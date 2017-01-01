@@ -1,0 +1,5 @@
+<?php
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE'] = 'Leads';
+$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE'] = 'Refree Leads';
+$mod_strings['LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE'] = 'Payment Details';

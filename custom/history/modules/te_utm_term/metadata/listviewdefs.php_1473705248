@@ -1,0 +1,41 @@
+<?php
+$module_name = 'te_utm_term';
+$listViewDefs [$module_name] = 
+array (
+  'NAME' => 
+  array (
+    'width' => '20%',
+    'label' => 'LBL_NAME',
+    'default' => true,
+    'link' => true,
+  ),
+  'INSTITUTE' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_INSTITUTE',
+    'width' => '20%',
+    'default' => true,
+  ),
+  'PROGRAM' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_PROGRAM',
+    'width' => '20%',
+    'default' => true,
+  ),
+  'DATE_ENTERED' => 
+  array (
+    'type' => 'datetime',
+    'label' => 'LBL_DATE_ENTERED',
+    'width' => '20%',
+    'default' => true,
+  ),
+  'DATE_MODIFIED' => 
+  array (
+    'type' => 'datetime',
+    'label' => 'LBL_DATE_MODIFIED',
+    'width' => '20%',
+    'default' => true,
+  ),
+);
+?>
