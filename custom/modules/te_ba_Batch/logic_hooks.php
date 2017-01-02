@@ -9,6 +9,6 @@ $hook_array['before_save'][] = Array(1, 'updateInitialPyment', 'custom/modules/t
 $hook_array['after_save'] = Array(); 
 $hook_array['after_save'][] = Array(1, 'updateInstallments', 'custom/modules/te_ba_Batch/update_installments.php','UpdateInstallments', 'updatePayments');
 $hook_array['process_record'] = Array(); 
-$hook_array['process_record'][] = Array(3, 'statusof_batch', 'custom/modules/te_ba_Batch/listview_status_batch.php','status_listview', 'display_list');
+$hook_array['process_record'][] = Array(3, 'statusof_batch_custom', 'custom/modules/te_ba_Batch/listview_status_batch.php','status_listview', 'display_list');
   
 ?>
