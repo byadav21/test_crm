@@ -6,6 +6,9 @@ $entry_point_registry['saveDisposition'] = array('file' => 'custom/modules/Leads
 $entry_point_registry['callHangup'] = array('file' => 'custom/modules/Leads/callHangup.php', 'auth' => true);
 $entry_point_registry['callHold'] = array('file' => 'custom/modules/Leads/callHold.php', 'auth' => true);
 $entry_point_registry['openCallPopup'] = array('file' => 'custom/modules/Leads/openCallPopup.php', 'auth' => true);
-$entry_point_registry['sendLeadListToNeox'] = array('file' => 'custom/modules/Leads/sendLeadListToNeox.php', 'auth' => true);
+$entry_point_registry['pauseTheNeoxCall'] = array('file' => 'custom/modules/Leads/pauseTheNeoxCall.php', 'auth' => true);
+$entry_point_registry['resumeTheNeoxCall'] = array('file' => 'custom/modules/Leads/resumeTheNeoxCall.php', 'auth' => true);
+$entry_point_registry['manualDialing'] = array('file' => 'custom/modules/Leads/manualDialing.php', 'auth' => true);
+$entry_point_registry['predictiveDialing'] = array('file' => 'custom/modules/Leads/predictiveDialing.php', 'auth' => true);
 
 ?>

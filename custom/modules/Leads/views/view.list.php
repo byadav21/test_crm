@@ -40,7 +40,37 @@ class LeadsViewList extends ViewList
 		if(!$this->headers)
 			return;
 		if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false){
+			if(!empty($GLOBALS['current_user']->neox_user) && !empty($GLOBALS['current_user']->neox_password)){
+					$this->lv->ss->assign("LOGGED_IN","Success");
+			}
+			
+		if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Manual'){
+			$this->lv->ss->assign("LOGGED_IN_MANUAL","Manual");
+		}
+		else{
+			$this->lv->ss->assign("LOGGED_IN_MANUAL","");	
+		}
+		if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Predictive'){
+			$this->lv->ss->assign("LOGGED_IN_PREDICTIVE","Predictive");
+		}
+		else{
+			$this->lv->ss->assign("LOGGED_IN_PREDICTIVE","");	
+		}
+		if(isset($_SESSION['dial_status']) && $_SESSION['dial_status'] =='Pause'){
+			$this->lv->ss->assign("LOGGED_IN_PAUSE","Pause");
+		}
+		else{
+				$this->lv->ss->assign("LOGGED_IN_PAUSE","");
+		}
+		if(isset($_SESSION['dial_status']) && $_SESSION['dial_status'] =='Resume'){
+			$this->lv->ss->assign("LOGGED_IN_RESUME","Resume");
+		}
+		else{
+				$this->lv->ss->assign("LOGGED_IN_RESUME","");
+		}	
 			$this->lv->ss->assign("SEARCH",true);
+			
+			
 			$this->lv->setup($this->seed, 'custom/modules/Leads/tpls/ListViewGeneric.tpl', $this->where, $this->params);
 			$savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
 			echo $this->lv->display();

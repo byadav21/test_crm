@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-21 02:55:54
+// created: 2017-01-03 12:46:09
 $sugar_config = array (
   'addAjaxBannedModules' => 
   array (
@@ -8,10 +8,12 @@ $sugar_config = array (
     2 => 'te_utm',
     3 => 'te_utm_campaign',
     4 => 'te_drip_campaign_list',
-    5 => 'te_drip_campaign',
-    6 => 'te_utm_medium',
-    7 => 'te_utm_term',
-    8 => 'KReports',
+    5 => 'AOS_Contracts',
+    6 => 'te_drip_campaign',
+    7 => 'te_student_batch',
+    8 => 'te_utm_medium',
+    9 => 'te_utm_term',
+    10 => 'KReports',
   ),
   'admin_access_control' => false,
   'admin_export_only' => false,
@@ -272,7 +274,7 @@ $sugar_config = array (
     'timeout' => 86400,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 22,
+  'js_lang_version' => 26,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -423,7 +425,7 @@ $sugar_config = array (
     'SuiteR' => 
     array (
       'display_sidebar' => true,
-      'navbar' => '572207',
+      'navbar' => '0B0657',
       'navbar_hover' => '597DBC',
       'navbar_font' => 'FFFFFF',
       'navbar_link_hover' => 'FFFFFF',

@@ -13642,3 +13642,1492 @@ Thu Dec 29 11:39:10 2016 [31597][1][FATAL] Request - Array
     [PHPSESSID] => 3a6e6a30f1f73909657afa92166130d8
 )
 
+Mon Jan  2 01:36:35 2017 [25824][-none-][FATAL] SECURITY: User authentication for admin failed
+Mon Jan  2 01:36:36 2017 [25824][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Mon Jan  2 03:47:43 2017 [2900][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Ravisha
+    [last_name] => 
+    [gender] => Female
+    [birthdate] => 11/01/1989
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => rav@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 5 yrs
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Batch 10
+    [te_ba_batch_id_c] => 5d61dc59-8a79-1399-5990-585cc472cb63
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => Follow Up
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 11/01/2017 11:00
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [Leads_divs] => t=#
+    [PHPSESSID] => 9f24f6e44d8e36690fa33919332427e0
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Mon Jan  2 04:09:46 2017 [4622][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => c473e75f-cfcd-1714-ab0c-586a21f49783
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => c473e75f-cfcd-1714-ab0c-586a21f49783
+    [offset] => 1
+    [status] => Warm
+    [status_detail] => Prospect
+    [description] => This is test
+    [date_of_callback] => 
+    [date_of_followup] => 
+    [date_of_prospect] => 29/12/2016 11:00
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [Leads_divs] => t=#l=#
+    [PHPSESSID] => 9ea2f24229838269435353d6026cb35a
+    [te_ba_Batch_divs] => t=#
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+)
+
+Mon Jan  2 04:16:07 2017 [5207][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => c473e75f-cfcd-1714-ab0c-586a21f49783
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => c473e75f-cfcd-1714-ab0c-586a21f49783
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => c473e75f-cfcd-1714-ab0c-586a21f49783
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Ravisha
+    [last_name] => 
+    [gender] => Female
+    [birthdate] => 11/01/1989
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => rav@gmail.com
+    [Leads0emailAddressId0] => 7923d892-9194-ea01-cb82-586a2111d919
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => rav@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 5 yrs
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => This is test
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 29/12/2016 11:00
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 20000
+    [payment_realized] => 1
+    [date_of_payment] => 02/01/2017
+    [reference_number] => 
+    [transaction_id] => 12344
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [te_ba_Batch_divs] => t=#
+    [Leads_divs] => t=#l=#
+    [PHPSESSID] => 9ea2f24229838269435353d6026cb35a
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+)
+
+Mon Jan  2 11:26:52 2017 [692][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 1bd07474-b170-9e80-fefa-585b80478cf7
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 1bd07474-b170-9e80-fefa-585b80478cf7
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 1bd07474-b170-9e80-fefa-585b80478cf7
+    [offset] => 4
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Karan
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => karan.chhabra@talentedge.in
+    [Leads0emailAddressId0] => 2616e626-5946-682d-1423-585b800b11da
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => karan.chhabra@talentedge.in
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => ajay kumar
+    [assigned_user_id] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 20000
+    [payment_realized] => 1
+    [date_of_payment] => 02/01/2017
+    [reference_number] => 
+    [transaction_id] => 12344
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [Leads_divs] => t=#l=#
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [PHPSESSID] => 86903c4c9a65e57953130467d46a2daa
+    [te_vendor_divs] => t=#
+    [te_ba_Batch_divs] => t=#
+)
+
+Mon Jan  2 11:34:51 2017 [1133][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 21f1bcfc-f8e6-4714-120a-585b770887b1
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 21f1bcfc-f8e6-4714-120a-585b770887b1
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 21f1bcfc-f8e6-4714-120a-585b770887b1
+    [offset] => 5
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => ban
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ban@yahoo.com
+    [Leads0emailAddressId0] => 2a6712c0-3918-92fa-a8eb-585b776b0957
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => ban@yahoo.com
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [leads_leads_1_name] => Raman
+    [leads_leads_1leads_ida] => 9790e213-6d2f-3928-f006-585b76fa676a
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 20000
+    [payment_realized] => 1
+    [date_of_payment] => 02/01/2017
+    [reference_number] => 
+    [transaction_id] => 12434
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [PHPSESSID] => 86903c4c9a65e57953130467d46a2daa
+    [te_vendor_divs] => t=#
+)
+
+Mon Jan  2 13:47:02 2017 [9303][1][FATAL] Caught error: Accessing static property ImportFieldSanitize::$createdBeans as non static
+Mon Jan  2 13:47:02 2017 [9303][1][FATAL] Caught error: Undefined index: installment
+Mon Jan  2 13:47:02 2017 [9303][1][FATAL] Caught error: Undefined index: initial_payment_inr
+Mon Jan  2 13:47:02 2017 [9303][1][FATAL] Caught error: Undefined index: initial_payment_usd
+Mon Jan  2 13:47:02 2017 [9303][1][FATAL] Caught error: Undefined index: initial_payment_date
+Mon Jan  2 13:47:02 2017 [9303][1][FATAL] Caught error: Accessing static property ImportFieldSanitize::$createdBeans as non static
+Mon Jan  2 13:47:04 2017 [9303][1][FATAL] Caught error: stat(): stat failed for upload/import/status_1.csv
+Mon Jan  2 13:47:04 2017 [9303][1][FATAL] Caught error: touch(): UploadStream::stream_metadata is not implemented!
+Tue Jan  3 00:02:05 2017 [15137][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 1bd07474-b170-9e80-fefa-585b80478cf7
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 4
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Karan
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => karan.chhabra@talentedge.in
+    [Leads0emailAddressId0] => 2616e626-5946-682d-1423-585b800b11da
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => karan.chhabra@talentedge.in
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Warm
+    [status_description] => Prospect
+    [note] => 
+    [assigned_user_name] => ajay kumar
+    [assigned_user_id] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 03/01/2017 11:00
+    [payment_type] => Online
+    [amount] => 0.00
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:03:03 2017 [15206][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 1bd07474-b170-9e80-fefa-585b80478cf7
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 1bd07474-b170-9e80-fefa-585b80478cf7
+    [offset] => 1
+    [status] => Warm
+    [status_detail] => 
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:05:45 2017 [15507][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => e6278135-ea05-bcf5-1b09-586b3e39e53b
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => te_disposition
+    [return_action] => DetailView
+    [return_id] => e6278135-ea05-bcf5-1b09-586b3e39e53b
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition
+    [relate_id] => e6278135-ea05-bcf5-1b09-586b3e39e53b
+    [offset] => 1
+    [name] => Warm
+    [assigned_user_name] => 
+    [assigned_user_id] => 
+    [status] => Warm
+    [status_detail] => Prospect
+    [description] => 
+    [date_of_callback] => 
+    [te_disposition_leads_name] => Karan
+    [te_disposition_leadsleads_ida] => 1bd07474-b170-9e80-fefa-585b80478cf7
+    [date_of_followup] => 
+    [date_of_prospect] => 03/01/2017 11:00
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:10:44 2017 [15959][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Rajesh
+    [last_name] => Kumar
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => raj@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 9876654444
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => Follow Up
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 03/01/2017 12:00
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:13:01 2017 [16144][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [offset] => 1
+    [status] => Warm
+    [status_detail] => 
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 
+    [date_of_prospect] => 02/01/2017 11:00
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:13:52 2017 [16198][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [offset] => 1
+    [status] => Dead
+    [status_detail] => 
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:29:41 2017 [17636][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Follow Up
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 31/12/2016 11:00
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:35:59 2017 [18302][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 4a670840-6a27-7257-6cc9-5864f08df913
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 4
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Raman
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ram@gmail.com
+    [Leads0emailAddressId0] => 7379104e-d9c8-52e4-7eab-585b76e6ac8c
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => ram@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 94867847589
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => Call Back
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 03/01/2017 11:00
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 0.00
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:39:49 2017 [18539][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 4a670840-6a27-7257-6cc9-5864f08df913
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 4a670840-6a27-7257-6cc9-5864f08df913
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Follow Up
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 03/01/2017 11:00
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:48:11 2017 [19491][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 21f1bcfc-f8e6-4714-120a-585b770887b1
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 6
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => ban
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ban@yahoo.com
+    [Leads0emailAddressId0] => 2a6712c0-3918-92fa-a8eb-585b776b0957
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => ban@yahoo.com
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [leads_leads_1_name] => Raman
+    [leads_leads_1leads_ida] => 9790e213-6d2f-3928-f006-585b76fa676a
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [amount] => 0.00
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:54:57 2017 [20002][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => caab3fda-461e-4dfa-54e1-58654af7c4d9
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 3
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => That
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ase@gmail.com
+    [Leads0emailAddressId0] => 7e8345f0-0c0e-b320-8901-5853b75789a8
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => ase@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9650211216
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => Follow Up
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 03/01/2017 11:00
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 0.00
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 00:59:20 2017 [20375][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => caab3fda-461e-4dfa-54e1-58654af7c4d9
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => caab3fda-461e-4dfa-54e1-58654af7c4d9
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => 
+    [date_of_callback] => 03/01/2017 11:00
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 10e5ea45b0ec2bf4f6424694e3a5a460
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Tue Jan  3 02:33:53 2017 [28648][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
+Tue Jan  3 03:34:41 2017 [1333][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 76905a15-07c8-cf32-f7b2-585a41d6450b
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 76905a15-07c8-cf32-f7b2-585a41d6450b
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 76905a15-07c8-cf32-f7b2-585a41d6450b
+    [offset] => 8
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => lap
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => lap@gmail.com
+    [Leads0emailAddressId0] => 47450c43-2a57-1a26-34c3-585a41d77961
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => lap@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => 5
+    [te_ba_batch_id_c] => 929ff0ce-9b43-a245-dff4-58525db4a8e8
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Email Enquiries
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 20000
+    [payment_realized] => 1
+    [date_of_payment] => 03/01/2017
+    [reference_number] => 
+    [transaction_id] => 67
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [Leads_divs] => t=#l=#
+    [PHPSESSID] => 1dc172aa7c2a969e793632b0a2b359d4
+    [te_ba_Batch_divs] => t=#
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [te_vendor_divs] => t=#
+)
+
+Tue Jan  3 04:14:14 2017 [5144][1][FATAL] Caught error: Accessing static property ImportFieldSanitize::$createdBeans as non static
+Tue Jan  3 04:14:14 2017 [5144][1][FATAL] Caught error: stat(): stat failed for upload/import/error_1.csv
+Tue Jan  3 04:14:15 2017 [5144][1][FATAL] Caught error: touch(): UploadStream::stream_metadata is not implemented!
+Tue Jan  3 04:14:15 2017 [5144][1][FATAL] Caught error: Accessing static property ImportFieldSanitize::$createdBeans as non static
+Tue Jan  3 04:14:15 2017 [5144][1][FATAL] Caught error: stat(): stat failed for upload/import/status_1.csv
+Tue Jan  3 04:14:15 2017 [5144][1][FATAL] Caught error: touch(): UploadStream::stream_metadata is not implemented!
+Tue Jan  3 12:46:21 2017 [13331][1][FATAL] assigned_user_link for te_industry_assigned_user failed to load
+
+Tue Jan  3 23:35:44 2017 [28130][1][FATAL] assigned_user_link for te_industry_assigned_user failed to load
+
+Tue Jan  3 23:35:57 2017 [28150][1][FATAL] assigned_user_link for te_source_assigned_user failed to load
+
+Tue Jan  3 23:36:29 2017 [28216][1][FATAL] assigned_user_link for te_product_category_assigned_user failed to load
+
+Wed Jan  4 04:24:47 2017 [26818][1][FATAL] assigned_user_link for te_industry_assigned_user failed to load
+
+Wed Jan  4 04:25:10 2017 [26904][1][FATAL] assigned_user_link for te_industry_assigned_user failed to load
+
+Wed Jan  4 04:34:42 2017 [27787][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => b21718bc-93c1-a028-3bf8-586b401cd4b9
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Rajesh
+    [last_name] => Kumar
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => raj@gmail.com
+    [Leads0emailAddressId0] => 8bad30c4-d8e0-5e9b-8ee2-586b4075fe17
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => raj@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9876654444
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 31/12/2016 11:00
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 50,000
+    [payment_realized] => 0
+    [date_of_payment] => 20/01/2017
+    [reference_number] => 
+    [transaction_id] => 
+    [PHPSESSID] => 400b857ee87f18d205eee3633d31bfe7
+    [te_student_batch_divs] => t=#
+    [te_student_divs] => undefined=#undefined=#undefined=#undefined=#undefined=#
+    [te_ba_Batch_divs] => t=#
+    [Leads_divs] => l=#t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Wed Jan  4 05:02:25 2017 [30402][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 5286264a-2b27-5bcb-c72f-58471b283407
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 5286264a-2b27-5bcb-c72f-58471b283407
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 5286264a-2b27-5bcb-c72f-58471b283407
+    [offset] => 12
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => New 07Dec
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => 07Dec@2016.com
+    [Leads0emailAddressId0] => 8d280d2f-6849-3160-2394-58471ba7fc52
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 07Dec@2016.com
+    [useEmailWidget] => true
+    [phone_mobile] => 8750781901
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Chat
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 65000
+    [payment_realized] => 0
+    [date_of_payment] => 10/01/2017
+    [reference_number] => 
+    [transaction_id] => 
+    [PHPSESSID] => 400b857ee87f18d205eee3633d31bfe7
+    [Leads_divs] => l=#t=#
+    [te_student_divs] => undefined=#t=#undefined=#undefined=#undefined=#undefined=#
+    [te_student_batch_divs] => t=#
+    [te_ba_Batch_divs] => t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Wed Jan  4 05:46:59 2017 [1570][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 912a0b77-feb6-76b0-d4fc-58468849d97a
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 912a0b77-feb6-76b0-d4fc-58468849d97a
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 912a0b77-feb6-76b0-d4fc-58468849d97a
+    [offset] => 20
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Suryakant
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => yp.suryakant@gmail.com
+    [Leads0emailAddressId0] => f1dc607a-5337-5955-707e-58467ba7d05d
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => yp.suryakant@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 8737066116
+    [education_c] => Post Graduate
+    [phone_other] => 
+    [work_experience_c] => 1
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 20000
+    [payment_realized] => 0
+    [date_of_payment] => 04/01/2017
+    [reference_number] => 
+    [transaction_id] => 12332
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [PHPSESSID] => d8217678c679fe73ec94252c4b427400
+    [te_vendor_divs] => t=#
+)
+
+Wed Jan  4 08:13:47 2017 [12978][-none-][FATAL] SECURITY: User authentication for admin failed
+Wed Jan  4 08:13:47 2017 [12978][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Wed Jan  4 08:16:12 2017 [13356][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
+Wed Jan  4 08:16:13 2017 [13360][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
+Wed Jan  4 08:16:15 2017 [13406][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
+Wed Jan  4 09:00:02 2017 [1700][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [1745][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [1782][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [2501][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [2408][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [2409][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [1950][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [1786][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [2422][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [2410][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [1949][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [2702][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 09:00:02 2017 [1739][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [2829][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [2887][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [2909][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [2934][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [3085][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [2846][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [3151][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [3200][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [2908][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:36:20 2017 [2935][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3610][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3667][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3671][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3758][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [4068][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3754][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3838][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3964][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [4067][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 10:51:20 2017 [3759][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Wed Jan  4 22:38:08 2017 [13206][1][FATAL] created_by_link for te_student_payment_created_by failed to load
+
+Wed Jan  4 22:38:08 2017 [13206][1][FATAL]  Query Failed:  SELECT  te_student_payment.id , te_student_payment.te_student_batch_id_c , te_student_payment.created_by  , jt0.name te_student_te_student_payment_1_name, jtl0.te_student_te_student_payment_1te_student_ida te_student_te_student_payment_1te_student_ida, jt1.name batch_id , te_student_payment.amount , te_student_payment.date_of_payment , te_student_payment.payment_type , te_student_payment.payment_source , te_student_payment.date_entered , te_student_payment.assigned_user_id  FROM te_student_payment   LEFT JOIN  te_student_te_student_payment_1_c jtl0 ON te_student_payment.id=jtl0.te_student_te_student_payment_1te_student_payment_idb AND jtl0.deleted=0
+
+ LEFT JOIN  te_student jt0 ON jt0.id=jtl0.te_student_te_student_payment_1te_student_ida AND jt0.deleted=0
+ AND jt0.deleted=0 LEFT JOIN te_student_batch jt1 ON te_student_payment.te_student_batch_id_c = jt1.id AND jt1.deleted=0  where te_student_payment.deleted=0 ORDER BY te_student_payment.date_entered DESC LIMIT 0,21: MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 00:55:20 2017 [21926][-none-][FATAL] SECURITY: User authentication for garima.gupta@talentedge.in failed
+Thu Jan  5 00:55:20 2017 [21926][-none-][FATAL] FAILED LOGIN:attempts[1] - garima.gupta@talentedge.in
+Thu Jan  5 00:56:44 2017 [22008][-none-][FATAL] SECURITY: User authentication for garima.gupta@talentedge.in failed
+Thu Jan  5 00:56:44 2017 [22008][-none-][FATAL] FAILED LOGIN:attempts[1] - garima.gupta@talentedge.in
+Thu Jan  5 02:24:10 2017 [16414][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [16506][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [16376][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [17281][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [18288][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [18289][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [17542][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [18501][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [19278][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [17283][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [18502][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [19279][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [17419][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [17425][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [18418][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [18419][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [16545][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [16467][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 02:24:10 2017 [17543][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31463][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31544][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31659][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32623][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [1151][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32540][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31923][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [362][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31399][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32159][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31980][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31604][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [412][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32522][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32373][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32243][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32700][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31930][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32523][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [32053][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [31897][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 04:20:01 2017 [317][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:36:59 2017 [9902][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 05:36:59 2017 [9902][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 05:37:07 2017 [9936][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 05:37:07 2017 [9936][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 05:37:09 2017 [9944][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 05:37:09 2017 [9944][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 05:43:28 2017 [4974][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [5186][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [5322][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [5986][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [6299][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [7593][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [5131][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [7590][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [7592][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [7170][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [6353][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [5273][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [7591][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [6190][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:43:28 2017 [6130][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [1670][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [2758][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [2929][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [1460][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [1500][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [1609][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [2930][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [3039][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [2757][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [4212][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [2005][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [3957][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [4208][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [3040][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 05:57:48 2017 [3958][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 06:20:09 2017 [13360][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 06:20:12 2017 [13372][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 06:20:12 2017 [13372][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 06:20:29 2017 [13387][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 06:20:29 2017 [13387][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 07:51:54 2017 [10287][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 07:51:54 2017 [10066][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 07:51:55 2017 [10383][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 07:51:55 2017 [10235][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 07:51:55 2017 [10330][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 23:23:46 2017 [9682][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => d515c1d7-8f6a-0e3d-3f7f-58523ccbea63
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 10
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => meetu
+    [last_name] => 
+    [gender] => Female
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => meetu@gmail.com
+    [Leads0emailAddressId0] => 19ee0b03-f7f4-e686-0f40-58523c0bd9fd
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => meetu@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 8347453723
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Batch 1
+    [te_ba_batch_id_c] => c16dfef8-a69a-18dd-35cd-5850ddb7dfb9
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 50,000
+    [payment_realized] => 0
+    [date_of_payment] => 13/01/2017
+    [reference_number] => 
+    [transaction_id] => 
+    [Leads_divs] => t=#l=#
+    [te_pr_Programs_divs] => t=#
+    [te_ba_Batch_divs] => t=#
+    [te_vendor_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [PHPSESSID] => b85d306239e191d224fcb99dbdcd303b
+    [te_student_batch_divs] => t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Thu Jan  5 23:24:46 2017 [9736][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:24:46 2017 [9736][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:25:07 2017 [9808][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:25:07 2017 [9808][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:26:58 2017 [9883][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:26:58 2017 [9883][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:27:23 2017 [9967][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:27:23 2017 [9967][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:27:45 2017 [9985][1][FATAL]  Query Failed:  SELECT  te_student_payment.id , te_student_payment.te_student_batch_id_c , te_student_payment.created_by  , jt0.name te_student_te_student_payment_1_name, jtl0.te_student_te_student_payment_1te_student_ida te_student_te_student_payment_1te_student_ida, jt1.name batch_id , te_student_payment.amount , te_student_payment.date_of_payment , te_student_payment.payment_type , te_student_payment.payment_source  , jt2.user_name created_by_name , jt2.created_by created_by_name_owner  , 'Users' created_by_name_mod, te_student_payment.date_entered , te_student_payment.assigned_user_id  FROM te_student_payment   LEFT JOIN  te_student_te_student_payment_1_c jtl0 ON te_student_payment.id=jtl0.te_student_te_student_payment_1te_student_payment_idb AND jtl0.deleted=0
+
+ LEFT JOIN  te_student jt0 ON jt0.id=jtl0.te_student_te_student_payment_1te_student_ida AND jt0.deleted=0
+ AND jt0.deleted=0 LEFT JOIN te_student_batch jt1 ON te_student_payment.te_student_batch_id_c = jt1.id AND jt1.deleted=0   LEFT JOIN  users jt2 ON te_student_payment.created_by=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 where te_student_payment.deleted=0 ORDER BY te_student_payment.date_entered DESC LIMIT 0,21: MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:27:53 2017 [9989][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:27:53 2017 [9989][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:28:01 2017 [9994][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:28:01 2017 [9994][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:28:31 2017 [10043][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:28:31 2017 [10043][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:29:38 2017 [10135][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:29:38 2017 [10135][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:30:07 2017 [10241][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='d4216fb9-0a80-9a51-a702-586ce0405f1d' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:30:07 2017 [10241][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:30:53 2017 [10270][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:30:53 2017 [10270][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:31:14 2017 [10306][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:31:14 2017 [10306][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:32:43 2017 [10441][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:32:43 2017 [10441][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:35:10 2017 [10707][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:35:10 2017 [10707][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:35:52 2017 [10732][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 23:35:52 2017 [10732][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 23:35:56 2017 [10738][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 23:35:56 2017 [10738][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 23:36:05 2017 [10773][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:36:05 2017 [10773][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:36:36 2017 [10799][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 23:36:36 2017 [10799][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Thu Jan  5 23:37:26 2017 [10904][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='d4216fb9-0a80-9a51-a702-586ce0405f1d' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:37:26 2017 [10904][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:38:42 2017 [10974][1][FATAL] SECURITY: User authentication for admin failed
+Thu Jan  5 23:38:42 2017 [10974][1][FATAL] FAILED LOGIN:attempts[2] - admin
+Thu Jan  5 23:39:58 2017 [11033][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='b609e773-9345-def9-880e-586b705c88e0' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:39:58 2017 [11033][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 11:13:47 2017 [11364][1][FATAL] Error running count query for Lead List:  Query Failed: ( SELECT count(*) c FROM te_disposition  INNER JOIN  te_disposition_leads_c ON te_disposition.id=te_disposition_leads_c.te_disposition_leadste_disposition_idb AND te_disposition_leads_c.te_disposition_leadsleads_ida='d515c1d7-8f6a-0e3d-3f7f-58523ccbea63' AND te_disposition_leads_c.deleted=0
+
+ where te_disposition.deleted=0 ): MySQL error 2006: MySQL server has gone away
+Fri Jan  6 11:13:47 2017 [11364][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:43:47 2017 [11365][-none-][FATAL] Retrieving record by id users:1 found  Query Failed: SELECT users.* FROM users  WHERE users.id = '1' AND users.deleted=0 LIMIT 0,1: MySQL error 2006: MySQL server has gone away
+Thu Jan  5 23:43:48 2017 [11368][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
+Thu Jan  5 23:43:49 2017 [11411][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
+Thu Jan  5 23:45:12 2017 [11565][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:45:12 2017 [11565][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:48:36 2017 [11797][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:48:36 2017 [11797][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Jan  5 23:49:40 2017 [11858][1][FATAL]  Query Failed:  SELECT  te_student_payment.id , te_student_payment.te_student_batch_id_c , te_student_payment.created_by  , jt0.name te_student_te_student_payment_1_name, jtl0.te_student_te_student_payment_1te_student_ida te_student_te_student_payment_1te_student_ida, jt1.name batch_id , te_student_payment.amount , te_student_payment.date_of_payment , te_student_payment.payment_type , te_student_payment.payment_source  , jt2.user_name created_by_name , jt2.created_by created_by_name_owner  , 'Users' created_by_name_mod, te_student_payment.date_entered , te_student_payment.assigned_user_id  FROM te_student_payment   LEFT JOIN  te_student_te_student_payment_1_c jtl0 ON te_student_payment.id=jtl0.te_student_te_student_payment_1te_student_payment_idb AND jtl0.deleted=0
+
+ LEFT JOIN  te_student jt0 ON jt0.id=jtl0.te_student_te_student_payment_1te_student_ida AND jt0.deleted=0
+ AND jt0.deleted=0 LEFT JOIN te_student_batch jt1 ON te_student_payment.te_student_batch_id_c = jt1.id AND jt1.deleted=0   LEFT JOIN  users jt2 ON te_student_payment.created_by=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 where te_student_payment.deleted=0 ORDER BY te_student_payment.date_entered DESC LIMIT 0,21: MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:51:19 2017 [12023][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Thu Jan  5 23:51:19 2017 [12023][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 00:12:16 2017 [13509][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 00:12:16 2017 [13509][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 00:46:23 2017 [16242][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 00:46:23 2017 [16242][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 01:00:06 2017 [17504][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused

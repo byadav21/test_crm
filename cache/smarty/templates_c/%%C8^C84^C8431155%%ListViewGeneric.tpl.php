@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-30 01:44:56
+<?php /* Smarty version 2.6.29, created on 2017-01-05 13:58:24
          compiled from custom/modules/Leads/tpls/ListViewGeneric.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjspath', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 46, false),array('function', 'counter', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 156, false),array('function', 'sugar_translate', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 174, false),array('function', 'sugar_getimage', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 180, false),array('function', 'sugar_ajax_url', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 249, false),array('function', 'sugar_evalcolumn_old', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 253, false),array('function', 'sugar_field', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 255, false),array('modifier', 'replace', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 112, false),array('modifier', 'default', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 163, false),array('modifier', 'lower', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 166, false),array('modifier', 'upper', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 169, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjspath', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 46, false),array('function', 'counter', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 224, false),array('function', 'sugar_translate', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 242, false),array('function', 'sugar_getimage', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 248, false),array('function', 'sugar_ajax_url', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 317, false),array('function', 'sugar_evalcolumn_old', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 321, false),array('function', 'sugar_field', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 323, false),array('modifier', 'replace', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 180, false),array('modifier', 'default', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 231, false),array('modifier', 'lower', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 234, false),array('modifier', 'upper', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 237, false),)), $this); ?>
 
 <script type='text/javascript' src='<?php echo smarty_function_sugar_getjspath(array('file' => 'include/javascript/popup_helper.js'), $this);?>
 '></script>
@@ -23,10 +23,8 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjs
         	sugarListView.prototype.toggleSelected();
         }
        });
-       function sendLeadsToNeox(){
-			
-		//~ alert(phone)
-		if(confirm(\'Are you sure to send the list to neox\')){
+       function resumeTheNeoxCall(){
+		if(confirm(\'Are you sure to resume the call\')){
 			SUGAR.ajaxUI.showLoadingPanel();
 			var callback = {
 				success:function(b){
@@ -35,25 +33,95 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjs
 					//~ alert(parsedJSON[0]);
 					//~ alert(parsedJSON[1]);
 					
-					if(b.responseText=="Success"){	
-						alert(b.responseText)
-
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById(\'show_pause\').innerHTML=\'\';
+							document.getElementById(\'show_pause\').innerHTML=\'<a onclick="pauseTheNeoxCall()">Pause</a>\';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
-
-						alert(\'Error!!\')
-						
-							//~ $(this).popupModal(\'atomBox\');
+							alert(\'Error!!\')
 					}
 				}
-						
 			}
-			
-			var connectionObject = YAHOO.util.Connect.asyncRequest(\'GET\', \'index.php?entryPoint=sendLeadListToNeox\', callback);
+			var connectionObject = YAHOO.util.Connect.asyncRequest(\'GET\', \'index.php?entryPoint=resumeTheNeoxCall\', callback);
 		 }
-			
+		}
+       
+       function pauseTheNeoxCall(){
+		if(confirm(\'Are you sure to pause the Call Process\')){
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//var parsedJSON = JSON.parse(b.responseText);
+					//~ alert(parsedJSON[0]);
+					//~ alert(parsedJSON[1]);
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById(\'show_pause\').innerHTML=\'\';
+							document.getElementById(\'show_pause\').innerHTML=\'<a onclick="resumeTheNeoxCall()">Resume</a>\';
+			}
+					else{
+							SUGAR.ajaxUI.hideLoadingPanel();
+						alert(\'Error!!\')
+					}
+				}
+			}
+			var connectionObject = YAHOO.util.Connect.asyncRequest(\'GET\', \'index.php?entryPoint=pauseTheNeoxCall\', callback);
+		 }
        }
+       
+       function manualDialing(){
+		if(confirm(\'Are you sure to shift on Manual dialing\')){
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//var parsedJSON = JSON.parse(b.responseText);
+					//~ alert(parsedJSON[0]);
+					//~ alert(parsedJSON[1]);
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById(\'shift_call\').innerHTML=\'\';
+							document.getElementById(\'shift_call\').innerHTML=\'<a onclick="predictiveDialing()">Predictive Dialing</a>\';
+					}
+					else{
+							SUGAR.ajaxUI.hideLoadingPanel();
+						alert(\'Error!!\')
+					}
+				}
+			}
+			var connectionObject = YAHOO.util.Connect.asyncRequest(\'GET\', \'index.php?entryPoint=manualDialing\', callback);
+		 }
+       }
+       
+       
+       function predictiveDialing(){
+		if(confirm(\'Are you sure to shift on Predictive dialing\')){
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//var parsedJSON = JSON.parse(b.responseText);
+					//~ alert(parsedJSON[0]);
+					//~ alert(parsedJSON[1]);
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById(\'shift_call\').innerHTML=\'\';
+							document.getElementById(\'shift_call\').innerHTML=\'<a onclick="manualDialing()">Manual Dialing</a>\';
+					}
+					else{
+							SUGAR.ajaxUI.hideLoadingPanel();
+						alert(\'Error!!\')
+					}
+				}
+			}
+			var connectionObject = YAHOO.util.Connect.asyncRequest(\'GET\', \'index.php?entryPoint=predictiveDialing\', callback);
+		 }
+       }
+       
+       
 '; ?>
 
 </script>

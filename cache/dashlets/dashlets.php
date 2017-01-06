@@ -1,6 +1,13 @@
 <?php
-// created: 2016-12-30 01:38:11
+// created: 2017-01-04 22:49:26
 $dashletsFiles = array (
+  'te_industryDashlet' => 
+  array (
+    'file' => 'modules/te_industry/Dashlets/te_industryDashlet/te_industryDashlet.php',
+    'class' => 'te_industryDashlet',
+    'meta' => 'modules/te_industry/Dashlets/te_industryDashlet/te_industryDashlet.meta.php',
+    'module' => 'te_industry',
+  ),
   'te_actual_campaignDashlet' => 
   array (
     'file' => 'modules/te_actual_campaign/Dashlets/te_actual_campaignDashlet/te_actual_campaignDashlet.php',
@@ -43,6 +50,13 @@ $dashletsFiles = array (
     'meta' => 'modules/te_drip_campaign/Dashlets/te_drip_campaignDashlet/te_drip_campaignDashlet.meta.php',
     'module' => 'te_drip_campaign',
   ),
+  'te_productDashlet' => 
+  array (
+    'file' => 'modules/te_product/Dashlets/te_productDashlet/te_productDashlet.php',
+    'class' => 'te_productDashlet',
+    'meta' => 'modules/te_product/Dashlets/te_productDashlet/te_productDashlet.meta.php',
+    'module' => 'te_product',
+  ),
   'FP_eventsDashlet' => 
   array (
     'file' => 'modules/FP_events/Dashlets/FP_eventsDashlet/FP_eventsDashlet.php',
@@ -63,6 +77,13 @@ $dashletsFiles = array (
     'class' => 'AORReportsDashlet',
     'meta' => 'modules/AOR_Reports/Dashlets/AORReportsDashlet/AORReportsDashlet.meta.php',
     'module' => 'AOR_Reports',
+  ),
+  'te_student_paymentDashlet' => 
+  array (
+    'file' => 'modules/te_student_payment/Dashlets/te_student_paymentDashlet/te_student_paymentDashlet.php',
+    'class' => 'te_student_paymentDashlet',
+    'meta' => 'modules/te_student_payment/Dashlets/te_student_paymentDashlet/te_student_paymentDashlet.meta.php',
+    'module' => 'te_student_payment',
   ),
   'FP_Event_LocationsDashlet' => 
   array (
@@ -119,6 +140,13 @@ $dashletsFiles = array (
     'meta' => 'modules/Calls/Dashlets/MyCallsDashlet/MyCallsDashlet.meta.php',
     'module' => 'Calls',
   ),
+  'te_sub_productDashlet' => 
+  array (
+    'file' => 'modules/te_sub_product/Dashlets/te_sub_productDashlet/te_sub_productDashlet.php',
+    'class' => 'te_sub_productDashlet',
+    'meta' => 'modules/te_sub_product/Dashlets/te_sub_productDashlet/te_sub_productDashlet.meta.php',
+    'module' => 'te_sub_product',
+  ),
   'AOBH_BusinessHoursDashlet' => 
   array (
     'file' => 'modules/AOBH_BusinessHours/Dashlets/AOBH_BusinessHoursDashlet/AOBH_BusinessHoursDashlet.php',
@@ -160,6 +188,13 @@ $dashletsFiles = array (
     'class' => 'SugarFeedDashlet',
     'meta' => 'modules/SugarFeed/Dashlets/SugarFeedDashlet/SugarFeedDashlet.meta.php',
     'module' => 'SugarFeed',
+  ),
+  'te_sourceDashlet' => 
+  array (
+    'file' => 'modules/te_source/Dashlets/te_sourceDashlet/te_sourceDashlet.php',
+    'class' => 'te_sourceDashlet',
+    'meta' => 'modules/te_source/Dashlets/te_sourceDashlet/te_sourceDashlet.meta.php',
+    'module' => 'te_source',
   ),
   'te_pr_ProgramsDashlet' => 
   array (
@@ -486,6 +521,13 @@ $dashletsFiles = array (
     'meta' => 'modules/jjwg_Areas/Dashlets/jjwg_AreasDashlet/jjwg_AreasDashlet.meta.php',
     'module' => 'jjwg_Areas',
   ),
+  'te_training_categoryDashlet' => 
+  array (
+    'file' => 'modules/te_training_category/Dashlets/te_training_categoryDashlet/te_training_categoryDashlet.php',
+    'class' => 'te_training_categoryDashlet',
+    'meta' => 'modules/te_training_category/Dashlets/te_training_categoryDashlet/te_training_categoryDashlet.meta.php',
+    'module' => 'te_training_category',
+  ),
   'AOS_InvoicesDashlet' => 
   array (
     'file' => 'modules/AOS_Invoices/Dashlets/AOS_InvoicesDashlet/AOS_InvoicesDashlet.php',
@@ -548,6 +590,13 @@ $dashletsFiles = array (
     'class' => 'MyCasesDashlet',
     'meta' => 'modules/Cases/Dashlets/MyCasesDashlet/MyCasesDashlet.meta.php',
     'module' => 'Cases',
+  ),
+  'te_product_categoryDashlet' => 
+  array (
+    'file' => 'modules/te_product_category/Dashlets/te_product_categoryDashlet/te_product_categoryDashlet.php',
+    'class' => 'te_product_categoryDashlet',
+    'meta' => 'modules/te_product_category/Dashlets/te_product_categoryDashlet/te_product_categoryDashlet.meta.php',
+    'module' => 'te_product_category',
   ),
   'MyNotesDashlet' => 
   array (

@@ -62,10 +62,8 @@
         	sugarListView.prototype.toggleSelected();
         }
        });
-       function sendLeadsToNeox(){
-			
-		//~ alert(phone)
-		if(confirm('Are you sure to send the list to neox')){
+       function resumeTheNeoxCall(){
+		if(confirm('Are you sure to resume the call')){
 			SUGAR.ajaxUI.showLoadingPanel();
 			var callback = {
 				success:function(b){
@@ -74,25 +72,95 @@
 					//~ alert(parsedJSON[0]);
 					//~ alert(parsedJSON[1]);
 					
-					if(b.responseText=="Success"){	
-						alert(b.responseText)
-
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById('show_pause').innerHTML='';
+							document.getElementById('show_pause').innerHTML='<a onclick="pauseTheNeoxCall()">Pause</a>';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
-
-						alert('Error!!')
-						
-							//~ $(this).popupModal('atomBox');
+							alert('Error!!')
 					}
 				}
-						
 			}
-			
-			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=sendLeadListToNeox', callback);
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=resumeTheNeoxCall', callback);
 		 }
-			
+		}
+       
+       function pauseTheNeoxCall(){
+		if(confirm('Are you sure to pause the Call Process')){
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//var parsedJSON = JSON.parse(b.responseText);
+					//~ alert(parsedJSON[0]);
+					//~ alert(parsedJSON[1]);
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById('show_pause').innerHTML='';
+							document.getElementById('show_pause').innerHTML='<a onclick="resumeTheNeoxCall()">Resume</a>';
+			}
+					else{
+							SUGAR.ajaxUI.hideLoadingPanel();
+						alert('Error!!')
+					}
+				}
+			}
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=pauseTheNeoxCall', callback);
+		 }
        }
+       
+       function manualDialing(){
+		if(confirm('Are you sure to shift on Manual dialing')){
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//var parsedJSON = JSON.parse(b.responseText);
+					//~ alert(parsedJSON[0]);
+					//~ alert(parsedJSON[1]);
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById('shift_call').innerHTML='';
+							document.getElementById('shift_call').innerHTML='<a onclick="predictiveDialing()">Predictive Dialing</a>';
+					}
+					else{
+							SUGAR.ajaxUI.hideLoadingPanel();
+						alert('Error!!')
+					}
+				}
+			}
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=manualDialing', callback);
+		 }
+       }
+       
+       
+       function predictiveDialing(){
+		if(confirm('Are you sure to shift on Predictive dialing')){
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//var parsedJSON = JSON.parse(b.responseText);
+					//~ alert(parsedJSON[0]);
+					//~ alert(parsedJSON[1]);
+					if(b.responseText=="200"){	
+						//alert(b.responseText)
+							document.getElementById('shift_call').innerHTML='';
+							document.getElementById('shift_call').innerHTML='<a onclick="manualDialing()">Manual Dialing</a>';
+					}
+					else{
+							SUGAR.ajaxUI.hideLoadingPanel();
+						alert('Error!!')
+					}
+				}
+			}
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=predictiveDialing', callback);
+		 }
+       }
+       
+       
 {/literal}
 </script>
 {assign var="currentModule" value = $pageData.bean.moduleDir}

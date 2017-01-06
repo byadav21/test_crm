@@ -131,7 +131,6 @@ class addPaymentClass{
 		$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 		$tempAmt=0;
 		while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
-			echo"<br>Amount: ".$amount;
 			if($row['due_amount_inr']==$row['paid_amount_inr'])
 				continue;
 			$restAmt=($row['due_amount_inr']-$row['paid_amount_inr']);
@@ -171,6 +170,8 @@ class addPaymentClass{
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
+			$bean->assigned_user_id = 'NULL';
+		
 		}else{
 			if(empty($bean->fetched_row['id'])){
 				$sql = "SELECT id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' AND date_entered LIKE '".date('Y-m-d')."%'";

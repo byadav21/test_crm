@@ -62,8 +62,26 @@
 						{sugar_action_menu id=$link_action_id params=$actionsLink}
 						
                         { if $actionDisabledLink ne "" }<div class='selectActionsDisabled' id='select_actions_disabled_{$action_menu_location}'>{$actionDisabledLink}<span class='ab'></span></div>{/if}
-						&nbsp;{$selectedObjectsSpan}		
-						<a onclick="sendLeadsToNeox()">Push Leads</a>
+						&nbsp;{$selectedObjectsSpan}
+						{if $LOGGED_IN =='Success'}
+							
+							{if $LOGGED_IN_RESUME=='Resume'}
+								<span id='show_pause'><a onclick="pauseTheNeoxCall()">Pause</a></span><span>&nbsp;&nbsp;</span>
+							{/if}
+							{if $LOGGED_IN_PAUSE=='Pause'}
+								<span id='show_pause'><a onclick="resumeTheNeoxCall()">Resume</a></span><span>&nbsp;&nbsp;</span>
+							{/if}
+							
+							
+							{if $LOGGED_IN_MANUAL=='Manual'}
+								<span id='shift_call'><a onclick="predictiveDialing()">Predictive Dialing</a></span>
+							{/if}
+							{if $LOGGED_IN_PREDICTIVE=='Predictive'}
+								<span id='shift_call'><a onclick="manualDialing()">Manual Dialing</a></span>
+							{/if}
+							
+						{/if}		
+						
 					</td>
 					<td  nowrap='nowrap' align="right" class='paginationChangeButtons' width="1%">
 						{if $pageData.urls.startPage}

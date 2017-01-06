@@ -17,13 +17,6 @@ $moduleList[] = 'te_payment_details';
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['KReports'] = 'KReport';
-$beanFiles['KReport'] = 'modules/KReports/KReport.php';
-$moduleList[] = 'KReports';
-
-
- 
- //WARNING: The contents of this file are auto-generated
 $beanList['te_drip_campaign_list'] = 'te_drip_campaign_list';
 $beanFiles['te_drip_campaign_list'] = 'modules/te_drip_campaign_list/te_drip_campaign_list.php';
 $moduleList[] = 'te_drip_campaign_list';
@@ -76,6 +69,28 @@ $moduleList[] = 'te_target_campaign_list';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['te_industry'] = 'te_industry';
+$beanFiles['te_industry'] = 'modules/te_industry/te_industry.php';
+$moduleList[] = 'te_industry';
+$beanList['te_product_category'] = 'te_product_category';
+$beanFiles['te_product_category'] = 'modules/te_product_category/te_product_category.php';
+$moduleList[] = 'te_product_category';
+$beanList['te_product'] = 'te_product';
+$beanFiles['te_product'] = 'modules/te_product/te_product.php';
+$moduleList[] = 'te_product';
+$beanList['te_sub_product'] = 'te_sub_product';
+$beanFiles['te_sub_product'] = 'modules/te_sub_product/te_sub_product.php';
+$moduleList[] = 'te_sub_product';
+$beanList['te_source'] = 'te_source';
+$beanFiles['te_source'] = 'modules/te_source/te_source.php';
+$moduleList[] = 'te_source';
+$beanList['te_training_category'] = 'te_training_category';
+$beanFiles['te_training_category'] = 'modules/te_training_category/te_training_category.php';
+$moduleList[] = 'te_training_category';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['te_UTM_System'] = 'te_UTM_System';
 $beanFiles['te_UTM_System'] = 'modules/te_UTM_System/te_UTM_System.php';
 $moduleList[] = 'te_UTM_System';
@@ -100,6 +115,13 @@ $moduleList[] = 'te_report_recipients';
 $beanList['te_student_batch'] = 'te_student_batch';
 $beanFiles['te_student_batch'] = 'modules/te_student_batch/te_student_batch.php';
 $moduleList[] = 'te_student_batch';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_student_payment'] = 'te_student_payment';
+$beanFiles['te_student_payment'] = 'modules/te_student_payment/te_student_payment.php';
+$moduleList[] = 'te_student_payment';
 
 
  
@@ -161,22 +183,6 @@ $beanList['te_student'] = 'te_student';
 $beanFiles['te_student'] = 'modules/te_student/te_student.php';
 $moduleList[] = 'te_student';
 
-
-
-
-/* * *******************************************************************************
- * This file is part of KReporter. KReporter is an enhancement developed
- * by Christian Knoll. All rights are (c) 2014 by Christian Knoll
- *
- * This Version of the KReporter is licensed software and may only be used in
- * alignment with the License Agreement received with this Software.
- * This Software is copyrighted and may not be further distributed without
- * witten consent of Christian Knoll
- *
- * You can contact us at info@kreporter.org
- * ****************************************************************************** */
-if(!array_search('KReports', $GLOBALS['sugar_config']['addAjaxBannedModules']))
-   $GLOBALS['sugar_config']['addAjaxBannedModules'][] = 'KReports';
 
  
  //WARNING: The contents of this file are auto-generated

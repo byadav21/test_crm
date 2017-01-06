@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-21 02:55:54
+// created: 2017-01-03 12:46:09
 $GLOBALS['tabStructure'] = array (
   'LBL_GROUPTAB5_1473074494' => 
   array (
@@ -42,6 +42,19 @@ $GLOBALS['tabStructure'] = array (
     array (
       0 => 'AOR_Reports',
       1 => 'Home',
+    ),
+  ),
+  'LBL_GROUPTAB4_1483469057' => 
+  array (
+    'label' => 'LBL_GROUPTAB4_1483469057',
+    'modules' => 
+    array (
+      0 => 'te_industry',
+      1 => 'te_source',
+      2 => 'te_product_category',
+      3 => 'te_product',
+      4 => 'te_sub_product',
+      5 => 'te_training_category',
     ),
   ),
 );

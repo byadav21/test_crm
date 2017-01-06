@@ -106,4 +106,6 @@ $GLOBALS['app_list_strings']['student_qualify_refund_list']=array (
   'No' => 'No',
   'Partial' => 'Partial',
 );
+
+$app_strings['LBL_GROUPTAB4_1483469057'] = 'Master Data';
 ?>
