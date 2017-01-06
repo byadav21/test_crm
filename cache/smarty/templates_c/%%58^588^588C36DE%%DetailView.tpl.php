@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 07:14:29
+<?php /* Smarty version 2.6.29, created on 2017-01-06 00:52:01
          compiled from cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_include', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 33, false),array('function', 'counter', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 38, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 48, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 63, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 49, false),array('modifier', 'escape', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 129, false),array('modifier', 'url2html', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 129, false),array('modifier', 'nl2br', 'cache/themes/SuiteR/modules/te_in_institutes/DetailView.tpl', 129, false),)), $this); ?>
@@ -31,11 +31,19 @@ SUGAR.util.doWhen(function(){
 <input type="hidden" name="action" value="EditView">
 <input type="hidden" name="sugar_body_only">
 </form>
-<ul id="detail_header_action_menu" class="clickMenu fancymenu" ><li class="sugar_action_button" ><?php if ($this->_tpl_vars['bean']->aclAccess('edit')): ?><input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
+<ul id="detail_header_action_menu" class="clickMenu fancymenu" ><li class="sugar_action_button" ><?php if ($this->_tpl_vars['bean']->aclAccess('edit')): ?><input title="<?php echo $this->_tpl_vars['APP']['LBL_EDIT_BUTTON_TITLE']; ?>
+" accessKey="<?php echo $this->_tpl_vars['APP']['LBL_EDIT_BUTTON_KEY']; ?>
+" class="button primary" onclick="var _form = document.getElementById('formDetailView'); _form.return_module.value='te_in_institutes'; _form.return_action.value='DetailView'; _form.return_id.value='<?php echo $this->_tpl_vars['id']; ?>
+'; _form.action.value='EditView';SUGAR.ajaxUI.submitForm(_form);" type="button" name="Edit" id="edit_button" value="<?php echo $this->_tpl_vars['APP']['LBL_EDIT_BUTTON_LABEL']; ?>
+"><?php endif; ?> <ul id class="subnav" ><li><?php if ($this->_tpl_vars['bean']->aclAccess('edit')): ?><input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
 " accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_KEY']; ?>
 " class="button" onclick="var _form = document.getElementById('formDetailView'); _form.return_module.value='te_in_institutes'; _form.return_action.value='DetailView'; _form.isDuplicate.value=true; _form.action.value='EditView'; _form.return_id.value='<?php echo $this->_tpl_vars['id']; ?>
 ';SUGAR.ajaxUI.submitForm(_form);" type="button" name="Duplicate" value="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_LABEL']; ?>
-" id="duplicate_button"><?php endif; ?> <ul id class="subnav" ><li><?php if ($this->_tpl_vars['bean']->aclAccess('edit') && $this->_tpl_vars['bean']->aclAccess('delete')): ?><input title="<?php echo $this->_tpl_vars['APP']['LBL_DUP_MERGE']; ?>
+" id="duplicate_button"><?php endif; ?> </li><li><?php if ($this->_tpl_vars['bean']->aclAccess('delete')): ?><input title="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_TITLE']; ?>
+" accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_KEY']; ?>
+" class="button" onclick="var _form = document.getElementById('formDetailView'); _form.return_module.value='te_in_institutes'; _form.return_action.value='ListView'; _form.action.value='Delete'; if(confirm('<?php echo $this->_tpl_vars['APP']['NTC_DELETE_CONFIRMATION']; ?>
+')) SUGAR.ajaxUI.submitForm(_form);" type="submit" name="Delete" value="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_LABEL']; ?>
+" id="delete_button"><?php endif; ?> </li><li><?php if ($this->_tpl_vars['bean']->aclAccess('edit') && $this->_tpl_vars['bean']->aclAccess('delete')): ?><input title="<?php echo $this->_tpl_vars['APP']['LBL_DUP_MERGE']; ?>
 " class="button" onclick="var _form = document.getElementById('formDetailView'); _form.return_module.value='te_in_institutes'; _form.return_action.value='DetailView'; _form.return_id.value='<?php echo $this->_tpl_vars['id']; ?>
 '; _form.action.value='Step1'; _form.module.value='MergeRecords';SUGAR.ajaxUI.submitForm(_form);" type="button" name="Merge" value="<?php echo $this->_tpl_vars['APP']['LBL_DUP_MERGE']; ?>
 " id="merge_duplicate_button"><?php endif; ?> </li><li><?php if ($this->_tpl_vars['bean']->aclAccess('detail')): ?><?php if (! empty ( $this->_tpl_vars['fields']['id']['value'] ) && $this->_tpl_vars['isAuditEnabled']): ?><input id="btn_view_change_log" title="<?php echo $this->_tpl_vars['APP']['LNK_VIEW_CHANGE_LOG']; ?>
@@ -121,7 +129,11 @@ SUGAR.util.doWhen(function(){
 
 
 
-<?php $this->assign('value', "09/05/2016"); ?>
+<?php if (strlen ( $this->_tpl_vars['fields']['date_entered']['value'] ) <= 0): ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['date_entered']['default_value']); ?>
+<?php else: ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['date_entered']['value']); ?>
+<?php endif; ?>
 <span class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['date_entered']['name']; ?>
 "><?php echo $this->_tpl_vars['value']; ?>
 </span>
@@ -143,11 +155,7 @@ SUGAR.util.doWhen(function(){
 
 
 
-<?php if (strlen ( $this->_tpl_vars['fields']['date_modified']['value'] ) <= 0): ?>
-<?php $this->assign('value', $this->_tpl_vars['fields']['date_modified']['default_value']); ?>
-<?php else: ?>
-<?php $this->assign('value', $this->_tpl_vars['fields']['date_modified']['value']); ?>
-<?php endif; ?>
+<?php $this->assign('value', "01/06/2017"); ?>
 <span class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['date_modified']['name']; ?>
 "><?php echo $this->_tpl_vars['value']; ?>
 </span>

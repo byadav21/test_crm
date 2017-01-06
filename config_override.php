@@ -22,9 +22,6 @@ $sugar_config['SAML_loginurl'] = '';
 $sugar_config['SAML_X509Cert'] = '';
 $sugar_config['authenticationClass'] = '';
 $sugar_config['securitysuite_inbound_email'] = false;
-$sugar_config['neox']['secret_key'] = 'M2dyvnmMCJRBNxxudKxHlMiR94BR8vyB2tmjuiI';
-$sugar_config['neox']['campaign'] = 'arrina1';
-$sugar_config['neox']['server_ip'] = '103.23.140.221';
 $sugar_config['verify_client_ip'] = false;
 $sugar_config['theme_settings']['SuiteR']['display_sidebar'] = true;
 $sugar_config['theme_settings']['SuiteR']['navbar'] = '572207';
@@ -51,4 +48,20 @@ $sugar_config['theme_settings']['SuiteR']['suggestion_popup_to'] = '4286AD';
 $sugar_config['hide_subpanels'] = true;
 $sugar_config['dbconfigoption']['collation'] = 'utf8_general_ci';
 $sugar_config['default_date_format'] = 'd/m/Y';
+
+$sugar_config['neox']['secret_key'] = 'M2dyvnmMCJRBNxxudKxHlMiR94BR8vyB2tmjuiI';
+$sugar_config['neox']['secret_key_pause_resume'] = 'cYXIr0y7PuyA2B1F1njrFt9wF6C28fghg530CnK8pg';
+$sugar_config['neox']['campaign'] = 'arrina1';
+$sugar_config['neox']['server_ip'] = '103.23.140.221';
+$sugar_config['neox']['campaign_id_manual'] = 'arrina1';
+$sugar_config['neox']['list_id_manual'] = '2001';
+$sugar_config['neox']['user_id_manual'] = '2001';
+$sugar_config['neox']['password_manual'] = '2001';
+$sugar_config['neox']['number_manual'] = '2001';
+$sugar_config['neox']['campaign_id_predictive'] = 'arrina2';
+$sugar_config['neox']['list_id_predictive'] = '2002';
+$sugar_config['neox']['user_id_predictive'] = '2002';
+$sugar_config['neox']['password_predictive'] = '2002';
+$sugar_config['neox']['number_predictive'] = '2002';
+
 /***CONFIGURATOR***/

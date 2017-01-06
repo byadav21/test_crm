@@ -4,6 +4,8 @@ ini_set("display_errors",0);
 class addPaymentClass{
 	
 	function addPaymentFunc($bean, $event, $argument){
+		$paidAmount=0;
+		$student_id="";
 		if(!empty($bean->payment_type)||!empty($bean->date_of_payment)||!empty($bean->reference_number)){
 			$payment = new te_payment_details();
 			$payment->payment_type 	   = $bean->payment_type;
@@ -15,25 +17,19 @@ class addPaymentClass{
 			$payment->name 		   	   = $bean->amount;
 			$payment->payment_realized = $bean->payment_realized;
 			$payment->leads_te_payment_details_1leads_ida = $bean->id;
-			//~ $payment_realized_check    = $bean->payment_realized;
-			//~ ,payment_realized_check={$payment_realized_check}
-			$payment->save();
+			$payment->save();			
+			$paidAmount=$bean->amount;
 			$GLOBALS['db']->query("UPDATE leads SET payment_type='',transaction_id='',payment_source='',date_of_payment='',reference_number='',amount='',payment_realized=''");
 			
 			$sqlRel = "SELECT p.id FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='".$bean->id."' AND p.payment_realized= 0 ";
-			//~ echo $sqlRel."<br>";
 			$rel= $GLOBALS['db']->query($sqlRel);
 			if($GLOBALS['db']->getRowCount($rel) > 0){
 				$s = "UPDATE leads SET payment_realized_check=0 WHERE id='".$bean->id."'";
-				//~ echo $s;
 				$GLOBALS['db']->query($s);
-			}
-			else{
+			}else{
 				$s = "UPDATE leads SET payment_realized_check=1 WHERE id='".$bean->id."'";
-				//~ echo $s;
 				$GLOBALS['db']->query($s);
-			}
-			//~ die;
+			}			
 		}
 		
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
@@ -48,23 +44,105 @@ class addPaymentClass{
 			if($bean->status=='Converted'){
 				$bean->converted_date=date("Y-m-d");
 				#create student
-				$studentObj=new te_student();
-				$studentObj->name=$bean->first_name." ".$bean->last_name;
-				$studentObj->email=$bean->email1;
-				$studentObj->mobile=$bean->phone_mobile;
-				$studentObj->status='Inactive';
-				$studentObj->lead_id_c=$bean->id;
-				$studentObj->dob=$bean->birthdate;
-				$studentObj->gender=$bean->gender;
-				$studentObj->company=$bean->company_c;
-				$studentObj->state=$bean->primary_address_state;
-				$studentObj->city=$bean->primary_address_city;
-				$studentObj->country=$bean->primary_address_country;
-				$studentObj->save();
+				$duplicateStudentSql = "SELECT id FROM te_student WHERE deleted=0 AND email='".$bean->email1."'";
+				$duplicateStudentObj= $GLOBALS['db']->query($duplicateStudentSql);
+				#check duplicate student
+				if($GLOBALS['db']->getRowCount($duplicateStudentObj) > 0){
+					$duplicateStudent = $GLOBALS['db']->fetchByAssoc($duplicateStudentObj);
+					$student_id=$duplicateStudent['id'];
+					
+					$duplicateBatchSql = "SELECT id FROM te_student_batch WHERE deleted=0 AND te_ba_batch_id_c='".$bean->te_ba_batch_id_c."'";
+					$duplicateBatchObj= $GLOBALS['db']->query($duplicateBatchSql);				
+					if($GLOBALS['db']->getRowCount($duplicateBatchObj) == 0){	#If no duplicate batch	
+			
+						#create batch of student
+						$vendorSql = "SELECT id FROM te_vendor WHERE deleted=0 AND name='".$bean->vendor."'";
+						$vendorObj= $GLOBALS['db']->query($vendorSql);
+						$vendor = $GLOBALS['db']->fetchByAssoc($vendorObj);
+						#get Institute, Program and batch details
+						$batchSql = "SELECT b.id as batch_id,b.name as batch_name,b.batch_code,b.fees_inr,b.fees_in_usd,b.initial_payment_inr,b.initial_payment_usd,b.initial_payment_date,p.id as program_id,i.id as institute_id FROM te_ba_batch b INNER JOIN te_pr_programs_te_ba_batch_1_c pbr ON pbr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id INNER JOIN te_pr_programs p ON pbr.te_pr_programs_te_ba_batch_1te_pr_programs_ida=p.id INNER JOIN te_in_institutes_te_ba_batch_1_c bir ON b.id=bir.te_in_institutes_te_ba_batch_1te_ba_batch_idb INNER JOIN te_in_institutes i ON bir.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id WHERE b.deleted=0 AND b.id='".$bean->te_ba_batch_id_c."'";
+						$batchObj= $GLOBALS['db']->query($batchSql);
+						$batchDetails = $GLOBALS['db']->fetchByAssoc($batchObj);
+						$studentBatchObj=new te_student_batch();
+						$studentBatchObj->name=$batchDetails['batch_name'];
+						$studentBatchObj->batch_code=$batchDetails['batch_code'];
+						$studentBatchObj->fee_inr=$batchDetails['fees_inr'];
+						$studentBatchObj->fee_usd=$batchDetails['fees_in_usd'];
+						$studentBatchObj->initial_payment_inr=$batchDetails['initial_payment_inr'];
+						$studentBatchObj->initial_payment_usd=$batchDetails['initial_payment_usd'];
+						$studentBatchObj->initial_payment_date=$batchDetails['initial_payment_date'];
+						$studentBatchObj->te_ba_batch_id_c=$batchDetails['batch_id'];
+						$studentBatchObj->te_pr_programs_id_c=$batchDetails['program_id'];
+						$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
+						$studentBatchObj->te_vendor_id_c=$vendor['id'];
+						$studentBatchObj->status="Active";
+						$studentBatchObj->te_student_te_student_batch_1te_student_ida=$duplicateStudent['id'];
+						$studentBatchObj->save();
+					}
+					
+				}else{
+					$duplicateStudent = $GLOBALS['db']->fetchByAssoc($duplicateStudentObj);				
+					$studentObj=new te_student();
+					$studentObj->name=$bean->first_name." ".$bean->last_name;
+					$studentObj->email=$bean->email1;
+					$studentObj->mobile=$bean->phone_mobile;
+					$studentObj->status='Inactive';
+					$studentObj->lead_id_c=$bean->id;
+					$studentObj->dob=$bean->birthdate;
+					$studentObj->gender=$bean->gender;
+					$studentObj->company=$bean->company_c;
+					$studentObj->state=$bean->primary_address_state;
+					$studentObj->city=$bean->primary_address_city;
+					$studentObj->country=$bean->primary_address_country;
+					$studentObj->save();				
+					$student_id=$studentObj->id;
+					#create batch of student
+					$vendorSql = "SELECT id FROM te_vendor WHERE deleted=0 AND name='".$bean->vendor."'";
+					$vendorObj= $GLOBALS['db']->query($vendorSql);
+					$vendor = $GLOBALS['db']->fetchByAssoc($vendorObj);
+					#get Institute, Program and batch details
+					$batchSql = "SELECT b.id as batch_id,b.name as batch_name,b.batch_code,b.fees_inr,b.fees_in_usd,b.initial_payment_inr,b.initial_payment_usd,b.initial_payment_date,p.id as program_id,i.id as institute_id FROM te_ba_batch b INNER JOIN te_pr_programs_te_ba_batch_1_c pbr ON pbr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id INNER JOIN te_pr_programs p ON pbr.te_pr_programs_te_ba_batch_1te_pr_programs_ida=p.id INNER JOIN te_in_institutes_te_ba_batch_1_c bir ON b.id=bir.te_in_institutes_te_ba_batch_1te_ba_batch_idb INNER JOIN te_in_institutes i ON bir.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id WHERE b.deleted=0 AND b.id='".$bean->te_ba_batch_id_c."'";
+					$batchObj= $GLOBALS['db']->query($batchSql);
+					$batchDetails = $GLOBALS['db']->fetchByAssoc($batchObj);
+					$studentBatchObj=new te_student_batch();
+					$studentBatchObj->name=$batchDetails['batch_name'];
+					$studentBatchObj->batch_code=$batchDetails['batch_code'];
+					$studentBatchObj->fee_inr=$batchDetails['fees_inr'];
+					$studentBatchObj->fee_usd=$batchDetails['fees_in_usd'];
+					$studentBatchObj->initial_payment_inr=$batchDetails['initial_payment_inr'];
+					$studentBatchObj->initial_payment_usd=$batchDetails['initial_payment_usd'];
+					$studentBatchObj->initial_payment_date=$batchDetails['initial_payment_date'];
+					$studentBatchObj->te_ba_batch_id_c=$batchDetails['batch_id'];
+					$studentBatchObj->te_pr_programs_id_c=$batchDetails['program_id'];
+					$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
+					$studentBatchObj->te_vendor_id_c=$vendor['id'];
+					$studentBatchObj->status="Active";
+					$studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_id;
+					$studentBatchObj->save();
+				}				
 			}
-		}		
+		}
+		if($paidAmount>0)
+			$this->updateStudentPaymentPlan($bean->te_ba_batch_id_c,$student_id,$paidAmount);
 	}
-	
+	function updateStudentPaymentPlan($batch_id,$student_id,$amount){
+		$paymentPlanSql="SELECT s.name,s.id,s.te_student_id_c,due_amount_inr,paid_amount_inr,paid,s.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` s ON s.id=rel.te_student9d1ant_plan_idb WHERE s.deleted=0 AND s.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY s.due_date";
+		
+		$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
+		$tempAmt=0;
+		while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
+			echo"<br>Amount: ".$amount;
+			if($row['due_amount_inr']==$row['paid_amount_inr'])
+				continue;
+			$restAmt=($row['due_amount_inr']-$row['paid_amount_inr']);
+			if($amount>$restAmt){
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_inr=paid_amount_inr+".$restAmt.", paid='Yes' WHERE id='".$row['id']."'");
+				$amount=$amount-$restAmt;
+			}else{
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_inr=paid_amount_inr+".$amount." WHERE id='".$row['id']."'");
+			}			
+		}
+	}
 	
 	function checkDuplicateFunc($bean, $event, $argument){
 		ini_set("display_errors",0);
@@ -78,10 +156,7 @@ class addPaymentClass{
 			if($bean->email1!=""){
 				$sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
 				$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-			}
-			
-						
-			
+			}			
 			$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' AND DATE(date_entered) = '".date('Y-m-d')."'";
 			if($bean->phone_mobile!=""){
 				$sql.=" AND leads.phone_mobile = '{$bean->phone_mobile}'";
@@ -89,41 +164,28 @@ class addPaymentClass{
 			if($bean->email1!=""){
 				$sql.=" AND email_addresses.email_address='".$bean->email1."'";
 			}
-			if($bean->email1=="dec@one.com"){
-			//~ echo $sql;					
-			}
-			
 			$re = $GLOBALS['db']->query($sql);
 			if($GLOBALS['db']->getRowCount($re)>0){
-				//~ $ro = $GLOBALS['db']->fetchByAssoc($re);
-				//~ $lid = $ro['id'];
-				//~ require_once('include/SugarEmailAddress/SugarEmailAddress.php');
-				//~ $emailAddress = new SugarEmailAddress();
-				//~ $lead_list = $emailAddress->getRelatedId($bean->email1, 'leads');
-				//~ if(is_array($lead_list) && in_array($lid,$lead_list)){
-					$bean->status = 'Duplicate';
-					$bean->status_description = 'Duplicate';
-				//~ }
+				$bean->status = 'Duplicate';
+				$bean->status_description = 'Duplicate';
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
+			$bean->assigned_user_id = 'NULL';
+		
 		}else{
 			if(empty($bean->fetched_row['id'])){
 				$sql = "SELECT id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' AND date_entered LIKE '".date('Y-m-d')."%'";
 				if($bean->phone_mobile!=""){
 					$sql.=" AND leads.phone_mobile = '{$bean->phone_mobile}'";
-				}
-			
+				}			
 				$re = $GLOBALS['db']->query($sql);
 				if($GLOBALS['db']->getRowCount($re)>0){
 					$ro = $GLOBALS['db']->fetchByAssoc($re);
 					$lid = $ro['id'];
-					//~ echo $lid;
 					require_once('include/SugarEmailAddress/SugarEmailAddress.php');
 					$emailAddress = new SugarEmailAddress();
 					$lead_list = $emailAddress->getRelatedId($bean->email1, 'leads');
-					//~ print_r($lead_list);
-					
 					if(is_array($lead_list) && in_array($lid,$lead_list)){
 						$bean->status = 'Duplicate';
 						$bean->status_description = 'Duplicate';

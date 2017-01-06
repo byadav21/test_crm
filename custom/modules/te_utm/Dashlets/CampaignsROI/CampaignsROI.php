@@ -134,7 +134,7 @@ class CampaignsROI extends Dashlet{
 			
 			 $total_spend = $this->GetTotalCost($data['total_cost_id']);
 			 $revenue = $data['total_leads']*$data['fees_inr'];
-			 $revenueBySpend = $total_spend/$revenue;
+			 $revenueBySpend = $total_spend/$revenue*100;
 			// $cpa_percentage = number_format(($data['total_leads']*100)/$total_spend,2);
 		
 			 $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['name']."</td><td scope='row' align='left' valign='top'>".$total_spend."</td><td scope='row' align='left' valign='top'>".$revenue."</td><td scope='row' align='left' valign='top'>".ROUND($revenueBySpend,2)."</td></tr>";

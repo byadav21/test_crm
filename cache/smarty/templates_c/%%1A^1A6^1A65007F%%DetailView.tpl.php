@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 07:14:47
+<?php /* Smarty version 2.6.29, created on 2017-01-06 01:01:59
          compiled from cache/themes/SuiteR/modules/te_vendor/DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_include', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 33, false),array('function', 'counter', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 38, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 48, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 63, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 49, false),array('modifier', 'escape', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 200, false),array('modifier', 'url2html', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 200, false),array('modifier', 'nl2br', 'cache/themes/SuiteR/modules/te_vendor/DetailView.tpl', 200, false),)), $this); ?>

@@ -9,6 +9,11 @@ $entry_point_registry['duplicateutm'] = array('file' => 'custom/modules/te_utm/d
 $entry_point_registry['makeitexpire'] = array('file' => 'custom/modules/te_utm/makeitexpire.php','auth' => true);
 
 
+$entry_point_registry['pushLeads'] = array('file' => 'custom/modules/Leads/pushLeads.php','auth' => false);
+
+
+
+
 $entry_point_registry['expiringcontract'] = array('file' => 'custom/modules/AOS_Contracts/expiringcontract.php','auth' => false);
 
 

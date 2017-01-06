@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 23:21:13
+<?php /* Smarty version 2.6.29, created on 2017-01-06 00:50:11
          compiled from cache/themes/SuiteR/modules/te_pr_Programs/SearchForm_advanced.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'counter', 'cache/themes/SuiteR/modules/te_pr_Programs/SearchForm_advanced.tpl', 26, false),array('function', 'math', 'cache/themes/SuiteR/modules/te_pr_Programs/SearchForm_advanced.tpl', 27, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/te_pr_Programs/SearchForm_advanced.tpl', 35, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/te_pr_Programs/SearchForm_advanced.tpl', 44, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/te_pr_Programs/SearchForm_advanced.tpl', 69, false),)), $this); ?>

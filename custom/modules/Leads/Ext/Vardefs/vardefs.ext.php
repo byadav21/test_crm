@@ -63,6 +63,20 @@ $dictionary['Lead']['fields']['fee_usd'] =array (
 );
  
 
+$dictionary['Lead']['fields']['neoxstatus'] = array (
+      'name' => 'neoxstatus',
+      'vname' => 'NEOXSTATUS',
+      'type' => 'varchar',
+      'comment' => 'Status of Lead to push into neox',
+      'inline_edit' => false,
+      'required' => false,
+      'studio' => 'visible',
+      'default'=>'0',
+    );
+
+
+
+
  // created: 2016-10-29 14:14:16
 $dictionary['Lead']['fields']['last_name']['required']=false;
 $dictionary['Lead']['fields']['last_name']['inline_edit']=true;

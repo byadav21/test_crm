@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 23:18:20
+<?php /* Smarty version 2.6.29, created on 2017-01-05 05:24:55
          compiled from modules/KReports/tpls/DetailViewFooter.tpl */ ?>
 {*
 /* * *******************************************************************************

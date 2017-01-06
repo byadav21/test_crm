@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 23:18:20
+<?php /* Smarty version 2.6.29, created on 2017-01-05 05:24:55
          compiled from cache/themes/SuiteR/modules/KReports/DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_include', 'cache/themes/SuiteR/modules/KReports/DetailView.tpl', 34, false),)), $this); ?>

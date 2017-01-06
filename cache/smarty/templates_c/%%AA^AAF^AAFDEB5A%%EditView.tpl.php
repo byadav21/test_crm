@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 23:20:28
+<?php /* Smarty version 2.6.29, created on 2017-01-06 00:48:48
          compiled from include/SugarFields/Fields/Image/EditView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjspath', 'include/SugarFields/Fields/Image/EditView.tpl', 42, false),array('function', 'sugarvar', 'include/SugarFields/Fields/Image/EditView.tpl', 55, false),array('modifier', 'default', 'include/SugarFields/Fields/Image/EditView.tpl', 109, false),)), $this); ?>

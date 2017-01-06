@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 19:14:38
+<?php /* Smarty version 2.6.29, created on 2017-01-05 12:09:48
          compiled from modules/Home/Dashlets/RSSDashlet/RSSDashlet.tpl */ ?>
 <div id='rss_<?php echo $this->_tpl_vars['id']; ?>
 ' style='overflow: auto; width: 100%; height: <?php echo $this->_tpl_vars['height']; ?>

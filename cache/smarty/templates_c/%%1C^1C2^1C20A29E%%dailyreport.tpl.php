@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-29 00:12:31
+<?php /* Smarty version 2.6.29, created on 2017-01-05 01:47:25
          compiled from custom/modules/AOR_Reports/tpls/dailyreport.tpl */ ?>
 <section class="moduleTitle"> <h2>Daily Report Report</h2><br/><br/>
 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=dailyreport">

@@ -20,7 +20,7 @@
 
 <div class="edit view edit508  expanded" id="detailpanel_2">
 
-	<table cellspacing="1" cellpadding="10" border="0" width="100%" class="yui3-skin-sam edit view panelContainer" id="Payment">
+	<table cellspacing="1" cellpadding="10" border="0" width="100%" class="yui3-skin-sam edit view panelContainer" style="border:none;" id="Payment">
 		<tr>
 			<td style="padding-top:10px;">No. Of Installments</td><td style="padding-top:10px;"><input name="installment" id="installment" type="text"  value="{$no_of_installments}" size="17%"/></td>
 			

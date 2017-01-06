@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-12-28 23:17:54
+<?php /* Smarty version 2.6.29, created on 2017-01-05 01:03:23
          compiled from cache/themes/SuiteR/modules/KReports/SearchFormFooter.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/KReports/SearchFormFooter.tpl', 11, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/KReports/SearchFormFooter.tpl', 12, false),)), $this); ?>

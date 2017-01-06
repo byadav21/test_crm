@@ -5659,8 +5659,9 @@ table#tabFormPagination td,  #tabFormPagination, #EditView > table#tabFormPagina
 .search td input[type=text], .search td input[type=password], .search td select {
     width: 125px !important;
 	margin-right: 9px;
+	margin-bottom:5px;
 }
-
+#detailpanel_1{border:1px solid #ddd;}
 /* Listview styles */
 .list, .edit .list {
     padding: 0 !important;
@@ -7992,7 +7993,7 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
     padding: 5px;
     WIDTH: 230PX !IMPORTANT;
     float: left;
-    margin-top: 10px;
+    margin-top: 2px;
 }
 
 select:focus {
@@ -9365,7 +9366,8 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background:none;
 }
-
+.dateTime img{top: 0px !important;}
+#fieldLines{overflow-x: scroll;}
 #globalLinksicons {
     margin:0 5px 0 0;
 }
@@ -9374,6 +9376,18 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
     margin:10px;
     padding:0;
 }
+
+.popupBody input[type=text], .popupBody textarea{
+    width:74% !important;
+    left: 47px;
+    position: relative;
+}
+.name_advanced input[type=text]{
+    width: 250px !important;
+    left: 82px;
+    position: relative;
+}
+
 
 .popupBody input[type=text], .popupBody textarea{
     width:74% !important;
