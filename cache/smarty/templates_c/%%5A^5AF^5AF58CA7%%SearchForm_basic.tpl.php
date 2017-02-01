@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-05 01:00:12
+<?php /* Smarty version 2.6.29, created on 2017-02-01 06:46:19
          compiled from cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'counter', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 33, false),array('function', 'math', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 34, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 44, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 131, false),array('modifier', 'count', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 118, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'counter', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 33, false),array('function', 'math', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 34, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 44, false),array('function', 'html_options', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 79, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 152, false),array('modifier', 'count', 'cache/themes/SuiteR/modules/Leads/SearchForm_basic.tpl', 139, false),)), $this); ?>
 
 <input type='hidden' id="orderByInput" name='orderBy' value=''/>
 <input type='hidden' id="sortOrder" name='sortOrder' value=''/>
@@ -64,6 +64,28 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'counter', '
      
     value='<?php echo $this->_tpl_vars['value']; ?>
 ' title=''      accesskey='9'  >
+   	   	</td>
+    
+      
+	<?php echo smarty_function_counter(array('assign' => 'index'), $this);?>
+
+	<?php echo smarty_function_math(array('equation' => "left % right",'left' => $this->_tpl_vars['index'],'right' => $this->_tpl_vars['basicMaxColumns'],'assign' => 'modVal'), $this);?>
+
+	<?php if (( $this->_tpl_vars['index'] % $this->_tpl_vars['basicMaxColumns'] == 1 && $this->_tpl_vars['index'] != 1 )): ?>
+		</tr><tr>
+	<?php endif; ?>
+	
+	<td scope="row" nowrap="nowrap" width='1%' >
+		
+		<label for='batch_basic' ><?php echo smarty_function_sugar_translate(array('label' => 'LBL_BATCH','module' => 'Leads'), $this);?>
+</label>
+    	</td>
+
+	
+	<td  nowrap="nowrap" width='1%'>
+			
+<?php echo smarty_function_html_options(array('id' => 'batch_basic','name' => 'batch_basic[]','options' => $this->_tpl_vars['fields']['batch_basic']['options'],'size' => '6','style' => "width: 150px",'multiple' => '1','selected' => $this->_tpl_vars['fields']['batch_basic']['value']), $this);?>
+
    	   	</td>
     
       

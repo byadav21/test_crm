@@ -63,6 +63,22 @@ $dictionary['Lead']['fields']['fee_usd'] =array (
 );
  
 
+$dictionary['Lead']['fields']['channel'] =array (
+	'name' => 'channel',
+	'vname' => 'Channel',
+	'type' => 'varchar',
+	'len' => '50',
+    'size' => '20',
+    'studio' => 'visible',
+	'required' => false, 
+	'reportable' => true, 
+	'audited' => false, 
+	'importable' => true, 
+	'duplicate_merge' => false, 
+);
+ 
+
+
 $dictionary['Lead']['fields']['neoxstatus'] = array (
       'name' => 'neoxstatus',
       'vname' => 'NEOXSTATUS',
@@ -211,6 +227,24 @@ $dictionary["Lead"]["fields"]["leads_te_payment_details_1"] = array (
 );
 
 
+$dictionary['Lead']['fields']['batch'] =array (
+	'name' => 'batch',
+	'label' => 'LBL_BATCH',
+	'type' => 'enum',
+	'module' => 'Leads',
+	'help' => '',
+	'comment' => '',
+	'function' => 'getBatchList',
+	'default_value' => '',
+	'mass_update' => false, 
+	'required' => true, 
+	'reportable' => true, 
+	'audited' => false,
+	'importable' => 'true',
+	'duplicate_merge' => false,
+);
+
+
  // created: 2016-09-15 13:40:04
 $dictionary['Lead']['fields']['min_attendance_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['min_attendance_c']['labelValue']='Min. Attendance';
@@ -306,6 +340,23 @@ $dictionary['Lead']['fields']['city_c']['labelValue']='City';
 $dictionary['Lead']['fields']['education_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['education_c']['labelValue']='Education';
 
+ 
+
+$dictionary['Lead']['fields']['assigned_date'] =array (
+	'name' => 'assigned_date',
+	'label' => 'LBL_ASSIGNED_DATE',
+	'type' => 'date',
+	'module' => 'Leads',
+	'default_value' => '',
+	'help' => '',
+	'comment' => '',
+	'mass_update' => false, 
+	'required' => false, 
+	'reportable' => true, 
+	'audited' => false, 
+	'duplicate_merge' => false, 
+	'importable' => 'true', 
+);
  
 
 $dictionary['Lead']['fields']['mailer_day'] =array (
@@ -467,6 +518,28 @@ $dictionary['Lead']['fields']['gender']['audited']='false';
  
 
 
+
+$dictionary['Lead']['fields']['invoice_number'] =array (
+		'name' => 'invoice_number',
+		'vname' => 'LBL_INVOICE_NUMBER',
+		'type' => 'int',
+		'required' => false,
+		'massupdate' => 0,
+		'comments' => '',
+		'help' => '',
+		'default'=> 0,
+		'importable' => 'false',
+		'duplicate_merge' => 'disabled',
+		'duplicate_merge_dom_value' => '0',
+		'audited' => false,
+		'reportable' => false,
+		'len' => '50',
+		'size' => '50',
+	);
+
+
+
+
 $dictionary['Lead']['fields']['fee_inr'] =array (
 	'required' => false,
     'name' => 'fee_inr',
@@ -510,6 +583,10 @@ $dictionary['Lead']['fields']['converted_date'] =array (
 );
  
 
+$dictionary['Lead']['fields']['primary_address_country']['required'] = false;
+
+
+
 // created: 2016-09-19 13:25:40
 $dictionary["Lead"]["fields"]["program"] = array (
   'name' => 'program',
@@ -528,6 +605,127 @@ $dictionary["Lead"]["fields"]["institute"] = array (
   'module' => 'Leads',
   'bean_name' => 'Lead',
   'vname' => 'LBL_INSTITUTE',
+  
+);
+$dictionary["Lead"]["fields"]["status_d"] = array (
+  'name' => 'status_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_STATUS_D',
+  
+);
+$dictionary["Lead"]["fields"]["status_detail_d"] = array (
+  'name' => 'status_detail_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_STATUS_DETAIL_D',
+  
+);
+$dictionary["Lead"]["fields"]["description_d"] = array (
+  'name' => 'description_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DESCRIPTION_D',
+  
+);
+
+$dictionary["Lead"]["fields"]["date_of_callback_date_d"] = array (
+  'name' => 'date_of_callback_date_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_CALL_BACK_DATE_D',
+  
+);
+$dictionary["Lead"]["fields"]["date_of_callback_hours_d"] = array (
+  'name' => 'date_of_callback_hours_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_CALL_BACK_HOURS_D',
+  
+);
+$dictionary["Lead"]["fields"]["date_of_callback_minutes_d"] = array (
+  'name' => 'date_of_callback_minutes_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_CALL_BACK_MINUTES_D',
+  
+);
+$dictionary["Lead"]["fields"]["disposition_id"] = array (
+  'name' => 'disposition_id',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DISPOSITION_ID',
+  
+);
+
+
+$dictionary["Lead"]["fields"]["date_of_followup_date_d"] = array (
+  'name' => 'date_of_followup_date_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_FOLLOWUP_DATE_D',
+  
+);
+$dictionary["Lead"]["fields"]["date_of_followup_hours_d"] = array (
+  'name' => 'date_of_followup_hours_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_FOLLOWUP_HOURS_D',
+  
+);
+$dictionary["Lead"]["fields"]["date_of_followup_minutes_d"] = array (
+  'name' => 'date_of_followup_minutes_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_FOLLOWUP_MINUTES_D',
+  
+);
+
+$dictionary["Lead"]["fields"]["date_of_prospect_date_d"] = array (
+  'name' => 'date_of_prospect_date_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_PROSPECT_DATE_D',
+  
+);
+$dictionary["Lead"]["fields"]["date_of_prospect_hours_d"] = array (
+  'name' => 'date_of_prospect_hours_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_PROSPECT_HOURS_D',
+  
+);
+$dictionary["Lead"]["fields"]["date_of_prospect_minutes_d"] = array (
+  'name' => 'date_of_prospect_minutes_d',
+  'type' => 'varchar',
+  'source' => 'non-db',
+  'module' => 'Leads',
+  'bean_name' => 'Lead',
+  'vname' => 'LBL_DATE_OF_PROSPECT_MINUTES_D',
   
 );
 

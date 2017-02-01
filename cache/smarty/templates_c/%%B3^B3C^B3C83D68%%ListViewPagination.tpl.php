@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-05 13:59:31
+<?php /* Smarty version 2.6.29, created on 2017-02-01 06:46:19
          compiled from custom/modules/Leads/tpls/ListViewPagination.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_action_menu', 'custom/modules/Leads/tpls/ListViewPagination.tpl', 58, false),array('function', 'sugar_getimage', 'custom/modules/Leads/tpls/ListViewPagination.tpl', 89, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_action_menu', 'custom/modules/Leads/tpls/ListViewPagination.tpl', 58, false),array('function', 'sugar_getimage', 'custom/modules/Leads/tpls/ListViewPagination.tpl', 91, false),)), $this); ?>
 
 
 <?php $this->assign('alt_start', $this->_tpl_vars['navStrings']['start']); ?>
@@ -34,21 +34,23 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_actio
 						<?php if ($this->_tpl_vars['LOGGED_IN'] == 'Success'): ?>
 							
 							<?php if ($this->_tpl_vars['LOGGED_IN_RESUME'] == 'Resume'): ?>
-								<span id='show_pause'><a onclick="pauseTheNeoxCall()">Pause</a></span><span>&nbsp;&nbsp;</span>
+								<span id='show_pause'><button type="button" onclick="pauseTheNeoxCall()">Pause</button></span><span>&nbsp;&nbsp;</span>
 							<?php endif; ?>
 							<?php if ($this->_tpl_vars['LOGGED_IN_PAUSE'] == 'Pause'): ?>
-								<span id='show_pause'><a onclick="resumeTheNeoxCall()">Resume</a></span><span>&nbsp;&nbsp;</span>
+								<span id='show_pause'><button type="button"onclick="resumeTheNeoxCall()">Resume</button></span><span>&nbsp;&nbsp;</span>
 							<?php endif; ?>
 							
 							
 							<?php if ($this->_tpl_vars['LOGGED_IN_MANUAL'] == 'Manual'): ?>
-								<span id='shift_call'><a onclick="predictiveDialing()">Predictive Dialing</a></span>
+								<span id='shift_call'><button type="button" onclick="predictiveDialing()">Predictive Dialing</button></span>
 							<?php endif; ?>
 							<?php if ($this->_tpl_vars['LOGGED_IN_PREDICTIVE'] == 'Predictive'): ?>
-								<span id='shift_call'><a onclick="manualDialing()">Manual Dialing</a></span>
+								<span id='shift_call'><button type="button" onclick="manualDialing()">Manual Dialing</button></span>
 							<?php endif; ?>
 							
 						<?php endif; ?>		
+							
+
 						
 					</td>
 					<td  nowrap='nowrap' align="right" class='paginationChangeButtons' width="1%">

@@ -146,6 +146,42 @@ class addPaymentClass{
 	
 	function checkDuplicateFunc($bean, $event, $argument){
 		ini_set("display_errors",0);
+// Save the disposition record when the Lead open from the pusher		
+		if(isset($_REQUEST['disposition_id']) && !empty($_REQUEST['disposition_id'])){
+			$disposition = new te_disposition();
+			$disposition->retrieve($_REQUEST['disposition_id']);
+			$disposition->name 		   	 = $_REQUEST['status_d'];
+			$disposition->status 		 = $_REQUEST['status_d'];
+			$disposition->status_detail = $_REQUEST['status_detail_d'];
+			$disposition->description	= $_REQUEST['description_d'];
+			$callBack = $_REQUEST['date_of_callback_date_d']." ".$_REQUEST['date_of_callback_hours_d'].":".$_REQUEST['date_of_callback_minutes_d'].":00";;
+			$disposition->date_of_callback = $callBack;
+			$followup = $_REQUEST['date_of_followup_date_d']." ".$_REQUEST['date_of_followup_hours_d'].":".$_REQUEST['date_of_followup_minutes_d'].":00";
+			$disposition->date_of_followup = $followup;
+			$prospect = $_REQUEST['date_of_prospect_date_d']." ".$_REQUEST['date_of_prospect_hours_d'].":".$_REQUEST['date_of_prospect_minutes_d'].":00";;
+			$disposition->date_of_prospect = $prospect;
+			$disposition->te_disposition_leadsleads_ida = $bean->id;
+			$disposition_id = $disposition->save();
+			
+		// Call Resume API	
+			$server_ip 		= $GLOBALS['sugar_config']['neox']['server_ip'];
+			$event          = "neox_agent_pause";
+			$user           = $GLOBALS['current_user']->neox_user;
+			$password       = $GLOBALS['current_user']->neox_password;
+			$value_pr       = "Resume"; 
+			$neoxKey   		= $GLOBALS['sugar_config']['neox']['secret_key'];
+			$URL = "http://$server_ip:9090/Neox_DialCenter_API/agent_pause_resume.php?secret_key=".$neoxKey;
+			$QUERY_PARAM = "data={\"event\":\"$event\",\"user\":\"$user\",\"value_pr\":\"$value_pr\"}";
+			$ch = curl_init();
+			curl_setopt($ch,CURLOPT_URL,"$URL");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, "$QUERY_PARAM");
+			$buffer = curl_exec($ch);
+			//~ echo $buffer."----";die;
+
+		}
+		
 		if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){				
 			#update fee & attendance
 			$utmSql="SELECT  u.name as utm,u.te_ba_batch_id_c as batch, v.name as vendor from  te_utm u INNER JOIN te_vendor_te_utm_1_c uvr ON u.id=uvr.te_vendor_te_utm_1te_utm_idb INNER JOIN te_vendor v ON uvr.te_vendor_te_utm_1te_vendor_ida=v.id WHERE uvr.deleted=0 AND u.deleted=0 AND u.name='".$bean->utm."'";
@@ -190,7 +226,14 @@ class addPaymentClass{
 						$bean->status = 'Duplicate';
 						$bean->status_description = 'Duplicate';
 					}
-				}					
+				}	
+				if($bean->assigned_user_id!="")
+					$bean->assigned_date=date("Y-m-d");
+			}else{
+				$lead_bean=$bean->fetched_row['id'];
+				if($lead_bean->assigned_user_id!=$bean->assigned_user_id){
+					$bean->assigned_date=date("Y-m-d");
+				}
 			}
 		}
 	}

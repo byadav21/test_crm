@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-05 23:17:45
+<?php /* Smarty version 2.6.29, created on 2017-02-01 08:05:27
          compiled from include/DetailView/footer.tpl */ ?>
 {*
 /*********************************************************************************

@@ -504,7 +504,13 @@ class LeadsViewDetail extends ViewDetail {
 				alert(1)
 			});     
    });
-            
+  
+  
+  function generateInvoice(lead_id){
+	  //~ alert(lead_id)
+	  //~ window.location.href='index.php?entryPoint=generateInvoice&LeadID='+lead_id;
+	  window.open('index.php?entryPoint=generateInvoice&LeadID='+lead_id, '_blank');
+	}          
   function clickToCall(phone,lead_id){
 
 		//~ alert(phone)

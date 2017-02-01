@@ -94,3 +94,12 @@ $app_strings['LBL_GROUPTAB3_1480929977'] = 'Reports';
 
 $app_list_strings['moduleList']['KReports']='Custom Reports';
 $app_list_strings['moduleListSingular']['KReports']='Custom Reports';
+$GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
+  '' => '',
+  'Chat' => 'Chat',
+  'InboundCalls' => 'Inbound Calls',
+  'Referrals' => 'Referrals',
+  'Email Enquiries' => 'Email Enquiries',
+  'Campaign' => 'Campaign',
+  'Channel' => 'Channel',
+);

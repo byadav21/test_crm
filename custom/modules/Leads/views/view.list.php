@@ -508,11 +508,36 @@ class LeadsViewList extends ViewList
 	
  	
  public function display(){
-	
+	 global $current_user;
+	$id = $current_user->id;
 	
 		?>
-
+<script src="http://js.pusher.com/3.2/pusher.min.js"></script>
 <script>
+	
+	    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('467cd9d1723f2650b8ad', {
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+	var logged_in_user_id = '<?=$id ?>';
+    channel.bind(logged_in_user_id, function(data) {
+		//~ alert(data.first_name+"-"+data.last_name+"-"+data.email_address+"-"+data.primary_address_country+"-"+data.batch_name+"-"+data.programe_name+"-"+data.programe_name+"-"+data.education_c+"-"+data.work_experience_c)
+		
+		var params = "&disposition_id="+data.dispo_id+"&lead_id="+data.lead_id+"&user_id="+logged_in_user_id+"&from_pusher=1&mobile="+data.mobile+"&fname="+data.first_name+"&lname="+data.last_name+"&email="+data.email_address+"&address="+data.primary_address_country+"&bname="+data.batch_name+"&pname="+data.programe_name+"&edu="+data.education_c+"&work="+data.work_experience_c;
+		
+
+		var url_open = "http://te.engeniatech.in/index.php?entryPoint=openDispositionPopup"+params;
+		//~ var url_open = "http://localhost/TalentEdge/index.php?entryPoint=openDispositionPopup"+params;
+      
+			window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
+      
+    });
+
+	
 	
         
   function clickToCall(phone,lead_id){
@@ -550,6 +575,8 @@ class LeadsViewList extends ViewList
 		 }
 	}
 	    
+  
+  
   
      </script>
 

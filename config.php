@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-27 02:29:47
+// created: 2017-01-06 12:26:54
 $sugar_config = array (
   'addAjaxBannedModules' => 
   array (
@@ -273,7 +273,7 @@ $sugar_config = array (
     'timeout' => 86400,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 25,
+  'js_lang_version' => 26,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -452,5 +452,16 @@ $sugar_config = array (
     'secret_key' => 'M2dyvnmMCJRBNxxudKxHlMiR94BR8vyB2tmjuiI',
     'campaign' => 'arrina1',
     'server_ip' => '103.23.140.221',
+    'secret_key_pause_resume' => 'cYXIr0y7PuyA2B1F1njrFt9wF6C28fghg530CnK8pg',
+    'campaign_id_manual' => 'arrina1',
+    'list_id_manual' => '2001',
+    'user_id_manual' => '2001',
+    'password_manual' => '2001',
+    'number_manual' => '2001',
+    'campaign_id_predictive' => 'arrina2',
+    'list_id_predictive' => '2002',
+    'user_id_predictive' => '2002',
+    'password_predictive' => '2002',
+    'number_predictive' => '2002',
   ),
 );

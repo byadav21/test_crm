@@ -97,6 +97,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'neox_extension',
+            'label' => 'LBL_NEOXEXTENSION',
+          ),
+          1 => '',
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
             'name' => 'full_name',
             'studio' => 
             array (
@@ -104,7 +113,7 @@ array (
             ),
             'label' => 'LBL_NAME',
           ),
-           1 => 
+          1 => 
           array (
             'name' => 'user_access_type',
             'label' => 'LBL_USERTYPE',

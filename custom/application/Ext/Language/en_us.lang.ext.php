@@ -227,6 +227,14 @@ $app_list_strings['payment_type_dom'][''] = '';
 $app_list_strings['payment_type_dom']['NEFT'] = 'NEFT';
 $app_list_strings['payment_type_dom']['Cheque'] = 'Cheque';
 
+
+$app_list_strings['pyment_currency_type'] = array (
+  'INR' => 'INR',
+  'USD' => 'USD',
+  
+);
+
+
  
 $app_list_strings['moduleList']['KReports'] = 'KReports v3.0';
 
@@ -590,7 +598,7 @@ $app_list_strings['moduleList']['te_drip_campaign_list'] = 'Drip Campaign List';
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['te_disposition'] = 'Disposition';
+$app_list_strings['moduleList']['te_disposition'] = 'Predictive Call Details';
 $app_list_strings['lead_status_custom_dom'][''] = '';
 $app_list_strings['lead_status_custom_dom']['Alive'] = 'Alive';
 $app_list_strings['lead_status_custom_dom']['Converted'] = 'Converted';

@@ -24,6 +24,17 @@ $dictionary['te_payment_details']['fields']['payment_source']['audited']='false'
  
 
 
+$dictionary['te_payment_details']['fields']['currency_type'] = array (
+	'name' => 'currency_type',
+    'vname' => 'Currency Type',
+    'type' => 'enum',
+    'options'=>'pyment_currency_type',
+    'duplicate_merge' => 'disabled',
+    'required' => false,
+    'studio' => 'visible',
+);
+
+
 // created: 2016-11-03 00:13:18
 $dictionary["te_payment_details"]["fields"]["leads_te_payment_details_1"] = array (
   'name' => 'leads_te_payment_details_1',

@@ -324,7 +324,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 			if($recipients!=""){
 				$recipients=substr($recipients,0,-1);
 				$mail = new NetCoreEmail();			
-				//$mail->sendEmail($recipients,"Daily Report",$template);
+				$mail->sendEmail($recipients,"Daily Report",$template);
 			}
 		}else{			
 			$vendorListData=$this->getReportData($searchData);

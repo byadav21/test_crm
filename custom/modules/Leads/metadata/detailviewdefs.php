@@ -51,6 +51,26 @@ array (
               ),
             ),
           ),
+          6 => 
+          array (
+            'customCode' => '<input title="Generate Invoice" accessKey="" type="button" class="button" onClick="generateInvoice({$fields.id.value})" name="g_invoice" value="Generate Invoice">',
+            'sugar_html' => 
+            array (
+              'type' => 'button',
+              'value' => 'Generate Invoice',
+              'htmlOptions' => 
+              array (
+                'title' => 'Generate Invoice',
+                'accessKey' => '',
+                'class' => 'button',
+                'onClick' => 'generateInvoice(\'{$fields.id.value}\')',
+                'name' => 'g_invoice',
+                'id' => 'g_invoice_button',
+              ),
+              'template' => '{if $bean->aclAccess("edit") && !$DISABLE_CONVERT_ACTION}[CONTENT]{/if}',
+            ),
+          ),
+          
           'AOS_GENLET' => 
           array (
             'customCode' => '<input type="button" class="button" onClick="showPopup();" value="{$APP.LBL_GENERATE_LETTER}">',

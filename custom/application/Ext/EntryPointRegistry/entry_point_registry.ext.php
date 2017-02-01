@@ -5,8 +5,23 @@
 $entry_point_registry['rundripcampaign'] = array('file' => 'custom/modules/te_drip_campaign/rundripcampaign.php','auth' => false);
 
 
+$entry_point_registry['getbatchbyleadstatus'] = array('file' => 'custom/modules/AOR_Reports/getbatchbyleadstatus.php','auth' => false);
+
+
+
+
+$entry_point_registry['openDispositionPopup'] = array('file' => 'custom/modules/te_disposition/openDispositionPopup.php','auth' => true);
+
+
+
+
 $entry_point_registry['duplicateutm'] = array('file' => 'custom/modules/te_utm/duplicate.php','auth' => true);
 $entry_point_registry['makeitexpire'] = array('file' => 'custom/modules/te_utm/makeitexpire.php','auth' => true);
+
+
+$entry_point_registry['generateInvoice'] = array('file' => 'custom/modules/Leads/fppdf/generateInvoice.php','auth' => false);
+
+
 
 
 $entry_point_registry['pushLeads'] = array('file' => 'custom/modules/Leads/pushLeads.php','auth' => false);
@@ -15,6 +30,11 @@ $entry_point_registry['pushLeads'] = array('file' => 'custom/modules/Leads/pushL
 
 
 $entry_point_registry['expiringcontract'] = array('file' => 'custom/modules/AOS_Contracts/expiringcontract.php','auth' => false);
+
+
+$entry_point_registry['getCurrentCalls'] = array('file' => 'custom/modules/te_disposition/getCurrentCalls.php','auth' => true);
+
+
 
 
 $entry_point_registry['getvendors'] = array('file' => 'custom/modules/te_target_campaign/getvendors.php','auth' => false);

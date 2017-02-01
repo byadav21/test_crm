@@ -814,6 +814,14 @@
       'len' => '100',
       'audited' => 'false',
     ),
+    'neox_extension' => 
+    array (
+      'name' => 'neox_extension',
+      'type' => 'varchar',
+      'vname' => 'LBL_NEOXEXTENSION',
+      'len' => '100',
+      'audited' => 'false',
+    ),
     'user_access_type' => 
     array (
       'name' => 'user_access_type',

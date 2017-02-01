@@ -3,6 +3,15 @@ ini_set ( 'display_errors', 'off' );
 require_once ('include/MVC/View/views/view.edit.php');
 class LeadsViewEdit extends ViewEdit {
 	function display() {
+		//~ print_r($_REQUEST);
+		if(isset($_REQUEST['from_pusher'])){
+			$this->ss->assign('from_pusher', '1');
+			$this->ss->assign('disposition_id',$_REQUEST['disposition_id'] );
+			
+		}
+		else{
+			$this->ss->assign('from_pusher', '0');
+		}
 		?>
 <script>
 	

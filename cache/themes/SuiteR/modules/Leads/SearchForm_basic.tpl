@@ -72,6 +72,28 @@
 	
 	<td scope="row" nowrap="nowrap" width='1%' >
 		
+		<label for='batch_basic' >{sugar_translate label='LBL_BATCH' module='Leads'}</label>
+    	</td>
+
+	
+	<td  nowrap="nowrap" width='1%'>
+			
+{html_options id='batch_basic' name='batch_basic[]' options=$fields.batch_basic.options size="6" style="width: 150px" multiple="1" selected=$fields.batch_basic.value}
+   	   	</td>
+    
+      
+	{counter assign=index}
+	{math equation="left % right"
+   		  left=$index
+          right=$basicMaxColumns
+          assign=modVal
+    }
+	{if ($index % $basicMaxColumns == 1 && $index != 1)}
+		</tr><tr>
+	{/if}
+	
+	<td scope="row" nowrap="nowrap" width='1%' >
+		
 		<label for='email_basic' >{sugar_translate label='LBL_EMAIL' module='Leads'}</label>
     	</td>
 

@@ -344,6 +344,16 @@
       'options' => 'payment_type_source_dom',
       'audited' => 'false',
     ),
+    'currency_type' => 
+    array (
+      'name' => 'currency_type',
+      'vname' => 'Currency Type',
+      'type' => 'enum',
+      'options' => 'pyment_currency_type',
+      'duplicate_merge' => 'disabled',
+      'required' => false,
+      'studio' => 'visible',
+    ),
     'leads_te_payment_details_1' => 
     array (
       'name' => 'leads_te_payment_details_1',

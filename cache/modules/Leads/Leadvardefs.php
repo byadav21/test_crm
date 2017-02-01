@@ -560,6 +560,7 @@
       'group' => 'primary_address',
       'comment' => 'Country for primary address',
       'merge_filter' => 'enabled',
+      'required' => false,
     ),
     'alt_address_street' => 
     array (
@@ -1395,6 +1396,20 @@
       'min' => false,
       'max' => false,
     ),
+    'channel' => 
+    array (
+      'name' => 'channel',
+      'vname' => 'Channel',
+      'type' => 'varchar',
+      'len' => '50',
+      'size' => '20',
+      'studio' => 'visible',
+      'required' => false,
+      'reportable' => true,
+      'audited' => false,
+      'importable' => true,
+      'duplicate_merge' => false,
+    ),
     'neoxstatus' => 
     array (
       'name' => 'neoxstatus',
@@ -1638,6 +1653,23 @@
       'side' => 'right',
       'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
     ),
+    'batch' => 
+    array (
+      'name' => 'batch',
+      'label' => 'LBL_BATCH',
+      'type' => 'enum',
+      'module' => 'Leads',
+      'help' => '',
+      'comment' => '',
+      'function' => 'getBatchList',
+      'default_value' => '',
+      'mass_update' => false,
+      'required' => true,
+      'reportable' => true,
+      'audited' => false,
+      'importable' => 'true',
+      'duplicate_merge' => false,
+    ),
     'comment' => 
     array (
       'name' => 'comment',
@@ -1852,6 +1884,22 @@
       'id' => 'Leadseducation_c',
       'custom_module' => 'Leads',
     ),
+    'assigned_date' => 
+    array (
+      'name' => 'assigned_date',
+      'label' => 'LBL_ASSIGNED_DATE',
+      'type' => 'date',
+      'module' => 'Leads',
+      'default_value' => '',
+      'help' => '',
+      'comment' => '',
+      'mass_update' => false,
+      'required' => false,
+      'reportable' => true,
+      'audited' => false,
+      'duplicate_merge' => false,
+      'importable' => 'true',
+    ),
     'mailer_day' => 
     array (
       'required' => false,
@@ -1903,6 +1951,24 @@
       'len' => '100',
       'audited' => 'false',
     ),
+    'invoice_number' => 
+    array (
+      'name' => 'invoice_number',
+      'vname' => 'LBL_INVOICE_NUMBER',
+      'type' => 'int',
+      'required' => false,
+      'massupdate' => 0,
+      'comments' => '',
+      'help' => '',
+      'default' => 0,
+      'importable' => 'false',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'reportable' => false,
+      'len' => '50',
+      'size' => '50',
+    ),
     'fee_inr' => 
     array (
       'required' => false,
@@ -1945,6 +2011,123 @@
       'module' => 'Leads',
       'bean_name' => 'Lead',
       'vname' => 'LBL_INSTITUTE',
+    ),
+    'status_d' => 
+    array (
+      'name' => 'status_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_STATUS_D',
+    ),
+    'status_detail_d' => 
+    array (
+      'name' => 'status_detail_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_STATUS_DETAIL_D',
+    ),
+    'description_d' => 
+    array (
+      'name' => 'description_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DESCRIPTION_D',
+    ),
+    'date_of_callback_date_d' => 
+    array (
+      'name' => 'date_of_callback_date_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_CALL_BACK_DATE_D',
+    ),
+    'date_of_callback_hours_d' => 
+    array (
+      'name' => 'date_of_callback_hours_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_CALL_BACK_HOURS_D',
+    ),
+    'date_of_callback_minutes_d' => 
+    array (
+      'name' => 'date_of_callback_minutes_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_CALL_BACK_MINUTES_D',
+    ),
+    'disposition_id' => 
+    array (
+      'name' => 'disposition_id',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DISPOSITION_ID',
+    ),
+    'date_of_followup_date_d' => 
+    array (
+      'name' => 'date_of_followup_date_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_FOLLOWUP_DATE_D',
+    ),
+    'date_of_followup_hours_d' => 
+    array (
+      'name' => 'date_of_followup_hours_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_FOLLOWUP_HOURS_D',
+    ),
+    'date_of_followup_minutes_d' => 
+    array (
+      'name' => 'date_of_followup_minutes_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_FOLLOWUP_MINUTES_D',
+    ),
+    'date_of_prospect_date_d' => 
+    array (
+      'name' => 'date_of_prospect_date_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_PROSPECT_DATE_D',
+    ),
+    'date_of_prospect_hours_d' => 
+    array (
+      'name' => 'date_of_prospect_hours_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_PROSPECT_HOURS_D',
+    ),
+    'date_of_prospect_minutes_d' => 
+    array (
+      'name' => 'date_of_prospect_minutes_d',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_DATE_OF_PROSPECT_MINUTES_D',
     ),
     'jjwg_maps_lng_c' => 
     array (

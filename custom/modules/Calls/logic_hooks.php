@@ -6,7 +6,7 @@ $hook_array = Array();
 // position, file, function 
 $hook_array['process_record'] = Array(); 
 $hook_array['process_record'][] = Array(1, 'count', 'modules/Calls_Reschedule/reschedule_count.php','reschedule_count', 'count'); 
-
-
-
+$hook_array['before_save'] = Array(); 
+$hook_array['before_save'][] = Array(1, 'Leads push feed','custom/modules/Calls/addPayment.php','addPaymentClass', 'checkDuplicateFunc'); 
+//~ die("sdfsd");
 ?>

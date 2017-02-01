@@ -66,21 +66,23 @@
 						{if $LOGGED_IN =='Success'}
 							
 							{if $LOGGED_IN_RESUME=='Resume'}
-								<span id='show_pause'><a onclick="pauseTheNeoxCall()">Pause</a></span><span>&nbsp;&nbsp;</span>
+								<span id='show_pause'><button type="button" onclick="pauseTheNeoxCall()">Pause</button></span><span>&nbsp;&nbsp;</span>
 							{/if}
 							{if $LOGGED_IN_PAUSE=='Pause'}
-								<span id='show_pause'><a onclick="resumeTheNeoxCall()">Resume</a></span><span>&nbsp;&nbsp;</span>
+								<span id='show_pause'><button type="button"onclick="resumeTheNeoxCall()">Resume</button></span><span>&nbsp;&nbsp;</span>
 							{/if}
 							
 							
 							{if $LOGGED_IN_MANUAL=='Manual'}
-								<span id='shift_call'><a onclick="predictiveDialing()">Predictive Dialing</a></span>
+								<span id='shift_call'><button type="button" onclick="predictiveDialing()">Predictive Dialing</button></span>
 							{/if}
 							{if $LOGGED_IN_PREDICTIVE=='Predictive'}
-								<span id='shift_call'><a onclick="manualDialing()">Manual Dialing</a></span>
+								<span id='shift_call'><button type="button" onclick="manualDialing()">Manual Dialing</button></span>
 							{/if}
 							
 						{/if}		
+							
+
 						
 					</td>
 					<td  nowrap='nowrap' align="right" class='paginationChangeButtons' width="1%">

@@ -27,7 +27,7 @@ while($row=$db->fetchByAssoc($leadObj)){
 	
 	# Assign leads to a particular agent/user
 	 if(!empty($rules['user_id_c'])){
-		$assql = "UPDATE leads SET assigned_user_id='".$rules['user_id_c']."',assigned_flag=1 WHERE id='".$row['id']."'";
+		$assql = "UPDATE leads SET assigned_user_id='".$rules['user_id_c']."',assigned_flag=1,assigned_date='".date('Y-m-d')."' WHERE id='".$row['id']."'";
 		$db->query($assql);
 		$i++;
 	}else{
@@ -78,14 +78,14 @@ while($row=$db->fetchByAssoc($leadObj)){
 					$agentObj=$db->query($agentSql);
 				}		
 				$agent=$db->fetchByAssoc($agentObj);
-				$db->query("UPDATE leads set assigned_user_id='".$agent['user_id']."',assigned_flag=1 WHERE id='".$row['id']."'");
+				$db->query("UPDATE leads set assigned_user_id='".$agent['user_id']."',assigned_flag=1,assigned_date='".date('Y-m-d')."' WHERE id='".$row['id']."'");
 				$i++;
 				$db->query("UPDATE agent set assigned=1 WHERE user_id='".$agent['user_id']."'");
 			}else{
 				$agentSql="SELECT user_id FROM agent ORDER BY total ASC limit 0,1";
 				$agentObj=$db->query($agentSql);
 				$agent=$db->fetchByAssoc($agentObj);
-				$db->query("UPDATE leads set assigned_user_id='".$agent['user_id']."',assigned_flag=1 WHERE id='".$row['id']."'");
+				$db->query("UPDATE leads set assigned_user_id='".$agent['user_id']."',assigned_flag=1,assigned_date='".date('Y-m-d')."' WHERE id='".$row['id']."'");
 				$i++;
 				$db->query("UPDATE agent set total=total+1 WHERE user_id='".$agent['user_id']."'");
 			}

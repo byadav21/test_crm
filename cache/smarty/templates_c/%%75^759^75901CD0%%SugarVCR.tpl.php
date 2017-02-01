@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-05 05:24:55
+<?php /* Smarty version 2.6.29, created on 2017-02-01 06:54:50
          compiled from include/EditView/SugarVCR.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getimage', 'include/EditView/SugarVCR.tpl', 53, false),)), $this); ?>

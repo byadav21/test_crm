@@ -15,6 +15,12 @@ $dictionary['User']['fields']['neox_password']['vname']='LBL_NEOXPASS';
 $dictionary['User']['fields']['neox_password']['len']='100';
 $dictionary['User']['fields']['neox_password']['audited']='false';
 
+$dictionary['User']['fields']['neox_extension']['name']='neox_extension';
+$dictionary['User']['fields']['neox_extension']['type']='varchar';
+$dictionary['User']['fields']['neox_extension']['vname']='LBL_NEOXEXTENSION';
+$dictionary['User']['fields']['neox_extension']['len']='100';
+$dictionary['User']['fields']['neox_extension']['audited']='false';
+
  ?>
  
  

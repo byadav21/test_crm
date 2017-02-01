@@ -47,7 +47,8 @@ $mod_strings['LBL_VENDOR'] = 'Vendor';
 $mod_strings['LBL_MINIMUM_ATTENDANCE'] = 'Minimum Attendance';
 $mod_strings['LBL_CONVERTED_DATE'] = 'Converted Date';
 $mod_strings['LBL_MAILER_DAY'] = 'Mailer Day';
-
+$mod_strings['LBL_BATCH'] = 'Batch';
+$mod_strings['LBL_ASSIGNED_DATE'] = 'Assigned Date';
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE'] = 'Disposition';
