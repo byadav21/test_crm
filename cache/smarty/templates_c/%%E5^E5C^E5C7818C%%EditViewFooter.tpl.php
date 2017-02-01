@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-06 00:18:16
+<?php /* Smarty version 2.6.29, created on 2017-01-30 02:48:22
          compiled from custom/modules/te_ba_Batch/tpls/EditViewFooter.tpl */ ?>
 {literal}
 <script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() { initPanel(2, 'expanded'); }); </script>

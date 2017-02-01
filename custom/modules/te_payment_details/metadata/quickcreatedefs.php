@@ -52,36 +52,45 @@ array (
         array (
           0 => 
           array (
-            'name' => 'amount',
-            'label' => 'LBL_AMOUNT',
+            'name' => 'currency_type',
+            'studio' => 'visible',
+            'label' => 'Currency Type',
           ),
           1 => 
           array (
-            'name' => 'reference_number',
-            'label' => 'LBL_REFERENCE_NUMBER',
+            'name' => 'amount',
+            'label' => 'LBL_AMOUNT',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'payment_realized',
-            'label' => 'LBL_PAYMENT_REALIZED',
+            'name' => 'reference_number',
+            'label' => 'LBL_REFERENCE_NUMBER',
           ),
           1 => 
           array (
-            'name' => 'payment_source',
-            'label' => 'LBL_PAYMENTTYPESOURCE',
+            'name' => 'payment_realized',
+            'label' => 'LBL_PAYMENT_REALIZED',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
+            'name' => 'payment_source',
+            'label' => 'LBL_PAYMENTTYPESOURCE',
+          ),
+          1 => 
+          array (
             'name' => 'transaction_id',
             'label' => 'LBL_TRANSACTIONID',
           ),
-          1 => '',
+        ),
+        4 => 
+        array (
+          0 => '',
         ),
       ),
     ),

@@ -33,3 +33,4 @@ $mod_strings['LBL_VENDOR'] = 'Vendor';
 $mod_strings['LBL_MINIMUM_ATTENDANCE'] = 'Minimum Attendance';
 $mod_strings['LBL_CONVERTED_DATE'] = 'Converted Date';
 $mod_strings['LBL_MAILER_DAY'] = 'Mailer Day';
+$mod_strings['LBL_BATCH'] = 'Batch';

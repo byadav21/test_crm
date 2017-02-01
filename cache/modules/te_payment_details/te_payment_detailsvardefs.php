@@ -383,6 +383,16 @@
       'side' => 'right',
       'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
     ),
+    'currency_type' => 
+    array (
+      'name' => 'currency_type',
+      'vname' => 'Currency Type',
+      'type' => 'enum',
+      'options' => 'pyment_currency_type',
+      'duplicate_merge' => 'disabled',
+      'required' => false,
+      'studio' => 'visible',
+    ),
   ),
   'relationships' => 
   array (

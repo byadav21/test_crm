@@ -101,7 +101,13 @@ class LeadsListView extends Lead{
 		$iid = $ins['te_in_institutes_te_ba_batch_1te_in_institutes_ida'];
 		$this->institute = "<a href='index.php?action=DetailView&module=te_in_institutes&record={$iid}'>".$ins['name']."</a>";
 		if(!empty($this->phone_mobile)){
+			if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Predictive'){
+				$this->phone_mobile .= '  <img src="custom/themes/default/images/phone.png" href="" onclick="alert(\'You are in Predictive mode\')" alt="Smiley face" height="20" width="20">';
+			}
+			else{
 			$this->phone_mobile .= '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->phone_mobile.',\''.$this->id.'\')" alt="Smiley face" height="20" width="20">';
+			}
+			
 		}
 	    
 		//~ $this->program = 'test';

@@ -91,6 +91,13 @@ $moduleList[] = 'te_training_category';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['te_student_study_kit'] = 'te_student_study_kit';
+$beanFiles['te_student_study_kit'] = 'modules/te_student_study_kit/te_student_study_kit.php';
+$moduleList[] = 'te_student_study_kit';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['te_UTM_System'] = 'te_UTM_System';
 $beanFiles['te_UTM_System'] = 'modules/te_UTM_System/te_UTM_System.php';
 $moduleList[] = 'te_UTM_System';

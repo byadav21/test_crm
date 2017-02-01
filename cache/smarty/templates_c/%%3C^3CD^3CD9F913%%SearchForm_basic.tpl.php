@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-05 23:07:38
+<?php /* Smarty version 2.6.29, created on 2017-01-28 08:52:33
          compiled from cache/themes/SuiteR/modules/te_student/SearchForm_basic.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'counter', 'cache/themes/SuiteR/modules/te_student/SearchForm_basic.tpl', 33, false),array('function', 'math', 'cache/themes/SuiteR/modules/te_student/SearchForm_basic.tpl', 34, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/te_student/SearchForm_basic.tpl', 43, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/te_student/SearchForm_basic.tpl', 101, false),array('modifier', 'count', 'cache/themes/SuiteR/modules/te_student/SearchForm_basic.tpl', 88, false),)), $this); ?>

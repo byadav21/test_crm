@@ -1,11 +1,10 @@
 <?php
 class NetCoreEmail{
-	public function sendEmail($to,$subject,$body){
+	public function sendEmail($to,$subject,$body,$attachment=""){
 		$from = "falconadmin@talentedge.in";
 		$fromname = "TalentEdge";
 		$api_key = "fbb5606b326850fce2fa335cdce8dc16";
 		$content = $body;
-		
 		$data=array();
 		$data['subject']= $subject;
 		$data['fromname']= rawurlencode($fromname);
@@ -13,6 +12,10 @@ class NetCoreEmail{
 		$data['from'] = $from;
 		$data['content']= $content;
 		$data['recipients']= $to;
+		if($attachment!=""){
+			$attachment = file_get_contents($attachment);
+			$data['files']= array('payment_invoice'=>base64_encode($attachment));
+		}		
 		$apiresult = $this->callApi($data);
 		return trim($apiresult);
 	}
@@ -21,6 +24,7 @@ class NetCoreEmail{
 		return $result;
     }
 	function http_post_form($url,$data,$timeout=20) {
+		$header=array("content-type"=>"application/x-www-form-urlencoded");
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,$url);
 		curl_setopt($ch, CURLOPT_FAILONERROR, 1);
@@ -33,6 +37,10 @@ class NetCoreEmail{
 		curl_setopt($ch, CURLOPT_RANGE,"1-2000000");
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_REFERER, @$_SERVER['REQUEST_URI']);
+		if(isset($data['files'])){
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		}		
+		
 		$result = curl_exec($ch);
 		$result = curl_error($ch) ? curl_error($ch) : $result;
 		curl_close($ch);

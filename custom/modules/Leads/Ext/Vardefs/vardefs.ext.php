@@ -211,6 +211,24 @@ $dictionary["Lead"]["fields"]["leads_te_payment_details_1"] = array (
 );
 
 
+$dictionary['Lead']['fields']['batch'] =array (
+	'name' => 'batch',
+	'label' => 'LBL_BATCH',
+	'type' => 'enum',
+	'module' => 'Leads',
+	'help' => '',
+	'comment' => '',
+	'function' => 'getBatchList',
+	'default_value' => '',
+	'mass_update' => false, 
+	'required' => true, 
+	'reportable' => true, 
+	'audited' => false,
+	'importable' => 'true',
+	'duplicate_merge' => false,
+);
+
+
  // created: 2016-09-15 13:40:04
 $dictionary['Lead']['fields']['min_attendance_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['min_attendance_c']['labelValue']='Min. Attendance';
@@ -467,6 +485,28 @@ $dictionary['Lead']['fields']['gender']['audited']='false';
  
 
 
+
+$dictionary['Lead']['fields']['invoice_number'] =array (
+		'name' => 'invoice_number',
+		'vname' => 'LBL_INVOICE_NUMBER',
+		'type' => 'int',
+		'required' => false,
+		'massupdate' => 0,
+		'comments' => '',
+		'help' => '',
+		'default'=> 0,
+		'importable' => 'false',
+		'duplicate_merge' => 'disabled',
+		'duplicate_merge_dom_value' => '0',
+		'audited' => false,
+		'reportable' => false,
+		'len' => '50',
+		'size' => '50',
+	);
+
+
+
+
 $dictionary['Lead']['fields']['fee_inr'] =array (
 	'required' => false,
     'name' => 'fee_inr',
@@ -509,6 +549,10 @@ $dictionary['Lead']['fields']['converted_date'] =array (
 	'importable' => 'true', 
 );
  
+
+$dictionary['Lead']['fields']['primary_address_country']['required'] = true;
+
+
 
 // created: 2016-09-19 13:25:40
 $dictionary["Lead"]["fields"]["program"] = array (

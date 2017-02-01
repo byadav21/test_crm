@@ -242,6 +242,233 @@ SUGAR.util.doWhen(function(){
 <div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
 {counter name="fieldsUsed"}
 <td width='12.5%' scope="col">
+{if !$fields.result.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_RESULT' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="enum" field="result" width='37.5%'  >
+{if !$fields.result.hidden}
+{counter name="panelFieldCount"}
+
+
+{if is_string($fields.result.options)}
+<input type="hidden" class="sugar_field" id="{$fields.result.name}" value="{ $fields.result.options }">
+{ $fields.result.options }
+{else}
+<input type="hidden" class="sugar_field" id="{$fields.result.name}" value="{ $fields.result.value }">
+{ $fields.result.options[$fields.result.value]}
+{/if}
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+</tr>
+{/capture}
+{if $fieldsUsed > 0 && $fieldsUsed != $fieldsHidden}
+{$tableRow}
+{/if}
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+{counter name="fieldsHidden" start=0 print=false assign="fieldsHidden"}
+{capture name="tr" assign="tableRow"}
+<tr>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.eligible_for_certificate.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_ELIGIBLE_FOR_CERTIFICATE' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="enum" field="eligible_for_certificate" width='37.5%'  >
+{if !$fields.eligible_for_certificate.hidden}
+{counter name="panelFieldCount"}
+
+
+{if is_string($fields.eligible_for_certificate.options)}
+<input type="hidden" class="sugar_field" id="{$fields.eligible_for_certificate.name}" value="{ $fields.eligible_for_certificate.options }">
+{ $fields.eligible_for_certificate.options }
+{else}
+<input type="hidden" class="sugar_field" id="{$fields.eligible_for_certificate.name}" value="{ $fields.eligible_for_certificate.value }">
+{ $fields.eligible_for_certificate.options[$fields.eligible_for_certificate.value]}
+{/if}
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.assessment_mode.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_ASSESSMENT_MODE' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="enum" field="assessment_mode" width='37.5%'  >
+{if !$fields.assessment_mode.hidden}
+{counter name="panelFieldCount"}
+
+
+{if is_string($fields.assessment_mode.options)}
+<input type="hidden" class="sugar_field" id="{$fields.assessment_mode.name}" value="{ $fields.assessment_mode.options }">
+{ $fields.assessment_mode.options }
+{else}
+<input type="hidden" class="sugar_field" id="{$fields.assessment_mode.name}" value="{ $fields.assessment_mode.value }">
+{ $fields.assessment_mode.options[$fields.assessment_mode.value]}
+{/if}
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+</tr>
+{/capture}
+{if $fieldsUsed > 0 && $fieldsUsed != $fieldsHidden}
+{$tableRow}
+{/if}
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+{counter name="fieldsHidden" start=0 print=false assign="fieldsHidden"}
+{capture name="tr" assign="tableRow"}
+<tr>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.actual_attendance.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_ACTUAL_ATTENDANCE' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="int" field="actual_attendance" width='37.5%'  >
+{if !$fields.actual_attendance.hidden}
+{counter name="panelFieldCount"}
+
+<span class="sugar_field" id="{$fields.actual_attendance.name}">
+{sugar_number_format precision=0 var=$fields.actual_attendance.value}
+</span>
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.feedback_given.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_FEEDBACH_GIVEN' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="enum" field="feedback_given" width='37.5%'  >
+{if !$fields.feedback_given.hidden}
+{counter name="panelFieldCount"}
+
+
+{if is_string($fields.feedback_given.options)}
+<input type="hidden" class="sugar_field" id="{$fields.feedback_given.name}" value="{ $fields.feedback_given.options }">
+{ $fields.feedback_given.options }
+{else}
+<input type="hidden" class="sugar_field" id="{$fields.feedback_given.name}" value="{ $fields.feedback_given.value }">
+{ $fields.feedback_given.options[$fields.feedback_given.value]}
+{/if}
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+</tr>
+{/capture}
+{if $fieldsUsed > 0 && $fieldsUsed != $fieldsHidden}
+{$tableRow}
+{/if}
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+{counter name="fieldsHidden" start=0 print=false assign="fieldsHidden"}
+{capture name="tr" assign="tableRow"}
+<tr>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.Assessment_center_lcocation_preference.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_ASSESSMENT_CENTER_LOCATION_PREFERENCE' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="varchar" field="Assessment_center_lcocation_preference" width='37.5%'  >
+{if !$fields.Assessment_center_lcocation_preference.hidden}
+{counter name="panelFieldCount"}
+
+{if strlen($fields.Assessment_center_lcocation_preference.value) <= 0}
+{assign var="value" value=$fields.Assessment_center_lcocation_preference.default_value }
+{else}
+{assign var="value" value=$fields.Assessment_center_lcocation_preference.value }
+{/if} 
+<span class="sugar_field" id="{$fields.Assessment_center_lcocation_preference.name}">{$fields.Assessment_center_lcocation_preference.value}</span>
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.total_session_required.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_TOTAL_SESSION_REQUIRED' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="int" field="total_session_required" width='37.5%'  >
+{if !$fields.total_session_required.hidden}
+{counter name="panelFieldCount"}
+
+<span class="sugar_field" id="{$fields.total_session_required.name}">
+{sugar_number_format precision=0 var=$fields.total_session_required.value}
+</span>
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+</tr>
+{/capture}
+{if $fieldsUsed > 0 && $fieldsUsed != $fieldsHidden}
+{$tableRow}
+{/if}
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+{counter name="fieldsHidden" start=0 print=false assign="fieldsHidden"}
+{capture name="tr" assign="tableRow"}
+<tr>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.channel.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_CHANNEL' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="varchar" field="channel" width='37.5%'  >
+{if !$fields.channel.hidden}
+{counter name="panelFieldCount"}
+
+{if strlen($fields.channel.value) <= 0}
+{assign var="value" value=$fields.channel.default_value }
+{else}
+{assign var="value" value=$fields.channel.value }
+{/if} 
+<span class="sugar_field" id="{$fields.channel.name}">{$fields.channel.value}</span>
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.completion_certificate_address.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_COMPLETION_CERTIFICATE_ADDRESS' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="text" field="completion_certificate_address" width='37.5%'  >
+{if !$fields.completion_certificate_address.hidden}
+{counter name="panelFieldCount"}
+
+<span class="sugar_field" id="{$fields.completion_certificate_address.name|escape:'html'|url2html|nl2br}">{$fields.completion_certificate_address.value|escape:'html'|escape:'html_entity_decode'|url2html|nl2br}</span>
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+</tr>
+{/capture}
+{if $fieldsUsed > 0 && $fieldsUsed != $fieldsHidden}
+{$tableRow}
+{/if}
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+{counter name="fieldsHidden" start=0 print=false assign="fieldsHidden"}
+{capture name="tr" assign="tableRow"}
+<tr>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
+{if !$fields.assigned_user_name.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_ASSIGNED_TO_NAME' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
+</td>
+<td class="inlineEdit" type="relate" field="assigned_user_name" width='37.5%'  >
+{if !$fields.assigned_user_name.hidden}
+{counter name="panelFieldCount"}
+
+<span id="assigned_user_id" class="sugar_field" data-id-value="{$fields.assigned_user_id.value}">{$fields.assigned_user_name.value}</span>
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
+{counter name="fieldsUsed"}
+<td width='12.5%' scope="col">
 {if !$fields.description.hidden}
 {capture name="label" assign="label"}{sugar_translate label='LBL_DESCRIPTION' module='te_student_batch'}{/capture}
 {$label|strip_semicolon}:
@@ -400,10 +627,25 @@ SUGAR.util.doWhen(function(){
 <div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
 {counter name="fieldsUsed"}
 <td width='12.5%' scope="col">
-&nbsp;
+{if !$fields.dropout_status.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_DROPOUT_STATUS' module='te_student_batch'}{/capture}
+{$label|strip_semicolon}:
+{/if}
 </td>
-<td class="" type="" field="" width='37.5%'  >
-</td>
+<td class="inlineEdit" type="enum" field="dropout_status" width='37.5%'  >
+{if !$fields.dropout_status.hidden}
+{counter name="panelFieldCount"}
+
+
+{if is_string($fields.dropout_status.options)}
+<input type="hidden" class="sugar_field" id="{$fields.dropout_status.name}" value="{ $fields.dropout_status.options }">
+{ $fields.dropout_status.options }
+{else}
+<input type="hidden" class="sugar_field" id="{$fields.dropout_status.name}" value="{ $fields.dropout_status.value }">
+{ $fields.dropout_status.options[$fields.dropout_status.value]}
+{/if}
+{/if}
+<div class="inlineEditIcon"> {sugar_getimage name="inline_edit_icon.svg" attr='border="0" ' alt="$alt_edit"}</div>			</td>
 </tr>
 {/capture}
 {if $fieldsUsed > 0 && $fieldsUsed != $fieldsHidden}

@@ -582,6 +582,7 @@ value='{$value}' title=''      >
 <td valign="top" id='primary_address_country_label' width='12.5%' scope="col">
 {capture name="label" assign="label"}{sugar_translate label='LBL_COUNTRY' module='Leads'}{/capture}
 {$label|strip_semicolon}:
+<span class="required">*</span>
 </td>
 {counter name="fieldsUsed"}
 
@@ -2538,7 +2539,7 @@ addToValidate('EditView', 'primary_address_street_3', 'varchar', false,'{/litera
 addToValidate('EditView', 'primary_address_city', 'varchar', false,'{/literal}{sugar_translate label='LBL_PRIMARY_ADDRESS_CITY' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'primary_address_state', 'varchar', false,'{/literal}{sugar_translate label='LBL_PRIMARY_ADDRESS_STATE' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'primary_address_postalcode', 'varchar', false,'{/literal}{sugar_translate label='LBL_PRIMARY_ADDRESS_POSTALCODE' module='Leads' for_js=true}{literal}' );
-addToValidate('EditView', 'primary_address_country', 'varchar', false,'{/literal}{sugar_translate label='LBL_PRIMARY_ADDRESS_COUNTRY' module='Leads' for_js=true}{literal}' );
+addToValidate('EditView', 'primary_address_country', 'varchar', true,'{/literal}{sugar_translate label='LBL_PRIMARY_ADDRESS_COUNTRY' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'alt_address_street', 'varchar', false,'{/literal}{sugar_translate label='LBL_ALT_ADDRESS_STREET' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'alt_address_street_2', 'varchar', false,'{/literal}{sugar_translate label='LBL_ALT_ADDRESS_STREET_2' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'alt_address_street_3', 'varchar', false,'{/literal}{sugar_translate label='LBL_ALT_ADDRESS_STREET_3' module='Leads' for_js=true}{literal}' );
@@ -2617,6 +2618,7 @@ addToValidate('EditView', 'mailer_day', 'int', false,'{/literal}{sugar_translate
 addToValidate('EditView', 'amount', 'decimal', false,'{/literal}{sugar_translate label='LBL_AMOUNT' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'reference_number', 'varchar', false,'{/literal}{sugar_translate label='LBL_REFERENCENUMBER' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'transaction_id', 'varchar', false,'{/literal}{sugar_translate label='LBL_TRANSACTIONID' module='Leads' for_js=true}{literal}' );
+addToValidate('EditView', 'invoice_number', 'int', false,'{/literal}{sugar_translate label='LBL_INVOICE_NUMBER' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'fee_inr', 'int', false,'{/literal}{sugar_translate label='LBL_FEE_INR' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'program', 'varchar', false,'{/literal}{sugar_translate label='LBL_PROGRAM' module='Leads' for_js=true}{literal}' );
 addToValidate('EditView', 'institute', 'varchar', false,'{/literal}{sugar_translate label='LBL_INSTITUTE' module='Leads' for_js=true}{literal}' );

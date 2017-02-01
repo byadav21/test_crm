@@ -61,5 +61,20 @@ function getTemplateList(){
 	}
 	return $dropDown;
 }
+# function will return list of batch drop down in leads module
+function getBatchList(){
+	static $dropDown = null;
+	if(!$dropDown){
+		global $db;
+		$query = "SELECT distinct(b.id),b.name FROM `te_ba_batch` b INNER JOIN leads_cstm lc ON b.id=lc.te_ba_batch_id_c";
+		$result = $db->query($query, false);
+		$dropDown = array();
+		$dropDown[''] = '';
+		while (($row = $db->fetchByAssoc($result)) != null) {
+			$dropDown[$row['id']] = $row['name'];
+		}
+	}
+	return $dropDown;
+}
 
 ?>

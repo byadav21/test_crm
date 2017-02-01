@@ -83,4 +83,5 @@ $mod_strings = array (
   'LBL_STATE' => 'State',
   'LBL_CITY' => 'City',
   'LBL_COUNTRY' => 'Country',
+  'LBL_BATCH_START_DATE' => 'Batch Start Date',
 );

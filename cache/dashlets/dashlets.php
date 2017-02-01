@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-04 22:49:26
+// created: 2017-01-28 08:51:50
 $dashletsFiles = array (
   'te_industryDashlet' => 
   array (
@@ -604,6 +604,13 @@ $dashletsFiles = array (
     'class' => 'MyNotesDashlet',
     'meta' => 'modules/Notes/Dashlets/MyNotesDashlet/MyNotesDashlet.meta.php',
     'module' => 'Notes',
+  ),
+  'te_student_study_kitDashlet' => 
+  array (
+    'file' => 'modules/te_student_study_kit/Dashlets/te_student_study_kitDashlet/te_student_study_kitDashlet.php',
+    'class' => 'te_student_study_kitDashlet',
+    'meta' => 'modules/te_student_study_kit/Dashlets/te_student_study_kitDashlet/te_student_study_kitDashlet.meta.php',
+    'module' => 'te_student_study_kit',
   ),
   'te_neox_call_detailsDashlet' => 
   array (

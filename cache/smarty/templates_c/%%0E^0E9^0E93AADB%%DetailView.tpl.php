@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-05 23:05:50
+<?php /* Smarty version 2.6.29, created on 2017-01-28 08:04:49
          compiled from cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_include', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 33, false),array('function', 'counter', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 38, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 48, false),array('function', 'sugar_ajax_url', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 58, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 62, false),array('function', 'sugar_number_format', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 193, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 271, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 49, false),array('modifier', 'escape', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 254, false),array('modifier', 'url2html', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 254, false),array('modifier', 'nl2br', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 254, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_include', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 33, false),array('function', 'counter', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 38, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 48, false),array('function', 'sugar_ajax_url', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 58, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 62, false),array('function', 'sugar_number_format', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 193, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 498, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 49, false),array('modifier', 'escape', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 444, false),array('modifier', 'url2html', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 444, false),array('modifier', 'nl2br', 'cache/themes/SuiteR/modules/te_student_batch/DetailView.tpl', 444, false),)), $this); ?>
 
 
 <script language="javascript">
@@ -365,6 +365,334 @@ SUGAR.util.doWhen(function(){
 <?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
 
 <td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['result']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_RESULT','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="enum" field="result" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['result']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+
+<?php if (is_string ( $this->_tpl_vars['fields']['result']['options'] )): ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['result']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['result']['options']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['result']['options']; ?>
+
+<?php else: ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['result']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['result']['value']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['result']['options'][$this->_tpl_vars['fields']['result']['value']]; ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+</tr>
+<?php $this->_smarty_vars['capture']['tr'] = ob_get_contents();  $this->assign('tableRow', ob_get_contents());ob_end_clean(); ?>
+<?php if ($this->_tpl_vars['fieldsUsed'] > 0 && $this->_tpl_vars['fieldsUsed'] != $this->_tpl_vars['fieldsHidden']): ?>
+<?php echo $this->_tpl_vars['tableRow']; ?>
+
+<?php endif; ?>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed','start' => 0,'print' => false,'assign' => 'fieldsUsed'), $this);?>
+
+<?php echo smarty_function_counter(array('name' => 'fieldsHidden','start' => 0,'print' => false,'assign' => 'fieldsHidden'), $this);?>
+
+<?php ob_start(); ?>
+<tr>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['eligible_for_certificate']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_ELIGIBLE_FOR_CERTIFICATE','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="enum" field="eligible_for_certificate" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['eligible_for_certificate']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+
+<?php if (is_string ( $this->_tpl_vars['fields']['eligible_for_certificate']['options'] )): ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['eligible_for_certificate']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['eligible_for_certificate']['options']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['eligible_for_certificate']['options']; ?>
+
+<?php else: ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['eligible_for_certificate']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['eligible_for_certificate']['value']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['eligible_for_certificate']['options'][$this->_tpl_vars['fields']['eligible_for_certificate']['value']]; ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['assessment_mode']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_ASSESSMENT_MODE','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="enum" field="assessment_mode" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['assessment_mode']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+
+<?php if (is_string ( $this->_tpl_vars['fields']['assessment_mode']['options'] )): ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['assessment_mode']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['assessment_mode']['options']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['assessment_mode']['options']; ?>
+
+<?php else: ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['assessment_mode']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['assessment_mode']['value']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['assessment_mode']['options'][$this->_tpl_vars['fields']['assessment_mode']['value']]; ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+</tr>
+<?php $this->_smarty_vars['capture']['tr'] = ob_get_contents();  $this->assign('tableRow', ob_get_contents());ob_end_clean(); ?>
+<?php if ($this->_tpl_vars['fieldsUsed'] > 0 && $this->_tpl_vars['fieldsUsed'] != $this->_tpl_vars['fieldsHidden']): ?>
+<?php echo $this->_tpl_vars['tableRow']; ?>
+
+<?php endif; ?>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed','start' => 0,'print' => false,'assign' => 'fieldsUsed'), $this);?>
+
+<?php echo smarty_function_counter(array('name' => 'fieldsHidden','start' => 0,'print' => false,'assign' => 'fieldsHidden'), $this);?>
+
+<?php ob_start(); ?>
+<tr>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['actual_attendance']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_ACTUAL_ATTENDANCE','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="int" field="actual_attendance" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['actual_attendance']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+<span class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['actual_attendance']['name']; ?>
+">
+<?php echo smarty_function_sugar_number_format(array('precision' => 0,'var' => $this->_tpl_vars['fields']['actual_attendance']['value']), $this);?>
+
+</span>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['feedback_given']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_FEEDBACH_GIVEN','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="enum" field="feedback_given" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['feedback_given']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+
+<?php if (is_string ( $this->_tpl_vars['fields']['feedback_given']['options'] )): ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['feedback_given']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['feedback_given']['options']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['feedback_given']['options']; ?>
+
+<?php else: ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['feedback_given']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['feedback_given']['value']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['feedback_given']['options'][$this->_tpl_vars['fields']['feedback_given']['value']]; ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+</tr>
+<?php $this->_smarty_vars['capture']['tr'] = ob_get_contents();  $this->assign('tableRow', ob_get_contents());ob_end_clean(); ?>
+<?php if ($this->_tpl_vars['fieldsUsed'] > 0 && $this->_tpl_vars['fieldsUsed'] != $this->_tpl_vars['fieldsHidden']): ?>
+<?php echo $this->_tpl_vars['tableRow']; ?>
+
+<?php endif; ?>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed','start' => 0,'print' => false,'assign' => 'fieldsUsed'), $this);?>
+
+<?php echo smarty_function_counter(array('name' => 'fieldsHidden','start' => 0,'print' => false,'assign' => 'fieldsHidden'), $this);?>
+
+<?php ob_start(); ?>
+<tr>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['Assessment_center_lcocation_preference']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_ASSESSMENT_CENTER_LOCATION_PREFERENCE','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="varchar" field="Assessment_center_lcocation_preference" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['Assessment_center_lcocation_preference']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+<?php if (strlen ( $this->_tpl_vars['fields']['Assessment_center_lcocation_preference']['value'] ) <= 0): ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['Assessment_center_lcocation_preference']['default_value']); ?>
+<?php else: ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['Assessment_center_lcocation_preference']['value']); ?>
+<?php endif; ?> 
+<span class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['Assessment_center_lcocation_preference']['name']; ?>
+"><?php echo $this->_tpl_vars['fields']['Assessment_center_lcocation_preference']['value']; ?>
+</span>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['total_session_required']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_TOTAL_SESSION_REQUIRED','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="int" field="total_session_required" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['total_session_required']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+<span class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['total_session_required']['name']; ?>
+">
+<?php echo smarty_function_sugar_number_format(array('precision' => 0,'var' => $this->_tpl_vars['fields']['total_session_required']['value']), $this);?>
+
+</span>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+</tr>
+<?php $this->_smarty_vars['capture']['tr'] = ob_get_contents();  $this->assign('tableRow', ob_get_contents());ob_end_clean(); ?>
+<?php if ($this->_tpl_vars['fieldsUsed'] > 0 && $this->_tpl_vars['fieldsUsed'] != $this->_tpl_vars['fieldsHidden']): ?>
+<?php echo $this->_tpl_vars['tableRow']; ?>
+
+<?php endif; ?>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed','start' => 0,'print' => false,'assign' => 'fieldsUsed'), $this);?>
+
+<?php echo smarty_function_counter(array('name' => 'fieldsHidden','start' => 0,'print' => false,'assign' => 'fieldsHidden'), $this);?>
+
+<?php ob_start(); ?>
+<tr>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['channel']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_CHANNEL','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="varchar" field="channel" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['channel']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+<?php if (strlen ( $this->_tpl_vars['fields']['channel']['value'] ) <= 0): ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['channel']['default_value']); ?>
+<?php else: ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['channel']['value']); ?>
+<?php endif; ?> 
+<span class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['channel']['name']; ?>
+"><?php echo $this->_tpl_vars['fields']['channel']['value']; ?>
+</span>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['completion_certificate_address']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_COMPLETION_CERTIFICATE_ADDRESS','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="text" field="completion_certificate_address" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['completion_certificate_address']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+<span class="sugar_field" id="<?php echo ((is_array($_tmp=((is_array($_tmp=((is_array($_tmp=$this->_tpl_vars['fields']['completion_certificate_address']['name'])) ? $this->_run_mod_handler('escape', true, $_tmp, 'html') : smarty_modifier_escape($_tmp, 'html')))) ? $this->_run_mod_handler('url2html', true, $_tmp) : url2html($_tmp)))) ? $this->_run_mod_handler('nl2br', true, $_tmp) : smarty_modifier_nl2br($_tmp)); ?>
+"><?php echo ((is_array($_tmp=((is_array($_tmp=((is_array($_tmp=((is_array($_tmp=$this->_tpl_vars['fields']['completion_certificate_address']['value'])) ? $this->_run_mod_handler('escape', true, $_tmp, 'html') : smarty_modifier_escape($_tmp, 'html')))) ? $this->_run_mod_handler('escape', true, $_tmp, 'html_entity_decode') : smarty_modifier_escape($_tmp, 'html_entity_decode')))) ? $this->_run_mod_handler('url2html', true, $_tmp) : url2html($_tmp)))) ? $this->_run_mod_handler('nl2br', true, $_tmp) : smarty_modifier_nl2br($_tmp)); ?>
+</span>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+</tr>
+<?php $this->_smarty_vars['capture']['tr'] = ob_get_contents();  $this->assign('tableRow', ob_get_contents());ob_end_clean(); ?>
+<?php if ($this->_tpl_vars['fieldsUsed'] > 0 && $this->_tpl_vars['fieldsUsed'] != $this->_tpl_vars['fieldsHidden']): ?>
+<?php echo $this->_tpl_vars['tableRow']; ?>
+
+<?php endif; ?>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed','start' => 0,'print' => false,'assign' => 'fieldsUsed'), $this);?>
+
+<?php echo smarty_function_counter(array('name' => 'fieldsHidden','start' => 0,'print' => false,'assign' => 'fieldsHidden'), $this);?>
+
+<?php ob_start(); ?>
+<tr>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
+<?php if (! $this->_tpl_vars['fields']['assigned_user_name']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_ASSIGNED_TO_NAME','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
+</td>
+<td class="inlineEdit" type="relate" field="assigned_user_name" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['assigned_user_name']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+<span id="assigned_user_id" class="sugar_field" data-id-value="<?php echo $this->_tpl_vars['fields']['assigned_user_id']['value']; ?>
+"><?php echo $this->_tpl_vars['fields']['assigned_user_name']['value']; ?>
+</span>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
+<?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
+
+<td width='12.5%' scope="col">
 <?php if (! $this->_tpl_vars['fields']['description']['hidden']): ?>
 <?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_DESCRIPTION','module' => 'te_student_batch'), $this);?>
 <?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
@@ -587,10 +915,35 @@ SUGAR.util.doWhen(function(){
 <?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
 
 <td width='12.5%' scope="col">
-&nbsp;
+<?php if (! $this->_tpl_vars['fields']['dropout_status']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_DROPOUT_STATUS','module' => 'te_student_batch'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
 </td>
-<td class="" type="" field="" width='37.5%'  >
-</td>
+<td class="inlineEdit" type="enum" field="dropout_status" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['dropout_status']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+
+<?php if (is_string ( $this->_tpl_vars['fields']['dropout_status']['options'] )): ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['dropout_status']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['dropout_status']['options']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['dropout_status']['options']; ?>
+
+<?php else: ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['dropout_status']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['dropout_status']['value']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['dropout_status']['options'][$this->_tpl_vars['fields']['dropout_status']['value']]; ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<div class="inlineEditIcon"> <?php echo smarty_function_sugar_getimage(array('name' => "inline_edit_icon.svg",'attr' => 'border="0" ','alt' => ($this->_tpl_vars['alt_edit'])), $this);?>
+</div>			</td>
 </tr>
 <?php $this->_smarty_vars['capture']['tr'] = ob_get_contents();  $this->assign('tableRow', ob_get_contents());ob_end_clean(); ?>
 <?php if ($this->_tpl_vars['fieldsUsed'] > 0 && $this->_tpl_vars['fieldsUsed'] != $this->_tpl_vars['fieldsHidden']): ?>

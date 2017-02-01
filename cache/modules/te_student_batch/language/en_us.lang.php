@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-04 22:31:44
+// created: 2017-01-28 08:04:41
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -53,6 +53,17 @@ $mod_strings = array (
   'LBL_REFUND_REQUEST_DATE' => 'Refund Request Date',
   'LBL_REFUND_DATE' => 'Refund Date',
   'LBL_REFUND_AMOUNT' => 'Refund Amount',
+  'LBL_ELIGIBLE_FOR_CERTIFICATE' => 'Eligible For Certificate',
+  'LBL_FEEDBACH_GIVEN' => 'Feedback Given',
+  'LBL_ASSESSMENT_MODE' => 'Assessment Mode',
+  'LBL_RESULT' => 'Results',
+  'LBL_ACTUAL_ATTENDANCE' => 'Actual Attendance',
+  'LBL_TOTAL_SESSION_REQUIRED' => 'Total Session Required',
+  'LBL_ASSESSMENT_CENTER_LOCATION_PREFERENCE' => 'Assessment Center Location Preference',
+  'LBL_COMPLETION_CERTIFICATE_ADDRESS' => 'Completion Certificate address',
+  'LBL_CHANNEL' => 'Channel',
+  'LBL_DROPOUT_STATUS' => 'Dropout Status',
+  'LBL_BATCH_START_DATE' => 'Batch Start Date',
   'LBL_TE_STUDENT_BATCH_TE_STUDENT_PAYMENT_PLAN_1_FROM_TE_STUDENT_PAYMENT_PLAN_TITLE' => 'Student Payment Plan',
   'LBL_EDITVIEW_PANEL1' => 'Student Batch Status Details',
   'LBL_TE_STUDENT_TE_STUDENT_BATCH_1_FROM_TE_STUDENT_TITLE' => 'Student',

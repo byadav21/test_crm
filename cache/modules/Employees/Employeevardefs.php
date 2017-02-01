@@ -820,6 +820,14 @@
       'len' => '100',
       'audited' => 'false',
     ),
+    'neox_extension' => 
+    array (
+      'name' => 'neox_extension',
+      'type' => 'varchar',
+      'vname' => 'LBL_NEOXEXTENSION',
+      'len' => '100',
+      'audited' => 'false',
+    ),
     'user_access_type' => 
     array (
       'name' => 'user_access_type',
@@ -828,6 +836,17 @@
       'options' => 'user_access_type_dom',
       'len' => '100',
       'audited' => 'false',
+    ),
+    'designation' => 
+    array (
+      'name' => 'designation',
+      'vname' => 'LBL_DESIGNATION',
+      'required' => true,
+      'type' => 'enum',
+      'importable' => 'true',
+      'len' => 50,
+      'size' => '20',
+      'options' => 'designation_list',
     ),
   ),
   'indices' => 

@@ -1,0 +1,39 @@
+<!doctype>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/popup.css">
+		<script type="text/javascript" src="js/popup.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){	
+			$('#openModal').click(function(){
+				$(this).popupModal('atomBox');
+			});	
+		});
+		</script>
+		
+	</head>
+	<body>
+		Basic HTML content
+		<a id="openModal" href="#">Open</a>
+
+<!-- Pop up modal HTML start-->
+		<div class="dumbBoxWrap" id="atomBox"> 
+			<div class="dumbBoxOverlay"></div>
+			<div class="vertical-offset">
+				<div class="dumbBox">
+					<a id="closeModal"><img src="img/modal_close.png"/></a>
+				 	<div class="modalHeader">
+				 		<h4>Gaurav Vashishtha</h4>
+				 		<span>This is demo of popup</span>
+				 	</div>
+				 	<div class="modalContent">
+				 	</div>
+				 </div> 
+			</div> 
+		</div>
+<!-- Pop up modal HTML end-->
+	</body>
+</html>

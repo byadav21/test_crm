@@ -16,7 +16,7 @@ if($db->getRowCount($result)>0){
 	while($row = $db->fetchByAssoc($result)){
 		//~ print_r($row);
 		$data = array();
-		$data['list_id'] 			= '2001';
+		$data['list_id'] 			= $GLOBALS['sugar_config']['neox']['list_id_predictive'];
 		$data['Phone_Number'] 		= $row['phone_mobile'];
 		$data['Phone_Code'] 		= '91';
 		$data['Country_Code'] 		= 'IND';

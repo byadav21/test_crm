@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-04 22:31:44
+// created: 2017-01-28 08:04:41
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -42,4 +42,9 @@ $mod_strings = array (
   'LBL_DATEOFPROSPECT' => 'Prospect Date',
   'LBL_DATE' => 'Date',
   'LBL_UNIQUECALLID' => 'Unique Call ID',
+  'LBL_LEAD_MOBILE' => 'Lead Mobile',
+  'LBL_LEAD_EMAIL' => 'Lead Email',
+  'LBL_UPDATE_DISPOSITION' => 'Update',
+  'LBL_PROGRAM' => 'Program',
+  'LBL_BATCH' => 'Batch',
 );

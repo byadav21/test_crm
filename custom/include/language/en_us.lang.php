@@ -89,7 +89,6 @@ $GLOBALS['app_list_strings']['assign_rule_list']=array (
   'Agent' => 'Agent',
   'Group'=>'Group',  
 );
-$app_strings['LBL_GROUPTAB3_1480929977'] = 'Reports';
 $GLOBALS['app_list_strings']['student_batch_status_list']=array (
   'Active' => 'Active',
   'Inactive' => 'Inactive',
@@ -106,6 +105,28 @@ $GLOBALS['app_list_strings']['student_qualify_refund_list']=array (
   'No' => 'No',
   'Partial' => 'Partial',
 );
+$GLOBALS['app_list_strings']['assessment_mode_list']=array (
+  '' => '',
+  'Online' => 'Online',
+  'Center' => 'Center',
+);
+$GLOBALS['app_list_strings']['result_option_list']=array (
+  '' => '',
+  'Pass' => 'Pass',
+  'Fail' => 'Fail',
+);
 
-$app_strings['LBL_GROUPTAB4_1483469057'] = 'Master Data';
-?>
+$GLOBALS['app_list_strings']['dropuout_status_list']=array (
+  'Pending' => 'Pending',
+  'Rejected' => 'Rejected',
+  'Approved' => 'Approved',
+);
+$GLOBALS['app_list_strings']['designation_list']=array (
+  '' => '',
+  'BUH' => 'Business Head',
+);
+$GLOBALS['app_list_strings']['study_kit_status_list']=array (
+  '' => '',
+  'Pending' => 'Pending',
+  'Sent' => 'Send',
+);

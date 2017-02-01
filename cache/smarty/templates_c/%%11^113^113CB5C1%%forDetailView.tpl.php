@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-06 10:53:48
+<?php /* Smarty version 2.6.29, created on 2017-01-29 11:12:39
          compiled from include/SugarEmailAddress/templates/forDetailView.tpl */ ?>
 
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">

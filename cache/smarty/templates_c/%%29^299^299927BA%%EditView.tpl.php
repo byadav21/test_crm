@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-04 22:38:13
+<?php /* Smarty version 2.6.29, created on 2017-01-29 11:17:30
          compiled from cache/themes/SuiteR/modules/te_student_payment/EditView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 38, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 57, false),array('modifier', 'lookup', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 173, false),array('modifier', 'count', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 275, false),array('modifier', 'default', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 704, false),array('function', 'sugar_include', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 44, false),array('function', 'counter', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 50, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 56, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 80, false),array('function', 'html_options', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 148, false),array('function', 'sugar_number_format', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 675, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/te_student_payment/EditView.tpl', 693, false),)), $this); ?>
@@ -1141,6 +1141,7 @@ weekNumbers:false
 <?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
 <?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
 :
+<span class="required">*</span>
 </td>
 <?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
 
@@ -1369,7 +1370,7 @@ addToValidate(\'EditView\', \'date_of_payment\', \'date\', true,\''; ?>
 addToValidate(\'EditView\', \'amount\', \'decimal\', true,\''; ?>
 <?php echo smarty_function_sugar_translate(array('label' => 'LBL_AMOUNT','module' => 'te_student_payment','for_js' => true), $this);?>
 <?php echo '\' );
-addToValidate(\'EditView\', \'reference_number\', \'varchar\', false,\''; ?>
+addToValidate(\'EditView\', \'reference_number\', \'varchar\', true,\''; ?>
 <?php echo smarty_function_sugar_translate(array('label' => 'LBL_REFERENCE_NUMBER','module' => 'te_student_payment','for_js' => true), $this);?>
 <?php echo '\' );
 addToValidate(\'EditView\', \'payment_type\', \'enum\', true,\''; ?>

@@ -90,5 +90,15 @@ $mod_strings = array (
   'LBL_REFUND_REQUEST_DATE' => 'Refund Request Date',
   'LBL_REFUND_DATE' => 'Refund Date',
   'LBL_REFUND_AMOUNT' => 'Refund Amount',
-
+  'LBL_ELIGIBLE_FOR_CERTIFICATE' => 'Eligible For Certificate',
+  'LBL_FEEDBACH_GIVEN' => 'Feedback Given',
+  'LBL_ASSESSMENT_MODE' => 'Assessment Mode',
+  'LBL_RESULT' => 'Results',
+  'LBL_ACTUAL_ATTENDANCE' => 'Actual Attendance',
+  'LBL_TOTAL_SESSION_REQUIRED' => 'Total Session Required',
+  'LBL_ASSESSMENT_CENTER_LOCATION_PREFERENCE' => 'Assessment Center Location Preference',
+  'LBL_COMPLETION_CERTIFICATE_ADDRESS' => 'Completion Certificate address',
+  'LBL_CHANNEL' => 'Channel',
+  'LBL_DROPOUT_STATUS' => 'Dropout Status',
+  'LBL_BATCH_START_DATE' => 'Batch Start Date',
 );

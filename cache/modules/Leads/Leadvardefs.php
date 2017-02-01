@@ -560,6 +560,7 @@
       'group' => 'primary_address',
       'comment' => 'Country for primary address',
       'merge_filter' => 'enabled',
+      'required' => true,
     ),
     'alt_address_street' => 
     array (
@@ -1638,6 +1639,23 @@
       'side' => 'right',
       'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
     ),
+    'batch' => 
+    array (
+      'name' => 'batch',
+      'label' => 'LBL_BATCH',
+      'type' => 'enum',
+      'module' => 'Leads',
+      'help' => '',
+      'comment' => '',
+      'function' => 'getBatchList',
+      'default_value' => '',
+      'mass_update' => false,
+      'required' => true,
+      'reportable' => true,
+      'audited' => false,
+      'importable' => 'true',
+      'duplicate_merge' => false,
+    ),
     'comment' => 
     array (
       'name' => 'comment',
@@ -1902,6 +1920,24 @@
       'type' => 'varchar',
       'len' => '100',
       'audited' => 'false',
+    ),
+    'invoice_number' => 
+    array (
+      'name' => 'invoice_number',
+      'vname' => 'LBL_INVOICE_NUMBER',
+      'type' => 'int',
+      'required' => false,
+      'massupdate' => 0,
+      'comments' => '',
+      'help' => '',
+      'default' => 0,
+      'importable' => 'false',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'reportable' => false,
+      'len' => '50',
+      'size' => '50',
     ),
     'fee_inr' => 
     array (

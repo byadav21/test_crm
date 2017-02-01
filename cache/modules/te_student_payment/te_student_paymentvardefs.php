@@ -311,7 +311,7 @@
     ),
     'reference_number' => 
     array (
-      'required' => false,
+      'required' => true,
       'name' => 'reference_number',
       'vname' => 'LBL_REFERENCE_NUMBER',
       'type' => 'varchar',

@@ -40,7 +40,7 @@
 $relationships = array (
   'te_student_modified_user' => 
   array (
-    'id' => '7d580877-e6e5-825a-0bb3-586dc23b07a3',
+    'id' => 'd26ebe3c-6b45-d23b-1603-587a519e563e',
     'relationship_name' => 'te_student_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
@@ -66,7 +66,7 @@ $relationships = array (
   ),
   'te_student_created_by' => 
   array (
-    'id' => '7d90acb1-121b-062e-ea0d-586dc22b1ee4',
+    'id' => 'd2cf72cd-64c8-bc31-28b6-587a514ef685',
     'relationship_name' => 'te_student_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
@@ -92,7 +92,7 @@ $relationships = array (
   ),
   'te_student_assigned_user' => 
   array (
-    'id' => '7dc096b3-0403-1e2e-fee1-586dc2caca6a',
+    'id' => 'd3256a3e-d79c-9feb-45b4-587a51b50f42',
     'relationship_name' => 'te_student_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
@@ -118,7 +118,7 @@ $relationships = array (
   ),
   'securitygroups_te_student' => 
   array (
-    'id' => '7df7e64b-eeab-7174-4fa9-586dc23804b5',
+    'id' => 'd38a3108-5e54-f0a6-73ad-587a51324ed8',
     'relationship_name' => 'securitygroups_te_student',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
@@ -144,7 +144,7 @@ $relationships = array (
   ),
   'te_student_te_student_batch_1' => 
   array (
-    'id' => '1811c4cf-a9a0-29de-8ad5-586dc21589e2',
+    'id' => 'dc442701-f1cb-e66d-2abd-587a51ed491c',
     'relationship_name' => 'te_student_te_student_batch_1',
     'lhs_module' => 'te_student',
     'lhs_table' => 'te_student',
@@ -170,11 +170,37 @@ $relationships = array (
   ),
   'te_student_te_student_payment_1' => 
   array (
-    'rhs_label' => 'Student Payment',
+    'id' => 'dc94da36-b86f-7814-efb3-587a517ad663',
+    'relationship_name' => 'te_student_te_student_payment_1',
+    'lhs_module' => 'te_student',
+    'lhs_table' => 'te_student',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_payment',
+    'rhs_table' => 'te_student_payment',
+    'rhs_key' => 'id',
+    'join_table' => 'te_student_te_student_payment_1_c',
+    'join_key_lhs' => 'te_student_te_student_payment_1te_student_ida',
+    'join_key_rhs' => 'te_student_te_student_payment_1te_student_payment_idb',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => NULL,
+    'relationship_role_column_value' => NULL,
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'from_studio' => true,
+    'is_custom' => true,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'te_student_te_student_study_kit_1' => 
+  array (
+    'rhs_label' => 'Student Study Kit',
     'lhs_label' => 'Student',
     'rhs_subpanel' => 'default',
     'lhs_module' => 'te_student',
-    'rhs_module' => 'te_student_payment',
+    'rhs_module' => 'te_student_study_kit',
     'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
@@ -182,6 +208,6 @@ $relationships = array (
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'te_student_te_student_payment_1',
+    'relationship_name' => 'te_student_te_student_study_kit_1',
   ),
 );

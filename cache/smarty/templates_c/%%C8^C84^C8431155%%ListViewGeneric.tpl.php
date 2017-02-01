@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-05 13:58:24
+<?php /* Smarty version 2.6.29, created on 2017-01-29 11:11:24
          compiled from custom/modules/Leads/tpls/ListViewGeneric.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjspath', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 46, false),array('function', 'counter', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 224, false),array('function', 'sugar_translate', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 242, false),array('function', 'sugar_getimage', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 248, false),array('function', 'sugar_ajax_url', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 317, false),array('function', 'sugar_evalcolumn_old', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 321, false),array('function', 'sugar_field', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 323, false),array('modifier', 'replace', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 180, false),array('modifier', 'default', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 231, false),array('modifier', 'lower', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 234, false),array('modifier', 'upper', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 237, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjspath', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 46, false),array('function', 'counter', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 245, false),array('function', 'sugar_translate', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 263, false),array('function', 'sugar_getimage', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 269, false),array('function', 'sugar_ajax_url', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 338, false),array('function', 'sugar_evalcolumn_old', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 342, false),array('function', 'sugar_field', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 344, false),array('modifier', 'replace', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 201, false),array('modifier', 'default', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 252, false),array('modifier', 'lower', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 255, false),array('modifier', 'upper', 'custom/modules/Leads/tpls/ListViewGeneric.tpl', 258, false),)), $this); ?>
 
 <script type='text/javascript' src='<?php echo smarty_function_sugar_getjspath(array('file' => 'include/javascript/popup_helper.js'), $this);?>
 '></script>
@@ -36,7 +36,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjs
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById(\'show_pause\').innerHTML=\'\';
-							document.getElementById(\'show_pause\').innerHTML=\'<a onclick="pauseTheNeoxCall()">Pause</a>\';
+							document.getElementById(\'show_pause\').innerHTML=\'<button type="button" onclick="pauseTheNeoxCall()">Pause</button>\';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -60,7 +60,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjs
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById(\'show_pause\').innerHTML=\'\';
-							document.getElementById(\'show_pause\').innerHTML=\'<a onclick="resumeTheNeoxCall()">Resume</a>\';
+							document.getElementById(\'show_pause\').innerHTML=\'<button type="button" onclick="resumeTheNeoxCall()">Resume</button>\';
 			}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -84,7 +84,8 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjs
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById(\'shift_call\').innerHTML=\'\';
-							document.getElementById(\'shift_call\').innerHTML=\'<a onclick="predictiveDialing()">Predictive Dialing</a>\';
+							document.getElementById(\'shift_call\').innerHTML=\'<button type="button" onclick="predictiveDialing()">Predictive Dialing</button>\';
+							window.location.href=\'index.php?module=Leads&action=index\';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -109,7 +110,8 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjs
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById(\'shift_call\').innerHTML=\'\';
-							document.getElementById(\'shift_call\').innerHTML=\'<a onclick="manualDialing()">Manual Dialing</a>\';
+							document.getElementById(\'shift_call\').innerHTML=\'<button type="button" onclick="manualDialing()">Manual Dialing</button>\';
+							window.location.href=\'index.php?module=Leads&action=index\';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -131,6 +133,25 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjs
 <?php $this->assign('hideTable', false); ?>
 
 <?php if (count ( $this->_tpl_vars['data'] ) == 0): ?>
+	
+			<?php if ($this->_tpl_vars['LOGGED_IN'] == 'Success'): ?>
+			
+			<?php if ($this->_tpl_vars['LOGGED_IN_RESUME'] == 'Resume'): ?>
+				<span id='show_pause'><button type="button" onclick="pauseTheNeoxCall()">Pause</button></span><span>&nbsp;&nbsp;</span>
+			<?php endif; ?>
+			<?php if ($this->_tpl_vars['LOGGED_IN_PAUSE'] == 'Pause'): ?>
+				<span id='show_pause'><button type="button" onclick="resumeTheNeoxCall()">Resume</button></span><span>&nbsp;&nbsp;</span>
+			<?php endif; ?>
+			
+			
+			<?php if ($this->_tpl_vars['LOGGED_IN_MANUAL'] == 'Manual'): ?>
+				<span id='shift_call'><button type="button" onclick="predictiveDialing()">Predictive Dialing</button></span>
+			<?php endif; ?>
+			<?php if ($this->_tpl_vars['LOGGED_IN_PREDICTIVE'] == 'Predictive'): ?>
+				<span id='shift_call'><button type="button" onclick="manualDialing()">Manual Dialing</button></span>
+			<?php endif; ?>
+			
+		<?php endif; ?>	
 	<?php $this->assign('hideTable', true); ?>
 	<div class="list view listViewEmpty">
 		<?php if ($this->_tpl_vars['displayEmptyDataMesssages']): ?>

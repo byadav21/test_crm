@@ -75,7 +75,7 @@
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById('show_pause').innerHTML='';
-							document.getElementById('show_pause').innerHTML='<a onclick="pauseTheNeoxCall()">Pause</a>';
+							document.getElementById('show_pause').innerHTML='<button type="button" onclick="pauseTheNeoxCall()">Pause</button>';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -99,7 +99,7 @@
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById('show_pause').innerHTML='';
-							document.getElementById('show_pause').innerHTML='<a onclick="resumeTheNeoxCall()">Resume</a>';
+							document.getElementById('show_pause').innerHTML='<button type="button" onclick="resumeTheNeoxCall()">Resume</button>';
 			}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -123,7 +123,8 @@
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById('shift_call').innerHTML='';
-							document.getElementById('shift_call').innerHTML='<a onclick="predictiveDialing()">Predictive Dialing</a>';
+							document.getElementById('shift_call').innerHTML='<button type="button" onclick="predictiveDialing()">Predictive Dialing</button>';
+							window.location.href='index.php?module=Leads&action=index';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -148,7 +149,8 @@
 					if(b.responseText=="200"){	
 						//alert(b.responseText)
 							document.getElementById('shift_call').innerHTML='';
-							document.getElementById('shift_call').innerHTML='<a onclick="manualDialing()">Manual Dialing</a>';
+							document.getElementById('shift_call').innerHTML='<button type="button" onclick="manualDialing()">Manual Dialing</button>';
+							window.location.href='index.php?module=Leads&action=index';
 					}
 					else{
 							SUGAR.ajaxUI.hideLoadingPanel();
@@ -169,6 +171,25 @@
 {assign var="hideTable" value=false}
 
 {if count($data) == 0}
+	
+			{if $LOGGED_IN =='Success'}
+			
+			{if $LOGGED_IN_RESUME=='Resume'}
+				<span id='show_pause'><button type="button" onclick="pauseTheNeoxCall()">Pause</button></span><span>&nbsp;&nbsp;</span>
+			{/if}
+			{if $LOGGED_IN_PAUSE=='Pause'}
+				<span id='show_pause'><button type="button" onclick="resumeTheNeoxCall()">Resume</button></span><span>&nbsp;&nbsp;</span>
+			{/if}
+			
+			
+			{if $LOGGED_IN_MANUAL=='Manual'}
+				<span id='shift_call'><button type="button" onclick="predictiveDialing()">Predictive Dialing</button></span>
+			{/if}
+			{if $LOGGED_IN_PREDICTIVE=='Predictive'}
+				<span id='shift_call'><button type="button" onclick="manualDialing()">Manual Dialing</button></span>
+			{/if}
+			
+		{/if}	
 	{assign var="hideTable" value=true}
 	<div class="list view listViewEmpty">
 		{if $displayEmptyDataMesssages}

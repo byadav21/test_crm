@@ -23,11 +23,11 @@ $layout_defs["Leads"]["subpanel_setup"]['leads_te_payment_details_1'] = array (
   'get_subpanel_data' => 'leads_te_payment_details_1',
   'top_buttons' => 
   array (
-    0 => 
+    /*0 => 
     array (
       'widget_class' => 'SubPanelTopButtonQuickCreate',
     ),
-	/*
+	
     1 => 
     array (
       'widget_class' => 'SubPanelTopSelectButton',

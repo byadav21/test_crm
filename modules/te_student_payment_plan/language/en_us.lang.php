@@ -75,7 +75,10 @@ $mod_strings = array (
   'LBL_STUDENT' => 'Student',
   'LBL_STUDENT_ID' => 'Student (related  ID)',
   'LBL_PAID_AMOUNT_INR' => 'Paid Amount(INR)',
-  'LBL_PAID_AMOUNT_USD' => 'Paid Amount (USD)',
-  'LBL_DUE_AMOUNT_INR' => 'Due Amount (INR)',
-  'LBL_DUE_AMOUNT_USD' => 'Due Amount (USD)',
+  'LBL_PAID_AMOUNT_USD' => 'Paid Amount(USD)',
+  'LBL_DUE_AMOUNT_INR' => 'Due Amount(INR)',
+  'LBL_DUE_AMOUNT_USD' => 'Due Amount(USD)',
+  'LBL_BALANCE_USD' => 'Balance(USD)',
+  'LBL_CURRENCY' => 'Balance(INR)',
+  'LBL_CURRENCY' => 'Currency',
 );

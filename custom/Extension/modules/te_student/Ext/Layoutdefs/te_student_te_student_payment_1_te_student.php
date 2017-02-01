@@ -10,11 +10,11 @@ $layout_defs["te_student"]["subpanel_setup"]['te_student_te_student_payment_1'] 
   'get_subpanel_data' => 'te_student_te_student_payment_1',
   'top_buttons' => 
   array (
-    /* 0 => 
+     0 => 
     array (
-      'widget_class' => 'SubPanelTopButtonQuickCreate',
+      'widget_class' => 'SubPanelTopCreateButton',
     ),
-    1 => 
+   /* 1 => 
     array (
       'widget_class' => 'SubPanelTopSelectButton',
       'mode' => 'MultiSelect',

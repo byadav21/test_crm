@@ -264,6 +264,51 @@
       'studio' => 'visible',
       'dependency' => false,
     ),
+    'lead_mobile' => 
+    array (
+      'name' => 'lead_mobile',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'te_disposition',
+      'bean_name' => 'te_disposition',
+      'vname' => 'LBL_LEAD_MOBILE',
+    ),
+    'lead_email' => 
+    array (
+      'name' => 'lead_email',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'te_disposition',
+      'bean_name' => 'te_disposition',
+      'vname' => 'LBL_LEAD_EMAIL',
+    ),
+    'show_button' => 
+    array (
+      'name' => 'show_button',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'te_disposition',
+      'bean_name' => 'te_disposition',
+      'vname' => 'LBL_UPDATE_DISPOSITION',
+    ),
+    'batch_name' => 
+    array (
+      'name' => 'batch_name',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'te_disposition',
+      'bean_name' => 'te_disposition',
+      'vname' => 'LBL_BATCH',
+    ),
+    'program_name' => 
+    array (
+      'name' => 'program_name',
+      'type' => 'varchar',
+      'source' => 'non-db',
+      'module' => 'te_disposition',
+      'bean_name' => 'te_disposition',
+      'vname' => 'LBL_PROGRAM',
+    ),
     'te_disposition_leads' => 
     array (
       'name' => 'te_disposition_leads',

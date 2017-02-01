@@ -718,6 +718,7 @@ weekNumbers:false
 <td valign="top" id='reference_number_label' width='12.5%' scope="col">
 {capture name="label" assign="label"}{sugar_translate label='LBL_REFERENCE_NUMBER' module='te_student_payment'}{/capture}
 {$label|strip_semicolon}:
+<span class="required">*</span>
 </td>
 {counter name="fieldsUsed"}
 
@@ -853,7 +854,7 @@ addToValidate('EditView', 'te_student_batch_id_c', 'id', false,'{/literal}{sugar
 addToValidate('EditView', 'batch_id', 'relate', true,'{/literal}{sugar_translate label='LBL_BATCH_ID' module='te_student_payment' for_js=true}{literal}' );
 addToValidate('EditView', 'date_of_payment', 'date', true,'{/literal}{sugar_translate label='LBL_DATE_OF_PAYMENT' module='te_student_payment' for_js=true}{literal}' );
 addToValidate('EditView', 'amount', 'decimal', true,'{/literal}{sugar_translate label='LBL_AMOUNT' module='te_student_payment' for_js=true}{literal}' );
-addToValidate('EditView', 'reference_number', 'varchar', false,'{/literal}{sugar_translate label='LBL_REFERENCE_NUMBER' module='te_student_payment' for_js=true}{literal}' );
+addToValidate('EditView', 'reference_number', 'varchar', true,'{/literal}{sugar_translate label='LBL_REFERENCE_NUMBER' module='te_student_payment' for_js=true}{literal}' );
 addToValidate('EditView', 'payment_type', 'enum', true,'{/literal}{sugar_translate label='LBL_PAYMENT_TYPE' module='te_student_payment' for_js=true}{literal}' );
 addToValidate('EditView', 'payment_realized', 'bool', false,'{/literal}{sugar_translate label='LBL_PAYMENT_REALIZED' module='te_student_payment' for_js=true}{literal}' );
 addToValidate('EditView', 'transaction_id', 'varchar', false,'{/literal}{sugar_translate label='LBL_TRANSACTION_ID' module='te_student_payment' for_js=true}{literal}' );

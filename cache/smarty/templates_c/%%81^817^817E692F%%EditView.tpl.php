@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-06 10:50:50
+<?php /* Smarty version 2.6.29, created on 2017-01-29 22:42:59
          compiled from cache/themes/SuiteR/modules/Leads/EditView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 42, false),array('modifier', 'default', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 53, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 71, false),array('modifier', 'lookup', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 145, false),array('modifier', 'count', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 247, false),array('function', 'sugar_include', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 48, false),array('function', 'counter', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 54, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 57, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 60, false),array('function', 'html_options', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 120, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 376, false),array('function', 'sugar_getjspath', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 1607, false),array('function', 'sugar_number_format', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 2350, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 42, false),array('modifier', 'default', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 53, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 71, false),array('modifier', 'lookup', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 145, false),array('modifier', 'count', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 247, false),array('function', 'sugar_include', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 48, false),array('function', 'counter', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 54, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 57, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 60, false),array('function', 'html_options', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 120, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 376, false),array('function', 'sugar_getjspath', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 1608, false),array('function', 'sugar_number_format', 'cache/themes/SuiteR/modules/Leads/EditView.tpl', 2351, false),)), $this); ?>
 
 
 <script>
@@ -895,6 +895,7 @@ value='<?php echo $this->_tpl_vars['value']; ?>
 <?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
 <?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
 :
+<span class="required">*</span>
 </td>
 <?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
 
@@ -3986,7 +3987,7 @@ addToValidate(\'EditView\', \'primary_address_state\', \'varchar\', false,\''; ?
 addToValidate(\'EditView\', \'primary_address_postalcode\', \'varchar\', false,\''; ?>
 <?php echo smarty_function_sugar_translate(array('label' => 'LBL_PRIMARY_ADDRESS_POSTALCODE','module' => 'Leads','for_js' => true), $this);?>
 <?php echo '\' );
-addToValidate(\'EditView\', \'primary_address_country\', \'varchar\', false,\''; ?>
+addToValidate(\'EditView\', \'primary_address_country\', \'varchar\', true,\''; ?>
 <?php echo smarty_function_sugar_translate(array('label' => 'LBL_PRIMARY_ADDRESS_COUNTRY','module' => 'Leads','for_js' => true), $this);?>
 <?php echo '\' );
 addToValidate(\'EditView\', \'alt_address_street\', \'varchar\', false,\''; ?>
@@ -4216,6 +4217,9 @@ addToValidate(\'EditView\', \'reference_number\', \'varchar\', false,\''; ?>
 <?php echo '\' );
 addToValidate(\'EditView\', \'transaction_id\', \'varchar\', false,\''; ?>
 <?php echo smarty_function_sugar_translate(array('label' => 'LBL_TRANSACTIONID','module' => 'Leads','for_js' => true), $this);?>
+<?php echo '\' );
+addToValidate(\'EditView\', \'invoice_number\', \'int\', false,\''; ?>
+<?php echo smarty_function_sugar_translate(array('label' => 'LBL_INVOICE_NUMBER','module' => 'Leads','for_js' => true), $this);?>
 <?php echo '\' );
 addToValidate(\'EditView\', \'fee_inr\', \'int\', false,\''; ?>
 <?php echo smarty_function_sugar_translate(array('label' => 'LBL_FEE_INR','module' => 'Leads','for_js' => true), $this);?>

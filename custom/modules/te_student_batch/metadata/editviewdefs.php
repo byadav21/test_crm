@@ -125,6 +125,76 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_STATUS',
           ),
+          1 => 
+          array (
+            'name' => 'result',
+            'studio' => 'visible',
+            'label' => 'LBL_RESULT',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'eligible_for_certificate',
+            'studio' => 'visible',
+            'label' => 'LBL_ELIGIBLE_FOR_CERTIFICATE',
+          ),
+          1 => 
+          array (
+            'name' => 'assessment_mode',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSESSMENT_MODE',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'actual_attendance',
+            'label' => 'LBL_ACTUAL_ATTENDANCE',
+          ),
+          1 => 
+          array (
+            'name' => 'feedback_given',
+            'studio' => 'visible',
+            'label' => 'LBL_FEEDBACH_GIVEN',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'Assessment_center_lcocation_preference',
+            'label' => 'LBL_ASSESSMENT_CENTER_LOCATION_PREFERENCE',
+          ),
+          1 => 
+          array (
+            'name' => 'total_session_required',
+            'label' => 'LBL_TOTAL_SESSION_REQUIRED',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'channel',
+            'label' => 'LBL_CHANNEL',
+          ),
+          1 => 
+          array (
+            'name' => 'completion_certificate_address',
+            'comment' => 'Full text of the note',
+            'label' => 'LBL_COMPLETION_CERTIFICATE_ADDRESS',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO',
+          ),
           1 => 'description',
         ),
       ),
@@ -165,7 +235,12 @@ array (
             'name' => 'refund_date',
             'label' => 'LBL_REFUND_DATE',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'dropout_status',
+            'studio' => 'visible',
+            'label' => 'LBL_DROPOUT_STATUS',
+          ),
         ),
       ),
     ),

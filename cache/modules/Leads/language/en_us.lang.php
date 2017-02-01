@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-04 22:31:42
+// created: 2017-01-28 08:04:40
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date of Enquiry',
@@ -251,6 +251,7 @@ $mod_strings = array (
   'LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE' => 'Disposition',
   'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE' => 'Payment Details',
   'COMMENT' => 'Comment',
+  'LBL_INVOICE_NUMBER' => 'Invoice Number',
   'LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE' => 'Refree Leads',
   'LBL_LIST_ASSIGNED_USER' => 'Counsellor',
   'LBL_ASSIGNED_TO' => 'Counsellor',

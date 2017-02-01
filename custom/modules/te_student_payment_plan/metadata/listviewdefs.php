@@ -35,13 +35,6 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'DUE_AMOUNT_USD' => 
-  array (
-    'type' => 'int',
-    'label' => 'LBL_DUE_AMOUNT_USD',
-    'width' => '10%',
-    'default' => true,
-  ),
   'PAID' => 
   array (
     'type' => 'enum',
@@ -57,18 +50,18 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'PAID_AMOUNT_USD' => 
+  'BALANCE_INR' => 
   array (
     'type' => 'int',
-    'label' => 'LBL_PAID_AMOUNT_USD',
+    'label' => 'LBL_BALANCE_INR',
     'width' => '10%',
     'default' => true,
   ),
-  'DESCRIPTION' => 
+  'currency' => 
   array (
-    'type' => 'text',
+    'type' => 'varchar',
     'studio' => 'visible',
-    'label' => 'LBL_DESCRIPTION',
+    'label' => 'LBL_CURRENCY',
     'sortable' => false,
     'width' => '10%',
     'default' => true,

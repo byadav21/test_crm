@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-04 22:31:44
+// created: 2017-01-28 08:04:42
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -46,6 +46,8 @@ $mod_strings = array (
   'LBL_STATE' => 'State',
   'LBL_CITY' => 'City',
   'LBL_COUNTRY' => 'Country',
+  'LBL_BATCH_START_DATE' => 'Batch Start Date',
   'LBL_TE_STUDENT_TE_STUDENT_BATCH_1_FROM_TE_STUDENT_BATCH_TITLE' => 'Student Batch',
   'LBL_TE_STUDENT_TE_STUDENT_PAYMENT_1_FROM_TE_STUDENT_PAYMENT_TITLE' => 'Student Payment',
+  'LBL_TE_STUDENT_TE_STUDENT_STUDY_KIT_1_FROM_TE_STUDENT_STUDY_KIT_TITLE' => 'Student Study Kit',
 );

@@ -24,6 +24,13 @@ array (
         'headerTpl' => 'custom/modules/Users/tpls/EditViewHeader.tpl',
         'footerTpl' => 'custom/modules/Users/tpls/EditViewFooter.tpl',
       ),
+	  'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/modules/Users/user.js',
+        ),
+      ),
       'useTabs' => false,
       'tabDefs' => 
       array (
@@ -133,7 +140,7 @@ array (
             'name' => 'reports_to_name',
             'customCode' => '{if $IS_ADMIN}@@FIELD@@{else}{$REPORTS_TO_READONLY}{/if}',
           ),
-          1 => '',
+          1 => 'designation',
         ),
       ),
     ),

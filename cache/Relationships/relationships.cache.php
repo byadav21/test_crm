@@ -8094,6 +8094,103 @@
     'join_key_lhs' => 'aos_contracts_te_impression_1aos_contracts_ida',
     'join_key_rhs' => 'aos_contracts_te_impression_1te_impression_idb',
   ),
+  'te_student_te_student_study_kit_1' => 
+  array (
+    'name' => 'te_student_te_student_study_kit_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'te_student_te_student_study_kit_1' => 
+      array (
+        'lhs_module' => 'te_student',
+        'lhs_table' => 'te_student',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_student_study_kit',
+        'rhs_table' => 'te_student_study_kit',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'te_student_te_student_study_kit_1_c',
+        'join_key_lhs' => 'te_student_te_student_study_kit_1te_student_ida',
+        'join_key_rhs' => 'te_student_te_student_study_kit_1te_student_study_kit_idb',
+      ),
+    ),
+    'table' => 'te_student_te_student_study_kit_1_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'te_student_te_student_study_kit_1te_student_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'te_student_te_student_study_kit_1te_student_study_kit_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'te_student_te_student_study_kit_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'te_student_te_student_study_kit_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'te_student_te_student_study_kit_1te_student_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'te_student_te_student_study_kit_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'te_student_te_student_study_kit_1te_student_study_kit_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'te_student',
+    'lhs_table' => 'te_student',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_study_kit',
+    'rhs_table' => 'te_student_study_kit',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'te_student_te_student_study_kit_1_c',
+    'join_key_lhs' => 'te_student_te_student_study_kit_1te_student_ida',
+    'join_key_rhs' => 'te_student_te_student_study_kit_1te_student_study_kit_idb',
+  ),
   'te_student_te_student_payment_1' => 
   array (
     'name' => 'te_student_te_student_payment_1',
@@ -16719,6 +16816,109 @@
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
     'relationship_role_column_value' => 'te_training_category',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_student_study_kit_modified_user' => 
+  array (
+    'name' => 'te_student_study_kit_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_study_kit',
+    'rhs_table' => 'te_student_study_kit',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_student_study_kit_created_by' => 
+  array (
+    'name' => 'te_student_study_kit_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_study_kit',
+    'rhs_table' => 'te_student_study_kit',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_student_study_kit_assigned_user' => 
+  array (
+    'name' => 'te_student_study_kit_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_study_kit',
+    'rhs_table' => 'te_student_study_kit',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_student_study_kit' => 
+  array (
+    'name' => 'securitygroups_te_student_study_kit',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_study_kit',
+    'rhs_table' => 'te_student_study_kit',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_student_study_kit',
     'fields' => 
     array (
       0 => 

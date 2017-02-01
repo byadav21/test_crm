@@ -15131,3 +15131,1578 @@ Fri Jan  6 00:46:23 2017 [16242][1][FATAL] Error running count query for te_stud
  where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
 Fri Jan  6 00:46:23 2017 [16242][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
 Fri Jan  6 01:00:06 2017 [17504][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
+Fri Jan  6 01:39:33 2017 [3119][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 01:39:33 2017 [3119][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 01:39:52 2017 [3128][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 01:39:52 2017 [3128][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 02:12:52 2017 [6082][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='22996d7b-8fc1-e9ed-8d68-586ccfdd50a6' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 02:12:52 2017 [6082][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 02:52:57 2017 [9089][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='2efb3b9b-f907-3ca6-5eb6-586cd654104e' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 02:52:57 2017 [9089][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 02:53:58 2017 [9170][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='d4216fb9-0a80-9a51-a702-586ce0405f1d' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 02:53:58 2017 [9170][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 02:56:31 2017 [9437][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='22996d7b-8fc1-e9ed-8d68-586ccfdd50a6' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 02:56:31 2017 [9437][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 02:56:43 2017 [9443][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='d4216fb9-0a80-9a51-a702-586ce0405f1d' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 02:56:43 2017 [9443][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 03:56:45 2017 [13945][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='2efb3b9b-f907-3ca6-5eb6-586cd654104e' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 03:56:45 2017 [13945][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 04:03:50 2017 [14494][1][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='d4216fb9-0a80-9a51-a702-586ce0405f1d' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 04:03:50 2017 [14494][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 04:06:03 2017 [14745][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='9822a0a2-653d-2dd9-ffe4-586f29b03cd3' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 04:06:03 2017 [14745][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 04:06:19 2017 [14756][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='22996d7b-8fc1-e9ed-8d68-586ccfdd50a6' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 04:06:19 2017 [14756][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 04:08:14 2017 [14847][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL]  Query Failed:  SELECT  te_student_payment.id , te_student_payment.te_student_batch_id_c , te_student_payment.created_by  , jt0.name te_student_te_student_payment_1_name, jtl0.te_student_te_student_payment_1te_student_ida te_student_te_student_payment_1te_student_ida, jt1.name batch_id , te_student_payment.amount , te_student_payment.date_of_payment , te_student_payment.payment_type , te_student_payment.payment_source  , jt2.user_name created_by_name , jt2.created_by created_by_name_owner  , 'Users' created_by_name_mod, te_student_payment.date_entered , te_student_payment.assigned_user_id  FROM te_student_payment   LEFT JOIN  te_student_te_student_payment_1_c jtl0 ON te_student_payment.id=jtl0.te_student_te_student_payment_1te_student_payment_idb AND jtl0.deleted=0
+
+ LEFT JOIN  te_student jt0 ON jt0.id=jtl0.te_student_te_student_payment_1te_student_ida AND jt0.deleted=0
+ AND jt0.deleted=0 LEFT JOIN te_student_batch jt1 ON te_student_payment.te_student_batch_id_c = jt1.id AND jt1.deleted=0   LEFT JOIN  users jt2 ON te_student_payment.created_by=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 where te_student_payment.deleted=0 ORDER BY te_student_payment.date_entered DESC LIMIT 0,21: MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 04:11:17 2017 [15063][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='d4216fb9-0a80-9a51-a702-586ce0405f1d' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 04:11:17 2017 [15063][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 05:15:17 2017 [19516][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL]  Query Failed:  SELECT  te_student_payment.id , te_student_payment.te_student_batch_id_c , te_student_payment.created_by  , jt0.name te_student_te_student_payment_1_name, jtl0.te_student_te_student_payment_1te_student_ida te_student_te_student_payment_1te_student_ida, jt1.name batch_id , te_student_payment.amount , te_student_payment.date_of_payment , te_student_payment.payment_type , te_student_payment.payment_source  , jt2.user_name created_by_name , jt2.created_by created_by_name_owner  , 'Users' created_by_name_mod, te_student_payment.date_entered , te_student_payment.assigned_user_id  FROM te_student_payment   LEFT JOIN  te_student_te_student_payment_1_c jtl0 ON te_student_payment.id=jtl0.te_student_te_student_payment_1te_student_payment_idb AND jtl0.deleted=0
+
+ LEFT JOIN  te_student jt0 ON jt0.id=jtl0.te_student_te_student_payment_1te_student_ida AND jt0.deleted=0
+ AND jt0.deleted=0 LEFT JOIN te_student_batch jt1 ON te_student_payment.te_student_batch_id_c = jt1.id AND jt1.deleted=0   LEFT JOIN  users jt2 ON te_student_payment.created_by=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 where te_student_payment.deleted=0 ORDER BY te_student_payment.date_entered DESC LIMIT 0,21: MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 05:15:30 2017 [19522][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL]  Query Failed:  SELECT  te_student_payment.id , te_student_payment.te_student_batch_id_c , te_student_payment.created_by  , jt0.name te_student_te_student_payment_1_name, jtl0.te_student_te_student_payment_1te_student_ida te_student_te_student_payment_1te_student_ida, jt1.name batch_id , te_student_payment.amount , te_student_payment.date_of_payment , te_student_payment.payment_type , te_student_payment.payment_source  , jt2.user_name created_by_name , jt2.created_by created_by_name_owner  , 'Users' created_by_name_mod, te_student_payment.date_entered , te_student_payment.assigned_user_id  FROM te_student_payment   LEFT JOIN  te_student_te_student_payment_1_c jtl0 ON te_student_payment.id=jtl0.te_student_te_student_payment_1te_student_payment_idb AND jtl0.deleted=0
+
+ LEFT JOIN  te_student jt0 ON jt0.id=jtl0.te_student_te_student_payment_1te_student_ida AND jt0.deleted=0
+ AND jt0.deleted=0 LEFT JOIN te_student_batch jt1 ON te_student_payment.te_student_batch_id_c = jt1.id AND jt1.deleted=0   LEFT JOIN  users jt2 ON te_student_payment.created_by=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 where te_student_payment.deleted=0 ORDER BY te_student_payment.date_entered DESC LIMIT 0,21: MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 05:15:49 2017 [19543][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='7f020391-875d-829b-d271-58654cfed56a' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 05:15:49 2017 [19543][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 05:50:03 2017 [21677][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL]  Query Failed:  SELECT  te_student_payment.id , te_student_payment.te_student_batch_id_c , te_student_payment.created_by  , jt0.name te_student_te_student_payment_1_name, jtl0.te_student_te_student_payment_1te_student_ida te_student_te_student_payment_1te_student_ida, jt1.name batch_id , te_student_payment.amount , te_student_payment.date_of_payment , te_student_payment.payment_type , te_student_payment.payment_source  , jt2.user_name created_by_name , jt2.created_by created_by_name_owner  , 'Users' created_by_name_mod, te_student_payment.date_entered , te_student_payment.assigned_user_id  FROM te_student_payment   LEFT JOIN  te_student_te_student_payment_1_c jtl0 ON te_student_payment.id=jtl0.te_student_te_student_payment_1te_student_payment_idb AND jtl0.deleted=0
+
+ LEFT JOIN  te_student jt0 ON jt0.id=jtl0.te_student_te_student_payment_1te_student_ida AND jt0.deleted=0
+ AND jt0.deleted=0 LEFT JOIN te_student_batch jt1 ON te_student_payment.te_student_batch_id_c = jt1.id AND jt1.deleted=0   LEFT JOIN  users jt2 ON te_student_payment.created_by=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 where te_student_payment.deleted=0 ORDER BY te_student_payment.date_entered DESC LIMIT 0,21: MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 06:01:56 2017 [22397][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Error running count query for te_student List:  Query Failed: ( SELECT count(*) c FROM te_student_payment  INNER JOIN  te_student_te_student_payment_1_c ON te_student_payment.id=te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='22996d7b-8fc1-e9ed-8d68-586ccfdd50a6' AND te_student_te_student_payment_1_c.deleted=0
+
+ where te_student_payment.deleted=0 ): MySQL error 1146: Table 'etechin_dev_talentede.te_student_payment' doesn't exist
+Fri Jan  6 06:01:56 2017 [22397][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Fri Jan  6 14:15:49 2017 [21619][1][FATAL] Request - Array
+(
+    [entryPoint] => saveDisposition
+    [disposition_id] => 9fabefcc-d8a3-2304-9048-585febd41a20
+    [status] => Alive
+    [status_detail] => Follow Up
+    [description] => followup
+    [callback] =>  ::00
+    [followup] => 2017-01-14 17:15:00
+    [prospect] =>  ::00
+    [PHPSESSID] => 5bf4fe2455b2283e2669e78bbbc8172e
+    [Leads_divs] => t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [module] => Home
+    [action] => index
+)
+
+Fri Jan  6 14:17:41 2017 [21735][1][FATAL] Request - Array
+(
+    [entryPoint] => saveDisposition
+    [disposition_id] => bd67f4a4-db04-e1a0-3d0d-585b9b2ea564
+    [status] => Dead
+    [status_detail] => Wrong Number
+    [description] => test
+    [callback] =>  ::00
+    [followup] =>  ::00
+    [prospect] =>  ::00
+    [PHPSESSID] => 5bf4fe2455b2283e2669e78bbbc8172e
+    [Leads_divs] => t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [module] => Home
+    [action] => index
+)
+
+Sat Jan  7 03:25:20 2017 [8211][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 69a555dc-bc37-9e5c-8314-584688dc7870
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 69a555dc-bc37-9e5c-8314-584688dc7870
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 69a555dc-bc37-9e5c-8314-584688dc7870
+    [offset] => 19
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Mongsen Angh
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => yungkup17@gmail.com
+    [Leads0emailAddressId0] => 3ff1bc50-3647-454b-4c1d-58467be8702e
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => yungkup17@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 8257915918
+    [education_c] => Not Confirmed
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 25000
+    [payment_realized] => 1
+    [date_of_payment] => 07/01/2017
+    [reference_number] => 
+    [transaction_id] => Ax123
+    [PHPSESSID] => 76d86c773c057b078463893ede4d1f8c
+    [te_student_divs] => undefined=none#
+    [te_ba_Batch_divs] => t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Sat Jan  7 04:29:26 2017 [12473][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 4a670840-6a27-7257-6cc9-5864f08df913
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 4
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Raman
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ram@gmail.com
+    [Leads0emailAddressId0] => 7379104e-d9c8-52e4-7eab-585b76e6ac8c
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => ram@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 94867847589
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 03/01/2017 11:00
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 0.00
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [EmailGridWidths] => 0=10&1=10&2=150&3=250&4=175&5=125
+    [EmailTreeLayout] => d06991c0-2772-ddd8-5025-57e119a83a17=false&d41a8b7b-7f14-4877-7213-57e119297e9d=false&d44ae70a-5bde-661e-a6f3-57e119aac51c=false&d476f553-8f6d-1b73-e8bd-57e1199d997f=false
+    [te_student_divs] => undefined=#
+    [te_student_batch_divs] => undefined=#t=none#
+    [PHPSESSID] => 02a63c3aee3f19836de20134cfab8dc4
+    [te_ba_Batch_divs] => t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Sat Jan  7 04:35:51 2017 [12972][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Ravi
+    [last_name] => Tiwari
+    [gender] => Male
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ravi@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [EmailGridWidths] => 0=10&1=10&2=150&3=250&4=175&5=125
+    [EmailTreeLayout] => d06991c0-2772-ddd8-5025-57e119a83a17=false&d41a8b7b-7f14-4877-7213-57e119297e9d=false&d44ae70a-5bde-661e-a6f3-57e119aac51c=false&d476f553-8f6d-1b73-e8bd-57e1199d997f=false
+    [PHPSESSID] => 02a63c3aee3f19836de20134cfab8dc4
+    [te_ba_Batch_divs] => t=#
+    [Leads_divs] => l=#
+    [te_student_divs] => undefined=#
+    [te_student_batch_divs] => undefined=#t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Sat Jan  7 04:36:36 2017 [13030][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 29655395-eb43-852d-c621-5870c447b6dc
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 29655395-eb43-852d-c621-5870c447b6dc
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 29655395-eb43-852d-c621-5870c447b6dc
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Ravi
+    [last_name] => Tiwari
+    [gender] => Male
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ravi@gmail.com
+    [Leads0emailAddressId0] => cc8fce9b-b8ed-a377-23a9-5870c4c77068
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => ravi@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 0.00
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [EmailGridWidths] => 0=10&1=10&2=150&3=250&4=175&5=125
+    [EmailTreeLayout] => d06991c0-2772-ddd8-5025-57e119a83a17=false&d41a8b7b-7f14-4877-7213-57e119297e9d=false&d44ae70a-5bde-661e-a6f3-57e119aac51c=false&d476f553-8f6d-1b73-e8bd-57e1199d997f=false
+    [PHPSESSID] => 02a63c3aee3f19836de20134cfab8dc4
+    [te_ba_Batch_divs] => t=#
+    [Leads_divs] => l=#
+    [te_student_divs] => undefined=#
+    [te_student_batch_divs] => undefined=#t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Sat Jan  7 05:14:04 2017 [15807][1][FATAL] Exception in Controller: Error retrieving record.  This record may be deleted or you may not be authorized to view it.
+Sat Jan  7 11:40:38 2017 [8292][1][FATAL] Request - Array
+(
+    [entryPoint] => saveDisposition
+    [disposition_id] => d20d6182-689d-bb84-f46a-585f90ec2c42
+    [status] => 
+    [status_detail] => 
+    [description] => 
+    [callback] =>  ::00
+    [followup] =>  ::00
+    [prospect] =>  ::00
+    [Leads_divs] => t=#
+    [PHPSESSID] => e3d40e75fc6a1b318d92695b9dda8369
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [module] => Home
+    [action] => index
+)
+
+Sat Jan  7 13:05:03 2017 [13595][1][FATAL] Request - Array
+(
+    [entryPoint] => saveDisposition
+    [disposition_id] => 927b0a80-c048-3c05-c631-585ed45e11f0
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => test
+    [callback] => 2017-01-04 18:30:00
+    [followup] =>  ::00
+    [prospect] =>  ::00
+    [Leads_divs] => t=#
+    [PHPSESSID] => e3d40e75fc6a1b318d92695b9dda8369
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [module] => Home
+    [action] => index
+)
+
+Sat Jan  7 13:07:59 2017 [13788][-none-][FATAL] SECURITY: User authentication for admin failed
+Sat Jan  7 13:07:59 2017 [13788][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Sun Jan  8 04:09:17 2017 [4824][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-01-08 10:09:16',`modified_user_id`='1',`created_by`='4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff',`description`=NULL,`assigned_user_id`='6eca082c-21dd-669a-f78c-584646a4a1f5',`salutation`=NULL,`first_name`='Yuvraj Idpache',`last_name`=NULL,`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`='9404527813',`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`='Campaign',`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`=NULL,`note`=NULL,`fee_usd`=1450,`neoxstatus`='0',`utm_campaign`=NULL,`date_of_payment`='2017-01-08',`gender`=NULL,`payment_realized_check`=0,`payment_type`='Online',`payment_source`='PayU',`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`minimum_attendance`=75,`vendor`='TBS',`batch`='',`comment`=NULL,`mailer_day`=NULL,`amount`=32000,`reference_number`=NULL,`transaction_id`='567',`fee_inr`=65000,`utm`='TBS Emailers'
+					 WHERE  leads.id = 'd03fce7a-5f75-45d2-4639-584688f2ad53' AND deleted=0: MySQL error 1054: Unknown column 'batch' in 'field list'
+Sun Jan  8 04:09:17 2017 [4824][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Sun Jan  8 04:09:33 2017 [4828][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-01-08 10:09:32',`modified_user_id`='1',`created_by`='4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff',`description`=NULL,`assigned_user_id`='6eca082c-21dd-669a-f78c-584646a4a1f5',`salutation`=NULL,`first_name`='Yuvraj Idpache',`last_name`=NULL,`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`='9404527813',`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`='Campaign',`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`=NULL,`note`=NULL,`fee_usd`=1450,`neoxstatus`='0',`utm_campaign`=NULL,`date_of_payment`='2017-01-08',`gender`=NULL,`payment_realized_check`=0,`payment_type`='Online',`payment_source`='PayU',`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`minimum_attendance`=75,`vendor`='TBS',`batch`='',`comment`=NULL,`mailer_day`=NULL,`amount`=32000,`reference_number`=NULL,`transaction_id`='567',`fee_inr`=65000,`utm`='TBS Emailers'
+					 WHERE  leads.id = 'd03fce7a-5f75-45d2-4639-584688f2ad53' AND deleted=0: MySQL error 1054: Unknown column 'batch' in 'field list'
+Sun Jan  8 04:09:33 2017 [4828][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Sun Jan  8 04:10:56 2017 [4973][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-01-08 10:10:56',`modified_user_id`='1',`created_by`='4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff',`description`=NULL,`assigned_user_id`='6eca082c-21dd-669a-f78c-584646a4a1f5',`salutation`=NULL,`first_name`='Yuvraj Idpache',`last_name`=NULL,`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`='9404527813',`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`='Campaign',`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`=NULL,`note`=NULL,`fee_usd`=1450,`neoxstatus`='0',`utm_campaign`=NULL,`date_of_payment`='2017-01-08',`gender`=NULL,`payment_realized_check`=0,`payment_type`='Online',`payment_source`='PayU',`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`minimum_attendance`=75,`vendor`='TBS',`batch`='',`comment`=NULL,`mailer_day`=NULL,`amount`=26000,`reference_number`=NULL,`transaction_id`='67879',`fee_inr`=65000,`utm`='TBS Emailers'
+					 WHERE  leads.id = 'd03fce7a-5f75-45d2-4639-584688f2ad53' AND deleted=0: MySQL error 1054: Unknown column 'batch' in 'field list'
+Sun Jan  8 04:10:56 2017 [4973][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Sun Jan  8 05:28:08 2017 [9564][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-01-08 11:28:08',`modified_user_id`='1',`created_by`='1',`description`=NULL,`assigned_user_id`='1',`salutation`=NULL,`first_name`='Ravi',`last_name`='Tiwari',`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`=NULL,`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`=NULL,`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`=NULL,`note`=NULL,`fee_usd`=0,`neoxstatus`='0',`utm_campaign`=NULL,`date_of_payment`='2017-01-08',`gender`='Male',`payment_realized_check`=1,`payment_type`='Offline',`payment_source`=NULL,`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`minimum_attendance`=NULL,`vendor`=NULL,`batch`='',`comment`=NULL,`mailer_day`=NULL,`amount`=2000,`reference_number`='56565656',`transaction_id`='67677676',`fee_inr`=NULL,`utm`='NA'
+					 WHERE  leads.id = '29655395-eb43-852d-c621-5870c447b6dc' AND deleted=0: MySQL error 1054: Unknown column 'batch' in 'field list'
+Sun Jan  8 05:28:08 2017 [9564][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Sun Jan  8 05:31:15 2017 [9737][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-01-08 11:31:15',`modified_user_id`='1',`created_by`='1',`description`=NULL,`assigned_user_id`='1',`salutation`=NULL,`first_name`='Ravi',`last_name`='Tiwari',`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`=NULL,`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`=NULL,`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`=NULL,`note`=NULL,`fee_usd`=0,`neoxstatus`='0',`utm_campaign`=NULL,`date_of_payment`='2017-01-08',`gender`='Male',`payment_realized_check`=1,`payment_type`='Offline',`payment_source`=NULL,`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`minimum_attendance`=NULL,`vendor`=NULL,`batch`='',`comment`=NULL,`mailer_day`=NULL,`amount`=2000,`reference_number`='56565656',`transaction_id`='67677676',`fee_inr`=NULL,`utm`='NA'
+					 WHERE  leads.id = '29655395-eb43-852d-c621-5870c447b6dc' AND deleted=0: MySQL error 1054: Unknown column 'batch' in 'field list'
+Sun Jan  8 05:31:15 2017 [9737][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Sun Jan  8 05:32:27 2017 [10020][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-01-08 11:32:26',`modified_user_id`='1',`created_by`='1',`description`=NULL,`assigned_user_id`='1',`salutation`=NULL,`first_name`='Ravi',`last_name`='Tiwari',`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`=NULL,`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`=NULL,`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`=NULL,`note`=NULL,`fee_usd`=0,`neoxstatus`='0',`utm_campaign`=NULL,`date_of_payment`='2017-01-08',`gender`='Male',`payment_realized_check`=1,`payment_type`='Offline',`payment_source`=NULL,`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`minimum_attendance`=NULL,`vendor`=NULL,`batch`='',`comment`=NULL,`mailer_day`=NULL,`amount`=2000,`reference_number`='56565656',`transaction_id`='67677676',`fee_inr`=NULL,`utm`='NA'
+					 WHERE  leads.id = '29655395-eb43-852d-c621-5870c447b6dc' AND deleted=0: MySQL error 1054: Unknown column 'batch' in 'field list'
+Sun Jan  8 05:32:27 2017 [10020][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Sun Jan  8 06:05:13 2017 [12270][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] SugarPHPMailer encountered an error: Invalid address: 
+Sun Jan  8 06:05:14 2017 [12270][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] SugarPHPMailer encountered an error: Invalid address: 
+Sun Jan  8 06:05:16 2017 [12270][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] SugarPHPMailer encountered an error: Invalid address: 
+Sun Jan  8 06:05:18 2017 [12270][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] SugarPHPMailer encountered an error: Invalid address: 
+Sun Jan  8 06:05:18 2017 [12270][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] SugarPHPMailer encountered an error: Invalid address: 
+Sun Jan  8 06:43:02 2017 [14814][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 46d00171-1654-5449-8ef4-58468812ea3f
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 46d00171-1654-5449-8ef4-58468812ea3f
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 46d00171-1654-5449-8ef4-58468812ea3f
+    [offset] => 11
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Yogesh
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => yogesh_kumar2033@yahoo.com
+    [Leads0emailAddressId0] => 576ad7aa-2d86-f9de-a424-58467b9a3874
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => yogesh_kumar2033@yahoo.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9810809043
+    [education_c] => Not Confirmed
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 26000
+    [payment_realized] => 0
+    [date_of_payment] => 01/08/2017
+    [reference_number] => 
+    [transaction_id] => 456
+    [ck_login_id_20] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [Leads_divs] => t=#l=#
+    [PHPSESSID] => ebcd632cba9e63329ff04f13f3b64d27
+    [te_ba_Batch_divs] => t=#
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [te_vendor_divs] => t=#
+)
+
+Sun Jan  8 13:26:26 2017 [7258][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => a4650530-2c93-4010-d4b9-58468849aaae
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => a4650530-2c93-4010-d4b9-58468849aaae
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => a4650530-2c93-4010-d4b9-58468849aaae
+    [offset] => 22
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Yogeshwar Farde
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => yogeshwarfarde90@gmail.com
+    [Leads0emailAddressId0] => af4fac87-6d50-c858-0ffd-58467b329fd1
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => yogeshwarfarde90@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 7887977670
+    [education_c] => Post Graduate
+    [phone_other] => 
+    [work_experience_c] => 2
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 32000
+    [payment_realized] => 1
+    [date_of_payment] => 09/01/2017
+    [reference_number] => 
+    [transaction_id] => 4567
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => fa944e5f2a8201e2f9a3de078b4b31b5
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [te_vendor_divs] => t=#
+)
+
+Sun Jan  8 23:22:05 2017 [12398][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 57b57d35-b026-2f1d-fc2c-5846885a2397
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 23
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Yogesh Kale
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => yogeshkale2389@gmail.com
+    [Leads0emailAddressId0] => e0a106e8-0066-982d-c174-58467be148b5
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => yogeshkale2389@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9765583624
+    [education_c] => Not Confirmed
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 50,000
+    [payment_realized] => 0
+    [date_of_payment] => 10/01/2017
+    [reference_number] => 
+    [transaction_id] => 
+    [te_pr_Programs_divs] => t=#
+    [te_vendor_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [te_student_batch_divs] => t=#
+    [sidebartoggle] => expanded
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 3fa94cbb1386e60f125f5f9bfa6c1af2
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Mon Jan  9 00:00:02 2017 [15856][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 7ee08d15-00e3-8e67-d18d-584688f0d64d
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 7ee08d15-00e3-8e67-d18d-584688f0d64d
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 7ee08d15-00e3-8e67-d18d-584688f0d64d
+    [offset] => 32
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Mahip Kumar
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => yadavmahipkumar1993@gmail.com
+    [Leads0emailAddressId0] => 2143ca9a-da57-a4cc-a80c-58467ba8bb32
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => yadavmahipkumar1993@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9470201778
+    [education_c] => Diploma and Others
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 70,000
+    [payment_realized] => 0
+    [date_of_payment] => 20/01/2017
+    [reference_number] => 
+    [transaction_id] => 
+    [te_pr_Programs_divs] => t=#
+    [te_vendor_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [sidebartoggle] => expanded
+    [PHPSESSID] => 3fa94cbb1386e60f125f5f9bfa6c1af2
+    [te_ba_Batch_divs] => t=#
+    [te_student_batch_divs] => t=#
+    [te_student_divs] => undefined=#t=#
+    [Leads_divs] => t=#l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Wed Jan 11 00:29:27 2017 [29188][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 9bb2cee8-2dd0-a0d5-b701-58468891672c
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 9bb2cee8-2dd0-a0d5-b701-58468891672c
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 9bb2cee8-2dd0-a0d5-b701-58468891672c
+    [offset] => 28
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Yamini
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => yaminikulkarni9@gmail.com
+    [Leads0emailAddressId0] => a9c22b94-4006-27d4-0112-58467bbdf951
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => yaminikulkarni9@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9702954290
+    [education_c] => Not Confirmed
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 40,000
+    [payment_realized] => 0
+    [date_of_payment] => 10/01/2017
+    [reference_number] => 
+    [transaction_id] => 
+    [te_pr_Programs_divs] => t=#
+    [te_vendor_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [te_ba_Batch_divs] => t=#
+    [Leads_divs] => t=#l=#
+    [te_student_batch_divs] => t=#
+    [PHPSESSID] => f3221d419812234264d397c5fce38ae1
+    [te_student_divs] => undefined=#t=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Wed Jan 11 04:56:50 2017 [20664][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Karan
+    [last_name] => Singh
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => karan.singh@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 9999988888
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => 
+    [te_ba_batch_id_c] => 
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [PHPSESSID] => 1afcf768e8be9c56a123022bcb08d3dd
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [te_vendor_divs] => t=#
+)
+
+Wed Jan 11 04:58:28 2017 [20837][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => be046492-1773-57b5-1f56-58760fa8a0a0
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => be046492-1773-57b5-1f56-58760fa8a0a0
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => be046492-1773-57b5-1f56-58760fa8a0a0
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Karan
+    [last_name] => Singh
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => karan.singh@gmail.com
+    [Leads0emailAddressId0] => 54405262-2f9c-df1a-6201-58760fdbb716
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => karan.singh@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9999988888
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 34000
+    [payment_realized] => 1
+    [date_of_payment] => 11/01/2017
+    [reference_number] => 
+    [transaction_id] => 1234
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [PHPSESSID] => 1afcf768e8be9c56a123022bcb08d3dd
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [te_vendor_divs] => t=#
+)
+
+Wed Jan 11 11:45:56 2017 [17448][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Anand
+    [last_name] => Ram
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => anand@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 9999988889
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 347713ca6d3ee42ca6ef4b3a97997028
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [Leads_divs] => t=#l=#
+    [te_vendor_divs] => t=#
+)
+
+Wed Jan 11 11:46:37 2017 [17502][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 42dce119-3e3c-1660-f156-58766f922d3d
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 42dce119-3e3c-1660-f156-58766f922d3d
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 42dce119-3e3c-1660-f156-58766f922d3d
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Anand
+    [last_name] => Ram
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => anand@gmail.com
+    [Leads0emailAddressId0] => 9ae5139a-1c9f-90d4-2ada-58766fdc74ee
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => anand@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9999988889
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 32000
+    [payment_realized] => 1
+    [date_of_payment] => 11/01/2017
+    [reference_number] => 
+    [transaction_id] => 23432
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 347713ca6d3ee42ca6ef4b3a97997028
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [Leads_divs] => t=#l=#
+    [te_vendor_divs] => t=#
+)
+
+Wed Jan 11 11:56:40 2017 [18218][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Lakhan
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => lak@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 9889999998
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 347713ca6d3ee42ca6ef4b3a97997028
+    [te_vendor_divs] => t=#
+)
+
+Wed Jan 11 11:57:29 2017 [18270][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => b606d10f-7001-1b67-817e-58767101a9e0
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => b606d10f-7001-1b67-817e-58767101a9e0
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => b606d10f-7001-1b67-817e-58767101a9e0
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Lakhan
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => lak@gmail.com
+    [Leads0emailAddressId0] => 10869213-3190-1382-688e-587671519c9e
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => lak@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9889999998
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 33000
+    [payment_realized] => 1
+    [date_of_payment] => 11/01/2017
+    [reference_number] => 
+    [transaction_id] => 2323
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [PHPSESSID] => 347713ca6d3ee42ca6ef4b3a97997028
+    [te_vendor_divs] => t=#
+)
+
+Fri Jan 13 00:57:40 2017 [7014][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 21f1bcfc-f8e6-4714-120a-585b770887b1
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 21f1bcfc-f8e6-4714-120a-585b770887b1
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 21f1bcfc-f8e6-4714-120a-585b770887b1
+    [offset] => 5
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => ban
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ban@yahoo.com
+    [Leads0emailAddressId0] => 2a6712c0-3918-92fa-a8eb-585b776b0957
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => ban@yahoo.com
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [leads_leads_1_name] => Raman
+    [leads_leads_1leads_ida] => 9790e213-6d2f-3928-f006-585b76fa676a
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 50,000
+    [payment_realized] => 0
+    [date_of_payment] => 20/01/2017
+    [reference_number] => 
+    [transaction_id] => 
+    [te_vendor_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [te_pr_Programs_divs] => t=#
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [te_student_divs] => undefined=#t=#
+    [te_student_batch_divs] => t=#
+    [PHPSESSID] => 52e7b320811e51544938ebd0ec9543bd
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Fri Jan 13 01:08:09 2017 [7867][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Jan 13 01:08:16 2017 [7869][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Jan 13 05:44:26 2017 [28366][-none-][FATAL] Exception in Controller: FPDF error: Can't open image file: custom/modules/Leads/fppdf/rs.png
+Fri Jan 13 05:45:42 2017 [28487][-none-][FATAL] Exception in Controller: FPDF error: Can't open image file: custom/modules/Leads/fppdf/rs.png
+Tue Jan 17 02:20:07 2017 [18882][1][FATAL]  Query Failed: SELECT * FROM service_tax where deleted=0;: MySQL error 1146: Table 'etechin_dev_talentede.service_tax' doesn't exist
+Tue Jan 17 02:20:19 2017 [18894][1][FATAL]  Query Failed: SELECT * FROM service_tax where deleted=0;: MySQL error 1146: Table 'etechin_dev_talentede.service_tax' doesn't exist
+Tue Jan 17 15:12:20 2017 [24931][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Exception in Controller: Error retrieving record.  This record may be deleted or you may not be authorized to view it.
+Tue Jan 17 07:08:28 2017 [8047][-none-][FATAL] Exception in Controller: FPDF error: Can't open image file: custom/modules/Leads/fppdf/download.png
+Tue Jan 17 07:08:33 2017 [8050][-none-][FATAL] Exception in Controller: FPDF error: Can't open image file: custom/modules/Leads/fppdf/download.png
+Tue Jan 17 07:09:12 2017 [8097][-none-][FATAL] Exception in Controller: FPDF error: Can't open image file: custom/modules/Leads/fppdf/download.png
+Tue Jan 17 11:43:06 2017 [23979][1][FATAL]  Query Failed: SELECT * FROM service_tax where deleted=0;: MySQL error 1146: Table 'etechin_dev_talentede.service_tax' doesn't exist
+Tue Jan 17 11:43:22 2017 [24003][1][FATAL]  Query Failed: SELECT * FROM service_tax where deleted=0;: MySQL error 1146: Table 'etechin_dev_talentede.service_tax' doesn't exist
+Sat Jan 21 11:16:42 2017 [13730][1][FATAL]  Query Failed: SELECT sb.name,sb.batch_start_date,sb.te_pr_programs_id_c as program_id FROM te_student_te_student_batch_1_c sbr INNER JOIN `te_student_batch` sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sbr.te_student_te_student_batch_1te_student_ida='24ef9402-d682-0030-5df2-58766fec0c4e': MySQL error 1054: Unknown column 'sb.batch_start_date' in 'field list'
+Sat Jan 21 11:17:52 2017 [13821][1][FATAL]  Query Failed: SELECT sb.name,sb.batch_start_date,sb.te_pr_programs_id_c as program_id FROM te_student_te_student_batch_1_c sbr INNER JOIN `te_student_batch` sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sbr.te_student_te_student_batch_1te_student_ida='': MySQL error 1054: Unknown column 'sb.batch_start_date' in 'field list'
+Sat Jan 21 11:18:11 2017 [13862][1][FATAL]  Query Failed: SELECT sb.name,sb.batch_start_date,sb.te_pr_programs_id_c as program_id FROM te_student_te_student_batch_1_c sbr INNER JOIN `te_student_batch` sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sbr.te_student_te_student_batch_1te_student_ida='ba65d22e-4cfc-2fd2-8ed4-5870b3b74b55': MySQL error 1054: Unknown column 'sb.batch_start_date' in 'field list'
+Sun Jan 22 14:58:37 2017 [7997][1][FATAL] Error: Module te_student_PAYMENT does not exist.
+Sun Jan 22 14:58:48 2017 [7999][1][FATAL] Exception in Controller: Error retrieving record.  This record may be deleted or you may not be authorized to view it.
+Wed Jan 25 00:58:23 2017 [2200][-none-][FATAL] SECURITY: User authentication for admin failed
+Wed Jan 25 00:58:23 2017 [2200][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Wed Jan 25 01:38:08 2017 [5474][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => test
+    [last_name] => l
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => k@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => india
+    [batch_c] => 
+    [te_ba_batch_id_c] => 
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [PHPSESSID] => e75ae8437a0b53bbb0de541e8aba9c63
+    [ModuleBuilder] => treeHidden=false
+    [Leads_divs] => l=#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Wed Jan 25 03:32:56 2017 [14824][1][FATAL] Failed to load original or custom subpanel data for eapm in modules//metadata/subpanels/.php
+Sun Jan 29 11:14:08 2017 [13988][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 9518f5ec-b254-6a76-dc46-5846889ff8db
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 9518f5ec-b254-6a76-dc46-5846889ff8db
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 9518f5ec-b254-6a76-dc46-5846889ff8db
+    [offset] => 8
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Imran Khan
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => tirangagarments@gmail.com
+    [Leads0emailAddressId0] => 15439138-fe55-4c77-b8eb-58467b38bee6
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => tirangagarments@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 9810697720
+    [education_c] => Graduate
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => India
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 25000
+    [payment_realized] => 1
+    [date_of_payment] => 2017-01-29
+    [reference_number] => 
+    [transaction_id] => 12233
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+    [PHPSESSID] => d4ed9074b764a5572410f92039a3c292
+    [te_student_batch_divs] => undefined=#t=#
+    [te_student_divs] => undefined=#t=#
+    [Leads_divs] => t=#l=#
+    [te_ba_Batch_divs] => t=#
+    [te_vendor_divs] => t=#
+)
+
+Sun Jan 29 11:53:16 2017 [16361][1][FATAL]  Query Failed: SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,s.idp,sp.te_student_id_c,sp.due_amount_usd,sp.paid_amount_usd,sp.paid,sp.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='bfbaeef6-108f-5191-72c4-5876720b6351' AND sb.te_ba_batch_id_c='3e61df74-2ddd-ce27-af33-583fc534c2ac' ORDER BY sp.due_date: MySQL error 1054: Unknown column 's.idp' in 'field list'
+Sun Jan 29 11:54:48 2017 [16400][1][FATAL]  Query Failed: SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,s.idp,sp.te_student_id_c,sp.due_amount_usd,sp.paid_amount_usd,sp.paid,sp.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='bfbaeef6-108f-5191-72c4-5876720b6351' AND sb.te_ba_batch_id_c='3e61df74-2ddd-ce27-af33-583fc534c2ac' ORDER BY sp.due_date: MySQL error 1054: Unknown column 's.idp' in 'field list'
+Sun Jan 29 11:56:04 2017 [16525][1][FATAL]  Query Failed: SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,s.idp,sp.te_student_id_c,sp.due_amount_usd,sp.paid_amount_usd,sp.paid,sp.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='bfbaeef6-108f-5191-72c4-5876720b6351' AND sb.te_ba_batch_id_c='3e61df74-2ddd-ce27-af33-583fc534c2ac' ORDER BY sp.due_date: MySQL error 1054: Unknown column 's.idp' in 'field list'
+Mon Jan 30 02:49:39 2017 [11515][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => d011be21-5622-cb63-4fc6-5846887bf437
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => d011be21-5622-cb63-4fc6-5846887bf437
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => d011be21-5622-cb63-4fc6-5846887bf437
+    [offset] => 27
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Surya Vamshi
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => vsvsv.gamer.sv@gmail.com
+    [Leads0emailAddressId0] => ea120297-9a14-4cfc-6154-58467b19b064
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => vsvsv.gamer.sv@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 7893405447
+    [education_c] => Graduate
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => India
+    [batch_c] => Strategic Performance Management 
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Deepak Sharma
+    [assigned_user_id] => 6eca082c-21dd-669a-f78c-584646a4a1f5
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 30000
+    [payment_realized] => 1
+    [date_of_payment] => 2017-01-30
+    [reference_number] => 
+    [transaction_id] => 1234
+    [PHPSESSID] => acd7354d6f66a20ffe1e5fe40e39b60e
+    [te_ba_Batch_divs] => t=#
+    [ext_name] => jaehkpjddfdgiiefcnhahapilbejohhj
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Mon Jan 30 04:10:50 2017 [18173][-none-][FATAL] Could not connect to DB server tedev.engeniatech.in as etechin_te. port : Connection refused
