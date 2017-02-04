@@ -24459,3 +24459,474 @@ Wed Feb  1 07:26:47 2017 [32671][1][FATAL] Caught error: Accessing static proper
 Wed Feb  1 07:26:47 2017 [32671][1][FATAL] Caught error: Accessing static property ImportFieldSanitize::$createdBeans as non static
 Wed Feb  1 07:26:48 2017 [32671][1][FATAL] Caught error: stat(): stat failed for upload/import/status_1.csv
 Wed Feb  1 07:26:48 2017 [32671][1][FATAL] Caught error: touch(): UploadStream::stream_metadata is not implemented!
+Thu Feb  2 00:03:11 2017 [24061][624c213a-263f-7d22-3c2b-5886eda48d27][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => manish
+    [last_name] => kumar
+    [gender] => Male
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => manish@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 9650211216
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => 
+    [te_ba_batch_id_c] => 
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Chat
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => manish guprta
+    [assigned_user_id] => 624c213a-263f-7d22-3c2b-5886eda48d27
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [sugar_user_theme] => SuiteR
+    [ck_login_id_20] => 624c213a-263f-7d22-3c2b-5886eda48d27
+    [ck_login_language_20] => en_us
+    [Leads_sp_tab] => All
+    [Leads_divs] => t=#l=#
+    [Calls_sp_tab] => All
+    [Calls_divs] => l=#
+    [PHPSESSID] => c161eb0982da3c4e51337f637cf8ae8b
+)
+
+Thu Feb  2 00:03:43 2017 [24079][624c213a-263f-7d22-3c2b-5886eda48d27][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 3ca28031-a420-d49c-5275-5892cb33232f
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 3ca28031-a420-d49c-5275-5892cb33232f
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => First Name: 	manish
+    [date_of_callback] => 2017-02-02 11:45
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [sugar_user_theme] => SuiteR
+    [ck_login_id_20] => 624c213a-263f-7d22-3c2b-5886eda48d27
+    [ck_login_language_20] => en_us
+    [Leads_sp_tab] => All
+    [Leads_divs] => t=#l=#
+    [Calls_sp_tab] => All
+    [Calls_divs] => l=#
+    [PHPSESSID] => c161eb0982da3c4e51337f637cf8ae8b
+)
+
+Thu Feb  2 00:31:24 2017 [26127][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] =>  First Name: 	Ajay
+Counsellor: 	ajay kumar
+    [date_of_callback] => 2017-02-02 12:15
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [sugar_user_theme] => SuiteR
+    [ck_login_id_20] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [ck_login_language_20] => en_us
+    [Leads_sp_tab] => All
+    [Leads_divs] => t=#l=#
+    [Calls_sp_tab] => All
+    [Calls_divs] => l=#c=#u=#
+    [PHPSESSID] => 6e0f9787605aeaa4afff7ebf0e961ecc
+)
+
+Thu Feb  2 08:46:49 2017 [2955][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => testing
+    [date_of_callback] => 2017-02-02 20:30
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [sugar_user_theme] => SuiteR
+    [ck_login_id_20] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [ck_login_language_20] => en_us
+    [Leads_sp_tab] => All
+    [Leads_divs] => t=#l=#
+    [Calls_sp_tab] => All
+    [Calls_divs] => l=#c=none#u=#
+    [PHPSESSID] => 6e0f9787605aeaa4afff7ebf0e961ecc
+)
+
+Thu Feb  2 08:49:10 2017 [3174][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => 
+    [date_of_callback] => 2017-02-02 20:30
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [sugar_user_theme] => SuiteR
+    [ck_login_id_20] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [ck_login_language_20] => en_us
+    [Leads_sp_tab] => All
+    [Leads_divs] => t=#l=#
+    [Calls_sp_tab] => All
+    [Calls_divs] => l=#c=none#u=#
+    [PHPSESSID] => 6e0f9787605aeaa4afff7ebf0e961ecc
+)
+
+Thu Feb  2 12:00:32 2017 [14411][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [offset] => 1
+    [status] => Warm
+    [status_detail] => Prospect
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 
+    [date_of_prospect] => 2017-02-02 11:45
+    [te_ba_Batch_divs] => t=#
+    [te_Program_category_divs] => t=#
+    [te_pr_Programs_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [Calls_divs] => c=#u=#l=none#
+    [PHPSESSID] => ccfee02a120fc3038946136b41698d83
+    [Leads_divs] => t=#l=none#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Thu Feb  2 12:02:55 2017 [14578][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 96eb7a3b-e652-fff7-79e6-58918deff671
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => 
+    [date_of_callback] => 2017-02-02 11:45
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [te_Program_category_divs] => t=#
+    [te_pr_Programs_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [Calls_divs] => c=#u=#l=none#
+    [PHPSESSID] => ccfee02a120fc3038946136b41698d83
+    [Leads_divs] => t=#l=none#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Thu Feb  2 12:14:30 2017 [15360][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => b40a5df8-038b-da3b-6b0d-58903e9cf5b6
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => b40a5df8-038b-da3b-6b0d-58903e9cf5b6
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Follow Up
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 2017-02-02 23:45
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [te_Program_category_divs] => t=#
+    [te_pr_Programs_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [Calls_divs] => c=#u=#l=none#
+    [PHPSESSID] => ccfee02a120fc3038946136b41698d83
+    [Leads_divs] => t=#l=none#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Thu Feb  2 12:18:33 2017 [15687][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => b40a5df8-038b-da3b-6b0d-58903e9cf5b6
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => b40a5df8-038b-da3b-6b0d-58903e9cf5b6
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => 
+    [date_of_callback] => 2017-02-02 00:00
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [te_ba_Batch_divs] => t=#
+    [te_Program_category_divs] => t=#
+    [te_pr_Programs_divs] => t=#
+    [te_in_institutes_divs] => t=#
+    [Calls_divs] => c=#u=#l=none#
+    [PHPSESSID] => ccfee02a120fc3038946136b41698d83
+    [Leads_divs] => t=#l=none#
+    [ck_login_id_20] => 1
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Thu Feb  2 15:48:01 2017 [27906][-none-][FATAL] Could not connect to DB server te.engeniatech.in as etechin_te. port : Connection refused
+Thu Feb  2 15:48:01 2017 [27913][-none-][FATAL] Could not connect to DB server te.engeniatech.in as etechin_te. port : Connection refused
+Fri Feb  3 03:46:50 2017 [9367][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Failed to load original or custom subpanel data for eapm in modules//metadata/subpanels/.php
+Fri Feb  3 04:41:50 2017 [13846][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => pankaj
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => pankaj.jha@talentedge.in
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => batch1
+    [te_ba_batch_id_c] => ce9c5a25-4ffd-21ef-1075-585236e7b498
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Campaign
+    [leads_leads_1_name] => 
+    [leads_leads_1leads_ida] => 
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => ajay kumar
+    [assigned_user_id] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+    [PHPSESSID] => 231429c522ae781b09505a3a8db21388
+    [te_pr_Programs_divs] => t=none#
+    [te_vendor_divs] => t=none#
+    [sidebartoggle] => expanded
+    [ck_login_id_20] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Fri Feb  3 05:01:57 2017 [15577][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => ea79802e-8499-c43b-d41a-58945e028cd2
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => ea79802e-8499-c43b-d41a-58945e028cd2
+    [offset] => 1
+    [status] => Warm
+    [status_detail] => Re-Enquired
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [PHPSESSID] => 231429c522ae781b09505a3a8db21388
+    [te_pr_Programs_divs] => t=none#
+    [te_vendor_divs] => t=none#
+    [sidebartoggle] => expanded
+    [Leads_divs] => t=#
+    [ck_login_id_20] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
+Fri Feb  3 07:18:26 2017 [26196][-none-][FATAL] SECURITY: User authentication for admin failed
+Fri Feb  3 07:18:26 2017 [26196][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Fri Feb  3 07:18:29 2017 [26201][-none-][FATAL] SECURITY: User authentication for admin failed
+Fri Feb  3 07:18:30 2017 [26201][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Sat Feb  4 01:54:01 2017 [23069][-none-][FATAL] Could not connect to DB server te.engeniatech.in as etechin_te. port : MySQL server has gone away
+Sat Feb  4 01:54:01 2017 [23074][-none-][FATAL] Could not connect to DB server te.engeniatech.in as etechin_te. port : MySQL server has gone away
+Sat Feb  4 01:54:01 2017 [23073][-none-][FATAL]  Query Failed: SELECT id, name, symbol, conversion_rate FROM currencies WHERE status = 'Active' and deleted = 0: MySQL error 2006: MySQL server has gone away
+Sat Feb  4 01:54:01 2017 [23073][-none-][FATAL] Unable to retrieve system settings Query Failed: SELECT category, name, value FROM config: MySQL error 2006: MySQL server has gone away
+Sat Feb  4 04:16:19 2017 [31820][4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 3e53017d-7464-e060-4129-58918d7a129b
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 3e53017d-7464-e060-4129-58918d7a129b
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => 
+    [date_of_callback] => 2017-02-04 16:00
+    [date_of_followup] => 
+    [date_of_prospect] => 
+    [te_Program_category_divs] => t=none#
+    [Users_divs] => undefined=#s=none#
+    [te_utm_divs] => undefined=#t=#
+    [AOR_Reports_divs] => a=none#
+    [te_in_institutes_divs] => undefined=#t=none#
+    [te_ba_Batch_divs] => undefined=#t=#
+    [ck_login_theme_20] => SuiteR
+    [AOS_Contracts_divs] => a=none#
+    [EmailGridWidths] => 0=10&1=10&2=150&3=250&4=175&5=125
+    [EmailTreeLayout] => aaa5352b-dc0f-1b6f-bc8a-584a57b48751=false&acec3dc9-76e9-254d-3e74-584a579727c6=false&ad1812fc-e67e-309e-08e7-584a5708ccc8=false&ad3eea08-110c-ada6-4b53-584a5792910d=false&acfca023-337a-28de-8079-585b70dcbe64=false&ae752799-3c20-6101-7209-585b7007bdb4=false&aea46833-d3cc-19b5-8dc5-585b70b65db3=false&aed09a57-e367-ec09-b33a-585b702f7769=false
+    [te_drip_campaign_divs] => t=none#
+    [te_pr_Programs_divs] => undefined=#t=#
+    [ACLRoles_divs] => undefined=#u=#
+    [SecurityGroups_divs] => undefined=#u=none#a=none#
+    [te_vendor_divs] => undefined=#t=#
+    [PHPSESSID] => 04093080b4c2650681c77f1d0b374432
+    [Leads_divs] => undefined=#a=#c=#l=none#h=#f=#s=#t=#
+    [ck_login_id_20] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [ck_login_language_20] => en_us
+    [sugar_user_theme] => SuiteR
+)
+
