@@ -150,36 +150,52 @@ class addPaymentClass{
 		if(isset($_REQUEST['disposition_id']) && !empty($_REQUEST['disposition_id'])){
 			$disposition = new te_disposition();
 			$disposition->retrieve($_REQUEST['disposition_id']);
-			$disposition->name 		   	 = $_REQUEST['status_d'];
-			$disposition->status 		 = $_REQUEST['status_d'];
-			$disposition->status_detail = $_REQUEST['status_detail_d'];
-			$disposition->description	= $_REQUEST['description_d'];
-			$callBack = $_REQUEST['date_of_callback_date_d']." ".$_REQUEST['date_of_callback_hours_d'].":".$_REQUEST['date_of_callback_minutes_d'].":00";;
-			$disposition->date_of_callback = $callBack;
-			$followup = $_REQUEST['date_of_followup_date_d']." ".$_REQUEST['date_of_followup_hours_d'].":".$_REQUEST['date_of_followup_minutes_d'].":00";
-			$disposition->date_of_followup = $followup;
-			$prospect = $_REQUEST['date_of_prospect_date_d']." ".$_REQUEST['date_of_prospect_hours_d'].":".$_REQUEST['date_of_prospect_minutes_d'].":00";;
-			$disposition->date_of_prospect = $prospect;
-			$disposition->te_disposition_leadsleads_ida = $bean->id;
+			$unique_call_id = $disposition->unique_call_id;
+			$disposition->status 	   = $bean->status;
+			$disposition->status_detail  = $bean->status_description;
+			if(isset($bean->note)){
+			$disposition->description			 = $bean->note;
+			}
+			$disposition->date_of_callback			 = $bean->date_of_callback;
+			$disposition->date_of_followup			 = $bean->date_of_followup;
+			$disposition->date_of_prospect			 = $bean->date_of_prospect;
+			$disposition->name 		   	 = $bean->status;
+			$disposition->te_disposition_leadsleads_ida 		   	 = $bean->id;
+
+			//~ $disposition->name 		   	 = $_REQUEST['status_d'];
+			//~ $disposition->status 		 = $_REQUEST['status_d'];
+			//~ $disposition->status_detail = $_REQUEST['status_detail_d'];
+			//~ $disposition->description	= $_REQUEST['description_d'];
+			//~ $callBack = $_REQUEST['date_of_callback_date_d']." ".$_REQUEST['date_of_callback_hours_d'].":".$_REQUEST['date_of_callback_minutes_d'].":00";;
+			//~ $disposition->date_of_callback = $callBack;
+			//~ $followup = $_REQUEST['date_of_followup_date_d']." ".$_REQUEST['date_of_followup_hours_d'].":".$_REQUEST['date_of_followup_minutes_d'].":00";
+			//~ $disposition->date_of_followup = $followup;
+			//~ $prospect = $_REQUEST['date_of_prospect_date_d']." ".$_REQUEST['date_of_prospect_hours_d'].":".$_REQUEST['date_of_prospect_minutes_d'].":00";;
+			//~ $disposition->date_of_prospect = $prospect;
+			//~ $disposition->te_disposition_leadsleads_ida = $bean->id;
 			$disposition_id = $disposition->save();
 			
 		// Call Resume API	
-			$server_ip 		= $GLOBALS['sugar_config']['neox']['server_ip'];
-			$event          = "neox_agent_pause";
-			$user           = $GLOBALS['current_user']->neox_user;
-			$password       = $GLOBALS['current_user']->neox_password;
-			$value_pr       = "Resume"; 
-			$neoxKey   		= $GLOBALS['sugar_config']['neox']['secret_key'];
-			$URL = "http://$server_ip:9090/Neox_DialCenter_API/agent_pause_resume.php?secret_key=".$neoxKey;
-			$QUERY_PARAM = "data={\"event\":\"$event\",\"user\":\"$user\",\"value_pr\":\"$value_pr\"}";
-			$ch = curl_init();
-			curl_setopt($ch,CURLOPT_URL,"$URL");
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_POST, 1);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, "$QUERY_PARAM");
-			$buffer = curl_exec($ch);
-			//~ echo $buffer."----";die;
-
+			$sqlDispo = "SELECT unique_id FROM neox_call_details_update WHERE unique_id ='".$unique_call_id."'";
+			$resDispo = $GLOBALS['db']->query($sqlDispo);
+			//~ echo $GLOBALS['db']->getRowCount($resDispo);die; 
+			if($GLOBALS['db']->getRowCount($resDispo)>0){
+				$server_ip 		= $GLOBALS['sugar_config']['neox']['server_ip'];
+				$event          = "neox_agent_pause";
+				$user           = $GLOBALS['current_user']->neox_user;
+				$password       = $GLOBALS['current_user']->neox_password;
+				$value_pr       = "Resume"; 
+				$neoxKey   		= $GLOBALS['sugar_config']['neox']['secret_key'];
+				$URL = "http://$server_ip:9090/Neox_DialCenter_API/agent_pause_resume.php?secret_key=".$neoxKey;
+				$QUERY_PARAM = "data={\"event\":\"$event\",\"user\":\"$user\",\"value_pr\":\"$value_pr\"}";
+				$ch = curl_init();
+				curl_setopt($ch,CURLOPT_URL,"$URL");
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_POST, 1);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, "$QUERY_PARAM");
+				$buffer = curl_exec($ch);
+				//~ echo $buffer."----";die;
+			}
 		}
 		
 		if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){				
