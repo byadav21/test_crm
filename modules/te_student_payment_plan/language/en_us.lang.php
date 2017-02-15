@@ -81,4 +81,6 @@ $mod_strings = array (
   'LBL_BALANCE_USD' => 'Balance(USD)',
   'LBL_CURRENCY' => 'Balance(INR)',
   'LBL_CURRENCY' => 'Currency',
+  'LBL_TAX' => 'Tax',
+  'LBL_TOTAL_AMOUNT' => 'Total Amount',
 );
