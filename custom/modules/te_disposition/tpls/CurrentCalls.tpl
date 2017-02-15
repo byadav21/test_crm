@@ -51,60 +51,7 @@
 	<tr id='pacurrent_calls'  role='presentation'>
 		<td colspan='{if $prerow}{$colCount+1}{else}{$colCount}{/if}'>
 			<span id="running_call_container">
-			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
-				<tr>
-					<th>
-						<b>Status</b>
-					</th>
-					<th>
-						<b>Status Details</b>
-					</th>
-					<th>
-						<b>Date	</b>
-					</th>
-					<th>
-						<b>Leads</b>
-					</th>
-					<th>
-						<b>Leads Mobile</b>
-					</th>
-					<th>
-						<b>Leads Email</b>
-					</th>
-					<th>
-						<b>Program</b>
-					</th>
-					<th>
-						<b>Batch</b>
-					</th>
-				</tr>
-				<tr>
-					<td >
-						New
-					</td>
-					<td >
-						Alive
-					</td>
-					<td >
-						20/01/2016	
-					</td>
-					<td >
-						Test
-					</td>
-					<td >
-						9015306759
-					</td>
-					<td >
-						Test@test.com
-					</td>
-					<td >
-						Test Program
-					</td>
-					<td >
-						Test Batch
-					</td>
-				</tr>
-			</table>
+			No Runnung Calls
 			</span>
 		</td>
 	</tr>

@@ -140,7 +140,21 @@ Calendar.setup ({
    weekNumbers:false,
 });
 
-
+	function detailLead(){
+			//~ alert(window.parent)
+			//~ parent.window.open
+			
+			var lead_id = document.getElementById('lead_id').value;
+			var disposition_id = document.getElementById('disposition_id').value;
+			//~ var url_open = "http://localhost/TalentEdge/index.php?module=Leads&action=EditView&record="+lead_id+"&disposition_id="+disposition_id+"&from_pusher=1";
+			var url_open = "http://te.engeniatech.in/index.php?module=Leads&action=EditView&record="+lead_id+"&disposition_id="+disposition_id+"&from_pusher=1";
+			window.opener = self;
+			window.close();
+			
+			parent.window.open(url_open);
+				
+	}
+	
 	function saveDisposition(){
 			
 			var status = document.getElementById('status_d').value;
@@ -193,9 +207,9 @@ Calendar.setup ({
 						//~ SUGAR.ajaxUI.hideLoadingPanel();
 						//~ alert(b.responseText)
 						if(b.responseText.trim()=="1"){	
-							//~ window.opener = self;
-		  //~ window.close();
-							window.location.href='index.php?module=te_disposition&action=index';
+							window.opener = self;
+						window.close();
+							//~ window.location.href='index.php?module=te_disposition&action=index';
 						}
 						else{
 							alert('Error!! Record not saved')
@@ -224,6 +238,65 @@ Calendar.setup ({
 				 	<div class="modalContent modalContentpop">
 						<span id="call_status" style="color:red">&nbsp;</span>
 						<table style="width:100%">
+	
+	
+	
+<!-- Lead Detail Code Goes Here------->		
+<?php 	if(isset($_REQUEST['from_pusher']) && $_REQUEST['from_pusher']==1){  ?>
+						<tr>
+							<td  align="left"><span class="head_textpop">First Name</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['fname']?>
+							</span></td>
+						</tr>
+						<tr>
+							<td  align="left"><span class="head_textpop">Last Name</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['lname']?>
+							</span></td>
+						</tr>
+						<tr>
+							<td  align="left"><span class="head_textpop">Email</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['email']?>
+							</span></td>
+						</tr>
+						<tr>
+							<td  align="left"><span class="head_textpop">Address</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['address']?>
+							</span></td>
+						</tr>
+						<tr>
+							<td  align="left"><span class="head_textpop">Batch</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['bname']?>
+							</span></td>
+						</tr>
+						<tr>
+							<td  align="left"><span class="head_textpop">Program</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['pname']?>
+							</span></td>
+						</tr>
+						<tr>
+							<td  align="left"><span class="head_textpop">Education</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['edu']?>
+							</span></td>
+						</tr>
+						<tr>
+							<td  align="left"><span class="head_textpop">Experience</span></td>
+							<td  align="left"><span>
+								&nbsp;&nbsp;<?=$_REQUEST['work']?>
+							</span></td>
+						</tr>
+						
+
+<?php 	} 	?>
+<!---------------------End-------->
+
+	
 						   <tr>
 							<td  align="left"><span class="head_textpop">Status</span></td>
 							<td  align="left"><span>
@@ -407,7 +480,18 @@ Calendar.setup ({
     <td>
     <div id ="hold" onclick="callHold('hold')"><img src="custom/modules/Leads/include/img/hold_on_btn.png"/></div></td>
  <td>
-    <div style="display: none"  id ="unhold" onclick="callHold('unhold')"><img src="custom/modules/Leads/include/img/unhold_btn.png"/></div></td>
+    <div style="display: none"  id ="unhold" onclick="callHold('unhold')"><img src="custom/modules/Leads/include/img/unhold_btn.png"/></div>
+    </td>
+    <?php
+		if(isset($_REQUEST['from_pusher']) && $_REQUEST['from_pusher']==1){
+		?>
+    <td>
+		
+    <button type="button" onclick="detailLead()">Detail</button>
+    </td>
+    <?php
+	}
+		?>
   </tr>
 </table>
 </td>

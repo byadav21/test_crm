@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-28 08:04:42
+// created: 2017-02-15 06:05:32
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -47,8 +47,8 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL2' => 'undefined 2',
   'LBL_TE_UTM_TE_ACTUAL_CAMPAIGN_1_FROM_TE_ACTUAL_CAMPAIGN_TITLE' => 'Actual Campaign Plan',
   'LBL_TE_UTM_TE_BUDGETED_CAMPAIGN_1_FROM_TE_BUDGETED_CAMPAIGN_TITLE' => 'Budgeted Campaign Plan',
+  'LBL_TE_VENDOR_TE_UTM_1_FROM_TE_VENDOR_TITLE' => 'Source',
+  'LBL_UTM_URL' => 'Final Url',
   'LBL_TE_UTM_TE_UTM_MEDIUM_1_FROM_TE_UTM_MEDIUM_TITLE' => 'UTM Medium',
   'LBL_TE_UTM_TE_UTM_CAMPAIGN_1_FROM_TE_UTM_CAMPAIGN_TITLE' => 'UTM Campaign',
-  'LBL_TE_VENDOR_TE_UTM_1_FROM_TE_VENDOR_TITLE' => 'Vendor',
-  'LBL_UTM_URL' => 'Final Url',
 );

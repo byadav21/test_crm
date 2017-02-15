@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-28 08:04:41
+// created: 2017-02-15 06:05:31
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -97,11 +97,11 @@ $mod_strings = array (
   'LBL_EXPIRY_DATE' => 'Expiry Date(Optional):',
   'LBL_EXPIRY_VALUME' => 'Expiry Volume',
   'LBL_DETAILVIEW_PANEL1' => 'New Panel 1',
-  'LBL_AOS_CONTRACTS_TE_IMPRESSION_1_FROM_TE_IMPRESSION_TITLE' => 'Actual Consumption',
+  'LBL_AOS_CONTRACTS_TE_IMPRESSION_1_FROM_TE_IMPRESSION_TITLE' => 'Impression',
   'Documents' => 'Documents',
   'LBL_VOLUME' => 'Volume',
+  'LBL_PO_NUMBER' => 'PO Number',
   'LBL_VENDOR' => 'Vendor',
   'LBL_VENDOR_TE_VENDOR_ID' => 'Vendor (related  ID)',
   'LBL_TE_VENDOR_AOS_CONTRACTS_1_FROM_TE_VENDOR_TITLE' => 'Vendor',
-  'LBL_PO_NUMBER' => 'PO Number',
 );

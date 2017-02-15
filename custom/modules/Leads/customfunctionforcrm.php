@@ -48,7 +48,7 @@ ini_set("display_errors",0);
 				}
 
 //Duplicate		
-				$sqlDup = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Duplicate'  AND leads.assigned_user_id IN ('".$user_ids."')"; 
+				$sqlDup = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Duplicate'  AND is_seen=0 AND leads.assigned_user_id IN ('".$user_ids."')"; 
 				$resDup = $GLOBALS['db']->query($sqlDup);
 				$rowDup= $GLOBALS['db']->fetchByAssoc($resDup);			
 				if($rowDup['count'] > 0){

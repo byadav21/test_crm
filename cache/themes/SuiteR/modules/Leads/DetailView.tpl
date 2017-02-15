@@ -608,9 +608,22 @@ SUGAR.util.doWhen(function(){
 <tr>
 {counter name="fieldsUsed"}
 <td width='12.5%' scope="col">
-&nbsp;
+{if !$fields.parrent_leads.hidden}
+{capture name="label" assign="label"}{sugar_translate label='Parrent Lead' module='Leads'}{/capture}
+{$label|strip_semicolon}:
+{/if}
 </td>
-<td class="" type="" field="" width='37.5%'  >
+<td class="" type="varchar" field="parrent_leads" width='37.5%'  >
+{if !$fields.parrent_leads.hidden}
+{counter name="panelFieldCount"}
+
+{if strlen($fields.parrent_leads.value) <= 0}
+{assign var="value" value=$fields.parrent_leads.default_value }
+{else}
+{assign var="value" value=$fields.parrent_leads.value }
+{/if} 
+<span class="sugar_field" id="{$fields.parrent_leads.name}">{$fields.parrent_leads.value}</span>
+{/if}
 </td>
 {counter name="fieldsUsed"}
 <td width='12.5%' scope="col">

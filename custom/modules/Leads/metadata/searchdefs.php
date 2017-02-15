@@ -13,6 +13,14 @@ array (
         'default' => true,
         'width' => '10%',
       ),
+      'batch' => 
+      array (
+        'label' => 'LBL_BATCH',
+        'type' => 'enum',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'batch',
+      ),
       'email' => 
       array (
         'name' => 'email',

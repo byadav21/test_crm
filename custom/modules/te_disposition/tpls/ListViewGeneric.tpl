@@ -77,6 +77,9 @@
 {assign var="hideTable" value=false}
 
 {if count($data) == 0}
+	<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view table'>
+		{include file='custom/modules/te_disposition/tpls/CurrentCalls.tpl'}
+	</table>
 	{assign var="hideTable" value=true}
 	<div class="list view listViewEmpty">
 		{if $displayEmptyDataMesssages}

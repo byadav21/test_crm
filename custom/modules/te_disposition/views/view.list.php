@@ -56,7 +56,7 @@ class te_dispositionViewList extends ViewList
 		<link href="custom/modules/te_disposition/include/css/popup.css" rel="stylesheet">
 <script type="text/javascript" src="custom/modules/te_disposition/include/js/popup.js"></script>
 <script>
-	setInterval("getRunningCalls()", 25000 );
+	setInterval("getRunningCalls()", 5000 );
 	
 	function getRunningCalls(){
 			
@@ -88,8 +88,9 @@ class te_dispositionViewList extends ViewList
   function update_disposition_forrunning(dispo_id,mobile){
 
 		//~ alert(dispo_id)
+		//~ alert(mobile)
 			document.getElementById('disposition_id').value=dispo_id;
-			var url_open = "http://localhost/project/scrm/index.php?entryPoint=openDispositionPopup&disposition_id="+dispo_id+"&mobile"+mobile;
+			var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openDispositionPopup&disposition_id="+dispo_id+"&mobile="+mobile;
 			window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
 		//~ $(this).popupModal('atomBox');
 	}

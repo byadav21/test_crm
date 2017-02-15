@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-28 08:04:40
+// created: 2017-02-15 06:05:28
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date of Enquiry',
@@ -246,12 +246,11 @@ $mod_strings = array (
   'LBL_MIN_ATTENDANCE' => 'Min. Attendance(%)',
   'LBL_BATCH_TE_BA_BATCH_ID' => 'Batch (related  ID)',
   'LBL_BATCH' => 'Batch',
-  'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE' => 'Leads',
+  'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE' => 'Referral Leads',
   'NOTE' => 'Notes',
   'LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE' => 'Disposition',
   'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE' => 'Payment Details',
   'COMMENT' => 'Comment',
-  'LBL_INVOICE_NUMBER' => 'Invoice Number',
   'LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE' => 'Refree Leads',
   'LBL_LIST_ASSIGNED_USER' => 'Counsellor',
   'LBL_ASSIGNED_TO' => 'Counsellor',
@@ -280,4 +279,5 @@ $mod_strings = array (
   'LBL_MINIMUM_ATTENDANCE' => 'Minimum Attendance',
   'LBL_CONVERTED_DATE' => 'Converted Date',
   'LBL_MAILER_DAY' => 'Mailer Day',
+  'LBL_INVOICE_NUMBER' => 'Invoice Number',
 );

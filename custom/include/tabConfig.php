@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-06 14:12:42
+// created: 2017-02-15 02:20:36
 $GLOBALS['tabStructure'] = array (
   'LBL_GROUPTAB5_1473074494' => 
   array (
@@ -45,17 +45,12 @@ $GLOBALS['tabStructure'] = array (
       1 => 'Home',
     ),
   ),
-  'LBL_GROUPTAB4_1483469057' => 
+  'LBL_GROUPTAB4_1487154036' => 
   array (
-    'label' => 'LBL_GROUPTAB4_1483469057',
+    'label' => 'LBL_GROUPTAB4_1487154036',
     'modules' => 
     array (
-      0 => 'te_industry',
-      1 => 'te_source',
-      2 => 'te_product_category',
-      3 => 'te_product',
-      4 => 'te_sub_product',
-      5 => 'te_training_category',
+      0 => 'te_student',
     ),
   ),
 );

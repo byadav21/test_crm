@@ -327,22 +327,15 @@
       'len' => '255',
       'size' => '20',
     ),
-    'transaction_id' => 
+    'currency_type' => 
     array (
-      'name' => 'transaction_id',
-      'vname' => 'LBL_TRANSACTIONID',
-      'type' => 'varchar',
-      'len' => '100',
-      'audited' => 'false',
-    ),
-    'payment_source' => 
-    array (
-      'name' => 'payment_source',
+      'name' => 'currency_type',
+      'vname' => 'Currency Type',
       'type' => 'enum',
-      'vname' => 'LBL_PAYMENTTYPESOURCE',
-      'len' => '100',
-      'options' => 'payment_type_source_dom',
-      'audited' => 'false',
+      'options' => 'pyment_currency_type',
+      'duplicate_merge' => 'disabled',
+      'required' => false,
+      'studio' => 'visible',
     ),
     'leads_te_payment_details_1' => 
     array (
@@ -383,15 +376,22 @@
       'side' => 'right',
       'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
     ),
-    'currency_type' => 
+    'transaction_id' => 
     array (
-      'name' => 'currency_type',
-      'vname' => 'Currency Type',
+      'name' => 'transaction_id',
+      'vname' => 'LBL_TRANSACTIONID',
+      'type' => 'varchar',
+      'len' => '100',
+      'audited' => 'false',
+    ),
+    'payment_source' => 
+    array (
+      'name' => 'payment_source',
       'type' => 'enum',
-      'options' => 'pyment_currency_type',
-      'duplicate_merge' => 'disabled',
-      'required' => false,
-      'studio' => 'visible',
+      'vname' => 'LBL_PAYMENTTYPESOURCE',
+      'len' => '100',
+      'options' => 'payment_type_source_dom',
+      'audited' => 'false',
     ),
   ),
   'relationships' => 

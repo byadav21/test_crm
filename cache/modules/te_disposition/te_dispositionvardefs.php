@@ -264,6 +264,42 @@
       'studio' => 'visible',
       'dependency' => false,
     ),
+    'date_of_callback' => 
+    array (
+      'name' => 'date_of_callback',
+      'vname' => 'LBL_DATEOFCALLBACK',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
+    ),
+    'date_of_followup' => 
+    array (
+      'name' => 'date_of_followup',
+      'vname' => 'LBL_DATEOFFOLLOWUP',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
+    ),
+    'date_of_prospect' => 
+    array (
+      'name' => 'date_of_prospect',
+      'vname' => 'LBL_DATEOFPROSPECT',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
+    ),
+    'unique_call_id' => 
+    array (
+      'name' => 'unique_call_id',
+      'vname' => 'LBL_UNIQUECALLID',
+      'type' => 'varchar',
+      'dbType' => 'varchar',
+      'len' => '100',
+      'audited' => 'false',
+    ),
     'lead_mobile' => 
     array (
       'name' => 'lead_mobile',
@@ -347,42 +383,6 @@
       'reportable' => false,
       'side' => 'right',
       'vname' => 'LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE',
-    ),
-    'date_of_callback' => 
-    array (
-      'name' => 'date_of_callback',
-      'vname' => 'LBL_DATEOFCALLBACK',
-      'type' => 'datetimecombo',
-      'dbType' => 'datetime',
-      'enable_range_search' => true,
-      'options' => 'date_range_search_dom',
-    ),
-    'date_of_followup' => 
-    array (
-      'name' => 'date_of_followup',
-      'vname' => 'LBL_DATEOFFOLLOWUP',
-      'type' => 'datetimecombo',
-      'dbType' => 'datetime',
-      'enable_range_search' => true,
-      'options' => 'date_range_search_dom',
-    ),
-    'date_of_prospect' => 
-    array (
-      'name' => 'date_of_prospect',
-      'vname' => 'LBL_DATEOFPROSPECT',
-      'type' => 'datetimecombo',
-      'dbType' => 'datetime',
-      'enable_range_search' => true,
-      'options' => 'date_range_search_dom',
-    ),
-    'unique_call_id' => 
-    array (
-      'name' => 'unique_call_id',
-      'vname' => 'LBL_UNIQUECALLID',
-      'type' => 'varchar',
-      'dbType' => 'varchar',
-      'len' => '100',
-      'audited' => 'false',
     ),
   ),
   'relationships' => 

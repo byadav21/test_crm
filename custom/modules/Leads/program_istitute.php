@@ -27,5 +27,34 @@ class detail_view {
 			   $re1 =$db->fetchByAssoc($result);
 			   $bean->min_attendance_c=(int)$re1['minimum_attendance_criteria'];
 			   
+			   /*
+			   $seenunseen_text = 'Seen';
+				if($bean->is_seen==1){
+					$seenunseen_text = 'Unseen';
+				}
+				*/
+				
+			   // dupliacte ledas pram
+					$result_c =$db->query("SELECT parent_lead_id FROM leads_duplicate WHERE lead_id ='".$bean->id."'");
+					$child_id =$db->fetchByAssoc($result_c);
+					
+					//$result_p ="SELECT first_name,last_name FROM leads WHERE id ='".$child_id['parent_lead_id']."'";
+					$result_p=$db->query("SELECT first_name,last_name FROM leads WHERE id ='".$child_id['parent_lead_id']."'");
+						if($result_p->num_rows>0){
+					$p_id =$db->fetchByAssoc($result_p);
+					
+					$check_uncheck_lead_id = trim($bean->id);
+					
+					
+					
+					$bean->parrent_leads= "<a href=index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26offset%3D1%26stamp%3DLeads%26action%3DDetailView%26record%3D".$child_id['parent_lead_id'].">" .$p_id['first_name']."</a>".'<button type="button" onclick="updateleadseenunseen()" data-lid="'.$check_uncheck_lead_id.'" id="seenbtn">Seen</button>';	
+				}
+				else
+					{
+						$bean->parrent_leads="No"; 
+						
+						
+					}
+			   
 		}
  }

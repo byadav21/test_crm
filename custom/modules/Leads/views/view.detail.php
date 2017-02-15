@@ -526,7 +526,7 @@ class LeadsViewDetail extends ViewDetail {
 					if(parsedJSON[0]=="200"){	
 						//~ alert('Call Success');
 						//~ $(this).popupModal('atomBox');
-						var url_open = "http://te.engeniatech.in/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
+						var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
 						//~ window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
 						var width = 520;
 						var height = 570;
@@ -548,6 +548,24 @@ class LeadsViewDetail extends ViewDetail {
 			
 			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&number='+phone, callback);
 		 }
+	}
+	
+	function updateleadseenunseen(lid){
+		
+		var lead_id = $("#seenbtn").data('lid');
+		SUGAR.ajaxUI.showLoadingPanel();
+		$.ajax({url: "index.php?entryPoint=seen_unseen&lead_id="+lead_id, success: function(result){
+			SUGAR.ajaxUI.hideLoadingPanel();
+			if(result==1){
+				$("#seenbtn").text("Unseen");
+				return true;
+			}else{
+				alert("Unable to mark Seen!");
+				return false;
+			}
+			
+		}});
+		
 	}
 	
 	

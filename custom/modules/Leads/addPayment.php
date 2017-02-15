@@ -146,14 +146,16 @@ class addPaymentClass{
 				}				
 			}
 		}
+		if(!empty($bean->payment_type)){
 		#update student payment history
 		$id=create_guid();
 		$insertSql="INSERT INTO te_student_payment SET id='".$id."', name='".$bean->reference_number."', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".$bean->date_of_payment."', amount='".$bean->amount."', reference_number='".$bean->reference_number."', payment_type='".$bean->payment_type."', payment_realized='".$this->payment_realized."', transaction_id='".$bean->transaction_id."', payment_source='".$bean->payment_source."'";
 		$GLOBALS['db']->Query($insertSql);
+		
 		#Update relationship record
 		$insertRelSql="INSERT INTO te_student_te_student_payment_1_c SET id='".create_guid()."', 	date_modified='".date('Y-m-d H:i:s')."',deleted=0,te_student_te_student_payment_1te_student_ida='".$student_id."', te_student_te_student_payment_1te_student_payment_idb='".$id."'";
 		$GLOBALS['db']->Query($insertRelSql);
-		
+	}
 		if($paidAmount>0 && $bean->payment_realized==1){
 			$paymentDetails=array(
 				'batch_id'=>$bean->te_ba_batch_id_c,
@@ -223,30 +225,9 @@ class addPaymentClass{
 			if($payment_currency!=""){
 				$GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c SET te_student_payment_plan.currency = 'INR' WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$student_batch_id."' AND te_student_payment_plan.te_student_id_c='".$student_id."'");
 			}
-			
-			require('custom/modules/Leads/fppdf/generateInvoiceFunction.php');
-			$params=array(
-				'invoice_to' => $student_name, 
-				'mobile' => $student_mobile,
-				'invoiceNumber' => '1',
-				'cost' => $paid_amount,
-				'total' => $paid_amount,
-				'subtotal' => $paid_amount,
-				'tax' => $tax,
-				'gross' => ($paid_amount+$tax),
-				'program_name' => $student_batch,
-				'payment_source' => $payment_source,
-				'payment_made' => 'Yes'
-			);	
-			$filename=generatePdf($params,"Yes");
-
-			$this->sendWelcomEmail($student_email,$batch_id,$student_id,$student_name,$student_country,$filename);
-			
 			#send welcome email on first payment 				
 			if(!$initial_payment){
-				$this->sendWelcomEmail($student_email,$batch_id,$student_id,$student_name,$student_country,$filename);
-			}else{
-				$this->sendInvoice($student_email,$student_name,$filename);
+				$this->sendWelcomEmail($student_email,$batch_id,$student_id,$student_name,$student_country);
 			}
 		}else{
 			# Payment for non indian student will be on USD
@@ -291,29 +272,10 @@ class addPaymentClass{
 			#update payment currency as USD
 			if($payment_currency!=""){
 				$GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c SET te_student_payment_plan.currency = 'USD' WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$student_batch_id."' AND te_student_payment_plan.te_student_id_c='".$student_id."'");
-			}			
-			
-			require('custom/modules/Leads/fppdf/generateInvoiceFunction.php');
-			$params=array(
-				'invoice_to' => $student_name, 
-				'mobile' => $student_mobile,
-				'invoiceNumber' => '1',
-				'cost' => $paid_amount,
-				'total' => $paid_amount,
-				'subtotal' => $paid_amount,
-				'tax' => 0,
-				'gross' => ($paid_amount),
-				'program_name' => $student_batch,
-				'payment_source' => $payment_source,
-				'payment_made' => 'Yes'
-			);	
-			$filename=generatePdf($params,"Yes");
-	
+			}	
 			#send welcome email on first payment 				
 			if(!$initial_payment){
-				$this->sendWelcomEmail($student_email,$batch_id,$student_id,$student_name,$student_country,$filename);
-			}else{
-				$this->sendInvoice($student_email,$student_name,$filename);
+				$this->sendWelcomEmail($student_email,$batch_id,$student_id,$student_name,$student_country);
 			}
 		}	
 	}
@@ -340,8 +302,8 @@ class addPaymentClass{
 			}
 			$re = $GLOBALS['db']->query($sql);
 			if($GLOBALS['db']->getRowCount($re)>0){
-				$bean->status = 'Duplicate';
-				$bean->status_description = 'Duplicate';
+				$bean->status = 'Alive';
+				$bean->status_description = 'New Lead';
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
@@ -361,8 +323,8 @@ class addPaymentClass{
 					$emailAddress = new SugarEmailAddress();
 					$lead_list = $emailAddress->getRelatedId($bean->email1, 'leads');
 					if(is_array($lead_list) && in_array($lid,$lead_list)){
-						$bean->status = 'Duplicate';
-						$bean->status_description = 'Duplicate';
+						$bean->status = 'Alive';
+						$bean->status_description = 'New Lead';
 					}
 				}					
 			}
@@ -437,16 +399,5 @@ class addPaymentClass{
 		$subject="Welcome in batch - ".$batch_name;
 		$mail = new NetCoreEmail();			
 		$mail->sendEmail($email,$subject,$template,$attachment);
-	}
-	#function to send invoice
-	function sendInvoice($email,$student_name,$attachment=""){				
-		$template='<p>Hello '.$student_name.'</p>
-			<p>Thanks for making payment.Please have a look on attached invoice</p>
-			<p>Thanks & Regards</p>
-			<p>SRM Team</p>';
-			
-		$subject="Payment Invoice";
-		$mail = new NetCoreEmail();			
-		$mail->sendEmail($email,$subject,$template,$attachment);
-	}
+	}	
 }

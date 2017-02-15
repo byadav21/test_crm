@@ -3,9 +3,30 @@
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_impression'] = 'te_impression';
-$beanFiles['te_impression'] = 'modules/te_impression/te_impression.php';
-$moduleList[] = 'te_impression';
+$beanList['te_UTM_System'] = 'te_UTM_System';
+$beanFiles['te_UTM_System'] = 'modules/te_UTM_System/te_UTM_System.php';
+$moduleList[] = 'te_UTM_System';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_student_batch'] = 'te_student_batch';
+$beanFiles['te_student_batch'] = 'modules/te_student_batch/te_student_batch.php';
+$moduleList[] = 'te_student_batch';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_student_payment'] = 'te_student_payment';
+$beanFiles['te_student_payment'] = 'modules/te_student_payment/te_student_payment.php';
+$moduleList[] = 'te_student_payment';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_pr_Programs'] = 'te_pr_Programs';
+$beanFiles['te_pr_Programs'] = 'modules/te_pr_Programs/te_pr_Programs.php';
+$moduleList[] = 'te_pr_Programs';
 
 
  
@@ -17,16 +38,30 @@ $moduleList[] = 'te_payment_details';
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_drip_campaign_list'] = 'te_drip_campaign_list';
-$beanFiles['te_drip_campaign_list'] = 'modules/te_drip_campaign_list/te_drip_campaign_list.php';
-$moduleList[] = 'te_drip_campaign_list';
+$beanList['te_target_campaign'] = 'te_target_campaign';
+$beanFiles['te_target_campaign'] = 'modules/te_target_campaign/te_target_campaign.php';
+$moduleList[] = 'te_target_campaign';
 
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_student_payment_plan'] = 'te_student_payment_plan';
-$beanFiles['te_student_payment_plan'] = 'modules/te_student_payment_plan/te_student_payment_plan.php';
-$moduleList[] = 'te_student_payment_plan';
+$beanList['te_in_institutes'] = 'te_in_institutes';
+$beanFiles['te_in_institutes'] = 'modules/te_in_institutes/te_in_institutes.php';
+$moduleList[] = 'te_in_institutes';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_disposition'] = 'te_disposition';
+$beanFiles['te_disposition'] = 'modules/te_disposition/te_disposition.php';
+$moduleList[] = 'te_disposition';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_report_recipients'] = 'te_report_recipients';
+$beanFiles['te_report_recipients'] = 'modules/te_report_recipients/te_report_recipients.php';
+$moduleList[] = 'te_report_recipients';
 
 
  
@@ -38,19 +73,16 @@ $moduleList[] = 'te_vendor';
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_budgeted_campaign'] = 'te_budgeted_campaign';
-$beanFiles['te_budgeted_campaign'] = 'modules/te_budgeted_campaign/te_budgeted_campaign.php';
-$moduleList[] = 'te_budgeted_campaign';
-$beanList['te_actual_campaign'] = 'te_actual_campaign';
-$beanFiles['te_actual_campaign'] = 'modules/te_actual_campaign/te_actual_campaign.php';
-$moduleList[] = 'te_actual_campaign';
+$beanList['te_impression'] = 'te_impression';
+$beanFiles['te_impression'] = 'modules/te_impression/te_impression.php';
+$moduleList[] = 'te_impression';
 
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_disposition'] = 'te_disposition';
-$beanFiles['te_disposition'] = 'modules/te_disposition/te_disposition.php';
-$moduleList[] = 'te_disposition';
+$beanList['te_lead_assignment_rule'] = 'te_lead_assignment_rule';
+$beanFiles['te_lead_assignment_rule'] = 'modules/te_lead_assignment_rule/te_lead_assignment_rule.php';
+$moduleList[] = 'te_lead_assignment_rule';
 
 
  
@@ -65,6 +97,45 @@ $moduleList[] = 'te_installments';
 $beanList['te_target_campaign_list'] = 'te_target_campaign_list';
 $beanFiles['te_target_campaign_list'] = 'modules/te_target_campaign_list/te_target_campaign_list.php';
 $moduleList[] = 'te_target_campaign_list';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_utm_medium'] = 'te_utm_medium';
+$beanFiles['te_utm_medium'] = 'modules/te_utm_medium/te_utm_medium.php';
+$moduleList[] = 'te_utm_medium';
+$beanList['te_utm_term'] = 'te_utm_term';
+$beanFiles['te_utm_term'] = 'modules/te_utm_term/te_utm_term.php';
+$moduleList[] = 'te_utm_term';
+$beanList['te_utm'] = 'te_utm';
+$beanFiles['te_utm'] = 'modules/te_utm/te_utm.php';
+$moduleList[] = 'te_utm';
+$beanList['te_utm_campaign'] = 'te_utm_campaign';
+$beanFiles['te_utm_campaign'] = 'modules/te_utm_campaign/te_utm_campaign.php';
+$moduleList[] = 'te_utm_campaign';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_drip_campaign_list'] = 'te_drip_campaign_list';
+$beanFiles['te_drip_campaign_list'] = 'modules/te_drip_campaign_list/te_drip_campaign_list.php';
+$moduleList[] = 'te_drip_campaign_list';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_neox_call_details'] = 'te_neox_call_details';
+$beanFiles['te_neox_call_details'] = 'modules/te_neox_call_details/te_neox_call_details.php';
+$modules_exempt_from_availability_check['te_neox_call_details'] = 'te_neox_call_details';
+$report_include_modules['te_neox_call_details'] = 'te_neox_call_details';
+$modInvisList[] = 'te_neox_call_details';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['te_student'] = 'te_student';
+$beanFiles['te_student'] = 'modules/te_student/te_student.php';
+$moduleList[] = 'te_student';
 
 
  
@@ -91,60 +162,19 @@ $moduleList[] = 'te_training_category';
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_student_study_kit'] = 'te_student_study_kit';
-$beanFiles['te_student_study_kit'] = 'modules/te_student_study_kit/te_student_study_kit.php';
-$moduleList[] = 'te_student_study_kit';
+$beanList['te_ba_Batch'] = 'te_ba_Batch';
+$beanFiles['te_ba_Batch'] = 'modules/te_ba_Batch/te_ba_Batch.php';
+$moduleList[] = 'te_ba_Batch';
 
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_UTM_System'] = 'te_UTM_System';
-$beanFiles['te_UTM_System'] = 'modules/te_UTM_System/te_UTM_System.php';
-$moduleList[] = 'te_UTM_System';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_in_institutes'] = 'te_in_institutes';
-$beanFiles['te_in_institutes'] = 'modules/te_in_institutes/te_in_institutes.php';
-$moduleList[] = 'te_in_institutes';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_report_recipients'] = 'te_report_recipients';
-$beanFiles['te_report_recipients'] = 'modules/te_report_recipients/te_report_recipients.php';
-$moduleList[] = 'te_report_recipients';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_student_batch'] = 'te_student_batch';
-$beanFiles['te_student_batch'] = 'modules/te_student_batch/te_student_batch.php';
-$moduleList[] = 'te_student_batch';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_student_payment'] = 'te_student_payment';
-$beanFiles['te_student_payment'] = 'modules/te_student_payment/te_student_payment.php';
-$moduleList[] = 'te_student_payment';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_neox_call_details'] = 'te_neox_call_details';
-$beanFiles['te_neox_call_details'] = 'modules/te_neox_call_details/te_neox_call_details.php';
-$modules_exempt_from_availability_check['te_neox_call_details'] = 'te_neox_call_details';
-$report_include_modules['te_neox_call_details'] = 'te_neox_call_details';
-$modInvisList[] = 'te_neox_call_details';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_pr_Programs'] = 'te_pr_Programs';
-$beanFiles['te_pr_Programs'] = 'modules/te_pr_Programs/te_pr_Programs.php';
-$moduleList[] = 'te_pr_Programs';
+$beanList['te_budgeted_campaign'] = 'te_budgeted_campaign';
+$beanFiles['te_budgeted_campaign'] = 'modules/te_budgeted_campaign/te_budgeted_campaign.php';
+$moduleList[] = 'te_budgeted_campaign';
+$beanList['te_actual_campaign'] = 'te_actual_campaign';
+$beanFiles['te_actual_campaign'] = 'modules/te_actual_campaign/te_actual_campaign.php';
+$moduleList[] = 'te_actual_campaign';
 
 
  
@@ -156,6 +186,13 @@ $moduleList[] = 'te_Program_category';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['te_student_payment_plan'] = 'te_student_payment_plan';
+$beanFiles['te_student_payment_plan'] = 'modules/te_student_payment_plan/te_student_payment_plan.php';
+$moduleList[] = 'te_student_payment_plan';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['te_drip_campaign'] = 'te_drip_campaign';
 $beanFiles['te_drip_campaign'] = 'modules/te_drip_campaign/te_drip_campaign.php';
 $moduleList[] = 'te_drip_campaign';
@@ -163,46 +200,9 @@ $moduleList[] = 'te_drip_campaign';
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['te_utm_medium'] = 'te_utm_medium';
-$beanFiles['te_utm_medium'] = 'modules/te_utm_medium/te_utm_medium.php';
-$moduleList[] = 'te_utm_medium';
-$beanList['te_utm_term'] = 'te_utm_term';
-$beanFiles['te_utm_term'] = 'modules/te_utm_term/te_utm_term.php';
-$moduleList[] = 'te_utm_term';
-$beanList['te_utm'] = 'te_utm';
-$beanFiles['te_utm'] = 'modules/te_utm/te_utm.php';
-$moduleList[] = 'te_utm';
-$beanList['te_utm_campaign'] = 'te_utm_campaign';
-$beanFiles['te_utm_campaign'] = 'modules/te_utm_campaign/te_utm_campaign.php';
-$moduleList[] = 'te_utm_campaign';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_target_campaign'] = 'te_target_campaign';
-$beanFiles['te_target_campaign'] = 'modules/te_target_campaign/te_target_campaign.php';
-$moduleList[] = 'te_target_campaign';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_student'] = 'te_student';
-$beanFiles['te_student'] = 'modules/te_student/te_student.php';
-$moduleList[] = 'te_student';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_lead_assignment_rule'] = 'te_lead_assignment_rule';
-$beanFiles['te_lead_assignment_rule'] = 'modules/te_lead_assignment_rule/te_lead_assignment_rule.php';
-$moduleList[] = 'te_lead_assignment_rule';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['te_ba_Batch'] = 'te_ba_Batch';
-$beanFiles['te_ba_Batch'] = 'modules/te_ba_Batch/te_ba_Batch.php';
-$moduleList[] = 'te_ba_Batch';
+$beanList['te_student_study_kit'] = 'te_student_study_kit';
+$beanFiles['te_student_study_kit'] = 'modules/te_student_study_kit/te_student_study_kit.php';
+$moduleList[] = 'te_student_study_kit';
 
 
 ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-29 11:12:39
+<?php /* Smarty version 2.6.29, created on 2017-02-15 06:05:36
          compiled from cache/themes/SuiteR/modules/Leads/DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 7, false),array('modifier', 'strip_semicolon', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 96, false),array('modifier', 'escape', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 277, false),array('modifier', 'url2html', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 277, false),array('modifier', 'nl2br', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 277, false),array('function', 'sugar_include', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 70, false),array('function', 'counter', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 75, false),array('function', 'sugar_getimagepath', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 78, false),array('function', 'sugar_translate', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 81, false),array('function', 'sugar_getimage', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 110, false),array('function', 'sugar_phone', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 167, false),array('function', 'sugar_ajax_url', 'cache/themes/SuiteR/modules/Leads/DetailView.tpl', 238, false),)), $this); ?>
@@ -850,9 +850,27 @@ SUGAR.util.doWhen(function(){
 <?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
 
 <td width='12.5%' scope="col">
-&nbsp;
+<?php if (! $this->_tpl_vars['fields']['parrent_leads']['hidden']): ?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'Parrent Lead','module' => 'Leads'), $this);?>
+<?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
+<?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
+:
+<?php endif; ?>
 </td>
-<td class="" type="" field="" width='37.5%'  >
+<td class="" type="varchar" field="parrent_leads" width='37.5%'  >
+<?php if (! $this->_tpl_vars['fields']['parrent_leads']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount'), $this);?>
+
+
+<?php if (strlen ( $this->_tpl_vars['fields']['parrent_leads']['value'] ) <= 0): ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['parrent_leads']['default_value']); ?>
+<?php else: ?>
+<?php $this->assign('value', $this->_tpl_vars['fields']['parrent_leads']['value']); ?>
+<?php endif; ?> 
+<span class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['parrent_leads']['name']; ?>
+"><?php echo $this->_tpl_vars['fields']['parrent_leads']['value']; ?>
+</span>
+<?php endif; ?>
 </td>
 <?php echo smarty_function_counter(array('name' => 'fieldsUsed'), $this);?>
 

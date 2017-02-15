@@ -11,9 +11,10 @@ class neoxLogin {
 		$user           = $GLOBALS['current_user']->neox_user;
 		//~ $user           = $GLOBALS['sugar_config']['neox']['user_id_predictive'];
 		$password       = $GLOBALS['current_user']->neox_password;
+		$phone       = $GLOBALS['current_user']->neox_extension;
 		//~ $password       = $GLOBALS['sugar_config']['neox']['password_predictive'];
 		$campaign       = $GLOBALS['sugar_config']['neox']['campaign_id_predictive'];
-		$phone          = $GLOBALS['sugar_config']['neox']['number_predictive'];
+		//~ $phone          = $GLOBALS['sugar_config']['neox']['number_predictive'];
 		$neoxKey   		= $GLOBALS['sugar_config']['neox']['secret_key'];
 		/*$user           = "33344406";
 		$password       = "33344406";

@@ -2,6 +2,13 @@
  //WARNING: The contents of this file are auto-generated
 
 
+ // created: 2016-11-24 19:57:11
+$dictionary['te_actual_campaign']['fields']['name']['required']=false;
+$dictionary['te_actual_campaign']['fields']['name']['full_text_search']=array (
+);
+
+ 
+
 // created: 2016-11-24 12:25:58
 $dictionary["te_actual_campaign"]["fields"]["te_utm_te_actual_campaign_1"] = array (
   'name' => 'te_utm_te_actual_campaign_1',
@@ -36,11 +43,4 @@ $dictionary["te_actual_campaign"]["fields"]["te_utm_te_actual_campaign_1te_utm_i
   'vname' => 'LBL_TE_UTM_TE_ACTUAL_CAMPAIGN_1_FROM_TE_ACTUAL_CAMPAIGN_TITLE',
 );
 
-
- // created: 2016-11-24 19:57:11
-$dictionary['te_actual_campaign']['fields']['name']['required']=false;
-$dictionary['te_actual_campaign']['fields']['name']['full_text_search']=array (
-);
-
- 
 ?>

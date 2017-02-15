@@ -10,17 +10,17 @@ class te_dispositionListView extends te_disposition{
 			$currentUserId = $current_user->id;
 				
 			$search = 0;
-				//~ $reportingUserIds = array();
-				//~ $reportUserObj = new customfunctionforcrm();
-				//~ $reportUserObj->reportingUser($currentUserId);
-				//~ $reportUserObj->report_to_id[$currentUserId] = $current_user->name;
-				//~ $reportingUserIds = $reportUserObj->report_to_id;
+				$reportingUserIds = array();
+				$reportUserObj = new customfunctionforcrm();
+				$reportUserObj->reportingUser($currentUserId);
+				$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
+				$reportingUserIds = $reportUserObj->report_to_id;
 				//~ print_r($reportingUserIds);
-				//~ $ret_array["where"]  .= " AND te_disposition.assigned_user_id IN ('";
-				//~ $ret_array["where"]  .= implode("', '", array_keys($reportingUserIds));
-				//~ $ret_array["where"]  .= "')";
-			//~ 
-			//~ 
+				$ret_array["where"]  .= " AND te_disposition.assigned_user_id IN ('";
+				$ret_array["where"]  .= implode("', '", array_keys($reportingUserIds));
+				$ret_array["where"]  .= "')";
+			
+			
 			$ret_array["where"]  .= " AND te_disposition.status = 'unsaved'";
 			$ret_array["order_by"] =  " ORDER BY te_disposition.date_entered DESC";
 			

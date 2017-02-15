@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-01-28 08:04:49
+<?php /* Smarty version 2.6.29, created on 2017-02-15 06:05:36
          compiled from include/SubPanel/tpls/SubPanelTiles.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getjspath', 'include/SubPanel/tpls/SubPanelTiles.tpl', 2, false),)), $this); ?>

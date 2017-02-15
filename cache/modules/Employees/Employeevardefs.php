@@ -804,6 +804,26 @@
       'source' => 'non-db',
       'vname' => 'LBL_PRIMARY_GROUP',
     ),
+    'user_access_type' => 
+    array (
+      'name' => 'user_access_type',
+      'vname' => 'LBL_USERTYPE',
+      'type' => 'enum',
+      'options' => 'user_access_type_dom',
+      'len' => '100',
+      'audited' => 'false',
+    ),
+    'designation' => 
+    array (
+      'name' => 'designation',
+      'vname' => 'LBL_DESIGNATION',
+      'required' => true,
+      'type' => 'enum',
+      'importable' => 'true',
+      'len' => 50,
+      'size' => '20',
+      'options' => 'designation_list',
+    ),
     'neox_user' => 
     array (
       'name' => 'neox_user',
@@ -827,26 +847,6 @@
       'vname' => 'LBL_NEOXEXTENSION',
       'len' => '100',
       'audited' => 'false',
-    ),
-    'user_access_type' => 
-    array (
-      'name' => 'user_access_type',
-      'vname' => 'LBL_USERTYPE',
-      'type' => 'enum',
-      'options' => 'user_access_type_dom',
-      'len' => '100',
-      'audited' => 'false',
-    ),
-    'designation' => 
-    array (
-      'name' => 'designation',
-      'vname' => 'LBL_DESIGNATION',
-      'required' => true,
-      'type' => 'enum',
-      'importable' => 'true',
-      'len' => 50,
-      'size' => '20',
-      'options' => 'designation_list',
     ),
   ),
   'indices' => 

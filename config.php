@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-23 13:43:18
+// created: 2017-02-15 02:20:36
 $sugar_config = array (
   'addAjaxBannedModules' => 
   array (
@@ -11,9 +11,10 @@ $sugar_config = array (
     5 => 'AOS_Contracts',
     6 => 'te_drip_campaign',
     7 => 'te_student_batch',
-    8 => 'te_utm_medium',
-    9 => 'te_utm_term',
-    10 => 'KReports',
+    8 => 'te_student',
+    9 => 'te_utm_medium',
+    10 => 'te_utm_term',
+    11 => 'KReports',
   ),
   'admin_access_control' => false,
   'admin_export_only' => false,
@@ -101,11 +102,11 @@ $sugar_config = array (
   'datef' => 'm/d/Y',
   'dbconfig' => 
   array (
-    'db_host_name' => 'tedev.engeniatech.in',
+    'db_host_name' => 'localhost:8080',
     'db_host_instance' => 'SQLEXPRESS',
-    'db_user_name' => 'etechin_te',
-    'db_password' => '&4LpNXkB;dA@',
-    'db_name' => 'etechin_dev_talentede',
+    'db_user_name' => 'root',
+    'db_password' => 'Engenia',
+    'db_name' => '15febtedevcrm',
     'db_type' => 'mysql',
     'db_port' => '',
     'db_manager' => 'MysqliManager',
@@ -262,7 +263,7 @@ $sugar_config = array (
   'export_excel_compatible' => false,
   'hide_subpanels' => true,
   'history_max_viewed' => 50,
-  'host_name' => 'te.engeniatech.in',
+  'host_name' => 'localhost',
   'import_max_execution_time' => 3600,
   'import_max_records_per_file' => 100,
   'import_max_records_total_limit' => '',
@@ -274,7 +275,7 @@ $sugar_config = array (
     'timeout' => 86400,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 28,
+  'js_lang_version' => 30,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -364,7 +365,7 @@ $sugar_config = array (
   'session_dir' => '',
   'showDetailData' => true,
   'showThemePicker' => true,
-  'site_url' => 'http://tedev.engeniatech.in',
+  'site_url' => 'localhost:8080/15febtedev',
   'slow_query_time_msec' => '100',
   'sugar_version' => '6.5.24',
   'sugarbeet' => false,
