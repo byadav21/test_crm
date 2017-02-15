@@ -1,5 +1,5 @@
 <?php
-// created: 2017-02-15 18:08:08
+// created: 2017-02-15 18:59:25
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -8,10 +8,10 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'due_amount_inr' => 
+  'fees' => 
   array (
     'type' => 'int',
-    'vname' => 'LBL_DUE_AMOUNT_INR',
+    'vname' => 'LBL_FEES',
     'width' => '10%',
     'default' => true,
   ),
@@ -36,10 +36,10 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'balance_inr' => 
+  'due_amount_inr' => 
   array (
     'type' => 'int',
-    'vname' => 'LBL_BALANCE_INR',
+    'vname' => 'LBL_DUE_AMOUNT_INR',
     'width' => '10%',
     'default' => true,
   ),
