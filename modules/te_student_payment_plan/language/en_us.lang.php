@@ -83,4 +83,5 @@ $mod_strings = array (
   'LBL_CURRENCY' => 'Currency',
   'LBL_TAX' => 'Tax',
   'LBL_TOTAL_AMOUNT' => 'Total Amount',
+  'LBL_FEES' => 'Fees',
 );
