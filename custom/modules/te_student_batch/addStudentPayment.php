@@ -5,6 +5,9 @@ class addStudentPaymentClass{
 	
 	function makePayment($bean, $event, $argument){		
 		if(!isset($_REQUEST['import_module'])){
+		    global $sugar_config;
+			$service_tax=$sugar_config['tax']['service'];
+			
 			#If student's batch first time is being created
 			$paymentInstallmentSql = "SELECT te_installments.* FROM te_installments INNER JOIN te_ba_batch_te_installments_1_c rel ON te_installments.id=rel.te_ba_batch_te_installments_1te_installments_idb WHERE rel.te_ba_batch_te_installments_1te_ba_batch_ida= '".$bean->te_ba_batch_id_c."' ORDER BY te_installments.due_date";
 	
@@ -18,7 +21,13 @@ class addStudentPaymentClass{
 			
 			$studentPaymentObj->due_date=$bean->initial_payment_date;
 			
-			$studentPaymentObj->due_amount_inr=$bean->initial_payment_inr;
+			$initial_payment_inr=$bean->initial_payment_inr;
+			$tax=(($initial_payment_inr*$service_tax)/100);
+			$total_amount=($initial_payment_inr+$tax);
+			$studentPaymentObj->tax=$service_tax;
+			$studentPaymentObj->total_amount=$total_amount;
+			$studentPaymentObj->due_amount_inr=$total_amount;
+			
 			$studentPaymentObj->paid_amount_inr=0;
 			
 			$studentPaymentObj->due_amount_usd=$bean->initial_payment_usd;
@@ -39,7 +48,13 @@ class addStudentPaymentClass{
 				$studentPaymentObj->due_date=$paymentInstallments['due_date'];
 				$studentPaymentObj->description='Testing';
 				
-				$studentPaymentObj->due_amount_inr=$paymentInstallments['payment_inr'];
+				$payment_inr=$paymentInstallments['payment_inr'];				
+				$tax=(($payment_inr*$service_tax)/100);
+				$total_amount=($payment_inr+$tax);
+				$studentPaymentObj->tax=$service_tax;
+				$studentPaymentObj->total_amount=$total_amount;
+				$studentPaymentObj->due_amount_inr=$total_amount;
+				
 				$studentPaymentObj->paid_amount_inr=0;
 				
 				$studentPaymentObj->due_amount_usd=$paymentInstallments['payment_usd'];				
