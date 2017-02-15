@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-28 14:32:15
+// created: 2017-02-15 18:08:08
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -15,11 +15,17 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'paid' => 
+  'tax' => 
   array (
-    'type' => 'enum',
-    'studio' => 'visible',
-    'vname' => 'LBL_PAID',
+    'type' => 'int',
+    'vname' => 'LBL_TAX',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'total_amount' => 
+  array (
+    'type' => 'int',
+    'vname' => 'LBL_TOTAL_AMOUNT',
     'width' => '10%',
     'default' => true,
   ),
@@ -48,15 +54,6 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'date',
     'vname' => 'LBL_DUE_DATE',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'description' => 
-  array (
-    'type' => 'text',
-    'studio' => 'visible',
-    'vname' => 'LBL_DESCRIPTION',
-    'sortable' => false,
     'width' => '10%',
     'default' => true,
   ),
