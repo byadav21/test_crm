@@ -560,7 +560,7 @@
       'group' => 'primary_address',
       'comment' => 'Country for primary address',
       'merge_filter' => 'enabled',
-      'required' => true,
+      'required' => false,
     ),
     'alt_address_street' => 
     array (

@@ -1,5 +1,5 @@
 <?php
-// created: 2017-02-15 06:05:32
+// created: 2017-02-16 09:52:48
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -43,6 +43,9 @@ $mod_strings = array (
   'LBL_DUE_AMOUNT_USD' => 'Due Amount(USD)',
   'LBL_BALANCE_USD' => 'Balance(USD)',
   'LBL_CURRENCY' => 'Currency',
+  'LBL_TAX' => 'Tax',
+  'LBL_TOTAL_AMOUNT' => 'Total Amount',
+  'LBL_FEES' => 'Fees',
   'LBL_BALANCE_INR' => 'Balance',
   'LBL_TE_STUDENT_BATCH_TE_STUDENT_PAYMENT_PLAN_1_FROM_TE_STUDENT_BATCH_TITLE' => 'Student Batch',
 );

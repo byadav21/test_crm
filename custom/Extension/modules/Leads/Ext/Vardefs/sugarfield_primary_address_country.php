@@ -1,3 +1,3 @@
 <?php
-$dictionary['Lead']['fields']['primary_address_country']['required'] = true;
+$dictionary['Lead']['fields']['primary_address_country']['required'] = false;
 ?>
