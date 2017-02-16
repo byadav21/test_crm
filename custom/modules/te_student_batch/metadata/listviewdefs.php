@@ -45,7 +45,7 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'SOURCE' => 
+ /* 'SOURCE' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
@@ -54,7 +54,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'FEE_USD' => 
   array (
     'type' => 'decimal',
