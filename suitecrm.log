@@ -121,3 +121,61 @@ Wed Feb 15 05:03:04 2017 [12558][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`
 Wed Feb 15 05:03:06 2017 [12558][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
 Wed Feb 15 05:03:07 2017 [12558][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
 Wed Feb 15 06:11:32 2017 [14144][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:40:29 2017 [13392][1][FATAL] Caught error: Accessing static property ImportFieldSanitize::$createdBeans as non static
+Thu Feb 16 03:40:31 2017 [13392][1][FATAL] Caught error: stat(): stat failed for upload/import/status_1.csv
+Thu Feb 16 03:40:31 2017 [13392][1][FATAL] Caught error: touch(): UploadStream::stream_metadata is not implemented!
+Thu Feb 16 03:41:01 2017 [13466][1][FATAL] Caught error: Accessing static property ImportFieldSanitize::$createdBeans as non static
+Thu Feb 16 03:41:02 2017 [13466][1][FATAL] Caught error: stat(): stat failed for upload/import/status_1.csv
+Thu Feb 16 03:41:02 2017 [13466][1][FATAL] Caught error: touch(): UploadStream::stream_metadata is not implemented!
+Thu Feb 16 03:42:23 2017 [13326][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:42:50 2017 [13425][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:42:51 2017 [13425][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:44:07 2017 [10067][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:44:09 2017 [10067][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:44:10 2017 [10067][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:44:10 2017 [10067][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 03:50:24 2017 [13425][-none-][FATAL]  Query Failed: SELECT t1.id,t1.`parent_lead_id`,t1.`lead_id`,t2.assigned_user_id FROM `leads_duplicate` AS t1 INNER JOIN leads AS t2 ON t1.parent_lead_id=t2.id WHERE (t1.`is_assigened`=0) AND (t2.assigned_user_id!='NULL') LIMIT 0,50: MySQL error 1054: Unknown column 't1.is_assigened' in 'where clause'
+Thu Feb 16 04:44:50 2017 [9704][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => 62ee3669-e73e-3b53-edb4-58a448cd50f1
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => 62ee3669-e73e-3b53-edb4-58a448cd50f1
+    [offset] => 1
+    [status] => Alive
+    [status_detail] => Call Back
+    [description] => 
+    [date_of_callback] => 2017-02-16 18:30
+    [date_of_followup] => 
+    [date_of_prospect] => 
+)
+
+Thu Feb 16 04:45:21 2017 [13799][1][FATAL] Request - Array
+(
+    [module] => te_disposition
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => DetailView
+    [return_id] => ba2e73c7-6d1d-ef8c-9c25-58a448153865
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => te_disposition_leads
+    [relate_id] => ba2e73c7-6d1d-ef8c-9c25-58a448153865
+    [offset] => 1
+    [status] => Warm
+    [status_detail] => Prospect
+    [description] => 
+    [date_of_callback] => 
+    [date_of_followup] => 
+    [date_of_prospect] => 2017-02-16 18:30
+)
+

@@ -193,24 +193,40 @@ $(document).ready(function () {
 				}
 			  });
 
-
-			document.getElementById("date_of_callback_date_d").style.display ='none';
-			document.getElementById("date_of_callback_trigger_d").style.display ='none';
-			document.getElementById("date_of_callback_hours_d").style.display ='none';
-			document.getElementById("date_of_callback_minutes_d").style.display ='none';
-			document.getElementById("call_back_label").innerHTML = '';
+			(!document.getElementById("date_of_callback_date_d")) ? false : document.getElementById("date_of_callback_date_d").style.display ='none';
+			(!document.getElementById("date_of_callback_trigger_d")) ? false : document.getElementById("date_of_callback_trigger_d").style.display ='none';
+			(!document.getElementById("date_of_callback_hours_d")) ? false : document.getElementById("date_of_callback_hours_d").style.display ='none';
+			(!document.getElementById("date_of_callback_minutes_d")) ? false : document.getElementById("date_of_callback_minutes_d").style.display ='none';
+			(!document.getElementById("call_back_label")) ? false : document.getElementById("call_back_label").innerHTML = '';
+			//document.getElementById("date_of_callback_date_d").style.display ='none';
+			//document.getElementById("date_of_callback_trigger_d").style.display ='none';
+			//document.getElementById("date_of_callback_hours_d").style.display ='none';
+			//document.getElementById("date_of_callback_minutes_d").style.display ='none';
+			//document.getElementById("call_back_label").innerHTML = '';
 			
-			document.getElementById("date_of_followup_date_d").style.display ='none';
-			document.getElementById("date_of_followup_trigger_d").style.display ='none';
-			document.getElementById("date_of_followup_hours_d").style.display ='none';
-			document.getElementById("date_of_followup_minutes_d").style.display ='none';
-			document.getElementById("followup_label").innerHTML = '';		
+			(!document.getElementById("date_of_followup_date_d")) ? false : document.getElementById("date_of_followup_date_d").style.display ='none';
+			(!document.getElementById("date_of_followup_trigger_d")) ? false : document.getElementById("date_of_followup_trigger_d").style.display ='none';
+			(!document.getElementById("date_of_followup_hours_d")) ? false : document.getElementById("date_of_followup_hours_d").style.display ='none';
+			(!document.getElementById("date_of_followup_minutes_d")) ? false : document.getElementById("date_of_followup_minutes_d").style.display ='none';
+			(!document.getElementById("followup_label")) ? false : document.getElementById("call_back_label").innerHTML = '';
 			
-			document.getElementById("date_of_prospect_date_d").style.display ='none';
-			document.getElementById("date_of_prospect_trigger_d").style.display ='none';
-			document.getElementById("date_of_prospect_hours_d").style.display ='none';
-			document.getElementById("date_of_prospect_minutes_d").style.display ='none';
-			document.getElementById("prospect_label").innerHTML = '';	
+			//document.getElementById("date_of_followup_date_d").style.display ='none';
+			//document.getElementById("date_of_followup_trigger_d").style.display ='none';
+			//document.getElementById("date_of_followup_hours_d").style.display ='none';
+			//document.getElementById("date_of_followup_minutes_d").style.display ='none';
+			//document.getElementById("followup_label").innerHTML = '';	
+			
+			(!document.getElementById("date_of_prospect_date_d")) ? false : document.getElementById("date_of_prospect_date_d").style.display ='none';
+			(!document.getElementById("date_of_prospect_trigger_d")) ? false : document.getElementById("date_of_prospect_trigger_d").style.display ='none';
+			(!document.getElementById("date_of_prospect_hours_d")) ? false : document.getElementById("date_of_prospect_hours_d").style.display ='none';
+			(!document.getElementById("date_of_prospect_minutes_d")) ? false : document.getElementById("date_of_prospect_minutes_d").style.display ='none';
+			(!document.getElementById("prospect_label")) ? false : document.getElementById("prospect_label").innerHTML = '';	
+			
+			//document.getElementById("date_of_prospect_date_d").style.display ='none';
+			//document.getElementById("date_of_prospect_trigger_d").style.display ='none';
+			//document.getElementById("date_of_prospect_hours_d").style.display ='none';
+			//document.getElementById("date_of_prospect_minutes_d").style.display ='none';
+			//document.getElementById("prospect_label").innerHTML = '';	
 
          $("#status_detail_d").change(function() {
 					if(document.getElementById('status_detail_d').value=='Call Back'){
