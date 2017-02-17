@@ -223,7 +223,7 @@ class addPaymentClass{
 					break;
 			}			
 			#update payment currency as INR
-			if($payment_currency!=""){
+			if($payment_currency==""){
 				$GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c SET te_student_payment_plan.currency = 'INR' WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$student_batch_id."' AND te_student_payment_plan.te_student_id_c='".$student_id."'");
 			}
 			#send welcome email on first payment 				
@@ -271,7 +271,7 @@ class addPaymentClass{
 					break;
 			}
 			#update payment currency as USD
-			if($payment_currency!=""){
+			if($payment_currency==""){
 				$GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c SET te_student_payment_plan.currency = 'USD' WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$student_batch_id."' AND te_student_payment_plan.te_student_id_c='".$student_id."'");
 			}	
 			#send welcome email on first payment 				
