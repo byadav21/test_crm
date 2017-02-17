@@ -567,6 +567,17 @@ class LeadsViewDetail extends ViewDetail {
 		}});
 		
 	}
+	$(document).ready(function() {
+		//function to hide edit button on lead details page
+		if($("#seenbtn").attr('data-seen')=='1') {
+		  $(document).ajaxComplete(function() {
+ 		   //$("#delete_button").hide();
+		   //$("#edit_button_old").hide();
+		   //$("#edit_button").hide();
+		   $(".clickMenu").hide();
+		  });
+		}
+	});
 	
 	
 	
