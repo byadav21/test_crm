@@ -60,9 +60,8 @@ class addPaymentClass{
 					$student_country=$duplicateStudent['country'];
 					
 				//$duplicateBatchSql = "SELECT id FROM te_student_batch WHERE deleted=0 AND te_ba_batch_id_c='".$bean->te_ba_batch_id_c."'";
-				
-				$duplicateBatchSql = "SELECT te_student_te_student_batch_1te_student_ida as student_id,te_student_te_student_batch_1te_student_batch_idb as student_batch_id FROM te_student_te_student_batch_1_c WHERE deleted=0 AND te_student_te_student_batch_1te_student_ida=".$student_id." AND te_student_te_student_batch_1te_student_batch_idb='".$bean->te_ba_batch_id_c."'";	
-					echo $duplicateBatchSql;die;
+				$duplicateBatchSql = "SELECT te_student_te_student_batch_1te_student_ida as student_id,te_student_te_student_batch_1te_student_batch_idb as student_batch_id FROM te_student_te_student_batch_1_c WHERE deleted=0 AND te_student_te_student_batch_1te_student_ida='".$student_id."' AND te_student_te_student_batch_1te_student_batch_idb='".$bean->te_ba_batch_id_c."'";	
+					//echo $duplicateBatchSql;die;
 					$duplicateBatchObj= $GLOBALS['db']->query($duplicateBatchSql);				
 					if($GLOBALS['db']->getRowCount($duplicateBatchObj) == 0){	#If no duplicate batch	
 			
