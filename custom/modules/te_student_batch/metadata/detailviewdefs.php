@@ -91,12 +91,12 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_PROGRAM',
           ),
-          1 => 
+         /* 1 => 
           array (
             'name' => 'source',
             'studio' => 'visible',
             'label' => 'LBL_SOURCE',
-          ),
+          ),*/
         ),
         3 => 
         array (
