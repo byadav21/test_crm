@@ -1,5 +1,9 @@
 <?php
 //~ print_r($_REQUEST);
+$disposition = new te_disposition();
+$disposition->disable_row_level_security=true;
+$disposition->retrieve($_REQUEST['disposition_id']);
+$unique_call_id = $disposition->unique_call_id;
 
 $sqlDispo = "SELECT unique_id FROM neox_call_details_update WHERE unique_id ='".$unique_call_id."'";
 $resDispo = $GLOBALS['db']->query($sqlDispo);
