@@ -172,7 +172,8 @@ class addPaymentClass{
 	function updateStudentPaymentPlan($paymentDetails){
 		#Service Tax deduction
 		$amount=$paymentDetails['amount'];
-		$student_country=$paymentDetails['student_country'];
+		//$student_country=$paymentDetails['student_country'];
+		$student_country=$_REQUEST['primary_address_country'];
 		$batch_id=$paymentDetails['batch_id'];
 		$student_id=$paymentDetails['student_id'];
 		$payment_source=$paymentDetails['payment_source'];
