@@ -24,6 +24,7 @@ class addStudentPaymentClass{
 			$initial_payment_inr=$bean->initial_payment_inr;
 			$tax=(($initial_payment_inr*$service_tax)/100);
 			$total_amount=($initial_payment_inr+$tax);
+			$studentPaymentObj->fees=$initial_payment_inr;
 			$studentPaymentObj->tax=$service_tax;
 			$studentPaymentObj->total_amount=$total_amount;
 			$studentPaymentObj->due_amount_inr=$total_amount;
@@ -51,6 +52,7 @@ class addStudentPaymentClass{
 				$payment_inr=$paymentInstallments['payment_inr'];				
 				$tax=(($payment_inr*$service_tax)/100);
 				$total_amount=($payment_inr+$tax);
+				$studentPaymentObj->fees=$payment_inr;
 				$studentPaymentObj->tax=$service_tax;
 				$studentPaymentObj->total_amount=$total_amount;
 				$studentPaymentObj->due_amount_inr=$total_amount;
