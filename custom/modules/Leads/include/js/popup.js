@@ -68,6 +68,9 @@ function hideAtomBox(){
       window.close();
 						//~ window.location.href='index.php?module=Leads&action='+redirect;
 					}
+					else if(b.responseText.trim()=="2"){
+						alert('Please disconnect the call first and save the record')
+					}
 					else{
 						alert('Error!! Record not saved')
 					}

@@ -179,3 +179,7 @@ Thu Feb 16 04:45:21 2017 [13799][1][FATAL] Request - Array
     [date_of_prospect] => 2017-02-16 18:30
 )
 
+Thu Feb 16 21:09:32 2017 [3457][1][FATAL] Executing repair query:  Query Failed: ALTER TABLE te_student_payment_plan   add COLUMN tax int(5)  NULL ,  add COLUMN total_amount int(5)  NULL ,  add COLUMN fees int(5)  NULL: MySQL error 1060: Duplicate column name 'tax'
+Thu Feb 16 21:09:33 2017 [3457][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Feb 16 21:53:25 2017 [6883][-none-][FATAL] SECURITY: User authentication for admin failed
+Thu Feb 16 21:53:25 2017 [6883][-none-][FATAL] FAILED LOGIN:attempts[1] - admin

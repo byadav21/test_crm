@@ -14,7 +14,7 @@ class detail_view {
 		        
        // Query for Program display
 
-        $row =$db->query("select te_pr_programs.name from te_pr_programs
+			$row =$db->query("select te_pr_programs.name from te_pr_programs
                            left join te_pr_programs_te_ba_batch_1_c on te_pr_programs.id = te_pr_programs_te_ba_batch_1_c. te_pr_programs_te_ba_batch_1te_pr_programs_ida
                            left join te_ba_batch on te_pr_programs_te_ba_batch_1_c.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id where te_ba_batch.name ='".$bean->batch_c."'"); 
 			   $res =$db->fetchByAssoc($row);
@@ -22,17 +22,21 @@ class detail_view {
 			   
 			   
 			   // Batch Attendance 
-		$bean->program_c=$res['name'];   
+				$bean->program_c=$res['name'];   
 			   $result =$db->query("SELECT minimum_attendance_criteria FROM te_ba_batch WHERE id ='".$bean->te_ba_batch_id_c."'"); 
 			   $re1 =$db->fetchByAssoc($result);
 			   $bean->min_attendance_c=(int)$re1['minimum_attendance_criteria'];
 			   
-			   /*
-			   $seenunseen_text = 'Seen';
-				if($bean->is_seen==1){
+			    //seen/unseen
+				
+				$result_seen =$db->query("SELECT is_seen FROM leads WHERE id ='".$bean->id."'");
+				$seen =$db->fetchByAssoc($result_seen);
+				//$bean->company_c=$seen['is_seen'];
+					
+					$seenunseen_text = 'Seen';
+					if($seen['is_seen']==1){
 					$seenunseen_text = 'Unseen';
-				}
-				*/
+					}
 				
 			   // dupliacte ledas pram
 					$result_c =$db->query("SELECT parent_lead_id FROM leads_duplicate WHERE lead_id ='".$bean->id."'");
@@ -47,7 +51,7 @@ class detail_view {
 					
 					
 					
-					$bean->parrent_leads= "<a href=index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26offset%3D1%26stamp%3DLeads%26action%3DDetailView%26record%3D".$child_id['parent_lead_id'].">" .$p_id['first_name']."</a>".'<button type="button" onclick="updateleadseenunseen()" data-lid="'.$check_uncheck_lead_id.'" id="seenbtn">Seen</button>';	
+					$bean->parrent_leads= "<a href=index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26offset%3D1%26stamp%3DLeads%26action%3DDetailView%26record%3D".$child_id['parent_lead_id'].">" .$p_id['first_name']."</a>".'<button type="button" onclick="updateleadseenunseen()" data-lid="'.$check_uncheck_lead_id.'" id="seenbtn">'.$seenunseen_text.'</button>';	
 				}
 				else
 					{
