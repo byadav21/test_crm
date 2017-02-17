@@ -45,7 +45,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'source' => 
+  /*'source' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
@@ -57,7 +57,7 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'te_vendor',
     'target_record_key' => 'te_vendor_id_c',
-  ),
+  ),*/
   'fee_inr' => 
   array (
     'type' => 'decimal',
