@@ -1,4 +1,3 @@
-
 <?php
 if (!defined('sugarEntry') || !sugarEntry)die('Not A Valid Entry Point');
 
@@ -51,7 +50,8 @@ class detail_view {
 					
 					
 					
-					$bean->parrent_leads= "<a href=index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26offset%3D1%26stamp%3DLeads%26action%3DDetailView%26record%3D".$child_id['parent_lead_id'].">" .$p_id['first_name']."</a>".'<button type="button" onclick="updateleadseenunseen()" data-lid="'.$check_uncheck_lead_id.'" id="seenbtn">'.$seenunseen_text.'</button>';	
+					//$bean->parrent_leads= "<a href=index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26offset%3D1%26stamp%3DLeads%26action%3DDetailView%26record%3D".$child_id['parent_lead_id'].">" .$p_id['first_name']."</a>".'<button type="button" onclick="updateleadseenunseen()" data-lid="'.$check_uncheck_lead_id.'" id="seenbtn">'.$seenunseen_text.'</button>';
+					$bean->parrent_leads= "<a href=index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26offset%3D1%26stamp%3DLeads%26action%3DDetailView%26record%3D".$child_id['parent_lead_id'].">" .$p_id['first_name']."</a>".'<button type="button" onclick="updateleadseenunseen()" data-lid="'.$check_uncheck_lead_id.'" id="seenbtn" data-seen='.$seen['is_seen'].'>'.$seenunseen_text.'</button>';
 				}
 				else
 					{
