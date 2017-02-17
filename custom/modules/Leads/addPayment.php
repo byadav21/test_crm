@@ -172,8 +172,7 @@ class addPaymentClass{
 	function updateStudentPaymentPlan($paymentDetails){
 		#Service Tax deduction
 		$amount=$paymentDetails['amount'];
-		//$student_country=$paymentDetails['student_country'];
-		$student_country=$_REQUEST['primary_address_country'];
+		$student_country=$paymentDetails['student_country'];
 		$batch_id=$paymentDetails['batch_id'];
 		$student_id=$paymentDetails['student_id'];
 		$payment_source=$paymentDetails['payment_source'];
@@ -185,7 +184,7 @@ class addPaymentClass{
 
 			$service_tax=$sugar_config['tax']['service'];	
 			$tax=(($amount*$service_tax)/100);
-			#$amount=($amount-$tax);
+			#$amount=($amount-$tax); //since tax is already added in fees
 			
 			$paymentPlanSql="SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,sp.id,sp.te_student_id_c,sp.due_amount_inr,sp.paid_amount_inr,sp.paid,sp.due_date,sp.currency FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY sp.due_date";
 			
@@ -218,7 +217,7 @@ class addPaymentClass{
 					$amount=0;
 				}			
 				#update balanced amount
-				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_inr=due_amount_inr-paid_amount_inr, due_amount_inr=due_amount_inr-paid_amount_inr  WHERE id='".$row['id']."'");
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_inr=due_amount_inr-paid_amount_inr,due_amount_inr=due_amount_inr-paid_amount_inr WHERE id='".$row['id']."'");
 				if($amount==0)
 					break;
 			}			
@@ -266,7 +265,7 @@ class addPaymentClass{
 				}
 				
 				#update balanced amount
-				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_usd=due_amount_usd-paid_amount_usd, due_amount_usd=due_amount_usd-paid_amount_usd WHERE id='".$row['id']."'");
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_usd=due_amount_usd-paid_amount_usd,due_amount_usd=due_amount_usd-paid_amount_usd WHERE id='".$row['id']."'");
 				if($amount==0)
 					break;
 			}
@@ -303,8 +302,8 @@ class addPaymentClass{
 			}
 			$re = $GLOBALS['db']->query($sql);
 			if($GLOBALS['db']->getRowCount($re)>0){
-				$bean->status = 'Alive';
-				$bean->status_description = 'New Lead';
+				$bean->status = 'Duplicate';
+				$bean->status_description = 'Duplicate';
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
@@ -324,8 +323,8 @@ class addPaymentClass{
 					$emailAddress = new SugarEmailAddress();
 					$lead_list = $emailAddress->getRelatedId($bean->email1, 'leads');
 					if(is_array($lead_list) && in_array($lid,$lead_list)){
-						$bean->status = 'Alive';
-						$bean->status_description = 'New Lead';
+						$bean->status = 'Duplicate';
+						$bean->status_description = 'Duplicate';
 					}
 				}					
 			}
