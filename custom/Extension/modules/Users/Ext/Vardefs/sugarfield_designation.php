@@ -2,7 +2,7 @@
 $dictionary['User']['fields']['designation'] =array (
 	'name' => 'designation',
 	'vname' => 'LBL_DESIGNATION',
-	'required' => true,
+	'required' => false,
 	'type' => 'enum',
 	'importable' => 'true',
 	'len' => 50,
