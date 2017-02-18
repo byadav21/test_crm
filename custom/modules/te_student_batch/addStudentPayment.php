@@ -34,8 +34,8 @@ class addStudentPaymentClass{
 			$studentPaymentObj->due_amount_usd=$bean->initial_payment_usd;
 			$studentPaymentObj->paid_amount_usd=0;			
 			
-			$studentPaymentObj->balance_inr=($studentPaymentObj->due_amount_inr-$studentPaymentObj->paid_amount_inr);
-			$studentPaymentObj->balance_usd=($studentPaymentObj->due_amount_usd-$studentPaymentObj->paid_amount_usd);
+			$studentPaymentObj->balance_inr=$studentPaymentObj->due_amount_inr;
+			$studentPaymentObj->balance_usd=$studentPaymentObj->balance_usd;
 			
 			$studentPaymentObj->te_student_id_c=$bean->te_student_te_student_batch_1te_student_ida;
 			$studentPaymentObj->te_student_batch_te_student_payment_plan_1te_student_batch_ida=$bean->id;
