@@ -239,7 +239,7 @@ ini_set("display_errors",0);
 					$stat = 'Duplicate';
 					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
 				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Payment Not Realized</a></td></tr>
+				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Installment Not Paid</a></td></tr>
 					 </table>';
 				}
 
