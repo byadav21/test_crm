@@ -223,6 +223,28 @@ ini_set("display_errors",0);
 					 </table>';
 				}
 
+// 1st Instalment Not Paid
+			//~ $payNR = "SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0";
+            $sqlPay = "SELECT count(id) as not_realized FROM leads  WHERE deleted =0 AND payment_realized_check = 0 AND leads.assigned_user_id  IN ('".$user_ids."') AND leads.id IN (SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0)";
+            $resPay = $GLOBALS['db']->query($sqlPay);
+            $rowPay= $GLOBALS['db']->fetchByAssoc($resPay);
+			if($rowPay['not_realized'] > 0){
+				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
+				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowPay['not_realized'].'</th></tr>
+				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&payment_realized_check_basic=0">Installment Not Paid</a></td></tr>
+					 </table>';
+					
+				}
+				else{
+					$stat = 'Duplicate';
+					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
+				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
+				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Payment Not Realized</a></td></tr>
+					 </table>';
+				}
+
+
+
 
 
 
