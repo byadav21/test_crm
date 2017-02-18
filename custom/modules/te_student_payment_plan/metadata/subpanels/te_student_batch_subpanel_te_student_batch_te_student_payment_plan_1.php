@@ -36,7 +36,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'due_amount_inr' => 
+  'balance_inr' => 
   array (
     'type' => 'int',
     'vname' => 'LBL_DUE_AMOUNT_INR',
