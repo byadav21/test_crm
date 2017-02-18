@@ -219,7 +219,7 @@ class addPaymentClass{
 					$amount=0;
 				}			
 				#update balanced amount
-				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_inr=due_amount_inr-paid_amount_inr,due_amount_inr=due_amount_inr-paid_amount_inr WHERE id='".$row['id']."'");
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_inr=due_amount_inr-paid_amount_inr WHERE id='".$row['id']."'");
 				if($amount==0)
 					break;
 			}			
@@ -267,7 +267,7 @@ class addPaymentClass{
 				}
 				
 				#update balanced amount
-				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_usd=due_amount_usd-paid_amount_usd,due_amount_usd=due_amount_usd-paid_amount_usd WHERE id='".$row['id']."'");
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_usd=due_amount_usd-paid_amount_usd WHERE id='".$row['id']."'");
 				if($amount==0)
 					break;
 			}
