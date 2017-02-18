@@ -7,6 +7,6 @@ $dictionary['User']['fields']['designation'] =array (
 	'importable' => 'true',
 	'len' => 50,
 	'size' => '20',
-	'options' => 'designation_list',	
+	'options' => 'designation_list',
 );
 ?>

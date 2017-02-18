@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2017-02-16 22:02:45
+<?php /* Smarty version 2.6.29, created on 2017-02-18 23:27:12
          compiled from include/DetailView/header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_button', 'include/DetailView/header.tpl', 59, false),array('function', 'counter', 'include/DetailView/header.tpl', 63, false),array('function', 'sugar_action_menu', 'include/DetailView/header.tpl', 99, false),)), $this); ?>
