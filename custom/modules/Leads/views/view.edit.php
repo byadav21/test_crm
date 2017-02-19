@@ -8,6 +8,17 @@ class LeadsViewEdit extends ViewEdit {
 			$this->ss->assign('from_pusher', '1');
 			$this->ss->assign('disposition_id',$_REQUEST['disposition_id'] );
 			
+			
+		?>
+		<script>
+		$(document).ready(function() { /* code here */ 
+			document.getElementById("SAVE_FOOTER").style.display ='none';
+			
+			});
+		</script>
+		
+		<?php	
+			
 		}
 		else{
 			$this->ss->assign('from_pusher', '0');
