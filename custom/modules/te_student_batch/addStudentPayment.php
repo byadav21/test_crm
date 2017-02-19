@@ -4,7 +4,7 @@ require_once('custom/include/Email/sendmail.php');
 class addStudentPaymentClass{
 	
 	function makePayment($bean, $event, $argument){		
-		if(!isset($_REQUEST['import_module'])){
+		if(!isset($_REQUEST['import_module']) && $_REQUEST['module']=="Leads"){
 		    global $sugar_config;
 			$service_tax=$sugar_config['tax']['service'];
 			
