@@ -83,7 +83,7 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
 				 {$studentBatch.name}
 				 <input type="hidden" id="old_batch{$rowcount}" value="{$studentBatch.id}">
-				 <input type="student_country" id="student_country{$rowcount}" value="{$student.country}">
+				 <input type="hidden" id="student_country{$rowcount}" value="{$student.country}">
 			</td>
 		  	<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
 			{$studentBatch.batch_start_date}
@@ -142,14 +142,13 @@ function transferStudentBatch(student_id,rowcount){
 		$("#"+span_id).html('<img id="previewimage" src="custom/themes/default/images/spin.gif" width="32" height="32"/>');	
 		jQuery.ajax({
 		type: "POST",
-		url: 'index.php?entryPoint=transferbatch',
+		url: 'index.php?entryPoint=transferbatchrequest',
 		data: {student_id: student_id,old_batch: old_batch,new_batch: new_batch,student_country:student_country},
 		success: function (result)
 		{
-			var result = JSON.parse(result);			
-			$("#transfer_batch_button"+rowcount).html(result.status);
-			if(result.status=='Transferred'){
-				 $("#transfer_batch_button"+rowcount).html(result.status);
+			var result = JSON.parse(result);		
+			if(result.status=='queued'){
+				 $("#transfer_batch_button"+rowcount).html("Sent Request");
 			}
 		}
 		}); 
