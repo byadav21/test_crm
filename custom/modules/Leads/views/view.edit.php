@@ -228,6 +228,12 @@ class LeadsViewEdit extends ViewEdit {
 
 
 //  Payment panel hide show
+if($("#status_description").val() === "Converted") {
+						
+						document.getElementById("detailpanel_2").style.display ='inline';
+						triggerPaymentType();
+						
+					}
 					$("#payment_source option").remove() ; 
                    $("#status_description").change(function() {
 				  var sl = $(this) ;
@@ -237,34 +243,7 @@ class LeadsViewEdit extends ViewEdit {
 						 //~ document.getElementById("transaction_id").style.display ='none';
 						 //~ document.getElementById("reference_number_label").style.display ='none';
 						 //~ document.getElementById("reference_number").style.display ='none';
-						 $("#payment_type").change(function() {
-
-							var py = $(this) ;
-							if(py.val()=='Online'){
-								$("#payment_source option").remove() ; 
-								 $("#payment_source").append('<option></option>');
-								 $("#payment_source").append('<option>PayU</option>');
-								 $("#payment_source").append('<option>ATOM</option>');
-								 $("#payment_source").append('<option>Paytm</option>');
-								 document.getElementById("transaction_id_label").style.display ='inline';
-								 document.getElementById("transaction_id").style.display ='inline';
-								 document.getElementById("reference_number_label").style.display ='none';
-								 document.getElementById("reference_number").style.display ='none';
-							}
-							else if(py.val()=='Offline'){
-								$("#payment_source option").remove() ; 
-								 $("#payment_source").append('<option></option>');
-								 $("#payment_source").append('<option>NEFT</option>');
-								 $("#payment_source").append('<option>Cheque</option>');
-								 document.getElementById("transaction_id_label").style.display ='none';
-								 document.getElementById("transaction_id").style.display ='none';
-								 document.getElementById("reference_number_label").style.display ='inline';
-								 document.getElementById("reference_number").style.display ='inline';
-							}
-							else{
-								$("#payment_source option").remove() ; 
-							}
-						})
+						triggerPaymentType();
 					}
 					else{
 						document.getElementById("detailpanel_2").style.display ='none';	
@@ -349,19 +328,39 @@ class LeadsViewEdit extends ViewEdit {
 					 
 					}
 
-				})       
-             
-             
-             
-             
-             
-             
-             
-             
-             
+				})        
              
    });
-            
+            function triggerPaymentType() {
+			    	$("#payment_type").change(function() {
+
+							var py = $(this) ;
+							if(py.val()=='Online'){
+								$("#payment_source option").remove() ; 
+								 $("#payment_source").append('<option></option>');
+								 $("#payment_source").append('<option>PayU</option>');
+								 $("#payment_source").append('<option>ATOM</option>');
+								 $("#payment_source").append('<option>Paytm</option>');
+								 document.getElementById("transaction_id_label").style.display ='inline';
+								 document.getElementById("transaction_id").style.display ='inline';
+								 document.getElementById("reference_number_label").style.display ='none';
+								 document.getElementById("reference_number").style.display ='none';
+							}
+							else if(py.val()=='Offline'){
+								$("#payment_source option").remove() ; 
+								 $("#payment_source").append('<option></option>');
+								 $("#payment_source").append('<option>NEFT</option>');
+								 $("#payment_source").append('<option>Cheque</option>');
+								 document.getElementById("transaction_id_label").style.display ='none';
+								 document.getElementById("transaction_id").style.display ='none';
+								 document.getElementById("reference_number_label").style.display ='inline';
+								 document.getElementById("reference_number").style.display ='inline';
+							}
+							else{
+								$("#payment_source option").remove() ; 
+							}
+						})
+			}
             
             
      </script>
