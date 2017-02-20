@@ -182,7 +182,7 @@ class addPaymentClass{
 		
 		global $sugar_config;
 		#for Indian student only need to calculate service tax
-		if($student_country!="" && ($student_country=="India"||$student_country=="india")){
+		if($student_country=="" || $student_country=="India"||$student_country=="india"){
 
 			$service_tax=$sugar_config['tax']['service'];	
 			$tax=(($amount*$service_tax)/100);
@@ -367,7 +367,7 @@ class addPaymentClass{
 				<strong>Notes</strong></th><th><strong>Due Date</strong></th> 
 			</tr>';
 		$batch_name=0;	
-		if($student_country!="" && ($student_country=="India" || $student_country=="india")){
+		if($student_country=="" || $student_country=="India" || $student_country=="india"){
 			while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
 				$batch_name=$row['batch_name'];
 				$template.='<tr height="20">
