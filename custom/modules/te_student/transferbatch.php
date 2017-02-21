@@ -14,6 +14,14 @@ $new_batch_id=$transferDetails['te_ba_batch_id_c'];
 $student_id=$transferDetails['te_student_id_c'];
 $student_country=$transferDetails['country'];
 
+#If request is for Reject the case.
+if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"){
+	$GLOBALS['db']->query("UPDATE te_transfer_batch SET status='".$_REQUEST['request_status']."', te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
+	$utmOptions['status']="Transferred";
+	echo json_encode($utmOptions);
+	return false;
+}
+
 #create new student batch
 
 #create batch of student
@@ -71,7 +79,7 @@ $GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_stude
 $GLOBALS['db']->query("UPDATE te_student_payment, te_student_te_student_payment_1_c SET te_student_payment.deleted = 1,te_student_te_student_payment_1_c.deleted=1 WHERE te_student_payment.id = te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_payment.te_student_batch_id_c='".$old_batch_id."' AND statuste_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='".$student_id."'");
 
 #update batch transfer request status 
-$GLOBALS['db']->query("UPDATE te_transfer_batch SET status='".$_REQUEST['request_status']."', te_student_batch_id_c='".$student_batch_id."'");
+$GLOBALS['db']->query("UPDATE te_transfer_batch SET status='".$_REQUEST['request_status']."', te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
 $utmOptions['status']="Transferred";
 echo json_encode($utmOptions);
 return false;
