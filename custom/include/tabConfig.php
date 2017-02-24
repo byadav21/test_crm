@@ -1,5 +1,5 @@
 <?php
-// created: 2017-02-15 02:20:36
+// created: 2017-02-23 22:31:57
 $GLOBALS['tabStructure'] = array (
   'LBL_GROUPTAB5_1473074494' => 
   array (
@@ -33,7 +33,6 @@ $GLOBALS['tabStructure'] = array (
     array (
       0 => 'Leads',
       1 => 'te_lead_assignment_rule',
-      2 => 'te_disposition',
     ),
   ),
   'LBL_GROUPTAB3_1480929977' => 

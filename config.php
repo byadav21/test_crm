@@ -1,5 +1,5 @@
 <?php
-// created: 2017-02-15 02:20:36
+// created: 2017-02-23 22:31:57
 $sugar_config = array (
   'addAjaxBannedModules' => 
   array (
@@ -102,11 +102,11 @@ $sugar_config = array (
   'datef' => 'm/d/Y',
   'dbconfig' => 
   array (
-    'db_host_name' => 'localhost',
+    'db_host_name' => 'localhost:8080',
     'db_host_instance' => 'SQLEXPRESS',
-    'db_user_name' => 'crm',
-    'db_password' => 'crm',
-    'db_name' => 'crm',
+    'db_user_name' => 'root',
+    'db_password' => 'Engenia',
+    'db_name' => '15febtedevcrm',
     'db_type' => 'mysql',
     'db_port' => '',
     'db_manager' => 'MysqliManager',
@@ -263,7 +263,7 @@ $sugar_config = array (
   'export_excel_compatible' => false,
   'hide_subpanels' => true,
   'history_max_viewed' => 50,
-  'host_name' => '35.154.138.186',
+  'host_name' => 'localhost:8080',
   'import_max_execution_time' => 3600,
   'import_max_records_per_file' => 100,
   'import_max_records_total_limit' => '',
@@ -275,7 +275,7 @@ $sugar_config = array (
     'timeout' => 86400,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 30,
+  'js_lang_version' => 31,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -365,7 +365,7 @@ $sugar_config = array (
   'session_dir' => '',
   'showDetailData' => true,
   'showThemePicker' => true,
-  'site_url' => 'http://35.154.138.186/crm',
+  'site_url' => 'localhost:8080/24febserver',
   'slow_query_time_msec' => '100',
   'sugar_version' => '6.5.24',
   'sugarbeet' => false,

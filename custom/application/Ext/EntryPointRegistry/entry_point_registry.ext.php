@@ -12,6 +12,11 @@ $entry_point_registry['openDispositionPopup'] = array('file' => 'custom/modules/
 
 
 
+$entry_point_registry['transferbatchrequest'] = array('file' => 'custom/modules/te_student/transferbatchrequest.php','auth' => false);
+
+
+
+
 $entry_point_registry['budgtedvsactual'] = array('file' => 'custom/modules/te_budgeted_campaign/ajax.php','auth' => false);
 
 

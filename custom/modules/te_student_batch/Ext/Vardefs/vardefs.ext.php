@@ -36,6 +36,55 @@ $dictionary["te_student_batch"]["fields"]["te_student_te_student_batch_1te_stude
 );
 
 
+$dictionary['te_student_batch']['fields']['email'] = array(
+	'required' => false,
+	'name' => 'email',
+	'vname' => 'Email',
+	'type' => 'varchar',
+	'audited' => false,
+	'massupdate' => false,
+	'source' => 'non-db',
+	'studio' => 'visible',
+);
+
+
+
+
+$dictionary['te_student_batch']['fields']['leads_id'] =array (
+	'name' => 'leads_id',
+	'label' => 'LBL_LEADS_ID',
+	'type' => 'varchar',
+	'help' => '',
+	'comment' => '',
+	'default_value' => '',
+	'len' => '50',
+    'size' => '20',
+	'required' => false, 
+	'reportable' => true, 
+	'audited' => false, 
+	'importable' => 'true', 
+	'duplicate_merge' => false, 
+);
+ 
+
+
+
+
+
+$dictionary["te_student_batch"]["fields"]["student_kitsent"] = array(
+  'required' => false,
+	'name' => 'student_kitsent',
+	'vname' => 'Student Kit Sent',
+	'type' => 'varchar',
+	'audited' => false,
+	'massupdate' => false,
+	'source' => 'non-db',
+	'studio' => 'visible',
+);
+
+
+
+
 // created: 2016-12-27 19:40:57
 $dictionary["te_student_batch"]["fields"]["te_student_batch_te_student_payment_plan_1"] = array (
   'name' => 'te_student_batch_te_student_payment_plan_1',
@@ -47,5 +96,31 @@ $dictionary["te_student_batch"]["fields"]["te_student_batch_te_student_payment_p
   'side' => 'right',
   'vname' => 'LBL_TE_STUDENT_BATCH_TE_STUDENT_PAYMENT_PLAN_1_FROM_TE_STUDENT_PAYMENT_PLAN_TITLE',
 );
+
+
+$dictionary['te_student_batch']['fields']['feepaid'] = array(
+	'required' => false,
+	'name' => 'feepaid',
+	'vname' => 'Fee-Paid',
+	'type' => 'varchar',
+	'audited' => false,
+	'massupdate' => false,
+	'source' => 'non-db',
+	'studio' => 'visible',
+);
+
+
+
+$dictionary['te_student_batch']['fields']['mobile'] = array(
+	'required' => false,
+	'name' => 'mobile',
+	'vname' => 'Phone',
+	'type' => 'varchar',
+	'audited' => false,
+	'massupdate' => false,
+	'source' => 'non-db',
+	'studio' => 'visible',
+);
+
 
 ?>

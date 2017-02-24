@@ -15738,6 +15738,109 @@
       ),
     ),
   ),
+  'te_transfer_batch_modified_user' => 
+  array (
+    'name' => 'te_transfer_batch_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_transfer_batch_created_by' => 
+  array (
+    'name' => 'te_transfer_batch_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_transfer_batch_assigned_user' => 
+  array (
+    'name' => 'te_transfer_batch_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_transfer_batch' => 
+  array (
+    'name' => 'securitygroups_te_transfer_batch',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_transfer_batch',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
   'te_target_campaign_modified_user' => 
   array (
     'name' => 'te_target_campaign_modified_user',

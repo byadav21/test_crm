@@ -351,6 +351,7 @@ if($("#status_description").val() === "Converted") {
 								 $("#payment_source").append('<option></option>');
 								 $("#payment_source").append('<option>NEFT</option>');
 								 $("#payment_source").append('<option>Cheque</option>');
+								 $("#payment_source").append('<option>Institute</option>');
 								 document.getElementById("transaction_id_label").style.display ='none';
 								 document.getElementById("transaction_id").style.display ='none';
 								 document.getElementById("reference_number_label").style.display ='inline';

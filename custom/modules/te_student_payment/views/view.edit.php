@@ -26,6 +26,38 @@ function set_batch_rfq_return(popup_reply_data){
 	 document.getElementById('batch_id').value= name;
 	 document.getElementById('te_student_batch_id_c').value = id;
 }
+// Drop-down payments Mamnish
+$(function(){
+	$("#payment_type").change(function() {
+
+		var py = $(this) ;
+		if(py.val()=='Online'){
+			$("#payment_source option").remove() ; 
+			 $("#payment_source").append('<option></option>');
+			 $("#payment_source").append('<option>PayU</option>');
+			 $("#payment_source").append('<option>ATOM</option>');
+			 $("#payment_source").append('<option>Paytm</option>');
+			 //~ document.getElementById("transaction_id_label").style.display ='inline';
+			 //~ document.getElementById("transaction_id").style.display ='inline';
+			 //~ document.getElementById("reference_number_label").style.display ='none';
+			 //~ document.getElementById("reference_number").style.display ='none';
+		}
+		else if(py.val()=='Offline'){
+			$("#payment_source option").remove() ; 
+			 $("#payment_source").append('<option></option>');
+			 $("#payment_source").append('<option>NEFT</option>');
+			 $("#payment_source").append('<option>Cheque</option>');
+			  $("#payment_source").append('<option>Institute</option>');
+			 //~ document.getElementById("transaction_id_label").style.display ='none';
+			 //~ document.getElementById("transaction_id").style.display ='none';
+			 //~ document.getElementById("reference_number_label").style.display ='inline';
+			 //~ document.getElementById("reference_number").style.display ='inline';
+		}
+		else{
+			$("#payment_source option").remove() ; 
+		}
+	})	
+})
 </script> 	    	
       	
 <?php      	

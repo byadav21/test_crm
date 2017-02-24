@@ -108,10 +108,9 @@
 			$str = implode("','",$uid);
 			
 			date_default_timezone_set("Asia/Kolkata");
-			/*$leadQuery = "SELECT COUNT(b.id) AS total_leads,b.id batch_id,GROUP_CONCAT(DISTINCT(l.utm)) utm_name,b.name FROM leads l INNER JOIN leads_cstm lc ON l.id = lc.id_c 
+				$leadQuery = "SELECT COUNT(b.id) AS total_leads,b.id batch_id,GROUP_CONCAT(DISTINCT(l.utm)) utm_name,b.name FROM leads l INNER JOIN leads_cstm lc ON l.id = lc.id_c 
 							LEFT JOIN te_utm ON te_utm.name = l.utm INNER JOIN te_ba_batch b ON b.id = CASE WHEN l.utm = 'NA' THEN lc.te_ba_batch_id_c WHEN l.utm != 'NA' THEN te_utm.te_ba_batch_id_c 
-							END WHERE l.assigned_user_id in('".$str."') AND l.deleted = 0 AND b.batch_status = 'enrollment_in_progress'GROUP BY b.id ORDER BY total_leads DESC LIMIT 0 ,".$this->top_batchs; */
-			 $leadQuery = "SELECT COUNT(l.id)total_leads,b.name,b.id AS batch_id FROM leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c AND l.deleted=0 AND l.assigned_user_id IN('".$str."')  INNER JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c AND b.deleted=0 AND b.batch_status='enrollment_in_progress' GROUP BY b.id ORDER BY total_leads DESC LIMIT 0 ,10";
+							END WHERE l.assigned_user_id in('".$str."') AND l.deleted = 0 AND b.batch_status = 'enrollment_in_progress'GROUP BY b.id ORDER BY total_leads DESC LIMIT 0 ,".$this->top_batchs; 
 												  
 			$leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
 			while($row=$GLOBALS['db']->fetchByAssoc($leadObj)){	
@@ -123,22 +122,10 @@
 							<div style="white-space: normal;" width="100%" align="left">Batch Name</div>
 						</th>
 						<th scope="col" width="30%">
-							<div style="white-space: normal;" width="100%" align="left">Alive</div>
-						</th>
-						<th scope="col" width="30%">
-							<div style="white-space: normal;" width="100%" align="left">Warm</div>
-						</th>
-						
-						</th>
-						<th scope="col" width="30%">
-							<div style="white-space: normal;" width="100%" align="left">Dead</div>
-						</th>
-						
-						<th scope="col" width="30%">
-							<div style="white-space: normal;" width="100%" align="left">Converted</div>
+							<div style="white-space: normal;" width="100%" align="left">Leads</div>
 						</th>
 						 <th scope="col" width="10%">
-							<div style="white-space: normal;" width="100%" align="left">Total Leads</div>
+							<div style="white-space: normal;" width="100%" align="left">Conversion</div>
 						</th>
 						 <th scope="col" width="15%">
 							<div style="white-space: normal;" width="100%" align="left">Conversion %</div>
@@ -156,19 +143,13 @@
 				}
 				
 				 //$converted=$this->getConvertedLeads($data['utm_name']);
-				  $con=$this->getConSUMConversionLeads($data['batch_id'],$str);
-				 
-				 
-				  
-				  $alive=$this->getAliveLeads($data['batch_id'],$str);
-				  $warm=$this->getWarmLeads($data['batch_id'],$str);
-				  $dead=$this->getDeadLeads($data['batch_id'],$str);
-			
+				  $con=$this->getConSUMConversionLeads($data['batch_id']);
 				  
 				 // $Conversion=$converted+$con;
 				  $Conversion=$con;
 				  
-				 $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['name']."</td><td scope='row' align='left' valign='top'>".$alive."</td><td scope='row' align='left' valign='top'>".$warm."</td><td scope='row' align='left' valign='top'>".$dead."</td><td scope='row' align='left' valign='top'>".$Conversion."</td><td scope='row' align='left' valign='top'>".$data['total_leads']."</td><td scope='row' align='left' valign='top'>".number_format(($Conversion*100)/$data['total_leads'],2)."</td></tr>";
+			
+				 $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['name']."</td><td scope='row' align='left' valign='top'>".$data['total_leads']."</td><td scope='row' align='left' valign='top'>".$Conversion."</td><td scope='row' align='left' valign='top'>".number_format(($Conversion*100)/$data['total_leads'],2)."</td></tr>";
 				}		
 				 $output.="</table></div>";
 			
@@ -188,38 +169,11 @@
 			return $row['total'];
 		}
 		
-		public function getConSUMConversionLeads($batch1,$str){
+		public function getConSUMConversionLeads($batch1){
 			if(!$batch1){
 				return 0;
 			}
-			$leadQuery="select count(*) as total from leads l INNER JOIN leads_cstm lc on l.id=lc.id_c WHERE lc.te_ba_batch_id_c='".$batch1."' AND l.deleted=0 AND l.status='Converted' AND l.assigned_user_id IN('".$str."')";
-			$leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
-			$row=$GLOBALS['db']->fetchByAssoc($leadObj);
-			return $row['total'];
-		}
-		public function getAliveLeads($batch1,$str){
-			if(!$batch1){
-				return 0;
-			}
-			$leadQuery="select count(*) as total from leads l INNER JOIN leads_cstm lc on l.id=lc.id_c WHERE lc.te_ba_batch_id_c='".$batch1."' AND l.deleted=0 AND l.status='Alive' AND l.assigned_user_id IN('".$str."')";
-			$leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
-			$row=$GLOBALS['db']->fetchByAssoc($leadObj);
-			return $row['total'];
-		}
-		public function getWarmLeads($batch1,$str){
-			if(!$batch1){
-				return 0;
-			}
-			$leadQuery="select count(*) as total from leads l INNER JOIN leads_cstm lc on l.id=lc.id_c WHERE lc.te_ba_batch_id_c='".$batch1."' AND l.deleted=0 AND l.status='Warm' AND l.assigned_user_id IN('".$str."')";
-			$leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
-			$row=$GLOBALS['db']->fetchByAssoc($leadObj);
-			return $row['total'];
-		}
-		public function getDeadLeads($batch1,$str){
-			if(!$batch1){
-				return 0;
-			}
-			$leadQuery="select count(*) as total from leads l INNER JOIN leads_cstm lc on l.id=lc.id_c WHERE lc.te_ba_batch_id_c='".$batch1."' AND l.deleted=0 AND l.status='Dead' AND l.assigned_user_id IN('".$str."')";
+			$leadQuery="select count(*) as total from leads l INNER JOIN leads_cstm lc on l.id=lc.id_c WHERE lc.te_ba_batch_id_c='".$batch1."' AND l.deleted=0 AND l.status='Converted'";
 			$leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
 			$row=$GLOBALS['db']->fetchByAssoc($leadObj);
 			return $row['total'];

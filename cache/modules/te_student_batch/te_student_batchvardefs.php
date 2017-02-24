@@ -959,6 +959,44 @@
       'side' => 'right',
       'vname' => 'LBL_TE_STUDENT_TE_STUDENT_BATCH_1_FROM_TE_STUDENT_BATCH_TITLE',
     ),
+    'email' => 
+    array (
+      'required' => false,
+      'name' => 'email',
+      'vname' => 'Email',
+      'type' => 'varchar',
+      'audited' => false,
+      'massupdate' => false,
+      'source' => 'non-db',
+      'studio' => 'visible',
+    ),
+    'leads_id' => 
+    array (
+      'name' => 'leads_id',
+      'label' => 'LBL_LEADS_ID',
+      'type' => 'varchar',
+      'help' => '',
+      'comment' => '',
+      'default_value' => '',
+      'len' => '50',
+      'size' => '20',
+      'required' => false,
+      'reportable' => true,
+      'audited' => false,
+      'importable' => 'true',
+      'duplicate_merge' => false,
+    ),
+    'student_kitsent' => 
+    array (
+      'required' => false,
+      'name' => 'student_kitsent',
+      'vname' => 'Student Kit Sent',
+      'type' => 'varchar',
+      'audited' => false,
+      'massupdate' => false,
+      'source' => 'non-db',
+      'studio' => 'visible',
+    ),
     'te_student_batch_te_student_payment_plan_1' => 
     array (
       'name' => 'te_student_batch_te_student_payment_plan_1',
@@ -969,6 +1007,28 @@
       'bean_name' => 'te_student_payment_plan',
       'side' => 'right',
       'vname' => 'LBL_TE_STUDENT_BATCH_TE_STUDENT_PAYMENT_PLAN_1_FROM_TE_STUDENT_PAYMENT_PLAN_TITLE',
+    ),
+    'feepaid' => 
+    array (
+      'required' => false,
+      'name' => 'feepaid',
+      'vname' => 'Fee-Paid',
+      'type' => 'varchar',
+      'audited' => false,
+      'massupdate' => false,
+      'source' => 'non-db',
+      'studio' => 'visible',
+    ),
+    'mobile' => 
+    array (
+      'required' => false,
+      'name' => 'mobile',
+      'vname' => 'Phone',
+      'type' => 'varchar',
+      'audited' => false,
+      'massupdate' => false,
+      'source' => 'non-db',
+      'studio' => 'visible',
     ),
   ),
   'relationships' => 
