@@ -131,6 +131,12 @@ $GLOBALS['app_list_strings']['study_kit_status_list']=array (
   'Sent' => 'Send',
 );
 
+$GLOBALS['app_list_strings']['eligible_certificate_list']=array (
+  '' => '',
+  'COC' => 'COC',
+  'COP' => 'COP',
+);
+
 $app_strings['LBL_GROUPTAB3_1480929977'] = 'Reports';
 
 $app_list_strings['moduleList']['KReports']='Custom Reports';
@@ -145,4 +151,5 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'Channel' => 'Channel',
 );
 $app_strings['LBL_GROUPTAB4_1487154036'] = 'SRM';
+
 ?>
