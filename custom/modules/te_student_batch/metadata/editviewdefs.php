@@ -195,7 +195,17 @@ array (
             'name' => 'assigned_user_name',
             'label' => 'LBL_ASSIGNED_TO',
           ),
-          1 => 'description',
+          1 => 
+          array (
+            'name' => 'certificate_sent',
+            'studio' => 'visible',
+            'label' => 'LBL_CERTIFICATE_SENT',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 'description',
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
