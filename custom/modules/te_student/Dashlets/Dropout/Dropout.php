@@ -139,7 +139,7 @@ class Dropout extends Dashlet{
 				$row--;
 			}
 			//$converted=$this->getConvertedLeads($data['UTM']);
-			$con=$this->getConSUMConversionLeads($data['id']);
+		//	$con=$this->getConSUMConversionLeads($data['id']);
 			  
 			  //$Conversion=$converted+$con;
 			  $total=($data['postdropout'])+($data['postdropout']);
