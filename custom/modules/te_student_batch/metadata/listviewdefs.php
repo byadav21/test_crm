@@ -69,5 +69,13 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'DROPOUT_STATUS' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_DROPOUT_STATUS',
+    'width' => '10%',
+    'default' => true,
+  ),
 );
 ?>
