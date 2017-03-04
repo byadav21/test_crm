@@ -2,6 +2,10 @@
  //WARNING: The contents of this file are auto-generated
 
 
+ $action_view_map['leadprofilingreport'] = 'leadprofilingreport';
+ 
+
+
  $action_view_map['statusreport'] = 'statusreport';
  
 

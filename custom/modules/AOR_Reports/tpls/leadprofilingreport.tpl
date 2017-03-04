@@ -1,5 +1,5 @@
-<section class="moduleTitle"> <h2>Dropout Report</h2><br/><br/>
-<form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=dropoutreport">
+<section class="moduleTitle"> <h2>Lead Profiling Report</h2><br/><br/>
+<form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadprofilingreport">
 <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -45,6 +45,9 @@
 			<strong>Batch</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Gender</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
 			<strong>Email</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
@@ -68,6 +71,7 @@
 		<tr height="20" class="oddListRowS1">
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.student}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch}</td> 
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.gender}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.email}</td> 
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.mobile}</td> 
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.work_experience_c}</td>
