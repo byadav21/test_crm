@@ -26,12 +26,24 @@
 			<strong>Fee USD</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Dropout Type</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Refund Amount</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Refund Date</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
 			<strong>Dropout Status</strong>
 		</th>
+		
 	</tr>
 	</thead>  
 	{if $resultSet|@count > 0}
+	{assign var='rowcount' value=0}
 	{foreach from = $resultSet key=key item=result}
+		{assign var='rowcount' value=$rowcount+1}
 		<tr height="20" class="oddListRowS1">
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.student}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.batch}</td> 	
@@ -40,25 +52,40 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.batch_code}</td> 
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.fee_usd}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.fee_inr}</td> 			
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.action}</td> 
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+				{$result.dropout_type}
+			</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+				<input type="text" name="refund_amount" id="refund_amount_{$rowcount}" size="30" maxlength="5" value="0" title="" tabindex="0" style='width:80PX !IMPORTANT'>
+			</td>
+			<td>
+				<input name="refund_date_{$rowcount}" type="text"  value="" id='refund_date_{$rowcount}' style='width:113PX !IMPORTANT' />
+				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="refund_date_trigger_{$rowcount}">
+				
+			</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.dropout_status}</td> 
+			
 		</tr>				
 	{/foreach}
 	{else}
 		<tr height="20" class="oddListRowS1">
-			<td colspan="8">No Data</td>
+			<td colspan="11">No Data</td>
 		</tr>
 	{/if}
 </table>
 {literal}
 <script language="javascript">
-function changeDropoutStatus(request_id,value){
+function changeDropoutStatus(request_id,value,rowcount){
+	var dropout_type=$("#dropout_type_"+rowcount).val();
+	var refund_amount=$("#refund_amount_"+rowcount).val();
+	var refund_date=$("#refund_date_"+rowcount).val();
 
 	var span_id="dropout_request_"+request_id;	
 	$("#"+span_id).html('<img id="previewimage" src="custom/themes/default/images/spin.gif" width="32" height="32"/>');	
 	jQuery.ajax({
 		type: "POST",
 		url: 'index.php?entryPoint=dropoutapprove',
-		data: {request_id: request_id,request_status: value},
+		data: {request_id: request_id,request_status: value,dropout_type: dropout_type,refund_amount: refund_amount,refund_date: refund_date},
 		success: function (result)
 		{
 			var result = JSON.parse(result);		
@@ -68,5 +95,96 @@ function changeDropoutStatus(request_id,value){
 		}
 	}); 	
 }
+Calendar.setup ({
+   inputField : "refund_date_1",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_1",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_2",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_2",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_3",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_3",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_4",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_4",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_5",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_5",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_6",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_6",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_7",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_7",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_8",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_8",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_9",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_9",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "refund_date_10",
+   daFormat : "%m/%d/%Y %I:%M%P",
+   button : "refund_date_trigger_10",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});						
 </script>
 {/literal}
+
