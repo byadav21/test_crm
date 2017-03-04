@@ -51,6 +51,10 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Sta
 $module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report Vendor", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=gsvreport', "GSV Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=feedbackreport', "Feedback Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=resultreport', "Result Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
+
 
 
 ?>

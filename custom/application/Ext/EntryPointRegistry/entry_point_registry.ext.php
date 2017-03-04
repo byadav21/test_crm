@@ -64,6 +64,11 @@ $entry_point_registry['getCurrentCalls'] = array('file' => 'custom/modules/te_di
 
 
 
+$entry_point_registry['dropoutapprove'] = array('file' => 'custom/modules/te_student_batch/dropoutapprove.php','auth' => false);
+
+
+
+
 
 
 $entry_point_registry['updateutmleadfee'] = array('file' => 'custom/modules/Leads/updateutmleadfee.php','auth' => false);
