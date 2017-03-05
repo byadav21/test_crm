@@ -29,35 +29,70 @@ class LeadsViewEdit extends ViewEdit {
 	
     $(document).ready(function () {
 		//Lead Referral hide /show
-	   	if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('leads_leads_1leads_ida').value==''){
+	   	//~ if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('leads_leads_1leads_ida').value==''){
+				//~ 
+			//~ document.getElementById("leads_leads_1_name").style.display ='none';
+			//~ document.getElementById("btn_clr_leads_leads_1_name").style.display ='none';
+			//~ document.getElementById("btn_leads_leads_1_name").style.display ='none';
+			//~ document.getElementById("leads_leads_1_name_label").innerHTML='';	
+				//~ 
+     	//~ }
+     	//~ if(document.getElementById('leads_leads_1leads_ida').value!=''){
+			//~ document.getElementById('lead_source').value='Referrals'
+		//~ }
+		//~ var refere = document.getElementById("leads_leads_1leads_ida").value;
+		//~ $("#lead_source").change(function() {
+		  //~ var ls = $(this) ;
+			//~ if(ls.val() === "Referrals" ) {
+				//~ document.getElementById("leads_leads_1_name").style.display ='inline';
+				//~ document.getElementById("btn_leads_leads_1_name").style.display ='inline';
+				//~ document.getElementById("btn_clr_leads_leads_1_name").style.display ='inline';
+				//~ document.getElementById("leads_leads_1_name_label").innerHTML = 'Referral Lead:';			
+				//~ document.getElementById("leads_leads_1leads_ida").value = refere;
+			//~ }
+			//~ else{
+				//~ document.getElementById("leads_leads_1leads_ida").value ='';
+				//~ document.getElementById("leads_leads_1_name").value ='';
+				//~ document.getElementById("leads_leads_1_name").style.display ='none';
+				//~ document.getElementById("btn_clr_leads_leads_1_name").style.display ='none';
+				//~ document.getElementById("btn_leads_leads_1_name").style.display ='none';
+				//~ document.getElementById("leads_leads_1_name_label").innerHTML='';
+//~ 
+			//~ }
+		 //~ })	 
+		//~ 
+		
+			if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('parent_id').value==''){
 				
-			document.getElementById("leads_leads_1_name").style.display ='none';
-			document.getElementById("btn_clr_leads_leads_1_name").style.display ='none';
-			document.getElementById("btn_leads_leads_1_name").style.display ='none';
-			document.getElementById("leads_leads_1_name_label").innerHTML='';	
+			document.getElementById("parent_type").style.display ='none';
+			document.getElementById("parent_name").style.display ='none';
+			document.getElementById("btn_parent_name").style.display ='none';
+			document.getElementById("btn_clr_parent_name").style.display ='none';
+			document.getElementById("parent_name_label").innerHTML='';	
 				
      	}
-     	if(document.getElementById('leads_leads_1leads_ida').value!=''){
+     	if(document.getElementById('parent_id').value!=''){
 			document.getElementById('lead_source').value='Referrals'
 		}
-		var refere = document.getElementById("leads_leads_1leads_ida").value;
+		var refere = document.getElementById("parent_id").value;
 		$("#lead_source").change(function() {
 		  var ls = $(this) ;
 			if(ls.val() === "Referrals" ) {
-				document.getElementById("leads_leads_1_name").style.display ='inline';
-				document.getElementById("btn_leads_leads_1_name").style.display ='inline';
-				document.getElementById("btn_clr_leads_leads_1_name").style.display ='inline';
-				document.getElementById("leads_leads_1_name_label").innerHTML = 'Referral Lead:';			
-				document.getElementById("leads_leads_1leads_ida").value = refere;
+				document.getElementById("parent_type").style.display ='inline';
+				document.getElementById("parent_name").style.display ='inline';
+				document.getElementById("btn_parent_name").style.display ='inline';
+				document.getElementById("btn_clr_parent_name").style.display ='inline';
+				document.getElementById("parent_name_label").innerHTML = 'Referral:';			
+				document.getElementById("parent_id").value = refere;
 			}
 			else{
-				document.getElementById("leads_leads_1leads_ida").value ='';
-				document.getElementById("leads_leads_1_name").value ='';
-				document.getElementById("leads_leads_1_name").style.display ='none';
-				document.getElementById("btn_clr_leads_leads_1_name").style.display ='none';
-				document.getElementById("btn_leads_leads_1_name").style.display ='none';
-				document.getElementById("leads_leads_1_name_label").innerHTML='';
-
+				document.getElementById("parent_id").value ='';
+				document.getElementById("parent_name").value ='';
+				document.getElementById("parent_type").style.display ='none';
+				document.getElementById("parent_name").style.display ='none';
+				document.getElementById("btn_parent_name").style.display ='none';
+				document.getElementById("btn_clr_parent_name").style.display ='none';
+				document.getElementById("parent_name_label").innerHTML='';	
 			}
 		 })	 
 		
@@ -368,6 +403,15 @@ if($("#status_description").val() === "Converted") {
 
 
 <?php
+
+		if(isset($_REQUEST['addreferral']) && $_REQUEST['addreferral']=='true'){
+			$this->bean->lead_source = 'Referrals';
+			
+			$this->bean->parent_type = 'Users';
+			$this->bean->parent_id = $GLOBALS['current_user']->id;
+			$this->bean->parent_name = $GLOBALS['current_user']->user_name;
+		}
+
 		parent::display ();
 		?>
 

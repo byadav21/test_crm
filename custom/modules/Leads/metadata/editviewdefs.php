@@ -35,14 +35,13 @@ array (
           'field' => '30',
         ),
       ),
-       'includes' =>
-     array (
-    	0 =>
-    	array (
-    		'file' => 'custom/modules/Leads/include/js/popup.js',
-    		
-    	),
-     ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/modules/Leads/include/js/popup.js',
+        ),
+      ),
       'javascript' => '<script type="text/javascript" language="Javascript">function copyAddressRight(form)  {ldelim} form.alt_address_street.value = form.primary_address_street.value;form.alt_address_city.value = form.primary_address_city.value;form.alt_address_state.value = form.primary_address_state.value;form.alt_address_postalcode.value = form.primary_address_postalcode.value;form.alt_address_country.value = form.primary_address_country.value;return true; {rdelim} function copyAddressLeft(form)  {ldelim} form.primary_address_street.value =form.alt_address_street.value;form.primary_address_city.value = form.alt_address_city.value;form.primary_address_state.value = form.alt_address_state.value;form.primary_address_postalcode.value =form.alt_address_postalcode.value;form.primary_address_country.value = form.alt_address_country.value;return true; {rdelim} </script>',
       'useTabs' => false,
       'tabDefs' => 
@@ -172,15 +171,26 @@ array (
             'studio' => 'visible',
             'label' => 'COMMENT',
           ),
-          1 => '',
+          //~ 1 => 
+          //~ array (
+            //~ 'name' => 'parent_name',
+            //~ 'studio' => 'visible',
+            //~ 'label' => 'LBL_FLEX_RELATE',
+          //~ ),
         ),
         9 => 
         array (
           0 => 'lead_source',
+          //~ 1 => 
+          //~ array (
+            //~ 'name' => 'leads_leads_1_name',
+            //~ 'label' => 'Referral Lead',
+          //~ ),
           1 => 
           array (
-            'name' => 'leads_leads_1_name',
-            'label' => 'Referral Lead',
+            'name' => 'parent_name',
+            'studio' => 'visible',
+            'label' => 'LBL_FLEX_RELATE',
           ),
         ),
         10 => 
@@ -224,7 +234,6 @@ array (
             'name' => 'date_of_prospect',
             'label' => 'LBL_DATEOFPROSPECT',
           ),
-		  1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -275,7 +284,6 @@ array (
             'name' => 'transaction_id',
             'label' => 'LBL_TRANSACTIONID',
           ),
-          1 => '',
         ),
       ),
     ),

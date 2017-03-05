@@ -207,8 +207,9 @@ array (
           0 => 'lead_source',
           1 => 
           array (
-            'name' => 'leads_leads_1_name',
-            'label' => 'Referral Lead',
+            'name' => 'parent_name',
+            'studio' => 'visible',
+            'label' => 'LBL_FLEX_RELATE',
           ),
         ),
         10 => 
