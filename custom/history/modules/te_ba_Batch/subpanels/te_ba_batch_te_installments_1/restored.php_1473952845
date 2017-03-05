@@ -1,0 +1,25 @@
+<?php
+// created: 2016-09-15 10:20:40
+$layout_defs = array (
+  'payment' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_PAYMENT',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'due_date' => 
+  array (
+    'type' => 'date',
+    'vname' => 'LBL_DUE_DATE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'date_entered' => 
+  array (
+    'type' => 'datetime',
+    'vname' => 'LBL_DATE_ENTERED',
+    'width' => '10%',
+    'default' => true,
+  ),
+);
