@@ -1,5 +1,5 @@
 <?php
-// created: 2017-02-23 22:31:57
+// created: 2017-02-23 22:31:58
 $sugar_config = array (
   'addAjaxBannedModules' => 
   array (
