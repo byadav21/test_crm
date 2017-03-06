@@ -42,9 +42,9 @@ global $current_user;
 global $mod_strings, $app_strings;
 require_once('modules/ACL/ACLController.php');
 $acl_obj = new ACLController();
-$module_menu[] = array ('index.php?module=te_student&action=batchtransfer', "Batch Transfer", 'te_student');
-$module_menu[] = array ('index.php?module=Leads&action=EditView&addreferral=true', "Add Referral", 'Leads');
-$module_menu[] = array ('index.php?module=Leads&action=index&parent_id='.$current_user->id, "View My Referrals", 'Leads');
+$module_menu[] = array ('index.php?module=te_student_batch&action=EditView&return_module=te_student_batch&return_action=DetailView', "Create Student Batch", 'te_student_batch');
+$module_menu[] = array ('index.php?module=te_student_batch&action=index', "View Student Batch", 'te_student_batch');
+$module_menu[] = array ('index.php?module=te_student_batch&action=dropoutrequest', "Dropout Request", 'te_student_batch');
 
 
 ?>

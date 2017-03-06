@@ -17,6 +17,13 @@ $moduleList[] = 'te_student_batch';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['te_srm_auto_assignment'] = 'te_srm_auto_assignment';
+$beanFiles['te_srm_auto_assignment'] = 'modules/te_srm_auto_assignment/te_srm_auto_assignment.php';
+$moduleList[] = 'te_srm_auto_assignment';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['te_student_payment'] = 'te_student_payment';
 $beanFiles['te_student_payment'] = 'modules/te_student_payment/te_student_payment.php';
 $moduleList[] = 'te_student_payment';
