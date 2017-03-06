@@ -224,12 +224,7 @@ array (
         ),
         12 => 
         array (
-          0 => 
-          array (
-            'name' => 'address_confirmed',
-            'studio' => 'visible',
-            'label' => 'Address Confiremed',
-          ),
+          0 => '',
           1 => 
           array (
             'name' => 'study_kit_address_country',
@@ -242,22 +237,12 @@ array (
           0 => '',
           1 => 
           array (
-            'name' => 'study_kit_address_state',
-            'studio' => 'visible',
-            'label' => 'Study Kit Address State',
-          ),
-        ),
-        14 => 
-        array (
-          0 => '',
-          1 => 
-          array (
             'name' => 'study_kit_address_city',
             'studio' => 'visible',
             'label' => 'Study Kit Address City',
           ),
         ),
-        15 => 
+        14 => 
         array (
           0 => '',
           1 => 
