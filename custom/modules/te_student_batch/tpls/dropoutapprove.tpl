@@ -1,4 +1,3 @@
-
 <section class="moduleTitle"> <h2>Student Batch For Dropout Approval</h2><br/><br/>
 
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
@@ -56,7 +55,7 @@
 				{$result.dropout_type}
 			</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-				<input type="text" name="refund_amount" id="refund_amount_{$rowcount}" size="30" maxlength="5" value="0" title="" tabindex="0" style='width:80PX !IMPORTANT'>
+				<input type="text" name="refund_amount" id="refund_amount_{$rowcount}" size="30" maxlength="5" value="{$result.refund_amount}" title="" tabindex="0" style='width:80PX !IMPORTANT'>
 			</td>
 			<td>
 				<input name="refund_date_{$rowcount}" type="text"  value="" id='refund_date_{$rowcount}' style='width:113PX !IMPORTANT' />

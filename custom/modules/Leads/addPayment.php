@@ -112,6 +112,10 @@ class addPaymentClass{
 					$studentObj->state=$bean->primary_address_state;
 					$studentObj->city=$bean->primary_address_city;
 					$studentObj->country=$bean->primary_address_country;
+					$studentObj->education=$bean->education_c;
+					$studentObj->work_experience=$bean->work_experience_c;
+					$studentObj->functional_area=$bean->functional_area_c;
+					$studentObj->phone_other=$bean->phone_other;
 					$studentObj->save();				
 					$student_id=$studentObj->id;
 					$student_name=$studentObj->name;

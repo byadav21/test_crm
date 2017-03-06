@@ -336,3 +336,49 @@
 2016-11-21 09:13:49...installerHook: Could not find custom/install/install_hooks.php
 2016-11-21 09:13:50...installerHook: Could not find custom/install/install_hooks.php
 2016-11-21 09:13:50...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:15:25...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:16:25...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:17:25...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:18:25...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:19:25...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:20:25...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:21:03...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:55:17...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:55:32...Begin System Check Process *************
+2017-03-06 06:55:32...XML Parsing Support Found
+2017-03-06 06:55:32...MBString Support Found
+2017-03-06 06:55:32...ZIP Support Found
+2017-03-06 06:55:32.../custom directory and subdirectory check passed
+2017-03-06 06:55:32...cache directory and subdirectory check passed
+2017-03-06 06:55:33.../module  directory and subdirectory check passed
+2017-03-06 06:55:33.../upload directory check passed
+2017-03-06 06:55:33.../zip check passed
+2017-03-06 06:55:33...PCRE version check passed
+2017-03-06 06:55:33...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:55:33...php.ini location found. /home/engenia/lampstack-5.6.24-0/php/etc/php.ini
+2017-03-06 06:55:33...Outputting HTML for System check
+2017-03-06 06:55:33...No Errors were found *************
+2017-03-06 06:55:38...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:56:25...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:56:32...Begin System Check Process *************
+2017-03-06 06:56:32...XML Parsing Support Found
+2017-03-06 06:56:32...MBString Support Found
+2017-03-06 06:56:32...ZIP Support Found
+2017-03-06 06:56:32.../custom directory and subdirectory check passed
+2017-03-06 06:56:32...cache directory and subdirectory check passed
+2017-03-06 06:56:32.../module  directory and subdirectory check passed
+2017-03-06 06:56:32.../upload directory check passed
+2017-03-06 06:56:32.../zip check passed
+2017-03-06 06:56:32...PCRE version check passed
+2017-03-06 06:56:32...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:56:32...php.ini location found. /home/engenia/lampstack-5.6.24-0/php/etc/php.ini
+2017-03-06 06:56:32...Outputting HTML for System check
+2017-03-06 06:56:32...No Errors were found *************
+2017-03-06 06:56:32...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:56:33...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 06:56:49...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 07:03:04...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 07:03:29...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 07:03:33...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 07:03:51...installerHook: Could not find custom/install/install_hooks.php
+2017-03-06 07:19:41...installerHook: Could not find custom/install/install_hooks.php

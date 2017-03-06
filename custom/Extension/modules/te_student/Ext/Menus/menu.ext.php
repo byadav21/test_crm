@@ -40,4 +40,6 @@ global $mod_strings, $app_strings;
 require_once('modules/ACL/ACLController.php');
 $acl_obj = new ACLController();
 $module_menu[] = array ('index.php?module=te_student&action=batchtransfer', "Batch Transfer", 'te_student');
+$module_menu[] = array ('index.php?module=Leads&action=EditView&addreferral=true', "Add Referral", 'Leads');
+$module_menu[] = array ('index.php?module=Leads&action=index&parent_id='.$current_user->id, "View My Referrals", 'Leads');
 ?>

@@ -67,6 +67,9 @@ class LeadsListView extends Lead{
 			if(isset($_REQUEST['call_today'])){
 				$ret_array["where"]  .= " AND status_description LIKE 'Call Back' AND DATE(date_of_callback) = '".date('Y-m-d')."' ";
 			}
+			if(isset($_REQUEST['parent_id'])){
+				$ret_array["where"]  .= " AND parent_id LIKE  '".$_REQUEST['parent_id']."' ";
+			}
 			//~ if(isset($_REQUEST['status']) && !empty($_REQUEST['status'])){
 				//~ $ret_array["where"]  .= " AND leads.status ='".$_REQUEST['status']."'";
 			//~ }
