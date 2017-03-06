@@ -43,9 +43,15 @@ class addPaymentClass{
 			WHERE id='".$bean->te_ba_batch_id_c."' AND deleted=0";
 			$batchObj = $bean->db->Query($batchSql);
 			$batch = $GLOBALS['db']->fetchByAssoc($batchObj);
-			$bean->fee_inr = strstr($batch['fees_inr'],'.',true);
-			$bean->fee_usd = strstr($batch['fees_in_usd'],'.',true);
-			$bean->minimum_attendance = strstr($batch['minimum_attendance_criteria'],'.',true);
+			if(isset($batch['fees_inr']) && !empty($batch['fees_inr'])){
+				$bean->fee_inr = strstr($batch['fees_inr'],'.',true);
+			}
+			if(isset($batch['fees_in_usd']) && !empty($batch['fees_in_usd'])){
+				$bean->fee_usd = strstr($batch['fees_in_usd'],'.',true);
+			}
+			if(isset($batch['minimum_attendance_criteria']) && !empty($batch['minimum_attendance_criteria'])){
+				$bean->minimum_attendance = strstr($batch['minimum_attendance_criteria'],'.',true);
+			}
 			if($bean->status=='Converted'){
 				$bean->converted_date=date("Y-m-d");
 				#create student
