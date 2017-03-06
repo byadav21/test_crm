@@ -322,7 +322,7 @@ class addPaymentClass{
 			$bean->assigned_user_id = 'NULL';
 		
 		}else{
-			if(empty($bean->fetched_row['id'])){
+			if(empty($bean->fetched_row['id'])  && isset($utmDetails['batch']) && !empty($utmDetails['batch'])){
 				$sql = "SELECT id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' AND date_entered LIKE '".date('Y-m-d')."%'";
 				if($bean->phone_mobile!=""){
 					$sql.=" AND leads.phone_mobile = '{$bean->phone_mobile}'";
