@@ -16,11 +16,14 @@ array (
         'default' => true,
         'name' => 'te_student_te_student_batch_1_name',
       ),
-      'name' => 
+      'email' => 
       array (
-        'name' => 'name',
-        'default' => true,
+        'type' => 'varchar',
+        'studio' => 'visible',
+        'label' => 'Email',
         'width' => '10%',
+        'default' => true,
+        'name' => 'email',
       ),
       'institute' => 
       array (
@@ -33,15 +36,6 @@ array (
         'default' => true,
         'name' => 'institute',
       ),
-      'status' => 
-      array (
-        'type' => 'enum',
-        'studio' => 'visible',
-        'label' => 'LBL_STATUS',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'status',
-      ),
       'program' => 
       array (
         'type' => 'relate',
@@ -53,28 +47,41 @@ array (
         'default' => true,
         'name' => 'program',
       ),
-      'email' => 
+      'batch' => 
       array (
-        'type' => 'varchar',
+        'type' => 'relate',
         'studio' => 'visible',
-        'label' => 'Email',
+        'label' => 'LBL_BATCH',
+        'id' => 'TE_BA_BATCH_ID_C',
+        'link' => true,
         'width' => '10%',
         'default' => true,
-        'name' => 'email',
+        'name' => 'batch',
       ),
-      'current_user_only' => 
+      'status' => 
       array (
-        'name' => 'current_user_only',
-        'label' => 'LBL_CURRENT_USER_FILTER',
-        'type' => 'bool',
-        'default' => true,
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_STATUS',
         'width' => '10%',
+        'default' => true,
+        'name' => 'status',
       ),
     ),
     'advanced_search' => 
     array (
-      0 => 'name',
-      1 => 
+      'batch' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_BATCH',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'id' => 'TE_BA_BATCH_ID_C',
+        'name' => 'batch',
+      ),
+      'assigned_user_id' => 
       array (
         'name' => 'assigned_user_id',
         'label' => 'LBL_ASSIGNED_TO',
@@ -87,6 +94,8 @@ array (
             0 => false,
           ),
         ),
+        'default' => true,
+        'width' => '10%',
       ),
     ),
   ),

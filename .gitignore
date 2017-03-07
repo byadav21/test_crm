@@ -1,15 +1,1 @@
-## SuiteCRM
-# Ignore custom .htaccess stuff.
-/.htaccess
-# Ignore the cache directory completely.
-# This will break the current behaviour. Which was often leading to
-# the misuse of the repository as backup replacement.
-# For development the cache directory can be safely ignored and
-# therefore it is ignored.
-/cache/
-!/cache/index.html
-# Custom configuration should also be ignored.
-/config.php
-config.php
-/config_override.php
-config_override.php
+
