@@ -25,7 +25,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 		if($current_user->designation=="BUH"){
 			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status='Pending'  AND sb.deleted=0";
 		}else{
-			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status='Pending'  AND sb.deleted=0 AND assigned_user_id='".$current_user->id."'";
+			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.deleted=0 AND assigned_user_id='".$current_user->id."'";
 		}
 		$studentBatchObj =$db->query($studentBatchSql);
 			
