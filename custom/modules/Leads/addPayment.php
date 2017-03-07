@@ -97,7 +97,6 @@ class addPaymentClass{
 						$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 						$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 						$studentBatchObj->te_student_te_student_batch_1te_student_ida=$duplicateStudent['id'];
-						$studentBatchObj->leads_id=$bean->id;
 						$studentBatchObj->save();
 						#get new student batch id
 						$student_batch_id=$studentBatchObj->id;
@@ -157,7 +156,6 @@ class addPaymentClass{
 					$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 					$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 					$studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_id;
-					$studentBatchObj->leads_id=$bean->id;
 					$studentBatchObj->save();
 					#get new student batch id
 					$student_batch_id=$studentBatchObj->id;
