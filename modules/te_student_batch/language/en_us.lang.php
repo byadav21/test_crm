@@ -102,4 +102,6 @@ $mod_strings = array (
   'LBL_DROPOUT_STATUS' => 'Dropout Status',
   'LBL_BATCH_START_DATE' => 'Batch Start Date',
   'LBL_CERTIFICATE_SENT' => 'Certificate Sent',
+  'LBL_LEAD_LEAD_ID' => 'Lead (related Lead ID)',
+  'LBL_LEAD' => 'Lead',
 );
