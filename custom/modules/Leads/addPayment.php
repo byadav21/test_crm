@@ -91,6 +91,7 @@ class addPaymentClass{
 						$studentBatchObj->te_ba_batch_id_c=$batchDetails['batch_id'];
 						$studentBatchObj->te_pr_programs_id_c=$batchDetails['program_id'];
 						$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
+						$studentBatchObj->lead_id_c=$bean->id;
 						$studentBatchObj->te_vendor_id_c=$vendor['id'];
 						$studentBatchObj->status="Active";
 						$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
@@ -150,6 +151,7 @@ class addPaymentClass{
 					$studentBatchObj->te_ba_batch_id_c=$batchDetails['batch_id'];
 					$studentBatchObj->te_pr_programs_id_c=$batchDetails['program_id'];
 					$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
+					$studentBatchObj->lead_id_c=$bean->id;
 					$studentBatchObj->te_vendor_id_c=$vendor['id'];
 					$studentBatchObj->status="Active";
 					$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
