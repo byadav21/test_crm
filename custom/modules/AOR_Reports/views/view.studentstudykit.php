@@ -46,9 +46,11 @@ class AOR_ReportsViewStudentStudyKit extends SugarView {
 	public function display() {
 		global $sugar_config,$app_list_strings,$current_user,$db;
         $leadsData=array();
-	//	$user_id=$current_user->id;
-		//$this->report_to_id[]=$user_id;
-		//$users = $this->reportingUser($user_id);
+		$user_id=$current_user->id;
+		$this->report_to_id[]=$user_id;
+		$users = $this->reportingUser($user_id);
+		$uid=$this->report_to_id; # list of user ids
+		$IDIN=implode("','",$uid);
 		#Get lead status drop down option
 		//$leadStatusList=$GLOBALS['app_list_strings']['lead_status_dom'];
 		#Get batch drop down option
@@ -79,13 +81,16 @@ class AOR_ReportsViewStudentStudyKit extends SugarView {
 			if(!empty($_POST['result'])){	
 				$where.=" AND sb.kit_status='".$_POST['result']."' ";
 			}
-				$leadSql="SELECT b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,sb.`eligible_for_certificate`,sb.`certificate_sent`,sb.`completion_certificate_address` FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c WHERE s.deleted=0 AND sb.deleted=0 ".$where."";
+			$leadSql="SELECT b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,sb.`eligible_for_certificate`,sb.`certificate_sent`,sb.`completion_certificate_address` FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c WHERE s.deleted=0 AND sb.deleted=0 AND sb.assigned_user_id IN('".$IDIN."')".$where."";
 			
 			$leadObj =$db->query($leadSql);
 			$councelorList=array();
 				while($row =$db->fetchByAssoc($leadObj)){
-				$councelorList[]=$row;						
-			}						
+				$councelorList[]=$row;
+							
+			}		
+
+						
 			foreach($councelorList as $key=>$councelor){
 				if(!isset($councelor['student']))
 					$councelorList[$key]['student']="NA";
@@ -106,7 +111,9 @@ class AOR_ReportsViewStudentStudyKit extends SugarView {
 				
 				if(!isset($councelor['kit_status']))
 					$councelorList[$key]['kit_status']="NA";
-			}	
+			}
+			
+			
 			foreach($councelorList as $key=>$councelor){	
 				$data.= "\"" . $councelor['student'] . "\",\"" . $councelor['batch'] . "\",\"" . $councelor['email']."\",\"" . $councelor['mobile']."\",\"" . $councelor['address']. "\",\"" . $councelor['kit_status']."\"\n";
 			}
@@ -118,7 +125,7 @@ class AOR_ReportsViewStudentStudyKit extends SugarView {
 		
 		#Manish Kumar 
 		//$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
-		$leadSql="SELECT b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,sb.`eligible_for_certificate`,sb.`certificate_sent`,sb.`completion_certificate_address` FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c WHERE s.deleted=0 AND sb.deleted=0".$where."";
+		$leadSql="SELECT b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,sb.`eligible_for_certificate`,sb.`certificate_sent`,sb.`completion_certificate_address` FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c WHERE s.deleted=0 AND sb.deleted=0 AND sb.assigned_user_id IN('".$IDIN."')".$where."";
 		
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();

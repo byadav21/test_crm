@@ -2,7 +2,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
 	die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php'); 
-class AOR_ReportsViewResultreport extends SugarView {
+class AOR_ReportsViewReferalstudent extends SugarView {
 	
 	
 	public function __construct() {
@@ -45,7 +45,7 @@ class AOR_ReportsViewResultreport extends SugarView {
 	public function display() {
 		global $sugar_config,$app_list_strings,$current_user,$db;
         $leadsData=array();
-		$user_id=$current_user->id;
+	    $user_id=$current_user->id;
 		$this->report_to_id[]=$user_id;
 		$users = $this->reportingUser($user_id);
 		#Get lead status drop down option
@@ -62,13 +62,9 @@ class AOR_ReportsViewResultreport extends SugarView {
 			if(!empty($_POST['batch'])){	
 				$where.=" AND b.id IN('".implode("','",$_POST['batch'])."') ";
 			}
-			if(!empty($_POST['result'])){	
-				$where.=" AND sb.result='".$_POST['result']."' ";
-			}
-					
-		#$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 ".$where." GROUP BY assigned_user_id,status";		
-		//$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
-		$leadSql="SELECT b.id,b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,sb.result FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c WHERE s.deleted=0 AND sb.deleted=0 AND sb.assigned_user_id IN('".$IDIN."')".$where."";
+			
+		# Query Fill $$ Manish Kumar
+		$leadSql="SELECT b.name AS batch,s.name AS student,s.email,s.mobile,l.parent_type AS refby,concat(u.first_name,' ',u.last_name)createdby,concat(ru.first_name,' ',ru.last_name)refru,concat(rl.first_name)refrl FROM `leads` AS l INNER JOIN te_student_batch AS sb ON sb.leads_id=l.id INNER JOIN te_ba_batch AS b ON b.id=sb.te_ba_batch_id_c INNER JOIN te_student_te_student_batch_1_c as ssb on ssb.te_student_te_student_batch_1te_student_batch_idb=sb.id INNER JOIN te_student AS s ON s.id=ssb.te_student_te_student_batch_1te_student_ida LEFT JOIN users AS u ON u.id=l.`created_by` LEFT JOIN users as ru ON ru.id=l.parent_id LEFT JOIN leads AS rl ON rl.id=l.parent_id WHERE l.lead_source='Referrals' ".$where."";
 		
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();
@@ -80,7 +76,7 @@ class AOR_ReportsViewResultreport extends SugarView {
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("batchList",$batchList);
 	
-		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/resultreport.tpl');
+		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/referalstudent.tpl');
 	}
 }
 ?>

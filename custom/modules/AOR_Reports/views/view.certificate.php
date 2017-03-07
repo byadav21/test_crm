@@ -45,17 +45,18 @@ class AOR_ReportsViewCertificate extends SugarView {
 	public function display() {
 		global $sugar_config,$app_list_strings,$current_user,$db;
         $leadsData=array();
-	//	$user_id=$current_user->id;
-		//$this->report_to_id[]=$user_id;
-		//$users = $this->reportingUser($user_id);
-		#Get lead status drop down option
+		$user_id=$current_user->id;
+		$this->report_to_id[]=$user_id;
+		$users = $this->reportingUser($user_id);
+
 		//$leadStatusList=$GLOBALS['app_list_strings']['lead_status_dom'];
 		#Get batch drop down option
 		$batchList=$this->getBatch();
 		#print_r($users);
 		#print_r($this->report_to_id);die;
-		//$uid=$this->report_to_id;# list of user ids
-
+		$uid=$this->report_to_id; # list of user ids
+		$IDIN=implode("','",$uid);
+		
 		# Query for batch drop down options
 		$where="";
 		
@@ -66,10 +67,9 @@ class AOR_ReportsViewCertificate extends SugarView {
 				$where.=" AND sb.certificate_sent='".$_POST['result']."' ";
 			}
 			
-		
 		#Manish Kumar 
 		//$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
-		$leadSql="SELECT b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,sb.`eligible_for_certificate`,sb.`certificate_sent`,sb.`completion_certificate_address` FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c WHERE s.deleted=0 AND sb.deleted=0".$where."";
+		$leadSql="SELECT b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,sb.`eligible_for_certificate`,sb.`certificate_sent`,sb.`completion_certificate_address` FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c WHERE s.deleted=0 AND sb.deleted=0 AND sb.assigned_user_id IN('".$IDIN."')".$where."";
 		
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();
