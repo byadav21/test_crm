@@ -1,3 +1,4 @@
+
 <section class="moduleTitle"> <h2>Student Batch For Dropout Approval</h2><br/><br/>
 
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
@@ -55,11 +56,19 @@
 				{$result.dropout_type}
 			</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-				<input type="text" name="refund_amount" id="refund_amount_{$rowcount}" size="30" maxlength="5" value="{$result.refund_amount}" title="" tabindex="0" style='width:80PX !IMPORTANT'>
+				{if $designation eq "BUH"}
+					<input type="text" name="refund_amount" id="refund_amount_{$rowcount}" size="30" maxlength="5" value="{$result.refund_amount}" title="" tabindex="0" style='width:80PX !IMPORTANT'>
+				{else}
+					{$result.refund_amount}
+				{/if}
 			</td>
 			<td>
+				{if $designation eq "BUH"}
 				<input name="refund_date_{$rowcount}" type="text"  value="" id='refund_date_{$rowcount}' style='width:113PX !IMPORTANT' />
 				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="refund_date_trigger_{$rowcount}">
+				{else}
+					{$result.refund_date}
+				{/if}
 				
 			</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.dropout_status}</td> 
