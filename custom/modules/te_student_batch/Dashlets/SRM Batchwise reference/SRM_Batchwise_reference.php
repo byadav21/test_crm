@@ -76,7 +76,7 @@ class SRM_Batchwise_reference extends Dashlet{
 			$ss->assign('autoRefreshOptions', $this->getAutoRefreshOptions());
 			$ss->assign('autoRefreshSelect', $this->autoRefresh);
 		}
-		 return parent::displayOptions() . $ss->fetch('custom/modules/te_student_batch/Dashlets/SRM wise referral/SRM_Batchwise_referenceOptions.tpl');
+		 return parent::displayOptions() . $ss->fetch('custom/modules/te_student_batch/Dashlets/SRM Batchwise reference/SRM_Batchwise_referenceOptions.tpl');
     }
 	/**
      * called to filter out $_REQUEST object when the user submits the configure dropdown
