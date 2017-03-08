@@ -56,7 +56,8 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=resultreport', "Res
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=leadprofilingreport', "Lead Profiling Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=certificate', "Certificate Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=studentstudykit', "Student studykit Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=studentstudykit', "Student Study Kit Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "Referal Student Report",'AOR_Reports');
 
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 $linkTypeList = array (
-  'Link' => 'Link',
-  'YouTube' => 'YouTube',
   'Image' => 'Image',
+  'YouTube' => 'YouTube',
+  'Link' => 'Link',
 );

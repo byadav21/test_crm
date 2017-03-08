@@ -9802,39 +9802,6 @@
       ),
     ),
   ),
-  'alerts_modified_user' => 
-  array (
-    'name' => 'alerts_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Alerts',
-    'rhs_table' => 'alerts',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'alerts_created_by' => 
-  array (
-    'name' => 'alerts_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Alerts',
-    'rhs_table' => 'alerts',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'alerts_assigned_user' => 
-  array (
-    'name' => 'alerts_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Alerts',
-    'rhs_table' => 'alerts',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
   'leads_modified_user' => 
   array (
     'name' => 'leads_modified_user',
@@ -12308,6 +12275,39 @@
     'rhs_table' => 'tracker',
     'rhs_key' => 'monitor_id',
     'relationship_type' => 'one-to-one',
+  ),
+  'alerts_modified_user' => 
+  array (
+    'name' => 'alerts_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Alerts',
+    'rhs_table' => 'alerts',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'alerts_created_by' => 
+  array (
+    'name' => 'alerts_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Alerts',
+    'rhs_table' => 'alerts',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'alerts_assigned_user' => 
+  array (
+    'name' => 'alerts_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Alerts',
+    'rhs_table' => 'alerts',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
   ),
   'documents_modified_user' => 
   array (

@@ -1,5 +1,5 @@
 <?php
-// created: 2017-03-07 14:59:34
+// created: 2017-03-08 01:13:35
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -65,6 +65,8 @@ $mod_strings = array (
   'LBL_DROPOUT_STATUS' => 'Dropout Status',
   'LBL_BATCH_START_DATE' => 'Batch Start Date',
   'LBL_CERTIFICATE_SENT' => 'Certificate Sent',
+  'LBL_LEAD_LEAD_ID' => 'Lead (related Lead ID)',
+  'LBL_LEAD' => 'Lead',
   'LBL_TE_STUDENT_BATCH_TE_STUDENT_PAYMENT_PLAN_1_FROM_TE_STUDENT_PAYMENT_PLAN_TITLE' => 'Student Payment Plan',
   'LBL_EDITVIEW_PANEL1' => 'Student Batch Status Details',
   'LBL_TE_STUDENT_TE_STUDENT_BATCH_1_FROM_TE_STUDENT_TITLE' => 'Student',

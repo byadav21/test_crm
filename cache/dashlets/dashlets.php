@@ -1,40 +1,19 @@
 <?php
-// created: 2017-03-07 15:00:03
+// created: 2017-03-08 01:13:52
 $dashletsFiles = array (
-  'jjwg_Address_CacheDashlet' => 
+  'te_sourceDashlet' => 
   array (
-    'file' => 'modules/jjwg_Address_Cache/Dashlets/jjwg_Address_CacheDashlet/jjwg_Address_CacheDashlet.php',
-    'class' => 'jjwg_Address_CacheDashlet',
-    'meta' => 'modules/jjwg_Address_Cache/Dashlets/jjwg_Address_CacheDashlet/jjwg_Address_CacheDashlet.meta.php',
-    'module' => 'jjwg_Address_Cache',
+    'file' => 'modules/te_source/Dashlets/te_sourceDashlet/te_sourceDashlet.php',
+    'class' => 'te_sourceDashlet',
+    'meta' => 'modules/te_source/Dashlets/te_sourceDashlet/te_sourceDashlet.meta.php',
+    'module' => 'te_source',
   ),
-  'MyCallsDashlet' => 
+  'MyProjectDashlet' => 
   array (
-    'file' => 'modules/Calls/Dashlets/MyCallsDashlet/MyCallsDashlet.php',
-    'class' => 'MyCallsDashlet',
-    'meta' => 'modules/Calls/Dashlets/MyCallsDashlet/MyCallsDashlet.meta.php',
-    'module' => 'Calls',
-  ),
-  'MyClosedOpportunitiesDashlet' => 
-  array (
-    'file' => 'modules/Opportunities/Dashlets/MyClosedOpportunitiesDashlet/MyClosedOpportunitiesDashlet.php',
-    'class' => 'MyClosedOpportunitiesDashlet',
-    'meta' => 'modules/Opportunities/Dashlets/MyClosedOpportunitiesDashlet/MyClosedOpportunitiesDashlet.meta.php',
-    'module' => 'Opportunities',
-  ),
-  'MyOpportunitiesDashlet' => 
-  array (
-    'file' => 'modules/Opportunities/Dashlets/MyOpportunitiesDashlet/MyOpportunitiesDashlet.php',
-    'class' => 'MyOpportunitiesDashlet',
-    'meta' => 'modules/Opportunities/Dashlets/MyOpportunitiesDashlet/MyOpportunitiesDashlet.meta.php',
-    'module' => 'Opportunities',
-  ),
-  'MyDocumentsDashlet' => 
-  array (
-    'file' => 'modules/Documents/Dashlets/MyDocumentsDashlet/MyDocumentsDashlet.php',
-    'class' => 'MyDocumentsDashlet',
-    'meta' => 'modules/Documents/Dashlets/MyDocumentsDashlet/MyDocumentsDashlet.meta.php',
-    'module' => 'Documents',
+    'file' => 'modules/Project/Dashlets/MyProjectDashlet/MyProjectDashlet.php',
+    'class' => 'MyProjectDashlet',
+    'meta' => 'modules/Project/Dashlets/MyProjectDashlet/MyProjectDashlet.meta.php',
+    'module' => 'Project',
   ),
   'te_productDashlet' => 
   array (
@@ -43,19 +22,40 @@ $dashletsFiles = array (
     'meta' => 'modules/te_product/Dashlets/te_productDashlet/te_productDashlet.meta.php',
     'module' => 'te_product',
   ),
-  'te_utm_termDashlet' => 
+  'te_student_study_kitDashlet' => 
   array (
-    'file' => 'modules/te_utm_term/Dashlets/te_utm_termDashlet/te_utm_termDashlet.php',
-    'class' => 'te_utm_termDashlet',
-    'meta' => 'modules/te_utm_term/Dashlets/te_utm_termDashlet/te_utm_termDashlet.meta.php',
-    'module' => 'te_utm_term',
+    'file' => 'modules/te_student_study_kit/Dashlets/te_student_study_kitDashlet/te_student_study_kitDashlet.php',
+    'class' => 'te_student_study_kitDashlet',
+    'meta' => 'modules/te_student_study_kit/Dashlets/te_student_study_kitDashlet/te_student_study_kitDashlet.meta.php',
+    'module' => 'te_student_study_kit',
   ),
-  'te_Program_categoryDashlet' => 
+  'jjwg_MarkersDashlet' => 
   array (
-    'file' => 'modules/te_Program_category/Dashlets/te_Program_categoryDashlet/te_Program_categoryDashlet.php',
-    'class' => 'te_Program_categoryDashlet',
-    'meta' => 'modules/te_Program_category/Dashlets/te_Program_categoryDashlet/te_Program_categoryDashlet.meta.php',
-    'module' => 'te_Program_category',
+    'file' => 'modules/jjwg_Markers/Dashlets/jjwg_MarkersDashlet/jjwg_MarkersDashlet.php',
+    'class' => 'jjwg_MarkersDashlet',
+    'meta' => 'modules/jjwg_Markers/Dashlets/jjwg_MarkersDashlet/jjwg_MarkersDashlet.meta.php',
+    'module' => 'jjwg_Markers',
+  ),
+  'te_student_batchDashlet' => 
+  array (
+    'file' => 'modules/te_student_batch/Dashlets/te_student_batchDashlet/te_student_batchDashlet.php',
+    'class' => 'te_student_batchDashlet',
+    'meta' => 'modules/te_student_batch/Dashlets/te_student_batchDashlet/te_student_batchDashlet.meta.php',
+    'module' => 'te_student_batch',
+  ),
+  'MyEmailsDashlet' => 
+  array (
+    'file' => 'modules/Emails/Dashlets/MyEmailsDashlet/MyEmailsDashlet.php',
+    'class' => 'MyEmailsDashlet',
+    'meta' => 'modules/Emails/Dashlets/MyEmailsDashlet/MyEmailsDashlet.meta.php',
+    'module' => 'Emails',
+  ),
+  'te_utm_mediumDashlet' => 
+  array (
+    'file' => 'modules/te_utm_medium/Dashlets/te_utm_mediumDashlet/te_utm_mediumDashlet.php',
+    'class' => 'te_utm_mediumDashlet',
+    'meta' => 'modules/te_utm_medium/Dashlets/te_utm_mediumDashlet/te_utm_mediumDashlet.meta.php',
+    'module' => 'te_utm_medium',
   ),
   'te_dispositionDashlet' => 
   array (
@@ -64,74 +64,52 @@ $dashletsFiles = array (
     'meta' => 'modules/te_disposition/Dashlets/te_dispositionDashlet/te_dispositionDashlet.meta.php',
     'module' => 'te_disposition',
   ),
-  'te_student_payment_planDashlet' => 
+  'te_Program_categoryDashlet' => 
   array (
-    'file' => 'modules/te_student_payment_plan/Dashlets/te_student_payment_planDashlet/te_student_payment_planDashlet.php',
-    'class' => 'te_student_payment_planDashlet',
-    'meta' => 'modules/te_student_payment_plan/Dashlets/te_student_payment_planDashlet/te_student_payment_planDashlet.meta.php',
-    'module' => 'te_student_payment_plan',
+    'file' => 'modules/te_Program_category/Dashlets/te_Program_categoryDashlet/te_Program_categoryDashlet.php',
+    'class' => 'te_Program_categoryDashlet',
+    'meta' => 'modules/te_Program_category/Dashlets/te_Program_categoryDashlet/te_Program_categoryDashlet.meta.php',
+    'module' => 'te_Program_category',
   ),
-  'AOK_KnowledgeBaseDashlet' => 
+  'InvadersDashlet' => 
   array (
-    'file' => 'modules/AOK_KnowledgeBase/Dashlets/AOK_KnowledgeBaseDashlet/AOK_KnowledgeBaseDashlet.php',
-    'class' => 'AOK_KnowledgeBaseDashlet',
-    'meta' => 'modules/AOK_KnowledgeBase/Dashlets/AOK_KnowledgeBaseDashlet/AOK_KnowledgeBaseDashlet.meta.php',
-    'module' => 'AOK_KnowledgeBase',
+    'file' => 'modules/Home/Dashlets/InvadersDashlet/InvadersDashlet.php',
+    'class' => 'InvadersDashlet',
+    'meta' => 'modules/Home/Dashlets/InvadersDashlet/InvadersDashlet.meta.php',
+    'icon' => 'modules/Home/Dashlets/InvadersDashlet/InvadersDashlet.icon.jpg',
   ),
-  'SugarFeedDashlet' => 
+  'iFrameDashlet' => 
   array (
-    'file' => 'modules/SugarFeed/Dashlets/SugarFeedDashlet/SugarFeedDashlet.php',
-    'class' => 'SugarFeedDashlet',
-    'meta' => 'modules/SugarFeed/Dashlets/SugarFeedDashlet/SugarFeedDashlet.meta.php',
-    'module' => 'SugarFeed',
+    'file' => 'modules/Home/Dashlets/iFrameDashlet/iFrameDashlet.php',
+    'class' => 'iFrameDashlet',
+    'meta' => 'modules/Home/Dashlets/iFrameDashlet/iFrameDashlet.meta.php',
+    'module' => 'Home',
   ),
-  'SpotsDashlet' => 
+  'SugarNewsDashlet' => 
   array (
-    'file' => 'modules/Spots/Dashlets/SpotsDashlet/SpotsDashlet.php',
-    'class' => 'SpotsDashlet',
-    'meta' => 'modules/Spots/Dashlets/SpotsDashlet/SpotsDashlet.meta.php',
+    'file' => 'modules/Home/Dashlets/SugarNewsDashlet/SugarNewsDashlet.php',
+    'class' => 'SugarNewsDashlet',
+    'meta' => 'modules/Home/Dashlets/SugarNewsDashlet/SugarNewsDashlet.meta.php',
+    'module' => 'Home',
   ),
-  'TargetVsActualBatchSizeDashlet' => 
+  'RSSDashlet' => 
   array (
-    'file' => 'custom/modules/te_vendor/Dashlets/TargetVsActualBatchSizeDashlet/TargetVsActualBatchSizeDashlet.php',
-    'class' => 'TargetVsActualBatchSizeDashlet',
-    'meta' => 'custom/modules/te_vendor/Dashlets/TargetVsActualBatchSizeDashlet/TargetVsActualBatchSizeDashlet.meta.php',
-    'module' => 'te_vendor',
+    'file' => 'modules/Home/Dashlets/RSSDashlet/RSSDashlet.php',
+    'class' => 'RSSDashlet',
+    'meta' => 'modules/Home/Dashlets/RSSDashlet/RSSDashlet.meta.php',
+    'icon' => 'modules/Home/Dashlets/RSSDashlet/RSSDashlet.icon.jpg',
   ),
-  'te_ba_BatchDashlet' => 
+  'ChartsDashlet' => 
   array (
-    'file' => 'modules/te_ba_Batch/Dashlets/te_ba_BatchDashlet/te_ba_BatchDashlet.php',
-    'class' => 'te_ba_BatchDashlet',
-    'meta' => 'modules/te_ba_Batch/Dashlets/te_ba_BatchDashlet/te_ba_BatchDashlet.meta.php',
-    'module' => 'te_ba_Batch',
+    'file' => 'modules/Home/Dashlets/ChartsDashlet/ChartsDashlet.php',
+    'class' => 'ChartsDashlet',
+    'meta' => 'modules/Home/Dashlets/ChartsDashlet/ChartsDashlet.meta.php',
   ),
-  'MyNotesDashlet' => 
+  'JotPadDashlet' => 
   array (
-    'file' => 'modules/Notes/Dashlets/MyNotesDashlet/MyNotesDashlet.php',
-    'class' => 'MyNotesDashlet',
-    'meta' => 'modules/Notes/Dashlets/MyNotesDashlet/MyNotesDashlet.meta.php',
-    'module' => 'Notes',
-  ),
-  'te_payment_detailsDashlet' => 
-  array (
-    'file' => 'modules/te_payment_details/Dashlets/te_payment_detailsDashlet/te_payment_detailsDashlet.php',
-    'class' => 'te_payment_detailsDashlet',
-    'meta' => 'modules/te_payment_details/Dashlets/te_payment_detailsDashlet/te_payment_detailsDashlet.meta.php',
-    'module' => 'te_payment_details',
-  ),
-  'te_neox_call_detailsDashlet' => 
-  array (
-    'file' => 'modules/te_neox_call_details/Dashlets/te_neox_call_detailsDashlet/te_neox_call_detailsDashlet.php',
-    'class' => 'te_neox_call_detailsDashlet',
-    'meta' => 'modules/te_neox_call_details/Dashlets/te_neox_call_detailsDashlet/te_neox_call_detailsDashlet.meta.php',
-    'module' => 'te_neox_call_details',
-  ),
-  'te_srm_auto_assignmentDashlet' => 
-  array (
-    'file' => 'modules/te_srm_auto_assignment/Dashlets/te_srm_auto_assignmentDashlet/te_srm_auto_assignmentDashlet.php',
-    'class' => 'te_srm_auto_assignmentDashlet',
-    'meta' => 'modules/te_srm_auto_assignment/Dashlets/te_srm_auto_assignmentDashlet/te_srm_auto_assignmentDashlet.meta.php',
-    'module' => 'te_srm_auto_assignment',
+    'file' => 'modules/Home/Dashlets/JotPadDashlet/JotPadDashlet.php',
+    'class' => 'JotPadDashlet',
+    'meta' => 'modules/Home/Dashlets/JotPadDashlet/JotPadDashlet.meta.php',
   ),
   'te_target_campaign_listDashlet' => 
   array (
@@ -147,61 +125,110 @@ $dashletsFiles = array (
     'meta' => 'modules/AOR_Reports/Dashlets/AORReportsDashlet/AORReportsDashlet.meta.php',
     'module' => 'AOR_Reports',
   ),
-  'OutcomeByMonthDashlet' => 
+  'te_budgeted_campaignDashlet' => 
   array (
-    'file' => 'modules/Charts/Dashlets/OutcomeByMonthDashlet/OutcomeByMonthDashlet.php',
-    'class' => 'OutcomeByMonthDashlet',
-    'meta' => 'modules/Charts/Dashlets/OutcomeByMonthDashlet/OutcomeByMonthDashlet.meta.php',
-    'module' => 'Opportunities',
+    'file' => 'modules/te_budgeted_campaign/Dashlets/te_budgeted_campaignDashlet/te_budgeted_campaignDashlet.php',
+    'class' => 'te_budgeted_campaignDashlet',
+    'meta' => 'modules/te_budgeted_campaign/Dashlets/te_budgeted_campaignDashlet/te_budgeted_campaignDashlet.meta.php',
+    'module' => 'te_budgeted_campaign',
   ),
-  'CampaignROIChartDashlet' => 
+  'TemplateSectionLineDashlet' => 
   array (
-    'file' => 'modules/Charts/Dashlets/CampaignROIChartDashlet/CampaignROIChartDashlet.php',
-    'class' => 'CampaignROIChartDashlet',
-    'meta' => 'modules/Charts/Dashlets/CampaignROIChartDashlet/CampaignROIChartDashlet.meta.php',
-    'module' => 'Campaigns',
+    'file' => 'modules/TemplateSectionLine/Dashlets/TemplateSectionLineDashlet/TemplateSectionLineDashlet.php',
+    'class' => 'TemplateSectionLineDashlet',
+    'meta' => 'modules/TemplateSectionLine/Dashlets/TemplateSectionLineDashlet/TemplateSectionLineDashlet.meta.php',
+    'module' => 'TemplateSectionLine',
   ),
-  'OpportunitiesByLeadSourceDashlet' => 
+  'TargetVsActualBatchSizeDashlet' => 
   array (
-    'file' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceDashlet/OpportunitiesByLeadSourceDashlet.php',
-    'class' => 'OpportunitiesByLeadSourceDashlet',
-    'meta' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceDashlet/OpportunitiesByLeadSourceDashlet.meta.php',
-    'module' => 'Opportunities',
+    'file' => 'custom/modules/te_vendor/Dashlets/TargetVsActualBatchSizeDashlet/TargetVsActualBatchSizeDashlet.php',
+    'class' => 'TargetVsActualBatchSizeDashlet',
+    'meta' => 'custom/modules/te_vendor/Dashlets/TargetVsActualBatchSizeDashlet/TargetVsActualBatchSizeDashlet.meta.php',
+    'module' => 'te_vendor',
   ),
-  'PipelineBySalesStageDashlet' => 
+  'te_ba_BatchDashlet' => 
   array (
-    'file' => 'modules/Charts/Dashlets/PipelineBySalesStageDashlet/PipelineBySalesStageDashlet.php',
-    'class' => 'PipelineBySalesStageDashlet',
-    'meta' => 'modules/Charts/Dashlets/PipelineBySalesStageDashlet/PipelineBySalesStageDashlet.meta.php',
-    'module' => 'Opportunities',
+    'file' => 'modules/te_ba_Batch/Dashlets/te_ba_BatchDashlet/te_ba_BatchDashlet.php',
+    'class' => 'te_ba_BatchDashlet',
+    'meta' => 'modules/te_ba_Batch/Dashlets/te_ba_BatchDashlet/te_ba_BatchDashlet.meta.php',
+    'module' => 'te_ba_Batch',
   ),
-  'OpportunitiesByLeadSourceByOutcomeDashlet' => 
+  'AOK_Knowledge_Base_CategoriesDashlet' => 
   array (
-    'file' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceByOutcomeDashlet/OpportunitiesByLeadSourceByOutcomeDashlet.php',
-    'class' => 'OpportunitiesByLeadSourceByOutcomeDashlet',
-    'meta' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceByOutcomeDashlet/OpportunitiesByLeadSourceByOutcomeDashlet.meta.php',
-    'module' => 'Opportunities',
+    'file' => 'modules/AOK_Knowledge_Base_Categories/Dashlets/AOK_Knowledge_Base_CategoriesDashlet/AOK_Knowledge_Base_CategoriesDashlet.php',
+    'class' => 'AOK_Knowledge_Base_CategoriesDashlet',
+    'meta' => 'modules/AOK_Knowledge_Base_Categories/Dashlets/AOK_Knowledge_Base_CategoriesDashlet/AOK_Knowledge_Base_CategoriesDashlet.meta.php',
+    'module' => 'AOK_Knowledge_Base_Categories',
   ),
-  'MyPipelineBySalesStageDashlet' => 
+  'te_neox_call_detailsDashlet' => 
   array (
-    'file' => 'modules/Charts/Dashlets/MyPipelineBySalesStageDashlet/MyPipelineBySalesStageDashlet.php',
-    'class' => 'MyPipelineBySalesStageDashlet',
-    'meta' => 'modules/Charts/Dashlets/MyPipelineBySalesStageDashlet/MyPipelineBySalesStageDashlet.meta.php',
-    'module' => 'Opportunities',
+    'file' => 'modules/te_neox_call_details/Dashlets/te_neox_call_detailsDashlet/te_neox_call_detailsDashlet.php',
+    'class' => 'te_neox_call_detailsDashlet',
+    'meta' => 'modules/te_neox_call_details/Dashlets/te_neox_call_detailsDashlet/te_neox_call_detailsDashlet.meta.php',
+    'module' => 'te_neox_call_details',
   ),
-  'te_student_paymentDashlet' => 
+  'FP_eventsDashlet' => 
   array (
-    'file' => 'modules/te_student_payment/Dashlets/te_student_paymentDashlet/te_student_paymentDashlet.php',
-    'class' => 'te_student_paymentDashlet',
-    'meta' => 'modules/te_student_payment/Dashlets/te_student_paymentDashlet/te_student_paymentDashlet.meta.php',
-    'module' => 'te_student_payment',
+    'file' => 'modules/FP_events/Dashlets/FP_eventsDashlet/FP_eventsDashlet.php',
+    'class' => 'FP_eventsDashlet',
+    'meta' => 'modules/FP_events/Dashlets/FP_eventsDashlet/FP_eventsDashlet.meta.php',
+    'module' => 'FP_events',
   ),
-  'te_product_categoryDashlet' => 
+  'te_target_campaignDashlet' => 
   array (
-    'file' => 'modules/te_product_category/Dashlets/te_product_categoryDashlet/te_product_categoryDashlet.php',
-    'class' => 'te_product_categoryDashlet',
-    'meta' => 'modules/te_product_category/Dashlets/te_product_categoryDashlet/te_product_categoryDashlet.meta.php',
-    'module' => 'te_product_category',
+    'file' => 'modules/te_target_campaign/Dashlets/te_target_campaignDashlet/te_target_campaignDashlet.php',
+    'class' => 'te_target_campaignDashlet',
+    'meta' => 'modules/te_target_campaign/Dashlets/te_target_campaignDashlet/te_target_campaignDashlet.meta.php',
+    'module' => 'te_target_campaign',
+  ),
+  'MyTasksDashlet' => 
+  array (
+    'file' => 'modules/Tasks/Dashlets/MyTasksDashlet/MyTasksDashlet.php',
+    'class' => 'MyTasksDashlet',
+    'meta' => 'modules/Tasks/Dashlets/MyTasksDashlet/MyTasksDashlet.meta.php',
+    'module' => 'Tasks',
+  ),
+  'MyAccountsDashlet' => 
+  array (
+    'file' => 'modules/Accounts/Dashlets/MyAccountsDashlet/MyAccountsDashlet.php',
+    'class' => 'MyAccountsDashlet',
+    'meta' => 'modules/Accounts/Dashlets/MyAccountsDashlet/MyAccountsDashlet.meta.php',
+    'module' => 'Accounts',
+  ),
+  'te_UTM_SystemDashlet' => 
+  array (
+    'file' => 'modules/te_UTM_System/Dashlets/te_UTM_SystemDashlet/te_UTM_SystemDashlet.php',
+    'class' => 'te_UTM_SystemDashlet',
+    'meta' => 'modules/te_UTM_System/Dashlets/te_UTM_SystemDashlet/te_UTM_SystemDashlet.meta.php',
+    'module' => 'te_UTM_System',
+  ),
+  'MyCallsDashlet' => 
+  array (
+    'file' => 'modules/Calls/Dashlets/MyCallsDashlet/MyCallsDashlet.php',
+    'class' => 'MyCallsDashlet',
+    'meta' => 'modules/Calls/Dashlets/MyCallsDashlet/MyCallsDashlet.meta.php',
+    'module' => 'Calls',
+  ),
+  'AOK_KnowledgeBaseDashlet' => 
+  array (
+    'file' => 'modules/AOK_KnowledgeBase/Dashlets/AOK_KnowledgeBaseDashlet/AOK_KnowledgeBaseDashlet.php',
+    'class' => 'AOK_KnowledgeBaseDashlet',
+    'meta' => 'modules/AOK_KnowledgeBase/Dashlets/AOK_KnowledgeBaseDashlet/AOK_KnowledgeBaseDashlet.meta.php',
+    'module' => 'AOK_KnowledgeBase',
+  ),
+  'jjwg_MapsDashlet' => 
+  array (
+    'file' => 'modules/jjwg_Maps/Dashlets/jjwg_MapsDashlet/jjwg_MapsDashlet.php',
+    'class' => 'jjwg_MapsDashlet',
+    'meta' => 'modules/jjwg_Maps/Dashlets/jjwg_MapsDashlet/jjwg_MapsDashlet.meta.php',
+    'module' => 'jjwg_Maps',
+  ),
+  'MyMeetingsDashlet' => 
+  array (
+    'file' => 'modules/Meetings/Dashlets/MyMeetingsDashlet/MyMeetingsDashlet.php',
+    'class' => 'MyMeetingsDashlet',
+    'meta' => 'modules/Meetings/Dashlets/MyMeetingsDashlet/MyMeetingsDashlet.meta.php',
+    'module' => 'Meetings',
   ),
   'AOS_ProductsDashlet' => 
   array (
@@ -217,248 +244,61 @@ $dashletsFiles = array (
     'meta' => 'modules/ProjectTask/Dashlets/MyProjectTaskDashlet/MyProjectTaskDashlet.meta.php',
     'module' => 'ProjectTask',
   ),
-  'AOW_WorkFlowDashlet' => 
+  'MyPipelineBySalesStageDashlet' => 
   array (
-    'file' => 'modules/AOW_WorkFlow/Dashlets/AOW_WorkFlowDashlet/AOW_WorkFlowDashlet.php',
-    'class' => 'AOW_WorkFlowDashlet',
-    'meta' => 'modules/AOW_WorkFlow/Dashlets/AOW_WorkFlowDashlet/AOW_WorkFlowDashlet.meta.php',
-    'module' => 'AOW_WorkFlow',
+    'file' => 'modules/Charts/Dashlets/MyPipelineBySalesStageDashlet/MyPipelineBySalesStageDashlet.php',
+    'class' => 'MyPipelineBySalesStageDashlet',
+    'meta' => 'modules/Charts/Dashlets/MyPipelineBySalesStageDashlet/MyPipelineBySalesStageDashlet.meta.php',
+    'module' => 'Opportunities',
   ),
-  'te_drip_campaign_listDashlet' => 
+  'CampaignROIChartDashlet' => 
   array (
-    'file' => 'modules/te_drip_campaign_list/Dashlets/te_drip_campaign_listDashlet/te_drip_campaign_listDashlet.php',
-    'class' => 'te_drip_campaign_listDashlet',
-    'meta' => 'modules/te_drip_campaign_list/Dashlets/te_drip_campaign_listDashlet/te_drip_campaign_listDashlet.meta.php',
-    'module' => 'te_drip_campaign_list',
-  ),
-  'AOS_QuotesDashlet' => 
-  array (
-    'file' => 'modules/AOS_Quotes/Dashlets/AOS_QuotesDashlet/AOS_QuotesDashlet.php',
-    'class' => 'AOS_QuotesDashlet',
-    'meta' => 'modules/AOS_Quotes/Dashlets/AOS_QuotesDashlet/AOS_QuotesDashlet.meta.php',
-    'module' => 'AOS_Quotes',
-  ),
-  'AOS_ContractsDashlet' => 
-  array (
-    'file' => 'modules/AOS_Contracts/Dashlets/AOS_ContractsDashlet/AOS_ContractsDashlet.php',
-    'class' => 'AOS_ContractsDashlet',
-    'meta' => 'modules/AOS_Contracts/Dashlets/AOS_ContractsDashlet/AOS_ContractsDashlet.meta.php',
-    'module' => 'AOS_Contracts',
-  ),
-  'AM_ProjectTemplatesDashlet' => 
-  array (
-    'file' => 'modules/AM_ProjectTemplates/Dashlets/AM_ProjectTemplatesDashlet/AM_ProjectTemplatesDashlet.php',
-    'class' => 'AM_ProjectTemplatesDashlet',
-    'meta' => 'modules/AM_ProjectTemplates/Dashlets/AM_ProjectTemplatesDashlet/AM_ProjectTemplatesDashlet.meta.php',
-    'module' => 'AM_ProjectTemplates',
-  ),
-  'te_in_institutesDashlet' => 
-  array (
-    'file' => 'modules/te_in_institutes/Dashlets/te_in_institutesDashlet/te_in_institutesDashlet.php',
-    'class' => 'te_in_institutesDashlet',
-    'meta' => 'modules/te_in_institutes/Dashlets/te_in_institutesDashlet/te_in_institutesDashlet.meta.php',
-    'module' => 'te_in_institutes',
-  ),
-  'AOS_PDF_TemplatesDashlet' => 
-  array (
-    'file' => 'modules/AOS_PDF_Templates/Dashlets/AOS_PDF_TemplatesDashlet/AOS_PDF_TemplatesDashlet.php',
-    'class' => 'AOS_PDF_TemplatesDashlet',
-    'meta' => 'modules/AOS_PDF_Templates/Dashlets/AOS_PDF_TemplatesDashlet/AOS_PDF_TemplatesDashlet.meta.php',
-    'module' => 'AOS_PDF_Templates',
-  ),
-  'FP_Event_LocationsDashlet' => 
-  array (
-    'file' => 'modules/FP_Event_Locations/Dashlets/FP_Event_LocationsDashlet/FP_Event_LocationsDashlet.php',
-    'class' => 'FP_Event_LocationsDashlet',
-    'meta' => 'modules/FP_Event_Locations/Dashlets/FP_Event_LocationsDashlet/FP_Event_LocationsDashlet.meta.php',
-    'module' => 'FP_Event_Locations',
-  ),
-  'FP_eventsDashlet' => 
-  array (
-    'file' => 'modules/FP_events/Dashlets/FP_eventsDashlet/FP_eventsDashlet.php',
-    'class' => 'FP_eventsDashlet',
-    'meta' => 'modules/FP_events/Dashlets/FP_eventsDashlet/FP_eventsDashlet.meta.php',
-    'module' => 'FP_events',
-  ),
-  'te_vendorDashlet' => 
-  array (
-    'file' => 'modules/te_vendor/Dashlets/te_vendorDashlet/te_vendorDashlet.php',
-    'class' => 'te_vendorDashlet',
-    'meta' => 'modules/te_vendor/Dashlets/te_vendorDashlet/te_vendorDashlet.meta.php',
-    'module' => 'te_vendor',
-  ),
-  'te_UTM_SystemDashlet' => 
-  array (
-    'file' => 'modules/te_UTM_System/Dashlets/te_UTM_SystemDashlet/te_UTM_SystemDashlet.php',
-    'class' => 'te_UTM_SystemDashlet',
-    'meta' => 'modules/te_UTM_System/Dashlets/te_UTM_SystemDashlet/te_UTM_SystemDashlet.meta.php',
-    'module' => 'te_UTM_System',
-  ),
-  'MyAccountsDashlet' => 
-  array (
-    'file' => 'modules/Accounts/Dashlets/MyAccountsDashlet/MyAccountsDashlet.php',
-    'class' => 'MyAccountsDashlet',
-    'meta' => 'modules/Accounts/Dashlets/MyAccountsDashlet/MyAccountsDashlet.meta.php',
-    'module' => 'Accounts',
-  ),
-  'te_utmDashlet' => 
-  array (
-    'file' => 'modules/te_utm/Dashlets/te_utmDashlet/te_utmDashlet.php',
-    'class' => 'te_utmDashlet',
-    'meta' => 'modules/te_utm/Dashlets/te_utmDashlet/te_utmDashlet.meta.php',
-    'module' => 'te_utm',
-  ),
-  'MyCasesDashlet' => 
-  array (
-    'file' => 'modules/Cases/Dashlets/MyCasesDashlet/MyCasesDashlet.php',
-    'class' => 'MyCasesDashlet',
-    'meta' => 'modules/Cases/Dashlets/MyCasesDashlet/MyCasesDashlet.meta.php',
-    'module' => 'Cases',
-  ),
-  'te_student_batchDashlet' => 
-  array (
-    'file' => 'modules/te_student_batch/Dashlets/te_student_batchDashlet/te_student_batchDashlet.php',
-    'class' => 'te_student_batchDashlet',
-    'meta' => 'modules/te_student_batch/Dashlets/te_student_batchDashlet/te_student_batchDashlet.meta.php',
-    'module' => 'te_student_batch',
-  ),
-  'te_drip_campaignDashlet' => 
-  array (
-    'file' => 'modules/te_drip_campaign/Dashlets/te_drip_campaignDashlet/te_drip_campaignDashlet.php',
-    'class' => 'te_drip_campaignDashlet',
-    'meta' => 'modules/te_drip_campaign/Dashlets/te_drip_campaignDashlet/te_drip_campaignDashlet.meta.php',
-    'module' => 'te_drip_campaign',
-  ),
-  'MyProjectDashlet' => 
-  array (
-    'file' => 'modules/Project/Dashlets/MyProjectDashlet/MyProjectDashlet.php',
-    'class' => 'MyProjectDashlet',
-    'meta' => 'modules/Project/Dashlets/MyProjectDashlet/MyProjectDashlet.meta.php',
-    'module' => 'Project',
-  ),
-  'MyContactsDashlet' => 
-  array (
-    'file' => 'modules/Contacts/Dashlets/MyContactsDashlet/MyContactsDashlet.php',
-    'class' => 'MyContactsDashlet',
-    'meta' => 'modules/Contacts/Dashlets/MyContactsDashlet/MyContactsDashlet.meta.php',
-    'module' => 'Contacts',
-  ),
-  'MyMeetingsDashlet' => 
-  array (
-    'file' => 'modules/Meetings/Dashlets/MyMeetingsDashlet/MyMeetingsDashlet.php',
-    'class' => 'MyMeetingsDashlet',
-    'meta' => 'modules/Meetings/Dashlets/MyMeetingsDashlet/MyMeetingsDashlet.meta.php',
-    'module' => 'Meetings',
-  ),
-  'te_sub_productDashlet' => 
-  array (
-    'file' => 'modules/te_sub_product/Dashlets/te_sub_productDashlet/te_sub_productDashlet.php',
-    'class' => 'te_sub_productDashlet',
-    'meta' => 'modules/te_sub_product/Dashlets/te_sub_productDashlet/te_sub_productDashlet.meta.php',
-    'module' => 'te_sub_product',
-  ),
-  'CalendarDashlet' => 
-  array (
-    'file' => 'modules/Calendar/Dashlets/CalendarDashlet/CalendarDashlet.php',
-    'class' => 'CalendarDashlet',
-    'meta' => 'modules/Calendar/Dashlets/CalendarDashlet/CalendarDashlet.meta.php',
-    'module' => 'Calendar',
-  ),
-  'te_sourceDashlet' => 
-  array (
-    'file' => 'modules/te_source/Dashlets/te_sourceDashlet/te_sourceDashlet.php',
-    'class' => 'te_sourceDashlet',
-    'meta' => 'modules/te_source/Dashlets/te_sourceDashlet/te_sourceDashlet.meta.php',
-    'module' => 'te_source',
-  ),
-  'MyEmailsDashlet' => 
-  array (
-    'file' => 'modules/Emails/Dashlets/MyEmailsDashlet/MyEmailsDashlet.php',
-    'class' => 'MyEmailsDashlet',
-    'meta' => 'modules/Emails/Dashlets/MyEmailsDashlet/MyEmailsDashlet.meta.php',
-    'module' => 'Emails',
-  ),
-  'te_training_categoryDashlet' => 
-  array (
-    'file' => 'modules/te_training_category/Dashlets/te_training_categoryDashlet/te_training_categoryDashlet.php',
-    'class' => 'te_training_categoryDashlet',
-    'meta' => 'modules/te_training_category/Dashlets/te_training_categoryDashlet/te_training_categoryDashlet.meta.php',
-    'module' => 'te_training_category',
-  ),
-  'OutboundEmailAccountsDashlet' => 
-  array (
-    'file' => 'modules/OutboundEmailAccounts/Dashlets/OutboundEmailAccountsDashlet/OutboundEmailAccountsDashlet.php',
-    'class' => 'OutboundEmailAccountsDashlet',
-    'meta' => 'modules/OutboundEmailAccounts/Dashlets/OutboundEmailAccountsDashlet/OutboundEmailAccountsDashlet.meta.php',
-    'module' => 'OutboundEmailAccounts',
-  ),
-  'te_transfer_batchDashlet' => 
-  array (
-    'file' => 'modules/te_transfer_batch/Dashlets/te_transfer_batchDashlet/te_transfer_batchDashlet.php',
-    'class' => 'te_transfer_batchDashlet',
-    'meta' => 'modules/te_transfer_batch/Dashlets/te_transfer_batchDashlet/te_transfer_batchDashlet.meta.php',
-    'module' => 'te_transfer_batch',
-  ),
-  'te_student_study_kitDashlet' => 
-  array (
-    'file' => 'modules/te_student_study_kit/Dashlets/te_student_study_kitDashlet/te_student_study_kitDashlet.php',
-    'class' => 'te_student_study_kitDashlet',
-    'meta' => 'modules/te_student_study_kit/Dashlets/te_student_study_kitDashlet/te_student_study_kitDashlet.meta.php',
-    'module' => 'te_student_study_kit',
-  ),
-  'te_utm_campaignDashlet' => 
-  array (
-    'file' => 'modules/te_utm_campaign/Dashlets/te_utm_campaignDashlet/te_utm_campaignDashlet.php',
-    'class' => 'te_utm_campaignDashlet',
-    'meta' => 'modules/te_utm_campaign/Dashlets/te_utm_campaignDashlet/te_utm_campaignDashlet.meta.php',
-    'module' => 'te_utm_campaign',
-  ),
-  'TopCampaignsDashlet' => 
-  array (
-    'file' => 'modules/Campaigns/Dashlets/TopCampaignsDashlet/TopCampaignsDashlet.php',
-    'class' => 'TopCampaignsDashlet',
-    'meta' => 'modules/Campaigns/Dashlets/TopCampaignsDashlet/TopCampaignsDashlet.meta.php',
+    'file' => 'modules/Charts/Dashlets/CampaignROIChartDashlet/CampaignROIChartDashlet.php',
+    'class' => 'CampaignROIChartDashlet',
+    'meta' => 'modules/Charts/Dashlets/CampaignROIChartDashlet/CampaignROIChartDashlet.meta.php',
     'module' => 'Campaigns',
   ),
-  'MyLeadsDashlet' => 
+  'OpportunitiesByLeadSourceByOutcomeDashlet' => 
   array (
-    'file' => 'modules/Leads/Dashlets/MyLeadsDashlet/MyLeadsDashlet.php',
-    'class' => 'MyLeadsDashlet',
-    'meta' => 'modules/Leads/Dashlets/MyLeadsDashlet/MyLeadsDashlet.meta.php',
-    'module' => 'Leads',
+    'file' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceByOutcomeDashlet/OpportunitiesByLeadSourceByOutcomeDashlet.php',
+    'class' => 'OpportunitiesByLeadSourceByOutcomeDashlet',
+    'meta' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceByOutcomeDashlet/OpportunitiesByLeadSourceByOutcomeDashlet.meta.php',
+    'module' => 'Opportunities',
   ),
-  'AOK_Knowledge_Base_CategoriesDashlet' => 
+  'OpportunitiesByLeadSourceDashlet' => 
   array (
-    'file' => 'modules/AOK_Knowledge_Base_Categories/Dashlets/AOK_Knowledge_Base_CategoriesDashlet/AOK_Knowledge_Base_CategoriesDashlet.php',
-    'class' => 'AOK_Knowledge_Base_CategoriesDashlet',
-    'meta' => 'modules/AOK_Knowledge_Base_Categories/Dashlets/AOK_Knowledge_Base_CategoriesDashlet/AOK_Knowledge_Base_CategoriesDashlet.meta.php',
-    'module' => 'AOK_Knowledge_Base_Categories',
+    'file' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceDashlet/OpportunitiesByLeadSourceDashlet.php',
+    'class' => 'OpportunitiesByLeadSourceDashlet',
+    'meta' => 'modules/Charts/Dashlets/OpportunitiesByLeadSourceDashlet/OpportunitiesByLeadSourceDashlet.meta.php',
+    'module' => 'Opportunities',
   ),
-  'FavoritesDashlet' => 
+  'OutcomeByMonthDashlet' => 
   array (
-    'file' => 'modules/Favorites/Dashlets/Favorites/FavoritesDashlet.php',
-    'class' => 'FavoritesDashlet',
+    'file' => 'modules/Charts/Dashlets/OutcomeByMonthDashlet/OutcomeByMonthDashlet.php',
+    'class' => 'OutcomeByMonthDashlet',
+    'meta' => 'modules/Charts/Dashlets/OutcomeByMonthDashlet/OutcomeByMonthDashlet.meta.php',
+    'module' => 'Opportunities',
   ),
-  'te_studentDashlet' => 
+  'PipelineBySalesStageDashlet' => 
   array (
-    'file' => 'modules/te_student/Dashlets/te_studentDashlet/te_studentDashlet.php',
-    'class' => 'te_studentDashlet',
-    'meta' => 'modules/te_student/Dashlets/te_studentDashlet/te_studentDashlet.meta.php',
-    'module' => 'te_student',
+    'file' => 'modules/Charts/Dashlets/PipelineBySalesStageDashlet/PipelineBySalesStageDashlet.php',
+    'class' => 'PipelineBySalesStageDashlet',
+    'meta' => 'modules/Charts/Dashlets/PipelineBySalesStageDashlet/PipelineBySalesStageDashlet.meta.php',
+    'module' => 'Opportunities',
   ),
-  'AM_TaskTemplatesDashlet' => 
+  'jjwg_Address_CacheDashlet' => 
   array (
-    'file' => 'modules/AM_TaskTemplates/Dashlets/AM_TaskTemplatesDashlet/AM_TaskTemplatesDashlet.php',
-    'class' => 'AM_TaskTemplatesDashlet',
-    'meta' => 'modules/AM_TaskTemplates/Dashlets/AM_TaskTemplatesDashlet/AM_TaskTemplatesDashlet.meta.php',
-    'module' => 'AM_TaskTemplates',
+    'file' => 'modules/jjwg_Address_Cache/Dashlets/jjwg_Address_CacheDashlet/jjwg_Address_CacheDashlet.php',
+    'class' => 'jjwg_Address_CacheDashlet',
+    'meta' => 'modules/jjwg_Address_Cache/Dashlets/jjwg_Address_CacheDashlet/jjwg_Address_CacheDashlet.meta.php',
+    'module' => 'jjwg_Address_Cache',
   ),
-  'te_utm_mediumDashlet' => 
+  'te_utm_termDashlet' => 
   array (
-    'file' => 'modules/te_utm_medium/Dashlets/te_utm_mediumDashlet/te_utm_mediumDashlet.php',
-    'class' => 'te_utm_mediumDashlet',
-    'meta' => 'modules/te_utm_medium/Dashlets/te_utm_mediumDashlet/te_utm_mediumDashlet.meta.php',
-    'module' => 'te_utm_medium',
+    'file' => 'modules/te_utm_term/Dashlets/te_utm_termDashlet/te_utm_termDashlet.php',
+    'class' => 'te_utm_termDashlet',
+    'meta' => 'modules/te_utm_term/Dashlets/te_utm_termDashlet/te_utm_termDashlet.meta.php',
+    'module' => 'te_utm_term',
   ),
   'jjwg_AreasDashlet' => 
   array (
@@ -467,19 +307,19 @@ $dashletsFiles = array (
     'meta' => 'modules/jjwg_Areas/Dashlets/jjwg_AreasDashlet/jjwg_AreasDashlet.meta.php',
     'module' => 'jjwg_Areas',
   ),
-  'jjwg_MarkersDashlet' => 
+  'te_impressionDashlet' => 
   array (
-    'file' => 'modules/jjwg_Markers/Dashlets/jjwg_MarkersDashlet/jjwg_MarkersDashlet.php',
-    'class' => 'jjwg_MarkersDashlet',
-    'meta' => 'modules/jjwg_Markers/Dashlets/jjwg_MarkersDashlet/jjwg_MarkersDashlet.meta.php',
-    'module' => 'jjwg_Markers',
+    'file' => 'modules/te_impression/Dashlets/te_impressionDashlet/te_impressionDashlet.php',
+    'class' => 'te_impressionDashlet',
+    'meta' => 'modules/te_impression/Dashlets/te_impressionDashlet/te_impressionDashlet.meta.php',
+    'module' => 'te_impression',
   ),
-  'AOW_ProcessedDashlet' => 
+  'MyDocumentsDashlet' => 
   array (
-    'file' => 'modules/AOW_Processed/Dashlets/AOW_ProcessedDashlet/AOW_ProcessedDashlet.php',
-    'class' => 'AOW_ProcessedDashlet',
-    'meta' => 'modules/AOW_Processed/Dashlets/AOW_ProcessedDashlet/AOW_ProcessedDashlet.meta.php',
-    'module' => 'AOW_Processed',
+    'file' => 'modules/Documents/Dashlets/MyDocumentsDashlet/MyDocumentsDashlet.php',
+    'class' => 'MyDocumentsDashlet',
+    'meta' => 'modules/Documents/Dashlets/MyDocumentsDashlet/MyDocumentsDashlet.meta.php',
+    'module' => 'Documents',
   ),
   'AOS_Product_CategoriesDashlet' => 
   array (
@@ -488,33 +328,33 @@ $dashletsFiles = array (
     'meta' => 'modules/AOS_Product_Categories/Dashlets/AOS_Product_CategoriesDashlet/AOS_Product_CategoriesDashlet.meta.php',
     'module' => 'AOS_Product_Categories',
   ),
-  'te_target_campaignDashlet' => 
+  'te_studentDashlet' => 
   array (
-    'file' => 'modules/te_target_campaign/Dashlets/te_target_campaignDashlet/te_target_campaignDashlet.php',
-    'class' => 'te_target_campaignDashlet',
-    'meta' => 'modules/te_target_campaign/Dashlets/te_target_campaignDashlet/te_target_campaignDashlet.meta.php',
-    'module' => 'te_target_campaign',
+    'file' => 'modules/te_student/Dashlets/te_studentDashlet/te_studentDashlet.php',
+    'class' => 'te_studentDashlet',
+    'meta' => 'modules/te_student/Dashlets/te_studentDashlet/te_studentDashlet.meta.php',
+    'module' => 'te_student',
   ),
-  'MyBugsDashlet' => 
+  'AOW_ProcessedDashlet' => 
   array (
-    'file' => 'modules/Bugs/Dashlets/MyBugsDashlet/MyBugsDashlet.php',
-    'class' => 'MyBugsDashlet',
-    'meta' => 'modules/Bugs/Dashlets/MyBugsDashlet/MyBugsDashlet.meta.php',
-    'module' => 'Bugs',
+    'file' => 'modules/AOW_Processed/Dashlets/AOW_ProcessedDashlet/AOW_ProcessedDashlet.php',
+    'class' => 'AOW_ProcessedDashlet',
+    'meta' => 'modules/AOW_Processed/Dashlets/AOW_ProcessedDashlet/AOW_ProcessedDashlet.meta.php',
+    'module' => 'AOW_Processed',
   ),
-  'AOBH_BusinessHoursDashlet' => 
+  'te_sub_productDashlet' => 
   array (
-    'file' => 'modules/AOBH_BusinessHours/Dashlets/AOBH_BusinessHoursDashlet/AOBH_BusinessHoursDashlet.php',
-    'class' => 'AOBH_BusinessHoursDashlet',
-    'meta' => 'modules/AOBH_BusinessHours/Dashlets/AOBH_BusinessHoursDashlet/AOBH_BusinessHoursDashlet.meta.php',
-    'module' => 'AOBH_BusinessHours',
+    'file' => 'modules/te_sub_product/Dashlets/te_sub_productDashlet/te_sub_productDashlet.php',
+    'class' => 'te_sub_productDashlet',
+    'meta' => 'modules/te_sub_product/Dashlets/te_sub_productDashlet/te_sub_productDashlet.meta.php',
+    'module' => 'te_sub_product',
   ),
-  'jjwg_MapsDashlet' => 
+  'SugarFeedDashlet' => 
   array (
-    'file' => 'modules/jjwg_Maps/Dashlets/jjwg_MapsDashlet/jjwg_MapsDashlet.php',
-    'class' => 'jjwg_MapsDashlet',
-    'meta' => 'modules/jjwg_Maps/Dashlets/jjwg_MapsDashlet/jjwg_MapsDashlet.meta.php',
-    'module' => 'jjwg_Maps',
+    'file' => 'modules/SugarFeed/Dashlets/SugarFeedDashlet/SugarFeedDashlet.php',
+    'class' => 'SugarFeedDashlet',
+    'meta' => 'modules/SugarFeed/Dashlets/SugarFeedDashlet/SugarFeedDashlet.meta.php',
+    'module' => 'SugarFeed',
   ),
   'te_industryDashlet' => 
   array (
@@ -523,80 +363,67 @@ $dashletsFiles = array (
     'meta' => 'modules/te_industry/Dashlets/te_industryDashlet/te_industryDashlet.meta.php',
     'module' => 'te_industry',
   ),
-  'te_lead_assignment_ruleDashlet' => 
+  'OutboundEmailAccountsDashlet' => 
   array (
-    'file' => 'modules/te_lead_assignment_rule/Dashlets/te_lead_assignment_ruleDashlet/te_lead_assignment_ruleDashlet.php',
-    'class' => 'te_lead_assignment_ruleDashlet',
-    'meta' => 'modules/te_lead_assignment_rule/Dashlets/te_lead_assignment_ruleDashlet/te_lead_assignment_ruleDashlet.meta.php',
-    'module' => 'te_lead_assignment_rule',
+    'file' => 'modules/OutboundEmailAccounts/Dashlets/OutboundEmailAccountsDashlet/OutboundEmailAccountsDashlet.php',
+    'class' => 'OutboundEmailAccountsDashlet',
+    'meta' => 'modules/OutboundEmailAccounts/Dashlets/OutboundEmailAccountsDashlet/OutboundEmailAccountsDashlet.meta.php',
+    'module' => 'OutboundEmailAccounts',
   ),
-  'TemplateSectionLineDashlet' => 
+  'MyCasesDashlet' => 
   array (
-    'file' => 'modules/TemplateSectionLine/Dashlets/TemplateSectionLineDashlet/TemplateSectionLineDashlet.php',
-    'class' => 'TemplateSectionLineDashlet',
-    'meta' => 'modules/TemplateSectionLine/Dashlets/TemplateSectionLineDashlet/TemplateSectionLineDashlet.meta.php',
-    'module' => 'TemplateSectionLine',
+    'file' => 'modules/Cases/Dashlets/MyCasesDashlet/MyCasesDashlet.php',
+    'class' => 'MyCasesDashlet',
+    'meta' => 'modules/Cases/Dashlets/MyCasesDashlet/MyCasesDashlet.meta.php',
+    'module' => 'Cases',
   ),
-  'SugarNewsDashlet' => 
+  'te_payment_detailsDashlet' => 
   array (
-    'file' => 'modules/Home/Dashlets/SugarNewsDashlet/SugarNewsDashlet.php',
-    'class' => 'SugarNewsDashlet',
-    'meta' => 'modules/Home/Dashlets/SugarNewsDashlet/SugarNewsDashlet.meta.php',
-    'module' => 'Home',
+    'file' => 'modules/te_payment_details/Dashlets/te_payment_detailsDashlet/te_payment_detailsDashlet.php',
+    'class' => 'te_payment_detailsDashlet',
+    'meta' => 'modules/te_payment_details/Dashlets/te_payment_detailsDashlet/te_payment_detailsDashlet.meta.php',
+    'module' => 'te_payment_details',
   ),
-  'iFrameDashlet' => 
+  'MyNotesDashlet' => 
   array (
-    'file' => 'modules/Home/Dashlets/iFrameDashlet/iFrameDashlet.php',
-    'class' => 'iFrameDashlet',
-    'meta' => 'modules/Home/Dashlets/iFrameDashlet/iFrameDashlet.meta.php',
-    'module' => 'Home',
+    'file' => 'modules/Notes/Dashlets/MyNotesDashlet/MyNotesDashlet.php',
+    'class' => 'MyNotesDashlet',
+    'meta' => 'modules/Notes/Dashlets/MyNotesDashlet/MyNotesDashlet.meta.php',
+    'module' => 'Notes',
   ),
-  'JotPadDashlet' => 
+  'te_utm_campaignDashlet' => 
   array (
-    'file' => 'modules/Home/Dashlets/JotPadDashlet/JotPadDashlet.php',
-    'class' => 'JotPadDashlet',
-    'meta' => 'modules/Home/Dashlets/JotPadDashlet/JotPadDashlet.meta.php',
+    'file' => 'modules/te_utm_campaign/Dashlets/te_utm_campaignDashlet/te_utm_campaignDashlet.php',
+    'class' => 'te_utm_campaignDashlet',
+    'meta' => 'modules/te_utm_campaign/Dashlets/te_utm_campaignDashlet/te_utm_campaignDashlet.meta.php',
+    'module' => 'te_utm_campaign',
   ),
-  'ChartsDashlet' => 
+  'FP_Event_LocationsDashlet' => 
   array (
-    'file' => 'modules/Home/Dashlets/ChartsDashlet/ChartsDashlet.php',
-    'class' => 'ChartsDashlet',
-    'meta' => 'modules/Home/Dashlets/ChartsDashlet/ChartsDashlet.meta.php',
+    'file' => 'modules/FP_Event_Locations/Dashlets/FP_Event_LocationsDashlet/FP_Event_LocationsDashlet.php',
+    'class' => 'FP_Event_LocationsDashlet',
+    'meta' => 'modules/FP_Event_Locations/Dashlets/FP_Event_LocationsDashlet/FP_Event_LocationsDashlet.meta.php',
+    'module' => 'FP_Event_Locations',
   ),
-  'InvadersDashlet' => 
+  'te_drip_campaignDashlet' => 
   array (
-    'file' => 'modules/Home/Dashlets/InvadersDashlet/InvadersDashlet.php',
-    'class' => 'InvadersDashlet',
-    'meta' => 'modules/Home/Dashlets/InvadersDashlet/InvadersDashlet.meta.php',
-    'icon' => 'modules/Home/Dashlets/InvadersDashlet/InvadersDashlet.icon.jpg',
+    'file' => 'modules/te_drip_campaign/Dashlets/te_drip_campaignDashlet/te_drip_campaignDashlet.php',
+    'class' => 'te_drip_campaignDashlet',
+    'meta' => 'modules/te_drip_campaign/Dashlets/te_drip_campaignDashlet/te_drip_campaignDashlet.meta.php',
+    'module' => 'te_drip_campaign',
   ),
-  'RSSDashlet' => 
+  'SpotsDashlet' => 
   array (
-    'file' => 'modules/Home/Dashlets/RSSDashlet/RSSDashlet.php',
-    'class' => 'RSSDashlet',
-    'meta' => 'modules/Home/Dashlets/RSSDashlet/RSSDashlet.meta.php',
-    'icon' => 'modules/Home/Dashlets/RSSDashlet/RSSDashlet.icon.jpg',
+    'file' => 'modules/Spots/Dashlets/SpotsDashlet/SpotsDashlet.php',
+    'class' => 'SpotsDashlet',
+    'meta' => 'modules/Spots/Dashlets/SpotsDashlet/SpotsDashlet.meta.php',
   ),
-  'te_installmentsDashlet' => 
+  'te_student_paymentDashlet' => 
   array (
-    'file' => 'modules/te_installments/Dashlets/te_installmentsDashlet/te_installmentsDashlet.php',
-    'class' => 'te_installmentsDashlet',
-    'meta' => 'modules/te_installments/Dashlets/te_installmentsDashlet/te_installmentsDashlet.meta.php',
-    'module' => 'te_installments',
-  ),
-  'MyTasksDashlet' => 
-  array (
-    'file' => 'modules/Tasks/Dashlets/MyTasksDashlet/MyTasksDashlet.php',
-    'class' => 'MyTasksDashlet',
-    'meta' => 'modules/Tasks/Dashlets/MyTasksDashlet/MyTasksDashlet.meta.php',
-    'module' => 'Tasks',
-  ),
-  'te_pr_ProgramsDashlet' => 
-  array (
-    'file' => 'modules/te_pr_Programs/Dashlets/te_pr_ProgramsDashlet/te_pr_ProgramsDashlet.php',
-    'class' => 'te_pr_ProgramsDashlet',
-    'meta' => 'modules/te_pr_Programs/Dashlets/te_pr_ProgramsDashlet/te_pr_ProgramsDashlet.meta.php',
-    'module' => 'te_pr_Programs',
+    'file' => 'modules/te_student_payment/Dashlets/te_student_paymentDashlet/te_student_paymentDashlet.php',
+    'class' => 'te_student_paymentDashlet',
+    'meta' => 'modules/te_student_payment/Dashlets/te_student_paymentDashlet/te_student_paymentDashlet.meta.php',
+    'module' => 'te_student_payment',
   ),
   'te_report_recipientsDashlet' => 
   array (
@@ -605,19 +432,19 @@ $dashletsFiles = array (
     'meta' => 'modules/te_report_recipients/Dashlets/te_report_recipientsDashlet/te_report_recipientsDashlet.meta.php',
     'module' => 'te_report_recipients',
   ),
-  'te_budgeted_campaignDashlet' => 
+  'te_training_categoryDashlet' => 
   array (
-    'file' => 'modules/te_budgeted_campaign/Dashlets/te_budgeted_campaignDashlet/te_budgeted_campaignDashlet.php',
-    'class' => 'te_budgeted_campaignDashlet',
-    'meta' => 'modules/te_budgeted_campaign/Dashlets/te_budgeted_campaignDashlet/te_budgeted_campaignDashlet.meta.php',
-    'module' => 'te_budgeted_campaign',
+    'file' => 'modules/te_training_category/Dashlets/te_training_categoryDashlet/te_training_categoryDashlet.php',
+    'class' => 'te_training_categoryDashlet',
+    'meta' => 'modules/te_training_category/Dashlets/te_training_categoryDashlet/te_training_categoryDashlet.meta.php',
+    'module' => 'te_training_category',
   ),
-  'te_impressionDashlet' => 
+  'te_vendorDashlet' => 
   array (
-    'file' => 'modules/te_impression/Dashlets/te_impressionDashlet/te_impressionDashlet.php',
-    'class' => 'te_impressionDashlet',
-    'meta' => 'modules/te_impression/Dashlets/te_impressionDashlet/te_impressionDashlet.meta.php',
-    'module' => 'te_impression',
+    'file' => 'modules/te_vendor/Dashlets/te_vendorDashlet/te_vendorDashlet.php',
+    'class' => 'te_vendorDashlet',
+    'meta' => 'modules/te_vendor/Dashlets/te_vendorDashlet/te_vendorDashlet.meta.php',
+    'module' => 'te_vendor',
   ),
   'AOS_InvoicesDashlet' => 
   array (
@@ -626,6 +453,74 @@ $dashletsFiles = array (
     'meta' => 'modules/AOS_Invoices/Dashlets/AOS_InvoicesDashlet/AOS_InvoicesDashlet.meta.php',
     'module' => 'AOS_Invoices',
   ),
+  'te_drip_campaign_listDashlet' => 
+  array (
+    'file' => 'modules/te_drip_campaign_list/Dashlets/te_drip_campaign_listDashlet/te_drip_campaign_listDashlet.php',
+    'class' => 'te_drip_campaign_listDashlet',
+    'meta' => 'modules/te_drip_campaign_list/Dashlets/te_drip_campaign_listDashlet/te_drip_campaign_listDashlet.meta.php',
+    'module' => 'te_drip_campaign_list',
+  ),
+  'te_pr_ProgramsDashlet' => 
+  array (
+    'file' => 'modules/te_pr_Programs/Dashlets/te_pr_ProgramsDashlet/te_pr_ProgramsDashlet.php',
+    'class' => 'te_pr_ProgramsDashlet',
+    'meta' => 'modules/te_pr_Programs/Dashlets/te_pr_ProgramsDashlet/te_pr_ProgramsDashlet.meta.php',
+    'module' => 'te_pr_Programs',
+  ),
+  'AOW_WorkFlowDashlet' => 
+  array (
+    'file' => 'modules/AOW_WorkFlow/Dashlets/AOW_WorkFlowDashlet/AOW_WorkFlowDashlet.php',
+    'class' => 'AOW_WorkFlowDashlet',
+    'meta' => 'modules/AOW_WorkFlow/Dashlets/AOW_WorkFlowDashlet/AOW_WorkFlowDashlet.meta.php',
+    'module' => 'AOW_WorkFlow',
+  ),
+  'AOS_ContractsDashlet' => 
+  array (
+    'file' => 'modules/AOS_Contracts/Dashlets/AOS_ContractsDashlet/AOS_ContractsDashlet.php',
+    'class' => 'AOS_ContractsDashlet',
+    'meta' => 'modules/AOS_Contracts/Dashlets/AOS_ContractsDashlet/AOS_ContractsDashlet.meta.php',
+    'module' => 'AOS_Contracts',
+  ),
+  'AOS_PDF_TemplatesDashlet' => 
+  array (
+    'file' => 'modules/AOS_PDF_Templates/Dashlets/AOS_PDF_TemplatesDashlet/AOS_PDF_TemplatesDashlet.php',
+    'class' => 'AOS_PDF_TemplatesDashlet',
+    'meta' => 'modules/AOS_PDF_Templates/Dashlets/AOS_PDF_TemplatesDashlet/AOS_PDF_TemplatesDashlet.meta.php',
+    'module' => 'AOS_PDF_Templates',
+  ),
+  'te_in_institutesDashlet' => 
+  array (
+    'file' => 'modules/te_in_institutes/Dashlets/te_in_institutesDashlet/te_in_institutesDashlet.php',
+    'class' => 'te_in_institutesDashlet',
+    'meta' => 'modules/te_in_institutes/Dashlets/te_in_institutesDashlet/te_in_institutesDashlet.meta.php',
+    'module' => 'te_in_institutes',
+  ),
+  'te_transfer_batchDashlet' => 
+  array (
+    'file' => 'modules/te_transfer_batch/Dashlets/te_transfer_batchDashlet/te_transfer_batchDashlet.php',
+    'class' => 'te_transfer_batchDashlet',
+    'meta' => 'modules/te_transfer_batch/Dashlets/te_transfer_batchDashlet/te_transfer_batchDashlet.meta.php',
+    'module' => 'te_transfer_batch',
+  ),
+  'te_student_payment_planDashlet' => 
+  array (
+    'file' => 'modules/te_student_payment_plan/Dashlets/te_student_payment_planDashlet/te_student_payment_planDashlet.php',
+    'class' => 'te_student_payment_planDashlet',
+    'meta' => 'modules/te_student_payment_plan/Dashlets/te_student_payment_planDashlet/te_student_payment_planDashlet.meta.php',
+    'module' => 'te_student_payment_plan',
+  ),
+  'MyBugsDashlet' => 
+  array (
+    'file' => 'modules/Bugs/Dashlets/MyBugsDashlet/MyBugsDashlet.php',
+    'class' => 'MyBugsDashlet',
+    'meta' => 'modules/Bugs/Dashlets/MyBugsDashlet/MyBugsDashlet.meta.php',
+    'module' => 'Bugs',
+  ),
+  'FavoritesDashlet' => 
+  array (
+    'file' => 'modules/Favorites/Dashlets/Favorites/FavoritesDashlet.php',
+    'class' => 'FavoritesDashlet',
+  ),
   'te_actual_campaignDashlet' => 
   array (
     'file' => 'modules/te_actual_campaign/Dashlets/te_actual_campaignDashlet/te_actual_campaignDashlet.php',
@@ -633,92 +528,110 @@ $dashletsFiles = array (
     'meta' => 'modules/te_actual_campaign/Dashlets/te_actual_campaignDashlet/te_actual_campaignDashlet.meta.php',
     'module' => 'te_actual_campaign',
   ),
-  'BatchwiseLeadsLast24Hours' => 
+  'AOBH_BusinessHoursDashlet' => 
   array (
-    'file' => 'custom/modules/te_vendor/Dashlets/BatchwiseLeads24Hours/BatchwiseLeadsLast24Hours.php',
-    'class' => 'BatchwiseLeadsLast24Hours',
-    'meta' => 'custom/modules/te_vendor/Dashlets/BatchwiseLeads24Hours/BatchwiseLeadsLast24Hours.meta.php',
-    'module' => 'te_vendor',
+    'file' => 'modules/AOBH_BusinessHours/Dashlets/AOBH_BusinessHoursDashlet/AOBH_BusinessHoursDashlet.php',
+    'class' => 'AOBH_BusinessHoursDashlet',
+    'meta' => 'modules/AOBH_BusinessHours/Dashlets/AOBH_BusinessHoursDashlet/AOBH_BusinessHoursDashlet.meta.php',
+    'module' => 'AOBH_BusinessHours',
   ),
-  'SourcewiseLeadsLast24Hours' => 
+  'MyLeadsDashlet' => 
   array (
-    'file' => 'custom/modules/te_vendor/Dashlets/SourcewiseLeadsLast24Hours/SourcewiseLeadsLast24Hours.php',
-    'class' => 'SourcewiseLeadsLast24Hours',
-    'meta' => 'custom/modules/te_vendor/Dashlets/SourcewiseLeadsLast24Hours/SourcewiseLeadsLast24Hours.meta.php',
-    'module' => 'te_vendor',
-  ),
-  'TopBatchDashlet' => 
-  array (
-    'file' => 'custom/modules/te_vendor/Dashlets/TopBatchDashlet/TopBatchDashlet.php',
-    'class' => 'TopBatchDashlet',
-    'meta' => 'custom/modules/te_vendor/Dashlets/TopBatchDashlet/TopBatchDashlet.meta.php',
-    'module' => 'te_vendor',
-  ),
-  'ForLiveBatchesonly' => 
-  array (
-    'file' => 'custom/modules/te_utm/Dashlets/LiveTopLeadSource/ForLiveBatchesonly.php',
-    'class' => 'ForLiveBatchesonly',
-    'meta' => 'custom/modules/te_utm/Dashlets/LiveTopLeadSource/ForLiveBatchesonly.meta.php',
-    'module' => 'te_utm',
-  ),
-  'CampaignsROI' => 
-  array (
-    'file' => 'custom/modules/te_utm/Dashlets/CampaignsROI/CampaignsROI.php',
-    'class' => 'CampaignsROI',
-    'meta' => 'custom/modules/te_utm/Dashlets/CampaignsROI/CampaignsROI.meta.php',
-    'module' => 'te_utm',
-  ),
-  'TopCampaignDashboard' => 
-  array (
-    'file' => 'custom/modules/te_utm/Dashlets/TopCampaignDashboard/TopCampaignDashboard.php',
-    'class' => 'TopCampaignDashboard',
-    'meta' => 'custom/modules/te_utm/Dashlets/TopCampaignDashboard/TopCampaignDashboard.meta.php',
-    'module' => 'te_utm',
-  ),
-  'LiveBatchROI' => 
-  array (
-    'file' => 'custom/modules/te_utm/Dashlets/LiveBatchROI/LiveBatchROI.php',
-    'class' => 'LiveBatchROI',
-    'meta' => 'custom/modules/te_utm/Dashlets/LiveBatchROI/LiveBatchROI.meta.php',
-    'module' => 'te_utm',
-  ),
-  'Counsellorwiseleadstatus' => 
-  array (
-    'file' => 'custom/modules/Leads/Dashlets/Counsellorwiseleadstatus/Counsellorwiseleadstatus.php',
-    'class' => 'Counsellorwiseleadstatus',
-    'meta' => 'custom/modules/Leads/Dashlets/Counsellorwiseleadstatus/Counsellorwiseleadstatus.meta.php',
+    'file' => 'modules/Leads/Dashlets/MyLeadsDashlet/MyLeadsDashlet.php',
+    'class' => 'MyLeadsDashlet',
+    'meta' => 'modules/Leads/Dashlets/MyLeadsDashlet/MyLeadsDashlet.meta.php',
     'module' => 'Leads',
   ),
-  'TargetVsActualContactCenter' => 
+  'AM_ProjectTemplatesDashlet' => 
   array (
-    'file' => 'custom/modules/Leads/Dashlets/TargetVsActualContactCenter/TargetVsActualContactCenter.php',
-    'class' => 'TargetVsActualContactCenter',
-    'meta' => 'custom/modules/Leads/Dashlets/TargetVsActualContactCenter/TargetVsActualContactCenter.meta.php',
-    'module' => 'Leads',
+    'file' => 'modules/AM_ProjectTemplates/Dashlets/AM_ProjectTemplatesDashlet/AM_ProjectTemplatesDashlet.php',
+    'class' => 'AM_ProjectTemplatesDashlet',
+    'meta' => 'modules/AM_ProjectTemplates/Dashlets/AM_ProjectTemplatesDashlet/AM_ProjectTemplatesDashlet.meta.php',
+    'module' => 'AM_ProjectTemplates',
   ),
-  'BatchwiseContactcenter' => 
+  'CalendarDashlet' => 
   array (
-    'file' => 'custom/modules/Leads/Dashlets/BatchwiseContactcenter/BatchwiseContactcenter.php',
-    'class' => 'BatchwiseContactcenter',
-    'meta' => 'custom/modules/Leads/Dashlets/BatchwiseContactcenter/BatchwiseContactcenter.meta.php',
-    'module' => 'Leads',
+    'file' => 'modules/Calendar/Dashlets/CalendarDashlet/CalendarDashlet.php',
+    'class' => 'CalendarDashlet',
+    'meta' => 'modules/Calendar/Dashlets/CalendarDashlet/CalendarDashlet.meta.php',
+    'module' => 'Calendar',
   ),
-  'BatchwiseContactcenter_bkup24feb' => 
+  'te_utmDashlet' => 
   array (
-    'file' => 'custom/modules/Leads/Dashlets/BatchwiseContactcenter/BatchwiseContactcenter_bkup24feb.php',
-    'class' => 'BatchwiseContactcenter_bkup24feb',
+    'file' => 'modules/te_utm/Dashlets/te_utmDashlet/te_utmDashlet.php',
+    'class' => 'te_utmDashlet',
+    'meta' => 'modules/te_utm/Dashlets/te_utmDashlet/te_utmDashlet.meta.php',
+    'module' => 'te_utm',
   ),
-  'StagewiseDashlet_bkup' => 
+  'TopCampaignsDashlet' => 
   array (
-    'file' => 'custom/modules/Leads/Dashlets/StagewiseDashlet/StagewiseDashlet_bkup.php',
-    'class' => 'StagewiseDashlet_bkup',
+    'file' => 'modules/Campaigns/Dashlets/TopCampaignsDashlet/TopCampaignsDashlet.php',
+    'class' => 'TopCampaignsDashlet',
+    'meta' => 'modules/Campaigns/Dashlets/TopCampaignsDashlet/TopCampaignsDashlet.meta.php',
+    'module' => 'Campaigns',
   ),
-  'StagewiseDashlet' => 
+  'AM_TaskTemplatesDashlet' => 
   array (
-    'file' => 'custom/modules/Leads/Dashlets/StagewiseDashlet/StagewiseDashlet.php',
-    'class' => 'StagewiseDashlet',
-    'meta' => 'custom/modules/Leads/Dashlets/StagewiseDashlet/StagewiseDashlet.meta.php',
-    'module' => 'Leads',
+    'file' => 'modules/AM_TaskTemplates/Dashlets/AM_TaskTemplatesDashlet/AM_TaskTemplatesDashlet.php',
+    'class' => 'AM_TaskTemplatesDashlet',
+    'meta' => 'modules/AM_TaskTemplates/Dashlets/AM_TaskTemplatesDashlet/AM_TaskTemplatesDashlet.meta.php',
+    'module' => 'AM_TaskTemplates',
+  ),
+  'AOS_QuotesDashlet' => 
+  array (
+    'file' => 'modules/AOS_Quotes/Dashlets/AOS_QuotesDashlet/AOS_QuotesDashlet.php',
+    'class' => 'AOS_QuotesDashlet',
+    'meta' => 'modules/AOS_Quotes/Dashlets/AOS_QuotesDashlet/AOS_QuotesDashlet.meta.php',
+    'module' => 'AOS_Quotes',
+  ),
+  'te_product_categoryDashlet' => 
+  array (
+    'file' => 'modules/te_product_category/Dashlets/te_product_categoryDashlet/te_product_categoryDashlet.php',
+    'class' => 'te_product_categoryDashlet',
+    'meta' => 'modules/te_product_category/Dashlets/te_product_categoryDashlet/te_product_categoryDashlet.meta.php',
+    'module' => 'te_product_category',
+  ),
+  'te_installmentsDashlet' => 
+  array (
+    'file' => 'modules/te_installments/Dashlets/te_installmentsDashlet/te_installmentsDashlet.php',
+    'class' => 'te_installmentsDashlet',
+    'meta' => 'modules/te_installments/Dashlets/te_installmentsDashlet/te_installmentsDashlet.meta.php',
+    'module' => 'te_installments',
+  ),
+  'MyContactsDashlet' => 
+  array (
+    'file' => 'modules/Contacts/Dashlets/MyContactsDashlet/MyContactsDashlet.php',
+    'class' => 'MyContactsDashlet',
+    'meta' => 'modules/Contacts/Dashlets/MyContactsDashlet/MyContactsDashlet.meta.php',
+    'module' => 'Contacts',
+  ),
+  'MyClosedOpportunitiesDashlet' => 
+  array (
+    'file' => 'modules/Opportunities/Dashlets/MyClosedOpportunitiesDashlet/MyClosedOpportunitiesDashlet.php',
+    'class' => 'MyClosedOpportunitiesDashlet',
+    'meta' => 'modules/Opportunities/Dashlets/MyClosedOpportunitiesDashlet/MyClosedOpportunitiesDashlet.meta.php',
+    'module' => 'Opportunities',
+  ),
+  'MyOpportunitiesDashlet' => 
+  array (
+    'file' => 'modules/Opportunities/Dashlets/MyOpportunitiesDashlet/MyOpportunitiesDashlet.php',
+    'class' => 'MyOpportunitiesDashlet',
+    'meta' => 'modules/Opportunities/Dashlets/MyOpportunitiesDashlet/MyOpportunitiesDashlet.meta.php',
+    'module' => 'Opportunities',
+  ),
+  'te_srm_auto_assignmentDashlet' => 
+  array (
+    'file' => 'modules/te_srm_auto_assignment/Dashlets/te_srm_auto_assignmentDashlet/te_srm_auto_assignmentDashlet.php',
+    'class' => 'te_srm_auto_assignmentDashlet',
+    'meta' => 'modules/te_srm_auto_assignment/Dashlets/te_srm_auto_assignmentDashlet/te_srm_auto_assignmentDashlet.meta.php',
+    'module' => 'te_srm_auto_assignment',
+  ),
+  'te_lead_assignment_ruleDashlet' => 
+  array (
+    'file' => 'modules/te_lead_assignment_rule/Dashlets/te_lead_assignment_ruleDashlet/te_lead_assignment_ruleDashlet.php',
+    'class' => 'te_lead_assignment_ruleDashlet',
+    'meta' => 'modules/te_lead_assignment_rule/Dashlets/te_lead_assignment_ruleDashlet/te_lead_assignment_ruleDashlet.meta.php',
+    'module' => 'te_lead_assignment_rule',
   ),
   'Institute_wise_Students' => 
   array (
@@ -734,18 +647,105 @@ $dashletsFiles = array (
     'meta' => 'custom/modules/te_student/Dashlets/Dropout/Dropout.meta.php',
     'module' => 'te_student',
   ),
-  'TopConversionbyLeadSource' => 
+  'SourcewiseLeadsLast24Hours' => 
   array (
-    'file' => 'custom/modules/te_lead_assignment_rule/Dashlets/TopConversionbyLeadSource/TopConversionbyLeadSource.php',
-    'class' => 'TopConversionbyLeadSource',
-    'meta' => 'custom/modules/te_lead_assignment_rule/Dashlets/TopConversionbyLeadSource/TopConversionbyLeadSource.meta.php',
+    'file' => 'custom/modules/te_vendor/Dashlets/SourcewiseLeadsLast24Hours/SourcewiseLeadsLast24Hours.php',
+    'class' => 'SourcewiseLeadsLast24Hours',
+    'meta' => 'custom/modules/te_vendor/Dashlets/SourcewiseLeadsLast24Hours/SourcewiseLeadsLast24Hours.meta.php',
+    'module' => 'te_vendor',
+  ),
+  'TopBatchDashlet' => 
+  array (
+    'file' => 'custom/modules/te_vendor/Dashlets/TopBatchDashlet/TopBatchDashlet.php',
+    'class' => 'TopBatchDashlet',
+    'meta' => 'custom/modules/te_vendor/Dashlets/TopBatchDashlet/TopBatchDashlet.meta.php',
+    'module' => 'te_vendor',
+  ),
+  'BatchwiseLeadsLast24Hours' => 
+  array (
+    'file' => 'custom/modules/te_vendor/Dashlets/BatchwiseLeads24Hours/BatchwiseLeadsLast24Hours.php',
+    'class' => 'BatchwiseLeadsLast24Hours',
+    'meta' => 'custom/modules/te_vendor/Dashlets/BatchwiseLeads24Hours/BatchwiseLeadsLast24Hours.meta.php',
+    'module' => 'te_vendor',
+  ),
+  'StagewiseDashlet_bkup' => 
+  array (
+    'file' => 'custom/modules/Leads/Dashlets/StagewiseDashlet/StagewiseDashlet_bkup.php',
+    'class' => 'StagewiseDashlet_bkup',
+  ),
+  'StagewiseDashlet' => 
+  array (
+    'file' => 'custom/modules/Leads/Dashlets/StagewiseDashlet/StagewiseDashlet.php',
+    'class' => 'StagewiseDashlet',
+    'meta' => 'custom/modules/Leads/Dashlets/StagewiseDashlet/StagewiseDashlet.meta.php',
     'module' => 'Leads',
+  ),
+  'BatchwiseContactcenter' => 
+  array (
+    'file' => 'custom/modules/Leads/Dashlets/BatchwiseContactcenter/BatchwiseContactcenter.php',
+    'class' => 'BatchwiseContactcenter',
+    'meta' => 'custom/modules/Leads/Dashlets/BatchwiseContactcenter/BatchwiseContactcenter.meta.php',
+    'module' => 'Leads',
+  ),
+  'BatchwiseContactcenter_bkup24feb' => 
+  array (
+    'file' => 'custom/modules/Leads/Dashlets/BatchwiseContactcenter/BatchwiseContactcenter_bkup24feb.php',
+    'class' => 'BatchwiseContactcenter_bkup24feb',
+  ),
+  'Counsellorwiseleadstatus' => 
+  array (
+    'file' => 'custom/modules/Leads/Dashlets/Counsellorwiseleadstatus/Counsellorwiseleadstatus.php',
+    'class' => 'Counsellorwiseleadstatus',
+    'meta' => 'custom/modules/Leads/Dashlets/Counsellorwiseleadstatus/Counsellorwiseleadstatus.meta.php',
+    'module' => 'Leads',
+  ),
+  'TargetVsActualContactCenter' => 
+  array (
+    'file' => 'custom/modules/Leads/Dashlets/TargetVsActualContactCenter/TargetVsActualContactCenter.php',
+    'class' => 'TargetVsActualContactCenter',
+    'meta' => 'custom/modules/Leads/Dashlets/TargetVsActualContactCenter/TargetVsActualContactCenter.meta.php',
+    'module' => 'Leads',
+  ),
+  'LiveBatchROI' => 
+  array (
+    'file' => 'custom/modules/te_utm/Dashlets/LiveBatchROI/LiveBatchROI.php',
+    'class' => 'LiveBatchROI',
+    'meta' => 'custom/modules/te_utm/Dashlets/LiveBatchROI/LiveBatchROI.meta.php',
+    'module' => 'te_utm',
+  ),
+  'TopCampaignDashboard' => 
+  array (
+    'file' => 'custom/modules/te_utm/Dashlets/TopCampaignDashboard/TopCampaignDashboard.php',
+    'class' => 'TopCampaignDashboard',
+    'meta' => 'custom/modules/te_utm/Dashlets/TopCampaignDashboard/TopCampaignDashboard.meta.php',
+    'module' => 'te_utm',
+  ),
+  'ForLiveBatchesonly' => 
+  array (
+    'file' => 'custom/modules/te_utm/Dashlets/LiveTopLeadSource/ForLiveBatchesonly.php',
+    'class' => 'ForLiveBatchesonly',
+    'meta' => 'custom/modules/te_utm/Dashlets/LiveTopLeadSource/ForLiveBatchesonly.meta.php',
+    'module' => 'te_utm',
+  ),
+  'CampaignsROI' => 
+  array (
+    'file' => 'custom/modules/te_utm/Dashlets/CampaignsROI/CampaignsROI.php',
+    'class' => 'CampaignsROI',
+    'meta' => 'custom/modules/te_utm/Dashlets/CampaignsROI/CampaignsROI.meta.php',
+    'module' => 'te_utm',
   ),
   'TopLeadSourceContactcenter' => 
   array (
     'file' => 'custom/modules/te_lead_assignment_rule/Dashlets/TopLeadSourceContactcenter/TopLeadSourceContactcenter.php',
     'class' => 'TopLeadSourceContactcenter',
     'meta' => 'custom/modules/te_lead_assignment_rule/Dashlets/TopLeadSourceContactcenter/TopLeadSourceContactcenter.meta.php',
+    'module' => 'Leads',
+  ),
+  'TopConversionbyLeadSource' => 
+  array (
+    'file' => 'custom/modules/te_lead_assignment_rule/Dashlets/TopConversionbyLeadSource/TopConversionbyLeadSource.php',
+    'class' => 'TopConversionbyLeadSource',
+    'meta' => 'custom/modules/te_lead_assignment_rule/Dashlets/TopConversionbyLeadSource/TopConversionbyLeadSource.meta.php',
     'module' => 'Leads',
   ),
 );

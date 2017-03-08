@@ -17,6 +17,14 @@
  
 
 
+ $action_view_map['referalstudent'] = 'referalstudent';
+ 
+
+
+ $action_view_map['Feedback'] = 'Feedback';
+ 
+
+
  $action_view_map['resultreport'] = 'resultreport';
  
 
