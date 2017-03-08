@@ -76,8 +76,8 @@ class Institute_wise_Students extends Dashlet{
 			$ss->assign('autoRefreshOptions', $this->getAutoRefreshOptions());
 			$ss->assign('autoRefreshSelect', $this->autoRefresh);
 		}
-		 return parent::displayOptions() . $ss->fetch('custom/modules/te_students/Dashlets/Institute wise Students/Institute_wise_StudentsOptions.tpl');
-    }  
+		 return parent::displayOptions() . $ss->fetch('custom/modules/te_student/Dashlets/Institute wise Students/Institute_wise_StudentsOptions.tpl');
+    }                                           
 	/**
      * called to filter out $_REQUEST object when the user submits the configure dropdown
      * 
@@ -104,7 +104,7 @@ class Institute_wise_Students extends Dashlet{
 			$uid=$this->report_to_id;
 			$str = implode("','",$uid);
 		
-	 $leadQuery ="SELECT (SELECT te_in_institutes.name FROM te_in_institutes WHERE te_in_institutes.id=sb.te_in_institutes_id_c) AS ins_name,(SELECT te_pr_programs.name FROM te_pr_programs WHERE te_pr_programs.id=sb.te_pr_programs_id_c) AS pro_name,b.name AS batch_name,COUNT(sb.id)total FROM te_student_batch AS sb INNER JOIN te_ba_batch AS b ON b.id=sb.te_ba_batch_id_c WHERE sb.assigned_user_id IN('".$str."') AND sb.deleted=0 GROUP BY sb.`te_ba_batch_id_c`,pro_name,ins_name ORDER BY total desc";
+		$leadQuery ="SELECT (SELECT te_in_institutes.name FROM te_in_institutes WHERE te_in_institutes.id=sb.te_in_institutes_id_c) AS ins_name,(SELECT te_pr_programs.name FROM te_pr_programs WHERE te_pr_programs.id=sb.te_pr_programs_id_c) AS pro_name,b.name AS batch_name,COUNT(sb.id)total FROM te_student_batch AS sb INNER JOIN te_ba_batch AS b ON b.id=sb.te_ba_batch_id_c WHERE sb.assigned_user_id IN('".$str."') AND sb.deleted=0 GROUP BY sb.`te_ba_batch_id_c`,pro_name,ins_name ORDER BY total desc limit 0,".$this->Institute_wise_Students;
 	    $leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
         while($row=$GLOBALS['db']->fetchByAssoc($leadObj)){	
 			$leadsData[]=$row;
@@ -137,11 +137,8 @@ class Institute_wise_Students extends Dashlet{
 				$row--;
 			}
 			//$converted=$this->getConvertedLeads($data['UTM']);
-		
-			  
-			
-			
-			$output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['ins_name']."</td><td scope='row' align='left' valign='top'>".$data['pro_name']."</td><td scope='row' align='left' valign='top'>".$data['batch_name']."</td><td scope='row' align='left' valign='top'>".$data['total']."</td>";
+
+			$output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['ins_name']."</td><td scope='row' align='left' valign='top'>".$data['pro_name']."</td><td scope='row' align='left' valign='top'>".$data['batch_name']."</td><td scope='row' align='left' valign='top'>".$data['total']."</td></tr>";
 		}		
 		$output.="</table></div>";
         return $output;

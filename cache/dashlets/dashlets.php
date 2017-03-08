@@ -1,5 +1,5 @@
 <?php
-// created: 2017-03-08 03:45:21
+// created: 2017-03-08 05:16:11
 $dashletsFiles = array (
   'te_sourceDashlet' => 
   array (

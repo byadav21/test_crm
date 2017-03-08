@@ -75,7 +75,7 @@ class Programwise extends Dashlet{
 			$ss->assign('autoRefreshOptions', $this->getAutoRefreshOptions());
 			$ss->assign('autoRefreshSelect', $this->autoRefresh);
 		}
-		 return parent::displayOptions() . $ss->fetch('custom/modules/te_students/Dashlets/Programwise/ProgramwiseOptions.tpl');
+		 return parent::displayOptions() . $ss->fetch('custom/modules/te_student/Dashlets/Programwise/ProgramwiseOptions.tpl');
     }  
 	/**
      * called to filter out $_REQUEST object when the user submits the configure dropdown
@@ -147,7 +147,7 @@ class Programwise extends Dashlet{
 			$Referralp=($data['total_ref']+$data['total_admission'])*100;
 			# Referal Coversion---
 			$Referral_Conversion=($data['total_ref_converted']/$data['total_ref'])*100;
-			 $format=number_format((float)$Referral_Conversion, 2, '.', ''); 
+			$format=number_format((float)$Referral_Conversion, 2, '.', ''); 
 			
 		$output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['batch']."</td><td scope='row' align='left' valign='top'>".$data['total_admission']."</td><td scope='row' align='left' valign='top'>".$data['total_ref']."</td><td scope='row' align='left' valign='top'>".$data['total_ref_converted']."</td><td scope='row' align='left' valign='top'>".$Referralp."</td><td scope='row' align='left' valign='top'>".$format."</td></tr>";
 		}		

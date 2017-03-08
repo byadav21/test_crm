@@ -26,25 +26,25 @@
 </tr>
 {/if}
 <tr>
-    <td valign='top' nowrap scope='row'>Top Target VS Actual Enrollments for live batches</td>
+    <td valign='top' nowrap scope='row'>Institute wise Students</td>
     <td valign='top'>
-		<select name='TargetVsActualContactCenter'>
-			{if $TargetVsActualContactCenter==10}
+		<select name='Institute_wise_Students'>
+			{if $Institute_wise_Students==10}
 				<option value="10" selected>Top 10</option>
 			{else}
 				<option value="10">Top 10</option>
 			{/if}
-			{if $TargetVsActualContactCenter==20}
+			{if $Institute_wise_Students==20}
 				<option value="20" selected>Top 20</option>
 			{else}
 				<option value="20">Top 20</option>
 			{/if}
-			{if $TargetVsActualContactCenter==30}
+			{if $Institute_wise_Students==30}
 				<option value="30" selected>Top 30</option>
 			{else}
 				<option value="30">Top 30</option>
 			{/if}
-			{if $TargetVsActualContactCenter==50}
+			{if $Institute_wise_Students==50}
 				<option value="50" selected>Top 50</option>
 			{else}
 				<option value="50">Top 50</option>

@@ -22,7 +22,7 @@ class listviewClass {
 		//$bean->feepaid=$res['fee_usd'];
     
 			if($res['fee_inr']==0.00 || $res['fee_inr']==0.00)
-				{
+					{
 				$bean->feepaid="NA";
 				}
 		else{
