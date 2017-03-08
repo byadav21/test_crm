@@ -238,10 +238,10 @@ $dictionary['te_student_batch'] = array(
     'quicksearch' => 'enabled',
     'studio' => 'visible',
   ),
-  'lead_id_c' => 
+  'leads_id' => 
   array (
     'required' => false,
-    'name' => 'lead_id_c',
+    'name' => 'leads_id',
     'vname' => 'LBL_LEAD_LEAD_ID',
     'type' => 'id',
     'massupdate' => 0,
@@ -280,7 +280,7 @@ $dictionary['te_student_batch'] = array(
     'merge_filter' => 'disabled',
     'len' => '255',
     'size' => '20',
-    'id_name' => 'lead_id_c',
+    'id_name' => 'leads_id',
     'ext2' => 'Leads',
     'module' => 'Leads',
     'rname' => 'name',
