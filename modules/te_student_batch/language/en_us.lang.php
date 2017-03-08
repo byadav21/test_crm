@@ -104,4 +104,6 @@ $mod_strings = array (
   'LBL_CERTIFICATE_SENT' => 'Certificate Sent',
   'LBL_LEAD_LEAD_ID' => 'Lead (related Lead ID)',
   'LBL_LEAD' => 'Lead',
+  'LBL_APPROVED_BY' => 'Approved By (related User ID)',
+  'LBL_APPROVED_BY_NAME' => 'Approved By',
 );
