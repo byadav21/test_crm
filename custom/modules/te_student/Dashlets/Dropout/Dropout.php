@@ -142,8 +142,8 @@ class Dropout extends Dashlet{
 		//	$con=$this->getConSUMConversionLeads($data['id']);
 			  
 			  //$Conversion=$converted+$con;
-			  $total=($data['postdropout'])+($data['postdropout']);
-			$DropOut=$data['total_student']* $total/100;
+			$total=($data['postdropout']+$data['predropout']);
+			$DropOut=($data['total_student']* $total)/100;
 			
 			$output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['name']."</td><td scope='row' align='left' valign='top'>".$data['total_student']."</td><td scope='row' align='left' valign='top'>".$data['predropout']."</td><td scope='row' align='left' valign='top'>".$data['postdropout']."</td><td scope='row' align='left' valign='top'>".$DropOut."</td></tr>";
 		}		
