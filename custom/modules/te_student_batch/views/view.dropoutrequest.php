@@ -66,6 +66,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("resultSet",$resultSet);
 		$sugarSmarty->assign("designation",$current_user->designation);
+		$sugarSmarty->assign("current_user_id",$current_user->id);
 		$sugarSmarty->display('custom/modules/te_student_batch/tpls/dropoutapprove.tpl');
 	}
 }
