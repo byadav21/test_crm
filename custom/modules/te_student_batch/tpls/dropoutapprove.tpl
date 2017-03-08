@@ -1,3 +1,4 @@
+
 <section class="moduleTitle"> <h2>Student Batch For Dropout Approval</h2><br/><br/>
 
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
@@ -61,6 +62,7 @@
 					{$result.refund_amount}
 				{/if}
 				<input type="hidden" name="lead_id" id="lead_id_{$rowcount}" value="{$result.leads_id}">
+				<input type="hidden" name="current_user_id" id="current_user_id_{$rowcount}" value="{$current_user_id}">
 			</td>
 			<td>
 				{if $designation eq "BUH"}
@@ -88,13 +90,13 @@ function changeDropoutStatus(request_id,value,rowcount){
 	var refund_amount=$("#refund_amount_"+rowcount).val();
 	var refund_date=$("#refund_date_"+rowcount).val();
 	var lead_id=$("#lead_id_"+rowcount).val();
-
+	var current_user_id=$("#current_user_id_"+rowcount).val();
 	var span_id="dropout_request_"+request_id;	
 	$("#"+span_id).html('<img id="previewimage" src="custom/themes/default/images/spin.gif" width="32" height="32"/>');	
 	jQuery.ajax({
 		type: "POST",
 		url: 'index.php?entryPoint=dropoutapprove',
-		data: {request_id: request_id,request_status: value,dropout_type: dropout_type,refund_amount: refund_amount,refund_date: refund_date,lead_id:lead_id},
+		data: {request_id: request_id,request_status: value,dropout_type: dropout_type,refund_amount: refund_amount,refund_date: refund_date,lead_id:lead_id,current_user_id:current_user_id},
 		success: function (result)
 		{
 			var result = JSON.parse(result);		
