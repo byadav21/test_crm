@@ -1,4 +1,3 @@
-
 <section class="moduleTitle"> <h2>Student Batch For Dropout Approval</h2><br/><br/>
 
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
@@ -61,7 +60,7 @@
 				{else}
 					{$result.refund_amount}
 				{/if}
-				<input type="hidden" name="lead_id" id="lead_id_{$rowcount}" value="{$result.lead_id_c}">
+				<input type="hidden" name="lead_id" id="lead_id_{$rowcount}" value="{$result.leads_id}">
 			</td>
 			<td>
 				{if $designation eq "BUH"}
