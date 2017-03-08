@@ -4,15 +4,15 @@ if (!defined('sugarEntry') || !sugarEntry)
 
 ini_set('memory_limit','1024M');
 require_once('include/entryPoint.php');
-global $db;
+global $db,$current_user;
 
-$dropoutSql="UPDATE te_student_batch SET dropout_status='".$_REQUEST['request_status']."',refund_date='".$GLOBALS['timedate']->to_db_date($_REQUEST['refund_date'],false)."',refund_amount='".$_REQUEST['refund_amount']."',dropout_type='".$_REQUEST['dropout_type']."' WHERE id='".$_REQUEST['request_id']."'";
+$dropoutSql="UPDATE te_student_batch SET dropout_status='".$_REQUEST['request_status']."',refund_date='".$GLOBALS['timedate']->to_db_date($_REQUEST['refund_date'],false)."',refund_amount='".$_REQUEST['refund_amount']."',dropout_type='".$_REQUEST['dropout_type']."', approved_by='".$current_user->id."' WHERE id='".$_REQUEST['request_id']."'";
 $GLOBALS['db']->query($dropoutSql);
 
 $lead_id = $_REQUEST['lead_id'];
 
 #update lead status as Dropout
-"UPDATE leads SET status='".$_REQUEST['request_status']."' AND status_description='".$_REQUEST['request_status']."' WHERE id='".$lead_id."'"
+$GLOBALS['db']->query("UPDATE leads SET status='".$_REQUEST['request_status']."' AND status_description='".$_REQUEST['request_status']."' WHERE id='".$lead_id."'");
 #Add new Disposition Record
 $disposition = new te_disposition();
 $disposition->status 	   = 'Dropout';
