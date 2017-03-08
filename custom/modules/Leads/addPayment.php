@@ -91,13 +91,11 @@ class addPaymentClass{
 						$studentBatchObj->te_ba_batch_id_c=$batchDetails['batch_id'];
 						$studentBatchObj->te_pr_programs_id_c=$batchDetails['program_id'];
 						$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
-						$studentBatchObj->lead_id_c=$bean->id;
 						$studentBatchObj->te_vendor_id_c=$vendor['id'];
 						$studentBatchObj->status="Active";
-						$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 						$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 						$studentBatchObj->te_student_te_student_batch_1te_student_ida=$duplicateStudent['id'];
-						$studentBatchObj->lead_id=$bean->id; # added by ravi
+						$studentBatchObj->leads_id=$bean->id;
 						$studentBatchObj->save();
 						#get new student batch id
 						$student_batch_id=$studentBatchObj->id;
@@ -151,13 +149,11 @@ class addPaymentClass{
 					$studentBatchObj->te_ba_batch_id_c=$batchDetails['batch_id'];
 					$studentBatchObj->te_pr_programs_id_c=$batchDetails['program_id'];
 					$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
-					$studentBatchObj->lead_id_c=$bean->id;
 					$studentBatchObj->te_vendor_id_c=$vendor['id'];
 					$studentBatchObj->status="Active";
-					$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 					$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 					$studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_id;
-					$studentBatchObj->lead_id=$bean->id; # added by ravi
+					$studentBatchObj->leads_id=$bean->id;
 					$studentBatchObj->save();
 					#get new student batch id
 					$student_batch_id=$studentBatchObj->id;
@@ -187,16 +183,10 @@ class addPaymentClass{
 		}
 
 	}
-	public function getSrmUser($batch_id){
-		$srmSql = "SELECT assigned_user_id FROM te_srm_auto_assignment WHERE deleted=0 AND te_ba_batch_id_c='".$batch_id."'";
-		$srmObj= $GLOBALS['db']->query($srmSql);
-		$srmUser = $GLOBALS['db']->fetchByAssoc($srmObj);	
-		return $srmUser['assigned_user_id'];
-	}
 	function updateStudentPaymentPlan($paymentDetails){
 		#Service Tax deduction
 		$amount=$paymentDetails['amount'];
-		$student_country=$paymentDetails['student_country'];
+		$student_country=strtolower($paymentDetails['student_country']);
 		$batch_id=$paymentDetails['batch_id'];
 		$student_id=$paymentDetails['student_id'];
 		$payment_source=$paymentDetails['payment_source'];
@@ -204,7 +194,7 @@ class addPaymentClass{
 
 		global $sugar_config;
 		#for Indian student only need to calculate service tax
-		if($student_country=="" || $student_country=="India"||$student_country=="india"){
+		if(empty($student_country) || $student_country=="india"){
 
 			$service_tax=$sugar_config['tax']['service'];
 			$tax=(($amount*$service_tax)/100);
