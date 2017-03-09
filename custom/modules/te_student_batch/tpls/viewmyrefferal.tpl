@@ -19,8 +19,8 @@ function pleaseWait()
 		<td width="35%" align="left">
 		<select name="program" id="program" >
 			<option value=""></option>
-			{foreach from=$users key=keys item=options}
-				{if in_array($keys,$selectedmemberArr)}
+			{foreach from=$program key=keys item=options}
+				{if $keys== $selectedProgram}
 					<option value="{$keys}" selected='selected'>{$options}</option>
 				{else}
 					<option value="{$keys}">{$options}</option>
@@ -32,8 +32,8 @@ function pleaseWait()
 		<td width="35%" align="left">
 			<select name="batch" id="batch">
 				<option value=""></option>
-				{foreach from=$reportingManagers key=keys item=options}
-					{if in_array($keys,$selectedreportingManagerArr)}
+				{foreach from=$batch key=keys item=options}
+					{if $keys== $selectedBatch}
 						<option value="{$keys}" selected='selected'>{$options}</option>
 					{else}
 						<option value="{$keys}">{$options}</option>
@@ -47,8 +47,8 @@ function pleaseWait()
 		<td width="35%" align="left">
 			<select name="status" id="status" >
 				<option value=""></option>
-				{foreach from =$skipManagers key=keys item=options}
-					{if in_array($keys,$selectedskipManagerArr)}
+				{foreach from =$statusList key=keys item=options}
+					{if $keys== $selectedStatus}
 						<option value="{$keys}" selected='selected'>{$options}</option>
 					{else}
 						<option value="{$keys}">{$options}</option>
@@ -60,8 +60,8 @@ function pleaseWait()
 		<td width="35%" align="left">
 			<select name="srm" id="srm">
 				<option value=""></option>
-				{foreach from =$skipManagers key=keys item=options}
-					{if in_array($keys,$selectedskipManagerArr)}
+				{foreach from =$srm key=keys item=options}
+					{if $keys== $selectedSRM}
 						<option value="{$keys}" selected='selected'>{$options}</option>
 					{else}
 						<option value="{$keys}">{$options}</option>
@@ -99,9 +99,9 @@ function pleaseWait()
 		<td style="color:black;"><b>Program</b></td>
 		<td style="color:black;"><b>Status</b></td>
 		<td style="color:black;"><b>Counselor</b></td>
-		<td style="color:black;"><b>Date of Referral Creation</b></td>
-		<td style="color:black;"><b>Referred by</b></td>
-		<td style="color:black;"><b>--</b></td>
+		<td  style="color:black;"><b>Date of Referral Creation</b></td>
+		<td colspan ="2" style="color:black;"><b>Referred by</b></td>
+			
 		<td style="color:black;"><b>SRM</b></td>
 	</tr>
 	{foreach from =$referrals key=keys item=options}
@@ -115,6 +115,8 @@ function pleaseWait()
 				<td>{$options.prog_name}</td>
 				<td>{$options.status}</td>
 				<td>{$options.counselor}</td>
+				<td>{$options.date_of_referral}</td>
+				
 				<td>{$options.parent_type}</td>
 				{if $options.parent_type =='Users' }
 					<td><a href="index.php?module=User&action=detailview&record={$options.parent_id}">{$options.rcounselor}</a></td>
@@ -123,7 +125,7 @@ function pleaseWait()
 					<td><a href="index.php?module=Leads&action=detailview&record={$options.parent_id}">{$options.rname}</a></td>
 				{/if}	
 				
-				<td>&nbsp;</td>
+				<td>{$options.srm}</td>
 			
 		<tr>			                    
 	{/foreach}  

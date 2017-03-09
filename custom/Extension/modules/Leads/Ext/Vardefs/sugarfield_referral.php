@@ -1,4 +1,9 @@
 <?php
+$dictionary['Lead']['fields']['date_of_referral']['name']='date_of_referral';
+$dictionary['Lead']['fields']['date_of_referral']['vname']='LBL_DATEOFREFERRAL';
+$dictionary['Lead']['fields']['date_of_referral']['type']='date';
+$dictionary['Lead']['fields']['date_of_referral']['enable_range_search']=true;
+$dictionary['Lead']['fields']['date_of_referral']['options']='date_range_search_dom';
 
 
 $dictionary['Lead']['fields']['parent_name'] = 
