@@ -31,7 +31,7 @@ $SQL = "SELECT l.id as lid,  CONCAT(ifnull(l.first_name,''),' ',ifnull(l.last_na
 
 $where = '';
 
-$where .= " WHERE l.deleted =0 AND pb.deleted =0 AND ib.deleted=0 AND i.deleted = 0 AND b.deleted =0 AND p.deleted =0 ";
+$where .= " WHERE l.deleted =0 AND l.lead_source='Referrals' AND pb.deleted =0 AND ib.deleted=0 AND i.deleted = 0 AND b.deleted =0 AND p.deleted =0 ";
 $where  .= " AND l.parent_type IS NOT NULL AND (l.parent_id IN ('";
 $where  .= implode("', '", array_keys($reportingUserIds));
 $where  .= "') OR (l.created_by IN ('";
