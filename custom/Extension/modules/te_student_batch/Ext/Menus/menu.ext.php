@@ -42,4 +42,5 @@ $acl_obj = new ACLController();
 $module_menu[] = array ('index.php?module=te_student_batch&action=EditView&return_module=te_student_batch&return_action=DetailView', "Create Student Batch", 'te_student_batch');
 $module_menu[] = array ('index.php?module=te_student_batch&action=index', "View Student Batch", 'te_student_batch');
 $module_menu[] = array ('index.php?module=te_student_batch&action=dropoutrequest', "Dropout Request", 'te_student_batch');
+
 ?>
