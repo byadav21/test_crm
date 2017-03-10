@@ -61,9 +61,7 @@ class LeadsViewEdit extends ViewEdit {
 			//~ }
 		 //~ })
 		//~
-		$(function(){
-			alert("add view");
-		});
+
 			if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('parent_id').value==''){
 
 			document.getElementById("parent_type").style.display ='none';

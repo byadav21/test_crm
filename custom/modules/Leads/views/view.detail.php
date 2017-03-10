@@ -577,12 +577,9 @@ class LeadsViewDetail extends ViewDetail {
 		   $(".clickMenu").hide();
 		  });
 		}
-
 	});
 
-	$(function(){
-		alert("in detail");
-	});
+
 
 
      </script>
