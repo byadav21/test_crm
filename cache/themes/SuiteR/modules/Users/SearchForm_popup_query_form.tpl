@@ -42,17 +42,19 @@
 	{/if}
 	
 	<td scope="row" nowrap="nowrap" width='10%' >
-		
-		<label for='batch_advanced'>{sugar_translate label='LBL_BATCH' module='te_student_batch'}</label>
-    	</td>
+			<label for='first_name_advanced'>{sugar_translate label='LBL_FIRST_NAME' module='Users'}</label>
+		</td>
 	<td  nowrap="nowrap" width='30%'>
 			
-<input type="text" name="{$fields.batch_advanced.name}"  class="sqsEnabled"   id="{$fields.batch_advanced.name}" size="" value="{$fields.batch_advanced.value}" title='' autocomplete="off"  >
-<input type="hidden"  id="{$fields.te_ba_batch_id_c_advanced.name}" value="{$fields.te_ba_batch_id_c_advanced.value}">
-<span class="id-ff multiple">
-<button type="button" name="btn_{$fields.batch_advanced.name}"   title="{$APP.LBL_SELECT_BUTTON_TITLE}" class="button firstChild" value="{$APP.LBL_SELECT_BUTTON_LABEL}" onclick='open_popup("{$fields.batch_advanced.module}", 600, 400, "", true, false, {literal}{"call_back_function":"set_return","form_name":"popup_query_form","field_to_name_array":{"id":"te_ba_batch_id_c_advanced","name":"batch_advanced"}}{/literal}, "single", true);'>{sugar_getimage alt=$app_strings.LBL_ID_FF_SELECT name="id-ff-select" ext=".png" other_attributes=''}</button><button type="button" name="btn_clr_{$fields.batch_advanced.name}"   title="{$APP.LBL_CLEAR_BUTTON_TITLE}" class="button lastChild" onclick="this.form.{$fields.batch_advanced.name}.value = ''; this.form.{$fields.te_ba_batch_id_c_advanced.name}.value = '';" value="{$APP.LBL_CLEAR_BUTTON_LABEL}">{sugar_getimage name="id-ff-clear" alt=$app_strings.LBL_ID_FF_CLEAR ext=".png" other_attributes=''}</button>
-</span>
-
+{if strlen($fields.first_name_advanced.value) <= 0}
+{assign var="value" value=$fields.first_name_advanced.default_value }
+{else}
+{assign var="value" value=$fields.first_name_advanced.value }
+{/if}  
+<input type='text' name='{$fields.first_name_advanced.name}' 
+    id='{$fields.first_name_advanced.name}' size='30' 
+    maxlength='30' 
+    value='{$value}' title=''      accesskey='9'  >
    	   	</td>
     
       
@@ -76,12 +78,55 @@
 	{/if}
 	
 	<td scope="row" nowrap="nowrap" width='10%' >
-		
-		<label for='assigned_user_id_advanced'>{sugar_translate label='LBL_ASSIGNED_TO' module='te_student_batch'}</label>
-    	</td>
+			<label for='last_name_advanced'>{sugar_translate label='LBL_LAST_NAME' module='Users'}</label>
+		</td>
 	<td  nowrap="nowrap" width='30%'>
 			
-{html_options id='assigned_user_id_advanced' name='assigned_user_id_advanced[]' options=$fields.assigned_user_id_advanced.options size="6" style="width: 150px" multiple="1" selected=$fields.assigned_user_id_advanced.value}
+{if strlen($fields.last_name_advanced.value) <= 0}
+{assign var="value" value=$fields.last_name_advanced.default_value }
+{else}
+{assign var="value" value=$fields.last_name_advanced.value }
+{/if}  
+<input type='text' name='{$fields.last_name_advanced.name}' 
+    id='{$fields.last_name_advanced.name}' size='30' 
+    maxlength='30' 
+    value='{$value}' title=''      >
+   	   	</td>
+    
+      
+	
+	{counter assign=index}
+	{math equation="left % right"
+   		  left=$index
+          right=$templateMeta.maxColumns
+          assign=modVal
+    }
+	{if ($index % $templateMeta.maxColumns == 1 && $index != 1)}
+        {if $isHelperShown==0}
+            {assign var="isHelperShown" value="1"}
+            <td class="helpIcon" width="*">
+                <img alt="{$APP.LBL_SEARCH_HELP_TITLE}" id="helper_popup_image" border="0" src='{sugar_getimagepath file="help-dashlet.gif"}' class="help-search">
+            </td>
+        {else}
+            <td>&nbsp;</td>
+        {/if}
+		</tr><tr>
+	{/if}
+	
+	<td scope="row" nowrap="nowrap" width='10%' >
+			<label for='user_name_advanced'>{sugar_translate label='LBL_USER_NAME' module='Users'}</label>
+		</td>
+	<td  nowrap="nowrap" width='30%'>
+			
+{if strlen($fields.user_name_advanced.value) <= 0}
+{assign var="value" value=$fields.user_name_advanced.default_value }
+{else}
+{assign var="value" value=$fields.user_name_advanced.value }
+{/if}  
+<input type='text' name='{$fields.user_name_advanced.name}' 
+    id='{$fields.user_name_advanced.name}' size='30' 
+    maxlength='60' 
+    value='{$value}' title=''      >
    	   	</td>
 	</tr>
 <tr>
@@ -166,4 +211,4 @@
 		});
 	});
 	{/literal}
-</script>{literal}<script language="javascript">if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}sqs_objects['popup_query_form_modified_by_name_advanced']={"form":"popup_query_form","method":"get_user_array","field_list":["user_name","id"],"populate_list":["modified_by_name_advanced","modified_user_id_advanced"],"required_list":["modified_user_id"],"conditions":[{"name":"user_name","op":"like_custom","end":"%","value":""}],"limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_created_by_name_advanced']={"form":"popup_query_form","method":"get_user_array","field_list":["user_name","id"],"populate_list":["created_by_name_advanced","created_by_advanced"],"required_list":["created_by"],"conditions":[{"name":"user_name","op":"like_custom","end":"%","value":""}],"limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_assigned_user_name_advanced']={"form":"popup_query_form","method":"get_user_array","field_list":["user_name","id"],"populate_list":["assigned_user_name_advanced","assigned_user_id_advanced"],"required_list":["assigned_user_id"],"conditions":[{"name":"user_name","op":"like_custom","end":"%","value":""}],"limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_program_advanced']={"form":"popup_query_form","method":"query","modules":["te_pr_Programs"],"group":"or","field_list":["name","id"],"populate_list":["program_advanced","te_pr_programs_id_c_advanced"],"required_list":["parent_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_institute_advanced']={"form":"popup_query_form","method":"query","modules":["te_in_institutes"],"group":"or","field_list":["name","id"],"populate_list":["institute_advanced","te_in_institutes_id_c_advanced"],"required_list":["parent_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_batch_advanced']={"form":"popup_query_form","method":"query","modules":["te_ba_Batch"],"group":"or","field_list":["name","id"],"populate_list":["batch_advanced","te_ba_batch_id_c_advanced"],"required_list":["parent_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_lead_advanced']={"form":"popup_query_form","method":"query","modules":["Leads"],"group":"or","field_list":["name","id"],"populate_list":["lead_advanced","leads_id_advanced"],"required_list":["parent_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_approved_by_name_advanced']={"form":"popup_query_form","method":"get_user_array","field_list":["user_name","id"],"populate_list":["approved_by_name_advanced","approved_by_advanced"],"required_list":["approved_by"],"conditions":[{"name":"user_name","op":"like_custom","end":"%","value":""}],"limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_source_advanced']={"form":"popup_query_form","method":"query","modules":["te_vendor"],"group":"or","field_list":["name","id"],"populate_list":["source_advanced","te_vendor_id_c_advanced"],"required_list":["parent_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"No Match"};sqs_objects['popup_query_form_te_student_te_student_batch_1_name_advanced']={"form":"popup_query_form","method":"query","modules":["te_student"],"group":"or","field_list":["name","id"],"populate_list":["te_student_te_student_batch_1_name_advanced","te_student_te_student_batch_1te_student_ida_advanced"],"required_list":["parent_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"No Match"};</script>{/literal}
+</script>{literal}<script language="javascript">if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}sqs_objects['popup_query_form_reports_to_name_advanced']={"form":"popup_query_form","method":"get_user_array","field_list":["user_name","id"],"populate_list":["reports_to_name_advanced","reports_to_id_advanced"],"required_list":["reports_to_id"],"conditions":[{"name":"user_name","op":"like_custom","end":"%","value":""}],"limit":"30","no_match_text":"No Match"};</script>{/literal}

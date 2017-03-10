@@ -410,7 +410,13 @@ if($("#status_description").val() === "Converted") {
 			$this->bean->parent_type = 'Users';
 			$this->bean->parent_id = $GLOBALS['current_user']->id;
 			$this->bean->parent_name = $GLOBALS['current_user']->user_name;
-		}
+?>
+<script>
+$(function(){
+	$("input[name=assigned_user_name]").val(' ');
+});
+</script>
+<?php }
 
 		parent::display ();
 		?>

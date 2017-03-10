@@ -1,47 +1,45 @@
-<?php /* Smarty version 2.6.29, created on 2017-03-09 23:30:11
-         compiled from include/EditView/header.tpl */ ?>
+<?php /* Smarty version 2.6.29, created on 2017-03-10 20:03:04
+         compiled from custom/modules/Leads/tpls/header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_button', 'include/EditView/header.tpl', 84, false),array('function', 'sugar_action_menu', 'include/EditView/header.tpl', 94, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_button', 'custom/modules/Leads/tpls/header.tpl', 157, false),array('function', 'sugar_action_menu', 'custom/modules/Leads/tpls/header.tpl', 167, false),)), $this); ?>
 {*
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
- * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
- *
+ * SugarCRM, Inc. Copyright (C) 2004-2012 SugarCRM Inc.
+ * 
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
  * Free Software Foundation with the addition of the following permission added
  * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
  * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
  * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
  * details.
- *
+ * 
  * You should have received a copy of the GNU Affero General Public License along with
  * this program; if not, see http://www.gnu.org/licenses or write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301 USA.
- *
+ * 
  * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
  * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
- *
+ * 
  * The interactive user interfaces in modified source and object code versions
  * of this program must display Appropriate Legal Notices, as required under
  * Section 5 of the GNU Affero General Public License version 3.
- *
+ * 
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the "Powered by
- * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
+ * SugarCRM" logo. If the display of the logo is not reasonably feasible for
+ * technical reasons, the Appropriate Legal Notices must display the words
+ * "Powered by SugarCRM".
  ********************************************************************************/
 
 *}
+
 <script>
     {literal}
     $(document).ready(function(){
@@ -49,6 +47,81 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_butto
 	        $(node).sugarActionMenu();
 	    });
     });
+    
+    
+	function callHoldPusher(method){
+			
+			
+			number = document.getElementById('phone_mobile').value;
+			//~ alert(number);
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//alert(b.responseText);
+					if(b.responseText.trim()=="200"){	
+						
+						if(method=='hold'){
+							
+							document.getElementById("hold").style.display ='none';
+							document.getElementById("unhold").style.display ='inline';
+						}
+						else{
+							
+							document.getElementById("hold").style.display ='inline';
+							document.getElementById("unhold").style.display ='none';
+						}
+					}
+					else{
+						if(method=='hold'){
+						alert('Error!! Not putting on hold')
+						}
+						else{
+							alert('Error!! Not putting on un hold')
+						}
+					}
+				}
+						
+			}
+			
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=callHold&number='+number+'&method='+method, callback);
+		 }
+
+	
+	function callHangupPusher(){
+			
+		
+			
+			number = document.getElementById('phone_mobile').value;
+			//~ alert(number);
+			SUGAR.ajaxUI.showLoadingPanel();
+			var callback = {
+				success:function(b){
+					SUGAR.ajaxUI.hideLoadingPanel();
+					//~ alert(b.responseText);
+					if(b.responseText.trim()=="200"){	
+						
+						document.getElementById("hangup").disabled = true;
+						document.getElementById("hold").disabled = true;
+						document.getElementById("unhold").disabled = true;
+						document.getElementById("SAVE_FOOTER").style.display ='inline';
+
+					}
+					else{
+						alert('Error!! Not Disconnected')
+						
+					}
+				}
+						
+			}
+			
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=callHangup&number='+number, callback);
+		 }
+
+
+
+    
+
     {/literal}
 </script>
 <div class="clear"></div>
@@ -71,7 +144,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_butto
 <input type="hidden" name="return_id" value="{$smarty.request.return_id}">
 <input type="hidden" name="module_tab"> 
 <input type="hidden" name="contact_role">
-{if (!empty($smarty.request.return_module) || !empty($smarty.request.relate_to)) && !(isset($smarty.request.isDuplicate) && $smarty.request.isDuplicate eq "true")}
+{if !empty($smarty.request.return_module) || !empty($smarty.request.relate_to)}
 <input type="hidden" name="relate_to" value="{if $smarty.request.return_relationship}{$smarty.request.return_relationship}{elseif $smarty.request.relate_to && empty($smarty.request.from_dcmenu)}{$smarty.request.relate_to}{elseif empty($isDCForm) && empty($smarty.request.from_dcmenu)}{$smarty.request.return_module}{/if}">
 <input type="hidden" name="relate_id" value="{$smarty.request.return_id}">
 {/if}
@@ -116,4 +189,26 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_butto
 <?php endif; ?>
 </td>
 </tr>
+{if $from_pusher ==1}
+<tr>
+	<td>
+		<table border='1' cellpadding='0' cellspacing='0' width='100%'>
+			 			 <tr><td></td>
+						 <td> <input type="hidden" name="disposition_id" id="disposition_id" value="{$disposition_id}">
+						 </td></tr>
+						  <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+	<tr>
+		
+		<td> <button type="button" id ="hangup" onclick="callHangupPusher()">Hangup</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="button" id ="hold" onclick="callHoldPusher('hold')">Hold</button>
+		<button type="button" style="display: none" id ="unhold" onclick="callHoldPusher('unhold')">Un Hold</button></td>
+		
+  </tr>
+  <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+		</table>	
+		</td>
+	</tr>
+{/if}	
+	
+	
 </table>

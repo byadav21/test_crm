@@ -4913,3 +4913,208 @@ Thu Mar  9 22:53:10 2017 [19877][1][FATAL] Request - Array
 Thu Mar  9 22:55:07 2017 [15764][1][FATAL]  Query Failed: SELECT tbl1.id,tbl1.salutation,tbl1.phone_mobile,tbl4.email_address,tbl1.assigned_user_id,tbl1.first_name,tbl1.last_name, tbl1.status,tbl1.date_entered,tbl1.lead_source,tbl2.user_name FROM leads AS tbl1
 							LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id WHERE : MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
 Thu Mar  9 23:52:53 2017 [32324][1][FATAL]  Query Failed: SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,s.idp,sp.te_student_id_c,sp.due_amount_usd,sp.paid_amount_usd,sp.paid,sp.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='f0d56361-1bf5-2d5d-f3d3-58c23edbf59e' AND sb.te_ba_batch_id_c='3e61df74-2ddd-ce27-af33-583fc534c2ac' ORDER BY sp.due_date: MySQL error 1054: Unknown column 's.idp' in 'field list'
+Fri Mar 10 02:04:30 2017 [9305][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => 
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Puneet1
+    [last_name] => Kaur1
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => puneet1@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => 
+    [te_ba_batch_id_c] => 
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [parent_type] => Users
+    [parent_name] => aditi.kochhar@talentedge.in
+    [parent_id] => 62bce63d-3669-8bf8-7d8b-58a9a77574da
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Aditi Kochar
+    [assigned_user_id] => 62bce63d-3669-8bf8-7d8b-58a9a77574da
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+)
+
+Fri Mar 10 02:05:00 2017 [25986][-none-][FATAL]  Query Failed: UPDATE te_student_payment, te_student_te_student_payment_1_c SET te_student_payment.deleted = 1,te_student_te_student_payment_1_c.deleted=1 WHERE te_student_payment.id = te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_payment.te_student_batch_id_c='d29636b2-4354-9e22-ac41-58aac54e9505' AND statuste_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='d079c7a4-3f3f-4fa2-a272-58aac59bf544': MySQL error 1054: Unknown column 'statuste_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida' in 'where clause'
+Fri Mar 10 02:17:23 2017 [30626][-none-][FATAL] SECURITY: User authentication for nitin.bhardwaj@gmail.com failed
+Fri Mar 10 02:17:23 2017 [30626][-none-][FATAL] FAILED LOGIN:attempts[1] - nitin.bhardwaj@gmail.com
+Fri Mar 10 02:19:18 2017 [9305][40e3efab-db2d-e04a-007f-58a88ed70cd7][FATAL] Exception in Controller: Unauthorized access to administration.
+Fri Mar 10 02:23:33 2017 [27929][40e3efab-db2d-e04a-007f-58a88ed70cd7][FATAL] Exception in Controller: Unauthorized access to administration.
+Fri Mar 10 02:23:53 2017 [30744][-none-][FATAL] SECURITY: User authentication for admin failed
+Fri Mar 10 02:23:53 2017 [30744][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+Fri Mar 10 02:41:20 2017 [31862][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => 
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Ramit1
+    [last_name] => Singh1
+    [gender] => Male
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => ramit1@yahoo.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => 
+    [te_ba_batch_id_c] => 
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [parent_type] => Users
+    [parent_name] => aditi.kochhar@talentedge.in
+    [parent_id] => 62bce63d-3669-8bf8-7d8b-58a9a77574da
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Aditi Kochar
+    [assigned_user_id] => 62bce63d-3669-8bf8-7d8b-58a9a77574da
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+)
+
+Fri Mar 10 04:37:46 2017 [25900][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => e5ce624d-8b6b-9454-84de-58c24de711a4
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Ramit
+    [last_name] => Singh
+    [gender] => Male
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => rsingh@gmail.com
+    [Leads0emailAddressId0] => 46a9deb7-f79b-27ae-135c-58c24d403892
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => rsingh@gmail.com
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [parent_type] => Users
+    [parent_name] => Admin Administrator
+    [parent_id] => 1
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => PayU
+    [amount] => 1000
+    [payment_realized] => 1
+    [date_of_payment] => 2017-03-10
+    [reference_number] => 
+    [transaction_id] => 12345
+)
+
+Fri Mar 10 05:21:51 2017 [10850][1][FATAL]  Query Failed: SELECT tbl1.id,tbl1.salutation,tbl1.phone_mobile,tbl4.email_address,tbl1.assigned_user_id,tbl1.first_name,tbl1.last_name, tbl1.status,tbl1.date_entered,tbl1.lead_source,tbl2.user_name FROM leads AS tbl1
+							LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id WHERE : MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+Fri Mar 10 05:52:40 2017 [10850][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL] Exception in Controller: Unauthorized access to administration.
+Fri Mar 10 05:53:28 2017 [3319][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL] Exception in Controller: Unauthorized access to administration.
+Fri Mar 10 06:07:32 2017 [30744][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Mar 10 06:07:46 2017 [3244][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Mar 10 06:10:27 2017 [2850][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Mar 10 06:10:53 2017 [2761][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Mar 10 06:11:08 2017 [30744][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Mar 10 06:11:10 2017 [30744][1][FATAL] Exception in Controller: There is no action by that name.
+Fri Mar 10 06:17:55 2017 [5464][1][FATAL]  Query Failed: SELECT tbl1.id,tbl1.salutation,tbl1.phone_mobile,tbl4.email_address,tbl1.assigned_user_id,tbl1.first_name,tbl1.last_name, tbl1.status,tbl1.date_entered,tbl1.lead_source,tbl2.user_name FROM leads AS tbl1
+							LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id WHERE : MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2

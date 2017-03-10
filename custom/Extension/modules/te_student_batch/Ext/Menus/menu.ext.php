@@ -1,5 +1,5 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point'); 
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * The contents of this file are subject to the SugarCRM Master Subscription
  * Agreement ("License") which can be viewed at
@@ -34,7 +34,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
+
 global $current_user;
 global $mod_strings, $app_strings;
 require_once('modules/ACL/ACLController.php');
@@ -45,4 +45,5 @@ $module_menu[] = array ('index.php?module=te_student_batch&action=dropoutrequest
 $module_menu[] = array ('index.php?module=te_student&action=batchtransfer', "Batch Transfer", 'te_student');
 $module_menu[] = array ('index.php?module=Leads&action=EditView&addreferral=true', "Add Referral", 'Leads');
 $module_menu[] = array ('index.php?module=te_student_batch&action=viewmyrefferal&parent_id='.$current_user->id, "View My Referrals", 'te_student_batch');
+$module_menu[] = array("index.php?module=te_student_batch&action=search_leads", "CRM Leads Search", "te_student_batch");
 ?>
