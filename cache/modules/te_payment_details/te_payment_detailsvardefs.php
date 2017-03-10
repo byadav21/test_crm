@@ -337,6 +337,23 @@
       'required' => false,
       'studio' => 'visible',
     ),
+    'transaction_id' => 
+    array (
+      'name' => 'transaction_id',
+      'vname' => 'LBL_TRANSACTIONID',
+      'type' => 'varchar',
+      'len' => '100',
+      'audited' => 'false',
+    ),
+    'payment_source' => 
+    array (
+      'name' => 'payment_source',
+      'type' => 'enum',
+      'vname' => 'LBL_PAYMENTTYPESOURCE',
+      'len' => '100',
+      'options' => 'payment_type_source_dom',
+      'audited' => 'false',
+    ),
     'leads_te_payment_details_1' => 
     array (
       'name' => 'leads_te_payment_details_1',
@@ -375,23 +392,6 @@
       'reportable' => false,
       'side' => 'right',
       'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
-    ),
-    'transaction_id' => 
-    array (
-      'name' => 'transaction_id',
-      'vname' => 'LBL_TRANSACTIONID',
-      'type' => 'varchar',
-      'len' => '100',
-      'audited' => 'false',
-    ),
-    'payment_source' => 
-    array (
-      'name' => 'payment_source',
-      'type' => 'enum',
-      'vname' => 'LBL_PAYMENTTYPESOURCE',
-      'len' => '100',
-      'options' => 'payment_type_source_dom',
-      'audited' => 'false',
     ),
   ),
   'relationships' => 

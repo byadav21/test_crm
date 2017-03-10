@@ -2,82 +2,125 @@
  //WARNING: The contents of this file are auto-generated
 
 
-$dictionary['Lead']['fields']['min_attendance_c']['validation'] = array(
-    'type' => 'range',
-    'min' => '0',
-    'max' => '100',
-);
+$dictionary['Lead']['fields']['date_of_payment']['massupdate']=false;
+$dictionary['Lead']['fields']['do_not_call']['massupdate']=false;
+
+$dictionary['Lead']['fields']['converted']['massupdate']=false;
+
+$dictionary['Lead']['fields']['gender']['massupdate']=false;
+$dictionary['Lead']['fields']['optout_primary']['massupdate']=false;
+
+$dictionary['Lead']['fields']['payment_realized_check']['massupdate']=false;
+$dictionary['Lead']['fields']['payment_type']['massupdate']=false;
+
+//$dictionary['Lead']['fields']['program']['massupdate']=true;
+$dictionary['Lead']['fields']['payment_source']['massupdate']=false;
+$dictionary['Lead']['fields']['payment_realized']['massupdate']=false;
 
 
+// new added // css 173line css hide date field
 
- // created: 2016-10-18 02:06:29
-$dictionary['Lead']['fields']['first_name']['required']=true;
-$dictionary['Lead']['fields']['first_name']['inline_edit']=true;
-$dictionary['Lead']['fields']['first_name']['comments']='First name of the contact';
-$dictionary['Lead']['fields']['first_name']['merge_filter']='disabled';
+$dictionary['Lead']['fields']['date_of_callback']['massupdate']=false;
+$dictionary['Lead']['fields']['date_of_prospect']['massupdate']=false;
+$dictionary['Lead']['fields']['date_of_followup']['massupdate']=false;
+$dictionary['Lead']['fields']['status']['massupdate']=false;
+$dictionary['Lead']['fields']['converted_date']['massupdate']=false;
+$dictionary['Lead']['fields']['assigned_flag']['massupdate']=false;
+
+$dictionary['Lead']['fields']['status_description']['massupdate']=false;
+$dictionary['Lead']['fields']['assigned_flag']['converted_datejscal_field']=false;
+
+
+ // created: 2016-09-13 03:06:28
+$dictionary['Lead']['fields']['work_experience_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['work_experience_c']['labelValue']='Work Experience';
 
  
 
-$dictionary['Lead']['fields']['mailer_day'] =array (
-	'required' => false,
-    'name' => 'mailer_day',
-    'vname' => 'LBL_MAILER_DAY',
-    'type' => 'int',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '11',
+ // created: 2016-09-15 13:34:46
+$dictionary['Lead']['fields']['city_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['city_c']['labelValue']='City';
+
+ 
+
+$dictionary['Lead']['fields']['converted_date'] =array (
+	'name' => 'converted_date',
+	'label' => 'LBL_CONVERTED_DATE',
+	'type' => 'date',
+	'module' => 'Leads',
+	'default_value' => '',
+	'help' => '',
+	'comment' => '',
+	'mass_update' => false, 
+	'required' => false, 
+	'reportable' => true, 
+	'audited' => false, 
+	'duplicate_merge' => false, 
+	'importable' => 'true', 
+);
+ 
+
+ // created: 2016-09-15 13:40:55
+$dictionary['Lead']['fields']['te_ba_batch_id_c']['inline_edit']=1;
+
+ 
+
+ // created: 2016-09-13 02:59:07
+$dictionary['Lead']['fields']['company_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['company_c']['labelValue']='Company';
+
+ 
+
+ // created: 2016-11-07 04:56:35
+$dictionary['Lead']['fields']['email1']['required']=true;
+$dictionary['Lead']['fields']['email1']['inline_edit']=true;
+$dictionary['Lead']['fields']['email1']['merge_filter']='disabled';
+
+ 
+
+$dictionary['Lead']['fields']['vendor'] =array (
+	'name' => 'vendor',
+	'label' => 'LBL_VENDOR',
+	'type' => 'varchar',
+	'module' => 'Leads',
+	'help' => '',
+	'comment' => '',
+	'default_value' => '',
+	'len' => '50',
     'size' => '20',
-    'enable_range_search' => false,
-    'disable_num_format' => '',
-    'min' => false,
-    'max' => false,
+	'required' => false, 
+	'reportable' => true, 
+	'audited' => false, 
+	'importable' => 'true', 
+	'duplicate_merge' => false, 
 );
  
 
- // created: 2016-09-13 03:07:50
-$dictionary['Lead']['fields']['previous_courses_from_te_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['previous_courses_from_te_c']['labelValue']='Previous Courses From TE';
+ // created: 2016-10-29 14:14:16
+$dictionary['Lead']['fields']['last_name']['required']=false;
+$dictionary['Lead']['fields']['last_name']['inline_edit']=true;
+$dictionary['Lead']['fields']['last_name']['importable']=false;
+$dictionary['Lead']['fields']['last_name']['comments']='Last name of the contact';
+$dictionary['Lead']['fields']['last_name']['merge_filter']='disabled';
+
+$dictionary['Lead']['fields']['first_name']['importable']='required';
 
  
 
- // created: 2016-09-15 13:52:20
-$dictionary['Lead']['fields']['status_description']['inline_edit']=true;
-$dictionary['Lead']['fields']['status_description']['comments']='Description of the status of the lead';
-$dictionary['Lead']['fields']['status_description']['type']='enum';
-$dictionary['Lead']['fields']['status_description']['len']='100';
-$dictionary['Lead']['fields']['status_description']['options']='lead_status_details_custom_dom';
-$dictionary['Lead']['fields']['status_description']['audited']='true';
-$dictionary['Lead']['fields']['status_description']['default']='New Lead';
 
-
-$dictionary['Lead']['fields']['status']['options']='lead_status_custom_dom';
-$dictionary['Lead']['fields']['status']['default']='Alive';
-
-$dictionary['Lead']['fields']['lead_source']['options']='lead_source_custom_dom';
-
-$dictionary['Lead']['fields']['gender']['name']='gender';
-$dictionary['Lead']['fields']['gender']['comments']='Gender of the status of the lead';
-$dictionary['Lead']['fields']['gender']['type']='enum';
-$dictionary['Lead']['fields']['gender']['vname']='Gender';
-$dictionary['Lead']['fields']['gender']['len']='100';
-$dictionary['Lead']['fields']['gender']['options']='gender_dom';
-$dictionary['Lead']['fields']['gender']['audited']='false';
-
+ // created: 2016-09-15 13:52:52
+$dictionary['Lead']['fields']['lead_source_description']['inline_edit']=true;
+$dictionary['Lead']['fields']['lead_source_description']['comments']='Description of the lead source';
+$dictionary['Lead']['fields']['lead_source_description']['merge_filter']='disabled';
+$dictionary['Lead']['fields']['lead_source_description']['rows']='2';
+$dictionary['Lead']['fields']['lead_source_description']['cols']='20';
 
  
- 
- 
 
+ // created: 2016-08-29 08:18:17
+$dictionary['Lead']['fields']['jjwg_maps_address_c']['inline_edit']=1;
+
+ 
 
 // created: 2016-09-19 13:25:40
 $dictionary["Lead"]["fields"]["program"] = array (
@@ -102,9 +145,49 @@ $dictionary["Lead"]["fields"]["institute"] = array (
 
 
  // created: 2016-08-29 08:18:17
-$dictionary['Lead']['fields']['jjwg_maps_address_c']['inline_edit']=1;
+$dictionary['Lead']['fields']['jjwg_maps_lng_c']['inline_edit']=1;
 
  
+
+
+$dictionary['Lead']['fields']['invoice_number'] =array (
+		'name' => 'invoice_number',
+		'vname' => 'LBL_INVOICE_NUMBER',
+		'type' => 'int',
+		'required' => false,
+		'massupdate' => 0,
+		'comments' => '',
+		'help' => '',
+		'default'=> 0,
+		'importable' => 'false',
+		'duplicate_merge' => 'disabled',
+		'duplicate_merge_dom_value' => '0',
+		'audited' => false,
+		'reportable' => false,
+		'len' => '50',
+		'size' => '50',
+	);
+
+
+
+
+$dictionary['Lead']['fields']['batch'] =array (
+	'name' => 'batch',
+	'label' => 'LBL_BATCH',
+	'type' => 'enum',
+	'module' => 'Leads',
+	'help' => '',
+	'comment' => '',
+	'function' => 'getBatchList',
+	'default_value' => '',
+	'mass_update' => false, 
+	'required' => true, 
+	'reportable' => true, 
+	'audited' => false,
+	'importable' => 'true',
+	'duplicate_merge' => false,
+);
+
 
 // created: 2016-09-19 13:25:40
 $dictionary["Lead"]["fields"]["leads_leads_1"] = array (
@@ -145,136 +228,8 @@ $dictionary["Lead"]["fields"]["leads_leads_1leads_ida"] = array (
 );
 
 
- // created: 2016-09-15 13:52:52
-$dictionary['Lead']['fields']['lead_source_description']['inline_edit']=true;
-$dictionary['Lead']['fields']['lead_source_description']['comments']='Description of the lead source';
-$dictionary['Lead']['fields']['lead_source_description']['merge_filter']='disabled';
-$dictionary['Lead']['fields']['lead_source_description']['rows']='2';
-$dictionary['Lead']['fields']['lead_source_description']['cols']='20';
-
- 
-
-$dictionary['Lead']['fields']['batch'] =array (
-	'name' => 'batch',
-	'label' => 'LBL_BATCH',
-	'type' => 'enum',
-	'module' => 'Leads',
-	'help' => '',
-	'comment' => '',
-	'function' => 'getBatchList',
-	'default_value' => '',
-	'mass_update' => false, 
-	'required' => true, 
-	'reportable' => true, 
-	'audited' => false,
-	'importable' => 'true',
-	'duplicate_merge' => false,
-);
-
-
- // created: 2016-11-07 06:58:15
-$dictionary['Lead']['fields']['note']['name']='note';
-$dictionary['Lead']['fields']['note']['vname']='Note';
-$dictionary['Lead']['fields']['note']['type']='text';
-$dictionary['Lead']['fields']['note']['merge_filter']='disabled';
-$dictionary['Lead']['fields']['note']['rows']='5';
-$dictionary['Lead']['fields']['note']['cols']='29';
-$dictionary['Lead']['fields']['note']['inline_edit']=true;
-
- 
-
-
-$dictionary['Lead']['fields']['utm'] =array (
-		'name' => 'utm',
-		'vname' => 'LBL_UTM',
-		'type' => 'varchar',
-		'required' => false,
-		'massupdate' => 0,
-		'comments' => '',
-		'help' => '',
-		'default'=>'NA',
-		'importable' => 'true',
-		'duplicate_merge' => 'disabled',
-		'duplicate_merge_dom_value' => '0',
-		'audited' => false,
-		'reportable' => true,
-		'len' => '50',
-		'size' => '50',
-	);
-
-
-
-
- // created: 2016-09-13 02:59:34
-$dictionary['Lead']['fields']['functional_area_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['functional_area_c']['labelValue']='Functional Area';
-
- 
-
-$dictionary['Lead']['fields']['neoxstatus'] = array (
-      'name' => 'neoxstatus',
-      'vname' => 'NEOXSTATUS',
-      'type' => 'varchar',
-      'comment' => 'Status of Lead to push into neox',
-      'inline_edit' => false,
-      'required' => false,
-      'studio' => 'visible',
-      'default'=>'0',
-    );
-
-
-
-
- // created: 2016-10-29 14:14:16
-$dictionary['Lead']['fields']['last_name']['required']=false;
-$dictionary['Lead']['fields']['last_name']['inline_edit']=true;
-$dictionary['Lead']['fields']['last_name']['importable']=false;
-$dictionary['Lead']['fields']['last_name']['comments']='Last name of the contact';
-$dictionary['Lead']['fields']['last_name']['merge_filter']='disabled';
-
-$dictionary['Lead']['fields']['first_name']['importable']='required';
-
- 
-
-
-$dictionary['Lead']['fields']['date_of_payment']['massupdate']=false;
-$dictionary['Lead']['fields']['do_not_call']['massupdate']=false;
-
-$dictionary['Lead']['fields']['converted']['massupdate']=false;
-
-$dictionary['Lead']['fields']['gender']['massupdate']=false;
-$dictionary['Lead']['fields']['optout_primary']['massupdate']=false;
-
-$dictionary['Lead']['fields']['payment_realized_check']['massupdate']=false;
-$dictionary['Lead']['fields']['payment_type']['massupdate']=false;
-
-//$dictionary['Lead']['fields']['program']['massupdate']=true;
-$dictionary['Lead']['fields']['payment_source']['massupdate']=false;
-$dictionary['Lead']['fields']['payment_realized']['massupdate']=false;
-
-
-// new added // css 173line css hide date field
-
-$dictionary['Lead']['fields']['date_of_callback']['massupdate']=false;
-$dictionary['Lead']['fields']['date_of_prospect']['massupdate']=false;
-$dictionary['Lead']['fields']['date_of_followup']['massupdate']=false;
-$dictionary['Lead']['fields']['status']['massupdate']=false;
-$dictionary['Lead']['fields']['converted_date']['massupdate']=false;
-$dictionary['Lead']['fields']['assigned_flag']['massupdate']=false;
-
-$dictionary['Lead']['fields']['status_description']['massupdate']=false;
-$dictionary['Lead']['fields']['assigned_flag']['converted_datejscal_field']=false;
-
-
- // created: 2016-11-07 04:56:35
-$dictionary['Lead']['fields']['email1']['required']=true;
-$dictionary['Lead']['fields']['email1']['inline_edit']=true;
-$dictionary['Lead']['fields']['email1']['merge_filter']='disabled';
-
- 
-
- // created: 2016-09-15 13:40:55
-$dictionary['Lead']['fields']['te_ba_batch_id_c']['inline_edit']=1;
+ // created: 2016-08-29 08:18:17
+$dictionary['Lead']['fields']['jjwg_maps_lat_c']['inline_edit']=1;
 
  
 
@@ -294,21 +249,42 @@ $dictionary['Lead']['fields']['utm_campaign'] =array (
  
 
 
-$dictionary['Lead']['fields']['parrent_leads'] =array (
-	'name' => 'parrent_leads',
-	'vname' => 'Parrent Lead',
-	'type' => 'varchar',
-	'len' => '50',
-    'size' => '20',
-    'studio' => 'visible',
-	'required' => false, 
-	'reportable' => true, 
-	'audited' => false, 
-	'importable' => true, 
-	'duplicate_merge' => false,
-	'inline_edit' => false, 
-);
+ // created: 2016-11-07 06:58:15
+$dictionary['Lead']['fields']['note']['name']='note';
+$dictionary['Lead']['fields']['note']['vname']='Note';
+$dictionary['Lead']['fields']['note']['type']='text';
+$dictionary['Lead']['fields']['note']['merge_filter']='disabled';
+$dictionary['Lead']['fields']['note']['rows']='5';
+$dictionary['Lead']['fields']['note']['cols']='29';
+$dictionary['Lead']['fields']['note']['inline_edit']=true;
+
  
+
+ // created: 2016-09-15 13:40:55
+$dictionary['Lead']['fields']['batch_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['batch_c']['labelValue']='Batch';
+
+ 
+
+ // created: 2016-10-18 02:06:29
+$dictionary['Lead']['fields']['first_name']['required']=true;
+$dictionary['Lead']['fields']['first_name']['inline_edit']=true;
+$dictionary['Lead']['fields']['first_name']['comments']='First name of the contact';
+$dictionary['Lead']['fields']['first_name']['merge_filter']='disabled';
+
+ 
+
+// created: 2016-11-03 00:13:18
+$dictionary["Lead"]["fields"]["leads_te_payment_details_1"] = array (
+  'name' => 'leads_te_payment_details_1',
+  'type' => 'link',
+  'relationship' => 'leads_te_payment_details_1',
+  'source' => 'non-db',
+  'module' => 'te_payment_details',
+  'bean_name' => 'te_payment_details',
+  'side' => 'right',
+  'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
+);
 
 
  // created: 2016-09-15 13:52:52
@@ -415,6 +391,12 @@ $dictionary['Lead']['fields']['assigned_flag']['audited']='false';
  
 
 
+ // created: 2016-09-15 13:35:37
+$dictionary['Lead']['fields']['age_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['age_c']['labelValue']='Age';
+
+ 
+
 // created: 2016-11-07 22:45:22
 $dictionary["Lead"]["fields"]["te_disposition_leads"] = array (
   'name' => 'te_disposition_leads',
@@ -428,6 +410,204 @@ $dictionary["Lead"]["fields"]["te_disposition_leads"] = array (
 );
 
 
+$dictionary['Lead']['fields']['fee_inr'] =array (
+	'required' => false,
+    'name' => 'fee_inr',
+    'vname' => 'LBL_FEE_INR',
+    'type' => 'int',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '11',
+    'size' => '20',
+    'enable_range_search' => false,
+    'disable_num_format' => '',
+    'min' => false,
+    'max' => false,
+);
+ 
+
+$dictionary['Lead']['fields']['minimum_attendance'] =array (
+	'required' => false,
+    'name' => 'minimum_attendance',
+    'vname' => 'LBL_MINIMUM_ATTENDANCE',
+    'type' => 'int',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '11',
+    'size' => '20',
+    'enable_range_search' => false,
+    'disable_num_format' => '',
+    'min' => false,
+    'max' => false,
+);
+ 
+
+$dictionary['Lead']['fields']['primary_address_country']['required'] = false;
+
+
+
+ // created: 2016-09-15 13:52:20
+$dictionary['Lead']['fields']['status_description']['inline_edit']=true;
+$dictionary['Lead']['fields']['status_description']['comments']='Description of the status of the lead';
+$dictionary['Lead']['fields']['status_description']['type']='enum';
+$dictionary['Lead']['fields']['status_description']['len']='100';
+$dictionary['Lead']['fields']['status_description']['options']='lead_status_details_custom_dom';
+$dictionary['Lead']['fields']['status_description']['audited']='true';
+$dictionary['Lead']['fields']['status_description']['default']='New Lead';
+
+
+$dictionary['Lead']['fields']['status']['options']='lead_status_custom_dom';
+$dictionary['Lead']['fields']['status']['default']='Alive';
+
+$dictionary['Lead']['fields']['lead_source']['options']='lead_source_custom_dom';
+
+$dictionary['Lead']['fields']['gender']['name']='gender';
+$dictionary['Lead']['fields']['gender']['comments']='Gender of the status of the lead';
+$dictionary['Lead']['fields']['gender']['type']='enum';
+$dictionary['Lead']['fields']['gender']['vname']='Gender';
+$dictionary['Lead']['fields']['gender']['len']='100';
+$dictionary['Lead']['fields']['gender']['options']='gender_dom';
+$dictionary['Lead']['fields']['gender']['audited']='false';
+
+
+ 
+ 
+ 
+
+
+$dictionary['Lead']['fields']['neoxstatus'] = array (
+      'name' => 'neoxstatus',
+      'vname' => 'NEOXSTATUS',
+      'type' => 'varchar',
+      'comment' => 'Status of Lead to push into neox',
+      'inline_edit' => false,
+      'required' => false,
+      'studio' => 'visible',
+      'default'=>'0',
+    );
+
+
+
+
+ // created: 2016-09-13 02:59:34
+$dictionary['Lead']['fields']['functional_area_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['functional_area_c']['labelValue']='Functional Area';
+
+ 
+
+$dictionary['Lead']['fields']['mailer_day'] =array (
+	'required' => false,
+    'name' => 'mailer_day',
+    'vname' => 'LBL_MAILER_DAY',
+    'type' => 'int',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '11',
+    'size' => '20',
+    'enable_range_search' => false,
+    'disable_num_format' => '',
+    'min' => false,
+    'max' => false,
+);
+ 
+
+
+$dictionary['Lead']['fields']['utm'] =array (
+		'name' => 'utm',
+		'vname' => 'LBL_UTM',
+		'type' => 'varchar',
+		'required' => false,
+		'massupdate' => 0,
+		'comments' => '',
+		'help' => '',
+		'default'=>'NA',
+		'importable' => 'true',
+		'duplicate_merge' => 'disabled',
+		'duplicate_merge_dom_value' => '0',
+		'audited' => false,
+		'reportable' => true,
+		'len' => '50',
+		'size' => '50',
+	);
+
+
+
+
+$dictionary['Lead']['fields']['min_attendance_c']['validation'] = array(
+    'type' => 'range',
+    'min' => '0',
+    'max' => '100',
+);
+
+
+
+$dictionary['Lead']['fields']['fee_usd'] =array (
+	'required' => true,
+    'name' => 'fee_usd',
+    'vname' => 'LBL_FEE_USD',
+    'type' => 'int',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '11',
+    'size' => '20',
+    'enable_range_search' => false,
+    'disable_num_format' => '',
+    'min' => false,
+    'max' => false,
+);
+ 
+
+ // created: 2016-09-13 03:07:50
+$dictionary['Lead']['fields']['previous_courses_from_te_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['previous_courses_from_te_c']['labelValue']='Previous Courses From TE';
+
+ 
+
+$dictionary['Lead']['fields']['date_of_referral']['name']='date_of_referral';
+$dictionary['Lead']['fields']['date_of_referral']['vname']='LBL_DATEOFREFERRAL';
+$dictionary['Lead']['fields']['date_of_referral']['type']='date';
+$dictionary['Lead']['fields']['date_of_referral']['enable_range_search']=true;
+$dictionary['Lead']['fields']['date_of_referral']['options']='date_range_search_dom';
 
 
 $dictionary['Lead']['fields']['parent_name'] = 
@@ -517,182 +697,27 @@ $dictionary['Lead']['fields']['parent_type'] =
  
 
 
- // created: 2016-09-15 13:35:37
-$dictionary['Lead']['fields']['age_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['age_c']['labelValue']='Age';
-
- 
-
-$dictionary['Lead']['fields']['vendor'] =array (
-	'name' => 'vendor',
-	'label' => 'LBL_VENDOR',
+$dictionary['Lead']['fields']['parrent_leads'] =array (
+	'name' => 'parrent_leads',
+	'vname' => 'Parrent Lead',
 	'type' => 'varchar',
-	'module' => 'Leads',
-	'help' => '',
-	'comment' => '',
-	'default_value' => '',
 	'len' => '50',
     'size' => '20',
+    'studio' => 'visible',
 	'required' => false, 
 	'reportable' => true, 
 	'audited' => false, 
-	'importable' => 'true', 
-	'duplicate_merge' => false, 
+	'importable' => true, 
+	'duplicate_merge' => false,
+	'inline_edit' => false, 
 );
  
-
- // created: 2016-09-15 13:34:46
-$dictionary['Lead']['fields']['city_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['city_c']['labelValue']='City';
-
- 
-
-// created: 2016-11-03 00:13:18
-$dictionary["Lead"]["fields"]["leads_te_payment_details_1"] = array (
-  'name' => 'leads_te_payment_details_1',
-  'type' => 'link',
-  'relationship' => 'leads_te_payment_details_1',
-  'source' => 'non-db',
-  'module' => 'te_payment_details',
-  'bean_name' => 'te_payment_details',
-  'side' => 'right',
-  'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
-);
 
 
  // created: 2016-09-13 03:00:35
 $dictionary['Lead']['fields']['education_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['education_c']['labelValue']='Education';
 
- 
-
- // created: 2016-08-29 08:18:17
-$dictionary['Lead']['fields']['jjwg_maps_geocode_status_c']['inline_edit']=1;
-
- 
-
-$dictionary['Lead']['fields']['fee_usd'] =array (
-	'required' => true,
-    'name' => 'fee_usd',
-    'vname' => 'LBL_FEE_USD',
-    'type' => 'int',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => false,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '11',
-    'size' => '20',
-    'enable_range_search' => false,
-    'disable_num_format' => '',
-    'min' => false,
-    'max' => false,
-);
- 
-
- // created: 2016-08-29 08:18:17
-$dictionary['Lead']['fields']['jjwg_maps_lng_c']['inline_edit']=1;
-
- 
-
- // created: 2016-09-13 03:06:28
-$dictionary['Lead']['fields']['work_experience_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['work_experience_c']['labelValue']='Work Experience';
-
- 
-
-
-$dictionary['Lead']['fields']['invoice_number'] =array (
-		'name' => 'invoice_number',
-		'vname' => 'LBL_INVOICE_NUMBER',
-		'type' => 'int',
-		'required' => false,
-		'massupdate' => 0,
-		'comments' => '',
-		'help' => '',
-		'default'=> 0,
-		'importable' => 'false',
-		'duplicate_merge' => 'disabled',
-		'duplicate_merge_dom_value' => '0',
-		'audited' => false,
-		'reportable' => false,
-		'len' => '50',
-		'size' => '50',
-	);
-
-
-
-
- // created: 2016-09-15 13:40:55
-$dictionary['Lead']['fields']['batch_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['batch_c']['labelValue']='Batch';
-
- 
-
-$dictionary['Lead']['fields']['primary_address_country']['required'] = false;
-
-
-
- // created: 2016-09-15 13:40:04
-$dictionary['Lead']['fields']['min_attendance_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['min_attendance_c']['labelValue']='Min. Attendance';
-
- 
-
- // created: 2016-09-13 02:59:07
-$dictionary['Lead']['fields']['company_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['company_c']['labelValue']='Company';
-
- 
-
-$dictionary['Lead']['fields']['converted_date'] =array (
-	'name' => 'converted_date',
-	'label' => 'LBL_CONVERTED_DATE',
-	'type' => 'date',
-	'module' => 'Leads',
-	'default_value' => '',
-	'help' => '',
-	'comment' => '',
-	'mass_update' => false, 
-	'required' => false, 
-	'reportable' => true, 
-	'audited' => false, 
-	'duplicate_merge' => false, 
-	'importable' => 'true', 
-);
- 
-
-$dictionary['Lead']['fields']['minimum_attendance'] =array (
-	'required' => false,
-    'name' => 'minimum_attendance',
-    'vname' => 'LBL_MINIMUM_ATTENDANCE',
-    'type' => 'int',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => false,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '11',
-    'size' => '20',
-    'enable_range_search' => false,
-    'disable_num_format' => '',
-    'min' => false,
-    'max' => false,
-);
  
 
 $dictionary['Lead']['fields']['comment'] = array (
@@ -713,33 +738,13 @@ $dictionary['Lead']['fields']['comment'] = array (
 
 
  // created: 2016-08-29 08:18:17
-$dictionary['Lead']['fields']['jjwg_maps_lat_c']['inline_edit']=1;
+$dictionary['Lead']['fields']['jjwg_maps_geocode_status_c']['inline_edit']=1;
 
  
 
-$dictionary['Lead']['fields']['fee_inr'] =array (
-	'required' => false,
-    'name' => 'fee_inr',
-    'vname' => 'LBL_FEE_INR',
-    'type' => 'int',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => false,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '11',
-    'size' => '20',
-    'enable_range_search' => false,
-    'disable_num_format' => '',
-    'min' => false,
-    'max' => false,
-);
+ // created: 2016-09-15 13:40:04
+$dictionary['Lead']['fields']['min_attendance_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['min_attendance_c']['labelValue']='Min. Attendance';
+
  
 ?>

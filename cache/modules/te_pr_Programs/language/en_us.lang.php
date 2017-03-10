@@ -1,5 +1,5 @@
 <?php
-// created: 2017-03-09 05:14:54
+// created: 2017-03-09 22:27:04
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -44,6 +44,6 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL2' => 'New Panel 2',
   'LBL_MOBILE_NUMBER' => 'Mobile Number',
   'LBL_TE_PR_PROGRAMS_TE_BA_BATCH_1_FROM_TE_BA_BATCH_TITLE' => 'Batch',
-  'LBL_TE_PROGRAM_CATEGORY_TE_PR_PROGRAMS_FROM_TE_PROGRAM_CATEGORY_TITLE' => 'Program Category',
   'LBL_TE_IN_INSTITUTES_TE_PR_PROGRAMS_1_FROM_TE_IN_INSTITUTES_TITLE' => 'Institutes',
+  'LBL_TE_PROGRAM_CATEGORY_TE_PR_PROGRAMS_FROM_TE_PROGRAM_CATEGORY_TITLE' => 'Program Category',
 );

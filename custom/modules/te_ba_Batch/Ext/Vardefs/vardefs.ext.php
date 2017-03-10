@@ -39,9 +39,25 @@ $dictionary["te_ba_Batch"]["fields"]["te_in_institutes_te_ba_batch_1te_in_instit
 );
 
 
+ // created: 2016-10-06 04:03:42
+$dictionary['te_ba_Batch']['fields']['minimum_attendance_criteria']['comments']='Attendance is in %';
+
+$dictionary['te_ba_Batch']['fields']['minimum_attendance_criteria']['precision']='2';
+$dictionary['te_ba_Batch']['fields']['fees_inr']['precision']='2';
+$dictionary['te_ba_Batch']['fields']['fees_in_usd']['precision']='2';
+
+ 
+
+
  // created: 2016-09-09 01:39:04
 $dictionary['te_ba_Batch']['fields']['class_schedule_c']['inline_edit']='1';
 $dictionary['te_ba_Batch']['fields']['class_schedule_c']['labelValue']='class schedule';
+
+ 
+
+ // created: 2016-10-05 08:01:34
+$dictionary['te_ba_Batch']['fields']['enrolled_students_c']['inline_edit']='1';
+$dictionary['te_ba_Batch']['fields']['enrolled_students_c']['labelValue']='Enrolled Students';
 
  
 
@@ -82,8 +98,12 @@ $dictionary["te_ba_Batch"]["fields"]["te_pr_programs_te_ba_batch_1te_pr_programs
 );
 
 
- // created: 2016-10-06 05:58:28
-$dictionary['te_ba_Batch']['fields']['duration']['max']=1000;
+ // created: 2016-10-28 00:43:07
+$dictionary['te_ba_Batch']['fields']['name']['inline_edit']=true;
+$dictionary['te_ba_Batch']['fields']['name']['duplicate_merge']='disabled';
+$dictionary['te_ba_Batch']['fields']['name']['duplicate_merge_dom_value']='0';
+$dictionary['te_ba_Batch']['fields']['name']['merge_filter']='disabled';
+$dictionary['te_ba_Batch']['fields']['name']['unified_search']=false;
 
  
 
@@ -99,24 +119,11 @@ $dictionary['te_ba_Batch']['fields']['batch_start_date1']['options']='date_range
  
 
 
- // created: 2016-10-28 00:43:07
-$dictionary['te_ba_Batch']['fields']['name']['inline_edit']=true;
-$dictionary['te_ba_Batch']['fields']['name']['duplicate_merge']='disabled';
-$dictionary['te_ba_Batch']['fields']['name']['duplicate_merge_dom_value']='0';
-$dictionary['te_ba_Batch']['fields']['name']['merge_filter']='disabled';
-$dictionary['te_ba_Batch']['fields']['name']['unified_search']=false;
-
- 
-
- // created: 2016-10-05 08:01:34
-$dictionary['te_ba_Batch']['fields']['enrolled_students_c']['inline_edit']='1';
-$dictionary['te_ba_Batch']['fields']['enrolled_students_c']['labelValue']='Enrolled Students';
-
- 
-
- // created: 2016-10-28 00:59:47
-$dictionary['te_ba_Batch']['fields']['minimum_batch_size_c']['inline_edit']='1';
-$dictionary['te_ba_Batch']['fields']['minimum_batch_size_c']['labelValue']='Minimum Batch Size';
+ // created: 2016-10-28 01:32:11
+$dictionary['te_ba_Batch']['fields']['description']['inline_edit']=true;
+$dictionary['te_ba_Batch']['fields']['description']['comments']='Full text of the note';
+$dictionary['te_ba_Batch']['fields']['description']['merge_filter']='disabled';
+$dictionary['te_ba_Batch']['fields']['description']['cols']='103';
 
  
 
@@ -133,21 +140,14 @@ $dictionary["te_ba_Batch"]["fields"]["te_ba_batch_te_installments_1"] = array (
 );
 
 
- // created: 2016-10-28 01:32:11
-$dictionary['te_ba_Batch']['fields']['description']['inline_edit']=true;
-$dictionary['te_ba_Batch']['fields']['description']['comments']='Full text of the note';
-$dictionary['te_ba_Batch']['fields']['description']['merge_filter']='disabled';
-$dictionary['te_ba_Batch']['fields']['description']['cols']='103';
+ // created: 2016-10-06 05:58:28
+$dictionary['te_ba_Batch']['fields']['duration']['max']=1000;
 
  
 
- // created: 2016-10-06 04:03:42
-$dictionary['te_ba_Batch']['fields']['minimum_attendance_criteria']['comments']='Attendance is in %';
-
-$dictionary['te_ba_Batch']['fields']['minimum_attendance_criteria']['precision']='2';
-$dictionary['te_ba_Batch']['fields']['fees_inr']['precision']='2';
-$dictionary['te_ba_Batch']['fields']['fees_in_usd']['precision']='2';
+ // created: 2016-10-28 00:59:47
+$dictionary['te_ba_Batch']['fields']['minimum_batch_size_c']['inline_edit']='1';
+$dictionary['te_ba_Batch']['fields']['minimum_batch_size_c']['labelValue']='Minimum Batch Size';
 
  
-
 ?>

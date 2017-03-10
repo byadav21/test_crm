@@ -7804,28 +7804,28 @@
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'user_id',
   ),
-  'te_ba_batch_te_installments_1' => 
+  'te_pr_programs_te_ba_batch_1' => 
   array (
-    'name' => 'te_ba_batch_te_installments_1',
+    'name' => 'te_pr_programs_te_ba_batch_1',
     'true_relationship_type' => 'one-to-many',
     'from_studio' => true,
     'relationships' => 
     array (
-      'te_ba_batch_te_installments_1' => 
+      'te_pr_programs_te_ba_batch_1' => 
       array (
-        'lhs_module' => 'te_ba_Batch',
-        'lhs_table' => 'te_ba_batch',
+        'lhs_module' => 'te_pr_Programs',
+        'lhs_table' => 'te_pr_programs',
         'lhs_key' => 'id',
-        'rhs_module' => 'te_installments',
-        'rhs_table' => 'te_installments',
+        'rhs_module' => 'te_ba_Batch',
+        'rhs_table' => 'te_ba_batch',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'te_ba_batch_te_installments_1_c',
-        'join_key_lhs' => 'te_ba_batch_te_installments_1te_ba_batch_ida',
-        'join_key_rhs' => 'te_ba_batch_te_installments_1te_installments_idb',
+        'join_table' => 'te_pr_programs_te_ba_batch_1_c',
+        'join_key_lhs' => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
+        'join_key_rhs' => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
       ),
     ),
-    'table' => 'te_ba_batch_te_installments_1_c',
+    'table' => 'te_pr_programs_te_ba_batch_1_c',
     'fields' => 
     array (
       0 => 
@@ -7849,13 +7849,13 @@
       ),
       3 => 
       array (
-        'name' => 'te_ba_batch_te_installments_1te_ba_batch_ida',
+        'name' => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
         'type' => 'varchar',
         'len' => 36,
       ),
       4 => 
       array (
-        'name' => 'te_ba_batch_te_installments_1te_installments_idb',
+        'name' => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
         'type' => 'varchar',
         'len' => 36,
       ),
@@ -7864,7 +7864,7 @@
     array (
       0 => 
       array (
-        'name' => 'te_ba_batch_te_installments_1spk',
+        'name' => 'te_pr_programs_te_ba_batch_1spk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -7873,33 +7873,421 @@
       ),
       1 => 
       array (
-        'name' => 'te_ba_batch_te_installments_1_ida1',
+        'name' => 'te_pr_programs_te_ba_batch_1_ida1',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'te_ba_batch_te_installments_1te_ba_batch_ida',
+          0 => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
         ),
       ),
       2 => 
       array (
-        'name' => 'te_ba_batch_te_installments_1_alt',
+        'name' => 'te_pr_programs_te_ba_batch_1_alt',
         'type' => 'alternate_key',
         'fields' => 
         array (
-          0 => 'te_ba_batch_te_installments_1te_installments_idb',
+          0 => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
         ),
       ),
     ),
-    'lhs_module' => 'te_ba_Batch',
-    'lhs_table' => 'te_ba_batch',
+    'lhs_module' => 'te_pr_Programs',
+    'lhs_table' => 'te_pr_programs',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_installments',
-    'rhs_table' => 'te_installments',
+    'rhs_module' => 'te_ba_Batch',
+    'rhs_table' => 'te_ba_batch',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
-    'join_table' => 'te_ba_batch_te_installments_1_c',
-    'join_key_lhs' => 'te_ba_batch_te_installments_1te_ba_batch_ida',
-    'join_key_rhs' => 'te_ba_batch_te_installments_1te_installments_idb',
+    'join_table' => 'te_pr_programs_te_ba_batch_1_c',
+    'join_key_lhs' => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
+    'join_key_rhs' => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
+  ),
+  'te_utm_te_actual_campaign_1' => 
+  array (
+    'name' => 'te_utm_te_actual_campaign_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'te_utm_te_actual_campaign_1' => 
+      array (
+        'lhs_module' => 'te_utm',
+        'lhs_table' => 'te_utm',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_actual_campaign',
+        'rhs_table' => 'te_actual_campaign',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'te_utm_te_actual_campaign_1_c',
+        'join_key_lhs' => 'te_utm_te_actual_campaign_1te_utm_ida',
+        'join_key_rhs' => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
+      ),
+    ),
+    'table' => 'te_utm_te_actual_campaign_1_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'te_utm_te_actual_campaign_1te_utm_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'te_utm_te_actual_campaign_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'te_utm_te_actual_campaign_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'te_utm_te_actual_campaign_1te_utm_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'te_utm_te_actual_campaign_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'te_utm',
+    'lhs_table' => 'te_utm',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_actual_campaign',
+    'rhs_table' => 'te_actual_campaign',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'te_utm_te_actual_campaign_1_c',
+    'join_key_lhs' => 'te_utm_te_actual_campaign_1te_utm_ida',
+    'join_key_rhs' => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
+  ),
+  'aos_contracts_te_impression_1' => 
+  array (
+    'name' => 'aos_contracts_te_impression_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'aos_contracts_te_impression_1' => 
+      array (
+        'lhs_module' => 'AOS_Contracts',
+        'lhs_table' => 'aos_contracts',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_impression',
+        'rhs_table' => 'te_impression',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'aos_contracts_te_impression_1_c',
+        'join_key_lhs' => 'aos_contracts_te_impression_1aos_contracts_ida',
+        'join_key_rhs' => 'aos_contracts_te_impression_1te_impression_idb',
+      ),
+    ),
+    'table' => 'aos_contracts_te_impression_1_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'aos_contracts_te_impression_1aos_contracts_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'aos_contracts_te_impression_1te_impression_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'aos_contracts_te_impression_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'aos_contracts_te_impression_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'aos_contracts_te_impression_1aos_contracts_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'aos_contracts_te_impression_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'aos_contracts_te_impression_1te_impression_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'AOS_Contracts',
+    'lhs_table' => 'aos_contracts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_impression',
+    'rhs_table' => 'te_impression',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'aos_contracts_te_impression_1_c',
+    'join_key_lhs' => 'aos_contracts_te_impression_1aos_contracts_ida',
+    'join_key_rhs' => 'aos_contracts_te_impression_1te_impression_idb',
+  ),
+  'te_in_institutes_te_ba_batch_1' => 
+  array (
+    'name' => 'te_in_institutes_te_ba_batch_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'te_in_institutes_te_ba_batch_1' => 
+      array (
+        'lhs_module' => 'te_in_institutes',
+        'lhs_table' => 'te_in_institutes',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_ba_Batch',
+        'rhs_table' => 'te_ba_batch',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'te_in_institutes_te_ba_batch_1_c',
+        'join_key_lhs' => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
+        'join_key_rhs' => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+      ),
+    ),
+    'table' => 'te_in_institutes_te_ba_batch_1_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'te_in_institutes_te_ba_batch_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'te_in_institutes_te_ba_batch_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'te_in_institutes_te_ba_batch_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'te_in_institutes',
+    'lhs_table' => 'te_in_institutes',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_ba_Batch',
+    'rhs_table' => 'te_ba_batch',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'te_in_institutes_te_ba_batch_1_c',
+    'join_key_lhs' => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
+    'join_key_rhs' => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+  ),
+  'leads_leads_1' => 
+  array (
+    'name' => 'leads_leads_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'leads_leads_1' => 
+      array (
+        'lhs_module' => 'Leads',
+        'lhs_table' => 'leads',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Leads',
+        'rhs_table' => 'leads',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'leads_leads_1_c',
+        'join_key_lhs' => 'leads_leads_1leads_ida',
+        'join_key_rhs' => 'leads_leads_1leads_idb',
+      ),
+    ),
+    'table' => 'leads_leads_1_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'leads_leads_1leads_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'leads_leads_1leads_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'leads_leads_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'leads_leads_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'leads_leads_1leads_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'leads_leads_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'leads_leads_1leads_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Leads',
+    'lhs_table' => 'leads',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Leads',
+    'rhs_table' => 'leads',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'leads_leads_1_c',
+    'join_key_lhs' => 'leads_leads_1leads_ida',
+    'join_key_rhs' => 'leads_leads_1leads_idb',
   ),
   'te_vendor_te_utm_1' => 
   array (
@@ -7998,190 +8386,6 @@
     'join_key_lhs' => 'te_vendor_te_utm_1te_vendor_ida',
     'join_key_rhs' => 'te_vendor_te_utm_1te_utm_idb',
   ),
-  'te_drip_campaign_te_drip_campaign_list' => 
-  array (
-    'name' => 'te_drip_campaign_te_drip_campaign_list',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'te_drip_campaign_te_drip_campaign_list' => 
-      array (
-        'lhs_module' => 'te_drip_campaign',
-        'lhs_table' => 'te_drip_campaign',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_drip_campaign_list',
-        'rhs_table' => 'te_drip_campaign_list',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'te_drip_campaign_te_drip_campaign_list_c',
-        'join_key_lhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
-        'join_key_rhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
-      ),
-    ),
-    'table' => 'te_drip_campaign_te_drip_campaign_list_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'te_drip_campaign_te_drip_campaign_listspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'te_drip_campaign_te_drip_campaign_list_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'te_drip_campaign_te_drip_campaign_list_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'te_drip_campaign',
-    'lhs_table' => 'te_drip_campaign',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_drip_campaign_list',
-    'rhs_table' => 'te_drip_campaign_list',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'te_drip_campaign_te_drip_campaign_list_c',
-    'join_key_lhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
-    'join_key_rhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
-  ),
-  'te_program_category_te_pr_programs' => 
-  array (
-    'name' => 'te_program_category_te_pr_programs',
-    'true_relationship_type' => 'many-to-many',
-    'relationships' => 
-    array (
-      'te_program_category_te_pr_programs' => 
-      array (
-        'lhs_module' => 'te_Program_category',
-        'lhs_table' => 'te_program_category',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_pr_Programs',
-        'rhs_table' => 'te_pr_programs',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'te_program_category_te_pr_programs_c',
-        'join_key_lhs' => 'te_program_category_te_pr_programste_program_category_ida',
-        'join_key_rhs' => 'te_program_category_te_pr_programste_pr_programs_idb',
-      ),
-    ),
-    'table' => 'te_program_category_te_pr_programs_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'te_program_category_te_pr_programste_program_category_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'te_program_category_te_pr_programste_pr_programs_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'te_program_category_te_pr_programsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'te_program_category_te_pr_programs_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'te_program_category_te_pr_programste_program_category_ida',
-          1 => 'te_program_category_te_pr_programste_pr_programs_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'te_Program_category',
-    'lhs_table' => 'te_program_category',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_pr_Programs',
-    'rhs_table' => 'te_pr_programs',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'te_program_category_te_pr_programs_c',
-    'join_key_lhs' => 'te_program_category_te_pr_programste_program_category_ida',
-    'join_key_rhs' => 'te_program_category_te_pr_programste_pr_programs_idb',
-  ),
   'te_student_te_student_batch_1' => 
   array (
     'name' => 'te_student_te_student_batch_1',
@@ -8278,6 +8482,480 @@
     'join_table' => 'te_student_te_student_batch_1_c',
     'join_key_lhs' => 'te_student_te_student_batch_1te_student_ida',
     'join_key_rhs' => 'te_student_te_student_batch_1te_student_batch_idb',
+  ),
+  'te_program_category_te_pr_programs' => 
+  array (
+    'name' => 'te_program_category_te_pr_programs',
+    'true_relationship_type' => 'many-to-many',
+    'relationships' => 
+    array (
+      'te_program_category_te_pr_programs' => 
+      array (
+        'lhs_module' => 'te_Program_category',
+        'lhs_table' => 'te_program_category',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_pr_Programs',
+        'rhs_table' => 'te_pr_programs',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'te_program_category_te_pr_programs_c',
+        'join_key_lhs' => 'te_program_category_te_pr_programste_program_category_ida',
+        'join_key_rhs' => 'te_program_category_te_pr_programste_pr_programs_idb',
+      ),
+    ),
+    'table' => 'te_program_category_te_pr_programs_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'te_program_category_te_pr_programste_program_category_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'te_program_category_te_pr_programste_pr_programs_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'te_program_category_te_pr_programsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'te_program_category_te_pr_programs_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'te_program_category_te_pr_programste_program_category_ida',
+          1 => 'te_program_category_te_pr_programste_pr_programs_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'te_Program_category',
+    'lhs_table' => 'te_program_category',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_pr_Programs',
+    'rhs_table' => 'te_pr_programs',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'te_program_category_te_pr_programs_c',
+    'join_key_lhs' => 'te_program_category_te_pr_programste_program_category_ida',
+    'join_key_rhs' => 'te_program_category_te_pr_programste_pr_programs_idb',
+  ),
+  'leads_te_payment_details_1' => 
+  array (
+    'name' => 'leads_te_payment_details_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'leads_te_payment_details_1' => 
+      array (
+        'lhs_module' => 'Leads',
+        'lhs_table' => 'leads',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_payment_details',
+        'rhs_table' => 'te_payment_details',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'leads_te_payment_details_1_c',
+        'join_key_lhs' => 'leads_te_payment_details_1leads_ida',
+        'join_key_rhs' => 'leads_te_payment_details_1te_payment_details_idb',
+      ),
+    ),
+    'table' => 'leads_te_payment_details_1_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'leads_te_payment_details_1leads_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'leads_te_payment_details_1te_payment_details_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'leads_te_payment_details_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'leads_te_payment_details_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'leads_te_payment_details_1leads_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'leads_te_payment_details_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'leads_te_payment_details_1te_payment_details_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Leads',
+    'lhs_table' => 'leads',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_payment_details',
+    'rhs_table' => 'te_payment_details',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'leads_te_payment_details_1_c',
+    'join_key_lhs' => 'leads_te_payment_details_1leads_ida',
+    'join_key_rhs' => 'leads_te_payment_details_1te_payment_details_idb',
+  ),
+  'te_drip_campaign_te_drip_campaign_list' => 
+  array (
+    'name' => 'te_drip_campaign_te_drip_campaign_list',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'te_drip_campaign_te_drip_campaign_list' => 
+      array (
+        'lhs_module' => 'te_drip_campaign',
+        'lhs_table' => 'te_drip_campaign',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_drip_campaign_list',
+        'rhs_table' => 'te_drip_campaign_list',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'te_drip_campaign_te_drip_campaign_list_c',
+        'join_key_lhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
+        'join_key_rhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
+      ),
+    ),
+    'table' => 'te_drip_campaign_te_drip_campaign_list_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'te_drip_campaign_te_drip_campaign_listspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'te_drip_campaign_te_drip_campaign_list_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'te_drip_campaign_te_drip_campaign_list_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'te_drip_campaign',
+    'lhs_table' => 'te_drip_campaign',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_drip_campaign_list',
+    'rhs_table' => 'te_drip_campaign_list',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'te_drip_campaign_te_drip_campaign_list_c',
+    'join_key_lhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_ida',
+    'join_key_rhs' => 'te_drip_campaign_te_drip_campaign_listte_drip_campaign_list_idb',
+  ),
+  'te_vendor_aos_contracts_1' => 
+  array (
+    'name' => 'te_vendor_aos_contracts_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'te_vendor_aos_contracts_1' => 
+      array (
+        'lhs_module' => 'te_vendor',
+        'lhs_table' => 'te_vendor',
+        'lhs_key' => 'id',
+        'rhs_module' => 'AOS_Contracts',
+        'rhs_table' => 'aos_contracts',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'te_vendor_aos_contracts_1_c',
+        'join_key_lhs' => 'te_vendor_aos_contracts_1te_vendor_ida',
+        'join_key_rhs' => 'te_vendor_aos_contracts_1aos_contracts_idb',
+      ),
+    ),
+    'table' => 'te_vendor_aos_contracts_1_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'te_vendor_aos_contracts_1te_vendor_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'te_vendor_aos_contracts_1aos_contracts_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'te_vendor_aos_contracts_1spk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'te_vendor_aos_contracts_1_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'te_vendor_aos_contracts_1te_vendor_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'te_vendor_aos_contracts_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'te_vendor_aos_contracts_1aos_contracts_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'te_vendor',
+    'lhs_table' => 'te_vendor',
+    'lhs_key' => 'id',
+    'rhs_module' => 'AOS_Contracts',
+    'rhs_table' => 'aos_contracts',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'te_vendor_aos_contracts_1_c',
+    'join_key_lhs' => 'te_vendor_aos_contracts_1te_vendor_ida',
+    'join_key_rhs' => 'te_vendor_aos_contracts_1aos_contracts_idb',
+  ),
+  'te_disposition_leads' => 
+  array (
+    'name' => 'te_disposition_leads',
+    'true_relationship_type' => 'one-to-many',
+    'relationships' => 
+    array (
+      'te_disposition_leads' => 
+      array (
+        'lhs_module' => 'Leads',
+        'lhs_table' => 'leads',
+        'lhs_key' => 'id',
+        'rhs_module' => 'te_disposition',
+        'rhs_table' => 'te_disposition',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'te_disposition_leads_c',
+        'join_key_lhs' => 'te_disposition_leadsleads_ida',
+        'join_key_rhs' => 'te_disposition_leadste_disposition_idb',
+      ),
+    ),
+    'table' => 'te_disposition_leads_c',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      1 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      2 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      3 => 
+      array (
+        'name' => 'te_disposition_leadsleads_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      4 => 
+      array (
+        'name' => 'te_disposition_leadste_disposition_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'te_disposition_leadsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'te_disposition_leads_ida1',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'te_disposition_leadsleads_ida',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'te_disposition_leads_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'te_disposition_leadste_disposition_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Leads',
+    'lhs_table' => 'leads',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_disposition',
+    'rhs_table' => 'te_disposition',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'te_disposition_leads_c',
+    'join_key_lhs' => 'te_disposition_leadsleads_ida',
+    'join_key_rhs' => 'te_disposition_leadste_disposition_idb',
   ),
   'te_utm_te_budgeted_campaign_1' => 
   array (
@@ -8473,394 +9151,6 @@
     'join_key_lhs' => 'te_in_institutes_te_pr_programs_1te_in_institutes_ida',
     'join_key_rhs' => 'te_in_institutes_te_pr_programs_1te_pr_programs_idb',
   ),
-  'leads_leads_1' => 
-  array (
-    'name' => 'leads_leads_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'leads_leads_1' => 
-      array (
-        'lhs_module' => 'Leads',
-        'lhs_table' => 'leads',
-        'lhs_key' => 'id',
-        'rhs_module' => 'Leads',
-        'rhs_table' => 'leads',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'leads_leads_1_c',
-        'join_key_lhs' => 'leads_leads_1leads_ida',
-        'join_key_rhs' => 'leads_leads_1leads_idb',
-      ),
-    ),
-    'table' => 'leads_leads_1_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'leads_leads_1leads_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'leads_leads_1leads_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'leads_leads_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'leads_leads_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'leads_leads_1leads_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'leads_leads_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'leads_leads_1leads_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Leads',
-    'lhs_table' => 'leads',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Leads',
-    'rhs_table' => 'leads',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'leads_leads_1_c',
-    'join_key_lhs' => 'leads_leads_1leads_ida',
-    'join_key_rhs' => 'leads_leads_1leads_idb',
-  ),
-  'te_student_te_student_payment_1' => 
-  array (
-    'name' => 'te_student_te_student_payment_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'te_student_te_student_payment_1' => 
-      array (
-        'lhs_module' => 'te_student',
-        'lhs_table' => 'te_student',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_student_payment',
-        'rhs_table' => 'te_student_payment',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'te_student_te_student_payment_1_c',
-        'join_key_lhs' => 'te_student_te_student_payment_1te_student_ida',
-        'join_key_rhs' => 'te_student_te_student_payment_1te_student_payment_idb',
-      ),
-    ),
-    'table' => 'te_student_te_student_payment_1_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'te_student_te_student_payment_1te_student_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'te_student_te_student_payment_1te_student_payment_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'te_student_te_student_payment_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'te_student_te_student_payment_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'te_student_te_student_payment_1te_student_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'te_student_te_student_payment_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'te_student_te_student_payment_1te_student_payment_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'te_student',
-    'lhs_table' => 'te_student',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment',
-    'rhs_table' => 'te_student_payment',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'te_student_te_student_payment_1_c',
-    'join_key_lhs' => 'te_student_te_student_payment_1te_student_ida',
-    'join_key_rhs' => 'te_student_te_student_payment_1te_student_payment_idb',
-  ),
-  'te_pr_programs_te_ba_batch_1' => 
-  array (
-    'name' => 'te_pr_programs_te_ba_batch_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'te_pr_programs_te_ba_batch_1' => 
-      array (
-        'lhs_module' => 'te_pr_Programs',
-        'lhs_table' => 'te_pr_programs',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_ba_Batch',
-        'rhs_table' => 'te_ba_batch',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'te_pr_programs_te_ba_batch_1_c',
-        'join_key_lhs' => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
-        'join_key_rhs' => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
-      ),
-    ),
-    'table' => 'te_pr_programs_te_ba_batch_1_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'te_pr_programs_te_ba_batch_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'te_pr_programs_te_ba_batch_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'te_pr_programs_te_ba_batch_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'te_pr_Programs',
-    'lhs_table' => 'te_pr_programs',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_ba_Batch',
-    'rhs_table' => 'te_ba_batch',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'te_pr_programs_te_ba_batch_1_c',
-    'join_key_lhs' => 'te_pr_programs_te_ba_batch_1te_pr_programs_ida',
-    'join_key_rhs' => 'te_pr_programs_te_ba_batch_1te_ba_batch_idb',
-  ),
-  'te_utm_te_actual_campaign_1' => 
-  array (
-    'name' => 'te_utm_te_actual_campaign_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'te_utm_te_actual_campaign_1' => 
-      array (
-        'lhs_module' => 'te_utm',
-        'lhs_table' => 'te_utm',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_actual_campaign',
-        'rhs_table' => 'te_actual_campaign',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'te_utm_te_actual_campaign_1_c',
-        'join_key_lhs' => 'te_utm_te_actual_campaign_1te_utm_ida',
-        'join_key_rhs' => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
-      ),
-    ),
-    'table' => 'te_utm_te_actual_campaign_1_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'te_utm_te_actual_campaign_1te_utm_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'te_utm_te_actual_campaign_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'te_utm_te_actual_campaign_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'te_utm_te_actual_campaign_1te_utm_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'te_utm_te_actual_campaign_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'te_utm',
-    'lhs_table' => 'te_utm',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_actual_campaign',
-    'rhs_table' => 'te_actual_campaign',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'te_utm_te_actual_campaign_1_c',
-    'join_key_lhs' => 'te_utm_te_actual_campaign_1te_utm_ida',
-    'join_key_rhs' => 'te_utm_te_actual_campaign_1te_actual_campaign_idb',
-  ),
   'te_student_te_student_study_kit_1' => 
   array (
     'name' => 'te_student_te_student_study_kit_1',
@@ -8957,200 +9247,6 @@
     'join_table' => 'te_student_te_student_study_kit_1_c',
     'join_key_lhs' => 'te_student_te_student_study_kit_1te_student_ida',
     'join_key_rhs' => 'te_student_te_student_study_kit_1te_student_study_kit_idb',
-  ),
-  'te_student_batch_te_student_payment_plan_1' => 
-  array (
-    'name' => 'te_student_batch_te_student_payment_plan_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'te_student_batch_te_student_payment_plan_1' => 
-      array (
-        'lhs_module' => 'te_student_batch',
-        'lhs_table' => 'te_student_batch',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_student_payment_plan',
-        'rhs_table' => 'te_student_payment_plan',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'te_student_batch_te_student_payment_plan_1_c',
-        'join_key_lhs' => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
-        'join_key_rhs' => 'te_student9d1ant_plan_idb',
-      ),
-    ),
-    'table' => 'te_student_batch_te_student_payment_plan_1_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'te_student9d1ant_plan_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'te_student_batch_te_student_payment_plan_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'te_student_batch_te_student_payment_plan_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'te_student_batch_te_student_payment_plan_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'te_student9d1ant_plan_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'te_student_batch',
-    'lhs_table' => 'te_student_batch',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment_plan',
-    'rhs_table' => 'te_student_payment_plan',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'te_student_batch_te_student_payment_plan_1_c',
-    'join_key_lhs' => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
-    'join_key_rhs' => 'te_student9d1ant_plan_idb',
-  ),
-  'leads_te_payment_details_1' => 
-  array (
-    'name' => 'leads_te_payment_details_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'leads_te_payment_details_1' => 
-      array (
-        'lhs_module' => 'Leads',
-        'lhs_table' => 'leads',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_payment_details',
-        'rhs_table' => 'te_payment_details',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'leads_te_payment_details_1_c',
-        'join_key_lhs' => 'leads_te_payment_details_1leads_ida',
-        'join_key_rhs' => 'leads_te_payment_details_1te_payment_details_idb',
-      ),
-    ),
-    'table' => 'leads_te_payment_details_1_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'leads_te_payment_details_1leads_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'leads_te_payment_details_1te_payment_details_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'leads_te_payment_details_1spk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'leads_te_payment_details_1_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'leads_te_payment_details_1leads_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'leads_te_payment_details_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'leads_te_payment_details_1te_payment_details_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Leads',
-    'lhs_table' => 'leads',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_payment_details',
-    'rhs_table' => 'te_payment_details',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'leads_te_payment_details_1_c',
-    'join_key_lhs' => 'leads_te_payment_details_1leads_ida',
-    'join_key_rhs' => 'leads_te_payment_details_1te_payment_details_idb',
   ),
   'te_target_campaign_te_target_campaign_list_1' => 
   array (
@@ -9249,28 +9345,28 @@
     'join_key_lhs' => 'te_target_b188ampaign_ida',
     'join_key_rhs' => 'te_target_ee97gn_list_idb',
   ),
-  'te_in_institutes_te_ba_batch_1' => 
+  'te_ba_batch_te_installments_1' => 
   array (
-    'name' => 'te_in_institutes_te_ba_batch_1',
+    'name' => 'te_ba_batch_te_installments_1',
     'true_relationship_type' => 'one-to-many',
     'from_studio' => true,
     'relationships' => 
     array (
-      'te_in_institutes_te_ba_batch_1' => 
+      'te_ba_batch_te_installments_1' => 
       array (
-        'lhs_module' => 'te_in_institutes',
-        'lhs_table' => 'te_in_institutes',
+        'lhs_module' => 'te_ba_Batch',
+        'lhs_table' => 'te_ba_batch',
         'lhs_key' => 'id',
-        'rhs_module' => 'te_ba_Batch',
-        'rhs_table' => 'te_ba_batch',
+        'rhs_module' => 'te_installments',
+        'rhs_table' => 'te_installments',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'te_in_institutes_te_ba_batch_1_c',
-        'join_key_lhs' => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
-        'join_key_rhs' => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+        'join_table' => 'te_ba_batch_te_installments_1_c',
+        'join_key_lhs' => 'te_ba_batch_te_installments_1te_ba_batch_ida',
+        'join_key_rhs' => 'te_ba_batch_te_installments_1te_installments_idb',
       ),
     ),
-    'table' => 'te_in_institutes_te_ba_batch_1_c',
+    'table' => 'te_ba_batch_te_installments_1_c',
     'fields' => 
     array (
       0 => 
@@ -9294,13 +9390,13 @@
       ),
       3 => 
       array (
-        'name' => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
+        'name' => 'te_ba_batch_te_installments_1te_ba_batch_ida',
         'type' => 'varchar',
         'len' => 36,
       ),
       4 => 
       array (
-        'name' => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+        'name' => 'te_ba_batch_te_installments_1te_installments_idb',
         'type' => 'varchar',
         'len' => 36,
       ),
@@ -9309,7 +9405,7 @@
     array (
       0 => 
       array (
-        'name' => 'te_in_institutes_te_ba_batch_1spk',
+        'name' => 'te_ba_batch_te_installments_1spk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -9318,56 +9414,56 @@
       ),
       1 => 
       array (
-        'name' => 'te_in_institutes_te_ba_batch_1_ida1',
+        'name' => 'te_ba_batch_te_installments_1_ida1',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
+          0 => 'te_ba_batch_te_installments_1te_ba_batch_ida',
         ),
       ),
       2 => 
       array (
-        'name' => 'te_in_institutes_te_ba_batch_1_alt',
+        'name' => 'te_ba_batch_te_installments_1_alt',
         'type' => 'alternate_key',
         'fields' => 
         array (
-          0 => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+          0 => 'te_ba_batch_te_installments_1te_installments_idb',
         ),
       ),
     ),
-    'lhs_module' => 'te_in_institutes',
-    'lhs_table' => 'te_in_institutes',
+    'lhs_module' => 'te_ba_Batch',
+    'lhs_table' => 'te_ba_batch',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_ba_Batch',
-    'rhs_table' => 'te_ba_batch',
+    'rhs_module' => 'te_installments',
+    'rhs_table' => 'te_installments',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
-    'join_table' => 'te_in_institutes_te_ba_batch_1_c',
-    'join_key_lhs' => 'te_in_institutes_te_ba_batch_1te_in_institutes_ida',
-    'join_key_rhs' => 'te_in_institutes_te_ba_batch_1te_ba_batch_idb',
+    'join_table' => 'te_ba_batch_te_installments_1_c',
+    'join_key_lhs' => 'te_ba_batch_te_installments_1te_ba_batch_ida',
+    'join_key_rhs' => 'te_ba_batch_te_installments_1te_installments_idb',
   ),
-  'aos_contracts_te_impression_1' => 
+  'te_student_te_student_payment_1' => 
   array (
-    'name' => 'aos_contracts_te_impression_1',
+    'name' => 'te_student_te_student_payment_1',
     'true_relationship_type' => 'one-to-many',
     'from_studio' => true,
     'relationships' => 
     array (
-      'aos_contracts_te_impression_1' => 
+      'te_student_te_student_payment_1' => 
       array (
-        'lhs_module' => 'AOS_Contracts',
-        'lhs_table' => 'aos_contracts',
+        'lhs_module' => 'te_student',
+        'lhs_table' => 'te_student',
         'lhs_key' => 'id',
-        'rhs_module' => 'te_impression',
-        'rhs_table' => 'te_impression',
+        'rhs_module' => 'te_student_payment',
+        'rhs_table' => 'te_student_payment',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'aos_contracts_te_impression_1_c',
-        'join_key_lhs' => 'aos_contracts_te_impression_1aos_contracts_ida',
-        'join_key_rhs' => 'aos_contracts_te_impression_1te_impression_idb',
+        'join_table' => 'te_student_te_student_payment_1_c',
+        'join_key_lhs' => 'te_student_te_student_payment_1te_student_ida',
+        'join_key_rhs' => 'te_student_te_student_payment_1te_student_payment_idb',
       ),
     ),
-    'table' => 'aos_contracts_te_impression_1_c',
+    'table' => 'te_student_te_student_payment_1_c',
     'fields' => 
     array (
       0 => 
@@ -9391,13 +9487,13 @@
       ),
       3 => 
       array (
-        'name' => 'aos_contracts_te_impression_1aos_contracts_ida',
+        'name' => 'te_student_te_student_payment_1te_student_ida',
         'type' => 'varchar',
         'len' => 36,
       ),
       4 => 
       array (
-        'name' => 'aos_contracts_te_impression_1te_impression_idb',
+        'name' => 'te_student_te_student_payment_1te_student_payment_idb',
         'type' => 'varchar',
         'len' => 36,
       ),
@@ -9406,7 +9502,7 @@
     array (
       0 => 
       array (
-        'name' => 'aos_contracts_te_impression_1spk',
+        'name' => 'te_student_te_student_payment_1spk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -9415,152 +9511,56 @@
       ),
       1 => 
       array (
-        'name' => 'aos_contracts_te_impression_1_ida1',
+        'name' => 'te_student_te_student_payment_1_ida1',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'aos_contracts_te_impression_1aos_contracts_ida',
+          0 => 'te_student_te_student_payment_1te_student_ida',
         ),
       ),
       2 => 
       array (
-        'name' => 'aos_contracts_te_impression_1_alt',
+        'name' => 'te_student_te_student_payment_1_alt',
         'type' => 'alternate_key',
         'fields' => 
         array (
-          0 => 'aos_contracts_te_impression_1te_impression_idb',
+          0 => 'te_student_te_student_payment_1te_student_payment_idb',
         ),
       ),
     ),
-    'lhs_module' => 'AOS_Contracts',
-    'lhs_table' => 'aos_contracts',
+    'lhs_module' => 'te_student',
+    'lhs_table' => 'te_student',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_impression',
-    'rhs_table' => 'te_impression',
+    'rhs_module' => 'te_student_payment',
+    'rhs_table' => 'te_student_payment',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
-    'join_table' => 'aos_contracts_te_impression_1_c',
-    'join_key_lhs' => 'aos_contracts_te_impression_1aos_contracts_ida',
-    'join_key_rhs' => 'aos_contracts_te_impression_1te_impression_idb',
+    'join_table' => 'te_student_te_student_payment_1_c',
+    'join_key_lhs' => 'te_student_te_student_payment_1te_student_ida',
+    'join_key_rhs' => 'te_student_te_student_payment_1te_student_payment_idb',
   ),
-  'te_disposition_leads' => 
+  'te_student_batch_te_student_payment_plan_1' => 
   array (
-    'name' => 'te_disposition_leads',
-    'true_relationship_type' => 'one-to-many',
-    'relationships' => 
-    array (
-      'te_disposition_leads' => 
-      array (
-        'lhs_module' => 'Leads',
-        'lhs_table' => 'leads',
-        'lhs_key' => 'id',
-        'rhs_module' => 'te_disposition',
-        'rhs_table' => 'te_disposition',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'te_disposition_leads_c',
-        'join_key_lhs' => 'te_disposition_leadsleads_ida',
-        'join_key_rhs' => 'te_disposition_leadste_disposition_idb',
-      ),
-    ),
-    'table' => 'te_disposition_leads_c',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      1 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      2 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      3 => 
-      array (
-        'name' => 'te_disposition_leadsleads_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      4 => 
-      array (
-        'name' => 'te_disposition_leadste_disposition_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'te_disposition_leadsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'te_disposition_leads_ida1',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'te_disposition_leadsleads_ida',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'te_disposition_leads_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'te_disposition_leadste_disposition_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Leads',
-    'lhs_table' => 'leads',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_disposition',
-    'rhs_table' => 'te_disposition',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'te_disposition_leads_c',
-    'join_key_lhs' => 'te_disposition_leadsleads_ida',
-    'join_key_rhs' => 'te_disposition_leadste_disposition_idb',
-  ),
-  'te_vendor_aos_contracts_1' => 
-  array (
-    'name' => 'te_vendor_aos_contracts_1',
+    'name' => 'te_student_batch_te_student_payment_plan_1',
     'true_relationship_type' => 'one-to-many',
     'from_studio' => true,
     'relationships' => 
     array (
-      'te_vendor_aos_contracts_1' => 
+      'te_student_batch_te_student_payment_plan_1' => 
       array (
-        'lhs_module' => 'te_vendor',
-        'lhs_table' => 'te_vendor',
+        'lhs_module' => 'te_student_batch',
+        'lhs_table' => 'te_student_batch',
         'lhs_key' => 'id',
-        'rhs_module' => 'AOS_Contracts',
-        'rhs_table' => 'aos_contracts',
+        'rhs_module' => 'te_student_payment_plan',
+        'rhs_table' => 'te_student_payment_plan',
         'rhs_key' => 'id',
         'relationship_type' => 'many-to-many',
-        'join_table' => 'te_vendor_aos_contracts_1_c',
-        'join_key_lhs' => 'te_vendor_aos_contracts_1te_vendor_ida',
-        'join_key_rhs' => 'te_vendor_aos_contracts_1aos_contracts_idb',
+        'join_table' => 'te_student_batch_te_student_payment_plan_1_c',
+        'join_key_lhs' => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
+        'join_key_rhs' => 'te_student9d1ant_plan_idb',
       ),
     ),
-    'table' => 'te_vendor_aos_contracts_1_c',
+    'table' => 'te_student_batch_te_student_payment_plan_1_c',
     'fields' => 
     array (
       0 => 
@@ -9584,13 +9584,13 @@
       ),
       3 => 
       array (
-        'name' => 'te_vendor_aos_contracts_1te_vendor_ida',
+        'name' => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
         'type' => 'varchar',
         'len' => 36,
       ),
       4 => 
       array (
-        'name' => 'te_vendor_aos_contracts_1aos_contracts_idb',
+        'name' => 'te_student9d1ant_plan_idb',
         'type' => 'varchar',
         'len' => 36,
       ),
@@ -9599,7 +9599,7 @@
     array (
       0 => 
       array (
-        'name' => 'te_vendor_aos_contracts_1spk',
+        'name' => 'te_student_batch_te_student_payment_plan_1spk',
         'type' => 'primary',
         'fields' => 
         array (
@@ -9608,33 +9608,33 @@
       ),
       1 => 
       array (
-        'name' => 'te_vendor_aos_contracts_1_ida1',
+        'name' => 'te_student_batch_te_student_payment_plan_1_ida1',
         'type' => 'index',
         'fields' => 
         array (
-          0 => 'te_vendor_aos_contracts_1te_vendor_ida',
+          0 => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
         ),
       ),
       2 => 
       array (
-        'name' => 'te_vendor_aos_contracts_1_alt',
+        'name' => 'te_student_batch_te_student_payment_plan_1_alt',
         'type' => 'alternate_key',
         'fields' => 
         array (
-          0 => 'te_vendor_aos_contracts_1aos_contracts_idb',
+          0 => 'te_student9d1ant_plan_idb',
         ),
       ),
     ),
-    'lhs_module' => 'te_vendor',
-    'lhs_table' => 'te_vendor',
+    'lhs_module' => 'te_student_batch',
+    'lhs_table' => 'te_student_batch',
     'lhs_key' => 'id',
-    'rhs_module' => 'AOS_Contracts',
-    'rhs_table' => 'aos_contracts',
+    'rhs_module' => 'te_student_payment_plan',
+    'rhs_table' => 'te_student_payment_plan',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
-    'join_table' => 'te_vendor_aos_contracts_1_c',
-    'join_key_lhs' => 'te_vendor_aos_contracts_1te_vendor_ida',
-    'join_key_rhs' => 'te_vendor_aos_contracts_1aos_contracts_idb',
+    'join_table' => 'te_student_batch_te_student_payment_plan_1_c',
+    'join_key_lhs' => 'te_student_batch_te_student_payment_plan_1te_student_batch_ida',
+    'join_key_rhs' => 'te_student9d1ant_plan_idb',
   ),
   'user_direct_reports' => 
   array (
@@ -15223,981 +15223,54 @@
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_utm_system_modified_user' => 
+  'te_student_payment_plan_modified_user' => 
   array (
-    'name' => 'te_utm_system_modified_user',
+    'name' => 'te_student_payment_plan_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_UTM_System',
-    'rhs_table' => 'te_utm_system',
+    'rhs_module' => 'te_student_payment_plan',
+    'rhs_table' => 'te_student_payment_plan',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_utm_system_created_by' => 
+  'te_student_payment_plan_created_by' => 
   array (
-    'name' => 'te_utm_system_created_by',
+    'name' => 'te_student_payment_plan_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_UTM_System',
-    'rhs_table' => 'te_utm_system',
+    'rhs_module' => 'te_student_payment_plan',
+    'rhs_table' => 'te_student_payment_plan',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_utm_system_assigned_user' => 
+  'te_student_payment_plan_assigned_user' => 
   array (
-    'name' => 'te_utm_system_assigned_user',
+    'name' => 'te_student_payment_plan_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_UTM_System',
-    'rhs_table' => 'te_utm_system',
+    'rhs_module' => 'te_student_payment_plan',
+    'rhs_table' => 'te_student_payment_plan',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_utm_system' => 
+  'securitygroups_te_student_payment_plan' => 
   array (
-    'name' => 'securitygroups_te_utm_system',
+    'name' => 'securitygroups_te_student_payment_plan',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_UTM_System',
-    'rhs_table' => 'te_utm_system',
+    'rhs_module' => 'te_student_payment_plan',
+    'rhs_table' => 'te_student_payment_plan',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_UTM_System',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_student_batch_modified_user' => 
-  array (
-    'name' => 'te_student_batch_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_batch',
-    'rhs_table' => 'te_student_batch',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_student_batch_created_by' => 
-  array (
-    'name' => 'te_student_batch_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_batch',
-    'rhs_table' => 'te_student_batch',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_student_batch_assigned_user' => 
-  array (
-    'name' => 'te_student_batch_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_batch',
-    'rhs_table' => 'te_student_batch',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_student_batch' => 
-  array (
-    'name' => 'securitygroups_te_student_batch',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_batch',
-    'rhs_table' => 'te_student_batch',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_student_batch',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_srm_auto_assignment_modified_user' => 
-  array (
-    'name' => 'te_srm_auto_assignment_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_srm_auto_assignment',
-    'rhs_table' => 'te_srm_auto_assignment',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_srm_auto_assignment_created_by' => 
-  array (
-    'name' => 'te_srm_auto_assignment_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_srm_auto_assignment',
-    'rhs_table' => 'te_srm_auto_assignment',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_srm_auto_assignment_assigned_user' => 
-  array (
-    'name' => 'te_srm_auto_assignment_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_srm_auto_assignment',
-    'rhs_table' => 'te_srm_auto_assignment',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_srm_auto_assignment' => 
-  array (
-    'name' => 'securitygroups_te_srm_auto_assignment',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_srm_auto_assignment',
-    'rhs_table' => 'te_srm_auto_assignment',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_srm_auto_assignment',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_student_payment_modified_user' => 
-  array (
-    'name' => 'te_student_payment_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment',
-    'rhs_table' => 'te_student_payment',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_student_payment_created_by' => 
-  array (
-    'name' => 'te_student_payment_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment',
-    'rhs_table' => 'te_student_payment',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_student_payment_assigned_user' => 
-  array (
-    'name' => 'te_student_payment_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment',
-    'rhs_table' => 'te_student_payment',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_student_payment' => 
-  array (
-    'name' => 'securitygroups_te_student_payment',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment',
-    'rhs_table' => 'te_student_payment',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_student_payment',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_pr_programs_modified_user' => 
-  array (
-    'name' => 'te_pr_programs_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_pr_Programs',
-    'rhs_table' => 'te_pr_programs',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_pr_programs_created_by' => 
-  array (
-    'name' => 'te_pr_programs_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_pr_Programs',
-    'rhs_table' => 'te_pr_programs',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_pr_programs_assigned_user' => 
-  array (
-    'name' => 'te_pr_programs_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_pr_Programs',
-    'rhs_table' => 'te_pr_programs',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_pr_programs' => 
-  array (
-    'name' => 'securitygroups_te_pr_programs',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_pr_Programs',
-    'rhs_table' => 'te_pr_programs',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_pr_Programs',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_payment_details_modified_user' => 
-  array (
-    'name' => 'te_payment_details_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_payment_details',
-    'rhs_table' => 'te_payment_details',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_payment_details_created_by' => 
-  array (
-    'name' => 'te_payment_details_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_payment_details',
-    'rhs_table' => 'te_payment_details',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_payment_details_assigned_user' => 
-  array (
-    'name' => 'te_payment_details_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_payment_details',
-    'rhs_table' => 'te_payment_details',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_payment_details' => 
-  array (
-    'name' => 'securitygroups_te_payment_details',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_payment_details',
-    'rhs_table' => 'te_payment_details',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_payment_details',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_transfer_batch_modified_user' => 
-  array (
-    'name' => 'te_transfer_batch_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_transfer_batch',
-    'rhs_table' => 'te_transfer_batch',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_transfer_batch_created_by' => 
-  array (
-    'name' => 'te_transfer_batch_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_transfer_batch',
-    'rhs_table' => 'te_transfer_batch',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_transfer_batch_assigned_user' => 
-  array (
-    'name' => 'te_transfer_batch_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_transfer_batch',
-    'rhs_table' => 'te_transfer_batch',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_transfer_batch' => 
-  array (
-    'name' => 'securitygroups_te_transfer_batch',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_transfer_batch',
-    'rhs_table' => 'te_transfer_batch',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_transfer_batch',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_target_campaign_modified_user' => 
-  array (
-    'name' => 'te_target_campaign_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign',
-    'rhs_table' => 'te_target_campaign',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_target_campaign_created_by' => 
-  array (
-    'name' => 'te_target_campaign_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign',
-    'rhs_table' => 'te_target_campaign',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_target_campaign_assigned_user' => 
-  array (
-    'name' => 'te_target_campaign_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign',
-    'rhs_table' => 'te_target_campaign',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_target_campaign' => 
-  array (
-    'name' => 'securitygroups_te_target_campaign',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign',
-    'rhs_table' => 'te_target_campaign',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_target_campaign',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_in_institutes_modified_user' => 
-  array (
-    'name' => 'te_in_institutes_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_in_institutes',
-    'rhs_table' => 'te_in_institutes',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_in_institutes_created_by' => 
-  array (
-    'name' => 'te_in_institutes_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_in_institutes',
-    'rhs_table' => 'te_in_institutes',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_in_institutes_assigned_user' => 
-  array (
-    'name' => 'te_in_institutes_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_in_institutes',
-    'rhs_table' => 'te_in_institutes',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_in_institutes' => 
-  array (
-    'name' => 'securitygroups_te_in_institutes',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_in_institutes',
-    'rhs_table' => 'te_in_institutes',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_in_institutes',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_disposition_modified_user' => 
-  array (
-    'name' => 'te_disposition_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_disposition',
-    'rhs_table' => 'te_disposition',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_disposition_created_by' => 
-  array (
-    'name' => 'te_disposition_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_disposition',
-    'rhs_table' => 'te_disposition',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_disposition_assigned_user' => 
-  array (
-    'name' => 'te_disposition_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_disposition',
-    'rhs_table' => 'te_disposition',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_disposition' => 
-  array (
-    'name' => 'securitygroups_te_disposition',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_disposition',
-    'rhs_table' => 'te_disposition',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_disposition',
+    'relationship_role_column_value' => 'te_student_payment_plan',
     'fields' => 
     array (
       0 => 
@@ -16356,6 +15429,109 @@
       ),
     ),
   ),
+  'te_pr_programs_modified_user' => 
+  array (
+    'name' => 'te_pr_programs_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_pr_Programs',
+    'rhs_table' => 'te_pr_programs',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_pr_programs_created_by' => 
+  array (
+    'name' => 'te_pr_programs_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_pr_Programs',
+    'rhs_table' => 'te_pr_programs',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_pr_programs_assigned_user' => 
+  array (
+    'name' => 'te_pr_programs_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_pr_Programs',
+    'rhs_table' => 'te_pr_programs',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_pr_programs' => 
+  array (
+    'name' => 'securitygroups_te_pr_programs',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_pr_Programs',
+    'rhs_table' => 'te_pr_programs',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_pr_Programs',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
   'te_vendor_modified_user' => 
   array (
     'name' => 'te_vendor_modified_user',
@@ -16459,54 +15635,54 @@
       ),
     ),
   ),
-  'te_impression_modified_user' => 
+  'te_ba_batch_modified_user' => 
   array (
-    'name' => 'te_impression_modified_user',
+    'name' => 'te_ba_batch_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_impression',
-    'rhs_table' => 'te_impression',
+    'rhs_module' => 'te_ba_Batch',
+    'rhs_table' => 'te_ba_batch',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_impression_created_by' => 
+  'te_ba_batch_created_by' => 
   array (
-    'name' => 'te_impression_created_by',
+    'name' => 'te_ba_batch_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_impression',
-    'rhs_table' => 'te_impression',
+    'rhs_module' => 'te_ba_Batch',
+    'rhs_table' => 'te_ba_batch',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_impression_assigned_user' => 
+  'te_ba_batch_assigned_user' => 
   array (
-    'name' => 'te_impression_assigned_user',
+    'name' => 'te_ba_batch_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_impression',
-    'rhs_table' => 'te_impression',
+    'rhs_module' => 'te_ba_Batch',
+    'rhs_table' => 'te_ba_batch',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_impression' => 
+  'securitygroups_te_ba_batch' => 
   array (
-    'name' => 'securitygroups_te_impression',
+    'name' => 'securitygroups_te_ba_batch',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_impression',
-    'rhs_table' => 'te_impression',
+    'rhs_module' => 'te_ba_Batch',
+    'rhs_table' => 'te_ba_batch',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_impression',
+    'relationship_role_column_value' => 'te_ba_Batch',
     'fields' => 
     array (
       0 => 
@@ -16562,672 +15738,54 @@
       ),
     ),
   ),
-  'te_lead_assignment_rule_modified_user' => 
+  'te_target_campaign_modified_user' => 
   array (
-    'name' => 'te_lead_assignment_rule_modified_user',
+    'name' => 'te_target_campaign_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_lead_assignment_rule',
-    'rhs_table' => 'te_lead_assignment_rule',
+    'rhs_module' => 'te_target_campaign',
+    'rhs_table' => 'te_target_campaign',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_lead_assignment_rule_created_by' => 
+  'te_target_campaign_created_by' => 
   array (
-    'name' => 'te_lead_assignment_rule_created_by',
+    'name' => 'te_target_campaign_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_lead_assignment_rule',
-    'rhs_table' => 'te_lead_assignment_rule',
+    'rhs_module' => 'te_target_campaign',
+    'rhs_table' => 'te_target_campaign',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_lead_assignment_rule_assigned_user' => 
+  'te_target_campaign_assigned_user' => 
   array (
-    'name' => 'te_lead_assignment_rule_assigned_user',
+    'name' => 'te_target_campaign_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_lead_assignment_rule',
-    'rhs_table' => 'te_lead_assignment_rule',
+    'rhs_module' => 'te_target_campaign',
+    'rhs_table' => 'te_target_campaign',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_lead_assignment_rule' => 
+  'securitygroups_te_target_campaign' => 
   array (
-    'name' => 'securitygroups_te_lead_assignment_rule',
+    'name' => 'securitygroups_te_target_campaign',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_lead_assignment_rule',
-    'rhs_table' => 'te_lead_assignment_rule',
+    'rhs_module' => 'te_target_campaign',
+    'rhs_table' => 'te_target_campaign',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_lead_assignment_rule',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_installments_modified_user' => 
-  array (
-    'name' => 'te_installments_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_installments',
-    'rhs_table' => 'te_installments',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_installments_created_by' => 
-  array (
-    'name' => 'te_installments_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_installments',
-    'rhs_table' => 'te_installments',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_installments_assigned_user' => 
-  array (
-    'name' => 'te_installments_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_installments',
-    'rhs_table' => 'te_installments',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_installments' => 
-  array (
-    'name' => 'securitygroups_te_installments',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_installments',
-    'rhs_table' => 'te_installments',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_installments',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_target_campaign_list_modified_user' => 
-  array (
-    'name' => 'te_target_campaign_list_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign_list',
-    'rhs_table' => 'te_target_campaign_list',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_target_campaign_list_created_by' => 
-  array (
-    'name' => 'te_target_campaign_list_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign_list',
-    'rhs_table' => 'te_target_campaign_list',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_target_campaign_list_assigned_user' => 
-  array (
-    'name' => 'te_target_campaign_list_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign_list',
-    'rhs_table' => 'te_target_campaign_list',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_target_campaign_list' => 
-  array (
-    'name' => 'securitygroups_te_target_campaign_list',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_target_campaign_list',
-    'rhs_table' => 'te_target_campaign_list',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_target_campaign_list',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_utm_medium_modified_user' => 
-  array (
-    'name' => 'te_utm_medium_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_medium',
-    'rhs_table' => 'te_utm_medium',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_medium_created_by' => 
-  array (
-    'name' => 'te_utm_medium_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_medium',
-    'rhs_table' => 'te_utm_medium',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_medium_assigned_user' => 
-  array (
-    'name' => 'te_utm_medium_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_medium',
-    'rhs_table' => 'te_utm_medium',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_utm_medium' => 
-  array (
-    'name' => 'securitygroups_te_utm_medium',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_medium',
-    'rhs_table' => 'te_utm_medium',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_utm_medium',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_utm_term_modified_user' => 
-  array (
-    'name' => 'te_utm_term_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_term',
-    'rhs_table' => 'te_utm_term',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_term_created_by' => 
-  array (
-    'name' => 'te_utm_term_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_term',
-    'rhs_table' => 'te_utm_term',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_term_assigned_user' => 
-  array (
-    'name' => 'te_utm_term_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_term',
-    'rhs_table' => 'te_utm_term',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_utm_term' => 
-  array (
-    'name' => 'securitygroups_te_utm_term',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_term',
-    'rhs_table' => 'te_utm_term',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_utm_term',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_utm_modified_user' => 
-  array (
-    'name' => 'te_utm_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm',
-    'rhs_table' => 'te_utm',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_created_by' => 
-  array (
-    'name' => 'te_utm_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm',
-    'rhs_table' => 'te_utm',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_assigned_user' => 
-  array (
-    'name' => 'te_utm_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm',
-    'rhs_table' => 'te_utm',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_utm' => 
-  array (
-    'name' => 'securitygroups_te_utm',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm',
-    'rhs_table' => 'te_utm',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_utm',
-    'fields' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'type' => 'char',
-        'len' => '36',
-        'required' => true,
-        'default' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'securitygroup_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      2 => 
-      array (
-        'name' => 'record_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      3 => 
-      array (
-        'name' => 'module',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      4 => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      5 => 
-      array (
-        'name' => 'modified_user_id',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      6 => 
-      array (
-        'name' => 'created_by',
-        'type' => 'char',
-        'len' => '36',
-      ),
-      7 => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'required' => true,
-        'default' => '0',
-      ),
-    ),
-  ),
-  'te_utm_campaign_modified_user' => 
-  array (
-    'name' => 'te_utm_campaign_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_campaign',
-    'rhs_table' => 'te_utm_campaign',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_campaign_created_by' => 
-  array (
-    'name' => 'te_utm_campaign_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_campaign',
-    'rhs_table' => 'te_utm_campaign',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'te_utm_campaign_assigned_user' => 
-  array (
-    'name' => 'te_utm_campaign_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_campaign',
-    'rhs_table' => 'te_utm_campaign',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'securitygroups_te_utm_campaign' => 
-  array (
-    'name' => 'securitygroups_te_utm_campaign',
-    'lhs_module' => 'SecurityGroups',
-    'lhs_table' => 'securitygroups',
-    'lhs_key' => 'id',
-    'rhs_module' => 'te_utm_campaign',
-    'rhs_table' => 'te_utm_campaign',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'securitygroups_records',
-    'join_key_lhs' => 'securitygroup_id',
-    'join_key_rhs' => 'record_id',
-    'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_utm_campaign',
+    'relationship_role_column_value' => 'te_target_campaign',
     'fields' => 
     array (
       0 => 
@@ -17386,54 +15944,54 @@
       ),
     ),
   ),
-  'te_neox_call_details_modified_user' => 
+  'te_payment_details_modified_user' => 
   array (
-    'name' => 'te_neox_call_details_modified_user',
+    'name' => 'te_payment_details_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_neox_call_details',
-    'rhs_table' => 'te_neox_call_details',
+    'rhs_module' => 'te_payment_details',
+    'rhs_table' => 'te_payment_details',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_neox_call_details_created_by' => 
+  'te_payment_details_created_by' => 
   array (
-    'name' => 'te_neox_call_details_created_by',
+    'name' => 'te_payment_details_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_neox_call_details',
-    'rhs_table' => 'te_neox_call_details',
+    'rhs_module' => 'te_payment_details',
+    'rhs_table' => 'te_payment_details',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_neox_call_details_assigned_user' => 
+  'te_payment_details_assigned_user' => 
   array (
-    'name' => 'te_neox_call_details_assigned_user',
+    'name' => 'te_payment_details_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_neox_call_details',
-    'rhs_table' => 'te_neox_call_details',
+    'rhs_module' => 'te_payment_details',
+    'rhs_table' => 'te_payment_details',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_neox_call_details' => 
+  'securitygroups_te_payment_details' => 
   array (
-    'name' => 'securitygroups_te_neox_call_details',
+    'name' => 'securitygroups_te_payment_details',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_neox_call_details',
-    'rhs_table' => 'te_neox_call_details',
+    'rhs_module' => 'te_payment_details',
+    'rhs_table' => 'te_payment_details',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_neox_call_details',
+    'relationship_role_column_value' => 'te_payment_details',
     'fields' => 
     array (
       0 => 
@@ -17489,54 +16047,260 @@
       ),
     ),
   ),
-  'te_student_modified_user' => 
+  'te_student_batch_modified_user' => 
   array (
-    'name' => 'te_student_modified_user',
+    'name' => 'te_student_batch_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student',
-    'rhs_table' => 'te_student',
+    'rhs_module' => 'te_student_batch',
+    'rhs_table' => 'te_student_batch',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_student_created_by' => 
+  'te_student_batch_created_by' => 
   array (
-    'name' => 'te_student_created_by',
+    'name' => 'te_student_batch_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student',
-    'rhs_table' => 'te_student',
+    'rhs_module' => 'te_student_batch',
+    'rhs_table' => 'te_student_batch',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_student_assigned_user' => 
+  'te_student_batch_assigned_user' => 
   array (
-    'name' => 'te_student_assigned_user',
+    'name' => 'te_student_batch_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student',
-    'rhs_table' => 'te_student',
+    'rhs_module' => 'te_student_batch',
+    'rhs_table' => 'te_student_batch',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_student' => 
+  'securitygroups_te_student_batch' => 
   array (
-    'name' => 'securitygroups_te_student',
+    'name' => 'securitygroups_te_student_batch',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student',
-    'rhs_table' => 'te_student',
+    'rhs_module' => 'te_student_batch',
+    'rhs_table' => 'te_student_batch',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_student',
+    'relationship_role_column_value' => 'te_student_batch',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_disposition_modified_user' => 
+  array (
+    'name' => 'te_disposition_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_disposition',
+    'rhs_table' => 'te_disposition',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_disposition_created_by' => 
+  array (
+    'name' => 'te_disposition_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_disposition',
+    'rhs_table' => 'te_disposition',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_disposition_assigned_user' => 
+  array (
+    'name' => 'te_disposition_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_disposition',
+    'rhs_table' => 'te_disposition',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_disposition' => 
+  array (
+    'name' => 'securitygroups_te_disposition',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_disposition',
+    'rhs_table' => 'te_disposition',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_disposition',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_drip_campaign_modified_user' => 
+  array (
+    'name' => 'te_drip_campaign_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_drip_campaign',
+    'rhs_table' => 'te_drip_campaign',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_drip_campaign_created_by' => 
+  array (
+    'name' => 'te_drip_campaign_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_drip_campaign',
+    'rhs_table' => 'te_drip_campaign',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_drip_campaign_assigned_user' => 
+  array (
+    'name' => 'te_drip_campaign_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_drip_campaign',
+    'rhs_table' => 'te_drip_campaign',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_drip_campaign' => 
+  array (
+    'name' => 'securitygroups_te_drip_campaign',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_drip_campaign',
+    'rhs_table' => 'te_drip_campaign',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_drip_campaign',
     'fields' => 
     array (
       0 => 
@@ -18210,54 +16974,54 @@
       ),
     ),
   ),
-  'te_ba_batch_modified_user' => 
+  'te_impression_modified_user' => 
   array (
-    'name' => 'te_ba_batch_modified_user',
+    'name' => 'te_impression_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_ba_Batch',
-    'rhs_table' => 'te_ba_batch',
+    'rhs_module' => 'te_impression',
+    'rhs_table' => 'te_impression',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_ba_batch_created_by' => 
+  'te_impression_created_by' => 
   array (
-    'name' => 'te_ba_batch_created_by',
+    'name' => 'te_impression_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_ba_Batch',
-    'rhs_table' => 'te_ba_batch',
+    'rhs_module' => 'te_impression',
+    'rhs_table' => 'te_impression',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_ba_batch_assigned_user' => 
+  'te_impression_assigned_user' => 
   array (
-    'name' => 'te_ba_batch_assigned_user',
+    'name' => 'te_impression_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_ba_Batch',
-    'rhs_table' => 'te_ba_batch',
+    'rhs_module' => 'te_impression',
+    'rhs_table' => 'te_impression',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_ba_batch' => 
+  'securitygroups_te_impression' => 
   array (
-    'name' => 'securitygroups_te_ba_batch',
+    'name' => 'securitygroups_te_impression',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_ba_Batch',
-    'rhs_table' => 'te_ba_batch',
+    'rhs_module' => 'te_impression',
+    'rhs_table' => 'te_impression',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_ba_Batch',
+    'relationship_role_column_value' => 'te_impression',
     'fields' => 
     array (
       0 => 
@@ -18519,6 +17283,315 @@
       ),
     ),
   ),
+  'te_utm_system_modified_user' => 
+  array (
+    'name' => 'te_utm_system_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_UTM_System',
+    'rhs_table' => 'te_utm_system',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_system_created_by' => 
+  array (
+    'name' => 'te_utm_system_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_UTM_System',
+    'rhs_table' => 'te_utm_system',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_system_assigned_user' => 
+  array (
+    'name' => 'te_utm_system_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_UTM_System',
+    'rhs_table' => 'te_utm_system',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_utm_system' => 
+  array (
+    'name' => 'securitygroups_te_utm_system',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_UTM_System',
+    'rhs_table' => 'te_utm_system',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_UTM_System',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_neox_call_details_modified_user' => 
+  array (
+    'name' => 'te_neox_call_details_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_neox_call_details',
+    'rhs_table' => 'te_neox_call_details',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_neox_call_details_created_by' => 
+  array (
+    'name' => 'te_neox_call_details_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_neox_call_details',
+    'rhs_table' => 'te_neox_call_details',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_neox_call_details_assigned_user' => 
+  array (
+    'name' => 'te_neox_call_details_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_neox_call_details',
+    'rhs_table' => 'te_neox_call_details',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_neox_call_details' => 
+  array (
+    'name' => 'securitygroups_te_neox_call_details',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_neox_call_details',
+    'rhs_table' => 'te_neox_call_details',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_neox_call_details',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_student_modified_user' => 
+  array (
+    'name' => 'te_student_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student',
+    'rhs_table' => 'te_student',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_student_created_by' => 
+  array (
+    'name' => 'te_student_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student',
+    'rhs_table' => 'te_student',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_student_assigned_user' => 
+  array (
+    'name' => 'te_student_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student',
+    'rhs_table' => 'te_student',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_student' => 
+  array (
+    'name' => 'securitygroups_te_student',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student',
+    'rhs_table' => 'te_student',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_student',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
   'te_program_category_modified_user' => 
   array (
     'name' => 'te_program_category_modified_user',
@@ -18622,54 +17695,54 @@
       ),
     ),
   ),
-  'te_student_payment_plan_modified_user' => 
+  'te_lead_assignment_rule_modified_user' => 
   array (
-    'name' => 'te_student_payment_plan_modified_user',
+    'name' => 'te_lead_assignment_rule_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment_plan',
-    'rhs_table' => 'te_student_payment_plan',
+    'rhs_module' => 'te_lead_assignment_rule',
+    'rhs_table' => 'te_lead_assignment_rule',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_student_payment_plan_created_by' => 
+  'te_lead_assignment_rule_created_by' => 
   array (
-    'name' => 'te_student_payment_plan_created_by',
+    'name' => 'te_lead_assignment_rule_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment_plan',
-    'rhs_table' => 'te_student_payment_plan',
+    'rhs_module' => 'te_lead_assignment_rule',
+    'rhs_table' => 'te_lead_assignment_rule',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_student_payment_plan_assigned_user' => 
+  'te_lead_assignment_rule_assigned_user' => 
   array (
-    'name' => 'te_student_payment_plan_assigned_user',
+    'name' => 'te_lead_assignment_rule_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment_plan',
-    'rhs_table' => 'te_student_payment_plan',
+    'rhs_module' => 'te_lead_assignment_rule',
+    'rhs_table' => 'te_lead_assignment_rule',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_student_payment_plan' => 
+  'securitygroups_te_lead_assignment_rule' => 
   array (
-    'name' => 'securitygroups_te_student_payment_plan',
+    'name' => 'securitygroups_te_lead_assignment_rule',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_student_payment_plan',
-    'rhs_table' => 'te_student_payment_plan',
+    'rhs_module' => 'te_lead_assignment_rule',
+    'rhs_table' => 'te_lead_assignment_rule',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_student_payment_plan',
+    'relationship_role_column_value' => 'te_lead_assignment_rule',
     'fields' => 
     array (
       0 => 
@@ -18725,54 +17798,878 @@
       ),
     ),
   ),
-  'te_drip_campaign_modified_user' => 
+  'te_target_campaign_list_modified_user' => 
   array (
-    'name' => 'te_drip_campaign_modified_user',
+    'name' => 'te_target_campaign_list_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_drip_campaign',
-    'rhs_table' => 'te_drip_campaign',
+    'rhs_module' => 'te_target_campaign_list',
+    'rhs_table' => 'te_target_campaign_list',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'te_drip_campaign_created_by' => 
+  'te_target_campaign_list_created_by' => 
   array (
-    'name' => 'te_drip_campaign_created_by',
+    'name' => 'te_target_campaign_list_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_drip_campaign',
-    'rhs_table' => 'te_drip_campaign',
+    'rhs_module' => 'te_target_campaign_list',
+    'rhs_table' => 'te_target_campaign_list',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'te_drip_campaign_assigned_user' => 
+  'te_target_campaign_list_assigned_user' => 
   array (
-    'name' => 'te_drip_campaign_assigned_user',
+    'name' => 'te_target_campaign_list_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_drip_campaign',
-    'rhs_table' => 'te_drip_campaign',
+    'rhs_module' => 'te_target_campaign_list',
+    'rhs_table' => 'te_target_campaign_list',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_te_drip_campaign' => 
+  'securitygroups_te_target_campaign_list' => 
   array (
-    'name' => 'securitygroups_te_drip_campaign',
+    'name' => 'securitygroups_te_target_campaign_list',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'te_drip_campaign',
-    'rhs_table' => 'te_drip_campaign',
+    'rhs_module' => 'te_target_campaign_list',
+    'rhs_table' => 'te_target_campaign_list',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'te_drip_campaign',
+    'relationship_role_column_value' => 'te_target_campaign_list',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_student_payment_modified_user' => 
+  array (
+    'name' => 'te_student_payment_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_payment',
+    'rhs_table' => 'te_student_payment',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_student_payment_created_by' => 
+  array (
+    'name' => 'te_student_payment_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_payment',
+    'rhs_table' => 'te_student_payment',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_student_payment_assigned_user' => 
+  array (
+    'name' => 'te_student_payment_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_payment',
+    'rhs_table' => 'te_student_payment',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_student_payment' => 
+  array (
+    'name' => 'securitygroups_te_student_payment',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_student_payment',
+    'rhs_table' => 'te_student_payment',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_student_payment',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_transfer_batch_modified_user' => 
+  array (
+    'name' => 'te_transfer_batch_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_transfer_batch_created_by' => 
+  array (
+    'name' => 'te_transfer_batch_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_transfer_batch_assigned_user' => 
+  array (
+    'name' => 'te_transfer_batch_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_transfer_batch' => 
+  array (
+    'name' => 'securitygroups_te_transfer_batch',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_transfer_batch',
+    'rhs_table' => 'te_transfer_batch',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_transfer_batch',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_in_institutes_modified_user' => 
+  array (
+    'name' => 'te_in_institutes_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_in_institutes',
+    'rhs_table' => 'te_in_institutes',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_in_institutes_created_by' => 
+  array (
+    'name' => 'te_in_institutes_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_in_institutes',
+    'rhs_table' => 'te_in_institutes',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_in_institutes_assigned_user' => 
+  array (
+    'name' => 'te_in_institutes_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_in_institutes',
+    'rhs_table' => 'te_in_institutes',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_in_institutes' => 
+  array (
+    'name' => 'securitygroups_te_in_institutes',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_in_institutes',
+    'rhs_table' => 'te_in_institutes',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_in_institutes',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_srm_auto_assignment_modified_user' => 
+  array (
+    'name' => 'te_srm_auto_assignment_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_srm_auto_assignment',
+    'rhs_table' => 'te_srm_auto_assignment',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_srm_auto_assignment_created_by' => 
+  array (
+    'name' => 'te_srm_auto_assignment_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_srm_auto_assignment',
+    'rhs_table' => 'te_srm_auto_assignment',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_srm_auto_assignment_assigned_user' => 
+  array (
+    'name' => 'te_srm_auto_assignment_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_srm_auto_assignment',
+    'rhs_table' => 'te_srm_auto_assignment',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_srm_auto_assignment' => 
+  array (
+    'name' => 'securitygroups_te_srm_auto_assignment',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_srm_auto_assignment',
+    'rhs_table' => 'te_srm_auto_assignment',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_srm_auto_assignment',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_utm_medium_modified_user' => 
+  array (
+    'name' => 'te_utm_medium_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_medium',
+    'rhs_table' => 'te_utm_medium',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_medium_created_by' => 
+  array (
+    'name' => 'te_utm_medium_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_medium',
+    'rhs_table' => 'te_utm_medium',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_medium_assigned_user' => 
+  array (
+    'name' => 'te_utm_medium_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_medium',
+    'rhs_table' => 'te_utm_medium',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_utm_medium' => 
+  array (
+    'name' => 'securitygroups_te_utm_medium',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_medium',
+    'rhs_table' => 'te_utm_medium',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_utm_medium',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_utm_term_modified_user' => 
+  array (
+    'name' => 'te_utm_term_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_term',
+    'rhs_table' => 'te_utm_term',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_term_created_by' => 
+  array (
+    'name' => 'te_utm_term_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_term',
+    'rhs_table' => 'te_utm_term',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_term_assigned_user' => 
+  array (
+    'name' => 'te_utm_term_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_term',
+    'rhs_table' => 'te_utm_term',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_utm_term' => 
+  array (
+    'name' => 'securitygroups_te_utm_term',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_term',
+    'rhs_table' => 'te_utm_term',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_utm_term',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_utm_modified_user' => 
+  array (
+    'name' => 'te_utm_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm',
+    'rhs_table' => 'te_utm',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_created_by' => 
+  array (
+    'name' => 'te_utm_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm',
+    'rhs_table' => 'te_utm',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_assigned_user' => 
+  array (
+    'name' => 'te_utm_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm',
+    'rhs_table' => 'te_utm',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_utm' => 
+  array (
+    'name' => 'securitygroups_te_utm',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm',
+    'rhs_table' => 'te_utm',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_utm',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_utm_campaign_modified_user' => 
+  array (
+    'name' => 'te_utm_campaign_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_campaign',
+    'rhs_table' => 'te_utm_campaign',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_campaign_created_by' => 
+  array (
+    'name' => 'te_utm_campaign_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_campaign',
+    'rhs_table' => 'te_utm_campaign',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_utm_campaign_assigned_user' => 
+  array (
+    'name' => 'te_utm_campaign_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_campaign',
+    'rhs_table' => 'te_utm_campaign',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_utm_campaign' => 
+  array (
+    'name' => 'securitygroups_te_utm_campaign',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_utm_campaign',
+    'rhs_table' => 'te_utm_campaign',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_utm_campaign',
     'fields' => 
     array (
       0 => 
@@ -18876,6 +18773,109 @@
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
     'relationship_role_column_value' => 'te_student_study_kit',
+    'fields' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'type' => 'char',
+        'len' => '36',
+        'required' => true,
+        'default' => '',
+      ),
+      1 => 
+      array (
+        'name' => 'securitygroup_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      2 => 
+      array (
+        'name' => 'record_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      3 => 
+      array (
+        'name' => 'module',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      4 => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      5 => 
+      array (
+        'name' => 'modified_user_id',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      6 => 
+      array (
+        'name' => 'created_by',
+        'type' => 'char',
+        'len' => '36',
+      ),
+      7 => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'required' => true,
+        'default' => '0',
+      ),
+    ),
+  ),
+  'te_installments_modified_user' => 
+  array (
+    'name' => 'te_installments_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_installments',
+    'rhs_table' => 'te_installments',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_installments_created_by' => 
+  array (
+    'name' => 'te_installments_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_installments',
+    'rhs_table' => 'te_installments',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'te_installments_assigned_user' => 
+  array (
+    'name' => 'te_installments_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_installments',
+    'rhs_table' => 'te_installments',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'securitygroups_te_installments' => 
+  array (
+    'name' => 'securitygroups_te_installments',
+    'lhs_module' => 'SecurityGroups',
+    'lhs_table' => 'securitygroups',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_installments',
+    'rhs_table' => 'te_installments',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'securitygroups_records',
+    'join_key_lhs' => 'securitygroup_id',
+    'join_key_rhs' => 'record_id',
+    'relationship_role_column' => 'module',
+    'relationship_role_column_value' => 'te_installments',
     'fields' => 
     array (
       0 => 

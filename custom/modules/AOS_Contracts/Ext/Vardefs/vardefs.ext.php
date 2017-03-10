@@ -2,25 +2,9 @@
  //WARNING: The contents of this file are auto-generated
 
 
-$dictionary['AOS_Contracts']['fields']["po_number"]=array(
-	'name' => 'po_number',
-	'vname' => 'LBL_PO_NUMBER',
-	'type' => 'varchar',
-	'massupdate' => 0,
-	'no_default' => false,
-	'comments' => '',
-	'help' => '',
-	'importable' => 'true',
-	'duplicate_merge' => 'disabled',
-	'duplicate_merge_dom_value' => '0',
-	'audited' => false,
-	'inline_edit' => true,
-	'reportable' => true,
-	'unified_search' => false,
-	'merge_filter' => 'disabled',
-	'len' => '40',
-	'size' => '20',
-);
+ // created: 2016-11-07 03:06:58
+$dictionary['AOS_Contracts']['fields']['volume_c']['inline_edit']='1';
+$dictionary['AOS_Contracts']['fields']['volume_c']['labelValue']='Volume';
 
  
 
@@ -36,38 +20,6 @@ $dictionary["AOS_Contracts"]["fields"]["aos_contracts_te_impression_1"] = array 
   'vname' => 'LBL_AOS_CONTRACTS_TE_IMPRESSION_1_FROM_TE_IMPRESSION_TITLE',
 );
 
-
- // created: 2016-11-07 03:06:58
-$dictionary['AOS_Contracts']['fields']['volume_c']['inline_edit']='1';
-$dictionary['AOS_Contracts']['fields']['volume_c']['labelValue']='Volume';
-
- 
-
- // created: 2016-09-18 22:22:36
-$dictionary['AOS_Contracts']['fields']['rate_c']['inline_edit']='1';
-$dictionary['AOS_Contracts']['fields']['rate_c']['labelValue']='Rate';
-
- 
-
-$dictionary['AOS_Contracts']['fields']['performance_metrics'] = array (
-	'name' => 'performance_metrics',
-    'vname' => 'Performance Metrics',
-    'type' => 'enum',
-    'options'=>'performance_metrics',
-    'duplicate_merge' => 'disabled',
-    'required' => false,
-    'studio' => 'visible',
-);
-
-
-
-
-
- // created: 2016-09-18 22:23:31
-$dictionary['AOS_Contracts']['fields']['target_c']['inline_edit']='1';
-$dictionary['AOS_Contracts']['fields']['target_c']['labelValue']='Target';
-
- 
 
  // created: 2016-09-18 22:23:31
 $dictionary['AOS_Contracts']['fields']["te_vendor_id_c"]=array(
@@ -119,9 +71,32 @@ $dictionary['AOS_Contracts']['fields']["vendor"]=array(
 );
 
 
- // created: 2016-09-18 23:05:10
-$dictionary['AOS_Contracts']['fields']['expiry_valume_c']['inline_edit']='1';
-$dictionary['AOS_Contracts']['fields']['expiry_valume_c']['labelValue']='Expiry Valume';
+$dictionary['AOS_Contracts']['fields']["po_number"]=array(
+	'name' => 'po_number',
+	'vname' => 'LBL_PO_NUMBER',
+	'type' => 'varchar',
+	'massupdate' => 0,
+	'no_default' => false,
+	'comments' => '',
+	'help' => '',
+	'importable' => 'true',
+	'duplicate_merge' => 'disabled',
+	'duplicate_merge_dom_value' => '0',
+	'audited' => false,
+	'inline_edit' => true,
+	'reportable' => true,
+	'unified_search' => false,
+	'merge_filter' => 'disabled',
+	'len' => '40',
+	'size' => '20',
+);
+
+ 
+
+ // created: 2016-11-08 01:01:54
+$dictionary['AOS_Contracts']['fields']['contract_type']['default']='';
+$dictionary['AOS_Contracts']['fields']['contract_type']['inline_edit']=true;
+$dictionary['AOS_Contracts']['fields']['contract_type']['merge_filter']='disabled';
 
  
 
@@ -130,6 +105,30 @@ $dictionary['AOS_Contracts']['fields']['description']['inline_edit']=true;
 $dictionary['AOS_Contracts']['fields']['description']['comments']='Full text of the note';
 $dictionary['AOS_Contracts']['fields']['description']['merge_filter']='disabled';
 $dictionary['AOS_Contracts']['fields']['description']['cols']='84';
+
+ 
+
+ // created: 2016-09-18 22:22:36
+$dictionary['AOS_Contracts']['fields']['rate_c']['inline_edit']='1';
+$dictionary['AOS_Contracts']['fields']['rate_c']['labelValue']='Rate';
+
+ 
+
+$dictionary['AOS_Contracts']['fields']['renewal_reminder_date']['type']='date';
+$dictionary['AOS_Contracts']['fields']['renewal_reminder_date']['display_default']='+1 year';
+$dictionary['AOS_Contracts']['fields']['renewal_reminder_date']['labelValue']='Expiry Date (Optional):';
+
+
+
+ // created: 2016-09-18 23:05:10
+$dictionary['AOS_Contracts']['fields']['expiry_valume_c']['inline_edit']='1';
+$dictionary['AOS_Contracts']['fields']['expiry_valume_c']['labelValue']='Expiry Valume';
+
+ 
+
+ // created: 2016-09-18 22:23:31
+$dictionary['AOS_Contracts']['fields']['target_c']['inline_edit']='1';
+$dictionary['AOS_Contracts']['fields']['target_c']['labelValue']='Target';
 
  
 
@@ -170,16 +169,17 @@ $dictionary["AOS_Contracts"]["fields"]["te_vendor_aos_contracts_1te_vendor_ida"]
 );
 
 
-$dictionary['AOS_Contracts']['fields']['renewal_reminder_date']['type']='date';
-$dictionary['AOS_Contracts']['fields']['renewal_reminder_date']['display_default']='+1 year';
-$dictionary['AOS_Contracts']['fields']['renewal_reminder_date']['labelValue']='Expiry Date (Optional):';
+$dictionary['AOS_Contracts']['fields']['performance_metrics'] = array (
+	'name' => 'performance_metrics',
+    'vname' => 'Performance Metrics',
+    'type' => 'enum',
+    'options'=>'performance_metrics',
+    'duplicate_merge' => 'disabled',
+    'required' => false,
+    'studio' => 'visible',
+);
 
 
 
- // created: 2016-11-08 01:01:54
-$dictionary['AOS_Contracts']['fields']['contract_type']['default']='';
-$dictionary['AOS_Contracts']['fields']['contract_type']['inline_edit']=true;
-$dictionary['AOS_Contracts']['fields']['contract_type']['merge_filter']='disabled';
 
- 
 ?>

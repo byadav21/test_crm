@@ -264,41 +264,44 @@
       'studio' => 'visible',
       'dependency' => false,
     ),
-    'date_of_callback' => 
+    'te_disposition_leads' => 
     array (
-      'name' => 'date_of_callback',
-      'vname' => 'LBL_DATEOFCALLBACK',
-      'type' => 'datetimecombo',
-      'dbType' => 'datetime',
-      'enable_range_search' => true,
-      'options' => 'date_range_search_dom',
+      'name' => 'te_disposition_leads',
+      'type' => 'link',
+      'relationship' => 'te_disposition_leads',
+      'source' => 'non-db',
+      'module' => 'Leads',
+      'bean_name' => 'Lead',
+      'vname' => 'LBL_TE_DISPOSITION_LEADS_FROM_LEADS_TITLE',
+      'id_name' => 'te_disposition_leadsleads_ida',
     ),
-    'date_of_followup' => 
+    'te_disposition_leads_name' => 
     array (
-      'name' => 'date_of_followup',
-      'vname' => 'LBL_DATEOFFOLLOWUP',
-      'type' => 'datetimecombo',
-      'dbType' => 'datetime',
-      'enable_range_search' => true,
-      'options' => 'date_range_search_dom',
+      'name' => 'te_disposition_leads_name',
+      'type' => 'relate',
+      'source' => 'non-db',
+      'vname' => 'LBL_TE_DISPOSITION_LEADS_FROM_LEADS_TITLE',
+      'save' => true,
+      'id_name' => 'te_disposition_leadsleads_ida',
+      'link' => 'te_disposition_leads',
+      'table' => 'leads',
+      'module' => 'Leads',
+      'rname' => 'name',
+      'db_concat_fields' => 
+      array (
+        0 => 'first_name',
+        1 => 'last_name',
+      ),
     ),
-    'date_of_prospect' => 
+    'te_disposition_leadsleads_ida' => 
     array (
-      'name' => 'date_of_prospect',
-      'vname' => 'LBL_DATEOFPROSPECT',
-      'type' => 'datetimecombo',
-      'dbType' => 'datetime',
-      'enable_range_search' => true,
-      'options' => 'date_range_search_dom',
-    ),
-    'unique_call_id' => 
-    array (
-      'name' => 'unique_call_id',
-      'vname' => 'LBL_UNIQUECALLID',
-      'type' => 'varchar',
-      'dbType' => 'varchar',
-      'len' => '100',
-      'audited' => 'false',
+      'name' => 'te_disposition_leadsleads_ida',
+      'type' => 'link',
+      'relationship' => 'te_disposition_leads',
+      'source' => 'non-db',
+      'reportable' => false,
+      'side' => 'right',
+      'vname' => 'LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE',
     ),
     'lead_mobile' => 
     array (
@@ -345,44 +348,41 @@
       'bean_name' => 'te_disposition',
       'vname' => 'LBL_PROGRAM',
     ),
-    'te_disposition_leads' => 
+    'date_of_callback' => 
     array (
-      'name' => 'te_disposition_leads',
-      'type' => 'link',
-      'relationship' => 'te_disposition_leads',
-      'source' => 'non-db',
-      'module' => 'Leads',
-      'bean_name' => 'Lead',
-      'vname' => 'LBL_TE_DISPOSITION_LEADS_FROM_LEADS_TITLE',
-      'id_name' => 'te_disposition_leadsleads_ida',
+      'name' => 'date_of_callback',
+      'vname' => 'LBL_DATEOFCALLBACK',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
     ),
-    'te_disposition_leads_name' => 
+    'date_of_followup' => 
     array (
-      'name' => 'te_disposition_leads_name',
-      'type' => 'relate',
-      'source' => 'non-db',
-      'vname' => 'LBL_TE_DISPOSITION_LEADS_FROM_LEADS_TITLE',
-      'save' => true,
-      'id_name' => 'te_disposition_leadsleads_ida',
-      'link' => 'te_disposition_leads',
-      'table' => 'leads',
-      'module' => 'Leads',
-      'rname' => 'name',
-      'db_concat_fields' => 
-      array (
-        0 => 'first_name',
-        1 => 'last_name',
-      ),
+      'name' => 'date_of_followup',
+      'vname' => 'LBL_DATEOFFOLLOWUP',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
     ),
-    'te_disposition_leadsleads_ida' => 
+    'date_of_prospect' => 
     array (
-      'name' => 'te_disposition_leadsleads_ida',
-      'type' => 'link',
-      'relationship' => 'te_disposition_leads',
-      'source' => 'non-db',
-      'reportable' => false,
-      'side' => 'right',
-      'vname' => 'LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE',
+      'name' => 'date_of_prospect',
+      'vname' => 'LBL_DATEOFPROSPECT',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
+    ),
+    'unique_call_id' => 
+    array (
+      'name' => 'unique_call_id',
+      'vname' => 'LBL_UNIQUECALLID',
+      'type' => 'varchar',
+      'dbType' => 'varchar',
+      'len' => '100',
+      'audited' => 'false',
     ),
   ),
   'relationships' => 

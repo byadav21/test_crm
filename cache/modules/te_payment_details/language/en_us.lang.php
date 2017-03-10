@@ -1,5 +1,5 @@
 <?php
-// created: 2017-03-09 05:14:54
+// created: 2017-03-09 22:27:04
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -38,7 +38,7 @@ $mod_strings = array (
   'LBL_REFERENCE_NUMBER' => 'Reference Number',
   'LBL_PAYMENT_TYPE' => 'Payment Type',
   'LBL_PAYMENT_REALIZED' => 'Payment Realized',
-  'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_LEADS_TITLE' => 'Leads',
   'LBL_PAYMENTTYPESOURCE' => 'Payment Source',
   'LBL_TRANSACTIONID' => 'Transaction Id',
+  'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_LEADS_TITLE' => 'Leads',
 );

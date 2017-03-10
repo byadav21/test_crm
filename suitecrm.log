@@ -4711,3 +4711,141 @@ Thu Mar  9 04:54:58 2017 [31442][-none-][FATAL] Request - Array
 )
 
 Thu Mar  9 05:16:05 2017 [32498][1][FATAL]  Query Failed: SELECT username as email, CONCAT(first_name,' ',last_name) as name FROM users WHERE deleted=0 AND status='Active' AND designation='BUH': MySQL error 1054: Unknown column 'username' in 'field list'
+Thu Mar  9 21:29:48 2017 [6746][-none-][FATAL] Could not connect to DB server localhost as root. port 8080: Unknown database '9marchco.in'
+Thu Mar  9 21:34:51 2017 [6766][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-03-10 05:34:51',`modified_user_id`='1',`created_by`='1',`description`=NULL,`assigned_user_id`='4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff',`salutation`=NULL,`first_name`='Anup',`last_name`=NULL,`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`='8750781901',`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`='Referrals',`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`='http://',`date_of_payment`='2017-03-10',`gender`=NULL,`payment_realized_check`=1,`payment_type`='Offline',`payment_source`='Institute',`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`vendor`='TBS',`invoice_number`=0,`batch`='',`utm_campaign`=NULL,`note`=NULL,`amount`=5000,`reference_number`='sfasdf',`transaction_id`=NULL,`fee_inr`=0,`minimum_attendance`=0,`neoxstatus`='1',`mailer_day`=0,`utm`='TBS Emailers',`fee_usd`=0,`date_of_referral`='2017-03-09',`parent_type`='Users',`parent_id`='62bce63d-3669-8bf8-7d8b-58a9a77574da',`parrent_leads`='No',`comment`=NULL
+					 WHERE  leads.id = '88e018d9-c5d6-0628-7e9b-58bd4e3c4b90' AND deleted=0: MySQL error 1054: Unknown column 'date_of_referral' in 'field list'
+Thu Mar  9 21:34:51 2017 [6766][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Mar  9 21:34:56 2017 [6669][1][FATAL] Error updating table: leads: Query Failed: UPDATE leads
+					SET `date_modified`='2017-03-10 05:34:56',`modified_user_id`='1',`created_by`='1',`description`=NULL,`assigned_user_id`='4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff',`salutation`=NULL,`first_name`='Anup',`last_name`=NULL,`title`=NULL,`photo`=NULL,`department`=NULL,`do_not_call`=0,`phone_home`=NULL,`phone_mobile`='8750781901',`phone_work`=NULL,`phone_other`=NULL,`phone_fax`=NULL,`primary_address_street`=NULL,`primary_address_city`=NULL,`primary_address_state`=NULL,`primary_address_postalcode`=NULL,`primary_address_country`=NULL,`alt_address_street`=NULL,`alt_address_city`=NULL,`alt_address_state`=NULL,`alt_address_postalcode`=NULL,`alt_address_country`=NULL,`assistant`=NULL,`assistant_phone`=NULL,`converted`=0,`refered_by`=NULL,`lead_source`='Referrals',`lead_source_description`=NULL,`status`='Converted',`status_description`='Converted',`reports_to_id`='',`account_name`=NULL,`account_description`=NULL,`contact_id`='',`account_id`='',`opportunity_id`='',`opportunity_name`=NULL,`opportunity_amount`=NULL,`campaign_id`='',`birthdate`=NULL,`portal_name`=NULL,`portal_app`=NULL,`website`='http://',`date_of_payment`='2017-03-10',`gender`=NULL,`payment_realized_check`=1,`payment_type`='Offline',`payment_source`='Institute',`payment_realized`=1,`date_of_callback`=NULL,`date_of_prospect`=NULL,`date_of_followup`=NULL,`converted_date`=NULL,`assigned_flag`=0,`vendor`='TBS',`invoice_number`=0,`batch`='',`utm_campaign`=NULL,`note`=NULL,`amount`=5000,`reference_number`='sfasdf',`transaction_id`=NULL,`fee_inr`=0,`minimum_attendance`=0,`neoxstatus`='1',`mailer_day`=0,`utm`='TBS Emailers',`fee_usd`=0,`date_of_referral`='2017-03-09',`parent_type`='Users',`parent_id`='62bce63d-3669-8bf8-7d8b-58a9a77574da',`parrent_leads`='No',`comment`=NULL
+					 WHERE  leads.id = '88e018d9-c5d6-0628-7e9b-58bd4e3c4b90' AND deleted=0: MySQL error 1054: Unknown column 'date_of_referral' in 'field list'
+Thu Mar  9 21:34:56 2017 [6669][1][FATAL] Exception in Controller: Database failure. Please refer to suitecrm.log for details.
+Thu Mar  9 21:43:34 2017 [6766][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 88e018d9-c5d6-0628-7e9b-58bd4e3c4b90
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Anup
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => anup@test.in
+    [Leads0emailAddressId0] => 3ff6c61a-8d47-8a76-7cf8-58a6a4d40e10
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => anup@test.in
+    [useEmailWidget] => true
+    [phone_mobile] => 8750781901
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [parent_type] => Users
+    [parent_name] => 
+    [parent_id] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => ajay kumar
+    [assigned_user_id] => 4d8b9bb7-ecb0-b084-abf6-57d67ff9b1ff
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Offline
+    [payment_source] => Institute
+    [amount] => 5000
+    [payment_realized] => 1
+    [date_of_payment] => 2017-03-10
+    [reference_number] => sfasdf
+    [transaction_id] => 
+)
+
+Thu Mar  9 21:50:40 2017 [6746][1][FATAL]  Query Failed: UPDATE te_student_batch assigned_user_id='1' WHERE te_ba_batch_id_c='3e61df74-2ddd-ce27-af33-583fc534c2ac': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='1' WHERE te_ba_batch_id_c='3e61df74-2ddd-ce27-af33-583fc534c2ac'' at line 1
+Thu Mar  9 21:51:57 2017 [9161][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => 
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Puneet
+    [last_name] => Kaur
+    [gender] => Female
+    [birthdate] => 1990-03-10
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => puneet@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => IIM Kashipur- Digital Marketing
+    [te_ba_batch_id_c] => 3e61df74-2ddd-ce27-af33-583fc534c2ac
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [parent_type] => Users
+    [parent_name] => Aditi Kochar
+    [parent_id] => 62bce63d-3669-8bf8-7d8b-58a9a77574da
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Online
+    [payment_source] => Paytm
+    [amount] => 10000
+    [payment_realized] => 1
+    [date_of_payment] => 2017-03-10
+    [reference_number] => 
+    [transaction_id] => 12345
+)
+
+Thu Mar  9 21:56:32 2017 [8772][1][FATAL]  Query Failed: SELECT username as email, CONCAT(first_name,' ',last_name) as name FROM users WHERE deleted=0 AND status='Active' AND designation='BUH': MySQL error 1054: Unknown column 'username' in 'field list'
+Thu Mar  9 21:58:34 2017 [6746][1][FATAL]  Query Failed: SELECT username as email, CONCAT(first_name,' ',last_name) as name FROM users WHERE deleted=0 AND status='Active' AND designation='BUH': MySQL error 1054: Unknown column 'username' in 'field list'

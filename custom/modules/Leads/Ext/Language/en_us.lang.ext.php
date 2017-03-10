@@ -3,22 +3,6 @@
 
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
-$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE'] = 'Leads';
-$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE'] = 'Refree Leads';
-$mod_strings['LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE'] = 'Payment Details';
-
-
-$mod_strings['LBL_FLEX_RELATE'] = 'Referral';
-$mod_strings['LBL_PARENT_TYPE'] = 'Parent Type';
-$mod_strings['LBL_PARENT_ID'] = 'Parent ID';
-
-
-//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
-$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE'] = 'Referral Leads';
-$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE'] = 'Refree Leads';
-
-
-//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_LIST_ASSIGNED_USER'] = 'Counsellor';
 $mod_strings['LBL_ASSIGNED_TO'] = 'Counsellor';
 $mod_strings['LBL_DATE_ENQUIRY'] = 'Date of Enquiry';
@@ -56,7 +40,24 @@ $mod_strings['LBL_BATCH'] = 'Batch';
 
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE'] = 'Referral Leads';
+$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE'] = 'Refree Leads';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_INVOICE_NUMBER'] = 'Invoice Number';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE'] = 'Leads';
+$mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE'] = 'Refree Leads';
+$mod_strings['LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE'] = 'Payment Details';
+
+
+$mod_strings['LBL_FLEX_RELATE'] = 'Referral';
+$mod_strings['LBL_PARENT_TYPE'] = 'Parent Type';
+$mod_strings['LBL_PARENT_ID'] = 'Parent ID';
+$mod_strings['LBL_DATEOFREFERRAL'] = 'Date of Referral Creation';
 
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY

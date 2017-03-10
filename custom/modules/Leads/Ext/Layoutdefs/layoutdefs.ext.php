@@ -26,6 +26,32 @@ $layout_defs["Leads"]["subpanel_setup"]['leads_leads_1leads_ida'] = array (
 );
 
 
+ // created: 2016-11-03 00:13:18
+$layout_defs["Leads"]["subpanel_setup"]['leads_te_payment_details_1'] = array (
+  'order' => 100,
+  'module' => 'te_payment_details',
+  'subpanel_name' => 'default',
+  'sort_order' => 'asc',
+  'sort_by' => 'id',
+  'title_key' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
+  'get_subpanel_data' => 'leads_te_payment_details_1',
+  'top_buttons' => 
+  array (
+    /*0 => 
+    array (
+      'widget_class' => 'SubPanelTopButtonQuickCreate',
+    ),
+	
+    1 => 
+    array (
+      'widget_class' => 'SubPanelTopSelectButton',
+      'mode' => 'MultiSelect',
+    ),
+	*/
+  ),
+);
+
+
 
 unset($layout_defs["Leads"]["subpanel_setup"]['activities']);
 unset($layout_defs["Leads"]["subpanel_setup"]['history']);
@@ -63,30 +89,8 @@ $layout_defs["Leads"]["subpanel_setup"]['te_disposition_leads'] = array (
 );
 
 
- // created: 2016-11-03 00:13:18
-$layout_defs["Leads"]["subpanel_setup"]['leads_te_payment_details_1'] = array (
-  'order' => 100,
-  'module' => 'te_payment_details',
-  'subpanel_name' => 'default',
-  'sort_order' => 'asc',
-  'sort_by' => 'id',
-  'title_key' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
-  'get_subpanel_data' => 'leads_te_payment_details_1',
-  'top_buttons' => 
-  array (
-    /*0 => 
-    array (
-      'widget_class' => 'SubPanelTopButtonQuickCreate',
-    ),
-	
-    1 => 
-    array (
-      'widget_class' => 'SubPanelTopSelectButton',
-      'mode' => 'MultiSelect',
-    ),
-	*/
-  ),
-);
+//auto-generated file DO NOT EDIT
+$layout_defs['Leads']['subpanel_setup']['securitygroups']['override_subpanel_name'] = 'Lead_subpanel_securitygroups';
 
 
 //auto-generated file DO NOT EDIT
@@ -99,9 +103,5 @@ $layout_defs['Leads']['subpanel_setup']['te_disposition_leads']['override_subpan
 
 //auto-generated file DO NOT EDIT
 $layout_defs['Leads']['subpanel_setup']['leads_leads_1leads_ida']['override_subpanel_name'] = 'Lead_subpanel_leads_leads_1leads_ida';
-
-
-//auto-generated file DO NOT EDIT
-$layout_defs['Leads']['subpanel_setup']['securitygroups']['override_subpanel_name'] = 'Lead_subpanel_securitygroups';
 
 ?>

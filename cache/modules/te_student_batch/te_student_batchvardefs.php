@@ -395,19 +395,24 @@
     ),
     'leads_id' => 
     array (
-      'name' => 'leads_id',
-      'label' => 'LBL_LEADS_ID',
-      'type' => 'varchar',
-      'help' => '',
-      'comment' => '',
-      'default_value' => '',
-      'len' => '50',
-      'size' => '20',
       'required' => false,
-      'reportable' => true,
-      'audited' => false,
+      'name' => 'leads_id',
+      'vname' => 'LBL_LEAD_LEAD_ID',
+      'type' => 'id',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
       'importable' => 'true',
-      'duplicate_merge' => false,
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => 0,
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => false,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => 36,
+      'size' => '20',
     ),
     'lead' => 
     array (
@@ -1042,6 +1047,17 @@
       'size' => '20',
       'enable_range_search' => false,
     ),
+    'te_student_batch_te_student_payment_plan_1' => 
+    array (
+      'name' => 'te_student_batch_te_student_payment_plan_1',
+      'type' => 'link',
+      'relationship' => 'te_student_batch_te_student_payment_plan_1',
+      'source' => 'non-db',
+      'module' => 'te_student_payment_plan',
+      'bean_name' => 'te_student_payment_plan',
+      'side' => 'right',
+      'vname' => 'LBL_TE_STUDENT_BATCH_TE_STUDENT_PAYMENT_PLAN_1_FROM_TE_STUDENT_PAYMENT_PLAN_TITLE',
+    ),
     'te_student_te_student_batch_1' => 
     array (
       'name' => 'te_student_te_student_batch_1',
@@ -1075,17 +1091,6 @@
       'reportable' => false,
       'side' => 'right',
       'vname' => 'LBL_TE_STUDENT_TE_STUDENT_BATCH_1_FROM_TE_STUDENT_BATCH_TITLE',
-    ),
-    'email' => 
-    array (
-      'required' => false,
-      'name' => 'email',
-      'vname' => 'Email',
-      'type' => 'varchar',
-      'audited' => false,
-      'massupdate' => false,
-      'source' => 'non-db',
-      'studio' => 'visible',
     ),
     'kit_status' => 
     array (
@@ -1256,16 +1261,16 @@
       'source' => 'non-db',
       'studio' => 'visible',
     ),
-    'te_student_batch_te_student_payment_plan_1' => 
+    'mobile' => 
     array (
-      'name' => 'te_student_batch_te_student_payment_plan_1',
-      'type' => 'link',
-      'relationship' => 'te_student_batch_te_student_payment_plan_1',
+      'required' => false,
+      'name' => 'mobile',
+      'vname' => 'Phone',
+      'type' => 'varchar',
+      'audited' => false,
+      'massupdate' => false,
       'source' => 'non-db',
-      'module' => 'te_student_payment_plan',
-      'bean_name' => 'te_student_payment_plan',
-      'side' => 'right',
-      'vname' => 'LBL_TE_STUDENT_BATCH_TE_STUDENT_PAYMENT_PLAN_1_FROM_TE_STUDENT_PAYMENT_PLAN_TITLE',
+      'studio' => 'visible',
     ),
     'feepaid' => 
     array (
@@ -1278,11 +1283,11 @@
       'source' => 'non-db',
       'studio' => 'visible',
     ),
-    'mobile' => 
+    'email' => 
     array (
       'required' => false,
-      'name' => 'mobile',
-      'vname' => 'Phone',
+      'name' => 'email',
+      'vname' => 'Email',
       'type' => 'varchar',
       'audited' => false,
       'massupdate' => false,
