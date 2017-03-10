@@ -7,35 +7,35 @@ class LeadsViewEdit extends ViewEdit {
 		if(isset($_REQUEST['from_pusher'])){
 			$this->ss->assign('from_pusher', '1');
 			$this->ss->assign('disposition_id',$_REQUEST['disposition_id'] );
-			
-			
+
+
 		?>
 		<script>
-		$(document).ready(function() { /* code here */ 
+		$(document).ready(function() { /* code here */
 			document.getElementById("SAVE_FOOTER").style.display ='none';
-			
+
 			});
 		</script>
-		
-		<?php	
-			
+
+		<?php
+
 		}
 		else{
 			$this->ss->assign('from_pusher', '0');
 		}
 		?>
 <script>
-	
-	
+
+
     $(document).ready(function () {
 		//Lead Referral hide /show
 	   	//~ if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('leads_leads_1leads_ida').value==''){
-				//~ 
+				//~
 			//~ document.getElementById("leads_leads_1_name").style.display ='none';
 			//~ document.getElementById("btn_clr_leads_leads_1_name").style.display ='none';
 			//~ document.getElementById("btn_leads_leads_1_name").style.display ='none';
-			//~ document.getElementById("leads_leads_1_name_label").innerHTML='';	
-				//~ 
+			//~ document.getElementById("leads_leads_1_name_label").innerHTML='';
+				//~
      	//~ }
      	//~ if(document.getElementById('leads_leads_1leads_ida').value!=''){
 			//~ document.getElementById('lead_source').value='Referrals'
@@ -47,7 +47,7 @@ class LeadsViewEdit extends ViewEdit {
 				//~ document.getElementById("leads_leads_1_name").style.display ='inline';
 				//~ document.getElementById("btn_leads_leads_1_name").style.display ='inline';
 				//~ document.getElementById("btn_clr_leads_leads_1_name").style.display ='inline';
-				//~ document.getElementById("leads_leads_1_name_label").innerHTML = 'Referral Lead:';			
+				//~ document.getElementById("leads_leads_1_name_label").innerHTML = 'Referral Lead:';
 				//~ document.getElementById("leads_leads_1leads_ida").value = refere;
 			//~ }
 			//~ else{
@@ -57,19 +57,21 @@ class LeadsViewEdit extends ViewEdit {
 				//~ document.getElementById("btn_clr_leads_leads_1_name").style.display ='none';
 				//~ document.getElementById("btn_leads_leads_1_name").style.display ='none';
 				//~ document.getElementById("leads_leads_1_name_label").innerHTML='';
-//~ 
+//~
 			//~ }
-		 //~ })	 
-		//~ 
-		
+		 //~ })
+		//~
+		$(function(){
+			alert("add view");
+		});
 			if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('parent_id').value==''){
-				
+
 			document.getElementById("parent_type").style.display ='none';
 			document.getElementById("parent_name").style.display ='none';
 			document.getElementById("btn_parent_name").style.display ='none';
 			document.getElementById("btn_clr_parent_name").style.display ='none';
-			document.getElementById("parent_name_label").innerHTML='';	
-				
+			document.getElementById("parent_name_label").innerHTML='';
+
      	}
      	if(document.getElementById('parent_id').value!=''){
 			document.getElementById('lead_source').value='Referrals'
@@ -82,7 +84,7 @@ class LeadsViewEdit extends ViewEdit {
 				document.getElementById("parent_name").style.display ='inline';
 				document.getElementById("btn_parent_name").style.display ='inline';
 				document.getElementById("btn_clr_parent_name").style.display ='inline';
-				document.getElementById("parent_name_label").innerHTML = 'Referral:';			
+				document.getElementById("parent_name_label").innerHTML = 'Referral:';
 				document.getElementById("parent_id").value = refere;
 			}
 			else{
@@ -92,22 +94,22 @@ class LeadsViewEdit extends ViewEdit {
 				document.getElementById("parent_name").style.display ='none';
 				document.getElementById("btn_parent_name").style.display ='none';
 				document.getElementById("btn_clr_parent_name").style.display ='none';
-				document.getElementById("parent_name_label").innerHTML='';	
+				document.getElementById("parent_name_label").innerHTML='';
 			}
-		 })	 
-		
-		
+		 })
+
+
 		// Status detail dependant drop down
 		    if (document.getElementById('status_description').value != "Converted") {
 				document.getElementById("detailpanel_2").style.display ='none';
-			}	
+			}
 		   var option = document.getElementById("status").options;
 		   var status_detail = document.getElementById('status_description').value;
-		   
+
             if (document.getElementById('status').value == "Alive") {
-				$("#status_description option").remove() ; 
+				$("#status_description option").remove() ;
 				 $("#status_description").append('<option></option>');
-				
+
 				if (status_detail == 'Call Back'){
 					$("#status_description").append('<option value="Call Back" selected="selected" >Call Back</option>');
 				}
@@ -120,7 +122,7 @@ class LeadsViewEdit extends ViewEdit {
 				else{
 				 $("#status_description").append('<option value="Follow Up" >Follow Up</option>');
 				}
-				
+
 				if (status_detail == 'New Lead'){
 					$("#status_description").append('<option  value="New Lead" selected="selected" >New Lead</option>');
 				}
@@ -130,7 +132,7 @@ class LeadsViewEdit extends ViewEdit {
               }
             if (document.getElementById('status').value == "Dead") {
 				//~ alert(status_detail)
-				$("#status_description option").remove() ; 
+				$("#status_description option").remove() ;
 				 $("#status_description").append('<option></option>');
 				if (status_detail == 'Dead Number'){
 				   $("#status_description").append('<option  selected="selected" >Dead Number</option>');
@@ -167,22 +169,22 @@ class LeadsViewEdit extends ViewEdit {
 				}
 				else{
 					$("#status_description").append('<option>Rejected</option>');
-				}	
+				}
                 if (status_detail == 'Fallout'){
 					$("#status_description").append('<option  selected="selected" >Fallout</option>');
 				}
 				else{
 					$("#status_description").append('<option >Fallout</option>');
-				}	
+				}
                 if (status_detail == 'Retired'){
 					$("#status_description").append('<option  selected="selected" >Retired</option>');
 				}
 				else{
 					$("#status_description").append('<option>Retired</option>');
-				}	
+				}
             }
              if (document.getElementById('status').value == "Converted") {
-				 $("#status_description option").remove() ; 
+				 $("#status_description option").remove() ;
 				 $("#status_description").append('<option></option>');
 				if (status_detail == 'Converted'){
 					$("#status_description").append('<option  selected="selected">Converted</option>');
@@ -191,9 +193,9 @@ class LeadsViewEdit extends ViewEdit {
 					$("#status_description").append('<option>Converted</option>');
 				}
              }
-             
+
              if (document.getElementById('status').value == "Duplicate") {
-				 $("#status_description option").remove() ; 
+				 $("#status_description option").remove() ;
 				 $("#status_description").append('<option></option>');
 				if (status_detail == 'Duplicate'){
 					$("#status_description").append('<option  selected="selected">Duplicate</option>');
@@ -203,7 +205,7 @@ class LeadsViewEdit extends ViewEdit {
 				}
              }
              if (document.getElementById('status').value == "Warm") {
-				 $("#status_description option").remove() ; 
+				 $("#status_description option").remove() ;
 				 $("#status_description").append('<option></option>');
                 if (status_detail == 'Re-Enquired'){
 					$("#status_description").append('<option  selected="selected">Re-Enquired</option>');
@@ -218,21 +220,21 @@ class LeadsViewEdit extends ViewEdit {
 					$("#status_description").append('<option>Prospect</option>');
 				}
              }
-             
-             
+
+
              $("#status").change(function() {
 
 				var el = $(this) ;
 //~ alert(el.val())
 				if(el.val() === "Alive" ) {
-					$("#status_description option").remove() ; 
+					$("#status_description option").remove() ;
 					 $("#status_description").append('<option></option>');
 					$("#status_description").append('<option>Call Back</option>');
 					$("#status_description").append('<option>Follow Up</option>');
 					$("#status_description").append('<option>New Lead</option>');
 				}
 				else if(el.val() === "Dead" ) {
-					$("#status_description option").remove() ; 
+					$("#status_description option").remove() ;
 					 $("#status_description").append('<option></option>');
 					 $("#status_description").append('<option>Dead Number</option>');
 					$("#status_description").append('<option>Wrong Number</option>');
@@ -244,17 +246,17 @@ class LeadsViewEdit extends ViewEdit {
 					$("#status_description").append('<option>Retired</option>');
 				}
 				else if(el.val() === "Converted" ) {
-					$("#status_description option").remove() ; 
+					$("#status_description option").remove() ;
 					 $("#status_description").append('<option></option>');
 					 $("#status_description").append('<option>Converted</option>');
 				}
 				else if(el.val() === "Duplicate" ) {
-					$("#status_description option").remove() ; 
+					$("#status_description option").remove() ;
 					 $("#status_description").append('<option></option>');
 					 $("#status_description").append('<option>Duplicate</option>');
 				}
 				else if(el.val() === "Warm" ) {
-					$("#status_description option").remove() ; 
+					$("#status_description option").remove() ;
 					 $("#status_description").append('<option></option>');
 					 $("#status_description").append('<option>Re-Enquired</option>');
 					$("#status_description").append('<option>Prospect</option>');
@@ -264,12 +266,12 @@ class LeadsViewEdit extends ViewEdit {
 
 //  Payment panel hide show
 if($("#status_description").val() === "Converted") {
-						
+
 						document.getElementById("detailpanel_2").style.display ='inline';
 						triggerPaymentType();
-						
+
 					}
-					$("#payment_source option").remove() ; 
+					$("#payment_source option").remove() ;
                    $("#status_description").change(function() {
 				  var sl = $(this) ;
 					if(sl.val() === "Converted" ) {
@@ -281,76 +283,76 @@ if($("#status_description").val() === "Converted") {
 						triggerPaymentType();
 					}
 					else{
-						document.getElementById("detailpanel_2").style.display ='none';	
+						document.getElementById("detailpanel_2").style.display ='none';
 					}
 				 })
-				 
+
       // Date fields show n hide based on status details
-      
+
       document.getElementById("date_of_callback_date").style.display ='none';
 		document.getElementById("date_of_callback_time_section").style.display ='none';
 		//~ document.getElementById("date_of_callback_minutes").style.display ='none';
 		document.getElementById("date_of_callback_trigger").style.display ='none';
-		document.getElementById("date_of_callback_label").innerHTML = '';			
- 
+		document.getElementById("date_of_callback_label").innerHTML = '';
+
  		document.getElementById("date_of_followup_date").style.display ='none';
 		document.getElementById("date_of_followup_time_section").style.display ='none';
 		//~ document.getElementById("date_of_followup_minutes").style.display ='none';
 		document.getElementById("date_of_followup_trigger").style.display ='none';
-		document.getElementById("date_of_followup_label").innerHTML = '';			
- 
- 
- 
+		document.getElementById("date_of_followup_label").innerHTML = '';
+
+
+
  		document.getElementById("date_of_prospect_date").style.display ='none';
 		document.getElementById("date_of_prospect_time_section").style.display ='none';
 		//~ document.getElementById("date_of_prospect_minutes").style.display ='none';
 		document.getElementById("date_of_prospect_trigger").style.display ='none';
-		document.getElementById("date_of_prospect_label").innerHTML = '';			
- 
- 
+		document.getElementById("date_of_prospect_label").innerHTML = '';
+
+
              $("#status_description").change(function() {
 					if(document.getElementById('status_description').value=='Call Back'){
 							document.getElementById("date_of_callback_date").style.display ='inline';
 							document.getElementById("date_of_callback_time_section").style.display ='inline';
 							//~ document.getElementById("date_of_callback_minutes").style.display ='inline';
 							document.getElementById("date_of_callback_trigger").style.display ='inline';
-							document.getElementById("date_of_callback_label").innerHTML = 'Call back Date:';			
+							document.getElementById("date_of_callback_label").innerHTML = 'Call back Date:';
 					}
 					else{
 							document.getElementById("date_of_callback_date").style.display ='none';
 							document.getElementById("date_of_callback_time_section").style.display ='none';
 							//~ document.getElementById("date_of_callback_hours").style.display ='none';
 							document.getElementById("date_of_callback_trigger").style.display ='none';
-							document.getElementById("date_of_callback_label").innerHTML = '';			
-					 
+							document.getElementById("date_of_callback_label").innerHTML = '';
+
 					}
-					
-					
+
+
 					if(document.getElementById('status_description').value=='Follow Up'){
 							document.getElementById("date_of_followup_date").style.display ='inline';
 							document.getElementById("date_of_followup_time_section").style.display ='inline';
 							//~ document.getElementById("date_of_followup_minutes").style.display ='inline';
 							document.getElementById("date_of_followup_trigger").style.display ='inline';
-							document.getElementById("date_of_followup_label").innerHTML = 'Followup Date:';			
+							document.getElementById("date_of_followup_label").innerHTML = 'Followup Date:';
 					}
 					else{
-							
+
 							document.getElementById("date_of_followup_date").style.display ='none';
 							document.getElementById("date_of_followup_time_section").style.display ='none';
 							//~ document.getElementById("date_of_followup_minutes").style.display ='none';
 							document.getElementById("date_of_followup_trigger").style.display ='none';
-							document.getElementById("date_of_followup_label").innerHTML = '';			
-					 
-					 
-										 
+							document.getElementById("date_of_followup_label").innerHTML = '';
+
+
+
 					}
-					
+
 					if(document.getElementById('status_description').value=='Prospect'){
 							document.getElementById("date_of_prospect_date").style.display ='inline';
 							document.getElementById("date_of_prospect_time_section").style.display ='inline';
 							//~ document.getElementById("date_of_prospect_minutes").style.display ='inline';
 							document.getElementById("date_of_prospect_trigger").style.display ='inline';
-							document.getElementById("date_of_prospect_label").innerHTML = 'Prospect Date:';			
+							document.getElementById("date_of_prospect_label").innerHTML = 'Prospect Date:';
 					}
 					else{
 
@@ -358,20 +360,20 @@ if($("#status_description").val() === "Converted") {
 						document.getElementById("date_of_prospect_time_section").style.display ='none';
 						//~ document.getElementById("date_of_prospect_minutes").style.display ='none';
 						document.getElementById("date_of_prospect_trigger").style.display ='none';
-						document.getElementById("date_of_prospect_label").innerHTML = '';			
-				 
-					 
+						document.getElementById("date_of_prospect_label").innerHTML = '';
+
+
 					}
 
-				})        
-             
+				})
+
    });
             function triggerPaymentType() {
 			    	$("#payment_type").change(function() {
 
 							var py = $(this) ;
 							if(py.val()=='Online'){
-								$("#payment_source option").remove() ; 
+								$("#payment_source option").remove() ;
 								 $("#payment_source").append('<option></option>');
 								 $("#payment_source").append('<option>PayU</option>');
 								 $("#payment_source").append('<option>ATOM</option>');
@@ -382,7 +384,7 @@ if($("#status_description").val() === "Converted") {
 								 document.getElementById("reference_number").style.display ='none';
 							}
 							else if(py.val()=='Offline'){
-								$("#payment_source option").remove() ; 
+								$("#payment_source option").remove() ;
 								 $("#payment_source").append('<option></option>');
 								 $("#payment_source").append('<option>NEFT</option>');
 								 $("#payment_source").append('<option>Cheque</option>');
@@ -393,12 +395,12 @@ if($("#status_description").val() === "Converted") {
 								 document.getElementById("reference_number").style.display ='inline';
 							}
 							else{
-								$("#payment_source option").remove() ; 
+								$("#payment_source option").remove() ;
 							}
 						})
 			}
-            
-            
+
+
      </script>
 
 
@@ -406,7 +408,7 @@ if($("#status_description").val() === "Converted") {
 
 		if(isset($_REQUEST['addreferral']) && $_REQUEST['addreferral']=='true'){
 			$this->bean->lead_source = 'Referrals';
-			
+
 			$this->bean->parent_type = 'Users';
 			$this->bean->parent_id = $GLOBALS['current_user']->id;
 			$this->bean->parent_name = $GLOBALS['current_user']->user_name;
@@ -418,14 +420,14 @@ if($("#status_description").val() === "Converted") {
 
 <?php
 	}
-	
-	
+
+
  	/**
      * Displays the header on section of the page; basically everything before the content
      */
     public function displayHeader($retModTabs=false)
     {
-		
+
 		 //~ parent::displayHeader();
         global $theme;
         global $max_tabs;
@@ -783,7 +785,7 @@ if($("#status_description").val() === "Converted") {
             // This is here for backwards compatibility, someday, somewhere, it will be able to be removed
             $ss->assign("moduleTopMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['modules']);
             $ss->assign("moduleExtraMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);
-		
+
 // Show the custom panel in the left panel
 
 			require_once('custom/modules/Leads/customfunctionforcrm.php');
@@ -792,14 +794,14 @@ if($("#status_description").val() === "Converted") {
 			$reportingUserIds = array();
 			$reportUserObj1 = new customfunctionforcrm();
 			$statusWiseCount = $reportUserObj1->statusWiseCounts();
-		
+
 
 			$ss->assign("statusWiseCount",$statusWiseCount);
-		
+
 
         }
 
-		
+
 		//~ echo $test;die;
         if ( isset($extraTabs) && is_array($extraTabs) ) {
             // Adding shortcuts array to extra menu array for displaying shortcuts associated with each module
@@ -852,7 +854,7 @@ if($("#status_description").val() === "Converted") {
         }
 
     }
-	
-	
+
+
 }
 ?>

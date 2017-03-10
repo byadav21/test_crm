@@ -4849,3 +4849,67 @@ Thu Mar  9 21:51:57 2017 [9161][1][FATAL] Request - Array
 
 Thu Mar  9 21:56:32 2017 [8772][1][FATAL]  Query Failed: SELECT username as email, CONCAT(first_name,' ',last_name) as name FROM users WHERE deleted=0 AND status='Active' AND designation='BUH': MySQL error 1054: Unknown column 'username' in 'field list'
 Thu Mar  9 21:58:34 2017 [6746][1][FATAL]  Query Failed: SELECT username as email, CONCAT(first_name,' ',last_name) as name FROM users WHERE deleted=0 AND status='Active' AND designation='BUH': MySQL error 1054: Unknown column 'username' in 'field list'
+Thu Mar  9 22:53:10 2017 [19877][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => 
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [offset] => 1
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Ramit
+    [last_name] => Singh
+    [gender] => Male
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => rsingh@gmail.com
+    [Leads0emailAddressId0] => 
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => 
+    [useEmailWidget] => true
+    [phone_mobile] => 
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => Referrals
+    [parent_type] => Users
+    [parent_name] => admin
+    [parent_id] => 1
+    [status] => Alive
+    [status_description] => New Lead
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => 
+    [amount] => 
+    [payment_realized] => 0
+    [date_of_payment] => 
+    [reference_number] => 
+    [transaction_id] => 
+)
+
+Thu Mar  9 22:55:07 2017 [15764][1][FATAL]  Query Failed: SELECT tbl1.id,tbl1.salutation,tbl1.phone_mobile,tbl4.email_address,tbl1.assigned_user_id,tbl1.first_name,tbl1.last_name, tbl1.status,tbl1.date_entered,tbl1.lead_source,tbl2.user_name FROM leads AS tbl1
+							LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id WHERE : MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+Thu Mar  9 23:52:53 2017 [32324][1][FATAL]  Query Failed: SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,s.idp,sp.te_student_id_c,sp.due_amount_usd,sp.paid_amount_usd,sp.paid,sp.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='f0d56361-1bf5-2d5d-f3d3-58c23edbf59e' AND sb.te_ba_batch_id_c='3e61df74-2ddd-ce27-af33-583fc534c2ac' ORDER BY sp.due_date: MySQL error 1054: Unknown column 's.idp' in 'field list'

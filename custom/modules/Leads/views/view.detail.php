@@ -3,13 +3,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/MVC/View/views/view.detail.php');
 require_once('include/utils.php');
 class LeadsViewDetail extends ViewDetail {
-	
+
  	/**
      * Displays the header on section of the page; basically everything before the content
      */
     public function displayHeader($retModTabs=false)
     {
-		
+
 		 //~ parent::displayHeader();
         global $theme;
         global $max_tabs;
@@ -367,8 +367,8 @@ class LeadsViewDetail extends ViewDetail {
             // This is here for backwards compatibility, someday, somewhere, it will be able to be removed
             $ss->assign("moduleTopMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['modules']);
             $ss->assign("moduleExtraMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);
-		
-		
+
+
 // Show the custom panel in the left panel
 
 			require_once('custom/modules/Leads/customfunctionforcrm.php');
@@ -377,14 +377,14 @@ class LeadsViewDetail extends ViewDetail {
 			$reportingUserIds = array();
 			$reportUserObj1 = new customfunctionforcrm();
 			$statusWiseCount = $reportUserObj1->statusWiseCounts();
-		
+
 
 			$ss->assign("statusWiseCount",$statusWiseCount);
-		
+
 
         }
 
-		
+
 		//~ echo $test;die;
         if ( isset($extraTabs) && is_array($extraTabs) ) {
             // Adding shortcuts array to extra menu array for displaying shortcuts associated with each module
@@ -437,11 +437,11 @@ class LeadsViewDetail extends ViewDetail {
         }
 
     }
-	  
+
 	public function display(){
 		global $current_user;
 		if(!is_admin($current_user)){
-	
+
 		}
 		require_once('custom/modules/Leads/customfunctionforcrm.php');
 		$reportingUserIds = array();
@@ -450,12 +450,12 @@ class LeadsViewDetail extends ViewDetail {
 		$reportUserObj->reportingUser($currentUserId);
 		$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 		$reportingUserIds = $reportUserObj->report_to_id;
-		
+
 		if (!array_key_exists($this->bean->assigned_user_id,$reportingUserIds)){
 				echo "<span> You don't have access to view this record</span>";
 					//~ die;
-				
-		
+
+
 		}
 		if(!empty($this->bean->phone_mobile)){
 			$this->bean->phone_mobile .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
@@ -463,10 +463,10 @@ class LeadsViewDetail extends ViewDetail {
 		if(!empty($this->bean->phone_other)){
 			$this->bean->phone_other .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
 		}
-		
+
 		if(!empty($this->bean->te_ba_batch_id_c)){
 
-// Get Institute details based on the Batch			
+// Get Institute details based on the Batch
 			$sql_pro = "SELECT te_pr_programs_te_ba_batch_1te_pr_programs_ida,name FROM te_pr_programs p INNER JOIN te_pr_programs_te_ba_batch_1_c  pb ON p.id = pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida WHERE te_pr_programs_te_ba_batch_1te_ba_batch_idb = '".$this->bean->te_ba_batch_id_c."' AND pb.deleted = 0 AND p.deleted=0";
 			$res_pro = $GLOBALS['db']->query($sql_pro);
 			$pro = $GLOBALS['db']->fetchByAssoc($res_pro);
@@ -474,21 +474,21 @@ class LeadsViewDetail extends ViewDetail {
 			$this->bean->program = "<a href='index.php?action=DetailView&module=te_pr_Programs&record={$pid}'>".$pro['name']."</a>";
 
 // Get Institute details based on the Batch
-			
+
 			$sql_ins = "SELECT te_in_institutes_te_ba_batch_1te_in_institutes_ida,name FROM te_in_institutes i INNER JOIN  te_in_institutes_te_ba_batch_1_c ib ON i.id = ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida WHERE te_in_institutes_te_ba_batch_1te_ba_batch_idb = '".$this->bean->te_ba_batch_id_c."' AND ib.deleted = 0 AND i.deleted=0";
 			$res_ins = $GLOBALS['db']->query($sql_ins);
 			$ins = $GLOBALS['db']->fetchByAssoc($res_ins);
 			$iid = $ins['te_in_institutes_te_ba_batch_1te_in_institutes_ida'];
 			$this->bean->institute = "<a href='index.php?action=DetailView&module=te_in_institutes&record={$iid}'>".$ins['name']."</a>";
-			
-			
+
+
 		}
-		
+
 		?>
 
 <script>
-	
-	
+
+
     $(document).ready(function () {
 			var table 	 	= document.getElementById('detailpanel_1').getElementsByTagName('TBODY')[0].rows;
 			var rowCount 	= table.length;
@@ -502,15 +502,15 @@ class LeadsViewDetail extends ViewDetail {
 			}
 		    $("#status").change(function() {
 				alert(1)
-			});     
+			});
    });
-  
-  
+
+
   function generateInvoice(lead_id){
 	  //~ alert(lead_id)
 	  //~ window.location.href='index.php?entryPoint=generateInvoice&LeadID='+lead_id;
 	  window.open('index.php?entryPoint=generateInvoice&LeadID='+lead_id, '_blank');
-	}          
+	}
   function clickToCall(phone,lead_id){
 
 		//~ alert(phone)
@@ -522,8 +522,8 @@ class LeadsViewDetail extends ViewDetail {
 					var parsedJSON = JSON.parse(b.responseText);
 					//~ alert(parsedJSON[0]);
 					//~ alert(parsedJSON[1]);
-					
-					if(parsedJSON[0]=="200"){	
+
+					if(parsedJSON[0]=="200"){
 						//~ alert('Call Success');
 						//~ $(this).popupModal('atomBox');
 						var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
@@ -543,15 +543,15 @@ class LeadsViewDetail extends ViewDetail {
 						//~ window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
 					}
 				}
-						
+
 			}
-			
+
 			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&number='+phone, callback);
 		 }
 	}
-	
+
 	function updateleadseenunseen(lid){
-		
+
 		var lead_id = $("#seenbtn").data('lid');
 		SUGAR.ajaxUI.showLoadingPanel();
 		$.ajax({url: "index.php?entryPoint=seen_unseen&lead_id="+lead_id, success: function(result){
@@ -563,9 +563,9 @@ class LeadsViewDetail extends ViewDetail {
 				alert("Unable to mark Seen!");
 				return false;
 			}
-			
+
 		}});
-		
+
 	}
 	$(document).ready(function() {
 		//function to hide edit button on lead details page
@@ -577,19 +577,22 @@ class LeadsViewDetail extends ViewDetail {
 		   $(".clickMenu").hide();
 		  });
 		}
+
 	});
-	
-	
-	
-            
+
+	$(function(){
+		alert("in detail");
+	});
+
+
      </script>
 
 
 <?php
-		
+
 		parent::display();
 		//~ require_once('custom/modules/Leads/include/ShowCallPopup.html');
 	}
-	
+
 }
 ?>
