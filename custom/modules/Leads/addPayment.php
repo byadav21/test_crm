@@ -93,6 +93,7 @@ class addPaymentClass{
 						$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
 						$studentBatchObj->te_vendor_id_c=$vendor['id'];
 						$studentBatchObj->status="Active";
+						$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 						$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 						$studentBatchObj->te_student_te_student_batch_1te_student_ida=$duplicateStudent['id'];
 						$studentBatchObj->leads_id=$bean->id;
@@ -152,6 +153,7 @@ class addPaymentClass{
 					$studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
 					$studentBatchObj->te_vendor_id_c=$vendor['id'];
 					$studentBatchObj->status="Active";
+					$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 					$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 					$studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_id;
 					$studentBatchObj->leads_id=$bean->id;
@@ -184,6 +186,14 @@ class addPaymentClass{
 		}
 
 	}
+	
+	public function getSrmUser($batch_id){
+		$srmSql = "SELECT assigned_user_id FROM te_srm_auto_assignment WHERE deleted=0 AND te_ba_batch_id_c='".$batch_id."'";
+		$srmObj= $GLOBALS['db']->query($srmSql);
+		$srmUser = $GLOBALS['db']->fetchByAssoc($srmObj);	
+		return $srmUser['assigned_user_id'];
+	}
+	
 	function updateStudentPaymentPlan($paymentDetails){
 		#Service Tax deduction
 		$amount=$paymentDetails['amount'];
