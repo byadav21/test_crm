@@ -11,7 +11,7 @@
 # Ignore some files and directories from the custom directory.
 /custom/modules/*/Ext/
 # Custom configuration should also be ignored.
-config.php
-config_override.php
+/config.php
+/config_override.php
 # Logs files can safely be ignored.
 *.log
