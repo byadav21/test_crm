@@ -26,11 +26,11 @@ class listviewClass {
         if($res1['country']=="INDIA" || $res1['country']=="india" || $res1['country']=="India" || $res1['country']=="")
   			{
 
-    			$bean->feepaid="INR- ".number_format($inr, 2, ',', ' ');
+    			$bean->feepaid="INR- ".number_format($inr, 2, '.', ' ');
   			}
   			else
   			{
-  			  $bean->feepaid="USD- ".number_format($inr, 2, ',', ' ');
+  			  $bean->feepaid="USD- ".number_format($inr, 2, '.', ' ');
   			}
       }
       else{
