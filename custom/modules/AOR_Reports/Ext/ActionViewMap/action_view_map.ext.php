@@ -9,6 +9,9 @@
  
 
 
+ $action_view_map['feereport'] = 'feereport';
+ 
+
  $action_view_map['feedbackreport'] = 'feedbackreport';
  
 

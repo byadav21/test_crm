@@ -5118,3 +5118,89 @@ Fri Mar 10 06:11:08 2017 [30744][1][FATAL] Exception in Controller: There is no 
 Fri Mar 10 06:11:10 2017 [30744][1][FATAL] Exception in Controller: There is no action by that name.
 Fri Mar 10 06:17:55 2017 [5464][1][FATAL]  Query Failed: SELECT tbl1.id,tbl1.salutation,tbl1.phone_mobile,tbl4.email_address,tbl1.assigned_user_id,tbl1.first_name,tbl1.last_name, tbl1.status,tbl1.date_entered,tbl1.lead_source,tbl2.user_name FROM leads AS tbl1
 							LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id WHERE : MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+Fri Mar 10 22:26:04 2017 [4808][1][FATAL] Request - Array
+(
+    [module] => Leads
+    [record] => 9e6593b1-18de-a525-6057-58bd4efeab9d
+    [isDuplicate] => false
+    [action] => Save
+    [return_module] => Leads
+    [return_action] => 
+    [return_id] => 
+    [module_tab] => 
+    [contact_role] => 
+    [relate_to] => Leads
+    [relate_id] => 
+    [offset] => 4
+    [prospect_id] => 
+    [account_id] => 
+    [contact_id] => 
+    [opportunity_id] => 
+    [first_name] => Avneet
+    [last_name] => 
+    [gender] => 
+    [birthdate] => 
+    [Leads_email_widget_id] => 0
+    [emailAddressWidget] => 1
+    [Leads0emailAddress0] => avneet@test.in
+    [Leads0emailAddressId0] => 4abf9064-ed0d-bf3b-87e2-58a6a4130601
+    [Leads0emailAddressPrimaryFlag] => Leads0emailAddress0
+    [Leads0emailAddressVerifiedFlag0] => true
+    [Leads0emailAddressVerifiedValue0] => avneet@test.in
+    [useEmailWidget] => true
+    [phone_mobile] => 9810697720
+    [education_c] => 
+    [phone_other] => 
+    [work_experience_c] => 
+    [functional_area_c] => 
+    [company_c] => 
+    [primary_address_city] => 
+    [primary_address_state] => 
+    [primary_address_country] => 
+    [batch_c] => Strategic Performance Management
+    [te_ba_batch_id_c] => e65e9063-bd77-7b08-7414-58465ad5a871
+    [utm_campaign] => 
+    [comment] => 
+    [lead_source] => 
+    [parent_type] => Users
+    [parent_name] => 
+    [parent_id] => 
+    [status] => Converted
+    [status_description] => Converted
+    [note] => 
+    [assigned_user_name] => Admin Administrator
+    [assigned_user_id] => 1
+    [date_of_followup] => 
+    [date_of_callback] => 
+    [date_of_prospect] => 
+    [payment_type] => Offline
+    [payment_source] => Institute
+    [amount] => 15000
+    [payment_realized] => 1
+    [date_of_payment] => 2017-03-11
+    [reference_number] => sfasdf
+    [transaction_id] => 
+)
+
+Fri Mar 10 23:05:31 2017 [6818][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:05:42 2017 [7294][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:05:45 2017 [7294][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:05:46 2017 [7294][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:05:46 2017 [7294][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:05:46 2017 [7294][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:06:57 2017 [4806][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='b86f7757-9e1e-29c8-de59-58c23df675ed': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='b86f7757-9e1e-29c8-de59-58c23df675ed'' at line 1
+Fri Mar 10 23:06:57 2017 [4806][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1d100526-ffd5-e7f5-0c3f-58c23ecb4d97': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1d100526-ffd5-e7f5-0c3f-58c23ecb4d97'' at line 1
+Fri Mar 10 23:06:57 2017 [4806][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='916c73c6-b161-d994-472f-58c29e721569': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='916c73c6-b161-d994-472f-58c29e721569'' at line 1
+Fri Mar 10 23:06:57 2017 [4806][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:06:57 2017 [4806][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='e7443997-7aed-1674-3ea2-58c27a923593': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='e7443997-7aed-1674-3ea2-58c27a923593'' at line 1
+Fri Mar 10 23:07:22 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='b86f7757-9e1e-29c8-de59-58c23df675ed': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='b86f7757-9e1e-29c8-de59-58c23df675ed'' at line 1
+Fri Mar 10 23:07:22 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1d100526-ffd5-e7f5-0c3f-58c23ecb4d97': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1d100526-ffd5-e7f5-0c3f-58c23ecb4d97'' at line 1
+Fri Mar 10 23:07:22 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='916c73c6-b161-d994-472f-58c29e721569': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='916c73c6-b161-d994-472f-58c29e721569'' at line 1
+Fri Mar 10 23:07:22 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:07:22 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='e7443997-7aed-1674-3ea2-58c27a923593': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='e7443997-7aed-1674-3ea2-58c27a923593'' at line 1
+Fri Mar 10 23:07:31 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='b86f7757-9e1e-29c8-de59-58c23df675ed': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='b86f7757-9e1e-29c8-de59-58c23df675ed'' at line 1
+Fri Mar 10 23:07:31 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1d100526-ffd5-e7f5-0c3f-58c23ecb4d97': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1d100526-ffd5-e7f5-0c3f-58c23ecb4d97'' at line 1
+Fri Mar 10 23:07:31 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='916c73c6-b161-d994-472f-58c29e721569': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='916c73c6-b161-d994-472f-58c29e721569'' at line 1
+Fri Mar 10 23:07:31 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='1438013c-ff20-7b37-0001-58c3983a73b4': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='1438013c-ff20-7b37-0001-58c3983a73b4'' at line 1
+Fri Mar 10 23:07:31 2017 [6010][1][FATAL]  Query Failed: SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`=='e7443997-7aed-1674-3ea2-58c27a923593': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='e7443997-7aed-1674-3ea2-58c27a923593'' at line 1
+Fri Mar 10 23:40:15 2017 [7294][62bce63d-3669-8bf8-7d8b-58a9a77574da][FATAL] Exception in Controller: Unauthorized access to administration.
