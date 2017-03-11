@@ -166,7 +166,8 @@ class addPaymentClass{
 		if(!empty($bean->payment_type)){
 		#update student payment history
 		$id=create_guid();
-		$insertSql="INSERT INTO te_student_payment SET id='".$id."', name='".$bean->reference_number."', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".$bean->date_of_payment."', amount='".$bean->amount."', reference_number='".$bean->reference_number."', payment_type='".$bean->payment_type."', payment_realized='".$this->payment_realized."', transaction_id='".$bean->transaction_id."', payment_source='".$bean->payment_source."'";
+		$insertSql="INSERT INTO te_student_payment SET id='".$id."', name='".$bean->reference_number."', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".$bean->date_of_payment."', amount='".$bean->amount."', reference_number='".$bean->reference_number."', payment_type='".$bean->payment_type."', payment_realized='".$bean->payment_realized."', transaction_id='".$bean->transaction_id."', payment_source='".$bean->payment_source."'";
+		//echo $insertSql;exit();
 		$GLOBALS['db']->Query($insertSql);
 
 		#Update relationship record
@@ -186,14 +187,14 @@ class addPaymentClass{
 		}
 
 	}
-	
+
 	public function getSrmUser($batch_id){
 		$srmSql = "SELECT assigned_user_id FROM te_srm_auto_assignment WHERE deleted=0 AND te_ba_batch_id_c='".$batch_id."'";
 		$srmObj= $GLOBALS['db']->query($srmSql);
-		$srmUser = $GLOBALS['db']->fetchByAssoc($srmObj);	
+		$srmUser = $GLOBALS['db']->fetchByAssoc($srmObj);
 		return $srmUser['assigned_user_id'];
 	}
-	
+
 	function updateStudentPaymentPlan($paymentDetails){
 		#Service Tax deduction
 		$amount=$paymentDetails['amount'];
