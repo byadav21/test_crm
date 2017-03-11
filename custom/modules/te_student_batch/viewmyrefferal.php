@@ -57,7 +57,7 @@ $reportingUserIds = $reportUserObj->report_to_id;
 
 
 
-$SQL = "SELECT l.id as lid,  CONCAT(ifnull(l.first_name,''),' ',ifnull(l.last_name,''))  as name, l.phone_mobile,e.email_address,l.status,CONCAT(ifnull(u.first_name,''),' ',ifnull(u.last_name,'')) as counselor,b.id batch_id, b.name as batch_name, p.name as prog_name,i.name as insti_name,l.parent_type,l.parent_id, CONCAT(ifnull(lr.first_name,''),' ',ifnull(lr.last_name,''))  as rname, CONCAT(ifnull(ur.first_name,''),' ',ifnull(ur.last_name,'')) as rcounselor,  CONCAT(ifnull(usb.first_name,''),' ',ifnull(usb.last_name,''))  as srm,l.date_of_referral FROM leads l
+$SQL = "SELECT distinct(l.id) as lid,  CONCAT(ifnull(l.first_name,''),' ',ifnull(l.last_name,''))  as name, l.phone_mobile,e.email_address,l.status,CONCAT(ifnull(u.first_name,''),' ',ifnull(u.last_name,'')) as counselor,b.id batch_id, b.name as batch_name, p.name as prog_name,i.name as insti_name,l.parent_type,l.parent_id, CONCAT(ifnull(lr.first_name,''),' ',ifnull(lr.last_name,''))  as rname, CONCAT(ifnull(ur.first_name,''),' ',ifnull(ur.last_name,'')) as rcounselor,  CONCAT(ifnull(usb.first_name,''),' ',ifnull(usb.last_name,''))  as srm,l.date_of_referral FROM leads l
 		LEFT JOIN leads_cstm lc ON l.id =lc.id_c
 		LEFT JOIN email_addr_bean_rel er ON er.bean_id = l.id AND er.bean_module ='Leads'
 		INNER JOIN email_addresses e ON e.id =  er.email_address_id
