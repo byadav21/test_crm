@@ -2,7 +2,7 @@
 <script>
 function pleaseWait()
 {
-	
+
 	if(check_form('referralform')){
 				SUGAR.ajaxUI.showLoadingPanel();
 				return true;
@@ -13,9 +13,9 @@ function pleaseWait()
 {/literal}
 
 <form name='referralform' action='' method='POST'>
-<table cellpadding='0' cellspacing='0' width='100%' border='0' align='left' >   
+<table cellpadding='0' cellspacing='0' width='100%' border='0' align='left' >
 	<tr>
-		<td width="15%" align="left" style="color:black;"><strong>Program:</strong></td>
+		<!--<td width="15%" align="left" style="color:black;"><strong>Program:</strong></td>
 		<td width="35%" align="left">
 		<select name="program" id="program" >
 			<option value=""></option>
@@ -24,10 +24,10 @@ function pleaseWait()
 					<option value="{$keys}" selected='selected'>{$options}</option>
 				{else}
 					<option value="{$keys}">{$options}</option>
-				{/if}                       
-			{/foreach}  
+				{/if}
+			{/foreach}
 		</select>
-		</td> 
+	</td>-->
 		<td width="15%" align="left"  style="color:black;"><strong>Batch: </strong></td>
 		<td width="35%" align="left">
 			<select name="batch" id="batch">
@@ -37,25 +37,26 @@ function pleaseWait()
 						<option value="{$keys}" selected='selected'>{$options}</option>
 					{else}
 						<option value="{$keys}">{$options}</option>
-					{/if}                       
-				{/foreach}  
+					{/if}
+				{/foreach}
 			</select>
 		</td>
+		<td width="15%" align="left"  style="color:black;"><strong>Status:</strong></td>
+	 <td width="35%" align="left">
+		 <select name="status" id="status" >
+			 <option value=""></option>
+			 {foreach from =$statusList key=keys item=options}
+				 {if $keys== $selectedStatus}
+					 <option value="{$keys}" selected='selected'>{$options}</option>
+				 {else}
+					 <option value="{$keys}">{$options}</option>
+				 {/if}
+			 {/foreach}
+		 </select>
+		</td>
 		</tr>
-		<tr> 
-	   <td width="15%" align="left"  style="color:black;"><strong>Status:</strong></td>
-		<td width="35%" align="left">
-			<select name="status" id="status" >
-				<option value=""></option>
-				{foreach from =$statusList key=keys item=options}
-					{if $keys== $selectedStatus}
-						<option value="{$keys}" selected='selected'>{$options}</option>
-					{else}
-						<option value="{$keys}">{$options}</option>
-					{/if}                       
-				{/foreach}  
-			</select>
-	   </td> 
+		<tr>
+
 	    <td width="15%" align="left"  style="color:black;"><strong>SRM:</strong></td>
 		<td width="35%" align="left">
 			<select name="srm" id="srm">
@@ -65,13 +66,13 @@ function pleaseWait()
 						<option value="{$keys}" selected='selected'>{$options}</option>
 					{else}
 						<option value="{$keys}">{$options}</option>
-					{/if}                       
-				{/foreach}  
+					{/if}
+				{/foreach}
 			</select>
 	   </td>
    </tr>
    <tr><td>&nbsp;</td><td>&nbsp;</td>
-	</tr> 
+	</tr>
 	<tr><td>&nbsp;</td>
 		<td colspan="3">
 			<input type='submit' name='searchreferral' id = 'searchreferral' value='Search' class="button primary" onclick='pleaseWait()' >
@@ -101,12 +102,12 @@ function pleaseWait()
 		<td style="color:black;"><b>Counselor</b></td>
 		<td  style="color:black;"><b>Date of Referral Creation</b></td>
 		<td colspan ="2" style="color:black;"><b>Referred by</b></td>
-			
+
 		<td style="color:black;"><b>SRM</b></td>
 	</tr>
 	{foreach from =$referrals key=keys item=options}
 		<tr>
-			
+
 				<td><a href="index.php?module=Leads&action=detailview&record={$options.lid}">{$options.name}</a></td>
 				<td>{$options.email_address}</td>
 				<td>{$options.phone_mobile}</td>
@@ -116,20 +117,19 @@ function pleaseWait()
 				<td>{$options.status}</td>
 				<td>{$options.counselor}</td>
 				<td>{$options.date_of_referral}</td>
-				
+
 				<td>{$options.parent_type}</td>
 				{if $options.parent_type =='Users' }
 					<td><a href="index.php?module=User&action=detailview&record={$options.parent_id}">{$options.rcounselor}</a></td>
-				{/if}	
+				{/if}
 				{if $options.parent_type =='Leads' }
 					<td><a href="index.php?module=Leads&action=detailview&record={$options.parent_id}">{$options.rname}</a></td>
-				{/if}	
-				
+				{/if}
+
 				<td>{$options.srm}</td>
-			
-		<tr>			                    
-	{/foreach}  
-	
+
+		<tr>
+	{/foreach}
+
 	</table>
 </div>
-

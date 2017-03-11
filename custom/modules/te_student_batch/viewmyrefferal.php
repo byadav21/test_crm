@@ -28,7 +28,7 @@ $reportingUserIds = $reportUserObj->report_to_id;
 	}
 
 // Batch List
-	$sqlBatch = "SELECT id,name FROM  te_ba_batch WHERE deleted = 0   ORDER BY name ASC";
+	$sqlBatch = "SELECT b.id,CONCAT(p.name,' - ',b.name) AS name FROM  te_ba_batch AS b INNER JOIN te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id INNER JOIN te_pr_programs AS p on p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida WHERE b.deleted=0  AND p.deleted=0 ORDER BY name ASC";
 	$resultB = $db->query($sqlBatch);
 	$selectedBatch = '';
 	$batch = array();
