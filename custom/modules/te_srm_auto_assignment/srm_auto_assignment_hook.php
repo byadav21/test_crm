@@ -9,7 +9,7 @@ class SrmAutoAssignment{
 				$duplicateSql = "SELECT id FROM te_srm_auto_assignment WHERE te_ba_batch_id_c='".$_REQUEST['te_ba_batch_id_c']."'";
 				$duplicateObj = $GLOBALS['db']->query($duplicateSql);
 				if($GLOBALS['db']->getRowCount($duplicateObj)>0){
-					SugarApplication::appendErrorMessage('You have been redirected here because the selected batch has already assigned to one SRM');
+					SugarApplication::appendErrorMessage('You have been redirected here because of duplicate SRM assignment for the batch');
 					SugarApplication::redirect('index.php?module=te_srm_auto_assignment&action=EditView');
 				}					
 			}
