@@ -77,7 +77,7 @@ class InstallmentDue extends Dashlet{
 			$ss->assign('autoRefreshOptions', $this->getAutoRefreshOptions());
 			$ss->assign('autoRefreshSelect', $this->autoRefresh);
 		}
-		 return parent::displayOptions() . $ss->fetch('custom/modules/te_ba_Batch/Dashlets/InstallmentDue/InstallmentDue.tpl');
+		 return parent::displayOptions() . $ss->fetch('custom/modules/te_student_Batch/Dashlets/InstallmentDue/InstallmentDue.tpl');
     }  
 	/**
      * called to filter out $_REQUEST object when the user submits the configure dropdown
