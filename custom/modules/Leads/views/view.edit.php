@@ -414,6 +414,7 @@ if($("#status_description").val() === "Converted") {
 <script>
 $(function(){
 	$("input[name=assigned_user_name]").val(' ');
+	$("#btn_clr_assigned_user_name").trigger('click');
 });
 </script>
 <?php }
