@@ -144,7 +144,7 @@ class Programwise extends Dashlet{
 			//$converted=$this->getConvertedLeads($data['UTM']);
 
 			#Referal %
-			$Referralp=($data['total_ref']/$data['total_admission'])*100;
+      $Referralp=($data['total_ref']/$data['total_admission'])*100;
       $Referralp=number_format((float)$Referralp, 2, '.', '');
 			# Referal Coversion---
 			$Referral_Conversion=($data['total_ref_converted']/$data['total_ref'])*100;
