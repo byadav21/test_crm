@@ -7,7 +7,7 @@ class te_student_batchViewList extends ViewList
      * @see ViewList::preDisplay()
      */
     public function preDisplay(){
-		//echo '<script type="text/javascript" src="custom/modules/te_student_batch/student_batch.js"></script>';
+		echo '<script type="text/javascript" src="custom/modules/te_student_batch/student_batch.js"></script>';
         parent::preDisplay();
     }
 	function listViewProcess(){
@@ -18,8 +18,8 @@ class te_student_batchViewList extends ViewList
 				$this->where .= " AND te_student_batch.dropout_status ='Pending'";
 			else
 				$this->where .= " te_student_batch.dropout_status ='Pending'";
-		} */	
-		
+		} */
+
 		#echo $this->where;die;
 		$this->lv->searchColumns = $this->searchForm->searchColumns;
 		if(!$this->headers)
@@ -31,8 +31,8 @@ class te_student_batchViewList extends ViewList
 			$this->params['sortOrder']='DESC';
 
 			$tplFile = 'include/ListView/ListViewGeneric.tpl';
-			$this->lv->setup($this->seed, $tplFile, $this->where, $this->params);			
+			$this->lv->setup($this->seed, $tplFile, $this->where, $this->params);
 			echo $this->lv->display();
-		}	
+		}
  	}
 }

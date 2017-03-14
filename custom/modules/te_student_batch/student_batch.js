@@ -1,5 +1,5 @@
-$(document).ready(function(){	
-	$(window).load(function() {
+$(document).ready(function(){
+	/*$(window).load(function() {
 		  $('.id-ff').html('');
 		  $('.utils').html('');
 		  if($("#status").val() != "Dropout" ){
@@ -14,6 +14,6 @@ $(document).ready(function(){
 		}else{
 			document.getElementById("detailpanel_2").style.display ='none';
 		}
-	})
+	})*/
+	$(".actionmenulinks a").eq(4).attr('target','_blank');
 });
-
