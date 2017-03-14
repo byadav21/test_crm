@@ -23,7 +23,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 		global $db,$current_user;
 		$resultSet=array();
 		if($current_user->designation=="BUH"){
-			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status='Pending'  AND sb.deleted=0";
+			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status='Pending'  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
 		}else{
 			$user_id = $current_user->id;
 			$users=$this->reportingUser($user_id);
@@ -36,7 +36,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 			}
 
 			$users_str = "'".implode("','", $uid)."'";
-			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.deleted=0 AND sb.assigned_user_id IN($users_str)";
+			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.deleted=0 AND sb.assigned_user_id IN($users_str) ORDER BY sb.date_entered DESC,sb.date_modified DESC";
 		}
 		$studentBatchObj =$db->query($studentBatchSql);
 

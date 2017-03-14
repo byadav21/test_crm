@@ -105,7 +105,8 @@ if(isset($_REQUEST['searchreferral']) && $_REQUEST['searchreferral'] =='Search')
 }
 
 $sql = $SQL.$where;
-//~ echo $sql;
+$sql = $sql." ORDER BY l.date_of_referral DESC";
+ //echo $sql;exit();
 $referrals = array();
 $result = $db->query($sql);
 if($db->getRowCount($result)>0){
