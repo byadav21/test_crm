@@ -4,6 +4,7 @@ require_once('custom/include/Email/sendmail.php');
 class addPaymentClass{
 
 	function addPaymentFunc($bean, $event, $argument){
+		//echo $bean->primary_address_country.' state '.$bean->primary_address_state.' city '.$bean->primary_address_city;exit();
 		$paidAmount=0;
 		$student_id="";
 		$student_name="";
@@ -11,6 +12,7 @@ class addPaymentClass{
 		$student_batch_id="";
 		$student_country="";
 		if(!empty($bean->payment_type)||!empty($bean->date_of_payment)||!empty($bean->reference_number)){
+
 			$payment = new te_payment_details();
 			$payment->payment_type 	   = $bean->payment_type;
 			$payment->payment_source   = $bean->payment_source;
@@ -53,6 +55,7 @@ class addPaymentClass{
 				$bean->minimum_attendance = strstr($batch['minimum_attendance_criteria'],'.',true);
 			}
 			if($bean->status=='Converted'){
+
 				$bean->converted_date=date("Y-m-d");
 				#create student
 				$duplicateStudentSql = "SELECT id,name,email,country FROM te_student WHERE deleted=0 AND email='".$bean->email1."'";
@@ -95,6 +98,9 @@ class addPaymentClass{
 						$studentBatchObj->status="Active";
 						$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 						$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
+						$studentBatchObj->study_kit_address_state=$bean->primary_address_state;
+						$studentBatchObj->study_kit_address_city=$bean->primary_address_city;
+						$studentBatchObj->study_kit_address_country=$bean->primary_address_country;
 						$studentBatchObj->te_student_te_student_batch_1te_student_ida=$duplicateStudent['id'];
 						$studentBatchObj->leads_id=$bean->id;
 						$studentBatchObj->save();
@@ -155,6 +161,9 @@ class addPaymentClass{
 					$studentBatchObj->status="Active";
 					$studentBatchObj->assigned_user_id=$this->getSrmUser($batchDetails['batch_id']);
 					$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
+					$studentBatchObj->study_kit_address_state=$bean->primary_address_state;
+					$studentBatchObj->study_kit_address_city=$bean->primary_address_city;
+					$studentBatchObj->study_kit_address_country=$bean->primary_address_country;
 					$studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_id;
 					$studentBatchObj->leads_id=$bean->id;
 					$studentBatchObj->save();
