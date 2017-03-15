@@ -9,7 +9,7 @@
 /cache/
 !/cache/index.html
 # Ignore some files and directories from the custom directory.
-/custom/modules/*/Ext/
+#/custom/modules/*/Ext/
 # Custom configuration should also be ignored.
 /config.php
 /config_override.php

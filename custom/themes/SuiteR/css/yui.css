@@ -1005,8 +1005,8 @@ span.yui-carousel-first-button-disabled {
     font-weight: bold;
     line-height: 2;
     line-height: 1.8;
-    color: #ffffff;
-    background-color:#3C8DBC;
+    color: #666;
+    background-color:#f1f1f1;
     background: #3C8DBC none repeat scroll 0 0;
 }
 

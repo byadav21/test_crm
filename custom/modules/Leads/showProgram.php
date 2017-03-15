@@ -116,6 +116,13 @@ class LeadsListView extends Lead{
 			}
 			
 		}
+		
+		  $sql_ins = "SELECT id,te_ba_batch.name FROM te_ba_batch  WHERE id = '".$bid ."'";
+			$res_ins = $GLOBALS['db']->query($sql_ins);
+			$ins = $GLOBALS['db']->fetchByAssoc($res_ins);
+			$iid = $ins['id'];
+			  $this->batch = "<a href='index.php?action=DetailView&module=te_ba_Batch&record={$iid}'>".$ins['name']."</a>"; 
+			  
 	    
 		//~ $this->program = 'test';
 		

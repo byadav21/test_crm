@@ -68,10 +68,9 @@ class LeadsViewList extends ViewList
 		else{
 				$this->lv->ss->assign("LOGGED_IN_RESUME","");
 		}	
-			$this->lv->ss->assign("SEARCH",true);
+			$this->lv->ss->assign("SEARCH",true);			
 			
-			
-			$this->lv->setup($this->seed, 'custom/modules/Leads/tpls/ListViewGeneric.tpl', $this->where, $this->params);
+			$this->lv->setup($this->seed, 'custom/modules/Leads/tpls/listing.tpl', $this->where, $this->params);
 			$savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
 			echo $this->lv->display();
 		}
@@ -448,6 +447,7 @@ class LeadsViewList extends ViewList
 			$statusWiseCount = $reportUserObj1->statusWiseCounts();
 		
 			$ss->assign("statusWiseCount",$statusWiseCount);
+			$ss->assign("csshack",'leadpage');
 		
 
         }
@@ -583,7 +583,9 @@ class LeadsViewList extends ViewList
 
 <?php
 		
-		parent::display();
+	 parent::display();
+		
+		
 		//~ require_once('custom/modules/Leads/include/ShowCallPopup.html');
 	}
  

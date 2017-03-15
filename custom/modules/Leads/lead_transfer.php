@@ -34,6 +34,17 @@ input[type=text], select {
                 $("#enddate").datepicker({ dateFormat: "yy-mm-dd" }).val()
                 } );
             </script> 
+     <script type="text/javascript">
+							$( document ).ready(function() {
+								$( "#Lead_source,#Lead_status").find("option").eq(0).remove();
+							});
+							$(function () {
+								$('#Lead_source,#Lead_status').multiselect({
+									includeSelectAllOption: true,numberDisplayed:0
+								});
+							});
+</script>       
+            
     </head>
         <body>
              <section class="moduleTitle">

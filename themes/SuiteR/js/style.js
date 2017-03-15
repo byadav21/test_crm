@@ -362,4 +362,23 @@ $(document).ready(function() {
     });
 });
 
+
+ 
+$( document ).ready(function() {
+	 if($( ".multiselbox").find("option").eq(0).val()==0) $( ".multiselbox").find("option").eq(0).remove();
+});
+$(function () {
+	 $('.multiselbox').multiselect({
+		includeSelectAllOption: true,numberDisplayed:0
+	}); 
+});
+						
+ 
+
+$(document).ready(function() {
+    $('#alert-nav').click(function() {
+        $('#alert-nav #alerts').css('display', 'inherit');
+    });
+});
+
 // End of custom jQuery

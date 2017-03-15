@@ -1,0 +1,223 @@
+<?php
+//print_r($_REQUEST);die;
+require_once('modules/te_ExpensePO/te_ExpensePO.php');
+require_once('modules/te_expenseprdetail/te_expenseprdetail.php');
+require_once('modules/te_Expense_approvall/te_Expense_approvall.php');
+require_once('modules/ACLRoles/ACLRole.php');
+require_once ('custom/modules/te_ExpensePO/te_Expenseproverride.php');
+global  $current_user;global $db;
+
+$roles=new ACLRole();
+$objExp=new te_Expenseproverride();			
+		
+
+$role = new te_ExpensePO();
+if(isset($_REQUEST['record']) && $_POST['record']){
+	$role->id = $_POST['record'];
+	$rolesData=$role->retrieve($_POST['record']);
+	if(!$rolesData){
+		header("Location: index.php?module=te_ExpensePO&action=DetailView&msg=1&record=". $role->id); exit();
+	}
+	if( $rolesData->status==2 || $rolesData->status==-1){
+			header("Location: index.php?module=te_ExpensePO&action=DetailView&msg=2&record=". $role->id);	exit();
+	}
+	$approvers=[];	
+	$userRole=$roles->getUserRole($current_user->id);	
+	$department=$current_user->rel_fields_before_value['te_department_expense_users_1te_department_expense_ida']; 
+	if($userRole['sendtofin']==1){
+		$approvers=$objExp->getFacilityApprovers($userRole['parent_role'],1,0); 
+	}else{
+		$approvers=$objExp->getAllApprovers($department,$userRole['parent_role']);
+	}
+	$inQuery='';
+	if($approvers && count($approvers)>0){
+		foreach($approvers as $appvrs){
+			$inQuery.="'".$appvrs['id']."',";
+		}
+	}			
+	$inQuery=substr($inQuery,0, strlen($inQuery)-1);
+	
+	if(!$objExp->getStatusForEdit($rolesData->id,$inQuery)){
+				header("Location: index.php?module=te_ExpensePO&action=DetailView&msg=2&record=". $role->id);	exit();
+	}
+	 
+	
+}
+
+if(!empty($_REQUEST['name'])){
+	
+	try{
+			
+			$db->query('start transaction');
+			$role->name = $_POST['name'];
+			$role->date_entered = date('Y-m-d H:i:s');
+			if($_POST['record']) $role->date_modified = date('Y-m-d H:i:s');
+			$role->modified_user_id = $current_user->id;
+			$role->created_by = $current_user->id;
+			$role->assigned_user_id = $current_user->id;
+			$role->refrenceid = $_POST['refrenceid'];
+			$role->dated = $_POST['dated'];
+			$role->amount = $_POST['amount'];
+			$role->porequired = $_POST['porequired'];
+			$role->status = 1;
+			$updateddoc=[];
+			$document=json_decode(html_entity_decode($_POST['documents']));
+			if($document && count($document)>0){
+				foreach($document as $doc) 
+					if($doc) $updateddoc[]=$doc;
+			}
+			 
+			$role->documents= json_encode($updateddoc);
+			if($role->save()){
+				 $expID=$role->id;
+				 $deletednotid=[]; 
+				if(count($_POST['items'])>0){
+						$i=0;
+						foreach($_POST['items'] as $items){
+							if(isset($_POST['savedid'][$i]) && $_POST['savedid'][$i]){
+								if($items!='' && $_POST['amounts'][$i]>0){
+									$itemsExp = new te_expenseprdetail();
+									$itemsExp->id=$_POST['savedid'][$i];
+									$itemsExp->name=$items;							 
+									$itemsExp->date_modified=date('Y-m-d H:i:s');
+									$itemsExp->modified_user_id=$current_user->id;							 
+									
+									$itemsExp->itemtype=0;
+									$itemsExp->amounts=$_POST['amounts'][$i];
+									$itemsExp->save();
+									$deletednotid[]=	$_POST['savedid'][$i];	
+								}
+							}else{
+								if($items!='' && $_POST['amounts'][$i]>0){
+									$itemsExp = new te_expenseprdetail();
+									$itemsExp->expenseprid=$role->id;
+									$itemsExp->name=$items;
+									$itemsExp->date_entered=date('Y-m-d H:i:s');
+									$itemsExp->date_modified=date('Y-m-d H:i:s');
+									$itemsExp->modified_user_id=$current_user->id;
+									$itemsExp->created_by=$current_user->id;
+									$itemsExp->assigned_user_id=$current_user->id;
+									$itemsExp->itemtype=0;
+									$itemsExp->amounts=$_POST['amounts'][$i];
+									$itemsExp->save();
+									$deletednotid[]=	$itemsExp->id;
+								}	
+							}
+							$i++;	
+						}
+				}
+				
+				if(count($_POST['taxesp'])>0){
+						$i=0;
+						foreach($_POST['taxesp'] as $items){
+							if(isset($_POST['savedtaxid'][$i]) && $_POST['savedtaxid'][$i]){
+								if($items!='' && $_POST['tax'][$i]>0){
+									$itemsExp = new te_expenseprdetail();
+									$itemsExp->id=$_POST['savedtaxid'][$i];
+									$itemsExp->name=$items;			
+											 
+									$itemsExp->date_modified=date('Y-m-d H:i:s');
+									$itemsExp->modified_user_id=$current_user->id;
+									$itemsExp->itemtype=1;
+									$itemsExp->amounts=$_POST['tax'][$i];
+									$itemsExp->save();
+									$deletednotid[]=	$_POST['savedtaxid'][$i];	
+									
+									
+								}
+							}else{
+								if($items!='' && $_POST['tax'][$i]>0){
+									$itemsExp = new te_expenseprdetail();
+									$itemsExp->expenseprid=$role->id;
+									$itemsExp->name=$items;		
+									$itemsExp->date_entered=date('Y-m-d H:i:s');					 
+									$itemsExp->date_modified=date('Y-m-d H:i:s');
+									$itemsExp->modified_user_id=$current_user->id;
+									$itemsExp->created_by=$current_user->id;
+									$itemsExp->assigned_user_id=$current_user->id;
+									$itemsExp->itemtype=1;
+									$itemsExp->amounts=$_POST['tax'][$i];
+									$itemsExp->save();
+									$deletednotid[]=	$itemsExp->id;	
+								}				
+								
+							}	
+							 $i++;
+						}
+				}
+				
+				//deleted records
+				if($deletednotid && count ($deletednotid)>0){
+						$var=$role->id;
+						$delid='';
+						foreach($deletednotid as $did){
+							if($did) $delid .="'$did',";
+						}
+						$delid=substr($delid,0,strlen($delid)-1);
+						//echo "update te_expenseprdetail set deleted=1 where expenseprid='$var' and id not in ($delid)";die;
+						$db->query("update te_expenseprdetail set deleted=1 where expenseprid='$var' and id not in ($delid) ");
+				}
+				
+				
+			if(!isset($_REQUEST['record']) || $_REQUEST['record']=='' ){
+				//echo '<pre>';//</pre>
+				$exapprovers = new te_Expense_approvall();
+				$exapprovers->name='submitter';
+				$exapprovers->date_entered=date('Y-m-d H:i:s');	
+				$exapprovers->created_by=$current_user->id;
+				$exapprovers->deleted=0;
+				$exapprovers->assigned_user_id=$current_user->id;
+				$exapprovers->expense_id=$expID;
+				$exapprovers->staus=0;
+				$exapprovers->save();//print_r($exapprovers);die;
+				
+				
+				$department=$current_user->rel_fields_before_value['te_department_expense_users_1te_department_expense_ida'];  
+				$roleArr=$roles->getUserRole($current_user->id);
+				
+				 
+				$approvers=[];
+				if($roleArr['parent_role'] &&  $roleArr['sendtofin']==0){// for submitter and approver  
+					$approvers=$objExp->getAllApprovers($department,$roleArr['parent_role']);
+				}else if($roleArr['sendtofin']==1){ // for ceo
+					$approvers=$objExp->getFacilityApprovers($roleArr['parent_role'],1,0); 
+				}
+			  //print_r($approvers);die;
+				if($approvers && count($approvers)>0){
+					foreach($approvers as $appvrs){
+						$exapprovers = new te_Expense_approvall(); 
+						$exapprovers->name='approver';
+						$exapprovers->date_entered=date('Y-m-d H:i:s');	
+						$exapprovers->created_by=$current_user->id;
+						$exapprovers->deleted=0;
+						$exapprovers->assigned_user_id=$appvrs['id'];
+						
+						$exapprovers->expense_id=$expID;
+						$exapprovers->staus=0;
+						$exapprovers->save();
+					}
+				}
+			 }	
+				
+			}
+			$db->query('commit');
+		}catch(Exception $e){
+			$db->query('rollback');
+		}	
+	
+}else{
+ob_clean();	
+    $flc_module = 'All';
+    foreach($_POST as $name=>$value){
+    	if(substr_count($name, 'act_guid') > 0){
+    		$name = str_replace('act_guid', '', $name);
+    
+    		$role->setAction($role->id,$name, $value);
+    	}
+    	
+    }
+    echo "result = {role_id:'$role->id', module:'$flc_module'}";
+    sugar_cleanup(true);
+}
+ 
+header("Location: index.php?module=te_ExpensePO&action=DetailView&record=". $role->id);

@@ -39,7 +39,7 @@
 
 *}
 <!DOCTYPE html>
-<html {$langHeader}>
+<html  {$langHeader}>
 <head>
     <link rel="SHORTCUT ICON" href="{$FAVICON_URL}">
     <meta http-equiv="Content-Type" content="text/html; charset={$APP.LBL_CHARSET}">
@@ -47,8 +47,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <!-- Bootstrap -->
+     
+    
+    <!-- Bootstrap -->
     <link href="themes/SuiteR/css/bootstrap.min.css" rel="stylesheet">
-    <link href="themes/SuiteR/css/footable.core.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link href="themes/SuiteR/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    
+   
+   
+    <!-- Custom Theme Style -->
+    <link href="themes/SuiteR/css/custom.min.css" rel="stylesheet">
+ 
+        
+   <link rel="stylesheet" type="text/css" href="custom/themes/SuiteR/css/alerts/sweetalert.css">     
+
+    
+  <link rel="stylesheet" href="custom/themes/SuiteR/css/toastr.min.css">  
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,4 +88,9 @@
     <link rel="stylesheet" type="text/css" href="themes/SuiteR/css/colourSelector.php">
     <script type="text/javascript" src='{sugar_getjspath file="themes/SuiteR/js/jscolor.js"}'></script>
     <script type="text/javascript" src='{sugar_getjspath file="cache/include/javascript/sugar_field_grp.js"}'></script>
+    <script src="themes/SuiteR/js/toastr.min.js"></script>   
+   <script src="custom/themes/SuiteR/css/alerts/sweetalert.min.js"></script>  
+   <script src="themes/SuiteR/js/bootstrap-multiselect.js"    type="text/javascript"></script>
+   <script type='text/javascript' src='custom/themes/SuiteR/js/angular.min.js'></script>
+   <script type='text/javascript' src='custom/themes/SuiteR/js/app.js'></script>
 </head>

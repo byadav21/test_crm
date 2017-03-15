@@ -151,7 +151,7 @@ input[type=checkbox],input[type=radio] {
     background-color: transparent;
     margin: 0;
     vertical-align: bottom;
-	    top: -3px;
+	    top: -7px;
     position: relative;
 }
 
@@ -394,8 +394,9 @@ table#tabFormPagination td,  #tabFormPagination, #EditView > table#tabFormPagina
 .search td input[type=text], .search td input[type=password], .search td select {
     width: 125px !important;
 	margin-right: 9px;
+	margin-bottom:5px;
 }
-
+#detailpanel_1{border:1px solid #ddd;}
 /* Listview styles */
 .list, .edit .list {
     padding: 0 !important;
@@ -743,7 +744,7 @@ div#responseTime {
 }
 
 #scheduler .schedulerDiv {
-    color: #000000;
+    color: #666;
     text-align: left;
     width: 100%;
     background-color: #FAFAFA;
@@ -1125,7 +1126,7 @@ div#responseTime {
 }
 
 .aclOwner {
-    color: #000000;
+    color: #666;
     font-weight: bold;
 }
 
@@ -1712,7 +1713,7 @@ a.tabFormAdvLink:link, a.tabFormAdvLink:visited, a.tabFormAdvLink:hover {
 
 #globalLinks ul li a {
     max-width:150px !important;
-    color:#3C8DBC;
+    color:#5A738E;
 }
 
 #globalLinks ul li a:hover {
@@ -1807,11 +1808,11 @@ ul.subpanelTablist li a.current, ul.subpanelTablist li a.current:hover {
 /* for subpanel tabs */
 ul.tablist li a.activeSubTab:hover {
     border-bottom-color: #ddd;
-    color: #000000;
+    color: #666;
 }
 
 ul.subpanelTablist li a.activeSubTab:hover {
-    color: #000000;
+    color: #666;
 }
 
 /* search */
@@ -1844,7 +1845,7 @@ ul.subpanelTablist li a.activeSubTab:hover {
 }
 
 .evenListRowS1 td, .oddListRowS1 td {
-    color: #000000;
+    color: #666;
     border-bottom: 1px solid #cbdae6;
 }
 
@@ -1858,7 +1859,7 @@ ul.subpanelTablist li a.activeSubTab:hover {
 }
 
 .detail tr td[scope="row"] {
-    color: #000000;
+    color: #666;
     background-color: #f6f6f6;
     border-color: #cbdae6;
 }
@@ -1913,12 +1914,12 @@ ul.subpanelTablist li a.activeSubTab:hover {
 }
 
 .other td[scope=row] {
-    color: #000000;
+    color: #666;
     background-color: #fafafa;
 }
 
 .other td.edit {
-    color: #000000;
+    color: #666;
     background-color: #f6f6f6;
 }
 
@@ -1973,16 +1974,22 @@ a.tabFormAdvLink:link, a.tabFormAdvLink:visited {
 }
 
 .monthCalBody th a {
-    color: #000000;
+    color: #666;
 }
 
 .yearCalBody {
     border: none;
 }
 
+
+.btn-success .badge {
+    color: aliceblue!important;
+    background-color: #fff!important;
+}
+
 .yearCalBodyMonth {
     background-color: #efefef !important;
-    border-top: 2px solid #3C8DBC;
+    border-top: 2px solid #5A738E;
     border-bottom: 2px solid #fff;
 }
 
@@ -1999,7 +2006,7 @@ a.tabFormAdvLink:link, a.tabFormAdvLink:visited {
 }
 
 .yearCalBodyMonth > a {
-    color: #000000;
+    color: #666;
 }
 
 h5.calSharedUser {
@@ -2014,18 +2021,18 @@ h5.calSharedUser {
 
 /* for subpanel tabs */
 .subpanelTabForm {
-    border-color: #3C8DBC;
-    color: #000000;
+    border-color: #5A738E;
+    color: #666;
     background-color: #ffffff;
 }
 
 ul.tablist, ul.subpanelTablist {
-    border-bottom-color: #3C8DBC;
+    border-bottom-color: #5A738E;
 }
 
 ul.tablist li a:hover, ul.subpanelTablist li a:hover {
     background: #fafafa;
-    border-color: #3C8DBC;
+    border-color: #5A738E;
 }
 
 ul.tablist li a, ul.subpanelTablist li a {
@@ -2086,7 +2093,7 @@ a.sugar-tab-close, .yui-navset .yui-nav a.sugar-tab-close, .yui-navset .yui-nav 
 }
 
 ul.yui-nav li.selected {
-    background:#3C8DBC;
+    background:#5A738E;
 }
 
 #basic_search_link {
@@ -2111,9 +2118,9 @@ div#chartDashlets {
 
 /* miscellaneaous 508 classes */
 .detail508 tr td[scope="col"] {
-    background-color: #F6F6F6;
+    background-color: #ffffff;
     border-color: #CBDAE6;
-    color: #000000;
+    color: #666;
     text-align: right;
     white-space: nowrap;
 }
@@ -2129,7 +2136,7 @@ ul.clickMenu {
     padding: 0;
     margin: 0 !important;
     vertical-align: bottom;
-    color: #000000;
+    color: #666;
     display: inline-block;
     border:1px solid #dddddd;
     background:#eeeeee;
@@ -2146,7 +2153,7 @@ ul.SugarActionMenuIESub li a:hover, ul.clickMenu.SugarActionMenu li a:hover, ul.
 ul#globalLinksSubnav li a:hover, ul#quickCreateULSubnav li a:hover,
 ul.clickMenu li ul.subnav li a:hover,ul.clickMenu li ul.subnav li input:hover, ul.clickMenu.subpanel.records li ul.subnav li a:hover, ul.clickMenu ul.subnav-sub li a:hover { /*--Hover effect for subnav links--*/
 
-   color: #3C8DBC;
+   color: #5A738E;
 }
 
 ul#globalLinksSubnav.SugarActionMenuIESub li a:hover, ul#quickCreateULSubnav.SugarActionMenuIESub li a:hover,
@@ -2335,7 +2342,7 @@ ul.clickMenu li ul.subnav li input {
 }
 ul.SugarActionMenuIESub li a:hover,
 ul.clickMenu li ul.subnav li a:hover,ul.clickMenu li ul.subnav li input:hover, ul.clickMenu.subpanel.records li ul.subnav li a:hover, ul.clickMenu ul.subnav-sub li a:hover { /*--Hover effect for subnav links--*/
-    background-color: #3C8DBC;
+    background-color: #5A738E;
     color: #fff;
     font-weight: normal !important;
     font-size: 12px !important;
@@ -2658,7 +2665,7 @@ button[disabled]:hover, input[type=submit][disabled]:hover, input[type=reset][di
 {
     border: none;
     background-color: #777777;
-    color: #000000;
+    color: #666;
 }
 
 .iconed_dull {
@@ -2727,11 +2734,11 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
     padding: 5px;
     WIDTH: 230PX !IMPORTANT;
     float: left;
-    margin-top: 10px;
+    margin-top: 2px;
 }
 
 select:focus {
-    border:1px solid #3C8DBC;
+    border:1px solid #5A738E;
     padding:4px;
 }
 
@@ -3070,12 +3077,12 @@ fieldset[disabled] .btn-primary:active,
 .button-primary.disabled.active,
 .button-primary[disabled].active,
 fieldset[disabled] .btn-primary.active{
-    background-color: #3C8DBC;
+    background-color: #5A738E;
     border-color: #2e6da4;
 }
 
 .button-primary .badge {
-    color: #3C8DBC;
+    color: #5A738E;
     background-color: #fff;
 }
 
@@ -3093,7 +3100,7 @@ fieldset[disabled] .btn-primary.active{
 
 }
 .dropdown-menu em a {
-    color:#3C8DBC;
+    color:#5A738E;
 }
 
 .dropdown-menu em a:hover {
@@ -3109,7 +3116,7 @@ fieldset[disabled] .btn-primary.active{
 }
 
 .dropdown-menu li a {
-    color:#3C8DBC;
+    color:#5A738E;
     text-decoration:none;
     padding:5px;
     display:block;
@@ -3117,7 +3124,7 @@ fieldset[disabled] .btn-primary.active{
 
 .dropdown-menu li a:hover {
     color:#ffffff;
-    background:#3C8DBC;
+    background:#5A738E;
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
@@ -3155,7 +3162,7 @@ li.topnav:hover{
 
 li#usermenu:hover {
     color:#ffffff;
-    background:#3C8DBC;
+    background:#5A738E;
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
@@ -3213,7 +3220,7 @@ li#usermenu:hover {
 }
 
 .moremenu ul li a{
-    color:#3C8DBC !important;
+    color:#5A738E !important;
     cursor:pointer;
     padding:5px;
     font-size:1.2em;
@@ -3229,7 +3236,7 @@ li#usermenu:hover {
     background:none !important;
     cursor:pointer;
     padding:5px;
-    background:#3C8DBC !important;
+    background:#5A738E !important;
 }
 
 .button, input[type=button] {
@@ -3291,7 +3298,7 @@ button[disabled], input[type="submit"][disabled], input[type="reset"][disabled],
 }
 
 .button .badge {
-    color: #3C8DBC;
+    color: #5A738E;
     background-color: #fff;
 }
 
@@ -3356,7 +3363,7 @@ ul.dashboardTabList li {
 }
 
 .btn-success {
-    background:#3C8DBC;
+    background:#5A738E;
     border: none;
 }
 
@@ -3412,7 +3419,7 @@ table legend {
 }
 
 .ui-widget-content a {
-    color:#3C8DBC;
+    color:#5A738E;
 }
 
 .ui-widget-content a:hover {
@@ -3489,7 +3496,7 @@ table legend {
     #searchmobile #query_string{
         width:75% !important;
         outline: 0 !important;
-        background:#3C8DBC !important;
+        background:#5A738E !important;
         border:none !important;
         border-radius:0 !important;
         border-bottom:1px solid #cccccc !important;
@@ -3514,7 +3521,7 @@ table legend {
     #searchmobile #query_string{
         width:80% !important;
         outline: 0 !important;
-        background:#3C8DBC !important;
+        background:#5A738E !important;
         border:none !important;
         border-radius:0 !important;
         border-bottom:1px solid #cccccc !important;
@@ -3539,7 +3546,7 @@ table legend {
     #searchmobile #query_string{
         width:85% !important;
         outline: 0 !important;
-        background:#3C8DBC !important;
+        background:#5A738E !important;
         border:none !important;
         border-radius:0 !important;
         border-bottom:1px solid #cccccc !important;
@@ -3724,7 +3731,7 @@ table legend {
     }
 
     #userlinks_head ul li a{
-        color:#3C8DBC;
+        color:#5A738E;
     }
 
     #userlinks_head ul li a:hover{
@@ -3795,16 +3802,42 @@ span#quickcreateplus{
     border-radius: 50%;
 }
 
-/* Padding for sidebar items */
-
-.nav > li > a {
-    padding:8px 0 8px 0;
-	border-bottom: #fff dotted 1px;
-}
+ .dashboardTabList li {display: inline-block;
+    /* border-right: 1px solid #666; */
+    padding-right: 29px!important;}
 
 li.moremenu {
     padding:8px 10px 8px 10px;
 }
+
+#content{
+    background: #fff;
+    padding: 7px 10px;
+}
+
+.moduleTitle{padding: 5px 5px 7px;
+	    border-bottom: 2px solid #E6E9ED;    margin-bottom: 10px;
+}
+
+.moduleTitle h2 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 22px;
+    color: #666;
+    text-transform: uppercase;
+    padding-top: 5px;
+    margin-bottom: 14px;
+}
+
+ 
+
+#detailpanel_1, #detailpanel_1 table {
+    border: 0!important;
+    color: #73879C;
+    
+}
+
+#EditView_tabs td{font-weight:bold}
 
 /* Fix so that sidebar does not oversize on larger screens */
 
@@ -4032,7 +4065,7 @@ li.moremenu {
 @media (max-width:1023px) {
     button, .button, input[type="button"], input[type="reset"], input[type="submit"], a#create_link.utilsLink {
         color: #fff;
-        background-color: #3C8DBC;
+        background-color: #5A738E;
         border: none;
         padding: 8px 12px 8px 12px;
         margin: 2px;
@@ -4100,7 +4133,8 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background:none;
 }
-
+ 
+#fieldLines{overflow-x: scroll;}
 #globalLinksicons {
     margin:0 5px 0 0;
 }
@@ -4109,6 +4143,18 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
     margin:10px;
     padding:0;
 }
+
+.popupBody input[type=text], .popupBody textarea{
+    width:74% !important;
+    left: 47px;
+    position: relative;
+}
+.name_advanced input[type=text]{
+    width: 250px !important;
+    left: 82px;
+    position: relative;
+}
+
 
 .popupBody input[type=text], .popupBody textarea{
     width:74% !important;
@@ -4303,8 +4349,8 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
 /* Dashlet CSS */
 
 .dashletPanel .h3Row {
-    background: #3e73c2;
-    color:#ffffff;
+       background: #f1f1f1;
+    color: #666;
     border-bottom:1px solid #eeeeee; !important;
 }
 
@@ -4321,13 +4367,13 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
 }
 
 .dashletPanel .h3Row h3{
-    color:#fff;
+    color:#666;
     font-weight:bold;
     margin:0 0 0 10px;
 }
 
 #dashletbuttons{
-    color:#3C8DBC;
+    color:#5A738E;
     margin: 0 2px 0 2px;
 }
 
@@ -4343,11 +4389,21 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
     border:none;
 }
 
-.oddListRowS1, .evenListRowS1{
+.oddListRowS1{
+
     background:#f7f7f7 !important;
     border-top:1px solid #dddddd;
     border-bottom:1px solid #dddddd;
 }
+
+ .evenListRowS1{
+    background:#ffffff !important;
+    border-top:1px solid #dddddd;
+    border-bottom:1px solid #dddddd;
+}
+
+.multiselect-item>.active>a, .multiselect-item>.active>a:focus, .multiselect-item>.active>a:hover{    color: #ffffff!important;
+    background: #5A738E!important;}
 
 .list tr.oddListRowS1 td, .list tr.evenListRowS1 td{
     padding-top:10px !important;
@@ -4355,7 +4411,7 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
 }
 
 #copyright_data a{
-    color: #000000;
+    color: #666;
     margin: 0 5px 0 5px;
 }
 
@@ -4558,7 +4614,7 @@ h3 span{
     width:200px !important;
     margin:0;
     padding:0;
-    background: #3C8DBC !important;
+    background: #5A738E !important;
 }
 
 #mobile_menu li{
@@ -4599,7 +4655,7 @@ h3 span{
     }
 
     #quickcreatetop ul li a, #desktop_notifications ul li a{
-        color:#3C8DBC !important;
+        color:#5A738E !important;
         padding:0 3px 0 3px !important;
         margin:0 !important;
         line-height:35px;
@@ -4626,9 +4682,9 @@ h3 span{
     visibility:hidden;
 }
 .icon{
-    fill: #3c8dbc;
+    fill: #5A738E;
     pointer-events: none;
-    fill: #3C8DBC;
+    fill: #5A738E;
     pointer-events: none;
 }
 .dashletToolSet .icon{
@@ -4642,13 +4698,13 @@ h3 span{
 .inlineEditIcon {
     float: right;
     height: 10px;
-    color: #3c8dbc;
+    color: #5A738E;
     width: 15px;
     padding-left: 3px;
 }
 
 .inlineEditIcon svg {
-    fill: #3c8dbc;
+    fill: #5A738E;
     display: none;
 }
 
@@ -4667,11 +4723,11 @@ td.inlineEditActive{
 }
 
 #inlineEditSaveButton svg{
-    fill: #3c8dbc;
+    fill: #5A738E;
 }
 
 #inlineEditSaveButton svg:hover{
-    fill: #3c8dbc;
+    fill: #5A738E;
 }
 
 #inline_edit_field{
@@ -4750,7 +4806,7 @@ td.inlineEditActive{
     }
 
     #mobilegloballinks ul li a {
-        color: #3C8DBC !important;
+        color: #5A738E !important;
     }
 
     .glyphicon-search, .glyphicon-option-vertical {
@@ -4891,10 +4947,10 @@ object{
 
 
 .qtip-tipped .qtip-titlebar {
-    background-color: #3c8dbc;
+    background-color: #5A738E;
     padding: 10px 40px 10px 10px;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#3c8dbc),to(#4286AD));
-    background-image: -webkit-linear-gradient(top,#3c8dbc,#4286AD);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#5A738E),to(#4286AD));
+    background-image: -webkit-linear-gradient(top,#5A738E,#4286AD);
 }
 
 /* suggestion box has to be responsive */
@@ -5052,7 +5108,7 @@ object{
 }
 #fieldChoices .field-header {
     background-clip: padding-box;
-    background-color: #3c8dbc;
+    background-color: #5A738E;
     border-radius: 2px 2px 0 0;
     color: white;
     font-size: 14px;
@@ -5268,7 +5324,7 @@ div.target-list-table {
 .icon-btn-lst .icon-btn {
     margin: 10px;
     list-style-type: none;
-    background-color: #3C8DBC;
+    background-color: #5A738E;
     display: block;
     float: left;
     width: 150px;
@@ -5304,5 +5360,34 @@ table tr#delegates_search {
     padding-bottom: 25px;
 }
 
+span.multiselect-native-select{position:relative}span.multiselect-native-select select{border:0!important;clip:rect(0 0 0 0)!important;height:1px!important;margin:-1px -1px -1px -3px!important;overflow:hidden!important;padding:0!important;position:absolute!important;width:1px!important;left:50%;top:30px}.multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0}.multiselect-container .input-group{margin:5px}.multiselect-container>li{padding:0}.multiselect-container>li>a.multiselect-all label{font-weight:700}.multiselect-container>li.multiselect-group label{margin:0;padding:3px 20px 3px 20px;height:100%;font-weight:700}.multiselect-container>li.multiselect-group-clickable label{cursor:pointer}.multiselect-container>li>a{padding:0}.multiselect-container>li>a>label{margin:0;height:100%;cursor:pointer;font-weight:400;padding:3px 20px 3px 40px}.multiselect-container>li>a>label.radio,.multiselect-container>li>a>label.checkbox{margin:0}.multiselect-container>li>a>label>input[type=checkbox]{margin-bottom:5px}.btn-group>.btn-group:nth-child(2)>.multiselect.btn{border-top-left-radius:4px;border-bottom-left-radius:4px}.form-inline .multiselect-container label.checkbox,.form-inline .multiselect-container label.radio{padding:3px 20px 3px 40px}.form-inline .multiselect-container li a label.checkbox input[type=checkbox],.form-inline .multiselect-container li a label.radio input[type=radio]{margin-left:-20px;margin-right:0}
+
 /* End SuiteCRM Responsive/Bootstrap additional CSS */
 /* End Global CSS */
+
+#salutation{width:50px!important;float:left;margin-right:9px}
+#first_name{margin-top: -15px}
+
+.maincontainer input[type=text],.maincontainer select{width:100%!important}
+.minbtn,.minbtntx,.errdiv,#documents,#documents_label{display:none;cursor:pointer}
+.errdiv{color:red}
+.deldocs{cursor:pointer}
+.dompar{margin-bottom: 5px;
+    display: block;
+    overflow: hidden;clear:both}
+#Default_te_ExpensePO_Subpanel #amount{pointer-events:none;opacity:0.8}    
+.action_buttons{display: inline-block;}
+    
+.uploadedimg{padding: 5px 0;
+    border-bottom: 1px dotted #000000;
+    margin-bottom: 0px;
+    display: block;
+    overflow: hidden;}
+    
+.maincontroe{
+padding-left:5px;clear:both
+}    
+.disablepointer{pointer-events:none;opacity:0.9}
+
+
+ 

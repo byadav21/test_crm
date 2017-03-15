@@ -39,17 +39,7 @@
 
 
 *}
-{literal}
-    <style>
-        .menu{
-            z-index:100;
-        }
-
-        .subDmenu{
-            z-index:100;
-        }
-    </style>
-{/literal}
+ 
 
 
 <script type="text/javascript">

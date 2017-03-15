@@ -9,12 +9,17 @@
             global $current_user,$db;
             if($bean->status=='Dropout'){
 
+			 
+
               $user_id=$current_user->id;
               $dispo_id=$this->__create_guid();
               $current_date=date('Y-m-d H:i:s');
               $leadid = $bean->leads_id;
               $te_disposition_leads_c=$this->__create_guid();
 
+              $tebatchSql="UPDATE te_student_batch set is_new=0,is_new_dropout=1 WHERE id='". $bean->id."'";
+              $tebatchSqlObj =$db->query($leadSql);
+              
               $leadSql="UPDATE leads set status='Dropout',status_description='Dropout' WHERE id='".$leadid."'";
               $leadObj =$db->query($leadSql);
 
