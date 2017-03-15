@@ -13,6 +13,13 @@ class BatchTransferRequest{
 			}
 			$action.="</select>";
 			$bean->status=$action;
-		}	
+		}
+		global $db;
+		$sql="select name from te_ba_batch where id='".$bean->te_student_batch_id_c."' and deleted=0";
+		$programObj=$db->query($sql);
+		$data=$db->fetchByAssoc($programObj);
+		
+		$bean->old_batch=$data['name'];
+			
 	}		
 }
