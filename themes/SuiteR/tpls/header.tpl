@@ -36,11 +36,15 @@
 
 *}
 {include file="_head.tpl" theme_template=true}
-<body onMouseOut="closeMenus();">
+<body class="nav-md" ng-app="talentedge" onMouseOut="closeMenus();">
+
+ <div class="container body ">
+      <div class="main_container">
+		
 {$DCSCRIPT}
 {if $AUTHENTICATED}
-    <div id="ajaxHeader">
-        {include file="_headerModuleList.tpl" theme_template=true}
+     <div id="ajaxHeader">
+		{include file="_headerModuleList.tpl" theme_template=true}
     </div>
 {/if}
 {literal}
@@ -57,7 +61,9 @@
 {/literal}
 <!-- Start of page content -->
 {if $AUTHENTICATED}
-    <div id="bootstrap-container"  class="{if $THEME_CONFIG.display_sidebar && $smarty.cookies.sidebartoggle != 'collapsed'}col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2{/if} main">
-        <div id="content">
-            <div id="pagecontent">
+
+	<div id="bootstrap-container" class="right_col" role="main" style="min-height: 3814px;">
+          <div  id="content" class="">
+			<div id="pagecontent" class="{$csshack}">
+
 {/if}

@@ -117,6 +117,38 @@
 
 
     
+Calendar.setup ({
+   inputField : "date_of_prospect_date_d",
+   daFormat : "%Y-%m-%d %I:%M%P",
+   button : "date_of_prospect_trigger_d",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+
+
+
+Calendar.setup ({
+   inputField : "date_of_callback_date_d",
+   daFormat : "%Y-%m-%d %I:%M%P",
+   button : "date_of_callback_trigger_d",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+
+
+Calendar.setup ({
+   inputField : "date_of_followup_date_d",
+   daFormat : "%Y-%m-%d %I:%M%P",
+   button : "date_of_followup_trigger_d",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
 
     {/literal}
 </script>

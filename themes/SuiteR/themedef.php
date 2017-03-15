@@ -53,7 +53,7 @@ $themedef = array(
         'display_sidebar' => array(
             'vname' => 'LBL_DISPLAY_SIDEBAR',
             'type' => 'bool',
-            'default' => true
+            'default' => false
         ),
 
         'navbar' => array(
@@ -84,7 +84,7 @@ $themedef = array(
         'dropdown_menu_link' => array(
             'vname' => 'LBL_COLOUR_ADMIN_DDLINK',
             'type' => 'colour',
-            'default' => '#3C8DBC'
+            'default' => '#5A738E'
         ),
 
         'dropdown_menu_link_hover' => array(
@@ -108,13 +108,13 @@ $themedef = array(
         'action_menu_background_hover' => array(
             'vname' => 'LBL_ACTION_MENU_BACKGROUND_HOVER',
             'type' => 'colour',
-            'default' => '#3C8DBC'
+            'default' => '#5A738E'
         ),
 
         'button' => array(
             'vname' => 'LBL_COLOUR_ADMIN_BTNTOP',
             'type' => 'colour',
-            'default' => '#3C8DBC'
+            'default' => '#5A738E'
         ),
         'button_hover' => array(
             'vname' => 'LBL_COLOUR_ADMIN_BTNHOVER',
@@ -140,7 +140,7 @@ $themedef = array(
         'page_link' => array(
             'vname' => 'LBL_COLOUR_ADMIN_PAGELINK',
             'type' => 'colour',
-            'default' => '#3C8DBC'
+            'default' => '#5A738E'
         ),
 
         'dashlet' => array(
@@ -151,7 +151,7 @@ $themedef = array(
         'dashlet_headertext' => array(
             'vname' => 'LBL_COLOUR_ADMIN_DASHHEADTEXT',
             'type' => 'colour',
-            'default' => '#3C8DBC'
+            'default' => '#5A738E'
         ),        
         'icon' => array(
             'vname' => 'LBL_COLOUR_ADMIN_ICON',
@@ -161,7 +161,7 @@ $themedef = array(
         'suggestion_popup_from' => array(
             'vname' => 'LBL_SUGGESTION_POPUP_FROM',
             'type' => 'colour',
-            'default' => '#3c8dbc'
+            'default' => '#5A738E'
         ),
         'suggestion_popup_to' => array(
             'vname' => 'LBL_SUGGESTION_POPUP_TO',

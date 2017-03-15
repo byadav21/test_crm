@@ -37,6 +37,7 @@
 *}
 </div>
 </div>
+
 <!-- END of container-fluid, pageContainer divs -->
 <!-- Start Footer Section -->
 {if $AUTHENTICATED}
@@ -74,6 +75,17 @@
 {/if}
 <!-- END Footer Section -->
 {literal}
+
+
+  
+
+
+   
+    <!-- Custom Theme Scripts -->
+    <script src="themes/SuiteR/js/custom.js"></script>
+     
+
+
 <script>
 
 //qe_init function sets listeners to click event on elements of 'quickEdit' class
@@ -125,6 +137,13 @@ function qe_init(){
     	YAHOO.util.Event.onContentReady('ajaxUI-history-field', SUGAR.ajaxUI.firstLoad);
 </script>
 {/literal}
+ 
+
+
 </div>
+</div>
+</div>
+ 
+
 </body>
 </html>
