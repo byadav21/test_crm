@@ -146,7 +146,9 @@ html , body{
     padding: 0 0 4px 0
 }
 .left_col {
-    background: #2A3F54
+    background: #2A3F54;    position: fixed;
+    height: 100%;
+    overflow-y: auto;
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -490,7 +492,7 @@ body .container.body .right_col {
 }
 body {
     color: #73879C!important;
-    background: #2A3F54!important;
+    
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif!important;
     font-size: 13px;
     font-weight: 400;
@@ -1712,7 +1714,7 @@ span.right {
            margin-bottom: 0px;
 		border-bottom: 0;
 		padding-top: 8px;
-		width: 11.11%!important;
+		width: 10%!important;
     }
 }
 .tile_count .tile_stats_count:before {
