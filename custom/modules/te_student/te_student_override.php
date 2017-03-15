@@ -36,7 +36,7 @@ class te_student_override extends te_student {
 	
 	function getAllStudentInstallmentSummary($email='',$batches='',$installment='',$start=0,$noofRow=18){
 		 
-		$sql="select b.id,i.name as iname, b.batch_start_date,b.duration,b.fees_inr, p.name as pname, b.name as bname , sum(amount) as amt from 
+		$sql="select b.id,i.name as iname, b.batch_start_date,b.duration,b.fees_inr, b.batch_status,p.name as pname, b.name as bname , sum(amount) as amt from 
 					te_ba_batch as b 
 					inner join te_pr_programs_te_ba_batch_1_c as ib on ib.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id
 					inner join te_pr_programs as p on p.id=ib.te_pr_programs_te_ba_batch_1te_pr_programs_ida
@@ -44,12 +44,12 @@ class te_student_override extends te_student {
 					inner join te_in_institutes as i on i.id=bi.te_in_institutes_te_ba_batch_1te_in_institutes_ida
 					left join te_student_batch as tsb on tsb.te_ba_batch_id_c=b.id   left join te_student_payment as sp on sp.te_student_batch_id_c=tsb.id
 					  where b.deleted=0 and p.deleted=0  and i.deleted=0 and bi.deleted=0 
-					and ib.deleted=0 group by  b.id,p.id,i.name,  p.name , b.name order by i.name";
-					//if($batches) $sql .=" and b.id='". $batches . "' ";
+					and ib.deleted=0 ";
+					if($batches) $sql .=" and b.batch_status='". $batches . "' ";
 					//if($installment) $sql .=" and p.name='". $installment . "' ";
 					//if($email) $sql .=" and s.email like '%". $email . "%' ";
 					//$sql .="group by s.id,s.name,s.email,s.status,batch_code,b.name,b.id ";
-					//echo $sql .="order by s.id asc, p.name='Initial Payment' desc, p.name asc limit $start,$noofRow"; 
+					  $sql .="group by  b.id,p.id,i.name,  p.name , b.name order by i.name"; 
 		$itemDetal=	$this->dbinstance->query($sql);
 		$rowData=[];
 		$current='';
@@ -60,13 +60,18 @@ class te_student_override extends te_student {
 			$addrows['activeStudent']=	intval($this->getStudentStatusCount($row['id']));		
 			$addrows['dropOutStudent']=	intval($this->getStudentStatusCount($row['id'],'Dropout'));	
 			$addrows['totalamt']=	 number_format(floatval($row['fees_inr'])*$addrows['activeStudent'], 2, '.', '');	
+			$addrows['batch_status']=	 str_replace('_',' ',$row['batch_status']);	
 			$rowData[]=	$addrows;
 		}	
 		return $rowData;
 	}
 	
-	function getStudentStatusCount($id,$status='Active'){
-		$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id' and status='$status' and deleted=0";
+	function getStudentStatusCount($id,$status=''){
+		if($status){
+			$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id' and status='$status' and deleted=0";
+		}else{
+			$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id'   and deleted=0";			
+		}
 		$itemDetal=	$this->dbinstance->query($sql);
 		$data= $this->dbinstance->fetchByAssoc($itemDetal);
 		return intval($data['ctr']);
@@ -186,28 +191,28 @@ class te_student_override extends te_student {
 	}
 	
 	function newConversion($user_ids){
-		$sql="select count(id) as newconv from te_student_batch where status='Active' and deleted=0 and assigned_user_id in ('".$user_ids."')";
+		$sql="select count(id) as newconv from te_student_batch where status='Active' and is_new='1' and deleted=0 and assigned_user_id in ('".$user_ids."')";
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
 	}
 	
 	function newDropOut($user_ids){
-		$sql="select count(id) as newconv from te_student_batch where status='Dropout' and deleted=0 and assigned_user_id in ('".$user_ids."')";
+		$sql="select count(id) as newconv from te_student_batch where status='Dropout' and  is_new_dropout='1' and deleted=0 and assigned_user_id in ('".$user_ids."')";
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
 	}
 	
 	function newDropOutCallcenter($user_ids){
-		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 AND status LIKE 'Dropout'  AND leads.assigned_user_id IN ('".$user_ids."')";
+		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 AND status LIKE 'Dropout' and is_new_dropout='1'  AND leads.assigned_user_id IN ('".$user_ids."')";
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
 	}
 	
 	function getMyreferals($user_ids){
-		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 AND parent_type LIKE 'Users'  AND leads.parent_id ='".$user_ids."'";
+		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 and is_new_referalls='1' AND parent_type LIKE 'Users'  AND leads.parent_id ='".$user_ids."'";
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		

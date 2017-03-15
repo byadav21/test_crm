@@ -1,0 +1,13 @@
+<?php 
+ //WARNING: The contents of this file are auto-generated
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_TE_VENDOR_TE_UTM_1_FROM_TE_UTM_TITLE'] = 'UTM';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_TE_VENDOR_TE_UTM_1_FROM_TE_UTM_TITLE'] = 'UTM';
+$mod_strings['LBL_TE_VENDOR_AOS_CONTRACTS_1_FROM_AOS_CONTRACTS_TITLE'] = 'Contracts';
+
+?>

@@ -47,9 +47,9 @@
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	  <div class="menu_section">
  
-				
+				 {assign var="showsrm" value="0"}
                 <ul class="nav side-menu">
-                     
+                    
                  
                     {foreach from=$groupTabs item=modules key=group name=groupList}
                      
@@ -60,17 +60,20 @@
                         <li >
                              
                             <a href="#"><i class="fa fa-home"></i>{$group}<span class="fa fa-chevron-down"></span></a>
-                            {if $group !='SRM'}
+                            {if $group !='SRM' }
                          
                             <ul  class="nav child_menu" >
                             
                                 {foreach from=$modules.modules item=module key=modulekey}
-                               
-                                     {if $modulekey =='Home'}
+                                
+									 {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch' || $modulekey =='te_student'}
+										 {assign var="showsrm" value="1"}
+									 {/if}
+                                
+                                    {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}
+										
 										{php}continue;{/php}
-									{/if}            
-                                
-                                
+									{/if} 
                                     <li>
                                         {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
                                         {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
@@ -94,13 +97,18 @@
                                         
                                     </li>
                                 {/foreach}
+
                                 
                             </ul>
+                           
+                              
+                            
+                            
                              { else}
 									 <ul  class="nav child_menu" >
-									    <li> <a href="index.php?module=te_student_batch&action=listrevenueSummary">Student</a>
+									    <li> <a href="index.php?module=te_student_batch&action=revenue">Student</a>
 									    <ul id="srmchildmenu" class="nav child_menu" style="display:block!important">
-											<li> <a href="index.php?module=te_student_batch&action=listrevenueSummary">Summary</a> </li>
+											<li> <a href="index.php?module=te_student_batch&action=revenue">Summary</a> </li>
 											<li> <a href="index.php?action=index&module=te_student_batch">List Student</a> </li>
 											<li> <a href="index.php?module=te_student_batch&action=EditView&return_module=te_student_batch&return_action=DetailView">Create Student</a> </li>
 											<li><a href="index.php?module=te_transfer_batch">Transfer Request</a> </li>
@@ -121,6 +129,13 @@
                         </li>
                     {/foreach}
                 </ul>
+                
+                  {if $showsrm==1}
+                                <script>
+                                  $('#srmchildmenu').parent().parent().css('display','block') ; 
+                                  $('#srmchildmenu').css('display','block') ; 
+                                </script>
+                                {/if}
 	</div> 
 
 	<!-- /sidebar menu -->
