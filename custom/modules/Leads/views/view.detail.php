@@ -9,20 +9,20 @@ class LeadsViewDetail extends ViewDetail {
 
 	protected function _displaySubPanels()
     {
-        
-			
+
+
     }
 
     public function preDisplay()
     {
  	    $metadataFile = $this->getMetaDataFile();
  	    $this->dv = new DetailView2();
- 	    $this->dv->ss =&  $this->ss; 	    
+ 	    $this->dv->ss =&  $this->ss;
  	    $this->dv->setup($this->module, $this->bean, $metadataFile, get_custom_file_if_exists('custom/modules/Leads/tpls/DetailView/DetailView.tpl'));
     }
-  
 
-	
+
+
  	/**
      * Displays the header on section of the page; basically everything before the content
      */
@@ -364,20 +364,64 @@ class LeadsViewDetail extends ViewDetail {
         if ( isset($topTabList) && is_array($topTabList) ) {
             // Adding shortcuts array to menu array for displaying shortcuts associated with each module
             $shortcutTopMenu = array();
-            foreach($topTabList as $module_key => $label) {
-                global $mod_strings;
-                $mod_strings = return_module_language($current_language, $module_key);
-                foreach ( $this->getMenu($module_key) as $key => $menu_item ) {
-                    $shortcutTopMenu[$module_key][$key] = array(
-                        "URL"         => $menu_item[0],
-                        "LABEL"       => $menu_item[1],
-                        "MODULE_NAME" => $menu_item[2],
-                        "IMAGE"       => $themeObject
-                        ->getImage($menu_item[2],"border='0' align='absmiddle'",null,null,'.gif',$menu_item[1]),
-                        "ID"          => $menu_item[2]."_link",
-                        );
-                }
-            }
+						if(!isset($_SESSION['referral'])){
+							foreach($topTabList as $module_key => $label) {
+	                global $mod_strings;
+	                $mod_strings = return_module_language($current_language, $module_key);
+	                foreach ( $this->getMenu($module_key) as $key => $menu_item ) {
+	                    $shortcutTopMenu[$module_key][$key] = array(
+	                        "URL"         => $menu_item[0],
+	                        "LABEL"       => $menu_item[1],
+	                        "MODULE_NAME" => $menu_item[2],
+	                        "IMAGE"       => $themeObject
+	                        ->getImage($menu_item[2],"border='0' align='absmiddle'",null,null,'.gif',$menu_item[1]),
+	                        "ID"          => $menu_item[2]."_link",
+	                        );
+	                }
+	            }
+						}
+						else{
+	                    /*$shortcutTopMenu['Leads'][0] = array(
+	                        "URL"         => 'index.php?module=te_student_batch&action=revenue',
+	                        "LABEL"       => 'Summary',
+	                        "MODULE_NAME" => '',
+	                        "IMAGE"       => $themeObject
+	                        ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','View Student Batch'),
+	                        "ID"          => 'view'."_link",
+	                        );
+											$shortcutTopMenu['Leads'][1] = array(
+ 												 "URL"         => 'index.php?module=te_student_batch&action=dropoutrequest',
+ 												 "LABEL"       => 'Dropout Request',
+ 												 "MODULE_NAME" => '',
+ 												 "IMAGE"       => $themeObject
+ 												 ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','Dropout Request'),
+ 												 "ID"          => 'view'."_link",
+ 												 );
+										 $shortcutTopMenu['Leads'][2] = array(
+	                        "URL"         => 'index.php?module=te_student&action=batchtransfer',
+	                        "LABEL"       => 'Batch Transfer',
+	                        "MODULE_NAME" => '',
+	                        "IMAGE"       => $themeObject
+	                        ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','Batch Transfer'),
+	                        "ID"          => 'view'."_link",
+	                        );
+										$shortcutTopMenu['Leads'][3] = array(
+												"URL"         => 'index.php?module=te_student_batch&action=viewmyrefferal&parent_id='.$current_user->id,
+												"LABEL"       => 'View My Referrals',
+												"MODULE_NAME" => '',
+												"IMAGE"       => $themeObject
+												->getImage('',"border='0' align='absmiddle'",null,null,'.gif','View My Referrals'),
+												"ID"          => 'view'."_link",
+												);
+										$shortcutTopMenu['Leads'][4] = array(
+												"URL"         => 'index.php?module=te_student_batch&action=search_leads',
+												"LABEL"       => 'CRM Leads Search',
+												"MODULE_NAME" => '',
+												"IMAGE"       => $themeObject
+												->getImage('',"border='0' align='absmiddle'",null,null,'.gif','CRM Leads Search'),
+												"ID"          => 'view'."_link",
+											);*/
+						}
             if(!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) $ss->assign('lock_homepage', true);
             $ss->assign("groupTabs",$groupTabs);
             $ss->assign("shortcutTopMenu",$shortcutTopMenu);
@@ -386,29 +430,31 @@ class LeadsViewDetail extends ViewDetail {
             // This is here for backwards compatibility, someday, somewhere, it will be able to be removed
             $ss->assign("moduleTopMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['modules']);
             $ss->assign("moduleExtraMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);
-		
-		
+
+
 // Show the custom panel in the left panel
 
-			require_once('custom/modules/Leads/customfunctionforcrm.php');
-			global $current_user;
-			$currentUserId = $current_user->id;
-			$reportingUserIds = array();
-			$reportUserObj1 = new customfunctionforcrm();
-			$statusWiseCount = $reportUserObj1->statusWiseCounts();
-		
+if(!isset($_SESSION['referral'])){
+	require_once('custom/modules/Leads/customfunctionforcrm.php');
+	global $current_user;
+	$currentUserId = $current_user->id;
+	$reportingUserIds = array();
+	$reportUserObj1 = new customfunctionforcrm();
+	$statusWiseCount = $reportUserObj1->statusWiseCounts();
 
-			$ss->assign("statusWiseCount",$statusWiseCount);
+
+	$ss->assign("statusWiseCount",$statusWiseCount);
+}
 			$ss->assign("csshack",'leadpage');
-			
-			
-			
-			
-		
+
+
+
+
+
 
         }
 
-		
+
 		//~ echo $test;die;
         if ( isset($extraTabs) && is_array($extraTabs) ) {
             // Adding shortcuts array to extra menu array for displaying shortcuts associated with each module
@@ -467,18 +513,18 @@ class LeadsViewDetail extends ViewDetail {
 		if(!is_admin($current_user)){
 
 		}
-		
-		
+
+
 		require_once ('include/SubPanel/SubPanelTiles.php');
 			$subpanel = new SubPanelTiles($this->bean, $this->module);
 			 // $ss->assign("customtabs", $subpanel->displayinPanel());
 			  //$ss->assign("mycustomtabs", 'Pankaj');
 		 $returnedTabs=$subpanel->displayinPanel();
-			 
-		 $this->dv->ss->assign('subpanel_tabs', $returnedTabs['tab']); 
-		 $this->dv->ss->assign('subpanel_tabs_properties', $returnedTabs['properties']); 
-	 
-		 
+
+		 $this->dv->ss->assign('subpanel_tabs', $returnedTabs['tab']);
+		 $this->dv->ss->assign('subpanel_tabs_properties', $returnedTabs['properties']);
+
+
 		require_once('custom/modules/Leads/customfunctionforcrm.php');
 		$reportingUserIds = array();
 		$currentUserId = $current_user->id;
@@ -486,7 +532,7 @@ class LeadsViewDetail extends ViewDetail {
 		$reportUserObj->reportingUser($currentUserId);
 		$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 		$reportingUserIds = $reportUserObj->report_to_id;
-		
+
 		if (!array_key_exists($this->bean->assigned_user_id,$reportingUserIds)){
 				echo "<span> You don't have access to view this record</span>";
 					//~ die;
@@ -497,10 +543,10 @@ class LeadsViewDetail extends ViewDetail {
 		if(!empty($this->bean->phone_other)){
 			$this->bean->phone_other .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
 		}
-		
+
 		if(!empty($this->bean->te_ba_batch_id_c)){
 
-// Get Institute details based on the Batch			
+// Get Institute details based on the Batch
 			$sql_pro = "SELECT te_pr_programs_te_ba_batch_1te_pr_programs_ida,name FROM te_pr_programs p INNER JOIN te_pr_programs_te_ba_batch_1_c  pb ON p.id = pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida WHERE te_pr_programs_te_ba_batch_1te_ba_batch_idb = '".$this->bean->te_ba_batch_id_c."' AND pb.deleted = 0 AND p.deleted=0";
 			$res_pro = $GLOBALS['db']->query($sql_pro);
 			$pro = $GLOBALS['db']->fetchByAssoc($res_pro);
@@ -508,24 +554,24 @@ class LeadsViewDetail extends ViewDetail {
 			$this->bean->program = "<a href='index.php?action=DetailView&module=te_pr_Programs&record={$pid}'>".$pro['name']."</a>";
 
 // Get Institute details based on the Batch
-			
+
 			$sql_ins = "SELECT te_in_institutes_te_ba_batch_1te_in_institutes_ida,name FROM te_in_institutes i INNER JOIN  te_in_institutes_te_ba_batch_1_c ib ON i.id = ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida WHERE te_in_institutes_te_ba_batch_1te_ba_batch_idb = '".$this->bean->te_ba_batch_id_c."' AND ib.deleted = 0 AND i.deleted=0";
 			$res_ins = $GLOBALS['db']->query($sql_ins);
 			$ins = $GLOBALS['db']->fetchByAssoc($res_ins);
 			$iid = $ins['te_in_institutes_te_ba_batch_1te_in_institutes_ida'];
 			$this->bean->institute = "<a href='index.php?action=DetailView&module=te_in_institutes&record={$iid}'>".$ins['name']."</a>";
-			  
+
 			$sql_ins = "SELECT id,te_ba_batch.name FROM te_ba_batch  WHERE id = '".$this->bean->te_ba_batch_id_c . "'";
 			$res_ins = $GLOBALS['db']->query($sql_ins);
 			$ins = $GLOBALS['db']->fetchByAssoc($res_ins);
 			$iid = $ins['id'];
 			$this->bean->batches = "<a href='index.php?action=DetailView&module=te_ba_Batch&record={$iid}'>".$ins['name']."</a>";
-			  
-			
-			
+
+
+
 		}
-		 
-		$overview=array();	 
+
+		$overview=array();
 		$overview['name']=$this->bean->name;
 		$overview['email']=$this->bean->email1;
 		$overview['mobile']=$this->bean->phone_mobile;
@@ -536,7 +582,7 @@ class LeadsViewDetail extends ViewDetail {
 		$overview['status'] = $this->bean->status;
 		$overview['statusDetail'] = $this->bean->status_description;
 		$overview['dated'] = $this->bean->date_entered;//DATE_ENTERED;
-		//print_r($overview);die;		
+		//print_r($overview);die;
 		$this->dv->ss->assign('overview',$overview);
 		?>
 
@@ -558,7 +604,13 @@ class LeadsViewDetail extends ViewDetail {
 				alert(1)
 			});
    });
+	 <?php if(isset($_SESSION['referral'])){//unset($_SESSION['referral']);?>
+	 	 $(function(){
+			$(".sugar_action_button").hide();
+			$("#create_link").hide();
+		 });
 
+	 <?php }?>
 
   function generateInvoice(lead_id){
 	  //~ alert(lead_id)

@@ -434,6 +434,9 @@ $(function(){
     {
 
 		 //~ parent::displayHeader();
+		 if(isset($_REQUEST['addreferral']) && $_REQUEST['addreferral']=='true'){
+			 $_SESSION['referral']=1;
+		 }
         global $theme;
         global $max_tabs;
         global $app_strings;
@@ -765,23 +768,69 @@ $(function(){
             }
         }
 
-        if ( isset($topTabList) && is_array($topTabList) ) {
+				if ( isset($topTabList) && is_array($topTabList) ) {
             // Adding shortcuts array to menu array for displaying shortcuts associated with each module
             $shortcutTopMenu = array();
-            foreach($topTabList as $module_key => $label) {
-                global $mod_strings;
-                $mod_strings = return_module_language($current_language, $module_key);
-                foreach ( $this->getMenu($module_key) as $key => $menu_item ) {
-                    $shortcutTopMenu[$module_key][$key] = array(
-                        "URL"         => $menu_item[0],
-                        "LABEL"       => $menu_item[1],
-                        "MODULE_NAME" => $menu_item[2],
-                        "IMAGE"       => $themeObject
-                        ->getImage($menu_item[2],"border='0' align='absmiddle'",null,null,'.gif',$menu_item[1]),
-                        "ID"          => $menu_item[2]."_link",
-                        );
-                }
-            }
+						if(!isset($_SESSION['referral'])){
+							foreach($topTabList as $module_key => $label) {
+	                global $mod_strings;
+	                $mod_strings = return_module_language($current_language, $module_key);
+	                foreach ( $this->getMenu($module_key) as $key => $menu_item ) {
+	                    $shortcutTopMenu[$module_key][$key] = array(
+	                        "URL"         => $menu_item[0],
+	                        "LABEL"       => $menu_item[1],
+	                        "MODULE_NAME" => $menu_item[2],
+	                        "IMAGE"       => $themeObject
+	                        ->getImage($menu_item[2],"border='0' align='absmiddle'",null,null,'.gif',$menu_item[1]),
+	                        "ID"          => $menu_item[2]."_link",
+	                        );
+	                }
+	            }
+						}
+						else{
+
+										/*$shortcutTopMenu['Leads'][0] = array(
+												"URL"         => 'index.php?module=te_student_batch&action=revenue',
+												"LABEL"       => 'Summary',
+												"MODULE_NAME" => '',
+												"IMAGE"       => $themeObject
+												->getImage('',"border='0' align='absmiddle'",null,null,'.gif','View Student Batch'),
+												"ID"          => 'view'."_link",
+												);
+											$shortcutTopMenu['Leads'][1] = array(
+ 												 "URL"         => 'index.php?module=te_student_batch&action=dropoutrequest',
+ 												 "LABEL"       => 'Dropout Request',
+ 												 "MODULE_NAME" => '',
+ 												 "IMAGE"       => $themeObject
+ 												 ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','Dropout Request'),
+ 												 "ID"          => 'view'."_link",
+ 												 );
+										 $shortcutTopMenu['Leads'][2] = array(
+	                        "URL"         => 'index.php?module=te_student&action=batchtransfer',
+	                        "LABEL"       => 'Batch Transfer',
+	                        "MODULE_NAME" => '',
+	                        "IMAGE"       => $themeObject
+	                        ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','Batch Transfer'),
+	                        "ID"          => 'view'."_link",
+	                        );
+										$shortcutTopMenu['Leads'][3] = array(
+												"URL"         => 'index.php?module=te_student_batch&action=viewmyrefferal&parent_id='.$current_user->id,
+												"LABEL"       => 'View My Referrals',
+												"MODULE_NAME" => '',
+												"IMAGE"       => $themeObject
+												->getImage('',"border='0' align='absmiddle'",null,null,'.gif','View My Referrals'),
+												"ID"          => 'view'."_link",
+												);
+										$shortcutTopMenu['Leads'][4] = array(
+												"URL"         => 'index.php?module=te_student_batch&action=search_leads',
+												"LABEL"       => 'CRM Leads Search',
+												"MODULE_NAME" => '',
+												"IMAGE"       => $themeObject
+												->getImage('',"border='0' align='absmiddle'",null,null,'.gif','CRM Leads Search'),
+												"ID"          => 'view'."_link",
+											);*/
+						}
+
             if(!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) $ss->assign('lock_homepage', true);
             $ss->assign("groupTabs",$groupTabs);
             $ss->assign("shortcutTopMenu",$shortcutTopMenu);
@@ -792,16 +841,17 @@ $(function(){
             $ss->assign("moduleExtraMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);
 
 // Show the custom panel in the left panel
+			if(!isset($_SESSION['referral'])){
+				require_once('custom/modules/Leads/customfunctionforcrm.php');
+				global $current_user;
+				$currentUserId = $current_user->id;
+				$reportingUserIds = array();
+				$reportUserObj1 = new customfunctionforcrm();
+				$statusWiseCount = $reportUserObj1->statusWiseCounts();
 
-			require_once('custom/modules/Leads/customfunctionforcrm.php');
-			global $current_user;
-			$currentUserId = $current_user->id;
-			$reportingUserIds = array();
-			$reportUserObj1 = new customfunctionforcrm();
-			$statusWiseCount = $reportUserObj1->statusWiseCounts();
+				$ss->assign("statusWiseCount",$statusWiseCount);
+			}
 
-
-			$ss->assign("statusWiseCount",$statusWiseCount);
 
 
         }
