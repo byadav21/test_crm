@@ -5,6 +5,30 @@ $dictionary['Lead']['fields']['date_of_referral']['type']='date';
 $dictionary['Lead']['fields']['date_of_referral']['enable_range_search']=true;
 $dictionary['Lead']['fields']['date_of_referral']['options']='date_range_search_dom';
 
+$dictionary['Lead']['fields']['is_new_dropout'] = array(
+	'required' => false,
+	'name' => 'is_new_dropout',
+	'vname' => 'is_new_dropout',
+	'type' => 'varchar',
+	'default'=>'0',
+	'audited' => false,
+	'massupdate' => false,
+	'source' => 'non-db',
+	'studio' => 'visible',
+);
+
+$dictionary['Lead']['fields']['is_new_referalls'] = array(
+	'required' => false,
+	'name' => 'is_new_referalls',
+	'vname' => 'is_new_referalls',
+	'type' => 'varchar',
+	'default'=>'0',
+	'audited' => false,
+	'massupdate' => false,
+	'source' => 'non-db',
+	'studio' => 'visible',
+);
+
 
 $dictionary['Lead']['fields']['parent_name'] = 
     array (

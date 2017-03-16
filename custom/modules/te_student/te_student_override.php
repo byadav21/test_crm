@@ -34,7 +34,7 @@ class te_student_override extends te_student {
 		return $rowData;
 	}
 	
-	function getAllStudentInstallmentSummary($email='',$batches='',$installment='',$start=0,$noofRow=18){
+	function getAllStudentInstallmentSummary($isadmin='0',$batches='',$userID='',$start=0,$noofRow=18){
 		 
 		$sql="select b.id,i.name as iname, b.batch_start_date,b.duration,b.fees_inr, b.batch_status,p.name as pname, b.name as bname , sum(amount) as amt from 
 					te_ba_batch as b 
@@ -57,8 +57,8 @@ class te_student_override extends te_student {
 			
 			$addrows=$row;
 			if(empty($addrows['amt']) || $addrows['amt']==null) $addrows['amt']=0;
-			$addrows['activeStudent']=	intval($this->getStudentStatusCount($row['id']));		
-			$addrows['dropOutStudent']=	intval($this->getStudentStatusCount($row['id'],'Dropout'));	
+			$addrows['activeStudent']=	$this->getStudentStatusCount($row['id'],'',$isadmin,$userID);		
+			$addrows['dropOutStudent']=	intval($this->getStudentStatusCount($row['id'],'Dropout',$isadmin,$userID));	
 			$addrows['totalamt']=	 number_format(floatval($row['fees_inr'])*$addrows['activeStudent'], 2, '.', '');	
 			$addrows['batch_status']=	 str_replace('_',' ',$row['batch_status']);	
 			$rowData[]=	$addrows;
@@ -66,15 +66,23 @@ class te_student_override extends te_student {
 		return $rowData;
 	}
 	
-	function getStudentStatusCount($id,$status=''){
+	function getStudentStatusCount($id,$status='',$isadmin='0',$userID=''){
 		if($status){
 			$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id' and status='$status' and deleted=0";
+			if($isadmin==0 && $userID){
+				$sql .= " and created_by in ('".$userID."')";
+			}
 		}else{
-			$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id'   and deleted=0";			
+			$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id'   and deleted=0";	
+			if($isadmin==0 && $userID){
+				$sql .= " and created_by in ('".$userID."')";
+			}	
+			 		
 		}
 		$itemDetal=	$this->dbinstance->query($sql);
 		$data= $this->dbinstance->fetchByAssoc($itemDetal);
-		return intval($data['ctr']);
+		 
+		return ($data && count($data)>0) ? intval($data['ctr']) :0;
 	}
 	function getAllStudentBatch(){
 		
@@ -190,15 +198,31 @@ class te_student_override extends te_student {
 		return $programsList;
 	}
 	
+	function setSeen($col,$tbl,$user_ids,$status='Active'){
+		$sql="update $tbl set $col='0' where deleted=0 and status='$status'  and created_by in ('".$user_ids."')";
+		$programObj =$this->dbinstance->query($sql);
+	}
+	
+	function setSeenDropout($col,$tbl,$user_ids){
+		$sql="update $tbl set $col='0' where deleted=0 and status='Dropout'  and assigned_user_id in ('".$user_ids."')";
+		$programObj =$this->dbinstance->query($sql);
+	}
+	
+	function setSeenRefrals($col,$tbl,$user_ids){
+		$sql="update $tbl set $col='0' where deleted=0 and parent_type LIKE 'Users'  and parent_id in ('".$user_ids."')";
+		$programObj =$this->dbinstance->query($sql);
+	}
+	
 	function newConversion($user_ids){
-		$sql="select count(id) as newconv from te_student_batch where status='Active' and is_new='1' and deleted=0 and assigned_user_id in ('".$user_ids."')";
+	 
+		$sql="select count(id) as newconv, leads_id from te_student_batch where status='Active' and is_new='1' and deleted=0 and created_by in ('".$user_ids."')";
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
 	}
 	
 	function newDropOut($user_ids){
-		$sql="select count(id) as newconv from te_student_batch where status='Dropout' and  is_new_dropout='1' and deleted=0 and assigned_user_id in ('".$user_ids."')";
+		$sql="select count(id) as newconv from te_student_batch where status='Dropout' and  is_new_dropout='1' and deleted=0 and created_by in ('".$user_ids."')";
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		

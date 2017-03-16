@@ -406,8 +406,8 @@ class LeadsViewList extends ViewList
                     $topTabList[$moduleKey] = $module;
                 }
 
-                $groupTabs[$tabIdx]['modules'] = $topTabs;
-                $groupTabs[$tabIdx]['extra'] = $extraTabs;
+               // $groupTabs[$tabIdx]['modules'] = $topTabs;
+               // $groupTabs[$tabIdx]['extra'] = $extraTabs;
             }
         }
 
@@ -435,7 +435,7 @@ class LeadsViewList extends ViewList
 
             // This is here for backwards compatibility, someday, somewhere, it will be able to be removed
             $ss->assign("moduleTopMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['modules']);
-            $ss->assign("moduleExtraMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);
+          //  $ss->assign("moduleExtraMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);
 
 // Show the custom panel in the left panel
 

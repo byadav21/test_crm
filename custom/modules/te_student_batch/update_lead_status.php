@@ -18,7 +18,7 @@
               $te_disposition_leads_c=$this->__create_guid();
 
               $tebatchSql="UPDATE te_student_batch set is_new=0,is_new_dropout=1 WHERE id='". $bean->id."'";
-              $tebatchSqlObj =$db->query($leadSql);
+              $tebatchSqlObj =$db->query($tebatchSql);
               
               $leadSql="UPDATE leads set status='Dropout',status_description='Dropout' WHERE id='".$leadid."'";
               $leadObj =$db->query($leadSql);
