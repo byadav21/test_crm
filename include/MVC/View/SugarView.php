@@ -628,8 +628,8 @@ class SugarView
                     $topTabList[$moduleKey] = $module;
                 }
 
-                $groupTabs[$tabIdx]['modules'] = $topTabs;
-                $groupTabs[$tabIdx]['extra'] = $extraTabs;
+               // $groupTabs[$tabIdx]['modules'] = $topTabs;
+               // $groupTabs[$tabIdx]['extra'] = $extraTabs;
             }
         }
 

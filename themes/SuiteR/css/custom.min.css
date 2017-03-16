@@ -4379,3 +4379,14 @@ fieldset{   min-width: 100px; }
     overflow: hidden;
     position: relative;
 }
+
+#pagination .paginationActionButtons ul {float:left; margin-right:5px!important}
+#pagination .selectActionsDisabled.show{display:none!important}
+#pagination .selectmenu li ,.selectActionsDisabled {padding-bottom: 8px !important;}
+#pagination #selectedRecordsTop{margin-top: -9px!important}
+#pagination #selectedRecordsTop input{    width: 100px!important;
+    display: inline;
+    border: 0!important;
+    box-shadow: 0 0 0 0!important;
+    margin-top: -10px;}
+ 

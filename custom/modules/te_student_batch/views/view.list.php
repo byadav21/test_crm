@@ -367,8 +367,8 @@ class te_student_batchViewList extends ViewList
                     $topTabList[$moduleKey] = $module;
                 }
 
-                $groupTabs[$tabIdx]['modules'] = $topTabs;
-                $groupTabs[$tabIdx]['extra'] = $extraTabs;
+                //$groupTabs[$tabIdx]['modules'] = $topTabs;
+               // $groupTabs[$tabIdx]['extra'] = $extraTabs;
             }
         }
 
@@ -417,19 +417,19 @@ class te_student_batchViewList extends ViewList
 			$dropconCall=$obj->newDropOutCallcenter($user_ids);
 			$myRefrals=$obj->getMyreferals($current_user->id);
 			$newreg='<div class="col-md-3 text-center tile_stats_counts">
-						<div class="count">'.intval($newconv['newconv']).'</div>
+						<div class="count"><a href="index.php?action=seen&type=new&module=te_student_batch">'.intval($newconv['newconv']).'</a></div>
 						<span class="count_top"> New Conversion</span>
 					</div>';
 			$newreg .='<div class="col-md-3 text-center tile_stats_counts">
-						<div class="count">'.intval($dropconv['newconv']).'</div>
+						<div class="count"><a href="index.php?action=seen&type=dropout&module=te_student_batch">'.intval($dropconv['newconv']).'</a></div>
 						<span class="count_top"> Drop Out</span>
 					</div>';
 			$newreg .='<div class="col-md-3 text-center tile_stats_counts">
-						<div class="count">'.intval($dropconCall['newconv']).'</div>
+						<div class="count"><a href="index.php?action=seen&type=call_dropout&module=te_student_batch">'.intval($dropconCall['newconv']).'</a></div>
 						<span class="count_top"> Call Center Drop Out</span>
 					</div>';
 			$newreg .='<div class="col-md-3 text-center tile_stats_counts">
-						<div class="count">'.intval($myRefrals['newconv']).'</div>
+						<div class="count"><a href="index.php?action=seen&type=refral&module=te_student_batch">'.intval($myRefrals['newconv']).'</a></div>
 						<span class="count_top"> My Referrals</span>
 					</div>';
 			$ss->assign("statusWiseCount",$newreg);

@@ -49,8 +49,7 @@
  
 				 {assign var="showsrm" value="0"}
                 <ul class="nav side-menu">
-                    
-                 
+                
                     {foreach from=$groupTabs item=modules key=group name=groupList}
                      
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
@@ -70,13 +69,13 @@
 										 {assign var="showsrm" value="1"}
 									 {/if}
                                 
-                                    {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}
-										
+                                    {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}										
 										{php}continue;{/php}
 									{/if} 
                                     <li>
                                         {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
                                         {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
+                                    
                                         {if $modulekey == $MODULE_TAB}
 											{if count($shortcutTopMenu.$modulekey) > 0}
 										        <ul id="showactive" class="nav child_menu" style="display:block!important">
@@ -105,9 +104,12 @@
                             
                             
                              { else}
+									
+									
+									
 									 <ul  class="nav child_menu" >
 									    <li> <a href="index.php?module=te_student_batch&action=revenue">Student</a>
-									    <ul id="srmchildmenu" class="nav child_menu" style="display:block!important">
+									    <ul id="srmchildmenu" class="nav child_menu" >
 											<li> <a href="index.php?module=te_student_batch&action=revenue">Summary</a> </li>
 											<li> <a href="index.php?action=index&module=te_student_batch">List Student</a> </li>
 											<li> <a href="index.php?module=te_student_batch&action=EditView&return_module=te_student_batch&return_action=DetailView">Create Student</a> </li>
@@ -116,12 +118,42 @@
 											<li> <a href="index.php?module=Leads&action=EditView&addreferral=true">Add Referrals</a> </li>
 											<li> <a href="index.php?module=te_student_batch&action=viewmyrefferal">View My Referrals</a> </li>
 											<li> <a href="index.php?module=te_student_batch&action=search_leads">CRM Lead Search</a> </li>
-										</ul> 
-										 
-										
+										</ul>
 										</li>
 									 
-									 </ul>
+									   {foreach from=$modules.modules item=module key=modulekey}
+									       {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch' || $modulekey =='te_student'}
+												{assign var="showsrm" value="1"}
+											{/if}
+									     {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}										
+											{php}continue;{/php}
+										{/if}
+									    <li>
+                                        {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
+                                        {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
+                                        {if $modulekey == $MODULE_TAB}
+											{if count($shortcutTopMenu.$modulekey) > 0}
+										        <ul id="showactive" class="nav child_menu" style="display:block!important">
+												{foreach from=$shortcutTopMenu.$modulekey item=item}
+													{if $item.URL == "-"}
+														<li><a></a><span>&nbsp;</span></li>
+													{else}
+														<li><a href="{$item.URL}">{$item.LABEL}</a></li>
+													{/if}
+												{/foreach}
+												
+												</ul>
+												<script> $('#showactive').parent().css('display','block'); $('#showactive').parent().parent().css('display','block') ; $('#showactive').parent().parent().parent().addClass('active') ;</script>
+
+											{/if}
+                                        
+                                        {/if} 
+                                        
+                                       </li>
+                                       {/foreach}
+									  </ul>
+									 
+									 
                              
                              
                              
@@ -132,8 +164,8 @@
                 
                   {if $showsrm==1}
                                 <script>
-                                  $('#srmchildmenu').parent().parent().css('display','block') ; 
-                                  $('#srmchildmenu').css('display','block') ; 
+                                 $('#srmchildmenu').parent().parent().css('display','block') ; 
+                                  $('#srmchildmenu').css('display','block') ;  
                                 </script>
                                 {/if}
 	</div> 
