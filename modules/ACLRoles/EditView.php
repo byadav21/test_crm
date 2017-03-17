@@ -38,9 +38,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-
-
 global $app_list_strings;// $modInvisList;
 
 $sugar_smarty = new Sugar_Smarty();
@@ -49,6 +46,12 @@ $sugar_smarty->assign('MOD', $mod_strings);
 $sugar_smarty->assign('APP', $app_strings);
 $sugar_smarty->assign('ISDUPLICATE', '');
 $duplicateString='';
+
+/*
+$departmentObj=new te_Department();
+$departments= $departmentObj->getAllDepartment();
+$sugar_smarty->assign('departments', $departments); */
+
 //mass localization
 /*foreach($modInvisList as $modinvisname){
 	$app_list_strings['moduleList'][$modinvisname] = $modinvisname;
@@ -58,6 +61,11 @@ $sugar_smarty->assign('APP_LIST', $app_list_strings);
 	unset($app_list_strings['moduleList'][$modinvisname]);
 }*/
 $role = new ACLRole();
+
+
+$allRoles=$role->getAllRoles(true);
+$sugar_smarty->assign('allRoles', $allRoles); 
+
 $role_name = '';
 $return= array('module'=>'ACLRoles', 'action'=>'index', 'record'=>'');
 if(!empty($_REQUEST['record'])){
@@ -77,7 +85,14 @@ if(!empty($_REQUEST['record'])){
 }else{
 	$categories = ACLRole::getRoleActions('');
 }
+$otherRecords=[];
+if($role->id){
+  $otherRecords=$role->getOtherFeilds($role->id);
+ // print_r( $otherRecords);die;
+}
+ //print_r($role->toArray());
 $sugar_smarty->assign('ROLE', $role->toArray());
+$sugar_smarty->assign('otherRecords', $otherRecords);
 $tdwidth = 10;
 
 if(isset($_REQUEST['return_module'])){

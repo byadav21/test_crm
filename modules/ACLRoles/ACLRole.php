@@ -126,6 +126,16 @@ function getUserRoles($user_id, $getAsNameArray = true){
         return $user_roles;
 }
 
+function getOtherFeilds($roleID){
+		$db = DBManagerFactory::getInstance();
+         $query = "SELECT a.parent_role,a.issubmit,a.isapprove,a.sendtofin,b.name as parname,a.isfacility FROM acl_roles as a left join acl_roles as b on a.parent_role=b.id 
+                    WHERE a.deleted=0 and a.id='$roleID' ORDER BY a.name";
+
+        $result = $db->query($query);
+        return $db->fetchByAssoc($result);
+	
+}
+
 /**
  * static  getUserRoleNames($user_id)
  * returns a list of Role names for a given user id
@@ -301,6 +311,20 @@ function mark_relationships_deleted($id){
             $this->$name = $value;
         }
     }
+    
+    function getUserRole($user){
+        
+        $db = DBManagerFactory::getInstance();
+        $query =  "select acl_roles.id,acl_roles.name,issubmit,isapprove,isfacility,sendtofin,parent_role from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='$user' where acl_roles_users.deleted=0";
+        $result=$db->query($query);
+        return $db->fetchByAssoc($result);
+    }
+    
+    
+    
+    
+    
+    
 }
 
 ?>
