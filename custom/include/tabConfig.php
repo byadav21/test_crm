@@ -1,5 +1,5 @@
 <?php
-// created: 2017-02-23 22:31:57
+// created: 2017-03-17 18:10:01
 $GLOBALS['tabStructure'] = array (
   'LBL_GROUPTAB5_1473074494' => 
   array (
@@ -10,6 +10,7 @@ $GLOBALS['tabStructure'] = array (
       1 => 'te_pr_Programs',
       2 => 'te_ba_Batch',
       3 => 'te_Program_category',
+      4 => 'te_ExpensePO',
     ),
   ),
   'LBL_GROUPTAB1_1474960120' => 
