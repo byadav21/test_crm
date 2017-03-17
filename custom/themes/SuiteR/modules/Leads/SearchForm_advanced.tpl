@@ -395,7 +395,7 @@ function {$id}_range_validate(e){ldelim}
     	</td>
 	<td  nowrap="nowrap" width='25%'>
 			
-{html_options id='assigned_user_id_advanced' name='assigned_user_id_advanced[]' options=$fields.assigned_user_id_advanced.options size="6" style="width: 150px" multiple="1"  class="multiselbox"  selected=$fields.assigned_user_id_advanced.value}
+{html_options id='assigned_user_id_advanced' name='assigned_user_id_advanced[]' options=$fields.assigned_user_id_advanced.options size="6" style="width: 150px"  multiple="1"  class="multiselbox"  selected=$fields.assigned_user_id_advanced.value}
    	   	</td>
 	</tr>
 <tr>
