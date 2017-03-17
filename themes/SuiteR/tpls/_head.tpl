@@ -90,7 +90,11 @@
     <script type="text/javascript" src='{sugar_getjspath file="cache/include/javascript/sugar_field_grp.js"}'></script>
     <script src="themes/SuiteR/js/toastr.min.js"></script>   
    <script src="custom/themes/SuiteR/css/alerts/sweetalert.min.js"></script>  
-   <script src="themes/SuiteR/js/bootstrap-multiselect.js"    type="text/javascript"></script>
+   <script src="themes/SuiteR/js/bootstrap.min.js"    type="text/javascript"></script>
+   
    <script type='text/javascript' src='custom/themes/SuiteR/js/angular.min.js'></script>
    <script type='text/javascript' src='custom/themes/SuiteR/js/app.js'></script>
+   
+   <script src="themes/SuiteR/js/bootstrap-multiselect.js"    type="text/javascript"></script>
+
 </head>
