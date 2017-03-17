@@ -42,40 +42,40 @@
 	  <a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span><img src="themes/default/images/logo.png"></span></a>
 	</div>
 	<div class="clearfix"></div>
-	
+
 	<!-- sidebar menu -->
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	  <div class="menu_section">
- 
+
 				 {assign var="showsrm" value="0"}
                 <ul class="nav side-menu">
-                
+
                     {foreach from=$groupTabs item=modules key=group name=groupList}
-                     
+
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
                         {if $group =='All'}
                               {php}continue;{/php}
-                           {/if} 
+                           {/if}
                         <li >
-                             
+
                             <a href="#"><i class="fa fa-home"></i>{$group}<span class="fa fa-chevron-down"></span></a>
                             {if $group !='SRM' }
-                         
+
                             <ul  class="nav child_menu" >
-                            
+
                                 {foreach from=$modules.modules item=module key=modulekey}
-                                
+
 									 {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch' || $modulekey =='te_student'}
 										 {assign var="showsrm" value="1"}
 									 {/if}
-                                
-                                    {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}										
+
+                                    {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}
 										{php}continue;{/php}
-									{/if} 
+									{/if}
                                     <li>
                                         {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
                                         {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
-                                    
+
                                         {if $modulekey == $MODULE_TAB}
 											{if count($shortcutTopMenu.$modulekey) > 0}
 										        <ul id="showactive" class="nav child_menu" style="display:block!important">
@@ -86,27 +86,27 @@
 														<li><a href="{$item.URL}">{$item.LABEL}</a></li>
 													{/if}
 												{/foreach}
-												
+
 												</ul>
 												<script> $('#showactive').parent().css('display','block'); $('#showactive').parent().parent().css('display','block') ; $('#showactive').parent().parent().parent().addClass('active') ;</script>
 
 											{/if}
-                                        
-                                        {/if} 
-                                        
+
+                                        {/if}
+
                                     </li>
                                 {/foreach}
 
-                                
+
                             </ul>
-                           
-                              
-                            
-                            
+
+
+
+
                              { else}
-									
-									
-									
+
+
+
 									 <ul  class="nav child_menu" >
 									    <li> <a href="index.php?module=te_student_batch&action=revenue">Student</a>
 									    <ul id="srmchildmenu" class="nav child_menu" >
@@ -114,18 +114,19 @@
 											<li> <a href="index.php?action=index&module=te_student_batch">List Student</a> </li>
 											<li> <a href="index.php?module=te_student_batch&action=EditView&return_module=te_student_batch&return_action=DetailView">Create Student</a> </li>
 											<li><a href="index.php?module=te_transfer_batch">Transfer Request</a> </li>
-											<li><a href="index.php?module=te_student_batch&action=dropoutrequest">Dropout Request</a> </li>										
+											<li><a href="index.php?module=te_student_batch&action=dropoutrequest">Dropout Request</a> </li>
 											<li> <a href="index.php?module=Leads&action=EditView&addreferral=true">Add Referrals</a> </li>
 											<li> <a href="index.php?module=te_student_batch&action=viewmyrefferal">View My Referrals</a> </li>
 											<li> <a href="index.php?module=te_student_batch&action=search_leads">CRM Lead Search</a> </li>
-										</ul>
+                      <li> <a href="index.php?module=te_srm_auto_assignment">SRM Auto Assignment</a> </li>
+                    </ul>
 										</li>
-									 
+
 									   {foreach from=$modules.modules item=module key=modulekey}
 									       {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch' || $modulekey =='te_student'}
 												{assign var="showsrm" value="1"}
 											{/if}
-									     {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}										
+									     {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch'|| $modulekey =='te_student' || $modulekey =='Home'}
 											{php}continue;{/php}
 										{/if}
 									    <li>
@@ -141,43 +142,43 @@
 														<li><a href="{$item.URL}">{$item.LABEL}</a></li>
 													{/if}
 												{/foreach}
-												
+
 												</ul>
 												<script> $('#showactive').parent().css('display','block'); $('#showactive').parent().parent().css('display','block') ; $('#showactive').parent().parent().parent().addClass('active') ;</script>
 
 											{/if}
-                                        
-                                        {/if} 
-                                        
+
+                                        {/if}
+
                                        </li>
                                        {/foreach}
 									  </ul>
-									 
-									 
-                             
-                             
-                             
-                             {/if} 
+
+
+
+
+
+                             {/if}
                         </li>
                     {/foreach}
                 </ul>
-                
+
                   {if $showsrm==1}
                                 <script>
-                                 $('#srmchildmenu').parent().parent().css('display','block') ; 
-                                  $('#srmchildmenu').css('display','block') ;  
+                                 $('#srmchildmenu').parent().parent().css('display','block') ;
+                                  $('#srmchildmenu').css('display','block') ;
                                 </script>
                                 {/if}
-	</div> 
+	</div>
 
 	<!-- /sidebar menu -->
-	 
+
 	  </div><!-- sidebar-->
-	  
-	  
+
+
 </div> <!-- /left end -->
 </div> <!-- /left end -->
-        
+
 <!-- top navigation -->
 <div class="top_nav">
   <div class="nav_menu">
@@ -193,12 +194,12 @@
 			<span class=" fa fa-angle-down"></span>
 		  </a>
 		  <ul class="dropdown-menu dropdown-usermenu pull-right">
-		  
+
 			   {foreach from=$GCLS item=GCL name=gcl key=gcl_key}
 				  <li><a id="{$gcl_key}_link" href="{$GCL.URL}"{if !empty($GCL.ONCLICK)} onclick="{$GCL.ONCLICK}"{/if}>{$GCL.LABEL}</a></li>
 			   {/foreach}
 			   <li ><a  href='{$LOGOUT_LINK}'>{$LOGOUT_LABEL}</a></li>
-		  
+
 		  </ul>
 		</li>
 
@@ -208,21 +209,20 @@
 			<span class="badge bg-green alert_count">0</span>
 		  </a>
 		   <div id="alerts" class="dropdown-menu" role="menu">{$APP.LBL_EMAIL_ERROR_VIEW_RAW_SOURCE}</div>
-		  
+
 		</li>
 	  </ul>
 	</nav>
   </div>
-  
 
-  
-  
+
+
+
 </div>
 <!-- /top navigation -->
 
-   	
+
   <div class="tile_count">
                 {$statusWiseCount}
                 {$convWiseCount}
   </div>
- 
