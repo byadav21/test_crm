@@ -1,6 +1,5 @@
 {literal}
-<style>
-	 
+<style>	 
 	.revenue h1{      font-size: 20px;
     margin: 18px 0;
     font-weight: bold;}
@@ -28,6 +27,8 @@
     opacity: 0.7;
     pointer-events: none;}
     .revenue input[type=text], .revenue select {width:100%!important}
+    .revmulti .ms-options-wrap ,.revmulti .ms-options-wrap > .ms-options{width:100%}
+    .revmulti .ms-options-wrap > .ms-options > ul input[type="checkbox"] {top: 15px;}
 	</style>
 {/literal}	
 <div class="container revenue" ng-controller="revenueSummary">
@@ -35,11 +36,11 @@
              
 <div class="row">
     
-    <div class="col-xs-12 div" style="margin-bottom: 23px;">
+    <div class="col-xs-12 div revmulti" style="margin-bottom: 23px;">
 		
-		<div class="col-xs-3 text-center">
-			<label>Status</label>
-			<select id="batched" ng-model="request.batch" > 
+		<div class="col-xs-4 text-left">
+			<label>Select Batch Status : </label>
+			<select multiple="multiple" class="multiselbox" id="batched" ng-model="request.batch" > 
 				 
 				<option   value="" selected="selected">All</option>
 				<option   value="planned"  >Planned</option>
