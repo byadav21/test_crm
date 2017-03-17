@@ -79,6 +79,35 @@ function set_focus(){
 <td scope="row" align='right'>{$MOD.LBL_DESCRIPTION}:</td>
 <td ><textarea name='description' cols="80" rows="8">{$ROLE.description}</textarea></td>
 </tr>
+<tr>
+<td scope="row" align='right'>Parent Role:</td>
+<td >
+
+<select  id='parent_role' name='parent_role' >
+<option>-Select-</option>
+
+{foreach from=$allRoles item=val}
+<option {if $val.id==$otherRecords.parent_role} selected {/if} value="{$val.id}">  {$val.name} </option>
+{/foreach}
+</select>
+
+</td>
+</tr>
+<tr>
+<td scope="row" align='right'>Permission</td>
+<td >
+<input {if 1==$otherRecords.isfacility} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isfacility" value="1"> Is Facility Role
+</td>
+</tr>
+<tr>
+<td scope="row" align='right'>Permission</td>
+<td >
+<input {if 1==$otherRecords.issubmit} checked {/if} style="    margin-top: -11px;" type="checkbox" name="issubmit" value="1"> Can Submit 
+<input {if 1==$otherRecords.isapprove} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isapprove" value="1"> Can Approve 
+<input {if 1==$otherRecords.sendtofin} checked {/if} style="     margin-top: -11px;"type="checkbox" name="sendtofin" value="1"> Can Send to Facility 
+<input {if 1==$otherRecords.isfacility} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isfacility" value="1"> Is Facility Role
+</td>
+</tr>
 </table>
 
 </form>

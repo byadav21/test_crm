@@ -152,25 +152,25 @@ $dictionary['ACLRole'] = array('table' => 'acl_roles', 'comment' => 'ACL Role de
         'issubmit' =>
             array(
                 'name' => 'issubmit',
-                'type' => 'enum',               
+                'type' => 'int',               
                 'vname' => 'LBL_DEPARTMENT',
             ),
         'isapprove' =>
             array(
                 'name' => 'isapprove',
-                'type' => 'enum',               
+                'type' => 'int',               
                 'vname' => 'LBL_DEPARTMENT',
             ),
         'sendtofin' =>
             array(
                 'name' => 'sendtofin',
-                'type' => 'enum',               
+                'type' => 'int',               
                 'vname' => 'LBL_DEPARTMENT',
             ),
         'isfacility' =>
             array(
                 'name' => 'isfacility',
-                'type' => 'enum',               
+                'type' => 'int',               
                 'vname' => 'LBL_DEPARTMENT',
             ),
     )

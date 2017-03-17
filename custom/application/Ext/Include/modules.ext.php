@@ -97,6 +97,13 @@ $moduleList[] = 'te_training_category';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['te_student_disposition'] = 'te_student_disposition';
+$beanFiles['te_student_disposition'] = 'modules/te_student_disposition/te_student_disposition.php';
+$moduleList[] = 'te_student_disposition';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['te_pr_Programs'] = 'te_pr_Programs';
 $beanFiles['te_pr_Programs'] = 'modules/te_pr_Programs/te_pr_Programs.php';
 $moduleList[] = 'te_pr_Programs';

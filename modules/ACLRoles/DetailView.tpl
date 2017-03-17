@@ -79,10 +79,19 @@ EOD
 		<p>
 		<TABLE width='100%' class='detail view' border='0' cellpadding=0 cellspacing = 1  >
 		<TR>
-<td valign='top' width='15%' align='right'><b>{$MOD.LBL_NAME}:</b></td><td width='85%' colspan='3'>{$ROLE.name}</td>
+<td valign='top' width='10%' align='right'><b>{$MOD.LBL_NAME}:</b></td><td width='40%' colspan='3'>{$ROLE.name}</td>
+
+<td valign='top' width='10%' align='right'><b>Parent Role:</b></td><td width='40%' colspan='3'>{$otherRecords.parname}</td>
+
 </tr
 ><TR>
-<td valign='top'  width='15%' align='right'><b>{$MOD.LBL_DESCRIPTION}:</b></td><td colspan='3' valign='top'  width='85%' align='left'>{$ROLE.description | nl2br}</td>
+
+<td valign='top' width='25%' align='right'><b>Can Submit:</b> {$otherRecords.issubmit} <br><b>Is facility Role:</b> {$otherRecords.isfacility}</td>
+
+<td width='25%' colspan='3'><b>Can Approve:</b> {$otherRecords.isapprove} <br><b>Can Send to facility:</b> {$otherRecords.sendtofin}</td>
+
+
+<td valign='top'  width='10%' align='right'><b>{$MOD.LBL_DESCRIPTION}:</b></td><td colspan='3' valign='top'  width='40%' align='left'>{$ROLE.description | nl2br}</td>
 </tr></table>
 </p>
 		<p>

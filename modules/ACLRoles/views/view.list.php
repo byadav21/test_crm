@@ -39,6 +39,7 @@
 
 
 require_once('include/MVC/View/views/view.list.php');
+require_once('modules/ACLRoles/views/Approver.php');
 
 class ACLRolesViewList extends ViewList
 {
@@ -52,4 +53,27 @@ class ACLRolesViewList extends ViewList
         $this->lv->export = false;
         $this->lv->showMassupdateFields = false;
     }
+    
+    public function display(){
+		
+		if(!$this->bean || !$this->bean->ACLAccess('list')){
+            ACLController::displayNoAccess();
+        } else {
+            $this->listViewPrepare();
+            
+        $this->processSearchForm();
+        $this->lv->searchColumns = $this->searchForm->searchColumns;
+
+        if(!$this->headers) return false;
+        
+            $this->lv->ss->assign("SEARCH",true);
+            $this->lv->setup($this->seed, 'modules/ACLRoles/ListView.tpl', $this->where, $this->params);
+            $savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
+            echo $this->lv->display(); 
+             
+             
+             
+        }
+		
+	}
 }
