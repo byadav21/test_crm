@@ -36,7 +36,7 @@
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
-
+  
 *}
 {{capture name=display_size assign=size}}{{$displayParams.size|default:6}}{{/capture}}
-{html_options id='{{$vardef.name}}' name='{{$vardef.name}}[]' options={{sugarvar key='options' string=true}} size="{{$size}}" style="width: 150px" {{if $size > 1}}multiple="1"{{/if}} selected={{sugarvar key='value' string=true}}}
+{html_options id='{{$vardef.name}}' name='{{$vardef.name}}[]' options={{sugarvar key='options' string=true}} size="{{$size}}" style="width: 150px" {{if $size > 1}} multiple="1"   class="multiselbox" {{/if}} selected={{sugarvar key='value' string=true}}}
