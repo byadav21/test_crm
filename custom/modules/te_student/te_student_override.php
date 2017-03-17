@@ -45,7 +45,7 @@ class te_student_override extends te_student {
 					left join te_student_batch as tsb on tsb.te_ba_batch_id_c=b.id   left join te_student_payment as sp on sp.te_student_batch_id_c=tsb.id
 					  where b.deleted=0 and p.deleted=0  and i.deleted=0 and bi.deleted=0 
 					and ib.deleted=0 ";
-					if($batches) $sql .=" and b.batch_status='". $batches . "' ";
+					if($batches) $sql .=" and b.batch_status in (". $batches .") ";
 					//if($installment) $sql .=" and p.name='". $installment . "' ";
 					//if($email) $sql .=" and s.email like '%". $email . "%' ";
 					//$sql .="group by s.id,s.name,s.email,s.status,batch_code,b.name,b.id ";

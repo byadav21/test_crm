@@ -4425,7 +4425,7 @@ fieldset{   min-width: 100px; }
 .ms-options-wrap > .ms-options {
     position: absolute;
     left: 0;
-    width: 100%;
+    width: auto;
     margin-top: 1px;
     margin-bottom: 20px;
     background: white;
@@ -4499,7 +4499,7 @@ fieldset{   min-width: 100px; }
     margin: 0 5px 0 0;
     position: absolute;
     left: 4px;
-    top: 7px;
+    top: 6px;
 }
 
 .ms-options-wrap > .ms-options.hide-checkbox > ul input[type="checkbox"] {
@@ -4511,8 +4511,8 @@ fieldset{   min-width: 100px; }
     clip: rect(1px, 1px, 1px, 1px);
 }
 
-.ms-options-wrap{    width: 300px;}
+.ms-options-wrap{width: 150px;}
 
-.ms-options-wrap button{    width: 100%!important;
+.ms-options-wrap button{    width: 100%!important;    margin-bottom: -2px;
     overflow: hidden;
     display: block;}
