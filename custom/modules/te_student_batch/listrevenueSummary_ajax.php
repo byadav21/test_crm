@@ -12,7 +12,7 @@ $obj->reportingUser($currentUserId);
 $obj->report_to_id[$currentUserId] = $current_user->name;
 $reportingUserIds = $obj->report_to_id;
 $user_ids = implode("', '", array_keys($reportingUserIds)); 
-
+if($current_user->isAdmin()) $user_ids ='';
  
 
 $page=(isset($_REQUEST['page']) && intval($_REQUEST['page'])>0)? intval($_REQUEST['page']) : 1;

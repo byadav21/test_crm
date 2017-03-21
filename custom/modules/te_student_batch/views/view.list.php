@@ -411,7 +411,7 @@ class te_student_batchViewList extends ViewList
 			$obj->report_to_id[$currentUserId] = $current_user->name;
 			$reportingUserIds = $obj->report_to_id;
 			$user_ids = implode("', '", array_keys($reportingUserIds));
-			
+			if($current_user->isAdmin()) $user_ids ='';
 			$newconv=$obj->newConversion($user_ids);
 			$dropconv=$obj->newDropOut($user_ids);
 			$dropconCall=$obj->newDropOutCallcenter($user_ids);

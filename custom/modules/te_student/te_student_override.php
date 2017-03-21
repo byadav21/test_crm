@@ -36,17 +36,20 @@ class te_student_override extends te_student {
 	
 	function getAllStudentInstallmentSummary($isadmin='0',$batches='',$userID='',$start=0,$noofRow=18){
 		 
-		$sql="select b.id,i.name as iname, b.batch_start_date,b.duration,b.fees_inr, b.batch_status,p.name as pname, b.name as bname , sum(amount) as amt from 
-					te_ba_batch as b 
-					inner join te_pr_programs_te_ba_batch_1_c as ib on ib.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id
-					inner join te_pr_programs as p on p.id=ib.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-					inner join te_in_institutes_te_ba_batch_1_c as bi on bi.te_in_institutes_te_ba_batch_1te_ba_batch_idb=b.id
-					inner join te_in_institutes as i on i.id=bi.te_in_institutes_te_ba_batch_1te_in_institutes_ida
-					left join te_student_batch as tsb on tsb.te_ba_batch_id_c=b.id   left join te_student_payment as sp on sp.te_student_batch_id_c=tsb.id
-					  where b.deleted=0 and p.deleted=0  and i.deleted=0 and bi.deleted=0 
-					and ib.deleted=0 ";
+		$sql="select b.id,i.name as iname, b.batch_start_date,b.duration,b.fees_inr, b.batch_status,p.name as pname, b.name as bname , 
+						sum(amount) as amt from te_student_batch as tsb  
+						inner join  te_ba_batch as b  on  tsb.te_ba_batch_id_c=b.id " ;
+		if($userID) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =b.id ";
+					$sql .="	inner join te_pr_programs_te_ba_batch_1_c as ib on ib.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id
+						inner join te_pr_programs as p on p.id=ib.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+						inner join te_in_institutes_te_ba_batch_1_c as bi on bi.te_in_institutes_te_ba_batch_1te_ba_batch_idb=b.id
+						inner join te_in_institutes as i on i.id=bi.te_in_institutes_te_ba_batch_1te_in_institutes_ida
+						left join te_student_payment as sp on sp.te_student_batch_id_c=tsb.id
+						 where b.deleted=0 and p.deleted=0  and i.deleted=0 and bi.deleted=0 and ib.deleted=0 ";
+						 
+						 
 					if($batches) $sql .=" and b.batch_status in (". $batches .") ";
-					//if($installment) $sql .=" and p.name='". $installment . "' ";
+					if($userID) $sql .=" and tsaa.assigned_user_id in ('".$userID .  "')";
 					//if($email) $sql .=" and s.email like '%". $email . "%' ";
 					//$sql .="group by s.id,s.name,s.email,s.status,batch_code,b.name,b.id ";
 					  $sql .="group by  b.id,p.id,i.name,  p.name , b.name order by i.name"; 
@@ -68,15 +71,21 @@ class te_student_override extends te_student {
 	
 	function getStudentStatusCount($id,$status='',$isadmin='0',$userID=''){
 		if($status){
-			$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id' and status='$status' and deleted=0";
+			$sql="select count(te_student_batch.id) as ctr from te_student_batch ";
+			if($userID) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c "; 
+			$sql .=" where te_student_batch.te_ba_batch_id_c='$id' and te_student_batch.status='$status' and te_student_batch.deleted=0";
 			if($isadmin==0 && $userID){
-				$sql .= " and created_by in ('".$userID."')";
+				$sql .= " and tsaa.assigned_user_id in ('".$userID."')";
 			}
+			
 		}else{
-			$sql="select count(id) as ctr from te_student_batch where te_ba_batch_id_c='$id'   and deleted=0";	
+			$sql="select count(te_student_batch.id) as ctr from te_student_batch ";
+			if($userID) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c "; 
+			$sql .=" where te_student_batch.te_ba_batch_id_c='$id'   and te_student_batch.deleted=0";
 			if($isadmin==0 && $userID){
-				$sql .= " and created_by in ('".$userID."')";
-			}	
+				$sql .= " and tsaa.assigned_user_id in ('".$userID."')";
+			}
+			//echo $sql;	
 			 		
 		}
 		$itemDetal=	$this->dbinstance->query($sql);
@@ -198,8 +207,25 @@ class te_student_override extends te_student {
 		return $programsList;
 	}
 	
-	function setSeen($col,$tbl,$user_ids,$status='Active'){
-		$sql="update $tbl set $col='0' where deleted=0 and status='$status'  and created_by in ('".$user_ids."')";
+	function setSeen($col,$tbl,$user_ids='',$status='Active'){
+		$sql="update te_student_batch as t  ";
+		if($user_ids) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =t.te_ba_batch_id_c ";
+		$sql .=" set t.is_new=0
+		 where  t.status='Active' and t.is_new='1' and t.deleted=0 ";
+		if($user_ids) $sql .="  and tsaa.assigned_user_id in ('".$user_ids."')";
+
+		$programObj =$this->dbinstance->query($sql);
+	}
+	
+	function setSeenDropoutIN($col,$tbl,$user_ids='',$status='Dropout'){
+		
+		$sql="update te_student_batch as t  ";
+		if($user_ids) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =t.te_ba_batch_id_c ";
+		$sql .=" set t.is_new=0
+		 where  t.status='Dropout' and t.is_new_dropout='1' and t.deleted=0 ";
+		if($user_ids) $sql .="  and tsaa.assigned_user_id in ('".$user_ids."')";
+		 
+		
 		$programObj =$this->dbinstance->query($sql);
 	}
 	
@@ -213,16 +239,33 @@ class te_student_override extends te_student {
 		$programObj =$this->dbinstance->query($sql);
 	}
 	
-	function newConversion($user_ids){
+	function newConversion($user_ids=''){
 	 
-		$sql="select count(id) as newconv, leads_id from te_student_batch where status='Active' and is_new='1' and deleted=0 and created_by in ('".$user_ids."')";
+		$sql="select count(te_student_batch.id) as newconv, te_student_batch.leads_id from te_student_batch ";
+		if($user_ids) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c "; 
+		
+		$sql .=" where te_student_batch.status='Active' and te_student_batch.is_new='1' and te_student_batch.deleted=0 ";//and created_by in ('".$user_ids."')";
+		
+		if($user_ids){
+				$sql .= " and tsaa.assigned_user_id in ('".$user_ids."')";
+		}
+		
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
 	}
 	
-	function newDropOut($user_ids){
-		$sql="select count(id) as newconv from te_student_batch where status='Dropout' and  is_new_dropout='1' and deleted=0 and created_by in ('".$user_ids."')";
+	function newDropOut($user_ids=""){
+		
+		$sql="select count(te_student_batch.id) as newconv, te_student_batch.leads_id from te_student_batch ";
+		if($user_ids) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c "; 
+		
+		$sql .=" where te_student_batch.status='Dropout' and te_student_batch.is_new_dropout='1' and te_student_batch.deleted=0 ";//and created_by in ('".$user_ids."')";
+		
+		if($user_ids){
+				$sql .= " and tsaa.assigned_user_id in ('".$user_ids."')";
+		}
+	 
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
