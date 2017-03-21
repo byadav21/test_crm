@@ -46,7 +46,7 @@
 		{assign var='rowcount' value=$rowcount+1}
 		<tr height="20" class="oddListRowS1">
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.student}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.batch}</td> 	
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.name}</td> 	
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.program}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.institute}</td> 
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.batch_code}</td> 
@@ -73,9 +73,7 @@
 				{/if}
 				
 			</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-			 
-			{$result.dropout_status}</td> 
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.dropout_status}</td> 
 			
 		</tr>				
 	{/foreach}
@@ -209,4 +207,69 @@ Calendar.setup ({
 });						
 </script>
 {/literal}
+<!-- View COde added-->
+{if $designation eq "BUH" }
+<section class="moduleTitle"> <h2>Student Batch For Dropout Past Details</h2><br/><br/>
+
+<table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
+	<thead>    	
+	<tr height="20">
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">	
+			<strong>Student</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Batch Name</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Program</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Institute</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Batch Code</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Fee INR</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Fee USD</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Dropout Type</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Refund Amount</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Refund Date</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<strong>Dropout Status</strong>
+		</th>
+		
+	</tr>
+	</thead>  
+	
+	{if $resultSethis|@count > 0}
+	{foreach from = $resultSethis key=key item=result}
+		<tr height="20" class="oddListRowS1">
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.student}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.name}</td> 	
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.program}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.institute}</td> 
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.batch_code}</td> 
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.fee_usd}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.fee_inr}</td> 			
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.dropout_type}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.refund_amount}</td>
+			<td>{$result.refund_date}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.dropout_status}</td> 
+			
+		</tr>				
+	{/foreach}
+	{/if}
+</table>
+
+{/if}
 

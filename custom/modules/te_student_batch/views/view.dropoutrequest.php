@@ -20,10 +20,13 @@ class te_student_batchViewDropoutrequest extends SugarView {
 		return $program['name'];
 	}
 	public function display() {
-		global $db,$current_user;
+		global $db,$current_user,$s_history;
 		$resultSet=array();
+		$resultSethis=array();
 		if($current_user->designation=="BUH"){
-			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status is not null and sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";//sb.dropout_status='Pending'  AND
+			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status='Pending'  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
+			$s_history="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE (sb.dropout_status='Approved' OR sb.dropout_status='Rejected')  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
+			
 		}else{
 			$user_id = $current_user->id;
 			$users=$this->reportingUser($user_id);
@@ -39,6 +42,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.deleted=0 AND sb.assigned_user_id IN($users_str) ORDER BY sb.date_entered DESC,sb.date_modified DESC";
 		}
 		$studentBatchObj =$db->query($studentBatchSql);
+		
 
 		$dropout_status_list =$GLOBALS['app_list_strings']['dropuout_status_list'];
 		$dropout_type_list =$GLOBALS['app_list_strings']['student_batch_dropout_list'];
@@ -47,7 +51,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 			$rowcount++;
 			$row['program']=$this->getProgram($row['te_pr_programs_id_c']);
 			$row['institute']=$this->getInstitute($row['te_in_institutes_id_c']);
-			
+
 			$dropout_status="<span id='dropout_request_".$row['id']."'></span><select name='dropout_status' id='".$row['id']."' onchange='return changeDropoutStatus(this.id,this.value,".$rowcount.");' style='width:113PX !IMPORTANT'><option value=''></option>";
 			foreach($dropout_status_list as $key=>$value){
 				if($row['dropout_status']==$key)
@@ -55,7 +59,10 @@ class te_student_batchViewDropoutrequest extends SugarView {
 				else
 					$dropout_status.="<option value='".$key."'>".$value."</option>";
 			}
+			
 			$dropout_status.="</select>";
+			
+			
 			$dropout_type="<select name='dropout_type' id='dropout_type_".$rowcount."'  style='width:90PX !IMPORTANT'>";
 			foreach($dropout_type_list as $key=>$value){
 				if($row['dropout_type']==$key)
@@ -64,21 +71,37 @@ class te_student_batchViewDropoutrequest extends SugarView {
 					$dropout_type.="<option value='".$key."'>".$value."</option>";
 			}
 			$dropout_type.="</select>";
-			if($current_user->designation=="BUH" && $row['dropout_status']== 'Pending' ){
+			
+			
+			
+			
+			if($current_user->designation=="BUH"){
 				$row['dropout_type']=$dropout_type;
 				$row['dropout_status']=$dropout_status;
 			}else{
 				$row['dropout_type']=$dropout_type_list[$row['dropout_type']];
-				$row['dropout_status']=$row['dropout_status'];
 			}
+			
 			$resultSet[]=$row;
 		}
+		if($s_history){
+			$student_history=$db->query($s_history);
+			while($rowhis =$db->fetchByAssoc($student_history)){
+				$rowhis['program']=$this->getProgram($rowhis['te_pr_programs_id_c']);
+				$rowhis['institute']=$this->getInstitute($rowhis['te_in_institutes_id_c']);
 
-
+				$resultSethis[]=$rowhis;
+			}
+		}
+		
+		//New code
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("resultSet",$resultSet);
+		$sugarSmarty->assign("resultSethis",$resultSethis);
 		$sugarSmarty->assign("designation",$current_user->designation);
+		
 		$sugarSmarty->assign("current_user_id",$current_user->id);
+		
 		$sugarSmarty->display('custom/modules/te_student_batch/tpls/dropoutapprove.tpl');
 	}
 	function reportingUser($currentUserId){
