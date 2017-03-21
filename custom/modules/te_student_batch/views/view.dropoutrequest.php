@@ -23,7 +23,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 		global $db,$current_user;
 		$resultSet=array();
 		if($current_user->designation=="BUH"){
-			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status='Pending'  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
+			$studentBatchSql="SELECT sb.*,s.name as student FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status is not null and sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";//sb.dropout_status='Pending'  AND
 		}else{
 			$user_id = $current_user->id;
 			$users=$this->reportingUser($user_id);
@@ -47,7 +47,7 @@ class te_student_batchViewDropoutrequest extends SugarView {
 			$rowcount++;
 			$row['program']=$this->getProgram($row['te_pr_programs_id_c']);
 			$row['institute']=$this->getInstitute($row['te_in_institutes_id_c']);
-
+			
 			$dropout_status="<span id='dropout_request_".$row['id']."'></span><select name='dropout_status' id='".$row['id']."' onchange='return changeDropoutStatus(this.id,this.value,".$rowcount.");' style='width:113PX !IMPORTANT'><option value=''></option>";
 			foreach($dropout_status_list as $key=>$value){
 				if($row['dropout_status']==$key)
@@ -64,11 +64,12 @@ class te_student_batchViewDropoutrequest extends SugarView {
 					$dropout_type.="<option value='".$key."'>".$value."</option>";
 			}
 			$dropout_type.="</select>";
-			if($current_user->designation=="BUH"){
+			if($current_user->designation=="BUH" && $row['dropout_status']== 'Pending' ){
 				$row['dropout_type']=$dropout_type;
 				$row['dropout_status']=$dropout_status;
 			}else{
 				$row['dropout_type']=$dropout_type_list[$row['dropout_type']];
+				$row['dropout_status']=$row['dropout_status'];
 			}
 			$resultSet[]=$row;
 		}
