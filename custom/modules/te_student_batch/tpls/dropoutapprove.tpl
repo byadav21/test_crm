@@ -73,7 +73,9 @@
 				{/if}
 				
 			</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.dropout_status}</td> 
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+			 
+			{$result.dropout_status}</td> 
 			
 		</tr>				
 	{/foreach}
