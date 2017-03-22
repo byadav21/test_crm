@@ -284,6 +284,24 @@ class te_student_override extends te_student {
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
 	}
+	
+	function getSRMByMobile($mobile){
+		$sql="select distinct tsaa.assigned_user_id from te_student_batch  
+				 inner join te_student_te_student_batch_1_c as tba on tba.te_student_te_student_batch_1te_student_batch_idb=te_student_batch.id
+				inner join te_student on te_student.id=tba.te_student_te_student_batch_1te_student_ida 
+				and te_student.mobile like '$mobile' 
+				inner join te_srm_auto_assignment as tsaa on 
+				 tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c 
+
+				where te_student_batch.deleted=0 and te_student.deleted=0  
+				and tsaa.deleted=0  limit 0,1";
+		$programObj =$this->dbinstance->query($sql);
+		return $this->dbinstance->fetchByAssoc($programObj);
+		
+	}
+	
+	
+	
 	public $report_to_id;
 	function reportingUser($currentUserId){
 		
