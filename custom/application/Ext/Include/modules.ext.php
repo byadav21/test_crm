@@ -94,6 +94,13 @@ $moduleList[] = 'te_student';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['te_Api'] = 'te_Api';
+$beanFiles['te_Api'] = 'modules/te_Api/te_Api.php';
+$moduleList[] = 'te_Api';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['te_industry'] = 'te_industry';
 $beanFiles['te_industry'] = 'modules/te_industry/te_industry.php';
 $moduleList[] = 'te_industry';

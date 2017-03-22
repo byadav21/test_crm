@@ -21,6 +21,13 @@ $entry_point_registry['duplicatecontract'] = array('file' => 'custom/modules/AOS
 $entry_point_registry['rundripcampaign'] = array('file' => 'custom/modules/te_drip_campaign/rundripcampaign.php','auth' => false);
 
 
+$entry_point_registry['loginCRM'] = array('file' => 'custom/modules/te_Api/login.php','auth' => false);
+$entry_point_registry['logoutCRM'] = array('file' => 'custom/modules/te_Api/logout.php','auth' => false);
+$entry_point_registry['ivrCRM'] = array('file' => 'custom/modules/te_Api/ivr.php','auth' => false);
+
+
+
+
 $entry_point_registry['getvendors'] = array('file' => 'custom/modules/te_target_campaign/getvendors.php','auth' => false);
 
 
