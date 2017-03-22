@@ -145,10 +145,15 @@ html , body{
 .calendar-exibit .calendar-table {
     padding: 0 0 4px 0
 }
-.left_col {
+.nav-md .left_col {
     background: #2A3F54;    position: fixed;
     height: 100%;
     overflow-y: auto;    width: 235px;
+}
+.nav-sm .left_col {
+    background: #2A3F54;    position: fixed;
+    height: 100%;
+        width:69px;
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;

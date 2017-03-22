@@ -106,9 +106,13 @@ $MENU_TOGGLE.on('click', function() {
 		if ($BODY.hasClass('nav-md')) {
 			$SIDEBAR_MENU.find('li.active ul').hide();
 			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+			$BODY.removeClass('nav-md');
+			$BODY.addClass('nav-sm');
 		} else {
 			$SIDEBAR_MENU.find('li.active-sm ul').show();
 			$SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+			$BODY.removeClass('nav-sm');
+			$BODY.addClass('nav-md');
 		}
 
 	$BODY.toggleClass('nav-md nav-md');
