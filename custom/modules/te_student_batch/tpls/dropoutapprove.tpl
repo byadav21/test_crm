@@ -45,7 +45,7 @@
 	{foreach from = $resultSet key=key item=result}
 		{assign var='rowcount' value=$rowcount+1}
 		<tr height="20" class="oddListRowS1">
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.student}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="index.php?module=te_student&return_module=te_student&action=DetailView&record={$result.idstudent}">{$result.student}</a></td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.name}</td> 	
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.program}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.institute}</td> 
@@ -254,7 +254,7 @@ Calendar.setup ({
 	{if $resultSethis|@count > 0}
 	{foreach from = $resultSethis key=key item=result}
 		<tr height="20" class="oddListRowS1">
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.student}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="index.php?module=te_student&return_module=te_student&action=DetailView&record={$result.idstudent}">{$result.student}</a></td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.name}</td> 	
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.program}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$result.institute}</td> 
