@@ -116,6 +116,16 @@
 </table>
 <script>
 	{literal}
+	
+	$( document ).ready(function() {
+
+					 if($( ".multiselbox").find("option").eq(0).val()==0) $( ".multiselbox").find("option").eq(0).remove();
+				 
+					 $(".multiselbox").multiselect({
+						 texts:{selectAll: "Select All"}
+					}); 
+				});
+	
 	$(document).ready(function () {
 		$( '#advanced_search_link' ).one( "click", function() {
 			//alert( "This will be displayed only once." );

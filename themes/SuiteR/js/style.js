@@ -370,6 +370,17 @@ $( document ).ready(function() {
 	 $('.multiselbox').multiselect({
 		 texts:{selectAll: 'Select All'}
 	}); 
+	
+	$('body').on('click','#desktop_notifications',function(){
+		 
+		if($(this).hasClass('open')){
+		  $(this).removeClass('open');	
+		}else{
+			 $(this).addClass('open');	
+		}
+	})
+	
+	
 });
 						
 

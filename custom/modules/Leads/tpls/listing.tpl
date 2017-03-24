@@ -377,6 +377,18 @@
 <script type="text/javascript">
 {$contextMenuScript}
 {literal}
+
+
+$( document ).ready(function() {
+					 if($( ".multiselbox").find("option").eq(0).val()==0) $( ".multiselbox").find("option").eq(0).remove();
+				 
+					 $(".multiselbox").multiselect({
+						 texts:{selectAll: "Select All"}
+					}); 
+				});
+
+
+ 
 function lvg_nav(m,id,act,offset,t){
     if(t.href.search(/#/) < 0){return;}
     else{
