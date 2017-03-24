@@ -48,7 +48,7 @@
 						$data = curl_exec($ch);
 						
 						$sessionArray=json_decode($data);
-						print_r($sessionArray);
+						//print_r($sessionArray);
 						if(isset($sessionArray->id)){
 							echo '<response>
 								<status>success</status>
