@@ -100,7 +100,7 @@ var setContentHeight = function () {
     });
 
 // toggle small or large menu 
-$MENU_TOGGLE.on('click', function() {
+$('body').on('click','#menu_toggle', function() {
 		console.log('clicked - menu toggle');
 		
 		if ($BODY.hasClass('nav-md')) {
@@ -115,7 +115,7 @@ $MENU_TOGGLE.on('click', function() {
 			$BODY.addClass('nav-md');
 		}
 
-	$BODY.toggleClass('nav-md nav-md');
+	//$BODY.toggleClass('nav-md nav-md');
 
 	setContentHeight();
 });
