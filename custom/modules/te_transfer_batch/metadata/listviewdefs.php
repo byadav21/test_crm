@@ -8,7 +8,7 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_STUDENT',
     'id' => 'TE_STUDENT_ID_C',
-    'link' => false,
+    'link' => true,
     'width' => '20%',
     'default' => true,
   ),
