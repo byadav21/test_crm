@@ -50,7 +50,7 @@ $GLOBALS['tabStructure'] = array (
     'label' => 'LBL_GROUPTAB4_1487154036',
     'modules' => 
     array (
-      0 => 'te_student',
+      0 => 'te_srm_auto_assignment',
     ),
   ),
 );

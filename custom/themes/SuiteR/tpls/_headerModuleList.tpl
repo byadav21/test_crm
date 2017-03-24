@@ -187,8 +187,8 @@
 	  </div>
 
 	  <ul class="nav navbar-nav navbar-right">
-		<li class="">
-		  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		<li class="" style="  margin-left: 31px;">
+		  <a href="javascript:;" class="user-profile  " data-toggle="dropdown" aria-expanded="false">
 			<img src="themes/default/images/img.png" alt="">{$CURRENT_USER}
 			<span class=" fa fa-angle-down"></span>
 		  </a>
@@ -202,8 +202,8 @@
 		  </ul>
 		</li>
 
-		<li id="desktop_notifications" role="presentation" class="dropdown">
-		  <a href="javascript:;" class="dropdown-toggle info-number alertsButton" style="background: transparent;"  data-toggle="dropdown" aria-expanded="false">
+		<li id="desktop_notifications" role="presentation" class=" ">
+		  <a href="javascript:;" class=" info-number alertsButton" style="background: transparent;  "    m  data-toggle="dropdown" aria-expanded="false">
 			<i class="fa fa-envelope-o"></i>
 			<span class="badge bg-green alert_count">0</span>
 		  </a>
