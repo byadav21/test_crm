@@ -19,7 +19,7 @@
 						$obj=new te_student_override();
 						$srm=$obj->getSRMByMobile($jsonDecode->mobile);
 						if($srm && count($srm)>0){
-							$users=BeanFactory::getBean('Users')->retrieve_by_string_fields(array('user_name'=>$srm['assigned_user_id']));
+							$users=BeanFactory::getBean('Users')->retrieve_by_string_fields(array('id'=>$srm['assigned_user_id']));
 						 
 							if($users && count($users)>0){
 									$reponse=[];
