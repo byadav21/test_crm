@@ -2,7 +2,22 @@
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  
 class BatchTransferRequest{	
-	function approveBatchTransferRequest($bean, $event, $argument){				
+	function approveBatchTransferRequest($bean, $event, $argument){	
+		global $db;
+		 
+		  $programmeOld="select p.te_pr_programs_te_ba_batch_1te_pr_programs_ida as id from te_ba_batch as b inner join te_pr_programs_te_ba_batch_1_c as p on p.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id where b.id='".$bean->oldbackup."' and b.deleted=0";
+		 $programObj=$db->query($programmeOld);
+		 $programObjOld=$db->fetchByAssoc($programObj);
+		
+		
+		  $programmeNew="select p.te_pr_programs_te_ba_batch_1te_pr_programs_ida as id from te_ba_batch as b inner join te_pr_programs_te_ba_batch_1_c as p on p.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id where b.id='".$bean->te_ba_batch_id_c."' and b.deleted=0";
+		$programObj=$db->query($programmeNew);
+		$programObjNew=$db->fetchByAssoc($programObj);
+		$bean->country=($programObjOld['id']==$programObjNew['id']) ? 'Batch'	: 'Programme';
+	 
+		
+		$data=$db->fetchByAssoc($programObj);
+					
 		if($bean->status=="Pending"){
 			 global $current_user;
 			// print_r($_SESSION['ACL'][$current_user->id]['te_transfer_batch']); 
@@ -26,7 +41,7 @@ class BatchTransferRequest{
 			
 			
 		}
-		global $db;
+		
 		$sql="select name from te_ba_batch where id='".$bean->te_student_batch_id_c."' and deleted=0";
 		$programObj=$db->query($sql);
 		$data=$db->fetchByAssoc($programObj);
