@@ -171,6 +171,12 @@ class addPaymentClass{
 					$student_batch_id=$studentBatchObj->id;
 				}
 			}
+			
+			if($bean->status=='Dropout'){
+				
+				$GLOBALS['db']->query("update leads set is_new_dropout=1 where id='{$bean->id}'");
+				
+			}	
 		}
 		if(!empty($bean->payment_type)){
 		#update student payment history

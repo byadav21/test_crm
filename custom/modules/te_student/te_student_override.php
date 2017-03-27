@@ -221,21 +221,23 @@ class te_student_override extends te_student {
 		
 		$sql="update te_student_batch as t  ";
 		if($user_ids) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =t.te_ba_batch_id_c ";
-		$sql .=" set t.is_new=0
+		$sql .=" set t.is_new_dropout=0
 		 where  t.status='Dropout' and t.is_new_dropout='1' and t.deleted=0 ";
 		if($user_ids) $sql .="  and tsaa.assigned_user_id in ('".$user_ids."')";
 		 
-		
+		 
 		$programObj =$this->dbinstance->query($sql);
 	}
 	
-	function setSeenDropout($col,$tbl,$user_ids){
-		$sql="update $tbl set $col='0' where deleted=0 and status='Dropout'  and assigned_user_id in ('".$user_ids."')";
+	function setSeenDropout($col,$tbl,$user_ids=""){
+		$sql="update $tbl set $col='0' where deleted=0  ";
+		if($user_ids) $sql .="  and assigned_user_id in ('".$user_ids."')";
 		$programObj =$this->dbinstance->query($sql);
 	}
 	
-	function setSeenRefrals($col,$tbl,$user_ids){
+	function setSeenRefrals($col,$tbl,$user_ids=""){
 		$sql="update $tbl set $col='0' where deleted=0 and parent_type LIKE 'Users'  and parent_id in ('".$user_ids."')";
+		if($user_ids) $sql .="  and parent_id in ('".$user_ids."')";
 		$programObj =$this->dbinstance->query($sql);
 	}
 	
@@ -271,15 +273,23 @@ class te_student_override extends te_student {
 		
 	}
 	
-	function newDropOutCallcenter($user_ids){
-		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 AND status LIKE 'Dropout' and is_new_dropout='1'  AND leads.assigned_user_id IN ('".$user_ids."')";
+	function newDropOutCallcenter($user_ids=""){
+		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 AND status LIKE 'Dropout' and is_new_dropout='1' ";
+		if($user_ids){
+				$sql .= " and leads.assigned_user_id IN ('".$user_ids."')";
+		} 
+	 
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
 	}
 	
-	function getMyreferals($user_ids){
-		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 and is_new_referalls='1' AND parent_type LIKE 'Users'  AND leads.parent_id ='".$user_ids."'";
+	function getMyreferals($user_ids=""){
+		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 and is_new_referalls='1' AND parent_type LIKE 'Users' "; 
+		if($user_ids){
+				$sql .= " and leads.parent_id IN ('".$user_ids."')";
+		} 		
+	 
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
