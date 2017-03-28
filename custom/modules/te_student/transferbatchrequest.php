@@ -12,7 +12,7 @@ $student_country=$_REQUEST['student_country'];
 
 $studentBatchObj=new te_transfer_batch();
 $studentBatchObj->te_student_batch_id_c=$old_batch_id;
-$studentBatchObj->oldbackup=$old_batch_id;
+$studentBatchObj->old_batch_records=$old_batch_id;
 $studentBatchObj->te_ba_batch_id_c=$new_batch_id;
 $studentBatchObj->te_student_id_c=$student_id;
 $studentBatchObj->status="Pending";

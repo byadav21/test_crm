@@ -5,7 +5,7 @@ class BatchTransferRequest{
 	function approveBatchTransferRequest($bean, $event, $argument){	
 		global $db;
 		 
-		  $programmeOld="select p.te_pr_programs_te_ba_batch_1te_pr_programs_ida as id from te_ba_batch as b inner join te_pr_programs_te_ba_batch_1_c as p on p.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id where b.id='".$bean->oldbackup."' and b.deleted=0";
+		  $programmeOld="select p.te_pr_programs_te_ba_batch_1te_pr_programs_ida as id from te_ba_batch as b inner join te_pr_programs_te_ba_batch_1_c as p on p.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id where b.id='".$bean->old_batch_records."' and b.deleted=0";
 		 $programObj=$db->query($programmeOld);
 		 $programObjOld=$db->fetchByAssoc($programObj);
 		
@@ -42,11 +42,11 @@ class BatchTransferRequest{
 			
 		}
 		
-		$sql="select name from te_ba_batch where id='".$bean->te_student_batch_id_c."' and deleted=0";
+		  $sql="select name from te_ba_batch where id='".$bean->old_batch_records."' and deleted=0"; 
 		$programObj=$db->query($sql);
 		$data=$db->fetchByAssoc($programObj);
 		
-		$bean->old_batch=$data['name'];
+		$bean->old_batch_records=$data['name'];
 			
 	}		
 }
