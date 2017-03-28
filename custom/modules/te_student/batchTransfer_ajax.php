@@ -16,6 +16,7 @@ switch ($_REQUEST['type']) {
         if($data && count($data)>0){
 			
 			$batches=$studentObj->getStudentBatch($data->id);
+			 
 			$isTransfer=1;
 			if($batches['te_student_batch']>date("Y-m-d")){
 				$isTransfer=0;
@@ -28,9 +29,9 @@ switch ($_REQUEST['type']) {
 			
 			
 			
-			echo json_encode(array('result'=>array('id'=>$data->id,'name'=>$data->name,'email'=>$data->email,'status'=>$data->status),'programme'=>$programm,'selbatch'=>$selBatch,'batch'=>array('id'=>$batches['id'],'name'=>$batches['name'],'id_org'=>$batches['batch_id'],'is_transfer'=>$isTransfer)));
+			echo json_encode(array('result'=>array('id'=>$data->id,'name'=>$data->name,'email'=>$data->email,'status'=>$data->status),'programme'=>$programm,'selbatch'=>$selBatch,'batch'=>array('id'=>$batches['id'],'name'=>$batches['name'],'id_org'=>$batches['batch_id'],'is_transfer'=>$isTransfer),'currentbatchid'=>$batches['id']));
 		}else{
-			echo json_encode(['result'=>array(),'batch'=>array(),'programme'=>array(),'selbatch'=>array()]);die;	
+			echo json_encode(['result'=>array(),'batch'=>array(),'programme'=>array(),'selbatch'=>array(),'currentbatchid'=>'']);die;	
 		}
         break;
    

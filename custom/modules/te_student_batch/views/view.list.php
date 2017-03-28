@@ -416,22 +416,32 @@ class te_student_batchViewList extends ViewList
 			$dropconv=$obj->newDropOut($user_ids);
 			$dropconCall=$obj->newDropOutCallcenter($user_ids);
 			$myRefrals=$obj->getMyreferals($current_user->id);
-			$newreg='<div class="col-md-3 text-center tile_stats_counts">
+			$approved=$obj->approvedTransfer($user_ids);
+			$dropped=$obj->droppedTransfer($user_ids);
+			$newreg='<div class="col-md-2 text-center tile_stats_counts">
 						<div class="count"><a href="index.php?action=seen&type=new&module=te_student_batch">'.intval($newconv['newconv']).'</a></div>
 						<span class="count_top"> New Conversion</span>
 					</div>';
-			$newreg .='<div class="col-md-3 text-center tile_stats_counts">
+			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
 						<div class="count"><a href="index.php?action=seen&type=dropout&module=te_student_batch">'.intval($dropconv['newconv']).'</a></div>
 						<span class="count_top"> Drop Out</span>
 					</div>';
-			$newreg .='<div class="col-md-3 text-center tile_stats_counts">
+			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
 						<div class="count"><a href="index.php?action=seen&type=call_dropout&module=te_student_batch">'.intval($dropconCall['newconv']).'</a></div>
 						<span class="count_top"> Call Center Drop Out</span>
 					</div>';
-			$newreg .='<div class="col-md-3 text-center tile_stats_counts">
+			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
 						<div class="count"><a href="index.php?action=seen&type=refral&module=te_student_batch">'.intval($myRefrals['newconv']).'</a></div>
 						<span class="count_top"> My Referrals</span>
 					</div>';
+			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="index.php?action=seen&type=transfer&module=te_student_batch">'.intval($approved['newconv']).'</a></div>
+						<span class="count_top"> Approved Transfer</span>
+					</div>';
+			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="index.php?action=seen&type=dropapprove&module=te_student_batch">'.intval($dropped['newconv']).'</a></div>
+						<span class="count_top"> Approved Dropout</span>
+					</div>';		
 			$ss->assign("statusWiseCount",$newreg);
 			 
 			//$ss->assign("csshack",'leadpage');

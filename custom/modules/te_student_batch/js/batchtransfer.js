@@ -4,6 +4,7 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 	$scope.req={};
 	$scope.req.newprogram='';
 	$scope.req.newbatch='';
+	$scope.req.cbid='';
 	$scope.batch={};
 	$scope.groupProgram={};
 	$scope.groupBatch={};	 
@@ -28,7 +29,7 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 		$http({
 			url: 'index.php?module=te_student&action=transferbatchrequest&to_pdf=1', 
 			method: "POST",
-			params: {student_id: $scope.results.id,old_batch: $scope.batch.id_org,new_batch: $scope.req.newbatch,student_country:'india'}
+			params: {cbid:$scope.req.cbid , student_id: $scope.results.id,old_batch: $scope.batch.id_org,new_batch: $scope.req.newbatch,student_country:'india'}
 		 }).success(function(data, status) {
 			if(data.status=='queued'){
 				window.location.href="index.php?module=te_student_batch&action=index&parentTab=SRM";
@@ -67,6 +68,7 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 			$scope.groupProgram=data.programme;
 			$scope.groupBatch=data.selbatch;
 			$scope.isprogramme=0;
+			$scope.req.cbid=data.currentbatchid;
 			
 			$('#studentModal').modal('show',{
 				backdrop: 'static',

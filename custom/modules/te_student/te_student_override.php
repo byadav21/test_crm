@@ -241,6 +241,40 @@ class te_student_override extends te_student {
 		$programObj =$this->dbinstance->query($sql);
 	}
 	
+	function approvedTransfer($user_ids=''){
+	 
+		$sql="select count(te_student_batch.id) as newconv from te_student_batch inner join te_transfer_batch on te_transfer_batch.batch_id_rel=te_student_batch.id ";
+		if($user_ids) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c "; 
+		
+		$sql .=" where te_transfer_batch.is_new_approved='1' and te_student_batch.deleted=0 and te_transfer_batch.deleted=0 ";//and created_by in ('".$user_ids."')";
+		
+		if($user_ids){
+				$sql .= " and tsaa.assigned_user_id in ('".$user_ids."')";
+		}
+		
+		 
+		
+		$programObj =$this->dbinstance->query($sql);
+		return $this->dbinstance->fetchByAssoc($programObj);
+		
+	}
+	
+	function droppedTransfer($user_ids=''){
+	 
+		$sql="select count(te_student_batch.id) as newconv, te_student_batch.leads_id from te_student_batch ";
+		if($user_ids) $sql .=" inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c "; 
+		
+		$sql .=" where te_student_batch.is_new_approved='1' and te_student_batch.deleted=0 ";//and created_by in ('".$user_ids."')";
+		
+		if($user_ids){
+				$sql .= " and tsaa.assigned_user_id in ('".$user_ids."')";
+		}
+		
+		$programObj =$this->dbinstance->query($sql);
+		return $this->dbinstance->fetchByAssoc($programObj);
+		
+	}
+	
 	function newConversion($user_ids=''){
 	 
 		$sql="select count(te_student_batch.id) as newconv, te_student_batch.leads_id from te_student_batch ";
