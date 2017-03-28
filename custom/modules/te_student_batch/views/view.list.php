@@ -15,7 +15,19 @@ class te_student_batchViewList extends ViewList
     }
 	function listViewProcess(){
 		global $current_user,$db;
+    $this->report_to_id[]=$current_user->id;
+    $reporting_UserIds = $this->reportingUser($current_user->id);
+    $uid=$this->report_to_id;
+    $user_ids = "'" . implode("','", $uid) . "'";
 		$this->processSearchForm();
+    if($current_user->is_admin==0){
+      if($this->where!=""){
+        $this->where .= " AND te_student_batch.assigned_user_id IN($user_ids)";
+      }
+      else{
+        $this->where .= " te_student_batch.assigned_user_id IN($user_ids)";
+      }
+    }
 		/* if($current_user->designation=="BUH"){
 			if($this->where!="")
 				$this->where .= " AND te_student_batch.dropout_status ='Pending'";
@@ -38,9 +50,23 @@ class te_student_batchViewList extends ViewList
 			echo $this->lv->display();
 		}
  	}
- 	
+
+  function reportingUser($currentUserId){
+		$userObj = new User();
+		$userObj->disable_row_level_security = true;
+		$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+		if(!empty($userList)){
+			foreach($userList as $record){
+				if(!empty($record->reports_to_id) && !empty($record->id)){
+					$this->report_to_id[] = $record->id;
+					$this->reportingUser($record->id);
+				}
+			}
+		}
+	}
+  
    public function displayHeader(){
-	   
+
 	      global $theme;
         global $max_tabs;
         global $app_strings;
@@ -400,13 +426,13 @@ class te_student_batchViewList extends ViewList
 
 // Show the custom panel in the left panel
 
-			 
+
 			global $current_user;
 			$currentUserId = $current_user->id;
 			$obj=new te_student_override();
-							 
+
 			$currentUserId = $current_user->id;
-			$reportingUserIds = array();			 
+			$reportingUserIds = array();
 			$obj->reportingUser($currentUserId);
 			$obj->report_to_id[$currentUserId] = $current_user->name;
 			$reportingUserIds = $obj->report_to_id;
@@ -441,16 +467,16 @@ class te_student_batchViewList extends ViewList
 			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
 						<div class="count"><a href="index.php?action=seen&type=dropapprove&module=te_student_batch">'.intval($dropped['newconv']).'</a></div>
 						<span class="count_top"> Approved Dropout</span>
-					</div>';		
+					</div>';
 			$ss->assign("statusWiseCount",$newreg);
-			 
+
 			//$ss->assign("csshack",'leadpage');
 			//$ss->assign("csshack",'leadpage');
-		
+
 
         }
 
-		
+
 		//~ echo $test;die;
         if ( isset($extraTabs) && is_array($extraTabs) ) {
             // Adding shortcuts array to extra menu array for displaying shortcuts associated with each module
@@ -501,25 +527,25 @@ class te_student_batchViewList extends ViewList
                 }
             }
         }
-	   
-	   
-	   
-		
-	} 	
 
- 	
- 	
+
+
+
+	}
+
+
+
 }
 
 //tpl fun
 function getisSent($id){
-	global $current_user;	 
+	global $current_user;
 	$obj=new  te_student_override();
 	//get Student ID
 	$sid=$obj->getStudentID($id);
- 
+
 	$data=$obj->getApproval($sid['sid']);
 	echo (!$data || !$sid['sid']) ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\''. $sid['sid'] .'\')">Transfer Batch</a>' : 'Pending';
-	
-	
+
+
 }
