@@ -60,7 +60,19 @@ $(function(){
 })
 </script> 	    	
       	
-<?php      	
+<?php  
+	if(isset($_REQUEST['te_student_te_student_payment_1_name'])){
+		global $db;
+		
+			$comp = new te_student();
+			$comp->retrieve($_REQUEST['parent_id']);
+				$batchSql="SELECT sb.id,b.name FROM te_student_te_student_batch_1_c AS sbr INNER JOIN te_student_batch AS sb on sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id AND sbr.te_student_te_student_batch_1te_student_ida='".$comp->id."' INNER JOIN te_ba_batch AS b ON b.id=sb.te_ba_batch_id_c ORDER BY sb.date_entered DESC LIMIT 0,1";
+				$batchObj =$db->query($batchSql);
+				$row =$db->fetchByAssoc($batchObj);
+				$this->bean->batch_id =$row['name'];
+				$this->bean->te_student_batch_id_c=$row['id'];
+				 
+  }
 		parent::display();
     }
 }
