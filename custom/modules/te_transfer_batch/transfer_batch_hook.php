@@ -41,12 +41,11 @@ class BatchTransferRequest{
 
 
 		}
+		$sql="SELECT b.name FROM te_ba_batch AS b INNER JOIN `te_transfer_batch` AS tb ON b.id=tb.`old_batch_records`  WHERE tb.id='".$bean->id."'";
+	$programObj=$db->query($sql);
+	$data=$db->fetchByAssoc($programObj);
 
-		  $sql="select name from te_ba_batch where id='".$bean->old_batch_records."' and deleted=0";
-		$programObj=$db->query($sql);
-		$data=$db->fetchByAssoc($programObj);
-
-		$bean->old_batch_records=$data['name'];
+	$bean->old_batch=$data['name'];
 
 	}
 }
