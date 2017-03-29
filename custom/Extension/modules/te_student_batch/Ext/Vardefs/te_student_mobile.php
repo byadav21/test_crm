@@ -10,10 +10,18 @@ $dictionary['te_student_batch']['fields']['mobile'] = array(
 	'studio' => 'visible',
 );
 
+$dictionary['te_student_batch']['fields']['is_new_approved'] = array(
+	'required' => false,
+	'name' => 'is_new_approved',
+	'vname' => 'is_new_approved',
+	'type' => 'int',
+	'audited' => false,
+	'massupdate' => false,	 
+	'studio' => 'visible',
+);
 
-$dictionary['te_student_batch']['fields']['is_new_approved']['name']='is_new_approved';
-$dictionary['te_student_batch']['fields']['is_new_approved']['vname']='is_new_approved';
-$dictionary['te_student_batch']['fields']['is_new_approved']['type']='int';
+
+
 
 
 
