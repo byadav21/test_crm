@@ -26,9 +26,13 @@ class te_student_batchViewDropoutrequest extends SugarView {
 		if($current_user->designation=="BUH"){
 			$studentBatchSql="SELECT sb.*,s.name as student,s.id as idstudent FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status='Pending'  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
 			$s_history="SELECT sb.*,s.name as student,s.id as idstudent FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE (sb.dropout_status='Approved' OR sb.dropout_status='Rejected')  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
-		
-			
-		}else{
+
+
+		}
+		elseif ($current_user->is_admin==1) {
+			$studentBatchSql="SELECT sb.*,s.name as student,s.id as idstudent FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status IN('Rejected','Approved','Pending')  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
+		}
+		else{
 			$user_id = $current_user->id;
 			$users=$this->reportingUser($user_id);
 			$uid=$this->report_to_id;
@@ -40,10 +44,10 @@ class te_student_batchViewDropoutrequest extends SugarView {
 			}
 
 			$users_str = "'".implode("','", $uid)."'";
-			$studentBatchSql="SELECT sb.*,s.name as student,s.id as idstudent FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.deleted=0 AND sb.assigned_user_id IN($users_str) ORDER BY sb.date_entered DESC,sb.date_modified DESC";
+			$studentBatchSql="SELECT sb.*,s.name as student,s.id as idstudent FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status IN('Rejected','Approved','Pending') AND sb.deleted=0 AND sb.assigned_user_id IN($users_str) ORDER BY sb.date_entered DESC,sb.date_modified DESC";
 		}
 		$studentBatchObj =$db->query($studentBatchSql);
-		
+
 
 		$dropout_status_list =$GLOBALS['app_list_strings']['dropuout_status_list'];
 		$dropout_type_list =$GLOBALS['app_list_strings']['student_batch_dropout_list'];
@@ -60,10 +64,10 @@ class te_student_batchViewDropoutrequest extends SugarView {
 				else
 					$dropout_status.="<option value='".$key."'>".$value."</option>";
 			}
-			
+
 			$dropout_status.="</select>";
-			
-			
+
+
 			$dropout_type="<select name='dropout_type' id='dropout_type_".$rowcount."'  style='width:90PX !IMPORTANT'>";
 			foreach($dropout_type_list as $key=>$value){
 				if($row['dropout_type']==$key)
@@ -72,17 +76,17 @@ class te_student_batchViewDropoutrequest extends SugarView {
 					$dropout_type.="<option value='".$key."'>".$value."</option>";
 			}
 			$dropout_type.="</select>";
-			
-			
-			
-			
+
+
+
+
 			if($current_user->designation=="BUH"){
 				$row['dropout_type']=$dropout_type;
 				$row['dropout_status']=$dropout_status;
 			}else{
 				$row['dropout_type']=$dropout_type_list[$row['dropout_type']];
 			}
-			
+
 			$resultSet[]=$row;
 		}
 		if($s_history){
@@ -94,15 +98,15 @@ class te_student_batchViewDropoutrequest extends SugarView {
 				$resultSethis[]=$rowhis;
 			}
 		}
-		
+
 		//New code
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("resultSet",$resultSet);
 		$sugarSmarty->assign("resultSethis",$resultSethis);
 		$sugarSmarty->assign("designation",$current_user->designation);
-		
+
 		$sugarSmarty->assign("current_user_id",$current_user->id);
-		
+
 		$sugarSmarty->display('custom/modules/te_student_batch/tpls/dropoutapprove.tpl');
 	}
 	function reportingUser($currentUserId){
