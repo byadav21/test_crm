@@ -6,9 +6,11 @@
 	
 	try{
 		
-		$dataPOST = trim(file_get_contents('php://input'));
-		if($dataPOST){
-			$xmlData = simplexml_load_string($dataPOST);
+		$dataPOST = $_REQUEST;
+	 
+		if($dataPOST['requestXml']){
+			 
+			$xmlData = simplexml_load_string(html_entity_decode($dataPOST['requestXml']));			 
 			if(isset($xmlData->command) && $xmlData->command=='login'){ 
 			
 				if(isset($xmlData->userId) && isset($xmlData->password)){
@@ -50,18 +52,14 @@
 						$sessionArray=json_decode($data);
 						//print_r($sessionArray);
 						if(isset($sessionArray->id)){
-							echo '<response>
-								<status>success</status>
-								<message>Auth Successful</message>
-								<crmSessionId>'. $sessionArray->id  .'</crmSessionId>
-						    </response>'; exit();
+							echo '<response><status>success</status><message>Auth Successful</message><crmSessionId>'. $sessionArray->id  .'</crmSessionId></response>'; exit();
 							
 						}else{
 							
 							$error=$sessionArray->description;
 						}
 					
-						;
+						 
 				}else{
 					$error="Invalid XML format";
 				}
