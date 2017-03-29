@@ -86,7 +86,7 @@
 			<div class="col-xs-1  text-center div"><a href="index.php?searchFormTab=basic_search&module=te_student_batch&batch_basic=<% obj.bname %>&action=index&query=true" ><% obj.activeStudent %> </a></div>
 			<div class="col-xs-1  text-center div"><a href="index.php?searchFormTab=basic_search&module=te_student_batch&batch_basic=<% obj.bname %>&action=index&query=true&status_basic[]=Dropout" ><% obj.dropOutStudent %> </a></div>
 			<div class="col-xs-2  text-center div"><% obj.totalamt %></div> 
-			<div class="col-xs-2 divlast text-center div"><a href="index.php?module=te_student&action=listrevenue"><% obj.amt %></a></div> 
+			<div class="col-xs-2 divlast text-center div"><a href="index.php?module=te_student&action=listrevenue&records=<% obj.id %>"><% obj.amt %></a></div> 
 						
 						
 		</div>
@@ -96,4 +96,5 @@
 
 </div>
 <div id="loadingPages" align="center" style="vertical-align:middle;opacity:0"><img src="themes/default/images/img_loading.gif?v=pjh5Q-Y5ZM5LOLJN0GRbHQ" align="absmiddle"> <b>Loading results, please wait...</b></div>
+
 <script type='text/javascript' src='custom/modules/te_student_batch/js/listrevenueSummary.js'></script>

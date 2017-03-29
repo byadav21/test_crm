@@ -124,4 +124,12 @@ $instLabels=$obj->getAllStudentInstallmentLabel();
 
 </div>
 <div id="loadingPages" align="center" style="vertical-align:middle;opacity:0"><img src="themes/default/images/img_loading.gif?v=pjh5Q-Y5ZM5LOLJN0GRbHQ" align="absmiddle"> <b>Loading results, please wait...</b></div>
+<script>var batch=0</script>
+<?php
+ if(isset($_GET['records']) && $_GET['records']){
+	 echo '<script> batch="' . $_GET['records'] . '"</script>';
+ }
+
+?>
+
 <script type='text/javascript' src='custom/modules/te_student/js/revenue.js'></script>

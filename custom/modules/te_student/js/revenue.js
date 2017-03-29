@@ -3,7 +3,7 @@ app.controller("revenue", function($rootScope,$scope, $http) {
 	$scope.results={};
 	$scope.request={};
 	$scope.request.email='';
-	$scope.request.batch='';
+	$scope.request.batch=batch;
 	$scope.request.installment='';
 	$scope.page=1;
 	$scope.isload=0;

@@ -28,4 +28,7 @@ $user_ids = implode("', '", array_keys($reportingUserIds));
  }else if($_GET['type']=='refral'){
 	//  $obj->setSeenRefrals('is_new_referalls','leads',$user_ids);
 	   header('Location: index.php?module=te_student_batch&action=viewmyrefferal');
- }	 
+ }else{
+	 
+	 header('Location: index.php?module=te_transfer_batch');
+ } 

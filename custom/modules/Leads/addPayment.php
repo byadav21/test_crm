@@ -1,6 +1,7 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
+require_once('custom/modules/te_Api/te_Api.php');
 class addPaymentClass{
 
 	function addPaymentFunc($bean, $event, $argument){
@@ -177,7 +178,43 @@ class addPaymentClass{
 				$GLOBALS['db']->query("update leads set is_new_dropout=1 where id='{$bean->id}'");
 				
 			}	
+		}elseif( isset($_REQUEST['import_module']) && $_REQUEST['module']=="Import"){
+			
+				$api=new te_Api_override();
+				$session=(!isset($_SESSION['AMUYSESSION']) || $_SESSION['AMUYSESSION']=='')? $api->doLogin() : 	$_SESSION['AMUYSESSION'];				 
+					 
+				$data=[];							
+				$data['sessionId']=$session;
+				$data['properties']=array('update.customer'=>true,'migrate.customer'=>true);
+				$customerRecords=[];
+				if($bean->first_name." ".$bean->last_name) $customerRecords['name']=$bean->first_name." ".$bean->last_name;
+				if($bean->first_name )  $customerRecords['first_name'] = $bean->first_name;
+				if($bean->last_name )  $customerRecords['last_name'] = $bean->last_name;
+				if($bean->email1 )  $customerRecords['email'] = $bean->email1;
+				if($bean->phone_mobile )  $customerRecords['phone1'] = $bean->phone_mobile;				
+				if($bean->id )  $customerRecords['lead_id'] = $bean->id;
+				$data['customerRecords'][]=$customerRecords;			 
+				$error=false; 
+				
+				if($session){
+					$error=(!$api->uploadContacts($data))?false:true;
+				}
+				
+				if(!$error){
+					$session=$api->doLogin();
+					$data['sessionId']=$session;
+					if(!$api->uploadContacts($data)){
+					   $apiSave=new te_Api_override();	
+					   $apiSave->name=$bean->id;
+					   $apiSave->description=$api->importError;
+					   $apiSave->save();
+					}
+				}		
+				 
 		}
+		
+		
+		
 		if(!empty($bean->payment_type)){
 		#update student payment history
 		$id=create_guid();
