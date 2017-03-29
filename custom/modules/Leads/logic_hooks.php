@@ -15,5 +15,5 @@ $hook_array['after_save'][] = Array(2, 'add Disposition details', 'custom/module
 $hook_array['after_retrieve'][] = Array(23, 'leads details', 'custom/modules/Leads/program_istitute.php','detail_view','detail_pro_ins');
 $hook_array['process_record'] = Array(); 
 $hook_array['process_record'][] = Array(2, 'statusoleads', 'custom/modules/Leads/lead_report.php','listviewlead', 'lead_report');
-
+$hook_array['after_relationship_add'][] = Array(8, 'abcd', 'custom/modules/Leads/refree_lead.php','Alogic', 'Bmethod'); 
 ?>

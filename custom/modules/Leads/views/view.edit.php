@@ -407,9 +407,26 @@ if($("#status_description").val() === "Converted") {
 
 
      </script>
+<?php /* Manish @28MArch */
 
+		if(isset($_REQUEST['full_form'])){
+			
+			$instituteObj = new Lead();
+ 			$institute=$instituteObj->retrieve($_REQUEST['relate_id']);
+			$this->bean->lead_source ='Referrals';
+			$this->bean->parent_type = 'Leads';
+			$this->bean->parent_id =$institute->id;
+			$this->bean->parent_name =$institute->first_name;
+?>
+<script>
+$(function(){
+	$("input[name=assigned_user_name]").val(' ');
+	$("#btn_clr_assigned_user_name").trigger('click');
+});
+</script>
 
-<?php
+<?php }
+
 
 		if(isset($_REQUEST['addreferral']) && $_REQUEST['addreferral']=='true'){
 			$this->bean->lead_source = 'Referrals';
