@@ -67,7 +67,7 @@ class te_Api_override extends te_Api {
 		 
 		if(isset($jsonEncodedData->sessionId) && !empty($jsonEncodedData->sessionId)){
 			
-			$_SESSION['AMUYSESSION']=$jsonEncodedData->sessionId;			
+			//$_SESSION['AMUYSESSION']=$jsonEncodedData->sessionId;			
 			return $jsonEncodedData->sessionId;
 			
 		}else{
@@ -84,15 +84,11 @@ class te_Api_override extends te_Api {
 			$request['campaignId']=$sugar_config['ameyo_campaigainID'];
 			$request['status']='NOT_TRIED';
 			$request['leadId']=$sugar_config['ameyo_leadID'];	
-			//echo $server. urlencode(json_encode($request));die;		 
-		    $response= @file_get_contents($server. urlencode(json_encode($request)));			
-			$responses=json_decode($response);			
-			if(isset($responses->beanResponse[0]->inserted) && $responses->beanResponse[0]->inserted==true){
-			  return true;
-			}else{
-				$this->importError=$response;
-				return false;
-			}
+	 
+		    $response= file_get_contents($server. urlencode(json_encode($request)));			
+			$responses=json_decode($response);		
+			return $responses;
+
 	}
 	
 }

@@ -36,3 +36,8 @@ $dictionary["Lead"]["fields"]["leads_leads_1leads_ida"] = array (
   'side' => 'right',
   'vname' => 'LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE',
 );
+$dictionary["Lead"]["fields"]["dristi_customer_id"] = array (
+  'name' => 'dristi_customer_id',
+  'type' => 'varchar',
+  
+);

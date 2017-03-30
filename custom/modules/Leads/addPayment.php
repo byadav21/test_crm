@@ -178,7 +178,8 @@ class addPaymentClass{
 				$GLOBALS['db']->query("update leads set is_new_dropout=1 where id='{$bean->id}'");
 				
 			}	
-		}elseif( isset($_REQUEST['import_module']) && $_REQUEST['module']=="Import"){
+		}
+		/*elseif( isset($_REQUEST['import_module']) && $_REQUEST['module']=="Import"){
 			
 				$api=new te_Api_override();
 				$session=(!isset($_SESSION['AMUYSESSION']) || $_SESSION['AMUYSESSION']=='')? $api->doLogin() : 	$_SESSION['AMUYSESSION'];				 
@@ -211,7 +212,7 @@ class addPaymentClass{
 					}
 				}		
 				 
-		}
+		}*/
 		
 		
 		

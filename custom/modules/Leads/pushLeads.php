@@ -1,18 +1,72 @@
 <?php
-//~ echo "<pre>";
+
+require_once('custom/modules/te_Api/te_Api.php');
+$api=new te_Api_override();
+global $db;
 
 
+$customerRecords=[];
+$sql="SELECT l.id,l.first_name,l.last_name,l.phone_mobile,l.phone_home,l.phone_work,l.phone_other,e.email_address  FROM leads l
+ LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id AND el.bean_module='Leads' AND el.deleted=0
+LEFT JOIN email_addresses e ON el.email_address_id = e.id AND e.deleted=0
+WHERE l.deleted =0  AND l.duplicate_check=1   AND l.status_description= 'New Lead' AND l.neoxstatus='0'  AND (l.assigned_user_id= 'NULL' OR l.assigned_user_id ='' OR l.assigned_user_id IS NULL) LIMIT 30";
+
+$data=[];
+$allInserted=[];
+$result = $db->query($sql);
+if($db->getRowCount($result)>0){
+	while($row = $db->fetchByAssoc($result)){
+		$allInserted[]=$row;
+		if($row['first_name'] || $row['last_name']) $customerRecords['name']= $row['first_name']." ". $row['last_name'];
+		if($row['first_name'] )  $customerRecords['first_name'] = $row['first_name'];
+		if($row['last_name'] )  $customerRecords['last_name'] = $row['last_name'];
+		if($row['email_address'] )  $customerRecords['email'] = $row['email_address'];
+		if($row['phone_mobile'] )  $customerRecords['phone1'] = $row['phone_mobile'];
+		if($row['phone_home'] )  $customerRecords['phone2'] = $row['phone_home'];
+		if($row['phone_work'] )  $customerRecords['phone3'] = $row['phone_work'];
+		if($row['phone_other'] )  $customerRecords['phone4'] = $row['phone_other'] ;	 
+		if($row['id'] )  $customerRecords['lead_refrence'] = $row['id'];		 			
+	 
+		$data['customerRecords'][]=$customerRecords;		
+		
+	}
+	
+	
+	$session=$api->doLogin();								
+	$data['sessionId']=$session;
+	$data['properties']=array('update.customer'=>true,'migrate.customer'=>true);
+	if(!$session){
+		echo 'Invalid Session'; exit();
+	}	
+	$responses=$api->uploadContacts($data)	;
+	if(isset($responses->beanResponse) && count($responses->beanResponse)>0){
+		
+		foreach($responses->beanResponse as $key=>$res){
+			if($res->inserted==1 && $res->resultTypeString=='ADDED'){
+				$update = "UPDATE leads set dristi_customer_id='".  $res->customerId ."', neoxstatus =1 WHERE id = '".$allInserted[$key]['id']."'";
+				$db->query($update);
+				
+				
+			}
+		}
+		
+	}	
+	
+}	
+
+exit();
+
+
+/*
 $server_ip = $GLOBALS['sugar_config']['neox']['server_ip'];
 $neoxKey   		= $GLOBALS['sugar_config']['neox']['secret_key'];
-global $db;
+
 
 //~ $URL = "http://$server_ip:9090/admin/ec_pass_list_data.php?secret_key=".$neoxKey;
  
 $URL  = "http://$server_ip:9090/admin/ec_pass_list_data.php?secret_key=".$neoxKey."&duplicate_check_list=AVOID_DUPLICATE";
-
-/*$sql = "SELECT l.*,lc.*,e.email_address FROM leads l LEFT JOIN leads_cstm lc on l.id=lc.id_c LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id LEFT JOIN email_addresses e ON el.email_address_id = e.id WHERE l.deleted =0 AND el.deleted=0 AND e.deleted=0 AND l.status_description= 'New Lead' AND el.bean_module='Leads' AND l.neoxstatus='0' AND (assigned_user_id= 'NULL' OR assigned_user_id ='' OR assigned_user_id IS NULL) LIMIT 50";*/ 
-
-$sql = "SELECT l.*,lc.*,e.email_address,te_ba_batch.name as batch_name,te_pr_programs.name as program_name FROM leads l LEFT JOIN leads_cstm lc on l.id=lc.id_c LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id LEFT JOIN email_addresses e ON el.email_address_id = e.id LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c=te_ba_batch.id LEFT JOIN te_pr_programs_te_ba_batch_1_c ON te_ba_batch.id=te_pr_programs_te_ba_batch_1_c.te_pr_programs_te_ba_batch_1te_ba_batch_idb LEFT JOIN te_pr_programs ON te_pr_programs_te_ba_batch_1_c.te_pr_programs_te_ba_batch_1te_pr_programs_ida=te_pr_programs.id WHERE l.deleted =0 AND l.duplicate_check=1 AND el.deleted=0 AND e.deleted=0 AND l.status_description= 'New Lead' AND el.bean_module='Leads' AND l.neoxstatus='0' AND (l.assigned_user_id= 'NULL' OR l.assigned_user_id ='' OR l.assigned_user_id IS NULL) LIMIT 50";
+*/ 
+/*$sql = "SELECT l.*,lc.*,e.email_address,te_ba_batch.name as batch_name,te_pr_programs.name as program_name FROM leads l LEFT JOIN leads_cstm lc on l.id=lc.id_c LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id LEFT JOIN email_addresses e ON el.email_address_id = e.id LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c=te_ba_batch.id LEFT JOIN te_pr_programs_te_ba_batch_1_c ON te_ba_batch.id=te_pr_programs_te_ba_batch_1_c.te_pr_programs_te_ba_batch_1te_ba_batch_idb LEFT JOIN te_pr_programs ON te_pr_programs_te_ba_batch_1_c.te_pr_programs_te_ba_batch_1te_pr_programs_ida=te_pr_programs.id WHERE l.deleted =0 AND l.duplicate_check=1 AND el.deleted=0 AND e.deleted=0 AND l.status_description= 'New Lead' AND el.bean_module='Leads' AND l.neoxstatus='0' AND (l.assigned_user_id= 'NULL' OR l.assigned_user_id ='' OR l.assigned_user_id IS NULL) LIMIT 50";
 
 $result = $db->query($sql);
 $filename="pushLeadNeox";
@@ -86,9 +140,7 @@ else{
 
 
 function multiRequest($data, $options = array()) {
-	/*echo "<pre>";
-	print_r($data);
-	exit();*/
+	 
 	$result=array();
  foreach ($data as $id => $d) {
 
@@ -110,6 +162,4 @@ sleep(1);
 return $result;
 }
  
- 
-
-?>
+ */
