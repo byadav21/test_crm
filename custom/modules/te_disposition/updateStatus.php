@@ -1,5 +1,7 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+require_once('custom/modules/te_Api/te_Api.php');
+
 class updateStatusClass{
 	
 	function updateStatusFunc($bean, $event, $argument){
@@ -21,6 +23,37 @@ class updateStatusClass{
 		}
 		
 	}
+	
+	function sendDisposition($bean, $event, $argument){
+		
+		$ss = "SELECT te_disposition_leadsleads_ida FROM te_disposition_leads_c WHERE te_disposition_leadste_disposition_idb = '".$bean->id."' AND deleted =0";
+		$rr = $GLOBALS['db']->query($ss);
+		if($GLOBALS['db']->getRowCount($rr)>0){
+			$ll = $GLOBALS['db']->fetchByAssoc($rr);
+			  $sql = " select dristi_request from leads WHERE id ='".$ll['te_disposition_leadsleads_ida']."'";
+			$sqlData=$GLOBALS['db']->query($sql);
+		     
+			if($GLOBALS['db']->getRowCount($sqlData)>0){
+					$dristiReq = $GLOBALS['db']->fetchByAssoc($sqlData);
+					 
+					if($dristiReq && $dristiReq['dristi_request']){
+					   $arrReq=(array)json_decode(html_entity_decode($dristiReq['dristi_request']));
+					   //echo '<pre>'; print_r((array)$arrReq);
+					   if($arrReq && count($arrReq)>2){
+						   $drobj= new te_Api_override();
+						   $session=$drobj->doLogin();
+						   if($session){
+								 $drobj->sendDisposition($session,$arrReq);
+						   }
+					   }
+					   
+					   	  
+					}
+			}	
+			
+		}
+	}
+	
 	
 	function showDates($bean, $event, $argument){
 		

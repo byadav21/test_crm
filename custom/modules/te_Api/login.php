@@ -3,6 +3,7 @@
 	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 	$error='';
 	header('Content-type: application/xml');
+	require_once('custom/modules/te_Api/te_Api.php');
 	
 	try{
 		
@@ -48,12 +49,19 @@
 						curl_setopt($ch, CURLOPT_POST, true);
 						curl_setopt($ch, CURLOPT_POSTFIELDS, $post);					
 						$data = curl_exec($ch);
-						
+						//print_r($data);
 						$sessionArray=json_decode($data);
 						//print_r($sessionArray);
 						if(isset($sessionArray->id)){
-							echo '<response><status>success</status><message>Auth Successful</message><crmSessionId>'. $sessionArray->id  .'</crmSessionId></response>'; exit();
-							
+			
+							$obj= new te_Api_override();
+							$obj->name=$sessionArray->id;							
+							$obj->description=base64_encode(serialize(array(rand(100,500),base64_encode((String) $xmlData->password))));
+							if($obj->save()){
+								echo '<response><status>success</status><message>Auth Successful</message><crmSessionId>'. $sessionArray->id  .'</crmSessionId></response>'; exit();
+							}else{
+								$error="Error occured during saving session";
+							}
 						}else{
 							
 							$error=$sessionArray->description;

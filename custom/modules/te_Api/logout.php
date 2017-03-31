@@ -31,6 +31,10 @@
 							"rest_data" => $jsonEncodedData
 							);
 						
+						global $db;
+						$sesstodel=(String) $xmlData->crmSessionId;
+						$db->query("delete from te_API where name = '$sesstodel'");
+						
 						$ch = curl_init(); 
 						curl_setopt($ch, CURLOPT_URL, $url);
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
