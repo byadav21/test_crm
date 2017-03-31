@@ -22,6 +22,6 @@ if($_REQUEST['amyoaction']=='callStart'){
 	//header('Location: index.php?module=Leads&action=leadCRM&phone='.  $_REQUEST['phone'].'&crtObjectId='.  $_REQUEST['crtObjectId'].'&campaignId='.  $_REQUEST['campaignId'].'&customerId='.  $_REQUEST['customerId'].'&userId=' . $_REQUEST['userId']);
 	
 }else{
-	echo 'dash';
+	echo 'dasbutgaghh';
 	//header('Location: index.php');
 }
