@@ -6,12 +6,19 @@ class addPaymentClass{
 
 	function addPaymentFunc($bean, $event, $argument){
 		//echo $bean->primary_address_country.' state '.$bean->primary_address_state.' city '.$bean->primary_address_city;exit();
+		$primary_address_country=strtolower($bean->primary_address_country);
 		$paidAmount=0;
 		$student_id="";
 		$student_name="";
 		$student_email="";
 		$student_batch_id="";
-		$student_country="";
+		if(empty($primary_address_country) || $primary_address_country=='india'){
+			$student_country="india";
+		}
+		else{
+			$student_country=$primary_address_country;
+		}
+
 		if(!empty($bean->payment_type)||!empty($bean->date_of_payment)||!empty($bean->reference_number)){
 
 			$payment = new te_payment_details();
@@ -101,7 +108,7 @@ class addPaymentClass{
 						$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 						$studentBatchObj->study_kit_address_state=$bean->primary_address_state;
 						$studentBatchObj->study_kit_address_city=$bean->primary_address_city;
-						$studentBatchObj->study_kit_address_country=$bean->primary_address_country;
+						$studentBatchObj->study_kit_address_country=$student_country;
 						$studentBatchObj->te_student_te_student_batch_1te_student_ida=$duplicateStudent['id'];
 						$studentBatchObj->leads_id=$bean->id;
 						$studentBatchObj->save();
@@ -127,7 +134,7 @@ class addPaymentClass{
 					$studentObj->company=$bean->company_c;
 					$studentObj->state=$bean->primary_address_state;
 					$studentObj->city=$bean->primary_address_city;
-					$studentObj->country=$bean->primary_address_country;
+					$studentObj->country=$student_country;
 					$studentObj->education=$bean->education_c;
 					$studentObj->work_experience=$bean->work_experience_c;
 					$studentObj->functional_area=$bean->functional_area_c;
@@ -164,7 +171,7 @@ class addPaymentClass{
 					$studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 					$studentBatchObj->study_kit_address_state=$bean->primary_address_state;
 					$studentBatchObj->study_kit_address_city=$bean->primary_address_city;
-					$studentBatchObj->study_kit_address_country=$bean->primary_address_country;
+					$studentBatchObj->study_kit_address_country=$student_country;
 					$studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_id;
 					$studentBatchObj->leads_id=$bean->id;
 					$studentBatchObj->save();
@@ -172,19 +179,19 @@ class addPaymentClass{
 					$student_batch_id=$studentBatchObj->id;
 				}
 			}
-			
+
 			if($bean->status=='Dropout'){
-				
+
 				$GLOBALS['db']->query("update leads set is_new_dropout=1 where id='{$bean->id}'");
-				
-			}	
+
+			}
 		}
 		/*elseif( isset($_REQUEST['import_module']) && $_REQUEST['module']=="Import"){
-			
+
 				$api=new te_Api_override();
-				$session=(!isset($_SESSION['AMUYSESSION']) || $_SESSION['AMUYSESSION']=='')? $api->doLogin() : 	$_SESSION['AMUYSESSION'];				 
-					 
-				$data=[];							
+				$session=(!isset($_SESSION['AMUYSESSION']) || $_SESSION['AMUYSESSION']=='')? $api->doLogin() : 	$_SESSION['AMUYSESSION'];
+
+				$data=[];
 				$data['sessionId']=$session;
 				$data['properties']=array('update.customer'=>true,'migrate.customer'=>true);
 				$customerRecords=[];
@@ -192,30 +199,30 @@ class addPaymentClass{
 				if($bean->first_name )  $customerRecords['first_name'] = $bean->first_name;
 				if($bean->last_name )  $customerRecords['last_name'] = $bean->last_name;
 				if($bean->email1 )  $customerRecords['email'] = $bean->email1;
-				if($bean->phone_mobile )  $customerRecords['phone1'] = $bean->phone_mobile;				
+				if($bean->phone_mobile )  $customerRecords['phone1'] = $bean->phone_mobile;
 				if($bean->id )  $customerRecords['lead_id'] = $bean->id;
-				$data['customerRecords'][]=$customerRecords;			 
-				$error=false; 
-				
+				$data['customerRecords'][]=$customerRecords;
+				$error=false;
+
 				if($session){
 					$error=(!$api->uploadContacts($data))?false:true;
 				}
-				
+
 				if(!$error){
 					$session=$api->doLogin();
 					$data['sessionId']=$session;
 					if(!$api->uploadContacts($data)){
-					   $apiSave=new te_Api_override();	
+					   $apiSave=new te_Api_override();
 					   $apiSave->name=$bean->id;
 					   $apiSave->description=$api->importError;
 					   $apiSave->save();
 					}
-				}		
-				 
+				}
+
 		}*/
-		
-		
-		
+
+
+
 		if(!empty($bean->payment_type)){
 		#update student payment history
 		$id=create_guid();

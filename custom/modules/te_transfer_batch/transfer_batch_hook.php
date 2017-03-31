@@ -38,11 +38,14 @@ class BatchTransferRequest{
 
 			}
 
-
+			$programsql="SELECT b.name FROM te_ba_batch AS b INNER JOIN `te_transfer_batch` AS tb ON b.id=tb.`te_student_batch_id_c`  WHERE tb.id='".$bean->id."'";
 
 		}
-		$sql="SELECT b.name FROM te_ba_batch AS b INNER JOIN `te_transfer_batch` AS tb ON b.id=tb.`old_batch_records`  WHERE tb.id='".$bean->id."'";
-	$programObj=$db->query($sql);
+		else{
+			$programsql="SELECT b.name FROM te_ba_batch AS b INNER JOIN `te_transfer_batch` AS tb ON b.id=tb.`old_batch_records`  WHERE tb.id='".$bean->id."'";
+		}
+		
+	$programObj=$db->query($programsql);
 	$data=$db->fetchByAssoc($programObj);
 
 	$bean->old_batch=$data['name'];

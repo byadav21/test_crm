@@ -12,7 +12,19 @@ $transferDetails = $GLOBALS['db']->fetchByAssoc($transferObj);
 $old_batch_id=$transferDetails['te_student_batch_id_c'];
 $new_batch_id=$transferDetails['te_ba_batch_id_c'];
 $student_id=$transferDetails['te_student_id_c'];
-$student_country=$transferDetails['country'];
+$student_batch_id_old=$transferDetails['batch_id_rel'];
+$student_country=strtolower($transferDetails['country']);
+if($student_country=='india' || empty($student_country)){
+  $currency='INR';
+}
+else{
+  $currency='USD';
+}
+
+#find student old batch details
+$oldBatchSql="SELECT * FROM te_student_batch WHERE id='".$student_batch_id_old."' AND deleted=0";
+$oldBatchObj= $GLOBALS['db']->query($oldBatchSql);
+$oldBatchDetails = $GLOBALS['db']->fetchByAssoc($oldBatchObj);
 
 #If request is for Reject the case.
 if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"){
@@ -23,7 +35,9 @@ if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"
 }
 
 #create new student batch
-
+$srm_auto_ass_useridSql = "SELECT * FROM te_srm_auto_assignment WHERE te_ba_batch_id_c='".$new_batch_id."' AND deleted=0";
+$srm_auto_assObj= $GLOBALS['db']->query($srm_auto_ass_useridSql);
+$srm_auto_Details = $GLOBALS['db']->fetchByAssoc($srm_auto_assObj);
 #create batch of student
 /* $vendorSql = "SELECT id FROM te_vendor WHERE deleted=0 AND name='".$bean->vendor."'";
 $vendorObj= $GLOBALS['db']->query($vendorSql);
@@ -46,6 +60,17 @@ $studentBatchObj->te_pr_programs_id_c=$batchDetails['program_id'];
 $studentBatchObj->te_in_institutes_id_c=$batchDetails['institute_id'];
 //$studentBatchObj->te_vendor_id_c=$vendor['id'];
 $studentBatchObj->status="Active";
+if($srm_auto_Details){
+$studentBatchObj->assigned_user_id=$srm_auto_Details['assigned_user_id'];
+}
+if($oldBatchDetails){
+$studentBatchObj->study_kit_address=$oldBatchDetails['study_kit_address'];
+$studentBatchObj->study_kit_address_country=$oldBatchDetails['study_kit_address_country'];
+$studentBatchObj->study_kit_address_state=$oldBatchDetails['study_kit_address_state'];
+$studentBatchObj->study_kit_address_postalcode=$oldBatchDetails['study_kit_address_postalcode'];
+$studentBatchObj->study_kit_address_city=$oldBatchDetails['study_kit_address_city'];
+$studentBatchObj->leads_id=$oldBatchDetails['leads_id'];
+}
 $studentBatchObj->total_session_required=$batchDetails['total_sessions_planned'];
 $studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_id;
 $studentBatchObj->save();
@@ -53,16 +78,16 @@ $studentBatchObj->save();
 $student_batch_id=$studentBatchObj->id;
 
 #transfer payment from old batch to new batch
-$studentPaymentSql="SELECT SUM(te_student_payment_plan.paid_amount_inr) as total FROM te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$old_batch_id."' AND te_student_payment_plan.te_student_id_c='".$student_id."'";
-
+$studentPaymentSql="SELECT SUM(te_student_payment.amount) AS total FROM te_student_payment, te_student_te_student_payment_1_c WHERE te_student_payment.id = te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_payment.te_student_batch_id_c='".$student_batch_id_old."' AND te_student_payment.payment_realized=1";
 $studentPaymentObj= $GLOBALS['db']->query($studentPaymentSql);
 $studentPayment = $GLOBALS['db']->fetchByAssoc($studentPaymentObj);
+
 if(isset($studentPayment['total']) && $studentPayment['total']>0){
 	updateStudentPaymentPlan($new_batch_id,$student_id,$studentPayment['total'],$student_country);
 }
 #update new student payment history
 $id=create_guid();
-$insertSql="INSERT INTO te_student_payment SET id='".$id."', name='Transferred Payment', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".date('Y-m-d')."', amount='".$studentPayment['total']."', reference_number='Transferred Payment', payment_type='Transfer', payment_realized=1, transaction_id='0', payment_source='batch Id:".$old_batch_id."'";
+$insertSql="INSERT INTO te_student_payment SET id='".$id."', name='Transferred Payment', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".date('Y-m-d')."', amount='".$studentPayment['total']."', reference_number='Transferred Payment', payment_type='Transfer', payment_realized=1, transaction_id='0', payment_source='Batch Transfer'";
 $GLOBALS['db']->Query($insertSql);
 #Update relationship record of student payment history
 $insertRelSql="INSERT INTO te_student_te_student_payment_1_c SET id='".create_guid()."', 	date_modified='".date('Y-m-d H:i:s')."',deleted=0,te_student_te_student_payment_1te_student_ida='".$student_id."', te_student_te_student_payment_1te_student_payment_idb='".$id."'";
@@ -70,42 +95,46 @@ $GLOBALS['db']->Query($insertRelSql);
 
 
 #unlink old student batch from student
-$GLOBALS['db']->query("UPDATE te_student_batch, te_student_te_student_batch_1_c SET te_student_batch.deleted = 1,te_student_te_student_batch_1_c.deleted=1 WHERE te_student_batch.id = te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_batch_idb AND te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_ida='".$student_id."' AND te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_batch_idb='".$old_batch_id."' AND te_student_batch.id='".$old_batch_id."'");
+$GLOBALS['db']->query("UPDATE te_student_batch, te_student_te_student_batch_1_c SET te_student_batch.status = 'Inactive Transfer',te_student_batch.deleted = 0,te_student_te_student_batch_1_c.deleted=0 WHERE te_student_batch.id = te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_batch_idb AND te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_ida='".$student_id."' AND te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_batch_idb='".$student_batch_id_old."' AND te_student_batch.id='".$student_batch_id_old."'");
 
 #unlink old student batch plan from student batch
-$GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c SET te_student_payment_plan.deleted = 1,te_student_batch_te_student_payment_plan_1_c.deleted=1 WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$old_batch_id."' AND te_student_payment_plan.te_student_id_c='".$student_id."'");
+$GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c SET te_student_payment_plan.deleted = 1,te_student_batch_te_student_payment_plan_1_c.deleted=1 WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$student_batch_id_old."' AND te_student_payment_plan.te_student_id_c='".$student_id."'");
 
-#unlink old student from student payment for old batch payment 
-$GLOBALS['db']->query("UPDATE te_student_payment, te_student_te_student_payment_1_c SET te_student_payment.deleted = 1,te_student_te_student_payment_1_c.deleted=1 WHERE te_student_payment.id = te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_payment.te_student_batch_id_c='".$old_batch_id."' AND statuste_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='".$student_id."'");
+#unlink old student from student payment for old batch payment
+$GLOBALS['db']->query("UPDATE te_student_payment, te_student_te_student_payment_1_c SET te_student_payment.deleted = 1,te_student_te_student_payment_1_c.deleted=1 WHERE te_student_payment.id = te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_payment.te_student_batch_id_c='".$student_batch_id_old."' AND te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_ida='".$student_id."'");
 
-#update batch transfer request status 
+#update currency
+$GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_student_payment_plan_1_c SET te_student_payment_plan.currency ='".$currency."'  WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.te_student9d1ant_plan_idb AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='".$student_batch_id."' AND te_student_payment_plan.te_student_id_c='".$student_id."'");
+
+
+#update batch transfer request status
 $GLOBALS['db']->query("UPDATE te_transfer_batch SET is_new_approved=1,status='".$_REQUEST['request_status']."', te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
 $utmOptions['status']="Transferred";
 echo json_encode($utmOptions);
 return false;
 
 #update student payment plan
-function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country){	
+function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country){
 	#Service Tax deduction
 	global $sugar_config;
 	#for Indian student only need to calculate service tax
-	if($student_country!="" && ($student_country=="India"||$student_country=="india")){
+	if($student_country=="" || strtolower($student_country)=="india"){
 		$paymentPlanSql="SELECT s.name,s.id,s.te_student_id_c,s.due_amount_inr,s.paid_amount_inr,s.paid,s.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` s ON s.id=rel.te_student9d1ant_plan_idb WHERE s.deleted=0 AND s.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY s.due_date";
-	
+
 		$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 		$tempAmt=0;
 		while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
 			if($row['due_amount_inr']==$row['paid_amount_inr']){
 				continue;
-			}				
+			}
 			$restAmt=($row['due_amount_inr']-$row['paid_amount_inr']);
 			if($amount>=$restAmt){
 				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_inr=paid_amount_inr+".$restAmt.", paid='Yes' WHERE id='".$row['id']."'");
 				$amount=$amount-$restAmt;
-			}else{				
+			}else{
 				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_inr=paid_amount_inr+".$amount." WHERE id='".$row['id']."'");
 				$amount=0;
-			}			
+			}
 			#update balanced amount
 			$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_inr=due_amount_inr-paid_amount_inr WHERE id='".$row['id']."'");
 			if($amount==0)
@@ -114,21 +143,21 @@ function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country
 	}else{
 		# Payment for non indian student will be on USD
 		$paymentPlanSql="SELECT s.name,s.id,s.te_student_id_c,s.due_amount_usd,s.paid_amount_usd,s.paid,s.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` s ON s.id=rel.te_student9d1ant_plan_idb WHERE s.deleted=0 AND s.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY s.due_date";
-	
 		$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 		$tempAmt=0;
 		while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
 			if($row['due_amount_usd']==$row['paid_amount_usd']){
 				continue;
-			}				
+			}
 			$restAmt=($row['due_amount_usd']-$row['paid_amount_usd']);
+      
 			if($amount>=$restAmt){
 				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_usd=paid_amount_usd+".$restAmt.", paid='Yes' WHERE id='".$row['id']."'");
 				$amount=$amount-$restAmt;
-			}else{				
+			}else{
 				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_usd=paid_amount_usd+".$amount." WHERE id='".$row['id']."'");
 				$amount=0;
-			}			
+			}
 			#update balanced amount
 			$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET balance_usd=due_amount_usd-paid_amount_usd WHERE id='".$row['id']."'");
 			if($amount==0)
@@ -136,4 +165,3 @@ function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country
 		}
 	}
 }
-
