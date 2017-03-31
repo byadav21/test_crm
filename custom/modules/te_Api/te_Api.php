@@ -51,6 +51,17 @@ class te_Api_override extends te_Api {
 		$this->url=$sugar_config['ameyo_URL'] . 'command/?command=';
 		parent::__construct();
 	}
+	 
+	 function getUserCredential($sessioID){
+	      	 global $db;
+	      	 // "select description from te_api where name='". $sessioID ."'";// die;
+	      	 $itemDetal=$db->query("select description from te_api where name='". $sessioID ."'");
+	      	 $rs=$db->fetchByAssoc($itemDetal);
+	      	// print_r($rs);
+	      	 if(!$rs) return false;
+	      	 $reslt= unserialize(base64_decode($rs['description']));
+	      	 return base64_decode($reslt[1]);
+	 }
 	
 	function doLogin(){
 		global $sugar_config;
@@ -61,8 +72,8 @@ class te_Api_override extends te_Api {
 		$data['password']= $sugar_config['ameyo_import_pass'];
 		$data['terminal']= $_SERVER['REMOTE_ADDR'];
 		 
-		
-		$session= file_get_contents(  $server. urlencode(json_encode($data))); 
+		 
+		$session= file_get_contents(  $server. urlencode(json_encode($data)));
 		$jsonEncodedData = json_decode($session);
 		 
 		if(isset($jsonEncodedData->sessionId) && !empty($jsonEncodedData->sessionId)){
@@ -74,6 +85,23 @@ class te_Api_override extends te_Api {
 		  return false;	
 		}	
 		
+	}
+	
+	function sendDisposition($session,$request){
+		$url= $sugar_config['ameyo_URL']. 'dacx/dispose/?';
+		$data=[];
+		if($request['campaignId']) $data['campaignId']=$request['campaignId'];
+		if($request['sessionId']) $data['sessionId']=$session;
+		if($request['crtObjectId']) $data['crtObjectId']=$request['crtObjectId'];
+		if($request['userCrtObjectId']) $data['userCrtObjectId']=$request['userCrtObjectId'];
+		if($request['customerId']) $data['customerId']=$request['customerId'];
+		if($request['phone']) $data['phone']=$request['phone'];
+		if($request['userId']) $data['userId']=$request['userId'];
+		$qrystr='';
+		foreach($data as $key=>$val){
+			$qrystr .=$key .'='. $val;
+		}
+		$response= file_get_contents($url. urlencode(json_encode($qrystr))); 
 	}
 	
 	function uploadContacts($data){

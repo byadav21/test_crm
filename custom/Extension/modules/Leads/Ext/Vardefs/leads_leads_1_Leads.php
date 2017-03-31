@@ -41,3 +41,9 @@ $dictionary["Lead"]["fields"]["dristi_customer_id"] = array (
   'type' => 'varchar',
   
 );
+
+$dictionary["Lead"]["fields"]["dristi_request"] = array (
+  'name' => 'dristi_request',
+  'type' => 'text',
+  
+);
