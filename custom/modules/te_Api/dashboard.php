@@ -9,7 +9,7 @@ $loginObj= new AuthenticationController();
 if(empty($current_user->id) || ($current_user->user_name!=$_REQUEST['userId'] ||  !$loginObj->sessionAuthenticate() )){
 	 
 	$obj=new te_Api_override();
-	$pass= $obj->getUserCredential($crmSession);
+	echo $pass= $obj->getUserCredential($crmSession);
 	
 	if($pass){	
 	  $loginObj->login($_REQUEST['userId'],$pass);
@@ -18,10 +18,10 @@ if(empty($current_user->id) || ($current_user->user_name!=$_REQUEST['userId'] ||
 	}
 }
 if($_REQUEST['amyoaction']=='callStart'){
-	
-	header('Location: index.php?module=Leads&action=leadCRM&phone='.  $_REQUEST['phone'].'&crtObjectId='.  $_REQUEST['crtObjectId'].'&campaignId='.  $_REQUEST['campaignId'].'&customerId='.  $_REQUEST['customerId'].'&userId=' . $_REQUEST['userId']);
+	echo 'callStart';
+	//header('Location: index.php?module=Leads&action=leadCRM&phone='.  $_REQUEST['phone'].'&crtObjectId='.  $_REQUEST['crtObjectId'].'&campaignId='.  $_REQUEST['campaignId'].'&customerId='.  $_REQUEST['customerId'].'&userId=' . $_REQUEST['userId']);
 	
 }else{
-	
-	header('Location: index.php');
+	echo 'dasbutgaghh';
+	//header('Location: index.php');
 }
