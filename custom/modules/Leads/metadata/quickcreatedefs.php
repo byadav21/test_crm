@@ -74,13 +74,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'min_attendance_c',
-            'label' => 'LBL_MIN_ATTENDANCE',
-          ),
-          1 => 
-          array (
             'name' => 'status',
           ),
+          1 => '',
         ),
         3 => 
         array (
@@ -113,6 +109,7 @@ array (
             'name' => 'leads_leads_1_name',
             'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
           ),
+          1 => '',
         ),
         6 => 
         array (

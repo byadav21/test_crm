@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-07 01:04:23
+// created: 2017-03-31 02:46:34
 $searchFields['Leads'] = array (
   'first_name' => 
   array (
@@ -285,6 +285,24 @@ $searchFields['Leads'] = array (
     'is_date_field' => true,
   ),
   'end_range_date_of_followup' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'range_date_of_referral' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'start_range_date_of_referral' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'end_range_date_of_referral' => 
   array (
     'query_type' => 'default',
     'enable_range_search' => true,

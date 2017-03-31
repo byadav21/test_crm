@@ -27,10 +27,10 @@
 			<td style="padding-top:10px;">&nbsp;</td>
 		</tr>
 		<tr>
-			<td style="padding-top:10px;">Initial Payment In INR <span class="required">*</td><td style="padding-top:10px;"><input name="initial_payment_inr" id="initial_payment_inr" type="text"  value="{$initial_payment_inr}" size="17%"/></td>
-			<td style="padding-top:10px;">Initial Payments In USD <span class="required">*</td><td style="padding-top:10px;"><input name="initial_payment_usd" type="text"  value="{$initial_payment_usd}" id='initial_payment_usd' />
+			<td style="padding-top:10px;">Initial Payment In INR <span class="required"></td><td style="padding-top:10px;"><input name="initial_payment_inr" id="initial_payment_inr" type="text"  value="{$initial_payment_inr}" size="17%"/></td>
+			<td style="padding-top:10px;">Initial Payments In USD <span class="required"></td><td style="padding-top:10px;"><input name="initial_payment_usd" type="text"  value="{$initial_payment_usd}" id='initial_payment_usd' />
 			</td>
-			<td style="padding-top:10px;">Initial Payments Date <span class="required">*</td><td style="padding-top:10px;"><input name="initial_payment_date" type="text"  value="{$initial_payment_date}" id='initial_payment_date' />
+			<td style="padding-top:10px;">Initial Payments Date <span class="required"></td><td style="padding-top:10px;"><input name="initial_payment_date" type="text"  value="{$initial_payment_date}" id='initial_payment_date' />
 			<img src="themes/SuiteR/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="initial_payment_date_trigger">
 			</td>
 		</tr>

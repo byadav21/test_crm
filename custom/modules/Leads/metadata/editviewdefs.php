@@ -155,12 +155,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_BATCH',
           ),
-          1 => 
-          array (
-            'name' => 'utm_campaign',
-            'studio' => 'visible',
-            'label' => 'UTM Campaign',
-          ),
         ),
         8 => 
         array (
@@ -171,21 +165,10 @@ array (
             'studio' => 'visible',
             'label' => 'COMMENT',
           ),
-          //~ 1 => 
-          //~ array (
-            //~ 'name' => 'parent_name',
-            //~ 'studio' => 'visible',
-            //~ 'label' => 'LBL_FLEX_RELATE',
-          //~ ),
         ),
         9 => 
         array (
           0 => 'lead_source',
-          //~ 1 => 
-          //~ array (
-            //~ 'name' => 'leads_leads_1_name',
-            //~ 'label' => 'Referral Lead',
-          //~ ),
           1 => 
           array (
             'name' => 'parent_name',

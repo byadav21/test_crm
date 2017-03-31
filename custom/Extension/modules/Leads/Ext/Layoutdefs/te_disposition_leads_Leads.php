@@ -11,7 +11,7 @@ $layout_defs["Leads"]["subpanel_setup"]['te_disposition_leads'] = array (
   'get_subpanel_data' => 'te_disposition_leads',
   'top_buttons' => 
   array (
-    0 => 
+   /* 0 => 
     array (
       'widget_class' => 'SubPanelTopButtonQuickCreate',
     ),

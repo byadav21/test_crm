@@ -13,13 +13,16 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'batch' => 
+      'batch_c' => 
       array (
-        'label' => 'LBL_BATCH',
-        'type' => 'enum',
-        'width' => '10%',
+        'type' => 'relate',
         'default' => true,
-        'name' => 'batch',
+        'studio' => 'visible',
+        'label' => 'LBL_BATCH',
+        'link' => true,
+        'width' => '10%',
+        'id' => 'TE_BA_BATCH_ID_C',
+        'name' => 'batch_c',
       ),
       'email' => 
       array (
@@ -86,22 +89,6 @@ array (
       'status' => 
       array (
         'name' => 'status',
-        'default' => true,
-        'width' => '10%',
-      ),
-      'assigned_user_id' => 
-      array (
-        'name' => 'assigned_user_id',
-        'type' => 'enum',
-        'label' => 'LBL_ASSIGNED_TO',
-        'function' => 
-        array (
-          'name' => 'get_user_array',
-          'params' => 
-          array (
-            0 => false,
-          ),
-        ),
         'default' => true,
         'width' => '10%',
       ),

@@ -26,3 +26,9 @@ $dictionary['Lead']['fields']['assigned_flag']['massupdate']=false;
 
 $dictionary['Lead']['fields']['status_description']['massupdate']=false;
 $dictionary['Lead']['fields']['assigned_flag']['converted_datejscal_field']=false;
+
+//New Added 31 Mrch
+$dictionary['Lead']['fields']['batch']['massupdate']=false;
+
+$dictionary['Lead']['fields']['status_description']['massupdate']=false;
+$dictionary['Lead']['fields']['date_of_referral']['massupdate']=false;
