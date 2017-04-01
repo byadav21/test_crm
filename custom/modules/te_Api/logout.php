@@ -2,14 +2,15 @@
 
 	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 	$error='';
-	header('Content-type: application/xml');
+	//header('Content-type: application/xml');
 	
 	try{
 		
-		$dataPOST = trim(file_get_contents('php://input'));
-		if($dataPOST){
-			$xmlData = simplexml_load_string($dataPOST);
-		 
+		$dataPOST = $_REQUEST;
+ 
+		if($dataPOST['requestXml']){
+			$xmlData = simplexml_load_string(html_entity_decode($dataPOST['requestXml']));	
+		
 			if(isset($xmlData->command) && $xmlData->command=='logout'){ 
 			
 				if(isset($xmlData->crmSessionId) && ($xmlData->crmSessionId)){
@@ -33,7 +34,7 @@
 						
 						global $db;
 						$sesstodel=(String) $xmlData->crmSessionId;
-						$db->query("delete from te_api where name = '$sesstodel'");
+						$db->query("delete from te_API where name = '$sesstodel'");
 						
 						$ch = curl_init(); 
 						curl_setopt($ch, CURLOPT_URL, $url);
