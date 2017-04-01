@@ -3,6 +3,10 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('custom/modules/te_Api/te_Api.php');
 require_once('modules/Users/authentication/AuthenticationController.php');
 $crmSession=$_REQUEST['crmSessionId'];
+echo $_SERVER['QUERY_STRING'];
+
+echo '<br>';echo '<br>';echo '<br>';
+
 print_r($_REQUEST);
 global $current_user, $db;
 
