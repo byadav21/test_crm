@@ -9,8 +9,9 @@ global $current_user, $db;
 echo '<br>current user='. $current_user->user_name;
 echo '<br>request user='. $_REQUEST['userId'] ;
 echo '<br>';
-echo ($loginObj->sessionAuthenticate())?1:0;
+
 $loginObj= new AuthenticationController();
+echo ($loginObj->sessionAuthenticate())?1:0;
 if(empty($current_user->id) || ($current_user->user_name!=$_REQUEST['userId'] ||  !$loginObj->sessionAuthenticate() )){
 	 echo '<br> in login check';
 	$obj=new te_Api_override();
