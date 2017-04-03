@@ -1,18 +1,20 @@
 {literal}
 <script>
 $(function(){
-	$("#status").change(function(){		
+	$("#status").change(function(){
 		if($(this).val()!=''){
+			SUGAR.ajaxUI.showLoadingPanel();
 			$.ajax({url: "index.php?entryPoint=getbatchbyleadstatus&status="+$(this).val()+"", success: function(result){
 				var result = JSON.parse(result);
-				if(result.status=='ok'){				
+				SUGAR.ajaxUI.hideLoadingPanel();
+				if(result.status=='ok'){
 				var utm='';
 				 for(var i=0;i<result.res.length;i++){
 						var id = result.res[i].id;
 						var name = result.res[i].name;
 						utm+='<option value="'+id+'">'+name+'</option>'
 				 }
-				 $("#batch").html(utm);				
+				 $("#batch").html(utm);
 				}
 			}});
 		}
@@ -26,11 +28,11 @@ $(function(){
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
-		<tr>      
-			<td scope="row" nowrap="nowrap" width="1%">		
+		<tr>
+			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">Status</label>
 			</td>
-			<td nowrap="nowrap" width="10%">			
+			<td nowrap="nowrap" width="10%">
 				<select name="status" id="status">
 					{if $selected_status eq 'Live'}
 						<option value="Live" selected>Live</option>
@@ -43,19 +45,19 @@ $(function(){
 						<option value="Closed">Closed</option>
 					{/if}
 				</select>
-			</td>	
-			<td scope="row" nowrap="nowrap" width="1%">		
+			</td>
+			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">Batch</label>
-			</td>	
-			<td nowrap="nowrap" width="10%">			
+			</td>
+			<td nowrap="nowrap" width="10%">
 				<select name="batch[]" id="batch" multiple>
 					<option  value=""></option>
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}"{if in_array($batch.id, $selected_batch)} selected="selected"{/if}>{$batch.name}</option>							
-					{/foreach}							
+						<option value="{$batch.id}"{if in_array($batch.id, $selected_batch)} selected="selected"{/if}>{$batch.name}</option>
+					{/foreach}
 				</select>
-			</td>				
-			
+			</td>
+
 			<td class="sumbitButtons">
 				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
 				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
@@ -73,23 +75,23 @@ $(function(){
 </div>
 </form>
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
-	<thead>    	
+	<thead>
 	<tr height="20">
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">	
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Counsellors</strong>
 		</th>
 		{foreach from = $programList key=key item=program}
-			<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+			<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 				<strong>{$program}</strong>
 			</th>
-		{/foreach}		
+		{/foreach}
 	</tr>
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
 		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
 		   {foreach from = $programList key=key item=program}
-				<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.$key}</td> 
-		   {/foreach}		  				
-		</tr>				
+				<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.$key}</td>
+		   {/foreach}
+		</tr>
 	{/foreach}
 </table>
