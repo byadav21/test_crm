@@ -20,7 +20,24 @@ class te_student_batchViewList extends ViewList
     $uid=$this->report_to_id;
     $user_ids = "'" . implode("','", $uid) . "'";
 		$this->processSearchForm();
-    if($current_user->is_admin==0){
+    #fetch managers id
+    $managersSql="SELECT GROUP_CONCAT(`user_id`)user_id FROM `acl_roles_users` WHERE `role_id`='86800aa5-c8c2-5868-a690-58a88d188265' AND deleted=0";
+		$managersObj =$db->query($managersSql);
+		$manager_res =$db->fetchByAssoc($managersObj);
+    $managers=explode(',',$manager_res['user_id']);
+
+      if($managers){
+        if($current_user->is_admin==1){
+          array_push($managers,$current_user->id);
+        }
+      }
+      else{
+        if($current_user->is_admin==1){
+          $managers[0]=$current_user->id;
+        }
+      }
+
+    if(!in_array($current_user->id,$managers)){
       if($this->where!=""){
         $this->where .= " AND te_student_batch.assigned_user_id IN($user_ids)";
       }
