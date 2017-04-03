@@ -149,6 +149,12 @@ $dictionary["Lead"]["fields"]["dristi_customer_id"] = array (
   
 );
 
+$dictionary["Lead"]["fields"]["dristi_request"] = array (
+  'name' => 'dristi_request',
+  'type' => 'text',
+  
+);
+
 
  // created: 2016-09-15 13:52:52
 $dictionary['Lead']['fields']['lead_source_description']['inline_edit']=true;

@@ -103,7 +103,7 @@ class Dropout extends Dashlet{
 		$uid=$this->report_to_id;
 		$str = implode("','",$uid);
 		
-	     $leadQuery ="SELECT b.name,(SELECT COUNT(*) FROM te_student_batch WHERE te_student_batch.`te_ba_batch_id_c`=b.id AND te_student_batch.deleted=0)total_student,(SELECT COUNT(*) FROM te_student_batch WHERE te_student_batch.`te_ba_batch_id_c`=b.id AND te_student_batch.deleted=0 AND te_student_batch.status='Dropout' AND te_student_batch.dropout_type='pre_dropout')predropout,(SELECT COUNT(*) FROM te_student_batch WHERE te_student_batch.`te_ba_batch_id_c`=b.id AND te_student_batch.deleted=0 AND te_student_batch.status='Dropout' AND te_student_batch.dropout_type='post_dropout')postdropout FROM `te_student_batch` as sb INNER JOIN te_ba_batch AS b ON sb.`te_ba_batch_id_c`=b.id WHERE sb.assigned_user_id IN('".$str."') AND sb.deleted=0 AND b.deleted=0 GROUP BY sb.`te_ba_batch_id_c` ORDER BY total_student DESC";
+	    $leadQuery ="SELECT b.name,(SELECT COUNT(*) FROM te_student_batch WHERE te_student_batch.`te_ba_batch_id_c`=b.id AND te_student_batch.deleted=0)total_student,(SELECT COUNT(*) FROM te_student_batch WHERE te_student_batch.`te_ba_batch_id_c`=b.id AND te_student_batch.deleted=0 AND te_student_batch.status='Dropout' AND te_student_batch.dropout_type='pre_dropout')predropout,(SELECT COUNT(*) FROM te_student_batch WHERE te_student_batch.`te_ba_batch_id_c`=b.id AND te_student_batch.deleted=0 AND te_student_batch.status='Dropout' AND te_student_batch.dropout_type='post_dropout')postdropout FROM `te_student_batch` as sb INNER JOIN te_ba_batch AS b ON sb.`te_ba_batch_id_c`=b.id WHERE sb.assigned_user_id IN('".$str."') AND sb.deleted=0 AND b.deleted=0 GROUP BY sb.`te_ba_batch_id_c` ORDER BY total_student DESC";
 	    $leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
         while($row=$GLOBALS['db']->fetchByAssoc($leadObj)){	
 			$leadsData[]=$row;
@@ -119,13 +119,10 @@ class Dropout extends Dashlet{
 						<div style="white-space: normal;" width="100%" align="left">Total Admission</div>
 					</th>
 					 <th scope="col" width="10%">
-						<div style="white-space: normal;" width="100%" align="left">Pre-Dropout</div>
+						<div style="white-space: normal;" width="100%" align="left">Pre-Dropout%</div>
 					</th>
 					<th scope="col" width="10%">
-						<div style="white-space: normal;" width="100%" align="left">Postdropout</div>
-					</th>
-					<th scope="col" width="10%">
-						<div style="white-space: normal;" width="100%" align="left">Dropout %</div>
+						<div style="white-space: normal;" width="100%" align="left">Postdropout%</div>
 					</th>
 					
 		    </tr>';
@@ -145,7 +142,12 @@ class Dropout extends Dashlet{
 			$total=($data['postdropout']+$data['predropout']);
 			$DropOut=($data['total_student']* $total)/100;
 			
-			$output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['name']."</td><td scope='row' align='left' valign='top'>".$data['total_student']."</td><td scope='row' align='left' valign='top'>".$data['predropout']."</td><td scope='row' align='left' valign='top'>".$data['postdropout']."</td><td scope='row' align='left' valign='top'>".$DropOut."</td></tr>";
+			$preDropout1=($data['predropout']/$data['total_student'])*100;
+			$postDropout1=($data['postdropout']/($data['total_student']-$data['predropout']))*100;
+			
+			$preDropout_format=number_format((float)$preDropout1, 2, '.', '');
+			
+			$output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data['name']."</td><td scope='row' align='left' valign='top'>".$data['total_student']."</td><td scope='row' align='left' valign='top'>".$preDropout_format."</td><td scope='row' align='left' valign='top'>".$postDropout1."</td></tr>";
 		}		
 		$output.="</table></div>";
         return $output;
@@ -174,5 +176,5 @@ class Dropout extends Dashlet{
 			}
 	
 }
-// @MAnish Gupta
+// @MAnish Gupta 2april17
 ?>
