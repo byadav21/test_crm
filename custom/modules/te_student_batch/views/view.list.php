@@ -36,6 +36,12 @@ class te_student_batchViewList extends ViewList
           $managers[0]=$current_user->id;
         }
       }
+      if(isset($_REQUEST['batch']) && !empty($_REQUEST['batch']) && !empty($this->where)){
+        $this->where .= " AND te_student_batch.te_ba_batch_id_c IN('".$_REQUEST['batch']."')";
+      }
+      elseif(isset($_REQUEST['batch']) && !empty($_REQUEST['batch']) && empty($this->where)){
+        $this->where = " te_student_batch.te_ba_batch_id_c IN('".$_REQUEST['batch']."')";
+      }
 
     if(!in_array($current_user->id,$managers)){
       if($this->where!=""){
@@ -45,6 +51,7 @@ class te_student_batchViewList extends ViewList
         $this->where .= " te_student_batch.assigned_user_id IN($user_ids)";
       }
     }
+
 		/* if($current_user->designation=="BUH"){
 			if($this->where!="")
 				$this->where .= " AND te_student_batch.dropout_status ='Pending'";
