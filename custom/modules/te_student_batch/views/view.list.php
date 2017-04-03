@@ -41,7 +41,7 @@ class te_student_batchViewList extends ViewList
 			return;
 		if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false){
 
-			$this->params['orderBy']='LEAD_NUMBER_C';
+			$this->params['orderBy']='date_entered';
 			$this->params['overrideOrder']='1';
 			$this->params['sortOrder']='DESC';
 
@@ -64,7 +64,7 @@ class te_student_batchViewList extends ViewList
 			}
 		}
 	}
-  
+
    public function displayHeader(){
 
 	      global $theme;
