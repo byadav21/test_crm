@@ -45,7 +45,7 @@ if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('in
 if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=salescyclereport', "Sales Cycle Report", 'AOR_Reports');
 if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Status Report", 'AOR_Reports');
 if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
-if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report Vendor", 'AOR_Reports');
+
 if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=gsvreport', "GSV Report", 'AOR_Reports');
 # DIgital Marketing #
 if(ACLController::checkAccess('te_vendor', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
