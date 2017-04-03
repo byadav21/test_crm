@@ -7,14 +7,24 @@ class status_listview_program {
     global $db;
     
     
-    
-     // Total Batch 
+  // Total Batch update 3Aprl17 Manish gupta
        
         $row1 =$db->query("SELECT COUNT(te_pr_programs_te_ba_batch_1te_ba_batch_idb) AS Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'");                         
+        $amt="SELECT COUNT(te_pr_programs_te_ba_batch_1te_ba_batch_idb) AS Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'";                         
 				$res1 =$db->fetchByAssoc($row1);
+				
+				if($res1['Totalbatch']==0)
+				{
 				$bean->total_p_c=$res1['Totalbatch'];
+				//$res1['Totalbatch'];
+				}
+				else
+				{
+				$bean->total_p_c="<a href='index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3Dte_pr_Programs%26return_module%3Dte_pr_Programs%26action%3DDetailView%26record%3D".$bean->id."'>".$res1['Totalbatch']."</a>";
+				//index.php?module=te_pr_Programs&action=statusview&Stw=total&record=
+					
+				}
 			  
-    
     
     // Query for Closed Batch
        $row2 =$db->query("SELECT tab1.te_pr_programs_te_ba_batch_1te_ba_batch_idb,COUNT(tab2.batch_status) AS Total_cl from te_pr_programs_te_ba_batch_1_c AS tab1 INNER JOIN te_ba_batch AS tab2 ON tab1.te_pr_programs_te_ba_batch_1te_ba_batch_idb = tab2.id WHERE tab2.deleted=0 AND tab2.batch_status= 'closed' AND tab1.te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'"); 
