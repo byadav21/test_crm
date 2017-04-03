@@ -95,7 +95,7 @@ class SRM_wise_referral extends Dashlet{
     protected function getCurrentBenchOutput()
     {
 
-		global $sugar_config,$app_list_strings,$current_user;
+		global $sugar_config,$app_list_strings,$current_user,$overallusers_res,$overallusers,$overallusers_str;
         $leadsData=array();
 		    $user_id=$current_user->id;
         $users_str='';
@@ -111,6 +111,17 @@ class SRM_wise_referral extends Dashlet{
       while($row=$GLOBALS['db']->fetchByAssoc($userObj)){
    		   $is_admin=$row['is_admin'];
    		}
+      $overallusers=$this->get_users_for_admin();
+      if($overallusers){
+        $overallusers_str = "'".implode("','", $overallusers)."'";
+        if($overallusers){
+            $overallusers_sql = "SELECT (SELECT count(*) FROM leads WHERE (leads.created_by IN($overallusers_str) OR leads.parent_id IN($overallusers_str)) AND leads.deleted=0 AND leads.lead_source='Referrals')totalref,(SELECT count(*) FROM leads WHERE (leads.created_by IN($overallusers_str) OR leads.parent_id IN($overallusers_str)) AND leads.deleted=0 AND leads.lead_source='Referrals' AND leads.status='Converted')totalrefConverted FROM leads LIMIT 0,1";
+            $overallusersObj = $GLOBALS['db']->query($overallusers_sql);
+            $overallusers_res = $GLOBALS['db']->fetchByAssoc($overallusersObj);
+
+        }
+
+      }
 
       if($is_admin==1){
         $users=$this->get_users_for_admin();
@@ -137,6 +148,7 @@ class SRM_wise_referral extends Dashlet{
       			$users_str = "'".implode("','", $uid)."'";
           }
         }
+
 
       }
 
@@ -191,9 +203,13 @@ class SRM_wise_referral extends Dashlet{
 
             $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>".$data1['userfullname']."</td><td scope='row' align='left' valign='top'>".$data1['referral']."</td><td scope='row' align='left' valign='top'>".$teamcontribution."%</td><td scope='row' align='left' valign='top'>".$data1['conreferral']."</td><td scope='row' align='left' valign='top'>".$refcoversion."%</td></tr>";
         }
-        $totalrefconper=(array_sum($totalcon)/array_sum($totalref))*100;
-        $totalrefconper=number_format((float)$totalrefconper, 2, '.', '');
-        $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>Overall</td><td scope='row' align='left' valign='top'>".array_sum($totalref)."</td><td scope='row' align='left' valign='top'>".array_sum($totalteamcon)."%</td><td scope='row' align='left' valign='top'>".array_sum($totalcon)."</td><td scope='row' align='left' valign='top'>".$totalrefconper."%</td></tr>";
+
+        if($overallusers_res){
+            $totalrefconper=($overallusers_res['totalrefConverted']/$overallusers_res['totalref'])*100;
+            $totalrefconper=number_format((float)$totalrefconper, 2, '.', '');
+            $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>Overall</td><td scope='row' align='left' valign='top'>".$overallusers_res['totalref']."</td><td scope='row' align='left' valign='top'>".array_sum($totalteamcon)."%</td><td scope='row' align='left' valign='top'>".$overallusers_res['totalrefConverted']."</td><td scope='row' align='left' valign='top'>".$totalrefconper."%</td></tr>";
+        }
+
       }
 
 		$output.="</table></div>";
