@@ -89,7 +89,7 @@ class te_Api_override extends te_Api {
 	
 	function sendDisposition($session,$request){
 		global $sugar_config;
-		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose/?';
+		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
 		$data=[];
 		if($request['campaignId']) $data['campaignId']=$request['campaignId'];
 		if($request['sessionId']) $data['sessionId']=$session;
@@ -98,14 +98,15 @@ class te_Api_override extends te_Api {
 		if($request['customerId']) $data['customerId']=$request['customerId'];
 		if($request['phone']) $data['phone']=$request['phone'];
 		if($request['userId']) $data['userId']=$request['userId'];
+		$data['dispositionCode']='Do  Not Call';
 		$qrystr='';
 		foreach($data as $key=>$val){
 			$qrystr .=$key .'='. $val;
 		}
-	 
+		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		
 		
-		//echo $url. urlencode( ($qrystr));die;
+		echo $url. urlencode( ($qrystr));die;
 		$response= file_get_contents($url. urlencode($qrystr)); 
 	}
 	
