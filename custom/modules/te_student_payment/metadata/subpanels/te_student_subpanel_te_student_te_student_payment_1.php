@@ -63,4 +63,11 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
+  'edit_button' => 
+  array (
+    'width' => '4%',
+    'vname' => 'LBL_EDIT_BUTTON',
+    'default' => true,
+    'widget_class' => 'SubPanelEditButton',
+  ),
 );
