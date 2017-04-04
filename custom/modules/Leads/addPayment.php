@@ -442,6 +442,30 @@ class addPaymentClass{
 				$disposition->name 		   	 = $bean->status;
 				$disposition->te_disposition_leadsleads_ida 		   	 = $bean->id;
 				$disposition->save();
+				
+				
+			$sql = " select dristi_request from leads WHERE id ='".$bean->id."'";
+			$sqlData=$GLOBALS['db']->query($sql);
+		     
+			if($GLOBALS['db']->getRowCount($sqlData)>0){
+					$dristiReq = $GLOBALS['db']->fetchByAssoc($sqlData);
+					 
+					if($dristiReq && $dristiReq['dristi_request']){
+					   $arrReq=(array)json_decode(html_entity_decode($dristiReq['dristi_request']));
+					   //echo '<pre>'; print_r((array)$arrReq);
+					   if($arrReq && count($arrReq)>2){
+						   $drobj= new te_Api_override();
+						   $session=$drobj->doLogin();
+						   if($session){
+								 $drobj->sendDisposition($session,$arrReq);
+						   }
+					   }
+					   
+					   	  
+					}
+			}
+				
+				
 				//~ die;
 			}
 		}
