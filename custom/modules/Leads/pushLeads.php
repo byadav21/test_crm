@@ -9,13 +9,13 @@ $customerRecords=[];
 $sql="SELECT l.id,l.first_name,l.last_name,l.phone_mobile,l.phone_home,l.phone_work,l.phone_other,e.email_address  FROM leads l
  LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id AND el.bean_module='Leads' AND el.deleted=0
 LEFT JOIN email_addresses e ON el.email_address_id = e.id AND e.deleted=0
-WHERE l.deleted =0  AND l.duplicate_check=1   AND l.status_description= 'New Lead' AND l.neoxstatus='0'  AND (l.assigned_user_id= 'NULL' OR l.assigned_user_id ='' OR l.assigned_user_id IS NULL) LIMIT 30";
+WHERE l.deleted =0  AND l.duplicate_check=1   AND l.status_description= 'New Lead' AND l.neoxstatus='0'  AND (l.assigned_user_id= 'NULL' OR l.assigned_user_id ='' OR l.assigned_user_id IS NULL) ";
 
 $data=[];
 $allInserted=[];
 $result = $db->query($sql);
 if($db->getRowCount($result)>0){
-	while($row = $db->fetchByAssoc($result)){
+	while($row =  $db->fetchByAssoc($result)){
 		$allInserted[]=$row;
 		if($row['first_name'] || $row['last_name']) $customerRecords['name']= $row['first_name']." ". $row['last_name'];
 		if($row['first_name'] )  $customerRecords['first_name'] = $row['first_name'];
