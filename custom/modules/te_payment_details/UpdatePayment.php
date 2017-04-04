@@ -10,6 +10,11 @@ class UpdatePaymentName{
 				$GLOBALS['db']->query($sa);
 			//~ $bean->name = $bean->reference_number;
 		}
+		# if payment details is being updated. Update the same payment in student payment module
+		if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
+			$GLOBALS['db']->query("UPDATE te_student_payment SET amount='".$bean->amount."' WHERE lead_payment_details_id='".$_REQUEST['record']."'");
+		}
+		
 		$leadSql = "SELECT leads_te_payment_details_1leads_ida as lid FROM leads_te_payment_details_1_c WHERE leads_te_payment_details_1te_payment_details_idb = '".$bean->id."' AND deleted = 0";
 		$relLead= $GLOBALS['db']->query($leadSql);
 		
