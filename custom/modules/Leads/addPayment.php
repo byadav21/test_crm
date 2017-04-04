@@ -12,6 +12,7 @@ class addPaymentClass{
 		$student_name="";
 		$student_email="";
 		$student_batch_id="";
+		$lead_payment_details_id="";
 		if(empty($primary_address_country) || $primary_address_country=='india'){
 			$student_country="india";
 		}
@@ -32,7 +33,7 @@ class addPaymentClass{
 			$payment->payment_realized = $bean->payment_realized;
 			$payment->leads_te_payment_details_1leads_ida = $bean->id;
 			$payment->save();
-
+            $lead_payment_details_id=$payment->id;
 			$paidAmount=$bean->amount;
 			$GLOBALS['db']->query("UPDATE leads SET payment_type='',transaction_id='',payment_source='',date_of_payment='',reference_number='',amount='',payment_realized=''");
 
@@ -225,13 +226,16 @@ class addPaymentClass{
 
 		if(!empty($bean->payment_type)){
 		#update student payment history
-		$id=create_guid();
-		$insertSql="INSERT INTO te_student_payment SET id='".$id."', name='".$bean->reference_number."', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".$bean->date_of_payment."', amount='".$bean->amount."', reference_number='".$bean->reference_number."', payment_type='".$bean->payment_type."', payment_realized='".$bean->payment_realized."', transaction_id='".$bean->transaction_id."', payment_source='".$bean->payment_source."'";
+		$student_payment_id=create_guid();
+		$insertSql="INSERT INTO te_student_payment SET id='".$student_payment_id."', name='".$bean->reference_number."', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".$bean->date_of_payment."', amount='".$bean->amount."', reference_number='".$bean->reference_number."', payment_type='".$bean->payment_type."', payment_realized='".$bean->payment_realized."', transaction_id='".$bean->transaction_id."', payment_source='".$bean->payment_source."',lead_payment_details_id='".$lead_payment_details_id."'";
 		//echo $insertSql;exit();
 		$GLOBALS['db']->Query($insertSql);
+		
+		#update student payment id in lead payment details
+		$GLOBALS['db']->query("UPDATE te_payment_details SET student_payment_id='".$student_payment_id."' WHERE id='".$lead_payment_details_id."'");
 
 		#Update relationship record
-		$insertRelSql="INSERT INTO te_student_te_student_payment_1_c SET id='".create_guid()."', 	date_modified='".date('Y-m-d H:i:s')."',deleted=0,te_student_te_student_payment_1te_student_ida='".$student_id."', te_student_te_student_payment_1te_student_payment_idb='".$id."'";
+		$insertRelSql="INSERT INTO te_student_te_student_payment_1_c SET id='".create_guid()."', 	date_modified='".date('Y-m-d H:i:s')."',deleted=0,te_student_te_student_payment_1te_student_ida='".$student_id."', te_student_te_student_payment_1te_student_payment_idb='".$student_payment_id."'";
 		$GLOBALS['db']->Query($insertRelSql);
 	}
 		if($paidAmount>0 && $bean->payment_realized==1){
