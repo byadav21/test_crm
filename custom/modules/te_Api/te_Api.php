@@ -109,14 +109,14 @@ class te_Api_override extends te_Api {
 		$response= file_get_contents($url. urlencode($qrystr)); 
 	}
 	
-	function uploadContacts($data){
+	function uploadContacts($data,$campID='',$api=''){
 			global $sugar_config;
 			$this->importError='';
 			//$server = $this->url.'uploadContacts&data=';
 			$request=$data;
-			$request['campaignId']=$sugar_config['ameyo_campaigainID'];
+			$request['campaignId']=($campID)? $campID :$sugar_config['ameyo_campaigainID'];
 			$request['status']='NOT_TRIED';
-			$request['leadId']=$sugar_config['ameyo_leadID'];	
+			$request['leadId']=($api)? $api : $sugar_config['ameyo_leadID'];	
 			 
 			$ch = curl_init(); 
 			curl_setopt($ch, CURLOPT_URL, $sugar_config['ameyo_URL'] . 'command?command=uploadContacts');
@@ -124,9 +124,9 @@ class te_Api_override extends te_Api {
 			curl_setopt($ch, CURLOPT_TIMEOUT, 100);
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
-			$response = curl_exec($ch);
+			echo $response = curl_exec($ch);
 		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
-			$responses=json_decode($response);		
+			 $responses=json_decode($response);		
 			return $responses;
 
 	}
