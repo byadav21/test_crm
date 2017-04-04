@@ -15,7 +15,7 @@ $data=[];
 $allInserted=[];
 $result = $db->query($sql);
 if($db->getRowCount($result)>0){
-	while($row = $db->fetchByAssoc($result)){
+	while($row =  $db->fetchByAssoc($result)){
 		$allInserted[]=$row;
 		if($row['first_name'] || $row['last_name']) $customerRecords['name']= $row['first_name']." ". $row['last_name'];
 		if($row['first_name'] )  $customerRecords['first_name'] = $row['first_name'];

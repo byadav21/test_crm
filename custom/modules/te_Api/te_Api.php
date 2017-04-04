@@ -78,7 +78,7 @@ class te_Api_override extends te_Api {
 		 
 		if(isset($jsonEncodedData->sessionId) && !empty($jsonEncodedData->sessionId)){
 			
-			//$_SESSION['AMUYSESSION']=$jsonEncodedData->sessionId;			
+			 		
 			return $jsonEncodedData->sessionId;
 			
 		}else{

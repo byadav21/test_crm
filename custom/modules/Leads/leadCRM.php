@@ -7,9 +7,9 @@ global $current_user,$db;
 $customerId= $_REQUEST['customerId'];
 $userID= $_REQUEST['userId'];
 $phone= $_REQUEST['phone'];
-$callType= $_REQUEST['callType'];
+$callType= $_REQUEST['callType']; 
 
-//if($userID==$)
+ 
 
 		
 $getUserIDs= "select id from users where user_name='$userID'";
