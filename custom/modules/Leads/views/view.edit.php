@@ -61,7 +61,7 @@ class LeadsViewEdit extends ViewEdit {
 			//~ }
 		 //~ })
 		//~
-
+			$("td#date_of_prospect_label").next().prop('colspan','0');
 			if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('parent_id').value==''){
 
 			document.getElementById("parent_type").style.display ='none';
@@ -202,8 +202,8 @@ class LeadsViewEdit extends ViewEdit {
 					$("#status_description").append('<option>Duplicate</option>');
 				}
              }
-             
-            
+
+
              if (document.getElementById('status').value == "Warm") {
 				 $("#status_description option").remove() ;
 				 $("#status_description").append('<option></option>');
@@ -322,6 +322,8 @@ if($("#status_description").val() === "Converted") {
 							//~ document.getElementById("date_of_callback_minutes").style.display ='inline';
 							document.getElementById("date_of_callback_trigger").style.display ='inline';
 							document.getElementById("date_of_callback_label").innerHTML = 'Call back Date:';
+							$("#date_of_followup_label").hide();
+							$("#date_of_followup_label").next().hide();
 					}
 					else{
 							document.getElementById("date_of_callback_date").style.display ='none';
@@ -329,7 +331,8 @@ if($("#status_description").val() === "Converted") {
 							//~ document.getElementById("date_of_callback_hours").style.display ='none';
 							document.getElementById("date_of_callback_trigger").style.display ='none';
 							document.getElementById("date_of_callback_label").innerHTML = '';
-
+							$("#date_of_followup_label").show();
+							$("#date_of_followup_label").next().show();
 					}
 
 
@@ -410,7 +413,7 @@ if($("#status_description").val() === "Converted") {
 <?php /* Manish @28MArch */
 
 		if(isset($_REQUEST['full_form'])){
-			
+
 			$instituteObj = new Lead();
  			$institute=$instituteObj->retrieve($_REQUEST['relate_id']);
 			$this->bean->lead_source ='Referrals';
