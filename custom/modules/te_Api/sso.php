@@ -1,6 +1,7 @@
 <?php
 
 require_once('modules/Users/authentication/AuthenticationController.php');
+require_once('custom/modules/te_Api/te_Api.php');
 $crmSession=$_REQUEST['crmSessionId'];
 global $current_user, $db;
 

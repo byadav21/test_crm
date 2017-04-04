@@ -37,13 +37,19 @@ class updateStatusClass{
 					$dristiReq = $GLOBALS['db']->fetchByAssoc($sqlData);
 					 
 					if($dristiReq && $dristiReq['dristi_request']){
-					   $arrReq=(array)json_decode(html_entity_decode($dristiReq['dristi_request']));
-					   //echo '<pre>'; print_r((array)$arrReq);
+					   $arrReq=(array)json_decode(html_entity_decode($dristiReq['dristi_request']));					   
 					   if($arrReq && count($arrReq)>2){
 						   $drobj= new te_Api_override();
-						   $session=$drobj->doLogin();
-						   if($session){
-								 $drobj->sendDisposition($session,$arrReq);
+						   global $current_user;
+						   
+						   $assinuserDristi="select neox_user,neox_password from users where id='". $bean->assigned_user_id . "'";
+						   $users=$GLOBALS['db']->query($assinuserDristi);
+						   if($GLOBALS['db']->getRowCount($users)>0){
+							   $dristiCred = $GLOBALS['db']->fetchByAssoc($users);
+							   $session=$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
+							   if($session){
+									 $drobj->sendDisposition($session,$arrReq);
+							   }
 						   }
 					   }
 					   
