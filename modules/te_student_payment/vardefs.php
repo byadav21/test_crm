@@ -248,6 +248,21 @@ $dictionary['te_student_payment'] = array(
     'studio' => 'visible',
     'dependency' => false,
   ),
+  'lead_payment_details_id' => 
+	array (
+		'name' => 'lead_payment_details_id',
+		'label' => 'Lead Payment Id',
+		'type' => 'char',
+		'help' => '',
+		'comment' => '',
+		'default_value' => '',
+		'len' => '36',
+		'required' => false, 
+		'reportable' => true, 
+		'audited' => false, 
+		'importable' => 'true', 
+		'duplicate_merge' => false, 
+	),
 ),
 	'relationships'=>array (
 ),
