@@ -63,13 +63,13 @@ class te_Api_override extends te_Api {
 	      	 return base64_decode($reslt[1]);
 	 }
 	
-	function doLogin(){
+	function doLogin($user='',$pass=''){
 		global $sugar_config;
 		$server = $this->url.'force-login&data=';
 		
 		$data=[];
-		$data['userId']= $sugar_config['ameyo_import_login'];
-		$data['password']= $sugar_config['ameyo_import_pass'];
+		$data['userId']= ($user)? $user : $sugar_config['ameyo_import_login'];
+		$data['password']= ($pass)? $pass : $sugar_config['ameyo_import_pass'];
 		$data['terminal']= $_SERVER['REMOTE_ADDR'];
 		 
 		 
@@ -88,7 +88,8 @@ class te_Api_override extends te_Api {
 	}
 	
 	function sendDisposition($session,$request){
-		$url= $sugar_config['ameyo_URL']. 'dacx/dispose/?';
+		global $sugar_config;
+		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose/?';
 		$data=[];
 		if($request['campaignId']) $data['campaignId']=$request['campaignId'];
 		if($request['sessionId']) $data['sessionId']=$session;
@@ -101,7 +102,11 @@ class te_Api_override extends te_Api {
 		foreach($data as $key=>$val){
 			$qrystr .=$key .'='. $val;
 		}
-		$response= file_get_contents($url. urlencode(json_encode($qrystr))); 
+	 
+		
+		
+		//echo $url. urlencode( ($qrystr));die;
+		$response= file_get_contents($url. urlencode($qrystr)); 
 	}
 	
 	function uploadContacts($data){

@@ -1,6 +1,6 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-//require_once('custom/modules/te_Api/sso.php');
+require_once('custom/modules/te_Api/sso.php');
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
 
 print_r($_REQUEST);

@@ -9,25 +9,34 @@ $userID= $_REQUEST['userId'];
 $phone= $_REQUEST['phone'];
 $callType= $_REQUEST['callType']; 
 
- 
-
-		
+ 	
 $getUserIDs= "select id from users where user_name='$userID'";
 $getUserID=$db->query($getUserIDs);
 if($db->getRowCount($getUserID) > 0){
 	$userid=$db->fetchByAssoc($getUserID);
 	if($callType=='outbound.auto.dial'){	
-		$lead="select id from  leads where  dristi_customer_id='$customerId'";
+		$lead="select id,assigned_user_id from  leads where  dristi_customer_id='$customerId'";
+		$res=$db->query($lead); 
+		
+	}else if($callType=='outbound.manual.dial'){
+		$lead="select id,assigned_user_id from  leads where  dristi_customer_id='$customerId'";
+		$res=$db->query($lead);
+		if($db->getRowCount($res) == 0){	
+			 $lead="select id,assigned_user_id from  leads where ( phone_home='$phone' or  phone_mobile='$phone' or  phone_work='$phone' or  phone_other='$phone' ) ";
+			 $res=$db->query($lead);
+		}	
+			
 	}else if($callType=='inbound.call.dial'){	
 		$lead="select id,assigned_user_id from  leads where ( phone_home='$phone' or  phone_mobile='$phone' or  phone_work='$phone' or  phone_other='$phone' ) ";
+		$res=$db->query($lead);
 	}	
-	$res=$db->query($lead);
+ 
 	if($db->getRowCount($res) > 0){	
 		$records=$db->fetchByAssoc($res);	
 		if($callType=='outbound.auto.dial'){		
 			$db->query("update leads set dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 			header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
-		}else if($callType=='inbound.call.dial'){
+		}else if($callType=='inbound.call.dial' || $callType=='outbound.manual.dial'){
 			
 			if(empty($records['assigned_user_id'])){
 				
@@ -43,6 +52,8 @@ if($db->getRowCount($getUserID) > 0){
 			}
 			
 		}
+	}else{
+		header('Location: index.php?module=te_student_batch&action=search_leads&search_leads=1&mobile_number='. $phone);
 	}	
 }else{
 	
