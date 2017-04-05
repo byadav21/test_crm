@@ -1,6 +1,6 @@
 <?php
-// created: 2017-04-05 00:10:39
-$subpanel_layout['list_fields'] = array (
+// created: 2017-04-05 00:10:34
+$layout_defs = array (
   'name' => 
   array (
     'type' => 'name',
@@ -11,14 +11,6 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => NULL,
     'target_record_key' => NULL,
-  ),
-  'status' => 
-  array (
-    'type' => 'enum',
-    'studio' => 'visible',
-    'vname' => 'LBL_STATUS',
-    'width' => '10%',
-    'default' => true,
   ),
   'institute' => 
   array (
