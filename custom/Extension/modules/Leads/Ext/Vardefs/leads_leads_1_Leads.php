@@ -47,3 +47,20 @@ $dictionary["Lead"]["fields"]["dristi_request"] = array (
   'type' => 'text',
   
 );
+$dictionary["Lead"]["fields"]["dristi_campagain_id"] = array (
+  'name' => 'dristi_campagain_id',
+  'type' => 'varchar',
+  
+);
+
+$dictionary["Lead"]["fields"]["dristi_API_id"] = array (
+  'name' => 'dristi_API_id',
+  'type' => 'text',
+  
+);
+
+$dictionary["Lead"]["fields"]["call_object_id"] = array (
+  'name' => 'call_object_id',
+  'type' => 'text',
+  
+);

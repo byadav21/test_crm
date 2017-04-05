@@ -106,8 +106,9 @@ class te_Api_override extends te_Api {
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		
 		
-		echo $url. urlencode( ($qrystr));die;
-		$response= file_get_contents($url. urlencode($qrystr)); 
+		echo $url. ( ($qrystr));
+		echo $response= file_get_contents($url. urlencode($qrystr)); 
+		die;
 	}
 	
 	function uploadContacts($data,$campID='',$api=''){

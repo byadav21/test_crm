@@ -8,6 +8,7 @@ $customerId= $_REQUEST['customerId'];
 $userID= $_REQUEST['userId'];
 $phone= $_REQUEST['phone'];
 $callType= $_REQUEST['callType']; 
+$callObjId= $_REQUEST['userCrtObjectId']; 
 
  	
 $getUserIDs= "select id from users where user_name='$userID'";
@@ -34,13 +35,13 @@ if($db->getRowCount($getUserID) > 0){
 	if($db->getRowCount($res) > 0){	
 		$records=$db->fetchByAssoc($res);	
 		if($callType=='outbound.auto.dial'){		
-			$db->query("update leads set dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
+			$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 			header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 		}else if($callType=='inbound.call.dial' || $callType=='outbound.manual.dial'){
 			
-			if(empty($records['assigned_user_id'])){
+			if(empty($records['assigned_user_id']) || $records['assigned_user_id']==null){
 				
-				$db->query("update leads set dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
+				$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 				header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 				
 			}else if($records['assigned_user_id']!=$userid['id']){
@@ -48,16 +49,19 @@ if($db->getRowCount($getUserID) > 0){
 				header('Location: index.php?module=te_student_batch&action=search_leads&search_leads=1&mobile_number='. $phone);
 				 
 			}else{
+				
+				$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+				
 				header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 			}
 			
 		}
 	}else{
-		header('Location: index.php?module=te_student_batch&action=search_leads&search_leads=1&mobile_number='. $phone);
+		header('Location: index.php?module=Leads&action=EditView&return_module=Leads');
 	}	
 }else{
 	
-	echo 'Unauthrozied Access';
+	header('Location: index.php?module=Leads&action=EditView&return_module=Leads');
 }
 	
  
