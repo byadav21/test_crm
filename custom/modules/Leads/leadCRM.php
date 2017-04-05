@@ -32,14 +32,17 @@ if($db->getRowCount($getUserID) > 0){
 		$res=$db->query($lead);
 	}	
  
+  
+ 
 	if($db->getRowCount($res) > 0){	
 		$records=$db->fetchByAssoc($res);	
+		//print_r($records);die;
 		if($callType=='outbound.auto.dial'){		
 			$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 			header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 		}else if($callType=='inbound.call.dial' || $callType=='outbound.manual.dial'){
 			
-			if(empty($records['assigned_user_id']) || $records['assigned_user_id']==null){
+			if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
 				
 				$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 				header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
