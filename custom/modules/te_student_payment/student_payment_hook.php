@@ -16,29 +16,7 @@ class StudentPayment{
 		$student_country=$studentRes['country'];
 		
 		if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
-			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."' WHERE student_payment_id='".$bean->id."'");
-			
-			if($payment_realized==1){
-				$studentBatchSql = "SELECT te_ba_batch_id_c FROM te_student_batch WHERE id='".$bean->te_student_batch_id_c."' AND deleted=0";
-				$studentBatchObj= $GLOBALS['db']->query($studentBatchSql);
-				$studentBatch = $GLOBALS['db']->fetchByAssoc($studentBatchObj);		
-				
-				# get total paid amount
-				$paymentSql = "SELECT SUM(p.amount) as amount FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='".$studentRes['lead_id_c']."' AND p.payment_realized= 1";
-				$paymentObj= $GLOBALS['db']->query($paymentSql);
-				$paymentRes=$GLOBALS['db']->fetchByAssoc($paymentObj);
-				
-				$paymentDetails=array(
-					'batch_id'=>$studentBatch['te_ba_batch_id_c'],
-					'student_id'=>$student_id,
-					'amount'=>$paymentRes['amount'],
-					'student_country'=>$student_country,
-					'payment_source'=>$bean->payment_source
-				);
-				$this->removePaymentPlan($student_id,$studentBatch['te_ba_batch_id_c'],$student_country);
-				$this->updateStudentPaymentPlan($paymentDetails);
-			}
-		
+			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."' WHERE student_payment_id='".$bean->id."'");		
 		}else{
 			$payment = new te_payment_details();
 			$payment->payment_type 	   = $bean->payment_type;
@@ -56,8 +34,28 @@ class StudentPayment{
 			$payment->save();	
 			$lead_payment_details_id=$student_batch_id=$payment->id;
 			#update lead payment if for refference
-			$GLOBALS['db']->query("UPDATE te_student_payment SET lead_payment_details_id='".$lead_payment_details_id."' WHERE id='".$bean->id."'");
+			$GLOBALS['db']->query("UPDATE te_student_payment SET lead_payment_details_id='".$lead_payment_details_id."' WHERE id='".$bean->id."'");			
 		}		
+		if($payment_realized==1){
+			$studentBatchSql = "SELECT te_ba_batch_id_c FROM te_student_batch WHERE id='".$bean->te_student_batch_id_c."' AND deleted=0";
+			$studentBatchObj= $GLOBALS['db']->query($studentBatchSql);
+			$studentBatch = $GLOBALS['db']->fetchByAssoc($studentBatchObj);		
+			
+			# get total paid amount
+			$paymentSql = "SELECT SUM(p.amount) as amount FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='".$studentRes['lead_id_c']."' AND p.payment_realized= 1";
+			$paymentObj= $GLOBALS['db']->query($paymentSql);
+			$paymentRes=$GLOBALS['db']->fetchByAssoc($paymentObj);
+			
+			$paymentDetails=array(
+				'batch_id'=>$studentBatch['te_ba_batch_id_c'],
+				'student_id'=>$student_id,
+				'amount'=>$paymentRes['amount'],
+				'student_country'=>$student_country,
+				'payment_source'=>$bean->payment_source
+			);
+			$this->removePaymentPlan($student_id,$studentBatch['te_ba_batch_id_c'],$student_country);
+			$this->updateStudentPaymentPlan($paymentDetails);
+		}
 	}
 	
 	function removePaymentPlan($student_id,$batch_id,$student_country){
