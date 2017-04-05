@@ -5,6 +5,8 @@ class te_student_batchViewEdit extends ViewEdit {
 		global $current_user;	
 		parent::display();
 		echo "<script>
+		
+		
 		    if($('#status').val()!='Dropout'){
 				document.getElementById('detailpanel_2').style.display ='none';
 		    }
@@ -26,6 +28,13 @@ class te_student_batchViewEdit extends ViewEdit {
 			$("#refund_date_trigger").hide()
 			</script>';	
 		}
+	?>
+	<script>	
+	$(function(){
+	$("#status option[value='Inactive_transfer']").remove();
+	});	
+	</script>
+	<?php
     }
 }
 ?>

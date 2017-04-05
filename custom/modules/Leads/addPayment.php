@@ -65,7 +65,7 @@ class addPaymentClass{
 			}
 			if($bean->status=='Converted'){
 
-				$bean->converted_date=date("Y-m-d");
+				//$bean->converted_date=date("Y-m-d H:i:s");
 				#create student
 				$duplicateStudentSql = "SELECT id,name,email,country FROM te_student WHERE deleted=0 AND email='".$bean->email1."'";
 				$duplicateStudentObj= $GLOBALS['db']->query($duplicateStudentSql);
@@ -179,6 +179,7 @@ class addPaymentClass{
 					#get new student batch id
 					$student_batch_id=$studentBatchObj->id;
 				}
+				$GLOBALS['db']->query("update leads set converted_date='".date('Y-m-d H:i:s')."' where id='{$bean->id}'");
 			}
 
 			if($bean->status=='Dropout'){

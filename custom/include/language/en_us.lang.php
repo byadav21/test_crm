@@ -89,11 +89,6 @@ $GLOBALS['app_list_strings']['assign_rule_list']=array (
   'Agent' => 'Agent',
   'Group'=>'Group',  
 );
-$GLOBALS['app_list_strings']['student_batch_status_list']=array (
-  'Active' => 'Active',
-  'Inactive' => 'Inactive',
-  'Dropout' => 'Dropout',
-);
 $GLOBALS['app_list_strings']['student_batch_dropout_list']=array (
   '' => '',
   'pre_dropout' => 'Pre Dropout',
@@ -152,4 +147,10 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
 );
 $app_strings['LBL_GROUPTAB4_1487154036'] = 'SRM';
 
-?>
+
+$GLOBALS['app_list_strings']['student_batch_status_list']=array (
+  'Active' => 'Active',
+  'Inactive' => 'Inactive',
+  'Dropout' => 'Dropout',
+  'Inactive_transfer' => 'Inactive Transfer',
+);
