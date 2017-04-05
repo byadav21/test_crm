@@ -11,11 +11,6 @@ class Alogic{
 			
 			
 			}
-			else
-			{
-				echo "Hello";
-				}
-		
 			
 		}
 			
