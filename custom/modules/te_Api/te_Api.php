@@ -112,8 +112,10 @@ class te_Api_override extends te_Api {
         if($request['phone']) $data['phone']=urlencode($request['phone']);
 		if($request['userId']) $data['userId']=urlencode($request['userId']);
 		$data['dispositionCode']=($callback=='Callback')? 'Callback' : 'Sale';
-		if($callback=='Callback'){
-		  $data['selfCallback']=true;
+		
+
+            if($callback=='Callback'){
+		  $data['selfCallback']='true';
 		  $data['dispositionAttr']='customer-'.date('d-m-Y H:i:s',strtotime($date));
 		   //after-03-00-0000 02:01:00	
 		}
@@ -124,8 +126,8 @@ class te_Api_override extends te_Api {
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		
 		
-		echo $url. ( ($qrystr));
-		echo $response= file_get_contents($url. ($qrystr));    die;       
+		//echo $url. ( ($qrystr));
+		$response= file_get_contents($url. ($qrystr));  //  die;       
 
 
 	}

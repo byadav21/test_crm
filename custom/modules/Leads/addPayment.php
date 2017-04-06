@@ -432,10 +432,11 @@ class addPaymentClass{
 
 	function addDispositionFunc($bean, $event, $argument){
 		ini_set('display_errors',"off");
-		#If record is being created manually
+#If record is being created manually
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
-			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description=='Call Back' && $bean->fetched_row['date_of_callback']!= $bean->date_of_callback ){
+			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description)){
 				$disposition = new te_disposition();
+
 				$disposition->status 	   = $bean->status;
 				$disposition->status_detail  = $bean->status_description;
 				if(isset($bean->note)){
@@ -451,25 +452,26 @@ class addPaymentClass{
 				
 			$sql = " select dristi_request from leads WHERE id ='".$bean->id."'";
 			$sqlData=$GLOBALS['db']->query($sql);
-		     
+		       
 			if($GLOBALS['db']->getRowCount($sqlData)>0){
 					$dristiReq = $GLOBALS['db']->fetchByAssoc($sqlData);
 					 
 					if($dristiReq && $dristiReq['dristi_request']){
-					   $arrReq=(array)json_decode(html_entity_decode($dristiReq['dristi_request']));					   
+					   $arrReq=(array)json_decode(html_entity_decode($dristiReq['dristi_request']));
+				   
 					   if($arrReq && count($arrReq)>2){
 						   $drobj= new te_Api_override();
 						   global $current_user;
 						   
-						   $assinuserDristi="select neox_user,neox_password from users where id='". $bean->assigned_user_id . "'";
-						   $users=$GLOBALS['db']->query($assinuserDristi);
-						   if($GLOBALS['db']->getRowCount($users)>0){
-							   $dristiCred = $GLOBALS['db']->fetchByAssoc($users);
+						  // $assinuserDristi="select neox_user,neox_password from users where id='". $bean->assigned_user_id . "'";
+						  // $users=$GLOBALS['db']->query($assinuserDristi);
+						  // if($GLOBALS['db']->getRowCount($users)>0){
+							//   $dristiCred = $GLOBALS['db']->fetchByAssoc($users);
 							  // $ses$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
 							  // if($session){
-							  
+							 // print_r($bean->status_description);die;
 							        if($bean->status_description == 'Call Back'){
-										
+										//echo 'in call';
 									  	$drobj->sendDisposition('Callback',$arrReq,$bean->date_of_callback);
 									}else{
 									  $drobj->sendDisposition("",$arrReq);	
@@ -478,7 +480,7 @@ class addPaymentClass{
 							  
 									 
 							  // }
-						   }
+						 //  }
 					   }
 					   
 					   	  
