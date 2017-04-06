@@ -109,7 +109,7 @@ class te_Api_override extends te_Api {
 		$data['dispositionCode']='Sale';
 		$qrystr='';
 		foreach($data as $key=>$val){
-			$qrystr .=$key .'='. $val;
+			$qrystr .=$key .'='. $val '&';
 		}
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		
