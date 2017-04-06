@@ -124,8 +124,8 @@ class te_Api_override extends te_Api {
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		
 		
-		//echo $url. ( ($qrystr));
-		$response= file_get_contents($url. ($qrystr));           
+		echo $url. ( ($qrystr));
+		echo $response= file_get_contents($url. ($qrystr));    die;       
 
 
 	}
