@@ -18,5 +18,8 @@ if($_REQUEST['amyoaction']=='callStart'){
 	
 }else{
 	
+	$_SESSION['amyoSID']=$_REQUEST['sessionId'];
+	$_SESSION['amyoCID']=$_REQUEST['campaignId'];
+	
 	header('Location: index.php');
 }
