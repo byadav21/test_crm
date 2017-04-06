@@ -12,7 +12,7 @@ $GLOBALS['db']->query($dropoutSql);
 $lead_id = $_REQUEST['lead_id'];
 
 #update lead status as Dropout
-$GLOBALS['db']->query("UPDATE leads SET status='".$_REQUEST['request_status']."' AND status_description='".$_REQUEST['request_status']."' WHERE id='".$lead_id."'");
+//$GLOBALS['db']->query("UPDATE leads SET status='".$_REQUEST['request_status']."' AND status_description='".$_REQUEST['request_status']."' WHERE id='".$lead_id."'");
 #Add new Disposition Record
 $disposition = new te_disposition();
 $disposition->status 	   = 'Dropout';

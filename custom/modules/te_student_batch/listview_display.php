@@ -17,7 +17,7 @@ class listviewClass {
 			$bean->mobile=$res1['mobile'];
       //echo "SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$bean->id."'";
       //exit();
-			$row =$db->query("SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$bean->id."'");
+			$row =$db->query("SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$bean->id."'  AND payment_realized=1");
 			$res =$db->fetchByAssoc($row);
 
 		//$bean->feepaid=$res['fee_usd'];
