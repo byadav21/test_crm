@@ -97,7 +97,7 @@ class te_Api_override extends te_Api {
 		
 	}	
 	
-	function sendDisposition($session,$request){
+	function sendDisposition($callback='',$request,$date=''){
 		global $sugar_config;
 		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
 		$data=[];
@@ -111,10 +111,15 @@ class te_Api_override extends te_Api {
 		
         if($request['phone']) $data['phone']=urlencode($request['phone']);
 		if($request['userId']) $data['userId']=urlencode($request['userId']);
-		$data['dispositionCode']='Sale';
+		$data['dispositionCode']=($callback=='Callback')? 'Callback' : 'Sale';
+		if($callback=='Callback'){
+		  $data['selfCallback']=true;
+		  $data['dispositionAttr']='customer-'.date('d-m-Y H:i:s',strtotime($date));
+		   //after-03-00-0000 02:01:00	
+		}
 		$qrystr='';
 		foreach($data as $key=>$val){
-			$qrystr .=$key .'='. $val . '&';
+			$qrystr .=$key .'='. $val . '&'; 
 		}
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		

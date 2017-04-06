@@ -465,9 +465,18 @@ class addPaymentClass{
 						   $users=$GLOBALS['db']->query($assinuserDristi);
 						   if($GLOBALS['db']->getRowCount($users)>0){
 							   $dristiCred = $GLOBALS['db']->fetchByAssoc($users);
-							  // $session=$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
+							  // $ses$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
 							  // if($session){
-									 $drobj->sendDisposition(1,$arrReq);
+							  
+							        if($bean->fetched_row['status'] == 'Call Back'){
+										
+									  	$drobj->sendDisposition('Callback',$arrReq,$bean->date_of_callback);
+									}else{
+									  $drobj->sendDisposition("",$arrReq);	
+									}	
+			
+							  
+									 
 							  // }
 						   }
 					   }
