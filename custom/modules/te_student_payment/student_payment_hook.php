@@ -17,6 +17,7 @@ class StudentPayment{
 		
 		if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
 			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."' WHERE student_payment_id='".$bean->id."'");		
+			$payment_realized=$bean->payment_realized;
 		}else{
 			$payment = new te_payment_details();
 			$payment->payment_type 	   = $bean->payment_type;
