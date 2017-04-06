@@ -192,7 +192,7 @@ class SRM_wise_referral extends Dashlet{
     				$class="evenListRowS1";
     				$row--;
     			}
-          $teamcontribution = ($data1['referral']/$data1['toalreferral'])*100;
+          $teamcontribution = ($data1['referral']/$overallusers_res['totalref'])*100;
           $teamcontribution=number_format((float)$teamcontribution, 2, '.', '');
           $refcoversion = ($data1['conreferral']/$data1['referral'])*100;
           $refcoversion=number_format((float)$refcoversion, 2, '.', '');
@@ -207,7 +207,9 @@ class SRM_wise_referral extends Dashlet{
         if($overallusers_res){
             $totalrefconper=($overallusers_res['totalrefConverted']/$overallusers_res['totalref'])*100;
             $totalrefconper=number_format((float)$totalrefconper, 2, '.', '');
-            $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>Overall</td><td scope='row' align='left' valign='top'>".$overallusers_res['totalref']."</td><td scope='row' align='left' valign='top'>".array_sum($totalteamcon)."%</td><td scope='row' align='left' valign='top'>".$overallusers_res['totalrefConverted']."</td><td scope='row' align='left' valign='top'>".$totalrefconper."%</td></tr>";
+            $totalteamcon=($overallusers_res['totalref']/$overallusers_res['totalref'])*100;
+            $totalteamcon=number_format((float)$totalteamcon, 2, '.', '');
+            $output.="<tr class='".$class."' height='20'><td scope='row' align='left' valign='top'>Overall</td><td scope='row' align='left' valign='top'>".$overallusers_res['totalref']."</td><td scope='row' align='left' valign='top'>".$totalteamcon."%</td><td scope='row' align='left' valign='top'>".$overallusers_res['totalrefConverted']."</td><td scope='row' align='left' valign='top'>".$totalrefconper."%</td></tr>";
         }
 
       }
