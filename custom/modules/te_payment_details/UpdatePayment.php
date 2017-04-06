@@ -28,7 +28,7 @@ class UpdatePaymentName{
 		}
 		
 		# if payment details is being updated. Update the same payment in student payment module
-		if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
+		if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""&&$_REQUEST['module']!="Leads"){
 			$GLOBALS['db']->query("UPDATE te_student_payment SET amount='".$bean->amount."' WHERE lead_payment_details_id='".$_REQUEST['record']."'");
 			
 			#update student payment plan			
