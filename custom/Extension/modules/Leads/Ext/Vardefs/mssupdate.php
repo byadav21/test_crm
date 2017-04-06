@@ -32,3 +32,4 @@ $dictionary['Lead']['fields']['batch']['massupdate']=false;
 
 $dictionary['Lead']['fields']['status_description']['massupdate']=false;
 $dictionary['Lead']['fields']['date_of_referral']['massupdate']=false;
+$dictionary['Lead']['fields']['lead_source']['massupdate']=false;
