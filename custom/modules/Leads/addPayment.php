@@ -465,7 +465,7 @@ class addPaymentClass{
 						   $users=$GLOBALS['db']->query($assinuserDristi);
 						   if($GLOBALS['db']->getRowCount($users)>0){
 							   $dristiCred = $GLOBALS['db']->fetchByAssoc($users);
-							  // $session=$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
+							  // $ses$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
 							  // if($session){
 							  
 							        if($bean->fetched_row['status'] == 'Call Back'){

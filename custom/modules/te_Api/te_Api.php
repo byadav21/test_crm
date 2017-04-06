@@ -115,12 +115,11 @@ class te_Api_override extends te_Api {
 		if($callback=='Callback'){
 		  $data['selfCallback']=true;
 		  $data['dispositionAttr']='customer-'.date('d-m-Y H:i:s',strtotime($date));
-		  //$current=strtotime(date);
-		  //after-03-00-0000 02:01:00	
+		   //after-03-00-0000 02:01:00	
 		}
 		$qrystr='';
 		foreach($data as $key=>$val){
-			$qrystr .=$key .'='. $val . '&';
+			$qrystr .=$key .'='. $val . '&'; 
 		}
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		
