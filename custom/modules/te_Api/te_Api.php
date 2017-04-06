@@ -87,18 +87,26 @@ class te_Api_override extends te_Api {
 		
 	}
 	
+	function call($session,$request){		
+		 
+		$server= $this->url . "manual-dial&data=";
+		echo $data= file_get_contents(  $server. urlencode(json_encode($request)));
+		die;
+		
+	}	
+	
 	function sendDisposition($session,$request){
 		global $sugar_config;
 		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
 		$data=[];
-		if($request['campaignId']) $data['campaignId']=$request['campaignId'];
-		if($request['sessionId']) $data['sessionId']=$session;
-		if($request['crtObjectId']) $data['crtObjectId']=$request['crtObjectId'];
-		if($request['userCrtObjectId']) $data['userCrtObjectId']=$request['userCrtObjectId'];
-		if($request['customerId']) $data['customerId']=$request['customerId'];
-		if($request['phone']) $data['phone']=$request['phone'];
-		if($request['userId']) $data['userId']=$request['userId'];
-		$data['dispositionCode']='Do  Not Call';
+		if($request['campaignId']) $data['campaignId']=urlencode($request['campaignId']);
+		if($request['sessionId']) $data['sessionId']=urlencode($session);
+		if($request['crtObjectId']) $data['crtObjectId']=urlencode($request['crtObjectId']);
+		if($request['userCrtObjectId']) $data['userCrtObjectId']=urlencode($request['userCrtObjectId']);
+		if($request['customerId']) $data['customerId']=urlencode($request['customerId']);
+		if($request['phone']) $data['phone']=urlencode($request['phone']);
+		if($request['userId']) $data['userId']=urlencode($request['userId']);
+		$data['dispositionCode']='Sale';
 		$qrystr='';
 		foreach($data as $key=>$val){
 			$qrystr .=$key .'='. $val;
@@ -107,7 +115,7 @@ class te_Api_override extends te_Api {
 		
 		
 		echo $url. ( ($qrystr));
-		echo $response= file_get_contents($url. urlencode($qrystr)); 
+		echo $response= file_get_contents($url. ($qrystr)); 
 		die;
 	}
 	

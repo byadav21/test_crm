@@ -652,7 +652,7 @@ if(!isset($_SESSION['referral'])){
 
 			}
 
-			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&number='+phone, callback);
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead='+ lead_id +'&number='+phone, callback);
 		 }
 	}
 

@@ -301,7 +301,7 @@
 						
 							{if !empty($rowData.PHONE_MOBILE)} 
 								<p> <i class="fa fa-phone" aria-hidden="true"></i>  {$rowData.PHONE_MOBILE}  
-								 <img src="custom/themes/default/images/phone.png"  style="cursor:pointer" class="prevdel" onclick="showPredictive()" alt="Smiley face" height="20" width="20"></p>
+								 
 							{/if}
 						<p>Counsellor : {$rowData.ASSIGNED_USER_NAME}</p>
 				  </div>
