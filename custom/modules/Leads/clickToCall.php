@@ -14,10 +14,11 @@ if($db->getRowCount($res)){
 		 $assinuserDristi="select neox_user,neox_password from users where id='". $current_user->id . "'";
 		 $users=$db->query($assinuserDristi);
 		 if($db->getRowCount($users)>0){
-			  $session=$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
+			 print_r($_SESSION);
+			  $session=$_SESSION['amyoSID'];
 				   if($session){
 					     $arrReq=[];
-					     $arrReq['campaignId']=$resdata['dristi_campagain_id'];
+					     $arrReq['campaignId']=$_SESSION['amyoCID'];
 					     $arrReq['sessionId']=$session;
 					     $arrReq['phone']=$_REQUEST['number'];
 					     $customerRecords=[];
