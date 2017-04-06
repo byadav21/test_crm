@@ -102,8 +102,8 @@ class te_Api_override extends te_Api {
 		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
 		$data=[];
 		$session=$_SESSION['amyoSID'];
-		if($request['campaignId']) $data['campaignId']=urlencode($_SESSION['amyoCID']);
-		//if($request['sessionId']) $data['sessionId']=urlencode($session);
+		$data['campaignId']=urlencode($_SESSION['amyoCID']);
+		$data['sessionId']=urlencode($session);
 		if($request['crtObjectId']) $data['crtObjectId']=urlencode($request['crtObjectId']);
 		if($request['userCrtObjectId']) $data['userCrtObjectId']=urlencode($request['userCrtObjectId']);
 		if($request['customerId']) $data['customerId']=urlencode($request['customerId']);
@@ -119,8 +119,9 @@ class te_Api_override extends te_Api {
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);
 		
 		
-		//echo $url. ( ($qrystr));die;
-		$response= file_get_contents($url. ($qrystr));               
+		//echo $url. ( ($qrystr));
+		$response= file_get_contents($url. ($qrystr));           
+
 
 	}
 	

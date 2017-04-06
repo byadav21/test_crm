@@ -20,6 +20,6 @@ if($_REQUEST['amyoaction']=='callStart'){
 	
 	$_SESSION['amyoSID']=$_REQUEST['sessionId'];
 	$_SESSION['amyoCID']=$_REQUEST['campaignId'];
-	
+	//print_r($_SESSION);
 	header('Location: index.php');
 }
