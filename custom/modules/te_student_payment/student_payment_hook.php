@@ -16,8 +16,12 @@ class StudentPayment{
 		$student_country=$studentRes['country'];
 		
 		if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
-			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."' WHERE student_payment_id='".$bean->id."'");		
-			$payment_realized=$bean->payment_realized;
+			if($bean->payment_realized==1)
+				$payment_realized=1;
+			else
+				$payment_realized=0;
+
+			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."',payment_realized='".$payment_realized."' WHERE student_payment_id='".$bean->id."'");
 		}else{
 			$payment = new te_payment_details();
 			$payment->payment_type 	   = $bean->payment_type;
