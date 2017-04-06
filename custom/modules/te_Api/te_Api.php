@@ -92,8 +92,8 @@ class te_Api_override extends te_Api {
 		$server= $this->url . "manual-dial&data=";
 		echo $data= file_get_contents(  $server. urlencode(json_encode($request)));
 		
-echo  $server. urlencode(json_encode($request));
-die;
+		echo  $server. urlencode(json_encode($request));
+		die;
 		
 	}	
 	
@@ -101,14 +101,15 @@ die;
 		global $sugar_config;
 		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
 		$data=[];
-		if($request['campaignId']) $data['campaignId']=urlencode($request['campaignId']);
+		$session=$_SESSION['amyoSID'];
+		if($request['campaignId']) $data['campaignId']=urlencode($_SESSION['amyoCID']);
 		//if($request['sessionId']) $data['sessionId']=urlencode($session);
 		if($request['crtObjectId']) $data['crtObjectId']=urlencode($request['crtObjectId']);
 		if($request['userCrtObjectId']) $data['userCrtObjectId']=urlencode($request['userCrtObjectId']);
 		if($request['customerId']) $data['customerId']=urlencode($request['customerId']);
-                if($request['sessionId']) $data['sessionId']=urlencode($request['sessionId']);
+               // if($request['sessionId']) $data['sessionId']=urlencode($request['sessionId']);
 		
-                if($request['phone']) $data['phone']=urlencode($request['phone']);
+        if($request['phone']) $data['phone']=urlencode($request['phone']);
 		if($request['userId']) $data['userId']=urlencode($request['userId']);
 		$data['dispositionCode']='Sale';
 		$qrystr='';
