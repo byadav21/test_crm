@@ -434,7 +434,7 @@ class addPaymentClass{
 		ini_set('display_errors',"off");
 		#If record is being created manually
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
-			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) ){
+			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description=='Call Back' && $bean->fetched_row['date_of_callback']!= $bean->date_of_callback ){
 				$disposition = new te_disposition();
 				$disposition->status 	   = $bean->status;
 				$disposition->status_detail  = $bean->status_description;
@@ -468,7 +468,7 @@ class addPaymentClass{
 							  // $ses$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
 							  // if($session){
 							  
-							        if($bean->fetched_row['status'] == 'Call Back'){
+							        if($bean->status_description == 'Call Back'){
 										
 									  	$drobj->sendDisposition('Callback',$arrReq,$bean->date_of_callback);
 									}else{
