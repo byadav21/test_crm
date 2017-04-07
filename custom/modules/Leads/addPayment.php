@@ -434,7 +434,11 @@ class addPaymentClass{
 		ini_set('display_errors',"off");
 #If record is being created manually
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
-			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description)){
+			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description=='Call Back' && $bean->fetched_row['date_of_callback'] != $bean->date_of_callback) || ($bean->status_description=='Follow Up' && $bean->fetched_row['date_of_followup'] != $bean->date_of_followup) || ($bean->status_description=='Prospect' && $bean->fetched_row['date_of_prospect'] != $bean->date_of_prospect) ){
+				
+				
+				 
+				
 				$disposition = new te_disposition();
 
 				$disposition->status 	   = $bean->status;
@@ -463,24 +467,23 @@ class addPaymentClass{
 						   $drobj= new te_Api_override();
 						   global $current_user;
 						   
-						  // $assinuserDristi="select neox_user,neox_password from users where id='". $bean->assigned_user_id . "'";
-						  // $users=$GLOBALS['db']->query($assinuserDristi);
-						  // if($GLOBALS['db']->getRowCount($users)>0){
-							//   $dristiCred = $GLOBALS['db']->fetchByAssoc($users);
-							  // $ses$drobj->doLogin($dristiCred['neox_user'],$dristiCred['neox_password']);
-							  // if($session){
-							 // print_r($bean->status_description);die;
-							        if($bean->status_description == 'Call Back'){
-										//echo 'in call';
-									  	$drobj->sendDisposition('Callback',$arrReq,$bean->date_of_callback);
-									}else{
-									  $drobj->sendDisposition("",$arrReq);	
-									}	
-			
-							  
-									 
-							  // }
-						 //  }
+						   
+							if($bean->status_description == 'Call Back' || $bean->status_description == 'Follow Up' || $bean->status_description == 'Prospect'){
+								 
+								$date='';
+								if($bean->status_description == 'Call Back') $date=$bean->date_of_callback;
+								if($bean->status_description == 'Follow Up') $date=$bean->date_of_followup;
+								if($bean->status_description == 'Prospect') $date=$bean->date_of_prospect;
+								
+								if($date){
+									$drobj->sendDisposition('Callback',$arrReq,$date);
+								}else{
+									$drobj->sendDisposition("",$arrReq);	
+								}	
+							}else{
+							  $drobj->sendDisposition("",$arrReq);	
+							}	
+	
 					   }
 					   
 					   	  

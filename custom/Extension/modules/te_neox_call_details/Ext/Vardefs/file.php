@@ -1,19 +1,53 @@
 <?php
-$dictionary['te_neox_call_details']['fields']['srmno'] = array(
+$dictionary['te_neox_call_details']['fields']['callType'] = array(
 	'required' => false,
-	'name' => 'srmno',
-	'vname' => 'srmno',
-	'type' => 'varchar',
+	'name' => 'callType',
+	'vname' => 'callType',
+	'type' => 'text',
 	'audited' => false,
 	'massupdate' => false,
 	
 	'studio' => 'visible',
 );
 
-$dictionary['te_neox_call_details']['fields']['student_no'] = array(
+$dictionary['te_neox_call_details']['fields']['ivrTime'] = array(
 	'required' => false,
-	'name' => 'student_no',
-	'vname' => 'student_no',
+	'name' => 'ivrTime',
+	'vname' => 'ivrTime',
+	'type' => 'text',
+	'audited' => false,
+	'massupdate' => false,
+	
+	'studio' => 'visible',
+);
+$dictionary['te_neox_call_details']['fields']['userDetail'] = array(
+	'required' => false,
+	'name' => 'userDetail',
+	'vname' => 'userDetail',
+	'type' => 'text',
+	'audited' => false,
+	'massupdate' => false,
+	
+	'studio' => 'visible',
+);
+
+
+
+
+$dictionary['te_neox_call_details']['fields']['ringingTime'] = array(
+	'required' => false,
+	'name' => 'ringingTime',
+	'vname' => 'ringingTime',
+	'type' => 'varchar',
+	'audited' => false,
+	'massupdate' => false,	 
+	'studio' => 'visible',
+);
+
+$dictionary['te_neox_call_details']['fields']['setupTime'] = array(
+	'required' => false,
+	'name' => 'setupTime',
+	'vname' => 'setupTime',
 	'type' => 'varchar',
 	'audited' => false,
 	'massupdate' => false,	 
@@ -21,31 +55,30 @@ $dictionary['te_neox_call_details']['fields']['student_no'] = array(
 );
 
 
-$dictionary['te_neox_call_details']['fields']['calltime'] = array(
+$dictionary['te_neox_call_details']['fields']['dialedTime'] = array(
 	'required' => false,
-	'name' => 'calltime',
-	'vname' => 'calltime',
+	'name' => 'dialedTime',
+	'vname' => 'dialedTime',
 	'type' => 'varchar',
 	'audited' => false,
 	'massupdate' => false,	 
 	'studio' => 'visible',
 );
 
-$dictionary['te_neox_call_details']['fields']['starttime'] = array(
+$dictionary['te_neox_call_details']['fields']['customerId'] = array(
 	'required' => false,
-	'name' => 'starttime',
-	'vname' => 'starttime',
+	'name' => 'customerId',
+	'vname' => 'customerId',
 	'type' => 'varchar',
 	'audited' => false,
 	'massupdate' => false,	 
 	'studio' => 'visible',
 );
 
-
-$dictionary['te_neox_call_details']['fields']['endtime'] = array(
+$dictionary['te_neox_call_details']['fields']['dispositionCode'] = array(
 	'required' => false,
-	'name' => 'endtime',
-	'vname' => 'endtime',
+	'name' => 'dispositionCode',
+	'vname' => 'dispositionCode',
 	'type' => 'varchar',
 	'audited' => false,
 	'massupdate' => false,	 
