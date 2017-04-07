@@ -10,7 +10,7 @@ class status_listview_program {
   // Total Batch update 3Aprl17 Manish gupta
        
         $row1 =$db->query("SELECT COUNT(te_pr_programs_te_ba_batch_1te_ba_batch_idb) AS Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'");                         
-        $amt="SELECT COUNT(te_pr_programs_te_ba_batch_1te_ba_batch_idb) AS Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'";                         
+       // $amt="SELECT COUNT(te_pr_programs_te_ba_batch_1te_ba_batch_idb) AS Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'";                         
 				$res1 =$db->fetchByAssoc($row1);
 				
 				if($res1['Totalbatch']==0)
@@ -20,7 +20,7 @@ class status_listview_program {
 				}
 				else
 				{
-				$bean->total_p_c="<a href='index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3Dte_pr_Programs%26return_module%3Dte_pr_Programs%26action%3DDetailView%26record%3D".$bean->id."'>".$res1['Totalbatch']."</a>";
+				$bean->total_p_c="<a href='index.php?module=te_pr_Programs&action=statusview&total=".$bean->name."&&record=".$bean->id."'>".$res1['Totalbatch']."</a>";
 				//index.php?module=te_pr_Programs&action=statusview&Stw=total&record=
 					
 				}
