@@ -91,8 +91,7 @@ class te_Api_override extends te_Api {
 		 
 		$server= $this->url . "manual-dial&data=";
 		$data= file_get_contents(  $server. urlencode(json_encode($request)));
-		$dataErr=json_decode($data);
-		print_r($dataErr);
+		$dataErr=json_decode($data);		
 		return ($dataErr->status=='error')?false:true;
 	}	
 	
@@ -130,7 +129,7 @@ class te_Api_override extends te_Api {
 			$sec= $since_start->s;
 		   
 		  
-		  $data['dispositionAttr']='after-'. str_pad($day, 2, "0", STR_PAD_LEFT). '-'. str_pad($month, 2, "0", STR_PAD_LEFT).  '-'. str_pad($year, 4, "0", STR_PAD_LEFT).  ' '. str_pad($hour, 2, "0", STR_PAD_LEFT).  ':'. str_pad($min, 2, "0", STR_PAD_LEFT). ':'.  str_pad($sec, 2, "0", STR_PAD_LEFT);
+		  $data['dispositionAttr']=urlencode('after-'. str_pad($day, 2, "0", STR_PAD_LEFT). '-'. str_pad($month, 2, "0", STR_PAD_LEFT).  '-'. str_pad($year, 4, "0", STR_PAD_LEFT).  ' '. str_pad($hour, 2, "0", STR_PAD_LEFT).  ':'. str_pad($min, 2, "0", STR_PAD_LEFT). ':'.  str_pad($sec, 2, "0", STR_PAD_LEFT));
 		   //after-03-00-0000 02:01:00	
 		}
 		$qrystr='';
