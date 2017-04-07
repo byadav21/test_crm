@@ -31,6 +31,12 @@ if($db->getRowCount($getUserID) > 0){
 	}else if($callType=='inbound.call.dial'){	
 		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where ( phone_home='$phone' or  phone_mobile='$phone' or  phone_work='$phone' or  phone_other='$phone' ) ";
 		$res=$db->query($lead);
+	
+	}else if($callType=='outbound.callback.dial'){	
+	
+		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'";
+		$res=$db->query($lead); 
+	
 	}	
  
   
@@ -38,7 +44,7 @@ if($db->getRowCount($getUserID) > 0){
 	if($db->getRowCount($res) > 0){	
 		$records=$db->fetchByAssoc($res);	
 		//print_r($records);die;
-		if($callType=='outbound.auto.dial'){		
+		if($callType=='outbound.auto.dial' || $callType=='outbound.callback.dial'){		
 			$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 			//header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 			include_once("custom/modules/Leads/overview.php");
