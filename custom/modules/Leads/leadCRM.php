@@ -10,6 +10,7 @@ $phone= $_REQUEST['phone'];
 $callType= $_REQUEST['callType']; 
 $callObjId= $_REQUEST['userCrtObjectId']; 
 
+print_r($_REQUEST);
  	
 $getUserIDs= "select id from users where user_name='$userID'";
 $getUserID=$db->query($getUserIDs);
@@ -49,7 +50,7 @@ if($db->getRowCount($getUserID) > 0){
 				////header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 				include_once("custom/modules/Leads/overview.php");
 			}else if($records['assigned_user_id']!=$userid['id']){
-				
+				print_r($_REQUEST);die;
 				header('Location: index.php?module=te_student_batch&action=search_leads&search_leads=1&mobile_number='. $phone);
 				 
 			}else{
@@ -61,10 +62,11 @@ if($db->getRowCount($getUserID) > 0){
 			
 		}
 	}else{
+		print_r($_REQUEST);die;
 		header('Location: index.php?module=Leads&action=EditView&return_module=Leads');
 	}	
 }else{
-	
+	print_r($_REQUEST);die;
 	header('Location: index.php?module=Leads&action=EditView&return_module=Leads');
 }
 	
