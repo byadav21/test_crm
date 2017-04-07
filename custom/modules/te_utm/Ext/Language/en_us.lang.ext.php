@@ -2,11 +2,6 @@
  //WARNING: The contents of this file are auto-generated
 
 
-//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
-$mod_strings['LBL_TE_VENDOR_TE_UTM_1_FROM_TE_VENDOR_TITLE'] = 'Vendor';
-$mod_strings['LBL_TE_UTM_TE_BUDGETED_CAMPAIGN_1_FROM_TE_BUDGETED_CAMPAIGN_TITLE'] = 'Budgeted Campaign Plan';
-
-
 $mod_strings['LBL_UTM_URL'] = 'Final Url';
 
 
@@ -14,6 +9,11 @@ $mod_strings['LBL_UTM_URL'] = 'Final Url';
 $mod_strings['LBL_TE_VENDOR_TE_UTM_1_FROM_TE_VENDOR_TITLE'] = 'Vendor';
 $mod_strings['LBL_TE_UTM_TE_BUDGETED_CAMPAIGN_1_FROM_TE_BUDGETED_CAMPAIGN_TITLE'] = 'Budgeted Campaign Plan';
 $mod_strings['LBL_TE_UTM_TE_ACTUAL_CAMPAIGN_1_FROM_TE_ACTUAL_CAMPAIGN_TITLE'] = 'Actual Campaign Plan';
+
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_TE_VENDOR_TE_UTM_1_FROM_TE_VENDOR_TITLE'] = 'Vendor';
+$mod_strings['LBL_TE_UTM_TE_BUDGETED_CAMPAIGN_1_FROM_TE_BUDGETED_CAMPAIGN_TITLE'] = 'Budgeted Campaign Plan';
 
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY

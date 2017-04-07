@@ -28,33 +28,36 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/MVC/View/views/view.list.php');
 class LeadsViewList extends ViewList
-{   
- 	
+{
+
  	/**
      * Displays the header on section of the page; basically everything before the content
      */
-     function listViewProcess(){		
+     function listViewProcess(){
 		$this->processSearchForm();
-       
 		$this->lv->searchColumns = $this->searchForm->searchColumns;
+
+    if($this->where){
+      $this->where=str_replace('leads.batch','leads_cstm.te_ba_batch_id_c',$this->where);
+    }
 		if(!$this->headers)
 			return;
 		if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false){
 			if(!empty($GLOBALS['current_user']->neox_user) && !empty($GLOBALS['current_user']->neox_password)){
 					$this->lv->ss->assign("LOGGED_IN","Success");
 			}
-			
+
 		if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Manual'){
 			$this->lv->ss->assign("LOGGED_IN_MANUAL","Manual");
 		}
 		else{
-			$this->lv->ss->assign("LOGGED_IN_MANUAL","");	
+			$this->lv->ss->assign("LOGGED_IN_MANUAL","");
 		}
 		if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Predictive'){
 			$this->lv->ss->assign("LOGGED_IN_PREDICTIVE","Predictive");
 		}
 		else{
-			$this->lv->ss->assign("LOGGED_IN_PREDICTIVE","");	
+			$this->lv->ss->assign("LOGGED_IN_PREDICTIVE","");
 		}
 		if(isset($_SESSION['dial_status']) && $_SESSION['dial_status'] =='Pause'){
 			$this->lv->ss->assign("LOGGED_IN_PAUSE","Pause");
@@ -67,18 +70,19 @@ class LeadsViewList extends ViewList
 		}
 		else{
 				$this->lv->ss->assign("LOGGED_IN_RESUME","");
-		}	
-			$this->lv->ss->assign("SEARCH",true);			
-			
+		}
+			$this->lv->ss->assign("SEARCH",true);
+
 			$this->lv->setup($this->seed, 'custom/modules/Leads/tpls/listing.tpl', $this->where, $this->params);
 			$savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
 			echo $this->lv->display();
+
 		}
  	}
-     
+
     public function displayHeader($retModTabs=false)
     {
-		
+
 		 //~ parent::displayHeader();
         global $theme;
         global $max_tabs;
@@ -445,14 +449,14 @@ class LeadsViewList extends ViewList
 			$reportingUserIds = array();
 			$reportUserObj1 = new customfunctionforcrm();
 			$statusWiseCount = $reportUserObj1->statusWiseCounts();
-		
+
 			$ss->assign("statusWiseCount",$statusWiseCount);
 			$ss->assign("csshack",'leadpage');
-		
+
 
         }
 
-		
+
 		//~ echo $test;die;
         if ( isset($extraTabs) && is_array($extraTabs) ) {
             // Adding shortcuts array to extra menu array for displaying shortcuts associated with each module
@@ -505,16 +509,16 @@ class LeadsViewList extends ViewList
         }
 
     }
-	
- 	
+
+
  public function display(){
 	 global $current_user;
 	$id = $current_user->id;
-	
+
 		?>
 <script src="http://js.pusher.com/3.2/pusher.min.js"></script>
 <script>
-	
+
 	    // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
@@ -526,27 +530,22 @@ class LeadsViewList extends ViewList
 	var logged_in_user_id = '<?=$id ?>';
     channel.bind(logged_in_user_id, function(data) {
 		//~ alert(data.first_name+"-"+data.last_name+"-"+data.email_address+"-"+data.primary_address_country+"-"+data.batch_name+"-"+data.programe_name+"-"+data.programe_name+"-"+data.education_c+"-"+data.work_experience_c)
-		
+
 		var params = "&disposition_id="+data.dispo_id+"&lead_id="+data.lead_id+"&user_id="+logged_in_user_id+"&from_pusher=1&mobile="+data.mobile+"&fname="+data.first_name+"&lname="+data.last_name+"&email="+data.email_address+"&address="+data.primary_address_country+"&bname="+data.batch_name+"&pname="+data.programe_name+"&edu="+data.education_c+"&work="+data.work_experience_c;
-		
+
 
 		var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openDispositionPopup"+params;
 		//~ var url_open = "http://localhost/TalentEdge/index.php?entryPoint=openDispositionPopup"+params;
-      
+
 			window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
-      
+
     });
 
-	
-	
-        
+
+
+
   function clickToCall(phone,lead_id){
 
-		
-			
-		
-		
-		
 		//~ alert(phone)
 		if(confirm('Are you sure to make a call')){
 			SUGAR.ajaxUI.showLoadingPanel();
@@ -556,15 +555,15 @@ class LeadsViewList extends ViewList
 					var parsedJSON = JSON.parse(b.responseText);
 					//~ alert(parsedJSON[0]);
 					//~ alert(parsedJSON[1]);
-					
-					if(parsedJSON[0]=="200"){	
+
+					if(parsedJSON[0]=="200"){
 						//~ alert('Call Success');
 						//~ $(this).popupModal('atomBox');
 						//~ document.getElementById('call_id').value = parsedJSON[1];
 						//~ document.getElementById('lead_id').value = lead_id;
 						//~ document.getElementById('mobile').value = phone;
-						//var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
-						//window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
+						var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
+						window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
 						//~ window.location.href='index.php?module=Leads&action=index';
 
 					}
@@ -573,27 +572,27 @@ class LeadsViewList extends ViewList
 							//~ $(this).popupModal('atomBox');
 					}
 				}
-						
+
 			}
-			
-			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead='+ lead_id +'&number='+phone, callback);
+
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&number='+phone, callback);
 		 }
 	}
-	    
-  
-  
-  
+
+
+
+
      </script>
 
 
 <?php
-		
+
 	 parent::display();
-		
-		
+
+
 		//~ require_once('custom/modules/Leads/include/ShowCallPopup.html');
 	}
- 
- 	
+
+
 }
 ?>

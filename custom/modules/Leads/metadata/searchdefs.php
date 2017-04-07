@@ -1,11 +1,11 @@
 <?php
-$searchdefs ['Leads'] = 
+$searchdefs ['Leads'] =
 array (
-  'layout' => 
+  'layout' =>
   array (
-    'basic_search' => 
+    'basic_search' =>
     array (
-      'search_name' => 
+      'search_name' =>
       array (
         'name' => 'search_name',
         'label' => 'LBL_NAME',
@@ -13,7 +13,7 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'batch' => 
+      'batch' =>
       array (
         'label' => 'LBL_BATCH',
         'type' => 'enum',
@@ -21,7 +21,7 @@ array (
         'default' => true,
         'name' => 'batch',
       ),
-      'email' => 
+      'email' =>
       array (
         'name' => 'email',
         'label' => 'LBL_EMAIL',
@@ -29,7 +29,7 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'phone_mobile' => 
+      'phone_mobile' =>
       array (
         'type' => 'phone',
         'label' => 'LBL_MOBILE_PHONE',
@@ -38,9 +38,9 @@ array (
         'name' => 'phone_mobile',
       ),
     ),
-    'advanced_search' => 
+    'advanced_search' =>
     array (
-      'email' => 
+      'email' =>
       array (
         'name' => 'email',
         'label' => 'LBL_EMAIL',
@@ -48,7 +48,7 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'phone_mobile' => 
+      'phone_mobile' =>
       array (
         'type' => 'phone',
         'label' => 'LBL_MOBILE_PHONE',
@@ -56,18 +56,15 @@ array (
         'default' => true,
         'name' => 'phone_mobile',
       ),
-      'batch_c' => 
+      'batch' =>
       array (
-        'type' => 'relate',
-        'default' => true,
-        'studio' => 'visible',
         'label' => 'LBL_BATCH',
-        'id' => 'TE_BA_BATCH_ID_C',
-        'link' => true,
+        'type' => 'enum',
         'width' => '10%',
-        'name' => 'batch_c',
+        'default' => true,
+        'name' => 'batch',
       ),
-      'date_entered' => 
+      'date_entered' =>
       array (
         'type' => 'datetime',
         'label' => 'LBL_DATE_ENTERED',
@@ -75,7 +72,7 @@ array (
         'default' => true,
         'name' => 'date_entered',
       ),
-      'status_description' => 
+      'status_description' =>
       array (
         'type' => 'enum',
         'default' => true,
@@ -83,7 +80,7 @@ array (
         'width' => '10%',
         'name' => 'status_description',
       ),
-      'status' => 
+      'status' =>
       array (
         'name' => 'status',
         'default' => true,
@@ -91,11 +88,11 @@ array (
       ),
     ),
   ),
-  'templateMeta' => 
+  'templateMeta' =>
   array (
     'maxColumns' => '3',
     'maxColumnsBasic' => '4',
-    'widths' => 
+    'widths' =>
     array (
       'label' => '10',
       'field' => '30',
