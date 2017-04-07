@@ -552,30 +552,12 @@ class LeadsViewList extends ViewList
 			var callback = {
 				success:function(b){
 					SUGAR.ajaxUI.hideLoadingPanel();
-					var parsedJSON = JSON.parse(b.responseText);
-					//~ alert(parsedJSON[0]);
-					//~ alert(parsedJSON[1]);
-
-					if(parsedJSON[0]=="200"){
-						//~ alert('Call Success');
-						//~ $(this).popupModal('atomBox');
-						//~ document.getElementById('call_id').value = parsedJSON[1];
-						//~ document.getElementById('lead_id').value = lead_id;
-						//~ document.getElementById('mobile').value = phone;
-						var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
-						window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
-						//~ window.location.href='index.php?module=Leads&action=index';
-
-					}
-					else{
-						alert('Error!! Call not connected')
-							//~ $(this).popupModal('atomBox');
-					}
+					if(b.responseText) swal(b.responseText);
 				}
-
+						
 			}
-
-			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&number='+phone, callback);
+			
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead='+ lead_id +'&number='+phone, callback);
 		 }
 	}
 

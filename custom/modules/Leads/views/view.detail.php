@@ -625,29 +625,7 @@ if(!isset($_SESSION['referral'])){
 			var callback = {
 				success:function(b){
 					SUGAR.ajaxUI.hideLoadingPanel();
-					var parsedJSON = JSON.parse(b.responseText);
-					//~ alert(parsedJSON[0]);
-					//~ alert(parsedJSON[1]);
-
-					if(parsedJSON[0]=="200"){
-						//~ alert('Call Success');
-						//~ $(this).popupModal('atomBox');
-						var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
-						//~ window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
-						var width = 520;
-						var height = 570;
-						var windowFeatures = 'width=' + width + ',height=' + height + ',resizable=1,scrollbars=1';
-						SUGAR.util.openWindow(url_open, "Call Popup", windowFeatures);
-						//~ document.getElementById('call_id').value = parsedJSON[1];
-						//~ document.getElementById('mobile').value = phone;
-						//~ window.location.href='index.php?module=Leads&action=index';
-
-					}
-					else{
-						alert('Error!! Call not connected')
-						//~ var url_open = "http://localhost/TalentEdge/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
-						//~ window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
-					}
+					if(b.responseText) swal(b.responseText);
 				}
 
 			}

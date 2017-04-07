@@ -14,7 +14,7 @@ if($_REQUEST['amyoaction']=='callStart'){
 	}
  
  
-	header('Location: index.php?module=Leads&action=leadCRM&'. $redqr);
+	header('Location: index.php?module=Leads&to_pdf=1&action=leadCRM&'. $redqr);
 	
 }else{
 	

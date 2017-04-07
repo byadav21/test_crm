@@ -11,10 +11,7 @@ if($db->getRowCount($res)){
 	$resdata=$db->fetchByAssoc($res);
 	if($current_user->id==$resdata['assigned_user_id']){
 		 $drobj= new te_Api_override();
-		 $assinuserDristi="select neox_user,neox_password from users where id='". $current_user->id . "'";
-		 $users=$db->query($assinuserDristi);
-		 if($db->getRowCount($users)>0){
-			 print_r($_SESSION);
+		
 			  $session=$_SESSION['amyoSID'];
 				   if($session){
 					     $arrReq=[];
@@ -34,16 +31,22 @@ if($db->getRowCount($res)){
 					     
 					     $arrReq['customerRecords'][]=$customerRecords;
 					     
-						 $drobj->call($session,$arrReq);
+						 if(!$drobj->call($session,$arrReq)){
+							 echo "Something gone wrong. Please try again!";
+						 }
+				   }else{
+					    echo "Something gone wrong. Please try again!";
 				   }
 		 } 
 		
 	}else{
 		echo "Call Can't be connected";
 	}
-}
+}else{
+		echo "Call Can't be connected";
+	}
 
-
+exit();
 /*	
 $number = $_REQUEST['number'];
 //~ $number = "9015306759";
@@ -70,9 +73,9 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, "$QUERY_PARAM");
 $buffer = curl_exec($ch);
 $r = explode("|",$buffer);
  
-echo json_encode($r);*/
+echo json_encode($r);
 }
 else{
 		echo "Call Can't be connected";
-}
+}*/
 ?>
