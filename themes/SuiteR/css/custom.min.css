@@ -1702,8 +1702,8 @@ span.right {
 }
  
 .tile_count .tile_stats_count {
-    border-bottom: 1px solid #D9DEE4;
-    padding:0 8px 0 8px;
+       border-bottom: 1px solid #D9DEE4;
+    padding: 4px 8px;
     text-overflow: ellipsis;
     overflow: hidden;
  

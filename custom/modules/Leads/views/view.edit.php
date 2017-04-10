@@ -2,6 +2,17 @@
 ini_set ( 'display_errors', 'off' );
 require_once ('include/MVC/View/views/view.edit.php');
 class LeadsViewEdit extends ViewEdit {
+	
+		
+	public function preDisplay()
+    {
+        $metadataFile = $this->getMetaDataFile();
+        $this->ev = $this->getEditView();
+        $this->ev->ss =& $this->ss;
+        $this->ev->setup($this->module, $this->bean, $metadataFile, 'custom/modules/Leads/tpls/EditView.tpl');
+    }
+	
+	
 	function display() {
 		//~ print_r($_REQUEST);
 		if(isset($_REQUEST['from_pusher'])){
@@ -443,9 +454,15 @@ $(function(){
 	$("input[name=assigned_user_name]").val(' ');
 	$("#btn_clr_assigned_user_name").trigger('click');
 });
+
+
+
+		var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
+
 </script>
 <?php }
 
+		
 		parent::display ();
 		?>
 
