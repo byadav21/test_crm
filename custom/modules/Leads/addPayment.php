@@ -432,6 +432,7 @@ class addPaymentClass{
 
 	function addDispositionFunc($bean, $event, $argument){
 		ini_set('display_errors',"off");
+		unset($_SESSION['currentCall']);
 #If record is being created manually
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
 			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description=='Call Back' && $bean->fetched_row['date_of_callback'] != $bean->date_of_callback) || ($bean->status_description=='Follow Up' && $bean->fetched_row['date_of_followup'] != $bean->date_of_followup) || ($bean->status_description=='Prospect' && $bean->fetched_row['date_of_prospect'] != $bean->date_of_prospect) ){
@@ -543,4 +544,12 @@ class addPaymentClass{
 		$mail = new NetCoreEmail();
 		$mail->sendEmail($email,$subject,$template,$attachment);
 	}
+	
+	
+	function checkAmyoFunc($bean, $event, $argument){
+		
+		//throw new SugarApiException("You can't edit or add disposition while calling", null, 'Leads', 550);
+	}
+	
+	
 }

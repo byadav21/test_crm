@@ -29,11 +29,13 @@ ini_set("display_errors",0);
 //New Leads		
 				$sqlCount = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'New Lead'  AND leads.assigned_user_id IN ('".$user_ids."')"; 
 				
+				echo ' <style>@media (max-width: 1024px) and (min-width: 979px) .col-sm-3.tile_stats_count { max-width: 242px !important; }</style>';
+				
 				$resCount = $GLOBALS['db']->query($sqlCount);
 				$rowCount= $GLOBALS['db']->fetchByAssoc($resCount);						
 				if($rowCount['count'] > 0){
 										 
-					 $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 						<div class="count">'.$rowCount['count'].'</div>
 						<span class="count_top">  <a   href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowCount['status_description'].'">'.$rowCount['status_description'].'</a></span>
 						
@@ -43,7 +45,7 @@ ini_set("display_errors",0);
 				else{
 					 
 					 
-					$statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					$statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 						<div class="count">0</div>
 						<span class="count_top"> New Leads</span>
 						
@@ -58,7 +60,7 @@ ini_set("display_errors",0);
 				if($rowDup['count'] > 0){
 					 
 					 
-					 $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					 <div class="count">'.$rowDup['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowDup['status_description'].'">'.$rowDup['status_description'].'</a>s</span>
 						
@@ -68,7 +70,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					 $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 						<div class="count">0</div>
 						<span class="count_top"> Duplicate</span>
 						
@@ -88,7 +90,7 @@ ini_set("display_errors",0);
 			if($rowPros['count'] > 0){
 				 ;
 					 
-					$statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					$statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					      <div class="count">'.$rowPros['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&pros_today=1&status_description_basic=Prospect">Prospect Today</a></span>
 						
@@ -99,7 +101,7 @@ ini_set("display_errors",0);
 					$stat = 'Duplicate';
 					  
 					 
-					 $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					        <div class="count">0</div>
 						<span class="count_top"> Prospect Today</span>
 						
@@ -117,7 +119,7 @@ ini_set("display_errors",0);
 			if($rowFoll['count'] > 0){
 				 
 					 
-					  $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 						<div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&follow_today=1&status_description_basic=Follow Up">Followup Today</a></span>
 						
@@ -128,7 +130,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 				
-					 $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					    <div class="count">0</div>
 						<span class="count_top"> Followup Today</span>
 						
@@ -144,7 +146,7 @@ ini_set("display_errors",0);
 			if($rowPros['count'] > 0){
 		 
 					 
-					 $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 							<div class="count">'.$rowPros['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&over_due_pros=pros&status_description_basic=Prospect">Over Due Prospect</a></span>
 						
@@ -154,7 +156,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					 $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 					 <div class="count">0</div>
 						<span class="count_top"> Over Due Prospect</span>
 						
@@ -170,7 +172,7 @@ ini_set("display_errors",0);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
 				
-					   $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					   $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 					   <div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&due_followup=follow&status_description_basic=Follow Up">Overdue followups</a></span>
 						
@@ -180,7 +182,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					  $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 					  <div class="count">0</div>
 						<span class="count_top"> Overdue followups</span>
 						
@@ -195,7 +197,7 @@ ini_set("display_errors",0);
 			if($rowFoll['count'] > 0){
 				 
 					 
-					   $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					   $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					   <div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_today=1&status_description_basic=Call Back">CallBack Today</a></span>
 						
@@ -205,7 +207,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					  $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					  <div class="count">0</div>
 						<span class="count_top"> CallBack Today</span>
 						
@@ -224,7 +226,7 @@ ini_set("display_errors",0);
 				
 					 
 					 
-					  $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					  <div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_back_due=due&status_description_basic=Call Back">Overdue CallBack</a></span>
 						
@@ -233,7 +235,7 @@ ini_set("display_errors",0);
 				}
 				else{
 					$stat = 'Duplicate';
-					  $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					  <div class="count">0</div>
 						<span class="count_top"> Overdue CallBack</span>
 						
@@ -247,7 +249,7 @@ ini_set("display_errors",0);
             $resPay = $GLOBALS['db']->query($sqlPay);
             $rowPay= $GLOBALS['db']->fetchByAssoc($resPay);
 			if($rowPay['not_realized'] > 0){
-		  $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+		  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					  <div class="count">'.$rowPay['not_realized'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&payment_realized_check_basic=0">Payment Not Realized</a></span>
 						
@@ -258,7 +260,7 @@ ini_set("display_errors",0);
 					$stat = 'Duplicate';
 					 
 					 
-					   $statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					   $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
 					   <div class="count">0</div>
 						<span class="count_top"> Payment Not Realized</span>
 						
@@ -272,7 +274,7 @@ ini_set("display_errors",0);
             $resPay = $GLOBALS['db']->query($sqlPay);
             $rowPay= $GLOBALS['db']->fetchByAssoc($resPay);
 			if($rowPay['not_realized'] > 0){
-				$statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+				$statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 					   <div class="count">'. $rowPay['not_realized'] .'</div>
 						<span class="count_top"> Installment Not Paid</span>
 						
@@ -282,7 +284,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					
-					$statusWiseCount .= '<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					$statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
 					   <div class="count">0</div>
 						<span class="count_top"> Installment Not Paid</span>
 						

@@ -2,7 +2,7 @@
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 //require_once('custom/modules/te_Api/sso.php');
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
-
+unset($_SESSION['currentCall']);
 $obj=new te_neox_call_details();
 if($_REQUEST['phone']) $obj->phone_number= $_REQUEST['phone'];
 if($_REQUEST['campaignId']) $obj->campaignid= $_REQUEST['campaignId'];
