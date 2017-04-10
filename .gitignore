@@ -17,3 +17,4 @@ cache/*
 /config_override.php
 # Logs files can safely be ignored.
 *.log
+/nbproject/private/

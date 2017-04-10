@@ -33,19 +33,23 @@ class LeadsViewList extends ViewList
  	/**
      * Displays the header on section of the page; basically everything before the content
      */
-     function listViewProcess(){
-		$this->processSearchForm();
-		$this->lv->searchColumns = $this->searchForm->searchColumns;
-
-    if($this->where){
-      $this->where=str_replace('leads.batch','leads_cstm.te_ba_batch_id_c',$this->where);
+     /**
+     * @see ViewList::preDisplay()
+     */
+    public function preDisplay() {
+        echo '<script type="text/javascript" src="custom/modules/leads/leads.js"></script>';
+        parent::preDisplay();
     }
-		if(!$this->headers)
-			return;
-		if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false){
-			if(!empty($GLOBALS['current_user']->neox_user) && !empty($GLOBALS['current_user']->neox_password)){
-					$this->lv->ss->assign("LOGGED_IN","Success");
-			}
+    function listViewProcess() {
+        $this->processSearchForm();
+
+        $this->lv->searchColumns = $this->searchForm->searchColumns;
+        if (!$this->headers)
+            return;
+        if (empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false) {
+            if (!empty($GLOBALS['current_user']->neox_user) && !empty($GLOBALS['current_user']->neox_password)) {
+                $this->lv->ss->assign("LOGGED_IN", "Success");
+            }
 
 		if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Manual'){
 			$this->lv->ss->assign("LOGGED_IN_MANUAL","Manual");

@@ -25,6 +25,35 @@ function changeTransferStatus(request_id,value){
 	 }
 
 }
+function updateTransfer(){
+   
+    $.ajax({
+        async: false,
+        type: "GET",
+        data: { 
+          action2:'updateTransfer'
+         },
+        dataType: "json",
+        url: 'index.php?action=seen&type=new_transfer&module=te_student_batch&is_new_approved_basic=1&to_pdf=1',
+        error: function(responseData){
+        },
+        success:function(responseData)
+        { 
+             if(responseData.status==1){
+                
+             }
+           
+
+        } 
+    });
+    
+}
 $(document).ready(function(){
 	$(".actionmenulinks").eq(0).hide();
+        
+        var is_new_approved = $( "input[name='is_new_approved_basic']" ).val();
+       
+        if(is_new_approved==1){
+         updateTransfer();   
+        }
 });

@@ -28,7 +28,7 @@ $oldBatchDetails = $GLOBALS['db']->fetchByAssoc($oldBatchObj);
 
 #If request is for Reject the case.
 if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"){
-	$GLOBALS['db']->query("UPDATE te_transfer_batch SET status='".$_REQUEST['request_status']."', te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
+	$GLOBALS['db']->query("UPDATE te_transfer_batch SET status='".$_REQUEST['request_status']."',is_new_approved=1, te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
 	$utmOptions['status']="Transferred";
 	echo json_encode($utmOptions);
 	return false;

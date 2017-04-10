@@ -5,6 +5,15 @@ class te_student_batchViewDropoutrequest extends SugarView {
 	public function __construct() {
 		parent::SugarView();
 	}
+        
+            /**
+     * @see ViewList::preDisplay()
+     */
+    public function preDisplay() {
+        echo '<script type="text/javascript" src="custom/modules/te_student_batch/student_batch.js"></script>';
+        parent::preDisplay();
+    }
+    
 	function getInstitute($institute_id){
 		global $db;
 		$instituteSql="SELECT name FROM te_in_institutes WHERE id='".$institute_id."'";
@@ -20,6 +29,12 @@ class te_student_batchViewDropoutrequest extends SugarView {
 		return $program['name'];
 	}
 	public function display() {
+           
+                $custom_query='';
+                if(isset($_GET['is_new_dropout_basic']) && $_GET['is_new_dropout_basic']==1 ){
+                    $custom_query = "AND sb.is_new_dropout=1 AND dropout_status IN ('Approved','Rejected')";
+                    echo '<input type="hidden" name="is_new_dropout_basic" value="'.$_GET['is_new_dropout_basic'].'">';
+                }
 		global $db,$current_user,$s_history;
 		$resultSet=array();
 		$resultSethis=array();
@@ -30,7 +45,8 @@ class te_student_batchViewDropoutrequest extends SugarView {
 
 		}
 		elseif ($current_user->is_admin==1) {
-			$studentBatchSql="SELECT sb.*,s.name as student,s.id as idstudent FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status IN('Rejected','Approved','Pending')  AND sb.deleted=0 ORDER BY sb.date_entered DESC,sb.date_modified DESC";
+                     
+			$studentBatchSql="SELECT sb.*,s.name as student,s.id as idstudent FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id WHERE sb.dropout_status IN('Rejected','Approved','Pending')  AND sb.deleted=0 $custom_query ORDER BY sb.date_entered DESC,sb.date_modified DESC";
 		}
 		else{
 			$user_id = $current_user->id;
