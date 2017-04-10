@@ -83,21 +83,22 @@ class AOR_ReportsViewGsvreport extends SugarView {
 		$where="";
 		$from_date="";
 		$to_date="";
+		$selected_counsellor="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
-			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
+			if($_POST['from_date']!="" && $_POST['to_date']!=""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
 				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$where.=" AND DATE(date_modified)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
-				$where.=" AND DATE(date_modified)='".$to_date."' ";
+			}elseif($_POST['from_date']!="" && $_POST['to_date']==""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+				$where.=" AND DATE(date_modified)>='".$from_date."' ";
+			}elseif($_POST['from_date']=="" && $_POST['to_date']!=""){
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+				$where.=" AND DATE(date_modified)<='".$to_date."' ";
 			}
-
-			if(!empty($_POST['batch'])){
-				echo $where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_POST['batch'])."') ";
+			if(!empty($_POST['counsellor'])){
+				 $selected_counsellor=$_POST['counsellor'];
+				 $uid=$_POST['counsellor'];
 			}
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
 			$data="Counsellors,Conversion,GSV\n";
@@ -153,7 +154,6 @@ class AOR_ReportsViewGsvreport extends SugarView {
 		#$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 ".$where." GROUP BY assigned_user_id,status";
 
 		$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
-
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();
 		while($row =$db->fetchByAssoc($leadObj)){
@@ -174,13 +174,19 @@ class AOR_ReportsViewGsvreport extends SugarView {
 				$councelorList[$key]['Converted']=0;
 		}
 
+		if(!empty($from_date)){
+			$from_date = date('d/m/Y',strtotime($from_date));
+		}
+		if(!empty($to_date)){
+			$to_date = date('d/m/Y',strtotime($to_date));
+		}
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("leadStatusList",$leadStatusList);
 		$sugarSmarty->assign("batchList",$batchList);
-		$sugarSmarty->assign("selected_from_date",$GLOBALS['timedate']->to_display_date($from_date));
-		$sugarSmarty->assign("selected_to_date",$GLOBALS['timedate']->to_display_date($to_date));
-		$sugarSmarty->assign("selected_status",$search_status);
+		$sugarSmarty->assign("selected_from_date",$from_date);
+		$sugarSmarty->assign("selected_to_date",$to_date);
+		$sugarSmarty->assign("selected_counsellor",$selected_counsellor);
 		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/gsvreport.tpl');
 	}
 }

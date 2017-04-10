@@ -17,19 +17,47 @@ class AOR_ReportsViewFeereport extends SugarView {
 		}
 		return $batchOptions;
 	}
+	function reportingUser($currentUserId){
+		$userObj = new User();
+		$userObj->disable_row_level_security = true;
+		$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+		if(!empty($userList)){
+			foreach($userList as $record){
+				if(!empty($record->reports_to_id) && !empty($record->id)){
+					$this->report_to_id[] = $record->id;
+					$this->reportingUser($record->id);
+				}
+			}
+		}
+	}
 	public function display() {
-		global $db;
+		global $db,$current_user;
        	#Get batch drop down option
 		$batchList=$this->getBatch();
 		# Query for batch drop down options
+		$user_id=$current_user->id;
+		$this->report_to_id[]=$user_id;
+		$users = $this->reportingUser($user_id);
+		$srmArr=[];
+		while($srmres =$db->fetchByAssoc($srmrow)){
+		  $srmArr[]=$srmres['user_id'];
+		}
+
+		$uid=$this->report_to_id;# list of user ids
+		$user_ids = "'" . implode("','", $uid) . "'";
+
 		$where="";
 		$selected_batch="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
 			if(!empty($_POST['batch'])){
 				$selected_batch=$_POST['batch'];
-				$where.=" AND sb.te_ba_batch_id_c = '".$_POST['batch']."'";
+				$where.=" AND sb.te_ba_batch_id_c IN('".implode("','",$_POST['batch'])."') ";
 			}
 		}
+		if(!empty($user_ids) && ($current_user->is_admin==0 && !in_array($current_user->id,$srmArr))){
+			$where.=" AND sb.assigned_user_id IN($user_ids)";
+		}
+
 
 		$installmentSql="SELECT count(spp.name)as total FROM te_student s INNER JOIN te_student_te_student_batch_1_c sbr ON s.id=sbr.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch sb ON sbr.te_student_te_student_batch_1te_student_batch_idb=sb.id INNER JOIN te_student_batch_te_student_payment_plan_1_c sbpr ON sb.id=sbpr.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN te_student_payment_plan spp ON sbpr.te_student9d1ant_plan_idb=spp.id WHERE sb.status='Active' AND sb.deleted=0 AND spp.name<>'Initial Payment'GROUP BY s.name,sb.name order by total desc limit 0,1";
 		$installmentObj=$db->query($installmentSql);
@@ -74,5 +102,6 @@ class AOR_ReportsViewFeereport extends SugarView {
 		$sugarSmarty->assign("selected_batch",$selected_batch);
 		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/feereport.tpl');
 	}
+
 }
 ?>

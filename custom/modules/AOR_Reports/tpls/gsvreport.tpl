@@ -4,36 +4,36 @@
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
-		
-			<td scope="row" nowrap="nowrap" width="1%">		
+
+			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">From Date</label>
 			</td>
-			<td nowrap="nowrap" width="10%">			
+			<td nowrap="nowrap" width="10%">
 				<input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
 				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
-			</td>	
-			<td scope="row" nowrap="nowrap" width="1%">		
+			</td>
+			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">To Date</label>
 			</td>
-			<td nowrap="nowrap" width="10%">			
+			<td nowrap="nowrap" width="10%">
 				<input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
 				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
 			</td>
-				
-			     
-			<td scope="row" nowrap="nowrap" width="1%">		
+
+
+			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">Counsellors</label>
-			</td>	
-			<td nowrap="nowrap" width="10%">			
-				<select name="batch[]" id="batch" multiple>
+			</td>
+			<td nowrap="nowrap" width="10%">
+				<select name="counsellor[]" id="counsellor" multiple>
 					<option  value=""></option>
 				{foreach from = $councelorList key=key item=councelor}
-				
-						<option value="{$councelor.id}" {if $selected_batch eq $councelor.id} selected="selected" {/if}>{$councelor.name}</option>
-					{/foreach}							
+
+						<option value="{$key}" {if in_array($councelor.id,$selected_counsellor) } selected="selected" {/if}>{$councelor.name}</option>
+					{/foreach}
 				</select>
 			</td>
-			
+
 			<td class="sumbitButtons">
 				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
 				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
@@ -44,7 +44,7 @@
 		<tr>
 			<td scope="row" nowrap="nowrap" width="1%">
 				<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
-		
+
 			</td>
 		</tr>
 		</tbody>
@@ -52,25 +52,25 @@
 </div>
 </form>
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
-	<thead>    	
+	<thead>
 	<tr height="20">
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">	
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Counsellors</strong>
 		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Conversion</strong>
 		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>GSV</strong>
 		</th>
-		
+
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Converted}</td> 
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.gsv|number_format:2:".":","}</td>  
-					   
-		</tr>				
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Converted}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.gsv|number_format:2:".":","}</td>
+
+		</tr>
 	{/foreach}
 </table>
 <script>
