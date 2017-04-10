@@ -459,6 +459,19 @@ class PopupSmarty extends ListViewSmarty{
 	{
 		$where = '';
 		$where_clauses = $this->searchForm->generateSearchWhere(true, $this->seed->module_dir);
+		if(isset($_REQUEST['module']) && $_REQUEST['module']=='Leads' && isset($_REQUEST['action']) && $_REQUEST['action']=='Popup')
+		{
+			$Res = $this->getUserDeatils();
+			if($Res['type']=='cc' && !empty($Res['data'])){
+				$query = "leads.assigned_user_id IN ('".implode("','",$Res['data'])."')";
+			 	array_push($where_clauses,$query);
+
+			}
+			else if($Res['type']=="srm" && !empty($Res['data'])){
+				$query = "leads.id IN ('".implode("','",$Res['data'])."')";
+			 	array_push($where_clauses,$query);
+			}
+		}
 
 		// Bug 43452 - FG - Changed the way generated Where array is imploded into the string.
 		//                  Now it's imploding in the same way view.list.php do.
@@ -568,6 +581,62 @@ EOQ;
 		require_once("include/EditView/PopupQuickCreate.php");
 		$qc = new PopupQuickCreate($this->module);
 		return $qc->process($this->module);
+	}
+
+	function getUserDeatils(){
+		global $current_user,$db;
+		#Get CC USERS
+		$ccrow =$db->query("SELECT user_id FROM `acl_roles_users` WHERE `role_id` IN('7e225ca3-69fa-a75d-f3f2-581d88cafd9a','270ce9dd-7f7d-a7bf-f758-582aeb4f2a45','cc7133be-0db9-d50a-2684-582c0078e74e') AND deleted=0");
+		$crrArr=[];
+		while($ccres =$db->fetchByAssoc($ccrow)){
+		  $crrArr[]=$ccres['user_id'];
+		}
+		#Get SRM USERS
+		$srmrow =$db->query("SELECT user_id FROM `acl_roles_users` WHERE `role_id` IN('86800aa5-c8c2-5868-a690-58a88d188265','30957fe0-3494-e372-656d-58a9a6296516') AND deleted=0");
+		$srmArr=[];
+		while($srmres =$db->fetchByAssoc($srmrow)){
+		  $srmArr[]=$srmres['user_id'];
+		}
+
+		if(in_array($current_user->id,$crrArr) && $current_user->is_admin==0){
+			$user_id=$current_user->id;
+			$this->report_to_id[]=$user_id;
+			$users = $this->reportingUser($user_id);
+			$uid=$this->report_to_id;
+			return array('type'=>'cc','data'=>$uid);
+		}
+		else if(in_array($current_user->id,$srmArr) && $current_user->is_admin==0)
+		{
+			$user_id=$current_user->id;
+			$this->report_to_id[]=$user_id;
+			$users = $this->reportingUser($user_id);
+			$uid=$this->report_to_id;
+
+			$leadsrow =$db->query("SELECT sb.leads_id FROM te_student_batch AS sb WHERE sb.assigned_user_id IN('".implode("','",$uid)."')");
+			$leadsArr=[];
+			while($leadsres =$db->fetchByAssoc($leadsrow)){
+			  $leadsArr[]=$leadsres['leads_id'];
+			}
+			return array('type'=>'srm','data'=>$leadsArr);
+		}
+		else{
+			return 0;
+		}
+
+	}
+
+	function reportingUser($currentUserId){
+		$userObj = new User();
+		$userObj->disable_row_level_security = true;
+		$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+		if(!empty($userList)){
+			foreach($userList as $record){
+				if(!empty($record->reports_to_id) && !empty($record->id)){
+					$this->report_to_id[] = $record->id;
+					$this->reportingUser($record->id);
+				}
+			}
+		}
 	}
 }
 ?>
