@@ -16,6 +16,7 @@ class LeadsViewEdit extends ViewEdit {
 	function display() {
 		//~ print_r($_REQUEST);
 		$this->ss->assign('disableDisposition', '0');
+		$this->ss->assign('recID', $this->bean->id);
 		if(isset($_SESSION['currentCall']) && !empty($_SESSION['currentCall'])){
 			$this->ss->assign('disableDisposition', '1');
 		}
