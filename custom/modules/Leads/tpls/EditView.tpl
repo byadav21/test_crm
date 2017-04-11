@@ -326,14 +326,18 @@ $(document).ready(function() {ldelim}
 </script>
 {literal}
 <script>
-    var disDisable="{{$disableDisposition}}";
+    
 	$('.save_btn').on('click',function(){
+
 	
-	if(disDisable==1){
-	  swal("You can't add disposition till you end the call"); return false;
-	}
-	
-	var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
+		if (localStorage.getItem("calStart") === null) {
+			var localStorage=1;
+		}else{
+			swal("You can't add disposition till you end the call"); return false;
+		}
+		
+		
+		var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
 	
 	})
 </script>
