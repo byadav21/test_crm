@@ -432,7 +432,8 @@ class addPaymentClass{
 
 	function addDispositionFunc($bean, $event, $argument){
 		ini_set('display_errors',"off");
-		echo '<script> localStorage.removeItem("calStart"); </script>';
+		global $db;
+		$db->query("delete from  session_call where  session_id='" . session_id() ."'");
 #If record is being created manually
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
 			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description=='Call Back' && $bean->fetched_row['date_of_callback'] != $bean->date_of_callback) || ($bean->status_description=='Follow Up' && $bean->fetched_row['date_of_followup'] != $bean->date_of_followup) || ($bean->status_description=='Prospect' && $bean->fetched_row['date_of_prospect'] != $bean->date_of_prospect) ){

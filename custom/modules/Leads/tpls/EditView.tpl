@@ -330,14 +330,26 @@ $(document).ready(function() {ldelim}
 	$('.save_btn').on('click',function(){
   
  
-		if (localStorage.getItem("calStart") === null) {
-		  localSet=1;
-		}else{	 
-			swal("You can't add disposition till you end the call"); 
-		}
-		
+		var callbackdispose = {
+				success:function(b){
+					 
+					if(b.responseText==1) {
+					
+						swal("You can't save till call will disconnected"); 
+						return false;
+					} else{
+						var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
+					}
+					
+					
+				}
+
+			}
+
+		var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=dispose&checkCallStatus=1&records={{$recID}}', callbackdispose);
+		return false;
 	 
-		var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
+		
 	
 	})
 </script>

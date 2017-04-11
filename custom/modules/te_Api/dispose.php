@@ -2,7 +2,18 @@
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 //require_once('custom/modules/te_Api/sso.php');
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
-echo '<script> localStorage.removeItem("calStart"); </script>';
+global $db;
+
+if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUEST['checkCallStatus']=1 && $_REQUEST['records'] ){
+	//echo "select id from  session_call where lead_id='". $_REQUEST['records'] ."' session_id='" . session_id() ."'";
+	$res=$db->query("select id from  session_call where lead_id='". $_REQUEST['records'] ."' and session_id='" . session_id() ."'");
+	if($db->getRowCount($res)>0){
+		echo '1';
+	}
+	exit();
+}
+
+$db->query("delete from  session_call where  session_id='" . session_id() ."'");
 $obj=new te_neox_call_details();
 if($_REQUEST['phone']) $obj->phone_number= $_REQUEST['phone'];
 if($_REQUEST['campaignId']) $obj->campaignid= $_REQUEST['campaignId'];
