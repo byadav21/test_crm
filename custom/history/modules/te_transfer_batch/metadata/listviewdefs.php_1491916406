@@ -12,13 +12,6 @@ array (
     'width' => '20%',
     'default' => true,
   ),
-  'DATE_ENTERED' => 
-  array (
-    'type' => 'datetime',
-    'label' => 'LBL_DATE_ENTERED',
-    'width' => '10%',
-    'default' => true,
-  ),
   'OLD_BATCH' => 
   array (
     'type' => 'relate',

@@ -88,9 +88,9 @@ class te_Api_override extends te_Api {
 	}
 	
 	function call($session,$request){		
-		if(!$this->ping($request['sessionId'])){
-			return false;
-		}
+		//if(!$this->ping($request['sessionId'])){
+		//	return false;
+		//}
 		$server= $this->url . "manual-dial&data=";
 		$data= file_get_contents(  $server. urlencode(json_encode($request)));
 		$dataErr=json_decode($data);		
@@ -111,10 +111,10 @@ class te_Api_override extends te_Api {
 	function sendDisposition($callback='',$request,$date=''){
 		global $sugar_config;
 		
-		if(!$this->ping($session)){
-			 echo '<script>swal("You have to dispose manaually!")</script>';
-			 return false;			 
-		}
+		//if(!$this->ping($session)){
+		//	 echo '<script>swal("You have to dispose manaually!")</script>';
+		//	 return false;			 
+		//}
 		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
 		$data=[];
 		$session=$_SESSION['amyoSID'];
@@ -156,9 +156,9 @@ class te_Api_override extends te_Api {
 		}
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);		
 		$response= file_get_contents($url. ($qrystr));      
-		if($response!=='dispose successfully'){
-		  echo '<script>swal("You have to dispose manaually!")</script>';	
-		}
+		//if($response!=='dispose successfully'){
+		  //echo '<script>swal("You have to dispose manaually!")</script>';	
+		//}
 
 	}
 	

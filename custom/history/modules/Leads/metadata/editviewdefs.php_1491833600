@@ -53,7 +53,7 @@ array (
         ),
         'LBL_EDITVIEW_PANEL1' => 
         array (
-          'newTab' => true,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
