@@ -328,15 +328,15 @@ $(document).ready(function() {ldelim}
 <script>
     
 	$('.save_btn').on('click',function(){
-
-	
+  
+ 
 		if (localStorage.getItem("calStart") === null) {
-			var localStorage=1;
-		}else{
-			swal("You can't add disposition till you end the call"); return false;
+		  localSet=1;
+		}else{	 
+			swal("You can't add disposition till you end the call"); 
 		}
 		
-		
+	 
 		var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
 	
 	})
