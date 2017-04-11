@@ -38,6 +38,7 @@
  ********************************************************************************/
 
 *}
+pppppppppppppppppppp
 {{include file=$headerTpl}}
 {sugar_include include=$includes}
 
@@ -269,19 +270,13 @@ class="yui-navset"
 {assign var='place' value="_FOOTER"} <!-- to be used for id for buttons with custom code in def files-->
 {{if empty($form.button_location) || $form.button_location == 'bottom'}}
 <div class="buttons">
-{{if !empty($form) && !empty($form.buttons)}}
-   {{foreach from=$form.buttons key=val item=button}}
-      {{sugar_button module="$module" id="$button" form_id="$form_id" view="$view" appendTo="footer_buttons" location="FOOTER"}}
-   {{/foreach}}
-{{else}}
-
 
 
 <input title="Save" accesskey="a" class="button primary save_btn"   type="submit" name="button" value="Save" id="SAVE_FOOTER">
 
 
 {{sugar_button module="$module" id="CANCEL" view="$view" form_id="$form_id" location="FOOTER" appendTo="footer_buttons"}}
-{{/if}}
+ 
 {{if empty($form.hideAudit) || !$form.hideAudit}}
 {{sugar_button module="$module" id="Audit" view="$view" form_id="$form_id" appendTo="footer_buttons"}}
 {{/if}}
