@@ -4,7 +4,10 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
 global $db;
 
-if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUEST['checkCallStatus']=1 && $_REQUEST['records'] ){
+
+mail('jhapankaj4u@gmail.com',"test",print_r($_REQUEST,true));
+
+if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUEST['checkCallStatus']==1 && $_REQUEST['records'] ){
 	//echo "select id from  session_call where lead_id='". $_REQUEST['records'] ."' session_id='" . session_id() ."'";
 	$res=$db->query("select id from  session_call where lead_id='". $_REQUEST['records'] ."' and session_id='" . session_id() ."'");
 	if($db->getRowCount($res)>0){
