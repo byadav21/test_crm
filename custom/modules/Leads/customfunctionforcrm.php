@@ -29,7 +29,7 @@ ini_set("display_errors",0);
 //New Leads		
 				$sqlCount = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'New Lead'  AND leads.assigned_user_id IN ('".$user_ids."')"; 
 				
-				echo ' <style>@media (max-width: 1024px) and (min-width: 979px) .col-sm-3.tile_stats_count { max-width: 242px !important; }</style>';
+				$statusWiseCount .= ' <style>@media (max-width: 1024px) and (min-width: 979px) .col-sm-3.tile_stats_count { max-width: 242px !important; }</style>';
 				
 				$resCount = $GLOBALS['db']->query($sqlCount);
 				$rowCount= $GLOBALS['db']->fetchByAssoc($resCount);						
