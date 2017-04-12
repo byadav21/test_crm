@@ -10,7 +10,8 @@ $phone= $_REQUEST['phone'];
 $callType= $_REQUEST['callType']; 
 $callObjId= $_REQUEST['userCrtObjectId']; 
 
- 
+$objapi= new te_Api();
+$objapi->createLog(print_r($_REQUEST,true),"crm popup url"); 
  	
 $getUserIDs= "select id from users where user_name='$userID'";
 $getUserID=$db->query($getUserIDs);
