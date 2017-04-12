@@ -394,28 +394,28 @@ class te_student_batchViewRevenue extends SugarView {
 			$myRefrals=$obj->getMyreferals($current_user->id);
 			$approved=$obj->approvedTransfer($user_ids);
 			$dropped=$obj->droppedTransfer($user_ids);
-			$newreg='<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="index.php?action=seen&type=new&module=te_student_batch">'.intval($newconv['newconv']).'</a></div>
-						<span class="count_top"> New Conversion</span>
+            $newreg = '<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="' . (intval($newconv['newconv']) == 0 ? '#' : 'index.php?searchFormTab=basic_search&action=index&query=true&type=new_conversion&module=te_student_batch&is_new_basic=1').'">'.intval($newconv['newconv']).'</a></div>
+						<span class="count_top">New Conversion</span>
 					</div>';
-			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="index.php?action=seen&type=dropout&module=te_student_batch">'.intval($dropconv['newconv']).'</a></div>
+            $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="index.php?action=seen&type=dropout&module=te_student_batch">' . intval($dropconv['newconv']) . '</a></div>
 						<span class="count_top"> Drop Out</span>
 					</div>';
-			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="index.php?action=seen&type=call_dropout&module=te_student_batch">'.intval($dropconCall['newconv']).'</a></div>
+            $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="' . (intval($dropconCall['newconv']) == 0 ? '#' : 'index.php?searchFormTab=basic_search&module=te_student_batch&action=index&query=true&is_new_dropout_basic=1&type=new_dropout').'">'.intval($dropconCall['newconv']).'</a></div>
 						<span class="count_top"> Call Center Drop Out</span>
 					</div>';
-			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="index.php?action=seen&type=refral&module=te_student_batch">'.intval($myRefrals['newconv']).'</a></div>
+            $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="index.php?action=seen&type=refral&module=te_student_batch">' . intval($myRefrals['newconv']) . '</a></div>
 						<span class="count_top"> My Referrals</span>
 					</div>';
-			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="index.php?action=seen&type=transfer&module=te_student_batch">'.intval($approved['newconv']).'</a></div>
+            $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="' . (intval($approved['newconv']) == 0 ? '#' : 'index.php?module=te_transfer_batch&is_new_approved_basic=1').'">'.intval($approved['newconv']).'</a></div>
 						<span class="count_top"> Approved Transfer</span>
 					</div>';
-			$newreg .='<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="index.php?action=seen&type=dropapprove&module=te_student_batch">'.intval($dropped['newconv']).'</a></div>
+            $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
+						<div class="count"><a href="' . (intval($dropped['newconv']) == 0 ? '#' : 'index.php?module=te_student_batch&action=dropoutrequest&is_new_dropout_basic=1').'">'.intval($dropped['newconv']).'</a></div>
 						<span class="count_top"> Approved Dropout</span>
 					</div>';
 			$ss->assign("statusWiseCount",$newreg);
