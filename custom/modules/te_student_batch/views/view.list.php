@@ -62,7 +62,7 @@ class te_student_batchViewList extends ViewList
         if (isset($_GET['dropout_count']) &&  $_GET['dropout_count'] == 1)
         {
 
-            $dropout = " AND te_student_batch.is_new_dropout='1' AND te_student_batch.deleted=0 ";
+            $dropout = " AND te_student_batch.is_new_dropout='1' AND  te_student_batch.deleted=0 ";
             
            
         }

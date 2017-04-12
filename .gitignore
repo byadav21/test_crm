@@ -8,6 +8,8 @@
 # therefore it is ignored.
 /cache/
 cache/
+/upload/
+upload/*
 cache/*
 !/cache/index.html
 # Ignore some files and directories from the custom directory.
@@ -17,4 +19,4 @@ cache/*
 /config_override.php
 # Logs files can safely be ignored.
 *.log
-/nbproject/private/
+nbproject/*
