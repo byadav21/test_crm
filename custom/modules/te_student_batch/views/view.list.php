@@ -103,11 +103,9 @@ class te_student_batchViewList extends ViewList
             $this->where .= "   $dropout ";
         }
 
-			$tplFile = 'custom/modules/te_student_batch/tpls/listing.tpl';
-			$this->lv->setup($this->seed, $tplFile, $this->where, $this->params);
-			echo $this->lv->display();
-		}
- 	}
+			
+		
+ 	
 
 
         //echo 'sssssssssss'.$add;
