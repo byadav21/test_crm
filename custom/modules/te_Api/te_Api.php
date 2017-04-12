@@ -74,6 +74,7 @@ class te_Api_override extends te_Api {
 		 
 		 
 		$session= file_get_contents(  $server. urlencode(json_encode($data)));
+		$this->createLog($server. urlencode(json_encode($data)),$session); 	
 		$jsonEncodedData = json_decode($session);
 		 
 		if(isset($jsonEncodedData->sessionId) && !empty($jsonEncodedData->sessionId)){
@@ -93,7 +94,8 @@ class te_Api_override extends te_Api {
 		//}
 		$server= $this->url . "manual-dial&data=";
 		$data= file_get_contents(  $server. urlencode(json_encode($request)));
-		$dataErr=json_decode($data);		
+		$dataErr=json_decode($data);
+		$this->createLog($server. urlencode(json_encode($request)),$data); 		
 		return ($dataErr->status=='error')?false:true;
 	}	
 	
@@ -155,7 +157,8 @@ class te_Api_override extends te_Api {
 			$qrystr .=$key .'='. $val . '&'; 
 		}
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);		
-		$response= file_get_contents($url. ($qrystr));      
+		$response= file_get_contents($url. ($qrystr)); 
+		$this->createLog($url. ($qrystr),$response);     
 		//if($response!=='dispose successfully'){
 		  //echo '<script>swal("You have to dispose manaually!")</script>';	
 		//}
@@ -177,11 +180,24 @@ class te_Api_override extends te_Api {
 			curl_setopt($ch, CURLOPT_TIMEOUT, 100);
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
-			echo $response = curl_exec($ch);
+			$response = curl_exec($ch);
+			$this->createLog('Uploading',$response);	
 		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
-			 $responses=json_decode($response);		
+			 $responses=json_decode($response);	
+			
 			return $responses;
 
+	}
+	
+	function createLog($req,$res){
+		 
+		$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apilog.txt","a");
+		// var_dump($file);die;
+		fwrite($file,date('Y-m-d H:i:s') ."\n");
+		fwrite($file,$req ."\n");
+		fwrite($file,$res ."\n");
+		fclose($file);
+		
 	}
 	
 }
