@@ -69,7 +69,7 @@ class te_student_batchViewList extends ViewList
         if (isset($_GET['new_dropout']) &&  $_GET['new_dropout'] == 1)
         { 
             
-            echo "<input type='hidden' name='dropout_count' value='1'>";
+            echo "<input type='hidden' name='new_dropout' value='1'>";
         }
         if (isset($_GET['is_new_dropout_basic']) && $_GET['is_new_dropout_basic'] == 1)
         {
