@@ -257,13 +257,13 @@ class te_student_override extends te_student {
         function setApprovedDropout($col,$tbl,$user_ids=""){
         
             
-		    $sql=" UPDATE te_student_batch ";
-                    if($user_ids) $sql .="  INNER JOIN te_srm_auto_assignment AS tsaa ON  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c  ";
-                                  $sql .=" SET  te_student_batch.is_new_dropout=0 ";
-                                  $sql .=" WHERE te_student_batch.is_new_dropout='1' AND dropout_status IN ('Approved','Rejected') AND te_student_batch.deleted=0 ";
-                    if($user_ids) $sql .=" and tsaa.assigned_user_id in ('".$user_ids."')";
+		    $sql=" UPDATE te_student_batch 
+                        INNER JOIN te_srm_auto_assignment AS tsaa ON  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c  
+                        #AND te_student_batch.deleted=0 
+                        AND te_student_batch.is_new_dropout='1' ";
+                        if($user_ids) $sql .=" and tsaa.assigned_user_id in ('".$user_ids."')";
+                         $sql .=" SET te_student_batch.is_new_dropout='0' ";
                         
-                    //echo $sql;
                     $programObj =$this->dbinstance->query($sql);
 	}
 	
@@ -311,7 +311,7 @@ class te_student_override extends te_student {
 		if($user_ids){
 				$sql .= " and tsaa.assigned_user_id in ('".$user_ids."')";
 		}
-		//echo $sql;
+		
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
@@ -334,15 +334,11 @@ class te_student_override extends te_student {
 	}
 	
 	function newDropOutCallcenter($user_ids=""){
-		$sql="SELECT COUNT(bh.status) AS newconv FROM te_student_batch  bh
-                        INNER JOIN leads l ON bh.leads_id=l.id  WHERE 
-                         l.is_new_dropout='1'  AND l.deleted=0";
+		$sql="SELECT  count(status) as newconv FROM leads WHERE deleted =0 AND status LIKE 'Dropout' and is_new_dropout='1' ";
 		if($user_ids){
-				$sql .= " and l.assigned_user_id IN ('".$user_ids."')";
+				$sql .= " and leads.assigned_user_id IN ('".$user_ids."')";
 		} 
-                
-                //echo $sql;
-                
+	 
 		$programObj =$this->dbinstance->query($sql);
 		return $this->dbinstance->fetchByAssoc($programObj);
 		
