@@ -1,6 +1,6 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-//require_once('custom/modules/te_Api/sso.php');
+require_once('custom/modules/te_Api/te_Api.php');
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
 global $db;
 
@@ -14,9 +14,11 @@ if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUE
 	exit();
 }
 
-print_r($_REQUEST);
-echo "delete from  session_call where  session_id='" . session_id() ."'";
+ 
 $db->query("delete from  session_call where  session_id='" . session_id() ."'");
+$objapi= new te_Api_override();
+$objapi->createLog(print_r($_REQUEST,true),"delete from  session_call where  session_id='" . session_id() ."'");
+ 
 $obj=new te_neox_call_details();
 if($_REQUEST['phone']) $obj->phone_number= $_REQUEST['phone'];
 if($_REQUEST['campaignId']) $obj->campaignid= $_REQUEST['campaignId'];
