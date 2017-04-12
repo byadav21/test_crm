@@ -58,7 +58,7 @@ if($db->getRowCount($getUserID) > 0){
 				include_once("custom/modules/Leads/overview.php");
 			}else if($records['assigned_user_id']!=$userid['id']){
 				 
-				header('Location: index.php?module=te_student_batch&action=search_leads&search_leads=1&mobile_number='. $phone);
+				header('Location: index.php?module=Lead&action=search_leads&search_leads=1&mobile_number='. $phone);
 				 
 			}else{
 				

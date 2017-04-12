@@ -4,15 +4,13 @@ require_once('custom/modules/te_Api/te_Api.php');
 $api=new te_Api_override();
 global $db;
 
-
-$data=[];
-$session=$api->doLogin();								
-$data['sessionId']=$session;
-$data['properties']=array('update.customer'=>true,'migrate.customer'=>true);
-if(!$session){
-	echo 'Invalid Session'; exit();
-}	
-
+$sql="select lead_id from cron_job where session_id='cron_job'";
+$result = $db->query($sql);
+if($db->getRowCount($result)>0){
+	$res=$db->fetchByAssoc($result);
+	if($res['lead_id']==1) exit();
+}		
+$db->query("update cron_job set lead_id='1' where session_id='cron_job'");
 $sql="SELECT l.id,l.first_name,l.last_name,l.phone_mobile,l.phone_home,l.phone_work,l.phone_other,e.email_address , concat (dristi_campagain_id ,dristi_api_id) as drtord ,dristi_campagain_id ,dristi_api_id FROM leads l
  LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id AND el.bean_module='Leads' AND el.deleted=0
 LEFT JOIN email_addresses e ON el.email_address_id = e.id AND e.deleted=0
@@ -27,6 +25,16 @@ $currentApi='';
 $allInserted=[]; 
 $pushed=false;
 if($db->getRowCount($result)>0){
+	
+	$data=[];
+	$session=$api->doLogin();								
+	$data['sessionId']=$session;
+	$data['properties']=array('update.customer'=>true,'migrate.customer'=>true);
+	if(!$session){
+		echo 'Invalid Session'; exit();
+	}
+	
+	
 	$customerRs=[];
 	$data['customerRecords']=[];
 	while($row =  $db->fetchByAssoc($result)){
@@ -91,7 +99,7 @@ if($db->getRowCount($result)>0){
 	
 	
 }	
-
+$db->query("update cron_job set lead_id='0' where session_id='cron_job'");
 exit();
 
 
