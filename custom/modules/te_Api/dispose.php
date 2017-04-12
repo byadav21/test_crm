@@ -16,7 +16,7 @@ if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUE
 
  
 $db->query("delete from  session_call where  session_id='" . session_id() ."'");
-$objapi= new te_Api();
+$objapi= new te_Api_override();
 $objapi->createLog(print_r($_REQUEST,true),"delete from  session_call where  session_id='" . session_id() ."'");
  
 $obj=new te_neox_call_details();
