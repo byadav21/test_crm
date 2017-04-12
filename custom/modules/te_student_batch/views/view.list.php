@@ -13,69 +13,129 @@ class te_student_batchViewList extends ViewList
 		echo '<script type="text/javascript" src="custom/modules/te_student_batch/student_batch.js"></script>';
         parent::preDisplay();
     }
-	function listViewProcess(){
-		global $current_user,$db;
-    $this->report_to_id[]=$current_user->id;
-    $reporting_UserIds = $this->reportingUser($current_user->id);
-    $uid=$this->report_to_id;
-    $user_ids = "'" . implode("','", $uid) . "'";
-		$this->processSearchForm();
-    #fetch managers id
-    $managersSql="SELECT GROUP_CONCAT(`user_id`)user_id FROM `acl_roles_users` WHERE `role_id`='86800aa5-c8c2-5868-a690-58a88d188265' AND deleted=0";
-		$managersObj =$db->query($managersSql);
-		$manager_res =$db->fetchByAssoc($managersObj);
-    $managers=explode(',',$manager_res['user_id']);
+    function listViewProcess()
+    {
+        global $current_user, $db;
+        $this->report_to_id[] = $current_user->id;
+        $reporting_UserIds    = $this->reportingUser($current_user->id);
+        $uid                  = $this->report_to_id;
+        $user_ids             = "'" . implode("','", $uid) . "'";
+        $this->processSearchForm();
+        #fetch managers id
+        $managersSql          = "SELECT GROUP_CONCAT(`user_id`)user_id FROM `acl_roles_users` WHERE `role_id`='86800aa5-c8c2-5868-a690-58a88d188265' AND deleted=0";
+        $managersObj          = $db->query($managersSql);
+        $manager_res          = $db->fetchByAssoc($managersObj);
+        $managers             = explode(',', $manager_res['user_id']);
 
-      if($managers){
-        if($current_user->is_admin==1){
-          array_push($managers,$current_user->id);
-        }
-      }
-      else{
-        if($current_user->is_admin==1){
-          $managers[0]=$current_user->id;
-        }
-      }
-      if(isset($_REQUEST['batch']) && !empty($_REQUEST['batch']) && !empty($this->where)){
-        $this->where .= " AND te_student_batch.te_ba_batch_id_c IN('".$_REQUEST['batch']."')";
-      }
-      elseif(isset($_REQUEST['batch']) && !empty($_REQUEST['batch']) && empty($this->where)){
-        $this->where = " te_student_batch.te_ba_batch_id_c IN('".$_REQUEST['batch']."')";
-      }
-        $add='';
-        if(isset($_GET['is_new_basic']) && $_GET['is_new_basic']==1){ $add = " AND  te_student_batch.status='Active' ";}
-        if (!in_array($current_user->id, $managers)) {
-            if ($this->where != "") {
-                $this->where .= " AND te_student_batch.assigned_user_id IN($user_ids) $add";
-            } else {
-                $this->where .= " te_student_batch.assigned_user_id IN($user_ids) $add";
+        if ($managers)
+        {
+            if ($current_user->is_admin == 1)
+            {
+                array_push($managers, $current_user->id);
             }
         }
+        else
+        {
+            if ($current_user->is_admin == 1)
+            {
+                $managers[0] = $current_user->id;
+            }
+        }
+        if (isset($_REQUEST['batch']) && !empty($_REQUEST['batch']) && !empty($this->where))
+        {
+            $this->where .= " AND te_student_batch.te_ba_batch_id_c IN('" . $_REQUEST['batch'] . "')";
+        }
+        elseif (isset($_REQUEST['batch']) && !empty($_REQUEST['batch']) && empty($this->where))
+        {
+            $this->where = " te_student_batch.te_ba_batch_id_c IN('" . $_REQUEST['batch'] . "')";
+        }
+        
+        
+        $add         = '';
+        $dropout     = '';
+        $new_dropout = '';
+        if (isset($_GET['is_new_basic']) && $_GET['is_new_basic'] == 1)
+        {
+            $add = " AND  te_student_batch.status='Active' ";
+        }
 
-		/* if($current_user->designation=="BUH"){
-			if($this->where!="")
-				$this->where .= " AND te_student_batch.dropout_status ='Pending'";
-			else
-				$this->where .= " te_student_batch.dropout_status ='Pending'";
-		} */
+        if (isset($_GET['dropout_count']) &&  $_GET['dropout_count'] == 1)
+        {
 
-		#echo $this->where;die;
-		$this->lv->searchColumns = $this->searchForm->searchColumns;
-		if(!$this->headers)
-			return;
-		if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false){
+            $dropout = " AND te_student_batch.is_new_dropout='1' AND  te_student_batch.deleted=0 ";
+            
+           
+        }
+        if (isset($_GET['new_dropout']) &&  $_GET['new_dropout'] == 1)
+        { 
+            
+            echo "<input type='hidden' name='new_dropout' value='1'>";
+        }
+        if (isset($_GET['is_new_dropout_basic']) && $_GET['is_new_dropout_basic'] == 1)
+        {
+            //echo 'testing====  ';
+            //$new_dropout = " AND te_student_batch.is_new_dropout='1' AND te_student_batch.deleted=0 ";
+            //$this->join .= " te_student_batch INNER JOIN leads l ON te_student_batch.leads_id=l.id and  l.is_new_dropout='1'  AND l.deleted=0";
+        }
+        
+       
 
-			$this->params['orderBy']='date_entered';
-			$this->params['overrideOrder']='1';
-			$this->params['sortOrder']='DESC';
+        if (!in_array($current_user->id, $managers))
+        {
+            if ($this->where != "")
+            {
+                $this->where .= " AND te_student_batch.assigned_user_id IN($user_ids) $add $dropout $new_dropout";
+            }
+            else
+            {
+                $this->where .= " te_student_batch.assigned_user_id IN($user_ids) $add $dropout $new_dropout";
+            }
+        }
+        if ($current_user->is_admin == 1 && $_GET['is_new_basic'] == 1)
+        {
 
-			$tplFile = 'custom/modules/te_student_batch/tpls/listing.tpl';
-			$this->lv->setup($this->seed, $tplFile, $this->where, $this->params);
-			echo $this->lv->display();
-		}
- 	}
+            $this->where .= "   $add ";
+        }
 
-  function reportingUser($currentUserId){
+        if ($current_user->is_admin == 1 && $_GET['dropout_count'] == 1)
+        {
+
+            $this->where .= "   $dropout ";
+        }
+
+			
+		
+ 	
+
+
+        //echo 'sssssssssss'.$add;
+        /* if($current_user->designation=="BUH"){
+          if($this->where!="")
+          $this->where .= " AND te_student_batch.dropout_status ='Pending'";
+          else
+          $this->where .= " te_student_batch.dropout_status ='Pending'";
+          } */
+
+
+
+        //echo $this->where;
+        $this->lv->searchColumns = $this->searchForm->searchColumns;
+        if (!$this->headers)
+            return;
+        if (empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false)
+        {
+
+            $this->params['orderBy']       = 'date_entered';
+            $this->params['overrideOrder'] = '1';
+            $this->params['sortOrder']     = 'DESC';
+
+            $tplFile = 'custom/modules/te_student_batch/tpls/listing.tpl';
+            $this->lv->setup($this->seed, $tplFile, $this->where, $this->params);
+            echo $this->lv->display();
+        }
+    }
+
+    function reportingUser($currentUserId){
 		$userObj = new User();
 		$userObj->disable_row_level_security = true;
 		$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
@@ -469,7 +529,7 @@ class te_student_batchViewList extends ViewList
 			$approved=$obj->approvedTransfer($user_ids);
 			$dropped=$obj->droppedTransfer($user_ids);
             $newreg = '<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="' . (intval($newconv['newconv']) == 0 ? '#' : 'index.php?action=index&type=new_conversion&module=te_student_batch&is_new_basic=1').'">'.intval($newconv['newconv']).'</a></div>
+						<div class="count"><a href="' . (intval($newconv['newconv']) == 0 ? '#' : 'index.php?searchFormTab=basic_search&action=index&query=true&type=new_conversion&module=te_student_batch&is_new_basic=1').'">'.intval($newconv['newconv']).'</a></div>
 						<span class="count_top">New Conversion</span>
 					</div>';
             $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
@@ -477,7 +537,7 @@ class te_student_batchViewList extends ViewList
 						<span class="count_top"> Drop Out</span>
 					</div>';
             $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="' . (intval($dropconCall['newconv']) == 0 ? '#' : 'index.php?module=Leads&action=index&is_new_dropout_basic=1&type=new_dropout').'">'.intval($dropconCall['newconv']).'</a></div>
+						<div class="count"><a href="' . (intval($dropconCall['newconv']) == 0 ? '#' : 'index.php?searchFormTab=basic_search&module=te_student_batch&action=index&query=true&is_new_dropout_basic=1&type=new_dropout').'">'.intval($dropconCall['newconv']).'</a></div>
 						<span class="count_top"> Call Center Drop Out</span>
 					</div>';
             $newreg .= '<div class="col-md-2 text-center tile_stats_counts">
