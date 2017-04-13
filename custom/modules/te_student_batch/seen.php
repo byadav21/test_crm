@@ -18,6 +18,7 @@ $user_ids                          = implode("', '", array_keys($reportingUserId
 
 if ($current_user->isAdmin())
     $user_ids = '';
+
 $new      = 0;
 
 
@@ -27,20 +28,10 @@ if ($_GET['type'] == 'new_conversion')
     $obj->setSeen('is_new', 'te_student_batch', $user_ids, 'Active');
     print json_encode(array('status' => '1'));
 }
-else if ($_GET['type'] == 'dropout')
-{
-    //$obj->setSeenDropoutIN('is_new_dropout','te_student_batch',$user_ids,'Dropout');
-    header('Location: index.php?searchFormTab=basic_search&module=te_student_batch&action=index&query=true&status_basic[]=Dropout&dropout_count=1');
-}
 else if ($_GET['type'] == 'new_call_dropout')
 {
     $obj->setSeenDropout('is_new_dropout', 'leads', $user_ids);
     header('Location: index.php?module=Leads&action=index');
-}
-else if ($_GET['type'] == 'refral')
-{
-    //$obj->setSeenRefrals('is_new_referalls','leads',$user_ids);
-    header('Location: index.php?module=te_student_batch&action=viewmyrefferal');
 }
 else if ($_GET['type'] == 'new_transfer')
 {

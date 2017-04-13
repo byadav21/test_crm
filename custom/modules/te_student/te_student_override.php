@@ -384,7 +384,7 @@ class te_student_override extends te_student
         if ($user_ids)
             $sql .= " inner join te_srm_auto_assignment as tsaa on  tsaa.te_ba_batch_id_c =te_student_batch.te_ba_batch_id_c ";
 
-        $sql .= " where te_student_batch.status='Dropout' and te_student_batch.is_new_dropout='1' and te_student_batch.deleted=0 "; //and created_by in ('".$user_ids."')";
+        $sql .= " where te_student_batch.status='Dropout' AND dropout_status IN ('Approved','Rejected') and te_student_batch.deleted=0 "; //and created_by in ('".$user_ids."')";
 
         if ($user_ids)
         {
@@ -462,7 +462,6 @@ class te_student_override extends te_student
             }
         }
     }
-    
 
 }
 

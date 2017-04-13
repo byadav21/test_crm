@@ -2,19 +2,6 @@
  //WARNING: The contents of this file are auto-generated
 
 
-$dictionary['te_impression']['fields']['actual_type'] = array (
-	'name' => 'actual_type',
-    'vname' => 'Type',
-    'type' => 'enum',
-    'options'=>'actual_type',
-    'duplicate_merge' => 'disabled',
-    'required' => false,
-    'studio' => 'visible',
-);
-
-
-
-
 // created: 2016-10-22 13:16:05
 $dictionary["te_impression"]["fields"]["aos_contracts_te_impression_1"] = array (
   'name' => 'aos_contracts_te_impression_1',
@@ -47,5 +34,18 @@ $dictionary["te_impression"]["fields"]["aos_contracts_te_impression_1aos_contrac
   'side' => 'right',
   'vname' => 'LBL_AOS_CONTRACTS_TE_IMPRESSION_1_FROM_TE_IMPRESSION_TITLE',
 );
+
+
+$dictionary['te_impression']['fields']['actual_type'] = array (
+	'name' => 'actual_type',
+    'vname' => 'Type',
+    'type' => 'enum',
+    'options'=>'actual_type',
+    'duplicate_merge' => 'disabled',
+    'required' => false,
+    'studio' => 'visible',
+);
+
+
 
 ?>
