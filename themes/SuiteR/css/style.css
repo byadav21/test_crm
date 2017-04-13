@@ -2480,18 +2480,19 @@ ul.clickMenu li ul.subnav li a:hover .showLessArrow, ul.clickMenu li ul.subnav l
 
 a#create_link.utilsLink {
     color: #fff;
-    background-color: #3C8DBC;
+    background-color: #2A3F54;
     border:none;
-    padding:5px 8px 5px 8px;
+    padding:9px 20px 9px 20px;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
     text-decoration:none;
+    border-radius:3px;
 }
 
 a#create_link.utilsLink:hover {
-    background-color: #008080;
+    background-color: #2A3F54;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
@@ -3156,13 +3157,14 @@ li#usermenu:hover {
 }
 
 .button, input[type=submit], input[type=button] {
-    background-color: #3C8DBC;
+    background-color: #2A3F54;
     border:none;
     color: #fff;
     cursor:pointer;
     font-size:1.1em !important;
     margin:2px;
     padding:5px 8px 5px 8px;
+    border-radius:3px
 }
 
 button[disabled], input[type="submit"][disabled], input[type="reset"][disabled], input[type="button"][disabled]{
@@ -3925,10 +3927,11 @@ li.moremenu {
 @media (max-width:1023px) {
     button, .button, input[type="button"], input[type="reset"], input[type="submit"], a#create_link.utilsLink {
         color: #fff;
-        background-color: #3C8DBC;
+        background-color: #2A3F54;
         border: none;
-        padding: 8px 12px 8px 12px;
+        padding: 9px 20px 9px 20px;
         margin: 2px;
+        border-radius:3px;
     }
     .quickcreate {
         margin:0;
@@ -4218,7 +4221,7 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
 }
 
 #dashletbuttons{
-    color:#3C8DBC;
+    color:#2A3F54;
     margin: 0 2px 0 2px;
 }
 
@@ -4517,14 +4520,16 @@ h3 span{
     visibility:hidden;
 }
 .icon{
-    fill: #3c8dbc;
+    fill: #2A3F54;
     pointer-events: none;
-    fill: #3C8DBC;
+    fill: #2A3F54;
     pointer-events: none;
 }
 .inlineEdit{
     cursor: pointer !important;
 }
+
+#pagination .button{padding:4px 8px}
 
 .inlineEditIcon {
     float: right;
