@@ -4529,6 +4529,11 @@ h3 span{
     cursor: pointer !important;
 }
 
+.dropdown-usermenu a{color:#5A738E!important}
+
+.alert_count{     color: #fff!important;
+    font-weight: bold!important;}
+
 #pagination .button{padding:4px 8px}
 
 .inlineEditIcon {
