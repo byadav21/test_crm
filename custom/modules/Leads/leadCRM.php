@@ -77,7 +77,7 @@ if($db->getRowCount($getUserID) > 0){
 				include_once("custom/modules/Leads/overview.php");
 			}else if($records['assigned_user_id']!=$userid['id']){
 				 
-				header('Location: index.php?module=Leads&action=search_leads&search_leads=1&mobile_number='. $phone);
+				header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);
 				 
 			}else{
 				
