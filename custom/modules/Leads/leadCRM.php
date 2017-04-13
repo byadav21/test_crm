@@ -18,25 +18,44 @@ $getUserID=$db->query($getUserIDs);
 if($db->getRowCount($getUserID) > 0){
 	$userid=$db->fetchByAssoc($getUserID);
 	if($callType=='outbound.auto.dial'){	
-		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'";
+		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId' and duplicate_check=1 ";
 		$res=$db->query($lead); 
+		if($db->getRowCount($res) > 1){
+			$lead .=" and status!='Duplicate'";
+			$res=$db->query($lead); 
+		}
 		
 	}else if($callType=='outbound.manual.dial'){
-		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'";
+		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'  and duplicate_check=1 ";
 		$res=$db->query($lead);
 		if($db->getRowCount($res) == 0){	
-			 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where ( phone_home='$phone' or  phone_mobile='$phone' or  phone_work='$phone' or  phone_other='$phone' ) ";
+			 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile='$phone' or    phone_other='$phone' )  and duplicate_check=1 ";
 			 $res=$db->query($lead);
 		}	
+		
+		if($db->getRowCount($res) > 1){
+			$lead .=" and status!='Duplicate'";
+			$res=$db->query($lead); 
+		}
 			
 	}else if($callType=='inbound.call.dial'){	
-		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where ( phone_home='$phone' or  phone_mobile='$phone' or  phone_work='$phone' or  phone_other='$phone' ) ";
+		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile='$phone' or    phone_other='$phone' )  and duplicate_check=1  ";
 		$res=$db->query($lead);
+		
+		if($db->getRowCount($res) > 1){
+			$lead .=" and status!='Duplicate'";
+			$res=$db->query($lead); 
+		}
 	
 	}else if($callType=='outbound.callback.dial'){	
 	
-		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'";
+		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'  and duplicate_check=1 ";
 		$res=$db->query($lead); 
+		
+		if($db->getRowCount($res) > 1){
+			$lead .=" and status!='Duplicate'";
+			$res=$db->query($lead); 
+		}
 	
 	}	
  
