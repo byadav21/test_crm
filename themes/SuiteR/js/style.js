@@ -380,6 +380,17 @@ $( document ).ready(function() {
 		}
 	})
 	
+	$('body').on('click','.user-profile  ',function(){
+		 
+		if($(this).parent().hasClass('open')){
+		  $(this).parent().removeClass('open');	
+		  $('.dropdown-usermenu').hide();
+		}else{
+			 $(this).parent().addClass('open');	
+			  $('.dropdown-usermenu').show();
+		}
+	})
+	
 	
 });
 						

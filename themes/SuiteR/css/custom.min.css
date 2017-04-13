@@ -4187,6 +4187,14 @@ ul.notifications {
    .dataTables_length { float:none; }
 }
 
+@media (max-width: 1024px) {
+   .top_nav .navbar-right { width:100% }
+   
+    .dropdown-usermenu li:last-child {
+     display:none
+	}
+}
+
 
 
 
