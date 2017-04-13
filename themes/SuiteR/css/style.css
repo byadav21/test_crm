@@ -4221,7 +4221,7 @@ a[id^=grouptab]:visited, a[id^=grouptab]:active {
 }
 
 #dashletbuttons{
-    color:#3C8DBC;
+    color:#2A3F54;
     margin: 0 2px 0 2px;
 }
 
@@ -4520,14 +4520,16 @@ h3 span{
     visibility:hidden;
 }
 .icon{
-    fill: #3c8dbc;
+    fill: #2A3F54;
     pointer-events: none;
-    fill: #3C8DBC;
+    fill: #2A3F54;
     pointer-events: none;
 }
 .inlineEdit{
     cursor: pointer !important;
 }
+
+#pagination .button{padding:4px 8px}
 
 .inlineEditIcon {
     float: right;
