@@ -16,7 +16,7 @@ $(document).ready(function () {
      }
      })*/
     $(".actionmenulinks a").eq(4).attr('target', '_blank');
-    var new_conversion = $("input[name='is_new_basic']").val();
+    var new_conversion = $("input[name='new_conversion']").val();
     var is_new_dropout_basic = $("input[name='is_new_dropout_basic']").val(); //
     var callcenter_dropout = $("input[name='new_dropout']").val();
 

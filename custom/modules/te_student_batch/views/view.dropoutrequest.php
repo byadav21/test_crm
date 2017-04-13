@@ -44,9 +44,20 @@ class te_student_batchViewDropoutrequest extends SugarView
         $custom_query = '';
         if (isset($_GET['is_new_dropout_basic']) && $_GET['is_new_dropout_basic'] == 1)
         {
-            $custom_query = "AND sb.is_new_dropout=1 AND dropout_status IN ('Approved','Rejected')";
+            $custom_query = " AND sb.is_new_dropout=1 AND dropout_status IN ('Approved','Rejected')";
             echo '<input type="hidden" name="is_new_dropout_basic" value="' . $_GET['is_new_dropout_basic'] . '">';
         }
+        
+        if (isset($_GET['dropout_count']) && $_GET['dropout_count'] == 1)
+        {
+            $custom_query .= "  AND dropout_status IN ('Approved','Rejected')";
+            echo '<input type="hidden" name="dropout_count" value="' . $_GET['dropout_count'] . '">';
+            
+           
+        }
+        
+       
+        
         global $db, $current_user, $s_history;
         $resultSet    = array();
         $resultSethis = array();

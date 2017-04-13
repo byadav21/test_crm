@@ -58,9 +58,10 @@ class te_student_batchViewList extends ViewList
         $add         = '';
         $dropout     = '';
         $new_dropout = '';
-        if (isset($_GET['is_new_basic']) && $_GET['is_new_basic'] == 1)
+        if (isset($_GET['new_conversion']) && $_GET['new_conversion'] == 1)
         {
-            $add = " AND  te_student_batch.status='Active' ";
+            $add = " (is_new = 1) AND  te_student_batch.status='Active' ";
+            echo "<input type='hidden' name='new_conversion' value='1'>";
         }
 
         if (isset($_GET['dropout_count']) && $_GET['dropout_count'] == 1)
@@ -68,6 +69,7 @@ class te_student_batchViewList extends ViewList
 
             $dropout = " AND te_student_batch.is_new_dropout='1' AND te_student_batch.deleted=0 ";
         }
+        
         if (isset($_GET['new_dropout']) && $_GET['new_dropout'] == 1)
         {
 
@@ -95,7 +97,7 @@ class te_student_batchViewList extends ViewList
                 $this->where .= " te_student_batch.assigned_user_id IN($user_ids) $add $dropout $new_dropout";
             }
         }
-        if ($current_user->is_admin == 1 && $_GET['is_new_basic'] == 1)
+        if ($current_user->is_admin == 1 && $_GET['new_conversion'] == 1)
         {
 
             $this->where .= "   $add ";
@@ -107,7 +109,7 @@ class te_student_batchViewList extends ViewList
             $this->where .= "   $dropout ";
         }
 
-
+        //echo $this->where;
 
 
 
@@ -580,11 +582,11 @@ class te_student_batchViewList extends ViewList
             $approved                          = $obj->approvedTransfer($user_ids);
             $dropped                           = $obj->droppedTransfer($user_ids);
             $newreg                            = '<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="' . (intval($newconv['newconv']) == 0 ? '#' : 'index.php?searchFormTab=basic_search&action=index&query=true&type=new_conversion&module=te_student_batch&is_new_basic=1') . '">' . intval($newconv['newconv']) . '</a></div>
+						<div class="count"><a href="' . (intval($newconv['newconv']) == 0 ? '#' : 'index.php?action=index&type=new_conversion&module=te_student_batch&new_conversion=1') . '">' . intval($newconv['newconv']) . '</a></div>
 						<span class="count_top">New Conversion</span>
 					</div>';
             $newreg                            .= '<div class="col-md-2 text-center tile_stats_counts">
-						<div class="count"><a href="index.php?action=seen&type=dropout&module=te_student_batch">' . intval($dropconv['newconv']) . '</a></div>
+						<div class="count"><a href="index.php?module=te_student_batch&action=dropoutrequest&type=dropout&dropout_count=1">' . intval($dropconv['newconv']) . '</a></div>
 						<span class="count_top"> Drop Out</span>
 					</div>';
             $newreg                            .= '<div class="col-md-2 text-center tile_stats_counts">
@@ -604,6 +606,7 @@ class te_student_batchViewList extends ViewList
 						<span class="count_top"> Approved Dropout</span>
 					</div>';
             $ss->assign("statusWiseCount", $newreg);
+            // index.php?module=te_student_batch&action=dropoutrequest&type=dropout
 
             //$ss->assign("csshack",'leadpage');
             //$ss->assign("csshack",'leadpage');
