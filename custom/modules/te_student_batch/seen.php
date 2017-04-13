@@ -1,59 +1,61 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
 require_once('custom/modules/te_student/te_student_override.php');
-global  $current_user;
- 
-$obj=new te_student_override();
-global  $current_user;
-$currentUserId = $current_user->id;
-$reportingUserIds = array();			 
+global $current_user;
+
+$obj                               = new te_student_override();
+global $current_user;
+$currentUserId                     = $current_user->id;
+$reportingUserIds                  = array();
 $obj->reportingUser($currentUserId);
 $obj->report_to_id[$currentUserId] = $current_user->name;
-$reportingUserIds = $obj->report_to_id;
-$user_ids = implode("', '", array_keys($reportingUserIds));
+$reportingUserIds                  = $obj->report_to_id;
+$user_ids                          = implode("', '", array_keys($reportingUserIds));
 
 
 if ($current_user->isAdmin())
     $user_ids = '';
-$new = 0;
+$new      = 0;
 
 
-if ($_GET['type'] == 'new_conversion') {
+if ($_GET['type'] == 'new_conversion')
+{
 
     $obj->setSeen('is_new', 'te_student_batch', $user_ids, 'Active');
     print json_encode(array('status' => '1'));
-} 
-
-else if ($_GET['type'] == 'dropout') {
-    // $obj->setSeenDropoutIN('is_new_dropout','te_student_batch',$user_ids,'Dropout');
-    header('Location: index.php?searchFormTab=basic_search&module=te_student_batch&action=index&query=true&status_basic[]=Dropout');
-} 
-
-else if ($_GET['type'] == 'new_call_dropout') {
-    $obj->setSeenDropout('is_new_dropout', 'leads', $user_ids);
-    //header('Location: index.php?module=Leads&action=index');
-} 
-
-else if ($_GET['type'] == 'refral') {
-    //  $obj->setSeenRefrals('is_new_referalls','leads',$user_ids);
-    header('Location: index.php?module=te_student_batch&action=viewmyrefferal');
-} 
-
-else if ($_GET['type'] == 'new_transfer') {
-  
-    $obj->setSeenTransfer('is_new_approved','te_transfer_batch',$user_ids);
-    print json_encode(array('status' => 1));
-    
 }
+else if ($_GET['type'] == 'dropout')
+{
+    //$obj->setSeenDropoutIN('is_new_dropout','te_student_batch',$user_ids,'Dropout');
+    header('Location: index.php?searchFormTab=basic_search&module=te_student_batch&action=index&query=true&status_basic[]=Dropout&dropout_count=1');
+}
+else if ($_GET['type'] == 'new_call_dropout')
+{
+    $obj->setSeenDropout('is_new_dropout', 'leads', $user_ids);
+    header('Location: index.php?module=Leads&action=index');
+}
+else if ($_GET['type'] == 'refral')
+{
+    //$obj->setSeenRefrals('is_new_referalls','leads',$user_ids);
+    header('Location: index.php?module=te_student_batch&action=viewmyrefferal');
+}
+else if ($_GET['type'] == 'new_transfer')
+{
 
-else if ($_GET['type'] == 'new_dropout') {
-  
-    $obj->setApprovedDropout('is_new_dropout','te_student_batch',$user_ids);
+    $obj->setSeenTransfer('is_new_approved', 'te_transfer_batch', $user_ids);
     print json_encode(array('status' => 1));
-}  
-else {
+}
+else if ($_GET['type'] == 'approved_dropout')
+{
+
+    $obj->setApprovedDropout('is_new_dropout', 'te_student_batch', $user_ids);
+    print json_encode(array('status' => 1));
+}
+else
+{
 
     header('Location: index.php?module=te_transfer_batch');
 } 
