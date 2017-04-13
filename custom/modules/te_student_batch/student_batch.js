@@ -92,7 +92,7 @@ function callcenterDropout() {
 // transfer function is on transfer batch
 
 function approvedDropout() {
-   
+
     $.ajax({
         async: false,
         type: "GET",

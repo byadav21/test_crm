@@ -69,7 +69,7 @@ class te_student_batchViewList extends ViewList
 
             $dropout = " AND te_student_batch.is_new_dropout='1' AND te_student_batch.deleted=0 ";
         }
-        
+
         if (isset($_GET['new_dropout']) && $_GET['new_dropout'] == 1)
         {
 
@@ -110,10 +110,6 @@ class te_student_batchViewList extends ViewList
         }
 
         //echo $this->where;
-
-
-
-
         //echo 'sssssssssss'.$add;
         /* if($current_user->designation=="BUH"){
           if($this->where!="")
@@ -607,7 +603,6 @@ class te_student_batchViewList extends ViewList
 					</div>';
             $ss->assign("statusWiseCount", $newreg);
             // index.php?module=te_student_batch&action=dropoutrequest&type=dropout
-
             //$ss->assign("csshack",'leadpage');
             //$ss->assign("csshack",'leadpage');
         }

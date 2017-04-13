@@ -462,7 +462,6 @@ class te_student_override extends te_student
             }
         }
     }
-    
 
 }
 

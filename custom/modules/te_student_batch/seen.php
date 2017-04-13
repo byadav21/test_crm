@@ -18,6 +18,7 @@ $user_ids                          = implode("', '", array_keys($reportingUserId
 
 if ($current_user->isAdmin())
     $user_ids = '';
+
 $new      = 0;
 
 
