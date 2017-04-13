@@ -3704,9 +3704,7 @@ li.moremenu {
 /* Fix so that sidebar does not oversize on larger screens */
 
 @media (min-width:320px) and (max-width:978px){
-    .col-sm-3 {
-        display:none;
-    }
+    
     .col-sm-offset-3 {
         margin:0;
     }
