@@ -39,7 +39,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
 	<div class="navbar nav_title" style="border: 0;">
-	  <a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span><img src="themes/default/images/logo.png"></span></a>
+	  <a href="index.php" class="site_title"> <img class="favi" src="custom/themes/SuiteR/favicon.png">  <span><img src="themes/default/images/logo.png"></span></a>
 	</div>
 	<div class="clearfix"></div>
 	
