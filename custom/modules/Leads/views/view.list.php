@@ -36,10 +36,7 @@ class LeadsViewList extends ViewList
      /**
      * @see ViewList::preDisplay()
      */
-    public function preDisplay() {
-        echo '<script type="text/javascript" src="custom/modules/leads/leads.js"></script>';
-        parent::preDisplay();
-    }
+ 
     function listViewProcess() {
         $this->processSearchForm();
 
