@@ -364,7 +364,38 @@ class AOR_ReportsViewDailyreport extends SugarView {
 				$index++;
 			}
 		}		
-
+        #Custom Pagination
+		$total=count($reportDataList); #total records			
+		$start=0;
+		$per_page=10;
+		$page=1;
+		$last_page=ceil($total/$per_page);
+		
+		if(isset($_REQUEST['page'])&&$_REQUEST['page']>0){
+			$start=$per_page*($_REQUEST['page']-1);
+			$page=($_REQUEST['page']+1);
+		}else{
+			$page++;
+		}		
+		if(($start+$per_page)<$total){			
+			$right=1;
+		}else{
+			$right=0;
+		}
+		if(isset($_REQUEST['page'])&&$_REQUEST['page']==1){
+			$left=0;			
+		}elseif(isset($_REQUEST['page'])){
+			$page=($_REQUEST['page']-1);
+			$left=1;
+		}
+		$reportDataList=array_slice($reportDataList,$start,$per_page);
+		if($total>$per_page){
+			$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
+		}else{
+			$current="(".($start+1)."-".count($reportDataList)." of ".$total.")";
+		}
+		# Pagination end
+		
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("batchList",$batchList);
 		$sugarSmarty->assign("vendorOptionList",$vendorList);
@@ -374,6 +405,11 @@ class AOR_ReportsViewDailyreport extends SugarView {
 		$sugarSmarty->assign("selected_vendor",$selected_vendor);
 		$sugarSmarty->assign("selected_status",$selected_status);
 		$sugarSmarty->assign("selected_date",$search_date);
+		$sugarSmarty->assign("current_records",$current);
+		$sugarSmarty->assign("page",$page);
+		$sugarSmarty->assign("right",$right);
+		$sugarSmarty->assign("left",$left);
+		$sugarSmarty->assign("last_page",$last_page);
 		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/dailyreport.tpl');
 	}
 }
