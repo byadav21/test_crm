@@ -62,7 +62,7 @@
 	</div>	
     
     
-       <div class="col-xs-12 innerdiv">
+       <div  class="col-xs-12 innerdiv">
 		 
 			<div class="col-xs-1 div text-center headrtbl">Institute</div>			 
 			<div class="col-xs-2 div text-center headrtbl">Programme & Batch</div>			 
@@ -76,7 +76,9 @@
       </div>
     
     <div class="maincont">
-		<div class="col-xs-12 innerdiv" ng-repeat="(key,obj) in results">	 
+        <div class="col-xs-12 innerdiv" ng-if="results.length == 0"  > <div class="col-sm-12 text-center div"><strong style="font-size:18px;">No data found</strong></div></div>
+        
+		<div class="col-xs-12 innerdiv" ng-if="results.length > 0" ng-repeat="(key,obj) in results">	 
 			<div class="col-xs-1 text-center div"><% obj.iname %></div>
 			<div class="col-xs-2 text-center div"><% obj.pname %> - <% obj.bname %></div>
 			 

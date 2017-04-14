@@ -1,3 +1,4 @@
+
 <?php
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
@@ -34,5 +35,9 @@ $isadmin=($current_user->is_admin)?1:0;
 $results=$obj->getAllStudentInstallmentSummary($isadmin,$batchqry,$user_ids,$start,$noofRow);
 $isload=($results && count($results)>17)?1 :0;
 $page=$page+1;
-//print_r($results);
+
+if(!empty($results)){
 echo json_encode(['data'=>$results,'page'=>$page,'isload'=>$isload]);die;
+}else{
+    echo json_encode(['data'=>array(),'page'=>$page,'isload'=>$isload]);die;
+}
