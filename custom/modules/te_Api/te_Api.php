@@ -191,7 +191,7 @@ class te_Api_override extends te_Api {
 	
 	function createLog($req,$res){
 		 
-		$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apillog/apilog.txt","a");
+		$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apilog/apilog.txt","a");
 		// var_dump($file);die;
 		fwrite($file,date('Y-m-d H:i:s') ."\n");
 		fwrite($file,$req ."\n");
