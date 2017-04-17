@@ -3,6 +3,7 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
 ini_set('memory_limit','1024M');
+require_once('custom/include/Email/sendmail.php');
 require_once('include/entryPoint.php');
 global $db;
 $transferSql="SELECT * FROM te_transfer_batch WHERE id='".$_REQUEST['request_id']."' AND deleted=0";
@@ -30,6 +31,22 @@ $oldBatchDetails = $GLOBALS['db']->fetchByAssoc($oldBatchObj);
 if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"){
 	$GLOBALS['db']->query("UPDATE te_transfer_batch SET status='".$_REQUEST['request_status']."',is_new_approved=1, te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
 	$utmOptions['status']="Transferred";
+	
+			# Mail sent for Rejected/
+		
+			$studentSql="select * FROM `te_student` WHERE id ='".$student_id."' AND deleted=0";
+			$studentObj= $GLOBALS['db']->query($studentSql);
+			$studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
+			$studentemail=$studentDetails['email'];
+			$template="<p>Hello ".$studentDetails['name']."</p>
+						<p> Your Trasfer Batch Request Rejected</p>
+						<p>Please have a look and take action accordingly</p>
+						<p></p><p>Thanks & Regards</p>
+						<p>SRM Team</p>";
+			
+			$mail = new NetCoreEmail();
+			$mail->sendEmail($studentemail," Trasfer Batch Request Rejected",$template);
+		
 	echo json_encode($utmOptions);
 	return false;
 }
@@ -110,6 +127,23 @@ $GLOBALS['db']->query("UPDATE te_student_payment_plan, te_student_batch_te_stude
 #update batch transfer request status
 $GLOBALS['db']->query("UPDATE te_transfer_batch SET is_new_approved=1,status='".$_REQUEST['request_status']."', te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
 $utmOptions['status']="Transferred";
+
+# Mail sent for Approved/
+		
+			$studentSql="select * FROM `te_student` WHERE id ='".$student_id."' AND deleted=0";
+			$studentObj= $GLOBALS['db']->query($studentSql);
+			$studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
+			$studentemail=$studentDetails['email'];
+			$template="<p>Hello ".$studentDetails['name']."</p>
+						<p>Batch Transfer Request status is approved</p>
+						<p>Please have a look and take action accordingly</p>
+						<p></p><p>Thanks & Regards</p>
+						<p>SRM Team</p>";
+			
+			$mail = new NetCoreEmail();
+			$mail->sendEmail($studentemail," Trasfer Batch Request Approved",$template);
+
+
 echo json_encode($utmOptions);
 return false;
 

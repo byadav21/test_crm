@@ -250,8 +250,93 @@ class addPaymentClass{
 			);
 			$this->updateStudentPaymentPlan($paymentDetails);
 		}
+		#Mail Addreferal leads not converted lead
+		if($_REQUEST['module']=="Leads" &&$bean->lead_source=="Referrals"&& $bean->status!="Converted" && $bean->status_description!="Converted"){
+			
+			if($bean->parent_type=='Leads')
+				{
+					global $db;
+					$sqllead="SELECT ea.email_address FROM email_addr_bean_rel eabr JOIN email_addresses ea ON (ea.id = eabr.email_address_id) WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND eabr.bean_id='".$bean->parent_id."'";
+					$leadObj = $db->query($sqllead);
+					$studentresult = $db->fetchByAssoc($leadObj);
+					$studemail=$studentresult['email_address'];
+					$template="<p>Hello ".$bean->parent_name."</p>
+						<p>You have to sent Program Kit  </p>
+						<p>Please have a look and take action accordingly</p>
+						<p></p><p>Thanks & Regards</p>
+						<p>SRM Team</p>";
+					
+					$mail = new NetCoreEmail();
+					$mail->sendEmail($studemail,"Lead Referral",$template);
+				
+				}
+			if($bean->parent_type=='Users') # If get user then find user email id
+					{
+					global $db;
+					$sqllead="SELECT ea.email_address FROM email_addr_bean_rel eabr JOIN email_addresses ea ON (ea.id = eabr.email_address_id) WHERE eabr.deleted = 0 AND eabr.bean_module='Users' AND eabr.bean_id='".$bean->parent_id."'";
+					$leadObj = $db->query($sqllead);
+					$studentresult = $db->fetchByAssoc($leadObj);
+					$useremail=$studentresult['email_address'];	
+					
+					$template="<p>Hello ".$bean->parent_name."</p>
+						<p>You have to sent Program Kit  </p>
+						<p>Please have a look and take action accordingly</p>
+						<p></p><p>Thanks & Regards</p>
+						<p>Team</p>";
+					
+				$mail = new NetCoreEmail();
+				$mail->sendEmail($useremail,"Lead Referral",$template);
+					
+					
+					}
+			
+		}
+			
+			
+		# When Converted Leads and Referal select sendt mail
+		if($_REQUEST['module']=="Leads" &&$bean->lead_source=="Referrals" && $bean->status=="Converted" && $bean->status_description=="Converted"){
+			global $db;
+			if($bean->parent_type=='Leads') ## When lead get email id
+				{
+					global $db;
+					$sqllead="SELECT ea.email_address FROM email_addr_bean_rel eabr JOIN email_addresses ea ON (ea.id = eabr.email_address_id) WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND eabr.bean_id='".$bean->parent_id."'";
+					$leadObj = $db->query($sqllead);
+					$studentresult = $db->fetchByAssoc($leadObj);
+					$studemail=$studentresult['email_address'];
+					$template="<p>Hello ".$bean->parent_name."</p>
+						<p>You have to sent Program Kit  </p>
+						<p>Please have a look and take action accordingly</p>
+						<p></p><p>Thanks & Regards</p>
+						<p>SRM Team</p>";
+					
+					$mail = new NetCoreEmail();
+					$mail->sendEmail($studemail,"Lead Referral Converted",$template);
+					
+					}
+				if($bean->parent_type=='Users') # If get user then find user email id
+					{
+					global $db;
+					$sqllead="SELECT ea.email_address FROM email_addr_bean_rel eabr JOIN email_addresses ea ON (ea.id = eabr.email_address_id) WHERE eabr.deleted = 0 AND eabr.bean_module='Users' AND eabr.bean_id='".$bean->parent_id."'";
+					$leadObj = $db->query($sqllead);
+					$studentresult = $db->fetchByAssoc($leadObj);
+					$useremail=$studentresult['email_address'];
+					$template="<p>Hello ".$bean->parent_name."</p>
+						<p>You have to sent Program Kit  </p>
+						<p>Please have a look and take action accordingly</p>
+						<p></p><p>Thanks & Regards</p>
+						<p>SRM Team</p>";
+					
+					$mail = new NetCoreEmail();
+					$mail->sendEmail($useremail,"Lead Referral Converted",$template);	
+				
+					
+					}
+				
+				
+				}
 
 	}
+
 
 	public function getSrmUser($batch_id){
 		$srmSql = "SELECT assigned_user_id FROM te_srm_auto_assignment WHERE deleted=0 AND te_ba_batch_id_c='".$batch_id."'";
