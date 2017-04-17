@@ -14,10 +14,10 @@ if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUE
 	exit();
 }
 
- 
-$db->query("delete from  session_call where  session_id='" . session_id() ."'");
+$sql="delete from  session_call where  session_id='" . session_id() ."'";
+$db->query($sql);
 $objapi= new te_Api_override();
-$objapi->createLog(print_r($_REQUEST,true),"delete from  session_call where  session_id='" . session_id() ."'");
+$objapi->createLog(print_r($_REQUEST,true),$sql);
  
 $obj=new te_neox_call_details();
 if($_REQUEST['phone']) $obj->phone_number= $_REQUEST['phone'];

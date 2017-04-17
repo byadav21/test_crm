@@ -41,6 +41,12 @@ class LeadsViewList extends ViewList
         $this->processSearchForm();
 
         $this->lv->searchColumns = $this->searchForm->searchColumns;
+        
+        if($this->where){
+				$this->where=str_replace('leads.batch','leads_cstm.te_ba_batch_id_c',$this->where);
+		}
+        
+        
         if (!$this->headers)
             return;
         if (empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false) {

@@ -37,11 +37,18 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['item_taxes']=array('Tax 1'=>'Tax1','Tax 2'=>'Tax2');
-$app_list_strings['porequired_c_list']=array('No'=>'No','Yes'=>'Yes');
+$app_list_strings['payment_type_source_dom']['PayU']='PayU';
+$app_list_strings['payment_type_source_dom']['ATOM']='ATOM';
+$app_list_strings['payment_type_source_dom']['Paytm']='Paytm';
+$app_list_strings['payment_type_source_dom']['NEFT']='NEFT';
+$app_list_strings['payment_type_source_dom']['IMPS']='IMPS';
+$app_list_strings['payment_type_source_dom']['TPT']='TPT';
+$app_list_strings['payment_type_source_dom']['FT']='FT';
+$app_list_strings['payment_type_source_dom']['Chq']='Chq';
+$app_list_strings['payment_type_source_dom']['DD']='DD';
+$app_list_strings['payment_type_source_dom']['Institute']='Institute';
+$app_list_strings['payment_type_source_dom']['Inst_DD']='Inst.DD';
+$app_list_strings['payment_type_source_dom']['C_Disc']='C. Disc';
+$app_list_strings['payment_type_source_dom']['E_Disc']='E. Disc';
+$app_list_strings['payment_type_source_dom']['TDS']='TDS';
+$app_list_strings['payment_type_source_dom']['Others']='Others';
