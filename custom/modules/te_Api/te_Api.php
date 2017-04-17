@@ -159,9 +159,9 @@ class te_Api_override extends te_Api {
 		$qrystr=substr($qrystr,0,strlen($qrystr)-1);		
 		$response= file_get_contents($url. ($qrystr)); 
 		$this->createLog($url. ($qrystr),$response);     
-		//if($response!=='dispose successfully'){
-		  //echo '<script>swal("You have to dispose manaually!")</script>';	
-		//}
+		if($response!=='Dispose Successfully'){
+		  echo '<script>swal("You have to dispose manaually!")</script>';	
+		}
 
 	}
 	
@@ -191,7 +191,7 @@ class te_Api_override extends te_Api {
 	
 	function createLog($req,$res){
 		 
-		$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apilog.txt","a");
+		$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apilog/apilog.txt","a");
 		// var_dump($file);die;
 		fwrite($file,date('Y-m-d H:i:s') ."\n");
 		fwrite($file,$req ."\n");

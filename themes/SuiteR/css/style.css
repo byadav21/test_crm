@@ -2931,13 +2931,20 @@ ol, ul, dl {
     padding: 15px;
     margin: 0 auto;
     text-align: center;
-    background:#ffffff;
+    background: #ffffff;
     -moz-box-shadow: 0 0 5px 5px #dddddd;
     -webkit-box-shadow: 0 0 5px 5px#dddddd;
     box-shadow: 0 0 5px 5px #dddddd;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    top: 20%;
+    /* bottom: 50%; */
+    position: absolute;
+    left: 39%;
+    display: block;
+    overflow: visible;
+    height: auto;
 }
 
 .form-signin img{
@@ -3929,7 +3936,7 @@ li.moremenu {
         color: #fff;
         background-color: #2A3F54;
         border: none;
-        padding: 9px 20px 9px 20px;
+        padding: 7px 11px;
         margin: 2px;
         border-radius:3px;
     }
@@ -3941,9 +3948,7 @@ li.moremenu {
 
 /* Hide search form as standard */
 @media (max-width:980px) {
-    .search_form {
-        display: none;
-    }
+    
 }
 
 /* Custom styling for recently viewed on sidebar */
