@@ -61,20 +61,11 @@ class te_budgeted_campaign_override extends te_budgeted_campaign
     {
 
         $sql = " SELECT  
-                    bb.name ,
-                    bb.`batch_start_date`,
-                    bb.`registration_closing_date`,
-                    bb.`batch_size`,
-                    SUM(tbc.volume) AS total_volume,
-                    SUM(tbc.leads) AS total_leads,
-                    SUM(tbc.cost) AS total_cost,
-                    SUM(tbc.conversion) AS  total_conversion,
-                    SUM(tbc.conversion) AS  total_clp,
-                    SUM(tbc.conversion) AS  total_cpa
+                    bb.name 
                 FROM te_budgeted_campaign tbc 
                 INNER JOIN te_utm_te_budgeted_campaign_1_c ubc ON tbc.id=ubc.te_utm_te_budgeted_campaign_1te_budgeted_campaign_idb
                 INNER JOIN te_utm ON ubc.te_utm_te_budgeted_campaign_1te_utm_ida=te_utm. id
-                INNER JOIN `te_ba_batch` bb ON te_utm.te_ba_batch_id_c=bb.id  WHERE bb.deleted=0 GROUP BY bb.id ";
+                INNER JOIN `te_ba_batch` bb ON te_utm.te_ba_batch_id_c=bb.id  WHERE bb.deleted=0 AND te_utm.deleted=0 AND tbc.deleted=0 GROUP BY bb.id ";
 
         $itemDetal = $this->dbinstance->query($sql);
         $rowData   = [];
