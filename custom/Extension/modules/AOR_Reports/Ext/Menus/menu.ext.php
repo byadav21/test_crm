@@ -1,5 +1,8 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point'); 
+ //WARNING: The contents of this file are auto-generated
+
+
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * The contents of this file are subject to the SugarCRM Master Subscription
  * Agreement ("License") which can be viewed at
@@ -34,30 +37,59 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-global $current_user;
+
+global $current_user,$db;
 global $mod_strings, $app_strings;
 require_once('modules/ACL/ACLController.php');
+
+$ccrow =$db->query("SELECT user_id FROM `acl_roles_users` WHERE `role_id` IN('7e225ca3-69fa-a75d-f3f2-581d88cafd9a','270ce9dd-7f7d-a7bf-f758-582aeb4f2a45','cc7133be-0db9-d50a-2684-582c0078e74e') AND deleted=0");
+$crrArr=[];
+while($ccres =$db->fetchByAssoc($ccrow)){
+  $crrArr[]=$ccres['user_id'];
+}
+
+$dmrow =$db->query("SELECT user_id FROM `acl_roles_users` WHERE `role_id` IN('d7097ec5-28a7-8e06-46aa-581b127ee4af') AND deleted=0");
+$dmArr=[];
+while($dmres =$db->fetchByAssoc($dmrow)){
+  $dmArr[]=$dmres['user_id'];
+}
+
+$srmrow =$db->query("SELECT user_id FROM `acl_roles_users` WHERE `role_id` IN('86800aa5-c8c2-5868-a690-58a88d188265','30957fe0-3494-e372-656d-58a9a6296516') AND deleted=0");
+$srmArr=[];
+while($srmres =$db->fetchByAssoc($srmrow)){
+  $srmArr[]=$srmres['user_id'];
+}
+
 $acl_obj = new ACLController();
 # CC #
-if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=te_report_recipients&action=index', "Report Recipients", 'te_report_recipients');
-if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=pipelinereport', "Pipeline Report", 'AOR_Reports');
-if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=salescyclereport', "Sales Cycle Report", 'AOR_Reports');
-if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Status Report", 'AOR_Reports');
-if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
+if($current_user->is_admin==1){
+$module_menu[] = array ('index.php?module=te_report_recipients&action=index', "Report Recipients", 'te_report_recipients');  
+}
 
-if(ACLController::checkAccess('Leads', 'list', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=gsvreport', "GSV Report", 'AOR_Reports');
+if(in_array($current_user->id,$crrArr) || $current_user->is_admin==1){
+  $module_menu[] = array ('index.php?module=AOR_Reports&action=pipelinereport', "Pipeline Report", 'AOR_Reports');
+  $module_menu[] = array ('index.php?module=AOR_Reports&action=salescyclereport', "Sales Cycle Report", 'AOR_Reports');
+  $module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Status Report", 'AOR_Reports');
+  $module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
+  $module_menu[] = array ('index.php?module=AOR_Reports&action=gsvreport', "GSV Report", 'AOR_Reports');
+}
+
 # DIgital Marketing #
-if(ACLController::checkAccess('te_vendor', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
-if(ACLController::checkAccess('te_vendor', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=dailyreport', "Daily Report", 'AOR_Reports');
+if(in_array($current_user->id,$dmArr) || $current_user->is_admin==1){
+$module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=dailyreport', "Daily Report", 'AOR_Reports');
+}
 # SRM REPORTS #
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=feedbackreport', "Feedback Report", 'AOR_Reports');
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=resultreport', "Result Report", 'AOR_Reports');
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=leadprofilingreport', "Lead Profiling Report", 'AOR_Reports');
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=certificate', "Certificate Report", 'AOR_Reports');
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=studentstudykit', "Student Study Kit Report", 'AOR_Reports');
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "Referal Student Report",'AOR_Reports');
-if(ACLController::checkAccess('te_student_batch', 'import', true))$module_menu[] = array ('index.php?module=AOR_Reports&action=feereport', "Fee Report", 'AOR_Reports');
+if(in_array($current_user->id,$srmArr) || $current_user->is_admin==1){
+$module_menu[] = array ('index.php?module=AOR_Reports&action=feedbackreport', "Feedback Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=resultreport', "Result Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=leadprofilingreport', "Lead Profiling Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=certificate', "Certificate Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=studentstudykit', "Student Study Kit Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "Referal Student Report",'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=feereport', "Fee Report", 'AOR_Reports');
+}
+
 
 ?>
