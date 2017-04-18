@@ -44,4 +44,5 @@ $app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
 $app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
 $app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
 $app_list_strings['item_taxes']=array('Tax 1'=>'Tax1','Tax 2'=>'Tax2');
-$app_list_strings['porequired_c_list']=array('No'=>'No','Yes'=>'Yes');
+$app_list_strings['porequired_c_list']=array('no'=>'No','yes'=>'Yes');
+$app_list_strings['status_list']=array('0'=>'Rejected','1'=>'Open','2'=>'Approved','3'=>'Cancelled');

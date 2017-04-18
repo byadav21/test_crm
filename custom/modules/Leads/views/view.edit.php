@@ -414,6 +414,16 @@ if($("#status_description").val() === "Converted") {
 								 $("#payment_source").append('<option>NEFT</option>');
 								 $("#payment_source").append('<option>Cheque</option>');
 								 $("#payment_source").append('<option>Institute</option>');
+								 $("#payment_source").append('<option>IMPS</option>');
+								 $("#payment_source").append('<option>TPT</option>');
+								 $("#payment_source").append('<option>FT</option>');
+								 $("#payment_source").append('<option>Cash</option>');
+								 $("#payment_source").append('<option>DD</option>');
+								 $("#payment_source").append('<option>Inst.DD</option>');
+								 $("#payment_source").append('<option>C.Disc</option>');
+								 $("#payment_source").append('<option>E.Disc</option>');
+								 $("#payment_source").append('<option>TDS</option>');
+								 $("#payment_source").append('<option>Others</option>');
 								 document.getElementById("transaction_id_label").style.display ='none';
 								 document.getElementById("transaction_id").style.display ='none';
 								 document.getElementById("reference_number_label").style.display ='inline';
