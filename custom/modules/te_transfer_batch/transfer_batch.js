@@ -26,11 +26,11 @@ function changeTransferStatus(request_id,value){
 
 }
 function updateTransfer(){
-   
+
     $.ajax({
         async: false,
         type: "GET",
-        data: { 
+        data: {
           action2:'updateTransfer'
          },
         dataType: "json",
@@ -38,22 +38,22 @@ function updateTransfer(){
         error: function(responseData){
         },
         success:function(responseData)
-        { 
+        {
              if(responseData.status==1){
-                
-             }
-           
 
-        } 
+             }
+
+
+        }
     });
-    
+
 }
 $(document).ready(function(){
 	$(".actionmenulinks").eq(0).hide();
-        
+
         var is_new_approved = $( "input[name='is_new_approved_basic']" ).val();
-       
+
         if(is_new_approved==1){
-         updateTransfer();   
+         updateTransfer();
         }
 });

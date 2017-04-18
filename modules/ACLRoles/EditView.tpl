@@ -75,6 +75,11 @@ function set_focus(){
 <input id='name' name='name' type='text' value='{$ROLE.name}'>
 </td><td>&nbsp;</td><td>&nbsp;</td>
 </tr>
+<TR>
+<td scope="row" align='right'>Slug:<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span></td><td >
+<input id='slug' name='slug' type='text' value='{$ROLE.slug}'>
+</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
 <tr>
 <td scope="row" align='right'>{$MOD.LBL_DESCRIPTION}:</td>
 <td ><textarea name='description' cols="80" rows="8">{$ROLE.description}</textarea></td>

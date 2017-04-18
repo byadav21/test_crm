@@ -31,9 +31,9 @@ $oldBatchDetails = $GLOBALS['db']->fetchByAssoc($oldBatchObj);
 if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"){
 	$GLOBALS['db']->query("UPDATE te_transfer_batch SET status='".$_REQUEST['request_status']."',is_new_approved=1, te_student_batch_id_c='".$student_batch_id."' WHERE id='".$_REQUEST['request_id']."'");
 	$utmOptions['status']="Transferred";
-	
+
 			# Mail sent for Rejected/
-		
+
 			$studentSql="select * FROM `te_student` WHERE id ='".$student_id."' AND deleted=0";
 			$studentObj= $GLOBALS['db']->query($studentSql);
 			$studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
@@ -43,10 +43,10 @@ if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"
 						<p>Please have a look and take action accordingly</p>
 						<p></p><p>Thanks & Regards</p>
 						<p>SRM Team</p>";
-			
+
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail," Trasfer Batch Request Rejected",$template);
-		
+
 	echo json_encode($utmOptions);
 	return false;
 }
@@ -60,7 +60,7 @@ $srm_auto_Details = $GLOBALS['db']->fetchByAssoc($srm_auto_assObj);
 $vendorObj= $GLOBALS['db']->query($vendorSql);
 $vendor = $GLOBALS['db']->fetchByAssoc($vendorObj); */
 #get Institute, Program and batch details
-$batchSql = "SELECT b.id as batch_id,b.name as batch_name,b.batch_code,b.fees_inr,b.fees_in_usd,b.initial_payment_inr,b.initial_payment_usd,b.initial_payment_date,p.id as program_id,i.id as institute_id,b.total_sessions_planned,b.batch_start_date FROM te_ba_batch b INNER JOIN te_pr_programs_te_ba_batch_1_c pbr ON pbr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id INNER JOIN te_pr_programs p ON pbr.te_pr_programs_te_ba_batch_1te_pr_programs_ida=p.id INNER JOIN te_in_institutes_te_ba_batch_1_c bir ON b.id=bir.te_in_institutes_te_ba_batch_1te_ba_batch_idb INNER JOIN te_in_institutes i ON bir.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id WHERE b.deleted=0 AND b.id='".$new_batch_id."'";
+$batchSql = "SELECT b.id as batch_id,b.name as batch_name,b.batch_code,b.fees_inr,b.fees_in_usd,b.initial_payment_inr,b.initial_payment_usd,b.initial_payment_date,p.id as program_id,i.id as institute_id,b.total_sessions_planned,b.batch_start_date,b.minimum_attendance_criteria FROM te_ba_batch b INNER JOIN te_pr_programs_te_ba_batch_1_c pbr ON pbr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id INNER JOIN te_pr_programs p ON pbr.te_pr_programs_te_ba_batch_1te_pr_programs_ida=p.id INNER JOIN te_in_institutes_te_ba_batch_1_c bir ON b.id=bir.te_in_institutes_te_ba_batch_1te_ba_batch_idb INNER JOIN te_in_institutes i ON bir.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id WHERE b.deleted=0 AND b.id='".$new_batch_id."'";
 $batchObj= $GLOBALS['db']->query($batchSql);
 $batchDetails = $GLOBALS['db']->fetchByAssoc($batchObj);
 $studentBatchObj=new te_student_batch();
@@ -95,16 +95,39 @@ $studentBatchObj->save();
 $student_batch_id=$studentBatchObj->id;
 
 #transfer payment from old batch to new batch
-$studentPaymentSql="SELECT SUM(te_student_payment.amount) AS total FROM te_student_payment, te_student_te_student_payment_1_c WHERE te_student_payment.id = te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_payment.te_student_batch_id_c='".$student_batch_id_old."' AND te_student_payment.payment_realized=1";
+$studentPaymentSql="SELECT SUM(te_student_payment.amount) AS total FROM te_student_payment, te_student_te_student_payment_1_c WHERE te_student_payment.id = te_student_te_student_payment_1_c.te_student_te_student_payment_1te_student_payment_idb AND te_student_payment.te_student_batch_id_c='".$student_batch_id_old."' AND te_student_payment.payment_realized=1 AND te_student_payment.deleted=0";
 $studentPaymentObj= $GLOBALS['db']->query($studentPaymentSql);
 $studentPayment = $GLOBALS['db']->fetchByAssoc($studentPaymentObj);
 
 if(isset($studentPayment['total']) && $studentPayment['total']>0){
 	updateStudentPaymentPlan($new_batch_id,$student_id,$studentPayment['total'],$student_country);
 }
+
+#unlink old lead payment
+$GLOBALS['db']->query("UPDATE te_payment_details, leads_te_payment_details_1_c SET te_payment_details.deleted = 1,leads_te_payment_details_1_c.deleted=1 WHERE te_payment_details.id = leads_te_payment_details_1_c.leads_te_payment_details_1te_payment_details_idb AND leads_te_payment_details_1_c.leads_te_payment_details_1leads_ida='".$oldBatchDetails['leads_id']."'");
+
+#update leads
+$GLOBALS['db']->query("UPDATE leads,leads_cstm SET leads.fee_usd='".$batchDetails['fees_in_usd']."',leads.fee_inr='".$batchDetails['fees_inr']."',leads.minimum_attendance='".$batchDetails['minimum_attendance_criteria']."',leads_cstm.min_attendance_c='".$batchDetails['minimum_attendance_criteria']."',leads_cstm.te_ba_batch_id_c = '".$batchDetails['batch_id']."' WHERE leads_cstm.id_c=leads.id AND leads_cstm.id_c='".$oldBatchDetails['leads_id']."'");
+
 #update new student payment history
 $id=create_guid();
-$insertSql="INSERT INTO te_student_payment SET id='".$id."', name='Transferred Payment', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".date('Y-m-d')."', amount='".$studentPayment['total']."', reference_number='Transferred Payment', payment_type='Transfer', payment_realized=1, transaction_id='0', payment_source='Batch Transfer'";
+$payment = new te_payment_details();
+$payment->payment_type 	   = 'Batch Transfer';
+$payment->payment_source 	   = 'Batch Transfer';
+$payment->transaction_id 	   = 'Transferred Payment';
+$payment->date_of_payment  = date('Y-m-d');
+$payment->reference_number = 'Transferred Payment';
+$payment->amount 		   = $studentPayment['total'];
+$payment->name 		   	   = $studentPayment['total'];
+$payment->payment_realized = 1;
+$payment->leads_te_payment_details_1leads_ida = $oldBatchDetails['leads_id'];
+$paidAmount=$payment->amount;
+$payment_realized=1;
+$payment->student_payment_id = $id;
+$payment->save();
+$lead_payment_details_id=$payment->id;
+
+$insertSql="INSERT INTO te_student_payment SET id='".$id."',lead_payment_details_id='".$lead_payment_details_id."', name='Transferred Payment', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".date('Y-m-d')."', amount='".$studentPayment['total']."', reference_number='Transferred Payment', payment_type='Transfer', payment_realized=1, transaction_id='0', payment_source='Batch Transfer'";
 $GLOBALS['db']->Query($insertSql);
 #Update relationship record of student payment history
 $insertRelSql="INSERT INTO te_student_te_student_payment_1_c SET id='".create_guid()."', 	date_modified='".date('Y-m-d H:i:s')."',deleted=0,te_student_te_student_payment_1te_student_ida='".$student_id."', te_student_te_student_payment_1te_student_payment_idb='".$id."'";
@@ -129,7 +152,7 @@ $GLOBALS['db']->query("UPDATE te_transfer_batch SET is_new_approved=1,status='".
 $utmOptions['status']="Transferred";
 
 # Mail sent for Approved/
-		
+
 			$studentSql="select * FROM `te_student` WHERE id ='".$student_id."' AND deleted=0";
 			$studentObj= $GLOBALS['db']->query($studentSql);
 			$studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
@@ -139,7 +162,7 @@ $utmOptions['status']="Transferred";
 						<p>Please have a look and take action accordingly</p>
 						<p></p><p>Thanks & Regards</p>
 						<p>SRM Team</p>";
-			
+
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail," Trasfer Batch Request Approved",$template);
 
@@ -184,7 +207,7 @@ function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country
 				continue;
 			}
 			$restAmt=($row['due_amount_usd']-$row['paid_amount_usd']);
-      
+
 			if($amount>=$restAmt){
 				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_usd=paid_amount_usd+".$restAmt.", paid='Yes' WHERE id='".$row['id']."'");
 				$amount=$amount-$restAmt;

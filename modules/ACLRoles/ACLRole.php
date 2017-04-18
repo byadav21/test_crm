@@ -105,7 +105,7 @@ function getUserRoles($user_id, $getAsNameArray = true){
 
         //if we don't have it loaded then lets check against the db
         $additional_where = '';
-        $query = "SELECT acl_roles.* ".
+       echo  $query = "SELECT acl_roles.* ".
             "FROM acl_roles ".
             "INNER JOIN acl_roles_users ON acl_roles_users.user_id = '$user_id' ".
                 "AND acl_roles_users.role_id = acl_roles.id AND acl_roles_users.deleted = 0 ".
@@ -320,7 +320,31 @@ function mark_relationships_deleted($id){
         return $db->fetchByAssoc($result);
     }
     
-    
+    function getUserRoleSlug($user_id){
+
+        
+
+        if($user_id!=''){
+            //if we don't have it loaded then lets check against the db
+            $additional_where = '';
+            $query = "SELECT acl_roles.slug ".
+                "FROM acl_roles ".
+                "INNER JOIN acl_roles_users ON acl_roles_users.user_id = '$user_id' ".
+                    "AND acl_roles_users.role_id = acl_roles.id AND acl_roles_users.deleted = 0 ".
+                "WHERE acl_roles.deleted=0 ";
+
+            $result = $GLOBALS['db']->query($query);
+            $user_roles ='';
+
+            while($row = $GLOBALS['db']->fetchByAssoc($result) ){
+                $user_roles = $row['slug'];
+            }
+
+            sugar_cache_put("RoleMembershipNames_".$user_id, $user_roles);
+        }
+
+        return $user_roles;
+}
     
     
     
