@@ -170,7 +170,9 @@ class te_Expenseproverride extends te_ExpensePO {
 	
 	public function getPayments($id){
 		
-		$sql="select p.*,d.* from te_expencepopayment as p inner join te_expencepopayment_cstm as d on d.id_c=p.id where p.exenseid='$id' order by date_modified";
+		//$sql="select p.* from te_expencepopayment as p where p.exenseid='$id' order by date_modified";
+		//die;
+                $sql="select p.*,d.* from te_expencepopayment as p inner join te_expencepopayment_cstm as d on d.id_c=p.id where p.exenseid='$id' order by date_modified";
 		
 		$itemDetal=	$this->dbinstance->query($sql);
 		$returndata=[];
