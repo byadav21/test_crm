@@ -45,6 +45,7 @@ if(!empty($_REQUEST['name'])){
 	$role->name = $_POST['name'];
 	$role->description = $_POST['description'];
 	$role->parent_role = $_POST['parent_role']; 
+        $role->slug        = $_POST['slug']; 
 	$role->sendtofin = (isset($_POST['sendtofin']))?$_POST['sendtofin']:0; 
 	$role->isfacility = (isset($_POST['isfacility']))?$_POST['isfacility']:0; 
 	
