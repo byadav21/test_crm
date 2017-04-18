@@ -9,10 +9,15 @@ class te_ExpencePoPaymentprOverride extends te_ExpencePoPayment {
 	}
 	
 	public function deletePayment($exid,$id){
-		
-		$this->dbinstance->query("delete from te_expencepopayment where exenseid='$exid' and id='$id'");		
+		//echo "delete from te_expencepopayment where exenseid='$exid' and id='$id'";
+                //echo "delete from te_expencepopayment_cstm where  id_c='$id'"; die;
+	   try{
+                $this->dbinstance->query("delete from te_expencepopayment where exenseid='$exid' and id='$id'");		
 		$this->dbinstance->query("delete from te_expencepopayment_cstm where  id_c='$id'");		
-		
+	        return true;
+          }catch(Exception $e){
+            return false;
+          }	
 	}
 	
 	public function getLastPayment($id){
