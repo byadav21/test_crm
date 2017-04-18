@@ -132,7 +132,9 @@ class te_student_override extends te_student
     function getStudentBatch($id)
     {
 
-        $sql       = "select te_student_batch.te_pr_programs_id_c, te_student_batch.id,te_student_batch.te_ba_batch_id_c as batch_id,te_student_batch.name,te_student_batch.batch_start_date from te_student_te_student_batch_1_c inner join te_student_batch on te_student_batch.id=te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_batch_idb and te_student_te_student_batch_1te_student_ida='$id' where te_student_te_student_batch_1_c.deleted=0 and te_student_batch.deleted=0";
+       $sql  = "select te_student_batch.te_pr_programs_id_c, te_student_batch.id,te_student_batch.te_ba_batch_id_c 
+							as batch_id,te_student_batch.name,te_student_batch.batch_start_date 
+							from  te_student_batch  where te_student_batch.deleted=0 and te_student_batch.id='". $id."'";
         $itemDetal = $this->dbinstance->query($sql);
         return $this->dbinstance->fetchByAssoc($itemDetal);
     }
@@ -206,7 +208,7 @@ class te_student_override extends te_student
     {
 
         $programsList = array();
-        $programSql   = "SELECT status FROM te_transfer_batch WHERE te_student_id_c='$id' and status='Pending'  and deleted='0' ";
+        $programSql   = "SELECT status FROM te_transfer_batch WHERE batch_id_rel='$id' and status='Pending'  and deleted='0' ";
         $programObj   = $this->dbinstance->query($programSql);
         return $this->dbinstance->fetchByAssoc($programObj);
     }
@@ -215,7 +217,7 @@ class te_student_override extends te_student
     {
 
         $programsList = array();
-        $programSql   = "SELECT te_student_te_student_batch_1te_student_ida as sid FROM te_student_te_student_batch_1_c WHERE te_student_te_student_batch_1te_student_batch_idb='$id' and deleted='0' ";
+         $programSql   = "SELECT te_student_te_student_batch_1te_student_ida as sid, te_student.name, te_student.email,te_student.status  FROM te_student_te_student_batch_1_c inner join te_student on te_student.id=te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_ida WHERE te_student_te_student_batch_1te_student_batch_idb='$id' and te_student_te_student_batch_1_c.deleted='0' and te_student.deleted=0 ";
         $programObj   = $this->dbinstance->query($programSql);
         return $this->dbinstance->fetchByAssoc($programObj);
     }
