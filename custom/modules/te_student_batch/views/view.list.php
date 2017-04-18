@@ -676,8 +676,8 @@ function getisSent($id)
     global $current_user;
     $obj = new te_student_override();
     //get Student ID
-    $sid = $obj->getStudentID($id);
+   // $sid = $obj->getStudentID($id);
 
-    $data = $obj->getApproval($sid['sid']);
-    echo (!$data || !$sid['sid']) ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $sid['sid'] . '\')">Transfer Batch</a>' : 'Pending';
+    $data = $obj->getApproval($id);
+    echo (!$data || $data['status']!='Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>' : 'Pending';
 }
