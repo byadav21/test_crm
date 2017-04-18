@@ -491,7 +491,7 @@ class addPaymentClass{
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
-			$bean->assigned_user_id = 'NULL';
+			//$bean->assigned_user_id = 'NULL';
 
 		}else{
 			if(empty($bean->fetched_row['id'])  && isset($utmDetails['batch']) && !empty($utmDetails['batch'])){

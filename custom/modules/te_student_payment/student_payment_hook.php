@@ -1,6 +1,6 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('custom/include/Email/sendmail.php'); 
+require_once('custom/include/Email/sendmail.php');
 class StudentPayment{
 	function updateName($bean, $event, $argument){
 		$bean->name=$bean->reference_number;
@@ -9,12 +9,16 @@ class StudentPayment{
 
 		$paidAmount=0;
 		$payment_realized=0;
-		$student_id=$_REQUEST['te_student_te_student_payment_1te_student_ida'];		
+		$student_id=$_REQUEST['te_student_te_student_payment_1te_student_ida'];
 		$studentSql = "SELECT lead_id_c,country FROM te_student WHERE id='".$student_id."' AND deleted=0";
 		$studentObj= $GLOBALS['db']->query($studentSql);
 		$studentRes = $GLOBALS['db']->fetchByAssoc($studentObj);
 		$student_country=$studentRes['country'];
-		
+
+		$GetStuBatchSql = "SELECT leads_id FROM te_student_batch WHERE id='".$_REQUEST['te_student_batch_id_c']."' AND deleted=0";
+		$GetStuBatchObj= $GLOBALS['db']->query($GetStuBatchSql);
+		$GetStuBatchObjRes = $GLOBALS['db']->fetchByAssoc($GetStuBatchObj);
+
 		if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
 			if($bean->payment_realized==1)
 				$payment_realized=1;
@@ -32,25 +36,25 @@ class StudentPayment{
 			$payment->amount 		   = $bean->amount;
 			$payment->name 		   	   = $bean->amount;
 			$payment->payment_realized = $bean->payment_realized;
-			$payment->leads_te_payment_details_1leads_ida = $studentRes['lead_id_c'];
+			$payment->leads_te_payment_details_1leads_ida = $GetStuBatchObjRes['leads_id'];
 			$paidAmount=$payment->amount;
 			$payment_realized=$bean->payment_realized;
 			$payment->student_payment_id = $bean->id;
-			$payment->save();	
-			$lead_payment_details_id=$student_batch_id=$payment->id;
+			$payment->save();
+			$lead_payment_details_id=$payment->id;
 			#update lead payment if for refference
-			$GLOBALS['db']->query("UPDATE te_student_payment SET lead_payment_details_id='".$lead_payment_details_id."' WHERE id='".$bean->id."'");			
-		}		
+			$GLOBALS['db']->query("UPDATE te_student_payment SET lead_payment_details_id='".$lead_payment_details_id."' WHERE id='".$bean->id."'");
+		}
 		if($payment_realized==1){
 			$studentBatchSql = "SELECT te_ba_batch_id_c FROM te_student_batch WHERE id='".$bean->te_student_batch_id_c."' AND deleted=0";
 			$studentBatchObj= $GLOBALS['db']->query($studentBatchSql);
-			$studentBatch = $GLOBALS['db']->fetchByAssoc($studentBatchObj);		
-			
+			$studentBatch = $GLOBALS['db']->fetchByAssoc($studentBatchObj);
+
 			# get total paid amount
-			$paymentSql = "SELECT SUM(p.amount) as amount FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='".$studentRes['lead_id_c']."' AND p.payment_realized= 1";
+			$paymentSql = "SELECT SUM(p.amount) as amount FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='".$GetStuBatchObjRes['leads_id']."' AND p.payment_realized= 1 AND p.deleted=0";
 			$paymentObj= $GLOBALS['db']->query($paymentSql);
 			$paymentRes=$GLOBALS['db']->fetchByAssoc($paymentObj);
-			
+
 			$paymentDetails=array(
 				'batch_id'=>$studentBatch['te_ba_batch_id_c'],
 				'student_id'=>$student_id,
@@ -62,20 +66,20 @@ class StudentPayment{
 			$this->updateStudentPaymentPlan($paymentDetails);
 		}
 	}
-	
+
 	function removePaymentPlan($student_id,$batch_id,$student_country){
 		if(empty($student_country) || strtolower($student_country)=="india"){
 			$paymentPlanSql="SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,sp.id,sp.te_student_id_c,sp.due_amount_inr,sp.paid_amount_inr,sp.paid,sp.due_date,sp.currency FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY sp.due_date";
 			$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 			while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
-				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_inr=0,balance_inr=total_amount,paid='No' WHERE id='".$row['id']."'");			
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_inr=0,balance_inr=total_amount,paid='No' WHERE id='".$row['id']."'");
 			}
 		}else{
 			# Payment for non indian student will be on USD
 			$paymentPlanSql="SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,sp.id,sp.te_student_id_c,sp.due_amount_usd,sp.paid_amount_usd,sp.paid,sp.due_date,sp.currency FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY sp.due_date";
 			$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 			while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
-				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_usd=0,balance_usd=total_amount,paid='No' WHERE id='".$row['id']."'");			
+				$GLOBALS['db']->Query("UPDATE te_student_payment_plan SET paid_amount_usd=0,balance_usd=total_amount,paid='No' WHERE id='".$row['id']."'");
 			}
 		}
 	}
@@ -86,7 +90,7 @@ class StudentPayment{
 		$batch_id=$paymentDetails['batch_id'];
 		$student_id=$paymentDetails['student_id'];
 		$payment_source=$paymentDetails['payment_source'];
-		
+
 
 		global $sugar_config;
 		#for Indian student only need to calculate service tax
@@ -172,5 +176,5 @@ class StudentPayment{
 					break;
 			}
 		}
-	}	
+	}
 }

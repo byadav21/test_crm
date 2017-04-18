@@ -36,7 +36,7 @@ class te_ExpensePOViewDetail extends ViewDetail {
  
 		
 		$payments=$expObj->getPayments($this->bean->id);
-		
+		//print_r($payments);die;
 		$taxes=[]; 
 		$items=[];
 		$saveID=[];
@@ -67,7 +67,7 @@ class te_ExpensePOViewDetail extends ViewDetail {
 	  }	  
 	  
 		 	 
-		$this->ss->assign('totalamt', array('nettotal'=>number_format($this->bean->amount, 2, '.', ','),'total'=> number_format($total, 2, '.', ','),'taxes'=>number_format($totaltaxes, 2, '.', ',')));			 
+		$this->ss->assign('totalamt', array('nettotal'=>number_format($this->bean->amount, 2, '.',''),'total'=> number_format($total, 2, '.', ','),'taxes'=>number_format($totaltaxes, 2, '.', ',')));			 
 		$this->ss->assign('taxesarr', $taxes);			 
 		$this->ss->assign('items', $items);	
 		$this->ss->assign('roleStatus', $statusr);	

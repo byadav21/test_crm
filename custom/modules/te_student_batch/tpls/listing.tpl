@@ -168,7 +168,7 @@
 				</th>
 				{counter name="colCounter"}
 			{/foreach}
-			 <th>Action</th> 
+			 <th>Action</th>
 		</tr>
 	</thead>
 		{counter start=$pageData.offsets.current print=false assign="offset" name="offset"}
@@ -238,9 +238,9 @@
 				{/foreach}
 				<td> {$rowData.ID|getisSent}</td>
 				<td align='right' style="display:none;">{$pageData.additionalDetails.$id}</td>
-				
+
 		    	</tr>
-		    	 
+
 		{foreachelse}
 		<tr height='20' class='{$rowColor[0]}S1'>
 		    <td colspan="{$colCount}">
@@ -329,24 +329,24 @@ function lvg_nav(m,id,act,offset,t){
 									<option value="">--Select Program--</option>
 									<option ng-repeat="selected in groupProgram" value='<%selected.id%>'><%selected.name%></option>
 						</select>
-						  
+
 					</div>
 					<div class="col-sm-6"  >
-						<label>Select Batch : </label>  
-						 <select ng-model="req.newbatch" >						 
+						<label>Select Batch : </label>
+						 <select ng-model="req.newbatch" >
 								<option ng-repeat="selected in groupBatch" value='<%selected.id%>'><%selected.name%></option>
 						 </select>
 					</div>
 				</div>
-				
-				
+
+
 				<div class="col-sm-12 text-center" style="margin-top: 25px;">
-					 
+
 						<button type="button" class="button" ng-click="doTransfer()">TRANSFER</button>
-					 
+
 				</div>
-				
-			</div>                
+
+			</div>
             </div>
         </div>
     </div>
@@ -354,4 +354,4 @@ function lvg_nav(m,id,act,offset,t){
 </div>
 <script type='text/javascript' src='custom/modules/te_student_batch/js/batchtransfer.js'></script>
 </body>
-</html>                                		
+</html>
