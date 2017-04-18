@@ -37,7 +37,63 @@
 </div>
 </form>
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
-	<thead>    	
+	<thead>
+		{*Start Pagination*}
+					<tr id="pagination" role="presentation">
+						<td colspan="20">
+							<table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
+								<tbody><tr>
+									<td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
+									
+									<td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
+										
+										{if $left eq 1}
+											<a href="index.php?module=AOR_Reports&action=pipelinereport"  name="listViewStartButton" title="Start" class="button" >
+											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
+											</a>
+										
+											<a href="index.php?module=AOR_Reports&action=pipelinereport&page={$page}"  class="button" title="Previous">
+											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
+											</a>						
+										{else}
+											<button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
+											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
+											</button>
+										
+											<button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
+											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
+											</button>
+										{/if}
+										
+									</td>
+									<td nowrap="nowrap" width="1%" class="paginationActionButtons">
+										<div class="pageNumbers">{$current_records}</div>
+									</td>
+									<td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
+										{if $right eq 1}
+										<a href="index.php?module=AOR_Reports&action=pipelinereport&page={$pagenext}"  class="button" title="Next" disabled="disabled">
+											<img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
+										</a>
+										<a href="index.php?module=AOR_Reports&action=pipelinereport&page={$last_page}"  class="button" title="End" disabled="disabled">
+											<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
+										</a>
+										{else}
+											<button type="button" id="listViewNextButton_top" name="listViewNextButton" class="button" title="Next" disabled="disabled">
+											<img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
+											</button>
+											<button type="button" id="listViewEndButton_top" name="listViewEndButton" title="End" class="button" disabled="disabled">
+											<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
+											</button>
+										{/if}
+										
+									</td>
+									<td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
+								</tr>
+							</tbody>
+						</table>
+						</td>
+					</tr>
+					{*End Pagination*}  	
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">	
 			<strong>Counsellors</strong>

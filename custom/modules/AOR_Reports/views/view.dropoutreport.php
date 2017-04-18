@@ -90,10 +90,54 @@ class AOR_ReportsViewDropoutreport extends SugarView {
 			header ('Content-disposition: attachment;filename=" '. $filename . '.csv";' );
 			echo $data; exit;
 		}
+		#PS @Manish	
+			$total=count($councelorList); #total records					
+			$start=0;		
+			$per_page=10;		
+			$page=1;
+			$pagenext=1;		
+			$last_page=ceil($total/$per_page);		
+					
+			if(isset($_REQUEST['page'])&&$_REQUEST['page']>0){		
+				$start=$per_page*($_REQUEST['page']-1);		
+				$page=($_REQUEST['page']-1);
+				$pagenext = ($_REQUEST['page']+1);
+							
+			}else{		
+				//$page++;
+				$pagenext++;		
+			}				
+			if(($start+$per_page)<$total){					
+				$right=1;		
+			}else{		
+				$right=0;		
+			}		
+			if(isset($_REQUEST['page'])&&$_REQUEST['page']==1){		
+				$left=0;					
+			}elseif(isset($_REQUEST['page'])){		
+				//$page=($_REQUEST['page']-1);		
+				$left=1;		
+			}
+						
+			$councelorList=array_slice($councelorList,$start,$per_page);		
+			if($total>$per_page){		
+				$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";	
+					
+			}else{		
+				$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
+			
+			}		
+		#pE
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("batchList",$batchList);
 		$sugarSmarty->assign("selected_batch",$selected_batch);
+		$sugarSmarty->assign("current_records",$current);		
+		$sugarSmarty->assign("page",$page);	
+		$sugarSmarty->assign("pagenext",$pagenext);		
+		$sugarSmarty->assign("right",$right);		
+		$sugarSmarty->assign("left",$left);		
+		$sugarSmarty->assign("last_page",$last_page);
 		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/dropoutreport.tpl');
 	}
 }
