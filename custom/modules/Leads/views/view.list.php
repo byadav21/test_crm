@@ -47,8 +47,7 @@ class LeadsViewList extends ViewList
 
       
 
-        $rolObj    = new ACLRole();
-        $role_slug = $rolObj->getUserRoleSlug($current_user->id);
+  
 
 
 
@@ -60,10 +59,7 @@ class LeadsViewList extends ViewList
             $this->where = str_replace('leads.batch', 'leads_cstm.te_ba_batch_id_c', $this->where);
         }
 
-        if ($role_slug == 'mis' || $current_user->is_admin == 1)
-        {
-            $this->params['custom_where'] = ' or ( leads.assigned_user_id IN (SELECT id FROM users WHERE deleted=0))';
-        }
+       
 
 
         // echo $this->where;
