@@ -1,11 +1,13 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 //~ require_once('custom/modules/Accounts/customFunctions.php');
+
 ini_set('display_errors','on');
 class LeadsListView extends Lead{
 	function create_new_list_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean, $singleSelect = false) {
         $ret_array = parent::create_new_list_query($order_by, $where,$filter,$params, $show_deleted,$join_type, $return_array,$parentbean, $singleSelect);
 			require_once('custom/modules/Leads/customfunctionforcrm.php');
+                        require_once('modules/ACLRoles/ACLRole.php');
 			global $current_user;
 			$currentUserId = $current_user->id;
 			//~ $ret_array['select'] .= ",  pd_payment_details.tds_deducted_amount ";
@@ -30,16 +32,24 @@ class LeadsListView extends Lead{
 			//~ if ($search ==0)
     		//~ {
 				//~ 
+                        
+                                $rolObj    = new ACLRole();
+                                $role_slug = $rolObj->getUserRoleSlug($currentUserIdid);
+                                
 				$reportingUserIds = array();
 				$reportUserObj = new customfunctionforcrm();
 				$reportUserObj->reportingUser($currentUserId);
 				$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 				$reportingUserIds = $reportUserObj->report_to_id;
 				//~ print_r($reportingUserIds);
-				$ret_array["where"]  .= " AND leads.assigned_user_id IN ('";
+                                if ($role_slug != 'mis' && $current_user->is_admin != 1)
+                                {
+                                $ret_array["where"]  .= " AND leads.assigned_user_id IN ('";
 				$ret_array["where"]  .= implode("', '", array_keys($reportingUserIds));
 				$ret_array["where"]  .= "')";
-				//~ echo $ret_array['where'];
+                                    
+                                }
+                                
 			//~ }
 			//~ 
 			//add duplicate serach leads Query seen=o
