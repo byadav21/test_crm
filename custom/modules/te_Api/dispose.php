@@ -7,19 +7,20 @@ global $db;
 
 if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUEST['checkCallStatus']==1 && $_REQUEST['records'] ){
 	//echo "select id from  session_call where lead_id='". $_REQUEST['records'] ."' session_id='" . session_id() ."'";
-	$res=$db->query("select id from  session_call where lead_id='". $_REQUEST['records'] ."' and session_id='" . session_id() ."'");
+	$res=$db->query("select id from  session_call where lead_id='". $_REQUEST['records'] ."' and session_id='" . $_REQUEST['customerCRTId'] ."'");
 	if($db->getRowCount($res)>0){
-		//echo '1';
+		echo '1';
 	}
 	exit();
 }
 
-$sql="delete from  session_call where  session_id='" . session_id() ."'";
+$sql="delete from  session_call where  session_id='" . $_REQUEST['customerCRTId'] ."'";
 $db->query($sql);
 $objapi= new te_Api_override();
 $objapi->createLog(print_r($_REQUEST,true),$sql);
- 
+
 $obj=new te_neox_call_details();
+$obj->retrieve_by_string_fields(array('userid' => $_REQUEST['customerCRTId']));
 if($_REQUEST['phone']) $obj->phone_number= $_REQUEST['phone'];
 if($_REQUEST['campaignId']) $obj->campaignid= $_REQUEST['campaignId'];
 if($_REQUEST['customerCRTId']) $obj->userid= $_REQUEST['customerCRTId'];
