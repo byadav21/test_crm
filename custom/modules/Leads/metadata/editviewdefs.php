@@ -155,16 +155,18 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_BATCH',
           ),
-        ),
-        8 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'comment',
             'comment' => 'Full text of the note',
             'studio' => 'visible',
             'label' => 'COMMENT',
           ),
+        ),
+        8 => 
+        array (
+          0 => '',
+          1 => '',
         ),
         9 => 
         array (
