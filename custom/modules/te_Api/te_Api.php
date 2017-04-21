@@ -134,12 +134,13 @@ class te_Api_override extends te_Api {
 
         if($callback=='Callback'){
 		  $data['selfCallback']='true';
-		
+               //echo $date .'==';
+		//echo date('Y-m-d H:i:s');die;
 		  $callDate= date('d-m-Y H:i:s',strtotime($date));
-		  $diff= $callDate- $current;
-		  
-		    $start_date = new DateTime(date('Y-m-d H:i:s'));
-			$since_start = $start_date->diff(new DateTime($callDate));
+		 // $diff= $callDate- $current;
+		 
+		   $start_date = new DateTime(date('Y-m-d H:i:s'));
+		   $since_start = $start_date->diff(new DateTime($callDate));
 		 
 			$year= $since_start->y;
 			$month= $since_start->m;
@@ -149,8 +150,9 @@ class te_Api_override extends te_Api {
 			$sec= $since_start->s;
 		   
 		  
-		  $data['dispositionAttr']=urlencode('after-'. str_pad($day, 2, "0", STR_PAD_LEFT). '-'. str_pad($month, 2, "0", STR_PAD_LEFT).  '-'. str_pad($year, 4, "0", STR_PAD_LEFT).  ' '. str_pad($hour, 2, "0", STR_PAD_LEFT).  ':'. str_pad($min, 2, "0", STR_PAD_LEFT). ':'.  str_pad($sec, 2, "0", STR_PAD_LEFT));
-		   //after-03-00-0000 02:01:00	
+		 $data['dispositionAttr']=urlencode('after-'. str_pad($day, 2, "0", STR_PAD_LEFT). '-'. str_pad($month, 2, "0", STR_PAD_LEFT).  '-'. str_pad($year, 4, "0", STR_PAD_LEFT).  ' '. str_pad($hour, 2, "0", STR_PAD_LEFT).  ':'. str_pad($min, 2, "0", STR_PAD_LEFT). ':'.  str_pad($sec, 2, "0", STR_PAD_LEFT));
+		   
+                            //after-03-00-0000 02:01:00	
 		}
 		$qrystr='';
 		foreach($data as $key=>$val){
