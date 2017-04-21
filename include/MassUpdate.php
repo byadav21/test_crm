@@ -517,6 +517,7 @@ var option = document.getElementById("mass_status").options;
 var status_detail = document.getElementById('mass_status_description').value;
 $("#mass_status_description option").remove() ;
  $('#converted_datejscal_field').parent().css('display','none');
+ $('#mass_batch').parent().css('display','none');
  $("body").on('change','#mass_status',function() {
 
 	var el = $(this) ;

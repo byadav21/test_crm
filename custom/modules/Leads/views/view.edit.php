@@ -41,6 +41,7 @@ class LeadsViewEdit extends ViewEdit {
 			$this->ss->assign('from_pusher', '0');
 		}
 		?>
+		<style>.dcQuickEdit{display:none!important}</style>
 <script>
 
 
