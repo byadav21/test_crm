@@ -135,7 +135,7 @@ class te_Api_override extends te_Api {
         if($callback=='Callback'){
 		  $data['selfCallback']='true';
 		
-		  $callDate= date('d-m-Y H:i:s',strtotime($date));
+		 echo $callDate= date('d-m-Y H:i:s',strtotime($date));die;
 		  $diff= $callDate- $current;
 		  
 		    $start_date = new DateTime(date('Y-m-d H:i:s'));

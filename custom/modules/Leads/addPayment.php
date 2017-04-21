@@ -563,7 +563,7 @@ class addPaymentClass{
 								if($bean->status_description == 'Prospect') $date=$bean->date_of_prospect;
 								
 								if($date){
-									$drobj->sendDisposition('Callback',$arrReq,$date);
+									$drobj->sendDisposition('Callback',$arrReq,$GLOBALS['timedate']->to_display_date_time($date));
 								}else{
 									$drobj->sendDisposition("",$arrReq);	
 								}	

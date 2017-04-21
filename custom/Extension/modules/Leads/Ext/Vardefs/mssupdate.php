@@ -20,7 +20,7 @@ $dictionary['Lead']['fields']['payment_realized']['massupdate']=false;
 $dictionary['Lead']['fields']['date_of_callback']['massupdate']=false;
 $dictionary['Lead']['fields']['date_of_prospect']['massupdate']=false;
 $dictionary['Lead']['fields']['date_of_followup']['massupdate']=false;
-$dictionary['Lead']['fields']['status']['massupdate']=false;
+$dictionary['Lead']['fields']['status']['massupdate']=true;
 $dictionary['Lead']['fields']['converted_date']['massupdate']=false;
 $dictionary['Lead']['fields']['assigned_flag']['massupdate']=false;
 
@@ -30,6 +30,6 @@ $dictionary['Lead']['fields']['assigned_flag']['converted_datejscal_field']=fals
 //New Added 31 Mrch
 $dictionary['Lead']['fields']['batch']['massupdate']=false;
 
-$dictionary['Lead']['fields']['status_description']['massupdate']=false;
+$dictionary['Lead']['fields']['status_description']['massupdate']=true;
 $dictionary['Lead']['fields']['date_of_referral']['massupdate']=false;
 $dictionary['Lead']['fields']['lead_source']['massupdate']=false;
