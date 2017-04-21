@@ -268,15 +268,17 @@ ini_set("display_errors",0);
 				}
 
 
-// 1st Instalment Not Paid
-			//~ $payNR = "SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0";
-            $sqlPay = "SELECT count(id) as not_realized FROM leads  WHERE deleted =0 AND payment_realized_check = 0 AND leads.assigned_user_id  IN ('".$user_ids."') AND leads.id IN (SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0)";
+# 1st Instalment Not Paid
+			 //  $sqlPay = "SELECT count(id) as not_realized FROM leads  WHERE deleted =0 AND payment_realized_check = 0 AND leads.assigned_user_id  IN ('".$user_ids."') AND leads.id IN (SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0)";
+			$sqlPay="SELECT count(sb.id)total  FROM `te_student_batch` AS sb INNER JOIN leads AS l ON l.id=sb.leads_id INNER JOIN te_student_batch_te_student_payment_plan_1_c AS sppr ON sppr.te_student_batch_te_student_payment_plan_1te_student_batch_ida=sb.id INNER JOIN te_student_payment_plan AS spp ON spp.id=sppr.te_student9d1ant_plan_idb WHERE spp.name='1st Installment' AND sb.deleted=0 AND sb.status='Active' AND spp.deleted=0 AND l.assigned_user_id IN ('".$user_ids."') AND spp.due_date<=CURRENT_DATE AND (spp.balance_inr!=0 AND spp.balance_usd!=0)";
             $resPay = $GLOBALS['db']->query($sqlPay);
             $rowPay= $GLOBALS['db']->fetchByAssoc($resPay);
-			if($rowPay['not_realized'] > 0){
+			if($rowPay['total'] > 0){
+			//$users_lead = "'".implode("','", $leadList)."'";	
+				
 				$statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
-					   <div class="count">'. $rowPay['not_realized'] .'</div>
-						<span class="count_top"> Installment Not Paid</span>
+					   <div class="count">'. $rowPay['total'] .'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&action=index&&searchFormTab=basic_search&query=true&lead_id=id_instalment"> Installment Not Paid</a></span>
 						
 					</div>';
 					
@@ -291,9 +293,7 @@ ini_set("display_errors",0);
 					</div>';
 					
 				}
-				
-				
-				 
+								 
 				return 	$statusWiseCount;
 			}
 			
