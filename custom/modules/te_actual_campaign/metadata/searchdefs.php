@@ -5,23 +5,43 @@ array (
   'layout' => 
   array (
     'basic_search' => 
-    array (      
-	  'batch' => 
+    array (
+      'batch' => 
       array (
         'type' => 'relate',
+        'studio' => 'visible',
         'label' => 'LBL_BATCH',
-		'id' => 'LBL_BATCH_TE_BA_BATCH_ID',
         'width' => '10%',
         'default' => true,
+        'id' => 'TE_BA_BATCH_ID_C',
+        'link' => true,
         'name' => 'batch',
       ),
-	  'plan_date' => 
+      'te_utm_te_actual_campaign_1_name' => 
       array (
-        'type' => 'date',
-        'label' => 'LBL_PLAN_DATE',
+        'type' => 'relate',
+        'link' => true,
+        'label' => 'LBL_TE_UTM_TE_ACTUAL_CAMPAIGN_1_FROM_TE_UTM_TITLE',
+        'id' => 'TE_UTM_TE_ACTUAL_CAMPAIGN_1TE_UTM_IDA',
         'width' => '10%',
         'default' => true,
-        'name' => 'plan_date',
+        'name' => 'te_utm_te_actual_campaign_1_name',
+      ),
+      'leads' => 
+      array (
+        'type' => 'int',
+        'label' => 'LBL_LEADS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'leads',
+      ),
+      'created_by' => 
+      array (
+        'type' => 'assigned_user_name',
+        'label' => 'LBL_CREATED',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'created_by',
       ),
     ),
     'advanced_search' => 
