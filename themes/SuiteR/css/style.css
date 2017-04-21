@@ -5208,7 +5208,8 @@ table tr#delegates_search {
 
 
 #mblayout{margin-top: 53px;}
-
-
+.save_btn,.action_buttons{display:inline-block}
+ 
+input[type=text].sqsEnabled{width: 70%!important;}
 /* End SuiteCRM Responsive/Bootstrap additional CSS */
 /* End Global CSS */
