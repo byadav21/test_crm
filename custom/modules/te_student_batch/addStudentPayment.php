@@ -4,7 +4,7 @@ require_once('custom/include/Email/sendmail.php');
 class addStudentPaymentClass{
 
 	function makePayment($bean, $event, $argument){
-		if(!isset($_REQUEST['import_module']) && (($_REQUEST['module']=="Leads") || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='transferbatch'))){
+		if(!isset($_REQUEST['import_module']) && (($_REQUEST['module']=="Leads") || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='transferbatch') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='migrate_student'))){
 		    global $sugar_config;
 			$service_tax=$sugar_config['tax']['service'];
 
@@ -88,72 +88,72 @@ class addStudentPaymentClass{
 		# certifecate Sent mail
 		if($_REQUEST['module']=="te_student_batch" &&$bean->certificate_sent=="1" ){
 			global $db;
-			
+
 			$studentSql="SELECT email,name FROM `te_student` WHERE id = '".$bean->te_student_te_student_batch_1te_student_ida."'";
 			$studentObj = $db->query($studentSql);
 			$student = $db->fetchByAssoc($studentObj);
 			$studentemail=$student['email'];
-			
+
 			$template="<p>Hello ".$student['name']."</p>
 						<p>You have to sent Certificate  </p>
 						<p>Please have a look and take action accordingly</p>
 						<p></p><p>Thanks & Regards</p>
 						<p>SRM Team</p>";
-						
+
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail,"Certificate Sent",$template);
-				
+
 			}
-			
-			# kit sent mail 
+
+			# kit sent mail
 			if($_REQUEST['module']=="te_student_batch" &&$bean->kit_status=="Sent"){
 			global $db;
-			
+
 				 #$Sql="SELECT name,subject,body,body_htmlFROM `email_templates` WHERE id ='34f00439-5df8-1da6-f3be-57c4365eadb6' AND deleted=0";
 				#	$Obj= $GLOBALS['db']->query($Sql);
 				#	$stu = $GLOBALS['db']->fetchByAssoc($Obj);
-			
-			
+
+
 			$studentSql="SELECT email,name FROM `te_student` WHERE id = '".$bean->te_student_te_student_batch_1te_student_ida."'";
 			$studentObj = $db->query($studentSql);
 			$student = $db->fetchByAssoc($studentObj);
 			$studentemail=$student['email'];
-			
+
 			$template="<p>Hello ".$student['name']."</p>
 						<p>You have to sent Program Kit  </p>
 						<p>Please have a look and take action accordingly</p>
 						<p></p><p>Thanks & Regards</p>
 						<p>SRM Team</p>";
-					
+
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail,"Program Kit",$template);
-				
+
 			}
-			
-			
+
+
 			# DropOut Request Send ---3------
 			if($_REQUEST['module']=="te_student_batch" &&$bean->status=="Dropout"){
 			global $db;
-			
+
 			$studentSql="SELECT email,name FROM `te_student` WHERE id = '".$bean->te_student_te_student_batch_1te_student_ida."'";
-		
+
 			$studentObj = $db->query($studentSql);
 			$student = $db->fetchByAssoc($studentObj);
 			$studentemail=$student['email'];
-			
+
 			$template="<p>Hello ".$student['name']."</p>
 						<p>Your Dropout Request hasbeen Sent </p>
 						<p>Please Waite For Appovel </p>
 						<p>Please have a look and take action accordingly</p>
 						<p></p><p>Thanks & Regards</p>
 						<p>SRM Team</p>";
-					
+
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail,"Program Kit",$template);
-				
+
 			}
-			
-		
-		
+
+
+
 	}
 }
