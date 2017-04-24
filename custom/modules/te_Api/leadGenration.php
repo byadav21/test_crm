@@ -1,0 +1,64 @@
+<?php				
+	require_once('custom/modules/te_Api/leads_override.php');
+	ini_set('display_errors',1);
+	error_reporting(-1);
+	$name=$_REQUEST['name'];
+	$phone=$_REQUEST['phone'];
+	$email= $_REQUEST['email'];
+	$source= $_REQUEST['utm_source'];
+	$medium=$_REQUEST['utm_medium'];
+	$term=$_REQUEST['utm_term'];
+	$campaign=$_REQUEST['utm_campaign'];
+	$leadObj=new  leads_override();
+	$batchid='';
+	$status='Alive';
+	$statusDetail='New Lead';
+	$vendor='';
+	if($source && $medium && $term && $name && $phone && $email){
+	  $utm=	$leadObj->fetchUtm($source,$medium,$term);
+	  if($utm){
+		    $batchid=$utm['te_ba_batch_id_c'];
+		    $vendor=$utm['name'];
+	  }
+	}else{
+		
+	 echo json_encode(array('status'=>'error','msg'=>'Name, phone, email, Utm source, utm medium and utm term is required field')); exit();	
+	}
+ 
+	$sql = "SELECT leads.id as id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
+	if($email!=""){
+		$sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
+		$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
+	}
+	 
+	$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$batchid."' AND DATE(date_entered) = '".date('Y-m-d')."'";
+	 
+	if($phone!=""){
+		$sql.=" AND leads.phone_mobile = '$phone'";
+	}
+	if($email!=""){
+		$sql.=" AND email_addresses.email_address='".$email."'";
+	}
+	$re = $GLOBALS['db']->query($sql);
+	if($GLOBALS['db']->getRowCount($re)>0){
+		$status = 'Duplicate';
+		$statusDetail = 'Duplicate';
+	}
+
+
+	$leadObj->first_name=$name;
+	$leadObj->email1= $email;
+	$leadObj->phone_mobile=$phone;
+	if($_REQUEST['work_experience'])  $leadObj->work_experience_c=$_REQUEST['work_experience'];
+	if($_REQUEST['education']) $leadObj->education_c= $_REQUEST['education'];
+	if($_REQUEST['city']) $leadObj->primary_address_city= $_REQUEST['city'];
+	if($_REQUEST['functional_area']) $leadObj->functional_area_c=$_REQUEST['functional_area'];
+	if($campaign) $leadObj->utm_campaign=$campaign;
+	if($vendor)  $leadObj->vendor=$vendor;
+	if($batchid) $leadObj->te_ba_batch_id_c=$batchid;
+	$leadObj->assigned_user_id= 'NULL';
+	$leadObj->save();
+	if(!$leadObj->id){
+		echo json_encode(array('status'=>'error','msg'=>'Some thing gone wrong!')); exit();
+	}	 
+	echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); exit();
