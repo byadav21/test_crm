@@ -5,7 +5,7 @@ $api = new te_Api_override();
 global $db;
 
 
-echo '<pre>'.$sql = " SELECT  l.id,
+$sql = " SELECT  l.id,
                 l.first_name,
                 l.last_name,
                 l.phone_mobile,
@@ -50,12 +50,12 @@ if ($db->getRowCount($result) > 0)
         exit();
     }
 
-
+    
     $customerRs              = [];
     $data['customerRecords'] = [];
     while ($row                     = $db->fetchByAssoc($result))
     {
-
+        
         if ($last != '' && $row['drtord'] != $last)
         {
             $last                    = $row['drtord'];
@@ -69,7 +69,7 @@ if ($db->getRowCount($result) > 0)
                 {
                     if ($res->inserted == 1 && $res->resultTypeString == 'ADDED')
                     {
-                        $update = "UPDATE leads set dristi_customer_id='" . $res->customerId . "', neoxstatus =1 WHERE id = '" . $allInserted[$key]['id'] . "'";
+                        $update = "UPDATE leads set assigned_user_id = NULL, dristi_customer_id='" . $res->customerId . "', neoxstatus =1 WHERE id = '" . $allInserted[$key]['id'] . "'";
                         $db->query($update);
                     }
                 }
