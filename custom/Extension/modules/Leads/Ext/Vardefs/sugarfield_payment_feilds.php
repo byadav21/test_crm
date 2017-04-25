@@ -49,9 +49,10 @@ $dictionary['Lead']['fields']['payment_source']['audited']='false';
 
 
 $dictionary['Lead']['fields']['payment_realized']['name']='payment_realized';
-$dictionary['Lead']['fields']['payment_realized']['type']='bool';
+$dictionary['Lead']['fields']['payment_realized']['type']='enum';
 $dictionary['Lead']['fields']['payment_realized']['vname']='LBL_PAYMENTREREALIZED';
 $dictionary['Lead']['fields']['payment_realized']['len']='2';
+$dictionary['Lead']['fields']['payment_realized']['options']='payment_relize';
 $dictionary['Lead']['fields']['payment_realized']['audited']='false';
 
 
