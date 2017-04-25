@@ -52,3 +52,8 @@ $app_list_strings['payment_type_source_dom']['C_Disc']='C. Disc';
 $app_list_strings['payment_type_source_dom']['E_Disc']='E. Disc';
 $app_list_strings['payment_type_source_dom']['TDS']='TDS';
 $app_list_strings['payment_type_source_dom']['Others']='Others';
+$app_list_strings['parent_type_display_custom']['Users']='User';
+$app_list_strings['parent_type_display_custom']['Leads']='Lead';
+$app_list_strings['parent_type_display_custom']['te_student_batch']='Student';
+
+
