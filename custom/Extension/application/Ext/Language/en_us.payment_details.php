@@ -42,3 +42,8 @@ $app_list_strings['moduleList']['te_payment_details'] = 'Payment Details';
 $app_list_strings['payment_type_dom'][''] = '';
 $app_list_strings['payment_type_dom']['NEFT'] = 'NEFT';
 $app_list_strings['payment_type_dom']['Cheque'] = 'Cheque';
+$app_list_strings['payment_relize']['0'] = 'No';
+$app_list_strings['payment_relize']['1'] = 'Yes';
+$app_list_strings['payment_relize']['2'] = 'Failed';
+
+

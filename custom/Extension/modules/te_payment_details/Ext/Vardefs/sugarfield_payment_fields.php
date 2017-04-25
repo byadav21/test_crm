@@ -16,6 +16,14 @@ $dictionary['te_payment_details']['fields']['payment_source']['len']='100';
 $dictionary['te_payment_details']['fields']['payment_source']['options']='payment_type_source_dom';
 $dictionary['te_payment_details']['fields']['payment_source']['audited']='false';
 
+
+$dictionary['te_payment_details']['fields']['payment_realized']['name']='payment_realized';
+$dictionary['te_payment_details']['fields']['payment_realized']['type']='enum';
+$dictionary['te_payment_details']['fields']['payment_realized']['vname']='LBL_PAYMENTTYPESOURCE';
+$dictionary['te_payment_details']['fields']['payment_realized']['len']='2';
+$dictionary['te_payment_details']['fields']['payment_realized']['options']='payment_relize';
+$dictionary['te_payment_details']['fields']['payment_realized']['audited']='false';
+
  ?>
  
  
