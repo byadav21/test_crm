@@ -266,6 +266,8 @@ class="yui-navset"
         return document.getElementById(_form_id) != null;
     }, SUGAR.themes.actionMenu);
     {/literal}
+        
+  
 </script>
 {assign var='place' value="_FOOTER"} <!-- to be used for id for buttons with custom code in def files-->
 {{if empty($form.button_location) || $form.button_location == 'bottom'}}
@@ -352,5 +354,19 @@ $(document).ready(function() {ldelim}
 		
 	
 	})
+        
+              $("#status_description").on('change',function(){
+                  if($("#status_description").val()=='Converted'){
+                    $( "ul.yui-nav li:eq(0)" ).removeClass("selected");
+                    $( "ul.yui-nav li:eq(0)" ).attr("title", "");
+                    $( "ul.yui-nav li:eq(1)" ).addClass("selected");
+                    $( "ul.yui-nav li:eq(1)" ).attr("title", "active");
+                    $( "#tab1" ).click();
+                    $( "#tabcontent1" ).removeClass("yui-hidden");
+                    $( "#tabcontent0" ).addClass("yui-hidden");
+                     
+                  }
+            
+                });
 </script>
 {/literal}

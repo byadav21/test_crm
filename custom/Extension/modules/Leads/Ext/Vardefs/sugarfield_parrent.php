@@ -13,4 +13,20 @@ $dictionary['Lead']['fields']['parrent_leads'] =array (
 	'duplicate_merge' => false,
 	'inline_edit' => false, 
 );
- ?>
+
+$dictionary['Lead']['fields']['is_predictive'] = array(
+    'name'            => 'is_predictive',
+    'vname'           => 'Predictive',
+    'type'            => 'int',
+    'len'             => '2',
+    'size'            => '20',
+    'default'         =>  0,
+    'studio'          => 'visible',
+    'required'        => false,
+    'reportable'      => true,
+    'audited'         => false,
+    'importable'      => true,
+    'duplicate_merge' => false,
+    'inline_edit'     => false,
+);
+?>
