@@ -55,7 +55,7 @@ document.getElementById('btn_contract').onclick=function(){
 		'form_name' : 'EditView',
 		'field_to_name_array' : {
 		   'id' : 'aos_contracts_id_c',
-		   'contract_type': 'contract',
+		   'name': 'contract',
 		 },
 	};
 open_popup('AOS_Contracts', 600, 400, '&te_vendor_aos_contracts_1_name_advanced='+vendor, true, false, popup_request_data);

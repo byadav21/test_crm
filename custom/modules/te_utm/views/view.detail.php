@@ -15,7 +15,7 @@ class Customte_UTMViewDetail extends ViewDetail
 			unset($this->dv->defs['templateMeta']['form']['buttons'][0]);
 			unset($this->dv->defs['templateMeta']['form']['buttons'][2]);
 		}
-		$this->bean->utm_url="http://www.talentedge.in/?utm_source=".$this->bean->te_vendor_te_utm_1_name."&utm_medium=".$this->bean->contract."&utm_campaign=".$this->bean->utm_campaign."&utm_term=".$this->bean->batch;
+		$this->bean->utm_url="http://www.talentedge.in/?utm_source=".strtolower($this->bean->te_vendor_te_utm_1_name)."&utm_medium=".strtolower($this->bean->contract_type)."&utm_campaign=".strtolower($this->bean->utm_campaign)."&utm_term=".strtolower($this->bean->batch);
 		parent::display();
 	}
 }
