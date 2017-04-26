@@ -74,6 +74,15 @@ function set_contract_rfq_return(popup_reply_data){
 <?php      	
 //te_vendor_te_utm_1te_vendor_ida
 //te_vendor_id_c
+
+		if($this->bean->aos_contracts_id_c){
+			
+		  $obj= new AOS_Contracts();
+		   $cont=$obj->retrieve($this->bean->aos_contracts_id_c);
+		   $this->bean->contract=$cont->name;	
+		}
+
+
       	parent::display();
     }
 }
