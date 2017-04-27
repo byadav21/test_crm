@@ -19,7 +19,7 @@ global $app_list_strings, $current_user, $sugar_config, $db;
    .revenue .innerdiv .div{    border: 1px solid silver;
    border-right: 0px;
    border-bottom: 0px;    word-wrap: break-word;
-   height: 74px;
+   height: auto;
    overflow: hidden;}
    .innerdiv div.divlast{border-right: 1px solid silver!important;}		
    .divlastbot{border-bottom: 1px solid silver;}
@@ -60,9 +60,22 @@ Create
       <div class="col-xs-12 innerdiv" ng-if="results.length == 0"  >
          <div class="col-sm-12 text-center div"><strong style="font-size:18px;">No data found</strong></div>
       </div>
-      <div class="col-xs-7 " ng-if="results.length > 0" ng-repeat="(key,obj) in results">
-          <div class="col-xs-7 text-left div"><a ng-href='index.php?searchFormTab=basic_search&module=te_actual_campaign&action=index&query=true&batch_basic=<% obj.name %>'  ><% obj.name %></a></div>
-     
+      
+      
+      <div class="col-xs-12 innerdiv">
+		  <div class="col-xs-6 div text-center headrtbl">Batch</div>
+		  <div class="col-xs-2 div text-center headrtbl">Volume</div>
+		  <div class="col-xs-2 div text-center headrtbl">Rate</div>
+		  <div class="col-xs-2 div text-center headrtbl">Cost</div>
+ 
+      </div>
+      
+      
+      <div class="col-xs-12 innerdiv" ng-if="results.length > 0" ng-repeat="(key,obj) in results">
+          <div class="col-xs-6 text-left div"><a ng-href='index.php?searchFormTab=basic_search&module=te_actual_campaign&action=index&query=true&batch_basic=<% obj.name %>'  ><% obj.name %></a></div>
+          <div class="col-xs-2 text-center div"><% obj.volume  | number : 0 %></div>	
+          <div class="col-xs-2 text-center div"><% obj.rate  | number : 0 %></div>	
+          <div class="col-xs-2 text-center div"><% obj.total_cost  | number : 0 %></div>	
       </div>
       <div ng-show="isload==1" class="col-xs-12 text-center"><button ng-click="loadMore()" class="loadmore button">Load More</button></div>
    </div>

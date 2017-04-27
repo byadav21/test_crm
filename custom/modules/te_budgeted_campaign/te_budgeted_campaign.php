@@ -61,7 +61,7 @@ class te_budgeted_campaign_override extends te_budgeted_campaign
     {
 
         $sql = " SELECT  
-                    bb.name 
+                    bb.name , sum(leads) as leads,sum(conversion) as conversion,sum(volume) as volume,sum(cost) as cost,sum(leads)/sum(conversion) as clp,sum(cost)/sum(conversion) as cpa
                 FROM te_budgeted_campaign tbc 
                 INNER JOIN te_utm_te_budgeted_campaign_1_c ubc ON tbc.id=ubc.te_utm_te_budgeted_campaign_1te_budgeted_campaign_idb
                 INNER JOIN te_utm ON ubc.te_utm_te_budgeted_campaign_1te_utm_ida=te_utm. id
