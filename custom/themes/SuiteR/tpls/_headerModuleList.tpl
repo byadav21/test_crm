@@ -54,7 +54,7 @@
                      
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
                         {if $group =='All'}
-                              {php}continue;{/php}
+                             {php}continue;{/php}
                            {/if} 
                         <li >
                              
@@ -64,7 +64,7 @@
                             <ul  class="nav child_menu" >
                             
                                 {foreach from=$modules.modules item=module key=modulekey}
-                                
+                                 
 									 {if $modulekey =='te_transfer_batch' || $modulekey =='te_student_batch' || $modulekey =='te_student'}
 										 {assign var="showsrm" value="1"}
 									 {/if}
@@ -74,8 +74,14 @@
 									{/if} 
                                     <li>
                                         {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
-                                        {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
-                                    
+                                        {if  $modulekey =='te_actual_campaign'}
+											<a href="index.php?module=te_actual_campaign&action=actual_campaign_summary" id="moduleTab_-1_Actual Campaign Plan" module="te_actual_campaign">Actual Campaign Plan</a>
+										{elseif $modulekey =='te_budgeted_campaign'}
+										<a href="index.php?module=te_budgeted_campaign&action=budget_summary" id="moduleTab_-1_Budgeted Campaign Plan" module="te_budgeted_campaign">Budgeted Campaign Plan</a>
+											
+                                        {else}
+                                          {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
+                                        {/if} 
                                         {if $modulekey == $MODULE_TAB}
 											{if count($shortcutTopMenu.$modulekey) > 0}
 										        <ul id="showactive" class="nav child_menu" style="display:block!important">
