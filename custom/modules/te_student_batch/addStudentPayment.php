@@ -4,7 +4,7 @@ require_once('custom/include/Email/sendmail.php');
 class addStudentPaymentClass{
 
 	function makePayment($bean, $event, $argument){
-		if(!isset($_REQUEST['import_module']) && (($_REQUEST['module']=="Leads") || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='transferbatch') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='migrate_student'))){
+		if(!isset($_REQUEST['import_module']) && (($_REQUEST['module']=="Leads") || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='transferbatch') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='migrate_student') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=='web_lead_payment'))){
 		    global $sugar_config;
 			$service_tax=$sugar_config['tax']['service'];
 

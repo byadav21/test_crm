@@ -61,7 +61,7 @@ class te_actual_campaign_override extends te_actual_campaign
     {
 
         $sql = " SELECT  
-                    bb.name 
+                    bb.name ,sum(volume) as volume,sum(rate) as rate, sum(total_cost) as total_cost 
                 FROM te_actual_campaign tac 
                 INNER JOIN te_utm_te_actual_campaign_1_c uac ON tac.id=uac.te_utm_te_actual_campaign_1te_actual_campaign_idb
                 INNER JOIN te_utm ON uac.te_utm_te_actual_campaign_1te_utm_ida=te_utm. id

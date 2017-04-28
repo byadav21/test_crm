@@ -448,13 +448,10 @@ if($("#status_description").val() === "Converted") {
 			$this->bean->parent_type = 'Leads';
 			$this->bean->parent_id =$institute->id;
 			$this->bean->parent_name =$institute->first_name;
+			$this->bean->assigned_user_name = '';
+			$this->bean->assigned_user_id = '';
 ?>
-<script>
-$(function(){
-	$("input[name=assigned_user_name]").val(' ');
-	$("#btn_clr_assigned_user_name").trigger('click');
-});
-</script>
+
 
 <?php }
 
@@ -465,14 +462,10 @@ $(function(){
 			$this->bean->parent_type = 'Users';
 			$this->bean->parent_id = $GLOBALS['current_user']->id;
 			$this->bean->parent_name = $GLOBALS['current_user']->user_name;
+			$this->bean->assigned_user_name = '';
+			$this->bean->assigned_user_id = '';
 ?>
 <script>
-$(function(){
-	$("input[name=assigned_user_name]").val(' ');
-	$("#btn_clr_assigned_user_name").trigger('click');
-});
-
-
 
 		var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
 

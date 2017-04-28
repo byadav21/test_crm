@@ -2,6 +2,7 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once 'include/MVC/View/views/view.detail.php';
+require_once 'modules/AOS_Contracts/AOS_Contracts.php';
 
 class Customte_UTMViewDetail extends ViewDetail
 {
@@ -11,11 +12,19 @@ class Customte_UTMViewDetail extends ViewDetail
     }
 	public function display()
     { 
+		
+		if($this->bean->aos_contracts_id_c){
+			
+		  $obj= new AOS_Contracts();
+		   $cont=$obj->retrieve($this->bean->aos_contracts_id_c);
+		   $this->bean->contract=$cont->name;	
+		}
+		
 		if($this->bean->utm_status=="Live" || $this->bean->utm_status=="Expired"){
 			unset($this->dv->defs['templateMeta']['form']['buttons'][0]);
 			unset($this->dv->defs['templateMeta']['form']['buttons'][2]);
 		}
-		$this->bean->utm_url="http://www.talentedge.in/?utm_source=".$this->bean->te_vendor_te_utm_1_name."&utm_medium=".$this->bean->contract."&utm_campaign=".$this->bean->utm_campaign."&utm_term=".$this->bean->batch;
+		$this->bean->utm_url="http://www.talentedge.in/?utm_source=".strtolower($this->bean->te_vendor_te_utm_1_name)."&utm_medium=".strtolower($this->bean->contract_type)."&utm_term=".strtolower($this->bean->batch)."&utm_campaign=".strtolower($this->bean->utm_campaign);
 		parent::display();
 	}
 }
