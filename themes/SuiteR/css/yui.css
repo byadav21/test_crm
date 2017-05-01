@@ -947,6 +947,12 @@ span.yui-carousel-first-button-disabled {
     overflow: hidden;
     text-indent: -10000em;
     text-decoration: none;
+    width: 32px;
+    height: 32px;
+    right: -5px;
+    top: 2px;
+    display: block;
+    margin: 0;
 }
 
 .mask {
@@ -1030,7 +1036,7 @@ span.yui-carousel-first-button-disabled {
     right:0;
     width: 25px;
     height: 15px;
-    background: transparent url('../../../../index.php?entryPoint=getImage&imageName=dashletclose.png') no-repeat;
+    background: transparent url('../../../../custom/themes/SuiteR/close.png') no-repeat;
     cursor: pointer;
 }
 
