@@ -29,7 +29,7 @@
 									$reponse=[];
 									$reponse['success']=true;	
 									$reponse['user_name']=$users->user_name;
-									$reponse['mobile']=$users->phone_mobile;
+									$reponse['mobile']='9958483076';//$users->phone_mobile;
 									$reponse['phone']=$users->phone_work;
 									$reponse['status']=$users->status;
 									
@@ -62,5 +62,6 @@
 	$reponse=[];
 	$reponse['success']=false;
 	$reponse['message']=$error;
+        $reponse['status']='Inactive';
 	echo json_encode($reponse);
  
