@@ -55,6 +55,7 @@
 
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
+					  #$url='http://talentedgewpe.wpengine.com/tecourse-api/';
 					$url = 'http://talentedge.staging.wpengine.com/tecourse-api/';
 					$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
@@ -75,7 +76,6 @@
 						'Last_date_to_register'=>$bean->registration_closing_date,
 						'Installment_detail'=>$fee_detail,
 					];
-
 
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL,$url);
@@ -98,8 +98,6 @@
 		}
 
 		else{
-
-
 			# Web api while update batch Record
 
 			$user = 'talentedgeadmin';
