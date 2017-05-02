@@ -55,7 +55,7 @@ else{
 	
 	/*check valid crm_payment_id in case of update*/
 	if($data['action']=='update'){
-		$check_payment_sql = "SELECT p.* FROM `leads_te_payment_details_1_c` AS lpr INNER JOIN te_payment_details AS p ON p.id=lpr.`leads_te_payment_details_1te_payment_details_idb` WHERE lpr.`leads_te_payment_details_1te_payment_details_idb` ='".$data['crm_payment_id']."'";
+		$check_payment_sql = "SELECT p.* FROM `leads_te_payment_details_1_c` AS lpr INNER JOIN te_payment_details AS p ON p.id=lpr.`leads_te_payment_details_1te_payment_details_idb` WHERE lpr.`leads_te_payment_details_1te_payment_details_idb` ='".$data['crm_payment_id']."' AND lpr.`leads_te_payment_details_1leads_ida`='".$lead_id."'";
 		$check_payment_Obj= $GLOBALS['db']->query($check_payment_sql);
 		$check_payment_row=$GLOBALS['db']->fetchByAssoc($check_payment_Obj);
 		if(!$check_payment_row){
@@ -74,7 +74,7 @@ else{
           $lead_data['student_country']='india';
         }
         else{
-          $lead_data['student_country']=$lead_data['primary_address_country'];
+          $lead_data['student_country']=$lead_detail['primary_address_country'];
         }
 		$student_email_sql = "SELECT ea.email_address FROM email_addr_bean_rel eabr JOIN email_addresses ea ON (ea.id = eabr.email_address_id) WHERE  eabr.deleted = 0 AND eabr.bean_module='Leads' AND eabr.bean_id='".$lead_data['id']."'";
 		$student_email_Obj= $GLOBALS['db']->query($student_email_sql);
@@ -304,73 +304,10 @@ function __get_student_batch_id($student_arr=array()){
 }
 
 function __get_lead_details($lead_id=NULL,$batch_id=NULL){
-    /*$get_lead_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
+    $get_lead_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
     $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
     $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
-    return $get_lead;*/
-	
-	$get_lead_sql = "SELECT leads.*,leads_cstm.* FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."'";
-    $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
-    $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
-	if($get_lead){
-		if($get_lead['id'] && !empty($get_lead['te_ba_batch_id_c']) && $get_lead['te_ba_batch_id_c']==$batch_id){
-			return $get_lead;
-		}
-		else if($get_lead['id'] && empty($get_lead['te_ba_batch_id_c'])){
-			$update_lead_sql = "UPDATE leads_cstm SET te_ba_batch_id_c='".$batch_id."' WHERE leads_cstm.id_c='".$lead_id."'";
-			$update_lead_sql_Obj= $GLOBALS['db']->query($update_lead_sql);
-			return $get_lead;
-		}
-		else if($get_lead['id'] && !empty($get_lead['te_ba_batch_id_c']) && $get_lead['te_ba_batch_id_c']!=$batch_id){
-			$email_addr_bean_rel_sql = "SELECT * FROM email_addr_bean_rel WHERE bean_id='".$lead_id."' AND bean_module='Leads'";
-			$email_addr_bean_rel_Obj= $GLOBALS['db']->query($email_addr_bean_rel_sql);
-			$email_addr_bean_rel_res=$GLOBALS['db']->fetchByAssoc($email_addr_bean_rel_Obj);
-			if($email_addr_bean_rel_res){
-				
-				$find_leads_in_eabr_sql = "SELECT email_addr_bean_rel.bean_id FROM email_addr_bean_rel WHERE email_addr_bean_rel.email_address_id='".$email_addr_bean_rel_res['email_address_id']."' AND email_addr_bean_rel.bean_module='Leads'";
-				$find_leads_in_eabr_Obj = $GLOBALS['db']->query($find_leads_in_eabr_sql);
-				
-				$find_leads_in_eabr_Arr=[];
-				while($find_leads_in_eabr_res=$GLOBALS['db']->fetchByAssoc($find_leads_in_eabr_Obj)){
-					$find_leads_in_eabr_Arr[]=$find_leads_in_eabr_res['bean_id'];
-				}
-				$check_lead_exists_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id IN('".implode("','",$find_leads_in_eabr_Arr)."') AND leads_cstm.te_ba_batch_id_c='".$batch_id."' LIMIT 0,1";
-				
-				$check_lead_exists_Obj = $GLOBALS['db']->query($check_lead_exists_sql);
-				$check_lead_exists_res = $GLOBALS['db']->fetchByAssoc($check_lead_exists_Obj);
-				if($check_lead_exists_res){
-					return $check_lead_exists_res;
-				}
-				else{
-					$ins_lead_id = create_guid();
-					$insertLeadSql="INSERT INTO leads SET id='".$ins_lead_id."',date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', modified_user_id='1',created_by='1', assigned_user_id='".$get_lead['assigned_user_id']."', first_name='".$get_lead['first_name']."', last_name='".$get_lead['last_name']."', duplicate_check=1, neoxstatus=1, assigned_date='".date('Y-m-d H:i:s')."', assigned_flag=1, phone_mobile='".$get_lead['phone_mobile']."',status='Alive',status_description='New Lead',lead_source='Website',gender='".$get_lead['gender']."',primary_address_street='".$get_lead['primary_address_street']."',primary_address_city='".$get_lead['primary_address_city']."',primary_address_state='".$get_lead['primary_address_state']."',primary_address_postalcode='".$get_lead['primary_address_postalcode']."',primary_address_country='".$get_lead['primary_address_country']."',alt_address_street='".$get_lead['alt_address_street']."',alt_address_city='".$get_lead['alt_address_city']."',alt_address_state='".$get_lead['alt_address_state']."',alt_address_postalcode='".$get_lead['alt_address_postalcode']."',alt_address_country='".$get_lead['alt_address_country']."'";
-					$GLOBALS['db']->Query($insertLeadSql);
-					
-					$insertLeadCstmSql="INSERT INTO leads_cstm SET id_c='".$ins_lead_id."',company_c='".$get_lead['company_c']."', functional_area_c='".$get_lead['functional_area_c']."', work_experience_c='".$get_lead['work_experience_c']."', education_c='".$get_lead['education_c']."',previous_courses_from_te_c='".$get_lead['previous_courses_from_te_c']."',city_c='".$get_lead['city_c']."',age_c='".$get_lead['age_c']."',te_ba_batch_id_c='".$batch_id."',web_id_c='".$get_lead['web_id_c']."'";
-					$GLOBALS['db']->Query($insertLeadCstmSql);
-					
-					
-					$insert_email_bean_relSql="INSERT INTO email_addr_bean_rel SET id='".create_guid()."',bean_id='".$ins_lead_id."', email_address_id='".$email_addr_bean_rel_res['email_address_id']."', bean_module='Leads', primary_address='1',date_created='".date('Y-m-d H:i:s')."',date_modified='".date('Y-m-d H:i:s')."'";
-					$GLOBALS['db']->Query($insert_email_bean_relSql);
-					
-					$new_lead_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$ins_lead_id."'";
-					$new_lead_sql_Obj= $GLOBALS['db']->query($new_lead_sql);
-					$new_lead=$GLOBALS['db']->fetchByAssoc($new_lead_sql_Obj);
-					return $new_lead;
-				}
-			}
-			else{
-				return 0;
-			}
-		}
-		else{
-			return 0;
-		}
-	}
-	else{
-		return 0;
-	}
-    
+    return $get_lead;
 }
 function getSrmUser($batch_id){
   $srmSql = "SELECT assigned_user_id FROM te_srm_auto_assignment WHERE deleted=0 AND te_ba_batch_id_c='".$batch_id."'";
