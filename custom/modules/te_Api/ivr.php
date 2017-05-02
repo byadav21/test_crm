@@ -3,21 +3,25 @@
 	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 	$error='';
 	require('custom/modules/te_student/te_student_override.php');
+	require_once('custom/modules/te_Api/te_Api.php');
 	try{
-		
+		$objapi= new te_Api_override();
+		$objapi->createLog(print_r($_REQUEST,true),'ivr CRM');
 		$dataPOST = $_GET;
 	 
-		if($dataPOST){
-		 
-			if(isset($dataPOST['data']) && $dataPOST['data']){ 
-				 
-				$jsonDecode= json_decode(html_entity_decode($dataPOST['data']));
-			 
+		if($dataPOST){			
+		 $mobile=''; 	
+		 if(isset($dataPOST['data?mobile']) && $dataPOST['data?mobile']){
+			 $mobile=$dataPOST['data?mobile'];
+		 }else 	if(isset($dataPOST['data']) && $dataPOST['data']){ 
+			 $jsonDecode= json_decode(html_entity_decode($dataPOST['data']));
+			 $mobile=$jsonDecode->mobile;
+		 }	 
 			
-				if(isset($jsonDecode->mobile) && ($jsonDecode->mobile)){
+				if($mobile){
 					
 						$obj=new te_student_override();
-						$srm=$obj->getSRMByMobile($jsonDecode->mobile);
+						$srm=$obj->getSRMByMobile($mobile);
 						if($srm && count($srm)>0){
 							$users=BeanFactory::getBean('Users')->retrieve_by_string_fields(array('id'=>$srm['assigned_user_id']));
 						 
@@ -35,6 +39,8 @@
 								$error="User not found";
 								 
 							 }
+						}else{
+							$error="User not found";
 						}
 					
 					
@@ -42,12 +48,10 @@
 					$error="Invalid json format";
 				}
 			
-			}else{
-				$error="Invalid command";
-			}
+			
 			
 		}else{
-			$error="Invalid json format";
+			$error="Invalid Request format";
 		}	
 
 		 
