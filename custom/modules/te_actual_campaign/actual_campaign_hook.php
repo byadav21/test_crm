@@ -8,7 +8,7 @@ class AutoCalculate
 		global $db;
 		if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){
 			
-			if($_REQUEST['UTM']!=""){
+			if(isset($_REQUEST['UTM']) && $_REQUEST['UTM']!=""){
 				$actualCampaignSql="SELECT count(*) as total FROM te_actual_campaign WHERE plan_date='".$bean->plan_date."' AND name='".$bean->name."' AND deleted=0";
 				$actualCampaignObj = $bean->db->Query($actualCampaignSql);
 				$actualCampaign = $db->fetchByAssoc($actualCampaignObj);				
