@@ -21,7 +21,7 @@ class duplicate_logic{
 					
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
-					$url = 'http://talentedgewpe.wpengine.com/teapi';
+					$url = 'http://talentedge.staging.wpengine.com/institute-api/';
 					$headers = array(
 					    'Authorization: Basic '. base64_encode("$user:$password")
 					);
@@ -40,10 +40,10 @@ class duplicate_logic{
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 					$result = curl_exec($ch);
 					$res = json_decode($result);
-					print_r($res);
+					#print_r($res);
 
 						if(isset($res[0]->status) && $res[0]->status=='1'){
-							echo "hello insert Success ";
+							#echo "hello insert Success ";
 							$bean->is_sent_web="1";
 							$bean->web_institute_id=$res[0]->institute_id;
 
@@ -57,7 +57,7 @@ class duplicate_logic{
 					
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
-					$url = 'http://talentedgewpe.wpengine.com/teapi';
+					$url = 'http://talentedge.staging.wpengine.com/institute-api/';
 					$headers = array(
 					    'Authorization: Basic '. base64_encode("$user:$password")
 					);
@@ -80,7 +80,7 @@ class duplicate_logic{
 					
 
 						if(isset($res[0]->status) && $res[0]->status=='1'){
-							echo "hello update Success";
+							#echo "hello update Success";
 							$bean->web_institute_id=$res[0]->institute_id;
 
 						}
