@@ -259,15 +259,22 @@ class addPaymentClass{
 					$sqllead="SELECT ea.email_address FROM email_addr_bean_rel eabr JOIN email_addresses ea ON (ea.id = eabr.email_address_id) WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND eabr.bean_id='".$bean->parent_id."'";
 					$leadObj = $db->query($sqllead);
 					$studentresult = $db->fetchByAssoc($leadObj);
-					$studemail=$studentresult['email_address'];
-					$template="<p>Hello ".$bean->parent_name."</p>
-						<p>You have to sent Program Kit  </p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+					echo $studemail=$studentresult['email_address'];
+					$template="<p>Dear ".$bean->first_name.",</p>
+									<p> Greetings!</p>
+
+									<p>This is to thank you for participating in the referral programme offered by Talentedge.</p>
+
+									<p>Thank you for referring ".$bean->parent_name.".</p>
+									<p>We shall reach out to the prospective candidates, and keep you informed should any of your referred candidate chooses to join a programme offered by Talentedge.</p>
+									<p>The referral programme terms and conditions are mentioned in the website: https://talentedge.in/referral.</p> <p>The referral incentive shall be issued to the referrer subject to qualifying for the criteria, and as per the terms & conditions of Talentedge. </p><p>Talentedge also reserves the right to withdraw the referral programme at any stage.</p>
+									</br>
+									<p>Regards,</p>
+									<p>Student Relations Manager</p>
+									<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";	
 					
-					$mail = new NetCoreEmail();
-					$mail->sendEmail($studemail,"Lead Referral",$template);
+						$mail = new NetCoreEmail();
+						$mail->sendEmail($studemail,"Lead Referral",$template);
 				
 				}
 			if($bean->parent_type=='Users') # If get user then find user email id
@@ -278,11 +285,18 @@ class addPaymentClass{
 					$studentresult = $db->fetchByAssoc($leadObj);
 					$useremail=$studentresult['email_address'];	
 					
-					$template="<p>Hello ".$bean->parent_name."</p>
-						<p>You have to sent Program Kit  </p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>Team</p>";
+					$template="<p>Dear ".$bean->first_name.",</p>
+									<p> Greetings!</p>
+
+									<p>This is to thank you for participating in the referral programme offered by Talentedge.</p>
+
+									<p>Thank you for referring ".$bean->parent_name.".</p>
+									<p>We shall reach out to the prospective candidates, and keep you informed should any of your referred candidate chooses to join a programme offered by Talentedge.</p>
+									<p>The referral programme terms and conditions are mentioned in the website: https://talentedge.in/referral.</p> <p>The referral incentive shall be issued to the referrer subject to qualifying for the criteria, and as per the terms & conditions of Talentedge. </p><p>Talentedge also reserves the right to withdraw the referral programme at any stage.</p>
+									</br>
+									<p>Regards,</p>
+									<p>Student Relations Manager</p>
+									<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";	
 					
 				$mail = new NetCoreEmail();
 				$mail->sendEmail($useremail,"Lead Referral",$template);
