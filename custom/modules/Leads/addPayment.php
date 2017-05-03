@@ -260,12 +260,12 @@ class addPaymentClass{
 					$leadObj = $db->query($sqllead);
 					$studentresult = $db->fetchByAssoc($leadObj);
 					echo $studemail=$studentresult['email_address'];
-					$template="<p>Dear ".$bean->first_name.",</p>
+					$template="<p>Dear ".$bean->parent_name.",</p>
 									<p> Greetings!</p>
 
 									<p>This is to thank you for participating in the referral programme offered by Talentedge.</p>
 
-									<p>Thank you for referring ".$bean->parent_name.".</p>
+									<p>Thank you for referring ".$bean->first_name.".</p>
 									<p>We shall reach out to the prospective candidates, and keep you informed should any of your referred candidate chooses to join a programme offered by Talentedge.</p>
 									<p>The referral programme terms and conditions are mentioned in the website: https://talentedge.in/referral.</p> <p>The referral incentive shall be issued to the referrer subject to qualifying for the criteria, and as per the terms & conditions of Talentedge. </p><p>Talentedge also reserves the right to withdraw the referral programme at any stage.</p>
 									</br>
@@ -285,7 +285,7 @@ class addPaymentClass{
 					$studentresult = $db->fetchByAssoc($leadObj);
 					$useremail=$studentresult['email_address'];	
 					
-					$template="<p>Dear ".$bean->first_name.",</p>
+					$template="<p>Dear ".$bean->parent_name.",</p>
 									<p> Greetings!</p>
 
 									<p>This is to thank you for participating in the referral programme offered by Talentedge.</p>
@@ -317,14 +317,27 @@ class addPaymentClass{
 					$leadObj = $db->query($sqllead);
 					$studentresult = $db->fetchByAssoc($leadObj);
 					$studemail=$studentresult['email_address'];
-					$template="<p>Hello ".$bean->parent_name."</p>
-						<p>You have to sent Program Kit  </p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+					#find program 
+					$SQLBATCh="SELECT t1.te_pr_programs_te_ba_batch_1te_pr_programs_ida,pt2.name FROM `te_pr_programs_te_ba_batch_1_c` t1 INNER JOIN te_pr_programs pt2 ON t1.te_pr_programs_te_ba_batch_1te_pr_programs_ida=pt2.id where t1.te_pr_programs_te_ba_batch_1te_ba_batch_idb='".$bean->te_ba_batch_id_c."'";
+					$BatchObj = $db->query($SQLBATCh);
+					$BAtchresult = $db->fetchByAssoc($BatchObj);
+					$BATCHprogram=$BAtchresult['name'];
+					
+					echo $template="<p>Dear ".$bean->parent_name.",</p>
+								<p>Greetings!</p>
+
+								<p>This is to thank you for participating in the referral programme offered by Talentedge.</p>
+								<p>We are pleased to inform you that the following candidate(s) referred by you have registered with us for a Talentedge programme: ".$BATCHprogram."</p>
+								<p>Congratulations indeed for a successful referral! Your incentive voucher shall reach you within next 30 days at your registered email id.</p>
+								<p>The referral programme terms and conditions are mentioned in the website: https://talentedge.in/referral.</p> <p>The referral incentive shall be issued to the referrer subject to qualifying for the criteria, and as per the terms & conditions of Talentedge. Talentedge also reserves the right to withdraw the referral programme at any stage.</p>
+								<p>Please feel free to reach out to your Student Relations Manager incase of non-receipt of the referral gift voucher/incentive, or for any other query.</p>
+								<p>Regards,</p>
+								<p>Student Relations Manager</p>
+								<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
+						
 					
 					$mail = new NetCoreEmail();
-					$mail->sendEmail($studemail,"Lead Referral Converted",$template);
+				    $mail->sendEmail($studemail,"Lead Referral Converted",$template);
 					
 					}
 				if($bean->parent_type=='Users') # If get user then find user email id
@@ -334,15 +347,27 @@ class addPaymentClass{
 					$leadObj = $db->query($sqllead);
 					$studentresult = $db->fetchByAssoc($leadObj);
 					$useremail=$studentresult['email_address'];
-					$template="<p>Hello ".$bean->parent_name."</p>
-						<p>You have to sent Program Kit  </p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+					#find program 
+					$SQLBATCh="SELECT t1.te_pr_programs_te_ba_batch_1te_pr_programs_ida,pt2.name FROM `te_pr_programs_te_ba_batch_1_c` t1 INNER JOIN te_pr_programs pt2 ON t1.te_pr_programs_te_ba_batch_1te_pr_programs_ida=pt2.id where t1.te_pr_programs_te_ba_batch_1te_ba_batch_idb='".$bean->te_ba_batch_id_c."'";
+					$BatchObj = $db->query($SQLBATCh);
+					$BAtchresult = $db->fetchByAssoc($BatchObj);
+					$BATCHprogram=$BAtchresult['name'];	
+						
+					$template="<p>Dear ".$bean->parent_name.",</p>
+								<p>Greetings!</p>
+
+								<p>This is to thank you for participating in the referral programme offered by Talentedge.</p>
+								<p>We are pleased to inform you that the following candidate(s) referred by you have registered with us for a Talentedge programme: ".$BATCHprogram."</p>
+								<p>Congratulations indeed for a successful referral! Your incentive voucher shall reach you within next 30 days at your registered email id.</p>
+								<p>The referral programme terms and conditions are mentioned in the website: https://talentedge.in/referral.</p> <p>The referral incentive shall be issued to the referrer subject to qualifying for the criteria, and as per the terms & conditions of Talentedge. Talentedge also reserves the right to withdraw the referral programme at any stage.</p>
+								<p>Please feel free to reach out to your Student Relations Manager incase of non-receipt of the referral gift voucher/incentive, or for any other query.</p>
+								<p>Regards,</p>
+								<p>Student Relations Manager</p>
+								<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 					
 					$mail = new NetCoreEmail();
-					$mail->sendEmail($useremail,"Lead Referral Converted",$template);	
-				
+				$mail->sendEmail($useremail,"Lead Referral Converted",$template);	
+
 					
 					}
 				
