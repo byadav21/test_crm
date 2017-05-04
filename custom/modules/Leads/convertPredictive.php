@@ -50,12 +50,12 @@ if ($db->getRowCount($result) > 0)
         exit();
     }
 
-    
+
     $customerRs              = [];
     $data['customerRecords'] = [];
     while ($row                     = $db->fetchByAssoc($result))
     {
-        
+
         if ($last != '' && $row['drtord'] != $last)
         {
             $last                    = $row['drtord'];
