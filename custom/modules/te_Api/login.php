@@ -56,6 +56,7 @@
 			
 							$obj= new te_Api_override();
 							$obj->name=$sessionArray->id;							
+							$obj->dristi_session=md5((String) $xmlData->userId)	;					
 							$obj->description=base64_encode(serialize(array(rand(100,500),base64_encode((String) $xmlData->password))));
 							if($obj->save()){
 								echo '<response><status>success</status><message>Auth Successful</message><crmSessionId>'. $sessionArray->id  .'</crmSessionId></response>'; exit();
