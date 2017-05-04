@@ -28,11 +28,11 @@ try{
 				/*if($records['assigned_user_id']!=$userid['id']){
 					header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);
 				}*/
-					
-				header('Location: index.php?module=te_student&action=DetailView&record='. $records['id']);	
+				$records=$db->fetchByAssoc($res);		
+				header('Location: index.php?module=te_student&action=DetailView&record='. $records['id']); exit();	
 				
 			}else{
-				header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);
+				header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);exit();
 			}		
 			
 		}
