@@ -60,7 +60,7 @@ array (
           array (
             'name' => 'contract',
             'studio' => 'visible',
-            'label' => 'LBL_CONTRACT',
+            'label' => 'UTM Contract',
           ),
           1 => 
           array (
@@ -91,7 +91,11 @@ array (
               'rows' => 3,
             ),
           ),
-          1 => '',
+          1 => array (
+            'name' => 'contract_type',
+            'studio' => 'visible',
+            'label' => 'UTM Medium',
+          ),
         ),
       ),
     ),
