@@ -609,7 +609,7 @@ class addPaymentClass{
 									$drobj->sendDisposition($bean->status_description,$arrReq);	
 								}	
 							}else{
-							  $drobj->sendDisposition("",$arrReq);	
+							  $drobj->sendDisposition($bean->status_description,$arrReq);	
 							}	
 	
 					   }
