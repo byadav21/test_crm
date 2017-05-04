@@ -97,7 +97,7 @@
 						
 						global $db;
 						$sesstodel=(String) $xmlData->crmSessionId;
-						$db->query("delete from te_API where name = '$sesstodel'");						
+						$db->query("delete from te_api where name = '$sesstodel'");						
 						$ch = curl_init(); 
 						curl_setopt($ch, CURLOPT_URL, $url);
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
