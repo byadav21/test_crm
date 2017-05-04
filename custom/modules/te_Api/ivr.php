@@ -26,12 +26,21 @@
 							$users=BeanFactory::getBean('Users')->retrieve_by_string_fields(array('id'=>$srm['assigned_user_id']));
 						 
 							if($users && count($users)>0){
+								
+								    $isActive="select id form te_api where dristi_session=md5('". $users->user_name ."')";
+									global $db;
+									$status='Inactive';
+									$active=$db->query($isActive); 
+									if($db->getRowCount($active) > 0){
+										$status='Active';
+									}	
+								
 									$reponse=[];
 									$reponse['success']=true;	
 									$reponse['user_name']=$users->user_name;
 									$reponse['mobile']='9958483076';//$users->phone_mobile;
 									$reponse['phone']=$users->phone_work;
-									$reponse['status']=$users->status;
+									$reponse['status']=$status;
 									
 									echo json_encode($reponse);exit();
 								
