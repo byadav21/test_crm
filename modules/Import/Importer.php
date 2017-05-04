@@ -367,6 +367,7 @@ class Importer
                 $this->importSource->markRowAsDuplicate($idc->_dupedFields);
                 $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                 return;
+                
             }
         }
 
