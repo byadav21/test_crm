@@ -604,9 +604,9 @@ class addPaymentClass{
                                                                     // echo $date;die;
 
 								if($date){
-									$drobj->sendDisposition('Callback',$arrReq,$GLOBALS['timedate']->to_display_date_time($date));
+									$drobj->sendDisposition($bean->status_description,$arrReq,$GLOBALS['timedate']->to_display_date_time($date));
 								}else{
-									$drobj->sendDisposition("",$arrReq);	
+									$drobj->sendDisposition($bean->status_description,$arrReq);	
 								}	
 							}else{
 							  $drobj->sendDisposition("",$arrReq);	

@@ -53,6 +53,7 @@ class te_Api_override extends te_Api {
 	}
 	 
 	 function getUserCredential($sessioID){
+	      try{	 
 	      	 global $db;
 	      	 // "select description from te_api where name='". $sessioID ."'";// die;
 	      	 $itemDetal=$db->query("select description from te_api where name='". $sessioID ."'");
@@ -61,115 +62,130 @@ class te_Api_override extends te_Api {
 	      	 if(!$rs) return false;
 	      	 $reslt= unserialize(base64_decode($rs['description']));
 	      	 return base64_decode($reslt[1]);
+	      }catch(Exception $e){
+			  return false;
+		  }	 
 	 }
 	
 	function doLogin($user='',$pass=''){
-		global $sugar_config;
-		$server = $this->url.'force-login&data=';
-		
-		$data=[];
-		$data['userId']= ($user)? $user : $sugar_config['ameyo_import_login'];
-		$data['password']= ($pass)? $pass : $sugar_config['ameyo_import_pass'];
-		$data['terminal']= $_SERVER['REMOTE_ADDR'];
-		 
-		 
-		$session= file_get_contents(  $server. urlencode(json_encode($data)));
-		$this->createLog($server. urlencode(json_encode($data)),$session); 	
-		$jsonEncodedData = json_decode($session);
-		 
-		if(isset($jsonEncodedData->sessionId) && !empty($jsonEncodedData->sessionId)){
+		try{
+			global $sugar_config;
+			$server = $this->url.'force-login&data=';
 			
-			 		
-			return $jsonEncodedData->sessionId;
-			
-		}else{
-		  return false;	
-		}	
+			$data=[];
+			$data['userId']= ($user)? $user : $sugar_config['ameyo_import_login'];
+			$data['password']= ($pass)? $pass : $sugar_config['ameyo_import_pass'];
+			$data['terminal']= $_SERVER['REMOTE_ADDR'];
+			 
+			 
+			$session= file_get_contents(  $server. urlencode(json_encode($data)));
+			$this->createLog($server. urlencode(json_encode($data)),$session); 	
+			$jsonEncodedData = json_decode($session);
+			 
+			if(isset($jsonEncodedData->sessionId) && !empty($jsonEncodedData->sessionId)){
+				
+						
+				return $jsonEncodedData->sessionId;
+				
+			}else{
+			  return false;	
+			}	
+	   }catch(Exception $e){
+		  return false;   
+	   }
 		
 	}
 	
 	function call($session,$request){		
-		//if(!$this->ping($request['sessionId'])){
-		//	return false;
-		//}
-		$server= $this->url . "manual-dial&data=";
-		$data= file_get_contents(  $server. urlencode(json_encode($request)));
-		$dataErr=json_decode($data);
-		$this->createLog($server. urlencode(json_encode($request)),$data); 		
-		return ($dataErr->status=='error')?false:true;
+		try{ 
+			$server= $this->url . "manual-dial&data=";
+			$data= file_get_contents(  $server. urlencode(json_encode($request)));
+			$dataErr=json_decode($data);
+			$this->createLog($server. urlencode(json_encode($request)),$data); 		
+			return ($dataErr->status=='error')?false:true;
+		}catch(Exception $e){
+			
+		}
 	}	
 	
 	function ping($session){		
-		$request=[]; 
-		$request['sessionId']=$session; 
-		$request['sessionPushSeqNo']=0; 
-		$request['session​ push​ seq​ no']=0; 
-		$server= $this->url . "ping-session&data=";
-		$data= file_get_contents(  $server. urlencode(json_encode($request)));
-		$dataErr=json_decode($data);		
-		return ($dataErr->status=='error')?false:true;
+		try{
+			$request=[]; 
+			$request['sessionId']=$session; 
+			$request['sessionPushSeqNo']=0; 
+			$request['session​ push​ seq​ no']=0; 
+			$server= $this->url . "ping-session&data=";
+			$data= file_get_contents(  $server. urlencode(json_encode($request)));
+			$dataErr=json_decode($data);		
+			return ($dataErr->status=='error')?false:true;
+		}catch(Exception $e){
+			
+		}		
 	}	
 	
 	function sendDisposition($callback='',$request,$date=''){
-		global $sugar_config;
 		
-		//if(!$this->ping($session)){
-		//	 echo '<script>swal("You have to dispose manaually!")</script>';
-		//	 return false;			 
-		//}
-		$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
-		$data=[];
-		$session=$_SESSION['amyoSID'];
-		$data['campaignId']=urlencode($_SESSION['amyoCID']);
-		$data['sessionId']=urlencode($session);
-		if($request['crtObjectId']) $data['crtObjectId']=urlencode($request['crtObjectId']);
-		if($request['userCrtObjectId']) $data['userCrtObjectId']=urlencode($request['userCrtObjectId']);
-		if($request['customerId']) $data['customerId']=urlencode($request['customerId']);
-               // if($request['sessionId']) $data['sessionId']=urlencode($request['sessionId']);
-		
-        if($request['phone']) $data['phone']=urlencode($request['phone']);
-		if($request['userId']) $data['userId']=urlencode($request['userId']);
-		$data['dispositionCode']=($callback=='Callback')? 'Callback' : 'Sale';
-		
+		try{
+				global $sugar_config;				
+				$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
+				$data=[];
+				$session=$_SESSION['amyoSID'];
+				$data['campaignId']=urlencode($_SESSION['amyoCID']);
+				$data['sessionId']=urlencode($session);
+				if($request['crtObjectId']) $data['crtObjectId']=urlencode($request['crtObjectId']);
+				if($request['userCrtObjectId']) $data['userCrtObjectId']=urlencode($request['userCrtObjectId']);
+				if($request['customerId']) $data['customerId']=urlencode($request['customerId']);
+					   // if($request['sessionId']) $data['sessionId']=urlencode($request['sessionId']);
+				
+				if($request['phone']) $data['phone']=urlencode($request['phone']);
+				if($request['userId']) $data['userId']=urlencode($request['userId']);
+				$data['dispositionCode']=$callback;
+				
 
-        if($callback=='Callback'){
-		  $data['selfCallback']='true';
+				if($callback=='Call Back' || $callback=='Follow Up' || $callback=='Prospect'){
+				  $data['selfCallback']='true';
 
-               //echo $date .'==';
-		//echo date('Y-m-d H:i:s');die;
-		  $callDate= date('d-m-Y H:i:s',strtotime($date));
-		 // $diff= $callDate- $current;
+					   //echo $date .'==';
+				//echo date('Y-m-d H:i:s');die;
+				  $callDate= date('d-m-Y H:i:s',strtotime($date));
+				 // $diff= $callDate- $current;
+				 
+				   $start_date = new DateTime(date('Y-m-d H:i:s'));
+				   $since_start = $start_date->diff(new DateTime($callDate));
 		 
-		   $start_date = new DateTime(date('Y-m-d H:i:s'));
-		   $since_start = $start_date->diff(new DateTime($callDate));
- 
-		 
-			$year= $since_start->y;
-			$month= $since_start->m;
-			$day= $since_start->d;
-			$hour= $since_start->h;
-			$min= $since_start->i;
-			$sec= $since_start->s;
-		   
-		  
-		 $data['dispositionAttr']=urlencode('after-'. str_pad($day, 2, "0", STR_PAD_LEFT). '-'. str_pad($month, 2, "0", STR_PAD_LEFT).  '-'. str_pad($year, 4, "0", STR_PAD_LEFT).  ' '. str_pad($hour, 2, "0", STR_PAD_LEFT).  ':'. str_pad($min, 2, "0", STR_PAD_LEFT). ':'.  str_pad($sec, 2, "0", STR_PAD_LEFT));
-		   
-                            //after-03-00-0000 02:01:00	
-		}
-		$qrystr='';
-		foreach($data as $key=>$val){
-			$qrystr .=$key .'='. $val . '&'; 
-		}
-		$qrystr=substr($qrystr,0,strlen($qrystr)-1);		
-		$response= file_get_contents($url. ($qrystr)); 
-		$this->createLog($url. ($qrystr),$response);     
-		if($response!=='Dispose Successfully'){
-		  echo '<script>swal("You have to dispose manaually!")</script>';	
+				 
+					$year= $since_start->y;
+					$month= $since_start->m;
+					$day= $since_start->d;
+					$hour= $since_start->h;
+					$min= $since_start->i;
+					$sec= $since_start->s;
+				   
+				  
+				 $data['dispositionAttr']=urlencode('after-'. str_pad($day, 2, "0", STR_PAD_LEFT). '-'. str_pad($month, 2, "0", STR_PAD_LEFT).  '-'. str_pad($year, 4, "0", STR_PAD_LEFT).  ' '. str_pad($hour, 2, "0", STR_PAD_LEFT).  ':'. str_pad($min, 2, "0", STR_PAD_LEFT). ':'.  str_pad($sec, 2, "0", STR_PAD_LEFT));
+				   
+									//after-03-00-0000 02:01:00	
+				}
+				$qrystr='';
+				foreach($data as $key=>$val){
+					$qrystr .=$key .'='. $val . '&'; 
+				}
+				$qrystr=substr($qrystr,0,strlen($qrystr)-1);		
+				$response= file_get_contents($url. ($qrystr)); 
+				$this->createLog($url. ($qrystr),$response);     
+				if($response!=='Dispose Successfully'){
+				  echo '<script>swal("You have to dispose manaually!")</script>';	
+				}	
+		
+		}catch(Exception $e){
+			
+			 echo '<script>swal("You have to dispose manaually!")</script>';	
 		}
 
 	}
 	
 	function uploadContacts($data,$campID='',$api=''){
+		try{	
 			global $sugar_config;
 			$this->importError='';
 			//$server = $this->url.'uploadContacts&data=';
@@ -187,10 +203,12 @@ class te_Api_override extends te_Api {
 			$response = curl_exec($ch);
 			$this->createLog('Uploading',$response);	
 		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
-			 $responses=json_decode($response);	
-			
+			 $responses=json_decode($response);				
 			return $responses;
-
+			
+		}catch(Exception $e){
+			
+		}	
 	}
 	
 	function createLog($req,$res){
