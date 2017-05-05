@@ -2,8 +2,19 @@
 require_once('include/MVC/View/views/view.edit.php');
 class te_student_batchViewEdit extends ViewEdit {
 	function display(){		
-		global $current_user;	
+		global $current_user,$db;		
 		parent::display();
+		
+		$checkRoleSql="SELECT * FROM `acl_roles_users` WHERE user_id='".$current_user->id."' AND `role_id`='30957fe0-3494-e372-656d-58a9a6296516'";
+	    $checkRoleObj =$db->query($checkRoleSql);
+		$row =$db->fetchByAssoc($checkRoleObj);
+		if($row){
+			echo "<script>
+			$('#assigned_user_name').prop('readonly',true);
+			$('#btn_assigned_user_name').hide();
+			$('#btn_clr_assigned_user_name').hide();
+			</script>";	
+		}
 		echo "<script>
 		
 		
