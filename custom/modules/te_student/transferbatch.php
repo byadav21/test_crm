@@ -21,6 +21,13 @@ if($student_country=='india' || empty($student_country)){
 else{
   $currency='USD';
 }
+# Find program And istitute
+            $sql_program="SELECT Ts.name as institute,Ps.name as program,Sb.id FROM `te_student_batch` Sb INNER JOIN te_pr_programs Ps ON Ps.id=Sb.te_pr_programs_id_c INNER JOIN te_in_institutes Ts ON Ts.id=Sb.te_in_institutes_id_c WHERE Sb.id='".$student_batch_id_old."'";
+			$programObj = $db->query($sql_program);
+			$progrm_result = $db->fetchByAssoc($programObj);
+			$program_mail=$progrm_result['program'];
+			$institute_mail=$progrm_result['institute'];
+
 
 #find student old batch details
 $oldBatchSql="SELECT * FROM te_student_batch WHERE id='".$student_batch_id_old."' AND deleted=0";
@@ -38,11 +45,19 @@ if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"
 			$studentObj= $GLOBALS['db']->query($studentSql);
 			$studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
 			$studentemail=$studentDetails['email'];
-			$template="<p>Hello ".$studentDetails['name']."</p>
-						<p> Your Trasfer Batch Request Rejected</p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+			$template="<p>Dear ".$studentDetails['name'].",</p>
+
+                        <p>Greetings!</p>
+
+                        <p>This is to inform you that your request for batch transfer of your currently enrolled programme ".$program_mail."".$institute_mail." to a future batch of the same programme has not been approved.</p>
+
+                        <p>The terms and conditions are mentioned in the website just for your reference: https://talentedge.in/end-user-agreement/.</p>
+
+                        <p>Please feel free to contact your Admissions Counsellor or your Student Relations Manager for any other query.</p>
+
+                        <p>Regards,</p>
+                        <p>Student Relations Manager</p>
+                        <p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail," Trasfer Batch Request Rejected",$template);
@@ -157,12 +172,18 @@ $utmOptions['status']="Transferred";
 			$studentObj= $GLOBALS['db']->query($studentSql);
 			$studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
 			$studentemail=$studentDetails['email'];
-			$template="<p>Hello ".$studentDetails['name']."</p>
-						<p>Batch Transfer Request status is approved</p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+			$template="<p>Dear ".$studentDetails['name'].",</p>
+                        <p>Greetings!</p>
 
+                        <p>This is to confirm that owing your inability to participate in the programme for the existing batch you have enrolled for, your request for batch transfer from ".$program_mail."".$institute_mail." to the forthcoming/future batch of the same programme has been approved, subject to the future batch being offered by Talentedge.</p> 
+
+                        <p>To facilitate this, you are requested to pay the batch transfer fee of Rs 5,000 plus taxes, and share the payment details with your Admissions Counsellor.</p>
+
+                        <p>Please feel free to contact your Admissions Counsellor, or your Student Relations Manager for any other queries.</p>
+
+                        <p>Regards,</p>
+                        <p>Student Relations Manager</p>
+                        <p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail," Trasfer Batch Request Approved",$template);
 
