@@ -79,9 +79,11 @@ class addStudentPaymentClass{
 			$recipients=$user['email'];
 			$template="<p>Hello ".$user['name']."</p>
 						<p>You have assigned one batch for dropout approval request</p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+						<p> Please feel free to reach out to your counsellor for any other information.</p>
+
+							<p>Regards,</p>
+							<p>Student Relations Manager</p>
+							<p>Enquiries and Customer Support, Contact No: +91-8376000600 </p>";
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($recipients,"Batch Dropout Request",$template);
 		}
@@ -97,8 +99,11 @@ class addStudentPaymentClass{
 			$template="<p>Hello ".$student['name']."</p>
 						<p>You have to sent Certificate  </p>
 						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+						<p> Please feel free to reach out to your counsellor for any other information.</p>
+
+							<p>Regards,</p>
+							<p>Student Relations Manager</p>
+							<p>Enquiries and Customer Support, Contact No: +91-8376000600 </p>";
 
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail,"Certificate Sent",$template);
@@ -122,8 +127,11 @@ class addStudentPaymentClass{
 			$template="<p>Hello ".$student['name']."</p>
 						<p>You have to sent Program Kit  </p>
 						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+						<p> Please feel free to reach out to your counsellor for any other information.</p>
+
+							<p>Regards,</p>
+							<p>Student Relations Manager</p>
+							<p>Enquiries and Customer Support, Contact No: +91-8376000600 </p>";
 
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail,"Program Kit",$template);
@@ -142,14 +150,17 @@ class addStudentPaymentClass{
 			$studentemail=$student['email'];
 
 			$template="<p>Hello ".$student['name']."</p>
-						<p>Your Dropout Request hasbeen Sent </p>
-						<p>Please Waite For Appovel </p>
+						<p>Your Dropout Request has been Sent </p>
+						<p>Please Wait For Appovel </p>
 						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+						<p> Please feel free to reach out to your counsellor for any other information.</p>
+
+							<p>Regards,</p>
+							<p>Student Relations Manager</p>
+							<p>Enquiries and Customer Support, Contact No: +91-8376000600 </p>";
 
 			$mail = new NetCoreEmail();
-			$mail->sendEmail($studentemail,"Program Kit",$template);
+			$mail->sendEmail($studentemail,"Dropout Request",$template);
 
 			}
 
