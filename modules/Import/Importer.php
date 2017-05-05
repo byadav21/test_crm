@@ -89,7 +89,7 @@ class Importer
 
         $this->importSource = $importSource;
 
-        ///Vanilla copy of the bean object.
+        ////Vanilla copy of the bean object.
         $this->bean = $bean;
 
         // use our own error handler

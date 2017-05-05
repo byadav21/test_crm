@@ -7,7 +7,7 @@ class AutoCalculate
 
     public function calculateCPA(&$bean, $event, $arguments)
     {
-        global $db;
+        global  $db;
         if (isset($_REQUEST['import_module']) && $_REQUEST['module'] == "Import")
         {
 
