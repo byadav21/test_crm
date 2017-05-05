@@ -474,6 +474,17 @@ if($("#status_description").val() === "Converted") {
 
 		
 		parent::display ();
+		global $db;
+		$checkRoleSql="SELECT * FROM `acl_roles_users` WHERE user_id='".$GLOBALS['current_user']->id."' AND (`role_id`='30957fe0-3494-e372-656d-58a9a6296516' OR `role_id`='270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')";
+	    $checkRoleObj =$db->query($checkRoleSql);
+		$row =$db->fetchByAssoc($checkRoleObj);
+		if($row){
+			echo "<script>
+			$('#assigned_user_name').prop('readonly',true);
+			$('#btn_assigned_user_name').hide();
+			$('#btn_clr_assigned_user_name').hide();
+			</script>";	
+		}
 		?>
 
 
