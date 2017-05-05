@@ -96,7 +96,8 @@ class addStudentPaymentClass{
 			$student = $db->fetchByAssoc($studentObj);
 			$studentemail=$student['email'];
 
-			$template="<p>Hello ".$student['name']."</p>
+			$template="<p>Dear ".$student['name']."</p>
+						<p>Greetings from Talentedge!</p>
 						<p>You have to sent Certificate  </p>
 						<p>Please have a look and take action accordingly</p>
 						<p> Please feel free to reach out to your counsellor for any other information.</p>
@@ -124,7 +125,8 @@ class addStudentPaymentClass{
 			$student = $db->fetchByAssoc($studentObj);
 			$studentemail=$student['email'];
 
-			$template="<p>Hello ".$student['name']."</p>
+			$template="<p>Dear ".$student['name']."</p>
+						<p>Greetings from Talentedge!</p>
 						<p>You have to sent Program Kit  </p>
 						<p>Please have a look and take action accordingly</p>
 						<p> Please feel free to reach out to your counsellor for any other information.</p>
@@ -149,9 +151,9 @@ class addStudentPaymentClass{
 			$student = $db->fetchByAssoc($studentObj);
 			$studentemail=$student['email'];
 
-			$template="<p>Hello ".$student['name']."</p>
-						<p>Your Dropout Request has been Sent </p>
-						<p>Please Wait For Appovel </p>
+			$template="<p>Dear ".$student['name']."</p>
+						<p>Greetings from Talentedge!</p>
+						<p>Your Dropout Request has been registered for with Talentedge.</p>
 						<p>Please have a look and take action accordingly</p>
 						<p> Please feel free to reach out to your counsellor for any other information.</p>
 
