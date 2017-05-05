@@ -27,7 +27,7 @@
 						 
 							if($users && count($users)>0){
 								
-								    $isActive="select id form te_api where dristi_session=md5('". $users->user_name ."')";
+								    $isActive="select id from te_api where dristi_session='".md5( $users->user_name) ."'";
 									global $db;
 									$status='Inactive';
 									$active=$db->query($isActive); 
