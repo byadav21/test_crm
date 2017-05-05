@@ -1,6 +1,6 @@
 <?php
 
-//include a javascript file
+///include a javascript file
 
 class AutoCalculate
 {
