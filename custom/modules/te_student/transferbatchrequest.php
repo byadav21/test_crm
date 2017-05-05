@@ -28,11 +28,19 @@ $studentBatchObj->te_student_id_c=$student_id;
 $studentBatchObj->status="Pending";
 
 # Mail sent for Panding/
-			$template="<p>Hello ".$studentDetails['name']."</p>
+			$template="<p>Dear ".$studentDetails['name']."</p>
+						<p>Greetings!</p>
+						<p>This is in response to your request for Batch Transfer</p>
 						<p>Batch Transfer Request status is Panding</p>
-						<p>Please have a look and take action accordingly</p>
-						<p></p><p>Thanks & Regards</p>
-						<p>SRM Team</p>";
+						
+						<p>The terms and conditions which are explicitly mentioned in the Talentedge website, </p><p>and have been agreed upon by you while registering for the programme-
+						https://talentedge.in/end-user-agreement/ </p>
+
+						<p>Please feel free to reach out to your counsellor for any other information.</p>
+
+						<p>Regards,</p>
+						<p>Student Relations Manager</p>
+						<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 			$mail = new NetCoreEmail();
 			$mail->sendEmail($studentemail," Trasfer Batch Request Panding",$template);
 
