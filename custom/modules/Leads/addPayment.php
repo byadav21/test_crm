@@ -552,6 +552,164 @@ class addPaymentClass{
 				}
 			}
 		}
+		# 	>>>>----------------web Services ----------------------------<<<<<<
+					
+						$Query3="SELECT email_address,id FROM `email_addresses` WHERE deleted=0 AND email_address='".$bean->email1."'";
+						$lead3 = $GLOBALS['db']->query($Query3);
+						$Emails = $GLOBALS['db']->fetchByAssoc($lead3);
+						$leadEmail=$Emails['email_address'];
+						$emailaddid = $Emails['id'];
+						$webid = '';
+						
+						if($emailaddid){
+							$findUserWebidSql = "SELECT l.web_lead_id FROM `email_addr_bean_rel` as eabr INNER JOIN leads as l on l.id=eabr.bean_id WHERE eabr.`email_address_id`='".$emailaddid."' AND l.web_lead_id!='' LIMIT 0,1";
+							$findUserWebidobj = $GLOBALS['db']->query($findUserWebidSql);
+							$findUserWebidRes = $GLOBALS['db']->fetchByAssoc($findUserWebidobj);
+							$webid = $findUserWebidRes['web_lead_id'];
+							
+						}
+						$Fields=array();
+									
+						if(!empty($bean->first_name)){
+							$Fields[] = "first_name = '".$bean->first_name."'";
+							}
+						if(!empty($bean->last_name)){
+							$Fields[] = "last_name = '".$bean->last_name."'";
+							}
+						if(!empty($bean->birthdate)){
+							$Fields[] = "birthdate = '".$bean->birthdate."'";
+							}
+						if(!empty($bean->phone_mobile)){ 
+							$Fields[] = "phone_mobile = '".$bean->phone_mobile."'";
+							}
+						if(!empty($bean->primary_address_country)){ 
+							$Fields[] = "primary_address_country = '".$bean->primary_address_country."'";
+							}
+						if(!empty($bean->primary_address_city)){ 
+							$Fields[] = "primary_address_city = '".$bean->primary_address_city."'";
+							}
+					    $updateColumns = '';
+						if($Fields){		
+								$updateColumns = implode(",",$Fields);
+						}
+								if($bean->email1==$leadEmail && $webid){
+									$user = 'talentedgeadmin';
+									$password = 'Inkoniq@2016';
+									$url = 'http://talentedge.staging.wpengine.com/user-api/';
+									$headers = array(
+										'Authorization: Basic '. base64_encode("$user:$password") 
+									);
+									$post = [
+										'action'=> 'update',
+										'crm_user_id'=>$bean->id,
+										'email'  =>$bean->email1,
+										'first_name' =>$bean->first_name,
+										'last_name'=>$bean->last_name,
+										'gender'=>$bean->gender,
+										'dob'=>$bean->birthdate,
+										'mobile'=>$bean->phone_mobile,
+										'country'=>$bean->primary_address_country,
+										'state'=>$bean->primary_address_state,
+										'city'=>$bean->primary_address_city,
+										'pincode'=>'1',
+										'address'=>'1',
+									];
+									
+									$ch = curl_init();
+									curl_setopt($ch, CURLOPT_URL,$url);
+									curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+									curl_setopt($ch, CURLOPT_POST, 1);
+									curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+									curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+									$result = curl_exec($ch);
+									$res = json_decode($result);
+									if(isset($res[0]->status) && $res[0]->status=='1'){
+										$bean->web_lead_id=$res[0]->userid;
+										#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");
+									}
+									$bean->web_lead_id=$webid;
+									$bean->is_sent_web="1";
+									
+									curl_close($ch);
+									  if($updateColumns) {
+											#find ID of email address
+											$sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
+											$email6 = $GLOBALS['db']->query($sql6);
+										  
+											while($row6=$GLOBALS['db']->fetchByAssoc($email6)){
+												
+											# ****update When Records When Email id Same ******	
+											#echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
+											$GLOBALS['db']->Query("UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'");
+												#$qs="UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'";
+												
+											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$webid."' WHERE id_c='".$row6['bean_id']."'");					
+										
+											}
+									
+									  }
+								}
+									else
+									{
+										$user = 'talentedgeadmin';
+										$password = 'Inkoniq@2016';
+										$url = 'http://talentedge.staging.wpengine.com/user-api/';
+										$headers = array(
+											'Authorization: Basic '. base64_encode("$user:$password") 
+										);
+										$post = [
+											'action'=> 'add',
+											'crm_user_id'=>$bean->id,
+											'email'  =>$bean->email1,
+											'first_name' =>$bean->first_name,
+											'last_name'=>$bean->last_name,
+											'gender'=>$bean->gender,
+											'dob'=>$bean->birthdate,
+											'mobile'=>$bean->phone_mobile,
+											'country'=>$bean->primary_address_country,
+											'state'=>$bean->primary_address_state,
+											'city'=>$bean->primary_address_city,
+											'pincode'=>'1',
+											'address'=>'1',
+										];
+										#print_r ($post);
+										#die();
+										$ch = curl_init();
+										curl_setopt($ch, CURLOPT_URL,$url);
+										curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+										curl_setopt($ch, CURLOPT_POST, 1);
+										curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+										curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+										$result = curl_exec($ch);
+										$res = json_decode($result);
+										
+										if(isset($res[0]->status) && $res[0]->status=='1'){
+											$bean->is_sent_web="1";
+											$bean->web_lead_id=$res[0]->userid;
+											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");	
+											if($updateColumns) {
+											#find ID of email address
+											#echo $sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
+											$sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN  leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
+											$email6 = $GLOBALS['db']->query($sql6);
+											
+											while($row6=$GLOBALS['db']->fetchByAssoc($email6)){
+											# ****update When Records When Email id Same ******	
+											#echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
+											$GLOBALS['db']->Query("UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'");
+											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$row6['bean_id']."'");					
+										
+											}
+											
+										}
+										
+									
+									  }
+										
+										curl_close($ch);  						
+													
+									}									
+			
 	}
 
 	function addDispositionFunc($bean, $event, $argument){
@@ -604,9 +762,9 @@ class addPaymentClass{
                                                                     // echo $date;die;
 
 								if($date){
-									$drobj->sendDisposition($bean->status_description,$arrReq,$GLOBALS['timedate']->to_display_date_time($date));
+									$drobj->sendDisposition('Callback',$arrReq,$GLOBALS['timedate']->to_display_date_time($date));
 								}else{
-									$drobj->sendDisposition($bean->status_description,$arrReq);	
+									$drobj->sendDisposition("",$arrReq);	
 								}	
 							}else{
 							  $drobj->sendDisposition($bean->status_description,$arrReq);	
