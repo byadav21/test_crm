@@ -76,9 +76,13 @@ class te_Api_override extends te_Api {
 			$data['userId']= ($user)? $user : $sugar_config['ameyo_import_login'];
 			$data['password']= ($pass)? $pass : $sugar_config['ameyo_import_pass'];
 			$data['terminal']= $_SERVER['REMOTE_ADDR'];
+			$ch = curl_init(); 
+			curl_setopt($ch, CURLOPT_URL, $server. urlencode(json_encode($data)));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
+			$session= curl_exec($ch); 
 			 
-			 
-			$session= file_get_contents(  $server. urlencode(json_encode($data)));
+			//$session= file_get_contents(  $server. urlencode(json_encode($data)));
 			$this->createLog($server. urlencode(json_encode($data)),$session); 	
 			$jsonEncodedData = json_decode($session);
 			 
@@ -99,7 +103,12 @@ class te_Api_override extends te_Api {
 	function call($session,$request){		
 		try{ 
 			$server= $this->url . "manual-dial&data=";
-			$data= file_get_contents(  $server. urlencode(json_encode($request)));
+			$ch = curl_init(); 
+			curl_setopt($ch, CURLOPT_URL, $server. urlencode(json_encode($request)));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
+			$data= curl_exec($ch);				
+			//$data= file_get_contents(  $server. urlencode(json_encode($request)));
 			$dataErr=json_decode($data);
 			$this->createLog($server. urlencode(json_encode($request)),$data); 		
 			return ($dataErr->status=='error')?false:true;
@@ -139,7 +148,7 @@ class te_Api_override extends te_Api {
 				
 				if($request['phone']) $data['phone']=urlencode($request['phone']);
 				if($request['userId']) $data['userId']=urlencode($request['userId']);
-				$data['dispositionCode']=$callback;
+				$data['dispositionCode']=urlencode($callback);
 				
 
 				if($callback=='Call Back' || $callback=='Follow Up' || $callback=='Prospect'){
@@ -171,7 +180,14 @@ class te_Api_override extends te_Api {
 					$qrystr .=$key .'='. $val . '&'; 
 				}
 				$qrystr=substr($qrystr,0,strlen($qrystr)-1);		
-				$response= file_get_contents($url. ($qrystr)); 
+					
+
+				$ch = curl_init(); 
+				curl_setopt($ch, CURLOPT_URL, $url.$qrystr);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
+				$response = curl_exec($ch);
+				//$response= file_get_contents($url. ($qrystr)); 
 				$this->createLog($url. ($qrystr),$response);     
 				if($response!=='Dispose Successfully'){
 				  echo '<script>swal("You have to dispose manaually!")</script>';	
