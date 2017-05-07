@@ -36,12 +36,5 @@ array (
     'default' => true,
     'id' => 'AOS_CONTRACTS_ID_C',
   ),
-  'UTM_MEDIUM_C' => 
-  array (
-    'type' => 'varchar',
-    'default' => true,
-    'label' => 'LBL_UTM_MEDIUM',
-    'width' => '10%',
-  ),
 );
 ?>

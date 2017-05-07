@@ -55,18 +55,6 @@ $app_list_strings['moduleList']['te_utm']='UTM';
 $app_list_strings['moduleList']['te_UTM_System']='UTM Systems';
 $app_list_strings['moduleListSingular']['te_utm']='UTM';
 $app_list_strings['moduleListSingular']['te_UTM_System']='UTM System';
-
-$GLOBALS['app_list_strings']['contract_type_list']=array (
-  '' => '',
-  'CPA' => 'CPA',
-  'Mailer' => 'Mailer',
-  'Banner' => 'Banner',
-  'Clicks' => 'Clicks',
-  'Leads' => 'Leads',
-  'Registration' => 'Registration',
-  'Search' => 'Search',
-  'Impression' => 'Impression',
-);
 $GLOBALS['app_list_strings']['performance_metrics']=array (
   '' => '',
   'CPA' => 'CPA',
@@ -153,4 +141,14 @@ $GLOBALS['app_list_strings']['student_batch_status_list']=array (
   'Inactive' => 'Inactive',
   'Dropout' => 'Dropout',
   'Inactive_transfer' => 'Inactive Transfer',
+);
+
+$GLOBALS['app_list_strings']['contract_type_list']=array (
+  '' => '',
+  'Social' => 'Social',
+  'Organic' => 'Organic',
+  'Email' => 'Email',
+  'Display' => 'Display',
+  'CPC' => 'CPC',
+  'CPI' => 'CPI',
 );

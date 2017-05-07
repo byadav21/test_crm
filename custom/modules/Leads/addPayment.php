@@ -49,7 +49,9 @@ class addPaymentClass{
 		}
 
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
-			#update fee & attendance when record is being created manually
+			
+
+                         #update fee & attendance when record is being created manually
 			$batchSql="SELECT fees_inr,fees_in_usd,minimum_attendance_criteria as minimum_attendance FROM te_ba_batch
 			WHERE id='".$bean->te_ba_batch_id_c."' AND deleted=0";
 			$batchObj = $bean->db->Query($batchSql);
