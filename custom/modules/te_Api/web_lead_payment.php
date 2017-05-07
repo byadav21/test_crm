@@ -84,13 +84,13 @@ else{
 		$student_batch_detail = __get_student_batch_id($student_detail);
 		if($data['action']=='add'){
 			$ins_res = insert_payment($student_batch_detail,$student_detail,$data);
-			$response_result = array('status' => '1','result' => 'success','payment_id'=>$ins_res);
+			$response_result = array('status' => '1','result' => 'success','payment_id'=>$ins_res,'lead_id'=>$lead_data['id']);
 			echo json_encode($response_result);
 			exit();
 		}
 		else{
 			$update_res = update_payment($student_batch_detail,$student_detail,$data,$check_payment_row);
-			$response_result = array('status' => '1','result' => 'success','payment_id'=>$update_res);
+			$response_result = array('status' => '1','result' => 'success','payment_id'=>$update_res,'lead_id'=>$lead_data['id']);
 			echo json_encode($response_result);
 			exit();
 		}
@@ -314,11 +314,14 @@ function __get_lead_details($lead_id=NULL,$batch_id=NULL){
     $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
 	if($get_lead){
 		if($get_lead['id'] && !empty($get_lead['te_ba_batch_id_c']) && $get_lead['te_ba_batch_id_c']==$batch_id){
+			$get_lead['batch_id'] = $batch_id;
 			return $get_lead;
 		}
 		else if($get_lead['id'] && empty($get_lead['te_ba_batch_id_c'])){
 			$update_lead_sql = "UPDATE leads_cstm SET te_ba_batch_id_c='".$batch_id."' WHERE leads_cstm.id_c='".$lead_id."'";
 			$update_lead_sql_Obj= $GLOBALS['db']->query($update_lead_sql);
+			unset($get_lead['te_ba_batch_id_c']);
+			$get_lead['batch_id'] = $batch_id;
 			return $get_lead;
 		}
 		else if($get_lead['id'] && !empty($get_lead['te_ba_batch_id_c']) && $get_lead['te_ba_batch_id_c']!=$batch_id){
@@ -342,11 +345,12 @@ function __get_lead_details($lead_id=NULL,$batch_id=NULL){
 					return $check_lead_exists_res;
 				}
 				else{
+					$web_lead_id=$get_lead['web_lead_id'];
 					$ins_lead_id = create_guid();
-					$insertLeadSql="INSERT INTO leads SET id='".$ins_lead_id."',date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', modified_user_id='1',created_by='1', assigned_user_id='".$get_lead['assigned_user_id']."', first_name='".$get_lead['first_name']."', last_name='".$get_lead['last_name']."', duplicate_check=1, neoxstatus=1, assigned_date='".date('Y-m-d H:i:s')."', assigned_flag=1, phone_mobile='".$get_lead['phone_mobile']."',status='Alive',status_description='New Lead',lead_source='Website',gender='".$get_lead['gender']."',primary_address_street='".$get_lead['primary_address_street']."',primary_address_city='".$get_lead['primary_address_city']."',primary_address_state='".$get_lead['primary_address_state']."',primary_address_postalcode='".$get_lead['primary_address_postalcode']."',primary_address_country='".$get_lead['primary_address_country']."',alt_address_street='".$get_lead['alt_address_street']."',alt_address_city='".$get_lead['alt_address_city']."',alt_address_state='".$get_lead['alt_address_state']."',alt_address_postalcode='".$get_lead['alt_address_postalcode']."',alt_address_country='".$get_lead['alt_address_country']."'";
+					$insertLeadSql="INSERT INTO leads SET id='".$ins_lead_id."',date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', modified_user_id='1',created_by='1', assigned_user_id='".$get_lead['assigned_user_id']."', first_name='".$get_lead['first_name']."', last_name='".$get_lead['last_name']."', duplicate_check=1, neoxstatus=1, assigned_date='".date('Y-m-d H:i:s')."', assigned_flag=1, phone_mobile='".$get_lead['phone_mobile']."',status='Alive',status_description='New Lead',lead_source='Website',gender='".$get_lead['gender']."',primary_address_street='".$get_lead['primary_address_street']."',primary_address_city='".$get_lead['primary_address_city']."',primary_address_state='".$get_lead['primary_address_state']."',primary_address_postalcode='".$get_lead['primary_address_postalcode']."',primary_address_country='".$get_lead['primary_address_country']."',alt_address_street='".$get_lead['alt_address_street']."',alt_address_city='".$get_lead['alt_address_city']."',alt_address_state='".$get_lead['alt_address_state']."',alt_address_postalcode='".$get_lead['alt_address_postalcode']."',alt_address_country='".$get_lead['alt_address_country']."',web_lead_id=$web_lead_id,is_sent_web=1";
 					$GLOBALS['db']->Query($insertLeadSql);
 					
-					$insertLeadCstmSql="INSERT INTO leads_cstm SET id_c='".$ins_lead_id."',company_c='".$get_lead['company_c']."', functional_area_c='".$get_lead['functional_area_c']."', work_experience_c='".$get_lead['work_experience_c']."', education_c='".$get_lead['education_c']."',previous_courses_from_te_c='".$get_lead['previous_courses_from_te_c']."',city_c='".$get_lead['city_c']."',age_c='".$get_lead['age_c']."',te_ba_batch_id_c='".$batch_id."',web_id_c='".$get_lead['web_id_c']."'";
+					$insertLeadCstmSql="INSERT INTO leads_cstm SET id_c='".$ins_lead_id."',company_c='".$get_lead['company_c']."', functional_area_c='".$get_lead['functional_area_c']."', work_experience_c='".$get_lead['work_experience_c']."', education_c='".$get_lead['education_c']."',previous_courses_from_te_c='".$get_lead['previous_courses_from_te_c']."',city_c='".$get_lead['city_c']."',age_c='".$get_lead['age_c']."',te_ba_batch_id_c='".$batch_id."'";
 					$GLOBALS['db']->Query($insertLeadCstmSql);
 					
 					
