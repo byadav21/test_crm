@@ -89,15 +89,10 @@ array (
         2 => 
         array (
           0 => 'email1',
-          1 => 'phone_mobile',
         ),
         3 => 
         array (
-          0 => 
-          array (
-            'name' => 'education_c',
-            'label' => 'LBL_EDUCATION',
-          ),
+          0 => 'phone_mobile',
           1 => 
           array (
             'name' => 'phone_other',
@@ -109,45 +104,54 @@ array (
         array (
           0 => 
           array (
-            'name' => 'work_experience_c',
-            'label' => 'LBL_WORK_EXPERIENCE',
+            'name' => 'education_c',
+            'label' => 'LBL_EDUCATION',
           ),
           1 => 
           array (
-            'name' => 'functional_area_c',
-            'label' => 'LBL_FUNCTIONAL_AREA',
+            'name' => 'work_experience_c',
+            'label' => 'LBL_WORK_EXPERIENCE',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'company_c',
-            'label' => 'LBL_COMPANY',
+            'name' => 'functional_area_c',
+            'label' => 'LBL_FUNCTIONAL_AREA',
           ),
           1 => 
           array (
-            'name' => 'primary_address_city',
-            'comment' => 'City for primary address',
-            'label' => 'LBL_CITY',
+            'name' => 'company_c',
+            'label' => 'LBL_COMPANY',
           ),
         ),
         6 => 
         array (
           0 => 
           array (
+            'name' => 'primary_address_city',
+            'comment' => 'City for primary address',
+            'label' => 'LBL_CITY',
+          ),
+          1 => 
+          array (
             'name' => 'primary_address_state',
             'comment' => 'State for primary address',
             'label' => 'LBL_STATE',
           ),
-          1 => 
+        ),
+        7 => 
+        array (
+          0 => 
           array (
             'name' => 'primary_address_country',
             'comment' => 'Country for primary address',
             'label' => 'LBL_COUNTRY',
           ),
+          1 => '',
         ),
-        7 => 
+        8 => 
         array (
           0 => 
           array (
@@ -163,12 +167,12 @@ array (
             'label' => 'COMMENT',
           ),
         ),
-        8 => 
+        9 => 
         array (
           0 => '',
           1 => '',
         ),
-        9 => 
+        10 => 
         array (
           0 => 'lead_source',
           1 => 
@@ -178,7 +182,7 @@ array (
             'label' => 'LBL_FLEX_RELATE',
           ),
         ),
-        10 => 
+        11 => 
         array (
           0 => 'status',
           1 => 
@@ -186,7 +190,7 @@ array (
             'name' => 'status_description',
           ),
         ),
-        11 => 
+        12 => 
         array (
           0 => 
           array (
@@ -199,7 +203,7 @@ array (
             'label' => 'LBL_ASSIGNED_TO',
           ),
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
@@ -212,7 +216,7 @@ array (
             'label' => 'LBL_DATEOFCALLBACK',
           ),
         ),
-        13 => 
+        14 => 
         array (
           0 => 
           array (

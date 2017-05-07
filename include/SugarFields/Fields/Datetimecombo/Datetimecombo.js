@@ -46,7 +46,16 @@ text+='\nif(trim(newdate) =="'+this.timeseparator+'") newdate="";';text+='\nYAHO
 Datetimecombo.prototype.html=function(callback){var text='<span style="position:relative; top:-1px;"><select class="datetimecombo_time" size="1" id="'+this.fieldname+'_hours" tabindex="'+this.tabindex+'" onchange="combo_'+this.fieldname+'.update(); '+callback+'">';var h1=this.has12Hours?1:0;var h2=this.has12Hours?12:23;if(this.allowEmptyHM){text+='<option></option>';}
 for(i=h1;i<=h2;i++){val=i<10?"0"+i:i;text+='<option value="'+val+'" '+(i==this.hrs?"SELECTED":"")+'>'+val+'</option>';}
 text+='\n</select>&nbsp;';text+=this.timeseparator;text+='\n&nbsp;<select class="datetimecombo_time" size="1" id="'+this.fieldname+'_minutes" tabindex="'+this.tabindex+'" onchange="combo_'+this.fieldname+'.update(); '+callback+'">';if(this.allowEmptyHM){text+='\n<option></option>';}
-text+='\n<option value="00" '+(this.mins==0?"SELECTED":"")+'>00</option>';text+='\n<option value="15" '+(this.mins==15?"SELECTED":"")+'>15</option>';text+='\n<option value="30" '+(this.mins==30?"SELECTED":"")+'>30</option>';text+='\n<option value="45" '+(this.mins==45?"SELECTED":"")+'>45</option>';text+='\n</select>';if(this.hasMeridiem){text+='\n&nbsp;';text+='\n<select class="datetimecombo_time" size="1" id="'+this.fieldname+'_meridiem" tabindex="'+this.tabindex+'" onchange="combo_'+this.fieldname+'.update(); '+callback+'">';if(this.allowEmptyHM){text+='\n<option></option>';}
+var pad = "00";
+for(i=0;i<60;i++){
+	if(i<10){
+		text+='\n<option value=0"' + i  +'" '+(this.mins==i?"SELECTED":"")+'>0'+  i +'</option>';
+	}else{
+		text+='\n<option value="' + i  +'" '+(this.mins==i?"SELECTED":"")+'>'+  i +'</option>';
+	}
+}
+
+/*text+='\n<option value="00" '+(this.mins==0?"SELECTED":"")+'>00</option>';text+='\n<option value="15" '+(this.mins==15?"SELECTED":"")+'>15</option>';text+='\n<option value="30" '+(this.mins==30?"SELECTED":"")+'>30</option>';text+='\n<option value="45" '+(this.mins==45?"SELECTED":"")+'>45</option>';text+='\n</select>';*/if(this.hasMeridiem){text+='\n&nbsp;';text+='\n<select class="datetimecombo_time" size="1" id="'+this.fieldname+'_meridiem" tabindex="'+this.tabindex+'" onchange="combo_'+this.fieldname+'.update(); '+callback+'">';if(this.allowEmptyHM){text+='\n<option></option>';}
 text+='\n<option value="'+(this.pm?"am":"AM")+'" '+(/am/i.test(this.meridiem)?"SELECTED":"")+'>'+(this.pm?"am":"AM")+'</option>';text+='\n<option value="'+(this.pm?"pm":"PM")+'" '+(/pm/i.test(this.meridiem)?"SELECTED":"")+'>'+(this.pm?"pm":"PM")+'</option>';text+='\n</select>';}
 if(this.showCheckbox){text+='\n<input style="visibility:hidden;" type="checkbox" name="'+this.fieldname+'_flag" id="'+this.fieldname+'_flag" tabindex="'+this.tabindex+'" onchange="combo_'+this.fieldname+'.update(); '+callback+'" '+(this.checked?'CHECKED':'')+'>';}
 text+='</span>';return text;};Datetimecombo.prototype.update=function(updateListeners){if(typeof(updateListeners)=="undefined")
@@ -58,3 +67,4 @@ SUGAR.util.callOnChangeListers(this.fieldname);if(this.showCheckbox){flag=this.f
 {YAHOO.util.Selector.query('input#'+flag)[0].value=1;YAHOO.util.Selector.query('input#'+this.fieldname)[0].value='';YAHOO.util.Selector.query('input#'+date)[0].disabled=true;YAHOO.util.Selector.query('select#'+hours)[0].disabled=true;YAHOO.util.Selector.query('select#'+mins)[0].disabled=true;}
 else
 {YAHOO.util.Selector.query('input#'+flag)[0].value=0;YAHOO.util.Selector.query('input#'+date)[0].disabled=false;YAHOO.util.Selector.query('select#'+hours)[0].disabled=false;YAHOO.util.Selector.query('select#'+mins)[0].disabled=false;}}};
+
