@@ -1,6 +1,694 @@
-First Name,Last Name,gender,Date Of Birth,Email Address,Non Primary E-mails ,Mobile Phone,Other Phone,Education,Work Experience,Functional Area,Company,City,Primary Address State ,Primary Address Country ,Batch,Comment,Source,Status,Status Details,Notes,UTM,dristi_campagain_id,dristi_api_id
-Pankaj Jha,lname,,,111@pp.pp,,9958483076,,,,,,,,,,,,,New Lead,Referrals,Live Testing,5,19
-Pankaj Dubey,lname,,,112@pp.pp,,8588096285,,,,,,,,,,,,,New Lead,Referrals,Live Testing,5,19
-karan,lname,,,113@pp.pp,,9999497993,,,,,,,,,,,,,New Lead,Referrals,Live Testing,5,19
-Pawan,lname,,,114@pp.pp,,9971502476,,,,,,,,,,,,,New Lead,Referrals,Live Testing,5,19
-Ajay,lname,,,115@pp.pp,,9873401515,,,,,,,,,,,,,New Lead,Referrals,Live Testing,5,19
+UTM Name,FirstName,LastName,EmailAddress,MobileNumber,DateOfBirth,Secondary Phone No,City,State,Country,Gender,Comments,Education,TotalWorkExpinYears,Status,Status details,Campaign Id,Lead Id
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Bhawesh Rathod,.,rathodbhawesh12@gmail.com,9430158835,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Thiagarajan Chinnaswamy,.,thiagarajan.chinnaswamy@gmail.com,8825737727,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Tanmay Kothari,.,tanmaykothari24@gmail.com,9920460851,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Sanjeev Kumar Singh,.,skrasalpur@yahoo.co.in,9870245020,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Manmeet Patel,.,p_manmeet@yahoo.com,9662909228,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Sachindra Nath Chakravorty,.,sachin.bajrang@gmail.com,8170067151,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Avisek Ghosh,.,avisek8981@gmail.com,7407607969,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Ayush Agarwal,.,contact2ayush@yahoo.com,9871619819,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,V Ramesh Babu,.,rameshbabu67@yahoo.co.in,9902622655,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Debashish Banerji,.,debashishbanerji@yahoo.com,9198980001,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Karthikeya Buchiraju,.,bkarthikeya_14@yahoo.com,9705637935,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Suhas Shimpi,.,suhas_suha@rediffmail.com,8446324089,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Diljeet Singh Palsar,.,diljeet1105@gmail.com,9419273465,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Jaky Astik,.,jakyastik@gmail.com,8866522449,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Prashant Kharat,.,peekyy28@gmail.com,9960598802,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Srinivas Rao,.,garlapatisrinivasarao44@gmail.com,9493643792,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Ravi Kumar,.,ravik75@gmail.com,9810268481,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Mayur Mahajan,.,rakeshsingh1906@gmail.com,8789666651,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Jayesh Bari,.,bari.jayesh@gmail.com,9823490798,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Bapudp Sarmah,.,texdurga@gmail.com,7798880262,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Manas Ranjan Mohanty,.,manasmohaanty@gmail.com,9337463893,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Giridhar Isukapalli,.,giridhar.aryabhatta@gmail.com,9916170311,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Kunal Suri,.,kunal_suri@hotmail.com,9936066677,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Aman Sangha,.,sangha.aman22@yahoo.in,9815910356,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Alok Kumar,.,sonusagar1988@gmail.com,9934501297,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Rahul Gupta,.,rahulrocks452000@yahoo.com,7697279336,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Jun Bhattacharjya,.,junmonibhattacharjya@gmail.com,9707183623,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Garry James,.,cgarryjames@live.com,8691859502,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Raajesh Kanda,.,rajeshkanda59.2009@rediffmail.com,9829030810,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Gaurav Jaina,.,gauravjaina@gmail.com,9435551749,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Sandeep Pugalia,.,sandeep.pugalia@gmail.com,9830658585,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Pradip Patel,.,pradippatel06@yahoo.com,9825083053,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Vinay Khandelwal,.,hvvinaykhandelwal@gmail.com,9414662292,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Manish Sharma,.,manish2zig@gmail.com,9933695627,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Padmanaban Balachandran,.,padmanabanbalachandran@gmail.com,9894342614,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Vishal Jain,.,evishalin@yahoo.co.in,9816652110,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Certificate Programme in Entrepreneurship,Abhishek Kumar,.,abkumar2@yahoo.com,9748313231,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Advertising Management & PR,Manoj Samanta,.,manoj.samanta731@gmail.com,8967631668,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Advertising Management & PR,Shalini Malik,.,amberpackwell@gmail.com,9999595772,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Advertising Management & PR,Vikar Ahmad,.,vikar.amd@gmail.com,9410055812,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Advertising Management & PR,Karthikeyan Veerapandian,.,karthik_chennai34@yahoo.co.in,9008000000,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Advertising Management & PR,Gurdeep Singh,.,hairykotli@gmail.com,1923250490,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Ankit Ingle,.,ankitingle50@gmail.com,7888203691,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Anushikha Biswas,.,anushikhabiswas6@gmail.com,8120789518,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Mohsin Khan,.,m_khan78613@yahoo.com,9694673504,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Tirth Panchal,.,tirthpanchal87@gmail.com,8401075007,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Shivangi Gupta,.,s4sweetshivangi@yahoo.in,9899317764,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Amal Mathew Alex,.,amalappuas@gmail.com,7403287398,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Mvv Satya Durga Hari Swamy,.,hariswamy95@gmail.com,9780346909,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Mohan Lal Sah,.,mohanrathore0786@gmail.com,7050389916,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Shivam Verma Ji,.,shivamloreal@gmail.com,9027525088,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Padmapriya Iyer,.,padmaiyer19@gmail.com,9698585827,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Subha Dilip,.,sunithishreyas@yahoo.co.in,9567719803,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Shakti Saurabh,.,89saurabhdubey@gmail.com,7991472553,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _PG Certificate Program in Marketing and Brand Management,Ankit,.,ankitawesum@gmail.com,9598896123,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Paluri Umashankar,.,umapalurishankar@gmail.com,9701365904,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Chandrasekharan Narasimhan,.,chandrasekharan.n39@gmail.com,9600081448,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Vaibhav Patel,.,vaibhav.kit1987@gmail.com,7803924769,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Ganesa Pandian,.,ganesh.viv@gmail.com,9677135724,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Lalngura Tlau,.,ngura.tlau@gmail.com,9436155638,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Nimish Binani,.,nimish.binani@gmail.com,9831043130,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Nandakumar Menon,.,nandulic@yahoo.com,7736352665,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Neelash Krishnakanth,.,neelash.krishnakanth@gmail.com,9895255499,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Sharad Kumar,.,sharad_trg@rediffmail.com,9999210735,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Hema Babar,.,hemababar@rediffmail.com,9819837352,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Shashank Kr Pandey,.,shashankoverseas@gmail.com,9308885229,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Rajiv Vatsraj,.,vatsrajrajiv@gmail.com,7764902000,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Balaji Bala,.,balaji.july25@gmail.com,8148476747,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Manwendra Mukul,.,manwendramukul@gmail.com,9955631768,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Rajiv,.,kumarrajivaxis@gmail.com,7549000774,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Rahul Bhushan,.,rahul_chem04@yahoo.co.in,9448286292,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Smita Patra,.,smita1615@gmail.com,9923209001,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Sandeep Dubey,.,sandeepdby@gmail.com,9886260579,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Antony Kumar,.,rcantony@gmail.com,9840960300,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Karun Singh,.,karunsingh@rediffmail.com,7289087621,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Devang Rathor,.,devangrathor28@gmail.com,7600007523,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Manoj Kumar Sharma,.,manoj.tiss@gmail.com,9198443300,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Atul Thakur,.,atul_thkr@hotmail.com,8882055572,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Swati Baghri,.,baghriswati@gmail.com,9711297501,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Manas De,.,manasde.in@gmail.com,9836637770,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Shweta Singh,.,shwetasingh19@gmail.com,9304134404,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Charan Gopalakrishnan Balaji,.,cgbalaji@apollopharmacy.org,9551010666,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Ishtiyaque Ahmed,.,ishtiyaque21@gmail.com,9555630500,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Shakyawar Saurabh,.,sshakyawar@gmail.com,8860264426,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Prakash G Kulkarni,.,zircon_outsourcing@yahoo.com,8884345465,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Sangeeta Sarkar,.,sarkar.sangeeta786@gmail.com,9836206999,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Sumit Upadhyay,.,upadhyay.sumit01@gmail.com,9424282563,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Gaurav Pendke,.,gaurav_biotech_009@yahoo.in,8904439249,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Krishnendra Joshi,.,krishnendrajoshi@gmail.com,9039044648,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Sanjay Saha,.,sanjaysaha.76@gmail.com,9735810091,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Ritesh Kumar,.,dpolatehar1@gmail.com,9431715506,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Ankit Kesarwani,.,ankit.281091@gmail.com,9506425402,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Biplab Chandra,.,chandra.biplab@gmail.com,9674161388,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Krishnendu Das,.,krishnendu.das33@gmail.com,8926601720,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Raniammu Ammu,.,ashaammu1981@gmail.com,8861364511,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Surbhi Sharma,.,surbhisharma1286@yahoo.com,9982330530,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Sri Binunma,.,binunma@gmail.com,9895081346,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Uday Jha,.,udayjha2@gmail.com,9819321162,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Er Shravan K Roy,.,kshravanroy@gmail.com,8795817774,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Balakrishna Kurup,.,kuruprb06@gmail.com,9400794698,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Rajesh Gupta,.,rajesh.gupta4@pnb.co.in,9855992729,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Arjun A Warrier,.,arjunawarrier@gmail.com,7358019816,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Dhiraj Gogoi,.,gogoidhiraj09@gmail.com,8272844353,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Sreenivas Kondayil,.,kondayilsreenivaspillai@rediffmail.com,9677176212,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Alfi Ya,.,alfiyaa03@gmail.com,9677809213,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Gaurav Bhatt,.,gaurav007bhatt@gmail.com,9644422110,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Radhaa T Kumar,.,radhaatkumar@gmail.com,9845740720,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Desh Raj,.,raj.deshin13@gmail.com,7814936063,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Narendra Srivastava,.,narendrathebrain@gmail.com,8252138493,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Alok Mahapatra,.,er.qtptester@gmail.com,7022043109,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Ankit Agarwal,.,ankitdeworld@gmail.com,7023000742,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Kartik Naik,.,kartik.naik87@gmail.com,9824590666,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,S K Tiwari,.,tiwari_1989@yahoo.co.in,9431183918,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Kunal Sonawane,.,kunalsonawane87@gmail.com,9594936468,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Vivek Kumar Singh,.,viveksomvanshi83@gmail.com,9935835189,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Ashish Gupta,.,ankurgupta.2572@gmail.com,8989200819,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Satrughana Behera,.,satru67@gmail.com,9437049180,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE_Focus _Executive Programme in Leadership and Change Management,Sandeep Misra,.,dikkimca@gmail.com,9900393691,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Srinivas Rao,.,srinu.cps@gmail.com,9845941081,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TE_Focus _Executive Programme in Leadership and Change Management,Sudipta Dam,.,sudipta1975.dam@gmail.com,9903963554,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Rajeev Maheshwari,.,rajeevm682005@yahoo.com,9312947130,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Mohammed Irfan,.,mohammed.irfan2331@gmail.com,9168061199,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sunil Thomas,.,sunilthomas2006@gmail.com,9990764513,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ayan,.,ayanroy91@gmail.com,8318983635,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),N Srinivas Rao,.,nsrinivasrao.ace@gmail.com,9938180472,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Tarun,.,tarun96dhamija@gmail.com,9717336254,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Certificate Programme in Entrepreneurship,Sanjaya Das,.,educationbeyondboundary@gmail.com,7665207759,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Advertising Management & PR,P Misra,.,prithvi102@hotmail.com,9433019367,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Certificate Programme in Talent Management,D Anil Kumar,.,danilkumar@deloitte.com,9866314817,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Mahesh,.,maheshkottakota@gmail.com,7799589933,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme in Entrepreneurship,Gautam Biswas,.,gautam12862@gmail.com,9830037731,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Subhajit Banik,.,baniksubhajit00@gmail.com,8910024104,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Raghavendra,.,meetraghav@gmail.com,9886396677,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Marie Stanislas Ashok,.,ashokms@yahoo.com,9345421430,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sudesh,.,sudeshsinghal01@gmail.com,9870211947,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Advertising Management & PR,Supriya Modi,.,mymatri009@gmail.com,9329037323,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Nisith,.,nisith@sysces.com,9040006100,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Certificate Programme in Talent Management,Anup,.,anupgopalsuvarna@hotmail.com,77189850237,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Chhavi Choudhary,.,cchoudhary247@gmail.com,9461728472,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme in Entrepreneurship,Saubhik Adhya,.,saubhik.adhya@gmail.com,9731687459,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ansuman Prasad,.,ansymanatul@gmail.com,7978324503,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rohitha,.,rohithasweety1206@gmail.com,7702314470,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),R Subramaniam,.,subramaniam.ramakrishnan@sifycorp.com,9959999612,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sreekanth Raghuvaran,.,rsreekanthr@gmail.com,9884070544,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Anand Singh,.,thisisanand@yahoo.com,9849621521,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Chiraag Samaddar,.,chiraag_samaddar@gmail.com,9871684021,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Leadership and Change Management,Kanika Sharma,.,kanusharma93@gmail.com,9988960273,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Kumar,.,kumar.cg@kugway.com,9902058627,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Leadership and Change Management,S Sriram,.,sriram.s@bajajelectricals.com,9167651048,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Soma,.,monjoroy@gmail.com,8008552096,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TE _Executive Programme in Leadership and Change Management,Sandeep Sharma,.,sandeepharsh@gmail.com,7057581363,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Muhammed Mohideen,.,azarirshath@gmail.com,8056514514,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sanjeev Satija,.,sanjeevsatijaca@gmail.com,9910494926,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Certificate Programme in Talent Management,Aruna R,.,arunaradha1@gmail.com,9035608198,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Meenurani,.,meenurani123@gmail.com,7355246727,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Hemachandran,.,kb.hemachandran@gmail.com,9560033682,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Abhijit Sidhan,.,abhijit.ns@gmail.com,9620181301,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Subrata Das,.,dassubratamarch@gmail.com,9632665013,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Career360 _PG Certificate Program in Marketing and Brand Management,Mohandas,.,mohandasrp@mpp.co.in,9447053216,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Website _Executive Programme in Advanced Financial Management from XLRI,Shyam Ramesh Sundar,.,sundarforani@gmail.com,9600015399,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Devashish,.,devashish8991@gmail.com,8948306937,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Gaurav Shukla,.,gsmzp1994@gmail.com,9451678053,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Mathan Kumar,.,mathank832@gmail.com,7708654572,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Swapnil Vijay Belapurkar,.,swapnilbelapurkar35@gmail.com,7775909329,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Thakor Mukeshkumar Kantiji,.,udaniyamukeshkumar@gmail.com,8980536545,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Shahida Khan,.,khanshahida988@gmail.com,9509888688,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Akash,.,akash.chander@strengthscape.com,9845455307,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Certificate Programme in Talent Management,Ravisankar,.,ravisankarmatta@gmail.com,9000639999,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Gurjinder Kaur,.,gurindersingh7633@gmail.com,9996076328,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Programme in Leadership and Change Management,Ashok,.,ashoknegidi@gmail.com,9550742711,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Subhra Chatterjee,.,subhra.chatterjee@gmail.com,8334027469,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ashis Singha,.,ashisbcet@gmail.com,7483244503,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Applied Financial Risk Management,Bhavya Pandey,.,acsbhavya@gmail.com,8287097199,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Nisar Ahmad Sofi,.,na_sofi@yahoo.com,9958457080,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Certificate Programme in Entrepreneurship,Suviraj John,.,suvirajjohn195@gmail.com,9810833080,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme in Entrepreneurship,Rahul,.,rdshotspot@gmail.com,9874563210,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Ravindra Bisht,.,ravindra.bisht@fisglobal.com,9899651515,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Mansi,.,panchamia93@gmail.com,9820983496,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme in Entrepreneurship,Abhilash C P,.,cpabhilash@gmail.com,9446220099,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Swapnil Salgaonkar,.,sms28985@gmail.com,9869125501,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ravi,.,chr2711@hotmail.com,9566059777,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Jayachandran,.,haijay.m@gmail.com,9845536634,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Durga Prasad Subudhi,.,dpscivil2213@gmail.com,7008955196,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Raju Sheikh,.,rajusheikh2010@gmail.com,9051919000,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Mozahid Ansari,.,mozahidtipu7079@gmail.com,9060065290,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rajhans Kumar,.,rajhanskumar468@gmail.com,9986328496,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Naveenraj,.,dnaveenraj@gmail.com,8122302640,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Balkaran Jit Singh,.,karansangha@gmail.com,8198054394,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Mustak Ali Khan,.,mustakalikhan46@gmail.com,8875056613,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Praveen,.,ssarakanavar@gmail.com,9108911818,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Leadership and Change Management,Ganesan,.,ganeshsar@yahoo.co.in,9843168945,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Hari,.,harikrishna0056@gmail.com,9744624203,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ganesh Sambamurthi,.,sganesh0789@yahoo.com,9989501088,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Uday,.,udaypatel028@gmail.com,9099258622,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Santosh Kumar Mondal,.,santoshkumarmondal93@gmail.com,7261004895,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Vinod Nair,.,vinuaakash@gmail.com,8128698726,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Ramendra Singh,.,ramendrashrivastav001@gmail.com,7905916878,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Charanjeet Singh,.,pamma@email.com,9876507538,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Tufaan Singh,.,tufaansingh624@gmail.com,9005690422,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme in Talent Management,Abdul Razak,.,abdulelite@gmail.com,9886755944,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Arti Bhat,.,bhat.arti@gmail.com,9844683957,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Quora _PG Certificate Program in Marketing and Brand Management,Kalpesh Jadhav,.,kalpeshjadhav0055@gmail.com,8788108028,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Certificate Programme in Entrepreneurship,Vineet Raswant,.,vinras9@gmail.com,9739222499,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,D Kiran,.,dkiran888@gmail.com,9618895843,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Parth Sinha,.,sinhaparth77@gmail.com,9958134860,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sumit Gupta,.,sumitgupta1979@gmail.com,9810389101,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ravi Kumar Sinha,.,ravisinha559@gmail.com,9561154997,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,K Divya Priya,.,divyapriya143@gmail.com,8695824799,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Ranu Sharma,.,shhimanshu86@gmail.com,9929123596,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Leadership and Change Management,Mathew P D,.,mastermindkochi.in@gmail.com,9562802835,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Mahendra Singh,.,mahendrasingh201997@email.com,9461263397,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Sachin,.,sverma.sv13@email.com,9012598918,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Kunal,.,kunal.601thakur@gmail.com,9882180601,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Tanak,.,tanakraina19@gmail.com,9646421913,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Applied Financial Risk Management,Rahul Tripathi,.,imrrahul18@gmail.com,7752947356,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Vikram Verma,.,vikram@gmail.com,7256059834,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Certificate Programme in Talent Management,Nandita Warrier,.,nandita@growthspurt.net.in,9820824774,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Lalu,.,razasharukh1@gmail.com,7697817181,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Leadership and Change Management,Abhishek Bangia,.,abhishekb@technogile.com,9871144311,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Jyoti,.,bijenderpetwar@gmail.com,9467250800,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Jayshri,.,vikramjisankhala6@gmail.com,9610178500,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Ajit Tiwari,.,ajittiwari698@gmail.com,8446506329,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Amandeep Singh,.,amandeep.651@gmail.com,9915292267,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Ramesh Bediya,.,rbediya7@gmail.com,9162245642,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Ekta Tiwari,.,itsme.ektatiwari@gmail.com,9920995915,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Suraj Yedme,.,surajyedme2@gmail.com,9766752565,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Atul,.,sniperclone81920@gmail.com,8923951439,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Dimpal Said,.,rb.rambabuarya@gmail.com,9887068713,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Malhar Makwana,.,malhar_makwana@yahoo.com,7265818533,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Shivdayal Raturi,.,shivdayalraturi@yahoo.in,9760140233,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Abhishek Thakur,.,tabhishek1965@gmail.com,7898795569,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Sanjaykumar,.,skumar31493@gail.com,8960927606,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Ajeetkumar,.,ajeetkumar95238@gmail.com,9888940826,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Mallamudasir,.,mallamudasir4@gmail.com,7298752113,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Nutan Dharwan,.,nutanthakral91@gmail.com,8923999783,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Ajeetkumar,.,ajeetkumar95238@gmail.com,9888940826,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Gourav Gupta,.,djgouravgupta95@gmail.com,8109014051,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Bhagwan Das,.,akshitkohli30@gmail.com,8909113704,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Suprio Sonar,.,suriosonar2002@gmail.in,9735020372,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Prajakta Sontakke,.,prajaktasontakke90@gmail.com,9130508253,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Lucky,.,luckymish403@gmail.com,9532967089,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Chandan Kumar,.,ck962831@gmail.com,8130695291,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Md Ikbal,.,mdikbal8800@gmail.com,7177639818,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Muhammed Shibili Pk,.,shibilshaz643@gmail.com,9562470882,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Ramchandra Patel,.,subhampatel725@gmail.com,7617238947,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Nekram,.,ramnek36@gmail.com,9816159783,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Abuzafar,.,abuzafar95@gmail.com,7044556278,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Arshdeep Singh,.,singharshb1997@gmail.com,8392020003,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Kiran Kumri,.,kirankumaridm35@gmail.com,7765817108,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Anuradha Gupta,.,anuradhag.30@gmail.com,9811814731,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Abhinand,.,nandutaanvsabhi@gmail.com,9961088604,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Arundeep Singh,.,arundeep6927@yahoo.com,9872996142,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Pituni,.,pituni_airon@yahoo.com,9899694498,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Alok Kumar Sahu,.,aloksahu310@gmail.com,9938237547,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Gayathry,.,gayathryanish@gmail.com,9980141040,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Baljinder,.,baljindervirdi@yahoo.com,9779807266,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Neha Choudhary,.,shashikantchoudhary056@gmail.com,9012638010,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Rajesh Joshi,.,rjjoshi990@gmail.com,9858878934,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Taboola _Executive Certificate Programme In Applied Financial Risk Management,Srikanta Pradhan,.,srikanta.fin.acc@gmail.com,8984445556,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Programme in Data Science Using Excel and R from XLRI(COC),Vijay Kumar Yadav,.,imtsvkpy@gmail.com,8340371972,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Taboola _Executive Programme in Data Science Using Excel and R from XLRI(COC),Raheela Sultana,.,raheela.sultana8@gmail.com,9052946521,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _PG Certificate Program in Marketing and Brand Management,Gayatri Raman Doshi,.,gdoshi92@gmail.com,8149396480,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Certificate Programme in Entrepreneurship,Neeraj Kumar,.,neerajkumarsbg@gmail.com,96892811032,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Entrepreneurship,Shaik Nayab,.,snrtata@gmail.com,8985711127,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Krish Mehra,.,krishmehraofficial@gmail.com,9983781357,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Manisha,.,manishamanu666@gmail.com,9440908135,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Rishabh,.,rishabhqualitydesign@gmail.com,9111425387,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Applied Financial Risk Management,Aditya Deshpande,.,adityadeshpande2588@gmail.com,9930202790,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Ayman,.,aymanayman1104@gmail.com,9553140622,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+CiteHR _Executive Certificate Programme In Strategic Performance Management,Anar Mehta,.,banar1964@gmail.com,9824346983,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Shraddha,.,shraddha2892@gmail.com,8600993097,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ritesh,.,riteshright@gmail.com,9099082681,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Piyush,.,piyushchauah70550@gmail.com,7055050520,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Programme in Leadership and Change Management,Kashiff Khan,.,kashif.khan1@gmail.com,9849394448,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _PG Certificate Program In Digital Marketing,Shrayashee Dey,.,shrayashee@gmail.com,9986503588,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,V Purushotham Reddy,.,reddy.vpurushotham@gmail.com,9000478078,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Basil S Kuriakose,.,basilsk1997@gmail.com,9895639645,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Satarupa Mohapatra,.,satarupa.rgipt@gmail.com,9205386756,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Arun Gond,.,gondarun5760@gmail.com,8756254773,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Bharat Vora,.,pawanmac@hotmail.com,9821060330,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Sahil,.,sahilkaushik.sk84@gmail.com,9896577446,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Quora _PG Certificate Program in Marketing and Brand Management,Dhiraj Mittal,.,dhirajmittal2005@gmail.com,9810312859,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Himanshu,.,enjoyht@gmail.com,9873835056,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ratan,.,ratan.chand01@gmail.com,7022913507,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Anil Das,.,anil1991das@gmail.com,9818674193,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Applied Financial Risk Management,Bhawna,.,bhawnaaggarwal63@yahoo.com,9463848742,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Ramkumar,.,ramansat87@gmail.com,8148646486,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Certificate Programme in Talent Management,Samar Fatima,.,samarfa70@hotmail.com,9205823043,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Sairam Naidu,.,saiiramnaidu@gmail.com,9491938264,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Vijay Kumar,.,vijayrathor97@gmail.com,9716156209,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Rishikesh Yadav,.,ricky25101998@gmail.com,9793218218,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rahul P,.,pacherirahul@gmail.com,9048158538,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Vel,.,rvelmurukan@gmail.com,9500774935,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Sreekumar,.,sreekumar.sc@gmail.com,9387253872,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Rajshekhar,.,shekhar.raj81@gmail.com,9663098384,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Programme in Leadership and Change Management,Vivek Panda,.,vivekpanda2001@gmail.com,9871199256,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Farhat,.,drfarhatjababr@yahoo.in,9572464686,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sunitha,.,snb1319@gmail.com,8977671081,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Shankar,.,kdjadav349@gmail.com,9741376058,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Ruchi Bhakt,.,ruchi_bhakt@yahoo.co.in,8948553774,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Anitha Ramachandran,.,anithamallick@gmail.com,9972013885,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Pavan Korivi,.,pavankorivi@gmail.com,8885552223,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Anbarasan,.,lvking1607@gmail.com,9585086875,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sudhanshu Mishra,.,mishrasudhanshu509@gmail.com,9504267677,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Sachin Kumar Shakya,.,sshakya652@gmail.com,7568305729,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Shambuling N Konanavar,.,shambana15@gmail.com,9538979154,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _PG Certificate Program In Digital Marketing,Varanasi Ramakrishna,.,rkvaranasi96@yahoo.com,9553026927,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Garima Maheshwari,.,garima.maheshwari23@gmail.com,8149789734,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Jibran Khan,.,jibrankhan987@gmail.com,9784477872,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Mounika,.,mounikakasaragadda989@gmail.com,8096908210,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Amrutha,.,amruthaananth@gmail.com,9962424475,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Gaurav Mamtani,.,gomamtani@gmail.com,9711116890,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Parmar Dhaval,.,kdparmar07@gmail.com,96245564564,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Programme in Leadership and Change Management,Abhishek Singh,.,abhishekjn.singh@gmail.com,8800798685,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Pawan Kumar Dubey,.,thepawanbimps@gmail.com,9198223522,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Sudip D,.,sudipd2010@gmail.com,9833721073,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Akhalesh Kumar,.,akhaleshkumar111@gmail.com,9012537001,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Madhushree,.,madhushreecs44@gmail.com,9448258137,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Sonu Kumar,.,s.singh191191@gmail.com,9953747716,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Dr Dadapeer J Tondur,.,dadaeer.j.t@gmail.com,8867951381,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Programme in Leadership and Change Management,Silvy Chahal,.,silvychahal@gmail.com,7506320926,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Shyam,.,shyamghimire61939@gmail.com,8369499942,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Sudip Halder,.,sudiphalder001@gmail.com,9830704440,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Advanced Financial Management from XLRI,Sumanth,.,sumanth.gandhi@gmail.com,9740875400,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _PG Certificate Program in Marketing and Brand Management,Anirban De Munshi,.,ademunshi.04@gmail.com,9891228371,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Madhav,.,saimadhav69@gmail.com,9985612958,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+CiteHR _Executive Certificate Programme In Strategic Performance Management,Saroj Kumar Deka,.,sarojdeka2000@gmail.com,9971244622,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Md Jahangeer,.,jahangeertipu@gmail.com,9065083665,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Kishor,.,srtkishor@gmail.com,9898746029,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Altaf,.,altaf1.khan@gmail.com,8527519520,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Ayush Suhas Mhetre,.,mhetreayush123@gmail.com,9850803366,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Programme in Leadership and Change Management,Palak Sharma,.,palak1997123@gmail.com,9452042989,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _PG Certificate Program in Marketing and Brand Management,Shriti Das,.,shritii@gmail.com,9819169256,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Jasobantamishra,.,jasobantamishra@yahoo.com,9599112537,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Minakshi Sahoo,.,minakshi.jspur@gmail.com,7377358984,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Ramesh Kumar,.,rameshkumarct1@gmail.com,8239943190,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Nur Slam,.,islamnur564@gmail.com,8345853521,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Rajashree Vh,.,rajashree.vh@cenduit.com,9620041234,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Applied Financial Risk Management,Shaguna Gupta,.,shagunagupta90@gmail.com,9041370107,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Shubham,.,rohitsrivastav888@gmail.com,9540525488,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Anetha Kumar V,.,anetha2628@gmail.com,9840726281,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _PG Certificate Program In Digital Marketing,Sravan,.,rockingsravan2020@gmail.com,9030481639,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Mukesh Sharma,.,mukeshsharma388@outlook.com,8058011250,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Advertising Management & PR,Ashish Jagannath Jawale,.,ashish01jawale@gmail.com,7208021242,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Programme in Leadership and Change Management,Kirandeep Kaur,.,kiransandhu055@gmail.com,9888962819,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Sreta Jha,.,sretajha@gmail.com,9038610207,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Abhinash,.,pandit.bechu@gmail.com,8750163352,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Mayur Duwa,.,mayurduwa19@gmail.com,9512105065,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Pooja Verma,.,akashvermaali.1107@gmail.com,7895801655,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Chandankn,.,chandanknmalalur@gmail.com,9845217529,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Deepa Farswan,.,farswandeepika1@gmail.com,9997320052,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Applied Financial Risk Management,Rajshree Shukla,.,srajshree15@gmail.com,8693050218,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Sounderya Jaiswal,.,sounderyajaiswal@gmail.com,9140579050,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Bittu Kumar,.,bittu9934897519@gmail.com,7631365726,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Busetty Venkata Rajasekhar,.,rajasekharb85@email.com,8919046849,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Babudal Basor,.,babudalbasor@gmail.com,7898610734,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Rajesh Sing,.,raj.riya76@gmail.com,8447725051,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Kundan Kumar,.,kkmppv7473@gmail.in,9122676457,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TE_Focus _Executive Programme in Leadership and Change Management,Vikram Chatterjee,.,vikram983040@gmail.com,9874735224,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Prakash Singh,.,rishabhsingh8095@gmail.com,7808317504,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Shinto George,.,shintogeorge805@gmail.com,9947573496,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Prajapati Dipesh R,.,dipeshprajapaja215@gmail.com,7567082822,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Manikramsahu,.,manikramsahu259@gmail.com,7987164834,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Ram Ladhaite,.,ramsingh90159@gmail.com,9456996640,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Diksha Thakur,.,tabuthakur16@gmail.com,9459258524,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Deepak Gupta,.,puravgupta629@gmail.com,7737897262,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Md Jameel,.,mdjameel.mj84@gmail.com,7411705667,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Santanu Raul,.,santanuraul76@gmail.com,9932187661,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Mayank Kumar Prajapati,.,mayank1995prajapati@gmail.com,8439150466,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Sourav,.,sghundale@gmail.com,9888303605,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Applied Financial Risk Management,Ashish Kumar Panda,.,master.ashish12345@gmail.com,7077374209,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Narayan Kadam,.,narayankadam25@gmail.com,8088078749,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Krishnkant Shrama,.,divakaransharma@gmail.com,8051699133,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Harshitha,.,harshithasrinivas.6@gmail.com,9740969573,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Ashu Khan,.,ashukhan68@gmail.com,7903835099,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Cherish Patel,.,cherishpatel420@gmail.com,9558058405,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Narayana Swamy,.,narayanagdlr@gmail.com,7075123945,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Website _Executive Programme in Leadership and Change Management,Boopathi Raja V,.,boopathiking471@gmail.com,9941747731,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Ravitiwari,.,tiwariravi661@gmail.com,8655205952,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Kulvir Singh,.,kulvir@gmail.com,8968649807,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,M Kiridharan,.,kuttygiricivil@gmail.com,9524178473,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Vishnu Mv,.,vishnumv6811@gmail.com,9567636811,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Vivek Kumar Mishra,.,mishravivek319@gmail.com,8874702086,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Prince Jha,.,princekameshwar@yahoo.com,7276322210,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Programme in Leadership and Change Management,Mohammad Sameer,.,sameerkhan.sk2999@gmail.com,8952874070,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Party Sevak,.,sm016380@gmail.com,9521217902,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Javed Ali,.,alijaved9695@gmail.com,8691839941,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Krishna Singh,.,kpsingh999@gmail.com,9903372199,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Amardeep Kumar Bishwas,.,bishwasamardeep17@gmail.com,7633085742,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Programme in Leadership and Change Management,Varun Negi,.,varundotnegi@gmail.com,9711717681,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Tauqeer Ahmad Idrisi,.,ahmed.tauqeer8284@gmail.com,8284871740,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Poonam Kumari,.,kunalkumar65462@gmail.com,8002956791,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Shivkumar Rajbhar,.,rajbahar2013@gmail.com,9795662456,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Entrepreneurship,Arjun Kannaujia,.,arjunkannaujia.243@gmail.com,9125531376,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Hejbulla Box,.,hejbulla430@gmail.com,7501553694,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Manav,.,19.26shammigoryan@gmail.com,9878664100,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Rajat Dixit,.,rajatd504@email.com,9919275595,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Anubhav,.,anubhav.rishuraj@gmail.com,8873053377,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Vijay Kokare,.,vijaykokare0@gmail.com,9764195852,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Vijayapriyanga,.,vijayapriyangasivaguru@gmail.com,9092764051,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Deepali Jhanji,.,deepali.jhanji2931@gmail.com,9711120509,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Shreya Majumdar,.,shreyamajumdar006@gmail.com,7620491988,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Biswajit Barick,.,barickbiswajit@gmail.com,7011741205,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Ritesh Verma,.,riteshvermayhoo@gmail.com,8750355638,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Rajan R,.,rajanpillaiindian@gmail.com,9400368100,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Ravibadini,.,ravibadini8791@gmail.com,9912128791,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Khumansinh,.,kbbariyags@yahoo.com,8980068328,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Vipin,.,vipin@vistamotors.in,9745310022,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Mahipat Chavda,.,mahipatchavda7@gmail.com,8128264588,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Arnab Mukherjee,.,arnab.comworld@gmail.com,9804917806,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sidhartha Sinha,.,sdssidhartha@gmail.com,7045422056,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Programme in Leadership and Change Management,Faiza Kauser,.,faizakauser1711@gmail.com,9661960391,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Samrat Deb,.,edushineacademy12@gmail.com,8794862481,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ayan,.,dreamdecoration2003@gmail.com,8604046585,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Pavan Gopal Katta,.,pavankatta21@gmail.com,7875587221,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Pavankumarreddy,.,poola.pkr22154@gmail.com,9949074906,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Er Vijay Adhiya,.,cnsinfo7@gmail.com,9537036394,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Namrata Tiwari,.,namrata.tiwari990@gmail.com,9015832771,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Entrepreneurship,Sakshi,.,sakshigattani1994@gmail.com,8764164926,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Narendra Nareda,.,narendradmirer145@gmail.com,8770656062,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Advanced Financial Management from XLRI,Veeranki Sravani,.,alahari_suhasini@yahoo.com,8142099399,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Bharvad Dineshbhai Becharbhai,.,dineshbharvad990@gmaill.com,9099488057,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Keshav,.,keshavsharmabca@gmail.com,9782180791,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Benny,.,benny.thomas011@gmail.com,9902585484,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Rizwan,.,rizwanulhaque822@gmail.com,9992850681,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Programme in Leadership and Change Management,Nagesh,.,nageshmore349@gmail.com,9665800219,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Surajit Bhattacharjee,.,surajitbhattacharjee2000@gmail.com,7501232947,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Subhash Nautiyal,.,subhash.nautiyal@gmail.com,9873859290,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Kamleshwar,.,kamleshwar@gmail.com,7089813433,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Chultim Dorjee Sherpa,.,chultimkunga@gmail.com,8348331499,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+CiteHR _Executive Certificate Programme In Strategic Performance Management,Kalhyaan B Gugilam,.,kalhyaanbg@gmail.com,9699412348,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Rajesh Kharadi,.,rajeshkharadi500@gmail.com,9409676500,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Vishal Srivastava,.,mrannoymous27@gmail.com,8171037804,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Sagar Yadav,.,sagarsopankakayadav@gmail.com,8551957824,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Naveenkumar,.,mugilvelkumar@gmail.com,9944659985,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Vijay Shankar Jumde,.,vijayjumde14@gmail.com,9763677884,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Montu Thakur,.,thakurmontu133@gmail.com,8638926913,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Utpal Nandi,.,nandiutpal97@gmail.com,8984657525,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Rakesh P V,.,rajeshrrkutooos@gmail.com,9747305464,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+CiteHR _Executive Certificate Programme In Strategic Performance Management,Naga Rohit,.,capariesconsultancyservices@gmail.com,9177477865,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Vinita Negi,.,sunilnegi723@gmail.com,9953772437,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Debanjan Jash,.,debanjanjash8@gmail.com,9434854455,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Abhimanyu Singh,.,abhimanyusingh405@gmail.com,8290300687,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Pravin Bamble,.,pravinbamble40@gmail.com,9762645281,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Midair Ah Malik,.,malikmudasir1998@gmail.com,9596572002,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Kallappa Nagannavar,.,kallunagannavar@gmail.com,9980281779,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Manish Singh,.,manishgreat96@gmail.com,9336982307,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Vidhyanand,.,vidhyanand@gmail.com,9962588007,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Vishudevi V,.,vishudevi16091995@gmail.com,8807749316,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Arjun Mudgal,.,kaushik.shiva123@gmail.com,8393007266,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Neerajkushwa,.,neerajkushwaha43@gmail.com,7999606118,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Surbhi,.,subuugusain@gmail.com,8171776724,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Gokul,.,gokulmittu46@gmail.com,8921939349,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Pratik Atmaram Naykwadi,.,pratiknaykwadi30@gmail.com,9730491747,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Yogesh,.,yogeshkumar79466@gmail.com,7988701165,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Pargat Singh,.,pargatsinghsohata@gmail.com,9878712341,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Abdul,.,qayoumkhan786@gmail.com,9161765402,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Shubha,.,shubhayadav2110@gmail.com,7046838980,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Priyanka,.,piryankar@gmail.com,9913026251,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Rajkumar,.,rajkumartbt55@gmail.com,8400387138,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Valeo Venkatesh,.,venkateshveerappathiran360@gmail.com,8124763979,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Puja Chowdhury,.,surajkoiri129@gmail.com,9021678115,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Binuuthaman,.,binuuthaman1977@gmail.com,7510662237,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Surya,.,rsuryakumar1995@gmail.com,9550512404,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Bevara Bhargavanaidu,.,bevarabhargavanaidu@gmail.com,8500374931,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Amit Bar,.,amitbar9932@gmail.com,9958375257,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Aditya Samanta,.,adityasamanta147@gmail.com,9804847504,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Nagaraju,.,nagarajumech15@gmail.com,8374400810,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Binu D,.,binudaniel@gmail.com,9947506730,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Mohd Astaff Khan,.,mohdastaffkhan@gmail.com,7085164091,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Vikash,.,vc47895@gmail.com,7037907840,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Rajendraprasad,.,rajr29132@gmail.com,8886072890,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Amardeep Singh,.,amardeepsingh7244@gmail.com,7045734501,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,E Revathi,.,revathiesr@gmail.com,9700810890,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Usha Singh,.,singhusha0120@gmail.com,8839770385,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Vidya Kumari Gupta,.,vidya2911@gmail.com,8790042061,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Kesiya Mary Mathai,.,meenuanipkd41@gmail.com,9946335235,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Dutt,.,duttajwalia@gmail.com,8511944420,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Ravitiwari,.,rt085092@gmail.com,9587849595,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Talent Management,Rohit Kumar,.,rohitmzp20121996@gmail.com,8756305511,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Vikash,.,vickykumar11465@gmail.com,9928867748,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Nilesh Pawar,.,pawarnilesh1432@gmail.com,7066360333,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Asif Khan,.,ashifkhanchisti@gmail.com,7071538324,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Smruti Ranjan Parida,.,ranjan.smruti321@gmail.com,7377045608,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Suthar Rohit Govind Bhai,.,rohitsuthar079@gmail.com,9725580240,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Sher Singh,.,rajputroyalkingboy786@gmail.com,9772740320,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Davinder Heer,.,davinderheer967@gmail.com,9464179761,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Dilnawaj Sarif,.,dnsarif122@gmail.com,7407528677,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Malaya Ranjan Behera,.,malayabehera031@gmail.com,8280180721,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Surendra Saini,.,sksaini066@gmail.com,7597861190,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Pradip Kumar,.,salahkar2010pradipkumar@gmail.com,8709565622,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Km Niharika Singh,.,kmniharika25august@gmail.com,9580410037,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Amresh Kumar Pandey,.,amiedms@gmail.com,9555951499,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Subrata Paul,.,subratapaul4053@mail.com,8730848233,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,S Sahida,.,s.shahida786@gmail.com,9030203740,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Prince Soni,.,akashsoni6668@gmail.com,8707642738,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Nilesh Kumar Sharma,.,nileshkumarsharma668@gmail.com,7069190557,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Subhashini,.,skumarsubha0208@gmail.com,9842948904,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Aparna Sanjay Kamble,.,aparnakamble3194@gmail.com,8625831652,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Tarunswami,.,tanuswami38@gmail.com,9829806010,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Pramod Kumar Choudhary,.,pramodjaiswal110008@gmail.com,9205723647,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Himu Das Gupta,.,himudaskarimganj@gmail.com,9613020043,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Ajaykumar,.,ajay9780139474@gmail.com,9780139474,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Ksathiyaprabha,.,daudsraj007@gmail.com,9487154170,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Sangeeta Tilgam,.,sangeetatilgam@gmail.com,8109281574,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Pintusingh,.,pintusinghbuswal@gmail.com,9610812001,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Deepak Rajput,.,dr234113@gmail.com,7974562980,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Manu,.,manugmgadde707@email.com,8495057734,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Omprakash Sachan,.,sachan.omprakash348@gmail.com,9889491032,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Mohita,.,mohitarana90@gmail.com,9560271699,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Grishmann,.,grishmann143@gmail.com,8142737212,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Umamaheswari,.,manikandanqcheck@gmail.com,7373311355,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Programme in Leadership and Change Management,Sanjay Kumar,.,sumansanjay46@gmail.com,7367954767,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Chandan Kumar,.,chandanmishra.bsnl@gmail.com,9473006526,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Ravinder Singh,.,ravisabhra786@gmail.com,9878142653,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Arbazsajjn,.,arbazsajjn@gmail.com,8551875520,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program In Digital Marketing,Bapu Chakma,.,bapuchakma@gmail.com,8730976304,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Shivam Gupta,.,1515omcomputer@gmail.com,9120262766,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,A Raj Kumar,.,kraj84492@gmail.com,7729900214,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Pawan Kumar Sharma,.,pawansharmaips2@gmail.com,9929528093,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Sayanti Sen Gupta,.,sayanti.raysengupta@cognizant.com,9176310814,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Lakhan Chouhan,.,clakhan672@gmail.com,7772880995,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Sheenu,.,dhingrasheenu90@gmail.com,9814288168,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Harikrishnan C R,.,harikrishnan97@yahoo.com,9645206376,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme in Entrepreneurship,Biswajit Barick,.,barickbiswajit@gmail.com,7011741205,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Jitendra Kumar,.,jkjay399@gmail.com,8434117984,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Angraj Meena,.,angrajmeena996@gmail.com,9929191354,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Ratna Kumar,.,ratnasekhar122@gmail.com,8008126088,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Rahul Kumar,.,rahulsingh3118.rs@gmail.com,8077409640,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Sayuri,.,ujjainkarsayuri17@gmail.com,7666380801,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Rani Thakur,.,ranithakur968@gmail.com,7067404604,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme in Talent Management,Ranjan Kumar,.,ranjanayushsharma@gmail.com,9736372900,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Namita Mikir,.,namitasah123@email.com,9854050116,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Kime Tagiyang,.,kimetagiyang@gmail.com,9774627228,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Priti Bala,.,balapriti229@gmail.com,7888664771,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Advertising Management & PR,Kirti,.,kirtisingh15aug@gmail.com,8377899502,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Vishal,.,vishalbhardwaj62688@gmail.com,8283075607,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Facebook _Executive Certificate Programme In Applied Financial Risk Management,Sakshi Khandelwal,.,sakshikhandelwal.ndim2013@gmail.com,9958268724,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Sunny Malhotra,.,sunnymalt2016@gmail.com,7903479477,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Ankit Fadia Certified Ethical Hacker Program,Ajay Lakshman,.,malvsb@gmail.com,9566094535,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Saurav Kumar,.,sk8239739@gmail.com,8051121611,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Ankit Fadia Certified Ethical Hacker Program,Kabir Dhruw,.,kabirdhruw24@gmail.com,9002108701,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Programme in Leadership and Change Management,Varsha Somani,.,varshasomani01@gmail.com,9204131234,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Hannath Abdulkader,.,hannathabdulkader@gmail.com,9947763523,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Shubhangi Tanaji Shinde,.,tanajishinde577@gmail.com,9423248014,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Chithrachadran,.,chadranchithra9@gmail.com,8086137543,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _PG Certificate Program in Marketing and Brand Management,Rajesh Mishra,.,rajeshmishra1020@gmail.com,9977277530,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Dadasaheb Lokhande,.,dadasaheblokhande940@gmail.com,9763396012,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Executive Certificate Programme In Strategic Performance Management,Gagandeep Kaur,.,gkaur271996@gmail.com,9914927267,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Litan Das,.,litanmaman123@gmail.com,9402550126,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Gowtham R,.,gowthamsham26@gmail.com,8344474767,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,M Suresh,.,sureshmurugesan8221@gmail.com,9688075802,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Simaon Roota,.,sroota3@gmail.com,9957287142,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program In Digital Marketing,Venkata Lakshmi,.,asha123@gmail.com,9494361267,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Facebook _Executive Programme in Data Science Using Excel and R from XLRI(COC),Saurabh,.,saurabh@greatlearning.in,9863429783,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Rohan Bhalerao,.,rohanbhalerao06@gmail.com,8879168680,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme In Strategic Performance Management,Avijit Majhi,.,majhiavijit96@gmail.com,7074431797,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Tumpa Pati,.,tumpadas48736@gmail.com,8116463597,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Advertising Management & PR,Akhil Pa,.,akhilpullipadil@gmail.com,8113068858,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Sk Hakimuddin,.,hakimuddinsk5@gmail.com,9650034147,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Hemangi Mahakal,.,hemangi.mahakal@gmail.com,9594180313,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Nelapala Nagasrinivasa Rao,.,nagasrinu3030@gmail.com,9666303060,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _Executive Certificate Programme in Talent Management,Arunachalamoorthy P,.,moorthyarunachala358@gmail.com,9360308635,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Raju Jaiswal,.,rajuj01993@gmail.com,8889921386,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Kalaiyarasan,.,kalaiimma8300@gmail.com,8300169159,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,T Monisha,.,monishavswc@gmail.com,9994330488,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _PG Certificate Program in Marketing and Brand Management,Mahesh Nana Ughada,.,gotiramughada@gmail.com,7798242553,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Ankit Fadia Certified Ethical Hacker Program,Anuj,.,anujsharma50585@gmail.com,9009444568,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Google _PG Certificate Program in Marketing and Brand Management,Biman Duwarah,.,bimanduwarah5534@gmail.com,8472001448,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Google _Advertising Management & PR,Ajay Singh,.,tanwerajay77@yahoo.com,9780651151,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Google _Executive Certificate Programme In Strategic Performance Management,Honey Mittal,.,honeymittal0095@gmail.com,7657986000,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Website _Ankit Fadia Certified Ethical Hacker Program,Geeky Shahbaz,.,shahbazsaifi90@gmail.com,8864874383,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Website _PG Certificate Program In Media Management,Tej,.,gr8groups@gmail.com,9886465439,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Website _PG Certificate Program In Media Management,Ajitesh Sharma,.,ajitesh.sharma@gmail.com,9685085200,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Website _Executive Certificate Programme in Talent Management,Netra Shelar,.,netshel@gmail.com,9820107005,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Website _Executive Programme in Advanced Financial Management from XLRI,Prakash Khandka,.,prakash0289@gmail.com,9699712912,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Website _Ankit Fadia Certified Ethical Hacker Program,Sarada Prasanna Jena,.,jenasarada02@gmail.com,8018175474,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Website _PG Certificate Program in Marketing and Brand Management,Kiran,.,properhaimedia@gmail.com,8956266929,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Website _PG Certificate Program in Marketing and Brand Management,Manik Sharma,.,manik.sharma686@gmail.com,9911540434,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Website _Executive Programme in Data Science Using Excel and R from XLRI(COC),T Venkateswaran,.,janeosho@gmail.com,9597708984,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Website _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rupa Bhattacharjee,.,rupagbh@gmail.com,9831032146,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Website _Executive Programme in Data Science Using Excel and R from XLRI(COC),Kashiff Khan,.,kashif.khan1@gmail.com,9849394448,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Website _Executive Programme in Data Science Using Excel and R from XLRI(COC),Ashwin Jai,.,ashwin.jai2009@gmail.com,8095728983,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Website _PG Certificate Program In Digital Marketing,Priyesh Jain,.,jainpriyesh97@gmail.com,9680529555,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+AFGmail _Ankit Fadia Certified Ethical Hacker Program,Adarsh Rai,.,adarsh3161rai@gmail.com,7522880994,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Certificate Programme in Talent Management,Moni Agarwal,.,agarwal.m9@gmail.com,9368580310,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(CoC),Praveen Kumar,.,praveenk.iitb@gmail.com,9176777427,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Shashank,.,shashankgupta225@gmail.com,9049317707,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Poras,.,poras.rishi@gmail.com,8451845979,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Md Muazzam,.,mdmuazzam@yahoo.in,8458018653,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Abhiseka,.,abhiseka.uce@gmail.com,7893167897,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Raghunath,.,arsingh_13@yahoo.co.in,9916733433,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Anuj Singhal,.,anujsinghalhyd@gmail.com,9711720796,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Monali,.,monali.nayak05@yahoo.com,9168493770,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Divya Gupta,.,divya5954@gmail.com,8377007646,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Deepali,.,deepalir06@gmail.com,9654409184,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Deepak Singh,.,deepak.singh0417@gmail.com,9643831139,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Apurv Kumar,.,apurvakumar04@yahoo.com,9741416748,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rohan Kar,.,rohankar87@gmail.com,8527388246,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Raj,.,bhuwan.chandra789@gmail.com,9999999999,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rajashekhar T,.,srirajut@gmail.com,7760300174,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Bandana,.,bandana.singh123@gmail.com,9731985215,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sunil Rout,.,sunilrout1989@gmail.com,9742357766,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Chintan,.,chintan.m.kapadia@gmail.com,9870831165,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Pritam Sahoo,.,pritam.sahoo@oracle.com,9632005027,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Shivam Srivastava,.,shivam.iec10@gmail.com,9555917144,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rohit Philip,.,rohit.philip78@gmail.com,9916820578,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Abraham Philip,.,abrahamphilip07@gmail.com,9500034429,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Aryan Jain,.,aryanjain26@gmail.com,7738082662,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Vipul Kumar,.,vipul_36@yahoo.com,9015613357,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Indranil,.,indranil.ddas@gmail.com,7795420731,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sanjeeva,.,sanjeeva.kadiri@gmail.com,9441720609,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sushil,.,sushil_dwid@yahoo.co.in,9990993469,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Jacob,.,jjacob8082@yahoo.com,8095336334,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rahul,.,av.rahul@live.com,8884755788,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Satyavir,.,satya.chaudhary@gmail.com,9599096477,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Parul,.,paruloberai@gmail.com,8130360208,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Raj Kumar Shuka,.,rajshukla16@yahoo.com,8009619274,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Amit Binjola,.,ami.august25@gmail.com,9818414804,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Siddharth Vaid,.,siddharthvaid20@gmail.com,9930815028,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Srinath,.,devinenisrinath@gmail.com,9989944321,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Anirban,.,anirbandutta1@gmail.com,8885490858,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Akram,.,akramshazzad@gmail.com,9676070396,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sachin Mandlik,.,sachinmandlik1205@gmail.com,9987013567,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Chandrashekar,.,chandrashekara_cs@yahoo.com,9901922444,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sona Sharma,.,sonanomi@yahoo.co.in,9710432070,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Milan Hazra,.,milaniift1@gmail.com,8582803498,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Shtuti Acharya,.,thashruti@gmail.com,9819921077,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Abhishek,.,abhishek22del@gmail.com,9717057775,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Niloy Podder,.,niloy.podder@gmail.com,7032909871,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Aditya,.,aditya.acharya44@gmail.com,7829378007,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sarthak,.,jaswalsarthak1@gmail.com,8884095500,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Vikas,.,vs48574@gmail.com,9958520031,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sunitha,.,suneetha3456@gmail.com,8790214028,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Shareef,.,skms1434@gmail.com,8019620280,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rachit,.,rachit1419@yahoo.co.in,9501031419,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Amita Kumar Mishra,.,amit_misra4u@yahoo.com,9654228878,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Adwait,.,adwait2kate@gmail.com,9665412968,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),B Manoj Kumar,.,manoj.b27@gmail.com,7067094426,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sagar Katte,.,kattesagar123@gmail.com,8806066018,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Shivani Bhargava,.,shivani.bhargava6@gmail.com,9168491301,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Binay,.,pathak.binay@gmail.com,9899429499,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Vibhor Gupta,.,vibhugoel2007@yahoo.co.in,7838388338,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Rakhi Swami,.,rakhiswami@ymail.com,9990245695,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Nayeem,.,nayeem.balekundri@gmail.com,9008381032,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Pawan,.,koomarpawan@gmail.com,8088190963,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Hardeep Singh,.,hardee005@gmail.com,9540546655,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Amal Augusty,.,amalaugusty@pixelsolutions.org,9008882254,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Sidharth,.,sidnet06@gmail.com,9820172784,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Siva,.,vanga.sivanr@gmail.com,19086271463,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Subhajit,.,subhojit.07@gmail.com,9880937194,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Simpal,.,kumarisimpal05@gmail.com,7795135965,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Data Science Using Excel and R from XLRI(COC),Geetanjali Chauhan,.,geetanjalic01@gmail.com,7899294490,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Advertising Management & PR,Lavesh Soni,.,loveshsoni1989@gmail.com,9690703020,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Advertising Management & PR,Arjunkumar,.,arjunkumar109@gmail.com,7893606600,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Advertising Management & PR,Naveen,.,replytonaveen@gmail.com,7353756941,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Leadership and Change Management,D Balakrishna,.,doddibalu@gmail.com,7997462399,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Leadership and Change Management,Uppari Anil,.,kanil0990@gmail.com,8106033911,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Programme in Leadership and Change Management,Praveen Chandrashekaraiah,.,praveen1385@yahoo.com,9980545424,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Programme in Leadership and Change Management,Ramesh,.,rcyadav1963@gmail.com,7057556508,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Programme in Leadership and Change Management,Gururaj Revankar,.,gururaj.revankar@gmail.com,9964027160,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _PG Certificate Program in Marketing and Brand Management,Ranjeeta,.,ranjeetaghosh01@gmail.com,9560961433,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _PG Certificate Program in Marketing and Brand Management,Dooda Khan,.,doodabaloch77@gmail.com,3246859271,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _PG Certificate Program in Marketing and Brand Management,Vibha Shetty,.,vibhashetty14@gmail.com,9870223667,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _PG Certificate Program in Marketing and Brand Management,Archita,.,architasri3105@gmail.com,9930010386,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _PG Certificate Program in Marketing and Brand Management,Divya Tewari,.,tewaridivya87@gmail.com,8800284819,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _PG Certificate Program in Marketing and Brand Management,Praveen,.,praveenmsil.pm@gmail.com,8447246665,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _PG Certificate Program in Marketing and Brand Management,Rahul Madhiwalla,.,rmadhiwalla@rediffmail.com,8655843886,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Certificate Programme In Strategic Performance Management,Sandeep S Jain,.,skjharsh@gmail.com,9456003609,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+Infoedge _Executive Certificate Programme In Strategic Performance Management,Abhijeet Desai,.,abhijit31@hotmail.com,9710000666,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+Infoedge _Executive Certificate Programme In Strategic Performance Management,Mrinal Kanti Saha,.,saha.mrinal8@gmail.com,9332802150,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+Infoedge _Executive Certificate Programme In Strategic Performance Management,Neeraj Kumar,.,neerajkumarsbg@gmail.com,96892811032,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TBS _Executive Programme in Data Science Using Excel and R from XLRI(COC),Pramita Pal,.,pramita66@gmail.com,9831037428,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TBS _Executive Programme in Data Science Using Excel and R from XLRI(COC),Vishal Hinduja,.,hindujavishal@gmail.com,9987034844,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TBS _Executive Programme in Leadership and Change Management,B Nanwani,.,bnanwani@gmail.com,9049003759,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TBS _Executive Programme in Leadership and Change Management,Thomas Paulraj,.,thomaspaulraj@yahoo.com,9500031955,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TBS _Executive Programme in Leadership and Change Management,Ashok Kumar Jha,.,akumar.office@gmail.com,8872057404,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TBS _Executive Programme in Leadership and Change Management,Dillip,.,dillipca.finance@gmail.com,9740920192,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TBS _Executive Certificate Programme in Talent Management,Antima Sharma,.,anteemash@gmail.com,9928988603,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TBS _Executive Certificate Programme in Talent Management,Shreekant Gupta,.,shreekantgupta24@gmail.com,9812256442,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TBS _Executive Certificate Programme in Talent Management,Madhumita Bose,.,madhumita.bose16@gmail.com,9036063216,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TBS _Executive Certificate Programme in Talent Management,Jai Prakash,.,jpymsw@gmail.com,7027198611,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TBS _Executive Certificate Programme in Talent Management,Basant,.,basant.easam@gmail.com,9.72E+11,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TBS _PG Certificate Program in Marketing and Brand Management,Divya Bhandari,.,div.bhandari@gmail.com,9892751250,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TBS _PG Certificate Program in Marketing and Brand Management,Nirmalsinh Chauhan,.,nddarbar44@gmail.com,9714424363,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TBS _PG Certificate Program in Marketing and Brand Management,Deepika Tandon,.,deepika.tandon3@gmail.com,9920382200,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+TBS _Executive Certificate Programme In Applied Financial Risk Management,Selvaraju,.,selvaraj.chinnusamy@gmail.com,9940015131,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27
+TBS _Executive Certificate Programme In Applied Financial Risk Management,Rahuldas,.,rahulds02@gmail.com,9.72E+11,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,14,26
+TBS _Executive Certificate Programme In Applied Financial Risk Management,Revathi,.,revthid@gmail.com,9840398979,,,Other,Other,India,,,Not Confirmed,,Alive,New Lead,12,21
+iimjobs _PG Certificate Program In Digital Marketing,Navdeep Budhiraja,.,navdeep135@rediffmail.com,8123074123,,,Other,Other,India,,REGIONAL SALES MANAGER,Not Confirmed,1,Alive,New Lead,13,27
+iimjobs _Executive Certificate Programme in Entrepreneurship,Prateek Taparia,.,tapariaprateek@gmail.com,9910286811,,,Other,Other,India,,Regional Sales Manager,Not Confirmed,,Alive,New Lead,14,26
+iimjobs _Executive Programme in Leadership and Change Management,Madhavi Gokayarapu,.,madhug126@gmail.com,9900584043,,,Other,Other,India,,Sr. Manager Human Resources,Not Confirmed,1,Alive,New Lead,12,21
+Google _PG Certificate Program In Digital Marketing,Madhusudan Pramanik,.,madhusudanllb2@gmail.com,7063451989,,9547121498,Other,Other,India,,,Not Confirmed,,Alive,New Lead,13,27

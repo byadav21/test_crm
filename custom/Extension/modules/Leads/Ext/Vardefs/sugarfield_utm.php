@@ -14,8 +14,8 @@ $dictionary['Lead']['fields']['utm'] =array (
 		'duplicate_merge_dom_value' => '0',
 		'audited' => false,
 		'reportable' => true,
-		'len' => '50',
-		'size' => '50',
+		'len' => '255',
+		'size' => '255',
 	);
 
 ?>

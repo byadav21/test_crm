@@ -1,6 +1,6 @@
 <?php 
 global $db; 
-echo $sessionIds=session_id();
+$sessionIds=session_id();
 $db->query("insert into session_call set session_id='" . $_REQUEST['crtObjectId'] ."', lead_id='".  $records['id']   ."', call_start='". date('Y-m-d H:i:s') . "'");
 $obj=new te_neox_call_details();
 if($_REQUEST['phone']) $obj->phone_number= $_REQUEST['phone'];

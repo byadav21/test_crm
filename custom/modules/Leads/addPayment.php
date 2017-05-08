@@ -499,7 +499,7 @@ class addPaymentClass{
 
 	function checkDuplicateFunc($bean, $event, $argument){
 		ini_set("display_errors",0);
-
+               error_reporting(0);
 	// Capture the date of referral creation
 		if(isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']) ){
 				$bean->date_of_referral = date('Y-m-d');
@@ -532,7 +532,7 @@ class addPaymentClass{
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
-			$bean->assigned_user_id = 'NULL';
+			//$bean->assigned_user_id = 'NULL';
 
 		}else{
 			if(empty($bean->fetched_row['id'])  && isset($utmDetails['batch']) && !empty($utmDetails['batch'])){
@@ -617,13 +617,13 @@ class addPaymentClass{
 										'address'=>'1',
 									];
 									
-									$ch = curl_init();
+									/*$ch = curl_init();
 									curl_setopt($ch, CURLOPT_URL,$url);
 									curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 									curl_setopt($ch, CURLOPT_POST, 1);
 									curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 									curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-									$result = curl_exec($ch);
+									$result = curl_exec($ch);*/
 									$res = json_decode($result);
 									if(isset($res[0]->status) && $res[0]->status=='1'){
 										$bean->web_lead_id=$res[0]->userid;
@@ -632,7 +632,7 @@ class addPaymentClass{
 									$bean->web_lead_id=$webid;
 									$bean->is_sent_web="1";
 									
-									curl_close($ch);
+									//curl_close($ch);
 									  if($updateColumns) {
 											#find ID of email address
 											$sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
@@ -676,13 +676,13 @@ class addPaymentClass{
 										];
 										#print_r ($post);
 										#die();
-										$ch = curl_init();
+									/*	$ch = curl_init();
 										curl_setopt($ch, CURLOPT_URL,$url);
 										curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 										curl_setopt($ch, CURLOPT_POST, 1);
 										curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 										curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-										$result = curl_exec($ch);
+										$result = curl_exec($ch);*/
 										$res = json_decode($result);
 										
 										if(isset($res[0]->status) && $res[0]->status=='1'){
@@ -708,7 +708,7 @@ class addPaymentClass{
 									
 									  }
 										
-										curl_close($ch);  						
+										//curl_close($ch);  						
 													
 									}									
 			
@@ -720,7 +720,8 @@ class addPaymentClass{
 		$db->query("delete from  session_call where  session_id='" . session_id() ."'");
 #If record is being created manually
 		if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
-			if(($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description=='Call Back' && $bean->fetched_row['date_of_callback'] != $bean->date_of_callback) || ($bean->status_description=='Follow Up' && $bean->fetched_row['date_of_followup'] != $bean->date_of_followup) || ($bean->status_description=='Prospect' && $bean->fetched_row['date_of_prospect'] != $bean->date_of_prospect) ){
+                         // echo $bean->fetched_row['status'] . '='. $bean->status;die;
+			if($bean->fetched_row['status']='' || ($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description=='Call Back' && $bean->fetched_row['date_of_callback'] != $bean->date_of_callback) || ($bean->status_description=='Follow Up' && $bean->fetched_row['date_of_followup'] != $bean->date_of_followup) || ($bean->status_description=='Prospect' && $bean->fetched_row['date_of_prospect'] != $bean->date_of_prospect) ){
 				
 				
 				 
@@ -745,9 +746,12 @@ class addPaymentClass{
 		       
 			if($GLOBALS['db']->getRowCount($sqlData)>0){
 					$dristiReq = $GLOBALS['db']->fetchByAssoc($sqlData);
-					 
-					if($dristiReq && $dristiReq['dristi_request']){
+					 //echo $_SESSION['temp_for_newUser'];die;
+					if($dristiReq && $dristiReq['dristi_request'] || $_SESSION['temp_for_newUser']){
 					   $arrReq=(array)json_decode(html_entity_decode($dristiReq['dristi_request']));
+                                           if(!$arrReq) $arrReq=(array)json_decode(html_entity_decode($_SESSION['temp_for_newUser']));
+
+//$_SESSION['temp_for_newUser'];
 				   
 					   if($arrReq && count($arrReq)>2){
 						   $drobj= new te_Api_override();
@@ -840,3 +844,4 @@ class addPaymentClass{
 	
 	
 }
+
