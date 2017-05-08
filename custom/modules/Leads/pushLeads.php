@@ -48,7 +48,7 @@ if($db->getRowCount($result)>0){
 			if(isset($responses->beanResponse) && count($responses->beanResponse)>0){		
 				foreach($responses->beanResponse as $key=>$res){
 					if($res->inserted==1 && $res->resultTypeString=='ADDED'){
-						$update = "UPDATE leads set dristi_customer_id='".  $res->customerId ."', neoxstatus =1 WHERE id = '".$allInserted[$key]['id']."'";
+						//$update = "UPDATE leads set dristi_customer_id='".  $res->customerId ."', neoxstatus =1 WHERE id = '".$allInserted[$key]['id']."'";
 						$db->query($update);
 						
 					}

@@ -49,7 +49,7 @@ text+='\n</select>&nbsp;';text+=this.timeseparator;text+='\n&nbsp;<select class=
 var pad = "00";
 for(i=0;i<60;i++){
 	if(i<10){
-		text+='\n<option value=0"' + i  +'" '+(this.mins==i?"SELECTED":"")+'>0'+  i +'</option>';
+		text+='\n<option value="0' + i  +'" '+(this.mins==i?"SELECTED":"")+'>0'+  i +'</option>';
 	}else{
 		text+='\n<option value="' + i  +'" '+(this.mins==i?"SELECTED":"")+'>'+  i +'</option>';
 	}
