@@ -124,15 +124,6 @@ $app_strings['LBL_GROUPTAB3_1480929977'] = 'Reports';
 
 $app_list_strings['moduleList']['KReports']='Custom Reports';
 $app_list_strings['moduleListSingular']['KReports']='Custom Reports';
-$GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
-  '' => '',
-  'Chat' => 'Chat',
-  'InboundCalls' => 'Inbound Calls',
-  'Referrals' => 'Referrals',
-  'Email Enquiries' => 'Email Enquiries',
-  'Campaign' => 'Campaign',
-  'Channel' => 'Channel',
-);
 $app_strings['LBL_GROUPTAB4_1487154036'] = 'SRM';
 
 
@@ -151,4 +142,16 @@ $GLOBALS['app_list_strings']['contract_type_list']=array (
   'Display' => 'Display',
   'CPC' => 'CPC',
   'CPI' => 'CPI',
+);
+$GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
+  '' => '',
+  'Chat' => 'Chat',
+  'InboundCalls' => 'Inbound Calls',
+  'Referrals' => 'Referrals',
+  'Email Enquiries' => 'Email Enquiries',
+  'Campaign' => 'Campaign',
+  'Channel' => 'Channel',
+  'Crosssell' => 'Cross sell',
+  'ABND' => 'ABND',
+  'FailPayment' => 'Fail Payment',
 );

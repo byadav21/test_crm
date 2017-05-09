@@ -59,6 +59,12 @@
 							$obj->dristi_session=md5((String) $xmlData->userId)	;					
 							$obj->description=base64_encode(serialize(array(rand(100,500),base64_encode((String) $xmlData->password))));
 							if($obj->save()){
+
+
+							
+								$objapi= new te_Api_override();
+								$objapi->createLog(print_r($_REQUEST,true),'success');	
+
 								echo '<response><status>success</status><message>Auth Successful</message><crmSessionId>'. $sessionArray->id  .'</crmSessionId></response>'; exit();
 							}else{
 								$error="Error occured during saving session";
@@ -136,3 +142,6 @@ echo '<response>
 				<message>'.  $error .'</message>
 				<crmSessionId></crmSessionId>
 				</response>';
+							
+								$objapi= new te_Api_override();
+								$objapi->createLog(print_r($_REQUEST,true),$error);	

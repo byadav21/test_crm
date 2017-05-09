@@ -139,6 +139,7 @@ if($row->num_rows>0){
                 <th>Name</th>
                 <th>Status</th>
                 <th>Counsellor</th>               
+                <th>Batch</th>               
                 <th>Phone</th>               
                 </tr>';
                                   if($cur_user==$Us)
@@ -151,6 +152,23 @@ if($row->num_rows>0){
     <td><?php echo "<a href=index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26offset%3D1%26stamp%3DLeads%26action%3DDetailView%26record%3D$linkid"?>> <?php echo $_SESSION['records_fetch'][$key]['salutation'].$_SESSION['records_fetch'][$key]['first_name'].'&nbsp;'.$_SESSION['records_fetch'][$key]['last_name']; ?></td>
     <td><?php echo $_SESSION['records_fetch'][$key]['status'];?></td>
     <td><?php echo $_SESSION['records_fetch'][$key]['user_name'];?></td>
+    
+    <?php
+     $sql_ba = "SELECT b.id batch_id, b.name, l.id FROM leads l INNER JOIN leads_cstm lc ON l.id = lc.id_c AND l.id='". $_SESSION['records_fetch'][$key]['id']."' LEFT JOIN te_utm ON l.utm = te_utm.name LEFT JOIN te_ba_batch b ON b.id = CASE WHEN l.utm =  'NA' THEN lc.te_ba_batch_id_c WHEN l.utm !=  'NA' THEN te_utm.te_ba_batch_id_c END";
+		$res_ba = $GLOBALS['db']->query($sql_ba);
+		$ba = $GLOBALS['db']->fetchByAssoc($res_ba);
+		
+		$bid = $ba['batch_id'];
+       // Get programs details based on the Batch			
+		 $sql_pro = "SELECT te_pr_programs_te_ba_batch_1te_pr_programs_ida,name FROM te_pr_programs p INNER JOIN te_pr_programs_te_ba_batch_1_c  pb ON p.id = pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida WHERE te_pr_programs_te_ba_batch_1te_ba_batch_idb = '{$bid}' AND pb.deleted = 0 AND p.deleted=0";	
+		
+		$res_pro = $GLOBALS['db']->query($sql_pro);
+		$pro = $GLOBALS['db']->fetchByAssoc($res_pro);
+    
+    ?>
+    <td width="50%"><?php echo $pro['name'] . ' -  ' . $ba['name'];?></td>
+    
+    
     <td><?php echo $_SESSION['records_fetch'][$key]['phone_mobile'];?></td>
     </tr>
     <?php 
@@ -167,6 +185,22 @@ if($row->num_rows>0){
     <td><?php echo $_SESSION['records_fetch'][$key]['salutation'].$_SESSION['records_fetch'][$key]['first_name'].'&nbsp;'.$_SESSION['records_fetch'][$key]['last_name']; ?></td>
     <td><?php echo $_SESSION['records_fetch'][$key]['status'];?></td>
     <td><?php echo $_SESSION['records_fetch'][$key]['user_name'];?></td>
+    
+    
+      <?php
+     $sql_ba = "SELECT b.id batch_id, b.name, l.id FROM leads l INNER JOIN leads_cstm lc ON l.id = lc.id_c AND l.id='". $_SESSION['records_fetch'][$key]['id']."' LEFT JOIN te_utm ON l.utm = te_utm.name LEFT JOIN te_ba_batch b ON b.id = CASE WHEN l.utm =  'NA' THEN lc.te_ba_batch_id_c WHEN l.utm !=  'NA' THEN te_utm.te_ba_batch_id_c END";
+		$res_ba = $GLOBALS['db']->query($sql_ba);
+		$ba = $GLOBALS['db']->fetchByAssoc($res_ba);
+		$bid = $ba['batch_id'];
+       // Get programs details based on the Batch			
+		$sql_pro = "SELECT te_pr_programs_te_ba_batch_1te_pr_programs_ida,name FROM te_pr_programs p INNER JOIN te_pr_programs_te_ba_batch_1_c  pb ON p.id = pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida WHERE te_pr_programs_te_ba_batch_1te_ba_batch_idb = '{$bid}' AND pb.deleted = 0 AND p.deleted=0";	
+		
+		$res_pro = $GLOBALS['db']->query($sql_pro);
+		$pro = $GLOBALS['db']->fetchByAssoc($res_pro);
+    
+    ?>
+    <td width="50%"><?php echo $pro['name'] . ' -  ' . $ba['name'];?></td>
+    
     <td><?php echo $_SESSION['records_fetch'][$key]['phone_mobile'];?></td>
     </tr>
     <?php 
@@ -185,3 +219,4 @@ if($row->num_rows>0){
 
 
 ?>
+

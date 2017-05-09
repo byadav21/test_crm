@@ -35,7 +35,7 @@ ini_set("display_errors",0);
 				$rowCount= $GLOBALS['db']->fetchByAssoc($resCount);						
 				if($rowCount['count'] > 0){
 										 
-					 $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 						<div class="count">'.$rowCount['count'].'</div>
 						<span class="count_top">  <a   href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowCount['status_description'].'">'.$rowCount['status_description'].'</a></span>
 						
@@ -45,7 +45,7 @@ ini_set("display_errors",0);
 				else{
 					 
 					 
-					$statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+					$statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 						<div class="count">0</div>
 						<span class="count_top"> New Leads</span>
 						
@@ -60,7 +60,7 @@ ini_set("display_errors",0);
 				if($rowDup['count'] > 0){
 					 
 					 
-					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					 <div class="count">'.$rowDup['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowDup['status_description'].'">'.$rowDup['status_description'].'</a>s</span>
 						
@@ -70,7 +70,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 						<div class="count">0</div>
 						<span class="count_top"> Duplicate</span>
 						
@@ -90,7 +90,7 @@ ini_set("display_errors",0);
 			if($rowPros['count'] > 0){
 				 ;
 					 
-					$statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					$statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					      <div class="count">'.$rowPros['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&pros_today=1&status_description_basic=Prospect">Prospect Today</a></span>
 						
@@ -101,7 +101,7 @@ ini_set("display_errors",0);
 					$stat = 'Duplicate';
 					  
 					 
-					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					        <div class="count">0</div>
 						<span class="count_top"> Prospect Today</span>
 						
@@ -119,7 +119,7 @@ ini_set("display_errors",0);
 			if($rowFoll['count'] > 0){
 				 
 					 
-					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 						<div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&follow_today=1&status_description_basic=Follow Up">Followup Today</a></span>
 						
@@ -130,7 +130,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 				
-					 $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					    <div class="count">0</div>
 						<span class="count_top"> Followup Today</span>
 						
@@ -146,7 +146,7 @@ ini_set("display_errors",0);
 			if($rowPros['count'] > 0){
 		 
 					 
-					 $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 							<div class="count">'.$rowPros['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&over_due_pros=pros&status_description_basic=Prospect">Over Due Prospect</a></span>
 						
@@ -156,7 +156,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					 $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 					 <div class="count">0</div>
 						<span class="count_top"> Over Due Prospect</span>
 						
@@ -172,7 +172,7 @@ ini_set("display_errors",0);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
 				
-					   $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+					   $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 					   <div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&due_followup=follow&status_description_basic=Follow Up">Overdue followups</a></span>
 						
@@ -182,7 +182,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					  $statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 					  <div class="count">0</div>
 						<span class="count_top"> Overdue followups</span>
 						
@@ -197,7 +197,7 @@ ini_set("display_errors",0);
 			if($rowFoll['count'] > 0){
 				 
 					 
-					   $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					   $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					   <div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_today=1&status_description_basic=Call Back">CallBack Today</a></span>
 						
@@ -207,7 +207,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					 
-					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					  <div class="count">0</div>
 						<span class="count_top"> CallBack Today</span>
 						
@@ -226,7 +226,7 @@ ini_set("display_errors",0);
 				
 					 
 					 
-					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					  <div class="count">'.$rowFoll['count'].'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_back_due=due&status_description_basic=Call Back">Overdue CallBack</a></span>
 						
@@ -235,7 +235,7 @@ ini_set("display_errors",0);
 				}
 				else{
 					$stat = 'Duplicate';
-					  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					  <div class="count">0</div>
 						<span class="count_top"> Overdue CallBack</span>
 						
@@ -260,7 +260,7 @@ ini_set("display_errors",0);
 					$stat = 'Duplicate';
 					 
 					 
-					   $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					   $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					   <div class="count">0</div>
 						<span class="count_top"> Payment Not Realized</span>
 						
@@ -276,7 +276,7 @@ ini_set("display_errors",0);
 			if($rowPay['total'] > 0){
 			//$users_lead = "'".implode("','", $leadList)."'";	
 				
-				$statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+				$statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 					   <div class="count">'. $rowPay['total'] .'</div>
 						<span class="count_top"> <a  href="index.php?module=Leads&action=index&&searchFormTab=basic_search&query=true&lead_id=id_instalment"> Installment Not Paid</a></span>
 						
@@ -286,7 +286,7 @@ ini_set("display_errors",0);
 				else{
 					$stat = 'Duplicate';
 					
-					$statusWiseCount .= '<div class="col-xs-4 col-sm-3 tile_stats_count">
+					$statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 					   <div class="count">0</div>
 						<span class="count_top"> Installment Not Paid</span>
 						
@@ -342,3 +342,4 @@ ini_set("display_errors",0);
 	
 	
 	
+
