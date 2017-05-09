@@ -4,10 +4,10 @@
 
 	class UpdateInitialPyment {
 		function updatePayment(&$bean, $event, $arguments) {
-			$bean->no_of_installments=$_REQUEST['installment'];
-			$bean->initial_payment_inr=$_REQUEST['initial_payment_inr'];
-			$bean->initial_payment_usd=$_REQUEST['initial_payment_usd'];
-			$bean->initial_payment_date=$GLOBALS['timedate']->to_db_date($_REQUEST['initial_payment_date'],false);
+			$bean->no_of_installments=isset($_REQUEST['installment'])? $_REQUEST['installment']: '';
+			$bean->initial_payment_inr= isset($_REQUEST['initial_payment_inr'])? $_REQUEST['initial_payment_inr']: '';
+			$bean->initial_payment_usd= isset($_REQUEST['initial_payment_usd'])? $_REQUEST['initial_payment_usd']: '';
+			$bean->initial_payment_date=$GLOBALS['timedate']->to_db_date((isset($_REQUEST['initial_payment_date'])? $_REQUEST['initial_payment_date']: ''),false);
 
 			#If batch is being updated
 			if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
