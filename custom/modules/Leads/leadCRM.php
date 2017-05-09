@@ -102,9 +102,25 @@ try{
 			$records=$db->fetchByAssoc($res);	
 			//print_r($records);die;
 			if($callType=='outbound.auto.dial' || $callType=='outbound.callback.dial'){		
-				$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
+				//$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 				//header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
-				include_once("custom/modules/Leads/overview.php");
+				//include_once("custom/modules/Leads/overview.php");
+
+
+				if(empty($records['assigned_user_id']) ||  $records['assigned_user_id']==NULL ||  $records['assigned_user_id']=='NULL'){
+					$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+					include_once("custom/modules/Leads/overview.php");
+				}else if($records['assigned_user_id']!=$userid['id']){	
+					header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);exit();
+				}else{
+					
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+					include_once("custom/modules/Leads/overview.php");
+					
+				}
+
+
+
 			}else if($callType=='inbound.call.dial' || $callType=='outbound.manual.dial'){
 				
 				if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
