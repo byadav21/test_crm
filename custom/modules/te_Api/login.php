@@ -63,7 +63,7 @@
 
 							
 								$objapi= new te_Api_override();
-								$objapi->createLog(print_r($_REQUEST,true),'success');	
+								$objapi->createLog(print_r($_REQUEST,true),'login',$_REQUEST);	
 
 								echo '<response><status>success</status><message>Auth Successful</message><crmSessionId>'. $sessionArray->id  .'</crmSessionId></response>'; exit();
 							}else{
@@ -144,4 +144,4 @@ echo '<response>
 				</response>';
 							
 								$objapi= new te_Api_override();
-								$objapi->createLog(print_r($_REQUEST,true),$error);	
+								$objapi->createLog(print_r($_REQUEST,true),$error,$_REQUEST);	

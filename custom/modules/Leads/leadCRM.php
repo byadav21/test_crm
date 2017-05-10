@@ -13,7 +13,7 @@ $mainMenu= $_REQUEST['mainMenu'];
 $_SESSION['temp_for_newUser']= json_encode($_REQUEST) ; 
 try{
 	$objapi= new te_Api_override();
-	$objapi->createLog(print_r($_REQUEST,true),"crm popup url"); 
+	$objapi->createLog(print_r($_REQUEST,true),"crm popup url",$_REQUEST); 
 		
 	$getUserIDs= "select id from users where user_name='$userID'";
 	$getUserID=$db->query($getUserIDs);
