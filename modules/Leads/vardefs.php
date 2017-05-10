@@ -597,6 +597,17 @@ $dictionary['Lead'] = array('table' => 'leads', 'audited' => true, 'unified_sear
                         'listview' => false,
                     ),
             ),
+        'lead_date' =>
+            array(
+                'name' => 'lead_date',
+                'type' => 'datetime',
+                'vname' => 'LBL_LIST_ACCEPT_STATUS',
+                'importable'=>true,
+                'studio' =>
+                    array(
+                        'listview' => false,
+                    ),
+            ),
 
     )
 , 'indices' => array(
