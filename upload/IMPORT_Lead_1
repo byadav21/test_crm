@@ -1,3 +1,65 @@
+<<<<<<< HEAD
+Batch Code,Batch Start Date,Institutes,Programs,Duration (In Months),Batch Name,Batch Size,Close Date
+AF-05-0715-01,2014-01-01,Talentedge,Ankit Fadia Certified Ethical Hacker Program,6,Ankit Fadia Certified Ethical Hacker Program-05,200,2014-01-01
+AF-07-0115-01,2014-01-01,Talentedge,Ankit Fadia Certified Ethical Hacker Program,6,Ankit Fadia Certified Ethical Hacker Program-07,200,2014-01-01
+AF-08-0416-01,2014-01-01,Talentedge,Ankit Fadia Certified Ethical Hacker Program,6,Ankit Fadia Certified Ethical Hacker Program-08,200,2014-01-01
+AF-09-0716-01,2014-01-01,Talentedge,Ankit Fadia Certified Ethical Hacker Program,6,Ankit Fadia Certified Ethical Hacker Program-09,200,2014-01-01
+AF-10-1216-01,2014-01-01,Talentedge,Ankit Fadia Certified Ethical Hacker Program,6,Ankit Fadia Certified Ethical Hacker Program-010,200,2014-01-01
+BA-01-0517-01,2014-01-01,IIM KASHIPUR,Executive Certificate Programme In Business Analytics and Big Data,12,Executive Certificate Programme In Business Analytics and Big Data-01,200,2014-01-01
+BDA-01-0217-99,2014-01-01,"SP Jain Institute of Management and Research (SPJIMR), Mumbai",Executive Certificate Programme in Big Data Analytics from SPJIMR,6,Executive Certificate Programme in Big Data Analytics from SPJIMR-01,200,2014-01-01
+BM-01-1015-01,2014-01-01,MICA,PG Certificate Program in Marketing and Brand Management,6,PG Certificate Program in Marketing and Brand Management-01,200,2014-01-01
+BM-02-0616-01,2014-01-01,MICA,PG Certificate Program in Marketing and Brand Management,6,PG Certificate Program in Marketing and Brand Management-02,200,2014-01-01
+BM-03-1116-01,2014-01-01,MICA,PG Certificate Program in Marketing and Brand Management,6,PG Certificate Program in Marketing and Brand Management-03,200,2014-01-01
+BUSM-01-0117-01,2014-01-01,MICA,PG CERTIFICATE PROGRAMME IN BUSINESS MANAGEMENT,12,PG CERTIFICATE PROGRAMME IN BUSINESS MANAGEMENT-01,200,2014-01-01
+BUSM-02-0118-01,2014-01-01,MICA,PG CERTIFICATE PROGRAMME IN BUSINESS MANAGEMENT,12,PG CERTIFICATE PROGRAMME IN BUSINESS MANAGEMENT-02,200,2014-01-01
+CE-01-0616-99,2014-01-01,Talentedge and Wizcraft,Executive Certificate Programme In Corporate Events and Brand Orientation,6,Executive Certificate Programme In Corporate Events and Brand Orientation-01,200,2014-01-01
+CE-02-0217-99,2014-01-01,Talentedge and Wizcraft,Executive Certificate Programme In Corporate Events and Brand Orientation,6,Executive Certificate Programme In Corporate Events and Brand Orientation-02,200,2014-01-01
+CF-01-0815-01,2014-01-01,XLRI,Corporate Finance for Business Managers,6,Corporate Finance for Business Managers-01,200,2014-01-01
+CP-01-1014-01,2014-01-01,IIFT,PG Certificate Program in Business Management,12,PG Certificate Program in Business Management-01,200,2014-01-01
+CP-02-0715-01,2014-01-01,IIFT,PG Certificate Program in Business Management,12,PG Certificate Program in Business Management-02,200,2014-01-01
+DM-01-0814-01,2014-01-01,MICA,PG Certificate Program in Digital Marketing,6,PG Certificate Program in Digital Marketing-01,200,2014-01-01
+DM-02-0316-01,2014-01-01,XLRI,Executive Programme in Digital Marketing (CoC),6,Executive Programme in Digital Marketing (CoC)-02,200,2014-01-01
+DM-02-0316-02,2014-01-01,XLRI,Executive Programme in Digital Marketing (CoP),6,Executive Programme in Digital Marketing (CoP)-02,200,2014-01-01
+DM-03-1016-01,2014-01-01,MICA,PG Certificate Program in Digital Marketing,6,PG Certificate Program in Digital Marketing-03,200,2014-01-01
+DMI-01-0217-01,2014-01-01,IIM KASHIPUR,Executive Certificate Programme in Digital Marketing from IIM Kashipur,6,Executive Certificate Programme in Digital Marketing from IIM Kashipur-01,200,2014-01-01
+DS-01-0416-01,2014-01-01,XLRI,Executive Programme in Data Science Using Excel and R from XLRI(CoC),6,Executive Programme in Data Science Using Excel and R from XLRI(CoC)-01,200,2014-01-01
+DS-01-0416-02,2014-01-01,XLRI,Executive Programme in Data Science Using Excel and R from XLRI(CoC),6,Executive Programme in Data Science Using Excel and R from XLRI(CoC)-01,200,2014-01-01
+DS-02-1116-01,2014-01-01,XLRI,Executive Programme in Data Science Using Excel and R from XLRI(CoC),6,Executive Programme in Data Science Using Excel and R from XLRI(CoC)-02,200,2014-01-01
+DT-01-0915-01,2014-01-01,IIT Roorkee,Executive Program In Data Mining and Analytics,6,Executive Program In Data Mining and Analytics-01,200,2014-01-01
+EC-01-0216-01,2014-01-01,MICA OLX,PG Certificate Programme In ECommerce Business Management,6,PG Certificate Programme In ECommerce Business Management-01,200,2014-01-01
+EN-01-0216-01,2014-01-01,IIT Roorkee,Executive Programme in Entrepreneurship,6,Executive Programme in Entrepreneurship-01,200,2014-01-01
+EN-01-0516-01,2014-01-01,IIM Rohtak,Executive Programme in Entrepreneurship,6,Executive Programme in Entrepreneurship-01,200,2014-01-01
+ENI-01-0317-01,2014-01-01,IIM KASHIPUR,Executive Certificate Programme in Entrepreneurship,6,Executive Certificate Programme in Entrepreneurship-01,200,2014-01-01
+ENI-01-0317-02,2014-01-01,IIM KASHIPUR,Executive Certificate Programme in Entrepreneurship(With Optional Module),6,Executive Certificate Programme in Entrepreneurship(With Optional Module)-01,200,2014-01-01
+ERV-01-0117-99,2014-01-01,Copal Amba,Executive Certificate Programme In Equity Research and Company Valuation from COPAL AMBA,6,Executive Certificate Programme In Equity Research and Company Valuation from COPAL AMBA-01,200,2014-01-01
+FL-01-0616-99,2014-01-01,Talentedge and Wizcraft,"Executive Certificate Programme In Luxury,Fashion Events and Brand Communication",6,"Executive Certificate Programme In Luxury,Fashion Events and Brand Communication-01",200,2014-01-01
+FN-01-1016-99,2014-01-01,XLRI,Executive Programme in Advanced Financial Management from XLRI,6,Executive Programme in Advanced Financial Management from XLRI-01,200,2014-01-01
+FS-01-0616-01,2014-01-01,"Parsons School of Design, New York",Executive Programme In Fashion Business Management,6,Executive Programme In Fashion Business Management-01,200,2014-01-01
+FSA-01-0117-99,2014-01-01,Copal Amba,Executive Certificate Programme In Financial Statement Analysis from COPAL AMBA,6,Executive Certificate Programme In Financial Statement Analysis from COPAL AMBA-01,200,2014-01-01
+FVM-01-0117-99,2014-01-01,Copal Amba,Executive Certificate Programme In Financial and Valuation  Modeling from COPAL AMBA,6,Executive Certificate Programme In Financial and Valuation  Modeling from COPAL AMBA-01,200,2014-01-01
+HR-01-0815-01,2014-01-01,XLRI SHRM,Executive Certificate Programme in HRM,6,Executive Certificate Programme in HRM-01,200,2014-01-01
+HR-02-0216-01,2014-01-01,XLRI SHRM,Executive Certificate Programme in HRM,6,Executive Certificate Programme in HRM-02,200,2014-01-01
+HR-03-0816-01,2014-01-01,XLRI SHRM,Executive Certificate Programme in HRM Batch 3,6,Executive Certificate Programme in HRM Batch 3-03,200,2014-01-01
+HR-04-0317-01,2014-01-01,XLRI SHRM,Executive Certificate Programme in HRM,6,Executive Certificate Programme in HRM-04,200,2014-01-01
+LC-01-0117-01,2014-01-01,XLRI,Executive Programme in Leadership and Change Management,6,Executive Programme in Leadership and Change Management-01,200,2014-01-01
+LD-01-0916-99,2014-01-01,JWMI,Executive Certificate Programme in Leadership and Strategy from JWMI,6,Executive Certificate Programme in Leadership and Strategy from JWMI-01,200,2014-01-01
+MAC-01-0217-01,2014-01-01,IIM KASHIPUR,Executive Certificate Programme in Marketing Analytics and Customer Valuation from IIM Kashipur,6,Executive Certificate Programme in Marketing Analytics and Customer Valuation from IIM Kashipur-01,200,2014-01-01
+MR-01-0817-01,2014-01-01,MICA,Market Research & Data Analytics,6,Market Research & Data Analytics-01,200,2014-01-01
+PF-01-0116-01,2014-01-01,XLRI,Executive Certificate Programme In Strategic Performance Management,6,Executive Certificate Programme In Strategic Performance Management-01,200,2014-01-01
+PF-02-0816-01,2014-01-01,XLRI,Executive Certificate Programme In Strategic Performance Management,6,Executive Certificate Programme In Strategic Performance Management-02,200,2014-01-01
+PF-03-0217-01,2014-01-01,XLRI,Executive Certificate Programme In Strategic Performance Management,6,Executive Certificate Programme In Strategic Performance Management-03,200,2014-01-01
+PM-01-0915-01,2014-01-01,IIT Roorkee,Executive Program In Project Management,6,Executive Program In Project Management-01,200,2014-01-01
+PM-02-0216-01,2014-01-01,IIT Roorkee,Executive Program In Project Management,6,Executive Program In Project Management-02,200,2014-01-01
+PM-02-0516-02,2014-01-01,IIM Rohtak,Executive Programme In Project Management,6,Executive Programme In Project Management-02,200,2014-01-01
+RSM-01-0217-01,2014-01-01,MICA,PG Certificate Programme in Retail and Shopper Marketing,6,PG Certificate Programme in Retail and Shopper Marketing-01,200,2014-01-01
+SM-01-0115-01,2014-01-01,IIM Kozhikode,Program in Strategic Management,6,Program in Strategic Management-01,200,2014-01-01
+SM-02-0417-01,2014-01-01,IIM KASHIPUR,Executive Certificate Program in Strategic Management,6,Executive Certificate Program in Strategic Management-02,200,2014-01-01
+TM-01-1216-01,2014-01-01,XLRI,Executive Certificate Programme in Talent Management,6,Executive Certificate Programme in Talent Management-01,200,2014-01-01
+TV-01-0616-99,2014-01-01,Talentedge and Wizcraft,Executive Certificate Programme In Televised Event Management and Production,6,Executive Certificate Programme In Televised Event Management and Production-01,200,2014-01-01
+TV-02-0217-99,2014-01-01,Talentedge and Wizcraft,Executive Certificate Programme In Televised Event Management and Production,6,Executive Certificate Programme In Televised Event Management and Production-02,200,2014-01-01
+AF-02-0914-01,2014-01-01,Talentedge,Ankit Fadia Certified Ethical Hacker Program,6,Ankit Fadia Certified Ethical Hacker Program-02,200,2014-01-01
+AF-06-1015-01,2014-01-01,Talentedge,Ankit Fadia Certified Ethical Hacker Program,6,Ankit Fadia Certified Ethical Hacker Program-06,200,2014-01-01
+=======
 Work Experience,First Name,Last Name,DateOfBirth,Gender,MobileNumber,Secondary Phone No,EmailAddress,Assigned to,Comments,Status,Status Detail,UTM Name,Education,City,State,Country,Date
 ,Mayank S Rathore,.,,Male,9904401616,456465,mayank@mascotevent.com,rohit.mittal@talentedge.in,45000+TAXES,Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India,02-03-2017 10:57
 ,shreya,,,Female,9840829779,9840829779,shreyamohta18@gmail.com,samridhi.sabharwal@talentedge.in,,Converted,Converted,Website _Advertising Management & PR,Graduate,Hyderabad,Telangana,India,02-03-2017 14:55
@@ -600,3 +662,4 @@ rest 15000+taxes payable on 30th April, 2017",Converted,Converted,Google _PG Cer
 ,sumit raina,,,Male,9650733200,7777,sumitraina@hotmail.com,ashwin.pathak@talentedge.in,,Dead,Fallout,Website _PG Certificate Program In Media Management,Graduate,Feistritz an der Gail,Carinthia,Austria,22-04-2017 10:39
 2,Surabhi Sinha,.,,Female,7276212437,33333,surbhii.sinha@gmail.com,priyanshi.dhondiyal@talentedge.in,,Converted,Converted,Infoedge _PG Certificate Program In Media Management,Graduate,Other,Other,India,24-04-2017 16:35
 7,Prachi Kadam,.,,Female,99920315734,9920315734,pprachi.vk87@gmail.com,Rishabh.pal@talentedge.in,,Converted,Converted,Website _PG Certificate Program In Media Management,Not Confirmed,Other,Other,India,26-04-2017 18:28
+>>>>>>> 725d63b2aa15ec1a608ef0eccc668908c93e60cb
