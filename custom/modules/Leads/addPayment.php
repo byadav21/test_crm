@@ -273,7 +273,7 @@ class addPaymentClass{
 									</br>
 									<p>Regards,</p>
 									<p>Student Relations Manager</p>
-									<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";	
+									<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";	
 					
 						$mail = new NetCoreEmail();
 						$mail->sendEmail($studemail,"Lead Referral",$template);
@@ -298,7 +298,7 @@ class addPaymentClass{
 									</br>
 									<p>Regards,</p>
 									<p>Student Relations Manager</p>
-									<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";	
+									<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";	
 					
 				$mail = new NetCoreEmail();
 				$mail->sendEmail($useremail,"Lead Referral",$template);
@@ -335,7 +335,7 @@ class addPaymentClass{
 								<p>Please feel free to reach out to your Student Relations Manager incase of non-receipt of the referral gift voucher/incentive, or for any other query.</p>
 								<p>Regards,</p>
 								<p>Student Relations Manager</p>
-								<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
+								<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 						
 					
 					$mail = new NetCoreEmail();

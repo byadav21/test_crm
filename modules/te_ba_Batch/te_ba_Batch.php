@@ -42,7 +42,7 @@
  */
 require_once('modules/te_ba_Batch/te_ba_Batch_sugar.php');
 class te_ba_Batch extends te_ba_Batch_sugar {
-	
+
         var $importable = true;
 	function __construct(){
 		parent::__construct();

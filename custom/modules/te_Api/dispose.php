@@ -18,7 +18,7 @@ if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUE
 $sql="delete from  session_call where  session_id='" . $_REQUEST['customerCRTId'] ."'";
 $db->query($sql);
 $objapi= new te_Api_override();
-$objapi->createLog(print_r($_REQUEST,true),$sql);
+$objapi->createLog(print_r($_REQUEST,true),'disposeamyo',$_REQUEST);
 
 if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
   $sql="select id from te_neox_call_details where userid='".$_REQUEST['customerCRTId']."'";
@@ -46,7 +46,7 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 			if(isset($user[0]->userId))$sql .= " name='". $user[0]->userId . " ' ,"; 
 			$sql .= " description='". json_encode($_REQUEST) . " ' where id='". $id . "'";  
 			$res=$db->query($sql);
-            $objapi->createLog(print_r($_REQUEST,true),$sql);
+           // $objapi->createLog(print_r($_REQUEST,true),$sql);
      exit();
   } 
 

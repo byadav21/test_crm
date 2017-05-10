@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$('#contract_type').change(function (){
+                 returtn false;
 		var contract_type = $("#contract_type").val();	
 		var vender_id = $("#te_vendor_aos_contracts_1te_vendor_ida").val();
 		$.ajax({

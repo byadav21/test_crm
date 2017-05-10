@@ -1,12 +1,20 @@
 <?php
 
+
+        $reponse=[];
+        $reponse['success']=false;
+        $reponse['message']=$error;
+        $reponse['status']='Inactive';
+        echo json_encode($reponse);exit();
+
+
 	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 	$error='';
 	require('custom/modules/te_student/te_student_override.php');
 	require_once('custom/modules/te_Api/te_Api.php');
 	try{
 		$objapi= new te_Api_override();
-		$objapi->createLog(print_r($_REQUEST,true),'ivr CRM');
+		$objapi->createLog(print_r($_REQUEST,true),'ivr CRM',$_REQUEST);
 		$dataPOST = $_GET;
 	 
 		if($dataPOST){			
