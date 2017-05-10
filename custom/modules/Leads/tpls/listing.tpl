@@ -340,7 +340,7 @@
 				 {/if}
 				  
 				
-						<p><i class="fa fa-calendar" aria-hidden="true"></i> {$rowData.DATE_ENTERED}</p>
+						<p><i class="fa fa-calendar" aria-hidden="true"></i> {$rowData.TEMP_LEAD_DATE_C}</p>
 						<label>Status</label>: 
 						{if $rowData.STATUS eq 'Dead' or $rowData.STATUS eq 'Duplicate' }
 								<p style="color:red;font-weight:bold;display:inline"><i class="fa fa-times" aria-hidden="true"></i> {$rowData.STATUS}</p> 
