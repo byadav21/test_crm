@@ -55,6 +55,134 @@ class UpdatePaymentName{
 			}
 
 		}
+		# WEB Payment Api
+		  $lead_user_details=[];
+		  if(isset($_REQUEST['Leads0emailAddress0']) && !empty($_REQUEST['Leads0emailAddress0'])){
+		   $lead_user_details['email_address']=$_REQUEST['Leads0emailAddress0'];
+		   $lead_user_details['first_name']=$_REQUEST['first_name'];
+		   $lead_user_details['last_name']=$_REQUEST['last_name'];
+		   $lead_user_details['phone_mobile']=$_REQUEST['phone_mobile'];
+		   $lead_user_details['te_ba_batch_id_c']=$_REQUEST['te_ba_batch_id_c'];
+		   $lead_user_details['id']=$bean->id;
+		   $lead_user_details['lead_id']=$lead_id;
+		   $lead_user_details['amount']=$bean->amount;
+		   $lead_user_details['payment_realized']=$bean->payment_realized;
+		   $lead_user_details['reference_number']=$bean->reference_number.'&nbsp;'.$bean->transaction_id;
+		   $lead_user_details['payment_type']=$bean->payment_type;
+		   $lead_user_details['date_of_payment']=$bean->date_of_payment;
+		   
+		  }
+		  else{
+		   $lead_user_details=$this->get_lead_details($lead_id);
+		   $batch_id=$this->getBatchId($lead_id);
+		   $lead_user_details['te_ba_batch_id_c']=$batch_id;
+		   $lead_user_details['lead_id']=$lead_id;
+		   $lead_user_details['id']=$bean->id;
+		   $lead_user_details['lead_id']=$lead_id;
+		   $lead_user_details['amount']=$bean->amount;
+		   $lead_user_details['payment_realized']=$bean->payment_realized;
+		   $lead_user_details['reference_number']=$bean->reference_number.'&nbsp;'.$bean->transaction_id;
+		   $lead_user_details['payment_type']=$bean->payment_type;
+		   $lead_user_details['date_of_payment']=$bean->date_of_payment;
+		  }
+		  if($lead_user_details){
+
+			$paymentSql="SELECT * FROM `te_payment_details` WHERE id='".$bean->id."'";
+			$paymentObj = $GLOBALS['db']->Query($paymentSql);
+			$paymentrow=$GLOBALS['db']->fetchByAssoc($paymentObj);
+			if(isset($paymentrow['is_sent_web']) && $paymentrow['is_sent_web']==0){
+			#add api
+			$this->addpayment_curl($lead_user_details);
+				echo $bean->payment_type;
+			}
+			else{
+				#update api
+				$this->updatepayment_curl($lead_user_details);
+				}
+		 }
+}
+		function addpayment_curl($lead_user_details){
+						echo "insert";			
+						$user = 'talentedgeadmin';
+						$password = 'Inkoniq@2016';
+						$url = 'http://talentedge.staging.wpengine.com/order-api/';
+						$headers = array(
+							'Authorization: Basic '. base64_encode("$user:$password") 
+						);
+						$post = [				
+							'action'=> 'add',
+							'user_email'=>$lead_user_details['email_address'],
+							'first_name'=>$lead_user_details['first_name'],
+							'mobile'=>$lead_user_details['phone_mobile'],
+							'lead_id'=>$lead_user_details['lead_id'],
+							'batch_crmid'=>$lead_user_details['te_ba_batch_id_c'],
+							'order_total'=>$lead_user_details['amount'],
+							'order_currency'=>'INR',
+							'payment_method'=>$lead_user_details['payment_type'],
+							'payment_date'=>$lead_user_details['date_of_payment'],
+							'payment_realized'=>$lead_user_details['payment_realized'],
+							'payment_referencenum'=>$lead_user_details['reference_number'],
+							'crm_orderid'=>$lead_user_details['id'],
+							
+								
+						];
+						
+							$ch = curl_init();
+							curl_setopt($ch, CURLOPT_URL,$url);
+							curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+							curl_setopt($ch, CURLOPT_POST, 1);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+							$result = curl_exec($ch);
+							$res = json_decode($result);						
+						
+						if(isset($res[0]->status) && $res[0]->status=='1'){						
+							$insertRelSql="UPDATE te_payment_details SET is_sent_web=1 Where id='".$lead_user_details['id']."'";
+							$GLOBALS['db']->Query($insertRelSql);
+						}
+					
+						curl_close($ch);
+		}
+			function updatepayment_curl($lead_user_details){
+						$user = 'talentedgeadmin';
+						$password = 'Inkoniq@2016';
+						$url = 'http://talentedge.staging.wpengine.com/order-api/';
+						$headers = array(
+							'Authorization: Basic '. base64_encode("$user:$password"), 
+						);
+						$post = [
+				
+							'action'=> 'update',
+							'crm_orderid'=>$bean->id,
+							'batch_crmid' =>$lead_user_details['te_ba_batch_id_c'],
+							'order_total'=>$bean->amount,
+							'order_currency'=>'INR',
+							'payment_method'=>$bean->payment_source,
+							'payment_date'=>$bean->date_of_payment,
+							'payment_realized'=>$bean->payment_realized,
+							'payment_referencenum'=>$bean->reference_number,
+								
+					]; 
+							$ch = curl_init();
+							curl_setopt($ch, CURLOPT_URL,$url);
+							curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+							curl_setopt($ch, CURLOPT_POST, 1);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+							curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+							$httpCode = curl_getinfo($ch , CURLINFO_HTTP_CODE);
+ 							$result = curl_exec($ch);
+ 							$res = json_decode($result);
+							
+												
+							curl_close($ch);  
+			}
+
+	function get_lead_details($lead_id){
+		  $leadSql="SELECT e.email_address,leads.first_name,leads.last_name,leads.phone_mobile FROM `email_addr_bean_rel` AS eabr INNER JOIN email_addresses as e ON e.id=eabr.`email_address_id` INNER JOIN leads ON leads.id=eabr.`bean_id` WHERE eabr.`bean_id`='".$lead_id."' AND eabr.`bean_module`='Leads' LIMIT 0,1";
+		  $leadObj = $GLOBALS['db']->Query($leadSql);
+		  $row=$GLOBALS['db']->fetchByAssoc($leadObj);
+		  return $row;
 	}
 	function removePaymentPlan($student_id,$batch_id,$student_country){
 		if(empty($student_country) || strtolower($student_country)=="india"){
