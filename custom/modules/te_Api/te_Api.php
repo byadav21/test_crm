@@ -260,8 +260,8 @@ class te_Api_override extends te_Api {
 				$querty['customerCRTId']  = $data['customerCRTId'];
 				$querty['campaignId']  = $data['campaignId'];
 				$querty['phone']  = $data['phone'];
-				$querty['lastStatus']  =  $querty['lastStatus'];
-				$querty['callType'] = $querty['callType'];
+				$querty['lastStatus']  =  $data['lastStatus'];
+				$querty['callType'] = $data['callType'];
 				$querty['entryPoint'] ='dispose amyo'; 
 				$querty['response'] = json_encode($data);			  
 				$querty['systemDisposition'] ='dispose';		 
@@ -274,7 +274,7 @@ class te_Api_override extends te_Api {
 				$querty['customerCRTId']  = $data['crtObjectId'];
 				$querty['campaignId']  = $data['campaignId'];
 				$querty['phone']  = $data['phone'];				 
-				$querty['callType'] = $querty['callType'];
+				$querty['callType'] = $data['callType'];
 				$querty['entryPoint'] ='call start'; 
 				$querty['response'] = json_encode($data);		  
 				$querty['systemDisposition'] ='call satrt'; 
