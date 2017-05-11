@@ -58,7 +58,6 @@ array (
     'module' => 'Users',
     'id' => 'ASSIGNED_USER_ID',
     'default' => true,
-   
   ),
   'REPORT_TO_NAME' => 
   array (
@@ -68,13 +67,20 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-     'sortable' => false,
+    'sortable' => false,
   ),
   'DATE_ENTERED' => 
   array (
     'width' => '10%',
     'label' => 'LBL_DATE_ENTERED',
     'default' => true,
+  ),
+  'TEMP_LEAD_DATE_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_TEMP_LEAD_DATE',
+    'width' => '10%',
   ),
   'TITLE' => 
   array (

@@ -597,7 +597,7 @@ $dictionary['Lead'] = array('table' => 'leads', 'audited' => true, 'unified_sear
                         'listview' => false,
                     ),
             ),
-       
+
     )
 , 'indices' => array(
         array('name' => 'idx_lead_acct_name_first', 'type' => 'index', 'fields' => array('account_name', 'deleted')),
