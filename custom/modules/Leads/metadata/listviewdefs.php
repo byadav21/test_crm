@@ -82,6 +82,41 @@ array (
     'label' => 'LBL_TEMP_LEAD_DATE',
     'width' => '10%',
   ),
+  'DATE_OF_CALLBACK' => 
+  array (
+    'type' => 'datetimecombo',
+    'label' => 'LBL_DATEOFCALLBACK',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'DATE_OF_PROSPECT' => 
+  array (
+    'type' => 'datetimecombo',
+    'label' => 'LBL_DATEOFPROSPECT',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'DATE_OF_FOLLOWUP' => 
+  array (
+    'type' => 'datetimecombo',
+    'label' => 'LBL_DATEOFFOLLOWUP',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'STATUS_DESCRIPTION' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'label' => 'LBL_STATUS_DESCRIPTION',
+    'width' => '10%',
+  ),
+  'DATE_MODIFIED' => 
+  array (
+    'type' => 'datetime',
+    'label' => 'LBL_DATE_MODIFIED',
+    'width' => '10%',
+    'default' => true,
+  ),
   'TITLE' => 
   array (
     'width' => '10%',

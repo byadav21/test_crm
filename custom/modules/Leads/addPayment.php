@@ -533,7 +533,7 @@ class addPaymentClass{
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
-			//$bean->assigned_user_id = 'NULL';
+			$bean->assigned_user_id = 'NULL';
                         //$bean->date_entered= $bean->lead_date;
                         //$bean->date_modified=date('Y-m-d H:i:s');
                         //$GLOBALS['db']->query("update leads set date_entered='" . $bean->temp_lead_date_c . "' where id='". $bean->id ."'");   

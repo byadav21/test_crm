@@ -340,18 +340,28 @@
 				 {/if}
 				  
 			
-					<p><i class="fa fa-calendar" aria-hidden="true"></i> {$rowData.TEMP_LEAD_DATE_C}</p>
+					<p><i class="fa fa-calendar" aria-hidden="true"></i> {$rowData.DATE_MODIFIED}</p>
 						<label>Status</label>: 
 						{if $rowData.STATUS eq 'Dead' or $rowData.STATUS eq 'Duplicate' }
-								<p style="color:red;font-weight:bold;display:inline"><i class="fa fa-times" aria-hidden="true"></i> {$rowData.STATUS}</p> 
+								<p style="color:red;font-weight:bold;display:inline"><i class="fa fa-times" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}</p> 
 						 {elseif $rowData.STATUS eq 'Warm'}
-								<p style="color:orange;font-weight:bold;display:inline"><i class="fa fa-certificate" aria-hidden="true"></i> {$rowData.STATUS}</p> 
+								<p style="color:orange;font-weight:bold;display:inline"><i class="fa fa-certificate" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}</p> 
 						  {elseif $rowData.STATUS eq 'Converted'}
-								<p style="color:limegreen;font-weight:bold;display:inline"><i class="fa fa-check-square-o" aria-hidden="true"></i> {$rowData.STATUS}</p>
+								<p style="color:limegreen;font-weight:bold;display:inline"><i class="fa fa-check-square-o" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}</p>
 						  {elseif $rowData.STATUS eq 'Alive'}
-								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$rowData.STATUS}</p>
+								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}</p>
 						   {/if}
-						
+					<p>
+                                             {if $rowData.STATUS_DESCRIPTION=='Call Back'}
+                                                 Dated : {$rowData.DATE_OF_CALLBACK}
+
+                                             {elseif $rowData.STATUS_DESCRIPTION=='Follow Up' }  
+                                                 Dated : {$rowData.DATE_OF_FOLLOWUP}
+                                             {elseif $rowData.STATUS_DESCRIPTION=='Prospect'}
+                                                Dated : {$rowData.DATE_OF_PROSPECT}
+                                              {/if} 
+
+                                         </p>	
 						
 						 
 				  </div>

@@ -1,6 +1,8 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('custom/modules/te_Api/te_Api.php');
+require_once('modules/te_disposition/te_disposition.php');
+
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
 global $db;
 
@@ -47,7 +49,34 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 			$sql .= " description='". json_encode($_REQUEST) . " ' where id='". $id . "'";  
 			$res=$db->query($sql);
            // $objapi->createLog(print_r($_REQUEST,true),$sql);
-     exit();
+    
+	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['customerId'] ){
+				
+				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where dristi_customer_id='". $_REQUEST['customerId'] ."'";
+				$res=$db->query($sql);
+				 if($db->getRowCount($res)>0){
+                
+					 $records=$db->fetchByAssoc($res);  
+					 $id=$records['id_c']; 
+					 $attempid=intval($records['attempts_c']);
+					 $attempid++; 
+					 $sql="update leads_cstm set attempts_c='". $attempid."' where id_c='".  $id."'";
+					 $res=$db->query($sql);
+
+					$disposition = new te_disposition();
+					$disposition->status 	   = 'No Answer';
+					$disposition->status_detail  =  'No Answer';					 
+					$disposition->name 		   	 =  'No Answer';
+					$disposition->te_disposition_leadsleads_ida 		  = $id;
+					$disposition->save();
+                                            
+
+				}
+				
+	}
+
+
+         exit();
   } 
 
 	$obj=new te_neox_call_details();	
@@ -69,6 +98,29 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 	$user=json_decode(html_entity_decode($_REQUEST['userAssociations']));
 	if(isset($user[0]->userId)) $obj->name=$user[0]->userId;
 	$obj->save();
+
+
+	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['customerId'] ){
+				
+				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where dristi_customer_id='". $_REQUEST['customerId'] ."'";
+				$res=$db->query($sql);
+				 if($db->getRowCount($res)>0){
+                
+					 $records=$db->fetchByAssoc($res);  
+					 $id=$records['id_c']; 
+					 $attempid=intval($records['attempts_c']);
+					 $attempid++; 
+					 $sql="update leads_cstm set attempts_c='". $attempid."' where id_c='".  $id."'";
+					 $res=$db->query($sql);
+					$disposition = new te_disposition();
+					$disposition->status 	   = 'No Answer';
+					$disposition->status_detail  =  'No Answer';					 
+					$disposition->name 		   	 =  'No Answer';
+					$disposition->te_disposition_leadsleads_ida 		  = $id;
+					$disposition->save();
+				}
+				
+	}
 
 }
 

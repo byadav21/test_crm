@@ -1,5 +1,5 @@
 <?php
-// created: 2017-05-10 18:55:38
+// created: 2017-05-11 16:48:00
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Payment Details',
   'LBL_COMPANY' => 'Company',
@@ -31,4 +31,5 @@ $mod_strings = array (
   'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE' => 'Payment Details',
   'COMMENT' => 'Comment',
   'LBL_TEMP_LEAD_DATE' => 'temp lead date',
+  'LBL_ATTEMPTS' => 'No Answer Attempts',
 );

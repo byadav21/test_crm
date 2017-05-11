@@ -149,7 +149,11 @@ array (
             'studio' => 'visible',
             'label' => 'COMMENT',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'attempts_c',
+            'label' => 'LBL_ATTEMPTS',
+          ),
         ),
         5 => 
         array (
