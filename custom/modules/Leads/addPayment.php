@@ -571,7 +571,8 @@ class addPaymentClass{
 			}
 		}
 		# 	>>>>----------------web Services ----------------------------<<<<<<
-					
+			if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
+				
 						$Query3="SELECT email_address,id FROM `email_addresses` WHERE deleted=0 AND email_address='".$bean->email1."'";
 						$lead3 = $GLOBALS['db']->query($Query3);
 						$Emails = $GLOBALS['db']->fetchByAssoc($lead3);
@@ -633,13 +634,13 @@ class addPaymentClass{
 										'address'=>'1',
 									];
 									
-									/*$ch = curl_init();
+									$ch = curl_init();
 									curl_setopt($ch, CURLOPT_URL,$url);
 									curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 									curl_setopt($ch, CURLOPT_POST, 1);
 									curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 									curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-									$result = curl_exec($ch);*/
+									$result = curl_exec($ch);
 									$res = json_decode($result);
 									if(isset($res[0]->status) && $res[0]->status=='1'){
 										$bean->web_lead_id=$res[0]->userid;
@@ -692,13 +693,13 @@ class addPaymentClass{
 										];
 										#print_r ($post);
 										#die();
-									/*	$ch = curl_init();
+										$ch = curl_init();
 										curl_setopt($ch, CURLOPT_URL,$url);
 										curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 										curl_setopt($ch, CURLOPT_POST, 1);
 										curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 										curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-										$result = curl_exec($ch);*/
+										$result = curl_exec($ch);
 										$res = json_decode($result);
 										
 										if(isset($res[0]->status) && $res[0]->status=='1'){
@@ -726,8 +727,8 @@ class addPaymentClass{
 										
 										//curl_close($ch);  						
 													
-									}									
-			
+								}									
+			}
 	}
 
 	function addDispositionFunc($bean, $event, $argument){
