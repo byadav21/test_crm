@@ -154,7 +154,7 @@ class te_Api_override extends te_Api {
 				if($callback=='Call Back' || $callback=='Follow Up' || $callback=='Prospect'){
 				  $data['selfCallback']='true';
 
-					   //echo $date .'==';
+					   //echo                  $date .'==';
 				//echo date('Y-m-d H:i:s');die;
 				  $callDate= date('d-m-Y H:i:s',strtotime($date));
 				 // $diff= $callDate- $current;
@@ -240,7 +240,7 @@ class te_Api_override extends te_Api {
 
 	function createLog($req,$res,$data=array(),$dispose=''){
 		$querty=array();
-		if($res!='login'){
+		//if($res!='login' ){
 			  if($res=='dispose'){			
 				$querty['userId'] = $data['userId'];
 				$querty['customer_id'] = $data['customerId'];
@@ -279,26 +279,28 @@ class te_Api_override extends te_Api {
 				$querty['response'] = json_encode($data);		  
 				$querty['systemDisposition'] ='call satrt'; 
 			}	
-			$querty['dated'] = date('Y-m-d H:i:s');
+                       if($res=='dispose' || $res=='disposeamyo' ||$res=='crm popup url'){
+		   	 $querty['dated'] = date('Y-m-d H:i:s');
 			
-			foreach($querty as $key=>$val){
-			  $sql .= " $key='". $val . "',";	
+			 foreach($querty as $key=>$val){
+			   $sql .= " $key='". $val . "',";	
 			 	
-			}
+			 }
 			 $sql="insert into dristi_log set " .substr($sql,0,strlen($sql)-1);//die;
 			
-			global $db;
-			$db->query($sql);
-			
-		}//else{ 
-			$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apilog/apilog.txt","a");
+			 global $db;
+			 $db->query($sql);
+                       }else{			
+		
+		
+                 	$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apilog/apilog.txt","a");
 			 
 			fwrite($file,date('Y-m-d H:i:s') ."\n");
 			fwrite($file,$req ."\n");   fwrite($file,$res ."\n");
 
 			fwrite($file,$res ."\n");
 			fclose($file);
-		//}
+		      }
 		
 	}
 	
