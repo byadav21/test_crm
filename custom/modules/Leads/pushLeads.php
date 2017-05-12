@@ -47,19 +47,19 @@ if($db->getRowCount($result)>0){
 			$responses=$api->uploadContacts($request,$currentCamp,$currentApi);
 			if(isset($responses->beanResponse) && count($responses->beanResponse)>0){		
 				foreach($responses->beanResponse as $key=>$res){
-					if(isset($res->inserted) && ($res->inserted==1 or $res->inserted=='true' ){
+					if(isset($res->inserted) && ($res->inserted==1 or $res->inserted=='true') ){
 						try{
 							$update = "UPDATE leads set dristi_customer_id='".  $res->customerId ."', neoxstatus =1 WHERE id = '".$row['id']."'";
 							$db->query($update);
 							$sql="insert into dristi_upload_logs set lead_id='". $row['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
-							$db->query($update);	 
+							$db->query($sql);	 
 						}catch(Exception $e){
 						   //crete log	
 						}	
 					}else{
 						try{
 							$sql="insert into dristi_upload_logs set lead_id='". $row['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
-							$db->query($update);
+							$db->query($sql);
 						}catch(Exception $e){
 						   //crete log	
 						}	
@@ -71,7 +71,7 @@ if($db->getRowCount($result)>0){
 			}else{
 				try{
 					$sql="insert into dristi_upload_logs set lead_id='". $row['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='error',resultTypeString='error',text='". json_encode($responses)  ."'";
-					$db->query($update);
+					$db->query($sql);
 				}catch(Exception $e){
 						   //crete log	
 				}		
@@ -90,7 +90,7 @@ if($db->getRowCount($result)>0){
 		if($row['phone_home'] )  $customerRecords['phone2'] = $row['phone_home'];
 		if($row['phone_work'] )  $customerRecords['phone3'] = $row['phone_work'];
 		if($row['phone_other'] )  $customerRecords['phone4'] = $row['phone_other'] ;	 
-		if($row['id'] )  $customerRecords['lead_refrence'] = $row['id'];
+		if($row['id'] )  $customerRecords['lead_reference'] = $row['id'];
 		$data['customerRecords'][]=$customerRecords;
 		$currentCamp=$row['dristi_campagain_id'];
 		$currentApi=$row['dristi_api_id'];
@@ -108,19 +108,19 @@ if($db->getRowCount($result)>0){
 			$responses=$api->uploadContacts($request,$currentCamp,$currentApi);
 			if(isset($responses->beanResponse) && count($responses->beanResponse)>0){		
 				foreach($responses->beanResponse as $key=>$res){
-					if(isset($res->inserted) && ($res->inserted==1 or $res->inserted=='true' ){
+					if(isset($res->inserted) && ($res->inserted==1 or $res->inserted=='true') ){
 						try{
 							$update = "UPDATE leads set dristi_customer_id='".  $res->customerId ."', neoxstatus =1 WHERE id = '".$allInserted[$key]['id']."'";
 							$db->query($update);
 							$sql="insert into dristi_upload_logs set lead_id='". $allInserted[$key]['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
-							$db->query($update);	 
+							$db->query($sql);	 
 						}catch(Exception $e){
 						   //crete log	
 						}	
 					}else{
 						 try{	
 							$sql="insert into dristi_upload_logs set lead_id='". $allInserted[$key]['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
-								$db->query($update);
+								$db->query($sql);
 						 }catch(Exception $e){
 							 
 						 }	
@@ -131,7 +131,7 @@ if($db->getRowCount($result)>0){
 			}else{
 			 	try{	
 				$sql="insert into dristi_upload_logs set lead_id='". $allInserted[$key]['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='error',resultTypeString='error',text='". json_encode($responses)  ."'";
-							$db->query($update);
+							$db->query($sql);
 				}catch(Exception $e){
 				 
 				}			
