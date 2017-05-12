@@ -19,30 +19,30 @@ function dispostionFunc($bean, $event, $argument){
 	$Quer10 =$db->query("SELECT name,(SELECT leads.first_name FROM leads WHERE leads.id='".$leadid."')leads_name FROM te_ba_batch WHERE id=(SELECT te_ba_batch_id_c FROM leads_cstm WHERE id_c='".$leadid."' AND deleted = 0)");
 	$result10 =$db->fetchByAssoc($Quer10);
 
-	$fstname=$result10['name'];
-	$batch=$result10['leads_name'];
+	$fstname=$result10['leads_name'];
+	$batch=$result10['name'];
 
 
 	//if((isset($_REQUEST['status_detail']) && !empty($_REQUEST['status_detail'])) && ($_REQUEST['status_detail']=='Call Back' || $_REQUEST['status_detail']=='Prospect' || $_REQUEST['status_detail']=='Follow Up')){
 	$staus=$_REQUEST['status'];
-	$discription=$_REQUEST['description'];
+	//$discription=$_REQUEST['description'];
 	//$sta=$_REQUEST['record'];
 	
-	if((isset($_REQUEST['status_detail']) && !empty($_REQUEST['status_detail'])) && ($_REQUEST['status_detail']=='Call Back' || $_REQUEST['status_detail']=='Prospect' || $_REQUEST['status_detail']=='Follow Up')){
+	if((isset($_REQUEST['status_description']) && !empty($_REQUEST['status_description'])) && ($_REQUEST['status_description']=='Call Back' || $_REQUEST['status_description']=='Prospect' || $_REQUEST['status_description']=='Follow Up')){
 	//$datoff=$_REQUEST['date_of_callback'];
 	//$datoff=$_REQUEST['date_of_followup'];
 	//$datoff=$_REQUEST['date_of_prospect'];
-	if($_REQUEST['status_detail']=="Call Back")
+	if($_REQUEST['status_description']=="Call Back")
 		{
 		$datoff=$_REQUEST['date_of_callback'];
 		
 		}
-	if($_REQUEST['status_detail']=="Follow Up")
+	if($_REQUEST['status_description']=="Follow Up")
 		{
 		$datoff=$_REQUEST['date_of_followup'];
 		
 		}
-	if($_REQUEST['status_detail']=="Prospect")
+	if($_REQUEST['status_description']=="Prospect")
 		{
 		$datoff=$_REQUEST['date_of_prospect'];
 		}
@@ -53,7 +53,7 @@ function dispostionFunc($bean, $event, $argument){
 	
 	$call->name =$fstname."-".$staus;
 	$call->date_start=$datoff;
-	$call->description=	$discription."Name-".$fstname."Batch-".$batch;
+	$call->description=	"Name- ".$fstname." Batch- ".$batch;
 	$call->duration_minutes = "15";
 	$call->status = "Planned";
 	$call->direction = "Outbound";
