@@ -570,8 +570,8 @@ class addPaymentClass{
 				}
 			}
 		}
-		# 	>>>>----------------web Services ----------------------------<<<<<<
-			if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
+		/*	>>>>----------------web Services ----------------------------<<<<<<*/
+			/*if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
 				
 						$Query3="SELECT email_address,id FROM `email_addresses` WHERE deleted=0 AND email_address='".$bean->email1."'";
 						$lead3 = $GLOBALS['db']->query($Query3);
@@ -644,12 +644,10 @@ class addPaymentClass{
 									$res = json_decode($result);
 									if(isset($res[0]->status) && $res[0]->status=='1'){
 										$bean->web_lead_id=$res[0]->userid;
-										#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");
 									}
 									$bean->web_lead_id=$webid;
 									$bean->is_sent_web="1";
 									
-									//curl_close($ch);
 									  if($updateColumns) {
 											#find ID of email address
 											$sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
@@ -658,12 +656,8 @@ class addPaymentClass{
 											while($row6=$GLOBALS['db']->fetchByAssoc($email6)){
 												
 											# ****update When Records When Email id Same ******	
-											#echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
 											$GLOBALS['db']->Query("UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'");
-												#$qs="UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'";
 												
-											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$webid."' WHERE id_c='".$row6['bean_id']."'");					
-										
 											}
 									
 									  }
@@ -691,8 +685,7 @@ class addPaymentClass{
 											'pincode'=>'1',
 											'address'=>'1',
 										];
-										#print_r ($post);
-										#die();
+										
 										$ch = curl_init();
 										curl_setopt($ch, CURLOPT_URL,$url);
 										curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -705,19 +698,14 @@ class addPaymentClass{
 										if(isset($res[0]->status) && $res[0]->status=='1'){
 											$bean->is_sent_web="1";
 											$bean->web_lead_id=$res[0]->userid;
-											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");	
 											if($updateColumns) {
-											#find ID of email address
-											#echo $sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
 											$sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN  leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
 											$email6 = $GLOBALS['db']->query($sql6);
 											
 											while($row6=$GLOBALS['db']->fetchByAssoc($email6)){
 											# ****update When Records When Email id Same ******	
-											#echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
 											$GLOBALS['db']->Query("UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'");
-											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$row6['bean_id']."'");					
-										
+											
 											}
 											
 										}
@@ -725,10 +713,9 @@ class addPaymentClass{
 									
 									  }
 										
-										//curl_close($ch);  						
 													
 								}									
-			}
+			}*/
 	}
 
 	function addDispositionFunc($bean, $event, $argument){
