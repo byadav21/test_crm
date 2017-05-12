@@ -86,7 +86,8 @@ $filename = str_replace(' ', '', $filename);
 $transContent = $GLOBALS['locale']->translateCharset($content, 'UTF-8', $GLOBALS['locale']->getExportCharset());
 
 
-
+/*
+ * 
 if ($filename == 'Leads')
 {
     $file = 'upload/leads/Lead_Upload_Format.csv'; //path to the file on disk
@@ -110,6 +111,8 @@ if ($filename == 'Leads')
         exit;
     }
 }
+ 
+ */
 
 if ($_REQUEST['members'] == true)
     $filename .= '_' . 'members';
