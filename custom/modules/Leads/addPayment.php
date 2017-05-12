@@ -583,7 +583,7 @@ class addPaymentClass{
 			}
 		}
 		# 	>>>>----------------web Services ----------------------------<<<<<<
-			if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
+			/*if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
 				
 						$Query3="SELECT email_address,id FROM `email_addresses` WHERE deleted=0 AND email_address='".$bean->email1."'";
 						$lead3 = $GLOBALS['db']->query($Query3);
@@ -740,7 +740,7 @@ class addPaymentClass{
 										//curl_close($ch);  						
 													
 								}									
-			}
+			}*/
 	}
 
 	function addDispositionFunc($bean, $event, $argument){
