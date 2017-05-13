@@ -10,6 +10,8 @@ $phone= $_REQUEST['phone'];
 $callType= $_REQUEST['callType']; 
 $callObjId= $_REQUEST['userCrtObjectId']; 
 $mainMenu= $_REQUEST['mainMenu']; 
+$_REQUEST['customerInfo']=html_entity_decode($_REQUEST['customerInfo']);
+
 $_SESSION['temp_for_newUser']= json_encode($_REQUEST) ; 
 try{
 	$objapi= new te_Api_override();
