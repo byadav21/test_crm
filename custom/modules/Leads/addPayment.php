@@ -537,7 +537,7 @@ class addPaymentClass{
 				$bean->status = 'Duplicate';
 				$bean->status_description = 'Duplicate';
 				$bean->duplicate_check = '1';
-				$data=$GLOBALS['db']->fetchByAssoc($utmObj);
+				$data=$GLOBALS['db']->fetchByAssoc($re);
 				$bean->assigned_user_id = $data['assigned_user_id'];
 			}else{
 				$bean->assigned_user_id = 'NULL';
@@ -576,7 +576,7 @@ class addPaymentClass{
 					$bean->status = 'Duplicate';
 					$bean->status_description = 'Duplicate';
 					$bean->duplicate_check = '1';
-					$data=$GLOBALS['db']->fetchByAssoc($utmObj);
+					$data=$GLOBALS['db']->fetchByAssoc($re);
 					$bean->assigned_user_id = $data['assigned_user_id'];
 				}
 				
