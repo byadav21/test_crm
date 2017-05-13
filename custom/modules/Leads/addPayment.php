@@ -514,63 +514,75 @@ class addPaymentClass{
 			$utmObj = $bean->db->Query($utmSql);
 			$utmDetails = $GLOBALS['db']->fetchByAssoc($utmObj);
 			#check duplicate leads
-			$sql = "SELECT leads.id as id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
+			$sql = "SELECT leads.id as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
 			if($bean->email1!=""){
 				$sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
 				$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
 			}
-			$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' AND DATE(date_entered) = '".date('Y-m-d')."'";
-			if($bean->phone_mobile!=""){
-				$sql.=" AND leads.phone_mobile = '{$bean->phone_mobile}'";
-			}
-			if($bean->email1!=""){
-				$sql.=" AND email_addresses.email_address='".$bean->email1."'";
-			}
+			$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' and status_description!='Duplicate' and  leads.deleted=0";// AND DATE(date_entered) = '".date('Y-m-d')."'";
+			if($bean->phone_mobile && $bean->email1){
+				
+				$sql.=" and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
+				
+			}elseif(!$bean->phone_mobile && $bean->email1){
+			
+				$sql.=" and email_addresses.email_address = '{$bean->email1}'";
+			
+			}elseif(!$bean->phone_mobile && !$bean->email1){
+				$sql.=" and leads.phone_mobile = '{$bean->phone_mobile}'";
+			}	
+			
 			$re = $GLOBALS['db']->query($sql);
 			if($GLOBALS['db']->getRowCount($re)>0){
 				$bean->status = 'Duplicate';
 				$bean->status_description = 'Duplicate';
+				$bean->duplicate_check = '1';
+				$data=$GLOBALS['db']->fetchByAssoc($re);
+				$bean->assigned_user_id = $data['assigned_user_id'];
+			}else{
+				$bean->assigned_user_id = 'NULL';
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
-			//$bean->assigned_user_id = 'NULL';
-                        //$bean->date_entered= $bean->lead_date;
-                        //$bean->date_modified=date('Y-m-d H:i:s');
-                        //$GLOBALS['db']->query("update leads set date_entered='" . $bean->temp_lead_date_c . "' where id='". $bean->id ."'");   
-
-
+			 
 		}else{
 			
-                               if($bean->fetched_row['temp_lead_date_c']==''){
-                                     $bean->temp_lead_date_c=date('Y-m-d H:i:s');
-                                }
-                               // $bean->date_modified=date('Y-m-d H:i:s');
-                               
-//
-//echo 'p';die;
-//echo "update leads_cstm set temp_lead_date_c='" . date('Y-m-d H:i:s'). "' where id_c='". $bean->id ."'"; die;
-//global $db;
-                               //$GLOBALS['db']->query("update leads set date_entered='" . $bean->temp_lead_date_c . "' where ='". $bean->id ."'");
-                               if(empty($bean->fetched_row['id'])  && isset($utmDetails['batch']) && !empty($utmDetails['batch'])){
-				$sql = "SELECT id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' AND date_entered LIKE '".date('Y-m-d')."%'";
-				if($bean->phone_mobile!=""){
-					$sql.=" AND leads.phone_mobile = '{$bean->phone_mobile}'";
+			   if($bean->fetched_row['temp_lead_date_c']==''){
+					 $bean->temp_lead_date_c=date('Y-m-d H:i:s');
 				}
+                            
+ 			if(empty($bean->fetched_row['id'])){
+				
+				$sql = "SELECT leads.id  as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
+				if($bean->email1!=""){
+					$sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
+					$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
+				}
+				$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$bean->te_ba_batch_id_c."' and status_description!='Duplicate' and leads.deleted=0 ";// AND DATE(date_entered) = '".date('Y-m-d')."'";
+				if($bean->phone_mobile && $bean->email1){
+					
+					$sql.=" and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
+					
+				}elseif(!$bean->phone_mobile && $bean->email1){
+				
+					$sql.=" and email_addresses.email_address = '{$bean->email1}'";
+				
+				}elseif(!$bean->phone_mobile && !$bean->email1){
+					$sql.=" and leads.phone_mobile = '{$bean->phone_mobile}'";
+				}	
+			    
 				$re = $GLOBALS['db']->query($sql);
 				if($GLOBALS['db']->getRowCount($re)>0){
-					$ro = $GLOBALS['db']->fetchByAssoc($re);
-					$lid = $ro['id'];
-					require_once('include/SugarEmailAddress/SugarEmailAddress.php');
-					$emailAddress = new SugarEmailAddress();
-					$lead_list = $emailAddress->getRelatedId($bean->email1, 'leads');
-					if(is_array($lead_list) && in_array($lid,$lead_list)){
-						$bean->status = 'Duplicate';
-						$bean->status_description = 'Duplicate';
-					}
+					$bean->status = 'Duplicate';
+					$bean->status_description = 'Duplicate';
+					$bean->duplicate_check = '1';
+					$data=$GLOBALS['db']->fetchByAssoc($re);
+					$bean->assigned_user_id = $data['assigned_user_id'];
 				}
+				
 			}
 		}
-		/*	>>>>----------------web Services ----------------------------<<<<<<*/
+		# 	>>>>----------------web Services ----------------------------<<<<<<
 			/*if(!isset($_REQUEST['import_module'])&&$_REQUEST['module']!="Import"){
 				
 						$Query3="SELECT email_address,id FROM `email_addresses` WHERE deleted=0 AND email_address='".$bean->email1."'";
@@ -644,10 +656,12 @@ class addPaymentClass{
 									$res = json_decode($result);
 									if(isset($res[0]->status) && $res[0]->status=='1'){
 										$bean->web_lead_id=$res[0]->userid;
+										#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");
 									}
 									$bean->web_lead_id=$webid;
 									$bean->is_sent_web="1";
 									
+									//curl_close($ch);
 									  if($updateColumns) {
 											#find ID of email address
 											$sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
@@ -656,8 +670,12 @@ class addPaymentClass{
 											while($row6=$GLOBALS['db']->fetchByAssoc($email6)){
 												
 											# ****update When Records When Email id Same ******	
+											#echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
 											$GLOBALS['db']->Query("UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'");
+												#$qs="UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'";
 												
+											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$webid."' WHERE id_c='".$row6['bean_id']."'");					
+										
 											}
 									
 									  }
@@ -685,7 +703,8 @@ class addPaymentClass{
 											'pincode'=>'1',
 											'address'=>'1',
 										];
-										
+										#print_r ($post);
+										#die();
 										$ch = curl_init();
 										curl_setopt($ch, CURLOPT_URL,$url);
 										curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -698,14 +717,19 @@ class addPaymentClass{
 										if(isset($res[0]->status) && $res[0]->status=='1'){
 											$bean->is_sent_web="1";
 											$bean->web_lead_id=$res[0]->userid;
+											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");	
 											if($updateColumns) {
+											#find ID of email address
+											#echo $sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
 											$sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN  leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
 											$email6 = $GLOBALS['db']->query($sql6);
 											
 											while($row6=$GLOBALS['db']->fetchByAssoc($email6)){
 											# ****update When Records When Email id Same ******	
+											#echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
 											$GLOBALS['db']->Query("UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'");
-											
+											#$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$row6['bean_id']."'");					
+										
 											}
 											
 										}
@@ -713,6 +737,7 @@ class addPaymentClass{
 									
 									  }
 										
+										//curl_close($ch);  						
 													
 								}									
 			}*/
