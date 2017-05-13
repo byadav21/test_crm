@@ -70,6 +70,7 @@
 			<thead>
 				  	<tr>
 				  		<th>lead ID</th>
+                                                <th>Created Date</th>
                                                 <th>assigned_user_id</th>
                                        
 				  	
@@ -78,7 +79,7 @@
 				  	</tr>	
 				  </thead>
 			<?php
-				$SQLSELECT = "SELECT * FROM leads WHERE date( date_entered ) = '2017-05-12'";
+				$SQLSELECT = "SELECT * FROM leads WHERE date(date_entered)= '2017-05-13'";
 				$result_set =  mysqli_query($conn,$SQLSELECT);
 				while($row = mysqli_fetch_array($result_set))
 				{
@@ -86,7 +87,7 @@
 			
 					<tr>
 						<td><?php echo $row['id']; ?></td>
-						
+						<td><?php echo $row['date_entered']; ?></td>
 						<td><?php echo $row['assigned_user_id']; ?></td>
                                                 
 					</tr>

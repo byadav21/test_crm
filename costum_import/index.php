@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <?php 
-	include 'db.php';
-	
-
-
+include 'db.php';
 ?>	
 <html lang="en">
 	<head>
@@ -11,12 +8,9 @@
 		<title>Import Excel To Mysql Database Using PHP </title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Import Excel File To MySql Database Using php">
-
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 		<link rel="stylesheet" href="css/bootstrap-custom.css">
-
-
 	</head>
 	<body>    
 
@@ -31,17 +25,19 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#">Import Excel To Mysql Database Using PHP</a>
+				<a class="brand" href="#">Talentedge Import Excel</a>
 				
 			</div>
 		</div>
 	</div>
-
+       
 	<div id="wrap">
 	<div class="container">
+            
 		<div class="row">
 			<div class="span3 hidden-phone"></div>
 			<div class="span6" id="form-login">
+                             <a href="index.php">Utm</a> | <a href="leads_update.php">Leads</a>
 				<form class="form-horizontal well" action="import.php" method="post" name="upload_excel" enctype="multipart/form-data">
 					<fieldset>
 						<legend>Import CSV/Excel file</legend>
