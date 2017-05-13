@@ -79,7 +79,7 @@
 				  	</tr>	
 				  </thead>
 			<?php
-				$SQLSELECT = "SELECT * FROM leads WHERE date(date_entered) between  '2017-05-07' and '2017-05-08' limit 100";
+				$SQLSELECT = "SELECT * FROM leads WHERE date(date_entered)= '2017-05-13'";
 				$result_set =  mysqli_query($conn,$SQLSELECT);
 				while($row = mysqli_fetch_array($result_set))
 				{
