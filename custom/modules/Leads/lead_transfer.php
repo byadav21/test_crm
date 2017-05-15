@@ -65,24 +65,31 @@ input[type=text], select {
   <td><b>Lead Source</b></td>
      <td><select name="Lead_source[]" multiple id="Lead_source">
                                   <option  value="Campaign">Campaign</option>
-                                  <option  value="Web Site">Web Site</option>
-                                  <option  value="CallbackForm">Callback Form</option>
-                                  <option  value="Converted">Chat</option>
-                                  <option  value="InboundCalls">Inbound Calls</option>
-                                  <option  value="Referrals">Referrals</option>
-                                  <option  value="Chat">Chat</option>
-                                </select></td>
+								  <option  value="Web Site">Web Site</option>	
+								  <option  value="Converted">Chat</option>
+								  <option  value="InboundCalls">Inbound Calls</option>
+								  <option  value="Referrals">Referrals</option>
+								  <option  value="Chat">Chat</option>
+								  <option  value="Inbound Calls">InboundCalls</option>
+								  <option  value="Email Enquiries">Email Enquiries</option>
+								  <option  value="Channel">Channel</option>
+								  <option  value="Email Enquiries">Email Enquiries</option>
+								  <option  value="ABND">ABND</option>
+								  <option  value="Fail Payment">Fail Payment</option>
+								  <option value="Crosssell">Cross sell</option> 
+								  </select></td>
     
       
         <td><b>Lead Status</b></td>
     <td><select name="Lead_status[]" multiple id="Lead_status">
-                                  <option  value="New">New</option>
-                                  <option  value="Assigned">Assigned</option>
-                                  <option  value="Not_Enquired">Not Enquired</option>
-                                  <option  value="Converted">Converted</option>
-                                  <option  value="Not_Enquired">Not Enquired</option>
-                                  <option  value="Dead">Dead</option>
-                                </select></td>
+									<option  value="Converted">Converted</option>
+									<option  value="Alive">Alive</option>
+									<option  value="New">New</option>
+									<option  value="Dead">Dead</option>
+									<option  value="Duplicate">Duplicate</option>  
+									<option  value="Dropout">Dropout</option>
+									<option  value="Warm">Warm</option>
+									</select></td>
   </tr>
   <tr>
   <td><b>Number Of Leads</b></td>
@@ -94,14 +101,6 @@ input[type=text], select {
   </tr>
 </table>
 
-                      
-                      
-                      
-                     
-                      
-                      
-                      
-                      
                          
                     </fieldset>
             </section>
