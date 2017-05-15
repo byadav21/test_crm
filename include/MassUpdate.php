@@ -56,7 +56,7 @@ class MassUpdate
 	 * where clauses used to filter rows that have to be updated
 	 */
 	var $where_clauses = '';
-
+	public $report_to_id=array();
 	/**
 	  * set the sugar bean to its internal member
 	  * @param sugar bean reference
@@ -212,6 +212,25 @@ eoq;
 		if(!empty($_REQUEST['uid'])) $_POST['mass'] = explode(',', $_REQUEST['uid']); // coming from listview
 		elseif(isset($_REQUEST['entire']) && empty($_POST['mass'])) {
 			if(empty($order_by))$order_by = '';
+			
+			/*Custom code for leads goes here*/
+			if(isset($_REQUEST['module']) && strtolower($_REQUEST['module'])=='leads'){
+				$this->where_clauses = str_replace('leads.batch in','leads_cstm.te_ba_batch_id_c in',$this->where_clauses);
+			}
+			$this->report_to_id[]=$current_user->id;
+			$module_name = strtolower($_REQUEST['module']);
+			$users_arr = $this->reportingUser($current_user->id);
+			$users = implode("','",$this->report_to_id);
+			if($current_user->is_admin==0 && $users){
+				$where_clauses = explode(' ) AND ( ', $this->where_clauses) ;
+				array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
+				$where_clauses = array_filter($where_clauses);
+				if($where_clauses){
+					$this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
+				}
+				
+			}
+			/*Custom code for leads ends here*/
 
             // TODO: define filter array here to optimize the query
             // by not joining the unneeded tables
@@ -1415,6 +1434,19 @@ EOQ;
     {
         return '';
     }
+	function reportingUser($currentUserId){
+		$userObj = new User();
+		$userObj->disable_row_level_security = true;
+		$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+		if(!empty($userList)){
+			foreach($userList as $record){
+				if(!empty($record->reports_to_id) && !empty($record->id)){
+					$this->report_to_id[] = $record->id;
+					$this->reportingUser($record->id);
+				}
+			}
+		}
+	}
 }
 
 ?>
