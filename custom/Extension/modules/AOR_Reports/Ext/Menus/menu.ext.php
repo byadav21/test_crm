@@ -82,6 +82,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyreport', "Dail
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dmstatusreport', "DM Status Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=budgeted_actual', "Budgeted Vs Actual Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=Conversion_data', "Conversion Data Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
 }
 # SRM REPORTS #
 if(in_array($current_user->id,$srmArr) || $current_user->is_admin==1){
