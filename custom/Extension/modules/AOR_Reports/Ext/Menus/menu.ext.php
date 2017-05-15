@@ -79,6 +79,9 @@ if(in_array($current_user->id,$crrArr) || $current_user->is_admin==1){
 if(in_array($current_user->id,$dmArr) || $current_user->is_admin==1){
 $module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyreport', "Daily Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=dmstatusreport', "DM Status Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=budgeted_actual', "Budgeted Vs Actual Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=Conversion_data', "Conversion Data Report", 'AOR_Reports');
 }
 # SRM REPORTS #
 if(in_array($current_user->id,$srmArr) || $current_user->is_admin==1){
