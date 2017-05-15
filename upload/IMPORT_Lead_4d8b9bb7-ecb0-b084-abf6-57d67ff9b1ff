@@ -1,4 +1,503 @@
-first_name,phone_mobile,utm,dristi_campagain_id,dristi_api_id,email,Assigned User Name,Status,Status Details
-T134 Lead 9999,4988716657,Deal,8,12,pl91119@t111.in,pawan@talentedge.in,Warm,Re-Enquired	
-T234 Lead 9989,4988726656,Deal,8,12,pl11198@t11t.in,arundhati.katoch@talentedge.in,Dead,Dead Number	
- 
+Work Experience,First Name,Last Name,DateOfBirth,Gender,MobileNumber,Secondary Phone No,EmailAddress,Assigned to,Comments,Status,Status Detail,UTM Name,Education,City,State,Country
+,Thangaraja Arumugam,.,,,9842529981,,thangaraja.mba@gmail.com,Rishabh.pal@talentedge.in,call tomorrow he is busy,Dead,Fallout ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ritwik Gadgil,.,,,7709083780,,gadgil.ritwik@gmail.com,raghav.gurung@talentedge.in,,Alive,Follow up ,Email-Enquiry _Advertising Management & PR,Graduate,Other,Other,India
+,Mayank S Rathore,.,02-05-1975,Male,9904401616,456465,mayank@mascotevent.com,rohit.mittal@talentedge.in,45000+TAXES,Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Vijay Pal,.,,,7837303715,,vijayb238@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Kevin Stephen,.,,,8796550674,,stephenson5592@gmail.com,Jyoti.singh@talentedge.in ,do not a have finance,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sonia Biswas,.,,,8861159486,,soniabiswas29@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Asdasd,.,,,7418529632,,sasadaf@gmail.com,pooja.saini@talentedge.in,sw off,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Priyaranjan Patra,.,,,9938020191,,prpkhiladi520@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Siyaji,.,,,9058266717,,krana126@gmail.com,rohit.mittal@talentedge.in,,Dead,Not Eligible,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Madhuri,.,,Female,9730118294,,ishi9730@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Graduate,Other,Other,India
+,Divya V,.,,,7.70896E+13,,diayan4596@gmail.com,rohit.mittal@talentedge.in,,Dead,Retired ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,shreya,,08-03-2017,Female,9840829779,9840829779,shreyamohta18@gmail.com,samridhi.sabharwal@talentedge.in,,Converted,Converted,Website _Advertising Management & PR,Graduate,Hyderabad,Telangana,India
+,Mehak,,,Male,9999555835,,msmehaksharma@gmail.com,raghav.gurung@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,Roshni Shroff,.,03-05-1986,Female,9930122151,54654,roshroff@gmail.com,rohit.mittal@talentedge.in,120000 TOTAL,Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Ramandeep,,,,9971350675,,raman.kaur.rk696@gmail.com,shrey.sharotri@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Not Confirmed,,,
+,Elismary George Thayil,.,,,9986531161,,elisg.thayil811@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Sneha Sengupta,.,,,9883299043,,sengupta.sneha1@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+13,Tapal,.,,,8105128282,,gettotapal@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,Other,Other,India
+,DEEPAK RATNANI,.,,,7842495593,,deepak.ratnani@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,anand,,,Male,9884755505,,slashshah@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Prateek Mahajan,.,01-03-2017,Male,9316148884,0,prateek.mahajan12@gmail.com,akanksha.chandekar@talentedge.in,"22,500+ST= 25,875",Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+3,Kalaivani N,.,,,9600115016,,vanirathnam@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Shashi Malhotra,.,,,9999598533,,shashimalhotra.star@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+5,Minni,.,,,8800675588,,minie.saini@gmail.com,shrey.sharotri@talentedge.in,,Alive,Follow up ,Referral _Advertising Management & PR,Not Confirmed,Other,Other,India
+1,Garima Batra,.,,,9811844052,,bgarima08@gmail.com,pooja.saini@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+10,Nitin,,,,8600777102,,mandgenitin@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,ROHIT,SRIVASTAVA,,Male,8285479078,8527268526,rohit24shrivastava@gmail.com,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,Arun Suresh,.,,,1122334455,,arunsuresh0007@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Amrutha Krishnan.R,,,,9446968293,,radvij63@gmail.com,ashwin.pathak@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Not Confirmed,,,
+,Namrata,.,,,8861092874,,nams_venkatesh@yahoo.co.in,rohit.mittal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Nishant,.,,,7710009490,,nishant.kumar.82@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Meghna Sharma,.,,,9899580182,,meghna15000@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+3,arjun,bhadra,,Male,9619632978,,bhdra.arjun@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+1,Megha Nambootiri,.,05-03-2017,Female,9821567542,0,meghanambootiri@gmail.com,deepa.khatri@talentedge.in ,Enrolled for MM,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Sofia,.,,,9615511805,,sophyadkhar@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Abinesh Sankar,.,,,9894435807,,abipreani@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Ashutosh,Jadhav,,,8866767424,,Ashu.jadhavsam@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,Ansh Grover,,,Male,9876693401,,creative.Ansh@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Shubha Singh,.,,,9873323696,,shubha.shriwar@gmail.com,gurpreet.singh@talentedge.in ,,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Smruti,,,Male,8433999965,,smruti@ficgrp.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+3,Vivian,.,,,8095413685,,vvnfer@yahoo.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Sagar Dixit,.,,,9833123611,,sagardixit1493@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Meet Shah,.,,,9429955544,,meetshah116@gmail.com,robert.charles@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Rahul Kaul,.,,,9999492649,,rahulkaul211990@hotmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Kaizeen Davierwalla,.,,,9167975253,,kaizeenkd@gmail.com,vijay.singh@talentedge.in,NA from many days,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Jerry,Jacob,,,9886857252,,jerryjac27@gmail.com,rohit.mittal@talentedge.in,cb mb imp,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+3,nataraj,siddalingaiah,07-06-1968,Male,9980091883,91883,hs.nataraj@yahoo.com,prateek.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,New delhi,Delhi,India
+,Sanmoy ,Basu,03-04-2017,Male,9830697755,9830697755,sanmoy.basu@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Website _Advertising Management & PR,Not Confirmed,Kolkata,West Bengal,India
+,Raghuvendra Singh Parihar,.,,,7042729010,,raghuv1020@gmail.com,kshitij.verma@talentedge.in,not interested,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Praveen,kumar,,,9899683651,,praveensharma739@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Delhi,Delhi,India
+6,saurabh chaturvedi,.,,,9829890116,,schaturvedi15@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Post Graduate,Other,Other,India
+,Tanvi Patel,.,,,9730586015,,tannupatel22@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+4,Tanuj Saxena,.,,,8860838472,7353793872,tanujsaxena.blr@gmail.com,akanksha.chandekar@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,anand,raj,,Male,8986143247,,anandraj_014@yahoo.in,kshitij.verma@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,dushyant,vaidya,,Male,9779027141,,dushyant6713@gmail.com,kshitij.verma@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,partha,sarathi,,Male,9964570819,,parthasarathi1330@gmail.com,akanksha.chandekar@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,balaram,sahu,,,9538710509,,cet.rohan@gmail.com,rohit.mittal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,raunak,sah,,Male,9661602866,,sahraunak94@gmail.com,Rishabh.pal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,manik,madan,,Male,9818846655,,manik.madan@gmail.com,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,shamim,akhtar,,Male,8826925533,,Shamimansari123@gmail.com,smriti.grover@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,sandeep,banerjee,,Male,9903295275,,sandeep_agn@yahoo.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout ,Channel _Advertising Management & PR,Not Confirmed,,,
+,Dheeraj Khandelwal,.,,,7208041044,,dheerajkhandelwal2007@gmail.com,Rishabh.pal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,saravanan,natarajan,,Male,9910041033,,service.saravanan@gmail.com,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,AYAN BANERJEE,.,,,9804635096,,ayanbanerjee99@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,sanjeev,aggarwal,,Male,9769293035,,aggarwal@dow.com,prateek.sharma@talentedge.in,,Dead,Fallout,Channel _Advertising Management & PR,Not Confirmed,,,
+,tushar,shetty,,Male,9820032162,,tusharshetty@ymail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Channel _Advertising Management & PR,Not Confirmed,,,
+3,Nitin Hemnani,.,,,8806980444,0,nitin.hemnani@outlook.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,reena,sharma,,Male,9205627821,,sharma.reena19@yahoo.in,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,nagesh,kumar,,Male,8886288332,,tnagesh2000@gmail.com,parul.sharma@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,abhishek,shukla,,Male,9753250203,,abhishek15456@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout ,Channel _Advertising Management & PR,Not Confirmed,,,
+,Ankur,Shah,,,8758897099,,ankur_15984@yahoo.co.in,Rishabh.pal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,sahil,,,Male,9424486374,,sahil15456@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Channel _Advertising Management & PR,Not Confirmed,,,
+,Tathagata Banerjee,.,,,9874668494,,tathagata.banerjee1@gmail.com,pooja.saini@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,somwrita,sam,,Male,9830663630,,somwrita.sam@gmail.com,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,elluru,rakesh,,Male,8184850585,,ellururakesh@gmail.com,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,satwik,tiwari,,Male,8447818299,,satwik162@gmail.com,deepa.khatri@talentedge.in ,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,tejas,bokare,,Male,9538023936,,tejasbokare@gmail.com,prateek.sharma@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,amit,raj,,Male,9873777388,,amitrajraja@gmail.com,Rishabh.pal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,karan,,,Male,9999999999,,karan.saneja@gmail.com,rohit.mittal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,,,
+,jaffer,ali,,Male,9841722141,,jaffer.ali@sc.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Channel _Advertising Management & PR,Not Confirmed,,,
+,Kartika Rajendran,.,,,9176421829,,shreekartika@yahoo.co.in,parul.sharma@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Mirza Abbas Ali,.,,,9880176095,,mirzaabbasali1991@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+16,Soumi Halder,.,,,8809270964,,soumi0678@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Dharmesh Karai,.,,,9980236210,,dharmeshweb@hotmail.com,Jyoti.singh@talentedge.in ,,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Arpan Kodrawala,,,Male,9972208963,,kodrawala@gmail.com,deepa.khatri@talentedge.in ,Not answering,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,Sreevardhan Namboothiri,.,,,9176661377,,sreevardhan87@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Priyanka Ghoshal,.,30-03-2017,Female,9831303630,9831303630,priyanka.ghoshal86@gmail.com,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vijay Joshi Laheru,.,,,9427472860,,sknews@rediffmail.com,kshitij.verma@talentedge.in,,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Chandni Batra,,,,9958683476,9872886080,chandni.batra84@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Deepak,.,,,9004700856,,lall.micky@gmail.com,akanksha.chandekar@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajiv Thakkar,,,,8866113298,,rajiv4682@yahoo.com,kshitij.verma@talentedge.in,,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Naveen,.,,,9167482542,,maholia.naveen@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,vijay,,02-03-2017,Male,97339956526,97339956526,vijay.singh2007@hotmail.com,akanksha.chandekar@talentedge.in,,Alive,Follow up ,Channel _Advertising Management & PR,Not Confirmed,Gurgaon,Haryana,India
+,Naoroze Panthaky,.,,,9204246375,,nrp4u@yahoo.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bipasha Bardhan,.,,,9903614009,,bipashabardhan1@gmail.com,Jyoti.singh@talentedge.in ,v,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Devang Vyas,.,15-03-2017,Male,9825931331,9825931331,devangvyas1985@gmail.com,rohit.mittal@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Mudita,.,,,7045134473,,muditabhan@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Arvind,,,,8870007983,,arvind.raghu@yahoo.co.in,shrey.sharotri@talentedge.in,,Alive,Follow up ,Website _Advertising Management & PR,Not Confirmed,,,
+,Divya,Vijayan,,Male,7708955355,,divyavijayan4596@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,Channel _Advertising Management & PR,Not Confirmed,,,
+,Pragya,Kumar,,,9999501982,,pragya.kumar@gmail.com,raghav.gurung@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Delhi,Delhi,India
+2,Hemant Dave,.,,,9601866004,,Hemantdave009@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Tanvee Meisheri,.,,,9773522615,,Tanveehm05@gmail.com,deepa.khatri@talentedge.in ,NI,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Abhinav,.,,,9830242205,0,abhinav.banerjee.83@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+2,Rahman,.,,,9833585378,,findme.rahman@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Hari,.,,,9566110171,,hari.gurumoorthi@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Atmica,,,Male,7760493747,,atmicarreddy@gmail.com,shrey.sharotri@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Surajit Patanaik,.,,,8184953989,,littapatnaik@yahoo.co.in,parul.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,gourang joshi,.,,,9960680218,9960680218,gourangjoshi@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Kolhapur,Maharashtra,India
+,Justin,.,,,9769106802,,justin.georgejg@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Akshay Parik,.,,,7276152585,,parikakshay@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Suryanarayanan Krishnamoorthy,.,,,9841011889,,kr.soorya@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Nikhil Soi,.,03-11-1988,Male,8439707773,8439707773,nikhil.soi89@gmail.com,kshitij.verma@talentedge.in,BA-AD,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Delhi,Delhi,India
+,Rupali,.,,,9821878779,,neelam6472@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Surya Patro,.,,,77954455678,,surya.po@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,Channel _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rishabh,.,,,8126202739,,rishabhsobti0@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,anil sharma,,,Male,9831030820,,mr.anilsharma_hlm@rediffmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Abhinav,,,Male,8331897634,,socialbuzzer16@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Website _Advertising Management & PR,Graduate,,,
+,Raman Choudhary,.,,,9974660337,,rchoudhary183@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Kavisha Buddhadev,.,,,9925409030,,kavishajbd@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+5,Shiv Sharma,.,,Male,7042089635,,stksharma@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+2,Sahil,.,,,9988877587,,sahil.sharma2016@sims.edu,akanksha.chandekar@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,John,,,Male,9099049168,9998341413,johnbovas88@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,riya dave,,08-04-2016,Female,9925845551,9925845551,riahdave31@gmail.com,shrey.sharotri@talentedge.in,,Converted,Converted,Website _Advertising Management & PR,Graduate,Gurgaon,Haryana,India
+,Sanjeev Batra,.,,,9034561212,,ceosanjeevbatra@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Indranath Sen,.,,,9874264170,,jay.sen992@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,priyal,,,Male,9819441200,9833201562,contact@priyalthakkar.com,vijay.singh@talentedge.in,NI,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Ashutosh Tiwari,.,,,9867136998,,ashutosh.j.tiwari@gmail.com,rohit.mittal@talentedge.in,cb mb,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,ashrita,,04-03-2017,Female,9936600701,0,ashrita.shukla@gmail.com,Jyoti.singh@talentedge.in ,has enrolled for the DM,Dead,Fallout,CrossSell _Advertising Management & PR,Not Confirmed,Gurgaon,Haryana,India
+,Nikhil Ahuja,.,,,9873054374,,nik.ahuja.123@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Rohit Shukla,,,Male,9867891567,2233284800,rohitshukla85@gmail.com,raghav.gurung@talentedge.in,,Alive,Follow up ,Website _Advertising Management & PR,Graduate,,,
+,Saurabh Jaiswal,.,,,8347774888,,saurabhihm99@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Payal,,,,8901536447,,ms.payalgupta@gmail.com,ashwin.pathak@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Not Confirmed,,,
+,C C Rao,.,23-11-1971,Male,9818783332,0,ccrao80@gmail.com,pooja.saini@talentedge.in,,Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Vineet,.,,,9601466655,,vineetkumarjeenwal@gmail.com,shrey.sharotri@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,Other,Other,India
+,Anil,Shaw,,Male,9775881111,,anilaaki@hotmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,Tanya Goel,.,07-03-2017,Male,9899830583,6565654564,tanayabytanyagoel@gmail.com,vijay.singh@talentedge.in,registered for entre.,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+3,Shreeya Ladkat,.,,,8446937396,,shreeyarladkat@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Ankit Shukla,.,,,9408174400,,ankitshukla84@yahoo.com,parul.sharma@talentedge.in,he will go for dm,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Ujjwala,,,Male,9871216989,,ujjwalasinghus@icloud.com,prateek.sharma@talentedge.in,,Dead,Not Eligible,MICA _Advertising Management & PR,Graduate,,,
+5,ZISHAN  DOKADIA,.,,,8275550909,,zishandokadia@gmail.com,deepa.khatri@talentedge.in ,Not Interested,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Moushumi,.,,,9731208507,,jsmpatra@gmail.com,raghav.gurung@talentedge.in,,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Sanjeev Kumar Patnaik,.,16-11-1960,Male,9937366111,0,sanjeevpatnaikpr@gmail.com,pooja.saini@talentedge.in,,Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Aditi Sinnarkar,.,28-03-2017,Female,9833869693,33333,aditisinnarkar@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Ruchi Chandrakar,.,,,9977888780,,ruchichandrakar15091988@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Not Confirmed,Other,Other,India
+20,Suresh Ghatge,.,,,9148088297,,dezynsuresh@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Anup,,,,9545228736,,anup.wagh510@gmail.com,shrey.sharotri@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Not Confirmed,,,
+,Gaurav Suthar,.,,,9649400511,,grvsuthar786@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Meryl Cherian,.,,,9820084360,,cherianmeryl@hotmail.com,smriti.grover@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Post Graduate,Other,Other,India
+5,Ramesh Kumar,.,,,9718652810,,kumar.ramsh4u@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+4,Gaurav Gomez,.,30-03-2017,Male,9920807913,9920807913,gaurav.gomez@gmail.com,robert.charles@talentedge.in,,Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,vineet,,,Male,8765045952,,vineet.sset@gmail.com,shrey.sharotri@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,Purnima,.,,,9454369889,,purnimairrigation@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Prabandha Neog,.,,,8811825905,,prabandhaneog123@gmail.com,renu.prajapati@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Kavita,.,,,9702651302,,kavi_indi@yahoo.com,pooja.saini@talentedge.in,,Dead,Fallout ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,P Kranthi Kiran,.,,,8688386195,9248775357,kinu071@gmail.com,deepa.khatri@talentedge.in ,,Alive,Follow up ,Website _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Anand Christopher,.,,,9538492266,,anandchristopher7775@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Hunny Anand,.,,,7481916788,,academicsolution443@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Umesh,.,,,8608836034,,4umeshb@gmail.com,Rishabh.pal@talentedge.in,off,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Amarpreet Singh Modi,.,,,9015642826,,amarpreetmodi1@gmail.com,rohit.mittal@talentedge.in,ni,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Sreevalli,.,,,9989362552,,gandurishrivalli@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Zalak Shah,.,,,9833237481,,zalakshah69@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Graduate,Other,Other,India
+15,Monoy Mallick,.,,,9830361482,,monoymallick@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Pallvi Gupta,.,,,9100952478,,y29pallvi@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Website _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Swati,.,,,9320767473,,swati@intercraft.org,rohit.mittal@talentedge.in,ni,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,S Vijay Kumar,.,,,9864178355,,svijay6146@rediffmail.com,parul.sharma@talentedge.in,,Dead,Retired ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sudharshan,.,,,9676012200,,sudharshanreddym@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rinkle,.,,,9714977633,,rinkle.saraf@gmail.com,smriti.grover@talentedge.in,,Alive,Follow up ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rashi Raina,.,,,9618736021,,rashirainas@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nazrul Islam,.,,,9957453256,,nislam53256@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rishi Choumal,.,,,7042289889,,leovancassmonk@gmail.com,pooja.saini@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Keerthi Manchana,.,,,9502925838,,keerthimanchana@gmail.com,deepa.khatri@talentedge.in ,,Dead,Not Eligible,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,S S Chandak,.,,,9406401001,,gmebcg@gmail.com,pooja.saini@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+1,Bhavesh Kundal,.,,,7069270883,,bhaveshcbkundal@gmail.com,pooja.saini@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Marilyn John,.,,,9833274082,,merlmj86@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Mahesh Chand Saini,.,,,9929557289,,maheshsaini729@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,ashwini,,,Male,9029949799,9029949799,anashwininair91@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,Kalpesh,.,,,9909955060,,kalpesh.desai@nutronsystems.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Aakanksha Pant,.,,,9967462242,,aakankshapant96@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Yvsreddy,.,,,8978108806,,yvsreddy3737@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vedparkash,.,,,9915345620,,vedparkashrajput73550@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shubham Sharma,.,,,9646553610,,ss967974@gmail.com,Rishabh.pal@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sabir Pradhan,.,,,9439444338,,sabirpradhan333@gmail.com,pooja.saini@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sunil Kumar,.,,,9857305488,,ranasunil19860@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+1,Vishal,.,,,9910552762,,vishalchaudhary199444@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Graduate,Other,Other,India
+,Thakor Natvar,.,,,9904917831,,thakorntvr@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Suhail Zaroo,.,,,9697651931,,suhailzaroo@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Saurabh Pandey,.,,,9044427187,,saurabhpandey688@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Radhe Shyam Kumar,.,,,8409640226,,radhe.rs357@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Akshay Kumar,.,,,7386629511,,kumarakshay.ka98@gmail.com,prateek.sharma@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Himmat Singh Bhati,.,,,7820875503,,himmatsinghbhati1994@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Jayanta Mandal,.,,,9647018486,,jm2964391@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nabin Chandra Pradhan,.,,,9556570576,,nabinchandra8@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Dharmendra Kumar,.,,,8271161164,,kumardharmendra4099@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,P Prasanth,.,,,9489471071,,prasanthdpp@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nizam Mudeen,.,,,9791057281,,nizampcnizam@gmail.com,pooja.saini@talentedge.in,sw off,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Deepak,.,,,9729593907,,er.deepak39@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mohd Asad Khan,.,,,9717491759,,guchankhan7012@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Govardhan Bangaru,.,,,9441274250,,govardhanbangaru250@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Gurmeet Singhgu,.,,,9034650329,,gurmeetkhatri@gmail.com,parul.sharma@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Furqan,.,,,7995817092,,furqan01510@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mohd Sami,.,,,8534898080,,mohdsami175@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Laxman,.,,,9000972525,,laxman5888@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Kammari Chantibabu,.,,,8008147410,,chantibabu1987@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bambam Kumar,.,,,7564092810,,bambamkumar501@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Chandrabhushan Dubey,.,,,8579984777,,dubey.kundan98@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Banasri Das,.,,,9854516493,,banasridasbora2010@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nagma,.,,,8003038804,,derurakesh@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Md Gulnawaz Akhtar,.,,,8521437105,,afsar.mallick008@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Dhiraj Kumar,.,,,9803582069,,dhirajchauhan0786@gmail.com,deepa.khatri@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ramachandrn,.,,,9965484707,,chandransram@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Lal Bahadur Ram,.,,,9334191267,,ansh632013@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Binoda Behera,.,,,9701869222,9178358503,binodbehera@hotmail.com,raghav.gurung@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Toshi Tiwari,.,,,9643593303,,toshi.tiwari96@gmail.com,raghav.gurung@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vahab Sayyad,.,,,9373992992,,ws3089@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vipan Kumar,.,,,9817057536,,vipanlakanpal92@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+5,Umar,.,,,9714442737,,umarmansuri123@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Post Graduate,Other,Other,India
+,Chinmay Surve,.,,,9870705045,,surve.chinmay87@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,TBS _Advertising Management & PR,Graduate,Other,Other,India
+,Honey Thakuria,.,,,9924191992,,thakuria.honey@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sonali,Dey,,,8106866336,,sonali.dey83@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout ,TBS _Advertising Management & PR,Not Confirmed,Hyderabad,Telangana,India
+,Siddharth Chadha,,,,9910911778,,siddharth.chadha.rocks@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Graduate,,,
+,Vikas,.,,,8953089903,,shivakush90@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sonu,.,,,9988454270,,roshan0391@yahoo.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rohith,.,,,9884645326,,rohiiyer87@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vishnudev Kumar,.,,,9905655127,9198006130,rdcrssc@gmail.com,rohit.mittal@talentedge.in,WRONG NO,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajdeep Deka,.,,,9864273606,,rajdeep.deka3@gmail.com,pooja.saini@talentedge.in,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajendra Prasad,.,,,9810165011,,rajendragurgaon@hotmail.com,renu.prajapati@talentedge.in,going through some medical issues,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Priyanka Sukenkar Mani,.,,,9225122213,,priyamani135@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ca Nisha Nagar,.,,,9461025935,,nishanagar2709@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nilu Singh,.,,,9990305423,,nilusingh12294@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Souvik Maity,.,,,7432812714,,maitysouvik44@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Manish Kumar,.,,,9520251695,,manishkumarindian7@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,kyntiew,waglang,,,8699971441,,kyntiew.wahlang@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,,,
+,Hasan Khan,.,,,9818456176,,khan.hasan07@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Jesindha Leela,.,,,9042161996,,jensi1827@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Iqbal Ahmed Khan,.,,,9873098707,,iqbalahmedkhan199@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Devansh,.,,,9634268268,,devansh68@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bhaskar,.,,,9986781667,,bhaskarh1989@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bapi Sahu,.,,,7682891056,,bapisahu65143@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+1,Sandeep Rathod,.,,,8749068505,,banjarasandeep16@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Graduate,Other,Other,India
+,Ajay Kumar,.,,,9060917500,,ajaykumarfbg116@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Agnes A,.,,,9495868516,,agnessanu143@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ashok Shinde,.,,,9730099519,,advashokshinde@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Aarif Khan,.,,,8741851378,,aarif6555khan@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+6,Aravind Kumar,.,,,9524488844,,arvind.bizz@yahoo.com,rohit.mittal@talentedge.in,,Dead,Fallout ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Prashant Pal,,,Male,8287754668,,palprashant521@gmail.com,shrey.sharotri@talentedge.in,,Alive,Follow up ,Website _Advertising Management & PR,Graduate,,,
+,Sajjan Gunaparthi,.,,,8919343455,,powersajjan@gmail.com,parul.sharma@talentedge.in,na,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+1,Sowmya Iyer,.,,,7709559656,,sowmyaiyer0@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,jethalal    kunjo,,,Male,9173143540,,jethalalkunjo@gmail.com,shrey.sharotri@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Vishesh Shrivastava,.,,,9650186469,,visheshshrivastava01@gmail.com,akanksha.chandekar@talentedge.in,"his dad is out of country so his not able to have a word with him properly
+will be back on 9th 
+*call for final confirmation*",Alive,Follow up ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shalini,Wunnava,,,9899179978,,wshalini24@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Delhi,Delhi,India
+,Viineet Pandey,.,,,8527320003,,vineetpandey2005@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Alok Kumar Sahu,.,,,8340514085,,vickygunjan123@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shoeb Shaikh,.,,,9920099221,,shoeb2862@hotmail.com,rohit.mittal@talentedge.in,,Dead,Not Eligible,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sher Singh Meena,.,,,8107064646,,shermilksaray@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sanjay Kumar,.,,,7350866093,,sanjaymahto5102.sm@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Raj Vishwakarma,.,,,9893569361,,rudranimachinery@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+5,Dayanand,.,,,7204397815,,sagarbaburaju@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shobhana Rodrigues,.,,,9422667914,,rshobhana16@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rahul Pratap Singh,.,,,9761021328,,rahulpratap5696@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Raja,.,,,9422570555,,rajamm20@rediffmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rameshwar Nigam,.,,,9910940002,0,rameshwar.nigam@gmail.com,parul.sharma@talentedge.in,cross sell,Dead,Fallout,TBS _Advertising Management & PR,Post Graduate,Other,Other,India
+,Mukesh K Bansal,.,,,9992939393,,qmfmukesh@gmail.com,rohit.mittal@talentedge.in,ni,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Majid Nizam Baba,.,,,9622624614,,peermajidbaba007@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Jitendra Patil,.,,,8975890921,,patiljiten@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Facebook _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Parveen,.,,,8607508423,,parveenkumar08423@gmail.com,deepa.khatri@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Neeraj Gupta,.,,,8318653776,,neerajgupta690@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Neetu Parte,.,,,9981347907,,neetuparte7907@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Niyanta,.,,,8600013441,,niyantaa@gmail.com,deepa.khatri@talentedge.in ,Asked not to call. If situations suit she would really enroll.,Alive,Follow up ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nitin Sharma,.,,,9165747177,,nitinsharma231097nsns@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nagaraj Metri,.,,,7795430190,,metrin950@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Pooja Ravi,.,,,8273918757,,longowalpoojaravi@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,V Gunasekaran,.,,,9176367444,,maha4862@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mandeep Singh,.,,,9818515252,,mandeep9818singh@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+2,Mayank Dwivedi,.,,,9990255055,,mayankdkdwivedi@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Graduate,Other,Other,India
+,Gautam Kumar,.,,,9155976780,,kugautam.98@gmail.com,Rishabh.pal@talentedge.in,,Dead,Retired ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Lokendra Kumar,.,,,8750500113,,kumarlokendra496@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,K Jayachandrareddy,.,,,9701097742,,kesamjayachandrareddy@gmail.com,parul.sharma@talentedge.in,ni,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Harsh Morjaria,.,,,9998239999,,harshmorzaria@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Gargi Kerkar,.,,,9825144686,,gargi.kerkar@gmail.com,ashwin.pathak@talentedge.in,Status changed to Re-Enquired.<br/>Re-Enquired Lead for course Advertising Management & PR,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Fakira Khan,.,,,9799136286,,fakirakhan010290@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Drtrupti Dave,.,,,9893155770,,drtruptidave@yahoo.co.in,parul.sharma@talentedge.in,if interested will let u know,Alive,Follow up ,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Dimple Khatri,.,,,7506360096,,dimple.khatri7@gmail.com,nikhil.chaudhary@talentedge.in,,Alive,Follow up ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bhaskar Sarmah,.,,,9954904477,,bhaskarsarmah83@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bhaskar Roy,.,,,9957788304,,bhaskar_roy123@yahoo.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,V Anand Naik,.,,,8096102849,,anandbujji303@gmail.com,Jyoti.singh@talentedge.in ,not int,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Abhishek Singh,.,,,7491995363,,abhishekmailforu80@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Pavan Srivastava,.,,,9519313030,,pavan.narain@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Arvind Sharma,Pallavi sharma,,,9537522244,,sharma342000@yahoo.co.in,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Nysha Chandran,,,Male,9677233718,,nysha.chandran@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Zaidmirza,.,,,8898494941,,zaidansari@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Gagan Kumar,.,,,9071198765,,ursgkc@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vanarashi,.,,,9640579750,,vanarashibalaswamy@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Upender,ishita,,,9987681213,9004671910,ukothiyal@hotmail.com,parul.sharma@talentedge.in,,Alive,Follow up ,Taboola _Advertising Management & PR,Graduate,Other,Other,India
+,Tamilalagan P,.,,,9003539932,,tamil.07swty@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Supriya Goswami,.,,,9004601429,,supriyag922@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sushil Mishra,.,,,9350539922,,sushilmishra.prayag@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Subhasish Dasgupta,.,,,8481848114,,subhasis29@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Lokender Singh,.,,,9774106994,,singhlokender97@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Retired ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shusama Kumari,.,,,9206986259,,shusamakumari@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Faisal Shaikh,.,,,7779078666,,shkfsl3431@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Not Eligible,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shams Uddin,.,,,7576051703,,shamsuddin15659@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Seema Meena,.,,,8947006213,,seemasitaram3103@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Priyanka Ojha,.,,,9694857529,,sannuojha@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sanjay Kumar Ram,.,,,7782910838,,sanjaykumar45hr@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Graduate,Other,Other,India
+,Salman,.,,,8932037186,,salmanmiss2@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Roni Das,.,,,7551029942,,ronidas05012001@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajendra Ram,.,,,8864059652,,rk6994935@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rekha,.,,,9718804083,,rekhakumari31197@gmail.com,Rishabh.pal@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,D Mohan Rao,.,,,9818595109,,raom855@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajesh Verma,.,,,9106604219,,rajesh090283@yahoo.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Facebook _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rabish Tiriya,.,,,9102482474,,rabishtiriya3@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Pujitha,.,,,8897475516,,pujithamarka@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Darshpreet Kaur,.,,,7508087735,,preet.darsh@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,Facebook _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Savera Media Pvt Ltd,.,,,9431071261,,pradeep.silao@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Post Graduate,Other,Other,India
+,Pinaki Sengupta,.,,,8902185706,,pinakisengupta25@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout ,Facebook _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Pavan Kumar,.,,,7379643033,,pawanverma12gonda@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,omprakash singh,.,,,9987977067,,om6215@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Navneet,.,,,9304296125,,navneetksingh68@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nirmal Kumar,.,,,7830016121,,nirmal78300@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mohd Azam,.,,,9760468236,,mohdazamazhari@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Meghna K,.,,,8108822252,,meghna_khandelwal27@yahoo.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Laleechaursiya,.,,,9670103225,,lc2357217@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Pradeep Kumar Yadav,.,,,9506815091,,kumarsuryoday@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Aniket,.,,,9608334409,,kumaraniket31@gmail.com,parul.sharma@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Misss Amena Khatun,.,,,9577346735,,khatun086@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Surbhi Gaur,.,,,9357163483,,kaushiknavneet24@yahoo.com,renu.prajapati@talentedge.in,,Dead,Fallout ,Facebook _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Jeelani Pasha,.,,,8688817313,,jeelanikhan000@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Anamika,.,,,9009165977,,jagdishpappi@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Jay,.,,,8546685786,,jay1999@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Retired ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vashu Namdev,.,,,9575951032,,indrapatel@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Niranjan Hansda,.,,,8942952244,,hansdaniranjan44@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Gaurav Tandon,.,,,8657634633,,gtandon28@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Hemal N Kapadia,.,,,9831706407,,eastindiadezignco@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Digeshwar,.,,,9575469172,,dpv0003@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ekta,.,,,9819132523,,ektadoshi.ed@gmail.com,pooja.saini@talentedge.in,,Dead,Not Eligible,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Dipti Roy,.,,,7086240255,,diptiroysur@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout ,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,disha,jain,,,9963969236,,dishajain9963@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout ,Taboola _Advertising Management & PR,Not Confirmed,Vijayawada,Andhra Pradesh,India
+,Nani Chinna,.,,,9000627683,,dhariv6@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Deepika Arora,.,,,9873686664,,ddeepu666@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Resmoy Debbarma,.,,,8730848648,,debbarmaresmoy8114@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Lakshmi M V,.,,,9036443811,,chitra.nirmal16@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bhuvan Shastry,.,,,9886612201,,bhuvanshastry@gmail.com,renu.prajapati@talentedge.in,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Awnish Prajapati,.,,,8655901181,,avnishprajapati.ap@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,shalu,,,Male,9811034680,,shalu.goswami@gmail.com,shrey.sharotri@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Ashwani Kumawat,.,,,9785085610,,ashwanikumar97@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Anjani Kumar,.,,,8507112260,,anjani51196@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Anshul Malik,.,,,7309764323,,anshul476@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Pinki Vindrani,.,,,8421986828,,angelvindrani77@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Amit Kumar,.,,,7800758020,,amit7800758020@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Amit Verma,.,,,9910335804,,amit_v@outlook.com,rohit.mittal@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Amit,.,,,8249288764,,amitmundary2002@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Aishwaryaa,.,,,7708617835,,aishu.mslingam97@gmail.com,Rishabh.pal@talentedge.in,call not picked,Dead,Fallout ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Abhilash Kumar,.,,,7300185336,,abhilashkumar041@gmail.com,akanksha.chandekar@talentedge.in,asked to give a call around 15 for final confirmation,Alive,Follow up ,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shantaram Awate,.,,,7020818005,,968942872a@gmail.com,deepa.khatri@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Prerna Rao,.,31-03-2017,Female,9873879787,0,prernarao1427@gmail.com,pooja.saini@talentedge.in,,Converted,Converted,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Chirag,,,Male,9099060658,,chirag.amraniya@gmail.com,raghav.gurung@talentedge.in,,Alive,Follow up ,Website _Advertising Management & PR,Graduate,,,
+10,Shivendra Rastogi,.,,,8126075598,,rastogishivendra@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,Other,Other,India
+,Tanusri,.,,,7567860177,,tanusriisworkaholic@gmail.com,Rishabh.pal@talentedge.in,"deepa maam had a word with her she will pay on sat , 11:30 am",Warm,Prospect ,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Partha,.,,,7977018048,,partho1809@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Tarachandra,.,,,9795830571,,www.tarachandra@gmail.com,pooja.saini@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Yogesh,.,,,9350680336,,yk545314@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ravi Verma,.,,,8588090192,,vravi6121@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vivek Kumar,.,,,8102713571,,vivekkumar6985@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Vicky,.,,,7205000339,,vickymps@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Unnikrishnan B,.,,,9847141419,,unnikb@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Udhav Haribhau Kolpe,.,,,7038796754,,uhkolpe@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Tushar Kant Kumar,.,,,8210363669,,trkumar5678@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Suman Kumari,.,,,9097389020,,swrankant@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sneha Sarkar,.,,,9594564552,,sneha.rsarkar@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,TBS _Advertising Management & PR,Post Graduate,Other,Other,India
+,Pooja,.,,,7383188834,,sonistar626@gail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sinki,.,,,9504151711,,sinkisingh@rediffmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shah Pritesh,.,,,8866841941,,shahpritesh1991.sp@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Savita Kulesh,.,,,8889723573,,savitakulesh333@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Saurabh,Pakde,,,9970821376,,saurabh.pakde@gmail.com,priyanshi.dhondiyal@talentedge.in,,Alive,Follow up ,Facebook _Advertising Management & PR,Not Confirmed,,,
+,Ambalavanan,.,,,9972957654,,saastha1979@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ravi Ranjan Mishra,.,,,9304748074,,ravi.hospitalmanager@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ranjith Kumar,.,,,8344633756,,ranjithbiet@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Dharamendra Purohit,.,,,9826017420,,rahulpurohit698@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout ,TE_Focus _Advertising Management & PR,Graduate,Other,Other,India
+,Gaikwad Pritam Ashok,.,,,8147049836,,prit.pritam16@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Priyank Khandal,.,,,9833772214,,priyank_543@yahoo.co.in,parul.sharma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Graduate,Other,Other,India
+,Mohit Gupta,.,,,9044941543,,mohitvgupta@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Manisha,.,,,9002401202,,manishasharma@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Website _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Manish Kumar,.,,,9060800055,,mk363575@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Manojkumar,.,,,8102096921,,manojkrabc37@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Padmakar Mangam,.,,,8374931720,,mangampadmakar@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Catherine,.,,,8447636946,,lizaawomi69@gmail.com,renu.prajapati@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Parshotam Kumar,.,,,9797770506,,kparshotam24@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mohammad Ariz,.,,,8534010149,,hispeednetsurfingpoints@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Subhendu Sekhar Sahoo,.,,,8339922080,,gnsubhendu@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Divvisha,.,,,9718423134,,divvishabharti@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Diwakar Kumar Yadav,.,,,8406069500,,dkbishanpur97@gmail.com,smriti.grover@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Kapil,.,,,9719873248,,devkapil894@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Yerroju Sai Venkata Naga,.,,,8686600039,,chinnisindhuri@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bikram Keshari Pradhan,.,,,9437632106,,bikramkesharipradhan0000@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+1,Vikram Singh,.,,,9694122226,7300047776,avik.vikram2010@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Retired ,iimjobs _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Asha,.,,,9753414207,,ashadhangar7@gmail.com,ashwin.pathak@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sachin Dev Patil,.,,,7523865606,,arghapatil.bharti@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Graduate,Other,Other,India
+,Ash,Geneva,,,9744447960,,ashnaganeeva21@gmail.com,renu.prajapati@talentedge.in,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,,,
+,Alok Kumar,.,,,9661354878,,alokraj24499@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Amit,.,,,7060258924,,amitmahalwar2000@gmail.com,deepa.khatri@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Abhishek,.,,,9651940236,,abhisekkumartr@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Anurag Saxena,.,,,9999404320,,contactanurag89@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Arushi,.,,,9650002114,,arushiphillips007@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,subramaniam venkataraman,,27-02-2017,Male,9003076644,3333,subramaniam.venkataraman1@gmail.com,ashwin.pathak@talentedge.in,,Converted,Converted,Website _Advertising Management & PR,Graduate,Capiovi,Misiones,Argentina
+,abigail,darlong,,Male,7397253966,,abigaildarlong23@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Website _Advertising Management & PR,Not Confirmed,,,
+,Niyanta Mirjankar,,04-03-1983,Male,7507927755,7507927755,niyanta.mirjankar@gmail.com,hashmeet.sahni@talentedge.in,45000+tax=51750,Converted,Converted,Website _Advertising Management & PR,Graduate,Gurgaon,Haryana,India
+,Sakhi,.,,,9173621121,,sakhiparikh@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Upender Singh,.,,Male,9910896978,,uppisona7dec2015@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Graduate,Delhi,Delhi,India
+,Tilak Kasoju,.,,,8985202106,,tilak.kasoju@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,S Murty,.,,,9819285834,,sureshmurty080@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Surendr Khmer Kushwah,.,,,82399933587,,surendarkushwah0@gmail.com,pooja.saini@talentedge.in,wrong no,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Surajadiwasi,.,,,9200349388,,surajadiwasi051999@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Suganya,.,,,9445219505,,suganyaramu96@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,A Sreekanth,.,,,8143620557,,sreekanths571@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Smitha,.,,,9980123943,,smithap.2102@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Karandeep Khokhar,,,Male,9820618264,,karandeep.khokhar123@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Shelbin B,.,,,9895499575,,shelbinbaiju17@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+3,Saumya,.,,,9911545053,,saumya.chopra@yahoo.com,smriti.grover@talentedge.in,,Dead,Fallout,iimjobs _Advertising Management & PR,Graduate,Other,Other,India
+,Sangita,.,,,9029477559,,sangitamore025@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rasika Murlidharrao Wanaskar,.,,,7448008583,,rasikawanskar@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,RAJESH,RAJAGOPAL,,,9980611626,,rajgopalrajesh602@gmail.com,Rishabh.pal@talentedge.in,call not picked,Alive,Follow up ,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Priyesh Kumar,.,,,9039650572,,rajpriyesh684@gmail.com,renu.prajapati@talentedge.in,waiting for his result to come it will take 3 months time,Dead,Fallout,Google _Advertising Management & PR,Graduate,Other,Other,India
+,Siddharth,.,,,9959224148,,prodigycallsu@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Apoorva,.,,,7045458366,,poojaryapoorva71@gmail.com,prateek.sharma@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Graduate,Other,Other,India
+,Pooja Khanna,.,,,9545675802,,poojakhanna9545@gmail.com,raghav.gurung@talentedge.in,,Alive,Follow up ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Peddinti Krishna,.,,,8008440768,,peddintikrishna123@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Omprakash Sah,.,,,8804942771,,omprakashsah530@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nirmal Kumar Majhi,.,,,8892191842,,nirmalmajhi111@gmail.com,parul.sharma@talentedge.in,ni,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mamta Jain,.,,,8233602417,,mamta.surlaya@gmail.com,parul.sharma@talentedge.in,na,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Harendra Neni,.,,,9690416988,,hsnegi281@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Patel Hemangi,.,,,9737691992,,hemangip2512@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Gautam Patel,.,,,9971219510,,gautampatel6700@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ekta,.,,,8447167011,,ek001ek@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Dhruv Chaudhary,.,,,9999201569,,dhruv10a@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nikita,,,Male,7506641216,,nikitadesai61@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,CrossSell _Advertising Management & PR,Graduate,,,
+,Ct Lalruatthanga,.,,,9615866596,,ctruata7@gmail.com,parul.sharma@talentedge.in,,Dead,Dead Number,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Basant,Giri,,,8010791275,,basant7giri@gmail.com,ashwin.pathak@talentedge.in,Status changed to Re-Enquired.<br/>Re-Enquired Lead for course Advertising Management & PR,Dead,Fallout ,Taboola _Advertising Management & PR,Not Confirmed,Dimapur,Nagaland,India
+,Basau Ram,.,,,9068219472,,basauram116@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bilal Hasan,.,,,9756873529,,bilalhasan9756@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Antram Gurjar,.,,,9599713078,,antramgurjar191993@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Anuj Singh,.,,,9584464223,,anujsingh.1684@rediffmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ashish Rana,.,,,8393003829,,ashishrana666666@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Aishwarya Patel,.,,,8805728872,,aishwaryapatel360@gmail.com,renu.prajapati@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Abhishek Shukla,.,,,7415077552,,abhishekshukla155668@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sarmistha Joyee,,,Male,9620162110,,777@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Parag Pandya,.,,,9820802020,,pa.parag@gmail.com,gurpreet.singh@talentedge.in ,Call not answered,Alive,Follow up ,CrossSell _Advertising Management & PR,Graduate,Other,Other,India
+,Priyanka Sekhri,,,Male,9953454409,,priyanka.sekhri05@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,LIJU CHERIAN,,,Male,70070070,,liridol@gmail.com,samridhi.sabharwal@talentedge.in,,Alive,Follow up ,Website _Advertising Management & PR,Graduate,,,
+,Aakash Arora,,,Male,9674274221,,aakash.arora2908@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Website _Advertising Management & PR,Graduate,,,
+,Vishnu Menon,.,,,9619502673,,vishnumenon2015@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Dead Number,CrossSell _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Yash Walmik Kanekar,.,,,7756879502,,yashkanekar7@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Wasim Khan,.,,,8981652880,,wasimkhan077@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Post Graduate,Other,Other,India
+,Vikas Gajjar,.,,,9376302201,,vikas.gajjar15@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ananya Sen,.,,,9418493343,,vinodsen73@gmail.com,deepa.khatri@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ramana,.,,,7823960065,,ui.design222@gmail.com,ashwin.pathak@talentedge.in,,Dead,Fallout ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Anirban Chakraborty,.,,,9038259579,,theclassicagency@gmail.com,gurpreet.singh@talentedge.in ,Need time to decide,Alive,Follow up ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Tripti Jaiswal,.,,,8105422588,,triptijaiswal0503@gmail.com,parul.sharma@talentedge.in,ni,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Talendra Sahu,.,,,7999398130,,talendrasahu9@gmail.com,smriti.grover@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sharmistha Das,.,,,9620162110,,sharmisthadas03@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Shaik Fayaz,.,,,9642002370,,sf4073911@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Sucheta Sarkar,.,,,9874125939,,sarkar.sucheta29@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Chanda Patel,.,,,8382096378,,rsmismgs@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ritu Raj,.,,,9971024604,,rituraj.0622@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajat Mishra,.,,,9153407538,,rmishra2101996@gmail.com,prateek.sharma@talentedge.in,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajani R,.,,,9900169159,,rajaniramkrishna@gmail.com,gurpreet.singh@talentedge.in ,Call made from my cell..she will able to decide in the end of May only,Alive,Follow up ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rahul Kumar Pandey,.,,,9311725580,,rahulpandey0689@gmail.com,deepa.khatri@talentedge.in ,Not interested,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Suman Kumari,.,,,8434318841,,rabindradbgbihar1985@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Pradnya Dhage,.,,,8888323242,,pradnya.dhage2@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Praveen,.,,,8897610062,,praveennayak974@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Satyam,.,,,7779014111,,patelsatyam32@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bharti Pankaj,.,,,9706693724,,pankaj66451@gmail.com,kshitij.verma@talentedge.in,,Alive,Follow up ,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Papu Das,.,,,8001656866,,papudas91221@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Nikesh,.,,,7405178505,,nikesh717@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,E Ramboji Naik,.,,,9640422705,,naikramboji@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mohsin Ansari,.,,,9054970958,,mohsinansari43210@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Not Eligible,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Manoj Kumar,.,,,9756659220,,manojkanhya4485@gmail.com,Rishabh.pal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Manseerat Kaur,.,,,8828203033,,manseerat.k@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Dead Number,Taboola _Advertising Management & PR,Graduate,Other,Other,India
+,Raahul Narasimhalu,.,,,9894033363,,lu_traveloptions@yahoo.co.in,kshitij.verma@talentedge.in,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Lay Patel,.,,,7096014105,,laypatel247@gmail.com,rohit.mittal@talentedge.in,cb ringing,Dead,Fallout,Facebook _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Mahabeer Prasad Kiro,.,,,8103006464,,mahabeerprasadkiro@gmail.com,renu.prajapati@talentedge.in,,Dead,Not Eligible,Facebook _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Amarjeet Rai,.,,,8002187228,,kumarakshaykumar01@gmail.com,kshitij.verma@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ravi Shankar Kumar,.,,,8298992090,,kravishankar569@gmail.com,gurpreet.singh@talentedge.in ,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Kinkar Ari,.,,,7407328329,,kinkarari.k@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,S K Das,.,,,9830354441,,its_ratul@rediffmail.com,Jyoti.singh@talentedge.in ,,Dead,Fallout,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Meera Ranee Jena,.,,,9658135350,,jmeerarani@gmail.com,rohit.mittal@talentedge.in,ni,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,joginder,.,,,9216145644,,jogindersinghbedi@gmail.com,rohit.mittal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Jalina,.,,,9632257024,,jalinmaris@yahoo.com,pooja.saini@talentedge.in,NI,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,D D Sharma,.,05-04-2017,Male,9830045229,9830045229,headlinersadvertising@gmail.com,nawaz.khan@talentedge.in,,Converted,Converted,Taboola _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ganesh Hembrom,.,,,9102593411,,ganeshembrom98@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Evita Mendonca,.,,,9987692296,,evitamendonca16@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Diwya,.,,,9701099263,,diwya21992@gmail.com,smriti.grover@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Rajesh Kumar Choudhary,.,,,9015723261,,choudhary2rajesh@gmail.com,samridhi.sabharwal@talentedge.in,,Dead,Fallout ,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Brijesh,.,,,8866807900,,brijeshgosai@gmail.com,parul.sharma@talentedge.in,,Dead,Fallout,TBS _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Bharath,.,,,8374236446,,bharathvenkiral@gmail.com,Jyoti.singh@talentedge.in ,,Dead,Not Eligible,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ashoke,.,,,8585042829,,asgokeroy5021@gmail.com,deepa.khatri@talentedge.in ,,Dead,Fallout ,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Ankit Kumar,.,,,7549708052,,aniketkr1992@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Amit Katara,.,,,8936976864,,amitkumar0561975@gmail.com,pooja.saini@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Aashish Kumar Aide,.,,,9689043108,,aashishaide@gmail.com,akanksha.chandekar@talentedge.in,,Dead,Fallout,Google _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Asad Rahmani,.,,,9661214342,7396334720,asadpatna96@gmail.com,priyanshi.dhondiyal@talentedge.in,,Dead,Fallout,TE_Focus _Advertising Management & PR,Not Confirmed,Other,Other,India
+,Indra Kumar Prajpati,.,,,8981185029,8981185019,indraprajapati1998@gmail.com,nikhil.chaudhary@talentedge.in,,Dead,Dead Number,Google _Advertising Management & PR,Not Confirmed,Other,Other,India

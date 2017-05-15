@@ -91,7 +91,7 @@ array (
             'name' => 'neox_extension',
             'label' => 'LBL_NEOXEXTENSION',
           ),
-          1 => '',
+          1 => 'phone_mobile',
         ),
         5 => 
         array (

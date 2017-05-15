@@ -24,7 +24,7 @@ array (
         'headerTpl' => 'custom/modules/Users/tpls/EditViewHeader.tpl',
         'footerTpl' => 'custom/modules/Users/tpls/EditViewFooter.tpl',
       ),
-	  'includes' => 
+      'includes' => 
       array (
         0 => 
         array (
@@ -107,7 +107,7 @@ array (
             'name' => 'neox_extension',
             'label' => 'LBL_NEOXEXTENSION',
           ),
-          1 => '',
+          1 => 'phone_mobile',
         ),
         5 => 
         array (
