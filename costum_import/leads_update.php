@@ -79,7 +79,7 @@
 				  	</tr>	
 				  </thead>
 			<?php
-				$SQLSELECT = "SELECT * FROM leads WHERE date(date_entered)= '2017-05-08'";
+				$SQLSELECT = "SELECT * FROM leads WHERE date(date_entered)= '2017-05-15'";
 				$result_set =  mysqli_query($conn,$SQLSELECT);
 				while($row = mysqli_fetch_array($result_set))
 				{
