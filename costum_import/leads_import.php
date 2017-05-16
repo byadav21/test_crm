@@ -19,8 +19,8 @@ if (isset($_POST["Import"]))
 				$contRow = mysqli_num_rows($result_set);
             if($contRow>0) {                   
             //It wiil insert a row to our subject table from our csv file`
-            echo $sql    = "update  leads assigned_user_id='".$emapData[1]."' where id ='".$emapData[0]."'";
-	            	
+            echo $sql    = "update  leads set assigned_user_id='".$emapData[1]."' where id ='".$emapData[0]."'";
+	           	
             //we are using mysql_query function. it returns a resource on true else False on error
             $result = mysqli_query($conn, $sql);
             }
