@@ -25,7 +25,7 @@ include 'db.php';
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#">Talentedge Import Excel</a>
+				<a class="brand" href="#">Talentedge Import Excel (UTM)</a>
 				
 			</div>
 		</div>
@@ -37,7 +37,7 @@ include 'db.php';
 		<div class="row">
 			<div class="span3 hidden-phone"></div>
 			<div class="span6" id="form-login">
-                             <a href="index.php">Utm</a> | <a href="leads_update.php">Leads</a>
+                             <a href="index.php">UTM</a> | <a href="leads_update.php">Leads</a>
 				<form class="form-horizontal well" action="import.php" method="post" name="upload_excel" enctype="multipart/form-data">
 					<fieldset>
 						<legend>Import CSV/Excel file</legend>
