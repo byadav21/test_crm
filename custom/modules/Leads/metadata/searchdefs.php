@@ -29,6 +29,14 @@ array (
         'default' => true,
         'width' => '10%',
       ),
+      'Counsellors' => 
+      array (
+        'label' => 'Counsellors',
+        'type' => 'enum',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'Counsellors',
+      ),
       'phone_mobile' =>
       array (
         'type' => 'phone',

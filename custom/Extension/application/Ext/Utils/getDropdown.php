@@ -73,4 +73,39 @@ function getBatchList(){
 	}
 	return $dropDown;
 }
+# Current Users Details
+$userArr=[];
+function assigned_users_list(){
+	global $current_user;
+	$currentUserId = $current_user->id;
+	static $dropDown = null;
+	if(!$dropDown){
+		$result[] = reportingUser($currentUserId);
+		if($GLOBALS['userArr']){
+			foreach($GLOBALS['userArr'] as $val){
+				$userList = explode('__',$val);
+				$dropDown[$userList[1]]=$userList[0];
+			}	
+		}
+		
+	}
+	return $dropDown;
+}
+function reportingUser($currentUserId){
+			$userObj = new User();
+			$userObj->disable_row_level_security = true;
+			$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+			
+			if(!empty($userList)){
+				
+				foreach($userList as $record){
+
+					if(!empty($record->reports_to_id)){
+						$GLOBALS['userArr'][] = $record->name."__".$record->id;
+						reportingUser($record->id);
+					}
+				}
+			}
+		}
+		 
 ?>
