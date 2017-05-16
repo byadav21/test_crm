@@ -5,7 +5,27 @@ if (isset($_POST["Import"]))
 {
 
 
-    echo $filename = $_FILES["file"]["tmp_name"];
+     $mimeType='';
+    $extentionType='';
+    $filename = $_FILES["file"]["tmp_name"];
+    $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type text/plain 
+    $mimeType= finfo_file($finfo, $filename) . "\n"; 
+   
+    $filenameEx = $_FILES["file"]["name"];
+    $allowed =  array('csv');
+    $ext = pathinfo($filenameEx, PATHINFO_EXTENSION);
+   
+    if(!in_array($ext,$allowed) ) {
+        $extentionType= 'error';
+    }
+    
+     if ($extentionType=='error' && $mimeType!='text/plain')
+     {
+         echo "<script type=\"text/javascript\">
+                                                 alert(\"Invalid File:Please Upload CSV File.\");
+                                                 window.location = \"index.php\"
+                                         </script>";
+     }
 
 
     if ($_FILES["file"]["size"] > 0)
@@ -26,9 +46,9 @@ if (isset($_POST["Import"]))
             }
             if (!$result)
             {
-                echo "<script type=\"text/javascript\">
-							alert(\"Invalid File:Please Upload CSV File.\");
-							window.location = \"index.php\"
+                 echo "<script type=\"text/javascript\">
+							alert(\"Error:Please check the update query.\");
+							window.location = \"leads_update.php\"
 						</script>";
             }
         }
