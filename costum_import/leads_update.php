@@ -31,7 +31,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#">Import Excel To Mysql Database Using PHP</a>
+				<a class="brand" href="#">Talentedge Import Excel (Leads)</a>
 				
 			</div>
 		</div>
@@ -42,6 +42,7 @@
 		<div class="row">
 			<div class="span3 hidden-phone"></div>
 			<div class="span6" id="form-login">
+                             <a href="index.php">UTM</a> | <a href="leads_update.php">Leads</a>
                             <form class="form-horizontal well" action="leads_import.php" method="post" name="upload_excel" enctype="multipart/form-data">
 					<fieldset>
 						<legend>Import CSV/Excel file</legend>
