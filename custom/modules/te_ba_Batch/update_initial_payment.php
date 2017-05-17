@@ -38,14 +38,17 @@
 			# Web Api For Web site
 
 			# -> While add New Batch
+			$batch_start_date = date('d/m/Y',strtotime($bean->batch_start_date));
+			$registration_closing_date = date('d/m/Y',strtotime($bean->registration_closing_date));
 			$feearray=array();
 				for($x=1;$x<=$bean->no_of_installments;$x++){
 				$inr_index="payment_inr_".$x;
 				$usd_index="payment_usd_".$x;
 				$due_date_index="due_date_".$x;
-						$fee1=$_REQUEST[$inr_index].",".$_REQUEST[$usd_index].",".$GLOBALS['timedate']->to_db_date($_REQUEST[$due_date_index],false);
+						$fee1=$_REQUEST[$inr_index].",".$_REQUEST[$usd_index].",".date('d/m/Y',strtotime($_REQUEST[$due_date_index]));
 						$feearray[]=$fee1;
 						}
+						
 						$fee_detail = implode("|",$feearray);
 
 					if(!$bean->fetched_row && $bean->is_sent_web=="0"){
@@ -63,18 +66,18 @@
 					$post = [
 						'action'=> 'add',
 						'batch_crmid'   =>$bean->id,
-						'pname' =>$bean->te_pr_programs_te_ba_batch_1_name,
+						'pname' =>$bean->name,
 						'course_type'=>'1',
 						'batchID'=>$bean->batch_code,
 						'pexcerpt'=>'1',
 						'Inst_crm_id'=>$bean->te_in_institutes_te_ba_batch_1te_in_institutes_ida,
-						'batch_start_date'=>$bean->batch_start_date,
+						'batch_start_date'=>$batch_start_date,
 						'duration'=>$bean->duration,
 						'fees_inr'=>$bean->fees_inr,
 						'fees_usd'=>$bean->fees_in_usd,
 						'batch_status'=>$bean->batch_status,
-						'Last_date_to_register'=>$bean->registration_closing_date,
-						'Installment_detail'=>$fee_detail,
+						'last_date_to_register'=>$registration_closing_date,
+						'installment_detail'=>$fee_detail,
 					];
 
 					$ch = curl_init();
@@ -109,18 +112,18 @@
 					$post = [
 						'action'=> 'update',
 						'batch_crmid'   =>$bean->id,
-						'pname' =>$bean->te_pr_programs_te_ba_batch_1_name,
+						'pname' =>$bean->name,
 						'course_type'=>'1',
 						'batchID'=>$bean->batch_code,
 						'pexcerpt'=>'1',
 						'Inst_crm_id'=>$bean->te_in_institutes_te_ba_batch_1te_in_institutes_ida,
-						'batch_start_date'=>$bean->batch_start_date,
+						'batch_start_date'=>$batch_start_date,
 						'duration'=>$bean->duration,
 						'fees_inr'=>$bean->fees_inr,
 						'fees_usd'=>$bean->fees_in_usd,
 						'batch_status'=>$bean->batch_status,
-						'Last_date_to_register'=>$bean->registration_closing_date,
-						'Installment_detail'=>$fee_detail,
+						'last_date_to_register'=>$registration_closing_date,
+						'installment_detail'=>$fee_detail,
 					];
 
 
