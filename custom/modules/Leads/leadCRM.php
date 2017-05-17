@@ -10,8 +10,7 @@ $phone= $_REQUEST['phone'];
 $callType= $_REQUEST['callType']; 
 $callObjId= $_REQUEST['userCrtObjectId']; 
 $mainMenu= $_REQUEST['mainMenu']; 
-$_REQUEST['customerInfo']=html_entity_decode($_REQUEST['customerInfo']);
-
+$_REQUEST['customerInfo']=$customers=html_entity_decode($_REQUEST['customerInfo']);
 $_SESSION['temp_for_newUser']= json_encode($_REQUEST) ; 
 try{
 	$objapi= new te_Api_override();
@@ -23,7 +22,7 @@ try{
 		
 		if($mainMenu==1 &&  $callType=='inbound.call.dial'){
 			
-			$student= "select id,assigned_user_id,name as first_name,'' as last_name,'Active','Student' from  te_student where    mobile like '%$phone%'";
+			$student= "select id,assigned_user_id,name as first_name,'' as last_name,'Active','Student' from  te_student where    mobile like '%$phone%' and deleted=0";
 			$res=$db->query($student);
 			if($db->getRowCount($res) > 0){
 				
@@ -42,59 +41,40 @@ try{
 		
 		$userid=$db->fetchByAssoc($getUserID);
 		if($callType=='outbound.auto.dial'){	
-			$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId' and duplicate_check=1 ";
+			$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
 			$res=$db->query($lead); 
 			
-			if($db->getRowCount($res) == 0){	
-				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '#$phone#' )  and duplicate_check=1 ";
-				 $res=$db->query($lead);
-			}			
-			
-			if($db->getRowCount($res) > 1){
-				$lead .=" and status!='Duplicate'";
-				$res=$db->query($lead); 
-			}
-			
+						
 		}else if($callType=='outbound.manual.dial'){
-			$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'  and duplicate_check=1 ";
-			$res=$db->query($lead);
+			if(isset($customers->lead_reference) && $customers->lead_reference){
+				$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
+				$res=$db->query($lead);
+			}
 			if($db->getRowCount($res) == 0){	
-				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and duplicate_check=1 ";
+				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
 				 $res=$db->query($lead);
 			}	
 			
-			if($db->getRowCount($res) > 1){
-				$lead .=" and status!='Duplicate'";
-				$res=$db->query($lead); 
-			}
 				
 		}else if($callType=='inbound.call.dial'){
 			
 		 
-				$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and duplicate_check=1  ";
-				$res=$db->query($lead);
-				
-				if($db->getRowCount($res) > 1){
-					$lead .=" and status!='Duplicate'";
-					$res=$db->query($lead); 
-				}
+				$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and status!='Duplicate' and deleted=0  ";
+				$res=$db->query($lead);			
 		
 			
 		
 		}else if($callType=='outbound.callback.dial'){	
-		
-			$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  dristi_customer_id='$customerId'  and duplicate_check=1 ";
-			$res=$db->query($lead); 
+			if(isset($customers->lead_reference) && $customers->lead_reference){
+				$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
+				$res=$db->query($lead);
+			}	 
 			
 			if($db->getRowCount($res) == 0){	
-				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and duplicate_check=1 ";
+				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and deleted=0 and status!='Duplicate'";
 				 $res=$db->query($lead);
 			}	
 			
-			if($db->getRowCount($res) > 1){
-				$lead .=" and status!='Duplicate'";
-				$res=$db->query($lead); 
-			}
 		
 		}	
 	 
