@@ -10,8 +10,11 @@ $phone= $_REQUEST['phone'];
 $callType= $_REQUEST['callType']; 
 $callObjId= $_REQUEST['userCrtObjectId']; 
 $mainMenu= $_REQUEST['mainMenu']; 
-$_REQUEST['customerInfo']=$customers=html_entity_decode($_REQUEST['customerInfo']);
-$_SESSION['temp_for_newUser']= json_encode($_REQUEST) ; 
+$_REQUEST['customerInfo']=$customers=json_decode(html_entity_decode($_REQUEST['customerInfo']));
+$_SESSION['temp_for_newUser']= json_encode($_REQUEST) ;
+/*if($current_user->id=='3eec0353-0ec0-56cb-50a6-59107ffc29a1'){
+  print_r($customers);die;
+} */
 try{
 	$objapi= new te_Api_override();
 	$objapi->createLog(print_r($_REQUEST,true),"crm popup url",$_REQUEST); 
