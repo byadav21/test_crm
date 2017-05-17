@@ -216,6 +216,7 @@ eoq;
 			/*Custom code for leads goes here*/
 			if(isset($_REQUEST['module']) && strtolower($_REQUEST['module'])=='leads'){
 				$this->where_clauses = str_replace('leads.batch in','leads_cstm.te_ba_batch_id_c in',$this->where_clauses);
+				$this->where_clauses = str_replace('Counsellors', 'leads.assigned_user_id',$this->where_clauses);
 			}
 			$this->report_to_id[]=$current_user->id;
 			$module_name = strtolower($_REQUEST['module']);
