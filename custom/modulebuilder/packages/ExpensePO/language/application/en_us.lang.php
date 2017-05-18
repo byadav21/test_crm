@@ -38,8 +38,8 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
 $app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
 $app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
+$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
 $app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
+$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
