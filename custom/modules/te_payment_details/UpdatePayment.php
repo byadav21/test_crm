@@ -3,6 +3,10 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 class UpdatePaymentName{
 
 	function UpdatePaymentFunc($bean, $event, $argument){
+			if($_REQUEST['module']=="te_Api"){
+				return  true;
+				}
+					
 		$lead_id="";
 		if(!empty($bean->name)){
 			$sa = "UPDATE te_payment_details SET name='".$bean->reference_number."' WHERE id='".$bean->id."'";
@@ -50,7 +54,6 @@ class UpdatePaymentName{
 				);
 
 				$this->removePaymentPlan($studentDetails['id'],$batch_id,$studentDetails['country']);
-
 				$this->updateStudentPaymentPlan($paymentDetails);
 			}
 
@@ -93,7 +96,7 @@ class UpdatePaymentName{
 			if(isset($paymentrow['is_sent_web']) && $paymentrow['is_sent_web']==0){
 			#add api
 			$this->addpayment_curl($lead_user_details);
-				echo $bean->payment_type;
+				
 			}
 			else{
 				#update api
@@ -101,8 +104,7 @@ class UpdatePaymentName{
 				}
 		 }
 }
-		function addpayment_curl($lead_user_details){
-						echo "insert";			
+		function addpayment_curl($lead_user_details){			
 						$user = 'talentedgeadmin';
 						$password = 'Inkoniq@2016';
 						$url = 'http://talentedge.staging.wpengine.com/order-api/';
