@@ -217,7 +217,7 @@ class te_Api_override extends te_Api {
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
 			$response = curl_exec($ch);
-			$this->createLog('Uploading',$response,$data);	
+			$this->createLog(print_r($data,true),$response,$data);	
 		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
 			 $responses=json_decode($response);				
 			return $responses;
@@ -244,6 +244,8 @@ class te_Api_override extends te_Api {
 			  if($res=='dispose'){			
 				$querty['userId'] = $data['userId'];
 				$querty['customer_id'] = $data['customerId'];
+				$querty['lead_id'] = $data['lead_reference'];
+
 				$querty['dispositionCode'] =$data['dispositionCode']; 
 				$querty['customerCRTId']  = $data['userCrtObjectId'];
 				$querty['campaignId']  = $data['campaignId'];
@@ -255,6 +257,7 @@ class te_Api_override extends te_Api {
 			  }elseif($res=='disposeamyo'){		
 				$querty['dispositionName'] = $data['dispositionName'];
 				$querty['userId'] = $data['userId'];
+				$querty['lead_id'] = $data['lead_reference'];
 				$querty['customer_id'] = $data['customerId'];
 				$querty['dispositionCode'] =$data['dispositionCode']; 
 				$querty['customerCRTId']  = $data['customerCRTId'];
@@ -268,6 +271,7 @@ class te_Api_override extends te_Api {
 				  
 			 }elseif($res=='crm popup url'){		
 				$querty['dispositionName'] ='Call start';
+				$querty['lead_id'] = $data['lead_reference'];	
 				$querty['userId'] = $data['userId'];
 				$querty['customer_id'] = $data['customerId'];
 				$querty['dispositionCode'] ='Call start';
@@ -298,7 +302,7 @@ class te_Api_override extends te_Api {
 			fwrite($file,date('Y-m-d H:i:s') ."\n");
 			fwrite($file,$req ."\n");   fwrite($file,$res ."\n");
 
-			fwrite($file,$res ."\n");
+			//fwrite($file,$res ."\n");
 			fclose($file);
 		      }
 		

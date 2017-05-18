@@ -41,7 +41,7 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 			if($_REQUEST['callId'])$sql .= " unique_id='". $_REQUEST['callId'] . " ' ,";
 			if($_REQUEST['setupTime']) $sql .= " setupTime='". $_REQUEST['setupTime'] . " ' ,";
 			if($_REQUEST['dialedTime']) $sql .= " dialedTime='". $_REQUEST['dialedTime'] . " ' ,";
-			if($_REQUEST['customerId'])$sql .= " customerId='". $_REQUEST['customerId'] . " ' ,";
+			if($_REQUEST['lead_reference'])$sql .= " customerId='". $_REQUEST['lead_reference'] . " ' ,";
 			if($_REQUEST['talkTime']) $sql .= " talk_duration='". $_REQUEST['talkTime'] . " ' ,";
 			if($_REQUEST['dispositionCode']) $sql .= " dispositionCode='". $_REQUEST['dispositionCode'] . " ' ,";  
 			$user=json_decode(html_entity_decode($_REQUEST['userAssociations']));
@@ -50,9 +50,9 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 			$res=$db->query($sql);
            // $objapi->createLog(print_r($_REQUEST,true),$sql);
     
-	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['customerId'] ){
+	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['lead_reference'] ){
 				
-				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where dristi_customer_id='". $_REQUEST['customerId'] ."'";
+				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='". $_REQUEST['lead_reference'] ."'";
 				$res=$db->query($sql);
 				 if($db->getRowCount($res)>0){
                 
@@ -91,7 +91,9 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 	if($_REQUEST['callId']) $obj->unique_id= $_REQUEST['callId'];
 	if($_REQUEST['setupTime']) $obj->setupTime= $_REQUEST['setupTime'];
 	if($_REQUEST['dialedTime']) $obj->dialedTime= $_REQUEST['dialedTime'];
-	if($_REQUEST['customerId']) $obj->customerId= $_REQUEST['customerId'];
+	if($_REQUEST['customerId']) $obj->customerId= $_REQUEST['lead_reference'];
+        //if($_REQUEST['lead_reference']) $obj->lead_id= $_REQUEST['lead_reference'];
+
 	if($_REQUEST['talkTime']) $obj->talk_duration= $_REQUEST['talkTime'];
 	if($_REQUEST['dispositionCode']) $obj->dispositionCode= $_REQUEST['dispositionCode'];
 	$obj->description=json_encode($_REQUEST);
@@ -100,9 +102,9 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 	$obj->save();
 
 
-	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['customerId'] ){
+	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['lead_reference'] ){
 				
-				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where dristi_customer_id='". $_REQUEST['customerId'] ."'";
+				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where dristi_customer_id='". $_REQUEST['lead_reference'] ."'";
 				$res=$db->query($sql);
 				 if($db->getRowCount($res)>0){
                 

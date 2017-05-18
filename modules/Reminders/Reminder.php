@@ -1,6 +1,5 @@
 <?php
-/*********************************************************************************
- * SugarCRM Community Edition is a customer relationship management program developed by
+/* SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
  *
  * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
@@ -261,7 +260,7 @@ class Reminder extends Basic
     public static function addNotifications(jsAlerts $alert, $checkDecline = true)
     {
         global $current_user, $timedate, $app_list_strings, $db, $sugar_config, $app_strings;
-
+ 
         if (empty($current_user->id)) {
             return;
         }
@@ -291,9 +290,21 @@ class Reminder extends Basic
         }
         ////	END MEETING INTEGRATION
         ///////////////////////////////////////////////////////////////////////
-
-        $popupReminders = BeanFactory::getBean('Reminders')->get_full_list('', "reminders.popup = 1");
-
+        
+        $bean = BeanFactory::newBean('Reminders');	 
+		$where = 'popup=1';
+		$sql = $bean->create_new_list_query('', $where,array('related_event_module','related_event_module_id','id','related_event_module_id'));
+		$sql .=' order by date_entered desc limit 0,10';  
+        $res=$db->query($sql);
+        $popupReminders=new stdClass;
+        if($db->getRowCount($res)>0){
+			while($row=$db->fetchByAssoc($res)){
+				foreach($row as $key=>$val){
+					$popupReminders->$key=$val;
+				}
+			}
+		}
+        //$popupReminders = BeanFactory::getBean('Reminders')->get_full_list('', "reminders.popup = 1");		
         if ($popupReminders) {
             foreach ($popupReminders as $popupReminder) {
                 $relatedEvent = BeanFactory::getBean($popupReminder->related_event_module, $popupReminder->related_event_module_id);
@@ -715,3 +726,4 @@ class Reminder extends Basic
 }
 
 ?>
+
