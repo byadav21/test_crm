@@ -42,7 +42,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 
 //Bug 30094, If zlib is enabled, it can break the calls to header() due to output buffering. This will only work php5.2+
 ini_set("memory_limit","2024M");
-ini_set('zlib.output_compression', 'On');
+ini_set('zlib.output_compression', 'Off');
 
 
 ob_start();
