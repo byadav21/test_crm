@@ -1,112 +1,252 @@
-UTM,First Name,Email Address,Mobile phone,Other Phone,City,State,Country,Comments,TotalWorkExpinYears,Status,Status Details,Email
-TBS _Executive Certificate Programme In Applied Financial Risk Management,Sreedhar Tata,sreedhar@gmail.com,8099802819,,Hyderabad,Other,Other,,,Alive,New Lead,varun.khairwal@talentedge.in
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
+First Name,Last Name,DateOfBirth,Gender,MobileNumber,Secondary Phone No,EmailAddress,Comment,Status,Status Detail,Education,City,State,Country,UTM Name,Lead Id,Campaign Id
+amol,,,,9766334689,,ghemudamol@gmail.com,,Alive,New Lead,Graduate,,,,Facebook_SM-02-0417-01,19,5
+Rohit Bahadur,.,,,8527901848,,rohitbahadur24@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Alfred James,.,,,9962568064,,alfred.james1972@gmail.com,,Alive,New Lead,Post Graduate,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Rajan,.,,,8553335758,,rajankuppan@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Website_SM-02-0417-01,19,5
+Madhusudan,.,,,9848273206,,madhu.personal@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Rahul Sharma,.,,,8586913391,,rshr86@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,TBS_SM-02-0417-01,19,5
+Alok Kumar Parida,.,,,9668123124,,apctc1973@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+TANYA AGARWAL,,,Male,1234567899,,AGARWALT08@GMAIL.COM,,Alive,New Lead,Graduate,,,,Website_SM-02-0417-01,19,5
+Abhijit,,,,9960889261,,abhijit_unhale@yahoo.com,,Alive,New Lead,Post Graduate,,,,Taboola_SM-02-0417-01,19,5
+Elvis D Silva,.,,,9191394812,,elvisdsilva11@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Satish Avhankar,.,,,9881121485,,satishavankar@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Selvamanikandan,.,,,9500960674,,selvamanikandan@hotmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sumit Kumar,.,,,9871343478,,sumit.akshay@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Pankaj,.,,,8380093035,,pankaj2220@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Sriya,.,,,9439102247,,guddysr@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Ehti,.,,,9796515411,,aishaautomobiles@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Shiv Shankar,.,,,9598813563,,shivshankar2093@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Shubham Gupta,.,,,9049737334,,shum979@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Pravin Chowdhary,.,,,9666037682,,pravin.chowdhary@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Praveen,.,,,7702488326,,pbchem2016@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Neeraj Singh,.,,,9646040110,,nrj13psit@gmail.com,looking for something in technological field,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Somen Lahiri,.,,,8414035723,,lahiri216@gmail.com,"MCA 
+CCNA
+MBA",Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Dheeraj Arya,.,,,9810902575,,drdheeraj165@gmail.com,wants alumni status,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Kaleem Ali,.,,,8142192998,,alikaleemsyed@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Kamlesh S,.,,,8861064174,,s.89kamlesh@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,CrossSell_SM-02-0417-01,19,5
+J S Thakur,.,,,9803111888,,jsthakurx@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Satish Kumar .,.,,,8289026742,,srana.hope@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Kotha Naresh,.,,,8904287870,,knaresh229@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Aditya Vir Arya,.,,,8506056428,,adityavirarya@gmail.com,,Alive,New Lead,Post Graduate,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Vikramsingh,.,,,9462977750,,vs0051949@gmail.com,ITI,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Shivaraj,.,,,9980344044,,shivarajsggowda@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+S Prasad,.,,,9660075281,,serenewaves@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Rajesh Manjunath,.,,,9980160473,,rajesh_manjunath@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Karan Bargali,.,,,8979886199,,k.bargali@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Rajat Tripathi,.,,,9910049202,,rjt30011992@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Ramkiran,.,,,9488364461,,ramkiranias@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+T Kamesh Rao,.,,,7328830021,,kamesh1987@outlook.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Rishikesh,.,,,9370315272,,hvshrotriya@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Devendar Sinha,.,,,9894170890,,devendar2010@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Shankara M,.,,,8884100103,,shankara.m@suryakanthi.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sanjay,.,,,8608747468,,mandal.sanjay72@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Latika,.,,,9958166885,,latikalakhani@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Kapil Dhal,.,,,7838666507,,dhalkapil@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Biswajit Mohanty,.,,,9545451781,,biswajit.m2004@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Bhavna,Bhardwaj,,,9013070907,,bhanubhardwaj9@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Mohd Asif Khan,.,,,9807727413,,003asif@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sandeep Singh,.,,,9033913607,,sandeepsingh199020@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+RishuSingh,.,,,9871466544,0,rishusingh912@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Rajan Singh,.,,,9760098651,,rajan_mba35@yahoo.co.in,prefers offline classes,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Martin Chekuri,.,,,9901919798,,martinchekuri@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Chandan Kumar,.,,,8792783201,,kumar.chandanshahi@gmail.com,BE,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Narendra,.,,,7013824812,,guptabnb@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Faris Malik,.,,,9654049898,,farismalik@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+AKSHAYA KUMAR KHILAR,.,,,9438464171,,drakhillar@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Amol,.,,,9975764249,,amolmengade123@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Yogesh Kumar,.,,,9783544111,,yogesharya5612@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Venkat,.,,,9247373860,,vvr.hims@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Vijay Prakash Saklani,.,,,9997193515,,vijay.saklani@hp.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Umang Chadha,.,,,8506901615,,umangchadha123@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sona,.,,,7060072853,,sonasri11s@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Amar Singh,.,,,9891203777,,singhamar0@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Prashant Balakrishnan,.,,,9493180816,,prashantbk1980@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Naveen Kondamudi,.,,,9841011673,,naveen.kondamudi@tcs.com,,Alive,New Lead,Graduate,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Vipin,.,,,7042698991,,dhoundiyal.vp@gmail.com,BBA,Alive,New Lead,Not Confirmed,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Dev,.,,,9467341948,,dev.atreya@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Gayathri C,.,,,9488815377,,c.gayathri195@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Atul Agrawal,.,,,9797519990,,atulpune@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,iimjobs_SM-02-0417-01,19,5
+Anand Vardhan,.,,,8860699396,,anandvardhanit@hotmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Aditya Jain,.,,,9412959384,,adityajain@britindia.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Thirumurugan,.,,,9840813188,,vthiru@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+priyabrata swain,.,,,9937092660,,swain_priyabrata@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Satyender Kumar Jain,.,,,8587900284,,satyender1988@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Ram Kishor Meena,.,,,9413875511,,rkmeenacbi69@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Renjith Kumar R,.,,Male,9711169723,0,renjith.kumar19j@gmail.com,25000+ST,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Nikhil Gangurde,.,,,8600238524,,nikhil24192@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Jose Vallarian,.,,,967000000000,,j.vallarian@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Vikram Khurana,.,,,9810379328,,director@globalkidsrepublic.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Ar Ashish Pateriya,.,,,9571469582,,ashish.ashu89@rediffmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Amol Kondaji Ugale,.,,,8433832363,,ugaleamol9@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Mohd Shah Nawaz,.,,,9873795156,,snwaz2002@yahoo.co.in,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Satheesh K,.,,,8420360494,,satheesh_vnit@rediffmail.com,m tech,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Jibak Majumder,.,,,8148842517,,majumder_4d10@yahoo.co.in,,Alive,New Lead,Not Confirmed,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Dr Manish Kashyap,.,,,7694029976,,kashyap.manish1978@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Vinay Kumar,.,,,9971396321,,vksomra1@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Shankha,Ghosh,,,9886441682,,shankha1.ghosh@gmail.com,,Alive,New Lead,Not Confirmed,,,,iimjobs_SM-02-0417-01,19,5
+S Narayanan,.,,,9892323471,,s.narayanan@jsslspring.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Puja Kumari,.,,,7634810412,,puja26778@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Kishore Kumar,.,,,9884442635,,kishoremika@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Balaji C M,.,,,7010623217,,balajimohancm@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Arpan Gayen,.,,,9483410413,,arpangayen@tataprojects.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Amit Kaul,.,,,9899369957,,amitkaul2@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Murugesan S,.,,,9242151895,,murugesans@parry.murugappa.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Jayashree swarnakar,.,,,9953052097,,Jayashree.swarnakar@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Guddu Kumar Gupta,.,,,9718794984,,guddukumarco228@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Bharat Dwivedi,.,,,7049823318,,dwivedi.bharat@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Darshana Shinde,.,,,9960010667,,darshanaswadas@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Abhilekh,.,,,9029184169,,abwaghmare26@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+RAJNISH,.,,,9900260001,,rajnish.nvr@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+K G Muruganand,.,,,9742777827,,kg_muruganand@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Ajay,.,,,9779946006,,jain@gmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Dibyendu Jha,.,,,7767812763,,dibyendu.jha@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Vignesh,.,,,9791086702,,chintuvignesh1998@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Nitin Sharma,.,,,9873889795,,canitinsharma1320@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Arpan,.,,,8130244567,,arpan.rastogi@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Usha Koranga,.,,,9872802012,,ushakoranga.uvk@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Tanusree Mitra,.,,,7675977580,,tanusree.mitra@oakridge.in,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sunil Shaw,.,,,9830723434,,sunil.shaw270784@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+None,.,,,7385234213,,none7385@dummy.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+George Masih,.,,,213000000000,,george.masih73@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Vignesh Krishnamoorthy,.,,,8870322242,,ceokradc@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Ankit Kumar,.,,,7292981805,,ankitraj3867@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sandeep,.,,,9810327881,0,amar_ash@hotmail.com,number belongs to someone else,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+Aafaq Bazaz,.,,,9906722888,,aafaqbazaz@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Wani Tanveer,.,,,7006689202,,wanitanveer178@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sushant Sharma,.,,,9599222489,,sushantsharma2@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Arpit Sharma ,,,,7597185833,,arpitsharma1008@gmail.com,,Alive,New Lead,Not Confirmed,,,,TE_Focus_SM-02-0417-01,19,5
+Sandip M Tamboli,.,,,9822566559,,2anupamservices@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Website_SM-02-0417-01,19,5
+Saikrishna,.,,,9440870753,,saikrishna1262@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Chaudhari Harshadkumar D,.,,,9730251368,,harshad171991@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Corporate_SM-02-0417-01,19,5
+Prashanth,.,,,9845348010,,rprashanthr@yahoo.com,,Alive,New Lead,Graduate,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Nitin Jhamb,.,,,9723201560,,nitin.jhamb@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Arokia Raj,.,,,9444396625,,u.arokiarj@hil.in,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sanju Pathani,.,,,8958726338,,sanjupathani4@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+P N Mhetre,.,,,9822876204,,omsai.school@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Shivank Mishra,.,,,9582361195,,mishra.shivank88@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+A K Agrawal,.,,,9425808628,,ashok.mpgenco@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Anil Kumar Dinker,.,,,8400272402,,anildinker@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Marina Stephen,.,,,9995342502,,marina.stephen@xe04.ey.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Meenakshi,.,,,9972970418,,meenakshi.pal1@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Jenish,.,,,9638458728,,pateljenishd3@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Md Salam,.,,,9708705833,,mdsalam9708705833@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Praderp Kumar,.,,,9972530579,,pradeep.erudite@hotmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Rohit Rathi,.,,,9822456705,,rkrathi@sudarshan.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Shaik Mahammed Ali,.,,,9701708989,,mahammedali363@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Naveen Malikm,.,,,8377830763,,malik-n@hcl.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sutirtha Dutta,.,,,9800525225,,papin.babi2009@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Cma Umesh Kalra,.,,,8954303060,,kalrardr@gmail.com,ICWA,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Kapil,.,,,9811382602,,kapil.katariya@evalueserve.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+A Prassan,.,,,9884650768,,prassan_1990@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Chandershekhar,.,,,9780822045,,chintupandit87@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Nirmaan K Choudhury,.,,,9955909518,,nirman.c@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Abhijit Mukherjee,.,,,9819015884,,abhijit_mukherje@hotmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Monika Dhawan,.,,,9878586666,,dhawanmonikajk@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Govindraj,.,,,7768999933,,govind.biotech@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Sheetal Sagar,.,,,9690178358,,sheetalsagar49@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+santosh anand,.,,,9178318966,,santosh16anand@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Sahaj Bhatia,.,,,8989427629,,sahajbhatia999@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Dr Edwardmasih,.,,,9463229369,,edvan_anna@hotmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Abhishek,.,,,7271836872,,abhirajrajput.ar7271@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+A Vinod,.,,,9618276056,,www.angothvinod@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Vishal Singh,.,,,8981120681,8981945405,singhmonika141291@gmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Rohit Prabhakar,.,,,9990327505,,rohitprab@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Pranay,.,,,8341160768,,pranay2pagadala@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Parthiban S,.,,,9551556437,,parthisurthi@gmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Mahesh Dutt,.,,,9759010725,,mnm2862@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Kavita,.,,,7532939174,,kavitaaladiya051@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Darshana Ingle,.,,,9527554667,,darshanaaingle@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Jitendra Bakshi,.,,,8527519962,,bakshi.jitendra@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Arshad Mh,.,,,8113985995,,arshadmh304@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Aarti Arora,.,,,9811450876,,iaroraamit@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Damodaram P,.,,,9703835776,,damupras@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Naushad Alam Khan,.,,,8750543306,,naushad.alam246@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Sangeeta Baruri,.,,,8260276910,,sangeetabaruri@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Rajashri Chaudhuri,.,,,9830107339,,rajashri.chaudhuri@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Midhun Kuriakose,.,,,9452793918,,midhunkkuriakose@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Ashish Srivas,.,,,9003402085,,ashishsrivas.90@gmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Anirudh Nataraj,.,,,7299988673,,anirudhnataraj@yahoo.co.in,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Aparajita Mishra,.,,,9881309419,,aparajitams@yahoo.co.in,,Alive,New Lead,Graduate,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Trina Saha,.,,,9038566934,,trina.saha0502@gmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Sandeep,.,,,9666667894,,sandeepbachu65@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Harishkumar RP,.,,,9790454301,,rpharishkumar@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Rinku Yadav,.,,,8368265663,,rinkubhai@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Om Prakash Jain,.,,,9893471364,,ojain19@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Srikanth,.,,,9014066959,,mudiyala.srikanthreddy@gmail.com,wants offline classes,Alive,New Lead,Not Confirmed,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Kumar Kundan,.,,,9852248794,,kumarkundanrd@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+DheerajVaid.,.,,,9419134354,,dvtrytry@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Shilpi Dixit,.,,,8439336384,,shilpi.jhr@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TBS_SM-02-0417-01,19,5
+sai ,chand,,,8688262694,,saichandvarma999@gmail.com,,Alive,New Lead,Not Confirmed,Vijayawada,Andhra Pradesh,India,TE_Focus_SM-02-0417-01,19,5
+Dhanraj Suvarna,.,,,9987505333,,suvarnadhanraj@yahoo.co.in,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Rahul Shah,.,,,8452843848,,rahuloshah@yahoo.co.in,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Sayanti Nag Chowdhury,.,,,9836368326,,ncsayanti@gmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Neeraj Yadav,.,,,9555023351,,neerajyadav2265@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Sabir Ahmed,.,,,9635962684,,mondal963596@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Sami,.,,,7700915434,,mohammed.sami.shaikh@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Guneshmenon Kambrath,.,,,7561859934,,menon.gunesh@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Dr Manthri Kishan,.,,,9849400236,,manthrikishan@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Khantil Mehta,.,,,9825230745,,khantilmehta@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Ashwani Kumar,.,,,9868724737,,ashwban@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Mahesh Ahire,.,,,9421475504,,agrocker02@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Rezene Shimeles Reta,.,,,252000000000,,rezeneshi@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Rahul Goswami,.,,,8452918432,,rahulgoswami05218@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Kunal,Sheth,,,9886599499,9972287941,khsgoint@gmail.com,,Alive,New Lead,Not Confirmed,Gulbarga,Karnataka,India,TE_Focus_SM-02-0417-01,19,5
+Sandeep S Sekhon,.,,,9789913290,,ersandeep.sekhon@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Amit Kumar,.,,,9729826549,,amit19941002@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Suraj Debbarma,.,,,8011959880,,surajdebbarma1432@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Shridhar Reddy,.,,,7032123851,,sreddy@speech-soft.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Pankaj Kumar Patel,.,,,8874555510,,pankajpatel.indus@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Pradeep Gupta,.,,,8860758868,,bilaiya.pradeep.bilaiya@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Santhosh Kumar,.,,,9962345765,,acs.santhosh@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Subhabrata Bose,.,,,8981216256,,subhocse2017@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Shyam Sunder,.,,,9829251323,,shyam.goyal8@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Rituparna Bhattacharya,.,,,9674345663,,ritu.b85@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Ramkumar,.,,,9789332624,,ramkartz@yahoo.co.in,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Nikita Patel,.,,,9727442722,,nikita143.np@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Naveen,.,,,8826822259,,naveenkumarsaini@hotmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Akhilesh Sharma,.,,,9934311384,,akhilsharmaa@yahoo.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Viral Sharma,.,,,9540244326,9456624960,viral_3186@yahoo.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Jens Joshwa,.,,,8547724906,,jensjoshwa150@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+brijendra singh .,.,,,8427693677,,brijendra1_singh@yahoo.co.in,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Kalim Ansari,.,,,7761926308,,akalim481@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Sindhumathi,.,,,9600279219,,sindhumathir95@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Prateek,.,,,8085678300,,prateek1825@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Pradeep,.,,,8939952578,,pradeepparimi@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Payal Jadia,.,,,9978511418,,payal_dream@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Niharika V Jain,.,,,8971680626,,niharikavjain241@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Ishan Arora,.,,,9891883743,,ishan1989@ymail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Hardik Gulati,.,,,9996000065,,hg.hardikgulati@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Harsha Vardhana,.,,,9742063424,,harshavardhana@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Gnanendrakumar G,.,,,9656775205,,gnanendrakumar2009@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Deepak Kamal,.,,,9999975000,,deepakkamal@outlook.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Avantika Sahay,.,,,7032825799,,avantikasahay@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Taboola_SM-02-0417-01,19,5
+Amit Sharma,.,,,9836110122,,amitsharma002@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Andril Debbarma,.,,,7994623493,,andrildebbarma9@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Anant Verma,.,,,9648857666,,anant1605@rediffmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Suhail Akhter,.,,,8130867660,,suhail_zh@yahoo.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Aashim Sareen,.,,,8427202229,,terminator1111@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Murugesan,.,,,9884246333,,santhakeah@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Prameesh K,.,,,8891983538,,prameeshkclt123@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Manjunath,.,,,9945814977,,manjunathmms.dps@gmail.com,NI,Alive,New Lead,Not Confirmed,Other,Other,India,Website_SM-02-0417-01,19,5
+Kishore Sharma,.,,,9314487772,,k@taxila.in,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Jay Shah,.,,,7738637403,,jayshah19127@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Tanvi,.,,,9548171918,,jaintanvi795@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Hrishikesh,.,,,9004289939,,hrishicash85@gmail.com,,Alive,New Lead,Post Graduate,Other,Other,India,Facebook_SM-02-0417-01,19,5
+Akshar Syal,.,,Male,9988117866,0,healthyhelp.syal@gmail.com,25000+ST= 28750,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Anoop Tripathi,.,,,9934302546,,dr.anooptripathi@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Deepak Sharma,.,,,8146392025,,deepa_2182147@rediff.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Anu Bothra,.,,,9928744144,,bothraanu@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Deep Anand,.,,,8986810471,,deep116.prince@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,CrossSell_SM-02-0417-01,19,5
+Shruti Sharma,.,,,9873241344,,shrutisharma.kishore@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Rajesh Malviya,.,,,9926596073,,rajeshmalviya96073@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Anuj Pathak,.,,,8010507724,,pathakanuj007@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Manali Singh,.,,,9022343173,,manali.s1407@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Sonali Kapoor,.,,,9899650984,,createawittyinc@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Biswajit Adak,.,,,9564104225,,biswajitadak73@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+Badri,.,,,9566377265,,badri.royale@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,TE_Focus_SM-02-0417-01,19,5
+Rohan,.,,,9886667151,,rohanvijayshandilya@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Kmmauni,.,,,9457153713,,maunimahaur@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Google_SM-02-0417-01,19,5
+kpsingh,.,,,9700931162,,kpsinghsapiha@gmail.com,,Alive,New Lead,Graduate,Other,Other,India,Infoedge_SM-02-0417-01,19,5
+Jedson Beno Charis,.,,,9742671072,,jedsonbeno@gmail.com,,Alive,New Lead,Not Confirmed,Other,Other,India,Infoedge_SM-02-0417-01,19,5
