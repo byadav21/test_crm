@@ -3,6 +3,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 class UpdatePaymentName{
 
 	function UpdatePaymentFunc($bean, $event, $argument){
+			
 			if($_REQUEST['module']=="te_Api"){
 				return  true;
 				}
@@ -125,8 +126,7 @@ class UpdatePaymentName{
 							'payment_realized'=>$lead_user_details['payment_realized'],
 							'payment_referencenum'=>$lead_user_details['reference_number'],
 							'crm_orderid'=>$lead_user_details['id'],
-							
-								
+											
 						];
 						
 							$ch = curl_init();
@@ -175,7 +175,6 @@ class UpdatePaymentName{
 							$httpCode = curl_getinfo($ch , CURLINFO_HTTP_CODE);
  							$result = curl_exec($ch);
  							$res = json_decode($result);
-							
 												
 							curl_close($ch);  
 			}
