@@ -4,9 +4,9 @@ class UpdatePaymentName{
 
 	function UpdatePaymentFunc($bean, $event, $argument){
 			
-			if($_REQUEST['module']=="te_Api"){
-				return  true;
-				}
+			if(isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint']=="web_lead_payment"){
+			 return  true;
+		    }
 					
 		$lead_id="";
 		if(!empty($bean->name)){
