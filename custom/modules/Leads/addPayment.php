@@ -535,11 +535,12 @@ class addPaymentClass{
 			//echo $sql;die;
 	                $re = $GLOBALS['db']->query($sql);
 			if($GLOBALS['db']->getRowCount($re)>0){
+                                $beanData=$GLOBALS['db']->fetchByAssoc($re);
 				$bean->status = 'Duplicate';
 				$bean->status_description = 'Duplicate';
 				$bean->duplicate_check = '1';
-				$data=$GLOBALS['db']->fetchByAssoc($re);
-				$bean->assigned_user_id = NULL;//$datan->assigned_user_id;
+				//$data=$GLOBALS['db']->fetchByAssoc($re);
+				$bean->assigned_user_id = $beanData->assigned_user_id;
 			}else{
 				$bean->assigned_user_id = NULL;
 			}
@@ -872,6 +873,18 @@ class addPaymentClass{
 		//throw new SugarApiException("You can't edit or add disposition while calling", null, 'Leads', 550);
 	}
 	
+
+	function checkduplicate($bean, $event, $argument){
+		
+		if($bean->fetched_row['status']=='Duplicate'){			
+				echo 'alert("You can\'t edit duplicate lead ")';				
+				header('Location: index.php?module=Leads&action=DetailView&record='. $bean->id );
+				
+		}
+		 
+	}
+
+
 	
 }
 

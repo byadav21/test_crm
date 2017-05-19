@@ -1,5 +1,6 @@
 <?php
-
+ini_set('max_execution_time', 3600);
+set_time_limit(3600);
 require_once('custom/modules/te_Api/te_Api.php');
 $api=new te_Api_override();
 global $db;
@@ -43,22 +44,23 @@ if($db->getRowCount($result)>0){
 			$last=$row['drtord'];
 			$request=$data;
 			$data['customerRecords']=[];	
-			$pushed=true;
+			$pushed=true; // print_r($request);
+                        //echo count($request['customerRecords']);
 			$responses=$api->uploadContacts($request,$currentCamp,$currentApi);
 			if(isset($responses->beanResponse) && count($responses->beanResponse)>0){		
 				foreach($responses->beanResponse as $key=>$res){
 					if(isset($res->inserted) && ($res->inserted==1 or $res->inserted=='true') ){
 						try{
-							$update = "UPDATE leads set dristi_customer_id='".  $res->customerId ."', neoxstatus =1 WHERE id = '".$row['id']."'";
+							$update = "UPDATE leads set dristi_customer_id='".  $res->customerId ."', neoxstatus =1 WHERE id = '".  $allInserted[$key]['id']  ."'";
 							$db->query($update);
-							$sql="insert into dristi_upload_logs set lead_id='". $row['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
+							$sql="insert into dristi_upload_logs set lead_id='".  $allInserted[$key]['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
 							$db->query($sql);	 
 						}catch(Exception $e){
 						   //crete log	
 						}	
 					}else{
 						try{
-							$sql="insert into dristi_upload_logs set lead_id='". $row['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
+							$sql="insert into dristi_upload_logs set lead_id='".  $allInserted[$key]['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='". $res->customerId ."',resultTypeString='". $res->resultTypeString ."',text='". json_encode($res)  ."'";
 							$db->query($sql);
 						}catch(Exception $e){
 						   //crete log	
@@ -70,13 +72,13 @@ if($db->getRowCount($result)>0){
 				
 			}else{
 				try{
-					$sql="insert into dristi_upload_logs set lead_id='". $row['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='error',resultTypeString='error',text='". json_encode($responses)  ."'";
+					$sql="insert into dristi_upload_logs set lead_id='".  $allInserted[$key]['id'] ."',dated='". date('Y-m-d H:i:s') ."',customer_id='error',resultTypeString='error',text='". json_encode($responses)  ."'";
 					$db->query($sql);
 				}catch(Exception $e){
 						   //crete log	
 				}		
 				
-			}
+			} 
 			$allInserted=[]; 
 		} 
 		if($last=='') $last=$row['drtord'];
@@ -105,6 +107,7 @@ if($db->getRowCount($result)>0){
 			$request=$data;
 			$data['customerRecords']=[];	
 			$pushed=true;
+                        echo '=='.count($request);
 			$responses=$api->uploadContacts($request,$currentCamp,$currentApi);
 			if(isset($responses->beanResponse) && count($responses->beanResponse)>0){		
 				foreach($responses->beanResponse as $key=>$res){
