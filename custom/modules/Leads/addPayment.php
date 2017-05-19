@@ -877,8 +877,7 @@ class addPaymentClass{
 	function checkduplicate($bean, $event, $argument){
 		
 		if($bean->fetched_row['status']=='Duplicate'){			
-				echo 'alert("You can\'t edit duplicate lead ")';				
-				header('Location: index.php?module=Leads&action=DetailView&record='. $bean->id );
+		    	echo '<script> alert("You can\'t edit duplicate lead");callPage(); function callPage(){  window.location.href="index.php?module=Leads&action=DetailView&record='. $bean->id .'" } </script>';	exit();
 				
 		}
 		 
