@@ -539,9 +539,9 @@ class addPaymentClass{
 				$bean->status_description = 'Duplicate';
 				$bean->duplicate_check = '1';
 				$data=$GLOBALS['db']->fetchByAssoc($re);
-				//$bean->assigned_user_id = NULL;//$datan->assigned_user_id;
+				$bean->assigned_user_id = NULL;//$datan->assigned_user_id;
 			}else{
-				//$bean->assigned_user_id = NULL;
+				$bean->assigned_user_id = NULL;
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];
