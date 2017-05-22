@@ -875,7 +875,36 @@ class addPaymentClass{
 	
 
 	function checkduplicate($bean, $event, $argument){
+                ini_set('display_errors',"off");
+               if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import")  return false;
 		
+		if($bean->fetched_row['id']==''){			
+			$sql = "SELECT leads.id  as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
+			if($bean->email1!=""){
+				$sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
+				$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
+			}
+			$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$bean->te_ba_batch_id_c."' and status_description!='Duplicate' and leads.deleted=0 ";// AND DATE(date_entered) = '".date('Y-m-d')."'";
+			if($bean->phone_mobile && $bean->email1){
+				
+				$sql.=" and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
+				
+			}elseif(!$bean->phone_mobile && $bean->email1){
+			
+				$sql.=" and email_addresses.email_address = '{$bean->email1}'";
+			
+			}elseif($bean->phone_mobile && !$bean->email1){
+				$sql.=" and leads.phone_mobile = '{$bean->phone_mobile}'";
+			}	
+			
+			$re = $GLOBALS['db']->query($sql);
+			if($GLOBALS['db']->getRowCount($re)>0){
+				 echo '<script> alert("You can\'t add duplicate lead");callPage(); function callPage(){  window.location.href="index.php?module=Leads&action=ListView&record='. $bean->id .'" } </script>';	exit();
+			}
+				
+		}
+
+
 		if($bean->fetched_row['status']=='Duplicate'){			
 		    	echo '<script> alert("You can\'t edit duplicate lead");callPage(); function callPage(){  window.location.href="index.php?module=Leads&action=DetailView&record='. $bean->id .'" } </script>';	exit();
 				
