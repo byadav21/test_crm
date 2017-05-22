@@ -62,7 +62,7 @@ class ImportViewLast extends ImportView
      */
  	public function display()
     {
-        global $mod_strings, $app_strings, $current_user, $sugar_config, $current_language;
+        global $mod_strings, $app_strings, $current_user, $sugar_config, $current_language,$db;
 
 
 
@@ -112,9 +112,20 @@ class ImportViewLast extends ImportView
             $activeTab = 0;
 
         $this->ss->assign("JAVASCRIPT", $this->_getJS($activeTab));
+		
+        if( $_REQUEST['import_module']=='Leads'){
+			
+			$this->ss->assign("aliveCount",$_SESSION['aliveCheck']);
+			$this->ss->assign("dupeCount",$_SESSION['dupCheck']);
+			unset($_SESSION['aliveCheck']);
+			unset($_SESSION['dupCheck']);
+		}else{
+			$this->ss->assign("dupeCount", $dupeCount);
+			$this->ss->assign("aliveCount",0);
+		}
 
         $this->ss->assign("errorCount", $errorCount);
-        $this->ss->assign("dupeCount", $dupeCount);
+        
         $this->ss->assign("createdCount", $createdCount);
         $this->ss->assign("updatedCount", $updatedCount);
         $this->ss->assign("errorFile", ImportCacheFiles::convertFileNameToUrl(ImportCacheFiles::getErrorFileName()));
