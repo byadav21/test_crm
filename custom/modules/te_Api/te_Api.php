@@ -110,7 +110,7 @@ class te_Api_override extends te_Api {
 			$data= curl_exec($ch);				
 			//$data= file_get_contents(  $server. urlencode(json_encode($request)));
 			$dataErr=json_decode($data);
-			$this->createLog($server. urlencode(json_encode($request)),$data); 		
+			$this->createLog($server. urlencode(json_encode($request)),'manual',$request,$data); 		
 			return ($dataErr->status=='error')?false:true;
 		}catch(Exception $e){
 			
@@ -187,7 +187,7 @@ class te_Api_override extends te_Api {
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
 				$response = curl_exec($ch);
-				//$response= file_get_contents($url. ($qrystr)); 
+				$response= file_get_contents($url. ($qrystr)); 
 				$this->createLog($url. ($qrystr),'dispose',$data,$response);     
 				if($response!=='Dispose Successfully'){
 				  echo '<script>swal("You have to dispose manaually!")</script>';	
@@ -240,7 +240,8 @@ class te_Api_override extends te_Api {
 
 	function createLog($req,$res,$data=array(),$dispose=''){
 		$querty=array();
-		//if($res!='login' ){
+		global $current_user;
+		 
 			  if($res=='dispose'){			
 				$querty['userId'] = $data['userId'];
 				$querty['customer_id'] = $data['customerId'];
@@ -254,6 +255,18 @@ class te_Api_override extends te_Api {
 				$querty['callType'] ='dispose'; 
 				$querty['entryPoint'] ='dispose system'; 
 				$querty['response'] = json_encode($data);
+			  }elseif($res=='manual'){	
+				$querty['userId'] = $current_user->id;
+				$querty['customer_id'] = 'manual';
+				$querty['lead_id'] = $data['lead_refrence'];
+				$querty['dispositionCode'] ='Manual'; 
+				$querty['customerCRTId']  = 'Manual';
+				$querty['campaignId']  = $data['campaignId'];
+				$querty['phone']  = $data['phone'];
+				$querty['lastStatus']  ='Manual';
+				$querty['callType'] ='manual call'; 
+				$querty['entryPoint'] ='manually calling'; 
+				$querty['response'] = ($dispose);				  	
 			  }elseif($res=='disposeamyo'){		
 				$querty['dispositionName'] = $data['dispositionName'];
 				$querty['userId'] = $data['userId'];
@@ -283,27 +296,26 @@ class te_Api_override extends te_Api {
 				$querty['response'] = json_encode($data);		  
 				$querty['systemDisposition'] ='call satrt'; 
 			}	
-                       if($res=='dispose' || $res=='disposeamyo' ||$res=='crm popup url'){
-		   	 $querty['dated'] = date('Y-m-d H:i:s');
-			
-			 foreach($querty as $key=>$val){
-			   $sql .= " $key='". $val . "',";	
-			 	
-			 }
-			 $sql="insert into dristi_log set " .substr($sql,0,strlen($sql)-1);//die;
-			
-			 global $db;
-			 $db->query($sql);
-                       }else{			
+            if($res=='dispose' || $res=='disposeamyo' ||$res=='crm popup url' || $res=='manual'){
+				 $querty['dated'] = date('Y-m-d H:i:s');				
+				 foreach($querty as $key=>$val){
+				   $sql .= " $key='". $val . "',";	
+					
+				 }
+				 $sql="insert into dristi_log set " .substr($sql,0,strlen($sql)-1);//die;
+				
+				 global $db;
+				 $db->query($sql);
+           }else{			
 		
 		
                  	$file = fopen(str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']) . "upload/apilog/apilog.txt","a");
 			 
-			fwrite($file,date('Y-m-d H:i:s') ."\n");
-			fwrite($file,$req ."\n");   fwrite($file,$res ."\n");
+					fwrite($file,date('Y-m-d H:i:s') ."\n");
+					fwrite($file,$req ."\n");   fwrite($file,$res ."\n");
 
-			//fwrite($file,$res ."\n");
-			fclose($file);
+		 
+					fclose($file);
 		      }
 		
 	}

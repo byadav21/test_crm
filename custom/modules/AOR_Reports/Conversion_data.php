@@ -185,8 +185,7 @@ function getLeadCount($vendorname='',$batchid='') {
 					      $row3 =$db->query($fetch3); 
 						  $recordscount =$db->fetchByAssoc($row3);
 						  $recordscount=$recordscount['total'];
-											  
-						  //print_r($recordscount);
+											 
 						 
 	}
 	return $recordscount;
