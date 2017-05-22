@@ -29,10 +29,80 @@ input[type=text], select {
     WIDTH: 132PX !IMPORTANT;
 }
 </style>
-</head>
+	</style>
+			 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+			   <link rel="stylesheet" href="/resources/demos/style.css">
+				<script>
+				  $(function() {
+					$("#datepicker").datepicker({ dateFormat: "yy-mm-dd" }).val()
+					} );
+					$(function() {
+					$("#enddate").datepicker({ dateFormat: "yy-mm-dd" }).val()
+					} );
+	</script> 
+</head>		
+ <table width="100%">
+	<form action="index.php?module=AOR_Reports&action=Conversion_data" method="post" id="lead_trans">
+		<tbody>	
+			<tr>													
+	<td><b>Select Batch</b></td>
+					      <td>
+								<select name="batch_val[]" multiple id="batch_val">
+								<option  value="">Select Batch</option>	
+									<?php 
+									  $fetch1="SELECT id,name FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
+									  $row1 =$db->query($fetch1);
+									while($records =$db->fetchByAssoc($row1)){ ?> 
+									<option  value="<?php echo $records['id']?>"><?php echo $records['name']?></option>
+									<?php }?>
+                                </select></td>
+                                <td><b>Start Date</b></td>
+										<td><input type="text" name="start_date" id="datepicker"/></td>
+										<td><b>End Date</b></td>
+									<td>	<input type="text" name="end_date" id="enddate"/></td>
+										<td align='center' style="border:none;"><input type="Submit" name="Submit" value="Find Report"></td></tr>
+										</tbody></table>
+				</form>		
+				    
         <body>
 			<?php 										  									
 			 //@ Get All Vendor  details
+			 $where='';
+			 if(isset($_POST['Submit']) &&!empty($_POST['Submit'])) {
+				 extract($_POST);
+			// $whereBatch = implode ( "', '",$_POST['batch_val']);
+			// $where=" AND ID IN('".$whereBatch."')";
+			 if(!empty($start_date)&&!empty($end_date)){
+				$where.=" AND (CAST(date_entered AS DATE) BETWEEN '".$start_date."' AND '".$end_date."')";
+				}
+				if(!empty($start_date)&&empty($end_date)){
+				if($where!=''){
+				$where.=" AND (CAST(date_entered AS DATE) > '".$start_date."')";
+				}
+				else{
+				$where.=" AND (CAST(date_entered AS DATE) > '".$start_date."')";
+				}
+				}
+				if(empty($start_date)&&!empty($end_date)){
+				if($where!=''){
+				$where.=" AND (CAST(date_entered AS DATE) < '".$end_date."')";
+				}
+				else{
+				$where.=" AND (CAST(date_entered AS DATE) < '".$end_date."')";
+				}
+				}
+			 if(!empty($batch_val)){
+				$source_str=implode("','",$batch_val);
+				//$source_str="'".$source_str."'";
+				if($where!=''){
+				$where.=" AND id in('".$source_str."')";
+				}
+				else{
+				$where.=" AND id in('".$source_str."')";
+				}
+				}
+			 }
+			
 			  $vendorlist= array();
 			  $fetch="SELECT id,name FROM te_vendor WHERE deleted=0";
 			  $row =$db->query($fetch);
@@ -42,7 +112,7 @@ input[type=text], select {
 			  while($records =$db->fetchByAssoc($row)){
 				 $vendorlist[]=$records['name'];
 			  }
-			  $fetch1="SELECT id,name FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
+			  $fetch1="SELECT id,name FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0 ".$where."";
 			  $row1 =$db->query($fetch1); 
 			  while($records1 =$db->fetchByAssoc($row1)){
 				  $batchnamelist[]=$records1['name'];
