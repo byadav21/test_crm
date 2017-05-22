@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,9 +38,29 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+/*********************************************************************************
 
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+
+require_once('include/Dashlets/DashletGeneric.php');
+require_once('modules/te_Expensepo_Vendor/te_Expensepo_Vendor.php');
+
+class te_Expensepo_VendorDashlet extends DashletGeneric { 
+    function __construct($id, $def = null) {
+		global $current_user, $app_strings;
+		require('modules/te_Expensepo_Vendor/metadata/dashletviewdefs.php');
+
+        parent::__construct($id, $def);
+
+        if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'te_Expensepo_Vendor');
+
+        $this->searchFields = $dashletData['te_Expensepo_VendorDashlet']['searchFields'];
+        $this->columns = $dashletData['te_Expensepo_VendorDashlet']['columns'];
+
+        $this->seedBean = new te_Expensepo_Vendor();        
+    }
+}

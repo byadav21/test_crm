@@ -71,6 +71,15 @@ array (
             'label' => 'LBL_DOCUMENTS',
           ),
         ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'vendor_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VENDOR',
+          ),
+        ),
       ),
     ),
   ),

@@ -37,9 +37,19 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
+/*
+ * Created on August 2 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
+$module_name = 'te_Expensepo_Vendor';
+ $metafiles[$module_name] = array(
+	'detailviewdefs'  => 	'modules/' . $module_name . '/metadata/detailviewdefs.php', 	
+	'editviewdefs'    => 	'modules/' . $module_name . '/metadata/editviewdefs.php',
+ 	'listviewdefs'    => 	'modules/' . $module_name . '/metadata/listviewdefs.php',
+ 	'searchdefs'      =>    'modules/' . $module_name . '/metadata/searchdefs.php',
+ 	'popupdefs'	      =>    'modules/' . $module_name . '/metadata/popupdefs.php',
+ 	'searchfields'	  =>    'modules/' . $module_name . '/metadata/SearchFields.php',
+ );
+?>

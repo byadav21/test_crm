@@ -37,9 +37,26 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+/**
+ * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
+ */
+ 
+require_once('modules/te_Expensepo_Vendor/te_Expensepo_Vendor_sugar.php');
+require_once('include/upload_file.php');
+echo 'dddd'; die;
+class te_Expensepo_Vendor extends te_Expensepo_Vendor_sugar {
+	
+	function __construct(){
+		parent::__construct();
+	}
+        
+        
+	
+}
 
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
+$file = new UploadFile();
+
+//get the file location
+$file->temp_file_location = UploadFile::get_upload_path($file_id);
+echo $file_contents = $file->get_file_contents(); die;
+?>

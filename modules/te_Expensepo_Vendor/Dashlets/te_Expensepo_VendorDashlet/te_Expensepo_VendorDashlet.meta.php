@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,9 +38,18 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+/*********************************************************************************
 
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+ 
+global $app_strings;
+
+$dashletMeta['te_Expensepo_VendorDashlet'] = array('module'		=> 'te_Expensepo_Vendor',
+										  'title'       => translate('LBL_HOMEPAGE_TITLE', 'te_Expensepo_Vendor'), 
+                                          'description' => 'A customizable view into te_Expensepo_Vendor',
+                                          'icon'        => 'icon_te_Expensepo_Vendor_32.gif',
+                                          'category'    => 'Module Views');

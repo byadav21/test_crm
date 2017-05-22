@@ -38,8 +38,19 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
+$app_list_strings['moduleList']['te_expenseVendorsFiles'] = 'expenseVendorsFiles';
+$app_list_strings['moduleList']['te_Expensepo_Vendor'] = 'Expensepo_Vendor';
+$app_list_strings['te_expensevendorsfiles_category_dom'][''] = '';
+$app_list_strings['te_expensevendorsfiles_category_dom']['Marketing'] = 'Marketing';
+$app_list_strings['te_expensevendorsfiles_category_dom']['Knowledege Base'] = 'Knowledge Base';
+$app_list_strings['te_expensevendorsfiles_category_dom']['Sales'] = 'Sales';
+$app_list_strings['te_expensevendorsfiles_subcategory_dom'][''] = '';
+$app_list_strings['te_expensevendorsfiles_subcategory_dom']['Marketing Collateral'] = 'Marketing Collateral';
+$app_list_strings['te_expensevendorsfiles_subcategory_dom']['Product Brochures'] = 'Product Brochures';
+$app_list_strings['te_expensevendorsfiles_subcategory_dom']['FAQ'] = 'FAQ';
+$app_list_strings['te_expensevendorsfiles_status_dom']['Active'] = 'Active';
+$app_list_strings['te_expensevendorsfiles_status_dom']['Draft'] = 'Draft';
+$app_list_strings['te_expensevendorsfiles_status_dom']['FAQ'] = 'FAQ';
+$app_list_strings['te_expensevendorsfiles_status_dom']['Expired'] = 'Expired';
+$app_list_strings['te_expensevendorsfiles_status_dom']['Under Review'] = 'Under Review';
+$app_list_strings['te_expensevendorsfiles_status_dom']['Pending'] = 'Pending';

@@ -37,9 +37,48 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
+$mod_strings = array (
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
+  'LBL_SECURITYGROUPS' => 'Security Groups',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
+  'LBL_ID' => 'ID',
+  'LBL_DATE_ENTERED' => 'Date Created',
+  'LBL_DATE_MODIFIED' => 'Date Modified',
+  'LBL_MODIFIED' => 'Modified By',
+  'LBL_MODIFIED_ID' => 'Modified By Id',
+  'LBL_MODIFIED_NAME' => 'Modified By Name',
+  'LBL_CREATED' => 'Created By',
+  'LBL_CREATED_ID' => 'Created By Id',
+  'LBL_DESCRIPTION' => 'Description',
+  'LBL_DELETED' => 'Deleted',
+  'LBL_NAME' => 'Name',
+  'LBL_CREATED_USER' => 'Created by User',
+  'LBL_MODIFIED_USER' => 'Modified by User',
+  'LBL_LIST_NAME' => 'Name',
+  'LBL_EDIT_BUTTON' => 'Edit',
+  'LBL_REMOVE' => 'Remove',
+  'LBL_LIST_FORM_TITLE' => 'Expensepo_Vendor List',
+  'LBL_MODULE_NAME' => 'Expensepo_Vendor',
+  'LBL_MODULE_TITLE' => 'Expensepo_Vendor',
+  'LBL_HOMEPAGE_TITLE' => 'My Expensepo_Vendor',
+  'LNK_NEW_RECORD' => 'Create Expensepo_Vendor',
+  'LNK_LIST' => 'View Expensepo_Vendor',
+  'LNK_IMPORT_TE_EXPENSEPO_VENDOR' => 'Import Expensepo_Vendor',
+  'LBL_SEARCH_FORM_TITLE' => 'Search Expensepo_Vendor',
+  'LBL_HISTORY_SUBPANEL_TITLE' => 'View History',
+  'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Activities',
+  'LBL_TE_EXPENSEPO_VENDOR_SUBPANEL_TITLE' => 'Expensepo_Vendor',
+  'LBL_NEW_FORM_TITLE' => 'New Expensepo_Vendor',
+  'LBL_DATED' => 'dated',
+  'LBL_EMAIL_ID' => 'email id',
+  'LBL_PHONE_NO' => 'Phone no',
+  'LBL_MOBILE' => 'Mobile',
+  'LBL_ADDRESS' => 'Address',
+  'LBL_CITY' => 'City',
+  'LBL_STATE' => 'State',
+  'LBL_COUNTRY' => 'Country',
+  'LBL_PAN_NO' => 'Pan no',
+  'LBL_SERVICE_TAX_NO' => 'Service Tax no',
+  'LBL_DOCUMENTS' => 'Documents',
+);

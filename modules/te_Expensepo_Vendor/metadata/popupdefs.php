@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,9 +38,18 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['te_expenseprdetail'] = 'expenseprdetail';
-$app_list_strings['moduleList']['te_Expense_approvall'] = 'Expense approvall';
-$app_list_strings['moduleList']['te_ExpensePO'] = 'Expense PO';
-$app_list_strings['moduleList']['te_ExpencePoPayment'] = 'ExpencePoPayment';
-$app_list_strings['moduleList']['te_Department_Expense'] = 'Department Expense';
+$module_name = 'te_Expensepo_Vendor';
+$object_name = 'te_Expensepo_Vendor';
+$_module_name = 'te_expensepo_vendor';
+$popupMeta = array('moduleMain' => $module_name,
+						'varName' => $object_name,
+						'orderBy' => $_module_name.'.name',
+						'whereClauses' => 
+							array('name' => $_module_name . '.name', 
+								),
+						    'searchInputs'=> array($_module_name. '_number', 'name', 'priority','status'),
+							
+						);
+?>
+ 
+ 
