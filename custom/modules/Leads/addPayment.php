@@ -505,9 +505,6 @@ class addPaymentClass{
 				$bean->date_of_referral = date('Y-m-d');
 		}
                 
-	//--------------------------------------------------
-
-
 		if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){
 			#update fee & attendance
 			$utmSql="SELECT  u.name as utm,u.te_ba_batch_id_c as batch, v.name as vendor from  te_utm u INNER JOIN te_vendor_te_utm_1_c uvr ON u.id=uvr.te_vendor_te_utm_1te_utm_idb INNER JOIN te_vendor v ON uvr.te_vendor_te_utm_1te_vendor_ida=v.id WHERE uvr.deleted=0 AND u.deleted=0 AND u.name='".$bean->utm."'";
@@ -532,17 +529,24 @@ class addPaymentClass{
 			}elseif($bean->phone_mobile && !$bean->email1){
 				$sql.=" and leads.phone_mobile = '{$bean->phone_mobile}'";
 			}	
+			$bean->upload_status=1;
+			
 			//echo $sql;die;
-	                $re = $GLOBALS['db']->query($sql);
+	        $re = $GLOBALS['db']->query($sql);
 			if($GLOBALS['db']->getRowCount($re)>0){
-                                $beanData=$GLOBALS['db']->fetchByAssoc($re);
+                $beanData=$GLOBALS['db']->fetchByAssoc($re);
 				$bean->status = 'Duplicate';
 				$bean->status_description = 'Duplicate';
 				$bean->duplicate_check = '1';
+				$bean->upload_status=-1;
+				$_SESSION['dupCheck']= intval($_SESSION['dupCheck']) +1;
 				//$data=$GLOBALS['db']->fetchByAssoc($re);
 				$bean->assigned_user_id = $beanData->assigned_user_id;
 			}else{
-				$bean->assigned_user_id = NULL;
+				if($bean->autoassign=='Yes'){
+					$bean->assigned_user_id = NULL;
+			    }
+			    $_SESSION['aliveCheck']= intval($_SESSION['aliveCheck']) +1;	
 			}
 			$bean->vendor = $utmDetails['vendor'];
 			$bean->te_ba_batch_id_c = $utmDetails['batch'];

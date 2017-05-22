@@ -69,6 +69,11 @@ div.resultsTable {
 {if $errorCount > 0}
 <b>{$errorCount}</b>&nbsp;{$MOD.LBL_RECORDS_SKIPPED_DUE_TO_ERROR}<br />
 {/if}
+
+{if $aliveCount > 0}
+<b>{$aliveCount}</b>&nbsp;Alive Records Created<br />
+{/if}
+
 {if $dupeCount > 0}
 <b>{$dupeCount}</b>&nbsp;{$MOD.LBL_DUPLICATES}<br />
 {/if}
