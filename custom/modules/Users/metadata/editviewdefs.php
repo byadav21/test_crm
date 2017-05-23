@@ -53,6 +53,11 @@ array (
       array (
         0 => 
         array (
+          0 => '',
+          1 => '',
+        ),
+        1 => 
+        array (
           0 => 
           array (
             'name' => 'user_name',
@@ -63,14 +68,18 @@ array (
               'size' => 30,
             ),
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'te_department_expense_users_1_name',
+            'label' => 'LBL_TE_DEPARTMENT_EXPENSE_USERS_1_FROM_TE_DEPARTMENT_EXPENSE_TITLE',
+          ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 'first_name',
           1 => 'last_name',
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -87,7 +96,7 @@ array (
             'customCode' => '{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -100,7 +109,7 @@ array (
             'label' => 'LBL_NEOXPASS',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -109,7 +118,7 @@ array (
           ),
           1 => 'phone_mobile',
         ),
-        5 => 
+        6 => 
         array (
           0 => 
           array (
