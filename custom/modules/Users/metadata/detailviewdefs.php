@@ -46,10 +46,19 @@ array (
       array (
         0 => 
         array (
-          0 => 'user_name',
+          0 => '',
           1 => '',
         ),
         1 => 
+        array (
+          0 => 'user_name',
+          1 => 
+          array (
+            'name' => 'te_department_expense_users_1_name',
+            'label' => 'LBL_TE_DEPARTMENT_EXPENSE_USERS_1_FROM_TE_DEPARTMENT_EXPENSE_TITLE',
+          ),
+        ),
+        2 => 
         array (
           0 => 
           array (
@@ -62,7 +71,7 @@ array (
             'label' => 'LBL_LAST_NAME',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 'status',
           1 => 
@@ -71,7 +80,7 @@ array (
             'customCode' => '{$USER_TYPE_READONLY}',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -84,7 +93,7 @@ array (
             'label' => 'LBL_NEOXPASS',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -93,7 +102,7 @@ array (
           ),
           1 => 'phone_mobile',
         ),
-        5 => 
+        6 => 
         array (
           0 => 'full_name',
           1 => 

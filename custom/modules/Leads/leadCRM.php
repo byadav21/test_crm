@@ -104,9 +104,41 @@ try{
 					
 				}
 
+			}else if($callType=='inbound.call.dial'){
+				
+				if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
+					
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
+					////header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
+					include_once("custom/modules/Leads/overview.php");
+					$api=new te_Api_override();
+					$data=[];
+					$session=$api->doLogin();								
+					$data['sessionId']=$session;
+					$data['properties']=array('update.customer'=>true,'migrate.customer'=>true);
+					$data['customerRecords']=[];
+					$customerRecords['name']= $records['first_name']." ". $records['last_name'];
+					$customerRecords['first_name'] = $records['first_name'];
+					$customerRecords['last_name'] = $records['last_name'];					
+					$customerRecords['phone1'] =$phone;						 
+					$customerRecords['lead_reference'] = $records['id'];
+					$data['customerRecords'][]=$customerRecords;
+					$responses=$api->uploadContacts($data,18,42);
+					
+				}else if($records['assigned_user_id']!=$userid['id']){
+					 
+					header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);
+					 
+				}else{
+					
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+					include_once("custom/modules/Leads/overview.php");
+					///header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
+				}
+				
+				
 
-
-			}else if($callType=='inbound.call.dial' || $callType=='outbound.manual.dial'){
+			}else if($callType=='outbound.manual.dial'){
 				
 				if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
 					
@@ -131,7 +163,7 @@ try{
 		}	
 	}else{
 		 
-		header('Location: index.php');
+		header('Location: index.php?module=Leads&action=ListView');
 	}
 
 }catch(Exception $e){
