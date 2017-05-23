@@ -1,5 +1,5 @@
-<section class="moduleTitle"> <h2>Leads Feedback Report</h2><br/><br/>
-<form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadsfeedbackreport">
+<section class="moduleTitle"> <h2>Leads Performance Report</h2><br/><br/>
+<form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadperformancereport">
 <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -13,17 +13,6 @@
 					<option  value=""></option>
 					{foreach from = $batchList key=key item=batch}
 						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
-					{/foreach}
-				</select>
-			</td>
-      <td scope="row" nowrap="nowrap" width="1%">
-				<label for="batch_basic">Vendor</label>
-			</td>
-			<td nowrap="nowrap" width="10%">
-				<select name="vendor[]" id="vendor" multiple>
-					<option  value=""></option>
-					{foreach from = $vendorList key=key item=vendor}
-						<option value="{$vendor.name}" {if $selected_vendor eq $vendor.id} selected="selected" {/if}>{$vendor.name}</option>
 					{/foreach}
 				</select>
 			</td>
@@ -65,7 +54,7 @@
 	<thead>
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Batch</strong>
+			<strong>Vendor</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Duplicate</strong>
@@ -94,9 +83,7 @@
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>Wrong Number</strong>
     </th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong class="text-danger">Invalid Total</strong>
-		</th>
+
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Call Back</strong>
 		</th>
@@ -115,9 +102,7 @@
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>Re-Enquired</strong>
     </th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong class="text-primary">Valid Total</strong>
-		</th>
+
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong class="text-success">Grand Total</strong>
 		</th>
@@ -135,20 +120,14 @@
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Retired}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Ringing_Multiple_Times}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Wrong_Number}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column text-danger">
 
-        <strong class="text-danger">{$councelor.Invalid_Total}</strong>
-      </td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Call_Back}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Converted}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Follow_Up}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.New_Lead}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Prospect}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Re_Enquired}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column text-primary">
 
-        <strong class="text-primary">{$councelor.Valid_Total}</strong>
-      </td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
         <strong class="text-success">{$councelor.Grand_Total}</strong>
       </td>
@@ -224,13 +203,7 @@
       {/php}
      </strong>
     </th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
-      {php}
-      echo array_sum(array_column($councelorArray,'Invalid_Total'));
-      {/php}
-     </strong>
-    </th>
+
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}
@@ -273,13 +246,7 @@
       {/php}
      </strong>
     </th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
-      {php}
-      echo array_sum(array_column($councelorArray,'Valid_Total'));
-      {/php}
-     </strong>
-    </th>
+
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}
