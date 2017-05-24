@@ -172,9 +172,9 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 		}
 		$councelorList=array();
 
+
 		$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE vendor.name!='' $where GROUP BY vendor.name,l.status_description";
 		$leadObj =$db->query($leadSql);
-
 		while($row =$db->fetchByAssoc($leadObj)){
 			$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 			$councelorList[$row['id']]['name']=$row['name'];
@@ -239,6 +239,45 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 
 		}
 
+		//$pagination_query = "SELECT COUNT(*)total FROM (SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE vendor.name!='' $where GROUP BY vendor.name,l.status_description)as temp";
+		//$paginationObj =$db->query($pagination_query);
+		//$pagination_row =$db->fetchByAssoc($paginationObj);
+		$total=count($councelorList); #total records
+		$start=0;
+		$per_page=10;
+		$page=1;
+		$pagenext=1;
+		$last_page=ceil($total/$per_page);
+
+		if(isset($_REQUEST['page'])&&$_REQUEST['page']>0){
+			$start=$per_page*($_REQUEST['page']-1);
+			$page=($_REQUEST['page']-1);
+			$pagenext = ($_REQUEST['page']+1);
+
+		}else{
+			//$page++;
+			$pagenext++;
+		}
+		if(($start+$per_page)<$total){
+			$right=1;
+		}else{
+			$right=0;
+		}
+		if(isset($_REQUEST['page'])&&$_REQUEST['page']==1){
+			$left=0;
+		}elseif(isset($_REQUEST['page'])){
+			$page=($_REQUEST['page']-1);
+			$left=1;
+		}
+
+		$councelorList=array_slice($councelorList,$start,$per_page);
+		if($total>$per_page){
+			$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
+
+		}else{
+			$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
+
+		}
 		//echo "<pre>";print_r($councelorList);exit();
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
@@ -247,6 +286,12 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 		$sugarSmarty->assign("selected_from_date",$GLOBALS['timedate']->to_display_date($from_date));
 		$sugarSmarty->assign("selected_to_date",$GLOBALS['timedate']->to_display_date($to_date));
 		//$sugarSmarty->assign("selected_status",$search_status);
+		$sugarSmarty->assign("current_records",$current);
+		$sugarSmarty->assign("page",$page);
+		$sugarSmarty->assign("pagenext",$pagenext);
+		$sugarSmarty->assign("right",$right);
+		$sugarSmarty->assign("left",$left);
+		$sugarSmarty->assign("last_page",$last_page);
 		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/leadperformancereport.tpl');
 	}
 }
