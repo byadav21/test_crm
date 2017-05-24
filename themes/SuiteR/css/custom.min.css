@@ -9104,4 +9104,7 @@ fieldset{   min-width: 100px; }
 
     display: block;}
 
+#Default_te_ExpensePO_Subpanel input[type=text], #Default_te_ExpensePO_Subpanel   input[type=password],#Default_te_ExpensePO_Subpanel   select{
 
+    width: 200px!important;
+}

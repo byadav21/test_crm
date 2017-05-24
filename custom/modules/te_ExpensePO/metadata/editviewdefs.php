@@ -60,16 +60,26 @@ array (
         array (
           0 => 
           array (
+            'name' => 'vendor_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VENDOR',
+          ),
+          1 => 
+          array (
             'name' => 'porequired',
             'studio' => 'visible',
             'label' => 'LBL_POREQUIRED',
           ),
-          1 => 
+        ),
+        3 => 
+        array (
+          0 => 
           array (
             'name' => 'documents',
             'studio' => 'visible',
             'label' => 'LBL_DOCUMENTS',
           ),
+          1 => '',
         ),
       ),
     ),
