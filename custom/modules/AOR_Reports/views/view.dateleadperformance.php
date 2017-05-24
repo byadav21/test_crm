@@ -69,8 +69,8 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_POST['batch'])."') ";
 			}
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Batch Name,Vendor,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
-			$file = "status_report";
+			$data="Batch Name,Media,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
+			$file = "Till_Date_Lead_Performance";
 			$where='';
 			$from_date="";
 			$to_date="";
@@ -107,6 +107,7 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 					
 					$councelorList[$vendorval['id']]['name']=$vendorval['name'];
 					while($row =$db->fetchByAssoc($leadObj)){
+						$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 						$councelorList[$vendorval['id']][$row['status_description']]=$row['total'];
 						$councelorList[$vendorval['id']]['Batchname']=$row['Batchname'];
 					}
@@ -163,11 +164,14 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 					+$councelorList[$key]['Re_Enquired']
 					+$councelorList[$key]['Wrong_Number'];
 					 
+					 }
+			if(!isset($councelor['Batchvalue'])){
+				$councelorList[$key]['Batchvalue']=$councelorList[$key]['Batchname'];
 					 }		
 			}
 			
 			foreach($councelorList as $key=>$councelor){
-				$data.= "\"" . $councelor['Batchname'] . "\",\"" . $councelor['name'] . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\",\"" . $councelor['Grand_Total'] . "\"\n";
+				$data.= "\"" . $councelor['Batchvalue'] . "\",\"" . $councelor['name'] . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\",\"" . $councelor['Grand_Total'] . "\"\n";
 			}
 			
 			ob_end_clean();
@@ -253,7 +257,7 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 					+$councelorList[$key]['Wrong_Number'];
 					 
 					 }		
-					if(!isset($councelor['Batchvalue'])){
+			if(!isset($councelor['Batchvalue'])){
 					$councelorList[$key]['Batchvalue']=$councelorList[$key]['Batchname'];
 					//if(!isset($councelor['Batchname'])){
 					//$councelorList[$key]['Batchname']="NA";

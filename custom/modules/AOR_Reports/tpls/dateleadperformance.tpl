@@ -111,7 +111,7 @@
 		</th>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
-			<strong>Grand Total</strong>
+			<strong><font color="#B22222">Grand Total</font></strong>
 		</th>
 		
 	</tr>
@@ -135,7 +135,7 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.New_Lead}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Prospect}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Re_Enquired}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Grand_Total}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong><font color="#B22222">{$councelor.Grand_Total}</strong></font></td>
 		</tr>				
 	{/foreach}
 	  <tr height="20" class="oddListRowS1">
@@ -143,7 +143,7 @@
     $councelorArray = $this->get_template_vars('councelorList');
     {/php}
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>Grand Total</strong>
+      <strong><font color="#B22222">Grand Total</font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
@@ -153,118 +153,117 @@
      </strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Duplicate'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Dead_Number'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Fallout'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Not_Eligible'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Not_Enquired'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Rejected'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Retired'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+	<strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Ringing_Multiple_Times'));
       {/php}
-     </strong>
+    </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Wrong_Number'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Call_Back'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Converted'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Follow_Up'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'New_Lead'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Prospect'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#B22222">
       {php}
       echo array_sum(array_column($councelorArray,'Re_Enquired'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
+      <strong><font color="#006400">
       {php}
       echo array_sum(array_column($councelorArray,'Grand_Total'));
       {/php}
-     </strong>
+     </font></strong>
     </th>
-
   </tr>
 </table>
 <script>
