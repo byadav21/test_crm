@@ -40,32 +40,24 @@ array (
           0 => 'name',
           1 => 
           array (
-            'name' => 'email_c',
-            'label' => 'LBL_EMAIL',
+            'name' => 'email_address',
+            'label' => 'Email',
           ),
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'phone_c',
-            'label' => 'LBL_PHONE',
-          ),
-          1 => 
-          array (
             'name' => 'mobile',
             'label' => 'LBL_MOBILE',
           ),
-        ),
-        2 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'address',
             'label' => 'LBL_ADDRESS',
           ),
         ),
-        3 => 
+        2 => 
         array (
           0 => 
           array (
@@ -78,7 +70,7 @@ array (
             'label' => 'LBL_ADDRESS_STATE',
           ),
         ),
-        4 => 
+        3 => 
         array (
           0 => 
           array (
@@ -91,7 +83,7 @@ array (
             'label' => 'LBL_ADDRESS_COUNTRY',
           ),
         ),
-        5 => 
+        4 => 
         array (
           0 => 
           array (
@@ -102,6 +94,21 @@ array (
           array (
             'name' => 'pan',
             'label' => 'LBL_PAN',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'servicetaximage_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SERVICETAXIMAGE',
+          ),
+          1 => 
+          array (
+            'name' => 'pannoimage_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PANNOIMAGE',
           ),
         ),
       ),

@@ -17,8 +17,10 @@ class updateStatusClass{
 		$rr = $GLOBALS['db']->query($ss);
 		if($GLOBALS['db']->getRowCount($rr)>0){
 			$ll = $GLOBALS['db']->fetchByAssoc($rr);
+                      if($bean->status!='No Answer'){
 			$sql = "UPDATE leads SET status='".$bean->status."',status_description='".$bean->status_detail."',note='".$bean->description."',date_of_callback = '".$bean->date_of_callback."',date_of_followup='".$bean->date_of_followup."',date_of_prospect = '".$bean->date_of_prospect."' WHERE id ='".$ll['te_disposition_leadsleads_ida']."'";
 			$GLOBALS['db']->query($sql);
+                     }
 			
 		}
 		
