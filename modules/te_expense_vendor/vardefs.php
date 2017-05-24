@@ -43,27 +43,7 @@ $dictionary['te_expense_vendor'] = array(
     'inline_edit'=>true,
 		'duplicate_merge'=>true,
 		'fields'=>array (
-  'email' => 
-  array (
-    'required' => false,
-    'name' => 'email',
-    'vname' => 'LBL_EMAIL',
-    'type' => 'varchar',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '50',
-    'size' => '20',
-  ),
+
   'mobile' => 
   array (
     'required' => false,
@@ -85,27 +65,8 @@ $dictionary['te_expense_vendor'] = array(
     'len' => '15',
     'size' => '20',
   ),
-  'phone' => 
-  array (
-    'required' => false,
-    'name' => 'phone',
-    'vname' => 'LBL_PHONE',
-    'type' => 'varchar',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '15',
-    'size' => '20',
-  ),
+
+
   'address_city' => 
   array (
     'required' => false,
