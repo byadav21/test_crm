@@ -499,54 +499,17 @@ class addPaymentClass{
 
 	function checkDuplicateFunc($bean, $event, $argument){
 		ini_set("display_errors",0);
-        error_reporting(0);
-        global $db;
-
-        
+               error_reporting(0);
 	// Capture the date of referral creation
 		if(isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']) ){
 				$bean->date_of_referral = date('Y-m-d');
 		}
                 
 		if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){
-			
-			
-		$vendor= $bean->utm_source_c;
-		$contract= $bean->utm_contract_c;
-		$batch= $bean->utm_term_c;
-		$batch_id=0;
-		$vendor_id='';		 
-		if($batch){
-			$sql="select id from te_ba_batch  where batch_code='". $batch . "' and deleted=0";
-			$res=$db->query($sql);
-			if($db->getRowCount($res)>0){
-				  $batch_id=$db->fetchByAssoc($res);//die;
-				if($contract && $vendor && $batch_id['id']){						
-					$sql="select id from te_vendor  where name='". $vendor . "' and deleted=0";
-					$res=$db->query($sql);
-					if($db->getRowCount($res)>0){
-						$vendor_id=$db->fetchByAssoc($res);
-						
-							 if($vendor_id['id']){
-								 
-							   $sql="select te_utm.id,te_utm.name from te_utm inner join te_vendor_te_utm_1_c v on v.te_vendor_te_utm_1te_utm_idb=te_utm.id and te_vendor_te_utm_1te_vendor_ida='{$vendor_id['id']}' where te_ba_batch_id_c='{$batch_id['id']}' and contract_type='{$contract}' and te_utm.deleted=0 and v.deleted=0";
-							   $res=$db->query($sql);
-							   if($db->getRowCount($res)>0){
-								   $utmDetails=$db->fetchByAssoc($res);
-								   $bean->utm=$utmDetails['name'];
-								   
-							   }	   	 
-								 
-							 }
-					}
-				}	
-			}
-		}			
-			
 			#update fee & attendance
-			/*$utmSql="SELECT  u.name as utm,u.te_ba_batch_id_c as batch, v.name as vendor from  te_utm u INNER JOIN te_vendor_te_utm_1_c uvr ON u.id=uvr.te_vendor_te_utm_1te_utm_idb INNER JOIN te_vendor v ON uvr.te_vendor_te_utm_1te_vendor_ida=v.id WHERE uvr.deleted=0 AND u.deleted=0 AND u.name='".$bean->utm."'";
+			$utmSql="SELECT  u.name as utm,u.te_ba_batch_id_c as batch, v.name as vendor from  te_utm u INNER JOIN te_vendor_te_utm_1_c uvr ON u.id=uvr.te_vendor_te_utm_1te_utm_idb INNER JOIN te_vendor v ON uvr.te_vendor_te_utm_1te_vendor_ida=v.id WHERE uvr.deleted=0 AND u.deleted=0 AND u.name='".$bean->utm."'";
 			$utmObj = $bean->db->Query($utmSql);
-			$utmDetails = $GLOBALS['db']->fetchByAssoc($utmObj);*/
+			$utmDetails = $GLOBALS['db']->fetchByAssoc($utmObj);
 			//if(!isset($utmDetails['batch'] || !$utmDetails['batch'] ))  $utmDetails['batch']=$bean->batch; 
 			#check duplicate leads
 			$sql = "SELECT leads.id as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
@@ -554,7 +517,7 @@ class addPaymentClass{
 				$sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
 				$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
 			}
-			$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$batch_id['id']."' and status_description!='Duplicate' and  leads.deleted=0";// AND DATE(date_entered) = '".date('Y-m-d')."'";
+			$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' and status_description!='Duplicate' and  leads.deleted=0";// AND DATE(date_entered) = '".date('Y-m-d')."'";
 			if($bean->phone_mobile && $bean->email1){
 				
 				$sql.=" and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
@@ -569,11 +532,7 @@ class addPaymentClass{
 			$bean->upload_status=1;
 			
 			//echo $sql;die;
-			try{ 
-				$re = $GLOBALS['db']->query($sql);
-			}catch(Exception $e){
-				$re=NULL;
-			}
+	        $re = $GLOBALS['db']->query($sql);
 			if($GLOBALS['db']->getRowCount($re)>0){
                 $beanData=$GLOBALS['db']->fetchByAssoc($re);
 				$bean->status = 'Duplicate';
@@ -589,8 +548,8 @@ class addPaymentClass{
 			    }
 			    $_SESSION['aliveCheck']= intval($_SESSION['aliveCheck']) +1;	
 			}
-			$bean->vendor = $vendor_id['id'];
-			$bean->te_ba_batch_id_c = $batch_id['id'];
+			$bean->vendor = $utmDetails['vendor'];
+			$bean->te_ba_batch_id_c = $utmDetails['batch'];
 			 
 		}else{
 			
