@@ -40,56 +40,52 @@ array (
           0 => 'name',
           1 => 
           array (
-            'name' => 'email_c',
-            'label' => 'LBL_EMAIL',
+            'name' => 'email_address',
+            'label' => 'Email',
           ),
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'phone_c',
-            'label' => 'LBL_PHONE',
+            'name' => 'mobile',
+            'label' => 'LBL_MOBILE',
           ),
           1 => 
           array (
-            'name' => 'mobile',
-            'label' => 'LBL_MOBILE',
+            'name' => 'address',
+            'label' => 'LBL_ADDRESS',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'address',
-            'label' => 'LBL_ADDRESS',
+            'name' => 'address_city',
+            'label' => 'LBL_ADDRESS_CITY',
           ),
           1 => 
           array (
-            'name' => 'address_city',
-            'label' => 'LBL_ADDRESS_CITY',
+            'name' => 'address_state',
+            'label' => 'LBL_ADDRESS_STATE',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'address_state',
-            'label' => 'LBL_ADDRESS_STATE',
-          ),
-          1 => 
-          array (
             'name' => 'address_postalcode',
             'label' => 'LBL_ADDRESS_POSTALCODE',
           ),
-        ),
-        4 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'address_country',
             'label' => 'LBL_ADDRESS_COUNTRY',
           ),
+        ),
+        4 => 
+        array (
+          0 => '',
           1 => '',
         ),
         5 => 
