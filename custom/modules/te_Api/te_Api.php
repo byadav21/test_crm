@@ -284,7 +284,9 @@ class te_Api_override extends te_Api {
 				  
 			 }elseif($res=='crm popup url'){		
 				$querty['dispositionName'] ='Call start';
-				$querty['lead_id'] = $data['lead_reference'];	
+				$customers=json_decode(html_entity_decode($data['customerInfo']));
+				$querty['lead_id'] = $customers->lead_reference;
+				//$querty['lead_id'] = $data['lead_reference'];	
 				$querty['userId'] = $data['userId'];
 				$querty['customer_id'] = $data['customerId'];
 				$querty['dispositionCode'] ='Call start';

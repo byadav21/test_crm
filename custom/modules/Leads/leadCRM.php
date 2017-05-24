@@ -106,8 +106,8 @@ try{
 
 			}else if($callType=='inbound.call.dial'){
 				
-				if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
-					
+				//if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
+                                if(empty($records['assigned_user_id']) ||  $records['assigned_user_id']==NULL ||  $records['assigned_user_id']=='NULL'){					
 					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 					////header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 					include_once("custom/modules/Leads/overview.php");
@@ -140,8 +140,8 @@ try{
 
 			}else if($callType=='outbound.manual.dial'){
 				
-				if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
-					
+				//if(empty($records['assigned_user_id']) || $records['assigned_user_id']=='NULL'){
+                                if(empty($records['assigned_user_id']) ||  $records['assigned_user_id']==NULL ||  $records['assigned_user_id']=='NULL'){					
 					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
 					////header('Location: index.php?module=Leads&action=DetailView&record='. $records['id']);
 					include_once("custom/modules/Leads/overview.php");

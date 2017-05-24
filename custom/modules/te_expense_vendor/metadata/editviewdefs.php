@@ -85,11 +85,6 @@ array (
         ),
         4 => 
         array (
-          0 => '',
-          1 => '',
-        ),
-        5 => 
-        array (
           0 => 
           array (
             'name' => 'service_tax_no',
@@ -99,6 +94,21 @@ array (
           array (
             'name' => 'pan',
             'label' => 'LBL_PAN',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'servicetaximage_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SERVICETAXIMAGE',
+          ),
+          1 => 
+          array (
+            'name' => 'pannoimage_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PANNOIMAGE',
           ),
         ),
       ),
