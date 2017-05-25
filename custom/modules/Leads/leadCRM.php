@@ -115,7 +115,7 @@ try{
 					$data=[];
 					$session=$api->doLogin();								
 					$data['sessionId']=$session;
-					$data['properties']=array('update.customer'=>true,'migrate.customer'=>true);
+					$data['properties']=array('update.customer'=>'true','migrate.customer'=>'true');
 					$data['customerRecords']=[];
 					$customerRecords['name']= $records['first_name']." ". $records['last_name'];
 					$customerRecords['first_name'] = $records['first_name'];
