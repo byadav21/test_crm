@@ -90,15 +90,15 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		$to_date="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
 			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
-				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$where.=" AND DATE(date_modified)='".$from_date."' ";
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+				$where.=" AND DATE(date_entered)='".$from_date."' ";
 			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
-				$where.=" AND DATE(date_modified)='".$to_date."' ";
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+				$where.=" AND DATE(date_entered)='".$to_date."' ";
 			}
 
 			if(!empty($_POST['batch'])){
@@ -112,15 +112,15 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			$to_date="";
 			$filename = $file . "_" . date ( "Y-m-d");
 			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
-				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$where.=" AND DATE(date_modified)='".$from_date."' ";
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+				$where.=" AND DATE(date_entered)='".$from_date."' ";
 			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
-				$where.=" AND DATE(date_modified)='".$to_date."' ";
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+				$where.=" AND DATE(date_entered)='".$to_date."' ";
 			}
 
 			if(!empty($_POST['batch'])){
