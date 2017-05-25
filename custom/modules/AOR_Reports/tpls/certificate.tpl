@@ -9,10 +9,10 @@
 				<label for="batch_basic">Batch</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
-				<select name="batch[]" id="batch" multiple>
+				<select name="batch[]" id="batch" class="multiselbox" multiple>
 					<option  value=""></option>
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if in_array($batch.id,$selected_batch) } selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.idl}" {if in_array($batch.id,$selected_batch) } selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
 				</td>

@@ -9,7 +9,7 @@
 				<label for="batch_basic">Batch</label>
 			</td>	
 			<td nowrap="nowrap" width="10%">			
-				<select name="batch[]" id="batch" multiple>
+				<select name="batch[]" id="batch"  class="multiselbox" multiple>
 					<option  value=""></option>
 					{foreach from = $batchList key=key item=batch}
 						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
