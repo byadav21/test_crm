@@ -87,6 +87,47 @@ array (
         array (
           0 => 
           array (
+            'name' => 'bank_name',
+            'label' => 'bank_name',
+          ),
+          1 => 
+          array (
+            'name' => 'account_no',
+            'label' => 'account_no',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'ifsc',
+            'label' => 'ifsc',
+          ),
+          1 => 
+          array (
+            'name' => 'contact_person',
+            'label' => 'contact_person',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'department_c',
+            'studio' => 'visible',
+            'label' => 'LBL_DEPARTMENT',
+          ),
+          1 => 
+          array (
+            'name' => 'legal_entity_status_c',
+            'studio' => 'visible',
+            'label' => 'LBL_LEGAL_ENTITY_STATUS',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
             'name' => 'service_tax_no',
             'label' => 'LBL_SERVICE_TAX_NO',
           ),
@@ -96,19 +137,43 @@ array (
             'label' => 'LBL_PAN',
           ),
         ),
-        5 => 
+        8 => 
         array (
           0 => 
           array (
-            'name' => 'servicetaximage_c',
+            'name' => 'servicetaxdoc_c',
             'studio' => 'visible',
-            'label' => 'LBL_SERVICETAXIMAGE',
+            'label' => 'LBL_SERVICETAXDOC',
           ),
           1 => 
           array (
-            'name' => 'pannoimage_c',
+            'name' => 'pancard_document_c',
             'studio' => 'visible',
-            'label' => 'LBL_PANNOIMAGE',
+            'label' => 'LBL_PANCARD_DOCUMENT',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'cancledcheckdoc_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CANCLEDCHECKDOC',
+          ),
+          1 => 
+          array (
+            'name' => 'gstn_c',
+            'studio' => 'visible',
+            'label' => 'LBL_GSTN',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'registrationdoc_c',
+            'studio' => 'visible',
+            'label' => 'LBL_REGISTRATIONDOC',
           ),
         ),
       ),
