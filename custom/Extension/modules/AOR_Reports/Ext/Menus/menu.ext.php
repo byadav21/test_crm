@@ -74,9 +74,9 @@ $displayCC=false;
 $displayMis=false;
 $displaySRM=false;
 $displayDM=false;
-if($misData['slug']=='CCTL') $displayCC=true;
+if($misData['slug']=='CCM' || $misData['slug']=='CCC' || $misData['slug']=='CCTL' || $misData['slug']=='CCH') $displayCC=true;
 else if($misData['slug']=='mis') $displayMis=true;
-else if($misData['slug']=='SRM') $displaySRM=true;
+else if($misData['slug']=='SRM' || $misData['slug']=='SRE') $displaySRM=true;
 else if($misData['slug']=='DMM') $displayDM=true;
 //MIS ROLE
 $sql="select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $current_user->id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
