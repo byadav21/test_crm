@@ -155,3 +155,13 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'ABND' => 'ABND',
   'FailPayment' => 'Fail Payment',
 );
+$app_strings['LBL_GROUPTAB5_1495719136'] = 'Expense';
+
+$app_strings['LBL_GROUPTAB5_1495719157'] = 'Expense';
+
+$GLOBALS['app_list_strings']['legal_entity_status_list']=array (
+  'Company' => 'Company',
+  'Partnership' => 'Partnership',
+  'Sole' => 'Sole Proprietorship',
+  'LLP' => 'LLP',
+);

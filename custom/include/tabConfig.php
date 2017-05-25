@@ -1,5 +1,5 @@
 <?php
-// created: 2017-05-23 18:27:48
+// created: 2017-05-25 13:33:12
 $GLOBALS['tabStructure'] = array (
   'LBL_GROUPTAB5_1473074494' => 
   array (
@@ -10,10 +10,7 @@ $GLOBALS['tabStructure'] = array (
       1 => 'te_pr_Programs',
       2 => 'te_ba_Batch',
       3 => 'te_Program_category',
-      4 => 'te_ExpensePO',
-      5 => 'te_expense_vendor',
-      6 => 'te_Department_Expense',
-      7 => 'AOW_WorkFlow',
+      4 => 'AOW_WorkFlow',
     ),
   ),
   'LBL_GROUPTAB1_1474960120' => 
@@ -55,6 +52,16 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'te_srm_auto_assignment',
+    ),
+  ),
+  'LBL_GROUPTAB5_1495719157' => 
+  array (
+    'label' => 'LBL_GROUPTAB5_1495719157',
+    'modules' => 
+    array (
+      0 => 'te_ExpensePO',
+      1 => 'te_expense_vendor',
+      2 => 'te_Department_Expense',
     ),
   ),
 );
