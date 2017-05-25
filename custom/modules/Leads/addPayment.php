@@ -879,8 +879,13 @@ class addPaymentClass{
 	
 
 	function checkduplicate($bean, $event, $argument){
-                ini_set('display_errors',"off");
-               if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import")  return false;
+        ini_set('display_errors',"off");
+        if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import")  return false;
+		global $db,$current_user;
+		$sql="select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $current_user->id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
+		$mis=$db->query($sql);
+		$misData=$db->fetchByAssoc($mis);
+		if($misData['slug']=='CCM' ||  $misData['slug']=='CCTL' || $misData['slug']=='CCH' || $current_user->is_admin==1 ) return false;
 		
 		if($bean->fetched_row['id']==''){			
 			$sql = "SELECT leads.id  as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
