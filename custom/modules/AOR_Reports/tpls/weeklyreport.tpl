@@ -44,7 +44,7 @@ $(function(){
 				<label for="week_basic">Vendor</label>
 			</td>	
 			<td nowrap="nowrap" width="1%">  
-				<select name="vendor_val[]"  multiple id="vendor_val">
+				<select name="vendor_val[]"  class="multiselbox"  multiple id="vendor_val">
 					{foreach from = $vendorList key=key item=vendor}
 						<option value="{$vendor.id}"{if in_array($vendor.id, $selected_vendor)} selected="selected"{/if}>{$vendor.name}</option>						
 					{/foreach}			

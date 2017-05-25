@@ -25,7 +25,7 @@
 				<label for="batch_basic">Counsellors</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
-				<select name="counsellor[]" id="counsellor" multiple>
+				<select name="counsellor[]" id="counsellor"  class="multiselbox" multiple>
 					<option  value=""></option>
 				{foreach from = $councelorList key=key item=councelor}
 
