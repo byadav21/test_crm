@@ -75,15 +75,15 @@ $displayMis=false;
 $displaySRM=false;
 $displayDM=false;
 if($misData['slug']=='CCM' || $misData['slug']=='CCC' || $misData['slug']=='CCTL' || $misData['slug']=='CCH') $displayCC=true;
-else if($misData['slug']=='mis') $displayMis=true;
-else if($misData['slug']=='SRM' || $misData['slug']=='SRE') $displaySRM=true;
-else if($misData['slug']=='DMM') $displayDM=true;
+if($misData['slug']=='mis') $displayMis=true;
+if($misData['slug']=='SRM' || $misData['slug']=='SRE') $displaySRM=true;
+if($misData['slug']=='DMM') $displayDM=true;
 //MIS ROLE
-$sql="select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $current_user->id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
+/*$sql="select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $current_user->id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
 $mis=$db->query($sql);
 $misData=$db->fetchByAssoc($mis);
 $displayMis=false;
-
+*/
 
 if($current_user->is_admin==1 || $displayMis||$displayCC){
   $module_menu[] = array ('index.php?module=AOR_Reports&action=pipelinereport', "Pipeline Report", 'AOR_Reports');
