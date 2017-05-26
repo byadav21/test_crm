@@ -1,5 +1,5 @@
 <?php
-/* This is Custom file  For Budgeted vs Compaign 
+/* This is Custom file  For Budgeted vs Compaign
  * Display menu from Action at Module te_budgeted campaign
  *  Created date -02-dec-2016 @Manish Gupta 9650211216
  * */
@@ -39,20 +39,20 @@ input[type=text], select {
 					$(function() {
 					$("#enddate").datepicker({ dateFormat: "yy-mm-dd" }).val()
 					} );
-	</script> 
-</head>		
+	</script>
+</head>
  <table width="100%">
 	<form action="index.php?module=AOR_Reports&action=Conversion_data" method="post" id="lead_trans">
-		<tbody>	
-			<tr>													
+		<tbody>
+			<tr>
 	<td><b>Select Batch</b></td>
 					      <td>
-								<select name="batch_val[]" multiple id="batch_val">
-								<option  value="">Select Batch</option>	
-									<?php 
+								<select name="batch_val[]" multiple="1" class="multiselbox" id="batch_val">
+								<option  value="">Select Batch</option>
+									<?php
 									  $fetch1="SELECT id,name FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
 									  $row1 =$db->query($fetch1);
-									while($records =$db->fetchByAssoc($row1)){ ?> 
+									while($records =$db->fetchByAssoc($row1)){ ?>
 									<option  value="<?php echo $records['id']?>"><?php echo $records['name']?></option>
 									<?php }?>
                                 </select></td>
@@ -62,10 +62,10 @@ input[type=text], select {
 									<td>	<input type="text" name="end_date" id="enddate"/></td>
 										<td align='center' style="border:none;"><input type="Submit" name="Submit" value="Find Report"></td></tr>
 										</tbody></table>
-				</form>		
-				    
+				</form>
+
         <body>
-			<?php 										  									
+			<?php
 			 //@ Get All Vendor  details
 			 $where='';
 			 if(isset($_POST['Submit']) &&!empty($_POST['Submit'])) {
@@ -102,7 +102,7 @@ input[type=text], select {
 				}
 				}
 			 }
-			
+
 			  $vendorlist= array();
 			  $fetch="SELECT id,name FROM te_vendor WHERE deleted=0";
 			  $row =$db->query($fetch);
@@ -113,7 +113,7 @@ input[type=text], select {
 				 $vendorlist[]=$records['name'];
 			  }
 			  $fetch1="SELECT id,name FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0 ".$where."";
-			  $row1 =$db->query($fetch1); 
+			  $row1 =$db->query($fetch1);
 			  while($records1 =$db->fetchByAssoc($row1)){
 				  $batchnamelist[]=$records1['name'];
 				  $batchidlist[]=$records1['id'];
@@ -126,7 +126,7 @@ input[type=text], select {
 						<th>&nbsp;</th>
 					<?php for($i=0;$i<count($batchnamelist);$i++){ ?>
 						<th><?php echo $batchnamelist[$i];?></th>
-						
+
 					<?php }?>
 						<th>Grand Total</th>
 					</tr>
@@ -138,18 +138,18 @@ input[type=text], select {
 					<tr>
 						<?php $tdarr='';?>
 						<th><?php echo $vendorlist[$v];?></th>
-						
+
 						<?php for($b=0;$b<count($batchidlist);$b++){
 							// $leadcount=getLeadCount($vendorlist[$v],$batchidlist[$b]);
 							   $fetch3="SELECT count(leads.id)total FROM `leads` INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND leads.status='Converted' AND leads.vendor='".$vendorlist[$v]."'
-									   AND leads_cstm.te_ba_batch_id_c='".$batchidlist[$b]."'"; 
-							  $row3 =$db->query($fetch3); 
+									   AND leads_cstm.te_ba_batch_id_c='".$batchidlist[$b]."'";
+							  $row3 =$db->query($fetch3);
 							  $recordscount =$db->fetchByAssoc($row3);
 							  $recordscount=$recordscount['total'];
 							 $column_sum[$batchidlist[$b]][]=$recordscount;
 						?>
 						<td>
-							<?php $tdarr[]=$recordscount; 
+							<?php $tdarr[]=$recordscount;
 											// echo $vendorlist[$v].'X'.$batchidlist[$b].'-';
 											//echo $leadcount;
 											echo $recordscount;
@@ -159,11 +159,11 @@ input[type=text], select {
 						<?php }?>
 						<th><?php echo array_sum($tdarr);$gt['gt'][]=array_sum($tdarr);?></th>
 					</tr>
-					
+
 				<?php }?>
 				<tr>
 					<th>Grand Total</th>
-					
+
 					<?php foreach($column_sum as $val){?>
 					<th><?php echo array_sum($val);?></th>
 					<?php }?>
@@ -171,22 +171,34 @@ input[type=text], select {
 				</tr>
 				</tbody>
 			  </table>
+				<script>
+				  $(function() {
+						$(".multiselbox").each(function(){
+				      if($(this).find("option").eq(0).val()==''){
+				        $(this).find("option").eq(0).remove();
+				      }
+				    })
+					 $(".multiselbox").multiselect({
+				     includeSelectAllOption: true
+				   });
+					});
+			 </script>
         </body>
 </html>
 
-<?php 
+<?php
 function getLeadCount($vendorname='',$batchid='') {
 	$recordscount = 0;
-	
+
 	if($vendorname!='' && $batchid!='') {
-	 
+
 	$fetch3="SELECT count(leads.id)total FROM `leads` INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND leads.vendor='".$vendorname."'
-					      AND leads_cstm.te_ba_batch_id_c='".$batchid."'"; 
-					      $row3 =$db->query($fetch3); 
+					      AND leads_cstm.te_ba_batch_id_c='".$batchid."'";
+					      $row3 =$db->query($fetch3);
 						  $recordscount =$db->fetchByAssoc($row3);
 						  $recordscount=$recordscount['total'];
-											 
-						 
+
+
 	}
 	return $recordscount;
 }
