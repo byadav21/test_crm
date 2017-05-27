@@ -28,7 +28,30 @@ $dictionary['te_expense_vendor']['fields']['email_address'] =array (
         'duplicate_merge' => false, 
 );
 
+$dictionary['te_expense_vendor']['fields']['status'] =array (
+        'name' => 'status',
+        'label' => 'status',
+        'type' => 'integer',
+         'default'=>1,
+        'len' => '1',
+        
+);
+
  
+
+
+$dictionary['te_expense_vendor']['fields']['glcode'] =array (
+        'name' => 'glcode',  'label' => 'GL Code',      
+        'type' => 'varchar',        
+        'len' => '255',       
+);
+
+
+$dictionary['te_expense_vendor']['fields']['reason_rejection'] =array (
+        'name' => 'reason_rejection',  'label' => 'REject Reason',      
+        'type' => 'varchar',        
+        'len' => '255',       
+);
 
 
 $dictionary['te_expense_vendor']['fields']['bank_name'] =array (
