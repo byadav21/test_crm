@@ -38,105 +38,16 @@
  ********************************************************************************/
 
 *}
-
-
-
-
-
-<link rel="stylesheet" href="custom/themes/SuiteR/css/uploader/fine-uploader-new.min.css" type="text/css" media="all"/>
-<link rel="stylesheet" href="custom/themes/SuiteR/css/uploader/fine-uploader-gallery.min.css" type="text/css" media="all"/>
-{sugar_getscript file="custom/themes/SuiteR/css/uploader/all.fine-uploader.min.js"}
-{literal}
-
-<style>.maincontainer input[type=text],.maincontainer select{width:100%!important} .minbtn,.minbtntx,.errdiv,#documents,#documents_label{display:none;cursor:pointer} .errdiv{color:red} .deldocs{cursor:pointer} .dompar{margin-bottom: 5px; display: block; overflow: hidden;clear:both}  #amount{pointer-events:none;opacity:0.8} .action_buttons{display: inline-block;}.uploadedimg{padding: 5px 0;border-bottom: 1px dotted #000000; margin-bottom: 0px;    display: block;    overflow: hidden;}</style>
- 
-    <script type="text/template" id="qq-template-gallery">
-        <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="Drop files here">
-            <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
-                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
-            </div>
-            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
-                <span class="qq-upload-drop-area-text-selector"></span>
-            </div>
-            <div class="qq-upload-button-selector qq-upload-button">
-                <div>Upload a file</div>
-            </div>
-            <span class="qq-drop-processing-selector qq-drop-processing">
-                <span>Processing dropped files...</span>
-                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
-            </span>
-            <ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
-                <li>
-                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
-                    <div class="qq-progress-bar-container-selector qq-progress-bar-container">
-                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
-                    </div>
-                    <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
-                    <div class="qq-thumbnail-wrapper">
-                        <img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
-                    </div>
-                    <button type="button" class="qq-upload-cancel-selector qq-upload-cancel">X</button>
-                    <button type="button" class="qq-upload-retry-selector qq-upload-retry">
-                        <span class="qq-btn qq-retry-icon" aria-label="Retry"></span>
-                        Retry
-                    </button>
-
-                    <div class="qq-file-info">
-                        <div class="qq-file-name">
-                            <span class="qq-upload-file-selector qq-upload-file"></span>
-                            <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
-                        </div>
-                        <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
-                        <span class="qq-upload-size-selector qq-upload-size"></span>
-                        <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
-                            <span class="qq-btn qq-delete-icon" aria-label="Delete"></span>
-                        </button>
-                        <button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
-                            <span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
-                        </button>
-                        <button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
-                            <span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
-                        </button>
-                    </div>
-                </li>
-            </ul>
-
-            <dialog class="qq-alert-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Close</button>
-                </div>
-            </dialog>
-
-            <dialog class="qq-confirm-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">No</button>
-                    <button type="button" class="qq-ok-button-selector">Yes</button>
-                </div>
-            </dialog>
-
-            <dialog class="qq-prompt-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <input type="text">
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Cancel</button>
-                    <button type="button" class="qq-ok-button-selector">Ok</button>
-                </div>
-            </dialog>
-        </div>
-    </script>
-
-
-{/literal}
 {{include file=$headerTpl}}
 {sugar_include include=$includes}
 
 <span id='tabcounterJS'><script>SUGAR.TabFields=new Array();//this will be used to track tabindexes for references</script></span>
 
-<div id="{{$form_name}}_tabs" class="moduleTitle">
- 
-
+<div id="{{$form_name}}_tabs"
+{{if $useTabs}}
+class="yui-navset"
+{{/if}}
+>
     {{if $useTabs}}
     {* Generate the Tab headers *}
     {{counter name="tabCount" start=-1 print=false assign="tabCount"}}
@@ -298,7 +209,6 @@
 
 		{{$colData.field.prefix}}
 
-
 			{{if $fields[$colData.field.name] && !empty($colData.field.fields) }}
 			    {{foreach from=$colData.field.fields item=subField}}
 			        {{if $fields[$subField.name]}}
@@ -325,152 +235,72 @@
     {{/if}}
 
 	{{/foreach}}
+	
+	
+	
+	
 </tr>
 {/capture}
 {if $fieldsUsed > 0 }
 {$tableRow}
 {/if}
 {{/foreach}}
+
+
+<tr>
+<td valign="top" id="panpdf_label" width="12.5%" scope="col">Pan Doc:</td>
+<td valign="top" width="37.5%"> <input id="panpdf_img" name="panpdf_img" type="file" title="" size="30" maxlength="255"> 
+{if $overview->panpdf}
+<a href="index.php?module=te_expense_vendor&action=download&type=pan&record={$overview->id}">Download</a>
+{/if}
+
+</td>
+
+<td valign="top" id="panpdf_label" width="12.5%" scope="col">Service Tax Doc:</td>
+<td valign="top" width="37.5%"> <input id="stax_img" name="stax_img" type="file" title="" size="30" maxlength="255"> 
+
+{if $overview->staxpdf}
+<a href="index.php?module=te_expense_vendor&action=download&type=stax&record={$overview->id}">Download</a>
+{/if}
+
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" id="panpdf_label" width="12.5%" scope="col">GST Doc:</td>
+<td valign="top" width="37.5%"> <input id="gst_img" name="gst_img" type="file" title="" size="30" maxlength="255"> 
+
+{if $overview->gstndoc}
+<a href="index.php?module=te_expense_vendor&action=download&type=gst&record={$overview->id}">Download</a>
+{/if}
+</td>
+
+<td valign="top" id="panpdf_label" width="12.5%" scope="col">Cancelled Check</td>
+<td valign="top" width="37.5%"> <input id="cc_img" name="cc_img" type="file" title="" size="30" maxlength="255"> 
+
+{if $overview->ccheckdoc}
+<a href="index.php?module=te_expense_vendor&action=download&type=cc&record={$overview->id}">Download</a>
+{/if}
+</td>
+
+</tr>
+
+<tr>
+<td valign="top" id="panpdf_label" width="12.5%" scope="col">Registartion Certificate:</td>
+<td valign="top" width="37.5%"> <input id="reg_img" name="reg_img" type="file" title="" size="30" maxlength="255">
+
+
+{if $overview->reg_cert}
+<a href="index.php?module=te_expense_vendor&action=download&type=reg&record={$overview->id}">Download</a>
+{/if}
+
+ </td>
+</tr>
+
+
+
 </table>
-<hr>
-<h2>Expense Details</h2>
-<div class="clear"></div>
-<div class="row" class="maincontroe">
-				
-				<div class="maincontainer col-sm-6">
-					<div class="row items">
-						
-							<div class="col-sm-5">
-								Expense Detail
-							</div>
-							<div class="col-sm-5">
-								Amount in <i class="fa fa-inr" aria-hidden="true"></i>
-							</div>
-							
-						{if count($items) > 0}	
-							{foreach   from=$items key=id item=rowDatas}
-							
-								<div class="dompar">	
-								<div class="col-sm-5">
-									<input type="hidden" value="{$rowDatas.id}" name="savedid[]" >
-									<input type="text" value="{$rowDatas.name}" class="itemtxt" name="items[]" >
-									<div class="errdiv itemtxterr ">Please enter Item name</div>
-								</div>
-								<div class="col-sm-5">
-									 <input type="text" value="{$rowDatas.amt|string_format:"%.2f"}"  class="amtvald" name="amounts[]" >
-									 <div class="errdiv amtvalderr ">Please enter valid amount</div>
-								</div>
-								
-								<div class="col-sm-2">
-									<i style="font-size: 30px;display:none" class="fa fa-plus-circle addbtn" aria-hidden="true"></i>
-									<i style="font-size: 30px;display:block" class="fa fa-minus-circle minbtn" aria-hidden="true"></i>
-								</div>
-							 </div>
-							
-							{/foreach}
-						
-						{/if}
-							
-						 <div class="dompar">	
-							<div class="col-sm-5">
-								<input type="hidden"  name="savedid[]" >
-								<input type="text" class="itemtxt" name="items[]" >
-								<div class="errdiv itemtxterr ">Please enter Item name</div>
-							</div>
-							<div class="col-sm-5">
-								 <input type="text" class="amtvald" name="amounts[]" >
-								 <div class="errdiv amtvalderr ">Please enter valid amount</div>
-							</div>
-							
-							<div class="col-sm-2">
-								<i style="font-size: 30px;" class="fa fa-plus-circle addbtn" aria-hidden="true"></i>
-								<i style="font-size: 30px;" class="fa fa-minus-circle minbtn" aria-hidden="true"></i>
-							</div>
-						</div>	
-					</div>
-				</div>
-							
-				<div class="maincontainer col-sm-6">
-				
-					<div class=" itemstx">
-							<div class="col-sm-5">
-								Tax Detail
-							</div>
-							<div class="col-sm-5">
-								Amount in <i class="fa fa-inr" aria-hidden="true"></i>
-							</div>
-						 
-						{if count($taxesarr) > 0}	
-							{foreach   from=$taxesarr key=id item=rowDatas}
-							
-								<div class="dompar">	
-								<div class="col-sm-5">
-									<input type="hidden" value="{$rowDatas.id}" name="savedtaxid[]" >
-									<select class="itemtxttx" name="taxesp[]">
-										{foreach  from=$taxes key=keys item=val}
-											<option {if $rowDatas.name==$keys } selected  {/if}value="{$keys}">{$val}</option>	 
-										{/foreach}
-									</select>
-									<div class="errdiv itemtxterrtx ">Please select Tax</div>
-								</div>
-								<div class="col-sm-5">
-									 <input type="text" value="{$rowDatas.amt|string_format:"%.2f"}"  class="amtvaldtx" name="tax[]" >
-									 <div class="errdiv amtvalderrtx ">Please enter valid amount</div>
-								</div>
-								
-								<div class="col-sm-2">
-									<i style="font-size: 30px;display:none" class="fa fa-plus-circle addbtntx" aria-hidden="true"></i>
-									<i style="font-size: 30px;display:block" class="fa fa-minus-circle minbtntx" aria-hidden="true"></i>
-								</div>
-							 </div>
-							
-							{/foreach}
-						
-						{/if}	
-							
-						<div class="dompar">		
-							<div class="col-sm-5">
-							<input type="hidden"  name="savedtaxid[]" >
-								<select class="itemtxttx" name="taxesp[]">
-									{foreach  from=$taxes key=keys item=val}
-										<option value="{$keys}">{$val}</option>	 
-									{/foreach}
-								</select>	
-								<div class="errdiv itemtxterrtx ">Please select Tax</div>					 
-								
-							</div>
-							<div class="col-sm-5">
-								 <input type="text" class="amtvaldtx" name="tax[]" >
-								 <div class="errdiv amtvalderrtx ">Please enter valid amount</div>
-							</div>
-							<div class="col-sm-2">
-								<i style="font-size: 30px;" class="fa fa-plus-circle addbtntx" aria-hidden="true"></i>
-								<i style="font-size: 30px;" class="fa fa-minus-circle minbtntx" aria-hidden="true"></i>
-							</div>
-					  </div>
-					</div>
-				</div>
-				
-			</div>
-			
-<hr>
-<h2> Documents</h2>		
-<div style="clear:both"></div>	
-{if count($docuarray)>0}	
-	<div style="clear:both" class="apendnewdocs col-xs-4">
-
-	{foreach from=$docuarray key=id item=val}
-	  <div class="uploadedimg">
-	  <div class="col-sm-2"> <i data-id="{$id}" style="font-size: 15px;display:inline" class="fa fa-minus-circle deldocs" aria-hidden="true"></i> </div>
-	  <div class="col-sm-10"><a tarhet="new" href="index.php?module=te_ExpensePO&action=download&id={$id}&records={$beanid}&type=attch"> <img src="custom/themes/SuiteR/css/uploader/not_available-generic.png" style="width:25px;height:25px"> {$val->nameOrg} </a></div>
-	  </div>
-	{/foreach}
-
-	</div>	
-{/if}	
-
-<div id="fine-uploader-gallery"></div>
- 
 {{if !empty($label) && !is_int($label) && $label != 'DEFAULT' && $showSectionPanelsTitles && (!isset($tabDefs[$label_upper].newTab) || (isset($tabDefs[$label_upper].newTab) && $tabDefs[$label_upper].newTab == false)) && $view != "QuickCreate"}}
 <script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel({{$smarty.foreach.section.iteration}}, '{{$panelState}}'); {rdelim}); </script>
 {{/if}}
@@ -484,61 +314,7 @@
 {/if}
 {{/foreach}}
 </div></div>
-
-
-
-<script language="javascript">
-    var _form_id = '{$form_id}';
-    {literal}
-    SUGAR.util.doWhen(function(){
-        _form_id = (_form_id == '') ? 'EditView' : _form_id;
-        return document.getElementById(_form_id) != null;
-    }, SUGAR.themes.actionMenu);
-    {/literal}
-</script>
-{assign var='place' value="_FOOTER"} <!-- to be used for id for buttons with custom code in def files-->
-{{if empty($form.button_location) || $form.button_location == 'bottom'}}
-<div class="buttons">
-{{if !empty($form) && !empty($form.buttons)}}
-   {{foreach from=$form.buttons key=val item=button}}
-      {{sugar_button module="$module" id="$button" form_id="$form_id" view="$view" appendTo="footer_buttons" location="FOOTER"}}
-   {{/foreach}}
-{{else}}
-
-
-<input title="Save" accesskey="a" class="button primary save_btn"   type="submit" name="button" value="Save" id="SAVE_FOOTER">
-
-
-{{sugar_button module="$module" id="CANCEL" view="$view" form_id="$form_id" location="FOOTER" appendTo="footer_buttons"}}
-{{/if}}
-{{if empty($form.hideAudit) || !$form.hideAudit}}
-{{sugar_button module="$module" id="Audit" view="$view" form_id="$form_id" appendTo="footer_buttons"}}
-{{/if}}
-{{sugar_action_menu buttons=$footer_buttons class="fancymenu" flat=true}}
-</div>
-{{/if}}
-</form>
-{{if $externalJSFile}}
-{sugar_include include=$externalJSFile}
-{{/if}}
-
-{$set_focus_block}
-
-{{if isset($scriptBlocks)}}
-<!-- Begin Meta-Data Javascript -->
-{{$scriptBlocks}}
-<!-- End Meta-Data Javascript -->
-{{/if}}
-<script>SUGAR.util.doWhen("document.getElementById('EditView') != null",
-        function(){ldelim}SUGAR.util.buildAccessKeyLabels();{rdelim});
-</script>
-
-
-
-
- 
-
-
+{{include file=$footerTpl}}
 {{if $useTabs}}
 {sugar_getscript file="cache/include/javascript/sugar_grp_yui_widgets.js"}
 <script type="text/javascript">
@@ -562,218 +338,3 @@ $(document).ready(function() {ldelim}
   {rdelim});
 {rdelim}
 </script>
-{literal}
-<script>
-{{if !$beanid}}
-
-		$.post( "index.php?module=te_ExpensePO&action=genrateRefID&to_pdf=1", { })
-		  .done(function( dataobj ) {
-			 $("#refrenceid").val(dataobj);
-		 });
-
-{{/if}}
-
-function calculate(){
-
-
-	  var amount=0;
-	 $( ".amtvald" ).each(function() {
-				if($.trim($(this).val())!=''){				
-					var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
-					if(regex.test($.trim($(this).val()))){
-						amount +=parseFloat($.trim($(this).val()));
-					}
-					
-				}
-		});
-		
-		$( ".amtvaldtx" ).each(function() {
-				if($.trim($(this).val())!=''){				
-					var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
-					if(regex.test($.trim($(this).val()))){
-						amount +=parseFloat($.trim($(this).val()));
-					}
-					
-				}
-		});
-		
-		$('#amount').val(amount.toFixed(2));
-
-
-}
-
-var objImg={{ $document|html_entity_decode}};
-var restrictedUploader = new qq.FineUploader({
-            element: document.getElementById("fine-uploader-gallery"),
-            template: 'qq-template-gallery',           
-            request: {
-                 endpoint: 'index.php?module=te_ExpensePO&action=uploads&to_pdf=1',                 
-            },
-            thumbnails: {
-                placeholders: {
-                    waitingPath: 'custom/themes/SuiteR/css/uploader/waiting-generic.png',
-                    notAvailablePath: 'custom/themes/SuiteR/css/uploader/not_available-generic.png'
-                }
-            },           
-            validation: {                
-                itemLimit: 10,
-                sizeLimit: 1024*1024*20 // 50 kB = 50 * 1024 bytes
-            },
-            callbacks: {
-				onComplete: function(id, fileName, responseJSON) {
-					 
-					if(objImg.length==0){
-						 objImg[0]={name :responseJSON.filename, nameOrg:responseJSON.orgfilename};						 
-					}else{
-						objImg[objImg.length]={name :responseJSON.filename, nameOrg:responseJSON.orgfilename};						 
-					}
-					
-					$('#documents').html(JSON.stringify(objImg));
-					
-				}	
-			}	
-        });
-
-
-$('body').on('click','.minbtn',function(){
-	
-    if($('.itemtxt').length==1){
-		$('.items').append('<div class="dompar">' + $(this).parent().parent().html() + '</div>');
-    }
-	$(this).parent().parent().remove();
-	calculate();
-	
-});
-
-
-$('body').on('click','.addbtn',function(){
-	$('.errdiv').hide();
-	if($.trim($(this).parent().parent().find('.itemtxt').val())==''){
-		 
-		$(this).parent().parent().find('.itemtxterr').show();
-		
-	}
-	if($.trim($(this).parent().parent().find('.amtvald').val())==''){
-		$(this).parent().parent().find('.amtvalderr').show();
-		return false;
-	}
-
-	var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
-	if(!regex.test($.trim($(this).parent().parent().find('.amtvald').val()))){
-		$(this).parent().parent().find('.amtvalderr').show();
-		return false;
-	}
-
-	$('.items').append('<div class="dompar">' + $(this).parent().parent().html() + '</div>');
-	
-	$(this).next().show();
-	$(this).hide();
-
-})
-$('body').on('click','.deldocs',function(){
-		var id=$(this).attr('data-id');
-		 
-		delete objImg[id];
-		$(this).parent().parent().remove();
-		$('#documents').html(JSON.stringify(objImg));
-		 
-
-})
-$('body').on('click','.minbtntx',function(){
-	
-    if($('.itemtxttx').length==1){
-		$('.itemstx').append('<div class="dompar">' + $(this).parent().parent().html() + '</div>');
-    }
-	$(this).parent().parent().remove();
-	calculate();
-});
-
-$('body').on('click','.addbtntx',function(){
-	$('.errdiv').hide();
-	if($.trim($(this).parent().parent().find('.itemtxttx').val())==''){
-		 
-		$(this).parent().parent().find('.itemtxterrtx').show();
-		
-	}
-	if($.trim($(this).parent().parent().find('.amtvaldtx').val())==''){
-		$(this).parent().parent().find('.amtvalderrtx').show();
-		return false;
-	}
-
-	var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
-	if(!regex.test($.trim($(this).parent().parent().find('.amtvaldtx').val()))){
-		$(this).parent().parent().find('.amtvalderrtx').show();
-		return false;
-	}
-
-	$('.itemstx').append('<div class="dompar">' + $(this).parent().parent().html() + '</div>');
-	
-	$(this).next().show();
-	$(this).hide();
-
-})
-
-$('.amtvald,.amtvaldtx').bind('copy paste cut',function(e) {
-	e. preventDefault(); //disable cut,copy,paste.
- 
-});
-
-$('body').on('keyup','.amtvald,.amtvaldtx',function(e) {
-     calculate();
-});
-
-$('.save_btn').on('click',function(){
-		$('.errdiv').hide();
-		var iserr=0;
-		var amount=0;
-		var item=0;
-		$( ".itemtxt" ).each(function() {
-				if($.trim($(this).val())!=''){				
-					
-					item++;
-				}
-		});
-		$( ".amtvald" ).each(function() {
-				if($.trim($(this).val())!=''){				
-					var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
-					if(!regex.test($.trim($(this).val()))){
-						$(this).next().show();
-						iserr=1;
-					}
-					if($.trim($(this).parent().prev().find('.itemtxt').val())==''){
-						$(this).parent().prev().find('.itemtxt').next().show();
-						iserr=1;
-					}
-					amount +=parseFloat($.trim($(this).val()));
-				}
-		});
-		if(iserr==1) return false;
-			
-		
-		if(amount==0 || item==0){
-			alert('Please enter item detail');
-			return false;
-		}
-		
-		$( ".amtvaldtx" ).each(function() {
-				if($.trim($(this).val())!=''){				
-					var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
-					if(!regex.test($.trim($(this).val()))){
-						$(this).next().show();
-						iserr=1;
-					}
-					amount +=parseFloat($.trim($(this).val()));
-					
-				}
-		});
-		if(iserr==1) return false;
-		$('#amount').val(amount.toFixed(2));
-		
-		var _form = document.getElementById('EditView'); _form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);return false;
-})
-
-</script>
-{/literal}
-
-
-

@@ -147,32 +147,7 @@ array (
           ),
           1 => '',
         ),
-        9 => 
-        array (
-          0 => 
-          array (
-            'name' => 'panpdf',
-            'label' => 'Pan Doc',
-          ),
-          1 => 
-          array (
-            'name' => 'staxpdf',
-            'label' => 'Service Tax Doc',
-          ),
-        ),
-        10 => 
-        array (
-          0 => 
-          array (
-            'name' => 'ccheckdoc',
-            'label' => 'Cancled Check Doc',
-          ),
-          1 => 
-          array (
-            'name' => 'gstndoc',
-            'label' => 'GSTN Doc',
-          ),
-        ),
+      
       ),
     ),
   ),
