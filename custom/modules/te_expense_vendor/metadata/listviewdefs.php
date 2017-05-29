@@ -26,6 +26,13 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'STATUS' => 
+  array (
+    'label' => 'status',
+    'type' => 'integer',
+    'default' => true,
+    'width' => '10%',
+  ),
   'ASSIGNED_USER_NAME' => 
   array (
     'width' => '9%',

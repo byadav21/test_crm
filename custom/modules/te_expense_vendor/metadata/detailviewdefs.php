@@ -147,44 +147,8 @@ array (
             'label' => 'LBL_PAN',
           ),
         ),
-        8 => 
-        array (
-          0 => 
-          array (
-            'name' => 'servicetaxdoc_c',
-            'studio' => 'visible',
-            'label' => 'LBL_SERVICETAXDOC',
-          ),
-          1 => 
-          array (
-            'name' => 'pancard_document_c',
-            'studio' => 'visible',
-            'label' => 'LBL_PANCARD_DOCUMENT',
-          ),
-        ),
         9 => 
         array (
-          0 => 
-          array (
-            'name' => 'cancledcheckdoc_c',
-            'studio' => 'visible',
-            'label' => 'LBL_CANCLEDCHECKDOC',
-          ),
-          1 => 
-          array (
-            'name' => 'gstn_c',
-            'studio' => 'visible',
-            'label' => 'LBL_GSTN',
-          ),
-        ),
-        10 => 
-        array (
-          0 => 
-          array (
-            'name' => 'registrationdoc_c',
-            'studio' => 'visible',
-            'label' => 'LBL_REGISTRATIONDOC',
-          ),
         ),
       ),
     ),

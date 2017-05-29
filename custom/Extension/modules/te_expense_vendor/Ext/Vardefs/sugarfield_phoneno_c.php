@@ -28,6 +28,53 @@ $dictionary['te_expense_vendor']['fields']['email_address'] =array (
         'duplicate_merge' => false, 
 );
 
+
+
+$dictionary['te_expense_vendor']['fields']['panpdf'] =array (
+        'name' => 'panpdf',
+        'label' => 'Pan Doc',
+        'type' => 'file'        
+        
+);
+
+$dictionary['te_expense_vendor']['fields']['staxpdf'] =array (
+        'name' => 'staxpdf',
+        'label' => 'Service Tax Doc',
+        'type' => 'file'        
+        
+);
+
+$dictionary['te_expense_vendor']['fields']['ccheckdoc'] =array (
+        'name' => 'ccheckdoc',
+        'label' => 'Cancled Check Doc',
+        'type' => 'file'        
+        
+);
+
+$dictionary['te_expense_vendor']['fields']['gstndoc'] =array (
+        'name' => 'gstndoc',
+        'label' => 'GSTN Doc',
+        'type' => 'file'        
+        
+);
+
+$dictionary['te_expense_vendor']['fields']['reg_cert'] =array (
+        'name' => 'reg_cert',
+        'label' => 'Registration Certificate',
+        'type' => 'file'        
+        
+);
+
+$dictionary['te_expense_vendor']['fields']['gst'] =array (
+        'name' => 'gst',
+        'label' => 'GST No',
+        'type' => 'varchar',
+       
+        'len' => '40',
+        
+);
+
+
 $dictionary['te_expense_vendor']['fields']['status'] =array (
         'name' => 'status',
         'label' => 'status',

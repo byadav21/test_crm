@@ -7,6 +7,7 @@ array (
     'templateMeta' => 
     array (
       'maxColumns' => '2',
+      'enctype' => 'multipart/form-data',
       'widths' => 
       array (
         0 => 
@@ -29,7 +30,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
-      'syncDetailEditViews' => true,
+      'syncDetailEditViews' => false,
     ),
     'panels' => 
     array (
@@ -141,39 +142,35 @@ array (
         array (
           0 => 
           array (
-            'name' => 'servicetaxdoc_c',
-            'studio' => 'visible',
-            'label' => 'LBL_SERVICETAXDOC',
+            'name' => 'gst',
+            'label' => 'GST No',
           ),
-          1 => 
-          array (
-            'name' => 'pancard_document_c',
-            'studio' => 'visible',
-            'label' => 'LBL_PANCARD_DOCUMENT',
-          ),
+          1 => '',
         ),
         9 => 
         array (
           0 => 
           array (
-            'name' => 'cancledcheckdoc_c',
-            'studio' => 'visible',
-            'label' => 'LBL_CANCLEDCHECKDOC',
+            'name' => 'panpdf',
+            'label' => 'Pan Doc',
           ),
           1 => 
           array (
-            'name' => 'gstn_c',
-            'studio' => 'visible',
-            'label' => 'LBL_GSTN',
+            'name' => 'staxpdf',
+            'label' => 'Service Tax Doc',
           ),
         ),
         10 => 
         array (
           0 => 
           array (
-            'name' => 'registrationdoc_c',
-            'studio' => 'visible',
-            'label' => 'LBL_REGISTRATIONDOC',
+            'name' => 'ccheckdoc',
+            'label' => 'Cancled Check Doc',
+          ),
+          1 => 
+          array (
+            'name' => 'gstndoc',
+            'label' => 'GSTN Doc',
           ),
         ),
       ),

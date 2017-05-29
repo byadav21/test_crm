@@ -245,7 +245,7 @@
 				{/foreach}
 				<td>{$rowData.ASSIGNED_USER_NAME}</td>
 				<td align='right' style="display:none;">{$pageData.additionalDetails.$id}</td>
-				<td> 
+				<td>{$rowData.status} 
 					{if $rowData.STATUS==-1}
 					 Rejected
 					{elseif $rowData.STATUS==3}
