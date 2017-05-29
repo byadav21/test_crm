@@ -6,6 +6,8 @@ class clsApproval {
 	
 	
 		function valiDateApproval($bean, $event, $argument){
+			
+			echo 'bef';die;
 			if($bean->fetched_row['id']){
 				global $current_user;
 				$objExp=new te_expense_vendor_cls();
@@ -36,7 +38,7 @@ class clsApproval {
 			$uploads_dir = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['SCRIPT_NAME']). '/upload/vendors';
 			$roles=new ACLRole();
 			$objExp=new te_expense_vendor_cls();
-			//print_r($_FILES);die;
+			print_r($_FILES);die;
 		    if($_FILES['panpdf_img']['error']==0){				
 				$tmp_name = $_FILES["panpdf_img"]["tmp_name"];
 				$name = $bean->id.'_pan';
