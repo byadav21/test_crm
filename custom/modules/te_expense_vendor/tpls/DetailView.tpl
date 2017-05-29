@@ -258,6 +258,7 @@ class="yui-navset detailview_tabs"
 						 	<!--<p> Reason: {$overview->reason_rejection}</p>-->
 							   
 						  {elseif  $roleStatus == 0 &&  $overview->status!='0' }
+									<select style="width: 300px!important;clear: none;display: inline;" id="gldpid">{$dropdownData}</select>
 									<button class="button approveme">Approve</button>
 									<button class="button rejectme">Reject</button>
 						  {elseif  $roleStatus == -2 && $overview->status!='2' &&  $overview->status!='0' && $overview->status!='3' }
@@ -383,25 +384,8 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 	});
 	
 	$( ".approveme" ).on('click',function( event ) {	
-	
-		 swal({
-			  title: "Approve!",
-			  text: "Enter GL Code",
-			  type: "input",
-			  showCancelButton: true,
-			  closeOnConfirm: true,
-			  animation: "slide-from-top",
-			  inputPlaceholder: "GL Code"
-			},
-			function(inputValue){
-			  if (inputValue === false) return false;
-			  
-			  if (inputValue === "") {
-				swal.showInputError("You need to write GL Code!");
-				return false
-			  }
-			  
-				 $.post( "index.php?module=te_expense_vendor&action=approval&to_pdf=1", { type: "approve", record: records ,reason:inputValue })
+	       var glc=$('#gldpid').val() ;
+		  $.post( "index.php?module=te_expense_vendor&action=approval&to_pdf=1", { type: "approve", record: records ,reason:glc})
 				  .done(function( data ) {
 					 
 					  toastr.options = { "positionClass": "toast-top-center","timeOut": "8000",}
@@ -415,9 +399,6 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 							swal({title:"Finished!",timer: -1});
 					  }
 				 });
-				  
-			 
-			});
 	
 	
 	});

@@ -29,14 +29,20 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 			//echo 'UNAUTHORIZED ACCESS !!';die;
 			 
 		}
-	 
+	    
 			 
 		  if($current_user->is_admin){
 			 $statusr=te_expense_vendor_cls::getStatus( $this->bean->id);
 		  }else{
 			 $statusr=te_expense_vendor_cls::getStatus( $this->bean->id,$current_user->id);  
 		  } 
-		
+		 $ddown='';  
+		foreach($GLOBALS['app_list_strings']['glcode'] as $key=>$val){
+			$ddown.= '<option value="'.$key.'"';
+			if($this->bean->id==$key) $ddown.= ' selected ';
+			$ddown.= ' >' . $val .'</option>';
+		}
+		$this->ss->assign('dropdownData', $ddown);
 		$this->ss->assign('roleStatus', $statusr);
 		$this->ss->assign('overview', $this->bean);
 		$role=new ACLRole();
