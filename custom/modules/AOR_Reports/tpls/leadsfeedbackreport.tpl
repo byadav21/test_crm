@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h2>Leads Feedback Report</h2><br/><br/>
+<section class="moduleTitle"> <h2><b>Leads Feedback Report</b></h2><br/><br/>
 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadsfeedbackreport">
 <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -11,7 +11,7 @@
 			<td nowrap="nowrap" width="10%">
 				<select name="batch[]" id="batch" multiple="1" class="multiselbox"  size="6" style="width: 150px;">
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.id}" {if in_array($batch.id, $selected_batch) } selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
 			</td>
@@ -21,7 +21,7 @@
 			<td nowrap="nowrap" width="10%">
 				<select name="vendor[]" id="vendor" multiple="1" class="multiselbox"  size="6" style="width: 150px;">
 					{foreach from = $vendorList key=key item=vendor}
-						<option value="{$vendor.name}" {if $selected_vendor eq $vendor.id} selected="selected" {/if}>{$vendor.name}</option>
+						<option value="{$vendor.name}" {if in_array($vendor.name, $selected_vendor) } selected="selected" {/if}>{$vendor.name}</option>
 					{/foreach}
 				</select>
 			</td>
@@ -42,15 +42,17 @@
 			</td>
 
 
-			<td class="sumbitButtons">
-				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
-				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-	        </td>
+
 			<td nowrap="nowrap" width="10%">&nbsp;</td>
 			<td class="helpIcon" width="*"><img alt="Help" border="0" id="filterHelp" src="themes/SuiteR/images/help-dashlet.png?v=mjry3sKU3KG11ojfGn-sdg"></td>
 		</tr>
 		<tr>
-			<td scope="row" nowrap="nowrap" width="1%">
+      <td scope="row" nowrap="nowrap" width="1%" class="sumbitButtons">
+				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
+        <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
+	    </td>
+
+			<td scope="row" nowrap="nowrap" width="1%" class="sumbitButtons">
 				<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
 
 			</td>

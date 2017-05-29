@@ -57,19 +57,23 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 		$from_date="";
 		$to_date="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
-			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
+			$_SESSION['lf_from_date'] = $_REQUEST['from_date'];
+			$_SESSION['lf_to_date'] = $_REQUEST['to_date'];
+			$_SESSION['lf_batch'] = $_REQUEST['batch'];
+			$_SESSION['lf_vendor'] = $_REQUEST['vendor'];
+			if($_SESSION['lf_from_date'] && $_SESSION['lf_to_date']){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
 				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
+			}elseif($_SESSION['lf_from_date']!=""&&$_SESSION['lf_to_date']==""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
 				$where.=" AND DATE(date_modified)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
+			}elseif($_SESSION['lf_from_date']==""&&$_SESSION['lf_to_date']!=""){
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
 				$where.=" AND DATE(date_modified)='".$to_date."' ";
 			}
-			if(isset($_POST['vendor']) && !empty($_POST['vendor'])){
-				$where.=" AND l.vendor IN('".implode("','",$_POST['vendor'])."') ";
+			if(isset($_SESSION['lf_vendor']) && !empty($_SESSION['lf_vendor'])){
+				$where.=" AND l.vendor IN('".implode("','",$_SESSION['lf_vendor'])."') ";
 			}
 
 
@@ -80,22 +84,26 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 			$from_date="";
 			$to_date="";
 			$filename = $file . "_" . date ( "Y-m-d");
-			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
+			$_SESSION['lf_from_date'] = $_REQUEST['from_date'];
+			$_SESSION['lf_to_date'] = $_REQUEST['to_date'];
+			$_SESSION['lf_batch'] = $_REQUEST['batch'];
+			$_SESSION['lf_vendor'] = $_REQUEST['vendor'];
+			if($_SESSION['lf_from_date'] && $_SESSION['lf_to_date']){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
 				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
+			}elseif($_SESSION['lf_from_date']!=""&&$_SESSION['lf_to_date']==""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
 				$where.=" AND DATE(date_modified)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
+			}elseif($_SESSION['lf_from_date']==""&&$_SESSION['lf_to_date']!=""){
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
 				$where.=" AND DATE(date_modified)='".$to_date."' ";
 			}
-			if(isset($_POST['vendor']) && !empty($_POST['vendor'])){
-				$where.=" AND l.vendor IN('".implode("','",$_POST['vendor'])."') ";
+			if(isset($_SESSION['lf_vendor']) && !empty($_SESSION['lf_vendor'])){
+				$where.=" AND l.vendor IN('".implode("','",$_SESSION['lf_vendor'])."') ";
 			}
 			$councelorList=array();
-			$batchsearArr = (isset($_POST['batch']) ? $_POST['batch'] : "");
+			$batchsearArr = (isset($_SESSION['lf_batch']) ? $_SESSION['lf_batch'] : "");
 			$batches = $this->getbatchforlead($batchsearArr);
 			if($batches){
 				foreach($batches as $batch_val){
@@ -178,7 +186,7 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 			echo $data; exit;
 		}
 		$councelorList=array();
-		$batchsearArr = (isset($_POST['batch']) ? $_POST['batch'] : "");
+		$batchsearArr = (isset($_SESSION['lf_batch']) ? $_SESSION['lf_batch'] : "");
 		$batches = $this->getbatchforlead($batchsearArr);
 		if($batches){
 			foreach($batches as $batch_val){
@@ -287,16 +295,31 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 			$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
 
 		}
-		//echo "<pre>";print_r($councelorList);exit();
+
+		if(isset($_SESSION['lf_from_date']) && !empty($_SESSION['lf_from_date'])){
+			$from_date = date('d/m/Y',strtotime($_SESSION['lf_from_date']));
+		}
+		if(isset($_SESSION['lf_to_date']) && !empty($_SESSION['lf_to_date'])){
+			$to_date = date('d/m/Y',strtotime($_SESSION['lf_to_date']));
+		}
+		if(isset($_SESSION['lf_batch']) && !empty($_SESSION['lf_batch'])){
+			$selected_batch = $_SESSION['lf_batch'];
+		}
+		if(isset($_SESSION['lf_vendor']) && !empty($_SESSION['lf_vendor'])){
+			$selected_vendor = $_SESSION['lf_vendor'];
+		}
+
 		$vendorList = $this->getVendor();
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("leadStatusList",$leadStatusList);
 		$sugarSmarty->assign("batchList",$batchList);
 		$sugarSmarty->assign("vendorList",$vendorList);
-		$sugarSmarty->assign("selected_from_date",$GLOBALS['timedate']->to_display_date($from_date));
-		$sugarSmarty->assign("selected_to_date",$GLOBALS['timedate']->to_display_date($to_date));
-		//$sugarSmarty->assign("selected_status",$search_status);
+		$sugarSmarty->assign("selected_from_date",$from_date);
+		$sugarSmarty->assign("selected_to_date",$to_date);
+		$sugarSmarty->assign("selected_batch",$selected_batch);
+		$sugarSmarty->assign("selected_vendor",$selected_vendor);
+
 		$sugarSmarty->assign("current_records",$current);
 		$sugarSmarty->assign("page",$page);
 		$sugarSmarty->assign("pagenext",$pagenext);

@@ -59,7 +59,7 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 		}elseif(isset($_REQUEST['export']) && $_REQUEST['export']=="Export"){
 			$_SESSION['till_from_date'] = $_REQUEST['from_date'];
 			$_SESSION['till_to_date'] = $_REQUEST['to_date'];
-			$_SESSION['till_batch'] = $_REQUEST['from_batch'];
+			$_SESSION['till_batch'] = $_REQUEST['batch'];
 			$datacsv="Batch_Name,Media,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
 			$file = "Till_Date_Lead_Performance";
 			$where='';
@@ -77,7 +77,6 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['till_to_date'])));
 				$where.=" AND DATE(date_entered)='".$to_date."' ";
 			}
-
 			if(!empty($_SESSION['till_batch'])){
 				$wherebatch=" AND id IN('".implode("','",$_SESSION['till_batch'])."') ";
 			}
@@ -111,7 +110,6 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				}
 
 			}
-
 			if($batchVendorArr){
 				foreach ($batchVendorArr as $value) {
 					$where=" AND  l.vendor='".$value['vendor_name']."' AND lc.te_ba_batch_id_c='".$value['batch_id']."' ";

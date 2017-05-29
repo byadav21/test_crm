@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h2>Leads Performance Report</h2><br/><br/>
+<section class="moduleTitle"> <h2><b>Leads Performance Report</b></h2><br/><br/>
 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadperformancereport">
 <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -11,7 +11,7 @@
 			<td nowrap="nowrap" width="10%">
 				<select name="batch[]" id="batch"  multiple="1" class="multiselbox"  size="6" style="width: 150px;">
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.id}" {if in_array($batch.id, $selected_batch) } selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
 			</td>
