@@ -107,9 +107,9 @@ class te_expense_vendor_cls extends te_ExpensePO {
 			return $status= ($statrus && count($statrus)>0) ? (($statrus->status==0)? -2 :$statrus['staus'] ):-2;
 		}else{
 			if($submit==1){
-				$sql="select staus from te_expense_vendor_approval where assigned_user_id='$user' and expense_id='$id'";
+			 $sql="select staus from te_expense_vendor_approval where assigned_user_id='$user' and expense_id='$id'";
 			}else{
-				$sql="select staus from te_expense_vendor_approval where assigned_user_id='$user' and expense_id='$id' and name='approver'";
+			 	$sql="select staus from te_expense_vendor_approval where assigned_user_id='$user' and expense_id='$id' and name='approver'";
 			}
 			$itemDetal=	$db->query($sql);	
 			$statrus=$db->fetchByAssoc($itemDetal);	

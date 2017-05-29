@@ -206,6 +206,31 @@ class="yui-navset detailview_tabs"
 	{$tableRow}
 	{/if}
 	{{/foreach}}
+	<tr><td  colspan=4 > 
+	<h4>Uploaded Documents </h4>
+	{if $overview->panpdf}
+		<a href="index.php?module=te_expense_vendor&action=download&type=pan&record={$overview->id}">Download Pan</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{/if} 
+	{if $overview->staxpdf}
+	<a href="in
+	dex.php?module=te_expense_vendor&action=download&type=stax&record={$overview->id}">Download Service tax</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{/if}	
+	{if $overview->gstndoc}
+		<a href="index.php?module=te_expense_vendor&action=download&type=gst&record={$overview->id}">Download GSTN</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{/if}	
+	{if $overview->ccheckdoc}
+	<a href="index.php?module=te_expense_vendor&action=download&type=cc&record={$overview->id}">Download Cancelled Check</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{/if}	
+	
+	{if $overview->reg_cert}
+		<a href="index.php?module=te_expense_vendor&action=download&type=reg&record={$overview->id}">Download Registartion Cert.  
+</a>
+	{/if}	
+	
+	
+	</td>
+	
+	</tr>
 	<tr><td  colspan=4 style="text-align:center">
 	
 	<label>Status</label>: 
@@ -233,10 +258,13 @@ class="yui-navset detailview_tabs"
 						 	<!--<p> Reason: {$overview->reason_rejection}</p>-->
 							   
 						  {elseif  $roleStatus == 0 &&  $overview->status!='0' }
+									<select style="width: 300px!important;clear: none;display: inline;" id="gldpid">{$dropdownData}</select>
 									<button class="button approveme">Approve</button>
 									<button class="button rejectme">Reject</button>
-						  {elseif  $roleStatus == -2 && $overview->status!='2' &&  $overview->status!='0' && $overview->status!='3' }
-									<button class="button cancelme">Cancel</button>								
+						
+ {elseif  $roleStatus == -2 && $overview->status!='2'   && $overview->status!='0'  && $overview->status!='3' }						
+
+			<button class="button cancelme">Cancel</button>								
 						  {/if}
 						 
 	
@@ -358,25 +386,8 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 	});
 	
 	$( ".approveme" ).on('click',function( event ) {	
-	
-		 swal({
-			  title: "Approve!",
-			  text: "Enter GL Code",
-			  type: "input",
-			  showCancelButton: true,
-			  closeOnConfirm: true,
-			  animation: "slide-from-top",
-			  inputPlaceholder: "GL Code"
-			},
-			function(inputValue){
-			  if (inputValue === false) return false;
-			  
-			  if (inputValue === "") {
-				swal.showInputError("You need to write GL Code!");
-				return false
-			  }
-			  
-				 $.post( "index.php?module=te_expense_vendor&action=approval&to_pdf=1", { type: "approve", record: records ,reason:inputValue })
+	       var glc=$('#gldpid').val() ;
+		  $.post( "index.php?module=te_expense_vendor&action=approval&to_pdf=1", { type: "approve", record: records ,reason:glc})
 				  .done(function( data ) {
 					 
 					  toastr.options = { "positionClass": "toast-top-center","timeOut": "8000",}
@@ -390,9 +401,6 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 							swal({title:"Finished!",timer: -1});
 					  }
 				 });
-				  
-			 
-			});
 	
 	
 	});

@@ -6,6 +6,8 @@ class clsApproval {
 	
 	
 		function valiDateApproval($bean, $event, $argument){
+			
+			//echo 'bef';die;
 			if($bean->fetched_row['id']){
 				global $current_user;
 				$objExp=new te_expense_vendor_cls();
@@ -33,9 +35,61 @@ class clsApproval {
 			
 		function updateApproval($bean, $event, $argument){
 			global $current_user,$db;
+			$uploads_dir = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['SCRIPT_NAME']). '/upload/vendors';
 			$roles=new ACLRole();
 			$objExp=new te_expense_vendor_cls();
-		// echo 'p';die;
+			//print_r($_FILES);die;
+		    if($_FILES['panpdf_img']['error']==0){				
+				$tmp_name = $_FILES["panpdf_img"]["tmp_name"];
+				$name = $bean->id.'_pan';
+			 
+				if(move_uploaded_file($tmp_name, "$uploads_dir/$name")){
+					$nameFile=json_encode(array('path'=>$name,'name'=>$_FILES['panpdf_img']['name']));
+					$sql="update te_expense_vendor set panpdf='". $nameFile ."' where id='" . $bean->id . "'";
+					$db->query($sql);
+				}
+				 
+			}
+		    if($_FILES['stax_img']['error']==0){				
+				$tmp_name = $_FILES["stax_img"]["tmp_name"];
+				$name = $bean->id.'_stax';
+				if(move_uploaded_file($tmp_name, "$uploads_dir/$name")){
+					$nameFile=json_encode(array('path'=>$name,'name'=>$_FILES['stax_img']['name']));
+					$sql="update te_expense_vendor set staxpdf='". $nameFile ."' where id='" . $bean->id . "'";
+					$db->query($sql);
+				}
+			}
+		    if($_FILES['gst_img']['error']==0){				
+				$tmp_name = $_FILES["gst_img"]["tmp_name"];
+				$name = $bean->id.'_gst';
+				if(move_uploaded_file($tmp_name, "$uploads_dir/$name")){
+					$nameFile=json_encode(array('path'=>$name,'name'=>$_FILES['gst_img']['name']));
+					$sql="update te_expense_vendor set gstndoc='". $nameFile ."' where id='" . $bean->id . "'";
+					$db->query($sql);
+				}
+			}
+		    if($_FILES['cc_img']['error']==0){				
+				$tmp_name = $_FILES["cc_img"]["tmp_name"];
+				$name = $bean->id.'_cc';
+				if(move_uploaded_file($tmp_name, "$uploads_dir/$name")){
+					$nameFile=json_encode(array('path'=>$name,'name'=>$_FILES['cc_img']['name']));
+					$sql="update te_expense_vendor set ccheckdoc='". $nameFile ."' where id='" . $bean->id . "'";
+					$db->query($sql);
+				}
+			}
+		    if($_FILES['reg_img']['error']==0){				
+				$tmp_name = $_FILES["reg_img"]["tmp_name"];
+				$name = $bean->id.'_reg';
+				if(move_uploaded_file($tmp_name, "$uploads_dir/$name")){
+					$nameFile=json_encode(array('path'=>$name,'name'=>$_FILES['reg_img']['name']));
+					$sql="update te_expense_vendor set reg_cert='". $nameFile ."' where id='" . $bean->id . "'";
+					$db->query($sql);
+				}
+			}
+		 
+		 
+		 
+		 
 			if($bean->id){
 				$exapprovers = new te_expense_vendor_approval();
 				$exapprovers->name='submitter';

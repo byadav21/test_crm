@@ -165,3 +165,6 @@ $GLOBALS['app_list_strings']['legal_entity_status_list']=array (
   'Sole' => 'Sole Proprietorship',
   'LLP' => 'LLP',
 );
+$GLOBALS['app_list_strings']['glcode']=array (
+  'Housekeeping_Charges' => 'Housekeeping Charges',
+);
