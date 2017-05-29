@@ -46,7 +46,7 @@ class te_Expense_VendorViewEdit extends ViewEdit {
 			$inQuery=substr($inQuery,0, strlen($inQuery)-1);
 			
 			if(!$expObj->getStatusForEdit($this->bean->id,$inQuery)){
-					echo '<h1>Expense Vendor >> Edit</h1><br><br><br><span style="color:red">Error: You can\'t edit this vendor dueto approved by your Supervisor</span>'; exit();	
+					echo '<h1>Expense Vendor >> Edit</h1><br><br><br><span style="color:red">Error: You can\'t edit this vendor dueto this is in Supervisor approval</span>'; exit();	
 			}
 			
 		}

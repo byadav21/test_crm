@@ -261,8 +261,10 @@ class="yui-navset detailview_tabs"
 									<select style="width: 300px!important;clear: none;display: inline;" id="gldpid">{$dropdownData}</select>
 									<button class="button approveme">Approve</button>
 									<button class="button rejectme">Reject</button>
-						  {elseif  $roleStatus == -2 && $overview->status!='2' &&  $overview->status!='0' && $overview->status!='3' }
-									<button class="button cancelme">Cancel</button>								
+						
+ {elseif  $roleStatus == -2 && $overview->status!='2'   && $overview->status!='0'  && $overview->status!='3' }						
+
+			<button class="button cancelme">Cancel</button>								
 						  {/if}
 						 
 	

@@ -34,10 +34,10 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 			$objExp=new te_expense_vendor_cls();		
 		  
 			$roleArr=$roles->getUserRole($current_user->id);
-			
+			//print_r($roleArr);
 			$approvers=$objExp->getAllApprovers('',$roleArr['parent_role']);
-	 	
-		 
+	 	        //print_r($approvers);
+		        //die; 
 			
 			if($approvers && count($approvers)>0){
 				foreach($approvers as $appvrs){
