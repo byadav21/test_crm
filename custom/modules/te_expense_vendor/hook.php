@@ -39,6 +39,8 @@ class clsApproval {
 			$roles=new ACLRole();
 			$objExp=new te_expense_vendor_cls();
 			//print_r($_FILES);die;
+                    try{
+                    $db->query('start transaction');
 		    if($_FILES['panpdf_img']['error']==0){				
 				$tmp_name = $_FILES["panpdf_img"]["tmp_name"];
 				$name = $bean->id.'_pan';
@@ -91,6 +93,8 @@ class clsApproval {
 		 
 		 
 			if($bean->id){
+                                $sql="delete from  te_expense_vendor_approval  where expense_id='" . $bean->id . "'";
+                                $db->query($sql);
 				$exapprovers = new te_expense_vendor_approval();
 				$exapprovers->name='submitter';
 				$exapprovers->date_entered=date('Y-m-d H:i:s');	
@@ -120,8 +124,10 @@ class clsApproval {
 			} 
 			$sql="update te_expense_vendor set assigned_user_id='". $current_user->id ."' where id='" . $bean->id . "'";
 			$db->query($sql);
-				
-		 
+			$db->query('commit');
+		     }catch(Exception $e){
+			$db->query('rollback');
+		     }
 			
 			
 			

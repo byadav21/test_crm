@@ -35,13 +35,23 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 			$objExp=new te_Expenseproverride();		
 			$department=$current_user->rel_fields_before_value['te_department_expense_users_1te_department_expense_ida'];  
 			$roleArr=$roles->getUserRole($current_user->id);
-			
+			//print_r($roleArr);
 		 if(isset($_POST['facility']) && $_POST['facility']==1){
 			 $approvers=$objExp->getFacilityApprovers($roleArr['parent_role'],1,0); 
 		 }else{
 			
 			if($roleArr['parent_role'] &&  $roleArr['sendtofin']==0 && $roleArr['isfacility']==0){// for submitter and approver  
-				$approvers=$objExp->getAllApprovers($department,$roleArr['parent_role']);
+                               
+                                 $parentRole=$roles->retrieve($roleArr['parent_role']);
+                                 if($parentRole->parent_role==null || $parent_role->parent_role=='-Select-'){
+                                     $approvers=$objExp->getAllApprovers($department,$roleArr['parent_role']);
+                                 }else{
+
+                                   $approvers=$objExp->getAllApprovers('',$roleArr['parent_role']);
+                                 }
+	
+
+
 			}else if($roleArr['isfacility']>0){ // for fin
 				
 					$approvers=$objExp->getFacilityApprovers($roleArr['parent_role'],2,1);
@@ -51,7 +61,7 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 			}
 	   }		
 		 
-			
+                        //print_r($approvers);die; 			
 			if($approvers && count($approvers)>0){
 				foreach($approvers as $appvrs){
 					$exapprovers = new te_Expense_approvall(); 

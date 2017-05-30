@@ -38,11 +38,12 @@ class te_Expense_VendorViewList extends ViewList
         global $current_user;
         $this->processSearchForm();
        
-        /* if(!$current_user->is_admin){
-           $this->params['custom_from'] = " te_expense_vendor inner join te_expense_vendor_approval on te_expense_vendor.id=te_expense_vendor_approval.expense_id AND te_expense_vendor_approval.assigned_user_id = '". $current_user->id ."'";
+         if(!$current_user->is_admin){
+           $this->params['custom_from'] = "  inner join te_expense_vendor_approval on te_expense_vendor.id=te_expense_vendor_approval.expense_id AND te_expense_vendor_approval.assigned_user_id = '". $current_user->id ."'";
           }else{
-			 $this->params['custom_from'] = " te_expense_vendor inner join te_expense_vendor_approval on te_expense_vendor.id=te_expense_vendor_approval.expense_id ";
-		  } */
+			 $this->params['custom_from'] = "  inner join te_expense_vendor_approval on te_expense_vendor.id=te_expense_vendor_approval.expense_id and assigned_user_id = '". $current_user->id ."'";
+
+		  } 
 		  
 		  //$this->params['custom_where'] = " assigned_user_id = '". $current_user->id ."'";
 		  

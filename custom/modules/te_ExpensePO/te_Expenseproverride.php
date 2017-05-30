@@ -73,10 +73,13 @@ class te_Expenseproverride extends te_ExpensePO {
 		
 	}
 	
-	public function getAllApprovers($department,$role){
-		
-		$sql="select users.id from users inner join te_department_expense_users_1_c on  te_department_expense_users_1_c.te_department_expense_users_1users_idb=users.id
-		 and te_department_expense_users_1_c.te_department_expense_users_1te_department_expense_ida='$department' inner join acl_roles_users on  acl_roles_users.user_id= users.id and acl_roles_users.role_id='$role' and acl_roles_users.deleted=0 ";	
+	public function getAllApprovers($department='',$role){
+	        if($department){		
+		 $sql="select users.id from users inner join te_department_expense_users_1_c on  te_department_expense_users_1_c.te_department_expense_users_1users_idb=users.id
+		 and te_department_expense_users_1_c.te_department_expense_users_1te_department_expense_ida='$department' inner join acl_roles_users on  acl_roles_users.user_id= users.id   inner join acl_roles  on acl_roles_users.role_id=acl_roles.id where acl_roles.deleted=0 and isvendor=2    and acl_roles_users.role_id='$role' and acl_roles_users.deleted=0 ";	
+               }else{
+ 		 $sql="select users.id from users inner join acl_roles_users on  acl_roles_users.user_id= users.id   inner join acl_roles  on acl_roles_users.role_id=acl_roles.id where acl_roles.deleted=0 and isvendor=2    and acl_roles_users.role_id='$role' and acl_roles_users.deleted=0 ";
+               }	
 		$itemDetal=	$this->dbinstance->query($sql);
 		$returndata=[];
 		while($row=$this->dbinstance->fetchByAssoc($itemDetal)){

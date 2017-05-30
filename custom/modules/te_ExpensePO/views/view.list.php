@@ -39,13 +39,13 @@ class te_ExpensePOViewList extends ViewList
         $this->processSearchForm();
          
           if(!$current_user->is_admin){
-           $this->params['custom_from'] = ' te_expensepo inner join te_expense_approvall on te_expensepo.id=te_expense_approvall.expense_id AND te_expense_approvall.assigned_user_id = "'. $current_user->id .'"  ';
+           $this->params['custom_from'] = '  inner join te_expense_approvall on te_expensepo.id=te_expense_approvall.expense_id AND te_expense_approvall.assigned_user_id = "'. $current_user->id .'"  ';
           }else{
-			 $this->params['custom_from'] = ' te_expensepo inner join te_expense_approvall on te_expensepo.id=te_expense_approvall.expense_id ';
+			 $this->params['custom_from'] = '  inner join te_expense_approvall on te_expensepo.id=te_expense_approvall.expense_id ';
 		 
          
 		  } 
-			 
+	 
         if (empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false) {
             $this->lv->setup($this->seed, 'custom/modules/te_ExpensePO/tpls/listing.tpl', $this->where, $this->params);
             $savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
