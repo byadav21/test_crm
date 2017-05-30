@@ -20,7 +20,8 @@ $dictionary['te_ExpensePR']['fields']['refrenceid'] =array (
 $dictionary['te_ExpensePR']['fields']['amount'] =array (
 	'name' => 'amount',
 	'label' => 'Amount',
-	'type' => 'decimal',	
+	'type' => 'decimal',
+        'len'=>'8,2'	
 	 
      
 );
