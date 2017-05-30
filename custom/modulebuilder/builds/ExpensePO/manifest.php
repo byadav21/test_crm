@@ -63,9 +63,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'ExpensePO',
-  'published_date' => '2017-03-17 12:33:33',
+  'published_date' => '2017-05-30 10:27:16',
   'type' => 'module',
-  'version' => 1489754013,
+  'version' => 1496140036,
   'remove_tables' => 'prompt',
 );
 
@@ -104,6 +104,13 @@ $installdefs = array (
     ),
     4 => 
     array (
+      'module' => 'te_ExpensePR',
+      'class' => 'te_ExpensePR',
+      'path' => 'modules/te_ExpensePR/te_ExpensePR.php',
+      'tab' => true,
+    ),
+    5 => 
+    array (
       'module' => 'te_ExpencePoPayment',
       'class' => 'te_ExpencePoPayment',
       'path' => 'modules/te_ExpencePoPayment/te_ExpencePoPayment.php',
@@ -140,6 +147,11 @@ $installdefs = array (
       'to' => 'modules/te_expenseprdetail',
     ),
     4 => 
+    array (
+      'from' => '<basepath>/SugarModules/modules/te_ExpensePR',
+      'to' => 'modules/te_ExpensePR',
+    ),
+    5 => 
     array (
       'from' => '<basepath>/SugarModules/modules/te_ExpencePoPayment',
       'to' => 'modules/te_ExpencePoPayment',
