@@ -89,6 +89,7 @@ EOD
 <td valign='top' width='25%' align='right'><b>Can Submit:</b> {$otherRecords.issubmit} <br><b>Is facility Role:</b> {$otherRecords.isfacility}</td>
 
 <td width='25%' colspan='3'><b>Can Approve:</b> {$otherRecords.isapprove} <br><b>Can Send to facility:</b> {$otherRecords.sendtofin}</td>
+<td width='25%' colspan='3'><b>is vendor:</b> {$otherRecords.isvendor}</td>
 
 
 <td valign='top'  width='10%' align='right'><b>{$MOD.LBL_DESCRIPTION}:</b></td><td colspan='3' valign='top'  width='40%' align='left'>{$ROLE.description | nl2br}</td>

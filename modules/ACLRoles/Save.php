@@ -37,7 +37,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
-
+ 
   
 $role = new ACLRole();
 if(isset($_REQUEST['record']))$role->id = $_POST['record'];
@@ -48,6 +48,7 @@ if(!empty($_REQUEST['name'])){
         $role->slug        = $_POST['slug']; 
 	$role->sendtofin = (isset($_POST['sendtofin']))?$_POST['sendtofin']:0; 
 	$role->isfacility = (isset($_POST['isfacility']))?$_POST['isfacility']:0; 
+	$role->isvendor = (isset($_POST['isvendor']))?$_POST['isvendor']:0; 
 	
 	
 	$role->issubmit = (isset($_POST['issubmit']))?$_POST['issubmit']:0;

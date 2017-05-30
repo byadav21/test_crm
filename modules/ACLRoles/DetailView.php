@@ -73,6 +73,7 @@ if($role->id){
   $otherRecords['isapprove']=($otherRecords['isapprove']==1)?'Y':'N';
   $otherRecords['sendtofin']=($otherRecords['sendtofin']==1)?'Y':'N';
   $otherRecords['isfacility']=($otherRecords['isfacility']==1)?'Y':'N';
+  $otherRecords['isvendor']=($otherRecords['isvendor']==1)?'Y':'N';
  // print_r( $otherRecords);die;
 }
 $sugar_smarty->assign('otherRecords', $otherRecords);

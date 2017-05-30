@@ -33,7 +33,7 @@ class te_Expense_VendorViewEdit extends ViewEdit {
 				echo '<h1>Expense PO >> Edit</h1><br><br><br><span style="color:red">Error: This vendor can\'t be edited</span>'; exit();	
 			}
 			$this->ss->assign('overview', $this->bean);	
-			$userRole=$roleUsr->getUserRole($current_user->id);
+			$userRole=$roleUsr->getUserRole($current_user->id,1);
 			$approvers=$expObj->getAllApprovers($department,$userRole['parent_role']);
 			
 			  

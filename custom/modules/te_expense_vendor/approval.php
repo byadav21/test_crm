@@ -33,7 +33,7 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 			$roles=new ACLRole();
 			$objExp=new te_expense_vendor_cls();		
 		  
-			$roleArr=$roles->getUserRole($current_user->id);
+			$roleArr=$roles->getUserRole($current_user->id,1);
 			//print_r($roleArr);
 			$approvers=$objExp->getAllApprovers('',$roleArr['parent_role']);
 	 	        //print_r($approvers);
@@ -85,7 +85,7 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 	}else{
 		
 		$role=new ACLRole();
-		$userRole=$role->getUserRole($current_user->id);
+		$userRole=$role->getUserRole($current_user->id,1);
 			
 		
 		$approvers=$obkExp->getAllApprovers('',$userRole['parent_role']);

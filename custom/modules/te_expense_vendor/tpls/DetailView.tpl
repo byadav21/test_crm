@@ -262,9 +262,9 @@ class="yui-navset detailview_tabs"
 									<button class="button approveme">Approve</button>
 									<button class="button rejectme">Reject</button>
 						
- {elseif  $roleStatus == -2 && $overview->status!='2'   && $overview->status!='0'  && $overview->status!='3' }						
+						{elseif  $statusrsub == 0 && $overview->created_by==$currentuser && $overview->status==1 }						
 
-			<button class="button cancelme">Cancel</button>								
+								<button class="button cancelme">Cancel</button>								
 						  {/if}
 						 
 	

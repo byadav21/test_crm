@@ -12,7 +12,7 @@ class te_Expense_VendorViewDetail extends ViewDetail {
     {
  	    global $current_user;
  	    $role=new ACLRole();
-		$userRole=$role->getUserRole($current_user->id);		 
+		$userRole=$role->getUserRole($current_user->id,1);		 
  	      
  	    $metadataFile = $this->getMetaDataFile();
  	    $this->dv = new DetailView2();
@@ -33,8 +33,10 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 			 
 		  if($current_user->is_admin){
 			 $statusr=te_expense_vendor_cls::getStatus( $this->bean->id);
+			$statusrsub=te_expense_vendor_cls::getStatusApproval( $this->bean->id); 
 		  }else{
-			 $statusr=te_expense_vendor_cls::getStatus( $this->bean->id,$current_user->id);  
+			 $statusr=te_expense_vendor_cls::getStatus( $this->bean->id,$current_user->id); 
+			 $statusrsub=te_expense_vendor_cls::getStatusApproval( $this->bean->id); 
 		  } 
 		 $ddown='';  
 		foreach($GLOBALS['app_list_strings']['glcode'] as $key=>$val){
@@ -44,9 +46,11 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 		}
 		$this->ss->assign('dropdownData', $ddown);
 		$this->ss->assign('roleStatus', $statusr);
+		$this->ss->assign('statusrsub', $statusrsub);
 		$this->ss->assign('overview', $this->bean);
+		$this->ss->assign('currentuser', $current_user->id);
 		$role=new ACLRole();
-		$userRole=$role->getUserRole($current_user->id);
+		$userRole=$role->getUserRole($current_user->id,1);
 		$approver=0;		
 		if($this->bean->created_by!=$current_user->id  && $userRole['isapprove']==1){
 			$approver=1;

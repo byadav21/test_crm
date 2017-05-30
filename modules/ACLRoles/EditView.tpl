@@ -101,7 +101,7 @@ function set_focus(){
 <tr>
 <td scope="row" align='right'>Permission</td>
 <td >
-<input {if 1==$otherRecords.isfacility} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isfacility" value="1"> Is Facility Role
+<input {if 1==$otherRecords.isvendor} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isvendor" value="1"> Is vendor module
 </td>
 </tr>
 <tr>

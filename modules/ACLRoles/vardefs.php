@@ -173,6 +173,12 @@ $dictionary['ACLRole'] = array('table' => 'acl_roles', 'comment' => 'ACL Role de
                 'type' => 'int',               
                 'vname' => 'LBL_DEPARTMENT',
             ),
+        'isvendor' =>
+            array(
+                'name' => 'isvendor',
+                'type' => 'int',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
             'slug' =>
             array(
                 'name' => 'slug',
