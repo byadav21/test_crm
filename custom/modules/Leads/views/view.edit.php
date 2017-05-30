@@ -15,6 +15,30 @@ class LeadsViewEdit extends ViewEdit {
 	
 	function display() {
 		//~ print_r($_REQUEST);
+	?>	
+		 <script>
+		 YAHOO.util.Event.addListener(window,"load", function() {
+			document.getElementById('btn_batch_c').onclick=function(){ 
+			var popup_request_data = {
+				'call_back_function' : 'set_rfq_return',
+				'form_name' : 'EditView',
+				'field_to_name_array' : {
+				   'id' : 'id',
+				   'name': 'name',
+				 },
+			};
+			open_popup('te_ba_Batch', 600, 400, '&batch_status_advanced[0]=Planned&batch_status_advanced[1]=enrollment_in_progress', true, false, popup_request_data);
+			}
+			});
+			function set_rfq_return(popup_reply_data){				
+				 var name_to_value_array = popup_reply_data.name_to_value_array;
+				 var id = name_to_value_array['id'];
+				 var name = name_to_value_array['name'];
+				 document.getElementById('batch_c').value= name;
+				 document.getElementById('te_ba_batch_id_c').value = id;
+		}
+		 </script>
+	<?php	 
 		$this->ss->assign('disableDisposition', '0');
 		$this->ss->assign('recID', $this->bean->id);
 		if(isset($_SESSION['currentCall']) && !empty($_SESSION['currentCall'])){
