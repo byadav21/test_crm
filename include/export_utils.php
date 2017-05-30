@@ -84,7 +84,7 @@ function export($type, $records = null, $members = false, $sample=false) {
     global $mod_strings;
     global $current_language;
     $sampleRecordNum = 5;
-
+	 
     //Array of fields that should not be exported, and are only used for logic
     $remove_from_members = array("ea_deleted", "ear_deleted", "primary_address");
     $focus = 0;
@@ -159,7 +159,10 @@ function export($type, $records = null, $members = false, $sample=false) {
 
         $query = $focus->create_export_query($order_by,$where);
     }
-
+    if($_REQUEST['module']=='Leads'){
+	   $query=str_replace(', relJoin1.name batch_c ',', relJoin1.name batch_c ,relJoin1.batch_code',$query);	
+	}
+    
     $result = '';
     $populate = false;
     if($sample) {
