@@ -52,7 +52,7 @@ class te_expense_vendor_cls extends te_ExpensePO {
 		
 	public function getAllApprovers($department='',$role){
 		
-		$sql="select users.id from users inner join acl_roles_users on  acl_roles_users.user_id= users.id and acl_roles_users.role_id='$role' and acl_roles_users.deleted=0 ";	
+		$sql="select users.id from users inner join acl_roles_users on  acl_roles_users.user_id= users.id inner join acl_roles  on acl_roles_users.role_id=acl_roles.id and acl_roles.deleted=0 and isvendor=1 and acl_roles_users.role_id='$role' and acl_roles_users.deleted=0 ";	
 		$itemDetal=	$this->dbinstance->query($sql);
 		$returndata=[];
 		while($row=$this->dbinstance->fetchByAssoc($itemDetal)){
@@ -97,6 +97,15 @@ class te_expense_vendor_cls extends te_ExpensePO {
 		
 	}
 	
+	 	
+	public static function getStatusApproval($id){
+		global $db;
+		$sql="select staus from te_expense_vendor_approval where  expense_id='$id' and staus<>0";
+		$itemDetal=	$db->query($sql);	
+		$statrus=$db->fetchByAssoc($itemDetal);
+		return ($statrus && count($statrus)>0) ? 1:0;
+	}
+		
 	public static function getStatus($id,$user='',$submit=0){
 		global $db;
 		 

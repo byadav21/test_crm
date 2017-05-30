@@ -78,7 +78,7 @@ function checkParentApproved($id){
 	global $current_user;
 	$roleUsr=new ACLRole();
 	$expObj=new te_expense_vendor_cls();
-	$userRole=$roleUsr->getUserRole($current_user->id);	
+	$userRole=$roleUsr->getUserRole($current_user->id,1);	
 	
 	 
 	$approvers=$expObj->getAllApprovers('',$userRole['parent_role']);

@@ -14,7 +14,7 @@ class clsApproval {
 				$roles=new ACLRole();
 				//echo $bean->id;die;
 				$approvers=[];	
-				$userRole=$roles->getUserRole($current_user->id);	
+				$userRole=$roles->getUserRole($current_user->id,1);	
 				$approvers=$objExp->getAllApprovers('',$userRole['parent_role']);
 				
 				$inQuery='';
@@ -101,7 +101,7 @@ class clsApproval {
 				$exapprovers->staus=0;
 				$exapprovers->save();//print_r($exapprovers);die;
 				
-				$roleArr=$roles->getUserRole($current_user->id);
+				$roleArr=$roles->getUserRole($current_user->id,1);
 				$approvers=$objExp->getAllApprovers($department,$roleArr['parent_role']);
 				if($approvers && count($approvers)>0){
 					foreach($approvers as $appvrs){
