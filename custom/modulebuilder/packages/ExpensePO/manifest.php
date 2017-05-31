@@ -63,9 +63,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'ExpensePO',
-  'published_date' => '2017-05-30 10:27:16',
+  'published_date' => '2017-05-31 15:28:30',
   'type' => 'module',
-  'version' => 1496140036,
+  'version' => 1496244510,
   'remove_tables' => 'prompt',
 );
 

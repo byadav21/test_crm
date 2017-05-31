@@ -9,12 +9,15 @@ array (
     'default' => true,
     'link' => true,
   ),
-  'REFRENCEID' => 
+  'VENDOR_C' => 
   array (
-    'type' => 'varchar',
-    'label' => 'LBL_REFRENCEID',
-    'width' => '10%',
+    'type' => 'relate',
     'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_VENDOR',
+    'id' => 'TE_EXPENSE_VENDOR_ID_C',
+    'link' => true,
+    'width' => '10%',
   ),
   'DATED' => 
   array (
@@ -38,6 +41,13 @@ array (
     'label' => 'LBL_STATUS',
     'width' => '10%',
   ),
+  'EXPENSE_TYPE' => 
+  array (
+    'label' => 'expense_type',
+    'type' => 'enum',
+    'default' => true,
+    'width' => '10%',
+  ),
   'POREQUIRED' => 
   array (
     'type' => 'enum',
@@ -46,14 +56,12 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'PODOCUMENT' => 
+  'REFRENCEID' => 
   array (
-    'type' => 'text',
-    'studio' => 'visible',
-    'label' => 'LBL_PODOCUMENT',
-    'sortable' => false,
+    'type' => 'varchar',
+    'label' => 'LBL_REFRENCEID',
     'width' => '10%',
-    'default' => true,
+    'default' => false,
   ),
   'CREATED_BY_NAME' => 
   array (
@@ -61,6 +69,15 @@ array (
     'link' => true,
     'label' => 'LBL_CREATED',
     'id' => 'CREATED_BY',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'PODOCUMENT' => 
+  array (
+    'type' => 'text',
+    'studio' => 'visible',
+    'label' => 'LBL_PODOCUMENT',
+    'sortable' => false,
     'width' => '10%',
     'default' => false,
   ),

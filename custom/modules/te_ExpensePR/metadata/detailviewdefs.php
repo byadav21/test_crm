@@ -1,11 +1,21 @@
 <?php
-$module_name = 'te_ExpensePO';
+$module_name = 'te_ExpensePR';
 $viewdefs [$module_name] = 
 array (
-  'EditView' => 
+  'DetailView' => 
   array (
     'templateMeta' => 
     array (
+      'form' => 
+      array (
+        'buttons' => 
+        array (
+          0 => 'EDIT',
+          1 => 'DUPLICATE',
+          2 => 'DELETE',
+          3 => 'FIND_DUPLICATES',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -29,6 +39,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -39,50 +50,34 @@ array (
           0 => 'name',
           1 => 
           array (
-            'name' => 'refrenceid',
-            'label' => 'LBL_REFRENCEID',
+            'name' => 'status',
+            'label' => 'Reference ID',
           ),
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'dated',
-            'label' => 'LBL_DATED',
+            'name' => 'reason_rejection',
+            'label' => 'Reason Rejection',
           ),
           1 => 
           array (
-            'name' => 'amount',
-            'label' => 'LBL_AMOUNT',
+            'name' => 'dated',
+            'label' => 'Date',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'vendor_c',
-            'studio' => 'visible',
-            'label' => 'LBL_VENDOR',
+            'name' => 'amount',
+            'label' => 'Amount',
           ),
           1 => 
           array (
-            'name' => 'porequired',
-            'studio' => 'visible',
-            'label' => 'LBL_POREQUIRED',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'inv_num',
-            'label' => 'Invoce No.',
-          ),
-          1 => 
-          array (
-            'name' => 'documents',
-            'studio' => 'visible',
-            'label' => 'LBL_DOCUMENTS',
+            'name' => 'refrenceid',
+            'label' => 'Reference ID',
           ),
         ),
       ),

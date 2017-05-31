@@ -1,7 +1,7 @@
 <?php
 
 $dictionary['te_ExpensePO']['fields']['expense_type'] =array (
-	'name' => 'expense_type',
+	'name' => 'expense_type', 'options'=>'exptypedom',
 	'label' => 'expense_type',
 	'type' => 'enum',	
 	'len' => '15',

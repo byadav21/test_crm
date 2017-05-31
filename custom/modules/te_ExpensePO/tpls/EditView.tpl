@@ -380,7 +380,7 @@
 {{/foreach}}
 </table>
 <hr>
-<input type="hidden1" value="{$prtype}" name="type" id="type" />
+<input type="hidden" value="{$prtype}" name="type" id="type" />
 <h2>Expense Details</h2>
 <div class="clear"></div>
 <div class="row" class="maincontroe">

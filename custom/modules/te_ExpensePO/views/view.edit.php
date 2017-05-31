@@ -63,10 +63,14 @@ class te_ExpensePOViewEdit extends ViewEdit {
 			}	
 			 
 			
+                        $this->ss->assign('prtype', $this->bean->expense_type);
+		}else{
+			$this->ss->assign('prtype', "");		
+			
+		}			
 			
 			
-			
-		}
+		
 		
 		$this->ss->assign('taxes', $GLOBALS['app_list_strings']['item_taxes']);		 
 		$this->ss->assign('taxesarr', $taxes);
@@ -76,7 +80,7 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		$this->ss->assign('document', $document);		 
 		$this->ss->assign('docuarray', $docuarray);		 
 		$this->ss->assign('beanid', $this->bean->id);		 
-		$this->ss->assign('prtype', $this->bean->expense_type);	 
+		//$this->ss->assign('prtype', $this->bean->expense_type);	 
 		  
 		 
 		$this->ev->process();

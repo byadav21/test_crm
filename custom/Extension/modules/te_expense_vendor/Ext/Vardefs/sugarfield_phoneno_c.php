@@ -78,7 +78,7 @@ $dictionary['te_expense_vendor']['fields']['gst'] =array (
 $dictionary['te_expense_vendor']['fields']['status'] =array (
         'name' => 'status',
         'label' => 'status',
-        'type' => 'integer',
+        'type' => 'int',
          'default'=>1,
         'len' => '1',
         
