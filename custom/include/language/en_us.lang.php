@@ -168,3 +168,17 @@ $GLOBALS['app_list_strings']['legal_entity_status_list']=array (
 $GLOBALS['app_list_strings']['glcode']=array (
   'Housekeeping_Charges' => 'Housekeeping Charges',
 );
+
+$GLOBALS['app_list_strings']['porequired_c_list']=array (
+  'yes' => 'Yes',
+  'no' => 'NO',
+);
+
+$GLOBALS['app_list_strings']['porequired_c_list']=array (
+  'yes' => 'Yes',
+  'no' => 'NO',
+);
+$GLOBALS['app_list_strings']['item_taxes']=array (
+  'tax1'=>'Tax 1',
+  'tax2' => 'Tax 2',
+);
