@@ -63,7 +63,7 @@
  <ul class="nav nav-tabs" style="margin-top:15px">
   <li class="active"><a href="#1a" data-toggle="tab" href="#">PO Detail</a></li>
  
-  {if $status==2}
+  {if $status==2 && $overview->expense_type=='PO'}
     {if $isfacility>0}
 		<li><a href="#2a" data-toggle="tab" href="#">Add PO</a></li>
 	{/if}	
@@ -83,7 +83,9 @@
 					 
 						 
 						 <p>Date: {$overview->dated} </p>
-						 
+						 {if $overview->expense_type=='PR'}
+							<p>Invoice No: {$overview->inv_num} </p>
+						 {/if}
 								
 					 
 						 
@@ -92,9 +94,9 @@
 						   
 			
 			</div>
-		 
+		  
 			<div class="col-sm-6 rowpadd">
-					
+					{if $overview->expense_type=='PO'}
 								<label>Status</label>: 
 								{if $overview->status eq 0  }
 										<p style="color:red;font-weight:bold;display:inline">Rejected</p> 
@@ -108,12 +110,15 @@
 										<p style="color:red;font-weight:bold;display:inline">Cancelled</p>
 								 
 								   {/if}
-							
+								
 								  <p> <label>Po Required  </label>: {$overview->porequired}</p>
+								  
+					{/if}			  
 								  <p>Ref# {$overview->refrenceid} </p>
 								  <p>Submitter: {$overview->assigned_user_name} </p>
 								  
 			</div>
+		
 
 		</div>
 
@@ -210,7 +215,7 @@
 		</div>
 	</div>
 	
- {if $status==2}
+ {if $status==2 && $overview->expense_type=='PO'}
 	{sugar_getscript file="custom/themes/SuiteR/css/uploader/all.fine-uploader.min.js"}
     {if $isfacility>0}	
 
@@ -391,7 +396,7 @@
 	
 
 	});	
- {{if $status==2}}
+ {{if $status==2 && $overview->expense_type=='PO'}}
     {{if $isfacility>0}}		
 		 var ids='{{$overview->id}}';
          var finalParams={records:ids};

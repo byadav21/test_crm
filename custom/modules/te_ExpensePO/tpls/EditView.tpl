@@ -48,7 +48,29 @@
 {sugar_getscript file="custom/themes/SuiteR/css/uploader/all.fine-uploader.min.js"}
 {literal}
 
-<style>.maincontainer input[type=text],.maincontainer select{width:100%!important} .minbtn,.minbtntx,.errdiv,#documents,#documents_label{display:none;cursor:pointer} .errdiv{color:red} .deldocs{cursor:pointer} .dompar{margin-bottom: 5px; display: block; overflow: hidden;clear:both}  #amount{pointer-events:none;opacity:0.8} .action_buttons{display: inline-block;}.uploadedimg{padding: 5px 0;border-bottom: 1px dotted #000000; margin-bottom: 0px;    display: block;    overflow: hidden;}</style>
+<style>
+.boxchoose{    padding: 50px 12px;
+    background: #ffffff;
+    border: 1px solid #3C8DBC;
+    border-radius: 15px;
+    color: #3C8DBC;
+    font-size: 19px;cursor:pointer}
+.boxchoose:hover{background:#f1f1f1; border:1px solid silver}    
+
+  .maincontainer input[type=text],.maincontainer select{width:100%!important} .minbtn,.minbtntx,.errdiv,#documents,#documents_label{display:none;cursor:pointer} .errdiv{color:red} .deldocs{cursor:pointer} .dompar{margin-bottom: 5px; display: block; overflow: hidden;clear:both}  #amount{pointer-events:none;opacity:0.8} .action_buttons{display: inline-block;}.uploadedimg{padding: 5px 0;border-bottom: 1px dotted #000000; margin-bottom: 0px;    display: block;    overflow: hidden;}</style>
+
+{{if $prtype=='PR'}}
+<style>#porequired_label,#porequired{display:none}</style>
+{{elseif $prtype=='PO'}}
+<style>#inv_num_label,#inv_num{display:none}</style>
+{{/if}}
+<style>
+{{if $isedit=='0'}}
+	#EditView{display:none}
+{{else}}
+	.popupbox{display:none}
+{{/if}}
+</style>
  
     <script type="text/template" id="qq-template-gallery">
         <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="Drop files here">
@@ -126,9 +148,34 @@
             </dialog>
         </div>
     </script>
-
+    <script> 
+		function showFrm(e){
+		  if(e==1){
+			$('#porequired_label').hide();
+			$('#porequired').hide();
+			$('#type').val('PR');	
+		  }else{
+			$('#inv_num_label').hide();
+			$('#inv_num').hide();		  
+			$('#type').val('PO');		  
+		  }
+		$('.popupbox').hide();
+		$('#EditView').show();
+		}
+    </script>
 
 {/literal}
+
+
+<div class="row text-center popupbox">
+ 
+<div class="col-xs-10 col-xs-offset-1 centered">
+<div class="col-xs-4 boxchoose col-xs-offset-1"  onclick="showFrm(0)">Create Expense with PO</div>
+<div class="col-xs-4 boxchoose col-xs-offset-1"  onclick="showFrm(1)">Create Expense without PO</div>
+</div>
+</div>
+
+
 {{include file=$headerTpl}}
 {sugar_include include=$includes}
 
@@ -333,6 +380,7 @@
 {{/foreach}}
 </table>
 <hr>
+<input type="hidden1" value="{$prtype}" name="type" id="type" />
 <h2>Expense Details</h2>
 <div class="clear"></div>
 <div class="row" class="maincontroe">
@@ -727,6 +775,12 @@ $('.save_btn').on('click',function(){
 		var iserr=0;
 		var amount=0;
 		var item=0;
+		
+		if($('#type').val()=='PR' && $.trim($('#inv_num').val())==''){
+		  alert('Please enter invoice number');
+		  return false;
+		}
+		
 		$( ".itemtxt" ).each(function() {
 				if($.trim($(this).val())!=''){				
 					

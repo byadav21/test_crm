@@ -174,11 +174,18 @@ $GLOBALS['app_list_strings']['porequired_c_list']=array (
   'no' => 'NO',
 );
 
-$GLOBALS['app_list_strings']['porequired_c_list']=array (
-  'yes' => 'Yes',
-  'no' => 'NO',
+$GLOBALS['app_list_strings']['exptypedom']=array (
+  'PO' => 'Expense Wit PO',
+  'PR' => 'Expense Without PO',
 );
 $GLOBALS['app_list_strings']['item_taxes']=array (
   'tax1'=>'Tax 1',
   'tax2' => 'Tax 2',
+);
+$GLOBALS['app_list_strings']['po_status']=array (
+  '-1'=>'Rejected',
+  '0' => 'Open',
+  '1' => 'Open',
+  '2' => 'Approved',
+  '3' => 'Cancel',
 );

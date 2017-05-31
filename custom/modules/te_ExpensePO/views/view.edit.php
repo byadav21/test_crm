@@ -16,7 +16,6 @@ class te_ExpensePOViewEdit extends ViewEdit {
 	
 	
 	function display() {
-		
 		 
 		global $current_user;
 		$expObj=new te_Expenseproverride();
@@ -27,40 +26,41 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		$document='[]';
 		$docuarray=[];
 	 
- 
+		$this->ss->assign('isedit', 0);	
 		if(!empty($_REQUEST['record'])){
-		 
+			$this->ss->assign('isedit', 1);	
 			$var=$_REQUEST['record'];	
 			$itemDeiail=$expObj->getAllItems($var);
 			$taxes=$itemDeiail['taxes'];
 			$items=$itemDeiail['items'];
 			$document= $this->bean->documents;		 
 			$docuarray=json_decode(html_entity_decode( $this->bean->documents));
-			
-			if( $this->bean->status==2 || $this->bean->status==-1){
-				echo '<h1>Expense PO >> Edit</h1><br><br><br><span style="color:red">Error: This PO can\'t be edited</span>'; exit();	
-			}
-			
-			$userRole=$roleUsr->getUserRole($current_user->id);	
-			
-			$department=$current_user->rel_fields_before_value['te_department_expense_users_1te_department_expense_ida']; 
-			if($userRole['sendtofin']==1){
-				$approvers=$expObj->getFacilityApprovers($userRole['parent_role'],1,0); 
-			}else{
-				$approvers=$expObj->getAllApprovers($department,$userRole['parent_role']);
-			}
-			  
-			$inQuery='';
-			if($approvers && count($approvers)>0){
-				foreach($approvers as $appvrs){
-					$inQuery.="'".$appvrs['id']."',";
+			if($this->bean->expense_type=='PO'){
+				if( ($this->bean->status==2 || $this->bean->status==-1) ){
+					echo '<h1>Expense PO >> Edit</h1><br><br><br><span style="color:red">Error: This PO can\'t be edited</span>'; exit();	
 				}
-			}			
-			$inQuery=substr($inQuery,0, strlen($inQuery)-1);
-			
-			if(!$expObj->getStatusForEdit($this->bean->id,$inQuery)){
-					echo '<h1>Expense PO >> Edit</h1><br><br><br><span style="color:red">Error: You can\'t edit this PO dueto approved by your Supervisor</span>'; exit();	
-			}
+				
+				$userRole=$roleUsr->getUserRole($current_user->id);	
+				
+				$department=$current_user->rel_fields_before_value['te_department_expense_users_1te_department_expense_ida']; 
+				if($userRole['sendtofin']==1){
+					$approvers=$expObj->getFacilityApprovers($userRole['parent_role'],1,0); 
+				}else{
+					$approvers=$expObj->getAllApprovers($department,$userRole['parent_role']);
+				}
+				  
+				$inQuery='';
+				if($approvers && count($approvers)>0){
+					foreach($approvers as $appvrs){
+						$inQuery.="'".$appvrs['id']."',";
+					}
+				}			
+				$inQuery=substr($inQuery,0, strlen($inQuery)-1);
+				
+				if(!$expObj->getStatusForEdit($this->bean->id,$inQuery)){
+						echo '<h1>Expense PO >> Edit</h1><br><br><br><span style="color:red">Error: You can\'t edit this PO dueto under Supervisor approval</span>'; exit();	
+				}
+			}	
 			 
 			
 			
@@ -76,6 +76,7 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		$this->ss->assign('document', $document);		 
 		$this->ss->assign('docuarray', $docuarray);		 
 		$this->ss->assign('beanid', $this->bean->id);		 
+		$this->ss->assign('prtype', $this->bean->expense_type);	 
 		  
 		 
 		$this->ev->process();
