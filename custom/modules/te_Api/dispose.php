@@ -2,11 +2,9 @@
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('custom/modules/te_Api/te_Api.php');
 require_once('modules/te_disposition/te_disposition.php');
-
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
 global $db;
-
-
+ 
 if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUEST['checkCallStatus']==1 && $_REQUEST['records'] ){
         //echo "select id from  session_call where lead_id='". $_REQUEST['records'] ."' session_id='" . session_id() ."'";
 		$res=$db->query("select id from  session_call where lead_id='". $_REQUEST['records'] ."' and session_id='" . $_REQUEST['customerCRTId'] ."'");
@@ -47,9 +45,38 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 				}
 				
 	}
+	
+	if( $_REQUEST['callType']=='manual.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER'){
+					$phone=$_REQUEST['phone'];	
+					if(isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference']){
+						$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $_REQUEST['lead_reference'] ."' and deleted=0 and status!='Duplicate' ";
+						 
+					}else{
+					 
+						 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
+						
+					}
+						$res=$db->query($lead);
+						if($db->getRowCount($res) > 0){
+							$records=$db->fetchByAssoc($res);		
+							$api=new te_Api_override();
+							$data=[];
+							$session=$api->doLogin();								
+							$data['sessionId']=$session;
+							$data['properties']=array('update.customer'=>'true','migrate.customer'=>'true');
+							$data['customerRecords']=[];
+							$customerRecords['name']= $records['first_name']." ". $records['last_name'];
+							$customerRecords['first_name'] = $records['first_name'];
+							$customerRecords['last_name'] = $records['last_name'];					
+							$customerRecords['phone1'] =$phone;						 
+							$customerRecords['lead_reference'] = $records['id'];
+							$data['customerRecords'][]=$customerRecords;
+							$responses=$api->uploadContacts($data,18,42);
+					}
+	}
     exit();
  
 
 
 }
-
+die;
