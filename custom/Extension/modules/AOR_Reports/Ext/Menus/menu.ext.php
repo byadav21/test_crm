@@ -100,7 +100,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Wee
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyreport', "Daily Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dmstatusreport', "DM Status Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=budgeted_actual', "Budgeted Vs Actual Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=Conversion_data', "Conversion Data Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=conversiondatareport', "Conversion Data Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
 
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dateleadperformance', "Till Date Lead Performance", 'AOR_Reports');
