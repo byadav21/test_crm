@@ -49,6 +49,7 @@
 {literal}
 
 <style>
+.amtvald,#amount{    background-color: #f1f1f1!important;}
 .boxchoose{    padding: 50px 12px;
     background: #ffffff;
     border: 1px solid #3C8DBC;
@@ -385,13 +386,19 @@
 <div class="clear"></div>
 <div class="row" class="maincontroe">
 				
-				<div class="maincontainer col-sm-6">
+				<div class="maincontainer col-sm-8">
 					<div class="row items">
 						
-							<div class="col-sm-5">
+							<div class="col-sm-3">
 								Expense Detail
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-2">
+								Unit
+							</div>
+							<div class="col-sm-2">
+								Rate
+							</div>
+							<div class="col-sm-3">
 								Amount in <i class="fa fa-inr" aria-hidden="true"></i>
 							</div>
 							
@@ -399,13 +406,21 @@
 							{foreach   from=$items key=id item=rowDatas}
 							
 								<div class="dompar">	
-								<div class="col-sm-5">
+								<div class="col-sm-3">
 									<input type="hidden" value="{$rowDatas.id}" name="savedid[]" >
 									<input type="text" value="{$rowDatas.name}" class="itemtxt" name="items[]" >
 									<div class="errdiv itemtxterr ">Please enter Item name</div>
 								</div>
-								<div class="col-sm-5">
-									 <input type="text" value="{$rowDatas.amt|string_format:"%.2f"}"  class="amtvald" name="amounts[]" >
+								<div class="col-sm-2">
+									 <input type="text" value="{$rowDatas.unit|string_format:"%.2f"}"  class="amtu" name="unit[]" >
+									 <div class="errdiv amtuerr ">Please enter valid unit</div>
+								</div>
+								<div class="col-sm-2">
+									 <input type="text" value="{$rowDatas.rate|string_format:"%.2f"}"  class="amtr" name="rate[]" >
+									 <div class="errdiv amtrerr ">Please enter valid rate</div>
+								</div>
+								<div class="col-sm-3">
+									 <input style=" background-color: #f1f1f1!important;" disabled type="text" value="{$rowDatas.amt|string_format:"%.2f"}"  class="amtvald" name="amounts[]" >
 									 <div class="errdiv amtvalderr ">Please enter valid amount</div>
 								</div>
 								
@@ -420,13 +435,21 @@
 						{/if}
 							
 						 <div class="dompar">	
-							<div class="col-sm-5">
+							<div class="col-sm-3">
 								<input type="hidden"  name="savedid[]" >
 								<input type="text" class="itemtxt" name="items[]" >
 								<div class="errdiv itemtxterr ">Please enter Item name</div>
 							</div>
-							<div class="col-sm-5">
-								 <input type="text" class="amtvald" name="amounts[]" >
+							<div class="col-sm-2">
+								 <input type="text" class="amtu" name="unit[]" >
+								 <div class="errdiv amtuerr ">Please enter valid unit</div>
+							</div>
+							<div class="col-sm-2">
+								 <input type="text" class="amtr" name="rate[]" >
+								 <div class="errdiv amtrerr ">Please enter valid rate</div>
+							</div>
+							<div class="col-sm-3">
+								 <input  style=" background-color: #f1f1f1!important;" disabled type="text" class="amtvald" name="amounts[]" >
 								 <div class="errdiv amtvalderr ">Please enter valid amount</div>
 							</div>
 							
@@ -438,7 +461,7 @@
 					</div>
 				</div>
 							
-				<div class="maincontainer col-sm-6">
+				<div class="maincontainer col-sm-4">
 				
 					<div class=" itemstx">
 							<div class="col-sm-5">
@@ -621,10 +644,17 @@ $(document).ready(function() {ldelim}
 
 {{/if}}
 
+function calculateRow(unit,rate,amtvald){
+	var amount=parseFloat($.trim(unit)) * parseFloat($.trim(rate));
+	if(isNaN(amount)) amount=0;
+	amtvald.val(amount.toFixed(2));
+	calculate();
+}
 function calculate(){
 
 
-	  var amount=0;
+	 var amount=0;
+		
 	 $( ".amtvald" ).each(function() {
 				if($.trim($(this).val())!=''){				
 					var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
@@ -696,10 +726,19 @@ $('body').on('click','.minbtn',function(){
 
 $('body').on('click','.addbtn',function(){
 	$('.errdiv').hide();
+	 
 	if($.trim($(this).parent().parent().find('.itemtxt').val())==''){
 		 
 		$(this).parent().parent().find('.itemtxterr').show();
 		
+	}
+	if($.trim($(this).parent().parent().find('.amtu').val())==''){
+		$(this).parent().parent().find('.amtuerr').show();
+		return false;
+	}
+	if($.trim($(this).parent().parent().find('.amtr').val())==''){
+		$(this).parent().parent().find('.amtrerr').show();
+		return false;
 	}
 	if($.trim($(this).parent().parent().find('.amtvald').val())==''){
 		$(this).parent().parent().find('.amtvalderr').show();
@@ -707,10 +746,15 @@ $('body').on('click','.addbtn',function(){
 	}
 
 	var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
-	if(!regex.test($.trim($(this).parent().parent().find('.amtvald').val()))){
-		$(this).parent().parent().find('.amtvalderr').show();
+	if(!regex.test($.trim($(this).parent().parent().find('.amtu').val()))){
+		$(this).parent().parent().find('.amtuerr').show();
 		return false;
 	}
+	if(!regex.test($.trim($(this).parent().parent().find('.amtr').val()))){
+		$(this).parent().parent().find('.amtrerr').show();
+		return false;
+	}
+	calculateRow($.trim($(this).parent().parent().find('.amtu').val()),$.trim($(this).parent().parent().find('.amtr').val()),$(this).parent().parent().find('.amtvald'));
 
 	$('.items').append('<div class="dompar">' + $(this).parent().parent().html() + '</div>');
 	
@@ -761,13 +805,37 @@ $('body').on('click','.addbtntx',function(){
 
 })
 
-$('.amtvald,.amtvaldtx').bind('copy paste cut',function(e) {
+$('.amtvald,.amtvaldtx,.amtu,.amtr').bind('copy paste cut',function(e) {
 	e. preventDefault(); //disable cut,copy,paste.
  
 });
 
 $('body').on('keyup','.amtvald,.amtvaldtx',function(e) {
      calculate();
+});
+
+$('body').on('keyup','.amtu',function(e) {
+    $('.errdiv').hide();
+	var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
+	if(!regex.test($.trim($(this).val()))){
+		$(this).parent().parent().find('.amtuerr').show(); return false;
+	}
+    if($.trim($(this).val())!='' && $.trim($(this).parent().parent().find('.amtr').val())!=''){
+		calculateRow($.trim($(this).val()),$.trim($(this).parent().parent().find('.amtr').val()),$(this).parent().parent().find('.amtvald'));
+     
+     }
+});
+
+$('body').on('keyup','.amtr',function(e) {
+    $('.errdiv').hide();
+	var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
+	if(!regex.test($.trim($(this).val()))){
+		$(this).parent().parent().find('.amtrerr').show(); return false;
+	}
+    if($.trim($(this).val())!='' && $.trim($(this).parent().parent().find('.amtu').val())!=''){
+		calculateRow($.trim($(this).parent().parent().find('.amtu').val()),$.trim($(this).val()),$(this).parent().parent().find('.amtvald'));
+     
+     }
 });
 
 $('.save_btn').on('click',function(){
@@ -787,7 +855,7 @@ $('.save_btn').on('click',function(){
 					item++;
 				}
 		});
-		$( ".amtvald" ).each(function() {
+		$( ".amtu" ).each(function() {
 				if($.trim($(this).val())!=''){				
 					var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
 					if(!regex.test($.trim($(this).val()))){
@@ -798,6 +866,27 @@ $('.save_btn').on('click',function(){
 						$(this).parent().prev().find('.itemtxt').next().show();
 						iserr=1;
 					}
+					if($.trim($(this).parent().parent().find('.amtr').val())==''){
+						$(this).parent().parent().find('.amtr').next().show();
+						iserr=1;
+					}
+					
+					if(!regex.test($.trim($(this).parent().parent().find('.amtr').val()))){
+						$(this).parent().parent().find('.amtr').next().show();
+						iserr=1;
+					}
+					calculateRow($.trim($(this).val()),$.trim($(this).parent().parent().find('.amtr').val()),$(this).parent().parent().find('.amtvald'))	;				
+					 
+				}
+		});
+		if(iserr==1) return false;
+		$( ".amtvald" ).each(function() {
+				if($.trim($(this).val())!=''){				
+					var regex  = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
+					if(!regex.test($.trim($(this).val()))){
+						$(this).next().show();
+						iserr=1;
+					}					
 					amount +=parseFloat($.trim($(this).val()));
 				}
 		});

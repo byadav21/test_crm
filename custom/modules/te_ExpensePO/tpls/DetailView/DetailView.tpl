@@ -131,10 +131,15 @@
 					<h2> Expenses</h2>
 					{foreach from=$items key=id item=val}
 						<div class="col-sm-12 " style="line-height: 32px;">
-							<div class="col-sm-6 ">
+							<div class="col-sm-4 ">
 							  {$val.name}
 							</div>
-							<div class="col-sm-6 text-right ">
+							<div class="col-sm-2 ">
+							  {$val.unit} 							</div>
+							<div class="col-sm-3 ">
+							  <i class="fa fa-inr" aria-hidden="true"></i> {$val.rate}
+							</div>
+							<div class="col-sm-3 text-right ">
 							   <i class="fa fa-inr" aria-hidden="true"></i> {$val.amt}
 							</div>
 						</div>

@@ -12,7 +12,7 @@ global  $current_user;global $db;
 $roles=new ACLRole();
 $objExp=new te_Expenseproverride();			
 		
-
+//print_r($_REQUEST);die;
 $role = new te_ExpensePO();
 if(isset($_REQUEST['record']) && $_POST['record']){
 	$role->id = $_POST['record'];
@@ -48,6 +48,8 @@ if(isset($_REQUEST['record']) && $_POST['record']){
 	 
 	
 }
+
+ 
 
 if(!empty($_REQUEST['name'])){
 	
@@ -91,7 +93,7 @@ if(!empty($_REQUEST['name'])){
 						$i=0;
 						foreach($_POST['items'] as $items){
 							if(isset($_POST['savedid'][$i]) && $_POST['savedid'][$i]){
-								if($items!='' && $_POST['amounts'][$i]>0){
+								if($items!='' && $_POST['unit'][$i]>0){
 									$itemsExp = new te_expenseprdetail();
 									$itemsExp->id=$_POST['savedid'][$i];
 									$itemsExp->name=$items;							 
@@ -99,13 +101,15 @@ if(!empty($_REQUEST['name'])){
 									$itemsExp->modified_user_id=$current_user->id;							 
 									
 									$itemsExp->itemtype=0;
-									$itemsExp->amounts=$_POST['amounts'][$i];
+									$itemsExp->unit=$_POST['unit'][$i];
+									$itemsExp->rate=$_POST['rate'][$i];
+									$itemsExp->amounts=floatval($_POST['unit'][$i])*floatval($_POST['rate'][$i]);
 									$itemsExp->save();
-									$totalAmt +=floatval($_POST['amounts'][$i]);
+									$totalAmt +=floatval(floatval($_POST['unit'][$i])*floatval($_POST['rate'][$i]));
 									$deletednotid[]=	$_POST['savedid'][$i];	
 								}
 							}else{
-								if($items!='' && $_POST['amounts'][$i]>0){
+								if($items!='' && $_POST['unit'][$i]>0){
 									$itemsExp = new te_expenseprdetail();
 									$itemsExp->expenseprid=$role->id;
 									$itemsExp->name=$items;
@@ -115,14 +119,17 @@ if(!empty($_REQUEST['name'])){
 									$itemsExp->created_by=$current_user->id;
 									$itemsExp->assigned_user_id=$current_user->id;
 									$itemsExp->itemtype=0;
-									$itemsExp->amounts=$_POST['amounts'][$i];
+									$itemsExp->unit=$_POST['unit'][$i];
+									$itemsExp->rate=$_POST['rate'][$i];
+									$itemsExp->amounts=floatval($_POST['unit'][$i])*floatval($_POST['rate'][$i]);
 									$itemsExp->save();
-									$totalAmt +=floatval($_POST['amounts'][$i]);
+									$totalAmt +=floatval(floatval($_POST['unit'][$i])*floatval($_POST['rate'][$i]));
 									$deletednotid[]=	$itemsExp->id;
 								}	
 							}
 							$i++;	
 						}
+						
 				}
 				
 				if(count($_POST['taxesp'])>0){
@@ -177,7 +184,9 @@ if(!empty($_REQUEST['name'])){
 						//echo "update te_expenseprdetail set deleted=1 where expenseprid='$var' and id not in ($delid)";die;
 						$db->query("update te_expenseprdetail set deleted=1 where expenseprid='$var' and id not in ($delid) ");
 				}
-				
+			
+			$totalNet=floatval($totalAmt) + floatval($totalTax);
+			$db->query("update te_expensepo set amount=". $totalNet ." where id='". $expID ."'");	
 				
 			if(!isset($_REQUEST['record']) || $_REQUEST['record']=='' ){
 				//echo '<pre>';//</pre>
@@ -248,6 +257,7 @@ if(!empty($_REQUEST['name'])){
 			
 				
 			}
+		 
 			$db->query('commit');
 		}catch(Exception $e){
 			$db->query('rollback');

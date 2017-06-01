@@ -53,12 +53,14 @@ class te_Expenseproverride extends te_ExpensePO {
 		 
 		$taxes=[]; 
 		$items=[];		
-		$itemDetal=	$this->dbinstance->query("select amounts,name,id,itemtype from te_expenseprdetail where expenseprid='$var' and deleted=0");
+		$itemDetal=	$this->dbinstance->query("select amounts,rate,unit,name,id,itemtype from te_expenseprdetail where expenseprid='$var' and deleted=0");
 		$i=0;$j=0;
 		while($row=$this->dbinstance->fetchByAssoc($itemDetal)){
 			if($row['itemtype']==0){
 				$items[$i]['id']=$row['id'];
 				$items[$i]['amt']=number_format($row['amounts'], 2, '.', '');
+				$items[$i]['rate']=number_format($row['rate'], 2, '.', '');
+				$items[$i]['unit']=number_format($row['unit'], 2, '.', '');
 				$items[$i++]['name']=$row['name'];
 			}else{
 				$taxes[$j]['id']=$row['id'];
@@ -75,7 +77,7 @@ class te_Expenseproverride extends te_ExpensePO {
 	
 	public function getAllApprovers($department='',$role){
 	        if($department){		
-		 $sql="select users.id from users inner join te_department_expense_users_1_c on  te_department_expense_users_1_c.te_department_expense_users_1users_idb=users.id
+				$sql="select users.id from users inner join te_department_expense_users_1_c on  te_department_expense_users_1_c.te_department_expense_users_1users_idb=users.id
 		 and te_department_expense_users_1_c.te_department_expense_users_1te_department_expense_ida='$department' inner join acl_roles_users on  acl_roles_users.user_id= users.id   inner join acl_roles  on acl_roles_users.role_id=acl_roles.id where acl_roles.deleted=0 and isvendor=2    and acl_roles_users.role_id='$role' and acl_roles_users.deleted=0 ";	
                }else{
  		 $sql="select users.id from users inner join acl_roles_users on  acl_roles_users.user_id= users.id   inner join acl_roles  on acl_roles_users.role_id=acl_roles.id where acl_roles.deleted=0 and isvendor=2    and acl_roles_users.role_id='$role' and acl_roles_users.deleted=0 ";
