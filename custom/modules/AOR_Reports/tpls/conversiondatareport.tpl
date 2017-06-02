@@ -39,12 +39,12 @@
 			<td nowrap="nowrap" width="10%">&nbsp;</td>
 			<td class="helpIcon" width="*"><img alt="Help" border="0" id="filterHelp" src="themes/SuiteR/images/help-dashlet.png?v=mjry3sKU3KG11ojfGn-sdg"></td>
 		</tr>
-		<!--<tr>
+		<tr>
 			<td scope="row" nowrap="nowrap" width="1%">
 				<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
 
 			</td>
-		</tr>-->
+		</tr>
 		</tbody>
 	</table>
   {*Start Pagination*}

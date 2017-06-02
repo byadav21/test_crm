@@ -76,8 +76,7 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 
 
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Batch,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
-			$file = "leads_performance_report";
+			$file = "leads_conversiondata_report";
 			$where='';
 			$from_date="";
 			$to_date="";
@@ -96,8 +95,96 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
 				$where.=" AND DATE(date_entered)='".$to_date."' ";
 			}
+			if(!empty($_SESSION['lp_batch'])){
+				$batchLeadsArr = $this->getbatchforlead($_SESSION['lp_batch']);
+			}
+			else{
+				$batchLeadsArr = $this->getbatchforlead();
+			}
+			$batchnameArr[]='Vendor';
+			foreach ($batchLeadsArr as $key => $batchLeadsArrvalue) {
+				$batchArr[]=$batchLeadsArrvalue['id'];
+				$batchnameArr[]=str_replace(' ','_',$batchLeadsArrvalue['name']);
+			}
+			$batchnameArr[]='Grand_Total';
+			$data=implode(',',$batchnameArr)."\n";
 
-			
+			$councelorList=array();
+			$vendorArr = array();
+			$vendorSql = "SELECT vendor.name,vendor.id  from te_vendor AS vendor where vendor.deleted=0";
+			$vendorObj =$db->query($vendorSql);
+
+			while($row =$db->fetchByAssoc($vendorObj)){
+				$vendorArr[]=$row['name'];
+			}
+			$total=count($vendorArr); #total records
+			$start=0;
+			$per_page=10;
+			$page=1;
+			$pagenext=1;
+			$last_page=ceil($total/$per_page);
+
+			if(isset($_REQUEST['page'])&&$_REQUEST['page']>0){
+				$start=$per_page*($_REQUEST['page']-1);
+				$page=($_REQUEST['page']-1);
+				$pagenext = ($_REQUEST['page']+1);
+
+			}else{
+				//$page++;
+				$pagenext++;
+			}
+			if(($start+$per_page)<$total){
+				$right=1;
+			}else{
+				$right=0;
+			}
+			if(isset($_REQUEST['page'])&&$_REQUEST['page']==1){
+				$left=0;
+			}elseif(isset($_REQUEST['page'])){
+				$page=($_REQUEST['page']-1);
+				$left=1;
+			}
+
+			$vendorArr=array_slice($vendorArr,$start,$per_page);
+			if($total>$per_page){
+				$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
+
+			}else{
+				$current="(".($start+1)."-".count($vendorArr)." of ".$total.")";
+
+			}
+
+			if($vendorArr && $batchArr){
+				foreach ($vendorArr as $key => $vendorArrvalue) {
+					foreach ($batchArr as $key => $value) {
+						$councelorList[$vendorArrvalue][$value]=0;
+					}
+					$leadSql = "select count(*)total,leads_cstm.te_ba_batch_id_c AS batchid from leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c where leads.vendor='".$vendorArrvalue."' AND leads_cstm.te_ba_batch_id_c IN ('".implode("','",$batchArr)."') AND leads.status='Converted'  $where GROUP BY leads_cstm.te_ba_batch_id_c";
+					$leadObj =$db->query($leadSql);
+					while($row =$db->fetchByAssoc($leadObj)){
+						$councelorList[$vendorArrvalue][$row['batchid']]=$row['total'];
+					}
+				}
+			}
+
+
+			foreach($councelorList as $key=>$councelor){
+				$dataArr = array();
+				$total = array();
+				$dataArr[] = str_replace(' ','__',$key);
+				foreach($batchArr as $value){
+					$dataArr[] = $councelor[$value];
+					$total[] = $councelor[$value];
+				}
+				$dataArr[] = array_sum($total);
+
+				$data.=implode(',',$dataArr)."\n";
+		 }
+			ob_end_clean();
+			header("Content-type: application/csv");
+			header ('Content-disposition: attachment;filename=" '. $filename . '.csv";' );
+			echo $data; exit;
+
 		}
 		$councelorList=array();
 		$vendorArr = array();
