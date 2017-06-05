@@ -12,7 +12,7 @@
 				<select name="batch[]" id="batch"  class="multiselbox" multiple>
 					<option  value=""></option>
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.id}" {if in_array($batch.id, $selected_batch) } selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
 			</td>
@@ -140,7 +140,7 @@
 {literal}
 Calendar.setup ({
    inputField : "from_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "from_date_trigger",
    singleClick : true,
    dateStr : "",
@@ -153,7 +153,7 @@ Calendar.setup ({
 {literal}
 Calendar.setup ({
    inputField : "to_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "to_date_trigger",
    singleClick : true,
    dateStr : "",

@@ -286,10 +286,10 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 		}
 
 		if(isset($_SESSION['lp_from_date']) && !empty($_SESSION['lp_from_date'])){
-			$from_date = date('d/m/Y',strtotime($_SESSION['lp_from_date']));
+			$from_date = date('d-m-Y',strtotime($_SESSION['lp_from_date']));
 		}
 		if(isset($_SESSION['lp_to_date']) && !empty($_SESSION['lp_to_date'])){
-			$to_date = date('d/m/Y',strtotime($_SESSION['lp_to_date']));
+			$to_date = date('d-m-Y',strtotime($_SESSION['lp_to_date']));
 		}
 		if(isset($_SESSION['lp_batch']) && !empty($_SESSION['lp_batch'])){
 			$selected_batch = $_SESSION['lp_batch'];

@@ -364,7 +364,7 @@
 {literal}
 Calendar.setup ({
    inputField : "from_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "from_date_trigger",
    singleClick : true,
    dateStr : "",
@@ -377,8 +377,7 @@ Calendar.setup ({
 {literal}
 Calendar.setup ({
    inputField : "to_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "to_date_trigger",
    singleClick : true,
    dateStr : "",

@@ -297,10 +297,10 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 		}
 
 		if(isset($_SESSION['lf_from_date']) && !empty($_SESSION['lf_from_date'])){
-			$from_date = date('d/m/Y',strtotime($_SESSION['lf_from_date']));
+			$from_date = date('d-m-Y',strtotime($_SESSION['lf_from_date']));
 		}
 		if(isset($_SESSION['lf_to_date']) && !empty($_SESSION['lf_to_date'])){
-			$to_date = date('d/m/Y',strtotime($_SESSION['lf_to_date']));
+			$to_date = date('d-m-Y',strtotime($_SESSION['lf_to_date']));
 		}
 		if(isset($_SESSION['lf_batch']) && !empty($_SESSION['lf_batch'])){
 			$selected_batch = $_SESSION['lf_batch'];

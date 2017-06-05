@@ -53,20 +53,23 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 		$from_date="";
 		$to_date="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
-			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+			$_SESSION['ds_from_date'] = $_REQUEST['from_date'];
+			$_SESSION['ds_to_date'] = $_REQUEST['to_date'];
+			$_SESSION['ds_batch'] = $_REQUEST['batch'];
+			if($_SESSION['ds_from_date']!=""&&$_SESSION['ds_to_date']){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_to_date'])));
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+			}elseif($_SESSION['ds_from_date']!=""&&$_SESSION['ds_to_date']==""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_from_date'])));
 				$where.=" AND DATE(date_entered)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+			}elseif($_SESSION['ds_from_date']==""&&$_SESSION['ds_to_date']!=""){
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_to_date'])));
 				$where.=" AND DATE(date_entered)='".$to_date."' ";
 			}
 
-			if(!empty($_POST['batch'])){
-				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_POST['batch'])."') ";
+			if(!empty($_SESSION['ds_batch'])){
+				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['ds_batch'])."') ";
 			}
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
 			$data="Vendor,Alive,Warm,Dead,Converted\n";
@@ -133,25 +136,7 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 			echo $data; exit;
 		}
 		$councelorList=array();
-		/*$vendors = $this->getVendor();
-		if($vendors){
-			foreach($vendors as $vendorval){
-				$utm = $this->getUTM($vendorval['id']);
-				if($utm){
-					$whereutm="AND  (l.utm IN('".$utm."') OR l.vendor='".$vendorval['name']."') ";
-				}
-				else{
-					$whereutm="AND  l.vendor='".$vendorval['name']."' ";
-				}
-				$leadSql="SELECT count(l.id) as total,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $whereutm $where GROUP BY l.status";
-				$leadObj =$db->query($leadSql);
 
-				$councelorList[$vendorval['id']]['name']=$vendorval['name'];
-				while($row =$db->fetchByAssoc($leadObj)){
-					$councelorList[$vendorval['id']][$row['status']]=$row['total'];
-				}
-			}
-		}*/
 		$vendors_data = $this->getVendor();
 		$total=count($vendors_data); #total records
 		$start=0;
@@ -196,7 +181,7 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 
 		while($row =$db->fetchByAssoc($leadObj)){
 			$councelorList[$row['id']]['name']=$row['name'];
-			$where="AND  l.vendor='".$row['name']."' ";
+			$where.="AND  l.vendor='".$row['name']."' ";
 			$result = $this->getLeadStatusCountByVendor($where);
 			if($result){
 				foreach ($result as $key => $value) {
@@ -224,14 +209,23 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 				$councelorList[$key]['Converted']=0;
 		}
 
+		if(isset($_SESSION['ds_from_date']) && !empty($_SESSION['ds_from_date'])){
+			$from_date = date('d-m-Y',strtotime($_SESSION['ds_from_date']));
+		}
+		if(isset($_SESSION['ds_to_date']) && !empty($_SESSION['ds_to_date'])){
+			$to_date = date('d-m-Y',strtotime($_SESSION['ds_to_date']));
+		}
+		if(isset($_SESSION['ds_batch']) && !empty($_SESSION['ds_batch'])){
+			$selected_batch = $_SESSION['ds_batch'];
+		}
 
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("leadStatusList",$leadStatusList);
 		$sugarSmarty->assign("batchList",$batchList);
-		$sugarSmarty->assign("selected_from_date",$GLOBALS['timedate']->to_display_date($from_date));
-		$sugarSmarty->assign("selected_to_date",$GLOBALS['timedate']->to_display_date($to_date));
-		//$sugarSmarty->assign("selected_status",$search_status);
+		$sugarSmarty->assign("selected_from_date",$from_date);
+		$sugarSmarty->assign("selected_to_date",$to_date);
+		$sugarSmarty->assign("selected_batch",$selected_batch);
 
 		$sugarSmarty->assign("current_records",$current);
 		$sugarSmarty->assign("page",$page);

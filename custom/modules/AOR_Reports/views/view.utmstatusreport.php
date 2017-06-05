@@ -89,20 +89,23 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		$from_date="";
 		$to_date="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
-			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+			$_SESSION['us_from_date'] = $_REQUEST['from_date'];
+			$_SESSION['us_to_date'] = $_REQUEST['to_date'];
+			$_SESSION['us_batch'] = $_REQUEST['batch'];
+			if($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+			}elseif($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']==""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
 				$where.=" AND DATE(date_entered)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+			}elseif($_SESSION['us_from_date']==""&&$_SESSION['us_to_date']!=""){
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
 				$where.=" AND DATE(date_entered)='".$to_date."' ";
 			}
 
-			if(!empty($_POST['batch'])){
-				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_POST['batch'])."') ";
+			if(!empty($_SESSION['us_batch'])){
+				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
 			}
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
 			$data="UTM,Alive,Warm,Dead,Converted\n";
@@ -190,14 +193,23 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				$councelorList[$key]['Converted']=0;
 		}
 
+		if(isset($_SESSION['us_from_date']) && !empty($_SESSION['us_from_date'])){
+			$from_date = date('d-m-Y',strtotime($_SESSION['us_from_date']));
+		}
+		if(isset($_SESSION['us_to_date']) && !empty($_SESSION['us_to_date'])){
+			$to_date = date('d-m-Y',strtotime($_SESSION['us_to_date']));
+		}
+		if(isset($_SESSION['us_batch']) && !empty($_SESSION['us_batch'])){
+			$selected_batch = $_SESSION['us_batch'];
+		}
 
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("leadStatusList",$leadStatusList);
 		$sugarSmarty->assign("batchList",$batchList);
-		$sugarSmarty->assign("selected_from_date",$GLOBALS['timedate']->to_display_date($from_date));
-		$sugarSmarty->assign("selected_to_date",$GLOBALS['timedate']->to_display_date($to_date));
-		$sugarSmarty->assign("selected_status",$search_status);
+		$sugarSmarty->assign("selected_from_date",$from_date);
+		$sugarSmarty->assign("selected_to_date",$to_date);
+		$sugarSmarty->assign("selected_batch",$selected_batch);
 
 		$sugarSmarty->assign("current_records",$current);
 		$sugarSmarty->assign("page",$page);
