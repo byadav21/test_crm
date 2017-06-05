@@ -803,12 +803,12 @@ class addPaymentClass{
                                                                     // echo $date;die;
 
 								if($date){
-									$drobj->sendDisposition($bean->status_description,$arrReq,$GLOBALS['timedate']->to_display_date_time($date));
+									$drobj->sendDisposition($bean->status_description,$arrReq,$GLOBALS['timedate']->to_display_date_time($date),$bean->id);
 								}else{
-									$drobj->sendDisposition($bean->status_description,$arrReq);	
+									$drobj->sendDisposition($bean->status_description,$arrReq,'', $bean->id);	
 								}	
 							}else{
-							  $drobj->sendDisposition($bean->status_description,$arrReq);	
+							  $drobj->sendDisposition($bean->status_description,$arrReq,'', $bean->id);	
 							}	
 	
 					   }

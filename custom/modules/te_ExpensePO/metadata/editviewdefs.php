@@ -75,6 +75,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'cost_center',
+            'label' => 'Cost Center',
+          ),
+          1 => '',
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
             'name' => 'inv_num',
             'label' => 'Invoce No.',
           ),
