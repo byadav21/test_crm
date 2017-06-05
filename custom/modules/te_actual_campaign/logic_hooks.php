@@ -4,8 +4,8 @@
 $hook_version = 1; 
 $hook_array = Array(); 
 
-$hook_array['before_save'] = Array(); 
-$hook_array['before_save'][] = Array(1, 'actual_campaign_hook', 'custom/modules/te_actual_campaign/actual_campaign_hook.php','AutoCalculate', 'calculateCPA');
+$hook_array['after_save'] = Array(); 
+$hook_array['after_save'][] = Array(1, 'actual_campaign_hook', 'custom/modules/te_actual_campaign/actual_campaign_hook.php','AutoCalculate', 'calculateCPA');
 
 
 ?>
