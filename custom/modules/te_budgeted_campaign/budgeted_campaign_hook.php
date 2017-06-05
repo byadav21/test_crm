@@ -41,6 +41,7 @@ class MapUtm
 			$leadSql="SELECT count(*) as total FROM te_budgeted_campaign WHERE week='".$week."' AND name='".$bean->name."' AND deleted=0";
 			$leadObj = $bean->db->Query($leadSql);
 			$lead = $db->fetchByAssoc($leadObj);
+			$db->query("update te_actual_campaign set clp='".  $bean->clp ."',cpa='". $bean->cpa  ."',conversion_rate='". $bean->conversion_rate ."'  where id='" . $bean->id . "'");
 			//if($lead['total']>0){
 				//$budgetedSql="UPDATE te_budgeted_campaign SET leads='".$bean->leads."',conversion='".$bean->conversion."',conversion_rate='".$bean->conversion_rate."',clp='".$bean->clp."',cpa='".$bean->cpa."',volume='".$bean->volume."',cost='".$bean->cost."',te_ba_batch_id_c='".$utm['te_ba_batch_id_c']."'  WHERE week='".$week."' AND year='".$y."' AND name='".$bean->name."' AND deleted=0";
 				///$bean->db->Query($budgetedSql);
