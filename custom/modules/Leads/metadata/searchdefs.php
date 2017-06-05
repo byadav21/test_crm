@@ -64,7 +64,7 @@ array (
         'default' => true,
         'name' => 'phone_mobile',
       ),
-      'Counsellors' => 
+      'counsellors' => 
       array (
         'label' => 'Counsellors',
         'type' => 'enum',
@@ -99,6 +99,12 @@ array (
       'status' => 
       array (
         'name' => 'status',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'lead_source' => 
+      array (
+        'name' => 'lead_source',
         'default' => true,
         'width' => '10%',
       ),

@@ -18,15 +18,6 @@ $GLOBALS['app_list_strings']['lead_status_dom']=array (
   'Not_Enquired' => 'Not Enquired',
   'Converted' => 'Converted',
 );
-$GLOBALS['app_list_strings']['lead_source_dom']=array (
-  '' => '',
-  'Campaign' => 'Campaign',
-  'Web Site' => 'Web Site',
-  'CallbackForm' => 'Callback Form',
-  'Chat' => 'Chat',
-  'InboundCalls' => 'Inbound Calls',
-  'Referrals' => 'Referrals',
-);
 $app_strings['LBL_GROUPTAB6_1474959980'] = 'Digital Marketing';
 $app_strings['LBL_GROUPTAB7_1474959980'] = 'Contact Center';
 $app_strings['LBL_GROUPTAB1_1474960120'] = 'Digital Marketing';
@@ -143,18 +134,6 @@ $GLOBALS['app_list_strings']['contract_type_list']=array (
   'CPC' => 'CPC',
   'CPI' => 'CPI',
 );
-$GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
-  '' => '',
-  'Chat' => 'Chat',
-  'InboundCalls' => 'Inbound Calls',
-  'Referrals' => 'Referrals',
-  'Email Enquiries' => 'Email Enquiries',
-  'Campaign' => 'Campaign',
-  'Channel' => 'Channel',
-  'Crosssell' => 'Cross sell',
-  'ABND' => 'ABND',
-  'FailPayment' => 'Fail Payment',
-);
 $app_strings['LBL_GROUPTAB5_1495719136'] = 'Expense';
 
 $app_strings['LBL_GROUPTAB5_1495719157'] = 'Expense';
@@ -165,18 +144,9 @@ $GLOBALS['app_list_strings']['legal_entity_status_list']=array (
   'Sole' => 'Sole Proprietorship',
   'LLP' => 'LLP',
 );
-$GLOBALS['app_list_strings']['glcode']=array (
-  'Housekeeping_Charges' => 'Housekeeping Charges',
-);
-
 $GLOBALS['app_list_strings']['porequired_c_list']=array (
   'yes' => 'Yes',
   'no' => 'NO',
-);
-
-$GLOBALS['app_list_strings']['exptypedom']=array (
-  'PO' => 'Expense Wit PO',
-  'PR' => 'Expense Without PO',
 );
 $GLOBALS['app_list_strings']['item_taxes']=array (
   'tax1'=>'Tax 1',
@@ -188,4 +158,39 @@ $GLOBALS['app_list_strings']['po_status']=array (
   '1' => 'Open',
   '2' => 'Approved',
   '3' => 'Cancel',
+);
+
+$GLOBALS['app_list_strings']['exptypedom']=array (
+  'PO' => 'Expense With PO',
+  'PR' => 'Expense Without PO',
+);
+$GLOBALS['app_list_strings']['glcode']=array (
+  'Housekeeping_Charges' => 'Housekeeping Charges',
+  'HousekeepingExpensesMIsc' => 'Housekeeping Expenses - MIsc.',
+  'MiscellaneousExpFacilities' => 'Miscellaneous Exp-Facilities.',
+  'PostageCourier' => 'Postage & Courier',
+  'PrintingStationery' => 'Printing & Stationery',
+);
+$GLOBALS['app_list_strings']['lead_source_dom']=array (
+  '' => '',
+  'Campaign' => 'Campaign',
+  'Web Site' => 'Web Site',
+  'CallbackForm' => 'Callback Form',
+  'Chat' => 'Chat',
+  'InboundCalls' => 'Inbound Calls',
+  'Referrals' => 'Referrals',
+  'Offline_Chat' => 'Offline Chat',
+);
+$GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
+  '' => '',
+  'Chat' => 'Chat',
+  'InboundCalls' => 'Inbound Calls',
+  'Referrals' => 'Referrals',
+  'Email Enquiries' => 'Email Enquiries',
+  'Campaign' => 'Campaign',
+  'Channel' => 'Channel',
+  'Crosssell' => 'Cross sell',
+  'ABND' => 'ABND',
+  'FailPayment' => 'Fail Payment',
+  'Offline_Chat' => 'Offline Chat',
 );

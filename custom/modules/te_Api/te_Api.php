@@ -132,10 +132,10 @@ class te_Api_override extends te_Api {
 		}		
 	}	
 	
-	function sendDisposition($callback='',$request,$date=''){
+	function sendDisposition($callback='',$request,$date='',$lid){
 		
 		try{
-				global $sugar_config;				
+				global $sugar_config,$db;				
 				$url= $sugar_config['ameyo_BASEURL']. 'dacx/dispose?';
 				$data=[];
 				$session=$_SESSION['amyoSID'];
@@ -187,7 +187,9 @@ class te_Api_override extends te_Api {
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
 				$response = curl_exec($ch);
-				$response= file_get_contents($url. ($qrystr)); 
+				//$response= file_get_contents($url. ($qrystr)); 
+                                unset($_SESSION['temp_for_newUser']);
+                                $db->query("update leads set dristi_request=null where id='". $lid ."'"); 
 				$this->createLog($url. ($qrystr),'dispose',$data,$response);     
 				if($response!=='Dispose Successfully'){
 				  echo '<script>swal("You have to dispose manaually!")</script>';	
