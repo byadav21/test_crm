@@ -15,6 +15,20 @@ class LeadsViewEdit extends ViewEdit {
 	
 	function display() {
 		//~ print_r($_REQUEST);
+		global $current_user;
+		if(!is_admin($current_user) && !empty($this->bean->id)){
+			 
+			//check users
+			self::$reporters[]=$this->bean->assigned_user_id;
+			self::getUsers($this->bean->assigned_user_id);			 
+			if(!in_array($current_user->id,self::$reporters)){
+				echo 'You have not access to view this record'; exit();
+			}
+			
+
+		}
+		
+		
 	?>	
 		 <script>
 		 YAHOO.util.Event.addListener(window,"load", function() {
@@ -999,6 +1013,24 @@ if($("#status_description").val() === "Converted") {
 
     }
 
+
+	public static $reporters=array();
+	public static function getUsers($userID){
+	 global $db;
+	 
+		 $sql="select reports_to_id from users where id='" . $userID. "' and deleted=0";
+		 $res=$db->query($sql);	
+		 
+		 if($db->getRowCount($res) > 0){
+			 $records=$db->fetchByAssoc($res);
+			 if($records['reports_to_id']){	
+				 self::$reporters[]=$records['reports_to_id'];
+				 self::getUsers($records['reports_to_id']);
+			 }
+		 }	 
+		
+		
+	}
 
 }
 ?>

@@ -17,10 +17,10 @@ if(isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUE
 $sql="delete from  session_call where  session_id='" . $_REQUEST['customerCRTId'] ."'";
 $db->query($sql);
 $objapi= new te_Api_override();
-$objapi->createLog(print_r($_REQUEST,true),'disposeamyo',$_REQUEST);
+
 if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 
-    
+ $objapi->createLog(print_r($_REQUEST,true),'disposeamyo',$_REQUEST);   
 	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['lead_reference'] ){
 				
 				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='". $_REQUEST['lead_reference'] ."'";
