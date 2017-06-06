@@ -102,7 +102,7 @@ class CampaignsROI extends Dashlet{
 		date_default_timezone_set("Asia/Kolkata");
 		$leadQuery = "SELECT t1.name,(select COUNT(l.id) from leads l where l.utm=t1.name AND l.deleted=0 AND l.status='Converted') total_leads,GROUP_CONCAT(DISTINCT(t3.id)) total_cost_id,t4.id,t4.fees_inr,t4.fees_in_usd FROM te_utm t1 INNER JOIN leads l ON t1.name=l.utm INNER JOIN te_ba_batch t4 on t4.id=t1.te_ba_batch_id_c left join te_utm_te_actual_campaign_1_c as t2 on t2.te_utm_te_actual_campaign_1te_utm_ida=t1.id left join te_actual_campaign as t3 on t3.id=t2.te_utm_te_actual_campaign_1te_actual_campaign_idb WHERE t1.utm_status='Live' AND t3.deleted=0 GROUP BY t1.name ORDER BY total_leads DESC LIMIT 0 ,".$this->top_Campaigns;
                       
-	    $leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
+	    $leadObj=$resultDate=[];//$GLOBALS['db']->query($leadQuery);			  
         while($row=$GLOBALS['db']->fetchByAssoc($leadObj)){	
 			$leadsData[]=$row;			 
 		}		
