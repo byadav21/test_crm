@@ -10,7 +10,15 @@ $result = $db->query($sql);
 if($db->getRowCount($result)>0){
 	$res=$db->fetchByAssoc($result);
 	if($res['lead_id']==1) exit();
-}		
+}
+
+
+	
+
+$sqll="SELECT count(l.id) as ctr  from leads l WHERE l.deleted =0 and l.neoxstatus='0'";
+$res=$db->query($sqll);	
+$countLead=$db->fetchByAssoc($res);
+ 
 $db->query("update cron_job set lead_id='1' where session_id='cron_job'");
 $sql="SELECT l.id,l.first_name,l.last_name,l.phone_mobile,l.phone_home,l.phone_work,l.phone_other,e.email_address , concat (dristi_campagain_id ,dristi_api_id) as drtord ,dristi_campagain_id ,dristi_api_id FROM leads l
  LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id AND el.bean_module='Leads' AND el.deleted=0
@@ -25,6 +33,7 @@ $currentCamp='';
 $currentApi='';
 $allInserted=[]; 
 $pushed=false;
+ 
 if($db->getRowCount($result)>0){
 	
 	$data=[];
@@ -144,6 +153,32 @@ if($db->getRowCount($result)>0){
 	}
 	
 	
+	
+	
+	
+}
+ 
+ 
+ 
+if($countLead['ctr']>0){
+	$sql="select distinct te_utm_te_actual_campaign_1te_utm_ida as utm,te_utm.name from te_utm_te_actual_campaign_1_c inner join te_utm on te_utm.id=te_utm_te_actual_campaign_1_c.te_utm_te_actual_campaign_1te_utm_ida where te_utm_te_actual_campaign_1_c.deleted=0 and te_utm.deleted=0";
+	$result=$db->query($sql);
+	while($row =  $db->fetchByAssoc($result)){
+
+	            $leadSql     = "SELECT COUNT(*) as total FROM leads WHERE utm='" . $row['name'] . "' AND deleted=0 and status!='Duplicate'";
+				$leadObj     = $db->Query($leadSql);
+				$lead        = $db->fetchByAssoc($leadObj);
+				$total_leads = $lead['total'];	
+		 
+				if($total_leads > 0){					
+				  $db->query("update  te_actual_campaign t inner join te_utm_te_actual_campaign_1_c r on t.id=r.te_utm_te_actual_campaign_1te_actual_campaign_idb  set cpl=total_cost/$total_leads where r.te_utm_te_actual_campaign_1te_utm_ida='". $row['utm'] ."'");
+				}else{
+					$db->query("update  te_actual_campaign t inner join te_utm_te_actual_campaign_1_c r on t.id=r.te_utm_te_actual_campaign_1te_actual_campaign_idb  set cpl=0 where r.te_utm_te_actual_campaign_1te_utm_ida='". $row['utm'] ."'");
+				}				
+		
+	}
 }	
+
+ 
 $db->query("update cron_job set lead_id='0' where session_id='cron_job'");
 exit();
