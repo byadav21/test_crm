@@ -40,19 +40,14 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 		# Query for batch drop down options
 
-		$vendorSql="SELECT u.id ,v.name,b.name as batch,contract_type from te_utm as u
-						inner join te_ba_batch as b on b.id=u.te_ba_batch_id_c
-						inner join te_vendor_te_utm_1_c on te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
-						inner join te_vendor as v on v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
-						WHERE u.utm_status ='Live' AND u.deleted=0 AND b.deleted=0 AND v.deleted=0 
-						order by u.date_modified desc";
+		$vendorSql="SELECT name,id FROM `te_utm` WHERE utm_status IN ('Live') AND deleted=0 order by date_modified desc";
 		$vendorObj =$db->query($vendorSql);
 		$vendorArr = [];
 		while($vendor =$db->fetchByAssoc($vendorObj)){
 			$vendorArr[]=$vendor;
 		}
 		$vendors = $vendorArr;
-	 
+
 		$total=count($vendors); #total records
 		$start=0;
 		$per_page=10;
@@ -94,23 +89,26 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		$from_date="";
 		$to_date="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
-			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+			$_SESSION['us_from_date'] = $_REQUEST['from_date'];
+			$_SESSION['us_to_date'] = $_REQUEST['to_date'];
+			$_SESSION['us_batch'] = $_REQUEST['batch'];
+			if($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+			}elseif($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']==""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
 				$where.=" AND DATE(date_entered)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+			}elseif($_SESSION['us_from_date']==""&&$_SESSION['us_to_date']!=""){
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
 				$where.=" AND DATE(date_entered)='".$to_date."' ";
 			}
 
-			if(!empty($_POST['batch'])){
-				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_POST['batch'])."') ";
+			if(!empty($_SESSION['us_batch'])){
+				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
 			}
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Source,Term,Medium,Alive,Warm,Dead,Converted\n";
+			$data="UTM,Alive,Warm,Dead,Converted\n";
 			$file = "utm_status_report";
 			$where='';
 			$from_date="";
@@ -140,8 +138,6 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 					$leadObj =$db->query($leadSql);
 
 					$councelorList[$vendorval['id']]['name']=$vendorval['name'];
-					$councelorList[$vendorval['id']]['batch']=$vendorval['batch'];
-					$councelorList[$vendorval['id']]['contract_type']=$vendorval['contract_type'];
 					while($row =$db->fetchByAssoc($leadObj)){
 						$councelorList[$vendorval['id']][$row['status']]=$row['total'];
 					}
@@ -161,7 +157,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 
 			foreach($councelorList as $key=>$councelor){
-				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['batch']. "\",\"" . $councelor['contract_type']. "\",\"" . $councelor['Alive'] . "\",\"" . $councelor['Warm']."\",\"" . $councelor['Dead']."\",\"" . $councelor['Converted']. "\"\n";
+				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['Alive'] . "\",\"" . $councelor['Warm']."\",\"" . $councelor['Dead']."\",\"" . $councelor['Converted']. "\"\n";
 			}
 			ob_end_clean();
 			header("Content-type: application/csv");
@@ -178,8 +174,6 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				$leadObj =$db->query($leadSql);
 
 				$councelorList[$vendorval['id']]['name']=$vendorval['name'];
-				$councelorList[$vendorval['id']]['batch']=$vendorval['batch'];
-				$councelorList[$vendorval['id']]['contract_type']=$vendorval['contract_type'];
 				while($row =$db->fetchByAssoc($leadObj)){
 					$councelorList[$vendorval['id']][$row['status']]=$row['total'];
 				}
@@ -199,14 +193,23 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				$councelorList[$key]['Converted']=0;
 		}
 
-		 
+		if(isset($_SESSION['us_from_date']) && !empty($_SESSION['us_from_date'])){
+			$from_date = date('d-m-Y',strtotime($_SESSION['us_from_date']));
+		}
+		if(isset($_SESSION['us_to_date']) && !empty($_SESSION['us_to_date'])){
+			$to_date = date('d-m-Y',strtotime($_SESSION['us_to_date']));
+		}
+		if(isset($_SESSION['us_batch']) && !empty($_SESSION['us_batch'])){
+			$selected_batch = $_SESSION['us_batch'];
+		}
+
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("leadStatusList",$leadStatusList);
 		$sugarSmarty->assign("batchList",$batchList);
-		$sugarSmarty->assign("selected_from_date",$GLOBALS['timedate']->to_display_date($from_date));
-		$sugarSmarty->assign("selected_to_date",$GLOBALS['timedate']->to_display_date($to_date));
-		$sugarSmarty->assign("selected_status",$search_status);
+		$sugarSmarty->assign("selected_from_date",$from_date);
+		$sugarSmarty->assign("selected_to_date",$to_date);
+		$sugarSmarty->assign("selected_batch",$selected_batch);
 
 		$sugarSmarty->assign("current_records",$current);
 		$sugarSmarty->assign("page",$page);
