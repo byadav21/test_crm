@@ -24,7 +24,7 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 			$where =" AND id IN('".implode("','",$batch_arr)."')";
 		}
 		global $db;
-		$batchSql="SELECT id,name from te_ba_batch WHERE deleted=0 AND batch_status<>'Closed' $where";
+		$batchSql="SELECT id,name from te_ba_batch WHERE deleted=0 AND batch_status<>'Closed' $where  ORDER BY name ASC";
 		$batchObj =$db->query($batchSql);
 		$batchOptions=array();
 		while($row =$db->fetchByAssoc($batchObj)){
@@ -35,7 +35,7 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 
 	function getBatch(){
 		global $db;
-		$batchSql="SELECT id,name from te_ba_batch WHERE deleted=0 AND batch_status<>'Closed'";
+		$batchSql="SELECT id,name from te_ba_batch WHERE deleted=0 AND batch_status<>'Closed' ORDER BY name ASC";
 		$batchObj =$db->query($batchSql);
 		$batchOptions=array();
 		while($row =$db->fetchByAssoc($batchObj)){
@@ -64,16 +64,19 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 			if($_SESSION['lf_from_date'] && $_SESSION['lf_to_date']){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
-				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
+				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['lf_from_date']!=""&&$_SESSION['lf_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
-				$where.=" AND DATE(date_modified)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 			}elseif($_SESSION['lf_from_date']==""&&$_SESSION['lf_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
-				$where.=" AND DATE(date_modified)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 			}
 			if(isset($_SESSION['lf_vendor']) && !empty($_SESSION['lf_vendor'])){
 				$where.=" AND l.vendor IN('".implode("','",$_SESSION['lf_vendor'])."') ";
+			}
+			if(isset($_SESSION['lf_batch']) && !empty($_SESSION['lf_batch'])){
+				$where.=" AND b.id IN('".implode("','",$_SESSION['lf_batch'])."') ";
 			}
 
 
@@ -107,14 +110,13 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 			$batches = $this->getbatchforlead($batchsearArr);
 			if($batches){
 				foreach($batches as $batch_val){
-					$leadSql="SELECT count(l.id) as total,l.status_description FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where AND lc.te_ba_batch_id_c='".$batch_val['id']."' GROUP BY l.status_description";
-					$leadObj =$db->query($leadSql);
-
 					$councelorList[$batch_val['id']]['name']=$batch_val['name'];
-					while($row =$db->fetchByAssoc($leadObj)){
-						$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
-						$councelorList[$batch_val['id']][$row['status_description']]=$row['total'];
-					}
+				}
+				$leadSql="SELECT b.id,b.name,COUNT(l.id)total,l.status_description from te_ba_batch AS b LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id LEFT JOIN leads AS l ON l.id=lc.id_c AND l.deleted=0  WHERE b.deleted=0 AND b.batch_status<>'Closed' AND l.status_description!='' $where GROUP BY b.id,l.status_description ORDER BY b.name ASC";
+				$leadObj =$db->query($leadSql);
+				while($row =$db->fetchByAssoc($leadObj)){
+					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+					$councelorList[$row['id']][$row['status_description']]=$row['total'];
 				}
 			}
 
@@ -188,16 +190,23 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 		$councelorList=array();
 		$batchsearArr = (isset($_SESSION['lf_batch']) ? $_SESSION['lf_batch'] : "");
 		$batches = $this->getbatchforlead($batchsearArr);
+		//echo "<pre>";print_r($batches);
 		if($batches){
 			foreach($batches as $batch_val){
-				$leadSql="SELECT count(l.id) as total,l.status_description FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where AND lc.te_ba_batch_id_c='".$batch_val['id']."' GROUP BY l.status_description";
-				$leadObj =$db->query($leadSql);
+				//$leadSql="SELECT count(l.id) as total,l.status_description FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where AND lc.te_ba_batch_id_c='".$batch_val['id']."' GROUP BY l.status_description";
+				//$leadObj =$db->query($leadSql);
 
 				$councelorList[$batch_val['id']]['name']=$batch_val['name'];
-				while($row =$db->fetchByAssoc($leadObj)){
+				/*while($row =$db->fetchByAssoc($leadObj)){
 					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 					$councelorList[$batch_val['id']][$row['status_description']]=$row['total'];
-				}
+				}*/
+			}
+			$leadSql="SELECT b.id,b.name,COUNT(l.id)total,l.status_description from te_ba_batch AS b LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id LEFT JOIN leads AS l ON l.id=lc.id_c AND l.deleted=0  WHERE b.deleted=0 AND b.batch_status<>'Closed' AND l.status_description!='' $where GROUP BY b.id,l.status_description ORDER BY b.name ASC";
+			$leadObj =$db->query($leadSql);
+			while($row =$db->fetchByAssoc($leadObj)){
+				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+				$councelorList[$row['id']][$row['status_description']]=$row['total'];
 			}
 		}
 
