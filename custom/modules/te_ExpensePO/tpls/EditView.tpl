@@ -49,7 +49,7 @@
 {literal}
 
 <style>
-.amtvald,#amount{    background-color: #f1f1f1!important;}
+.amtvald,#amount,#refrenceid{    background-color: #f1f1f1!important;pointer-events:none;}
 .boxchoose{    padding: 50px 12px;
     background: #ffffff;
     border: 1px solid #3C8DBC;
