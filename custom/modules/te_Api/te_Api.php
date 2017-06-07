@@ -299,8 +299,24 @@ class te_Api_override extends te_Api {
 				$querty['entryPoint'] ='call start'; 
 				$querty['response'] = json_encode($data);		  
 				$querty['systemDisposition'] ='call satrt'; 
+				  
+			 }elseif($res=='call Initiate'){		
+				$querty['dispositionName'] ='call Initiate';
+				$customers=json_decode(html_entity_decode($data['customerInfo']));
+				$querty['lead_id'] = $customers->lead_reference;
+				//$querty['lead_id'] = $data['lead_reference'];	
+				$querty['userId'] = $data['userId'];
+				$querty['customer_id'] = $data['customerId'];
+				$querty['dispositionCode'] ='call Initiate';
+				$querty['customerCRTId']  = $data['crtObjectId'];
+				$querty['campaignId']  = $data['campaignId'];
+				$querty['phone']  = $data['phone'];				 
+				$querty['callType'] = $data['callType'];
+				$querty['entryPoint'] ='call Initiate'; 
+				$querty['response'] = json_encode($data);		  
+				$querty['systemDisposition'] ='call Initiate'; 
 			}	
-            if($res=='dispose' || $res=='disposeamyo' ||$res=='crm popup url' || $res=='manual'){
+            if($res=='dispose' || $res=='disposeamyo' ||$res=='crm popup url' || $res=='manual' || $res=='call Initiate'){
 				 $querty['dated'] = date('Y-m-d H:i:s');				
 				 foreach($querty as $key=>$val){
 				   $sql .= " $key='". $val . "',";	

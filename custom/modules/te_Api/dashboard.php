@@ -1,7 +1,9 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('custom/modules/te_Api/sso.php');
-
+require_once('custom/modules/te_Api/te_Api.php')
+$objapi= new te_Api_override();
+$objapi->createLog(print_r($_REQUEST,true),"call Initiate",$_REQUEST); 
 //print_r($_REQUEST);die;
 if($_REQUEST['amyoaction']=='callStart'){
 	  
