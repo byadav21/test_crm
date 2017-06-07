@@ -80,14 +80,6 @@ array (
         'default' => true,
         'name' => 'batch',
       ),
-      'date_entered' => 
-      array (
-        'type' => 'datetime',
-        'label' => 'LBL_DATE_ENTERED',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'date_entered',
-      ),
       'status_description' => 
       array (
         'type' => 'enum',
@@ -107,6 +99,14 @@ array (
         'name' => 'lead_source',
         'default' => true,
         'width' => '10%',
+      ),
+      'date_entered' => 
+      array (
+        'type' => 'datetime',
+        'label' => 'LBL_DATE_ENTERED',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'date_entered',
       ),
     ),
   ),
