@@ -11,6 +11,18 @@ $dictionary['te_ExpensePO']['fields']['expense_type'] =array (
 	 
 );
 
+$dictionary['te_ExpensePO']['fields']['refrenceid']['required']=true;
+
+$dictionary['te_ExpensePO']['fields']['cost_center'] =array (
+	'name' => 'cost_center',
+	'label' => 'Cost Center',
+	'type' => 'enum',	
+	'len' => '150',
+    'size' => '20',
+	'required' => false ,
+	'options'=>'cost_center'
+);
+
 
 $dictionary['te_ExpensePO']['fields']['inv_num'] =array (
 	'name' => 'inv_num',
@@ -21,11 +33,4 @@ $dictionary['te_ExpensePO']['fields']['inv_num'] =array (
 	'required' => false 
 );
 
-$dictionary['te_ExpensePO']['fields']['cost_center'] =array (
-	'name' => 'cost_center',
-	'label' => 'Cost Center',
-	'type' => 'varchar',	
-	'len' => '30',
-    'size' => '20',
-	'required' => false 
-);
+
