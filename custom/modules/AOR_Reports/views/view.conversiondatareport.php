@@ -24,7 +24,7 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 			$where =" AND id IN('".implode("','",$batch_arr)."')";
 		}
 		global $db;
-		$batchSql="SELECT id,name FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0 ".$where."";
+		$batchSql="SELECT id,name FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0 ".$where." ORDER BY name ASC";
 		$batchObj =$db->query($batchSql);
 		$batchOptions=array();
 		while($row =$db->fetchByAssoc($batchObj)){
@@ -65,13 +65,16 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 			if($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(date_entered)>='".$from_date."' AND DATE(date_entered)<='".$to_date."'";
+				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$where.=" AND DATE(date_entered)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 			}elseif($_SESSION['lp_from_date']==""&&$_SESSION['lp_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(date_entered)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
+			}
+			if(!empty($_SESSION['lp_batch'])){
+				$where.=" AND lc.te_ba_batch_id_c IN ('".implode("','",$_SESSION['lp_batch'])."') ";
 			}
 
 
@@ -87,13 +90,16 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 			if($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(date_entered)>='".$from_date."' AND DATE(date_entered)<='".$to_date."'";
+				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$where.=" AND DATE(date_entered)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 			}elseif($_SESSION['lp_from_date']==""&&$_SESSION['lp_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(date_entered)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
+			}
+			if(!empty($_SESSION['lp_batch'])){
+				$where.=" AND lc.te_ba_batch_id_c IN ('".implode("','",$_SESSION['lp_batch'])."') ";
 			}
 			if(!empty($_SESSION['lp_batch'])){
 				$batchLeadsArr = $this->getbatchforlead($_SESSION['lp_batch']);
@@ -117,7 +123,7 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 			while($row =$db->fetchByAssoc($vendorObj)){
 				$vendorArr[]=$row['name'];
 			}
-			$total=count($vendorArr); #total records
+			/*$total=count($vendorArr); #total records
 			$start=0;
 			$per_page=10;
 			$page=1;
@@ -152,18 +158,19 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 			}else{
 				$current="(".($start+1)."-".count($vendorArr)." of ".$total.")";
 
-			}
+			}*/
 
 			if($vendorArr && $batchArr){
 				foreach ($vendorArr as $key => $vendorArrvalue) {
 					foreach ($batchArr as $key => $value) {
 						$councelorList[$vendorArrvalue][$value]=0;
 					}
-					$leadSql = "select count(*)total,leads_cstm.te_ba_batch_id_c AS batchid from leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c where leads.vendor='".$vendorArrvalue."' AND leads_cstm.te_ba_batch_id_c IN ('".implode("','",$batchArr)."') AND leads.status='Converted'  $where GROUP BY leads_cstm.te_ba_batch_id_c";
-					$leadObj =$db->query($leadSql);
-					while($row =$db->fetchByAssoc($leadObj)){
-						$councelorList[$vendorArrvalue][$row['batchid']]=$row['total'];
-					}
+					
+				}
+				$leadSql = "SELECT lc.te_ba_batch_id_c AS batchid,v.id,v.name,COUNT(l.id)total from te_vendor AS v LEFT JOIN leads AS l ON l.vendor=v.name  LEFT JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE l.deleted=0 AND v.deleted=0 AND l.status='Converted' $where GROUP BY v.id,lc.te_ba_batch_id_c ORDER BY v.name ASC";
+				$leadObj =$db->query($leadSql);
+				while($row =$db->fetchByAssoc($leadObj)){
+					$councelorList[$row['name']][$row['batchid']]=$row['total'];
 				}
 			}
 
@@ -199,13 +206,35 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 		foreach ($batchLeadsArr as $key => $batchLeadsArrvalue) {
 			$batchArr[]=$batchLeadsArrvalue['id'];
 		}
-		$vendorSql = "SELECT vendor.name,vendor.id  from te_vendor AS vendor where vendor.deleted=0";
+		$vendorSql = "SELECT vendor.name,vendor.id  from te_vendor AS vendor where vendor.deleted=0 ORDER BY vendor.name ASC";
 		$vendorObj =$db->query($vendorSql);
 
 		while($row =$db->fetchByAssoc($vendorObj)){
 			$vendorArr[]=$row['name'];
 		}
-		$total=count($vendorArr); #total records
+
+		if($vendorArr && $batchArr){
+			foreach ($vendorArr as $key => $vendorArrvalue) {
+				foreach ($batchArr as $key => $value) {
+					$councelorList[$vendorArrvalue][$value]=0;
+				}
+				/*$leadSql = "select count(*)total,leads_cstm.te_ba_batch_id_c AS batchid from leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c where leads.vendor='".$vendorArrvalue."' AND leads_cstm.te_ba_batch_id_c IN ('".implode("','",$batchArr)."') AND leads.status='Converted'  $where GROUP BY leads_cstm.te_ba_batch_id_c";
+				$leadObj =$db->query($leadSql);
+				while($row =$db->fetchByAssoc($leadObj)){
+					$councelorList[$vendorArrvalue][$row['batchid']]=$row['total'];
+				}*/
+			}
+
+			$leadSql = "SELECT lc.te_ba_batch_id_c AS batchid,v.id,v.name,COUNT(l.id)total from te_vendor AS v LEFT JOIN leads AS l ON l.vendor=v.name  LEFT JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE l.deleted=0 AND v.deleted=0 AND l.status='Converted' $where GROUP BY v.id,lc.te_ba_batch_id_c ORDER BY v.name ASC";
+			$leadObj =$db->query($leadSql);
+			while($row =$db->fetchByAssoc($leadObj)){
+				$councelorList[$row['name']][$row['batchid']]=$row['total'];
+			}
+		}
+
+
+
+		$total=count($councelorList); #total records
 		$start=0;
 		$per_page=10;
 		$page=1;
@@ -233,29 +262,14 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 			$left=1;
 		}
 
-		$vendorArr=array_slice($vendorArr,$start,$per_page);
+		$councelorList=array_slice($councelorList,$start,$per_page);
 		if($total>$per_page){
 			$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
 
 		}else{
-			$current="(".($start+1)."-".count($vendorArr)." of ".$total.")";
+			$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
 
 		}
-
-		if($vendorArr && $batchArr){
-			foreach ($vendorArr as $key => $vendorArrvalue) {
-				foreach ($batchArr as $key => $value) {
-					$councelorList[$vendorArrvalue][$value]=0;
-				}
-				$leadSql = "select count(*)total,leads_cstm.te_ba_batch_id_c AS batchid from leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c where leads.vendor='".$vendorArrvalue."' AND leads_cstm.te_ba_batch_id_c IN ('".implode("','",$batchArr)."') AND leads.status='Converted'  $where GROUP BY leads_cstm.te_ba_batch_id_c";
-				$leadObj =$db->query($leadSql);
-				while($row =$db->fetchByAssoc($leadObj)){
-					$councelorList[$vendorArrvalue][$row['batchid']]=$row['total'];
-				}
-			}
-		}
-
-
 
 		if(isset($_SESSION['lp_from_date']) && !empty($_SESSION['lp_from_date'])){
 			$from_date = date('d-m-Y',strtotime($_SESSION['lp_from_date']));
@@ -266,8 +280,6 @@ class AOR_ReportsViewConversiondatareport extends SugarView {
 		if(isset($_SESSION['lp_batch']) && !empty($_SESSION['lp_batch'])){
 			$selected_batch = $_SESSION['lp_batch'];
 		}
-		/*echo "<pre>";
-		print_r($batchLeadsArr);*/
 
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
