@@ -348,8 +348,17 @@ function mark_relationships_deleted($id){
         return $user_roles;
 }
     
-    
-    
+	function getUserSlug ($user_id){
+		  global $db;	
+		  $sql="select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $user_id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
+		  $mis=$db->query($sql);
+		  $misData=$db->fetchByAssoc($mis);
+		  if($misData && count($misData)>0){
+			  return $misData;
+		  }else{
+			 return false;  
+		  }
+	}     
     
 }
 
