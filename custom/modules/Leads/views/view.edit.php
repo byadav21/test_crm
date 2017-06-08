@@ -29,17 +29,16 @@ class LeadsViewEdit extends ViewEdit {
 			$acl_obj = new ACLRole();
 			$misData=$acl_obj->getUserSlug($current_user->id);
 			if($misData['slug']=='CCC' || $misData['slug']=='CCTL' ) $disableBatch=true;
-		if ($disableBatch){ ?>
-        
+			if ($disableBatch){ ?>        
                 <style>
                 #btn_batch_c,#btn_clr_batch_c{display:none;pointer-events: none;}
                 #batch_c{pointer-events: none;}
                 </style>
                 <script>
                 $('#btn_batch_c,#btn_clr_batch_c').remove();
-                </script>
-<?php        
-}	
+                </script> <?php
+		
+			}	
 
 		}
 		

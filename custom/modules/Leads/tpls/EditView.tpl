@@ -41,17 +41,7 @@
  
 {{include file=$headerTpl}}
 {sugar_include include=$includes}
-{{if $disableBatch==true}}
-	{literal}
-		<style>
-		/*#btn_batch_c,#btn_clr_batch_c{display:none;pointer-events: none;}
-		#batch_c{pointer-events: none;}*/
-		</style>
-		<script>
-		//$('#btn_batch_c,#btn_clr_batch_c').remove();
-		</script>
-	{/literal}
-{{/if}}
+
 
 
 <span id='tabcounterJS'><script>SUGAR.TabFields=new Array();//this will be used to track tabindexes for references</script></span>
