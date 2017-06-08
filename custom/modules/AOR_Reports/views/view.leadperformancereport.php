@@ -66,17 +66,17 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$where.=" AND DATE(date_entered)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 			}elseif($_SESSION['lp_from_date']==""&&$_SESSION['lp_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(date_entered)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 			}
 			if(!empty($_SESSION['lp_batch'])){
 				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['lp_batch'])."') ";
 			}
 
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Batch,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
+			$data="Vendor,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
 			$file = "leads_performance_report";
 			$where='';
 			$from_date="";
@@ -91,19 +91,24 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$where.=" AND DATE(date_entered)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 			}elseif($_SESSION['lp_from_date']==""&&$_SESSION['lp_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(date_entered)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 			}
 			if(!empty($_SESSION['lp_batch'])){
 				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['lp_batch'])."') ";
 			}
 
 			$councelorList=array();
-			$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE vendor.name!='' $where GROUP BY vendor.name,l.status_description";
-			$leadObj =$db->query($leadSql);
+			$vendorSql="SELECT vendor.name,vendor.id from te_vendor AS vendor where vendor.deleted=0";
+			$vendorObj =$db->query($vendorSql);
+			while($rowVendor =$db->fetchByAssoc($vendorObj)){
+				$councelorList[$rowVendor['id']]['name']=$rowVendor['name'];
+			}
 
+			$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
+			$leadObj =$db->query($leadSql);
 			while($row =$db->fetchByAssoc($leadObj)){
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 				$councelorList[$row['id']]['name']=$row['name'];
@@ -179,7 +184,13 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 		$councelorList=array();
 
 
-		$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE vendor.name!='' $where GROUP BY vendor.name,l.status_description";
+		$vendorSql="SELECT vendor.name,vendor.id from te_vendor AS vendor where vendor.deleted=0";
+		$vendorObj =$db->query($vendorSql);
+		while($rowVendor =$db->fetchByAssoc($vendorObj)){
+			$councelorList[$rowVendor['id']]['name']=$rowVendor['name'];
+		}
+
+		$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
 		$leadObj =$db->query($leadSql);
 		while($row =$db->fetchByAssoc($leadObj)){
 			$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
@@ -246,8 +257,7 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 		}
 
 		//$pagination_query = "SELECT COUNT(*)total FROM (SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE vendor.name!='' $where GROUP BY vendor.name,l.status_description)as temp";
-		//$paginationObj =$db->query($pagination_query);
-		//$pagination_row =$db->fetchByAssoc($paginationObj);
+
 		$total=count($councelorList); #total records
 		$start=0;
 		$per_page=10;
