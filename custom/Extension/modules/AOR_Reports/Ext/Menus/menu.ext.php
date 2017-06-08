@@ -40,8 +40,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 global $current_user,$db;
 global $mod_strings, $app_strings;
-require_once('modules/ACL/ACLController.php');
-$acl_obj = new ACLController();
+//require_once('modules/ACL/ACLController.php');
+//$acl_obj = new ACLController();
+
+require_once('modules/ACLRoles/ACLRole.php');
+$acl_obj = new ACLRole();
 # CC #
 if($current_user->is_admin==1){
 $module_menu[] = array ('index.php?module=te_report_recipients&action=index', "Report Recipients", 'te_report_recipients');  
