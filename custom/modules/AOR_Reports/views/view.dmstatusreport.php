@@ -62,10 +62,10 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['ds_from_date']!=""&&$_SESSION['ds_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_from_date'])));
-				$where.=" AND DATE(date_entered)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 			}elseif($_SESSION['ds_from_date']==""&&$_SESSION['ds_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_to_date'])));
-				$where.=" AND DATE(date_entered)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 			}
 
 			if(!empty($_SESSION['ds_batch'])){
@@ -78,52 +78,46 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 			$from_date="";
 			$to_date="";
 			$filename = $file . "_" . date ( "Y-m-d");
-			if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
+			$_SESSION['ds_from_date'] = $_REQUEST['from_date'];
+			$_SESSION['ds_to_date'] = $_REQUEST['to_date'];
+			$_SESSION['ds_batch'] = $_REQUEST['batch'];
+			if($_SESSION['ds_from_date']!=""&&$_SESSION['ds_to_date']){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_from_date'])));
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_to_date'])));
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$where.=" AND DATE(date_entered)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['to_date'])));
-				$where.=" AND DATE(date_entered)='".$to_date."' ";
+			}elseif($_SESSION['ds_from_date']!=""&&$_SESSION['ds_to_date']==""){
+				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_from_date'])));
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
+			}elseif($_SESSION['ds_from_date']==""&&$_SESSION['ds_to_date']!=""){
+				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ds_to_date'])));
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 			}
 
-			if(!empty($_POST['batch'])){
-				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_POST['batch'])."') ";
+			if(!empty($_SESSION['ds_batch'])){
+				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['ds_batch'])."') ";
 			}
 
 			$councelorList=array();
-			$vendors = $this->getVendor();
-			if($vendors){
-				foreach($vendors as $vendorval){
-					$utm = $this->getUTM($vendorval['id']);
-					if($utm){
-						$whereutm="AND  (l.utm IN('".$utm."') OR l.vendor='".$vendorval['name']."') ";
-					}
-					else{
-						$whereutm="AND  l.vendor='".$vendorval['name']."' ";
-					}
-					$leadSql="SELECT count(l.id) as total,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $whereutm $where GROUP BY l.status";
-					$leadObj =$db->query($leadSql);
 
-					$councelorList[$vendorval['id']]['name']=$vendorval['name'];
-					while($row =$db->fetchByAssoc($leadObj)){
-						$councelorList[$vendorval['id']][$row['status']]=$row['total'];
-					}
-				}
+			$leadSql="SELECT vendor.name,vendor.id FROM `te_vendor` AS vendor WHERE vendor.deleted=0";
+			$leadObj =$db->query($leadSql);
+
+
+			while($row =$db->fetchByAssoc($leadObj)){
+				$councelorList[$row['id']]['name']=$row['name'];
+				$councelorList[$row['id']]['Alive']=0;
+				$councelorList[$row['id']]['Warm']=0;
+				$councelorList[$row['id']]['Dead']=0;
+				$councelorList[$row['id']]['Converted']=0;
 			}
 
-			foreach($councelorList as $key=>$councelor){
-				if(!isset($councelor['Alive']))
-					$councelorList[$key]['Alive']=0;
-				if(!isset($councelor['Warm']))
-					$councelorList[$key]['Warm']=0;
-				if(!isset($councelor['Dead']))
-					$councelorList[$key]['Dead']=0;
-				if(!isset($councelor['Converted']))
-					$councelorList[$key]['Converted']=0;
+			$leadCountSql="SELECT COUNT(l.id)total,vendor.name,vendor.id,l.status FROM `te_vendor` AS vendor INNER JOIN leads AS l ON l.vendor=vendor.name AND l.deleted=0 INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE vendor.deleted=0 AND l.status IN('Alive','Warm','Dead','Converted') $where  GROUP BY vendor.id,l.status";
+			$leadCountObj =$db->query($leadCountSql);
+
+
+			while($rowLeadCount =$db->fetchByAssoc($leadCountObj)){
+				$councelorList[$rowLeadCount['id']]['name']=$rowLeadCount['name'];
+				$councelorList[$rowLeadCount['id']][$rowLeadCount['status']]=$rowLeadCount['total'];
 			}
 
 
@@ -137,8 +131,30 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 		}
 		$councelorList=array();
 
-		$vendors_data = $this->getVendor();
-		$total=count($vendors_data); #total records
+
+
+		$leadSql="SELECT vendor.name,vendor.id FROM `te_vendor` AS vendor WHERE vendor.deleted=0";
+		$leadObj =$db->query($leadSql);
+
+
+		while($row =$db->fetchByAssoc($leadObj)){
+			$councelorList[$row['id']]['name']=$row['name'];
+			$councelorList[$row['id']]['Alive']=0;
+			$councelorList[$row['id']]['Warm']=0;
+			$councelorList[$row['id']]['Dead']=0;
+			$councelorList[$row['id']]['Converted']=0;
+		}
+
+		$leadCountSql="SELECT COUNT(l.id)total,vendor.name,vendor.id,l.status FROM `te_vendor` AS vendor INNER JOIN leads AS l ON l.vendor=vendor.name AND l.deleted=0 INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE vendor.deleted=0 AND l.status IN('Alive','Warm','Dead','Converted') $where  GROUP BY vendor.id,l.status";
+		$leadCountObj =$db->query($leadCountSql);
+
+
+		while($rowLeadCount =$db->fetchByAssoc($leadCountObj)){
+			$councelorList[$rowLeadCount['id']]['name']=$rowLeadCount['name'];
+			$councelorList[$rowLeadCount['id']][$rowLeadCount['status']]=$rowLeadCount['total'];
+		}
+
+		$total=count($councelorList); #total records
 		$start=0;
 		$per_page=10;
 		$page=1;
@@ -166,47 +182,13 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 			$left=1;
 		}
 
-		//$vendors=array_slice($vendors,$start,$per_page);
+		$councelorList=array_slice($councelorList,$start,$per_page);
 		if($total>$per_page){
 			$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
 
 		}else{
-			$current="(".($start+1)."-".count($vendors_data)." of ".$total.")";
+			$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
 
-		}
-
-		$leadSql="SELECT COUNT(l.id)total,vendor.name,vendor.id FROM `te_vendor` AS vendor LEFT JOIN leads AS l ON l.vendor=vendor.name AND l.deleted=0 WHERE vendor.deleted=0  GROUP BY vendor.id LIMIT $start,$per_page";
-		$leadObj =$db->query($leadSql);
-
-
-		while($row =$db->fetchByAssoc($leadObj)){
-			$councelorList[$row['id']]['name']=$row['name'];
-			$where.="AND  l.vendor='".$row['name']."' ";
-			$result = $this->getLeadStatusCountByVendor($where);
-			if($result){
-				foreach ($result as $key => $value) {
-					$councelorList[$row['id']][$value['status']]=$value['total'];
-				}
-			}
-			else{
-				$councelorList[$row['id']]['Alive']=0;
-				$councelorList[$row['id']]['Warm']=0;
-				$councelorList[$row['id']]['Dead']=0;
-				$councelorList[$row['id']]['Converted']=0;
-			}
-		}
-
-
-
-		foreach($councelorList as $key=>$councelor){
-			if(!isset($councelor['Alive']))
-				$councelorList[$key]['Alive']=0;
-			if(!isset($councelor['Warm']))
-				$councelorList[$key]['Warm']=0;
-			if(!isset($councelor['Dead']))
-				$councelorList[$key]['Dead']=0;
-			if(!isset($councelor['Converted']))
-				$councelorList[$key]['Converted']=0;
 		}
 
 		if(isset($_SESSION['ds_from_date']) && !empty($_SESSION['ds_from_date'])){
