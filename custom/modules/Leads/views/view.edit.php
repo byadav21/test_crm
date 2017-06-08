@@ -16,6 +16,7 @@ class LeadsViewEdit extends ViewEdit {
 	function display() {
 		//~ print_r($_REQUEST);
 		global $current_user;
+		$disableBatch=false;
 		if(!is_admin($current_user) && !empty($this->bean->id)){
 			 
 			//check users
@@ -24,6 +25,10 @@ class LeadsViewEdit extends ViewEdit {
 			if(!in_array($current_user->id,self::$reporters)){
 				echo 'You have not access to view this record'; exit();
 			}
+			require_once('modules/ACLRoles/ACLRole.php');
+			$acl_obj = new ACLRole();
+			$misData=$acl_obj->getUserSlug($current_user->id);
+			if($misData['slug']=='CCC' || $misData['slug']=='CCTL' ) $disableBatch=true;
 			
 
 		}
@@ -53,6 +58,7 @@ class LeadsViewEdit extends ViewEdit {
 		}
 		 </script>
 	<?php	 
+		$this->ss->assign('disableBatch', $disableBatch);
 		$this->ss->assign('disableDisposition', '0');
 		$this->ss->assign('recID', $this->bean->id);
 		if(isset($_SESSION['currentCall']) && !empty($_SESSION['currentCall'])){
