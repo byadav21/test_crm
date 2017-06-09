@@ -32,7 +32,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 	public function display() {
 		global $sugar_config,$app_list_strings,$current_user,$db;
         $leadsData=array();
-
+		
 		#Get lead status drop down option
 		$leadStatusList=$GLOBALS['app_list_strings']['lead_status_dom'];
 		#Get batch drop down option
@@ -40,12 +40,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 		# Query for batch drop down options
 
-		$vendorSql="SELECT u.id ,v.name,b.name as batch,contract_type from te_utm as u
-						inner join te_ba_batch as b on b.id=u.te_ba_batch_id_c
-						inner join te_vendor_te_utm_1_c on te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
-						inner join te_vendor as v on v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
-						WHERE u.utm_status ='Live' AND u.deleted=0 AND b.deleted=0 AND v.deleted=0 
-						order by u.date_modified desc";
+		$vendorSql="SELECT count(u.id)  from te_utm as u where u.utm_status ='Live' AND u.deleted=0 order by u.date_modified desc";
 		$vendorObj =$db->query($vendorSql);
 		$vendorArr = [];
 		while($vendor =$db->fetchByAssoc($vendorObj)){

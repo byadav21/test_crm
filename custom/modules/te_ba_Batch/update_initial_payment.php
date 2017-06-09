@@ -59,7 +59,7 @@
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
 					  #$url='http://talentedgewpe.wpengine.com/tecourse-api/';
-					$url = 'http://talentedge.staging.wpengine.com/tecourse-api/';
+					$url = 'http://webstaging.talentedge.in/tecourse-api/';
 					$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 					);
@@ -105,7 +105,7 @@
 
 			$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
-					$url = 'http://talentedge.staging.wpengine.com/tecourse-api/';
+					$url = 'http://webstaging.talentedge.in/tecourse-api/';
 					$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 					);
