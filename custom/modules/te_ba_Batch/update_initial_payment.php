@@ -51,10 +51,10 @@
 						
 						$fee_detail = implode("|",$feearray);
 
-					if(!$bean->fetched_row && $bean->is_sent_web=="0"){
+					if($bean->is_sent_web=="0"){
 
-					//$feeinr=$bean->initial_payment_inr.",".$bean->initial_payment_usd.",".$bean->initial_payment_date."|";
-					//feeusd=$bean->initial_payment_usd.",".$bean->initial_payment_usd.",".$bean->initial_payment_date;
+					/*$feeinr=$bean->initial_payment_inr.",".$bean->initial_payment_usd.",".$bean->initial_payment_date."|";
+					//feeusd=$bean->initial_payment_usd.",".$bean->initial_payment_usd.",".$bean->initial_payment_date; */
 
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';

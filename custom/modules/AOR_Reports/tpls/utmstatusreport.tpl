@@ -11,7 +11,7 @@
 			<td nowrap="nowrap" width="10%">
 				<select name="batch[]" id="batch" multiple="1" class="multiselbox"  size="6" style="width: 150px;">
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if in_array($batch.id, $selected_batch) } selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
 			</td>
@@ -110,10 +110,16 @@
 	<thead>
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>UTM</strong>
+			<strong>Source</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Alive</strong>
+			<strong>Term</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Medium</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>New Lead</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Warm</strong>
@@ -124,11 +130,14 @@
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Converted</strong>
 		</th>
+ 
 	</tr>
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Alive}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.contract_type}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.New Lead}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Warm}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dead}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Converted}</td>
@@ -139,7 +148,7 @@
 {literal}
 Calendar.setup ({
    inputField : "from_date",
-   daFormat : "%d-%m-%Y %I:%M%P",
+   daFormat : "%d/%m/%Y %I:%M%P",
    button : "from_date_trigger",
    singleClick : true,
    dateStr : "",
@@ -152,7 +161,7 @@ Calendar.setup ({
 {literal}
 Calendar.setup ({
    inputField : "to_date",
-   daFormat : "%d-%m-%Y %I:%M%P",
+   daFormat : "%d/%m/%Y %I:%M%P",
    button : "to_date_trigger",
    singleClick : true,
    dateStr : "",
