@@ -15,9 +15,9 @@ class duplicate_logic{
 		
 		
 		# Web Institute Sent Api While Insert NEw Istitute
-		if(!$bean->fetched_row && $bean->is_sent_web=="0"){
+		if($bean->is_sent_web=="0"){
 		
-				# ->  While insert New Institute sent to web
+				/* # ->  While insert New Institute sent to web .*/
 					
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
@@ -80,7 +80,7 @@ class duplicate_logic{
 					
 
 						if(isset($res[0]->status) && $res[0]->status=='1'){
-							#echo "hello update Success";
+						//	echo "hello update Success";
 							$bean->web_institute_id=$res[0]->institute_id;
 
 						}
