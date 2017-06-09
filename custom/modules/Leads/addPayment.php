@@ -632,7 +632,7 @@ class addPaymentClass{
 								if($bean->email1==$leadEmail && $webid){
 									$user = 'talentedgeadmin';
 									$password = 'Inkoniq@2016';
-									$url = 'http://talentedge.staging.wpengine.com/user-api/';
+									$url = 'http://webstaging.talentedge.in/user-api/';
 									$headers = array(
 										'Authorization: Basic '. base64_encode("$user:$password") 
 									);
@@ -690,7 +690,7 @@ class addPaymentClass{
 									{
 										$user = 'talentedgeadmin';
 										$password = 'Inkoniq@2016';
-										$url = 'http://talentedge.staging.wpengine.com/user-api/';
+										$url = 'http://webstaging.talentedge.in/user-api/';
 										$headers = array(
 											'Authorization: Basic '. base64_encode("$user:$password") 
 										);

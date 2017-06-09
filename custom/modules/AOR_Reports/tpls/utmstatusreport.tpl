@@ -122,20 +122,15 @@
 			<strong>New Lead</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Call Back</strong>
+			<strong>Warm</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Follow Up</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Re-Enquired</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Prospect</strong>
+			<strong>Dead</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Converted</strong>
 		</th>
+ 
 	</tr>
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
