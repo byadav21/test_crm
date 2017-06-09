@@ -167,9 +167,9 @@
 			<strong>Re-Enquired</strong>
 		</th>
 		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+		<!--<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong><font color="#B22222">Grand Total</font></strong>
-		</th>
+		</th>-->
 
 	</tr>
   {php}
@@ -178,7 +178,7 @@
   foreach($councelorArray as $key=>$val){
     $rowspan = count($val);
     $i=0;
-    foreach($val as $value){
+    foreach($val as  $keyvendor=>$value){
       $i++;
   {/php}
       <tr height='20' class='oddListRowS1'>
@@ -203,10 +203,10 @@
         $New_Lead[]=$value['New_Lead'];
         $Prospect[]=$value['Prospect'];
         $Re_Enquired[]=$value['Re_Enquired'];
-        $Grand_Total[]=$value['Grand_Total'];
+
 
         {/php}
-        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['name']{/php}</td>
+        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $keyvendor{/php}</td>
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Duplicate']{/php}</td>
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Dead_Number']{/php}</td>
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Fallout']{/php}</td>
@@ -222,9 +222,9 @@
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['New_Lead']{/php}</td>
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Prospect']{/php}</td>
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Re_Enquired']{/php}</td>
-        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-          <strong><font color="#B22222">{php}echo $value['Grand_Total']{/php}</strong></font>
-        </td>
+        <!--<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+          <strong><font color="#B22222">000</strong></font>
+        </td>-->
       </tr>
   {php}
     }
@@ -346,13 +346,11 @@
       {/php}
      </font></strong>
     </th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+    <!--<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong><font color="#006400">
-      {php}
-      echo array_sum($Grand_Total);
-      {/php}
+      0
      </font></strong>
-    </th>
+   </th>-->
   </tr>
   {php}
   }

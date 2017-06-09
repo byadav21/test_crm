@@ -60,7 +60,7 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 			$_SESSION['till_from_date'] = $_REQUEST['from_date'];
 			$_SESSION['till_to_date'] = $_REQUEST['to_date'];
 			$_SESSION['till_batch'] = $_REQUEST['batch'];
-			$datacsv="Batch_Name,Media,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
+			$datacsv="Batch_Name,Media,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired\n";
 			$file = "Till_Date_Lead_Performance";
 			$where='';
 			$from_date="";
@@ -72,17 +72,17 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['till_from_date']!=""&&$_SESSION['till_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['till_from_date'])));
-				$where.=" AND DATE(date_entered)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 			}elseif($_SESSION['till_from_date']==""&&$_SESSION['till_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['till_to_date'])));
-				$where.=" AND DATE(date_entered)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 			}
 			if(!empty($_SESSION['till_batch'])){
 				$wherebatch=" AND id IN('".implode("','",$_SESSION['till_batch'])."') ";
+				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['till_batch'])."') ";
 			}
 
 			$councelorList=array();
-
 			$vendorSql="SELECT name,id FROM `te_vendor` WHERE deleted=0 group by name order by name asc";
 			$vendorObj =$db->query($vendorSql);
 			$vendorArr = [];
@@ -91,16 +91,13 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 			}
 
 			$vendors = $vendorArr;
-
 			$batchSql="SELECT name,id from te_ba_batch WHERE deleted=0 AND batch_status<>'Closed' AND name!='' $wherebatch GROUP BY name";
 			$batchObj =$db->query($batchSql);
 			$batchOptions=array();
 			while($row =$db->fetchByAssoc($batchObj)){
 				$batchOptions[]=$row;
 			}
-
 			$batches = $batchOptions;
-
 			$batchVendorArr = array();
 			if($batches && $vendors){
 				foreach($batches as $batchval){
@@ -108,46 +105,40 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 						$batchVendorArr[]=array('batch_id'=>$batchval['id'],'batch_name'=>$batchval['name'],'vendor_id'=>$vendorsVal['id'],'vendor_name'=>$vendorsVal['name']);
 					}
 				}
-
 			}
 			if($batchVendorArr){
 				foreach ($batchVendorArr as $value) {
-					$where=" AND  l.vendor='".$value['vendor_name']."' AND lc.te_ba_batch_id_c='".$value['batch_id']."' ";
-					$leadSql="SELECT count(l.id) as total,l.status_description FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where GROUP BY l.status_description";
-					$leadObj =$db->query($leadSql);
-
-					$data = array();
-					while($row =$db->fetchByAssoc($leadObj)){
-						$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
-						$data[$row['status_description']]=$row['total'];
-					}
-					$res = $this->find_status($data);
-					$councelorList[$value['batch_name']][]=array('name'=>$value['vendor_name']
-					,'Call_Back'=>$res['Call_Back']
-					,'Converted'=>$res['Converted']
-					,'Dead_Number'=>$res['Dead_Number']
-					,'Fallout'=>$res['Fallout']
-					,'Follow_Up'=>$res['Follow_Up']
-					,'New_Lead'=>$res['New_Lead']
-					,'Not_Eligible'=>$res['Not_Eligible']
-					,'Not_Enquired'=>$res['Not_Enquired']
-					,'Prospect'=>$res['Prospect']
-					,'Re_Enquired'=>$res['Re_Enquired']
-					,'Rejected'=>$res['Rejected']
-					,'Retired'=>$res['Retired']
-					,'Ringing_Multiple_Times'=>$res['Ringing_Multiple_Times']
-					,'Duplicate'=>$res['Duplicate']
-					,'Wrong_Number'=>$res['Wrong_Number']
-					,'Grand_Total'=>$res['Grand_Total']
-
-				);
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Call_Back']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Converted']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Dead_Number']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Fallout']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Follow_Up']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['New_Lead']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Eligible']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Enquired']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Prospect']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Wrong_Number']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Re_Enquired']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Rejected']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Retired']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Ringing_Multiple_Times']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Duplicate']=0;
 				}
+				$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
+				$leadObj =$db->query($leadSql);
+
+				$data = array();
+				while($row =$db->fetchByAssoc($leadObj)){
+					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+					$councelorList[$row['name']][$row['vendor_name']][$row['status_description']]=$row['total'];
+			}
+
 
 			}
 
 			foreach($councelorList as $key1=>$councelorVal){
 				foreach ($councelorVal as $councelorkey => $councelor) {
-					$datacsv.= "\"" . $key1 . "\",\"" . $councelor['name'] . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\",\"" . $councelor['Grand_Total'] . "\"\n";
+					$datacsv.= "\"" . $key1 . "\",\"" . $councelorkey . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\"\n";
 				}
 
 			}
@@ -164,14 +155,15 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 			$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 		}elseif($_SESSION['till_from_date']!=""&&$_SESSION['till_to_date']==""){
 			$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['till_from_date'])));
-			$where.=" AND DATE(date_entered)='".$from_date."' ";
+			$where.=" AND DATE(l.date_entered)='".$from_date."' ";
 		}elseif($_SESSION['till_from_date']==""&&$_SESSION['till_to_date']!=""){
 			$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['till_to_date'])));
-			$where.=" AND DATE(date_entered)='".$to_date."' ";
+			$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 		}
 
 		if(!empty($_SESSION['till_batch'])){
 			$wherebatch=" AND id IN('".implode("','",$_SESSION['till_batch'])."') ";
+			$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['till_batch'])."') ";
 		}
 		$councelorList=array();
 
@@ -203,9 +195,53 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 
 		}
 
-		$total=count($batchVendorArr); #total records
+
+		if($batchVendorArr){
+			foreach ($batchVendorArr as $value) {
+				/*$where=" AND  l.vendor='".$value['vendor_name']."' AND lc.te_ba_batch_id_c='".$value['batch_id']."' ";
+				$leadSql="SELECT count(l.id) as total,l.status_description FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where GROUP BY l.status_description";
+				$leadObj =$db->query($leadSql);
+
+				$data = array();
+				while($row =$db->fetchByAssoc($leadObj)){
+					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+					$data[$row['status_description']]=$row['total'];
+				}
+				$res = $this->find_status($data);*/
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Call_Back']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Converted']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Dead_Number']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Fallout']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Follow_Up']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['New_Lead']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Eligible']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Enquired']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Prospect']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Wrong_Number']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Re_Enquired']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Rejected']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Retired']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Ringing_Multiple_Times']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Duplicate']=0;
+
+
+
+			}
+			$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
+			$leadObj =$db->query($leadSql);
+
+			$data = array();
+			while($row =$db->fetchByAssoc($leadObj)){
+				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+				$councelorList[$row['name']][$row['vendor_name']][$row['status_description']]=$row['total'];
+		}
+
+
+		}
+
+		$total=count($councelorList); #total records
 		$start=0;
-		$per_page=10;
+		$per_page=1;
 		$page=1;
 		$pagenext=1;
 		$last_page=ceil($total/$per_page);
@@ -230,49 +266,15 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 			$left=1;
 		}
 
-		$batchVendorArr=array_slice($batchVendorArr,$start,$per_page);
+		$councelorList=array_slice($councelorList,$start,$per_page);
 		if($total>$per_page){
 			$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
 
 		}else{
-			$current="(".($start+1)."-".count($batchVendorArr)." of ".$total.")";
+			$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
 
 		}
 
-
-		if($batchVendorArr){
-			foreach ($batchVendorArr as $value) {
-				$where=" AND  l.vendor='".$value['vendor_name']."' AND lc.te_ba_batch_id_c='".$value['batch_id']."' ";
-				$leadSql="SELECT count(l.id) as total,l.status_description FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where GROUP BY l.status_description";
-				$leadObj =$db->query($leadSql);
-
-				$data = array();
-				while($row =$db->fetchByAssoc($leadObj)){
-					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
-					$data[$row['status_description']]=$row['total'];
-				}
-				$res = $this->find_status($data);
-				$councelorList[$value['batch_name']][]=array('name'=>$value['vendor_name']
-				,'Call_Back'=>$res['Call_Back']
-				,'Converted'=>$res['Converted']
-				,'Dead_Number'=>$res['Dead_Number']
-				,'Fallout'=>$res['Fallout']
-				,'Follow_Up'=>$res['Follow_Up']
-				,'New_Lead'=>$res['New_Lead']
-				,'Not_Eligible'=>$res['Not_Eligible']
-				,'Not_Enquired'=>$res['Not_Enquired']
-				,'Prospect'=>$res['Prospect']
-				,'Re_Enquired'=>$res['Re_Enquired']
-				,'Rejected'=>$res['Rejected']
-				,'Retired'=>$res['Retired']
-				,'Ringing_Multiple_Times'=>$res['Ringing_Multiple_Times']
-				,'Duplicate'=>$res['Duplicate']
-				,'Wrong_Number'=>$res['Wrong_Number']
-				,'Grand_Total'=>$res['Grand_Total']
-
-			);
-			}
-		}
 		if(isset($_SESSION['till_from_date']) && !empty($_SESSION['till_from_date'])){
 			$from_date = date('d-m-Y',strtotime($_SESSION['till_from_date']));
 		}
