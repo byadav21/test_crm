@@ -43,8 +43,8 @@ if (!defined('sugarEntry')) {
  */
 //global $current_user;
 //if($current_user->id=='1'){
-ini_set("display_errors",1);
-error_reporting(-1);
+ini_set("display_errors",0);
+error_reporting(0);
 //}
 include 'include/MVC/preDispatch.php';
 $startTime = microtime(true);
