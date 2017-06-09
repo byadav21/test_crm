@@ -119,7 +119,7 @@ try{
 					$data['customerRecords']=[];
 					$customerRecords['name']= $records['first_name']." ". $records['last_name'];
 					$customerRecords['first_name'] = $records['first_name'];
-					$customerRecords['last_name'] = $records['last_name'];					
+					$customerRecords['last_name'] = ($records['last_name'])? $records['last_name']:'';				
 					$customerRecords['phone1'] =$phone;						 
 					$customerRecords['lead_reference'] = $records['id'];
 					$data['customerRecords'][]=$customerRecords;
@@ -173,7 +173,7 @@ try{
 					$data['customerRecords']=[];
 					$customerRecords['name']= $records['first_name']." ". $records['last_name'];
 					$customerRecords['first_name'] = $records['first_name'];
-					$customerRecords['last_name'] = $records['last_name'];					
+					$customerRecords['last_name'] = ($records['last_name'])? $records['last_name']:'';					
 					$customerRecords['phone1'] =$phone;						 
 					$customerRecords['lead_reference'] = $records['id'];
 					$data['customerRecords'][]=$customerRecords;
