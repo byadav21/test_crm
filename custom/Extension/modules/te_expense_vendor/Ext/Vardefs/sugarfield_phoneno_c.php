@@ -126,6 +126,15 @@ $dictionary['te_expense_vendor']['fields']['contact_person'] =array (
         'len' => '25',       
 );
 
- 
+ $dictionary['te_expense_vendor']['fields']['cost_center'] =array (
+	'name' => 'cost_center',
+	'label' => 'Cost Center',
+	'type' => 'enum',	
+	'len' => '150',
+        'size' => '20',
+	'required' => false ,
+	'options'=>'cost_center'
+);
+
 
 
