@@ -42,17 +42,17 @@ try{
 		
 		$userid=$db->fetchByAssoc($getUserID);
 		if($callType=='outbound.auto.dial'){	
-			$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
+			$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
 			$res=$db->query($lead); 
 			
 						
 		}else if($callType=='outbound.manual.dial'){
 			if(isset($customers->lead_reference) && $customers->lead_reference){
-				$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
+				$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
 				$res=$db->query($lead);
 			}
 			if($db->getRowCount($res) == 0){	
-				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
+				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
 				 $res=$db->query($lead);
 			}	
 			
@@ -60,19 +60,19 @@ try{
 		}else if($callType=='inbound.call.dial'){
 			
 		 
-				$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and status!='Duplicate' and deleted=0  ";
+				$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and status!='Duplicate' and deleted=0  ";
 				$res=$db->query($lead);			
 		
 			
 		
 		}else if($callType=='outbound.callback.dial'){	
 			if(isset($customers->lead_reference) && $customers->lead_reference){
-				$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
+				$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
 				$res=$db->query($lead);
 			}	 
 			
 			if($db->getRowCount($res) == 0){	
-				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and deleted=0 and status!='Duplicate'";
+				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and deleted=0 and status!='Duplicate'";
 				 $res=$db->query($lead);
 			}	
 			
@@ -112,6 +112,8 @@ try{
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 					include_once("custom/modules/Leads/overview.php");
 					$api=new te_Api_override();
+                                        $campID=18;
+                                        $apiID=42;
 					$data=[];
 					$session=$api->doLogin();								
 					$data['sessionId']=$session;
@@ -123,7 +125,24 @@ try{
 					$customerRecords['phone1'] =$phone;						 
 					$customerRecords['lead_reference'] = $records['id'];
 					$data['customerRecords'][]=$customerRecords;
-					$responses=$api->uploadContacts($data,18,42);
+                                        
+                                        if($records['dristi_campagain_id']==18){
+                                                            
+                                            $campID=18;
+                                            $apiID=46;
+                                        }
+                                        else if($records['dristi_campagain_id']==16){
+
+                                            $campID=16;
+                                            $apiID=47;
+                                        }
+                                        else if($records['dristi_campagain_id']==17){
+
+                                            $campID=17;
+                                            $apiID=48;
+                                        }
+                                                        
+					$responses=$api->uploadContacts($data,$campID,$apiID);
 					
 				}else if($records['assigned_user_id']!=$userid['id']){
 					 
@@ -177,7 +196,25 @@ try{
 					$customerRecords['phone1'] =$phone;						 
 					$customerRecords['lead_reference'] = $records['id'];
 					$data['customerRecords'][]=$customerRecords;
-					$responses=$api->uploadContacts($data,18,42);
+                                        $campID=18;
+                                        $apiID=42;
+                                        if($records['dristi_campagain_id']==18){
+                                                            
+                                            $campID=18;
+                                            $apiID=46;
+                                        }
+                                        else if($records['dristi_campagain_id']==16){
+
+                                            $campID=16;
+                                            $apiID=47;
+                                        }
+                                        else if($records['dristi_campagain_id']==17){
+
+                                            $campID=17;
+                                            $apiID=48;
+                                        }
+                                                        
+					$responses=$api->uploadContacts($data,$campID,$apiID);
 				
 			}
 		}else{
