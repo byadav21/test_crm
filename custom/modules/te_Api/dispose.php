@@ -49,11 +49,11 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 
 	$phone=$_REQUEST['phone'];	
 	if(isset($_REQUEST['lead_reference'])  && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference']!=''){
-		$lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where  id='". $_REQUEST['lead_reference'] ."' and deleted=0 and status!='Duplicate' ";
+		$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where  id='". $_REQUEST['lead_reference'] ."' and deleted=0 and status!='Duplicate' ";
 		 
 	}else{
 	 
-		 $lead="select id,assigned_user_id,first_name,last_name,status,status_description from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
+		 $lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
 		
 	}
 	$res=$db->query($lead);
@@ -69,6 +69,8 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 					
 						//$res=$db->query($lead);
 						if($db->getRowCount($res) > 0){
+                                                        $campID=18;
+                                                        $apiID=42;
 							$records=$db->fetchByAssoc($res);		
 							$api=new te_Api_override();
 							$data=[];
@@ -82,7 +84,24 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 							$customerRecords['phone1'] =$phone;						 
 							$customerRecords['lead_reference'] = $records['id'];
 							$data['customerRecords'][]=$customerRecords;
-							$responses=$api->uploadContacts($data,18,42);
+                                                        
+                                                        if($records['dristi_campagain_id']==18){
+                                                            
+                                                            $campID=18;
+                                                            $apiID=46;
+                                                        }
+                                                        else if($records['dristi_campagain_id']==16){
+                                                            
+                                                            $campID=16;
+                                                            $apiID=47;
+                                                        }
+                                                        else if($records['dristi_campagain_id']==17){
+                                                            
+                                                            $campID=17;
+                                                            $apiID=48;
+                                                        }
+                                                        
+							$responses=$api->uploadContacts($data,$campID,$apiID);
 				         	}
 	}
     exit();
