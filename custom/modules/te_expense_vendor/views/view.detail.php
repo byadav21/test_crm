@@ -44,7 +44,14 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 			if($this->bean->id==$key) $ddown.= ' selected ';
 			$ddown.= ' >' . $val .'</option>';
 		}
+                $cost_centerddown='';  
+		foreach($GLOBALS['app_list_strings']['cost_center'] as $key=>$val){
+			$cost_centerddown.= '<option value="'.$key.'"';
+			if($this->bean->id==$key) $cost_centerddown.= ' selected ';
+			$cost_centerddown.= ' >' . $val .'</option>';
+		}
 		$this->ss->assign('dropdownData', $ddown);
+                $this->ss->assign('cost_centerddown', $cost_centerddown);
 		$this->ss->assign('roleStatus', $statusr);
 		$this->ss->assign('statusrsub', $statusrsub);
 		$this->ss->assign('overview', $this->bean);

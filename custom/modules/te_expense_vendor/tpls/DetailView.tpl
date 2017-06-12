@@ -258,6 +258,7 @@ class="yui-navset detailview_tabs"
 						 	<!--<p> Reason: {$overview->reason_rejection}</p>-->
 							   
 						  {elseif  $roleStatus == 0 &&  $overview->status!='0' }
+                                                                        <select style="width: 300px!important;clear: none;display: inline;" id="cost_center">{$cost_centerddown}</select>
 									<select style="width: 300px!important;clear: none;display: inline;" id="gldpid">{$dropdownData}</select>
 									<button class="button approveme">Approve</button>
 									<button class="button rejectme">Reject</button>
@@ -386,8 +387,9 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 	});
 	
 	$( ".approveme" ).on('click',function( event ) {	
-	       var glc=$('#gldpid').val() ;
-		  $.post( "index.php?module=te_expense_vendor&action=approval&to_pdf=1", { type: "approve", record: records ,reason:glc})
+	       var glc=$('#gldpid').val();
+               var cost_center = $('#cost_center').val();
+		  $.post( "index.php?module=te_expense_vendor&action=approval&to_pdf=1", { type: "approve", record: records ,reason:glc,cost_center:cost_center})
 				  .done(function( data ) {
 					 
 					  toastr.options = { "positionClass": "toast-top-center","timeOut": "8000",}
