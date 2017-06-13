@@ -40,8 +40,7 @@ class duplicate_logic{
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 					$result = curl_exec($ch);
 					$res = json_decode($result);
-					#print_r($res);
-
+				 
 						if(isset($res[0]->status) && $res[0]->status=='1'){
 							#echo "hello insert Success ";
 							$bean->is_sent_web="1";
