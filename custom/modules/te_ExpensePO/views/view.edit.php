@@ -3,6 +3,7 @@ ini_set ( 'display_errors', 'off' );
 require_once ('include/MVC/View/views/view.edit.php');
 require_once ('custom/modules/te_ExpensePO/te_Expenseproverride.php');
 require_once ('modules/ACLRoles/ACLRole.php');
+require_once ('modules/te_expense_product/te_expense_product.php');
 class te_ExpensePOViewEdit extends ViewEdit {
 	
 	
@@ -20,6 +21,7 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		global $current_user;
 		$expObj=new te_Expenseproverride();
 		$roleUsr=new ACLRole();
+                $exeProObj = new te_expense_product();
 		$taxes=[]; 
 		$items=[];
 		$saveID=[];
@@ -70,8 +72,13 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		}			
 			
 			
-		
-		
+		foreach($GLOBALS['app_list_strings']['cost_center'] as $key=>$val){
+			$cost_centerddown.= '<option value="'.$key.'"';
+			if($this->bean->cost_center==$key) $cost_centerddown.= ' selected ';
+			$cost_centerddown.= ' >' . $val .'</option>';
+		}
+                
+		$this->ss->assign('cost_centerddown', $cost_centerddown);
 		$this->ss->assign('taxes', $GLOBALS['app_list_strings']['item_taxes']);		 
 		$this->ss->assign('taxesarr', $taxes);
 			 

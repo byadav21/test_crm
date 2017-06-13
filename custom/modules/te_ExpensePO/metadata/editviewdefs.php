@@ -36,11 +36,15 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
-          1 => 
+          0 => 
           array (
             'name' => 'refrenceid',
             'label' => 'LBL_REFRENCEID',
+          ),
+          1 => 
+          array (
+            'name' => 'amount',
+            'label' => 'LBL_AMOUNT',
           ),
         ),
         1 => 
@@ -52,11 +56,27 @@ array (
           ),
           1 => 
           array (
-            'name' => 'amount',
-            'label' => 'LBL_AMOUNT',
+            'name' => 'status',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
           ),
         ),
         2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'porequired',
+            'studio' => 'visible',
+            'label' => 'LBL_POREQUIRED',
+          ),
+          1 => 
+          array (
+            'name' => 'documents',
+            'studio' => 'visible',
+            'label' => 'LBL_DOCUMENTS',
+          ),
+        ),
+        3 => 
         array (
           0 => 
           array (
@@ -66,32 +86,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'porequired',
-            'studio' => 'visible',
-            'label' => 'LBL_POREQUIRED',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
             'name' => 'cost_center',
             'label' => 'Cost Center',
-          ),
-          1 => '',
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'inv_num',
-            'label' => 'Invoce No.',
-          ),
-          1 => 
-          array (
-            'name' => 'documents',
-            'studio' => 'visible',
-            'label' => 'LBL_DOCUMENTS',
           ),
         ),
       ),

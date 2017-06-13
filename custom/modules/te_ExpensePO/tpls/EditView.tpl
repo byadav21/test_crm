@@ -437,7 +437,8 @@
 						 <div class="dompar">	
 							<div class="col-sm-3">
 								<input type="hidden"  name="savedid[]" >
-								<input type="text" class="itemtxt" name="items[]" >
+								<!--<input type="text" class="itemtxt" name="items[]" >-->
+                                                                <select style="width: 210px!important;clear: none;display: inline;" class="itemtxt" name="items[]">{$cost_centerddown}</select>
 								<div class="errdiv itemtxterr ">Please enter Item name</div>
 							</div>
 							<div class="col-sm-2">
