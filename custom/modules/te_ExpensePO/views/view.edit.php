@@ -70,7 +70,7 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		}			
 			
 			
-		
+		echo 'Test....';
 		
 		$this->ss->assign('taxes', $GLOBALS['app_list_strings']['item_taxes']);		 
 		$this->ss->assign('taxesarr', $taxes);

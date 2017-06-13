@@ -38,7 +38,7 @@
  ********************************************************************************/
 
 $config = array (
-  'assignable' =>  true,
+  'assignable' => true,
   'security_groups' => true,
   'acl' => true,
   'has_tab' => true,
@@ -48,7 +48,7 @@ $config = array (
   array (
     'basic' => 1,
   ),
-  'tesy'=>'1',
+  'tesy' => '1',
   'label' => 'Expense PR',
   'importable' => false,
 );
