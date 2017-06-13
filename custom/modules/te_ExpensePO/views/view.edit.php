@@ -69,16 +69,25 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		}else{
 			$this->ss->assign('prtype', "");		
 			
-		}			
-			
-			
-		foreach($GLOBALS['app_list_strings']['cost_center'] as $key=>$val){
-			$cost_centerddown.= '<option value="'.$key.'"';
-			if($this->bean->cost_center==$key) $cost_centerddown.= ' selected ';
-			$cost_centerddown.= ' >' . $val .'</option>';
-		}
+		}	
                 
-		$this->ss->assign('cost_centerddown', $cost_centerddown);
+		$productsBean = BeanFactory::getBean('te_expense_product');
+                
+                $products = $productsBean->get_full_list();
+               
+                if ( $products != null ) {
+                    
+                    $expProDrop='';
+                    foreach($products as $val){
+			$expProDrop.= '<option value="'.$val->id.'"';
+			//if($this->bean->cost_center==$key) $cost_centerddown.= ' selected ';
+			$expProDrop.= ' >' . $val->name .'</option>';
+		}
+                } 
+			
+		
+                
+		$this->ss->assign('expProDrop', $expProDrop);
 		$this->ss->assign('taxes', $GLOBALS['app_list_strings']['item_taxes']);		 
 		$this->ss->assign('taxesarr', $taxes);
 			 
