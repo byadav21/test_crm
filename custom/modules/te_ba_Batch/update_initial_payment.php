@@ -48,7 +48,7 @@
 						$fee1=$_REQUEST[$inr_index].",".$_REQUEST[$usd_index].",".date('d/m/Y',strtotime($_REQUEST[$due_date_index]));
 						$feearray[]=$fee1;
 						}
-						
+
 						$fee_detail = implode("|",$feearray);
 
 					if($bean->is_sent_web=="0"){
@@ -59,7 +59,7 @@
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
 					  #$url='http://talentedgewpe.wpengine.com/tecourse-api/';
-					$url = 'http://talentedge.staging.wpengine.com/tecourse-api/';
+					$url = 'http://webstaging.talentedge.in/tecourse-api/';
 					$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 					);
@@ -70,7 +70,8 @@
 						'course_type'=>'1',
 						'batchID'=>$bean->batch_code,
 						'pexcerpt'=>'1',
-						'Inst_crm_id'=>$bean->te_in_institutes_te_ba_batch_1te_in_institutes_ida,
+						'inst_crm_id'=>$bean->te_in_institutes_te_ba_batch_1te_in_institutes_ida,
+						'programme_crmid'=>$bean->te_pr_programs_te_ba_batch_1te_pr_programs_ida,
 						'batch_start_date'=>$batch_start_date,
 						'duration'=>$bean->duration,
 						'fees_inr'=>$bean->fees_inr,
@@ -89,7 +90,6 @@
 					$result = curl_exec($ch);
 					$res = json_decode($result);
 					$bean->is_sent_web="1";
-
 					if(isset($res[0]->status) && $res[0]->status=='1'){
 						$bean->is_sent_web="1";
 						$bean->web_batch_id=$res[0]->course_id;
@@ -105,7 +105,7 @@
 
 			$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
-					$url = 'http://talentedge.staging.wpengine.com/tecourse-api/';
+					$url = 'http://webstaging.talentedge.in/tecourse-api/';
 					$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 					);
@@ -116,7 +116,8 @@
 						'course_type'=>'1',
 						'batchID'=>$bean->batch_code,
 						'pexcerpt'=>'1',
-						'Inst_crm_id'=>$bean->te_in_institutes_te_ba_batch_1te_in_institutes_ida,
+						'inst_crm_id'=>$bean->te_in_institutes_te_ba_batch_1te_in_institutes_ida,
+						'programme_crmid'=>$bean->te_pr_programs_te_ba_batch_1te_pr_programs_ida,
 						'batch_start_date'=>$batch_start_date,
 						'duration'=>$bean->duration,
 						'fees_inr'=>$bean->fees_inr,
@@ -135,8 +136,8 @@
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 					$result = curl_exec($ch);
 					$res = json_decode($result);
-
 					if(isset($res[0]->status) && $res[0]->status=='1'){
+						$bean->is_sent_web="1";
 						$bean->web_batch_id=$res[0]->course_id;
 						//echo $res[0]->course_id;
 						#echo "hello update";
