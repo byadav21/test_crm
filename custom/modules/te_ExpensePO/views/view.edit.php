@@ -3,6 +3,7 @@ ini_set ( 'display_errors', 'off' );
 require_once ('include/MVC/View/views/view.edit.php');
 require_once ('custom/modules/te_ExpensePO/te_Expenseproverride.php');
 require_once ('modules/ACLRoles/ACLRole.php');
+require_once ('modules/te_expense_product/te_expense_product.php');
 class te_ExpensePOViewEdit extends ViewEdit {
 	
 	
@@ -20,6 +21,7 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		global $current_user;
 		$expObj=new te_Expenseproverride();
 		$roleUsr=new ACLRole();
+                $exeProObj = new te_expense_product();
 		$taxes=[]; 
 		$items=[];
 		$saveID=[];
@@ -67,11 +69,25 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		}else{
 			$this->ss->assign('prtype', "");		
 			
-		}			
-			
+		}	
+                
+		$productsBean = BeanFactory::getBean('te_expense_product');
+                
+                $products = $productsBean->get_full_list();
+               
+                if ( $products != null ) {
+                    
+                    $expProDrop='';
+                    foreach($products as $val){
+			$expProDrop.= '<option value="'.$val->id.'"';
+			//if($this->bean->cost_center==$key) $cost_centerddown.= ' selected ';
+			$expProDrop.= ' >' . $val->name .'</option>';
+		}
+                } 
 			
 		
-		
+                
+		$this->ss->assign('expProDrop', $expProDrop);
 		$this->ss->assign('taxes', $GLOBALS['app_list_strings']['item_taxes']);		 
 		$this->ss->assign('taxesarr', $taxes);
 			 

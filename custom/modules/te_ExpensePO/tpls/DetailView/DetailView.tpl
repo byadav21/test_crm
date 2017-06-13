@@ -132,7 +132,7 @@
 					{foreach from=$items key=id item=val}
 						<div class="col-sm-12 " style="line-height: 32px;">
 							<div class="col-sm-4 ">
-							  {$val.name}
+							  {$val.proname}
 							</div>
 							<div class="col-sm-2 ">
 							  {$val.unit} 							</div>

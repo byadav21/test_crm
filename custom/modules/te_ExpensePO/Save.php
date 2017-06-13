@@ -49,10 +49,10 @@ if(isset($_REQUEST['record']) && $_POST['record']){
 	
 }
 
- 
+ //echo '<pre>';
+//print_r($_REQUEST);die;
+if(!empty($_REQUEST['items'])){
 
-if(!empty($_REQUEST['name'])){
-	
 	try{
 			
 			$db->query('start transaction');

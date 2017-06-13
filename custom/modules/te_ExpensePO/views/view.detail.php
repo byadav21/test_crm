@@ -5,6 +5,7 @@ require_once('include/utils.php');
 require_once('include/DetailView/DetailView2.php');
 require_once ('custom/modules/te_ExpensePO/te_Expenseproverride.php');
 require_once ('modules/ACLRoles/ACLRole.php');
+require_once ('modules/te_expense_product/te_expense_product.php');
 class te_ExpensePOViewDetail extends ViewDetail {
 
 
@@ -68,7 +69,21 @@ class te_ExpensePOViewDetail extends ViewDetail {
 	  
 		 	 
 		$this->ss->assign('totalamt', array('nettotal'=>number_format($this->bean->amount, 2, '.',''),'total'=> number_format($total, 2, '.', ','),'taxes'=>number_format($totaltaxes, 2, '.', ',')));			 
-		$this->ss->assign('taxesarr', $taxes);			 
+		$this->ss->assign('taxesarr', $taxes);	
+                //print_r($items);
+                
+                $proName = new te_expense_product();
+                
+                foreach ($items as $key=>$val){
+                    $proName->retrieve($val['name']);
+                   //echo $proName->name;
+                    //$items[]=$val;
+                    $items[$key]['proname']=$proName->name;
+                    
+                }
+                
+               // print_r($items);
+
 		$this->ss->assign('items', $items);	
 		$this->ss->assign('roleStatus', $statusr);	
 		 
