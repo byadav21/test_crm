@@ -258,8 +258,10 @@ class="yui-navset detailview_tabs"
 						 	<!--<p> Reason: {$overview->reason_rejection}</p>-->
 							   
 						  {elseif  $roleStatus == 0 &&  $overview->status!='0' }
+                                                                        <lable><strong>Cost Center</strong></lable>
                                                                         <select style="width: 300px!important;clear: none;display: inline;" id="cost_center">{$cost_centerddown}</select>
-									<select style="width: 300px!important;clear: none;display: inline;" id="gldpid">{$dropdownData}</select>
+                                                                        <lable><strong>GL Code</strong></lable>
+                                                                        <select style="width: 300px!important;clear: none;display: inline;" id="gldpid">{$dropdownData}</select>
 									<button class="button approveme">Approve</button>
 									<button class="button rejectme">Reject</button>
 						
