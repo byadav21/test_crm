@@ -41,13 +41,13 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 		 $ddown='';  
 		foreach($GLOBALS['app_list_strings']['glcode'] as $key=>$val){
 			$ddown.= '<option value="'.$key.'"';
-			if($this->bean->id==$key) $ddown.= ' selected ';
+			if($this->bean->glcode==$key) $ddown.= ' selected ';
 			$ddown.= ' >' . $val .'</option>';
 		}
                 $cost_centerddown='';  
 		foreach($GLOBALS['app_list_strings']['cost_center'] as $key=>$val){
 			$cost_centerddown.= '<option value="'.$key.'"';
-			if($this->bean->id==$key) $cost_centerddown.= ' selected ';
+			if($this->bean->cost_center==$key) $cost_centerddown.= ' selected ';
 			$cost_centerddown.= ' >' . $val .'</option>';
 		}
 		$this->ss->assign('dropdownData', $ddown);

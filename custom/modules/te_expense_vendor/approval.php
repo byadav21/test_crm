@@ -51,14 +51,22 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 					$exapprovers->staus=0;
 					$exapprovers->save();
 				}
+                                //echo 'Testing.....1....';
+                                
+                                if($_POST['reason']) $query="update te_expense_vendor set  glcode='". $_POST['reason'] ."' where id='". $_POST['record'] ."'";
+                                $db->query($query);
+                                if($_POST['cost_center']) $query="update te_expense_vendor set  cost_center='". $_POST['cost_center'] ."' where id='". $_POST['record'] ."'";
+				$db->query($query);
+                                
 			}else{
 				//approve all
-				
+				//echo 'Testing.....2....';
 				$query="update te_expense_vendor_approval set staus=2 where expense_id='". $_POST['record'] ."'";
 				$db->query($query);
 				$query="update te_expense_vendor set status=2  where id='". $_POST['record'] ."'";
 				$db->query($query);
 				if($_POST['reason']) $query="update te_expense_vendor set  glcode='". $_POST['reason'] ."' where id='". $_POST['record'] ."'";
+                                $db->query($query);
                                 if($_POST['cost_center']) $query="update te_expense_vendor set  cost_center='". $_POST['cost_center'] ."' where id='". $_POST['record'] ."'";
 				$db->query($query);				
 				
