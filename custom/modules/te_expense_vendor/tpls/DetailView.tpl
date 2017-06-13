@@ -399,7 +399,7 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 					  if(obj.error==0){
 							toastr["success"](obj.msg);
 							swal({title:"Finished!",timer: -1});
-							location.reload();
+							//location.reload();
 					  }else{
 							toastr["error"](obj.msg);
 							swal({title:"Finished!",timer: -1});
