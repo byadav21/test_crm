@@ -59,6 +59,7 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 				$query="update te_expense_vendor set status=2  where id='". $_POST['record'] ."'";
 				$db->query($query);
 				if($_POST['reason']) $query="update te_expense_vendor set  glcode='". $_POST['reason'] ."' where id='". $_POST['record'] ."'";
+                                if($_POST['cost_center']) $query="update te_expense_vendor set  cost_center='". $_POST['cost_center'] ."' where id='". $_POST['record'] ."'";
 				$db->query($query);				
 				
 			}			
