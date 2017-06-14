@@ -53,11 +53,12 @@ class te_Expenseproverride extends te_ExpensePO {
 		 
 		$taxes=[]; 
 		$items=[];		
-		$itemDetal=	$this->dbinstance->query("select amounts,rate,unit,name,id,itemtype from te_expenseprdetail where expenseprid='$var' and deleted=0");
+		$itemDetal=	$this->dbinstance->query("select amounts,rate,unit,name,id,itemtype,description from te_expenseprdetail where expenseprid='$var' and deleted=0");
 		$i=0;$j=0;
 		while($row=$this->dbinstance->fetchByAssoc($itemDetal)){
 			if($row['itemtype']==0){
 				$items[$i]['id']=$row['id'];
+                                $items[$i]['description']=$row['description'];
 				$items[$i]['amt']=number_format($row['amounts'], 2, '.', '');
 				$items[$i]['rate']=number_format($row['rate'], 2, '.', '');
 				$items[$i]['unit']=number_format($row['unit'], 2, '.', '');

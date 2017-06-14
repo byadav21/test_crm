@@ -50,7 +50,8 @@ class te_ExpensePOViewDetail extends ViewDetail {
 			$var=$_REQUEST['record'];	
 			$itemDeiail=$expObj->getAllItems($var);
 			$taxes=$itemDeiail['taxes'];
-			$items=$itemDeiail['items'];		 
+			$items=$itemDeiail['items'];
+                        $description = $itemDeiail['description'];
 			$docuarray=json_decode(html_entity_decode( $this->bean->documents));	
 			foreach($items as $itm)	{
 			  $total +=floatval($itm['amt']);	
@@ -83,7 +84,7 @@ class te_ExpensePOViewDetail extends ViewDetail {
                 }
                 
                // print_r($items);
-
+                $this->ss->assign('description', $description);	
 		$this->ss->assign('items', $items);	
 		$this->ss->assign('roleStatus', $statusr);	
 		 
