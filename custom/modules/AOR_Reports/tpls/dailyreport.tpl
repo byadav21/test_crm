@@ -166,10 +166,10 @@
 			<strong>GSV</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Source CPA</strong>
+			<strong>Source CPA%</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Course CPA</strong>
+			<strong>Course CPA%</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Status</strong>
