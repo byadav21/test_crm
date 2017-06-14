@@ -171,7 +171,7 @@
 <div class="row text-center popupbox">
  
 <div class="col-xs-10 col-xs-offset-1 centered">
-<div class="col-xs-4 boxchoose col-xs-offset-1"  onclick="showFrm(0)">Create Expense with PO</div>
+<div class="col-xs-4 boxchoose col-xs-offset-1"  onclick="showFrm(0)">Create Purchase Requisition</div>
 <div class="col-xs-4 boxchoose col-xs-offset-1"  onclick="showFrm(1)">Create Expense without PO</div>
 </div>
 </div>
