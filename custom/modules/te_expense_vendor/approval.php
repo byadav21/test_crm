@@ -10,6 +10,7 @@ $obkExp= new te_expense_vendor_cls();
 
 if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 	$recordId=$obkExp->checkACLDetailView($_POST['record'],$current_user->id);
+//print_r($recordId);die;
 	if(!$recordId ){
 			$response['error']=1;
 			$response['msg']='Unauthrozied access!';
@@ -36,8 +37,8 @@ if(isset($_POST['type']) && $_POST['type']=='approve' && $_POST['record']){
 			$roleArr=$roles->getUserRole($current_user->id,1);
 			//print_r($roleArr);
 			$approvers=$objExp->getAllApprovers('',$roleArr['parent_role']);
-	 	        //print_r($approvers);
-		        //die; 
+	 	       // print_r($approvers);
+		      //  die; 
 			
 			if($approvers && count($approvers)>0){
 				foreach($approvers as $appvrs){
