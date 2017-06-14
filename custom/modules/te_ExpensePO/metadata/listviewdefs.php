@@ -9,16 +9,6 @@ array (
     'default' => true,
     'link' => true,
   ),
-  'VENDOR_C' => 
-  array (
-    'type' => 'relate',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_VENDOR',
-    'id' => 'TE_EXPENSE_VENDOR_ID_C',
-    'link' => true,
-    'width' => '10%',
-  ),
   'DATED' => 
   array (
     'type' => 'date',
@@ -55,13 +45,6 @@ array (
     'label' => 'LBL_POREQUIRED',
     'width' => '10%',
     'default' => true,
-  ),
-  'REFRENCEID' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_REFRENCEID',
-    'width' => '10%',
-    'default' => false,
   ),
   'CREATED_BY_NAME' => 
   array (

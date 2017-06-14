@@ -72,9 +72,10 @@ if(!empty($_REQUEST['items'])){
 				  $refID.=str_pad('1',3,'0',STR_PAD_LEFT);	 
 				 }
 				 $role->refrenceid = $refID;
+                                 $role->name = $refID;
 			}
 			
-			$role->name = $_POST['name'];
+			
 			$role->date_entered = date('Y-m-d H:i:s');
 			if($_POST['record']) $role->date_modified = date('Y-m-d H:i:s');
 			$role->modified_user_id = $current_user->id;
@@ -107,6 +108,7 @@ if(!empty($_REQUEST['items'])){
 				 $deletednotid=[];
 				 $totalAmt=0; 
 				 $totalTax=0; 
+                                 
 				if(count($_POST['items'])>0){
 						$i=0;
 						foreach($_POST['items'] as $items){
@@ -117,7 +119,7 @@ if(!empty($_REQUEST['items'])){
 									$itemsExp->name=$items;							 
 									$itemsExp->date_modified=date('Y-m-d H:i:s');
 									$itemsExp->modified_user_id=$current_user->id;							 
-									
+									$itemsExp->description=$_POST['itemsd'][$i];		
 									$itemsExp->itemtype=0;
 									$itemsExp->unit=$_POST['unit'][$i];
 									$itemsExp->rate=$_POST['rate'][$i];
@@ -136,6 +138,7 @@ if(!empty($_REQUEST['items'])){
 									$itemsExp->modified_user_id=$current_user->id;
 									$itemsExp->created_by=$current_user->id;
 									$itemsExp->assigned_user_id=$current_user->id;
+                                                                        $itemsExp->description=$_POST['itemsd'][$i];
 									$itemsExp->itemtype=0;
 									$itemsExp->unit=$_POST['unit'][$i];
 									$itemsExp->rate=$_POST['rate'][$i];
@@ -277,8 +280,11 @@ if(!empty($_REQUEST['items'])){
 			}
 		 
 			$db->query('commit');
+                        header("Location: index.php?module=te_ExpensePO&action=DetailView&record=". $role->id);
 		}catch(Exception $e){
 			$db->query('rollback');
+                       
+                        header("Location: index.php?module=te_ExpensePO&action=ListView");
 		}	
 	
 }else{
@@ -294,6 +300,7 @@ ob_clean();
     }
     echo "result = {role_id:'$role->id', module:'$flc_module'}";
     sugar_cleanup(true);
+     header("Location: index.php?module=te_ExpensePO&action=ListView");
 }
  
-header("Location: index.php?module=te_ExpensePO&action=DetailView&record=". $role->id);
+
