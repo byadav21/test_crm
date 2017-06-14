@@ -7,6 +7,7 @@ class AutoCalculate
 
     public function calculateCPA(&$bean, $event, $arguments)
     {
+        //echo "<pre>";print_r($bean);exit();
         global  $db;
         if (isset($_REQUEST['import_module']) && $_REQUEST['module'] == "Import")
         {
@@ -18,8 +19,10 @@ class AutoCalculate
           $vendorObj                = $bean->db->Query($vendorSql);
           $vendor                   = $db->fetchByAssoc($vendorObj);
                 #count total leads
-
-                $leadSql               = "SELECT COUNT(*) as total FROM leads WHERE utm='" . $bean->te_utm_te_actual_campaign_1_name . "' AND deleted=0 and status!='Duplicate'";
+                if(isset($bean->plan_date) && !empty($bean->plan_date)){
+                  $where = " AND DATE(date_entered)='".$bean->plan_date."' ";
+                }
+                $leadSql               = "SELECT COUNT(*) as total FROM leads WHERE utm='" . $bean->te_utm_te_actual_campaign_1_name . "' AND deleted=0 and status!='Duplicate' $where";
                 $leadObj               = $bean->db->Query($leadSql);
                 $lead                  = $db->fetchByAssoc($leadObj);
                 $total_leads           = $lead['total'];
@@ -48,13 +51,16 @@ class AutoCalculate
 			$db->Query($insertQuery);
 
 
-            $leadSql     = "SELECT COUNT(*) as total FROM leads WHERE utm='" . $_REQUEST['te_utm_te_actual_campaign_1_name'] . "' AND deleted=0 and status!='Duplicate'";
+      if(isset($bean->plan_date) && !empty($bean->plan_date)){
+        $where = " AND DATE(date_entered)='".$bean->plan_date."' ";
+      }
+            $leadSql               = "SELECT COUNT(*) as total FROM leads WHERE utm='" . $bean->te_utm_te_actual_campaign_1_name . "' AND deleted=0 and status!='Duplicate' $where";
             $leadObj     = $bean->db->Query($leadSql);
             $lead        = $db->fetchByAssoc($leadObj);
             $total_leads = $lead['total'];
 
             if ($total_leads > 0)
-                $bean->cpl              = ($bean->total_cost / $total_leads);
+                $bean->cpl              = floatval($bean->total_cost / $total_leads);
             else
                 $bean->cpl              = 0;
 
