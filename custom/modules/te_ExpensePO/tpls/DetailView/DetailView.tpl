@@ -134,6 +134,9 @@
 							<div class="col-sm-4 ">
 							  {$val.proname}
 							</div>
+                                                        <div class="col-sm-2 ">
+							  {$val.description}
+							</div>
 							<div class="col-sm-2 ">
 							  {$val.unit} 							</div>
 							<div class="col-sm-3 ">

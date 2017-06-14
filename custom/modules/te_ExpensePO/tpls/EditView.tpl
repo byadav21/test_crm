@@ -386,10 +386,15 @@
 <div class="clear"></div>
 <div class="row" class="maincontroe">
 				
-				<div class="maincontainer col-sm-8">
+				<div class="maincontainer col-sm-9">
 					<div class="row items">
 						
-							<div class="col-sm-3">
+							<div class="col-sm-2">
+								Product Detail
+							</div>
+                                            
+                                            
+							<div class="col-sm-2">
 								Expense Detail
 							</div>
 							<div class="col-sm-2">
@@ -398,7 +403,7 @@
 							<div class="col-sm-2">
 								Rate
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								Amount in <i class="fa fa-inr" aria-hidden="true"></i>
 							</div>
 							
@@ -406,11 +411,16 @@
 							{foreach   from=$items key=id item=rowDatas}
 							
 								<div class="dompar">	
-								<div class="col-sm-3">
+								<div class="col-sm-2">
 									<input type="hidden" value="{$rowDatas.id}" name="savedid[]" >
 									<input type="text" value="{$rowDatas.name}" class="itemtxt" name="items[]" >
 									<div class="errdiv itemtxterr ">Please enter Item name</div>
 								</div>
+                                                                <div class="col-sm-2">
+								 
+                                                                      <input type="text" class="itemtxtd" value="{$rowDatas.description}"  name="itemsd[]" >     
+                                                            
+                                                                </div>        
 								<div class="col-sm-2">
 									 <input type="text" value="{$rowDatas.unit|string_format:"%.2f"}"  class="amtu" name="unit[]" >
 									 <div class="errdiv amtuerr ">Please enter valid unit</div>
@@ -419,7 +429,7 @@
 									 <input type="text" value="{$rowDatas.rate|string_format:"%.2f"}"  class="amtr" name="rate[]" >
 									 <div class="errdiv amtrerr ">Please enter valid rate</div>
 								</div>
-								<div class="col-sm-3">
+								<div class="col-sm-2">
 									 <input style=" background-color: #f1f1f1!important;" disabled type="text" value="{$rowDatas.amt|string_format:"%.2f"}"  class="amtvald" name="amounts[]" >
 									 <div class="errdiv amtvalderr ">Please enter valid amount</div>
 								</div>
@@ -435,12 +445,17 @@
 						{/if}
 							
 						 <div class="dompar">	
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<input type="hidden"  name="savedid[]" >
 								<!--<input type="text" class="itemtxt" name="items[]" >-->
-                                                                <select style="width: 210px!important;clear: none;display: inline;" class="itemtxt" name="items[]">{$expProDrop}</select>
+                                                                <select  class="itemtxt" name="items[]">{$expProDrop}</select>
 								<div class="errdiv itemtxterr ">Please enter Item name</div>
 							</div>
+                                                        <div class="col-sm-2">
+								 
+                                                            <input type="text" class="itemtxtd" name="itemsd[]" >     
+                                                            
+							</div>        
 							<div class="col-sm-2">
 								 <input type="text" class="amtu" name="unit[]" >
 								 <div class="errdiv amtuerr ">Please enter valid unit</div>
@@ -449,7 +464,7 @@
 								 <input type="text" class="amtr" name="rate[]" >
 								 <div class="errdiv amtrerr ">Please enter valid rate</div>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								 <input  style=" background-color: #f1f1f1!important;" disabled type="text" class="amtvald" name="amounts[]" >
 								 <div class="errdiv amtvalderr ">Please enter valid amount</div>
 							</div>
@@ -462,7 +477,7 @@
 					</div>
 				</div>
 							
-				<div class="maincontainer col-sm-4">
+				<div class="maincontainer col-sm-3">
 				
 					<div class=" itemstx">
 							<div class="col-sm-5">

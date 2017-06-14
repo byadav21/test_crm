@@ -17,7 +17,66 @@ class te_ExpensePOViewEdit extends ViewEdit {
 	
 	
 	function display() {
-		 
+		 ?>
+                 <script>
+                    //batch_status
+                   YAHOO.util.Event.addListener(window,"load", function() {
+                   //alert('Test.....');
+                   document.getElementById('btn_vendor_c').onclick=function(){
+                        
+                           var popup_request_data = {
+                                   'call_back_function' : 'set_vendor_rfq_return',
+                                   'form_name' : 'EditView',
+                                   'field_to_name_array' : {
+                                      'id' : 'id',
+                                      'name': 'name',
+                                    },
+                           };
+                   open_popup('te_expense_vendor', 600, 400, '&status_advanced=2', true, false, popup_request_data);
+                   }
+                   });
+                   
+                   function set_vendor_rfq_return(popup_reply_data){
+                       
+                        var name_to_value_array = popup_reply_data.name_to_value_array;
+                        var id = name_to_value_array['id'];
+                        var name = name_to_value_array['name'];
+                        document.getElementById('vendor_c').value= name;
+                        document.getElementById('te_expense_vendor_id_c').value = id;
+                        
+                        $.ajax({
+                                 async: false,
+                                    type: "POST",
+                                    data: { 
+                                      id:id,
+                                      name:name,
+                                      action:'getCostCenter'
+                                     },
+                                    dataType: "json",
+                                    url: 'index.php?module=te_ExpensePO&action=getCostCenter&to_pdf=1',
+                                    error: function(data){
+                                    $('.countloader').hide(); 
+                                    },
+                                    success:function(data)
+                                    {   
+                                       
+                                        $('#cost_center').html('');
+                                        $('#cost_center').html(data.cost_center);
+                                        $('#cost_center').prop('disabled', true);
+                                        
+                                         $('.itemtxt').html('');
+                                        $('.itemtxt').html(data.product_drop);
+                                       
+                                        
+                                        
+
+                                    } 
+                            });
+                        
+                    }
+                
+                   </script>
+                 <?php
 		global $current_user;
 		$expObj=new te_Expenseproverride();
 		$roleUsr=new ACLRole();
@@ -27,7 +86,7 @@ class te_ExpensePOViewEdit extends ViewEdit {
 		$saveID=[];
 		$document='[]';
 		$docuarray=[];
-	 
+                
 		$this->ss->assign('isedit', 0);	
 		if(!empty($_REQUEST['record'])){
 			$this->ss->assign('isedit', 1);	
