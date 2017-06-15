@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 if (!defined('sugarEntry') || !sugarEntry)die('Not A Valid Entry Point');
 global  $current_user;
 
@@ -15,51 +16,19 @@ if(isset($_REQUEST['record']) && $_REQUEST['record'] ){
 	
 	$obkExp= new te_expense_vendor(); 
 	$recordId=$obkExp->retrieve($_REQUEST['record']);
-
-//print_r($recordId);
 	if($recordId->id){
-		// print_r($_REQUEST);
+		 
 		$pan['pan']=json_decode(html_entity_decode($recordId->panpdf));
 		$pan['stax']=json_decode(html_entity_decode($recordId->staxpdf));
 		$pan['cc']=json_decode(html_entity_decode($recordId->ccheckdoc));
-	 $pan['gst']=json_decode(html_entity_decode($recordId->gstndoc));
+		$pan['gst']=json_decode(html_entity_decode($recordId->gstndoc));
 		$pan['reg']=json_decode(html_entity_decode($recordId->reg_cert));
-
-
-
-// $types= $pan[$_REQUEST['type']]->path;die;
-
-//print_r($_REQUEST);
-
-
-	 $file_url = 'upload/vendors/'.$pan[$_REQUEST['type']]->path;//die;
-
-if(!$pan[$_REQUEST['type']]->path){
-
-
-  header('Content-Type: text/pdf');
-                header("Content-Transfer-Encoding: Binary");
-header('Pragma: no-cache');
-header("Content-disposition: attachment; filename=\"" . basename( $file_url) . '.pdf'  . "\"");
-
-
- readfile($file_url);die;
-}
-echo '<script>';
-?>
-   window.open('<?php echo $file_url ?>'); window.history.back();
-<?php
-
-echo '</script>';
-die;
-
-	$name= $pan[$_REQUEST['type']]->name;		
-//$ext=explode('.',$name);
-		header('Content-Type: text/pdf');
+		$file_url = 'upload/vendors/'.$pan[$_REQUEST['type']]->path; 
+		$name= $pan[$_REQUEST['type']]->name;		
+		header('Content-Type: application/octet-stream');
 		header("Content-Transfer-Encoding: Binary"); 
-header('Pragma: no-cache');		
-header("Content-disposition: attachment; filename=\"" . basename( $file_url) . '.pdf'  . "\""); 
-		echo readfile($file_url);
+		header("Content-disposition: attachment; filename=\"" . $name . "\""); 
+		readfile($file_url);
 		exit(); 
 		 
 	}
@@ -69,6 +38,7 @@ header("Content-disposition: attachment; filename=\"" . basename( $file_url) . '
  
 	  echo '<h1>You are not authorised to download vendor</h1>';
 }
+
 
 
 
