@@ -90,6 +90,15 @@ array (
             'label' => 'Cost Center',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'gl_code_c',
+            'label' => 'LBL_GL_CODE',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

@@ -60,17 +60,7 @@
 
   .maincontainer input[type=text],.maincontainer select{width:100%!important} .minbtn,.minbtntx,.errdiv,#documents,#documents_label{display:none;cursor:pointer} .errdiv{color:red} .deldocs{cursor:pointer} .dompar{margin-bottom: 5px; display: block; overflow: hidden;clear:both}  #amount{pointer-events:none;opacity:0.8} .action_buttons{display: inline-block;}.uploadedimg{padding: 5px 0;border-bottom: 1px dotted #000000; margin-bottom: 0px;    display: block;    overflow: hidden;}</style>
 
-{{if $prtype=='PR'}}
-<style>#porequired_label,#porequired{display:none}</style>
-{{elseif $prtype=='PO'}}
-<style>#inv_num_label,#inv_num{display:none}</style>
-{{/if}}
-<style>
-{{if $isedit=='0'}}
-	#EditView{display:none}
-{{else}}
-	.popupbox{display:none}
-{{/if}}
+
 </style>
  
     <script type="text/template" id="qq-template-gallery">
@@ -149,32 +139,12 @@
             </dialog>
         </div>
     </script>
-    <script> 
-		function showFrm(e){
-		  if(e==1){
-			$('#porequired_label').hide();
-			$('#porequired').hide();
-			$('#type').val('PR');	
-		  }else{
-			$('#inv_num_label').hide();
-			$('#inv_num').hide();		  
-			$('#type').val('PO');		  
-		  }
-		$('.popupbox').hide();
-		$('#EditView').show();
-		}
-    </script>
+    
 
 {/literal}
 
 
-<div class="row text-center popupbox">
- 
-<div class="col-xs-10 col-xs-offset-1 centered">
-<div class="col-xs-4 boxchoose col-xs-offset-1"  onclick="showFrm(0)">Create Purchase Requisition</div>
-<div class="col-xs-4 boxchoose col-xs-offset-1"  onclick="showFrm(1)">Create Expense without PO</div>
-</div>
-</div>
+
 
 
 {{include file=$headerTpl}}
