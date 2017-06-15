@@ -41,7 +41,7 @@ class te_Expense_VendorViewList extends ViewList
          if(!$current_user->is_admin){
            $this->params['custom_from'] = "  inner join te_expense_vendor_approval on te_expense_vendor.id=te_expense_vendor_approval.expense_id AND te_expense_vendor_approval.assigned_user_id = '". $current_user->id ."'";
           }else{
-			 $this->params['custom_from'] = "  inner join te_expense_vendor_approval on te_expense_vendor.id=te_expense_vendor_approval.expense_id and assigned_user_id = '". $current_user->id ."'";
+			// $this->params['custom_from'] = "  inner join te_expense_vendor_approval on te_expense_vendor.id=te_expense_vendor_approval.expense_id";// and assigned_user_id = '". $current_user->id ."'";
 
 		  } 
 		  
