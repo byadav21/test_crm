@@ -1,5 +1,5 @@
 <?php
-// created: 2017-06-07 11:01:02
+// created: 2017-06-15 16:22:45
 $mod_strings = array (
   'LBL_STATUS' => 'status',
   'LBL_VENDOR_TE_EXPENSE_VENDOR_ID' => 'Vendor (related  ID)',
@@ -10,4 +10,5 @@ $mod_strings = array (
   'LBL_LIST_FORM_TITLE' => 'Expense Vouchers List',
   'LBL_SEARCH_FORM_TITLE' => 'Search Expense Vouchers',
   'LBL_HOMEPAGE_TITLE' => 'My Expense Vouchers',
+  'LBL_GL_CODE' => 'GL Code',
 );

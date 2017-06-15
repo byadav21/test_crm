@@ -26,5 +26,6 @@ $data= array();
 
 
 $data['product_drop']=$drop;
+$data['gl_code']=$vendorObj->glcode;
 $data['cost_center']= '<option label="'.$vendorObj->cost_center.'" value="'.$vendorObj->cost_center.'">'.$vendorObj->cost_center.'</option>';
 echo json_encode($data);

@@ -64,8 +64,13 @@ class te_ExpensePOViewEdit extends ViewEdit {
                                         $('#cost_center').html(data.cost_center);
                                         $('#cost_center').prop('disabled', true);
                                         
-                                         $('.itemtxt').html('');
+                                        $('.itemtxt').html('');
                                         $('.itemtxt').html(data.product_drop);
+                                        
+                                        
+                                        $('#gl_code_c').val('');
+                                        $('#gl_code_c').val(data.gl_code);
+                                        $('#gl_code_c').prop('disabled', true);
                                        
                                         
                                         
@@ -126,7 +131,7 @@ class te_ExpensePOViewEdit extends ViewEdit {
 			
                         $this->ss->assign('prtype', $this->bean->expense_type);
 		}else{
-			$this->ss->assign('prtype', "");		
+			$this->ss->assign('prtype', $_REQUEST['type']);		
 			
 		}	
                 
