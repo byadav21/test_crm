@@ -41,27 +41,13 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		$where="";
 		$from_date="";
 		$to_date="";
+		$whereBatch="";
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
 			$_SESSION['us_from_date'] = $_REQUEST['from_date'];
 			$_SESSION['us_to_date'] = $_REQUEST['to_date'];
 			$_SESSION['us_batch'] = $_REQUEST['batch'];
-			if($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
-				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-			}elseif($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']==""){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
-				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
-			}elseif($_SESSION['us_from_date']==""&&$_SESSION['us_to_date']!=""){
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
-				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
-			}
-
-			if(!empty($_SESSION['us_batch'])){
-				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
-			}
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Source,Term,Medium,,Alive,Warm,Dead,Converted\n";
+			$data="Source,Term,Medium,Campaign,Duplicate,Dead_Number,Dropout,Fallout,No_Answer,Not_Eligible,Not_Enquired,Rejected,Retired,Ringing_Multiple_Times,Wrong_Number,Call_Back,Converted,Follow_Up,New_Lead,Prospect,Re_Enquired\n";
 			$file = "utm_status_report";
 			$where='';
 			$from_date="";
@@ -84,14 +70,16 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 			if(!empty($_SESSION['us_batch'])){
 				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
+				$whereBatch ="AND b.id IN('".implode("','",$_SESSION['us_batch'])."')";
 			}
 
 			$councelorList=array();
+			$utmArr = [];
 			$vendorSql="SELECT u.id ,v.name,b.name as batch,contract_type from te_utm as u
 						inner join te_ba_batch as b on b.id=u.te_ba_batch_id_c
 						inner join te_vendor_te_utm_1_c on te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
 						inner join te_vendor as v on v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
-						WHERE u.utm_status ='Live' AND u.deleted=0 AND b.deleted=0 AND v.deleted=0 
+						WHERE u.utm_status ='Live' AND u.deleted=0 AND b.deleted=0 AND v.deleted=0 $whereBatch
 						order by u.date_modified desc";
 			$vendorObj =$db->query($vendorSql);
 			$vendorArr = [];
@@ -99,25 +87,55 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				$vendorArr[]=$vendor;
 			}
 			$vendors = $vendorArr;
-			if($vendors){
-				foreach($vendors as $vendorval){
-					$councelorList[$vendorval['id']]['name']=$vendorval['name'];
-					$councelorList[$vendorval['id']]['Alive']=0;
-					$councelorList[$vendorval['id']]['Warm']=0;
-					$councelorList[$vendorval['id']]['Dead']=0;
-					$councelorList[$vendorval['id']]['Converted']=0;
 
-				}
-				$leadSql="SELECT u.name,u.id,l.status,count(l.id)total FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0 AND l.status IN ('Alive','Warm','Dead','Converted') $where GROUP BY u.id,l.status";
-				$leadObj =$db->query($leadSql);
-				while($row =$db->fetchByAssoc($leadObj)){
-					$councelorList[$row['id']]['name']=$row['name'];
-					$councelorList[$row['id']][$row['status']]=$row['total'];
-				}
+			$campaignSql="SELECT DISTINCT IFNULL(utm_campaign,'NA')utm_campaign  from leads";
+
+			$campaignObj =$db->query($campaignSql);
+			$campaignArr = [];
+			while($campaign =$db->fetchByAssoc($campaignObj)){
+				$campaignArr[]=$campaign['utm_campaign'];
 			}
 
+			if($vendors){
+				foreach($vendors as $vendorval){
+					foreach($campaignArr as $val){
+						$councelorList[$vendorval['id'].'##'.$val]['name']=$vendorval['name'];
+						$councelorList[$vendorval['id'].'##'.$val]['batch']=$vendorval['batch'];
+						$councelorList[$vendorval['id'].'##'.$val]['contract_type']=$vendorval['contract_type'];
+						$councelorList[$vendorval['id'].'##'.$val]['Call_Back']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Converted']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Dropout']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Dead_Number']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Fallout']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Follow_Up']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['New_Lead']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['No_Answer']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Not_Eligible']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Not_Enquired']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Prospect']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Wrong_Number']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Re_Enquired']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Rejected']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Retired']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Ringing_Multiple_Times']=0;
+						$councelorList[$vendorval['id'].'##'.$val]['Duplicate']=0;
+					}
+					$utmArr[]=$vendorval['id'];
+
+				}
+				if($utmArr){
+					$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
+				}
+				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,IFNULL(l.utm_campaign,'NA')utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+				$leadObj =$db->query($leadSql);
+				while($row =$db->fetchByAssoc($leadObj)){
+					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+					$councelorList[$row['id'].'##'.$row['utm_campaign']][$row['status_description']]=$row['total'];
+				}
+			}
 			foreach($councelorList as $key=>$councelor){
-				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['batch']. "\",\"" . $councelor['contract_type']. "\",\"" . $councelor['Alive'] . "\",\"" . $councelor['Warm']."\",\"" . $councelor['Dead']."\",\"" . $councelor['Converted']. "\"\n";
+				$campaing = explode('##',$key);
+				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['batch']. "\",\"" . $councelor['contract_type']. "\",\"" . $campaing[1]. "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number'] . "\",\"" . $councelor['Dropout'] . "\",\"" . $councelor['Fallout'] . "\",\"" . $councelor['No_Answer'] . "\",\"" . $councelor['Not_Eligible'] . "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\"\n";
 			}
 			ob_end_clean();
 			header("Content-type: application/csv");
@@ -125,13 +143,29 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			echo $data; exit;
 		}
 
-		$vendorSql="SELECT u.id ,v.name,b.name as batch,contract_type from te_utm as u
+
+		if($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']){
+			$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
+			$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
+			$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
+		}elseif($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']==""){
+			$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
+			$where.=" AND DATE(l.date_entered)>='".$from_date."' ";
+		}elseif($_SESSION['us_from_date']==""&&$_SESSION['us_to_date']!=""){
+			$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
+			$where.=" AND DATE(l.date_entered)<='".$to_date."' ";
+		}
+		if(!empty($_SESSION['us_batch'])){
+			$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
+			$whereBatch ="AND b.id IN('".implode("','",$_SESSION['us_batch'])."')";
+		}
+		$vendorSql="SELECT u.id ,u.name AS utm_name,v.name,b.name as batch,contract_type from te_utm as u
 						inner join te_ba_batch as b on b.id=u.te_ba_batch_id_c
 						inner join te_vendor_te_utm_1_c on te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
 						inner join te_vendor as v on v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
-						WHERE u.utm_status ='Live' AND u.deleted=0 AND b.deleted=0 AND v.deleted=0 
+						WHERE u.utm_status ='Live' AND u.deleted=0 AND b.deleted=0 AND v.deleted=0 $whereBatch
 						order by u.date_modified desc";
-				 
+
 				$vendorObj =$db->query($vendorSql);
 				$vendorArr = [];
 				while($vendor =$db->fetchByAssoc($vendorObj)){
@@ -139,33 +173,53 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				}
 				$vendors = $vendorArr;
 
+				$campaignSql="SELECT DISTINCT IFNULL(utm_campaign,'NA')utm_campaign  from leads";
 
+				$campaignObj =$db->query($campaignSql);
+				$campaignArr = [];
+				while($campaign =$db->fetchByAssoc($campaignObj)){
+					$campaignArr[]=$campaign['utm_campaign'];
+				}
 		$councelorList=array();
+		$utmArr = [];
 		if($vendors){
 			foreach($vendors as $vendorval){
-				//$leadSql="SELECT count(l.id) as total,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND l.utm='".$vendorval['name']."' $where GROUP BY l.status";
-				//$leadObj =$db->query($leadSql);
-
-				$councelorList[$vendorval['id']]['name']=$vendorval['name'];
-				$councelorList[$vendorval['id']]['batch']=$vendorval['batch'];
-				$councelorList[$vendorval['id']]['contract_type']=$vendorval['contract_type'];
-				$councelorList[$vendorval['id']]['Alive']=0;
-				$councelorList[$vendorval['id']]['Warm']=0;
-				$councelorList[$vendorval['id']]['Dead']=0;
-				$councelorList[$vendorval['id']]['Converted']=0;
-				/*while($row =$db->fetchByAssoc($leadObj)){
-					$councelorList[$vendorval['id']][$row['status']]=$row['total'];
-				}*/
+				foreach($campaignArr as $val){
+					$councelorList[$vendorval['id'].'##'.$val]['name']=$vendorval['name'];
+					$councelorList[$vendorval['id'].'##'.$val]['batch']=$vendorval['batch'];
+					$councelorList[$vendorval['id'].'##'.$val]['contract_type']=$vendorval['contract_type'];
+					$councelorList[$vendorval['id'].'##'.$val]['Call_Back']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Converted']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Dropout']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Dead_Number']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Fallout']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Follow_Up']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['New_Lead']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['No_Answer']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Not_Eligible']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Not_Enquired']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Prospect']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Wrong_Number']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Re_Enquired']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Rejected']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Retired']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Ringing_Multiple_Times']=0;
+					$councelorList[$vendorval['id'].'##'.$val]['Duplicate']=0;
+				}
+				$utmArr[]=$vendorval['id'];
 			}
-			$leadSql="SELECT u.name,u.id,l.status,count(l.id)total FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0 AND l.status IN ('Alive','Warm','Dead','Converted') $where GROUP BY u.id,l.status";
+			if($utmArr){
+				$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
+			}
+			$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,IFNULL(l.utm_campaign,'NA')utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
 			$leadObj =$db->query($leadSql);
 			while($row =$db->fetchByAssoc($leadObj)){
-				$councelorList[$row['id']]['name']=$row['name'];
-				$councelorList[$row['id']][$row['status']]=$row['total'];
+				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+				$councelorList[$row['id'].'##'.$row['utm_campaign']][$row['status_description']]=$row['total'];
 			}
 
 		}
-
+		//echo count($councelorList)."<pre>";print_r($councelorList);exit();
 		$total=count($councelorList); #total records
 		$start=0;
 		$per_page=10;

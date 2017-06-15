@@ -11,7 +11,7 @@
 			<td nowrap="nowrap" width="10%">
 				<select name="batch[]" id="batch" multiple="1" class="multiselbox"  size="6" style="width: 150px;">
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.id}" {if in_array($batch.id, $selected_batch) } selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
 			</td>
@@ -118,29 +118,91 @@
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Medium</strong>
 		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Alive</strong>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Campaign</strong>
+		</th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Duplicate</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Warm</strong>
+			<strong>Dead Number</strong>
+		</th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Dropout</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Dead</strong>
+			<strong>Fallout</strong>
+		</th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>No Answer</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Not Eligible</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Not Enquired</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Rejected</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Retired</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Ringing Multiple</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Wrong Number</strong>
+		</th>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Call Back</strong>
+		</th>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Converted</strong>
 		</th>
- 
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Follow Up</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>New Lead</strong>
+		</th>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Prospect</strong>
+		</th>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Re-Enquired</strong>
+		</th>
+
 	</tr>
 	{foreach from = $councelorList key=key item=councelor}
+    {assign var=campaign value="##"|explode:$key}
 		<tr height="20" class="oddListRowS1">
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.contract_type}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Alive}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Warm}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dead}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$campaign[1]}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Duplicate}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dead_Number}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dropout}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Fallout}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.No_Answer}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Not_Eligible}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Not_Enquired}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Rejected}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Retired}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Ringing_Multiple_Times}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Wrong_Number}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Call_Back}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Converted}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Follow_Up}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.New_Lead}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Prospect}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Re_Enquired}</td>
 		</tr>
 	{/foreach}
 </table>
