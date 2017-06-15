@@ -259,6 +259,8 @@ $GLOBALS['app_list_strings']['lead_source_dom']=array (
   'InboundCalls' => 'Inbound Calls',
   'Referrals' => 'Referrals',
   'Offline_Chat' => 'Offline Chat',
+  'SPJ_Referrals' => 'SPJ Referrals',
+  'Mica_Referrals' => 'Mica Referrals',
 );
 $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   '' => '',
@@ -272,6 +274,8 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'ABND' => 'ABND',
   'FailPayment' => 'Fail Payment',
   'Offline_Chat' => 'Offline Chat',
+  'SPJ_Referrals' => 'SPJ Referrals',
+  'Mica_Referrals' => 'Mica Referrals',
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';
