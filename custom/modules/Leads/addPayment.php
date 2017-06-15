@@ -590,7 +590,7 @@ class addPaymentClass{
 			    }
 			    $_SESSION['aliveCheck']= intval($_SESSION['aliveCheck']) +1;	
 			}
-			$bean->vendor = $vendor_id['id'];
+			$bean->vendor =  $bean->utm_source_c;   // $vendor_id['id'];
 			$bean->te_ba_batch_id_c = $batch_id['id'];
 		/*ini_set("display_errors",0);
                error_reporting(0);
