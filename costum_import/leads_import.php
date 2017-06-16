@@ -36,13 +36,13 @@ if (isset($_POST["Import"]))
         $dristi_campagain_id='';
         while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
         {   
-            echo $SQLSELECT = "SELECT * FROM leads WHERE `id`='".$emapData[0]."' ";
+             $SQLSELECT = "SELECT * FROM leads WHERE `id`='".$emapData[0]."' ";
 				$result_set =  mysqli_query($conn,$SQLSELECT);
 				$contRow = mysqli_num_rows($result_set);
             if($contRow>0) {  
 				    $row= mysqli_fetch_assoc($result_set);                 
 					//It wiil insert a row to our subject table from our csv file`
-					//echo $sql    = "update  leads set assigned_user_id='".$emapData[1]."' where id ='".$emapData[0]."'";
+					echo $sql    = "update  leads set assigned_user_id='".$emapData[1]."' where id ='".$emapData[0]."'";
 					//we are using mysql_query function. it returns a resource on true else False on error
 					//$result = mysqli_query($conn, $sql);
 				$customerRecords=[];	
@@ -69,6 +69,7 @@ if (isset($_POST["Import"]))
         }
         fclose($file);
         //echo $dristi_campagain_id; die;
+       
         $server = 'http://180.151.225.244:8888/ameyowebaccess/command/?command=force-login&data=';
 	
 		$data=[];
@@ -79,7 +80,7 @@ if (isset($_POST["Import"]))
 		curl_setopt($ch, CURLOPT_URL, $server. urlencode(json_encode($data)));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
-		echo $session= curl_exec($ch); 
+		$session= curl_exec($ch); 
 
 		$jsonEncodedData = json_decode($session);
 		$session=$jsonEncodedData->sessionId;
@@ -115,7 +116,7 @@ if (isset($_POST["Import"]))
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 100);
                 curl_setopt($ch, CURLOPT_POST, true);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
+                curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($leadtobedelete)));					
                 echo $response = curl_exec($ch);
         
         
