@@ -75,7 +75,7 @@ include 'db.php';
 				  	</tr>	
 				  </thead>
 			<?php
-				$SQLSELECT = "SELECT * FROM te_utm";
+				$SQLSELECT = "SELECT * FROM te_utm limit 100";
 				$result_set =  mysqli_query($conn,$SQLSELECT);
 				while($row = mysqli_fetch_array($result_set))
 				{
