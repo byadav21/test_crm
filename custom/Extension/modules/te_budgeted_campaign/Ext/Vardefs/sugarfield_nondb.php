@@ -37,3 +37,8 @@ $dictionary['te_budgeted_campaign']['fields']['volume']['precision']='2';
 $dictionary['te_budgeted_campaign']['fields']['cost']['type']='decimal';
 $dictionary['te_budgeted_campaign']['fields']['cost']['len']='9';
 $dictionary['te_budgeted_campaign']['fields']['cost']['precision']='2';
+
+
+$dictionary['te_budgeted_campaign']['fields']['conversion_rate']['required']=false;
+$dictionary['te_budgeted_campaign']['fields']['clp']['required']=false;
+$dictionary['te_budgeted_campaign']['fields']['cpa']['required']=false;
