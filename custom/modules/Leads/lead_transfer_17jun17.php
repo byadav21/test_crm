@@ -2,9 +2,6 @@
 ini_set('display_errors','0');
 error_reporting(E_ALL);
 global $db; 
-global $current_user,$db;
-global $mod_strings, $app_strings;
-require_once('modules/ACL/ACLController.php');
 ?>
 <html>
     <title>Bulk Lead transfer</title>
@@ -42,11 +39,10 @@ input[type=text], select {
 								$( "#Lead_source,#Lead_status").find("option").eq(0).remove();
 							});
 							$(function () {
-								$('#Lead_source,#Lead_status,#status_details,#vendors').multiselect({
+								$('#Lead_source,#Lead_status').multiselect({
 									includeSelectAllOption: true,numberDisplayed:0
 								});
 							});
-							
 </script>       
             
     </head>
@@ -88,47 +84,17 @@ input[type=text], select {
     <td><select name="Lead_status[]" multiple id="Lead_status">
 									<option  value="Converted">Converted</option>
 									<option  value="Alive">Alive</option>
+									<option  value="New">New</option>
 									<option  value="Dead">Dead</option>
 									<option  value="Duplicate">Duplicate</option>  
 									<option  value="Dropout">Dropout</option>
 									<option  value="Warm">Warm</option>
 									</select></td>
   </tr>
-  <td><b>Status Details</b></td>
-    <td><select name="status_details[]" multiple id="status_details">
-									<option  value="Call Back">Call Back</option>
-									<option  value="Converted">Alive</option>
-									<option  value="Duplicate">Dead</option>
-									<option  value="Fallout">Duplicate</option>  
-									<option  value="Follow Up">Dropout</option>
-									<option  value="Not Eligible">Not Eligible</option>
-									<option  value="Not Enquired">Not Enquired</option>
-									<option  value="Prospect">Prospect</option>
-									<option  value="Re-Enquired">Re-Enquired</option>
-									<option  value="Rejected">Rejected</option>
-									<option  value="Retired">Retired</option>
-									<option  value="Wrong Number">Wrong Number</option>
-									<option  value="Ringing Multiple Times">Ringing Multiple Times</option>
-									</select></td>
-		<?php									
-		$acl_obj = new ACLController();
-		if($current_user->is_admin==1){ ?>							
-			<td><b>Vendors</b></td>
-			<td><select name="vendors[]" multiple id="vendors">
-				 <?php
-				 $fetch_vendor="SELECT name,id FROM te_vendor where deleted=0 GROUP by name";
-				 $row4 =$db->query($fetch_vendor); 
-				 while($result_vendor =$db->fetchByAssoc($row4)){?>
-							<option  value="<?php echo $result_vendor['name'] ?>"><?php echo $result_vendor['name'] ?></option>
-							<?php }}?>
-								
-									</select></td> 
-  </tr>
-  
   <tr>
   <td><b>Number Of Leads</b></td>
   <td><input type="text" name="number_lead" id="no_lead"/></td>
-                                	<td><input type="Submit" name="Search" value="Search Lead"></td>
+                                	<td>  <input type="Submit" name="Search" value="Search Lead"></td>
   </tr>
 </table>
 </td>
@@ -175,26 +141,6 @@ if(isset($_POST['Search'])) {
 		$where.=" (status in (".$status_str."))";
 		}
 		}
-		if(!empty($status_details)){
-		$status_str=implode("','",$status_details);
-		$status_str="'".$status_str."'";
-		if($where!=''){
-		$where.=" AND (status_description in (".$status_str."))";
-		}
-		else{
-		$where.=" (status_description in (".$status_str."))";
-		}
-		}
-		if(!empty($vendors)){
-		$status_str=implode("','",$vendors);
-		$status_str="'".$status_str."'";
-		if($where!=''){
-		$where.=" AND (vendor in (".$status_str."))";
-		}
-		else{
-		$where.=" (vendor in (".$status_str."))";
-		}
-		}
 		if(!empty($Lead_source)){
 		$source_str=implode("','",$Lead_source);
 		$source_str="'".$source_str."'";
@@ -219,8 +165,7 @@ if(isset($_POST['Search'])) {
 		}
 		
 			
-		$fetch="SELECT id,salutation,first_name,last_name,status,date_entered,lead_source FROM leads WHERE ".$where;
-		
+		 $fetch="SELECT id,salutation,first_name,last_name,status,date_entered,lead_source FROM leads WHERE ".$where;
 		// echo $fetch;
 		 //$fetch= "SELECT salutation,id,first_name, last_name, status, date_entered, lead_source FROM leads WHERE date_entered BETWEEN '".$start_date."' AND '".$end_date."' AND status='".$Lead_tatus."'  LIMIT 0,".$number_lead."";
 		 //$row =$db->query($fetch); 
@@ -389,8 +334,7 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
   }
   ?>
   <?php
-  
-	echo '<form action="index.php?module=Leads&action=lead_transfer&search_leads=1&transfer_leads=1" name="transfer" method="post" id="trnsfer">';
+  echo '<form action="index.php?module=Leads&action=lead_transfer&search_leads=1&transfer_leads=1" name="transfer" method="post" id="trnsfer">';
 	echo '<br/><br/><h1>Transfer Leads</h1><br/>';
 	  $fetch1="SELECT name,id FROM acl_roles where deleted=0";
       $row1 =$db->query($fetch1); ?>
