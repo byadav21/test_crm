@@ -30,9 +30,6 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		return $batchOptions;
 	}
 	public function display() {
-                // ini_set('display_errors',1);
-                //error_reporting(-1);
-                 
 		global $sugar_config,$app_list_strings,$current_user,$db;
         $leadsData=array();
 
@@ -45,7 +42,6 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		$from_date="";
 		$to_date="";
 		$whereBatch="";
-
 		if(isset($_POST['button']) && $_POST['button']=="Search") {
 			$_SESSION['us_from_date'] = $_REQUEST['from_date'];
 			$_SESSION['us_to_date'] = $_REQUEST['to_date'];
@@ -103,26 +99,26 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			if($vendors){
 				foreach($vendors as $vendorval){
 					foreach($campaignArr as $val){
-						$councelorList[$vendorval['id'].'##'.$val]['name']=$vendorval['name'];
-						$councelorList[$vendorval['id'].'##'.$val]['batch']=$vendorval['batch'];
-						$councelorList[$vendorval['id'].'##'.$val]['contract_type']=$vendorval['contract_type'];
-						$councelorList[$vendorval['id'].'##'.$val]['Call_Back']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Converted']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Dropout']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Dead_Number']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Fallout']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Follow_Up']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['New_Lead']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['No_Answer']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Not_Eligible']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Not_Enquired']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Prospect']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Wrong_Number']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Re_Enquired']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Rejected']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Retired']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Ringing_Multiple_Times']=0;
-						$councelorList[$vendorval['id'].'##'.$val]['Duplicate']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['name']=$vendorval['name'];
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['batch']=$vendorval['batch'];
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['contract_type']=$vendorval['contract_type'];
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Call_Back']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Converted']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Dropout']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Dead_Number']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Fallout']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Follow_Up']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['New_Lead']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['No_Answer']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Not_Eligible']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Not_Enquired']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Prospect']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Wrong_Number']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Re_Enquired']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Rejected']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Retired']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Ringing_Multiple_Times']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Duplicate']=0;
 					}
 					$utmArr[]=$vendorval['id'];
 
@@ -134,11 +130,11 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
 					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
-					$councelorList[$row['id'].'##'.$row['utm_campaign']][$row['status_description']]=$row['total'];
+					$councelorList[$row['id'].'TE__TE'.$row['utm_campaign']][$row['status_description']]=$row['total'];
 				}
 			}
 			foreach($councelorList as $key=>$councelor){
-				$campaing = explode('##',$key);
+				$campaing = explode('TE__TE',$key);
 				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['batch']. "\",\"" . $councelor['contract_type']. "\",\"" . $campaing[1]. "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number'] . "\",\"" . $councelor['Dropout'] . "\",\"" . $councelor['Fallout'] . "\",\"" . $councelor['No_Answer'] . "\",\"" . $councelor['Not_Eligible'] . "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\"\n";
 			}
 			ob_end_clean();
@@ -146,7 +142,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			header ('Content-disposition: attachment;filename=" '. $filename . '.csv";' );
 			echo $data; exit;
 		}
-               
+
 
 		if($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']){
 			$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
@@ -163,7 +159,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
 			$whereBatch ="AND b.id IN('".implode("','",$_SESSION['us_batch'])."')";
 		}
-	$vendorSql="SELECT u.id ,u.name AS utm_name,v.name,b.name as batch,contract_type from te_utm as u
+		$vendorSql="SELECT u.id ,u.name AS utm_name,v.name,b.name as batch,contract_type from te_utm as u
 						inner join te_ba_batch as b on b.id=u.te_ba_batch_id_c
 						inner join te_vendor_te_utm_1_c on te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
 						inner join te_vendor as v on v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
@@ -186,42 +182,40 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				}
 		$councelorList=array();
 		$utmArr = [];
-                   
 		if($vendors){
 			foreach($vendors as $vendorval){
 				foreach($campaignArr as $val){
-					
-                                        $councelorList[$vendorval['id'].'##'.$val]['name']=$vendorval['name'];
-					$councelorList[$vendorval['id'].'##'.$val]['batch']=$vendorval['batch'];
-					$councelorList[$vendorval['id'].'##'.$val]['contract_type']=$vendorval['contract_type'];
-					$councelorList[$vendorval['id'].'##'.$val]['Call_Back']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Converted']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Dropout']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Dead_Number']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Fallout']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Follow_Up']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['New_Lead']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['No_Answer']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Not_Eligible']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Not_Enquired']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Prospect']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Wrong_Number']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Re_Enquired']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Rejected']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Retired']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Ringing_Multiple_Times']=0;
-					$councelorList[$vendorval['id'].'##'.$val]['Duplicate']=0; 
-				} 
-				 $utmArr[]=$vendorval['id']; 
-			}  
-			if($utmArr){  echo 'p';die;
-				echo $where.=" AND u.id IN('".implode("','",$utmArr)."') "; 
-			} 
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['name']=$vendorval['name'];
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['batch']=$vendorval['batch'];
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['contract_type']=$vendorval['contract_type'];
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Call_Back']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Converted']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Dropout']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Dead_Number']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Fallout']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Follow_Up']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['New_Lead']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['No_Answer']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Not_Eligible']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Not_Enquired']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Prospect']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Wrong_Number']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Re_Enquired']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Rejected']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Retired']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Ringing_Multiple_Times']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Duplicate']=0;
+				}
+				$utmArr[]=$vendorval['id'];
+			}
+			if($utmArr){
+				$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
+			}
 			$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,IFNULL(l.utm_campaign,'NA')utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
 			$leadObj =$db->query($leadSql);
 			while($row =$db->fetchByAssoc($leadObj)){
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
-				$councelorList[$row['id'].'##'.$row['utm_campaign']][$row['status_description']]=$row['total'];
+				$councelorList[$row['id'].'TE__TE'.$row['utm_campaign']][$row['status_description']]=$row['total'];
 			}
 
 		}
@@ -271,7 +265,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		if(isset($_SESSION['us_batch']) && !empty($_SESSION['us_batch'])){
 			$selected_batch = $_SESSION['us_batch'];
 		}
-                
+
 		$sugarSmarty = new Sugar_Smarty();
 		$sugarSmarty->assign("councelorList",$councelorList);
 		$sugarSmarty->assign("leadStatusList",$leadStatusList);
@@ -285,7 +279,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 		$sugarSmarty->assign("pagenext",$pagenext);
 		$sugarSmarty->assign("right",$right);
 		$sugarSmarty->assign("left",$left);
-		$sugarSmarty->assign("last_page",$last_page); 
+		$sugarSmarty->assign("last_page",$last_page);
 		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/utmstatusreport.tpl');
 	}
 }

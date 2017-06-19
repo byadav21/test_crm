@@ -180,7 +180,7 @@
 
 	</tr>
 	{foreach from = $councelorList key=key item=councelor}
-    {assign var=campaign value="##"|explode:$key}
+    {assign var=campaign value="TE__TE"|explode:$key}
 		<tr height="20" class="oddListRowS1">
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch}</td>
