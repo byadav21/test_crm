@@ -240,14 +240,14 @@ input[type=text], select {
             <td><?php if($reco9['cpa']==''){echo 0;}else { echo round($reco9['cpa'],2);}?>&nbsp;</td>
           </tr>
           <tr>
-						<td><?php if($reco9['conversion_rate']==''){echo 0;}else {echo $reco9['conversion_rate'];}?>&nbsp;</td>
+						<td><?php if($reco9['conversion_rate']==''){echo 0;}else {echo round($reco9['conversion_rate'],2);}?>&nbsp;</td>
 
           </tr>
           <tr>
-            <td><?php if($reco9['cost']==''){echo 0;} else{echo $reco9['cost'];}?>&nbsp;</td>
+            <td><?php if($reco9['cost']==''){echo 0;} else{echo round($reco9['cost'],2);}?>&nbsp;</td>
           </tr>
           <tr>
-            <td><?php if($reco9['volume']==''){echo 0;}else {echo $reco9['volume'];}?>&nbsp;</td>
+            <td><?php if($reco9['volume']==''){echo 0;}else {echo round($reco9['volume'],2);}?>&nbsp;</td>
           </tr>
 
         </table></td>
@@ -277,10 +277,10 @@ input[type=text], select {
             <td><?php echo round($cr,2);?>&nbsp;</td>
           </tr>
           <tr>
-            <td><?php if($reco4['total_cost']==''){ echo 0;} else {echo $reco4['total_cost'];}?>&nbsp;</td>
+            <td><?php if($reco4['total_cost']==''){ echo 0;} else {echo round($reco4['total_cost'],2);}?>&nbsp;</td>
           </tr>
             <tr>
-            <td><?php if($reco4['volume']==''){ echo 0;} else {echo $reco4['volume'];}?>&nbsp;</td>
+            <td><?php if($reco4['volume']==''){ echo 0;} else {echo round($reco4['volume'],2);}?>&nbsp;</td>
           </tr>
 
         </table></td>
