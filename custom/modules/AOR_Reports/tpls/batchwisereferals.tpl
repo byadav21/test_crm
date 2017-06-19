@@ -82,10 +82,10 @@
                         
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.rc}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.rpercentage}</td>
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">N/A</td>
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Referals_GSV}</td>
                         
                         
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">&nbsp;{$councelor.fees_inr}</td>
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.fees_inr}</td>
 		</tr>
 	{/foreach}
 </table>

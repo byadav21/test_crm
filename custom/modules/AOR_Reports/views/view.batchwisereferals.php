@@ -15,7 +15,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
     function getBatch()
     {
         global $db;
-        $batchSql     = "SELECT b.name,b.id FROM te_ba_batch AS b GROUP BY b.id";
+        $batchSql     = "SELECT id,name from te_ba_batch WHERE deleted=0 AND batch_status<>'Closed'";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
@@ -33,7 +33,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
 
         $leadQuery = '';
         $users     .= substr($users, 0, strlen($users) - 1);
-        $sql       = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c  batch_id ";
+        $sql        = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c  batch_id ";
         $sql       .= "FROM leads ";
         $sql       .= "INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id ";
         $sql       .= "AND leads.deleted=0 ";
@@ -67,7 +67,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
         }
         $users .= substr($users, 0, strlen($users) - 1);
 
-        $sql       = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c,fees_inr as batch_id ";
+        $sql        = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c as batch_id ";
         $sql       .= "FROM leads ";
         $sql       .= "INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id ";
         $sql       .= "AND leads.deleted=0 ";
@@ -76,7 +76,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
         if (!is_admin($current_user) && $users)
             $leadQuery .= " and assigned_user_id in ($users)";
         $sql       .= "AND (leads.parent_id IS NOT NULL OR leads.parent_id!='' ) ";
-       echo $sql       .= "GROUP BY leads_cstm.te_ba_batch_id_c";
+        $sql       .= "GROUP BY leads_cstm.te_ba_batch_id_c";
 
 
         $referalQuery = $db->query($sql);
@@ -89,7 +89,31 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
 
         return $leadData;
     }
+    
+    function getGSV($user_id){
+		global $sugar_config, $app_list_strings, $current_user, $db;
+	        $batchSql=" SELECT id,fees_inr FROM `te_ba_batch`  WHERE deleted=0 AND batch_status<>'Closed' ";
+		$batchObj =$db->query($batchSql);
+	
+                $batchData            = array();
 
+                while ($row = $db->fetchByAssoc($batchObj))
+                {
+                    $batchData[$row['id']] = $row['fees_inr'];
+                }
+                
+                
+                return $batchData;
+	}
+
+
+
+
+
+
+
+
+    #############################################################
     public function display()
     {
 
@@ -112,36 +136,44 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
 
         $ConvertedArr = $this->getConverted($users);
         $ReferalsArr  = $this->getReferalls($users);
-        $RcArr  = $this->getReferalls($users,'True');
+        $RcArr        = $this->getReferalls($users, 'True');
+        $gsvArr       = $this->getGSV($users);
 
-        //echo '<pre>'; print_r($RcArr); die;
-        
-
-        $leadQuery = "select te_ba_batch.id,te_ba_batch.name,count(leads.id) as TotalLead ,fees_inr  from leads inner join leads_cstm on leads_cstm.id_c=leads.id and leads_cstm.te_ba_batch_id_c!='' and leads.deleted=0   ";
+       
+        $_SESSION['us_batch'] = $_REQUEST['batch'];
+        $where='';
+        if(!empty($_SESSION['us_batch'])){
+			
+			$where .="AND te_ba_batch.id IN('".implode("','",$_SESSION['us_batch'])."') ";
+		}
+        $sql       = "SELECT te_ba_batch.id,te_ba_batch.name,count(leads.id) AS TotalLead ,fees_inr ";
+        $sql       .= "FROM leads ";
+        $sql       .= "INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id ";
+        $sql       .= "AND leads_cstm.te_ba_batch_id_c!='' ";
+        $sql       .= "AND leads.deleted=0 ";
         if (!is_admin($current_user) && $users)
             $leadQuery .= " and assigned_user_id in ($users)";
-        $leadQuery .= " inner join te_ba_batch on leads_cstm.te_ba_batch_id_c=te_ba_batch.id
-		group by te_ba_batch.id,te_ba_batch.name,fees_inr having totalLead >0 order by totalLead desc ";
+        $sql       .= "INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c=te_ba_batch.id $where ";
+        $sql       .= "GROUP BY te_ba_batch.id,te_ba_batch.name,fees_inr ";
+        $sql       .= "HAVING totalLead >0 ";
 
-        $leadObj = $db->query($leadQuery);
-
-
-
+        $leadObj       = $db->query($sql);
         $councelorList = array();
 
         $i   = 0;
         while ($row = $db->fetchByAssoc($leadObj))
         {
-            $rPercentage= (($ReferalsArr[$row['id']]*100)/$row['TotalLead']);
-            
-            $councelorList[$row['id']]['id']        = $row['id'];
-            $councelorList[$row['id']]['name']      = $row['name'];
-            $councelorList[$row['id']]['TotalLead'] = $row['TotalLead'];
-            $councelorList[$row['id']]['fees_inr']  = $row['fees_inr'];
-            $councelorList[$row['id']]['converted'] = isset($ConvertedArr[$row['id']]) ? $ConvertedArr[$row['id']] : 0;
-            $councelorList[$row['id']]['referalls'] = isset($ReferalsArr[$row['id']]) ? $ReferalsArr[$row['id']] : 0;
-            $councelorList[$row['id']]['rc'] = isset($RcArr[$row['id']]) ? $RcArr[$row['id']] : 0;
-            $councelorList[$row['id']]['rpercentage'] = number_format($rPercentage,1) ;
+            $rPercentage = (($ReferalsArr[$row['id']] * 100) / $row['TotalLead']);
+              
+            $councelorList[$row['id']]['id']          = $row['id'];
+            $councelorList[$row['id']]['name']        = $row['name'];
+            $councelorList[$row['id']]['TotalLead']   = $row['TotalLead'];
+            $councelorList[$row['id']]['fees_inr']    = number_format($gsvArr[$row['id']]*$row['TotalLead'], 2);
+            $councelorList[$row['id']]['converted']   = isset($ConvertedArr[$row['id']]) ? $ConvertedArr[$row['id']] : 0;
+            $councelorList[$row['id']]['referalls']   = isset($ReferalsArr[$row['id']]) ? $ReferalsArr[$row['id']] : 0;
+            $councelorList[$row['id']]['rc']          = isset($RcArr[$row['id']]) ? $RcArr[$row['id']] : 0;
+            $councelorList[$row['id']]['rpercentage'] = number_format($rPercentage, 1);
+            $councelorList[$row['id']]['Referals_GSV'] =number_format($gsvArr[$row['id']]*$ReferalsArr[$row['id']], 2);
 
             $i++;
         }
