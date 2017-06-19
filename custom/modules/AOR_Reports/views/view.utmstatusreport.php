@@ -102,7 +102,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['name']=$vendorval['name'];
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['batch']=$vendorval['batch'];
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['contract_type']=$vendorval['contract_type'];
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Call_Back']=0;
+						/*$councelorList[$vendorval['id'].'TE__TE'.$val]['Call_Back']=0;
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['Converted']=0;
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['Dropout']=0;
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['Dead_Number']=0;
@@ -118,7 +118,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['Rejected']=0;
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['Retired']=0;
 						$councelorList[$vendorval['id'].'TE__TE'.$val]['Ringing_Multiple_Times']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Duplicate']=0;
+						$councelorList[$vendorval['id'].'TE__TE'.$val]['Duplicate']=0;*/
 					}
 					$utmArr[]=$vendorval['id'];
 
@@ -186,7 +186,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				if(!isset($councelor['Re_Enquired'])){
 					$councelor['Re_Enquired']=0;
 				}
-				
+
 				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['batch']. "\",\"" . $councelor['contract_type']. "\",\"" . $campaing[1]. "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number'] . "\",\"" . $councelor['Dropout'] . "\",\"" . $councelor['Fallout'] . "\",\"" . $councelor['No_Answer'] . "\",\"" . $councelor['Not_Eligible'] . "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\"\n";
 			}
 			ob_end_clean();
