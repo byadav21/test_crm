@@ -181,14 +181,35 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 					$campaignArr[]=$campaign['utm_campaign'];
 				}
 		$councelorList=array();
+		$InitialcouncelorList=array();
 		$utmArr = [];
 		if($vendors){
+			$keys=array(
+				"Call_Back",
+				"Converted",
+				"Dropout",
+				"Dead_Number",
+				"Fallout",
+				"Follow_Up",
+				"New_Lead",
+				"No_Answer",
+				"Not_Eligible",
+				"Not_Enquired",
+				"Prospect",
+				"Wrong_Number",
+				"Re_Enquired",
+				"Rejected",
+				"Retired",
+				"Ringing_Multiple_Times",
+				"Duplicate"
+			);
+			$a1=array_fill_keys($keys,0);
 			foreach($vendors as $vendorval){
 				foreach($campaignArr as $val){
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['name']=$vendorval['name'];
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['batch']=$vendorval['batch'];
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['contract_type']=$vendorval['contract_type'];
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['Call_Back']=0;
+					$InitialcouncelorList[$vendorval['id'].'TE__TE'.$val]['name']=$vendorval['name'];
+					$InitialcouncelorList[$vendorval['id'].'TE__TE'.$val]['batch']=$vendorval['batch'];
+					$InitialcouncelorList[$vendorval['id'].'TE__TE'.$val]['contract_type']=$vendorval['contract_type'];
+					/*$councelorList[$vendorval['id'].'TE__TE'.$val]['Call_Back']=0;
 					$councelorList[$vendorval['id'].'TE__TE'.$val]['Converted']=0;
 					$councelorList[$vendorval['id'].'TE__TE'.$val]['Dropout']=0;
 					$councelorList[$vendorval['id'].'TE__TE'.$val]['Dead_Number']=0;
@@ -204,10 +225,15 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 					$councelorList[$vendorval['id'].'TE__TE'.$val]['Rejected']=0;
 					$councelorList[$vendorval['id'].'TE__TE'.$val]['Retired']=0;
 					$councelorList[$vendorval['id'].'TE__TE'.$val]['Ringing_Multiple_Times']=0;
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['Duplicate']=0;
+					$councelorList[$vendorval['id'].'TE__TE'.$val]['Duplicate']=0;*/
 				}
 				$utmArr[]=$vendorval['id'];
 			}
+			foreach($InitialcouncelorList as $key=>$val){
+				 $test = array_merge($val,$a1);
+				 $councelorList[$key]=$test;
+			}
+			//echo "<pre>";print_r($councelorList);exit();
 			if($utmArr){
 				$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 			}
