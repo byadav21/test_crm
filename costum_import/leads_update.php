@@ -72,7 +72,7 @@
 				  	<tr>
 				  		<th>lead ID</th>
                                                 <th>Created Date</th>
-                                                <th>assigned_user_id</th>
+                                                <th>te_ba_batch_id_c</th>
                                        
 				  	
 				 		
@@ -80,7 +80,9 @@
 				  	</tr>	
 				  </thead>
 			<?php
-				$SQLSELECT = "SELECT * FROM leads WHERE date(date_entered)= '2017-06-16'";
+				$SQLSELECT = "SELECT * FROM leads l
+                                                INNER JOIN `leads_cstm` lc ON l.id=lc.id_c
+                                                WHERE DATE(date_entered)= '2017-06-19'";
 				$result_set =  mysqli_query($conn,$SQLSELECT);
 				while($row = mysqli_fetch_array($result_set))
 				{
@@ -89,7 +91,7 @@
 					<tr>
 						<td><?php echo $row['id']; ?></td>
 						<td><?php echo $row['date_entered']; ?></td>
-						<td><?php echo $row['assigned_user_id']; ?></td>
+						<td><?php echo $row['te_ba_batch_id_c']; ?></td>
                                                 
 					</tr>
 				<?php
