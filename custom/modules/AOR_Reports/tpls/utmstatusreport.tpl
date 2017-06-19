@@ -186,23 +186,91 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.contract_type}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$campaign[1]}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Duplicate}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dead_Number}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dropout}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Fallout}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.No_Answer}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Not_Eligible}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Not_Enquired}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Rejected}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Retired}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Ringing_Multiple_Times}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Wrong_Number}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Call_Back}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Converted}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Follow_Up}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.New_Lead}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Prospect}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Re_Enquired}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Duplicate }
+        {$councelor.Duplicate}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Dead_Number }
+        {$councelor.Dead_Number}
+        {else}0{/if}
+      </td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Dropout }
+        {$councelor.Dropout}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Fallout }
+        {$councelor.Fallout}
+        {else}0{/if}
+      </td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.No_Answer }
+        {$councelor.No_Answer}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Not_Eligible }
+        {$councelor.Not_Eligible}
+        {else}0{/if}
+      </td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Not_Enquired }
+        {$councelor.Not_Enquired}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Rejected }
+        {$councelor.Rejected}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Retired }
+        {$councelor.Retired}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Ringing_Multiple_Times }
+        {$councelor.Ringing_Multiple_Times}
+        {else}0{/if}
+      </td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Wrong_Number }
+        {$councelor.Wrong_Number}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Call_Back }
+        {$councelor.Call_Back}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Converted }
+        {$councelor.Converted}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Follow_Up }
+        {$councelor.Follow_Up}
+        {else}0{/if}
+      </td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.New_Lead }
+        {$councelor.New_Lead}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Prospect }
+        {$councelor.Prospect}
+        {else}0{/if}
+      </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+        {if $councelor.Re_Enquired }
+        {$councelor.Re_Enquired}
+        {else}0{/if}
+      </td>
 		</tr>
 	{/foreach}
 </table>
