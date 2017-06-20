@@ -33,7 +33,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
 
         $leadQuery = '';
         $users     .= substr($users, 0, strlen($users) - 1);
-        $sql        = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c  batch_id ";
+        $sql       = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c  batch_id ";
         $sql       .= "FROM leads ";
         $sql       .= "INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id ";
         $sql       .= "AND leads.deleted=0 ";
@@ -67,7 +67,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
         }
         $users .= substr($users, 0, strlen($users) - 1);
 
-        $sql        = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c as batch_id ";
+        $sql       = "SELECT COUNT(leads.id) AS CONV, leads_cstm.te_ba_batch_id_c as batch_id ";
         $sql       .= "FROM leads ";
         $sql       .= "INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id ";
         $sql       .= "AND leads.deleted=0 ";
@@ -89,31 +89,26 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
 
         return $leadData;
     }
-    
-    function getGSV($user_id){
-		global $sugar_config, $app_list_strings, $current_user, $db;
-	        $batchSql=" SELECT id,fees_inr FROM `te_ba_batch`  WHERE deleted=0 AND batch_status<>'Closed' ";
-		$batchObj =$db->query($batchSql);
-	
-                $batchData            = array();
 
-                while ($row = $db->fetchByAssoc($batchObj))
-                {
-                    $batchData[$row['id']] = $row['fees_inr'];
-                }
-                
-                
-                return $batchData;
-	}
+    function getGSV($user_id)
+    {
+        global $sugar_config, $app_list_strings, $current_user, $db;
+        $batchSql = " SELECT id,fees_inr FROM `te_ba_batch`  WHERE deleted=0 AND batch_status<>'Closed' ";
+        $batchObj = $db->query($batchSql);
+
+        $batchData = array();
+
+        while ($row = $db->fetchByAssoc($batchObj))
+        {
+            $batchData[$row['id']] = $row['fees_inr'];
+        }
 
 
-
-
-
-
-
+        return $batchData;
+    }
 
     #############################################################
+
     public function display()
     {
 
@@ -139,13 +134,14 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
         $RcArr        = $this->getReferalls($users, 'True');
         $gsvArr       = $this->getGSV($users);
 
-       
+
         $_SESSION['us_batch'] = $_REQUEST['batch'];
-        $where='';
-        if(!empty($_SESSION['us_batch'])){
-			
-			$where .="AND te_ba_batch.id IN('".implode("','",$_SESSION['us_batch'])."') ";
-		}
+        $where                = '';
+        if (!empty($_SESSION['us_batch']))
+        {
+
+            $where .= "AND te_ba_batch.id IN('" . implode("','", $_SESSION['us_batch']) . "') ";
+        }
         $sql       = "SELECT te_ba_batch.id,te_ba_batch.name,count(leads.id) AS TotalLead ,fees_inr ";
         $sql       .= "FROM leads ";
         $sql       .= "INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id ";
@@ -163,17 +159,22 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
         $i   = 0;
         while ($row = $db->fetchByAssoc($leadObj))
         {
-            $rPercentage = (($ReferalsArr[$row['id']] * 100) / $row['TotalLead']);
-              
-            $councelorList[$row['id']]['id']          = $row['id'];
-            $councelorList[$row['id']]['name']        = $row['name'];
-            $councelorList[$row['id']]['TotalLead']   = $row['TotalLead'];
-            $councelorList[$row['id']]['fees_inr']    = number_format($gsvArr[$row['id']]*$row['TotalLead'], 2);
-            $councelorList[$row['id']]['converted']   = isset($ConvertedArr[$row['id']]) ? $ConvertedArr[$row['id']] : 0;
-            $councelorList[$row['id']]['referalls']   = isset($ReferalsArr[$row['id']]) ? $ReferalsArr[$row['id']] : 0;
-            $councelorList[$row['id']]['rc']          = isset($RcArr[$row['id']]) ? $RcArr[$row['id']] : 0;
-            $councelorList[$row['id']]['rpercentage'] = number_format($rPercentage, 1);
-            $councelorList[$row['id']]['Referals_GSV'] =number_format($gsvArr[$row['id']]*$ReferalsArr[$row['id']], 2);
+            $rPercentage = (($RcArr[$row['id']] * 100) / $row['TotalLead']);
+
+            $councelorList[$row['id']]['id']           = $row['id'];
+            $councelorList[$row['id']]['name']         = $row['name'];
+            $councelorList[$row['id']]['TotalLead']    = $row['TotalLead'];
+            $councelorList[$row['id']]['converted']    = isset($ConvertedArr[$row['id']]) ? $ConvertedArr[$row['id']] : 0;
+            $councelorList[$row['id']]['referalls']    = isset($ReferalsArr[$row['id']]) ? $ReferalsArr[$row['id']] : 0;
+            $councelorList[$row['id']]['rc']           = isset($RcArr[$row['id']]) ? $RcArr[$row['id']] : 0;
+            $councelorList[$row['id']]['rpercentage']  = number_format($rPercentage, 1);
+            $councelorList[$row['id']]['Referals_GSV'] = number_format($gsvArr[$row['id']] * $RcArr[$row['id']], 2);
+            $councelorList[$row['id']]['fees_inr']     = number_format($gsvArr[$row['id']] * $row['TotalLead'], 2);
+           
+           
+           
+            
+            
 
             $i++;
         }
@@ -182,20 +183,13 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
-            $data     = "Batch, Total Lead, Converted, Referals, GSV By\n";
-            $file     = "refferal_report";
+            $data     = "Batch, Total Lead, Converted, Referals,Referals Converted,Rererals Percentage,Referals GSV, GSV By\n";
+            $file     = "batch_wise_referals_report";
             $filename = $file . "_" . date("Y-m-d");
             foreach ($councelorList as $key => $councelor)
             {
-                if ($councelor['refby'] == 'Users')
-                {
-                    $ref_person = $councelor['refru'];
-                }
-                else
-                {
-                    $ref_person = $councelor['refrl'];
-                }
-                $data .= "\"" . $councelor['name'] . "\",\"" . $councelor['TotalLead'] . "\",\"" . $councelor['converted'] . "\",\"" . $councelor['referalls'] . "\",\"" . $councelor['fees_inr'] . "\"\n";
+               
+                $data .= "\"" . $councelor['name'] . "\",\"" . $councelor['TotalLead'] . "\",\"" . $councelor['converted'] . "\",\"" . $councelor['referalls'] . "\",\"" .$councelor['rc'] . "\",\"" .$councelor['rpercentage'] . "\",\"" .$councelor['Referals_GSV'] . "\",\"" . $councelor['fees_inr'] . "\"\n";
             }
             ob_end_clean();
             header("Content-type: application/csv");
@@ -209,6 +203,25 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
         $sugarSmarty->assign("batchList", $batchList);
         $sugarSmarty->assign("councelorList", $councelorList);
         $sugarSmarty->display('custom/modules/AOR_Reports/tpls/batchwisereferals.tpl');
+        ?>
+        
+        <script>
+        
+                $('#BatchWiseTableId').DataTable();
+//                $('#BatchWiseTableId').dataTable({
+//                    "aoColumnDefs": [{'bSortable': false, 'aTargets': [1]}],
+//                    "order": [[0, "desc"]],
+//                    'iDisplayLength': 10,
+//                    language: {
+//                        search: "_INPUT_",
+//                        searchPlaceholder: "Search Here..."
+//                    }
+//                });
+               
+     
+        </script>
+        <link type="text/css" href="custom/modules/AOR_Reports/include/css/jquery_dataTable.css" rel="stylesheet" />
+        <?php
     }
 
 }
