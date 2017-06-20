@@ -18,16 +18,18 @@ class MapUtm
 	public function assignUtm(&$bean, $event, $arguments)
     {
 		global $db;
+		/*$bean->leads=floatval($bean->leads);
+		$bean->cost=floatval($bean->cost);
+		$bean->conversion=floatval($bean->conversion);*/
 		
-		$bean->clp=($bean->leads>0)?round($bean->cost,2)/$bean->leads:0;
-		$bean->cpa=($bean->conversion>0)?round($bean->cost,2)/$bean->conversion:0;		 
+		$bean->clp=($bean->leads>0)?round($bean->cost/$bean->leads,2):0;
+		$bean->cpa=($bean->conversion>0)?round($bean->cost/$bean->conversion,2):0;		 
 		$bean->conversion_rate=($bean->leads>0)?round(($bean->conversion*100)/$bean->leads,2) . '%':0 . '%';
-		
 		
 		#Record is being created while import
 		if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){
 			
-			$utmSql="SELECT te_ba_batch_id_c FROM te_utm WHERE name='".$bean->name."' AND deleted=0";
+			$utmSql="SELECT te_ba_batch_id_c FROM te_utm WHERE id='".$bean->te_utm_te_budgeted_campaign_1te_utm_ida."' AND deleted=0";
 			$utmObj = $bean->db->Query($utmSql);
 			$utm = $db->fetchByAssoc($utmObj);
 			$date=explode("-",$bean->campaign_date);
@@ -49,7 +51,7 @@ class MapUtm
 			//}			
 		}else{
 			# If record is being created from module
-			$utmSql="SELECT id,te_ba_batch_id_c FROM te_utm WHERE name='".$bean->te_utm_te_budgeted_campaign_1_name."' AND deleted=0";
+			$utmSql="SELECT id,te_ba_batch_id_c FROM te_utm WHERE id='".$bean->te_utm_te_budgeted_campaign_1te_utm_ida."' AND deleted=0";
 			$utmObj = $bean->db->Query($utmSql);
 			$utm = $db->fetchByAssoc($utmObj);
 			$bean->te_ba_batch_id_c=$utm['te_ba_batch_id_c'];
