@@ -159,7 +159,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
         $i   = 0;
         while ($row = $db->fetchByAssoc($leadObj))
         {
-            $rPercentage = (($ReferalsArr[$row['id']] * 100) / $row['TotalLead']);
+            $rPercentage = (($RcArr[$row['id']] * 100) / $row['TotalLead']);
 
             $councelorList[$row['id']]['id']           = $row['id'];
             $councelorList[$row['id']]['name']         = $row['name'];
@@ -168,7 +168,7 @@ class AOR_ReportsViewBatchwisereferals extends SugarView
             $councelorList[$row['id']]['referalls']    = isset($ReferalsArr[$row['id']]) ? $ReferalsArr[$row['id']] : 0;
             $councelorList[$row['id']]['rc']           = isset($RcArr[$row['id']]) ? $RcArr[$row['id']] : 0;
             $councelorList[$row['id']]['rpercentage']  = number_format($rPercentage, 1);
-            $councelorList[$row['id']]['Referals_GSV'] = number_format($gsvArr[$row['id']] * $ReferalsArr[$row['id']], 2);
+            $councelorList[$row['id']]['Referals_GSV'] = number_format($gsvArr[$row['id']] * $RcArr[$row['id']], 2);
             $councelorList[$row['id']]['fees_inr']     = number_format($gsvArr[$row['id']] * $row['TotalLead'], 2);
            
            
