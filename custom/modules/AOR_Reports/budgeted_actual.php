@@ -91,15 +91,9 @@ input[type=text], select {
 					function getStartAndEndDate($week, $year)
 					{
 
-						$time = strtotime("1 January $year", time());
-						$day = date('w', $time);
-						$time += ((7*$week)+1-$day)*24*3600;
-						$return[0] = date('Y-m-d', $time);
-						$return[0] = $return[0]." 00:00:00";
-						$time += 6*24*3600;
-						$return[1] = date('Y-m-d', $time);
-						$return[1] = $return[1]." 00:00:00";
-						return $return;
+						$dates[0] = date("Y-m-d", strtotime($year.'W'.str_pad($week, 2, 0, STR_PAD_LEFT)));
+	 				  $dates[1] = date("Y-m-d", strtotime($year.'W'.str_pad($week, 2, 0, STR_PAD_LEFT).' +6 days'));
+	         return $dates;
 					}
 
 
@@ -151,7 +145,7 @@ input[type=text], select {
 
 						//@Get Actual Lead,Converted Lead Based on Batch 3
 
-										$query3="SELECT count(l.id)total_leads,count(l2.id)converted FROM leads l inner join leads_cstm lc ON l.id = lc.id_c AND lc.te_ba_batch_id_c='".$_REQUEST['batch_val']."' left join leads l2 on l2.id=l.id AND l2.status='Converted' $whereActual";
+										  $query3="SELECT count(l.id)total_leads,count(l2.id)converted FROM leads l inner join leads_cstm lc ON l.id = lc.id_c AND lc.te_ba_batch_id_c='".$_REQUEST['batch_val']."' AND  l.status IN('Alive','Warm','Duplicate','Dead','Converted','Dropout') AND l.deleted=0 left join leads l2 on l2.id=l.id AND l2.status='Converted' AND l2.deleted=0 $whereActual";
                                         $row3 =$db->query($query3);
             	                        $reco3 =$db->fetchByAssoc($row3);
 
@@ -233,14 +227,15 @@ input[type=text], select {
           <tr>
             <td><?php if($reco9['conversion']==''){echo 0;}else {echo round($reco9['conversion']);}?>&nbsp;</td>
           </tr>
+					
           <tr>
-            <td><?php if($reco9['cpl']==''){echo 0;}else {echo round($reco9['cpl'],2);}?>&nbsp;</td>
+            <td><?php if($reco9['cost']=='' || $reco9['leads']==''){echo 0;}else {echo round($reco9['cost']/$reco9['leads'],2);}?>&nbsp;</td>
           </tr>
           <tr>
-            <td><?php if($reco9['cpa']==''){echo 0;}else { echo round($reco9['cpa'],2);}?>&nbsp;</td>
+            <td><?php if($reco9['cost']=='' || $reco9['conversion']==''){echo 0;}else { echo round($reco9['cost']/$reco9['conversion'],2);}?>&nbsp;</td>
           </tr>
           <tr>
-						<td><?php if($reco9['conversion_rate']==''){echo 0;}else {echo round($reco9['conversion_rate'],2);}?>&nbsp;</td>
+						<td><?php if($reco9['leads']=='' || $reco9['conversion']==''){echo 0;}else {echo round(($reco9['conversion']/$reco9['leads'])*100,2);}?>&nbsp;</td>
 
           </tr>
           <tr>
@@ -268,13 +263,13 @@ input[type=text], select {
            <td><?php if($reco3['converted']==''){echo 0;} else {echo $reco3['converted'];}?>&nbsp;</td>
           </tr>
           <tr>
-            <td><?php echo round($cpl,2);?>&nbsp;</td>
+            <td><?php if($cpl){echo round($cpl,2);}else{echo '0.00';}?>&nbsp;</td>
           </tr>
           <tr>
-            <td><?php echo round($cpa,2);?>&nbsp;</td>
+            <td><?php if($cpa){echo round($cpa,2);}else{echo '0.00';}?>&nbsp;</td>
           </tr>
           <tr>
-            <td><?php echo round($cr,2);?>&nbsp;</td>
+            <td><?php if($cr){echo round($cr,2);}else{echo '0.00';}?>&nbsp;</td>
           </tr>
           <tr>
             <td><?php if($reco4['total_cost']==''){ echo 0;} else {echo round($reco4['total_cost'],2);}?>&nbsp;</td>
