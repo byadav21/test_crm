@@ -1,4 +1,4 @@
-``<?php
+<?php
 if (!defined('sugarEntry') || !sugarEntry)
 	die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
@@ -178,13 +178,16 @@ class AOR_ReportsViewDailyreport extends SugarView {
 			$vendorObj =$db->query($vendorSql);
 			$vendorArr = [];
 			while($vendor =$db->fetchByAssoc($vendorObj)){
+				$vendorGSVSql="SELECT SUM(X.total_cost)total_gsv FROM (SELECT (COUNT(l.id)*b.fees_inr)total_cost FROM leads l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c INNER JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.vendor='".$vendor["name"]."' AND l.status='Converted' GROUP BY lc.te_ba_batch_id_c)X";
+				$vendorGSVObj =$db->query($vendorGSVSql);
+				$vendorGSV =$db->fetchByAssoc($vendorGSVObj);
 				$total_lead_con = ($vendor['total_con']?$vendor['total_con']:0);
 				$total_cost = ($vendor['total_cost']?$vendor['total_cost']:0);
-				$vendorArr[]=array('name'=>$vendor['name'],'id'=>$vendor['id'],'total_cost'=>$total_cost,'vendor_con'=>$total_lead_con);
+				$total_gsv = ($vendorGSV['total_gsv']?$vendorGSV['total_gsv']:0);
+				$vendorArr[]=array('name'=>$vendor['name'],'id'=>$vendor['id'],'total_cost'=>$total_cost,'vendor_con'=>$total_lead_con,'total_gsv'=>$total_gsv);
 			}
 			$vendors = $vendorArr;
-
-			$batchSql="SELECT b.name,b.id,b.fees_inr,b.batch_status,( SELECT sum(te_actual_campaign.total_cost) from te_actual_campaign where te_actual_campaign.te_ba_batch_id_c=b.id $filterwhere) as total_cost,COUNT(l.id)total_con from te_ba_batch AS b LEFT JOIN te_actual_campaign as a on a.te_ba_batch_id_c=b.id AND a.deleted=0 AND a.type='paid' LEFT JOIN leads_cstm ON leads_cstm.te_ba_batch_id_c=b.id LEFT JOIN leads AS l ON l.id=leads_cstm.id_c AND l.deleted=0 AND l.status='Converted' where b.deleted=0 $whereCourse group by b.id ORDER BY b.name ASC";
+			$batchSql="SELECT b.name,b.id,b.fees_inr,b.batch_status,( SELECT sum(te_actual_campaign.total_cost) from te_actual_campaign where te_actual_campaign.te_ba_batch_id_c=b.id AND te_actual_campaign.type='paid' AND te_actual_campaign.deleted=0 ) as total_cost,(SELECT count(leads.id) FROM leads INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE leads_cstm.te_ba_batch_id_c=b.id AND leads.status='Converted' AND leads.deleted=0)total_con from te_ba_batch AS b where b.deleted=0 $whereCourse group by b.id ORDER BY b.name ASC";
 			$batchObj =$db->query($batchSql);
 			$batchOptions=array();
 			while($row =$db->fetchByAssoc($batchObj)){
@@ -211,7 +214,8 @@ class AOR_ReportsViewDailyreport extends SugarView {
 							'vendor_cost'=>$vendorsVal['total_cost'],
 							'vendor_con'=>$vendorsVal['vendor_con'],
 							'batch_cost'=>$batchval['batch_total_cost'],
-							'batch_con' => $batchval['total_lead_con']
+							'batch_con' => $batchval['total_lead_con'],
+							'vendor_gsv'=>$vendorsVal['total_gsv']
 						);
 					}
 				}
@@ -225,51 +229,65 @@ class AOR_ReportsViewDailyreport extends SugarView {
 					foreach ($batchVendorArr as $value) {
 						$councelorList[$value['batch_name']][$value['vendor_name']]['course_fee'] = $value['fees_inr'];
 						$councelorList[$value['batch_name']][$value['vendor_name']]['batch_status'] = $GLOBALS['app_list_strings']['batch_status_list'][$value['batch_status']];
-						$councelorList[$value['batch_name']][$value['vendor_name']]['Alive'] = 0;
-						$councelorList[$value['batch_name']][$value['vendor_name']]['Converted'] = 0;
-						$councelorList[$value['batch_name']][$value['vendor_name']]['Dead'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Fallout'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['New_Lead'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Prospect'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Ringing_Multiple_Times'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Follow_Up'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Eligible'] = 0;
 						$councelorList[$value['batch_name']][$value['vendor_name']]['Duplicate'] = 0;
-						$councelorList[$value['batch_name']][$value['vendor_name']]['Warm'] = 0;
-						$councelorList[$value['batch_name']][$value['vendor_name']]['spend'] = $value['batch_cost'];
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Enquired'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Dead_Number'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Retired'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Wrong_Number'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Call_Back'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['No_Answer'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Re_Enquired'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Converted'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Rejected'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['Dropout'] = 0;
+						$councelorList[$value['batch_name']][$value['vendor_name']]['spend'] = 0;
 
 						$s_cpa_per = 0.00;
-						$source_cpa_percent = ($value['vendor_cost']/$value['vendor_con']);
-						if($value['vendor_cost']==0 || $value['vendor_con']==0){
+						$source_cpa_percent = (round($value['vendor_cost'])/round($value['vendor_gsv']));
+						if($value['vendor_cost']==0 || $value['vendor_gsv']==0){
 							$source_cpa_percent = 0;
 						}
-						if($source_cpa_percent && $value['vendor_cost']){
-							$s_cpa_per = number_format((($source_cpa_percent/$value['vendor_cost'])*100),2);
+						if($source_cpa_percent){
+							$s_cpa_per = round(($source_cpa_percent*100),2);
 						}
 						$councelorList[$value['batch_name']][$value['vendor_name']]['source_cpa_percent']=$s_cpa_per;
 
 						$c_cpa_per = 0.00;
-						$batch_cpa_percent = ($value['batch_cost']/$value['batch_con']);
+						$batch_cpa_percent = (round($value['batch_cost'])/(round($value['batch_con'])*round($value['fees_inr'])));
 						if($value['batch_cost']==0 || $value['batch_con']==0){
 							$batch_cpa_percent = 0;
 						}
-						if($batch_cpa_percent && $value['batch_cost']){
-							$c_cpa_per = number_format((($batch_cpa_percent/$value['batch_cost'])*100),2);
+						if($batch_cpa_percent){
+							$c_cpa_per = round(($batch_cpa_percent*100),2);
 						}
 						$councelorList[$value['batch_name']][$value['vendor_name']]['course_cpa_percent']=$c_cpa_per;
 					}
 
-					$leadSql="SELECT COUNT(l.id)total,l.status,l.vendor,(SELECT name FROM te_ba_batch WHERE te_ba_batch.id=lc.te_ba_batch_id_c)batch,(SELECT SUM(total_cost) FROM te_actual_campaign as a WHERE a.te_ba_batch_id_c=lc.te_ba_batch_id_c AND a.name=l.vendor)cost FROM leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c AND l.deleted=0 WHERE l.vendor!='' AND lc.te_ba_batch_id_c!='' $whereAll GROUP BY l.vendor,lc.te_ba_batch_id_c,l.status ORDER BY batch ASC,l.vendor ASC";
+					$leadSql="SELECT COUNT(l.id)total,l.status_description,l.vendor,(SELECT name FROM te_ba_batch WHERE te_ba_batch.id=lc.te_ba_batch_id_c)batch,(SELECT SUM(total_cost) FROM te_actual_campaign as a WHERE a.te_ba_batch_id_c=lc.te_ba_batch_id_c  AND a.vendor_id=(SELECT id FROM te_vendor WHERE name=l.vendor) AND a.type='paid' AND a.deleted=0)cost FROM leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c AND l.deleted=0 WHERE l.vendor!='' AND lc.te_ba_batch_id_c!='' $whereAll GROUP BY l.vendor,lc.te_ba_batch_id_c,l.status_description ORDER BY batch ASC,l.vendor ASC";
 					$leadObj =$db->query($leadSql);
 
 
 					while($row =$db->fetchByAssoc($leadObj)){
-						$councelorList[$row['batch']][$row['vendor']][$row['status']]=$row['total'];
+						$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+						$councelorList[$row['batch']][$row['vendor']][$row['status_description']]=$row['total'];
 						$councelorList[$row['batch']][$row['vendor']]['spend']=($row['cost']?$row['cost']:0);
 					}
 				}
-				//echo count($councelorList)."<pre>";print_r($councelorList);exit();
+				//echo "<pre>";print_r($councelorList);exit();
 				$data="Vendor,Course,Total_Leads,Registered,Leads_Validity,Leads_Validity%,Spend,Conversion_Rate,CPL,CPA,Course_Fee,CPA%,GSV,Source_CPA%,Course_CPA%,Status\n";
 				$file = "daily_report";
 				$filename = $file . "_" . date ( "Y-m-d");
 				foreach($councelorList as $key=>$vendorsval){
 					foreach($vendorsval as $vendorskey=>$vendors){
-						$total = $vendors['Alive']+$vendors['Converted']+$vendors['Dead']+$vendors['Warm']+$vendors['Duplicate'];
-						$validity = $total - ($vendors['Dead']+$vendors['Duplicate']);
+						$total = $vendors['Dropout'] +	$vendors['Rejected'] + $vendors['Converted'] + $vendors['Re_Enquired'] + $vendors['No_Answer']+ $vendors['Call_Back']+ $vendors['Wrong_Number']+ $vendors['Retired']+ $vendors['Dead_Number']+ $vendors['Not_Enquired']+ $vendors['Duplicate']+ $vendors['Not_Eligible']+ $vendors['Follow_Up']+ $vendors['Ringing_Multiple_Times']+ $vendors['Prospect']+ $vendors['New_Lead']+ $vendors['Fallout'];
+						$validity = $vendors['Dropout'] + $vendors['Fallout']+$vendors['Retired']+$vendors['Converted']+$vendors['Call_Back']+$vendors['Follow_Up']+$vendors['Prospect']+$vendors['New_Lead'];
+
 						$validity_per = ($validity && $total?($validity/$total)*100:0.00);
 						$validity_per = number_format((float)$validity_per, 2, '.', '');
 						$gsv = number_format($vendors['Converted']*$vendors['course_fee']);
@@ -277,7 +295,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 						$conversion_rate = number_format((float)$conversion_rate, 2, '.', '');
 						$cpl= ($vendors['spend'] && $total?number_format($vendors['spend']/$total,2):0);
 						$cpa=($vendors['spend'] && $vendors['Converted']?number_format($vendors['spend']/$vendors['Converted']):0);
-						$cpa_percent=($vendors['spend'] && $cpa?number_format((($cpa/$vendors['spend'])*100),2):0);
+						$cpa_percent=($vendors['spend'] && $gsv?(($vendors['spend']/str_replace(',','',$gsv))*100):0);
 
 						$data.= "\"" . $vendorskey . "\",\"" . $key . "\",\"" . $total."\",\"" . $vendors['Converted']."\",\"". $validity."\",\"" . $validity_per."\",\"" . $vendors['spend']."\",\"" . $conversion_rate."\",\"" . $cpl."\",\"" . $cpa."\",\"" . number_format($vendors['course_fee'])."\",\"" .$cpa_percent."\",\"" . $gsv."\",\"" . $vendors['source_cpa_percent']."\",\"" . $vendors['course_cpa_percent']."\",\"" . $vendors['batch_status']. "\"\n";
 					}
@@ -291,35 +309,56 @@ class AOR_ReportsViewDailyreport extends SugarView {
 				$councelorList = array();
 				if($batchVendorArr){
 				  foreach ($batchVendorArr as $value) {
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['course_fee'] = number_format($value['fees_inr']);
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['batch_status'] = $GLOBALS['app_list_strings']['batch_status_list'][$value['batch_status']];
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['Alive'] = 0;
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['Converted'] = 0;
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['Dead'] = 0;
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['Duplicate'] = 0;
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['Warm'] = 0;
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['spend'] = $value['batch_cost'];
-				    $source_cpa_percent = ($value['vendor_cost']/$value['vendor_con']);
-				    if($value['vendor_cost']==0 || $value['vendor_con']==0){
-				      $source_cpa_percent = 0;
-				    }
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['source_cpa_percent']=number_format($source_cpa_percent,2);
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['course_fee'] = $value['fees_inr'];
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['batch_status'] = $GLOBALS['app_list_strings']['batch_status_list'][$value['batch_status']];
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Fallout'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['New_Lead'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Prospect'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Ringing_Multiple_Times'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Follow_Up'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Eligible'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Duplicate'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Not_Enquired'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Dead_Number'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Retired'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Wrong_Number'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Call_Back'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['No_Answer'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Re_Enquired'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Converted'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Rejected'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['Dropout'] = 0;
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['spend'] = 0;
 
-				    $batch_cpa_percent = ($value['batch_cost']/$value['batch_con']);
-				    if($value['batch_cost']==0 || $value['batch_con']==0){
-				      $batch_cpa_percent = 0;
-				    }
-				    $councelorList[$value['batch_name']][$value['vendor_name']]['course_cpa_percent']=number_format($batch_cpa_percent,2);
+  						$s_cpa_per = 0.00;
+  						$source_cpa_percent = (round($value['vendor_cost'])/round($value['vendor_gsv']));
+  						if($value['vendor_cost']==0 || $value['vendor_gsv']==0){
+  							$source_cpa_percent = 0;
+  						}
+  						if($source_cpa_percent){
+  							$s_cpa_per = round(($source_cpa_percent*100),2);
+  						}
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['source_cpa_percent']=$s_cpa_per;
+
+  						$c_cpa_per = 0.00;
+  						$batch_cpa_percent = (round($value['batch_cost'])/(round($value['batch_con'])*round($value['fees_inr'])));
+  						if($value['batch_cost']==0 || $value['batch_con']==0){
+  							$batch_cpa_percent = 0;
+  						}
+  						if($batch_cpa_percent){
+  							$c_cpa_per = round(($batch_cpa_percent*100),2);
+  						}
+  						$councelorList[$value['batch_name']][$value['vendor_name']]['course_cpa_percent']=$c_cpa_per;
 				  }
+					$leadSql="SELECT COUNT(l.id)total,l.status_description,l.vendor,(SELECT name FROM te_ba_batch WHERE te_ba_batch.id=lc.te_ba_batch_id_c)batch,(SELECT SUM(total_cost) FROM te_actual_campaign as a WHERE a.te_ba_batch_id_c=lc.te_ba_batch_id_c  AND a.vendor_id=(SELECT id FROM te_vendor WHERE name=l.vendor) AND a.type='paid' AND a.deleted=0)cost FROM leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c AND l.deleted=0 WHERE l.vendor!='' AND lc.te_ba_batch_id_c!='' $whereAll GROUP BY l.vendor,lc.te_ba_batch_id_c,l.status_description ORDER BY batch ASC,l.vendor ASC";
+					$leadObj =$db->query($leadSql);
 
-				  $leadSql="SELECT COUNT(l.id)total,l.status,l.vendor,(SELECT name FROM te_ba_batch WHERE te_ba_batch.id=lc.te_ba_batch_id_c)batch,(SELECT SUM(total_cost) FROM te_actual_campaign as a WHERE a.te_ba_batch_id_c=lc.te_ba_batch_id_c AND a.name=l.vendor)cost FROM leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c AND l.deleted=0 WHERE l.vendor!='' AND lc.te_ba_batch_id_c!='' $whereAll GROUP BY l.vendor,lc.te_ba_batch_id_c,l.status ORDER BY batch ASC,l.vendor ASC";
-				  $leadObj =$db->query($leadSql);
 
-
-				  while($row =$db->fetchByAssoc($leadObj)){
-				    $councelorList[$row['batch']][$row['vendor']][$row['status']]=$row['total'];
-				    $councelorList[$row['batch']][$row['vendor']]['spend']=($row['cost']?$row['cost']:0);
-				  }
+					while($row =$db->fetchByAssoc($leadObj)){
+						$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+						$councelorList[$row['batch']][$row['vendor']][$row['status_description']]=$row['total'];
+						$councelorList[$row['batch']][$row['vendor']]['spend']=($row['cost']?$row['cost']:0);
+					}
 				}
 				$template='<table cellpadding="0" cellspacing="0" width="100%" border="1">
 			  <tr height="20">
@@ -341,9 +380,9 @@ class AOR_ReportsViewDailyreport extends SugarView {
 			      $conversion_rate = number_format((float)$conversion_rate, 2, '.', '');
 			      $cpl= ($vendors['spend'] && $total?number_format($vendors['spend']/$total,2):0);
 			      $cpa=($vendors['spend'] && $vendors['Converted']?number_format($vendors['spend']/$vendors['Converted']):0);
-			      $cpa_percent=($vendors['course_fee'] && $cpa?number_format((($vendors['course_fee']/$cpa)*100),2):0);
+			      $cpa_percent=($vendors['spend'] && $gsv?(($vendors['spend']/str_replace(',','',$gsv))*100):0);
 
-			      $template.='<tr height="20"><td>'.$vendorskey.'</td><td>'.$key.'</td><td>'.$total.'</td><td>'.$vendors['Converted'].'</td><td>'.$validity.'</td><td>'.$validity_per.'</td><td>'.$vendors['spend'].'</td><td>'.$conversion_rate.'</td><td>'.$cpl.'</td><td>'.$cpa.'</td><td>'.$vendors['course_fee'].'</td><td>'.$cpa_percent.'</td><td>'.$gsv.'</td><td>'.$vendors['source_cpa_percent'].'</td><td>'.$vendors['course_cpa_percent'].'</td><td>'.$vendors['batch_status'].'</td></tr>';
+			      $template.='<tr height="20"><td>'.$vendorskey.'</td><td>'.$key.'</td><td>'.$total.'</td><td>'.$vendors['Converted'].'</td><td>'.$validity.'</td><td>'.$validity_per.'</td><td>'.$vendors['spend'].'</td><td>'.$conversion_rate.'</td><td>'.$cpl.'</td><td>'.$cpa.'</td><td>'.round($vendors['course_fee'],2).'</td><td>'.$cpa_percent.'</td><td>'.$gsv.'</td><td>'.$vendors['source_cpa_percent'].'</td><td>'.$vendors['course_cpa_percent'].'</td><td>'.$vendors['batch_status'].'</td></tr>';
 			    }
 			  }
 				//echo $template;exit();
@@ -389,19 +428,32 @@ class AOR_ReportsViewDailyreport extends SugarView {
 				foreach ($batchVendorArr as $value) {
 					$where_lead =" AND  l.vendor='".$value['vendor_name']."' AND lc.te_ba_batch_id_c='".$value['batch_id']."' $where";
 					//echo $where_lead.'<br>';
-					$leadSql="SELECT count(l.id) as total,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where_lead GROUP BY l.status";
+					$leadSql="SELECT count(l.id) as total,l.status_description FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 $where_lead GROUP BY l.status_description";
 					$leadObj =$db->query($leadSql);
 
-					$data['Alive'] = 0;
-					$data['Converted'] = 0;
-					$data['Dead'] = 0;
+					$data['Fallout'] = 0;
+					$data['New_Lead'] = 0;
+					$data['Prospect'] = 0;
+					$data['Ringing_Multiple_Times'] = 0;
+					$data['Follow_Up'] = 0;
+					$data['Not_Eligible'] = 0;
 					$data['Duplicate'] = 0;
-					$data['Warm'] = 0;
+					$data['Not_Enquired'] = 0;
+					$data['Dead_Number'] = 0;
+					$data['Retired'] = 0;
+					$data['Wrong_Number'] = 0;
+					$data['Call_Back'] = 0;
+					$data['No_Answer'] = 0;
+					$data['Re_Enquired'] = 0;
+					$data['Converted'] = 0;
+					$data['Rejected'] = 0;
+					$data['Dropout'] = 0;
 					while($row =$db->fetchByAssoc($leadObj)){
-						$data[$row['status']]=$row['total'];
+						$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+						$data[$row['status_description']]=$row['total'];
 					}
-					$total = $data['Alive'] +	$data['Converted'] + $data['Dead'] + $data['Duplicate'] + $data['Warm'];
-					$validity = $total - ($data['Dead']+$data['Duplicate']);
+					$total = $data['Dropout'] +	$data['Rejected'] + $data['Converted'] + $data['Re_Enquired'] + $data['No_Answer']+ $data['Call_Back']+ $data['Wrong_Number']+ $data['Retired']+ $data['Dead_Number']+ $data['Not_Enquired']+ $data['Duplicate']+ $data['Not_Eligible']+ $data['Follow_Up']+ $data['Ringing_Multiple_Times']+ $data['Prospect']+ $data['New_Lead']+ $data['Fallout'];
+					$validity = $data['Dropout'] + $data['Fallout']+$data['Retired']+$data['Converted']+$data['Call_Back']+$data['Follow_Up']+$data['Prospect']+$data['New_Lead'];
 					$validity_per = ($validity && $total?($validity/$total)*100:0.00);
 					$validity_per = number_format((float)$validity_per, 2, '.', '');
 					$gsv = number_format($data['Converted']*$value['fees_inr']);
@@ -425,26 +477,26 @@ class AOR_ReportsViewDailyreport extends SugarView {
 					$councelorList[$index]['spend']=($actualCampaignData['total_cost']?$actualCampaignData['total_cost']:0);
 					$councelorList[$index]['cpl']= ($actualCampaignData['total_cost'] && $total?number_format($actualCampaignData['total_cost']/$total,2):0);
 					$councelorList[$index]['cpa']=($actualCampaignData['total_cost'] && $councelorList[$index]['registered']?number_format($actualCampaignData['total_cost']/$councelorList[$index]['registered']):0);
-					$councelorList[$index]['cpa_percent']=($councelorList[$index]['spend'] && $councelorList[$index]['cpa']?number_format((($councelorList[$index]['cpa']/$councelorList[$index]['spend'])*100),2):0);
+					$councelorList[$index]['cpa_percent']=($councelorList[$index]['spend'] && $gsv?(($councelorList[$index]['spend']/str_replace(',','',$gsv))*100):0);
 					//$councelorList[$index]['cpa_percent']=($councelorList[$index]['course_fee'] && $councelorList[$index]['cpa']?number_format((($councelorList[$index]['course_fee']/$councelorList[$index]['cpa'])*100),2):0);
 
 					$s_cpa_per = 0.00;
-					$source_cpa_percent = ($value['vendor_cost']/$value['vendor_con']);
-					if($value['vendor_cost']==0 || $value['vendor_con']==0){
+					$source_cpa_percent = (round($value['vendor_cost'])/round($value['vendor_gsv']));
+					if($value['vendor_cost']==0 || $value['vendor_gsv']==0){
 						$source_cpa_percent = 0;
 					}
-					if($source_cpa_percent && $value['vendor_cost']){
-						$s_cpa_per = number_format((($source_cpa_percent/$value['vendor_cost'])*100),2);
+					if($source_cpa_percent){
+						$s_cpa_per = round(($source_cpa_percent*100),2);
 					}
 					$councelorList[$index]['source_cpa_percent']=$s_cpa_per;
 
 					$c_cpa_per = 0.00;
-					$batch_cpa_percent = ($value['batch_cost']/$value['batch_con']);
+					$batch_cpa_percent = (round($value['batch_cost'])/(round($value['batch_con'])*round($value['fees_inr'])));
 					if($value['batch_cost']==0 || $value['batch_con']==0){
 						$batch_cpa_percent = 0;
 					}
-					if($batch_cpa_percent && $value['batch_cost']){
-						$c_cpa_per = number_format((($batch_cpa_percent/$value['batch_cost'])*100),2);
+					if($batch_cpa_percent){
+						$c_cpa_per = round(($batch_cpa_percent*100),2);
 					}
 					$councelorList[$index]['course_cpa_percent']=$c_cpa_per;
 
