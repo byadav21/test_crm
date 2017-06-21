@@ -568,13 +568,14 @@ class addPaymentClass{
 				$sql.=" and leads.phone_mobile = '{$bean->phone_mobile}'";
 			}	
 			$bean->upload_status=1;
-			
+			$bean->duplicate_check = '1';
 			//echo $sql;die;
 			try{ 
 				$re = $GLOBALS['db']->query($sql);
 			}catch(Exception $e){
 				$re=NULL;
 			}
+                        
 			if($GLOBALS['db']->getRowCount($re)>0){
                 $beanData=$GLOBALS['db']->fetchByAssoc($re);
 				$bean->status = 'Duplicate';
