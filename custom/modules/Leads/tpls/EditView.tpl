@@ -359,13 +359,29 @@ $(document).ready(function() {ldelim}
         
               $("#status_description").on('change',function(){
                   if($("#status_description").val()=='Converted'){
-                    $( "ul.yui-nav li:eq(0)" ).removeClass("selected");
-                    $( "ul.yui-nav li:eq(0)" ).attr("title", "");
-                    $( "ul.yui-nav li:eq(1)" ).addClass("selected");
-                    $( "ul.yui-nav li:eq(1)" ).attr("title", "active");
-                    $( "#tab1" ).click();
-                    $( "#tabcontent1" ).removeClass("yui-hidden");
-                    $( "#tabcontent0" ).addClass("yui-hidden");
+                      
+                       var status_description = $("#status_description").val();
+                       var state = $("#primary_address_state").val();
+                            if(status_description=='Converted' && state==0)
+                            {
+                                alert("Please select a state");
+                                $("#primary_address_state").focus();
+                                $("#primary_address_state").addClass('red-border');
+                                return false;
+                            }
+                            else
+                            {
+                                
+                                $( "ul.yui-nav li:eq(0)" ).removeClass("selected");
+                                $( "ul.yui-nav li:eq(0)" ).attr("title", "");
+                                $( "ul.yui-nav li:eq(1)" ).addClass("selected");
+                                $( "ul.yui-nav li:eq(1)" ).attr("title", "active");
+                                $( "#tab1" ).click();
+                                $( "#tabcontent1" ).removeClass("yui-hidden");
+                                $( "#tabcontent0" ).addClass("yui-hidden");   
+                            }
+                            
+                   
                      
                   }
             

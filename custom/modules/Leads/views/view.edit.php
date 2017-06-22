@@ -87,7 +87,7 @@ class LeadsViewEdit extends ViewEdit
                 $state_list .= ' selected ';
             $state_list .= ' >' . $val . '</option>';
         }
-
+        
 
         //print_r($GLOBALS['app_list_strings']['indian_states']); die;
 
@@ -134,8 +134,9 @@ class LeadsViewEdit extends ViewEdit
                                         $state_list .= '<option value="' . $key . '"';
                                         if ($this->bean->cost_center == $key)
                                             $state_list .= ' selected ';
-                                        echo $state_list .= ' >' . $val . '</option>';
+                                          $state_list .= ' >' . $val . '</option>';
                                     }
+                                    echo $state_list;
                                     ?></select>');
                 $('#primary_address_country').hide();
                 
@@ -156,16 +157,19 @@ class LeadsViewEdit extends ViewEdit
                                         $state_list .= '<option value="' . $key . '"';
                                         if ($this->bean->cost_center == $key)
                                             $state_list .= ' selected ';
-                                        echo $state_list .= ' >' . $val . '</option>';
+                                         $state_list .=  ' >' . $val . '</option>';
                                     }
+                                    echo $state_list;
                                     ?></select>');
 
                         $("#primary_address_country_label").text('');
 
                     }
                     
+                     
                     
                 });
+               
 
 
                 //Lead Referral hide /show
