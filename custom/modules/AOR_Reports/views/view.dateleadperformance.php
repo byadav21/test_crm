@@ -60,7 +60,7 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 			$_SESSION['till_from_date'] = $_REQUEST['from_date'];
 			$_SESSION['till_to_date'] = $_REQUEST['to_date'];
 			$_SESSION['till_batch'] = $_REQUEST['batch'];
-			$datacsv="Batch_Name,Media,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired\n";
+			$datacsv="Batch_Name,Media,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,No-Answer,Dropout\n";
 			$file = "Till_Date_Lead_Performance";
 			$where='';
 			$from_date="";
@@ -123,6 +123,9 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 					$councelorList[$value['batch_name']][$value['vendor_name']]['Retired']=0;
 					$councelorList[$value['batch_name']][$value['vendor_name']]['Ringing_Multiple_Times']=0;
 					$councelorList[$value['batch_name']][$value['vendor_name']]['Duplicate']=0;
+					//add new
+					$councelorList[$value['batch_name']][$value['vendor_name']]['No_Answer']=0;
+					$councelorList[$value['batch_name']][$value['vendor_name']]['Dropout']=0;
 				}
 				$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
 				$leadObj =$db->query($leadSql);
@@ -138,7 +141,7 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 
 			foreach($councelorList as $key1=>$councelorVal){
 				foreach ($councelorVal as $councelorkey => $councelor) {
-					$datacsv.= "\"" . $key1 . "\",\"" . $councelorkey . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\"\n";
+					$datacsv.= "\"" . $key1 . "\",\"" . $councelorkey . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\",\"" . $councelor['No_Answer'] . "\",\"" . $councelor['Dropout'] . "\"\n";
 				}
 
 			}
@@ -223,8 +226,9 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				$councelorList[$value['batch_name']][$value['vendor_name']]['Retired']=0;
 				$councelorList[$value['batch_name']][$value['vendor_name']]['Ringing_Multiple_Times']=0;
 				$councelorList[$value['batch_name']][$value['vendor_name']]['Duplicate']=0;
-
-
+				// Add new
+				$councelorList[$value['batch_name']][$value['vendor_name']]['No_Answer']=0;
+				$councelorList[$value['batch_name']][$value['vendor_name']]['Dropout']=0;
 
 			}
 			$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
@@ -335,6 +339,11 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 			$councelorList['Re_Enquired']=0;
 		if(!array_key_exists ('Wrong_Number',$councelorList))
 			$councelorList['Wrong_Number']=0;
+			//New Status
+		if(!array_key_exists ('No_Answer',$councelorList))
+			$councelorList['No_Answer']=0;
+			if(!array_key_exists ('Dropout',$councelorList))
+			$councelorList['Dropout']=0;
 
 		if(!array_key_exists ('Grand_Total',$councelorList)){
 				$councelorList['Grand_Total']=$councelorList['Call_Back']
@@ -351,6 +360,8 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				+$councelorList['Ringing_Multiple_Times']
 				+$councelorList['Re_Enquired']
 				+$councelorList['Wrong_Number'];
+				+$councelorList['No_Answer']; //Add new status
+				+$councelorList['Dropout'];
 
 				 }
 

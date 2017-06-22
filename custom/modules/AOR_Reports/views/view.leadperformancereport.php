@@ -51,34 +51,33 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 		$leadStatusList=$GLOBALS['app_list_strings']['lead_status_dom'];
 		#Get batch drop down option
 		$batchList=$this->getBatch();
-
 		# Query for batch drop down options
 		$where="";
 		$from_date="";
 		$to_date="";
-		if(isset($_POST['button']) && $_POST['button']=="Search") {
-			$_SESSION['lp_from_date'] = $_REQUEST['from_date'];
-			$_SESSION['lp_to_date'] = $_REQUEST['to_date'];
-			$_SESSION['lp_batch'] = $_REQUEST['batch'];
-			if($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-			}elseif($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']==""){
-				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
-				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
-			}elseif($_SESSION['lp_from_date']==""&&$_SESSION['lp_to_date']!=""){
-				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
-				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
-			}
-			if(!empty($_SESSION['lp_batch'])){
-				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['lp_batch'])."') ";
-			}
+		if(isset($_POST['button']) || isset($_POST['export'])){
+			   $_SESSION['lp_from_date'] = $_REQUEST['from_date'];
+			   $_SESSION['lp_to_date'] = $_REQUEST['to_date'];
+			   $_SESSION['lp_batch'] = $_REQUEST['batch'];
+	    }
 
-		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Vendor,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,Grand-Total\n";
+	  if($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']){
+		   $from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+		   $to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
+		   $where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
+	  }elseif($_SESSION['lp_from_date']!=""&&$_SESSION['lp_to_date']==""){
+		   $from_date=date('Y-m-d',strtotime(str_replace('/','-',$_POST['from_date'])));
+		   $where.=" AND DATE(l.date_entered)='".$from_date."' ";
+	  }elseif($_SESSION['lp_from_date']==""&&$_SESSION['lp_to_date']!=""){
+		   $to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lp_to_date'])));
+		   $where.=" AND DATE(l.date_entered)='".$to_date."' ";
+	  }
+	  if(!empty($_SESSION['lp_batch'])){
+		   $where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['lp_batch'])."') ";
+	  }
+		if(isset($_POST['export']) && $_POST['export']=="Export"){
+			$data="Vendor,Duplicate,Dead-Number,Fallout,Not-Eligible,Not-Enquired,Rejected,Retired,Ringing-Multiple-Times,Wrong-Number,Call-Back,Converted,Follow-Up,New-Lead,Prospect,Re-Enquired,No-Answer,Dropout,Grand-Total\n";
 			$file = "leads_performance_report";
-			$where='';
 			$from_date="";
 			$to_date="";
 			$filename = $file . "_" . date ( "Y-m-d");
@@ -147,24 +146,32 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 					$councelorList[$key]['Ringing_Multiple_Times']=0;
 				if(!isset($councelor['Wrong_Number']))
 					$councelorList[$key]['Wrong_Number']=0;
+							//add New Status
+				if(!isset($councelor['No_Answer']))
+					$councelorList[$key]['No_Answer']=0;
+				if(!isset($councelor['Dropout']))
+					$councelorList[$key]['Dropout']=0;
+					
 				if(!isset($councelor['Invalid_Total'])){
 					$councelorList[$key]['Invalid_Total']=$councelorList[$key]['Wrong_Number']
 					+$councelorList[$key]['Dead_Number']
 					+$councelorList[$key]['Duplicate']
-					+$councelorList[$key]['Fallout']
 					+$councelorList[$key]['Ringing_Multiple_Times']
 					+$councelorList[$key]['Not_Enquired']
 					+$councelorList[$key]['Not_Eligible']
 					+$councelorList[$key]['Rejected']
-					+$councelorList[$key]['Retired'];
+					+$councelorList[$key]['Re_Enquired']
+					+$councelorList[$key]['No_Answer'];	
 				}
 				if(!isset($councelor['Valid_Total'])){
 					$councelorList[$key]['Valid_Total']=$councelorList[$key]['Call_Back']
-					+$councelorList[$key]['Follow_Up']
+					+$councelorList[$key]['Follow_Up'] /*  New Code */	
 					+$councelorList[$key]['New_Lead']
 					+$councelorList[$key]['Converted']
-					+$councelorList[$key]['Re_Enquired']
-					+$councelorList[$key]['Prospect'];
+					+$councelorList[$key]['Prospect']
+					+$councelorList[$key]['Dropout'] /*  New Code */
+					+$councelorList[$key]['Retired']
+					+$councelorList[$key]['Fallout'];
 				}
 				if(!isset($councelor['Grand_Total'])){
 					$councelorList[$key]['Grand_Total']=$councelorList[$key]['Valid_Total']+$councelorList[$key]['Invalid_Total'];
@@ -174,7 +181,7 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 
 
 			foreach($councelorList as $key=>$councelor){
-				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\",\"" . $councelor['Grand_Total'] . "\"\n";
+				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number']."\",\"" . $councelor['Fallout']."\",\"" . $councelor['Not_Eligible']. "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\",\"" . $councelor['No_Answer'] . "\",\"" . $councelor['Dropout'] . "\",\"" . $councelor['Grand_Total'] . "\"\n";
 			}
 			ob_end_clean();
 			header("Content-type: application/csv");
@@ -231,25 +238,32 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 				$councelorList[$key]['Ringing_Multiple_Times']=0;
 			if(!isset($councelor['Wrong_Number']))
 				$councelorList[$key]['Wrong_Number']=0;
+							//add New Status
+			if(!isset($councelor['No_Answer']))
+					$councelorList[$key]['No_Answer']=0;
+			if(!isset($councelor['Dropout']))
+					$councelorList[$key]['Dropout']=0;
 			if(!isset($councelor['Invalid_Total'])){
-				$councelorList[$key]['Invalid_Total']=$councelorList[$key]['Wrong_Number']
-				+$councelorList[$key]['Dead_Number']
-				+$councelorList[$key]['Duplicate']
-				+$councelorList[$key]['Fallout']
-				+$councelorList[$key]['Ringing_Multiple_Times']
-				+$councelorList[$key]['Not_Enquired']
-				+$councelorList[$key]['Not_Eligible']
-				+$councelorList[$key]['Rejected']
-				+$councelorList[$key]['Retired'];
-			}
-			if(!isset($councelor['Valid_Total'])){
-				$councelorList[$key]['Valid_Total']=$councelorList[$key]['Call_Back']
-				+$councelorList[$key]['Follow_Up']
-				+$councelorList[$key]['New_Lead']
-				+$councelorList[$key]['Converted']
-				+$councelorList[$key]['Re_Enquired']
-				+$councelorList[$key]['Prospect'];
-			}
+					$councelorList[$key]['Invalid_Total']=$councelorList[$key]['Wrong_Number']
+					+$councelorList[$key]['Dead_Number']
+					+$councelorList[$key]['Duplicate']
+					+$councelorList[$key]['Ringing_Multiple_Times']
+					+$councelorList[$key]['Not_Enquired']
+					+$councelorList[$key]['Not_Eligible']
+					+$councelorList[$key]['Rejected']
+					+$councelorList[$key]['Re_Enquired']
+					+$councelorList[$key]['No_Answer'];	
+				}
+				if(!isset($councelor['Valid_Total'])){
+					$councelorList[$key]['Valid_Total']=$councelorList[$key]['Call_Back']
+					+$councelorList[$key]['Follow_Up'] /*  New Code */	
+					+$councelorList[$key]['New_Lead']
+					+$councelorList[$key]['Converted']
+					+$councelorList[$key]['Prospect']
+					+$councelorList[$key]['Dropout'] /*  New Code */
+					+$councelorList[$key]['Retired']
+					+$councelorList[$key]['Fallout'];
+				}
 			if(!isset($councelor['Grand_Total'])){
 				$councelorList[$key]['Grand_Total']=$councelorList[$key]['Valid_Total']+$councelorList[$key]['Invalid_Total'];
 			}
