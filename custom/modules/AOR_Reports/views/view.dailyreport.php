@@ -102,7 +102,6 @@ class AOR_ReportsViewDailyreport extends SugarView {
 		return $resultSet;
 	}
 	function getActualPlanByVendor($vendor="",$batch="",$search_date=""){
-		exit('Error in processing');
 		global $db;
 		if($batch!=""&&$vendor!=""){
 			$actualPlanSql=" SELECT sum(a.total_cost)total_cost FROM te_vendor_te_utm_1_c uvr INNER JOIN te_utm u ON uvr.te_vendor_te_utm_1te_utm_idb=u.id INNER JOIN te_utm_te_actual_campaign_1_c AS ua on ua.te_utm_te_actual_campaign_1te_utm_ida=u.id INNER JOIN te_actual_campaign a ON a.id=ua.te_utm_te_actual_campaign_1te_actual_campaign_idb WHERE uvr.te_vendor_te_utm_1te_vendor_ida='".$vendor."' AND a.te_ba_batch_id_c='".$batch."' AND a.type='paid' AND a.deleted=0";
