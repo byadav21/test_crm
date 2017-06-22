@@ -14,8 +14,8 @@ class LeadsViewEdit extends ViewEdit {
 	
 	
 	function display() {
-		//~ print_r($_REQUEST);
-		global $current_user;
+		 //print_r($_REQUEST);
+		global $current_user,$app_strings;
 		$disableBatch=false;
 		if(!is_admin($current_user) && !empty($this->bean->id)){
 			 
@@ -67,6 +67,25 @@ class LeadsViewEdit extends ViewEdit {
 		}
 		 </script>
 	<?php	 
+                $countries_list='';  
+		foreach($GLOBALS['app_list_strings']['countries_list'] as $key=>$val){
+			$countries_list.= '<option value="'.$key.'"';
+			if($this->bean->cost_center==$key) $countries_list.= ' selected ';
+			$countries_list.= ' >' . $val .'</option>';
+		}
+                
+                $state_list='';  
+		foreach($GLOBALS['app_list_strings']['indian_states'] as $key=>$val){
+			$state_list.= '<option value="'.$key.'"';
+			if($this->bean->cost_center==$key) $state_list.= ' selected ';
+			$state_list.= ' >' . $val .'</option>';
+		}
+               
+               
+                //print_r($GLOBALS['app_list_strings']['indian_states']); die;
+                
+		$this->ss->assign('countries_list', $countries_list);
+                $this->ss->assign('state_list', $state_list);
 		$this->ss->assign('disableBatch', $disableBatch);
 		$this->ss->assign('disableDisposition', '0');
 		$this->ss->assign('recID', $this->bean->id);
@@ -99,6 +118,19 @@ class LeadsViewEdit extends ViewEdit {
 
 
     $(document).ready(function () {
+
+                $('#primary_address_country').hide();
+                       $('#country_log').change(function() {
+                        if($('#country_log').val()=='Other'){
+                           
+                             
+                             $('#primary_address_country').show();
+                             $('#primary_address_country').html('<select id="hhh"><option>yyy</option></select>');
+                              $('#hhh').show();
+                        }
+                    });
+        
+       
 		//Lead Referral hide /show
 	   	//~ if(document.getElementById('lead_source').value!='Referrals' && document.getElementById('leads_leads_1leads_ida').value==''){
 				//~
