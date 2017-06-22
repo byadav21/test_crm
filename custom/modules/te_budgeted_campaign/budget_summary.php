@@ -72,9 +72,9 @@ Create
       <div class="col-xs-12 innerdiv" ng-if="results.length > 0" ng-repeat="(key,obj) in results">
           <div class="col-xs-3 text-center div"><a ng-href='index.php?searchFormTab=basic_search&module=te_budgeted_campaign&action=index&query=true&batch_basic=<% obj.name %>'  ><% obj.name %></a></div>
 			<div class="col-xs-2 text-center div"><% obj.volume  | number : 0 %></div>	
-			<div class="col-xs-2 text-center div"><% obj.leads  | number : 0 %></div>	
-			<div class="col-xs-2 text-center div"><% obj.cost  | number : 0 %></div>	
-			<div class="col-xs-1 text-center div"><% obj.conversion | number : 0 %></div>	
+			<div class="col-xs-2 text-center div"><% obj.leads  | number : 2 %></div>	
+			<div class="col-xs-2 text-center div"><% obj.cost  | number : 2 %></div>	
+			<div class="col-xs-1 text-center div"><% obj.conversion | number : 2 %></div>	
 			<div class="col-xs-1 text-center div"><% obj.clp | number : 2 %></div>	
 			<div class="col-xs-1 text-center div"><% obj.cpa | number : 2 %></div>	
       </div>
