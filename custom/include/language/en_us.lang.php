@@ -345,7 +345,7 @@ $GLOBALS['app_list_strings']['indian_states'] = array (
 
 $GLOBALS['app_list_strings']['countries_list']  = array
 (
-	'AF' => 'Afghanistan',
+	'AF ' => 'Afghanistan',
 	'AX' => 'Aland Islands',
 	'AL' => 'Albania',
 	'DZ' => 'Algeria',
