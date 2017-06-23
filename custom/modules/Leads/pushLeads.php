@@ -23,7 +23,7 @@ $db->query("update cron_job set lead_id='1' where session_id='cron_job'");
 $sql="SELECT l.id,l.first_name,l.last_name,l.phone_mobile,l.phone_home,l.phone_work,l.phone_other,e.email_address , concat (dristi_campagain_id ,dristi_api_id) as drtord ,dristi_campagain_id ,dristi_api_id FROM leads l
  LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id AND el.bean_module='Leads' AND el.deleted=0
 LEFT JOIN email_addresses e ON el.email_address_id = e.id AND e.deleted=0
-WHERE l.deleted =0  AND l.duplicate_check=1   AND l.status_description= 'New Lead' AND l.neoxstatus='0' and dristi_campagain_id !='' and dristi_api_id !='' AND (l.assigned_user_id= 'NULL' OR l.assigned_user_id ='' OR l.assigned_user_id IS NULL)  order by concat (dristi_campagain_id ,dristi_api_id)";
+WHERE l.deleted =0   AND l.status_description= 'New Lead' AND l.neoxstatus='0' and dristi_campagain_id !='' and dristi_api_id !='' AND (l.assigned_user_id= 'NULL' OR l.assigned_user_id ='' OR l.assigned_user_id IS NULL)  order by concat (dristi_campagain_id ,dristi_api_id)";
 	
 $allInserted=[];
 $result = $db->query($sql);
