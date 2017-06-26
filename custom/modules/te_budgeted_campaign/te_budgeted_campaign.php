@@ -46,23 +46,23 @@
 class te_budgeted_campaign_override extends te_budgeted_campaign
 {
     public $dbinstance;
-    
+
     function __construct()
     {
         parent::__construct();
         $this->dbinstance = DBManagerFactory::getInstance();
     }
-    
- 
 
 
- 
+
+
+
     function getBatchList($isadmin = '0', $batches = '', $userID = '', $start = 0, $noofRow = 18)
     {
 
-        $sql = " SELECT  
+        $sql = " SELECT
                     bb.name , sum(leads) as leads,sum(conversion) as conversion,sum(volume) as volume,sum(cost) as cost,sum(leads)/sum(conversion) as clp,sum(cost)/sum(conversion) as cpa
-                FROM te_budgeted_campaign tbc 
+                FROM te_budgeted_campaign tbc
                 INNER JOIN te_utm_te_budgeted_campaign_1_c ubc ON tbc.id=ubc.te_utm_te_budgeted_campaign_1te_budgeted_campaign_idb
                 INNER JOIN te_utm ON ubc.te_utm_te_budgeted_campaign_1te_utm_ida=te_utm. id
                 INNER JOIN `te_ba_batch` bb ON te_utm.te_ba_batch_id_c=bb.id  WHERE bb.deleted=0 AND te_utm.deleted=0 AND tbc.deleted=0 GROUP BY bb.id ";
@@ -75,6 +75,8 @@ class te_budgeted_campaign_override extends te_budgeted_campaign
 
             $addrows   = $row;
 
+            $addrows['clp']   = $row['cost']/$row['leads'];
+            $addrows['cpa']   = $row['cost']/$row['conversion'];
             $addrows['name']   = strtoupper($row['name']);
             $rowData[] = $addrows;
         }
