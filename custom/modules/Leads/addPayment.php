@@ -981,7 +981,7 @@ class addPaymentClass{
 		$mis=$db->query($sql);
 		$misData=$db->fetchByAssoc($mis);
                 //echo 'p';die;
-		//($misData['slug']=='CCM' ||  $misData['slug']=='CCTL' || $misData['slug']=='CCH' || $current_user->is_admin==1 ) return false;
+		if($misData['slug']=='CCM' ||  $misData['slug']=='CCTL' || $misData['slug']=='CCH' || $current_user->is_admin==1 ) return false;
 		
 		if($bean->fetched_row['id']==''){			
 			$sql = "SELECT leads.id  as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
