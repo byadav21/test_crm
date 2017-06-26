@@ -6,4 +6,7 @@ $dictionary['Lead']['fields']['lead_source_description']['merge_filter']='disabl
 $dictionary['Lead']['fields']['lead_source_description']['rows']='2';
 $dictionary['Lead']['fields']['lead_source_description']['cols']='20';
 
+//$dictionary['Lead']['fields']['lead_source']['required']=true;
+
+
  ?>

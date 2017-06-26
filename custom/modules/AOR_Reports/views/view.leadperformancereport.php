@@ -106,7 +106,8 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 				$councelorList[$rowVendor['id']]['name']=$rowVendor['name'];
 			}
 
-			$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
+			//$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
+			$leadSql="SELECT v.id,v.name ,count(l.id) as total,l.status_description from  leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c INNER JOIN te_vendor AS v on v.name=l.vendor WHERE l.deleted=0 AND v.deleted=0 $where GROUP BY v.id,l.status_description";
 			$leadObj =$db->query($leadSql);
 			while($row =$db->fetchByAssoc($leadObj)){
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
@@ -197,7 +198,8 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 			$councelorList[$rowVendor['id']]['name']=$rowVendor['name'];
 		}
 
-		$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
+		//$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
+		$leadSql="SELECT v.id,v.name ,count(l.id) as total,l.status_description from  leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c INNER JOIN te_vendor AS v on v.name=l.vendor WHERE l.deleted=0 AND v.deleted=0 $where GROUP BY v.id,l.status_description";
 		$leadObj =$db->query($leadSql);
 		while($row =$db->fetchByAssoc($leadObj)){
 			$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
