@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h2><b>Leads Feedback Report</b></h2><br/><br/>
+<section class="moduleTitle"><h2><b>Leads Feedback Report</b></h2><br/><br/>
 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadsfeedbackreport">
 <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -131,9 +131,6 @@
 			<strong>Dead Number</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Fallout</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Not Eligible</strong>
 		</th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -143,19 +140,29 @@
 			<strong>Rejected</strong>
 		</th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Retired</strong>
-		</th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Ringing Multiple Times</strong>
 		</th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>Wrong Number</strong>
+    </th>
+    <!-- New status-->
+     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>No Answer</strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>Re Enquiredr</strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong class="text-danger">Invalid Total</strong>
 		</th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Call Back</strong>
+		</th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Retired</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Fallout</strong>
 		</th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Converted</strong>
@@ -167,10 +174,10 @@
 			<strong>New Lead</strong>
 		</th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Prospect</strong>
-		</th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>Re-Enquired</strong>
+      <strong>Prospect</strong>
+    </th>
+     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>Dropout</strong>
     </th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong class="text-primary">Valid Total</strong>
@@ -185,23 +192,25 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Duplicate}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dead_Number}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Fallout}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Not_Eligible}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Not_Enquired}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Rejected}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Retired}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Ringing_Multiple_Times}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Wrong_Number}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.No_Answer}</td><!-- New-->
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Re_Enquired}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column text-danger">
 
         <strong class="text-danger">{$councelor.Invalid_Total}</strong>
       </td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Call_Back}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Retired}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Fallout}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Converted}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Follow_Up}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.New_Lead}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Prospect}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Re_Enquired}</td>
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dropout}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column text-primary">
 
         <strong class="text-primary">{$councelor.Valid_Total}</strong>
@@ -235,13 +244,6 @@
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}
-      echo array_sum(array_column($councelorArray,'Fallout'));
-      {/php}
-     </strong>
-    </th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
-      {php}
       echo array_sum(array_column($councelorArray,'Not_Eligible'));
       {/php}
      </strong>
@@ -263,13 +265,6 @@
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}
-      echo array_sum(array_column($councelorArray,'Retired'));
-      {/php}
-     </strong>
-    </th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-      <strong>
-      {php}
       echo array_sum(array_column($councelorArray,'Ringing_Multiple_Times'));
       {/php}
      </strong>
@@ -284,6 +279,20 @@
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}
+      echo array_sum(array_column($councelorArray,'No_Answer'));
+      {/php}
+     </strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>
+      {php}
+      echo array_sum(array_column($councelorArray,'Re_Enquired'));
+      {/php}
+     </strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>
+      {php}
       echo array_sum(array_column($councelorArray,'Invalid_Total'));
       {/php}
      </strong>
@@ -292,6 +301,20 @@
       <strong>
       {php}
       echo array_sum(array_column($councelorArray,'Call_Back'));
+      {/php}
+     </strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>
+      {php}
+      echo array_sum(array_column($councelorArray,'Retired'));
+      {/php}
+     </strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>
+      {php}
+      echo array_sum(array_column($councelorArray,'Fallout'));
       {/php}
      </strong>
     </th>
@@ -316,6 +339,7 @@
       {/php}
      </strong>
     </th>
+    <!-- new-->
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}
@@ -326,10 +350,11 @@
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}
-      echo array_sum(array_column($councelorArray,'Re_Enquired'));
+      echo array_sum(array_column($councelorArray,'Dropout'));
       {/php}
      </strong>
     </th>
+
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>
       {php}

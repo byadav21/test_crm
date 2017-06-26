@@ -38,38 +38,46 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 	function getActualPlanByBatch($batch_id,$week_date,$week=NULL){
 		//echo $batch_id; print_r($week_date);exit();
 		global $db;
-		$query3="SELECT count(l.id)total_leads,count(l2.id)converted FROM leads l inner join leads_cstm lc ON l.id = lc.id_c AND lc.te_ba_batch_id_c='".$batch_id."' AND l.status IN('Alive','Warm','Dead','Converted','Dropout') AND l.deleted=0  left join leads l2 on l2.id=l.id AND l2.status='Converted' AND l2.deleted=0 WHERE l.date_entered >= '".$week_date['week_start']."' AND l.date_entered <= '".$week_date['week_end']."'";
+		$query3="SELECT count(l.id)total_leads,count(l2.id)converted,(SELECT te_ba_batch.fees_inr FROM te_ba_batch WHERE te_ba_batch.id=lc.te_ba_batch_id_c)fee FROM leads l inner join leads_cstm lc ON l.id = lc.id_c AND lc.te_ba_batch_id_c='".$batch_id."' AND l.status IN('Alive','Warm','Dead','Converted','Dropout') AND l.deleted=0  left join leads l2 on l2.id=l.id AND l2.status='Converted' AND l2.deleted=0 WHERE l.date_entered >= '".$week_date['week_start']."' AND l.date_entered <= '".$week_date['week_end']."'";
 		//echo $query3;exit();
 		$row3 =$db->query($query3);
 		$reco3 =$db->fetchByAssoc($row3);
 
 		//$actualPlanSql="SELECT sum(cpl) as cpl, sum(cpa) as cpa FROM te_actual_campaign WHERE te_ba_batch_id_c='".$batch_id."' AND deleted=0 AND date(plan_date) >='".$week_date['week_start']."' AND date(plan_date)<='".$week_date['week_end']."'";
 		//echo $actualPlanSql;exit();
-		$query4="SELECT sum(t3.rate)rate,sum(t3.volume)volume,sum(t3.total_cost)total_cost FROM `te_ba_batch` INNER JOIN te_actual_campaign as t3 on t3.te_ba_batch_id_c=te_ba_batch.id AND t3.deleted=0 AND t3.type='paid' AND  t3.plan_date >= '".$week_date['week_start']."' AND t3.plan_date <= '".$week_date['week_end']."'";
+		$query4="SELECT sum(t3.rate)rate,sum(t3.volume)volume,sum(t3.total_cost)total_cost FROM `te_ba_batch` INNER JOIN te_actual_campaign as t3 on t3.te_ba_batch_id_c=te_ba_batch.id AND t3.deleted=0 AND t3.type='paid' AND  t3.plan_date >= '".$week_date['week_start']."' AND t3.plan_date <= '".$week_date['week_end']."' WHERE t3.te_ba_batch_id_c='".$batch_id."'";
 		$query4Obj =$db->query($query4);
 		$reco4 =$db->fetchByAssoc($query4Obj);
-
+		//echo "<pre>";print_r($reco3);print_r($reco4);
 
 		$actualPlan['cpl'] = $reco4['total_cost']/$reco3['total_leads'];
 		$actualPlan['cpa']= $reco4['total_cost']/$reco3['converted'];
+		$actualPlan['gsv']= round($reco3['fee'])*$reco3['converted'];
+		$cpa_percent = 0.00;
+		$cpa_percent= ($actualPlan['gsv'] && $reco4['total_cost']?round($reco4['total_cost'])/round($actualPlan['gsv']):0);
+		$cpa_percent=round($cpa_percent*100,2);
+		$actualPlan['cpa_percent'] = $cpa_percent;
 		$actualPlan['week']= $week;
 		return $actualPlan;
 	}
-	function getActualPlanByUtm($utms,$week_date,$week=NULL,$vendor=NULL){
+	function getActualPlanByUtm($utms,$week_date,$week=NULL,$vendor=NULL,$batch_id=NULL){
 		global $db;
 		if($utms){
-			$query3="SELECT count(l.id)total_leads,count(l2.id)converted FROM leads l inner join leads_cstm lc ON l.id = lc.id_c AND l.status IN('Alive','Warm','Dead','Converted','Dropout') AND l.deleted=0  AND l.utm in('".implode("','",$utms)."') left join leads l2 on l2.id=l.id AND l2.status='Converted' AND l2.deleted=0 WHERE l.date_entered >= '".$week_date['week_start']."' AND l.date_entered <= '".$week_date['week_end']."' ";
-			//echo $query3;exit();
+			$query3="SELECT count(l.id)total_leads,count(l2.id)converted,(SELECT te_ba_batch.fees_inr FROM te_ba_batch WHERE te_ba_batch.id=lc.te_ba_batch_id_c)fee FROM leads l inner join leads_cstm lc ON l.id = lc.id_c AND lc.te_ba_batch_id_c='".$batch_id."' AND l.status IN('Alive','Warm','Dead','Converted','Dropout') AND l.deleted=0  AND l.utm in('".implode("','",$utms)."') left join leads l2 on l2.id=l.id AND l2.status='Converted' AND l2.deleted=0 WHERE l.date_entered >= '".$week_date['week_start']."' AND l.date_entered <= '".$week_date['week_end']."' ";
 			$row3 =$db->query($query3);
 			$reco3 =$db->fetchByAssoc($row3);
 
-			$query4="SELECT sum(t3.rate)rate,sum(t3.volume)volume,sum(t3.total_cost)total_cost FROM `te_ba_batch` INNER JOIN te_actual_campaign as t3 on t3.te_ba_batch_id_c=te_ba_batch.id AND t3.deleted=0 AND t3.type='paid' AND t3.vendor_id in('".implode("','",$vendor)."') AND  t3.plan_date >= '".$week_date['week_start']."' AND t3.plan_date <= '".$week_date['week_end']."'";
+			$query4="SELECT sum(t3.rate)rate,sum(t3.volume)volume,sum(t3.total_cost)total_cost FROM `te_ba_batch` INNER JOIN te_actual_campaign as t3 on t3.te_ba_batch_id_c=te_ba_batch.id AND t3.deleted=0 AND t3.type='paid' AND t3.vendor_id in('".implode("','",$vendor)."') AND  t3.plan_date >= '".$week_date['week_start']."' AND t3.plan_date <= '".$week_date['week_end']."' WHERE t3.te_ba_batch_id_c='".$batch_id."'";
 			$query4Obj =$db->query($query4);
 			$reco4 =$db->fetchByAssoc($query4Obj);
 
-
 			$actualPlan['cpl'] = $reco4['total_cost']/$reco3['total_leads'];
 			$actualPlan['cpa']= $reco4['total_cost']/$reco3['converted'];
+			$actualPlan['gsv']= round($reco3['fee'])*$reco3['converted'];
+			$cpa_percent = 0.00;
+			$cpa_percent= ($actualPlan['gsv'] && $reco4['total_cost']?round($reco4['total_cost'])/round($actualPlan['gsv']):0);
+			$cpa_percent=round($cpa_percent*100,2);
+			$actualPlan['cpa_percent'] = $cpa_percent;
 			$actualPlan['week']= $week;
 			return $actualPlan;
 		}
@@ -116,7 +124,7 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 				$weeks = array_map(function($v){return date('W', $v);}, $dates);
 				foreach($weeks as $key=>$value){
 					if(!empty($utms)){
-						$reportData[$value]=$this->getActualPlanByUtm($utms,$this->getStartAndEndDate($value,$y),$value,$_REQUEST['vendor_val']);
+						$reportData[$value]=$this->getActualPlanByUtm($utms,$this->getStartAndEndDate($value,$y),$value,$_REQUEST['vendor_val'],$_REQUEST['batch_val']);
 					}
 					else{
 						$reportData[$value]=$this->getActualPlanByBatch($_POST['batch_val'],$this->getStartAndEndDate($value,$y),$value);
@@ -127,7 +135,7 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 
 
 		}elseif(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Week,CPL,CPA\n";
+			$data="Week,CPL,CPA,CPA%\n";
 			$file = "weekly_report";
 			$filename = $file . "_" . date ( "Y-m-d");
 			#Weeks of the batch created date and till date
@@ -169,8 +177,11 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 				if(!$value['cpa']){
 					$value['cpa']='0.00';
 				}
+				if(!$value['cpa_percent']){
+					$value['cpa_percent']='0.00';
+				}
 
-				$data.= "\"" . $key . "\",\"" . round($value['cpl'],2) . "\",\"" . round($value['cpa'],2). "\"\n";
+				$data.= "\"" . $key . "\",\"" . round($value['cpl'],2) . "\",\"" . round($value['cpa'],2). "\",\"" . round($value['cpa_percent'],2). "\"\n";
 			}
 			ob_end_clean();
 			header("Content-type: application/csv");
@@ -182,6 +193,7 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 				<th><strong>Week</strong></th>
 				<th><strong>CPL</strong></th>
 				<th><strong>CPA</strong></th>
+				<th><strong>CPA%</strong></th>
 			</tr>';
 			$file = "weekly_report";
 			$filename = $file . "_" . date ( "Y-m-d");
@@ -224,10 +236,14 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 				if(!$value['cpa']){
 					$value['cpa']='0.00';
 				}
+				if(!$value['cpa_percent']){
+					$value['cpa_percent']='0.00';
+				}
 				$template.='<tr height="20">
 				   <td align="left" valign="top" >'.$key.'</td>
 				   <td align="left" valign="top" >'.number_format($value['cpl'],2).'</td>
 				   <td align="left" valign="top">'.number_format($value['cpa'],2).'</td>
+					 <td align="left" valign="top">'.$value['cpa_percent'].'</td>
 				</tr>';
 			}
 
@@ -245,7 +261,7 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 			}
 		}
 #PS @Manish
-			$total=count($reportData); #total records
+			/*$total=count($reportData); #total records
 
 			$start=0;
 			$per_page=10;
@@ -281,7 +297,7 @@ class AOR_ReportsViewWeeklyreport extends SugarView {
 			}else{
 				$current="(".($start+1)."-".count($reportData)." of ".$total.")";
 
-			}
+			}*/
 		#pE
 		//echo "<pre>";print_r($reportData);exit();
 		$sugarSmarty = new Sugar_Smarty();

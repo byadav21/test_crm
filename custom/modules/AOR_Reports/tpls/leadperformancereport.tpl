@@ -157,7 +157,15 @@
 		</th>
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
       <strong>Re-Enquired</strong>
+    </th> 
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>No Answer</strong>
     </th>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>Dropout</strong>
+    </th>
+
 
     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong class="text-success">Grand Total</strong>
@@ -183,7 +191,8 @@
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.New_Lead}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Prospect}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Re_Enquired}</td>
-
+      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.No_Answer}</td>
+	  <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.Dropout}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
         <strong class="text-success">{$councelor.Grand_Total}</strong>
       </td>
@@ -299,6 +308,20 @@
       <strong>
       {php}
       echo array_sum(array_column($councelorArray,'Re_Enquired'));
+      {/php}
+     </strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>
+      {php}
+      echo array_sum(array_column($councelorArray,'No_Answer'));
+      {/php}
+     </strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong>
+      {php}
+      echo array_sum(array_column($councelorArray,'Dropout'));
       {/php}
      </strong>
     </th>

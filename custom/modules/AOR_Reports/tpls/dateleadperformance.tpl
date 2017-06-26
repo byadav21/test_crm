@@ -166,6 +166,12 @@
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Re-Enquired</strong>
 		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>No-Answer</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Dropout</strong>
+		</th>
 		</th>
 		<!--<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong><font color="#B22222">Grand Total</font></strong>
@@ -203,6 +209,8 @@
         $New_Lead[]=$value['New_Lead'];
         $Prospect[]=$value['Prospect'];
         $Re_Enquired[]=$value['Re_Enquired'];
+        $No_Answer[]=$value['No_Answer'];
+        $Dropout[]=$value['Dropout'];
 
 
         {/php}
@@ -222,6 +230,8 @@
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['New_Lead']{/php}</td>
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Prospect']{/php}</td>
         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Re_Enquired']{/php}</td>
+        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['No_Answer']{/php}</td>
+        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{php}echo $value['Dropout']{/php}</td>
         <!--<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
           <strong><font color="#B22222">000</strong></font>
         </td>-->
@@ -343,6 +353,20 @@
       <strong><font color="#B22222">
       {php}
       echo array_sum($Re_Enquired);
+      {/php}
+     </font></strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong><font color="#B22222">
+      {php}
+      echo array_sum($No_Answer);
+      {/php}
+     </font></strong>
+    </th>
+    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+      <strong><font color="#B22222">
+      {php}
+      echo array_sum($Dropout);
       {/php}
      </font></strong>
     </th>
