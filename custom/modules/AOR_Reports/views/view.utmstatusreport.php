@@ -88,7 +88,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			}
 			$vendors = $vendorArr;
 
-			$campaignSql="SELECT DISTINCT IFNULL(utm_campaign,'NA')utm_campaign,utm  from leads";
+			$campaignSql="SELECT DISTINCT if(utm_campaign is null or utm_campaign = '', 'NA', utm_campaign)utm_campaign,utm  from leads";
 
 			$campaignObj =$db->query($campaignSql);
 			$campaignArr = [];
@@ -116,7 +116,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				if($utmArr){
 					$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 				}
-				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,IFNULL(l.utm_campaign,'NA')utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
 					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
@@ -215,7 +215,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				}
 				$vendors = $vendorArr;
 
-				$campaignSql="SELECT DISTINCT IFNULL(utm_campaign,'NA')utm_campaign,utm  from leads";
+				$campaignSql="SELECT DISTINCT if(utm_campaign is null or utm_campaign = '', 'NA', utm_campaign)utm_campaign,utm  from leads";
 
 				$campaignObj =$db->query($campaignSql);
 				$campaignArr = [];
@@ -242,7 +242,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			if($utmArr){
 				$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 			}
-			$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,IFNULL(l.utm_campaign,'NA')utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+			$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,utm_campaign";
 			$leadObj =$db->query($leadSql);
 			while($row =$db->fetchByAssoc($leadObj)){
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
