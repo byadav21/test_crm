@@ -4,22 +4,27 @@ require_once('custom/include/Email/sendmail.php');
 require_once('custom/modules/te_Api/te_Api.php');
 class addPaymentClass{
 
-	function addPaymentFunc($bean, $event, $argument){
-		//echo $bean->primary_address_country.' state '.$bean->primary_address_state.' city '.$bean->primary_address_city;exit();
-		$primary_address_country=strtolower($bean->primary_address_country);
+        function addPaymentFunc($bean, $event, $argument){
+            echo 'addPaymentFunc'; die;
+		//echo  'country log ='.$bean->country_log.' country='.$bean->primary_address_country.' state '.$bean->primary_address_state.' city '.$bean->primary_address_city;exit(); die;
+                $primary_address_country='';
+                $primary_address_state='';
+                if($bean->country_log=='India'){
+                    $primary_address_country=strtolower($bean->country_log);
+                }
+            else if($bean->country_log=='Other'){
+                    $primary_address_country=strtolower($bean->primary_address_country);
+                }
+                
+                $primary_address_state=$bean->primary_address_country;
+		
 		$paidAmount=0;
 		$student_id="";
 		$student_name="";
 		$student_email="";
 		$student_batch_id="";
 		$lead_payment_details_id="";
-		if(empty($primary_address_country) || $primary_address_country=='india'){
-			$student_country="india";
-		}
-		else{
-			$student_country=$primary_address_country;
-		}
-
+		
 		if(!empty($bean->payment_type)||!empty($bean->date_of_payment)||!empty($bean->reference_number)){
 
 			$payment = new te_payment_details();
@@ -33,7 +38,7 @@ class addPaymentClass{
 			$payment->payment_realized = $bean->payment_realized;
 			$payment->leads_te_payment_details_1leads_ida = $bean->id;
 			$payment->save();
-            $lead_payment_details_id=$payment->id;
+                        $lead_payment_details_id=$payment->id;
 			$paidAmount=$bean->amount;
 			$GLOBALS['db']->query("UPDATE leads SET payment_type='',transaction_id='',payment_source='',date_of_payment='',reference_number='',amount='',payment_realized=''");
 
@@ -246,7 +251,7 @@ class addPaymentClass{
 				'batch_id'=>$bean->te_ba_batch_id_c,
 				'student_id'=>$student_id,
 				'amount'=>$paidAmount,
-				'student_country'=>$student_country,
+				'student_country'=>$primary_address_country,
 				'payment_source'=>$bean->payment_source,
 				'student_batch_id'=>$student_batch_id
 			);
@@ -380,6 +385,7 @@ class addPaymentClass{
 
 
 	public function getSrmUser($batch_id){
+              echo 'getSrmUser'; die;
 		$srmSql = "SELECT assigned_user_id FROM te_srm_auto_assignment WHERE deleted=0 AND te_ba_batch_id_c='".$batch_id."'";
 		$srmObj= $GLOBALS['db']->query($srmSql);
 		$srmUser = $GLOBALS['db']->fetchByAssoc($srmObj);
@@ -388,6 +394,7 @@ class addPaymentClass{
 
 	function updateStudentPaymentPlan($paymentDetails){
 		#Service Tax deduction
+             echo 'updateStudentPaymentPlan'; die;
 		$amount=$paymentDetails['amount'];
 		$student_country=strtolower($paymentDetails['student_country']);
 		$batch_id=$paymentDetails['batch_id'];
@@ -499,10 +506,11 @@ class addPaymentClass{
 
 	function checkDuplicateFunc($bean, $event, $argument){
 
-		ini_set("display_errors",0);
-        error_reporting(0);
+        //ini_set("display_errors",0);
+        //error_reporting(0);
+        //echo 'checkDuplicateFunc'; die;
         global $db;
-
+        //echo  'country log ='.$bean->country_log.' country='.$bean->primary_address_country.' state '.$bean->primary_address_state.' city '.$bean->primary_address_city;exit(); die;
         
 	// Capture the date of referral creation
 		if(isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']) ){
@@ -845,6 +853,8 @@ class addPaymentClass{
 	}
 
 	function addDispositionFunc($bean, $event, $argument){
+            
+                 echo 'addDispositionFunc'; die;
 		ini_set('display_errors',"off");
 		global $db;
 		$db->query("delete from  session_call where  session_id='" . session_id() ."'");
@@ -918,6 +928,8 @@ class addPaymentClass{
 		}
 	}
 	function sendWelcomEmail($email,$batch_id,$student_id,$student_name,$student_country,$attachment=""){
+            
+                echo 'sendWelcomEmail'; die;
 		$paymentPlanSql="SELECT sb.name as batch_name,s.name as payment_name,s.id,s.te_student_id_c,s.due_amount_inr,s.paid_amount_inr,s.paid,s.due_date,s.balance_inr,s.due_amount_usd,s.paid_amount_usd,s.balance_usd,s.description as notes FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` s ON s.id=rel.te_student9d1ant_plan_idb WHERE s.deleted=0 AND s.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY s.due_date";
 		$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 
@@ -968,12 +980,14 @@ class addPaymentClass{
 	
 	
 	function checkAmyoFunc($bean, $event, $argument){
-		
+		// echo 'checkAmyoFunc'; die;
 		//throw new SugarApiException("You can't edit or add disposition while calling", null, 'Leads', 550);
 	}
 	
 
 	function checkduplicate($bean, $event, $argument){
+            
+        //echo 'checkduplicate'; die;
         ini_set('display_errors',"off");
         if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import")  return false;
 		global $db,$current_user;
