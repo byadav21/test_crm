@@ -88,7 +88,9 @@ class LeadsViewEdit extends ViewEdit
             $state_list .= ' >' . $val . '</option>';
         }
         
-
+        //added hidden box for lead check
+        echo "<input type='hidden' id='CheckEditView' value='".$_REQUEST['record']."'>"; 
+        
         //print_r($GLOBALS['app_list_strings']['indian_states']); die;
 
         $this->ss->assign('countries_list', $countries_list);
@@ -169,7 +171,8 @@ class LeadsViewEdit extends ViewEdit
                      
                     
                 });
-               
+                
+              
 
 
                 //Lead Referral hide /show

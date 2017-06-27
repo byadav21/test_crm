@@ -333,7 +333,16 @@ $(document).ready(function() {ldelim}
     
 	$('.save_btn').on('click',function(){
   
- 
+               var lead_source = $("#lead_source").val();
+               var record = $("#CheckEditView").val();
+           
+                if(lead_source=="" && record==""){
+                    alert("Please select a lead source.");
+                    $("#lead_source").focus();
+                    return false;
+                }
+         
+                 
 		var callbackdispose = {
 				success:function(b){
 					 
