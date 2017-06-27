@@ -75,7 +75,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 			$councelorList=array();
 			$utmArr = [];
-			$vendorSql="SELECT u.id ,v.name,b.name as batch,contract_type from te_utm as u
+			$vendorSql="SELECT u.id ,u.name AS utm_name,v.name,b.name as batch,contract_type from te_utm as u
 						inner join te_ba_batch as b on b.id=u.te_ba_batch_id_c
 						inner join te_vendor_te_utm_1_c on te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
 						inner join te_vendor as v on v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
@@ -88,45 +88,35 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			}
 			$vendors = $vendorArr;
 
-			$campaignSql="SELECT DISTINCT IFNULL(utm_campaign,'NA')utm_campaign  from leads";
+			$campaignSql="SELECT DISTINCT if(utm_campaign is null or utm_campaign = '', 'NA', utm_campaign)utm_campaign,utm  from leads";
 
 			$campaignObj =$db->query($campaignSql);
 			$campaignArr = [];
 			while($campaign =$db->fetchByAssoc($campaignObj)){
-				$campaignArr[]=$campaign['utm_campaign'];
+				$campaignArr[]=$campaign;
 			}
+
+			$councelorList=array();
+			$utmArr = [];
 
 			if($vendors){
 				foreach($vendors as $vendorval){
 					foreach($campaignArr as $val){
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['name']=$vendorval['name'];
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['batch']=$vendorval['batch'];
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['contract_type']=$vendorval['contract_type'];
-						/*$councelorList[$vendorval['id'].'TE__TE'.$val]['Call_Back']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Converted']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Dropout']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Dead_Number']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Fallout']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Follow_Up']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['New_Lead']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['No_Answer']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Not_Eligible']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Not_Enquired']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Prospect']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Wrong_Number']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Re_Enquired']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Rejected']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Retired']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Ringing_Multiple_Times']=0;
-						$councelorList[$vendorval['id'].'TE__TE'.$val]['Duplicate']=0;*/
+						if($val['utm']==$vendorval['utm_name']){
+							$councelorList[$vendorval['id'].'TE__TE'.$val['utm_campaign']]['name']=$vendorval['name'];
+							$councelorList[$vendorval['id'].'TE__TE'.$val['utm_campaign']]['batch']=$vendorval['batch'];
+							$councelorList[$vendorval['id'].'TE__TE'.$val['utm_campaign']]['contract_type']=$vendorval['contract_type'];
+							$utmArr[]=$vendorval['id'];
+						}
+
 					}
-					$utmArr[]=$vendorval['id'];
+					//$utmArr[]=$vendorval['id'];
 
 				}
 				if($utmArr){
 					$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 				}
-				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,IFNULL(l.utm_campaign,'NA')utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
 					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
@@ -225,12 +215,12 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				}
 				$vendors = $vendorArr;
 
-				$campaignSql="SELECT DISTINCT IFNULL(utm_campaign,'NA')utm_campaign  from leads";
+				$campaignSql="SELECT DISTINCT if(utm_campaign is null or utm_campaign = '', 'NA', utm_campaign)utm_campaign,utm  from leads";
 
 				$campaignObj =$db->query($campaignSql);
 				$campaignArr = [];
 				while($campaign =$db->fetchByAssoc($campaignObj)){
-					$campaignArr[]=$campaign['utm_campaign'];
+					$campaignArr[]=$campaign;
 				}
 		$councelorList=array();
 		$utmArr = [];
@@ -238,17 +228,21 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 			foreach($vendors as $vendorval){
 				foreach($campaignArr as $val){
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['name']=$vendorval['name'];
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['batch']=$vendorval['batch'];
-					$councelorList[$vendorval['id'].'TE__TE'.$val]['contract_type']=$vendorval['contract_type'];
+					if($val['utm']==$vendorval['utm_name']){
+						$councelorList[$vendorval['id'].'TE__TE'.$val['utm_campaign']]['name']=$vendorval['name'];
+						$councelorList[$vendorval['id'].'TE__TE'.$val['utm_campaign']]['batch']=$vendorval['batch'];
+						$councelorList[$vendorval['id'].'TE__TE'.$val['utm_campaign']]['contract_type']=$vendorval['contract_type'];
+						$utmArr[]=$vendorval['id'];
+					}
+
 
 				}
-				$utmArr[]=$vendorval['id'];
+
 			}
 			if($utmArr){
 				$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 			}
-			$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,IFNULL(l.utm_campaign,'NA')utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+			$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,utm_campaign";
 			$leadObj =$db->query($leadSql);
 			while($row =$db->fetchByAssoc($leadObj)){
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
