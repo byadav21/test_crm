@@ -130,9 +130,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'primary_address_city',
-            'comment' => 'City for primary address',
-            'label' => 'LBL_CITY',
+            'name' => 'country_log',
+            'comment' => 'Status of the country',
+            'label' => 'LBL_COUNTRY_LOG',
           ),
           1 => 
           array (
@@ -149,7 +149,12 @@ array (
             'comment' => 'Country for primary address',
             'label' => 'LBL_COUNTRY',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'primary_address_city',
+            'comment' => 'City for primary address',
+            'label' => 'LBL_CITY',
+          ),
         ),
         8 => 
         array (
