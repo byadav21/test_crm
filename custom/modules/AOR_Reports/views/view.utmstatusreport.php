@@ -254,6 +254,12 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 		}
 
+		foreach ($councelorList as $key => $value) {
+			if(!isset($value['name']) && !isset($value['batch']) && !isset($value['contract_type'])){
+				unset($councelorList[$key]);
+			}
+		}
+		
 		$total=count($councelorList); #total records
 		$start=0;
 		$per_page=10;
