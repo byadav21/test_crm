@@ -52,7 +52,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			$where='';
 			$from_date="";
 			$to_date="";
-			$filename = $file . "_" . date ( "Y-m-d");
+			$filename = $file . "_" . date("Y-m-d");
 			$_SESSION['us_from_date'] = $_REQUEST['from_date'];
 			$_SESSION['us_to_date'] = $_REQUEST['to_date'];
 			$_SESSION['us_batch'] = $_REQUEST['batch'];
@@ -117,6 +117,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 					$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 				}
 				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+				//echo $leadSql;exit();
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
 					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
@@ -176,8 +177,10 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				if(!isset($councelor['Re_Enquired'])){
 					$councelor['Re_Enquired']=0;
 				}
+				if($councelor['name'] && $councelor['batch'] && $councelor['contract_type'] && $campaing[1]){
+					$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['batch']. "\",\"" . $councelor['contract_type']. "\",\"" . $campaing[1]. "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number'] . "\",\"" . $councelor['Dropout'] . "\",\"" . $councelor['Fallout'] . "\",\"" . $councelor['No_Answer'] . "\",\"" . $councelor['Not_Eligible'] . "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\"\n";
+				}
 
-				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['batch']. "\",\"" . $councelor['contract_type']. "\",\"" . $campaing[1]. "\",\"" . $councelor['Duplicate'] . "\",\"" . $councelor['Dead_Number'] . "\",\"" . $councelor['Dropout'] . "\",\"" . $councelor['Fallout'] . "\",\"" . $councelor['No_Answer'] . "\",\"" . $councelor['Not_Eligible'] . "\",\"" . $councelor['Not_Enquired'] . "\",\"" . $councelor['Rejected'] . "\",\"" . $councelor['Retired'] . "\",\"" . $councelor['Ringing_Multiple_Times'] . "\",\"" . $councelor['Wrong_Number'] . "\",\"" . $councelor['Call_Back'] . "\",\"" . $councelor['Converted'] . "\",\"" . $councelor['Follow_Up'] . "\",\"" . $councelor['New_Lead'] . "\",\"" . $councelor['Prospect'] . "\",\"" . $councelor['Re_Enquired'] . "\"\n";
 			}
 			ob_end_clean();
 			header("Content-type: application/csv");
