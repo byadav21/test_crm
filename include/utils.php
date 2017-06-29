@@ -6061,41 +6061,38 @@ function getTaxStatus($user_id)
                 pd.date_of_payment,
                 pd.amount,
                 pd.country,
-                pd.state
+                pd.state,
+                date_entered
                 FROM `te_student_payment` sp
                 INNER JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
                 INNER JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c 
                 INNER JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
                 INNER JOIN te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id
-                WHERE s.id='".$user_id."'
+                WHERE s.id='" . $user_id . "'
                 ORDER BY  pd.`date_entered` DESC limit 1 ";
     $results = $db->query($query);
-    
-    if ($results)
+    $order   = $db->fetchByAssoc($results);
+    if (!empty($order))
     {
-        $comp  = 0;
-        while ($order = $db->fetchByAssoc($results))
-        {
+        $ret = 0;
 
-            if (strtotime($order['date_entered']) <= strtotime($sugar_config['tax']['GSTDATE']))
+        if (strtotime($order['date_entered']) <= strtotime($sugar_config['tax']['GSTDATE']))
+        {
+            $ret = $sugar_config['tax']['service'];
+        }
+        else
+        {
+            if ($order['state'] == $sugar_config['tax']['BASECITY'])
             {
-                $ret = $sugar_config['tax']['service'];
+                //$ret = $sugar_config['tax']['SGST'];
+                $ret = $sugar_config['tax']['CGST'] + $sugar_config['tax']['SGST'];
             }
-           
             else
             {
-
-                if ($order['state'] == $sugar_config['tax']['BASECITY'])
-                {
-                    //$ret = $sugar_config['tax']['SGST'];
-                    $ret = $sugar_config['tax']['CGST']+$sugar_config['tax']['SGST'];
-                }
-                else
-                {
-                    $ret = $sugar_config['tax']['IGST'];
-                }
+                $ret = $sugar_config['tax']['IGST'];
             }
         }
+
         return $ret;
     }
     else
@@ -6103,7 +6100,7 @@ function getTaxStatus($user_id)
 
         if ($order['state'] == $sugar_config['tax']['BASECITY'])
         {
-            return  $sugar_config['tax']['CGST']+$sugar_config['tax']['SGST'];
+            return $sugar_config['tax']['CGST'] + $sugar_config['tax']['SGST'];
         }
         else
         {

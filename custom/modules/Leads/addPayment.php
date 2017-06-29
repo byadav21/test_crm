@@ -451,7 +451,7 @@ class addPaymentClass
         if (empty($student_country) || $student_country == "india")
         {
             //getTaxStatus($student_id);
-            $service_tax =  getTaxStatus($student_id);
+            $service_tax =  getTaxStatus($student_id); 
             $tax         = (($amount * $service_tax) / 100);
             $amount=($amount-$tax); //since tax is already added in fees
 
