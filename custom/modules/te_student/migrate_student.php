@@ -15,7 +15,11 @@ $studentDetails[] =$row;
 
 if($studentDetails){
   foreach ($studentDetails as $key => $value) {
-    $lead_detail = __get_lead_details($value['email'],$value['mobile'],$value['batch_id']);
+   $lead_detail = __get_lead_details(trim($value['email']),trim($value['mobile']),trim($value['batch_id']));
+   
+   echo '<pre>';
+   print_r($lead_detail);
+   
     if($lead_detail){
 
         $lead_detail['student_email']=$value['email'];
