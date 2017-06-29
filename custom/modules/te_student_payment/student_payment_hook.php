@@ -10,10 +10,11 @@ class StudentPayment{
 		$paidAmount=0;
 		$payment_realized=0;
 		$student_id=$_REQUEST['te_student_te_student_payment_1te_student_ida'];
-		$studentSql = "SELECT lead_id_c,country FROM te_student WHERE id='".$student_id."' AND deleted=0";
+		$studentSql = "SELECT lead_id_c,country,state FROM te_student WHERE id='".$student_id."' AND deleted=0";
 		$studentObj= $GLOBALS['db']->query($studentSql);
 		$studentRes = $GLOBALS['db']->fetchByAssoc($studentObj);
-		$student_country=$studentRes['country'];
+		$country    =$studentRes['country'];
+                $state      =$studentRes['state'];
 
 		$GetStuBatchSql = "SELECT leads_id FROM te_student_batch WHERE id='".$_REQUEST['te_student_batch_id_c']."' AND deleted=0";
 		$GetStuBatchObj= $GLOBALS['db']->query($GetStuBatchSql);
@@ -27,6 +28,31 @@ class StudentPayment{
 
 			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."',payment_realized='".$payment_realized."' WHERE student_payment_id='".$bean->id."'");
 		}else{
+                    
+                             $sqlpaymentState = "SELECT 
+                                                s.name,
+                                                sp.te_student_batch_id_c AS batch_id ,
+                                                sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
+                                                pd.date_of_payment,
+                                                pd.amount,
+                                                pd.country,
+                                                pd.state
+                                                FROM `te_student_payment` sp
+                                                INNER JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
+                                                INNER JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c 
+                                                INNER JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
+                                                INNER JOIN te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id
+                                                WHERE s.id='".$student_id."'
+                                                ORDER BY  pd.`date_entered` DESC limit 1"; 
+                                        $stateData    = $GLOBALS['db']->query($sqlpaymentState);
+                                        if ($GLOBALS['db']->getRowCount($stateData) > 0)
+                                        {
+                                            $statedata    = $GLOBALS['db']->fetchByAssoc($stateData);
+                                            $state        =$statedata['state'];
+                                      
+                                        }
+                                        /*End of update last state name in payment*/
+            
 			$payment = new te_payment_details();
 			$payment->payment_type 	   = $bean->payment_type;
 			$payment->payment_source 	   = $bean->payment_source;
@@ -40,8 +66,14 @@ class StudentPayment{
 			$paidAmount=$payment->amount;
 			$payment_realized=$bean->payment_realized;
 			$payment->student_payment_id = $bean->id;
+                        $payment->country = $country;
+                        $payment->state = $state;
+                      
 			$payment->save();
 			$lead_payment_details_id=$payment->id;
+                         /*update last state ID in */
+            
+        
 			#update lead payment if for refference
 			$GLOBALS['db']->query("UPDATE te_student_payment SET lead_payment_details_id='".$lead_payment_details_id."' WHERE id='".$bean->id."'");
 		}

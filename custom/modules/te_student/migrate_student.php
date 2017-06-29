@@ -7,15 +7,22 @@ require_once('include/entryPoint.php');
 global $db;
 $studentDetails=[];
 $Insert_student_counter=0;
-$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=0 limit 0,50";
+$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=0 limit 0,1500";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
 }
 
 if($studentDetails){
+    
+    
   foreach ($studentDetails as $key => $value) {
     $lead_detail = __get_lead_details($value['email'],$value['mobile'],$value['batch_id']);
+    
+    
+    print_r($lead_detail);
+    
+   
     if($lead_detail){
 
         $lead_detail['student_email']=$value['email'];
@@ -237,14 +244,32 @@ function __get_student_batch_id($student_arr=array()){
 
 function __get_lead_details($student_email=NULL,$student_mobile=NULL,$batch_id=NULL){
   $lead_id = '';
-  $find_lead_by_email_sql="SELECT eabr.bean_id FROM email_addr_bean_rel eabr INNER JOIN email_addresses ea ON (ea.id = eabr.email_address_id) INNER JOIN leads ON leads.id=eabr.bean_id INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND ea.email_address='".$student_email."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
+  
+  //echo '<pre>'.
+          $find_lead_by_email_sql="SELECT eabr.bean_id
+                                FROM email_addr_bean_rel eabr
+                            INNER JOIN email_addresses ea ON (ea.id = eabr.email_address_id)
+                            INNER JOIN leads ON leads.id=eabr.bean_id
+                            INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id
+                            WHERE eabr.deleted = 0
+                              AND eabr.bean_module='Leads'
+                              AND ea.email_address='".trim($student_email)."'
+                              AND leads_cstm.te_ba_batch_id_c='".$batch_id."'"; 
+
   $find_lead_by_email_Obj= $GLOBALS['db']->query($find_lead_by_email_sql);
   $find_lead_by_email=$GLOBALS['db']->fetchByAssoc($find_lead_by_email_Obj);
   if($find_lead_by_email){
     $lead_id = $find_lead_by_email['bean_id'];
   }
   else{
-    $find_lead_by_mobile_sql="SELECT leads.id FROM leads INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE leads_cstm.te_ba_batch_id_c='".$batch_id."' AND leads.phone_mobile='".$student_mobile."'";
+      
+      
+      
+    $find_lead_by_mobile_sql="SELECT leads.id
+                                FROM leads
+                                INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id
+                                WHERE leads_cstm.te_ba_batch_id_c='".$batch_id."'
+                                  AND leads.phone_mobile='".$student_mobile."'";
     $find_lead_by_mobile_Obj= $GLOBALS['db']->query($find_lead_by_mobile_sql);
     $find_lead_by_mobile=$GLOBALS['db']->fetchByAssoc($find_lead_by_mobile_Obj);
     if($find_lead_by_mobile){
@@ -252,7 +277,17 @@ function __get_lead_details($student_email=NULL,$student_mobile=NULL,$batch_id=N
     }
   }
   if($lead_id){
-    $get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND leads.id='".$lead_id."'";
+    $get_lead_sql = "SELECT leads.*,
+                            leads_cstm.company_c,
+                            leads_cstm.functional_area_c,
+                            leads_cstm.work_experience_c,
+                            leads_cstm.education_c,
+                            leads_cstm.city_c,
+                            leads_cstm.age_c
+                     FROM leads
+                     INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c
+                     WHERE leads.deleted=0
+                       AND leads.id='".$lead_id."'";
     $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
     $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
     return $get_lead;
@@ -273,7 +308,20 @@ function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country
 	global $sugar_config;
 	#for Indian student only need to calculate service tax
 	if($student_country=="" || strtolower($student_country)=="india"){
-		$paymentPlanSql="SELECT s.name,s.id,s.te_student_id_c,s.due_amount_inr,s.paid_amount_inr,s.paid,s.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` s ON s.id=rel.te_student9d1ant_plan_idb WHERE s.deleted=0 AND s.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY s.due_date";
+		$paymentPlanSql="SELECT s.name,
+                                s.id,
+                                s.te_student_id_c,
+                                s.due_amount_inr,
+                                s.paid_amount_inr,
+                                s.paid,
+                                s.due_date
+                         FROM te_student_batch sb
+                         INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida
+                         INNER JOIN `te_student_payment_plan` s ON s.id=rel.te_student9d1ant_plan_idb
+                         WHERE s.deleted=0
+                           AND s.te_student_id_c='".$student_id."'
+                           AND sb.te_ba_batch_id_c='".$batch_id."'
+                         ORDER BY s.due_date";
 		$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 		$tempAmt=0;
 		while($row=$GLOBALS['db']->fetchByAssoc($paymentPlanObj)){
