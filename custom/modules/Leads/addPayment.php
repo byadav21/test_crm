@@ -450,10 +450,10 @@ class addPaymentClass
         #for Indian student only need to calculate service tax
         if (empty($student_country) || $student_country == "india")
         {
-
-            $service_tax = $sugar_config['tax']['service'];
+            //getTaxStatus($student_id);
+            $service_tax =  getTaxStatus($student_id);
             $tax         = (($amount * $service_tax) / 100);
-            #$amount=($amount-$tax); //since tax is already added in fees
+            $amount=($amount-$tax); //since tax is already added in fees
 
             $paymentPlanSql = "SELECT s.name as student_name,s.email,s.mobile,sb.name as batch_name,sp.name,sp.id,sp.te_student_id_c,sp.due_amount_inr,sp.paid_amount_inr,sp.paid,sp.due_date,sp.currency FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` sp ON sp.id=rel.te_student9d1ant_plan_idb INNER JOIN te_student s ON sp.te_student_id_c=s.id WHERE sp.deleted=0 AND sp.te_student_id_c='" . $student_id . "' AND sb.te_ba_batch_id_c='" . $batch_id . "' ORDER BY sp.due_date";
 

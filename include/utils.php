@@ -6068,11 +6068,9 @@ function getTaxStatus($user_id)
                 INNER JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
                 INNER JOIN te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id
                 WHERE s.id='".$user_id."'
-                ORDER BY  pd.`date_entered` DESC  ";
+                ORDER BY  pd.`date_entered` DESC limit 1 ";
     $results = $db->query($query);
-
-
-
+    
     if ($results)
     {
         $comp  = 0;
@@ -6083,6 +6081,7 @@ function getTaxStatus($user_id)
             {
                 $ret = $sugar_config['tax']['service'];
             }
+           
             else
             {
 
@@ -6104,7 +6103,7 @@ function getTaxStatus($user_id)
 
         if ($order['state'] == $sugar_config['tax']['BASECITY'])
         {
-            return $sugar_config['tax']['CGST'];
+            return  $sugar_config['tax']['CGST']+$sugar_config['tax']['SGST'];
         }
         else
         {
