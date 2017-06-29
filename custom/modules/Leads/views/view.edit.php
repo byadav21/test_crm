@@ -74,16 +74,16 @@ class LeadsViewEdit extends ViewEdit
         foreach ($GLOBALS['app_list_strings']['countries_list'] as $key => $val)
         {
             $countries_list .= '<option value="' . $key . '"';
-            if ($this->bean->cost_center == $key)
+            if ($this->bean->country_log == $key)
                 $countries_list .= ' selected ';
             $countries_list .= ' >' . $val . '</option>';
         }
-
+        //echo $this->bean->primary_address_state;
         $state_list = '';
         foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
         {
             $state_list .= '<option value="' . $key . '"';
-            if ($this->bean->cost_center == $key)
+            if ($this->bean->primary_address_state == $key)
                 $state_list .= ' selected ';
             $state_list .= ' >' . $val . '</option>';
         }
@@ -134,7 +134,7 @@ class LeadsViewEdit extends ViewEdit
                                     {   
                                         
                                         $state_list .= '<option value="' . $key . '"';
-                                        if ($this->bean->cost_center == $key)
+                                        if ($this->bean->primary_address_state == $key)
                                             $state_list .= ' selected ';
                                           $state_list .= ' >' . $val . '</option>';
                                     }
@@ -157,7 +157,7 @@ class LeadsViewEdit extends ViewEdit
                                     foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
                                     {
                                         $state_list .= '<option value="' . $key . '"';
-                                        if ($this->bean->cost_center == $key)
+                                        if ($this->bean->primary_address_state == $key)
                                             $state_list .= ' selected ';
                                          $state_list .=  ' >' . $val . '</option>';
                                     }

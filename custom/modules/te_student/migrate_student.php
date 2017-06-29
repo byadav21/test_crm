@@ -17,8 +17,8 @@ if($studentDetails){
   foreach ($studentDetails as $key => $value) {
    $lead_detail = __get_lead_details(trim($value['email']),trim($value['mobile']),trim($value['batch_id']));
    
-   echo '<pre>';
-   print_r($lead_detail);
+   //echo '<pre>';
+   //print_r($lead_detail);
    
     if($lead_detail){
 
