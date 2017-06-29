@@ -212,7 +212,7 @@ eoq;
 		if(!empty($_REQUEST['uid'])) $_POST['mass'] = explode(',', $_REQUEST['uid']); // coming from listview
 		elseif(isset($_REQUEST['entire']) && empty($_POST['mass'])) {
 			if(empty($order_by))$order_by = '';
-			
+
 			/*Custom code for leads goes here*/
 			if(isset($_REQUEST['module']) && strtolower($_REQUEST['module'])=='leads'){
 				$this->where_clauses = str_replace('leads.batch in','leads_cstm.te_ba_batch_id_c in',$this->where_clauses);
@@ -229,7 +229,7 @@ eoq;
 				if($where_clauses){
 					$this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
 				}
-				
+
 			}
 			/*Custom code for leads ends here*/
 
@@ -521,70 +521,74 @@ eoq;
 
 		if ($this->sugarbean->object_name == 'Contact' ||
 			$this->sugarbean->object_name == 'Account' ||
-			 
+
 			$this->sugarbean->object_name == 'Prospect') {
 
 			$html .= "<tr><td width='15%'  scope='row' class='dataLabel'>$lang_optout_primaryemail</td><td width='35%' class='dataField'><select name='optout_primary'><option value=''>{$GLOBALS['app_strings']['LBL_NONE']}</option><option value='false'>{$GLOBALS['app_list_strings']['checkbox_dom']['2']}</option><option value='true'>{$GLOBALS['app_list_strings']['checkbox_dom']['1']}</option></select></td></tr>";
 
 			}
 		$html .="</table>";
-		
+
 		if($this->sugarbean->object_name == 'Lead'){
 		 $html .= '<style>#converted_datejscal_field{display:none}</style>';
 		 $html .= <<<EOJS
 <script>
 var option = document.getElementById("mass_status").options;
 var status_detail = document.getElementById('mass_status_description').value;
+$("#mass_status option[value='Converted']").hide();
+$("#mass_status option[value='Dropout']").hide();
 $("#mass_status_description option").remove() ;
  $('#converted_datejscal_field').parent().css('display','none');
  $('#mass_batch').parent().css('display','none');
+ $('#mass_Counsellors').parent().css('display','none');
+ $('#mass_country_log').parent().parent().css('display','none');
  $("body").on('change','#mass_status',function() {
 
 	var el = $(this) ;
-    
+
 	if(el.val() === "Alive" ) {
 		$("#mass_status_description option").remove() ;
-	 
-		$("#mass_status_description").append('<option>New Lead</option>');
+
+		$("#mass_status_description").append('<option value="Call Back">Call Back</option><option value="Follow Up">Follow Up</option><option value="New Lead">New Lead</option>');
 	}
 	else if(el.val() === "Dead" ) {
 		$("#mass_status_description option").remove() ;
-		 
-		 $("#mass_status_description").append('<option>Dead Number</option>');
-		$("#mass_status_description").append('<option>Wrong Number</option>');
-		$("#mass_status_description").append('<option>Ringing Multiple Times</option>');
-		$("#mass_status_description").append('<option>Not Enquired</option>');
-		$("#mass_status_description").append('<option>Not Eligible</option>');
-		$("#mass_status_description").append('<option>Rejected</option>');
-		$("#mass_status_description").append('<option>Fallout</option>');
-		$("#mass_status_description").append('<option>Retired</option>');
+
+		$("#mass_status_description").append('<option value="Dead Number">Dead Number</option>');
+		$("#mass_status_description").append('<option value="Wrong Number">Wrong Number</option>');
+		$("#mass_status_description").append('<option value="Ringing Multiple Times">Ringing Multiple Times</option>');
+		$("#mass_status_description").append('<option value="Not Enquired">Not Enquired</option>');
+		$("#mass_status_description").append('<option value="Not Eligible">Not Eligible</option>');
+		$("#mass_status_description").append('<option value="Rejected">Rejected</option>');
+		$("#mass_status_description").append('<option value="Fallout">Fallout</option>');
+		$("#mass_status_description").append('<option value="Retired">Retired</option>');
 	}
 	else if(el.val() === "Converted" ) {
 		$("#mass_status_description option").remove() ;
-		 
+
 		 $("#mass_status_description").append('<option>Converted</option>');
 	}
 	else if(el.val() === "Duplicate" ) {
 		$("#mass_status_description option").remove() ;
-		 
-		 $("#mass_status_description").append('<option>Duplicate</option>');
+
+		 $("#mass_status_description").append('<option value="Duplicate">Duplicate</option>');
 	}
 	else if(el.val() === "Warm" ) {
 		$("#mass_status_description option").remove() ;
-		 
-		 $("#mass_status_description").append('<option>Re-Enquired</option>');
-		 
+
+		 $("#mass_status_description").append('<option value="Re-Enquired">Re-Enquired</option><option value="Prospect">Prospect</option>');
+
 	}
 	else if(el.val() === "Dropout" ) {
 		$("#mass_status_description option").remove() ;
-		 
+
 		 $("#mass_status_description").append('<option>Dropout</option>');
 	}
   });
-</script>  
+</script>
 EOJS;
-			
-			
+
+
 		}
 
 		 $html .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr><td class='buttons'><input onclick='return sListView.send_mass_update(\"selected\", \"{$app_strings['LBL_LISTVIEW_NO_SELECTED']}\")' type='submit' id='update_button' name='Update' value='{$lang_update}' class='button'>&nbsp;<input onclick='javascript:toggleMassUpdateForm();' type='button' id='cancel_button' name='Cancel' value='{$GLOBALS['app_strings']['LBL_CANCEL_BUTTON_LABEL']}' class='button'>";
