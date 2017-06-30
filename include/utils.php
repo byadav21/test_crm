@@ -6062,7 +6062,7 @@ function getTaxStatus($user_id)
                 pd.amount,
                 pd.country,
                 pd.state,
-                date_entered
+                pd.date_entered
                 FROM `te_student_payment` sp
                 INNER JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
                 INNER JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c 
@@ -6075,10 +6075,10 @@ function getTaxStatus($user_id)
     if (!empty($order))
     {
         $ret = 0;
-
+        //echo $order['date_entered'] .'GSTDATE='.$sugar_config['tax']['GSTDATE']; die;
         if (strtotime($order['date_entered']) <= strtotime($sugar_config['tax']['GSTDATE']))
         {
-            $ret = $sugar_config['tax']['service'];
+                $ret = $sugar_config['tax']['service'];
         }
         else
         {
