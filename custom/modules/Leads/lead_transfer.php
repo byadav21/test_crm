@@ -181,6 +181,7 @@ input[type=text], select {
 </form>
 <?php
 unset($_SESSION['leds_id']);
+unset($_SESSION['records_fetch']);
     if(isset($_POST['Search'])) {
     		extract($_POST);
     		$where="";
