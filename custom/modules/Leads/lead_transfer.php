@@ -156,7 +156,7 @@ input[type=text], select {
 		if($current_user->is_admin==1){ ?>
 			<td><b>Vendors</b></td>
 			<td><select name="vendors" id="vendors">
-				<option>--Select Vendor--</option></option>
+				<option value="">--Select Vendor--</option>
 				 <?php
 				 $fetch_vendor="SELECT name,id FROM te_vendor where deleted=0 GROUP by name";
 				 $row4 =$db->query($fetch_vendor);
@@ -248,7 +248,7 @@ unset($_SESSION['records_fetch']);
 		}
 
 
-    if(empty($medium_val) && !empty($vendors) && $vendorArr){
+    if(empty($medium_val) && trim($vendors) && $vendorArr){
   		if($where!=''){
   		$where.=" AND (l.vendor in ('".$vendorArr[$vendors]."'))";
   		}
