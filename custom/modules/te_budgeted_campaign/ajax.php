@@ -22,5 +22,21 @@ if(isset($_REQUEST['batch_val']) && !empty($_REQUEST['batch_val'])){
 	echo json_encode($utmArr);
 	return false;
 }
+if(isset($_REQUEST['vendors']) && !empty($_REQUEST['vendors'])){
+ $query_utm="SELECT c.name,c.id FROM `te_vendor_aos_contracts_1_c` vc INNER JOIN aos_contracts c ON vc.te_vendor_aos_contracts_1aos_contracts_idb=c.id WHERE vc.deleted=0 AND vc.te_vendor_aos_contracts_1te_vendor_ida='".$_REQUEST['vendors']."' AND c.deleted=0";
+ $batch =$db->query($query_utm);
+ $utmArr='';
+ $utmArr['status']='error';
+ $utmArr['res']='';
+ while($utm =$db->fetchByAssoc($batch)){ 
+  $utmArr['res'][]=array('id'=>$utm['id'],'name'=>$utm['name']);
+ }
+ 
+ if(!empty($utmArr['res'])){
+  $utmArr['status']='ok';
+ }
+ echo json_encode($utmArr);
+ return false;
+} 
    
 ?>
