@@ -4,22 +4,22 @@
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
-		<tr>      
-			<td scope="row" nowrap="nowrap" width="1%">		
+		<tr>
+			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">From Date</label>
 			</td>
-			<td nowrap="nowrap" width="10%">			
+			<td nowrap="nowrap" width="10%">
 				<input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
 				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
-			</td>	
-			<td scope="row" nowrap="nowrap" width="1%">		
+			</td>
+			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">To Date</label>
 			</td>
-			<td nowrap="nowrap" width="10%">			
+			<td nowrap="nowrap" width="10%">
 				<input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
 				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
 			</td>
-			
+
 			<td class="sumbitButtons">
 				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
 				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
@@ -44,27 +44,27 @@
 							<table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
 								<tbody><tr>
 									<td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
-									
+
 									<td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
-										
+
 										{if $left eq 1}
 											<a href="index.php?module=AOR_Reports&action=pipelinereport"  name="listViewStartButton" title="Start" class="button" >
 											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
 											</a>
-										
+
 											<a href="index.php?module=AOR_Reports&action=pipelinereport&page={$page}"  class="button" title="Previous">
 											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
-											</a>						
+											</a>
 										{else}
 											<button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
 											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
 											</button>
-										
+
 											<button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
 											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
 											</button>
 										{/if}
-										
+
 									</td>
 									<td nowrap="nowrap" width="1%" class="paginationActionButtons">
 										<div class="pageNumbers">{$current_records}</div>
@@ -85,7 +85,7 @@
 											<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
 											</button>
 										{/if}
-										
+
 									</td>
 									<td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
 								</tr>
@@ -93,31 +93,31 @@
 						</table>
 						</td>
 					</tr>
-					{*End Pagination*}  	
+					{*End Pagination*}
 	<tr height="20">
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">	
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Counsellors</strong>
 		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Warm</strong>
 		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">					
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>GSV</strong>
 		</th>
 	</tr>
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
 		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
-		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.warm}</td> 
-		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.gsv|number_format:2:".":","}</td>					
-		</tr>				
+		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.warm}</td>
+		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.gsv|number_format:2:".":","}</td>
+		</tr>
 	{/foreach}
 </table>
 <script>
 {literal}
 Calendar.setup ({
    inputField : "from_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "from_date_trigger",
    singleClick : true,
    dateStr : "",
@@ -130,7 +130,7 @@ Calendar.setup ({
 {literal}
 Calendar.setup ({
    inputField : "to_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "to_date_trigger",
    singleClick : true,
    dateStr : "",
