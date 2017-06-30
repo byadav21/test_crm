@@ -22,12 +22,13 @@ class UpdatePaymentName
             $sa = "UPDATE te_payment_details SET name='" . $bean->reference_number . "' WHERE id='" . $bean->id . "'";
             $GLOBALS['db']->query($sa);
         }
-
+       
         $leadSql = "SELECT leads_te_payment_details_1leads_ida as lid FROM leads_te_payment_details_1_c WHERE leads_te_payment_details_1te_payment_details_idb = '" . $bean->id . "' AND deleted = 0";
         $relLead = $GLOBALS['db']->query($leadSql);
 
         if ($GLOBALS['db']->getRowCount($relLead) > 0)
         {
+            
             $leadRow = $GLOBALS['db']->fetchByAssoc($relLead);
             $lead_id = $leadRow['lid'];
             $sqlRel  = "SELECT p.id FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='" . $leadRow['lid'] . "' AND p.payment_realized= 0 ";
@@ -45,8 +46,11 @@ class UpdatePaymentName
         }
 
         # if payment details is being updated. Update the same payment in student payment module
+        
+        //print_r($_REQUEST);    die();
         if (isset($_REQUEST['record']) && $_REQUEST['record'] != "" && $_REQUEST['module'] != "Leads")
         {
+            
             $GLOBALS['db']->query("UPDATE te_student_payment SET amount='" . $bean->amount . "' WHERE lead_payment_details_id='" . $_REQUEST['record'] . "'");
 
             #update student payment plan
@@ -244,7 +248,7 @@ class UpdatePaymentName
         if (empty($student_country) || $student_country == "india")
         {
 
-            $service_tax =  getTaxStatus($student_id);
+            $service_tax =  getTaxStatus($student_id); 
             $tax         = (($amount * $service_tax) / 100);
             $amount=($amount-$tax); //since tax is already added in fees
 
