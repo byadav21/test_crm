@@ -1,10 +1,35 @@
 <?php
-ini_set('display_errors','0');
-error_reporting(E_ALL);
-global $db; 
-global $current_user,$db;
-global $mod_strings, $app_strings;
+ini_set('display_errors','1');
+//error_reporting(E_ALL);
+require_once('custom/modules/Leads/customfunctionforcrm.php');
 require_once('modules/ACL/ACLController.php');
+global $db,$current_user,$mod_strings, $app_strings;
+$vendorArr='';$mediumArr='';
+$customfunctionforcrmObj = new customfunctionforcrm();
+$customfunctionforcrmObj->reportingUser($current_user->id);
+$current_userData[$current_user->id]=$current_user->name;
+if($customfunctionforcrmObj->report_to_id_transfer && $current_userData){
+  $counsellorArr = array_merge($current_userData,$customfunctionforcrmObj->report_to_id_transfer);
+}
+else{
+  $counsellorArr = $current_userData;
+}
+
+//echo "<pre>";print_r($customfunctionforcrmObj->report_to_id_transfer);
+/*$userObj = new User();
+$userObj->disable_row_level_security = true;
+$userList = $userObj->get_full_list("", "users.reports_to_id='".$current_user->id."'");*/
+
+function getBatch(){
+  global $db;
+  $batchSql="SELECT id,name from te_ba_batch WHERE deleted=0 ";
+  $batchObj =$db->query($batchSql);
+  $batchOptions=array();
+  while($row =$db->fetchByAssoc($batchObj)){
+    $batchOptions[]=$row;
+  }
+  return $batchOptions;
+}
 ?>
 <html>
     <title>Bulk Lead transfer</title>
@@ -28,7 +53,7 @@ input[type=text], select {
 }
 </style>
          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-           <link rel="stylesheet" href="/resources/demos/style.css">
+          <link rel="stylesheet" href="/resources/demos/style.css">
             <script>
               $(function() {
                 $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" }).val()
@@ -36,24 +61,22 @@ input[type=text], select {
                 $(function() {
                 $("#enddate").datepicker({ dateFormat: "yy-mm-dd" }).val()
                 } );
-            </script> 
+            </script>
      <script type="text/javascript">
 							$( document ).ready(function() {
 								$( "#Lead_source,#Lead_status").find("option").eq(0).remove();
 							});
 							$(function () {
-								$('#Lead_source,#Lead_status,#status_details,#vendors').multiselect({
-									includeSelectAllOption: true,numberDisplayed:0
+								$('#Lead_source,#Lead_status,#status_details,#counsellor').multiselect({
+									selectAll: true,includeSelectAllOption: true,numberDisplayed:0
 								});
-							});
-							
-</script>                 
+							});	</script>
     </head>
         <body>
              <section class="moduleTitle">
                 <fieldset>
                     <form action="index.php?module=Leads&action=lead_transfer&search_leads=1" method="post" id="lead_trans">
-                      <h2>Search Leads</h2><br/><br/>      
+                      <h2>Search Leads</h2><br/><br/>
                       <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr style="background-color:#fff;">
     <td><table width="92%" border="0" cellpadding="0" cellspacing="0">
@@ -62,12 +85,25 @@ input[type=text], select {
     <td><input type="text" name="start_date" id="datepicker"/></td>
      <td><b>End Date</b></td>
      <td><input type="text" name="end_date" id="enddate"/></td>
+      <td><b>Batch</b></td>
+      <?php
+        $batches = getBatch();
+      ?>
+			<td>
+        <select name="batch[]" multiple id="Lead_status">
+					<?php if($batches){?>
+            <?php foreach ($batches as $key => $value) {?>
+              <option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
+            <?php }?>
+          <?php }?>
+				</select>
+      </td>
   </tr>
   <tr>
   <td><b>Lead Source</b></td>
      <td><select name="Lead_source[]" multiple id="Lead_source">
-                                  <option  value="Campaign">Campaign</option>
-								  <option  value="Web Site">Web Site</option>	
+                  <option  value="Campaign">Campaign</option>
+								  <option  value="Web Site">Web Site</option>
 								  <option  value="Converted">Chat</option>
 								  <option  value="InboundCalls">Inbound Calls</option>
 								  <option  value="Referrals">Referrals</option>
@@ -78,16 +114,25 @@ input[type=text], select {
 								  <option  value="Email Enquiries">Email Enquiries</option>
 								  <option  value="ABND">ABND</option>
 								  <option  value="Fail Payment">Fail Payment</option>
-								  <option value="Crosssell">Cross sell</option> 
+								  <option value="Crosssell">Cross sell</option>
 								  </select></td>
         <td><b>Lead Status</b></td>
     <td><select name="Lead_status[]" multiple id="Lead_status">
 									<option  value="Converted">Converted</option>
 									<option  value="Alive">Alive</option>
 									<option  value="Dead">Dead</option>
-									<option  value="Duplicate">Duplicate</option>  
+									<option  value="Duplicate">Duplicate</option>
 									<option  value="Dropout">Dropout</option>
 									<option  value="Warm">Warm</option>
+									</select></td>
+	<td><b>Counsellor</b></td>
+
+							<td><select name="counsellor[]" multiple id="counsellor">
+								<?php
+                  if($counsellorArr){
+                  foreach($counsellorArr as $key=>$counsellorval){?>
+									<option  value=<?php echo $key; ?> ><?php echo $counsellorval; ?></option>
+									<?php }}?>
 									</select></td>
   </tr>
   <td><b>Status Details</b></td>
@@ -95,7 +140,7 @@ input[type=text], select {
 									<option  value="Call Back">Call Back</option>
 									<option  value="Converted">Alive</option>
 									<option  value="Duplicate">Dead</option>
-									<option  value="Fallout">Duplicate</option>  
+									<option  value="Fallout">Duplicate</option>
 									<option  value="Follow Up">Dropout</option>
 									<option  value="Not Eligible">Not Eligible</option>
 									<option  value="Not Enquired">Not Enquired</option>
@@ -106,142 +151,196 @@ input[type=text], select {
 									<option  value="Wrong Number">Wrong Number</option>
 									<option  value="Ringing Multiple Times">Ringing Multiple Times</option>
 									</select></td>
-		<?php									
+		<?php
 		$acl_obj = new ACLController();
-		if($current_user->is_admin==1){ ?>							
+		if($current_user->is_admin==1){ ?>
 			<td><b>Vendors</b></td>
-			<td><select name="vendors[]" multiple id="vendors">
+			<td><select name="vendors" id="vendors">
+				<option>--Select Vendor--</option></option>
 				 <?php
 				 $fetch_vendor="SELECT name,id FROM te_vendor where deleted=0 GROUP by name";
-				 $row4 =$db->query($fetch_vendor); 
-				 while($result_vendor =$db->fetchByAssoc($row4)){?>
-							<option  value="<?php echo $result_vendor['name'] ?>"><?php echo $result_vendor['name'] ?></option>
-							<?php }}?>
-								
-									</select></td> 
+				 $row4 =$db->query($fetch_vendor);
+				 while($result_vendor =$db->fetchByAssoc($row4)){$vendorArr[$result_vendor['id']]=$result_vendor['name'];?>
+							<option  value="<?php echo $result_vendor['id']; ?>"><?php echo $result_vendor['name']; ?></option>
+							<?php }?>
+									</select></td>
+				<td><b>Medium</b></td>
+					 <td><select name="medium_val[]" multiple id="medium_val"></select></td>
 				 </tr>
-					  <tr>
+				 <?php } ?>
+					<tr>
 					  <td><b>Number Of Leads</b></td>
 					  <td><input type="text" name="number_lead" id="no_lead"/></td>
-					  <td><input type="Submit" name="Search" value="Search Lead"></td>
-					  </tr>
-			</table>
-					</td>
+					   <td><input type="Submit" name="Search" value="Search Lead"></td>
 				</tr>
-					</table>       
+			</table>
+					</table>
                     </fieldset>
             </section>
             <br/>
 </form>
 <?php
-if(isset($_POST['Search'])) {
-		extract($_POST);
-		$where="";
-		if(!empty($start_date)&&!empty($end_date)){
-		$where.=" (CAST(date_entered AS DATE) BETWEEN '".$start_date."' AND '".$end_date."')";
+unset($_SESSION['leds_id']);
+unset($_SESSION['records_fetch']);
+    if(isset($_POST['Search'])) {
+    		extract($_POST);
+    		$where="";
+    		if(!empty($start_date)&&!empty($end_date)){
+    		$where.=" (CAST(l.date_entered AS DATE) BETWEEN '".$start_date."' AND '".$end_date."')";
 		}
 		if(!empty($start_date)&&empty($end_date)){
-		if($where!=''){
-		$where.=" AND (CAST(date_entered AS DATE) > '".$start_date."')";
-		}
-		else{
-		$where.=" (CAST(date_entered AS DATE) > '".$start_date."')";
-		}
+  		if($where!=''){
+  		$where.=" AND (CAST(l.date_entered AS DATE) > '".$start_date."')";
+  		}
+  		else{
+  		$where.=" (CAST(l.date_entered AS DATE) > '".$start_date."')";
+  		}
 		}
 		if(empty($start_date)&&!empty($end_date)){
-		if($where!=''){
-		$where.=" AND (CAST(date_entered AS DATE) < '".$end_date."')";
+  		if($where!=''){
+  		$where.=" AND (CAST(l.date_entered AS DATE) < '".$end_date."')";
+  		}
+  		else{
+  		$where.=" (CAST(l.date_entered AS DATE) < '".$end_date."')";
+  		}
 		}
-		else{
-		$where.=" (CAST(date_entered AS DATE) < '".$end_date."')";
-		}
+    if(!empty($batch)){
+      $batch_str=implode("','",$batch);
+  		$batch_str="'".$batch_str."'";
+  		if($where!=''){
+  		$where.=" AND (lc.te_ba_batch_id_c in (".$batch_str."))";
+  		}
+  		else{
+  		$where.=" (lc.te_ba_batch_id_c in (".$batch_str."))";
+  		}
 		}
 		if(!empty($Lead_status)){
-		$status_str=implode("','",$Lead_status);
-		$status_str="'".$status_str."'";
-		if($where!=''){
-		$where.=" AND (status in (".$status_str."))";
+  		$status_str=implode("','",$Lead_status);
+  		$status_str="'".$status_str."'";
+  		if($where!=''){
+  		$where.=" AND (l.status in (".$status_str."))";
+  		}
+  		else{
+  		$where.=" (l.status in (".$status_str."))";
+  		}
 		}
-		else{
-		$where.=" (status in (".$status_str."))";
+		if(!empty($counsellor)){
+  		$counsellor_str=implode("','",$counsellor);
+  		$counsellor_str="'".$counsellor_str."'";
+  		if($where!=''){
+  		$where.=" AND (l.assigned_user_id in (".$counsellor_str."))";
+  		}
+  		else{
+  		$where.=" (l.assigned_user_id in (".$counsellor_str."))";
+  		}
 		}
+
+    if(empty($counsellor) && !empty($counsellorArr)){
+		$counsellorArr_str=array_keys($counsellorArr);
+    $counsellorArr_str=implode("','",$counsellorArr_str);
+		$counsellorArr_str="'".$counsellorArr_str."'";
+  		if($where!=''){
+  		$where.=" AND (l.assigned_user_id in (".$counsellorArr_str."))";
+  		}
+  		else{
+  		$where.=" (l.assigned_user_id in (".$counsellorArr_str."))";
+  		}
 		}
+
+
+    if(empty($medium_val) && !empty($vendors) && $vendorArr){
+  		if($where!=''){
+  		$where.=" AND (l.vendor in ('".$vendorArr[$vendors]."'))";
+  		}
+  		else{
+  		$where.=" (l.vendor in ('".$vendorArr[$vendors]."'))";
+  		}
+		}
+    if(!empty($medium_val)){
+      $medium_str=implode("','",$medium_val);
+  		$medium_str="'".$medium_str."'";
+      $fetch_utm="SELECT GROUP_CONCAT(`name`)utm FROM `te_utm` WHERE `aos_contracts_id_c` IN ($medium_str) AND deleted=0";
+      $rowmedium =$db->query($fetch_utm);
+      $result_utm =$db->fetchByAssoc($rowmedium);
+      if(isset($result_utm['utm']) && !empty($result_utm['utm'])){
+        $utmArr= explode(',',$result_utm['utm']);
+        $utm_str=implode("','",$utmArr);
+    		$utm_str="'".$utm_str."'";
+        if($where!=''){
+    		    $where.=" AND (l.utm in (".$utm_str."))";
+    		}
+    		else{
+    		    $where.=" (l.utm in (".$utm_str."))";
+    		}
+      }
+
+		}
+
 		if(!empty($status_details)){
-		$status_str=implode("','",$status_details);
-		$status_str="'".$status_str."'";
-		if($where!=''){
-		$where.=" AND (status_description in (".$status_str."))";
+  		$status_details_str=implode("','",$status_details);
+  		$status_details_str="'".$status_details_str."'";
+  		if($where!=''){
+  		$where.=" AND (l.status_description in (".$status_details_str."))";
+  		}
+  		else{
+  		$where.=" (l.status_description in (".$status_details_str."))";
+  		}
 		}
-		else{
-		$where.=" (status_description in (".$status_str."))";
-		}
-		}
-		if(!empty($vendors)){
-		$status_str=implode("','",$vendors);
-		$status_str="'".$status_str."'";
-		if($where!=''){
-		$where.=" AND (vendor in (".$status_str."))";
-		}
-		else{
-		$where.=" (vendor in (".$status_str."))";
-		}
-		}
+
 		if(!empty($Lead_source)){
 		$source_str=implode("','",$Lead_source);
 		$source_str="'".$source_str."'";
-		if($where!=''){
-		$where.=" AND (lead_source in (".$source_str."))";
+  		if($where!=''){
+  		$where.=" AND (l.lead_source in (".$source_str."))";
+  		}
+  		else{
+  		$where.=" (l.lead_source in (".$source_str."))";
+  		}
 		}
-		else{
-		$where.=" (lead_source in (".$source_str."))";
-		}
-		}
+
 		if(!empty($number_lead)){
-		if($where!=''){
-		$where.=" AND (deleted=0) LIMIT 0,".$number_lead."";
+  		if($where!=''){
+  		$where.=" AND (l.deleted=0) LIMIT 0,".$number_lead."";
+  		}
+  		else{
+  		$where.=" (l.deleted=0) LIMIT 0,".$number_lead."";
+  		}
 		}
-		else{
-		$where.=" (deleted=0) LIMIT 0,".$number_lead."";
+		if(strpos($where, 'deleted') == false && $where!='') {
+		    $where.=" and l.deleted=0 limit 0,100";
 		}
-		}
-		if (strpos($where, 'deleted') == false&&$where!='') {
-		$where.=" and deleted=0 limit 0,100";
-		}	
-		$fetch="SELECT id,salutation,first_name,last_name,status,date_entered,lead_source FROM leads WHERE ".$where;
-		// echo $fetch;
-		 //$fetch= "SELECT salutation,id,first_name, last_name, status, date_entered, lead_source FROM leads WHERE date_entered BETWEEN '".$start_date."' AND '".$end_date."' AND status='".$Lead_tatus."'  LIMIT 0,".$number_lead."";
-		 //$row =$db->query($fetch); 
-		$row = $db->query($fetch);					
+    //echo $where;exit();
+		$fetch="SELECT l.id,l.salutation,l.first_name,l.last_name,l.status,l.date_entered,l.lead_source FROM leads AS l INNER JOIN leads_cstm AS lc on l.id=lc.id_c WHERE ".$where;
+		$row = $db->query($fetch);
 if($row->num_rows>0){
-		
 		 $lead_ids='';
 		 while($records =$db->fetchByAssoc($row))
-            {
-			$lead_ids[]=$records['id'];
-			$records_arr[]=$records;
-			}
-				    }
-                       else
-	                {	
+     {
+  			$lead_ids[]=$records['id'];
+  			$records_arr[]=$records;
+		 }
+}
+else
+{
 		  echo '<script>';
-		  echo "alert('Search Leads Not Found')";  
-		  echo '</script>'; 
-		  exit;
-					}
+		  echo "alert('Search Leads Not Found')";
+		  echo '</script>';
+		  //exit;
+}
 			$_SESSION['records_fetch']=$records_arr;
-            $_SESSION['leds_id']=$lead_ids;
-			
-			}
+      $_SESSION['leds_id']=$lead_ids;
+
+}
         //  $lead_ids = implode("__",$lead_ids);
- if(isset($_REQUEST['search_leads'])&& $_REQUEST['search_leads']==1){
+ if(isset($_REQUEST['search_leads'])&& $_REQUEST['search_leads']==1 && isset($_SESSION['leds_id']) && !empty($_SESSION['leds_id'])){
 	  	 echo '<table>';
 		 echo ' <tr>
                 <th>Name</th>
                 <th>Status</th>
                 <th>Date Entered</th>
-                <th>Lead Source</th>    
+                <th>Lead Source</th>
                 </tr>';
-			  
+
 		foreach($_SESSION['records_fetch'] as $key=>$value){
 			?>
 		  <tr>
@@ -251,12 +350,12 @@ if($row->num_rows>0){
 			<td><?php echo $_SESSION['records_fetch'][$key]['date_entered'];?></td>
 			<td><?php echo $_SESSION['records_fetch'][$key]['lead_source'];?></td>
 		</tr>
-    <?php 
+    <?php
 	}
 
-	echo '</table>';   
+	echo '</table>';
 if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
- 
+
   //form submit of checkbox
    if(isset($_REQUEST['transfer'])){
 	   extract($_POST);
@@ -266,8 +365,8 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 		 $num_leads=COUNT($_SESSION['leds_id']);
 		 if($num_users>$num_leads){
 		  echo '<script>';
-		  echo "alert('Number of Users Should be less than number of leads')";  
-		  echo '</script>';  
+		  echo "alert('Number of Users Should be less than number of leads')";
+		  echo '</script>';
         }
           else{
 						$tot_User=count($_POST['check_list']);
@@ -278,19 +377,13 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 
 						if($tot_User > $num_leads)
 					     {
-						 
+
 						    for($i=0;$i < $num_leads;$i++)
 						  	{
-							 // $update_Arr[]=array("$leads_ID"=>$leadArr[$i],"$User_ID"=>$user_list[$i]);
 						     $fetch3="update leads SET assigned_user_id='".$user_list[$i]."'where id='".$ledt[$i]."'";
-                               
-                              $row3 =$db->query($fetch3);
-							   
-							           // echo '<pre>';
-							            //print_r($update_Arr);
-							            //echo '</pre>'; 
+                 $row3 =$db->query($fetch3);
 						     }
-			 
+
 				          }
 						 if($num_leads==$tot_User){
 
@@ -299,34 +392,28 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 							{
 						       $fetch3="update leads SET assigned_user_id='".$_POST['check_list'][$i]."'where id='$leadval'";
 							   $row3 =$db->query($fetch3);
-							    
+
 								$i++;
-								
+
 							}
 								echo "<font color='green'>Transfer..Success</font>";
 											}
-	//if ($row3) {
-    //echo "<script type='text/javascript'>alert('submitted successfully!')</script>";
-//}
-							else
-							
-					 { // else start
+			else
+					 {
 								   $leads = $_SESSION['leds_id'];
 								   $users = $_POST['check_list'];
-								
 								   $max = count($leads);
-								   
-									// FOR COUNT LEADS & USER	   
+									// FOR COUNT LEADS & USER
 									 echo '<h3>'.'<b>'.'Selected User'.'&nbsp';
 									 print_r ($max1 = count($users));
 									 echo ' and Leads ';
 									 print_r($max = count($leads));
-									 
+
 									 echo "<font color='green'>Transfer..Success</font>";
 									 echo '</h3>'.'</b>';
-										// END	    
+										// END
 									$each = round($max/count($users));
-									$arrays = array_chunk($leads, $each);					
+									$arrays = array_chunk($leads, $each);
 									//echo $each;
 									//echo count($arrays);
 								//	echo "<pre>";
@@ -339,56 +426,35 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 										}
 										    foreach($arrays[$i] as $val){
 											$newArr[]=array('lead_id'=>$val,'user_id'=>$users[$j]);
-											
+
 										    $fetch4="update leads SET assigned_user_id='".$users[$j]."'where id='".$val."'";
 			                				$row4 =$db->query($fetch4);
-			                							                				
-										}
-										
-										$j++;
-									
-									}
-								//print_r($newArr);
-							 
-									//Loop to query newAr				 
-								 
-					} // else close
-					 
-  //code for ech
 
+										}
+
+										$j++;
+									}
+
+					}
 }
-			
+
 	 }
   }
   ?>
   <?php
-  
+
 	echo '<form action="index.php?module=Leads&action=lead_transfer&search_leads=1&transfer_leads=1" name="transfer" method="post" id="trnsfer">';
 	echo '<br/><br/><h1>Transfer Leads</h1><br/>';
-	//  $fetch1="SELECT name,id FROM acl_roles where deleted=0 and id='270ce9dd-7f7d-a7bf-f758-582aeb4f2a45'";
-      //$row1 =$db->query($fetch1); ?>
-    
-		<!--	   <tr>
-			   <td><b>User Type</b></td>
-			   <td><select name="user" id="user_type" onChange="this.form.submit()">
-			     <option >Select User</option>
-	
-					<?php /*while($records1 =$db->fetchByAssoc($row1))
-							{ 
-						$id=$records1['id']; */?>
- 
-				<option  value="<?php //echo $id ?>"><?php //echo $records1['name'];?></option>
-						<?php //} ?>
-				</select>
-				  </td></tr></table><br><br>
-				 -->
-				  <h1>Select Users For Transfer Leads</h1> 
+	 ?>
+
+
+				  <h1>Select Users For Transfer Leads</h1>
 				<?php $fetch2 = "SELECT acl_roles.id, acl_roles_users.user_id, users.id, users.user_name FROM acl_roles JOIN acl_roles_users ON acl_roles.id = acl_roles_users.role_id JOIN users ON  acl_roles_users.user_id = users.id WHERE acl_roles.id = '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45' ";
 
-                      $row2 =$db->query($fetch2); 
+                      $row2 =$db->query($fetch2);
 
                 while($records2 =$db->fetchByAssoc($row2))
-					{ 	 	 
+					{
 					  ?>
 					  <input type="checkbox" name='check_list[]' value="<?php echo $records2['id']?>" ><?php echo $records2['user_name']?> <br>
 			  <?php } ?>
@@ -397,9 +463,31 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 					  <input type="submit" name="transfer" value="Transfer" id="transfer">
 			   </div>
              </form>
+             <?php }
+
+             ?>
   </body>
        </html>
-<?php
-}
 
-?>
+<script>
+$(function(){
+	$("#vendors").change(function(){
+		$("#medium_val").html('');
+		if($(this).val()!=''){
+			$.ajax({url: "index.php?entryPoint=budgtedvsactual&vendors="+$(this).val()+"", success: function(result){
+				var result = JSON.parse(result);
+				if(result.status=='ok'){
+				var medium='';
+				 for(var i=0;i<result.res.length;i++){
+						var id = result.res[i].id;
+						var name = result.res[i].name;
+						medium+='<option value="'+id+'">'+name+'</option>'
+				 }
+				 $("#medium_val").html(medium);
+				}
+			}});
+		}
+	});
+});
+
+</script>
