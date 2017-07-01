@@ -74,14 +74,14 @@ class AOR_ReportsViewPipelinereport extends SugarView {
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccp_to_date'])));
 				$where.=" AND DATE(date_entered)>='".$from_date."' AND DATE(date_entered)<='".$to_date."'";
 				$wheregsv.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
+			}elseif($_SESSION['ccp_from_date']!="" && $_SESSION['ccp_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccp_from_date'])));
 				$where.=" AND DATE(date_entered)>='".$from_date."' ";
 				$wheregsv.=" AND DATE(l.date_entered)>='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
+			}elseif($_SESSION['ccp_from_date']=="" && $_SESSION['ccp_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccp_to_date'])));
-				$where.=" AND DATE(date_modified)<='".$to_date."' ";
-				$wheregsv.=" AND DATE(l.date_modified)<='".$to_date."' ";
+				$where.=" AND DATE(date_entered)<='".$to_date."' ";
+				$wheregsv.=" AND DATE(l.date_entered)<='".$to_date."' ";
 			}
 			$leadSql="SELECT count(assigned_user_id) as warm,assigned_user_id FROM leads  where status='Warm' AND assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY assigned_user_id";
 
@@ -107,14 +107,14 @@ class AOR_ReportsViewPipelinereport extends SugarView {
 			$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccp_to_date'])));
 			$where.=" AND DATE(date_entered)>='".$from_date."' AND DATE(date_entered)<='".$to_date."'";
 			$wheregsv.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
-		}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
+		}elseif($_SESSION['ccp_from_date']!="" && $_SESSION['ccp_to_date']==""){
 			$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccp_from_date'])));
 			$where.=" AND DATE(date_entered)>='".$from_date."' ";
 			$wheregsv.=" AND DATE(l.date_entered)>='".$from_date."' ";
-		}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
+		}elseif($_SESSION['ccp_from_date']=="" && $_SESSION['ccp_to_date']!=""){
 			$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccp_to_date'])));
-			$where.=" AND DATE(date_modified)<='".$to_date."' ";
-			$wheregsv.=" AND DATE(l.date_modified)<='".$to_date."' ";
+			$where.=" AND DATE(date_entered)<='".$to_date."' ";
+			$wheregsv.=" AND DATE(l.date_entered)<='".$to_date."' ";
 		}
 
 

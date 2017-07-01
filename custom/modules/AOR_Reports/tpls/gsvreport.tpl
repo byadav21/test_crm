@@ -27,9 +27,9 @@
 			<td nowrap="nowrap" width="10%">
 				<select name="counsellor[]" id="counsellor"  class="multiselbox" multiple>
 					<option  value=""></option>
-				{foreach from = $councelorList key=key item=councelor}
+				{foreach from = $councelorArr key=key item=councelor}
 
-						<option value="{$key}" {if in_array($councelor.id,$selected_counsellor) } selected="selected" {/if}>{$councelor.name}</option>
+						<option value="{$key}" {if in_array($key,$selected_counsellor) } selected="selected" {/if}>{$councelor}</option>
 					{/foreach}
 				</select>
 			</td>
@@ -55,27 +55,27 @@
 							<table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
 								<tbody><tr>
 									<td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
-									
+
 									<td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
-										
+
 										{if $left eq 1}
 											<a href="index.php?module=AOR_Reports&action=gsvreport"  name="listViewStartButton" title="Start" class="button" >
 											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
 											</a>
-										
+
 											<a href="index.php?module=AOR_Reports&action=gsvreport&page={$page}"  class="button" title="Previous">
 											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
-											</a>						
+											</a>
 										{else}
 											<button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
 											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
 											</button>
-										
+
 											<button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
 											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
 											</button>
 										{/if}
-										
+
 									</td>
 									<td nowrap="nowrap" width="1%" class="paginationActionButtons">
 										<div class="pageNumbers">{$current_records}</div>
@@ -96,8 +96,8 @@
 											<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
 											</button>
 										{/if}
-										
-									
+
+
 									</td>
 									<td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
 								</tr>
@@ -134,7 +134,7 @@
 {literal}
 Calendar.setup ({
    inputField : "from_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "from_date_trigger",
    singleClick : true,
    dateStr : "",
@@ -147,7 +147,7 @@ Calendar.setup ({
 {literal}
 Calendar.setup ({
    inputField : "to_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
+   daFormat : "%d-%m-%Y %I:%M%P",
    button : "to_date_trigger",
    singleClick : true,
    dateStr : "",
