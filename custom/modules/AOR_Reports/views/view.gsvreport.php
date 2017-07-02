@@ -97,15 +97,15 @@ class AOR_ReportsViewGsvreport extends SugarView {
 			if($_SESSION['ccgsv_from_date']!="" && $_SESSION['ccgsv_to_date']!=""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccgsv_from_date'])));
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccgsv_to_date'])));
-				$where.=" AND DATE(converted_date)>='".$from_date."' AND DATE(converted_date)<='".$to_date."'";
+				$where.=" AND DATE(l.converted_date)>='".$from_date."' AND DATE(l.converted_date)<='".$to_date."'";
 				$wheregsv.=" AND DATE(l.converted_date)>='".$from_date."' AND DATE(l.converted_date)<='".$to_date."'";
 			}elseif($_SESSION['ccgsv_from_date']!="" && $_SESSION['ccgsv_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccgsv_from_date'])));
-				$where.=" AND DATE(converted_date)>='".$from_date."' ";
+				$where.=" AND DATE(l.converted_date)>='".$from_date."' ";
 				$wheregsv.=" AND DATE(l.converted_date)>='".$from_date."' ";
 			}elseif($_SESSION['ccgsv_from_date']=="" && $_SESSION['ccgsv_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['ccgsv_to_date'])));
-				$where.=" AND DATE(converted_date)<='".$to_date."' ";
+				$where.=" AND DATE(l.converted_date)<='".$to_date."' ";
 				$wheregsv.=" AND DATE(l.converted_date)<='".$to_date."' ";
 			}
 			if(!empty($_SESSION['ccgsv_counsellor'])){
@@ -119,20 +119,8 @@ class AOR_ReportsViewGsvreport extends SugarView {
 			$from_date="";
 			$to_date="";
 			$filename = $file . "_" . date ( "Y-m-d");
-			/*if($_POST['from_date']!=""&&$_POST['to_date']){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
-				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
-			}elseif($_POST['from_date']!=""&&$_POST['to_date']==""){
-				$from_date=$GLOBALS['timedate']->to_db_date($_POST['from_date'],false);
-				$where.=" AND DATE(date_modified)='".$from_date."' ";
-			}elseif($_POST['from_date']==""&&$_POST['to_date']!=""){
-				$to_date=$GLOBALS['timedate']->to_db_date($_POST['to_date'],false);
-				$where.=" AND DATE(date_modified)='".$to_date."' ";
-			}*/
 
-
-			$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
+			$leadSql="SELECT count(l.id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
 
 			$leadObj =$db->query($leadSql);
 			$councelorList=array();
@@ -163,7 +151,7 @@ class AOR_ReportsViewGsvreport extends SugarView {
 			echo $data; exit;
 		}
 
-		$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
+		$leadSql="SELECT count(l.id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND  l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status";
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();
 		while($row =$db->fetchByAssoc($leadObj)){

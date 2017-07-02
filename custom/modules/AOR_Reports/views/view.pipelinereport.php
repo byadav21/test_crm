@@ -83,7 +83,7 @@ class AOR_ReportsViewPipelinereport extends SugarView {
 				$where.=" AND DATE(date_entered)<='".$to_date."' ";
 				$wheregsv.=" AND DATE(l.date_entered)<='".$to_date."' ";
 			}
-			$leadSql="SELECT count(assigned_user_id) as warm,assigned_user_id FROM leads  where status='Warm' AND assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY assigned_user_id";
+			$leadSql="SELECT count(id) as warm,assigned_user_id FROM leads  where status='Warm' AND assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY assigned_user_id";
 
 			$leadObj =$db->query($leadSql);
 			$councelorList=array();
@@ -118,7 +118,7 @@ class AOR_ReportsViewPipelinereport extends SugarView {
 		}
 
 
-		$leadSql="SELECT count(assigned_user_id) as warm,assigned_user_id FROM leads  where status='Warm' AND assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY assigned_user_id";
+		$leadSql="SELECT count(id) as warm,assigned_user_id FROM leads  where status='Warm' AND assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY assigned_user_id";
 
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();
