@@ -30,6 +30,16 @@ function getBatch(){
   }
   return $batchOptions;
 }
+function getUtmByContractIDs($vAndCtVendorArr,$vAndCtArr){
+  global $db;
+  $batchSql="SELECT u.name from te_utm AS u INNER JOIN te_vendor_te_utm_1_c AS uv on uv.te_vendor_te_utm_1te_utm_idb=u.id WHERE u.deleted=0 AND uv.te_vendor_te_utm_1te_vendor_ida IN('".implode("','",$vAndCtVendorArr)."') AND u.contract_type IN('".implode("','",$vAndCtArr)."')";
+  $batchObj =$db->query($batchSql);
+  $batchOptions=array();
+  while($row =$db->fetchByAssoc($batchObj)){
+    $batchOptions[]=$row['name'];
+  }
+  return $batchOptions;
+}
 ?>
 <html>
     <title>Bulk Lead transfer</title>
@@ -257,7 +267,20 @@ unset($_SESSION['records_fetch']);
   		}
 		}
     if(!empty($medium_val)){
-      $medium_str=implode("','",$medium_val);
+      $vAndCtVendorArr=[];
+      $vAndCtArr=[];
+      foreach($medium_val as $val){
+        $valVandCT = explode('_TE_',$val);
+        if(count($valVandCT)>1){
+          $vAndCtVendorArr[]=$valVandCT[0];
+          $vAndCtArr[]=$valVandCT[1];
+        }
+      }
+      $utm_names=getUtmByContractIDs($vAndCtVendorArr,$vAndCtArr);
+      if($utm_names){
+        $where.=" AND l.utm IN('".implode("','",$utm_names)."') ";
+      }
+      /*$medium_str=implode("','",$medium_val);
   		$medium_str="'".$medium_str."'";
       $fetch_utm="SELECT GROUP_CONCAT(`name`)utm FROM `te_utm` WHERE `aos_contracts_id_c` IN ($medium_str) AND deleted=0";
       $rowmedium =$db->query($fetch_utm);
@@ -272,7 +295,7 @@ unset($_SESSION['records_fetch']);
     		else{
     		    $where.=" (l.utm in (".$utm_str."))";
     		}
-      }
+      }*/
 
 		}
 
