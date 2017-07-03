@@ -1,5 +1,6 @@
 <?php
-// created: 2017-06-29 16:53:18
+
+
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Payment Details',
   'LBL_COMPANY' => 'Company',
@@ -32,4 +33,5 @@ $mod_strings = array (
   'COMMENT' => 'Comment',
   'LBL_TEMP_LEAD_DATE' => 'Date of Enquiry',
   'LBL_ATTEMPTS' => 'No Answer Attempts',
+  'LBL_COUNTRY_LOG' => 'Country',
 );

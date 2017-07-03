@@ -6,7 +6,7 @@ $hook_array = Array();
 // position, file, function 
 $hook_array['before_save'] = Array(); 
 $hook_array['before_save'][] = Array(1, 'duplicatevalidation', 'custom/modules/Leads/addPayment.php','addPaymentClass', 'checkduplicate'); 
-$hook_array['before_save'][] = Array(1, 'validation', 'custom/modules/Leads/addPayment.php','addPaymentClass', 'checkAmyoFunc'); 
+//$hook_array['before_save'][] = Array(1, 'validation', 'custom/modules/Leads/addPayment.php','addPaymentClass', 'checkAmyoFunc'); 
 $hook_array['before_save'][] = Array(2, 'Leads push feed', 'modules/Leads/SugarFeeds/LeadFeed.php','LeadFeed', 'pushFeed'); 
 $hook_array['before_save'][] = Array(77, 'updateGeocodeInfo', 'modules/Leads/LeadsJjwg_MapsLogicHook.php','LeadsJjwg_MapsLogicHook', 'updateGeocodeInfo'); 
 $hook_array['before_save'][] = Array(2, 'Leads push feed','custom/modules/Leads/addPayment.php','addPaymentClass', 'checkDuplicateFunc'); 
