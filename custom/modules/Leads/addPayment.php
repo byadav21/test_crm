@@ -666,8 +666,8 @@ class addPaymentClass
                 $_SESSION['dupCheck']     = intval($_SESSION['dupCheck']) + 1;
                 //$data=$GLOBALS['db']->fetchByAssoc($re);
                 $bean->assigned_user_id   = $beanData->assigned_user_id;
-                $bean->assigned_date=date('Y-m-d H:i:s');
-				$bean->converted_date=date('Y-m-d');
+                if($beanData->assigned_user_id) $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+				//$bean->converted_date=date('Y-m-d');
             }
             else
             {
@@ -675,13 +675,15 @@ class addPaymentClass
                 {
                     $bean->assigned_user_id = NULL;
                 }else{
-					$bean->assigned_date=date('Y-m-d H:i:s');
-					$bean->converted_date=date('Y-m-d');
+					$bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
+					 
 				}
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
             $bean->vendor           = $bean->utm_source_c;   // $vendor_id['id'];
             $bean->te_ba_batch_id_c = $batch_id['id'];
+            
+            if($bean->status == 'Converted')  $bean->converted_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
             
         }
         else
@@ -725,13 +727,13 @@ class addPaymentClass
                     $bean->duplicate_check    = '1';
                     $data                     = $GLOBALS['db']->fetchByAssoc($re);
                     $bean->assigned_user_id   = $data['assigned_user_id'];
-                    $bean->assigned_date=date('Y-m-d H:i:s');
-					$bean->converted_date=date('Y-m-d');
+                    $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+					//$bean->converted_date=date('Y-m-d');
                     
                 }
                 
-                $bean->assigned_date=date('Y-m-d H:i:s');
-				$bean->converted_date=date('Y-m-d');
+                $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+				//$bean->converted_date=date('Y-m-d');
             }
         }
         # 	>>>>----------------web Services ----------------------------<<<<<<
