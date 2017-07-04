@@ -1,27 +1,3 @@
-{literal}
-<script>
-$(function(){
-	$("#status").change(function(){
-		if($(this).val()!=''){
-			SUGAR.ajaxUI.showLoadingPanel();
-			$.ajax({url: "index.php?entryPoint=getbatchbyleadstatus&status="+$(this).val()+"", success: function(result){
-				var result = JSON.parse(result);
-				SUGAR.ajaxUI.hideLoadingPanel();
-				if(result.status=='ok'){
-				var utm='';
-				 for(var i=0;i<result.res.length;i++){
-						var id = result.res[i].id;
-						var name = result.res[i].name;
-						utm+='<option value="'+id+'">'+name+'</option>'
-				 }
-				 $("#batch").html(utm);
-				}
-			}});
-		}
-	});
-});
-</script>
-{/literal}
 <section class="moduleTitle"> <h2>Conversion Report</h2><br/><br/>
 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=conversionreport">
 <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
@@ -50,26 +26,74 @@ $(function(){
 				<label for="batch_basic">Batch</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
-				<select name="batch[]" id="batch"  class="multiselbox" multiple>
-					<option  value=""></option>
+				<select name="batch[]" id="batch"  class="multiselbox_batch" multiple style="width:235px !important;">
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}"{if in_array($batch.id, $selected_batch)} selected="selected"{/if}>{$batch.name}</option>
+						<option value="{$batch.id}"{if in_array($batch.id, $selected_batch)} selected="selected"{/if} data-status="{$batch.status_filter}">{$batch.name}</option>
 					{/foreach}
 				</select>
 			</td>
 
-			<td class="sumbitButtons">
-				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
-				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-	        </td>
-			<td nowrap="nowrap" width="10%">&nbsp;</td>
-			<td class="helpIcon" width="*"><img alt="Help" border="0" id="filterHelp" src="themes/SuiteR/images/help-dashlet.png?v=mjry3sKU3KG11ojfGn-sdg"></td>
-		</tr>
-		<tr>
-			<td scope="row" nowrap="nowrap" width="1%">
-				<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
+      <td scope="row" nowrap="nowrap" width="1%">
+				<label for="batch_basic">From Date</label>
 			</td>
-		</tr>
+			<td nowrap="nowrap" width="10%">
+				<input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
+				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
+			</td>
+			<td scope="row" nowrap="nowrap" width="1%">
+				<label for="batch_basic">To Date</label>
+			</td>
+			<td nowrap="nowrap" width="10%">
+				<input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
+				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
+			</td>
+      <tr>
+        <td scope="row" nowrap="nowrap" width="1%">
+  				<label for="batch_basic">Counsellors</label>
+  			</td>
+  			<td nowrap="nowrap" width="10%">
+  				<select name="counsellor[]" id="counsellor"  class="multiselbox" multiple>
+  				{foreach from = $councelorArr key=key item=councelor}
+
+  						<option value="{$key}" {if in_array($key,$selected_counsellor) } selected="selected" {/if}>{$councelor}</option>
+  					{/foreach}
+  				</select>
+  			</td>
+        {if $is_admin==1 }
+          <td scope="row" nowrap="nowrap" width="1%">
+    				<label for="batch_basic">Vendor</label>
+    			</td>
+    			<td nowrap="nowrap" width="10%">
+    				<select name="vendors" id="vendors">
+    					<option  value="">--Select Vendor--</option>
+    				{foreach from = $vendorList key=key item=vendors}
+
+    						<option value="{$vendors.id}" {if $vendors.id==$selected_vendor } selected="selected" {/if}>{$vendors.name}</option>
+    					{/foreach}
+    				</select>
+    			</td>
+
+          <td scope="row" nowrap="nowrap" width="1%">
+    				<label for="batch_basic">Mediums</label>
+    			</td>
+    			<td nowrap="nowrap" width="10%">
+    				<select name="medium_val[]" multiple id="medium_val">
+    				      {foreach from = $contractList key=key item=contracts}
+                  {capture assign=cv}{$contracts.vendorid}_TE_{$contracts.contract_type}{/capture}
+    						<option value="{$cv}" data-vendor='{$contracts.vendorid}' {if in_array($cv,$selected_medium_val) } selected="selected" {/if} >{$contracts.vendor} - {$contracts.contract_type}</option>
+    					{/foreach}
+            </select>
+    			</td>
+        {/if}
+      <tr>
+        <td class="sumbitButtons" colspan="3">
+  				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
+  				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
+          <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
+  	    </td>
+      </tr>
+
+
 		</tbody>
 	</table>
 </div>
@@ -82,27 +106,27 @@ $(function(){
 							<table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
 								<tbody><tr>
 									<td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
-									
+
 									<td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
-										
+
 										{if $left eq 1}
 											<a href="index.php?module=AOR_Reports&action=conversionreport"  name="listViewStartButton" title="Start" class="button" >
 											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
 											</a>
-										
+
 											<a href="index.php?module=AOR_Reports&action=conversionreport&page={$page}"  class="button" title="Previous">
 											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
-											</a>						
+											</a>
 										{else}
 											<button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
 											<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
 											</button>
-										
+
 											<button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
 											<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
 											</button>
 										{/if}
-										
+
 									</td>
 									<td nowrap="nowrap" width="1%" class="paginationActionButtons">
 										<div class="pageNumbers">{$current_records}</div>
@@ -123,8 +147,8 @@ $(function(){
 											<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
 											</button>
 										{/if}
-										
-									
+
+
 									</td>
 									<td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
 								</tr>
@@ -138,7 +162,7 @@ $(function(){
 			<strong>Counsellors</strong>
 		</th>
 		{foreach from = $programList key=key item=program}
-			<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
 				<strong>{$program}</strong>
 			</th>
 		{/foreach}
@@ -147,8 +171,70 @@ $(function(){
 		<tr height="20" class="oddListRowS1">
 		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
 		   {foreach from = $programList key=key item=program}
-				<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.$key}</td>
+
+  				<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong>Total</strong> {$councelor.$key.total}</td>
+
+          <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong>Converted</strong> {$councelor.$key.converted}</td>
 		   {/foreach}
 		</tr>
 	{/foreach}
 </table>
+{literal}
+<script>
+  Calendar.setup ({
+     inputField : "from_date",
+     daFormat : "%d-%m-%Y %I:%M%P",
+     button : "from_date_trigger",
+     singleClick : true,
+     dateStr : "",
+     step : 1,
+     weekNumbers:false,
+  });
+  Calendar.setup ({
+     inputField : "to_date",
+     daFormat : "%d-%m-%Y %I:%M%P",
+     button : "to_date_trigger",
+     singleClick : true,
+     dateStr : "",
+     step : 1,
+     weekNumbers:false,
+  });
+$(document).ready(function() {
+  //$('.multiselbox_batch').multiselect();
+});
+$(document).ready(function() {
+  $('#medium_val').multiselect();
+});
+$(function(){
+  var status = $('#status').val();
+  $("#batch option[data-status!='" + status +"']").hide();
+  $("#status").change(function(){
+    var changedStatus = $(this).val();
+    $("#batch option[data-status!='" + changedStatus +"']").hide();
+    $("#batch option[data-status='" + changedStatus +"']").show();
+  });
+});
+/*$(function(){
+	$("#status").change(function(){
+		if($(this).val()!=''){
+			SUGAR.ajaxUI.showLoadingPanel();
+			$.ajax({url: "index.php?entryPoint=getbatchbyleadstatus&status="+$(this).val()+"", success: function(result){
+				var result = JSON.parse(result);
+				SUGAR.ajaxUI.hideLoadingPanel();
+				if(result.status=='ok'){
+				var utm='';
+				 for(var i=0;i<result.res.length;i++){
+						var id = result.res[i].id;
+						var name = result.res[i].name;
+						utm+='<option value="'+id+'">'+name+'</option>'
+				 }
+				 $("#batch").html(utm);
+				 //$("#batch").multiselect('destroy');
+         //$('.multiselbox_batch').multiselect();
+				}
+			}});
+		}
+	});
+});*/
+</script>
+{/literal}

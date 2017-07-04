@@ -276,6 +276,8 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'Offline_Chat' => 'Offline Chat',
   'SPJ_Referrals' => 'SPJ Referrals',
   'Mica_Referrals' => 'Mica Referrals',
+'Raymonds'=>'Raymonds'
+
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';
