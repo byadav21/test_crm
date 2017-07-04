@@ -12,7 +12,7 @@ $studentSql="SELECT m.id migration_id,m.email, m.name,m.batch_code,m.mobile,m.cu
                 INNER JOIN email_addr_bean_rel er ON  e.id=er.email_address_id AND bean_module='Leads'
                 INNER JOIN leads l  ON er.bean_id=l.id
                 INNER JOIN leads_cstm ON leads_cstm.id_c=l.id
-                INNER JOIN te_ba_batch bb ON leads_cstm.`te_ba_batch_id_c`=bb.id where m.is_completed=0 and m.id=1015 limit 0,1";
+                INNER JOIN te_ba_batch bb ON leads_cstm.`te_ba_batch_id_c`=bb.id limit 0,50";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
@@ -22,6 +22,9 @@ if($studentDetails){
   foreach ($studentDetails as $key => $value) {
    $lead_detail = __get_lead_details(trim($value['email']),trim($value['mobile']),trim($value['batch_id']));
    
+   echo '<pre>';
+   print_r($lead_detail);   
+   //die();
    
     if($lead_detail){
 
@@ -37,28 +40,22 @@ if($studentDetails){
         else{
           $lead_detail['student_country']=$lead_detail['primary_address_country'];
         }
-       
-        //echo "----";
+        /*echo "<pre>";
+        print_r($lead_detail);
+        echo "----";*/
         $student_detail = __get_student_id($lead_detail);
         if($student_detail){
-         
+
           $student_batch_detail = __get_student_batch_id($student_detail);
-           
-        
-        
           if($student_batch_detail){
             $migrate_payment_Data=__get_migrate_student_payment($student_detail);
-            echo "migrate_payment_Data<pre>";     print_r($migrate_payment_Data); 
             if($migrate_payment_Data){
-                
               $amt_arr=[];
               $payment = '';
               foreach ($migrate_payment_Data as $key => $migratevalue) {
-                  
                 if($migratevalue['payment_mode']=='Online'){
                   $amt_arr[]=$migratevalue['payment_tax'];
                   $payment_val = $migratevalue['payment_tax'];
-                  
                 }
                 else{
                   if($migratevalue['payment_realised']=='yes'){
@@ -66,9 +63,7 @@ if($studentDetails){
                     $payment_val = $migratevalue['payment_tax'];
                   }
                 }
-                //echo $payment_val; die;
                 if($payment_val){
-                    
                   #update new student payment history
                   $id=create_guid();
                   $payment = new te_payment_details();
@@ -100,7 +95,7 @@ if($studentDetails){
                   #Update relationship record of student payment history
                   $insertRelSql="INSERT INTO te_student_te_student_payment_1_c SET id='".create_guid()."', 	date_modified='".date('Y-m-d H:i:s')."',deleted=0,te_student_te_student_payment_1te_student_ida='".$student_id."', te_student_te_student_payment_1te_student_payment_idb='".$id."'";
                   $GLOBALS['db']->Query($insertRelSql);
-                    
+
                   $update_migrate_paymentSql="UPDATE te_migrate_student_payments SET is_completed=1 WHERE id='".$migratevalue['id']."'";
                   $GLOBALS['db']->Query($update_migrate_paymentSql);
                 }
@@ -109,20 +104,18 @@ if($studentDetails){
               #update Student PaymentPlan
               if($total_amt>0){
                 updateStudentPaymentPlan($student_batch_detail['te_ba_batch_id_c'],$student_detail['id'],$total_amt,$student_detail['country']);
-                
+                //echo $total_amt.'<br>';
               }
 
 
             }
             $update_migrate_studentSql="UPDATE te_migrate_student SET is_completed=1 WHERE id='".$student_detail['migration_id']."'";
             $GLOBALS['db']->Query($update_migrate_studentSql);
-            echo "<pre>student_detail";
-            print_r($student_detail);
-            echo 'student_batch_detail';
-            print_r($student_batch_detail);
-            echo 'migrate_payment_Data';
-            print_r($migrate_payment_Data);
-            echo create_guid();
+            //echo "<pre>";
+            //print_r($student_detail);
+            //print_r($student_batch_detail);
+            //print_r($migrate_payment_Data);
+            //echo create_guid();
           }
 
         }
@@ -132,9 +125,7 @@ if($studentDetails){
 }
 
 function __get_migrate_student_payment($student_arr=array()){
-    $migrate_student_paymentsql = "SELECT * FROM `te_migrate_student_payments` WHERE student_id=".$student_arr['migration_id']." AND is_completed=0 "
-          //. "AND `payment_tax`>0 "
-          . "ORDER BY payment_date ASC";
+  $migrate_student_paymentsql = "SELECT * FROM `te_migrate_student_payments` WHERE student_id=".$student_arr['migration_id']." AND is_completed=0 AND `payment_tax`>0 ORDER BY payment_date ASC";
   $migrate_student_payment_Obj= $GLOBALS['db']->query($migrate_student_paymentsql);
   while($row=$GLOBALS['db']->fetchByAssoc($migrate_student_payment_Obj)){
     $migrate_student_payment[]=$row;
@@ -288,12 +279,10 @@ function getSrmUser($batch_id){
 
 #update student payment plan
 function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country){
-   
 	#Service Tax deduction
 	global $sugar_config;
 	#for Indian student only need to calculate service tax
 	if($student_country=="" || strtolower($student_country)=="india"){
-                //echo 'india';die;
 		$paymentPlanSql="SELECT s.name,s.id,s.te_student_id_c,s.due_amount_inr,s.paid_amount_inr,s.paid,s.due_date FROM te_student_batch sb INNER JOIN te_student_batch_te_student_payment_plan_1_c rel ON sb.id=rel.te_student_batch_te_student_payment_plan_1te_student_batch_ida INNER JOIN `te_student_payment_plan` s ON s.id=rel.te_student9d1ant_plan_idb WHERE s.deleted=0 AND s.te_student_id_c='".$student_id."' AND sb.te_ba_batch_id_c='".$batch_id."' ORDER BY s.due_date";
 		$paymentPlanObj = $GLOBALS['db']->Query($paymentPlanSql);
 		$tempAmt=0;
