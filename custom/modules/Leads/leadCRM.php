@@ -87,7 +87,7 @@ try{
 			if($callType=='outbound.auto.dial' || $callType=='outbound.callback.dial'){		
 
 				if(empty($records['assigned_user_id']) ||  $records['assigned_user_id']==NULL ||  $records['assigned_user_id']=='NULL'){
-					$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+					$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."',assigned_date='". date('Y-m-d H:i:s') ."'  where id='". $records['id'] ."'");	
 					
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 					 
@@ -96,7 +96,9 @@ try{
 					header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);exit();
 				}else{
 					
-					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+					 
+					
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."'    where id='". $records['id'] ."'");	 
 					
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 					
@@ -108,7 +110,7 @@ try{
 				
 				 
                 if(empty($records['assigned_user_id']) ||  $records['assigned_user_id']==NULL ||  $records['assigned_user_id']=='NULL'){					
-					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] .",assigned_date='". date('Y-m-d H:i:s') ."'    where id='". $records['id'] ."'");		
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 					include_once("custom/modules/Leads/overview.php");
 					$api=new te_Api_override();
@@ -150,7 +152,7 @@ try{
 					 
 				}else{
 					
-					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."'   where id='". $records['id'] ."'");	
 					
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 					
@@ -164,7 +166,7 @@ try{
 				
 				 
                if(empty($records['assigned_user_id']) ||  $records['assigned_user_id']==NULL ||  $records['assigned_user_id']=='NULL'){					
-					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");		
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] .", assigned_date='". date('Y-m-d H:i:s') ."'   where id='". $records['id'] ."'");		
 					
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 				 
@@ -175,7 +177,7 @@ try{
 					 
 				}else{
 					
-					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."' where id='". $records['id'] ."'");	
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."'   where id='". $records['id'] ."'");	
 					
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 					

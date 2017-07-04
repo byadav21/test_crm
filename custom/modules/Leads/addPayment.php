@@ -666,70 +666,25 @@ class addPaymentClass
                 $_SESSION['dupCheck']     = intval($_SESSION['dupCheck']) + 1;
                 //$data=$GLOBALS['db']->fetchByAssoc($re);
                 $bean->assigned_user_id   = $beanData->assigned_user_id;
+                if($beanData->assigned_user_id) $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+				//$bean->converted_date=date('Y-m-d');
             }
             else
             {
                 if ($bean->autoassign == 'Yes')
                 {
                     $bean->assigned_user_id = NULL;
-                }
+                }else{
+					$bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
+					 
+				}
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
             $bean->vendor           = $bean->utm_source_c;   // $vendor_id['id'];
             $bean->te_ba_batch_id_c = $batch_id['id'];
-            /* ini_set("display_errors",0);
-              error_reporting(0);
-              // Capture the date of referral creation
-              if(isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']) ){
-              $bean->date_of_referral = date('Y-m-d');
-              }
-
-              if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){
-              #update fee & attendance
-              $utmSql="SELECT  u.name as utm,u.te_ba_batch_id_c as batch, v.name as vendor from  te_utm u INNER JOIN te_vendor_te_utm_1_c uvr ON u.id=uvr.te_vendor_te_utm_1te_utm_idb INNER JOIN te_vendor v ON uvr.te_vendor_te_utm_1te_vendor_ida=v.id WHERE uvr.deleted=0 AND u.deleted=0 AND u.name='".$bean->utm."'";
-              $utmObj = $bean->db->Query($utmSql);
-              $utmDetails = $GLOBALS['db']->fetchByAssoc($utmObj);
-              //if(!isset($utmDetails['batch'] || !$utmDetails['batch'] ))  $utmDetails['batch']=$bean->batch;
-              #check duplicate leads
-              $sql = "SELECT leads.id as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
-              if($bean->email1!=""){
-              $sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
-              $sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-              }
-              $sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$utmDetails['batch']."' and status_description!='Duplicate' and  leads.deleted=0";// AND DATE(date_entered) = '".date('Y-m-d')."'";
-              if($bean->phone_mobile && $bean->email1){
-
-              $sql.=" and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
-
-              }elseif(!$bean->phone_mobile && $bean->email1){
-
-              $sql.=" and email_addresses.email_address = '{$bean->email1}'";
-
-              }elseif($bean->phone_mobile && !$bean->email1){
-              $sql.=" and leads.phone_mobile = '{$bean->phone_mobile}'";
-              }
-              $bean->upload_status=1;
-
-              //echo $sql;die;
-              $re = $GLOBALS['db']->query($sql);
-              if($GLOBALS['db']->getRowCount($re)>0){
-              $beanData=$GLOBALS['db']->fetchByAssoc($re);
-              $bean->status = 'Duplicate';
-              $bean->status_description = 'Duplicate';
-              $bean->duplicate_check = '1';
-              $bean->upload_status=-1;
-              $_SESSION['dupCheck']= intval($_SESSION['dupCheck']) +1;
-              //$data=$GLOBALS['db']->fetchByAssoc($re);
-              $bean->assigned_user_id = $beanData->assigned_user_id;
-              }else{
-              if($bean->autoassign=='Yes'){
-              $bean->assigned_user_id = NULL;
-              }
-              $_SESSION['aliveCheck']= intval($_SESSION['aliveCheck']) +1;
-              }
-              $bean->vendor = $utmDetails['vendor'];
-              $bean->te_ba_batch_id_c = $utmDetails['batch'];
-             */
+            
+            if($bean->status == 'Converted')  $bean->converted_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
+            
         }
         else
         {
@@ -772,7 +727,13 @@ class addPaymentClass
                     $bean->duplicate_check    = '1';
                     $data                     = $GLOBALS['db']->fetchByAssoc($re);
                     $bean->assigned_user_id   = $data['assigned_user_id'];
+                    $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+					//$bean->converted_date=date('Y-m-d');
+                    
                 }
+                
+                $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+				//$bean->converted_date=date('Y-m-d');
             }
         }
         # 	>>>>----------------web Services ----------------------------<<<<<<
