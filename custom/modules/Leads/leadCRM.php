@@ -96,7 +96,7 @@ try{
 					header('Location: index.php?module=Leads&action=search_leads&Search=1&search_leads=1&mobile_number='. $phone);exit();
 				}else{
 					
-					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] .",assigned_date='". date('Y-m-d H:i:s') ."',converted_date='". date('Y-m-d H:i:s') ."'   where id='". $records['id'] ."'");	
+					$db->query("update leads set  call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] .",assigned_date='". date('Y-m-d H:i:s') ."',converted_date='". date('Y-m-d H:i:s') ."'   where id='". $records['id'] ."'");	 
 					
 					$db->query("insert into dristi_log set customer_id='". $customerId  ."', callType='". $callType ."', dated='". date('Y-m-d H:i:s')."', phone='". $phone ."',lead_id='". $records['id'] ."',entryPoint='assigned',dispositionName='". $userid['user_name'] ."',customerCRTId='". $userid['id']  ."', userId='". $userID  ."'");	
 					
