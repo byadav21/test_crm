@@ -6072,6 +6072,9 @@ function getTaxStatus($user_id)
                 ORDER BY  pd.`date_entered` DESC limit 1 ";
     $results = $db->query($query);
     $order   = $db->fetchByAssoc($results);
+    
+    //echo '<pre>';
+    //print_r($order); die;
     if (!empty($order))
     {
         $ret = 0;
@@ -6098,13 +6101,8 @@ function getTaxStatus($user_id)
     else
     {
 
-        if ($order['state'] == $sugar_config['tax']['BASECITY'])
-        {
-            return $sugar_config['tax']['CGST'] + $sugar_config['tax']['SGST'];
-        }
-        else
-        {
-            return $sugar_config['tax']['IGST'];
-        }
+      
+       return $sugar_config['tax']['IGST'];
+        
     }
 }

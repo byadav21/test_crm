@@ -26,15 +26,12 @@ array (
     'default' => true,
     'id' => 'TE_VENDOR_TE_UTM_1TE_VENDOR_IDA',
   ),
-  'CONTRACT' => 
+  'CONTRACT_TYPE' => 
   array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_CONTRACT',
-    'link' => true,
+    'type' => 'enum',
+    'label' => 'UTM Medium',
     'width' => '10%',
     'default' => true,
-    'id' => 'AOS_CONTRACTS_ID_C',
   ),
 );
 ?>
