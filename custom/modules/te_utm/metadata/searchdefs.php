@@ -29,17 +29,6 @@ array (
         'default' => true,
         'name' => 'utm_status',
       ),
-      'contract' => 
-      array (
-        'type' => 'relate',
-        'studio' => 'visible',
-        'label' => 'LBL_CONTRACT',
-        'id' => 'AOS_CONTRACTS_ID_C',
-        'link' => true,
-        'width' => '10%',
-        'default' => true,
-        'name' => 'contract',
-      ),
       'contract_type' => 
       array (
         'type' => 'enum',
@@ -47,14 +36,6 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'contract_type',
-      ),
-      'utm_source_c' => 
-      array (
-        'type' => 'varchar',
-        'default' => true,
-        'label' => 'LBL_UTM_SOURCE',
-        'width' => '10%',
-        'name' => 'utm_source_c',
       ),
       'te_vendor_te_utm_1_name' => 
       array (
