@@ -24,7 +24,7 @@ class MakeUtmLive {
 						 
                                                   } else
                                                   {
-                                                       echo '<script> alert("You can\'t add duplicate utm");callPage(); function callPage(){  window.location.href="index.php?module=te_utm&action=DetailView&record='. $utmid['id'] .'" } </script>';	exit();
+                                                       echo '<script> alert("You can\'t add duplicate utm");callPage(); function callPage(){  window.location.href="index.php?module=te_utm&action=DetailView&record='. $utmid['id'] .'" } </script>';	 exit();
                                                       
                                                   }
 					  }

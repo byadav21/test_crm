@@ -7,12 +7,7 @@ require_once('include/entryPoint.php');
 global $db;
 $studentDetails=[];
 $Insert_student_counter=0;
-$studentSql="SELECT m.id migration_id,m.email, m.name,m.batch_code,m.mobile,m.currency,m.batch_id FROM te_migrate_student m
-                INNER JOIN  email_addresses e ON e.email_address=m.email
-                INNER JOIN email_addr_bean_rel er ON  e.id=er.email_address_id AND bean_module='Leads'
-                INNER JOIN leads l  ON er.bean_id=l.id
-                INNER JOIN leads_cstm ON leads_cstm.id_c=l.id
-                INNER JOIN te_ba_batch bb ON leads_cstm.`te_ba_batch_id_c`=bb.id where bb.id=m.batch_id";
+$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=0 limit 0,50";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
@@ -22,9 +17,8 @@ if($studentDetails){
   foreach ($studentDetails as $key => $value) {
    $lead_detail = __get_lead_details(trim($value['email']),trim($value['mobile']),trim($value['batch_id']));
    
-   echo '<pre>';
-   print_r($lead_detail);   
-   //die();
+   //echo '<pre>';
+   //print_r($lead_detail);
    
     if($lead_detail){
 
@@ -247,14 +241,14 @@ function __get_student_batch_id($student_arr=array()){
 
 function __get_lead_details($student_email=NULL,$student_mobile=NULL,$batch_id=NULL){
   $lead_id = '';
-   $find_lead_by_email_sql="SELECT eabr.bean_id FROM email_addr_bean_rel eabr INNER JOIN email_addresses ea ON (ea.id = eabr.email_address_id) INNER JOIN leads ON leads.id=eabr.bean_id INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND ea.email_address='".$student_email."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
+  $find_lead_by_email_sql="SELECT eabr.bean_id FROM email_addr_bean_rel eabr INNER JOIN email_addresses ea ON (ea.id = eabr.email_address_id) INNER JOIN leads ON leads.id=eabr.bean_id INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND ea.email_address='".$student_email."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
   $find_lead_by_email_Obj= $GLOBALS['db']->query($find_lead_by_email_sql);
   $find_lead_by_email=$GLOBALS['db']->fetchByAssoc($find_lead_by_email_Obj);
   if($find_lead_by_email){
     $lead_id = $find_lead_by_email['bean_id'];
   }
   else{
-    $find_lead_by_mobile_sql="SELECT leads.id FROM leads INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE leads_cstm.te_ba_batch_id_c='".$batch_id."'";
+    $find_lead_by_mobile_sql="SELECT leads.id FROM leads INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE leads_cstm.te_ba_batch_id_c='".$batch_id."' AND leads.phone_mobile='".$student_mobile."'";
     $find_lead_by_mobile_Obj= $GLOBALS['db']->query($find_lead_by_mobile_sql);
     $find_lead_by_mobile=$GLOBALS['db']->fetchByAssoc($find_lead_by_mobile_Obj);
     if($find_lead_by_mobile){
