@@ -7,18 +7,19 @@
 	$email= $_REQUEST['email'];
 	$source= $_REQUEST['utm_source'];
 	$medium=$_REQUEST['utm_medium'];
-	$term=$_REQUEST['utm_term'];
+	$term=$_REQUEST['utm_term'];//batchcode
 	$campaign=$_REQUEST['utm_campaign'];
 	$leadObj=new  leads_override();
 	$batchid='';
 	$status='Alive';
 	$statusDetail='New Lead';
-	$vendor='';
+	 
+	$uname='';
 	if($source && $medium && $term && $name && $phone && $email){
 	  $utm=	$leadObj->fetchUtm($source,$medium,$term);
 	  if($utm){
 		    $batchid=$utm['te_ba_batch_id_c'];
-		    $vendor=$utm['name'];
+		    $uname=$utm['name'];
 	  }
 	}else{
 		
@@ -53,8 +54,12 @@
 	if($_REQUEST['education']) $leadObj->education_c= $_REQUEST['education'];
 	if($_REQUEST['city']) $leadObj->primary_address_city= $_REQUEST['city'];
 	if($_REQUEST['functional_area']) $leadObj->functional_area_c=$_REQUEST['functional_area'];
+	if($term) $leadObj->utm_term_c=$term;
+	if($source) $leadObj->utm_source_c=$source;
+	if($medium) $leadObj->utm_contract_c=$medium;
 	if($campaign) $leadObj->utm_campaign=$campaign;
-	if($vendor)  $leadObj->vendor=$vendor;
+	if($source)  $leadObj->vendor=$source;
+	if($uname)  $leadObj->utm=$uname;
 	if($batchid) $leadObj->te_ba_batch_id_c=$batchid;
 	$leadObj->assigned_user_id= 'NULL';
 	$leadObj->save();
