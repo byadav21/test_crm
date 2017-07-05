@@ -12,7 +12,7 @@ $studentSql="SELECT m.id migration_id,m.email, m.name,m.batch_code,m.mobile,m.cu
                 INNER JOIN email_addr_bean_rel er ON  e.id=er.email_address_id AND bean_module='Leads'
                 INNER JOIN leads l  ON er.bean_id=l.id
                 INNER JOIN leads_cstm ON leads_cstm.id_c=l.id
-                INNER JOIN te_ba_batch bb ON leads_cstm.`te_ba_batch_id_c`=bb.id limit 0,50";
+                INNER JOIN te_ba_batch bb ON leads_cstm.`te_ba_batch_id_c`=bb.id where bb.id=m.batch_id";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
