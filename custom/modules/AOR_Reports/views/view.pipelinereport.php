@@ -30,7 +30,7 @@ class AOR_ReportsViewPipelinereport extends SugarView {
 	}
 	function getGSV($user_id,$wheregsv=NULL){
 		global $db;
-		$batchSql="SELECT sum(b.fees_inr) as gsv,count(l.id)totalleads,b.id FROM leads l INNER JOIN leads_cstm lc on l.id=lc.id_c INNER JOIN te_ba_batch b ON lc.te_ba_batch_id_c=b.id where l.deleted=0 AND l.status='Warm' AND b.deleted=0 AND l.assigned_user_id='".$user_id."' $wheregsv GROUP BY b.id ";
+		$batchSql="SELECT b.fees_inr as gsv,count(l.id)totalleads,b.id FROM leads l INNER JOIN leads_cstm lc on l.id=lc.id_c INNER JOIN te_ba_batch b ON lc.te_ba_batch_id_c=b.id where l.deleted=0 AND l.status='Warm' AND b.deleted=0 AND l.assigned_user_id='".$user_id."' $wheregsv GROUP BY b.id ";
 		$batchObj =$db->query($batchSql);
 		$gsvArr=[];
 		while($batch =$db->fetchByAssoc($batchObj)){
