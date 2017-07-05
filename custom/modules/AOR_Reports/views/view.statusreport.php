@@ -43,10 +43,20 @@ class AOR_ReportsViewStatusreport extends SugarView {
 	function getContracts(){
 		global $db;
 		$vendorArr = [];
-		$vendorSql="SELECT DISTINCT u.contract_type,v.id AS vendorid,v.name AS vendor,u.id,u.name FROM `te_utm` AS u INNER JOIN te_vendor_te_utm_1_c AS uv ON uv.te_vendor_te_utm_1te_utm_idb=u.id INNER JOIN te_vendor AS v ON v.id=uv.te_vendor_te_utm_1te_vendor_ida WHERE u.deleted=0 AND v.deleted=0 AND v.vendor_status='Active' GROUP BY v.id";
+		$vendorSql="SELECT GROUP_CONCAT(DISTINCT u.contract_type)contract_type,v.id AS vendorid,v.name AS vendor,u.id,u.name FROM `te_utm` AS u INNER JOIN te_vendor_te_utm_1_c AS uv ON uv.te_vendor_te_utm_1te_utm_idb=u.id INNER JOIN te_vendor AS v ON v.id=uv.te_vendor_te_utm_1te_vendor_ida WHERE u.deleted=0 AND v.deleted=0 AND v.vendor_status='Active' GROUP BY v.id";
 		$vendorObj =$db->query($vendorSql);
 		while($vendors =$db->fetchByAssoc($vendorObj)){
-			$vendorArr[] = $vendors;
+			$contract_type = explode(',',$vendors['contract_type']);
+			foreach($contract_type as $cval){
+				$vendorArr[] = array(
+					'vendorid'=>$vendors['vendorid'],
+					'contract_type'=>$cval,
+					'vendor'=>$vendors['vendor'],
+					'id'=>$vendors['id'],
+					'name'=>$vendors['name'],
+				);
+			}
+
 		}
 		return $vendorArr;
 	}
