@@ -7,7 +7,7 @@ require_once('include/entryPoint.php');
 global $db;
 $studentDetails=[];
 $Insert_student_counter=0;
-$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=0 limit 0,50";
+$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=1 limit 0,50";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
