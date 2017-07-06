@@ -60,16 +60,19 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
 				$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
+				$whereInvalidUtm.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 			}elseif($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
-				$where.=" AND DATE(l.date_entered)='".$from_date."' ";
+				$where.=" AND DATE(l.date_entered)>='".$from_date."' ";
+				$whereInvalidUtm.=" AND DATE(l.date_entered)>='".$from_date."' ";
 			}elseif($_SESSION['us_from_date']==""&&$_SESSION['us_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
-				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
+				$where.=" AND DATE(l.date_entered)<='".$to_date."' ";
+				$whereInvalidUtm.=" AND DATE(l.date_entered)<='".$to_date."' ";
 			}
-
 			if(!empty($_SESSION['us_batch'])){
 				$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
+				$whereInvalidUtm.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
 				$whereBatch ="AND b.id IN('".implode("','",$_SESSION['us_batch'])."')";
 			}
 
@@ -124,6 +127,16 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 					$councelorList[$row['id'].'TE__TE'.$row['utm_campaign']][$row['status_description']]=$row['total'];
 				}
 			}
+			$invlidUtmSql = "select count(l.id)total,lc.te_ba_batch_id_c,l.status_description,l.utm,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,(select name from te_ba_batch where id=lc.te_ba_batch_id_c)batch from leads AS l inner join leads_cstm as lc on l.id=lc.id_c  where l.utm='NA'  AND l.deleted=0 AND lc.te_ba_batch_id_c!='' $whereInvalidUtm group by lc.te_ba_batch_id_c,l.status_description,utm_campaign";
+			$invlidUtmObj =$db->query($invlidUtmSql);
+			while($row =$db->fetchByAssoc($invlidUtmObj)){
+				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['name']='NA_VENDOR';
+				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['batch']=$row['batch'];
+				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['contract_type']='NA';
+				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA'][$row['status_description']]=$row['total'];
+			}
+
 			foreach($councelorList as $key=>$councelor){
 				$campaing = explode('TE__TE',$key);
 				if(!isset($councelor['Duplicate'])){
@@ -193,15 +206,19 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
 			$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
 			$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
+			$whereInvalidUtm.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
 		}elseif($_SESSION['us_from_date']!=""&&$_SESSION['us_to_date']==""){
 			$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_from_date'])));
 			$where.=" AND DATE(l.date_entered)>='".$from_date."' ";
+			$whereInvalidUtm.=" AND DATE(l.date_entered)>='".$from_date."' ";
 		}elseif($_SESSION['us_from_date']==""&&$_SESSION['us_to_date']!=""){
 			$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['us_to_date'])));
 			$where.=" AND DATE(l.date_entered)<='".$to_date."' ";
+			$whereInvalidUtm.=" AND DATE(l.date_entered)<='".$to_date."' ";
 		}
 		if(!empty($_SESSION['us_batch'])){
 			$where.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
+			$whereInvalidUtm.=" AND lc.te_ba_batch_id_c IN('".implode("','",$_SESSION['us_batch'])."') ";
 			$whereBatch ="AND b.id IN('".implode("','",$_SESSION['us_batch'])."')";
 		}
 		$vendorSql="SELECT u.id ,u.name AS utm_name,v.name,b.name as batch,contract_type from te_utm as u
@@ -254,12 +271,23 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 		}
 
+		$invlidUtmSql = "select count(l.id)total,lc.te_ba_batch_id_c,l.status_description,l.utm,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,(select name from te_ba_batch where id=lc.te_ba_batch_id_c)batch from leads AS l inner join leads_cstm as lc on l.id=lc.id_c  where l.utm='NA' AND l.deleted=0 AND lc.te_ba_batch_id_c!='' $whereInvalidUtm group by lc.te_ba_batch_id_c,l.status_description,utm_campaign";
+		$invlidUtmObj =$db->query($invlidUtmSql);
+		while($row =$db->fetchByAssoc($invlidUtmObj)){
+			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['name']='NA_VENDOR';
+			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['batch']=$row['batch'];
+			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['contract_type']='NA';
+			$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
+			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA'][$row['status_description']]=$row['total'];
+		}
+		//echo "<pre>";print_r($councelorList);exit();
+
 		foreach ($councelorList as $key => $value) {
 			if(!isset($value['name']) && !isset($value['batch']) && !isset($value['contract_type'])){
 				unset($councelorList[$key]);
 			}
 		}
-		
+
 		$total=count($councelorList); #total records
 		$start=0;
 		$per_page=10;
