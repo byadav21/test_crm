@@ -116,9 +116,9 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 					//$utmArr[]=$vendorval['id'];
 
 				}
-				if($utmArr){
+				/*if($utmArr){
 					$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
-				}
+				}*/
 				$leadSql="SELECT u.name AS utm,u.id AS utmid,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,l.utm,b.id,b.name,COUNT(l.id)total,l.status_description from te_ba_batch AS b LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id LEFT JOIN leads AS l ON l.id=lc.id_c LEFT JOIN `te_utm` AS u on l.utm=u.name  WHERE b.deleted=0  AND l.status_description!=''  $where AND l.deleted=0 GROUP BY b.id,l.status_description,l.utm,utm_campaign  ORDER BY b.name ASC";
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
@@ -127,7 +127,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 						$councelorList[$row['name'].'TE__TENA']['name']='NA_VENDOR';
 						$councelorList[$row['name'].'TE__TENA']['batch']=$row['name'];
 						$councelorList[$row['name'].'TE__TENA']['contract_type']='NA';
-						$councelorList[$row['name'].'TE__TE'.'NA'][$row['status_description']]=$row['total'];
+						$councelorList[$row['name'].'TE__TENA'][$row['status_description']]=$row['total'];
 					}
 					else{
 						$councelorList[$row['utmid'].'TE__TE'.$row['utm_campaign']][$row['status_description']]=$row['total'];
