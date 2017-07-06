@@ -6050,7 +6050,7 @@ function suite_strrpos($haystack, $needle, $offset = 0, $encoding = DEFAULT_UTIL
     }
 }
 
-function getTaxStatus($user_id,$dated=false)
+function getTaxStatus($user_id=0,$dated=false)
 {
 
     global $sugar_config, $db;
@@ -6081,7 +6081,7 @@ function getTaxStatus($user_id,$dated=false)
         //echo $order['date_entered'] .'GSTDATE='.$sugar_config['tax']['GSTDATE']; die;
         if (strtotime($order['date_of_payment']) <= strtotime($sugar_config['tax']['GSTDATE']))
         {
-                $ret = $sugar_config['tax']['service'];
+                $ret = $sugar_config['tax']['servicetax'];
         }
         else
         {
@@ -6101,8 +6101,11 @@ function getTaxStatus($user_id,$dated=false)
     else
     {
 		if($dated && strtotime($dated) <= strtotime($sugar_config['tax']['GSTDATE'])){
-				 return  $sugar_config['tax']['service'];
-		}else{
+				
+
+                                      return  $sugar_config['tax']['servicetax'];
+
+                }else{
 			if ($order['state'] == $sugar_config['tax']['BASECITY'])
 			{
 				return $sugar_config['tax']['CGST'] + $sugar_config['tax']['SGST'];
