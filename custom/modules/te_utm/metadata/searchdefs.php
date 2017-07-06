@@ -29,24 +29,34 @@ array (
         'default' => true,
         'name' => 'utm_status',
       ),
-      'contract' => 
+      'contract_type' => 
+      array (
+        'type' => 'enum',
+        'label' => 'UTM Medium',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'contract_type',
+      ),
+      'te_vendor_te_utm_1_name' => 
+      array (
+        'type' => 'relate',
+        'link' => true,
+        'label' => 'LBL_TE_VENDOR_TE_UTM_1_FROM_TE_VENDOR_TITLE',
+        'id' => 'TE_VENDOR_TE_UTM_1TE_VENDOR_IDA',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'te_vendor_te_utm_1_name',
+      ),
+      'batch' => 
       array (
         'type' => 'relate',
         'studio' => 'visible',
-        'label' => 'LBL_CONTRACT',
-        'id' => 'AOS_CONTRACTS_ID_C',
+        'label' => 'LBL_BATCH',
+        'id' => 'TE_BA_BATCH_ID_C',
         'link' => true,
         'width' => '10%',
         'default' => true,
-        'name' => 'contract',
-      ),
-      'utm_source_c' => 
-      array (
-        'type' => 'varchar',
-        'default' => true,
-        'label' => 'LBL_UTM_SOURCE',
-        'width' => '10%',
-        'name' => 'utm_source_c',
+        'name' => 'batch',
       ),
     ),
     'advanced_search' => 

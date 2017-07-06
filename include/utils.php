@@ -6072,6 +6072,9 @@ function getTaxStatus($user_id,$dated=false)
                 ORDER BY  pd.`date_entered` DESC limit 1 ";
     $results = $db->query($query);
     $order   = $db->fetchByAssoc($results);
+    
+    //echo '<pre>';
+    //print_r($order); die;
     if (!empty($order))
     {
         $ret = 0;

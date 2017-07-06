@@ -24,13 +24,17 @@ if(isset($_REQUEST['batch_val']) && !empty($_REQUEST['batch_val'])){
 }
 if(isset($_REQUEST['vendors']) && !empty($_REQUEST['vendors'])){
  //$query_utm="SELECT c.name,c.id FROM `te_vendor_aos_contracts_1_c` vc INNER JOIN aos_contracts c ON vc.te_vendor_aos_contracts_1aos_contracts_idb=c.id WHERE vc.deleted=0 AND vc.te_vendor_aos_contracts_1te_vendor_ida='".$_REQUEST['vendors']."' AND c.deleted=0";
- $query_utm="SELECT DISTINCT u.contract_type,v.id AS vendorid,v.name AS vendor,u.id,u.name FROM `te_utm` AS u INNER JOIN te_vendor_te_utm_1_c AS uv ON uv.te_vendor_te_utm_1te_utm_idb=u.id INNER JOIN te_vendor AS v ON v.id=uv.te_vendor_te_utm_1te_vendor_ida WHERE u.deleted=0 AND v.deleted=0 AND v.vendor_status='Active' AND v.id='".$_REQUEST['vendors']."' GROUP BY v.id";
+ $query_utm="SELECT GROUP_CONCAT(DISTINCT u.contract_type)contract_type,v.id AS vendorid,v.name AS vendor,u.id,u.name FROM `te_utm` AS u INNER JOIN te_vendor_te_utm_1_c AS uv ON uv.te_vendor_te_utm_1te_utm_idb=u.id INNER JOIN te_vendor AS v ON v.id=uv.te_vendor_te_utm_1te_vendor_ida WHERE u.deleted=0 AND v.deleted=0 AND v.vendor_status='Active' AND v.id='".$_REQUEST['vendors']."' GROUP BY v.id";
  $batch =$db->query($query_utm);
  $utmArr='';
  $utmArr['status']='error';
  $utmArr['res']='';
  while($utm =$db->fetchByAssoc($batch)){
-  $utmArr['res'][]=array('id'=>$utm['vendorid']."_TE_".$utm['contract_type'],'name'=>$utm['vendor']." - ".$utm['contract_type']);
+ 	$contract_type = explode(',',$utm['contract_type']);
+	foreach($contract_type as $cval){
+		$utmArr['res'][]=array('id'=>$utm['vendorid']."_TE_".$cval,'name'=>$utm['vendor']." - ".$cval);
+	}
+
  }
 
  if(!empty($utmArr['res'])){
