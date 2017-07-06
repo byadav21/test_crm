@@ -119,7 +119,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				if($utmArr){
 					$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 				}
-				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,utm_campaign";
 				//echo $leadSql;exit();
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
@@ -127,16 +127,16 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 					$councelorList[$row['id'].'TE__TE'.$row['utm_campaign']][$row['status_description']]=$row['total'];
 				}
 			}
-			$invlidUtmSql = "select count(l.id)total,lc.te_ba_batch_id_c,l.status_description,l.utm,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,(select name from te_ba_batch where id=lc.te_ba_batch_id_c)batch from leads AS l inner join leads_cstm as lc on l.id=lc.id_c  where l.utm='NA'  AND l.deleted=0 AND lc.te_ba_batch_id_c!='' $whereInvalidUtm group by lc.te_ba_batch_id_c,l.status_description,utm_campaign";
+			$invlidUtmSql = "select count(l.id)total,lc.te_ba_batch_id_c,l.status_description,(select name from te_ba_batch where id=lc.te_ba_batch_id_c)batch from leads AS l inner join leads_cstm as lc on l.id=lc.id_c  where l.utm='NA'  AND l.deleted=0 AND lc.te_ba_batch_id_c!='' $whereInvalidUtm group by lc.te_ba_batch_id_c,l.status_description,utm_campaign";
 			$invlidUtmObj =$db->query($invlidUtmSql);
 			while($row =$db->fetchByAssoc($invlidUtmObj)){
-				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['name']='NA_VENDOR';
-				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['batch']=$row['batch'];
-				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['contract_type']='NA';
+				$councelorList[$row['batch'].'TE__TENA']['name']='NA_VENDOR';
+				$councelorList[$row['batch'].'TE__TENA']['batch']=$row['batch'];
+				$councelorList[$row['batch'].'TE__TENA']['contract_type']='NA';
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
-				$councelorList[$row['te_ba_batch_id_c'].'TE__TENA'][$row['status_description']]=$row['total'];
+				$councelorList[$row['batch'].'TE__TENA'][$row['status_description']]=$row['total'];
 			}
-
+			//echo "<pre>";print_r($councelorList);exit();
 			foreach($councelorList as $key=>$councelor){
 				$campaing = explode('TE__TE',$key);
 				if(!isset($councelor['Duplicate'])){
@@ -271,17 +271,17 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 
 		}
 
-		$invlidUtmSql = "select count(l.id)total,lc.te_ba_batch_id_c,l.status_description,l.utm,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,(select name from te_ba_batch where id=lc.te_ba_batch_id_c)batch from leads AS l inner join leads_cstm as lc on l.id=lc.id_c  where l.utm='NA' AND l.deleted=0 AND lc.te_ba_batch_id_c!='' $whereInvalidUtm group by lc.te_ba_batch_id_c,l.status_description,utm_campaign";
+		$invlidUtmSql = "select count(l.id)total,lc.te_ba_batch_id_c,l.status_description,(select name from te_ba_batch where id=lc.te_ba_batch_id_c)batch from leads AS l inner join leads_cstm as lc on l.id=lc.id_c  where l.utm='NA'  AND l.deleted=0 AND lc.te_ba_batch_id_c!='' $whereInvalidUtm group by lc.te_ba_batch_id_c,l.status_description,utm_campaign";
 		$invlidUtmObj =$db->query($invlidUtmSql);
 		while($row =$db->fetchByAssoc($invlidUtmObj)){
-			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['name']='NA_VENDOR';
-			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['batch']=$row['batch'];
-			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA']['contract_type']='NA';
+			$councelorList[$row['batch'].'TE__TENA']['name']='NA_VENDOR';
+			$councelorList[$row['batch'].'TE__TENA']['batch']=$row['batch'];
+			$councelorList[$row['batch'].'TE__TENA']['contract_type']='NA';
 			$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
-			$councelorList[$row['te_ba_batch_id_c'].'TE__TENA'][$row['status_description']]=$row['total'];
+			$councelorList[$row['batch'].'TE__TENA'][$row['status_description']]=$row['total'];
 		}
 		//echo "<pre>";print_r($councelorList);exit();
-
+		//echo "<pre>";print_r($councelorList);exit();
 		foreach ($councelorList as $key => $value) {
 			if(!isset($value['name']) && !isset($value['batch']) && !isset($value['contract_type'])){
 				unset($councelorList[$key]);
