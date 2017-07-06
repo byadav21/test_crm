@@ -12,7 +12,7 @@ class addStudentPaymentClass
         if (!isset($_REQUEST['import_module']) && (($_REQUEST['module'] == "Leads") || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == 'transferbatch') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == 'migrate_student') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == 'web_lead_payment')))
         {
             global $sugar_config;
-            $service_tax =  getTaxStatus($student_id);
+            $service_tax =  getTaxStatus($student_id,$bean->date_entered);
 
             #If student's batch first time is being created
             $paymentInstallmentSql = "SELECT te_installments.* FROM te_installments INNER JOIN te_ba_batch_te_installments_1_c rel ON te_installments.id=rel.te_ba_batch_te_installments_1te_installments_idb WHERE rel.te_ba_batch_te_installments_1te_ba_batch_ida= '" . $bean->te_ba_batch_id_c . "' ORDER BY te_installments.due_date";
