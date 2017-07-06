@@ -119,7 +119,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				if($utmArr){
 					$where.=" AND u.id IN('".implode("','",$utmArr)."') ";
 				}
-				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,l.utm_campaign";
+				$leadSql="SELECT u.name,u.id,l.status_description,count(l.id)total,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign FROM `te_utm` AS u INNER JOIN leads AS l ON l.utm=u.name  INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE u.deleted=0 AND u.utm_status='Live' AND l.deleted=0  $where GROUP BY u.id,l.status_description,utm_campaign";
 				//echo $leadSql;exit();
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
@@ -136,7 +136,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 				$councelorList[$row['batch'].'TE__TENA'][$row['status_description']]=$row['total'];
 			}
-
+			//echo "<pre>";print_r($councelorList);exit();
 			foreach($councelorList as $key=>$councelor){
 				$campaing = explode('TE__TE',$key);
 				if(!isset($councelor['Duplicate'])){
@@ -281,7 +281,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView {
 			$councelorList[$row['batch'].'TE__TENA'][$row['status_description']]=$row['total'];
 		}
 		//echo "<pre>";print_r($councelorList);exit();
-
+		//echo "<pre>";print_r($councelorList);exit();
 		foreach ($councelorList as $key => $value) {
 			if(!isset($value['name']) && !isset($value['batch']) && !isset($value['contract_type'])){
 				unset($councelorList[$key]);
