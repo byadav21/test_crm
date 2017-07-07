@@ -16,11 +16,20 @@
 	 
 	$uname='';
 	if($source && $medium && $term && $name && $phone && $email){
+           
 	  $utm=	$leadObj->fetchUtm($source,$medium,$term);
 	  if($utm){
+            
 		    $batchid=$utm['te_ba_batch_id_c'];
 		    $uname=$utm['name'];
-	  }
+          }else{
+              $batchQ = "SELECT b.id,b.name FROM  `te_ba_batch`  b WHERE b.`batch_code`='".$term."'"; 
+              $rex = $GLOBALS['db']->query($batchQ);
+              $BatchRow = $GLOBALS['db']->fetchByAssoc($rex);
+              $batchid=$BatchRow['id'];
+              //$uname=$BatchRow['name'];
+              
+          }
 	}else{
 		
 	 echo json_encode(array('status'=>'error','msg'=>'Name, phone, email, Utm source, utm medium and utm term is required field')); exit();	
@@ -40,6 +49,7 @@
 	if($email!=""){
 		$sql.=" AND email_addresses.email_address='".$email."'";
 	}
+        //echo $sql; die;
 	$re = $GLOBALS['db']->query($sql);
 	if($GLOBALS['db']->getRowCount($re)>0){
 		$status = 'Duplicate';
