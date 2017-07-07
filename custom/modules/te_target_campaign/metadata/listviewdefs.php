@@ -30,10 +30,25 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'send_email' => 
+  'TEMPLATE' => 
+  array (
+    'label' => 'LBL_TEMPLATE',
+    'type' => 'enum',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'TOTAL_EMAIL' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => 'Total Email',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'SEND_EMAIL' => 
   array (
     'label' => 'LBL_SEND_EMAIL',
-	'type' => 'varchar',
+    'type' => 'varchar',
     'width' => '10%',
     'default' => true,
   ),
