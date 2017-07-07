@@ -1,4 +1,5 @@
 $(document).ready(function(){
+						
  	$('#program').change(function (){
 		var programId = this.value;
 		if(programId!=0){
@@ -45,6 +46,9 @@ $(document).ready(function(){
 				}
 			});
 		}	
-	});
+	});	
 });
-
+	$('#Status').multiselect({
+    columns: 2,
+    selectAll: true
+});				
