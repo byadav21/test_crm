@@ -66,7 +66,7 @@ class AOR_ReportsViewSalescyclereport extends SugarView {
 			$filename = $file . "_" . date ( "Y-m-d");
 
 
-			$leadSql=" SELECT AVG(DATEDIFF(l.converted_date,DATE(l.assigned_date))) as avg_conversion_time,l.assigned_user_id  FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND l.status='Converted' AND l.assigned_user_id IN('".implode("','",$uid)."')  GROUP BY l.assigned_user_id";
+			$leadSql=" SELECT AVG(DATEDIFF(l.converted_date,DATE(l.assigned_date))) as avg_conversion_time,l.assigned_user_id  FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND l.status='Converted' AND l.assigned_user_id IN('".implode("','",$uid)."') $where GROUP BY l.assigned_user_id";
 
 			$leadObj =$db->query($leadSql);
 			$councelorList=array();
@@ -86,7 +86,7 @@ class AOR_ReportsViewSalescyclereport extends SugarView {
 
 		#$leadSql="SELECT count(l.assigned_user_id) as total,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 ".$where." GROUP BY assigned_user_id,status";
 
-		$leadSql=" SELECT AVG(DATEDIFF(l.converted_date,DATE(l.assigned_date))) as avg_conversion_time,l.assigned_user_id FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND l.status='Converted' AND l.assigned_user_id IN('".implode("','",$uid)."') GROUP BY l.assigned_user_id";
+		$leadSql=" SELECT AVG(DATEDIFF(l.converted_date,DATE(l.assigned_date))) as avg_conversion_time,l.assigned_user_id FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND l.status='Converted' AND l.assigned_user_id IN('".implode("','",$uid)."') $where GROUP BY l.assigned_user_id";
 
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();
