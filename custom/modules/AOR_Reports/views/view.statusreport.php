@@ -202,6 +202,7 @@ class AOR_ReportsViewStatusreport extends SugarView {
 			}
 		}
 		if(isset($_POST['export']) && $_POST['export']=="Export"){
+
 			if($is_admin==1){
 					$data="Counsellors,Vendor,Medium,Batch,Alive,Warm,Dead\n";
 			}
@@ -209,7 +210,6 @@ class AOR_ReportsViewStatusreport extends SugarView {
 					$data="Counsellors,Alive,Warm,Dead\n";
 			}
 			$file = "status_report";
-			$where='';
 			$from_date="";
 			$to_date="";
 			$filename = $file . "_" . date ( "Y-m-d");
@@ -230,7 +230,6 @@ class AOR_ReportsViewStatusreport extends SugarView {
 			}*/
 			if($is_admin==1){
 				$leadSql="SELECT count(l.id) as total,(select name FROM te_ba_batch where id=lc.te_ba_batch_id_c)batch,l.utm,l.assigned_user_id,l.status FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c where l.deleted=0 AND l.assigned_user_id IN('".implode("','",$uid)."') ".$where." GROUP BY l.assigned_user_id,l.status,l.utm";
-
 				$leadObj =$db->query($leadSql);
 				$councelorList=array();
 				while($row =$db->fetchByAssoc($leadObj)){
