@@ -15,19 +15,42 @@
 	$statusDetail='New Lead';
 	 
 	$uname='';
+	$campagain_d='';
+	$lead_d='';
 	if($source && $medium && $term && $name && $phone && $email){
            
 	  $utm=	$leadObj->fetchUtm($source,$medium,$term);
-	  if($utm){
+	     if($utm){
             
 		    $batchid=$utm['te_ba_batch_id_c'];
 		    $uname=$utm['name'];
           }else{
-              $batchQ = "SELECT b.id,b.name FROM  `te_ba_batch`  b WHERE b.`batch_code`='".$term."'"; 
+              $batchQ = "SELECT b.id,b.name,b.d_campaign_id,b.d_lead_id,b.lastCampagain FROM  `te_ba_batch`  b WHERE b.`batch_code`='".$term."'"; 
               $rex = $GLOBALS['db']->query($batchQ);
               $BatchRow = $GLOBALS['db']->fetchByAssoc($rex);
               $batchid=$BatchRow['id'];
-              //$uname=$BatchRow['name'];
+              if(!$batchid){
+				  echo json_encode(array('status'=>'error','msg'=>'Utm term is required field')); exit();
+			  }
+              if($camID && $leadID){
+				  $camID=explode(',',$BatchRow['d_campaign_id']);
+				  $leadID=explode(',',$BatchRow['d_lead_id']);
+				  if(count($camID)>1 && count($camID)==count($leadID)){
+					  $assigned=false;
+					  for($i=0;$i<count($camID);$i++){
+						 if($BatchRow['lastCampagain']==$camID[$i] . $leadID[$i] || $assigned ) continue; 
+							  $campagain_d=$camID[$i];
+							  $lead_d=$leadID[$i];
+							   $assigned=true;
+					    } 
+				  }else{
+					  if($camID[0] && $leadID[0]){						  
+						  $campagain_d=$camID[0];
+						  $lead_d=$leadID[0];
+					  }					  
+				  }
+			  }
+              
               
           }
 	}else{
@@ -49,7 +72,7 @@
 	if($email!=""){
 		$sql.=" AND email_addresses.email_address='".$email."'";
 	}
-        //echo $sql; die;
+        
 	$re = $GLOBALS['db']->query($sql);
 	if($GLOBALS['db']->getRowCount($re)>0){
 		$status = 'Duplicate';
@@ -58,8 +81,10 @@
 
 
 	$leadObj->first_name=$name;
+	$leadObj->duplicate_check= 1;
 	$leadObj->email1= $email;
-	$leadObj->phone_mobile=$phone;
+	$leadObj->status=$status;
+	$leadObj->status_description=$statusDetail;
 	if($_REQUEST['work_experience'])  $leadObj->work_experience_c=$_REQUEST['work_experience'];
 	if($_REQUEST['education']) $leadObj->education_c= $_REQUEST['education'];
 	if($_REQUEST['city']) $leadObj->primary_address_city= $_REQUEST['city'];
@@ -71,9 +96,17 @@
 	if($source)  $leadObj->vendor=$source;
 	if($uname)  $leadObj->utm=$uname;
 	if($batchid) $leadObj->te_ba_batch_id_c=$batchid;
+	if(!$source) $leadObj->vendor='NA_VENDOR';
+	if(!$uname) $leadObj->utm='NA';
+	if($campagain_d)  $leadObj->dristi_campagain_id=$campagain_d;
+	if($lead_d)  $leadObj->dristi_API_id= $lead_d;
 	$leadObj->assigned_user_id= 'NULL';
 	$leadObj->save();
 	if(!$leadObj->id){
 		echo json_encode(array('status'=>'error','msg'=>'Some thing gone wrong!')); exit();
-	}	 
+	}
+	if($campagain_d && $lead_d)	{
+		$sql="update te_ba_batch set lastCampagain='". $campagain_d.$lead_d ."' where id='" .  $batchid ."'";   
+		$db->query($sql);
+	}
 	echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); exit();

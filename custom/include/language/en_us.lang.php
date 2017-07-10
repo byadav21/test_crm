@@ -599,3 +599,14 @@ $GLOBALS['app_list_strings']['country_log']=array (
   'India' => 'India',
   'Other' => 'Other',
 );
+
+$GLOBALS['app_list_strings']['lead_status_custom_dom']=array (
+  '' => '',
+  'Alive' => 'Alive',
+  'Converted' => 'Converted',
+  'Dead' => 'Dead',
+  'Duplicate' => 'Duplicate',
+  'Dropout' => 'Dropout',
+  'Warm' => 'Warm',
+  'Recycle' => 'Recycle',
+);

@@ -125,12 +125,20 @@ array (
             'name' => 'fees_in_usd',
             'label' => 'LBL_FEES_IN_USD',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'd_campaign_id',
+            'label' => 'Campagain ID',
+          ),
         ),
         7 => 
         array (
           0 => 'description',
-          1 => '',
+          1 => 
+          array (
+            'name' => 'd_lead_id',
+            'label' => 'Lead ID',
+          ),
         ),
       ),
     ),

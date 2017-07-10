@@ -326,6 +326,16 @@ class LeadsViewEdit extends ViewEdit
                     }
                 }
 
+                if (document.getElementById('status').value == "Recycle") {
+                    $("#status_description option").remove();
+                    $("#status_description").append('<option></option>');
+                    if (status_detail == 'Duplicate') {
+                        $("#status_description").append('<option  selected="selected">Recycle</option>');
+                    } else {
+                        $("#status_description").append('<option>Recycle</option>');
+                    }
+                }
+
                 if (document.getElementById('status').value == "Duplicate") {
                     $("#status_description option").remove();
                     $("#status_description").append('<option></option>');
@@ -374,6 +384,10 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option>Rejected</option>');
                         $("#status_description").append('<option>Fallout</option>');
                         $("#status_description").append('<option>Retired</option>');
+                    } else if (el.val() === "Recycle") {
+                        $("#status_description option").remove();
+                        $("#status_description").append('<option></option>');
+                        $("#status_description").append('<option>Recycle</option>');
                     } else if (el.val() === "Converted") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');

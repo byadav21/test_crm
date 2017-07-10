@@ -680,7 +680,8 @@ class addPaymentClass
 				}
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
-            $bean->vendor           = $bean->utm_source_c;   // $vendor_id['id'];
+            $bean->vendor           = ($bean->utm_source_c)? $bean->utm_source_c : 'NA_VENDOR';   // $vendor_id['id'];
+            if(!$bean->utm) $bean->utm='NA';
             $bean->te_ba_batch_id_c = $batch_id['id'];
             
             if($bean->status == 'Converted')  $bean->converted_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
@@ -733,6 +734,9 @@ class addPaymentClass
                 }
                 
                 $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+                
+				if(!$bean->utm) $bean->utm='NA';
+				if(!$bean->vendor) $bean->vendor='NA_VENDOR';
 				//$bean->converted_date=date('Y-m-d');
             }
         }
@@ -1058,6 +1062,9 @@ class addPaymentClass
         ini_set('display_errors', "off");
         if (isset($_REQUEST['import_module']) && $_REQUEST['module'] == "Import")
             return false;
+            
+        if (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == "lead-genration") return false;    
+            
         global $db, $current_user;
         $sql     = "select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $current_user->id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
         $mis     = $db->query($sql);
@@ -1065,6 +1072,8 @@ class addPaymentClass
         //echo 'p';die;
         if ($misData['slug'] == 'CCM' || $misData['slug'] == 'CCTL' || $misData['slug'] == 'CCH' || $current_user->is_admin == 1)
             return false;
+            
+        
 
         if ($bean->fetched_row['id'] == '')
         {
