@@ -51,7 +51,7 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_POST, 1);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-				echo $result = curl_exec($ch);die;
+				$result = curl_exec($ch);
 				$res = json_decode($result);
 					if(isset($res[0]->status) && $res[0]->status=='1'){
 						#echo "hello insert Success ";
