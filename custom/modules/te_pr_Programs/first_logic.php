@@ -2,7 +2,7 @@
 class first_logic{
 	function first_logic_method(&$bean, $event, $arguments){
 		global $db;
-
+			
 			/*
 		     $qry ="select name from te_pr_programs where (deleted=0) and (id!='".$bean->id."') and (name='".$bean->name."')";
 
@@ -40,9 +40,10 @@ class first_logic{
 				$post = [
 						'action' => 'add',
 						'pname' => $bean->name,
-						'inst_crm_id'   => $REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
+				 
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_URL,$url);
 
@@ -50,7 +51,7 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_POST, 1);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-				$result = curl_exec($ch);
+				echo $result = curl_exec($ch);die;
 				$res = json_decode($result);
 					if(isset($res[0]->status) && $res[0]->status=='1'){
 						#echo "hello insert Success ";
@@ -71,7 +72,7 @@ class first_logic{
 				$post = [
 						'action' => 'update',
 						'pname' => $bean->name,
-						'inst_crm_id'   => $REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
 				$ch = curl_init();
