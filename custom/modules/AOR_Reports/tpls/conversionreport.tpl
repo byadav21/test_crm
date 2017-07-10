@@ -167,14 +167,27 @@
 			</th>
 		{/foreach}
 	</tr>
+  <tr height="20">
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>&nbsp;</strong>
+		</th>
+		{foreach from = $programList key=key item=program}
+			<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+				<strong>Total</strong>
+			</th>
+      <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+				<strong>Converted</strong>
+			</th>
+		{/foreach}
+	</tr>
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
 		   <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
 		   {foreach from = $programList key=key item=program}
 
-  				<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong>Total</strong> {$councelor.$key.total}</td>
+  				<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.$key.total}</td>
 
-          <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong>Converted</strong> {$councelor.$key.converted}</td>
+          <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {$councelor.$key.converted}</td>
 		   {/foreach}
 		</tr>
 	{/foreach}

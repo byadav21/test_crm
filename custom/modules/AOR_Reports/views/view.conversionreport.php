@@ -245,16 +245,22 @@ class AOR_ReportsViewConversionreport extends SugarView {
 			# Create heading
 			$data="Counsellors";
 			foreach($programList as $key=>$program){
-				$data.=",".$program;
+				$data.=",".$program.", ";
+			}
+			$data.="\n";
+			$data.="\r";
+			foreach($programList as $key=>$program){
+				$data.=",Total,Converted";
 			}
 			$data.="\n";
 			//$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['warm'] . "\",\"" . $councelor['gsv']."\",\"". "\"\n";
 			foreach($councelorList as $key=>$councelor){
 				$data.= "\"" . $councelor['name'];
 				foreach($programList as $key1=>$value){
-					$total = " Total ".$councelor[$key1]['total'];
-					$converted = " Converted ".$councelor[$key1]['converted'];
-					$data.= "\",\"" . $total.$converted;
+					$total = $councelor[$key1]['total'];
+					$converted = $councelor[$key1]['converted'];
+					$data.= "\",\"" . $total;
+					$data.= "\",\"" . $converted;
 				}
 				$data.= "\"\n";
 			}
