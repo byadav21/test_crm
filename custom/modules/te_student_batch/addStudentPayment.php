@@ -14,6 +14,30 @@ class addStudentPaymentClass
             global $sugar_config;
             $service_tax =  getTaxStatus($student_id,$bean->date_entered);
 
+            /*Get Batch Discount*/
+            $discount = 0;
+            $BatchDetailsSql = "SELECT * FROM te_ba_batch WHERE id= '" . $bean->te_ba_batch_id_c . "'";
+            $BatchDetailsObj = $GLOBALS['db']->query($BatchDetailsSql);
+            $BatchDetails = $GLOBALS['db']->fetchByAssoc($BatchDetailsObj);
+
+            $LeadDetailsSql = "SELECT * FROM leads WHERE id= '" . $bean->leads_id . "'";
+            $LeadDetailsObj = $GLOBALS['db']->query($LeadDetailsSql);
+            $LeadDetails = $GLOBALS['db']->fetchByAssoc($LeadDetailsObj);
+            if(isset($LeadDetails['primary_address_country'])){
+              $country = $LeadDetails['primary_address_country'];
+              if(empty($country) || strtolower($country)=='india'){
+                $discount = $discount+$BatchDetails['discount_in_inr'];
+              }
+              else{
+                $discount = $discount+$BatchDetails['discount_in_usd'];
+              }
+              if(!empty($LeadDetails['discount'])){
+                $discount = $discount+$LeadDetails['discount'];
+              }
+
+            }
+            /*Batch Discount Ends HERE*/
+
  #If student's batch first time is being created
             $paymentInstallmentSql = "SELECT te_installments.* FROM te_installments INNER JOIN te_ba_batch_te_installments_1_c rel ON te_installments.id=rel.te_ba_batch_te_installments_1te_installments_idb WHERE rel.te_ba_batch_te_installments_1te_ba_batch_ida= '" . $bean->te_ba_batch_id_c . "' ORDER BY te_installments.due_date";
 
@@ -22,7 +46,7 @@ class addStudentPaymentClass
 
             $studentPaymentObj              = new te_student_payment_plan();
             $studentPaymentObj->name        = 'Initial Payment';
-            $studentPaymentObj->description = 'Testing';
+            $studentPaymentObj->description = 'Initial Payment';
             $studentPaymentObj->paid        = 'No';
 
             $studentPaymentObj->due_date = $bean->initial_payment_date;
@@ -48,13 +72,15 @@ class addStudentPaymentClass
 
             $studentPaymentObj->save();
             $index               = 1;
+            $totalInstallments = $paymentInstallmentObj->num_rows;
             while ($paymentInstallments = $GLOBALS['db']->fetchByAssoc($paymentInstallmentObj))
             {
+
                 $studentPaymentObj              = new te_student_payment_plan();
                 $studentPaymentObj->name        = $installments[$index] . ' Installment';
                 $studentPaymentObj->paid        = 'No';
                 $studentPaymentObj->due_date    = $paymentInstallments['due_date'];
-                $studentPaymentObj->description = 'Testing';
+                $studentPaymentObj->description = 'Installment';
 
                 $payment_inr                       = $paymentInstallments['payment_inr'];
                 $tax                               = (($payment_inr * $service_tax) / 100);
@@ -62,18 +88,41 @@ class addStudentPaymentClass
                 $studentPaymentObj->fees           = $payment_inr;
                 $studentPaymentObj->tax            = $service_tax;
                 $studentPaymentObj->total_amount   = $total_amount;
-                $studentPaymentObj->due_amount_inr = $total_amount;
+                //$studentPaymentObj->due_amount_inr = $total_amount;
 
                 $studentPaymentObj->paid_amount_inr = 0;
 
-                $studentPaymentObj->due_amount_usd  = $paymentInstallments['payment_usd'];
+                //$studentPaymentObj->due_amount_usd  = $paymentInstallments['payment_usd'];
                 $studentPaymentObj->paid_amount_usd = 0;
 
-                $studentPaymentObj->balance_inr = $studentPaymentObj->due_amount_inr;
-                $studentPaymentObj->balance_usd = $studentPaymentObj->due_amount_usd;
+                //$studentPaymentObj->balance_inr = $studentPaymentObj->due_amount_inr;
+                //$studentPaymentObj->balance_usd = $studentPaymentObj->due_amount_usd;
 
                 $studentPaymentObj->te_student_id_c                                                = $bean->te_student_te_student_batch_1te_student_ida;
                 $studentPaymentObj->te_student_batch_te_student_payment_plan_1te_student_batch_ida = $bean->id;
+                if($totalInstallments==$index){
+                  $studentPaymentObj->discount=$discount;
+                  $country = $LeadDetails['primary_address_country'];
+                  if((empty($country) || strtolower($country)=='india')){
+                    $studentPaymentObj->due_amount_inr = $total_amount-$discount;
+                    $studentPaymentObj->due_amount_usd  = $paymentInstallments['payment_usd'];
+                    $studentPaymentObj->balance_inr = $studentPaymentObj->due_amount_inr;
+                    $studentPaymentObj->balance_usd = $studentPaymentObj->due_amount_usd;
+                  }
+                  else{
+                    $studentPaymentObj->due_amount_inr = $total_amount;
+                    $studentPaymentObj->due_amount_usd  = $paymentInstallments['payment_usd']-$discount;
+                    $studentPaymentObj->balance_inr = $studentPaymentObj->due_amount_inr;
+                    $studentPaymentObj->balance_usd = $studentPaymentObj->due_amount_usd;
+                  }
+                }
+                else{
+                  $studentPaymentObj->discount=0;
+                  $studentPaymentObj->due_amount_inr = $total_amount;
+                  $studentPaymentObj->due_amount_usd  = $paymentInstallments['payment_usd'];
+                  $studentPaymentObj->balance_inr = $studentPaymentObj->due_amount_inr;
+                  $studentPaymentObj->balance_usd = $studentPaymentObj->due_amount_usd;
+                }
                 $studentPaymentObj->save();
                 unset($studentBatchObj);
                 $index++;
