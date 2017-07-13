@@ -23,8 +23,8 @@ class addStudentPaymentClass
             $LeadDetailsSql = "SELECT * FROM leads WHERE id= '" . $bean->leads_id . "'";
             $LeadDetailsObj = $GLOBALS['db']->query($LeadDetailsSql);
             $LeadDetails = $GLOBALS['db']->fetchByAssoc($LeadDetailsObj);
-            if(isset($LeadDetails['primary_address_country'])){
-              $country = $LeadDetails['primary_address_country'];
+            if(isset($LeadDetails['country_log'])){
+              $country = $LeadDetails['country_log'];
               if(empty($country) || strtolower($country)=='india'){
                 $discount = $discount+$BatchDetails['discount_in_inr'];
               }
@@ -102,7 +102,7 @@ class addStudentPaymentClass
                 $studentPaymentObj->te_student_batch_te_student_payment_plan_1te_student_batch_ida = $bean->id;
                 if($totalInstallments==$index){
                   $studentPaymentObj->discount=$discount;
-                  $country = $LeadDetails['primary_address_country'];
+                  $country = $LeadDetails['country_log'];
                   if((empty($country) || strtolower($country)=='india')){
                     $studentPaymentObj->due_amount_inr = $total_amount-$discount;
                     $studentPaymentObj->due_amount_usd  = $paymentInstallments['payment_usd'];
