@@ -39,7 +39,7 @@ class addStudentPaymentClass
             /*Batch Discount Ends HERE*/
 
  #If student's batch first time is being created
-            $paymentInstallmentSql = "SELECT te_installments.* FROM te_installments INNER JOIN te_ba_batch_te_installments_1_c rel ON te_installments.id=rel.te_ba_batch_te_installments_1te_installments_idb WHERE rel.te_ba_batch_te_installments_1te_ba_batch_ida= '" . $bean->te_ba_batch_id_c . "' ORDER BY te_installments.due_date";
+            $paymentInstallmentSql = "SELECT te_installments.* FROM te_installments INNER JOIN te_ba_batch_te_installments_1_c rel ON te_installments.id=rel.te_ba_batch_te_installments_1te_installments_idb WHERE rel.te_ba_batch_te_installments_1te_ba_batch_ida= '" . $bean->te_ba_batch_id_c . "' AND te_installments.deleted=0 ORDER BY te_installments.due_date";
 
             $installments          = array('1' => '1st', '2' => '2nd', '3' => '3rd', '4' => '4th', '5' => '5th', '6' => '6th', '7' => '7th');
             $paymentInstallmentObj = $GLOBALS['db']->query($paymentInstallmentSql);

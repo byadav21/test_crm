@@ -6,9 +6,10 @@ require_once('include/entryPoint.php');
 global $db;
 $data = json_decode(file_get_contents('php://input'), true);
 $error_fields=[];
+$discount=' 0';
 if(!isset($data['action']) || empty($data['action'])){
 	$error_fields['action']=['action field is required.'];
-	
+
 }
 else{
 	if(!isset($data['crm_lead_id']) || empty($data['crm_lead_id'])){
@@ -19,27 +20,30 @@ else{
 	}
 	if(!isset($data['amount']) || empty($data['amount'])){
 		$error_fields['amount']=['amount field is required.'];
-		
+
 	}
 	if(!isset($data['payment_date']) || empty($data['payment_date'])){
 		$error_fields['payment_date']=['payment_date field is required.'];
-		
+
 	}
 	if(!isset($data['payment_realized']) || empty($data['payment_realized'])){
-		$error_fields['payment_realized']=['payment_realized field is required.'];	
+		$error_fields['payment_realized']=['payment_realized field is required.'];
 	}
 	if(!isset($data['payment_source']) || empty($data['payment_source'])){
-		$error_fields['payment_source']=['payment_source field is required.'];	
+		$error_fields['payment_source']=['payment_source field is required.'];
 	}
 	if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
-		$error_fields['payment_referencenum']=['payment_referencenum field is required.'];	
+		$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
 	}
 	if(!isset($data['payment_id']) || empty($data['payment_id'])){
-		$error_fields['payment_id']=['payment_id field is required.'];	
+		$error_fields['payment_id']=['payment_id field is required.'];
+	}
+  if(isset($data['discount']) && !empty($data['discount'])){
+			$discount=$data['discount'];
 	}
 	if($data['action']=='update'){
 		if(!isset($data['crm_payment_id']) || empty($data['crm_payment_id'])){
-			$error_fields['crm_payment_id']=['crm_payment_id field is required.'];	
+			$error_fields['crm_payment_id']=['crm_payment_id field is required.'];
 		}
 	}
 }
@@ -52,7 +56,7 @@ if($error_fields){
 else{
 	$lead_id=$data['crm_lead_id'];
 	$batch_id=$data['batch_crm_id'];
-	
+
 	/*check valid crm_payment_id in case of update*/
 	if($data['action']=='update'){
 		$check_payment_sql = "SELECT p.* FROM `leads_te_payment_details_1_c` AS lpr INNER JOIN te_payment_details AS p ON p.id=lpr.`leads_te_payment_details_1te_payment_details_idb` WHERE lpr.`leads_te_payment_details_1te_payment_details_idb` ='".$data['crm_payment_id']."'";
@@ -66,10 +70,10 @@ else{
 		}
 	}
 	/*check valid crm_payment_id ends here*/
-	
-	
-	$lead_data = __get_lead_details($lead_id,$batch_id);
-	if($lead_data){	
+
+
+	$lead_data = __get_lead_details($lead_id,$batch_id,$discount);
+	if($lead_data){
 		if(strtolower($data['currency'])=='inr' || empty($lead_data['primary_address_country'])){
           $lead_data['student_country']='india';
         }
@@ -94,7 +98,7 @@ else{
 			echo json_encode($response_result);
 			exit();
 		}
-		
+
 	}
 	else{
 		$errors=array('type'=>'Invalid Lead with batch id');
@@ -102,14 +106,14 @@ else{
 		echo json_encode($response_result);
 		exit();
 	}
-	
+
 }
 
 function insert_payment($student_batch_detail=array(),$student_detail=array(),$data=array()){
 	/*$get_student_payment_sql = "SELECT SUM(amount)amount FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$student_batch_detail['batch_id']."' AND deleted=0 AND payment_realized= 1";
 	$get_student_payment_Obj= $GLOBALS['db']->query($get_student_payment_sql);
 	$row_get_student_payment=$GLOBALS['db']->fetchByAssoc($get_student_payment_Obj);*/
-	
+
 	if($data['payment_realized']=='yes'){
 		$payment_realized = 1;
 		$total_amt=$data['amount'];
@@ -117,7 +121,7 @@ function insert_payment($student_batch_detail=array(),$student_detail=array(),$d
 	else{
 		$payment_realized = 0;
 	}
-	
+
 
 	  #update new student payment history
 	  $payment_val= $data['amount'];
@@ -151,15 +155,15 @@ function insert_payment($student_batch_detail=array(),$student_detail=array(),$d
 	  #Update relationship record of student payment history
 	  $insertRelSql="INSERT INTO te_student_te_student_payment_1_c SET id='".create_guid()."', 	date_modified='".date('Y-m-d H:i:s')."',deleted=0,te_student_te_student_payment_1te_student_ida='".$student_id."', te_student_te_student_payment_1te_student_payment_idb='".$id."'";
 	  $GLOBALS['db']->Query($insertRelSql);
-	  
-	  
-		
-		
+
+
+
+
 	if($total_amt>0){
 		updateStudentPaymentPlan($student_batch_detail['te_ba_batch_id_c'],$student_detail['id'],$total_amt,$student_detail['country']);
 	}
 	return $lead_payment_details_id;
-	
+
 }
 
 function update_payment($student_batch_detail=array(),$student_detail=array(),$data=array(),$check_payment_row=array()){
@@ -171,13 +175,13 @@ function update_payment($student_batch_detail=array(),$student_detail=array(),$d
 	}
 	$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$data['amount']."',payment_realized='".$payment_realized."' WHERE id='".$data['crm_payment_id']."'");
 	$GLOBALS['db']->query("UPDATE te_student_payment SET amount='".$data['amount']."',payment_realized='".$payment_realized."' WHERE id='".$check_payment_row['student_payment_id']."'");
-	
+
 	$get_student_payment_sql = "SELECT SUM(amount)amount FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$student_batch_detail['batch_id']."' AND deleted=0 AND payment_realized= 1";
-	
+
 	$get_student_payment_Obj= $GLOBALS['db']->query($get_student_payment_sql);
-	
+
 	$row_get_student_payment=$GLOBALS['db']->fetchByAssoc($get_student_payment_Obj);
-	
+
 	$total_amt=$row_get_student_payment['amount'];
 	removePaymentPlan($student_detail['id'],$student_batch_detail['te_ba_batch_id_c'],$student_detail['country']);
 	updateStudentPaymentPlan($student_batch_detail['te_ba_batch_id_c'],$student_detail['id'],$total_amt,$student_detail['country']);
@@ -286,14 +290,14 @@ function __get_student_batch_id($student_arr=array()){
     $studentBatchObj->te_student_te_student_batch_1te_student_ida=$student_arr['id'];
     $studentBatchObj->leads_id=$student_arr['lead_id'];
     $studentBatchObj->save();
-	
+
 	$disposition = new te_disposition();
 	$disposition->status 	   = 'Converted';
 	$disposition->status_detail  = 'Converted';
 	$disposition->name 		   	 = 'Converted';
 	$disposition->te_disposition_leadsleads_ida = $student_arr['lead_id'];
 	$disposition->save();
-	
+
 	$GLOBALS['db']->query("UPDATE leads SET status='Converted',status_description='Converted' ,converted_date='".date('Y-m-d')."' WHERE id='".$student_arr['lead_id']."'");
     #get new student batch id
     return array(
@@ -303,21 +307,39 @@ function __get_student_batch_id($student_arr=array()){
   }
 }
 
-function __get_lead_details($lead_id=NULL,$batch_id=NULL){
+function __get_lead_details($lead_id=NULL,$batch_id=NULL,$discountStr=NULL){
     /*$get_lead_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
     $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
     $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
     return $get_lead;*/
-	
+
 	$get_lead_sql = "SELECT leads.*,leads_cstm.* FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."'";
     $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
     $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
 	if($get_lead){
+    if($discountStr){
+      $discount[0]=" discount=".$discountStr;
+    }
+    if(!empty($get_lead['primary_address_country']) && strtolower($get_lead['primary_address_country'])=='india'){
+      $discount[1]=" country_log='India' ";
+    }
+    elseif(!empty($get_lead['primary_address_country']) && strtolower($get_lead['primary_address_country'])!='india'){
+      $discount[1]=" country_log='Other' ";
+    }
+    else{
+      $discount[1]=" country_log='India' ";
+    }
+    $discountStr = implode(',',$discount);
 		if($get_lead['id'] && !empty($get_lead['te_ba_batch_id_c']) && $get_lead['te_ba_batch_id_c']==$batch_id){
+      $update_lead_sql = "UPDATE leads SET date_modified='".date('Y-m-d H:i:s')."',$discountStr WHERE id='".$lead_id."'";
+			$update_lead_sql_Obj= $GLOBALS['db']->query($update_lead_sql);
 			$get_lead['batch_id'] = $batch_id;
 			return $get_lead;
 		}
 		else if($get_lead['id'] && empty($get_lead['te_ba_batch_id_c'])){
+      $update_leadtable_sql = "UPDATE leads SET date_modified='".date('Y-m-d H:i:s')."',$discountStr WHERE id='".$lead_id."'";
+			$update_leadtable_sql_Obj= $GLOBALS['db']->query($update_leadtable_sql);
+
 			$update_lead_sql = "UPDATE leads_cstm SET te_ba_batch_id_c='".$batch_id."' WHERE leads_cstm.id_c='".$lead_id."'";
 			$update_lead_sql_Obj= $GLOBALS['db']->query($update_lead_sql);
 			unset($get_lead['te_ba_batch_id_c']);
@@ -329,16 +351,16 @@ function __get_lead_details($lead_id=NULL,$batch_id=NULL){
 			$email_addr_bean_rel_Obj= $GLOBALS['db']->query($email_addr_bean_rel_sql);
 			$email_addr_bean_rel_res=$GLOBALS['db']->fetchByAssoc($email_addr_bean_rel_Obj);
 			if($email_addr_bean_rel_res){
-				
+
 				$find_leads_in_eabr_sql = "SELECT email_addr_bean_rel.bean_id FROM email_addr_bean_rel WHERE email_addr_bean_rel.email_address_id='".$email_addr_bean_rel_res['email_address_id']."' AND email_addr_bean_rel.bean_module='Leads'";
 				$find_leads_in_eabr_Obj = $GLOBALS['db']->query($find_leads_in_eabr_sql);
-				
+
 				$find_leads_in_eabr_Arr=[];
 				while($find_leads_in_eabr_res=$GLOBALS['db']->fetchByAssoc($find_leads_in_eabr_Obj)){
 					$find_leads_in_eabr_Arr[]=$find_leads_in_eabr_res['bean_id'];
 				}
 				$check_lead_exists_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id IN('".implode("','",$find_leads_in_eabr_Arr)."') AND leads_cstm.te_ba_batch_id_c='".$batch_id."' LIMIT 0,1";
-				
+
 				$check_lead_exists_Obj = $GLOBALS['db']->query($check_lead_exists_sql);
 				$check_lead_exists_res = $GLOBALS['db']->fetchByAssoc($check_lead_exists_Obj);
 				if($check_lead_exists_res){
@@ -347,16 +369,16 @@ function __get_lead_details($lead_id=NULL,$batch_id=NULL){
 				else{
 					$web_lead_id=$get_lead['web_lead_id'];
 					$ins_lead_id = create_guid();
-					$insertLeadSql="INSERT INTO leads SET id='".$ins_lead_id."',date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', modified_user_id='1',created_by='1', assigned_user_id='".$get_lead['assigned_user_id']."', first_name='".$get_lead['first_name']."', last_name='".$get_lead['last_name']."', duplicate_check=1, neoxstatus=1, assigned_date='".date('Y-m-d H:i:s')."', assigned_flag=1, phone_mobile='".$get_lead['phone_mobile']."',status='Alive',status_description='New Lead',lead_source='Website',gender='".$get_lead['gender']."',primary_address_street='".$get_lead['primary_address_street']."',primary_address_city='".$get_lead['primary_address_city']."',primary_address_state='".$get_lead['primary_address_state']."',primary_address_postalcode='".$get_lead['primary_address_postalcode']."',primary_address_country='".$get_lead['primary_address_country']."',alt_address_street='".$get_lead['alt_address_street']."',alt_address_city='".$get_lead['alt_address_city']."',alt_address_state='".$get_lead['alt_address_state']."',alt_address_postalcode='".$get_lead['alt_address_postalcode']."',alt_address_country='".$get_lead['alt_address_country']."',web_lead_id=$web_lead_id,is_sent_web=1";
+					$insertLeadSql="INSERT INTO leads SET id='".$ins_lead_id."',date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', modified_user_id='1',created_by='1', assigned_user_id='".$get_lead['assigned_user_id']."', first_name='".$get_lead['first_name']."', last_name='".$get_lead['last_name']."', duplicate_check=1, neoxstatus=1, assigned_date='".date('Y-m-d H:i:s')."', assigned_flag=1, phone_mobile='".$get_lead['phone_mobile']."',status='Alive',status_description='New Lead',lead_source='Website',gender='".$get_lead['gender']."',primary_address_street='".$get_lead['primary_address_street']."',primary_address_city='".$get_lead['primary_address_city']."',primary_address_state='".$get_lead['primary_address_state']."',primary_address_postalcode='".$get_lead['primary_address_postalcode']."',primary_address_country='".$get_lead['primary_address_country']."',$discountStr,alt_address_street='".$get_lead['alt_address_street']."',alt_address_city='".$get_lead['alt_address_city']."',alt_address_state='".$get_lead['alt_address_state']."',alt_address_postalcode='".$get_lead['alt_address_postalcode']."',alt_address_country='".$get_lead['alt_address_country']."',web_lead_id=$web_lead_id,is_sent_web=1";
 					$GLOBALS['db']->Query($insertLeadSql);
-					
+
 					$insertLeadCstmSql="INSERT INTO leads_cstm SET id_c='".$ins_lead_id."',company_c='".$get_lead['company_c']."', functional_area_c='".$get_lead['functional_area_c']."', work_experience_c='".$get_lead['work_experience_c']."', education_c='".$get_lead['education_c']."',previous_courses_from_te_c='".$get_lead['previous_courses_from_te_c']."',city_c='".$get_lead['city_c']."',age_c='".$get_lead['age_c']."',te_ba_batch_id_c='".$batch_id."'";
 					$GLOBALS['db']->Query($insertLeadCstmSql);
-					
-					
+
+
 					$insert_email_bean_relSql="INSERT INTO email_addr_bean_rel SET id='".create_guid()."',bean_id='".$ins_lead_id."', email_address_id='".$email_addr_bean_rel_res['email_address_id']."', bean_module='Leads', primary_address='1',date_created='".date('Y-m-d H:i:s')."',date_modified='".date('Y-m-d H:i:s')."'";
 					$GLOBALS['db']->Query($insert_email_bean_relSql);
-					
+
 					$new_lead_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$ins_lead_id."'";
 					$new_lead_sql_Obj= $GLOBALS['db']->query($new_lead_sql);
 					$new_lead=$GLOBALS['db']->fetchByAssoc($new_lead_sql_Obj);
@@ -374,7 +396,7 @@ function __get_lead_details($lead_id=NULL,$batch_id=NULL){
 	else{
 		return 0;
 	}
-    
+
 }
 function getSrmUser($batch_id){
   $srmSql = "SELECT assigned_user_id FROM te_srm_auto_assignment WHERE deleted=0 AND te_ba_batch_id_c='".$batch_id."'";
