@@ -63,4 +63,5 @@
 
 //close of connection
     mysqli_close($conn);
-    ?>		 
+    ?>	
+</table>
