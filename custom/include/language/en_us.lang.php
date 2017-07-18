@@ -164,9 +164,9 @@ $GLOBALS['app_list_strings']['exptypedom']=array (
   'PO' => 'Expense With PO',
   'PR' => 'Expense Without PO',
 );
-$GLOBALS['app_list_strings']['glcode']=array (
-'Housekeeping_Charges'=>'Housekeeping Charges',
-'Housekeeping_Expenses___MIsc_'=>'Housekeeping Expenses - MIsc.',
+$GLOBALS['app_list_strings']['list_glcode']=array (
+'Branding_Housekeeping_Charges'=>'Housekeeping Charges',
+'Branding_Housekeeping_Expenses___MIsc_'=>'Housekeeping Expenses - MIsc.',
 'Miscellaneous_Exp_Facilities_'=>'Miscellaneous Exp-Facilities.',
 'Postage_&_Courier'=>'Postage & Courier',
 'Printing_&_Stationery'=>'Printing & Stationery',
@@ -281,8 +281,8 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';
-$GLOBALS['app_list_strings']['cost_center']=array (
- 'Branding'=>'Branding',
+$GLOBALS['app_list_strings']['list_cost_center']=array (
+'Branding'=>'Branding',
 'GOVTBusiness'=>'GOVT Business',
 'MLSNagaraj'=>'MLS Nagaraj',
 'ProjectSimense'=>'Project - Simense',

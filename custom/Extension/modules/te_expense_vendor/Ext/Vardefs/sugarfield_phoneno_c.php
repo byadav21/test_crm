@@ -86,14 +86,6 @@ $dictionary['te_expense_vendor']['fields']['status'] =array (
 
  
 
-
-$dictionary['te_expense_vendor']['fields']['glcode'] =array (
-        'name' => 'glcode',  'label' => 'GL Code',      
-        'type' => 'varchar',        
-        'len' => '255',       
-);
-
-
 $dictionary['te_expense_vendor']['fields']['reason_rejection'] =array (
         'name' => 'reason_rejection',  'label' => 'REject Reason',      
         'type' => 'varchar',        
@@ -126,14 +118,26 @@ $dictionary['te_expense_vendor']['fields']['contact_person'] =array (
         'len' => '25',       
 );
 
- $dictionary['te_expense_vendor']['fields']['cost_center'] =array (
+
+
+$dictionary['te_expense_vendor']['fields']['glcode'] =array(
+        'name' => 'glcode',  
+        'label' => 'GL Code',      
+        'type' => 'dynamicenum', 
+         'dbType' => 'enum',
+           'options' => 'list_glcode',
+        'parentenum' => 'cost_center',       
+        'len' => '255',       
+);
+
+$dictionary['te_expense_vendor']['fields']['cost_center'] =array(
 	'name' => 'cost_center',
 	'label' => 'Cost Center',
 	'type' => 'enum',	
 	'len' => '150',
         'size' => '20',
 	'required' => false ,
-	'options'=>'cost_center'
+	'options'=>'list_cost_center'
 );
 
 

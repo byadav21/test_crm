@@ -39,13 +39,17 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 			 $statusrsub=te_expense_vendor_cls::getStatusApproval( $this->bean->id); 
 		  } 
 		 $ddown='';  
-		foreach($GLOBALS['app_list_strings']['glcode'] as $key=>$val){
-			$ddown.= '<option value="'.$key.'"';
-			if($this->bean->glcode==$key) $ddown.= ' selected ';
-			$ddown.= ' >' . $val .'</option>';
+		 
+		 $glArray=[]; 
+		foreach($GLOBALS['app_list_strings']['list_glcode'] as $key=>$val){
+			 $glcode=explode('_',$key);
+			 if($glcode & count($glcode)>0){				 
+				 $glArray[$glcode]=array($key=>$value);
+			 }
 		}
-                $cost_centerddown='';  
-		foreach($GLOBALS['app_list_strings']['cost_center'] as $key=>$val){
+		echo '<script>'. json_encode($glArray) .'</script>';
+        $cost_centerddown='';  
+		foreach($GLOBALS['app_list_strings']['list_cost_center'] as $key=>$val){
 			$cost_centerddown.= '<option value="'.$key.'"';
 			if($this->bean->cost_center==$key) $cost_centerddown.= ' selected ';
 			$cost_centerddown.= ' >' . $val .'</option>';
