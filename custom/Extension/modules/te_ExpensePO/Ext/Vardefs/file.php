@@ -20,7 +20,7 @@ $dictionary['te_ExpensePO']['fields']['cost_center'] =array (
 	'len' => '150',
     'size' => '20',
 	'required' => false ,
-	'options'=>'cost_center'
+	'options'=>'list_cost_center'
 );
 
 
