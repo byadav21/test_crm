@@ -306,8 +306,16 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 
 <script>
  {literal}
-    var records='{{$overview->id}}';
-    var glcode='{{$overview->glcode}}';
+
+    	$( "#cost_center" ).on('change',function( event ) {	
+    	 
+				$.post( "index.php?module=te_expense_vendor&action=ajax_gl&to_pdf=1", { cost_center: $(this).val()})
+				  .done(function( data ) {
+				     $('#gldpid').html(data);
+				  });
+    	});
+    	
+    	
     	$( ".rejectme" ).on('click',function( event ) {	
 	
 		 swal({

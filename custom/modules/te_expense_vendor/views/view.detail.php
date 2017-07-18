@@ -40,14 +40,7 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 		  } 
 		 $ddown='';  
 		 
-		 $glArray=[]; 
-		foreach($GLOBALS['app_list_strings']['list_glcode'] as $key=>$val){
-			 $glcode=explode('_',$key);
-			 if($glcode & count($glcode)>0){				 
-				 $glArray[$glcode]=array($key=>$value);
-			 }
-		}
-		echo '<script>'. json_encode($glArray) .'</script>';
+		
         $cost_centerddown='';  
 		foreach($GLOBALS['app_list_strings']['list_cost_center'] as $key=>$val){
 			$cost_centerddown.= '<option value="'.$key.'"';
@@ -83,9 +76,12 @@ class te_Expense_VendorViewDetail extends ViewDetail {
 		$inQuery=substr($inQuery,0, strlen($inQuery)-1);
 		
 		$isCancel=(!$expObj->getStatusForEdit($this->bean->id,$inQuery))? 0: 1;
-		$this->ss->assign('isCancel', $isCancel);	
-		
-		
+		$this->ss->assign('isCancel', $isCancel);?>
+		<script>
+		    var records='<?php echo $overview->id ?>';
+			var glcode='<?php $overview->glcode ?>';
+		</script>	
+		<?php
 		parent::display();
 		
 	}
