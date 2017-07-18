@@ -259,9 +259,9 @@ class="yui-navset detailview_tabs"
 							   
 						  {elseif  $roleStatus == 0 &&  $overview->status!='0' }
                                                                         <lable><strong>Cost Center</strong></lable>
-                                                                        <select style="width: 300px!important;clear: none;display: inline;" id="cost_center">{$cost_centerddown}</select>
+                                                                        <select style="width: 300px!important;clear: none;display: inline;" id="cost_center"><option value="">-- Select Cost Center  --</option>{$cost_centerddown}</select>
                                                                         <lable><strong>GL Code</strong></lable>
-                                                                        <select style="width: 300px!important;clear: none;display: inline;" id="gldpid">{$dropdownData}</select>
+                                                                        <select style="width: 300px!important;clear: none;display: inline;" id="gldpid"><option value="">-- Select Cost Center first --</option></select>
 									<button class="button approveme">Approve</button>
 									<button class="button rejectme">Reject</button>
 						
@@ -391,6 +391,11 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
 	$( ".approveme" ).on('click',function( event ) {	
 	       var glc=$('#gldpid').val();
                var cost_center = $('#cost_center').val();
+          if(cost_center=='' || glc==''){
+             toastr["error"]("Please select cost center and GL code");
+             return false;
+          }     
+               
 		  $.post( "index.php?module=te_expense_vendor&action=approval&to_pdf=1", { type: "approve", record: records ,reason:glc,cost_center:cost_center})
 				  .done(function( data ) {
 					 
