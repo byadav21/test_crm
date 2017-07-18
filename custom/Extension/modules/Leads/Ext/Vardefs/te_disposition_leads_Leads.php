@@ -21,3 +21,37 @@ $dictionary["Lead"]["fields"]["country_log"] =
                 'comment' => 'Status of the country',
                 'merge_filter' => 'enabled',
             );
+
+
+$dictionary["Lead"]["fields"]["dispositionName"] = 
+            array(
+                'name' => 'dispositionName',
+                'vname' => 'LBL_DISPOSITION_NAME',
+                 'type' => 'varchar',
+                'len' => '255',
+		'size' => '20',
+                'module' => 'Leads',
+                'required' => false,
+                'reportable' => true,
+                'audited' => false,
+                'importable' => 'true',
+                'duplicate_merge' => false,
+            );
+
+$dictionary["Lead"]["fields"]["callType"] = 
+            array(
+                'name' => 'callType',
+                'label' => 'Call Type',
+                'vname' => 'LBL_CALL_TYPE',
+                'type' => 'varchar',
+                'module' => 'Leads',
+                'len' => '255',
+		'size' => '20',
+                'required' => false,
+                'reportable' => true,
+                'audited' => false,
+                'importable' => 'true',
+                'duplicate_merge' => false,
+            );
+
+
