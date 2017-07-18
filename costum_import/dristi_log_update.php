@@ -1,32 +1,66 @@
-<?php
-
-include 'db.php';
-
-function getLog($lead_id){
- $SQLSELECT  = "SELECT dl.lead_id, dl.`dispositionName` ,dl.dated,dl.`entryPoint` ,dl.`callType` FROM `dristi_log` dl
-            WHERE dl.lead_id='".$lead_id."' AND dl.`entryPoint`='dispose amyo' AND dl.`customer_id`!=''
-            ORDER BY dl.lead_id,dl.dated  DESC
-            LIMIT 1";
-}
-
-$SQLSELECT  = "SELECT l.id FROM `leads` l limit 10";
-$result_set = mysqli_query($conn, $SQLSELECT) or die('error:'. mysqli_error($conn));
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Lead ID</th>
+            <th>dispositionName</th>
+            <th>callType</th>
+            <th>dristi_customer_id</th>
+        </tr>	
+    </thead>
+    <?php
+    include 'db.php';
 
 
-  while ($emapData = mysqli_fetch_assoc($result_set))
-        {   
-            echo $emapData['id'].'<br>';
-            //print_r($emapData); die;
-      
-            $Leadssql    = "update  leads set vendor='".$emapData[4]."',utm='".$emapData[5]."',utm_campaign='".$emapData[6]."' where id ='".$emapData[0]."'";
-	   
-            //$result = mysqli_query($conn, $Leadssql);
-            
-         
+    $SQLSELECT  = " SELECT id,dristi_customer_id
+                            FROM `leads`
+                    WHERE dispositionName IS NULL
+                      AND callType IS NULL 
+                      AND dristi_customer_id IS NOT NULL
+                    LIMIT 300000000  ";
+    $result_set = mysqli_query($conn, $SQLSELECT) or die('error:' . mysqli_error($conn));
+
+
+    while ($emapData = mysqli_fetch_assoc($result_set))
+    {
+        $SQLSELECTx  = "SELECT  
+                                    dl.lead_id,
+                                    dl.`dispositionName`,
+                                    dl.dated,
+                                    dl.`entryPoint`,
+                                    dl.`callType`
+                            FROM `dristi_log` dl
+                            WHERE dl.customer_id='" . $emapData['dristi_customer_id'] . "'
+                              AND dl.`entryPoint`='dispose amyo'
+                        ORDER BY  dl.dated DESC
+                        LIMIT 1";
+        $result_setx = mysqli_query($conn, $SQLSELECTx) or die("error 1:" . mysqli_errno());
+        $contRow     = mysqli_num_rows($result_setx);
+        $data        = mysqli_fetch_assoc($result_setx);
+
+
+
+        if ($contRow > 0)
+        {
+            $Leadssql = "update  "
+                    . "  leads set "
+                    . "  dispositionName='" . $data['dispositionName'] . "',"
+                    . "  callType='" . $data['callType'] . "' "
+                    . "  where id ='" . $data['lead_id'] . "'";
+            $result   = mysqli_query($conn, $Leadssql);
+            ?>
+
+            <tr>
+                <td><?php echo $data['lead_id']; ?></td>
+                <td><?php echo $data['dispositionName']; ?></td>
+                <td><?php echo $data['callType']; ?></td>
+                <td><?php echo $emapData['dristi_customer_id']; ?></td>
+
+            </tr>
+            <?php
         }
-   
+    }
+
 
 //close of connection
-mysqli_close($conn);
-
-?>		 
+    mysqli_close($conn);
+    ?>		 
