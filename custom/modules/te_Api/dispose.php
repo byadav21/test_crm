@@ -33,6 +33,10 @@ if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 					 $attempid++; 
 					 $sql="update leads_cstm set attempts_c='". $attempid."' where id_c='".  $id."'";
 					 $res=$db->query($sql);
+					 if($attempid==10){
+						 $sql="update leads set status='Dead', status_description='Retired' where id='".  $id ."'";
+						 $res=$db->query($sql);
+					 }
 
 					$disposition = new te_disposition();
 					$disposition->status 	   = 'No Answer';
