@@ -571,7 +571,7 @@ class addPaymentClass
         error_reporting(0);
         global $db;
 
-
+        $bean->email_add_c=$bean->email1;
         // Capture the date of referral creation
         if (isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']))
         {
@@ -625,21 +625,21 @@ class addPaymentClass
             //if(!isset($utmDetails['batch'] || !$utmDetails['batch'] ))  $utmDetails['batch']=$bean->batch; 
             #check duplicate leads
             $sql = "SELECT leads.id as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
-            if ($bean->email1 != "")
+            /*if ($bean->email1 != "")
             {
                 $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
                 $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-            }
+            }*/
             $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batch_id['id'] . "' and status_description!='Duplicate' and  leads.deleted=0"; // AND DATE(date_entered) = '".date('Y-m-d')."'";
             if ($bean->phone_mobile && $bean->email1)
             {
 
-                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
+                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_add_c = '{$bean->email1}')";
             }
             elseif (!$bean->phone_mobile && $bean->email1)
             {
 
-                $sql .= " and email_addresses.email_address = '{$bean->email1}'";
+                $sql .= " and email_add_c=  '{$bean->email1}'";
             }
             elseif ($bean->phone_mobile && !$bean->email1)
             {
@@ -699,21 +699,21 @@ class addPaymentClass
             {
 
                 $sql = "SELECT leads.id  as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
-                if ($bean->email1 != "")
+                /*if ($bean->email1 != "")
                 {
                     $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
                     $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-                }
+                }*/
                 $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and status_description!='Duplicate' and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
                 if ($bean->phone_mobile && $bean->email1)
                 {
 
-                    $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
+                    $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_add_c = '{$bean->email1}')";
                 }
                 elseif (!$bean->phone_mobile && $bean->email1)
                 {
 
-                    $sql .= " and email_addresses.email_address = '{$bean->email1}'";
+                    $sql .= " and email_add_c= '{$bean->email1}'";
                 }
                 elseif ($bean->phone_mobile && !$bean->email1)
                 {
@@ -1078,21 +1078,21 @@ class addPaymentClass
         if ($bean->fetched_row['id'] == '')
         {
             $sql = "SELECT leads.id  as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
-            if ($bean->email1 != "")
+           /* if ($bean->email1 != "")
             {
                 $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
                 $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-            }
+            }*/
             $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and status_description!='Duplicate' and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
             if ($bean->phone_mobile && $bean->email1)
             {
 
-                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_addresses.email_address = '{$bean->email1}')";
+                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_add_c = '{$bean->email1}')";
             }
             elseif (!$bean->phone_mobile && $bean->email1)
             {
 
-                $sql .= " and email_addresses.email_address = '{$bean->email1}'";
+                $sql .= " and email_add_c= '{$bean->email1}'";
             }
             elseif ($bean->phone_mobile && !$bean->email1)
             {
