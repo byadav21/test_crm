@@ -98,7 +98,7 @@ class Batchwisereferal extends Dashlet{
 		
     protected function getCurrentBenchOutput()
     {
-		
+           return false;		
 		global $sugar_config,$app_list_strings,$current_user,$db;
         $leadsData=array();
 		$user_id=$current_user->id;
