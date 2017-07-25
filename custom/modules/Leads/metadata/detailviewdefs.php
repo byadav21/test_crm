@@ -205,6 +205,11 @@ array (
             'name' => 'gender',
             'label' => 'Gender',
           ),
+          1 => 
+          array (
+            'name' => 'lead_source_types',
+            'label' => 'Lead Source Type',
+          ),
         ),
         9 => 
         array (
