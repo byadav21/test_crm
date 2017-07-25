@@ -66,6 +66,25 @@ $dictionary['Lead']['fields']['utm_contract_c'] =array (
         'duplicate_merge' => false,
 );
 
+$dictionary['Lead']['fields']['lead_source'] =array(
+        'name' => 'lead_source',  
+         'vname' => 'LBL_LEAD_SOURCE',
+        'type' => 'dynamicenum', 
+         'dbType' => 'enum',
+           'options' => 'lead_source_custom_dom',
+        'parentenum' => 'lead_source_types',       
+        'len' => '255',       
+);
+
+$dictionary['Lead']['fields']['lead_source_types'] =array(
+	'name' => 'lead_source_types',
+	'label' => 'Lead Source Type',
+	'type' => 'enum',	
+	'len' => '150',
+        'size' => '20',
+	'required' => false ,
+	'options'=>'lead_source_custom_dom_type'
+);
 
 
  ?>

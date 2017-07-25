@@ -174,19 +174,26 @@ array (
             'studio' => 'visible',
             'label' => 'COMMENT',
           ),
-          1 => '',
         ),
         10 => 
         array (
-          0 => 'lead_source',
-          1 => 
+          0 => 
+          array (
+            'name' => 'lead_source_types',
+            'label' => 'Lead Source Type',
+          ),
+          1 => 'lead_source',
+        ),
+        11 => 
+        array (
+          0 => 
           array (
             'name' => 'parent_name',
             'studio' => 'visible',
             'label' => 'LBL_FLEX_RELATE',
           ),
         ),
-        11 => 
+        12 => 
         array (
           0 => 'status',
           1 => 
@@ -194,7 +201,7 @@ array (
             'name' => 'status_description',
           ),
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
@@ -207,7 +214,7 @@ array (
             'label' => 'LBL_ASSIGNED_TO',
           ),
         ),
-        13 => 
+        14 => 
         array (
           0 => 
           array (
@@ -220,13 +227,14 @@ array (
             'label' => 'LBL_DATEOFCALLBACK',
           ),
         ),
-        14 => 
+        15 => 
         array (
           0 => 
           array (
             'name' => 'date_of_prospect',
             'label' => 'LBL_DATEOFPROSPECT',
           ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 

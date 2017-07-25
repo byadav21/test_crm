@@ -324,19 +324,24 @@ $GLOBALS['app_list_strings']['lead_source_dom']=array (
 );
 $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   '' => '',
-  'Chat' => 'Chat',
-  'InboundCalls' => 'Inbound Calls',
-  'Referrals' => 'Referrals',
-  'Email Enquiries' => 'Email Enquiries',
-  'Campaign' => 'Campaign',
-  'Channel' => 'Channel',
-  'Crosssell' => 'Cross sell',
-  'ABND' => 'ABND',
-  'FailPayment' => 'Fail Payment',
-  'Offline_Chat' => 'Offline Chat',
-  'SPJ_Referrals' => 'SPJ Referrals',
-  'Mica_Referrals' => 'Mica Referrals',
-'Raymonds'=>'Raymonds'
+  'CC_Chat' => 'Chat',
+  'CC_InboundCalls' => 'Inbound Calls',
+  'CC_Referrals' => 'Referrals',
+  'CC_Email Enquiries' => 'Email Enquiries',
+  'CC_Campaign' => 'Campaign', 
+  'CC_Crosssell' => 'Cross sell',
+  'CC_ABND' => 'ABND',
+  'CC_FailPayment' => 'Fail Payment',
+  'CC_Offline_Chat' => 'Offline Chat',
+  'CC_SPJ_Referrals' => 'SPJ Referrals',
+  'CC_Mica_Referrals' => 'Mica Referrals',
+  'OO_KOL'=>'TBA KOLKATA',
+  'OO_NOI'=>'TBA NOIDA',
+  'OO_HYD'=>'TBA HYDERABAD',
+  'OO_GUR'=>'TBA GURGAON',
+  'OO_JAL'=>'TBA JALANDHAR',   
+  'OO_NAG'=>'TBA NAGPUR',
+  'OO_CHN'=>'Channels',
 
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
@@ -663,6 +668,11 @@ $GLOBALS['app_list_strings']['countries_list']  = array
 $GLOBALS['app_list_strings']['country_log']=array (
   'India' => 'India',
   'Other' => 'Other',
+);
+
+$GLOBALS['app_list_strings']['lead_source_custom_dom_type']=array (
+  'CC' => 'Call Center',
+  'OO' => 'Channel',
 );
 
 $GLOBALS['app_list_strings']['lead_status_custom_dom']=array (
