@@ -1,13 +1,13 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
-
+set_time_limit(0); 
 ini_set('memory_limit','1024M');
 require_once('include/entryPoint.php');
 global $db;
 $studentDetails=[];
 $Insert_student_counter=0;
-$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=0 limit 0,50";
+$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=0 limit 0,1000";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
@@ -17,9 +17,9 @@ if($studentDetails){
   foreach ($studentDetails as $key => $value) {
    $lead_detail = __get_lead_details(trim($value['email']),trim($value['mobile']),trim($value['batch_id']));
    
-   //echo '<pre>';
-   //print_r($lead_detail);
-   
+  // echo '<pre>';
+  // print_r($lead_detail);
+  //die; 
     if($lead_detail){
 
         $lead_detail['student_email']=$value['email'];
@@ -240,7 +240,7 @@ function __get_student_batch_id($student_arr=array()){
 }
 
 function __get_lead_details($student_email=NULL,$student_mobile=NULL,$batch_id=NULL){
-  $lead_id = '';
+ /* $lead_id = '';
   $find_lead_by_email_sql="SELECT eabr.bean_id FROM email_addr_bean_rel eabr INNER JOIN email_addresses ea ON (ea.id = eabr.email_address_id) INNER JOIN leads ON leads.id=eabr.bean_id INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND ea.email_address='".$student_email."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
   $find_lead_by_email_Obj= $GLOBALS['db']->query($find_lead_by_email_sql);
   $find_lead_by_email=$GLOBALS['db']->fetchByAssoc($find_lead_by_email_Obj);
@@ -260,7 +260,21 @@ function __get_lead_details($student_email=NULL,$student_mobile=NULL,$batch_id=N
     $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
     $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
     return $get_lead;
-  }
+  }*/
+  
+  
+ 	$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and status='Converted' and (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."')";
+	
+	$get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
+	$get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
+	if($get_lead){
+		return $get_lead;
+	}else{
+	$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and   (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."')";
+		$get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
+		return   $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
+   }
+
 
 
 }
@@ -322,3 +336,4 @@ function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country
 		}
 	}
 }
+

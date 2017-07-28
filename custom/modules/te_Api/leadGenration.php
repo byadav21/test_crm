@@ -1,7 +1,7 @@
 <?php				
 	require_once('custom/modules/te_Api/leads_override.php');
-	ini_set('display_errors',1);
-	error_reporting(-1);
+	ini_set('display_errors',0);
+	error_reporting(0);
 	$name=$_REQUEST['name'];
 	$phone=$_REQUEST['phone'];
 	$email= $_REQUEST['email'];
@@ -17,7 +17,7 @@
 	$uname='';
 	$campagain_d='';
 	$lead_d='';
-	if($source && $medium && $term && $name && $phone && $email){
+	if($source && $medium && $term  && $email){
            
 	  $utm=	$leadObj->fetchUtm($source,$medium,$term);
 	     if($utm){
@@ -55,7 +55,7 @@
           }
 	}else{
 		
-	 echo json_encode(array('status'=>'error','msg'=>'Name, phone, email, Utm source, utm medium and utm term is required field')); exit();	
+	 echo json_encode(array('status'=>'error','msg'=>'Email, Utm source, utm medium and utm term is required field')); exit();	
 	}
  
 	$sql = "SELECT leads.id as id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
@@ -83,6 +83,7 @@
 	$leadObj->first_name=$name;
 	$leadObj->duplicate_check= 1;
 	$leadObj->email1= $email;
+        $leadObj->email_add_c= $email;
 	$leadObj->status=$status;
 	$leadObj->status_description=$statusDetail;
 	if($_REQUEST['work_experience'])  $leadObj->work_experience_c=$_REQUEST['work_experience'];
