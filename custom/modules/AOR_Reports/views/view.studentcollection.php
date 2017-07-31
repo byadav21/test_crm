@@ -23,11 +23,11 @@ class AOR_ReportsViewStudentcollection extends SugarView {
 	public function display() {
 		global $sugar_config,$app_list_strings,$current_user,$db;
 		 
-		$sql="select te_student_payment.date_of_payment,te_in_institutes.name,b.batch_code,s.name as fname,s.state,fee_inr,amount,payment_type 
+		$sql="select te_student_payment.date_of_payment,te_pr_programs.name,b.batch_code,s.name as fname,s.state,fee_inr,amount,payment_type 
 			from te_student_batch b inner join te_student_te_student_batch_1_c r on r.te_student_te_student_batch_1te_student_batch_idb=b.id 
 			inner join te_student s on te_student_te_student_batch_1te_student_ida=s.id 
-			inner join te_in_institutes_te_ba_batch_1_c on b.te_ba_batch_id_c=te_in_institutes_te_ba_batch_1te_ba_batch_idb 
-			inner join te_in_institutes on te_in_institutes.id=te_in_institutes_te_ba_batch_1te_in_institutes_ida inner join te_student_payment 
+				inner join te_pr_programs_te_ba_batch_1_c on b.te_ba_batch_id_c=te_pr_programs_te_ba_batch_1te_ba_batch_idb
+				inner join te_pr_programs on te_pr_programs.id=te_pr_programs_te_ba_batch_1te_pr_programs_ida inner  join te_student_payment 
 			on te_student_payment.te_student_batch_id_c=b.id WHERE payment_realized=1 and b.deleted=0 and s.deleted=0 and te_student_payment.deleted=0   ";
 				
 		if(isset($_POST['batches']) && $_POST['batches']){
@@ -50,7 +50,7 @@ class AOR_ReportsViewStudentcollection extends SugarView {
 		   $sql .=" and te_student_payment.payment_type = '" .  $_POST['pmode']  ."'";
 		}		
 				
-		  $sql .=" group by s.name,b.name,te_in_institutes.name,fee_inr order by s.name";
+		  $sql .="   order by s.name";
 					   
 		$leadObj =$db->query($sql);
 		if(isset($_POST['export']) && $_POST['export']=="Export"){
