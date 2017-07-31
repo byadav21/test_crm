@@ -62,7 +62,7 @@ class AOR_ReportsViewStudentcollection extends SugarView {
 				 $i=0;
 				foreach($row as $key1=>$value){
 					 
-					$data.= str_replace(',',' ' $value) ;
+					$data.= str_replace(',',' ', $value) ;
 					if($i++ < count($row)-1) $data.= ",";
 				}
 				$data.= "\n";
