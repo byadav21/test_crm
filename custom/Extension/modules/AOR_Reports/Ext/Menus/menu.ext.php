@@ -50,7 +50,8 @@ if($current_user->is_admin==1){
 $module_menu[] = array ('index.php?module=te_report_recipients&action=index', "Report Recipients", 'te_report_recipients');  
 }
 $module_menu[] = array ('index.php?module=AOR_Reports&action=batchwisereferals', "Batch Wise Referals", 'AOR_Reports');
-
+$module_menu[] = array ('index.php?module=AOR_Reports&action=studentgsv', "Student GSV", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=studentcollection', "Student Collection", 'AOR_Reports');
 
 $misData=$acl_obj->getUserSlug($current_user->id);
 $displayCC=false;
