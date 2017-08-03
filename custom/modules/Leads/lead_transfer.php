@@ -3,6 +3,7 @@ ini_set('display_errors','1');
 //error_reporting(E_ALL);
 require_once('custom/modules/Leads/customfunctionforcrm.php');
 require_once('modules/ACL/ACLController.php');
+ 
 global $db,$current_user,$mod_strings, $app_strings;
 $vendorArr='';$mediumArr='';
 $customfunctionforcrmObj = new customfunctionforcrm();
@@ -41,9 +42,7 @@ function getUtmByContractIDs($vAndCtVendorArr,$vAndCtArr){
   return $batchOptions;
 }
 ?>
-<html>
-    <title>Bulk Lead transfer</title>
-  <head>
+ 
     <style>
 table {
     font-family: arial, sans-serif;
@@ -81,8 +80,7 @@ input[type=text], select {
 									selectAll: true,includeSelectAllOption: true,numberDisplayed:0
 								});
 							});	</script>
-    </head>
-        <body>
+  
              <section class="moduleTitle">
                 <fieldset>
                     <form action="index.php?module=Leads&action=lead_transfer&search_leads=1" method="post" id="lead_trans">
@@ -127,17 +125,22 @@ input[type=text], select {
 								  <option value="Crosssell">Cross sell</option>
 								  </select></td>
         <td><b>Lead Status</b></td>
-    <td><select name="Lead_status[]" multiple id="Lead_status">
-									<option  value="Converted">Converted</option>
-									<option  value="Alive">Alive</option>
-									<option  value="Dead">Dead</option>
-									<option  value="Duplicate">Duplicate</option>
-									<option  value="Dropout">Dropout</option>
-									<option  value="Warm">Warm</option>
-									</select></td>
+    <td>
+		
+			<select name="Lead_status[]" multiple id="Lead_status">		 
+				<option label="Alive" value="Alive" >Alive</option>
+				<option label="Converted" value="Converted">Converted</option>
+				<option label="Dead" value="Dead">Dead</option>
+				<option label="Duplicate" value="Duplicate">Duplicate</option>
+				<option label="Dropout" value="Dropout">Dropout</option>
+				<option label="Warm" value="Warm">Warm</option>
+				<option label="Recycle" value="Recycle">Recycle</option>
+			</select>
+		</td>
 	<td><b>Counsellor</b></td>
 
 							<td><select name="counsellor[]" multiple id="counsellor">
+							 
 								<?php
                   if($counsellorArr){
                   foreach($counsellorArr as $key=>$counsellorval){?>
@@ -146,21 +149,13 @@ input[type=text], select {
 									</select></td>
   </tr>
   <td><b>Status Details</b></td>
-    <td><select name="status_details[]" multiple id="status_details">
-									<option  value="Call Back">Call Back</option>
-									<option  value="Converted">Alive</option>
-									<option  value="Duplicate">Dead</option>
-									<option  value="Fallout">Duplicate</option>
-									<option  value="Follow Up">Dropout</option>
-									<option  value="Not Eligible">Not Eligible</option>
-									<option  value="Not Enquired">Not Enquired</option>
-									<option  value="Prospect">Prospect</option>
-									<option  value="Re-Enquired">Re-Enquired</option>
-									<option  value="Rejected">Rejected</option>
-									<option  value="Retired">Retired</option>
-									<option  value="Wrong Number">Wrong Number</option>
-									<option  value="Ringing Multiple Times">Ringing Multiple Times</option>
-									</select></td>
+    <td>
+		<select name="status_details[]" multiple id="status_details">
+
+			 <option value="Call Back">Call Back</option><option value="Follow Up">Follow Up</option><option value="New Lead" selected="selected">New Lead</option></select>
+		
+		
+		 ></td>
 		<?php
 		$acl_obj = new ACLController();
 		if($current_user->is_admin==1){ ?>
@@ -181,6 +176,7 @@ input[type=text], select {
 					<tr>
 					  <td><b>Number Of Leads</b></td>
 					  <td><input type="text" name="number_lead" id="no_lead"/></td>
+					<!--  <td><input type="checkbox" name="notAssigned" id="no_assigned"/> Not Assigned</td> -->
 					   <td><input type="Submit" name="Search" value="Search Lead"></td>
 				</tr>
 			</table>
@@ -189,10 +185,15 @@ input[type=text], select {
             </section>
             <br/>
 </form>
+
 <?php
-unset($_SESSION['leds_id']);
-unset($_SESSION['records_fetch']);
+
+ 
     if(isset($_POST['Search'])) {
+		
+			unset($_SESSION['leds_id']);
+			unset($_SESSION['records_fetch']);
+		
     		extract($_POST);
     		$where="";
     		if(!empty($start_date)&&!empty($end_date)){
@@ -350,12 +351,13 @@ else
 		  echo '</script>';
 		  //exit;
 }
-			$_SESSION['records_fetch']=$records_arr;
+	$_SESSION['records_fetch']=$records_arr;
       $_SESSION['leds_id']=$lead_ids;
 
 }
+ 
         //  $lead_ids = implode("__",$lead_ids);
- if(isset($_REQUEST['search_leads'])&& $_REQUEST['search_leads']==1 && isset($_SESSION['leds_id']) && !empty($_SESSION['leds_id'])){
+ if(isset($_REQUEST['search_leads']) && $_REQUEST['search_leads']==1 && isset($_SESSION['leds_id']) && !empty($_SESSION['leds_id'])){
 	  	 echo '<table>';
 		 echo ' <tr>
                 <th>Name</th>
@@ -373,10 +375,13 @@ else
 			<td><?php echo $_SESSION['records_fetch'][$key]['date_entered'];?></td>
 			<td><?php echo $_SESSION['records_fetch'][$key]['lead_source'];?></td>
 		</tr>
-    <?php
+    <?php 
+       echo '</table>';
 	}
 
-	echo '</table>';
+	
+	
+ 
 if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 
   //form submit of checkbox
@@ -459,8 +464,16 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 									}
 
 					}
+					unset($_SESSION['records_fetch']);
+		unset($_SESSION['leds_id']);
+		?>
+		 <script>
+		  alert( 'Lead transfered successfully'); window.location.reload();
+		 </script>
+		<?php
+					
 }
-
+		
 	 }
   }
   ?>
@@ -486,11 +499,9 @@ if(isset($_REQUEST['transfer_leads'])&&$_REQUEST['transfer_leads']==1){
 					  <input type="submit" name="transfer" value="Transfer" id="transfer">
 			   </div>
              </form>
-             <?php }
+             <?php } ?>
 
-             ?>
-  </body>
-       </html>
+ 
 
 <script>
 $(function(){
