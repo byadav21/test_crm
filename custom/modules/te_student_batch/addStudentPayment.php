@@ -31,8 +31,10 @@ class addStudentPaymentClass
               else{
                 $discount = $discount+$BatchDetails['discount_in_usd'];
               }
-              if(!empty($LeadDetails['discount'])){
-                $discount = $discount+$LeadDetails['discount'];
+			  
+              if(!empty($LeadDetails['discount']) && $LeadDetails['discount']>0){
+                //$discount = $discount+$LeadDetails['discount'];
+				$discount = $LeadDetails['discount'];
               }
 
             }
