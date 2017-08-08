@@ -34,14 +34,15 @@ if (isset($_POST["Import"]))
         $file     = fopen($filename, "r");
         while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
         {   
+           if($emapData[3]=='Converted') continue;
             echo $SQLSELECT = "SELECT * FROM leads WHERE `id`='".$emapData[0]."' ";
 				$result_set =  mysqli_query($conn,$SQLSELECT);
 				$contRow = mysqli_num_rows($result_set);
             if($contRow>0) {                   
             //It wiil insert a row to our subject table from our csv file`
             $LeadsCstmsql    = "update  leads_cstm set te_ba_batch_id_c='".$emapData[2]."'  where id_c ='".$emapData[0]."'";
-            $Leadssql    = "update  leads set vendor='".$emapData[4]."',utm='".$emapData[5]."',utm_campaign='".$emapData[6]."' where id ='".$emapData[0]."'";
-	    mysqli_query($conn, $Leadssql);        	
+            //$Leadssql    = "update  leads set vendor='".$emapData[4]."',utm='".$emapData[5]."',utm_campaign='".$emapData[6]."' where id ='".$emapData[0]."'";
+	    //mysqli_query($conn, $LeadsCstmsql);        	
             //we are using mysql_query function. it returns a resource on true else False on error
             $result = mysqli_query($conn, $LeadsCstmsql);
             }

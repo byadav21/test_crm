@@ -66,13 +66,13 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 	   if($_SESSION['lf_from_date'] && $_SESSION['lf_to_date']){
 		$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
 		$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
-		$where.=" AND DATE(l.date_entered)>='".$from_date."' AND DATE(l.date_entered)<='".$to_date."'";
+		$where.=" AND DATE(l.date_modified)>='".$from_date."' AND DATE(l.date_modified)<='".$to_date."'";
 	   }elseif($_SESSION['lf_from_date']!=""&&$_SESSION['lf_to_date']==""){
 		$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
-		$where.=" AND DATE(l.date_entered)='".$from_date."' ";
+		$where.=" AND DATE(l.date_modified)>='".$from_date."' ";
 	   }elseif($_SESSION['lf_from_date']==""&&$_SESSION['lf_to_date']!=""){
 		$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
-		$where.=" AND DATE(l.date_entered)='".$to_date."' ";
+		$where.=" AND DATE(l.date_modified)<='".$to_date."' ";
 	   }
 	   if(isset($_SESSION['lf_vendor']) && !empty($_SESSION['lf_vendor'])){
 		$where.=" AND l.vendor IN('".implode("','",$_SESSION['lf_vendor'])."') ";
@@ -83,27 +83,25 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 		if(isset($_POST['export']) && $_POST['export']=="Export"){
 			$data="Batch,Duplicate,Dead-Number,Not-Eligible,Not-Enquired,Rejected,Ringing-Multiple-Times,Wrong-Number,No-Answer,Re-Enquired,Invalid-Total,Call-Back,Retired,Fallout,Converted,Follow-Up,New-Lead,Prospect,Dropout,Valid-Total,Grand-Total\n";
 			$file = "leads_feedback_report";
-			$from_date="";
-			$to_date="";
-			$filename = $file . "_" . date ( "Y-m-d");
+			$filename = $file . "_" . date ("Y-m-d");
 			$_SESSION['lf_from_date'] = $_REQUEST['from_date'];
 			$_SESSION['lf_to_date'] = $_REQUEST['to_date'];
 			$_SESSION['lf_batch'] = $_REQUEST['batch'];
 			$_SESSION['lf_vendor'] = $_REQUEST['vendor'];
-			if($_SESSION['lf_from_date'] && $_SESSION['lf_to_date']){
+			/*if($_SESSION['lf_from_date'] && $_SESSION['lf_to_date']){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
-				$where.=" AND DATE(date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
+				$where.=" AND DATE(l.date_modified)>='".$from_date."' AND DATE(date_modified)<='".$to_date."'";
 			}elseif($_SESSION['lf_from_date']!=""&&$_SESSION['lf_to_date']==""){
 				$from_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_from_date'])));
-				$where.=" AND DATE(date_modified)='".$from_date."' ";
+				$where.=" AND DATE(date_modified)>='".$from_date."' ";
 			}elseif($_SESSION['lf_from_date']==""&&$_SESSION['lf_to_date']!=""){
 				$to_date=date('Y-m-d',strtotime(str_replace('/','-',$_SESSION['lf_to_date'])));
-				$where.=" AND DATE(date_modified)='".$to_date."' ";
+				$where.=" AND DATE(date_modified)<='".$to_date."' ";
 			}
 			if(isset($_SESSION['lf_vendor']) && !empty($_SESSION['lf_vendor'])){
 				$where.=" AND l.vendor IN('".implode("','",$_SESSION['lf_vendor'])."') ";
-			}
+			}*/
 			$councelorList=array();
 			$batchsearArr = (isset($_SESSION['lf_batch']) ? $_SESSION['lf_batch'] : "");
 			$batches = $this->getbatchforlead($batchsearArr);
@@ -111,6 +109,7 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 				foreach($batches as $batch_val){
 					$councelorList[$batch_val['id']]['name']=$batch_val['name'];
 				}
+				//echo $where;exit();
 				$leadSql="SELECT b.id,b.name,COUNT(l.id)total,l.status_description from te_ba_batch AS b LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id LEFT JOIN leads AS l ON l.id=lc.id_c AND l.deleted=0  WHERE b.deleted=0 AND b.batch_status<>'Closed' AND l.status_description!='' $where GROUP BY b.id,l.status_description ORDER BY b.name ASC";
 				$leadObj =$db->query($leadSql);
 				while($row =$db->fetchByAssoc($leadObj)){
@@ -157,7 +156,7 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 					$councelorList[$key]['No_Answer']=0;
 				if(!isset($councelor['Dropout']))
 					$councelorList[$key]['Dropout']=0;
-					
+
 				if(!isset($councelor['Invalid_Total'])){
 					$councelorList[$key]['Invalid_Total']=$councelorList[$key]['Wrong_Number']
 					+$councelorList[$key]['Dead_Number']
@@ -168,11 +167,11 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 					+$councelorList[$key]['Rejected']
 					+$councelorList[$key]['Re_Enquired']
 					+$councelorList[$key]['No_Answer'];
-					
+
 				}
 				if(!isset($councelor['Valid_Total'])){
 					$councelorList[$key]['Valid_Total']=$councelorList[$key]['Call_Back']
-					+$councelorList[$key]['Follow_Up'] /*  New Code */	
+					+$councelorList[$key]['Follow_Up'] /*  New Code */
 					+$councelorList[$key]['New_Lead']
 					+$councelorList[$key]['Converted']
 					+$councelorList[$key]['Prospect']
@@ -265,11 +264,11 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 				+$councelorList[$key]['Not_Eligible']
 				+$councelorList[$key]['Rejected']
 				+$councelorList[$key]['Re_Enquired']
-				+$councelorList[$key]['No_Answer'];						
+				+$councelorList[$key]['No_Answer'];
 			}
 			if(!isset($councelor['Valid_Total'])){
 				$councelorList[$key]['Valid_Total']=$councelorList[$key]['Call_Back']
-				+$councelorList[$key]['Follow_Up'] /*  New Code */	
+				+$councelorList[$key]['Follow_Up'] /*  New Code */
 				+$councelorList[$key]['New_Lead']
 				+$councelorList[$key]['Converted']
 				+$councelorList[$key]['Prospect']

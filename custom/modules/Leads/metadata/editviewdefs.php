@@ -164,8 +164,19 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_BATCH',
           ),
+          1 => 
+          array (
+            'name' => 'discount',
+            'studio' => 'visible',
+            'label' => 'Discount',
+          ),
         ),
         9 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        10 => 
         array (
           0 => 
           array (
@@ -175,7 +186,7 @@ array (
             'label' => 'COMMENT',
           ),
         ),
-        10 => 
+        11 => 
         array (
           0 => 
           array (
@@ -184,7 +195,7 @@ array (
           ),
           1 => 'lead_source',
         ),
-        11 => 
+        12 => 
         array (
           0 => 
           array (
@@ -193,7 +204,7 @@ array (
             'label' => 'LBL_FLEX_RELATE',
           ),
         ),
-        12 => 
+        13 => 
         array (
           0 => 'status',
           1 => 
@@ -201,7 +212,7 @@ array (
             'name' => 'status_description',
           ),
         ),
-        13 => 
+        14 => 
         array (
           0 => 
           array (
@@ -214,7 +225,7 @@ array (
             'label' => 'LBL_ASSIGNED_TO',
           ),
         ),
-        14 => 
+        15 => 
         array (
           0 => 
           array (
@@ -227,7 +238,7 @@ array (
             'label' => 'LBL_DATEOFCALLBACK',
           ),
         ),
-        15 => 
+        16 => 
         array (
           0 => 
           array (

@@ -140,6 +140,21 @@ array (
             'label' => 'Lead ID',
           ),
         ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'discount_in_inr',
+            'studio' => 'visible',
+            'label' => 'Discount In INR',
+          ),
+          1 => 
+          array (
+            'name' => 'discount_in_usd',
+            'studio' => 'visible',
+            'label' => 'Discount In USD',
+          ),
+        ),
       ),
     ),
   ),

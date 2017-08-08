@@ -35,9 +35,9 @@
 
 				}
 			}
-			# Web Api For Web site
+			/* # Web Api For Web site */
 
-			# -> While add New Batch
+		/*	# -> While add New Batch */
 			$batch_start_date = date('d/m/Y',strtotime($bean->batch_start_date));
 			$registration_closing_date = date('d/m/Y',strtotime($bean->registration_closing_date));
 			$feearray=array();
@@ -76,6 +76,8 @@
 						'duration'=>$bean->duration,
 						'fees_inr'=>$bean->fees_inr,
 						'fees_usd'=>$bean->fees_in_usd,
+						'discount_inr'=>$bean->discount_in_inr,
+						'discount_usd'=>$bean->discount_in_usd,
 						'batch_status'=>$bean->batch_status,
 						'last_date_to_register'=>$registration_closing_date,
 						'installment_detail'=>$fee_detail,
@@ -101,7 +103,7 @@
 		}
 
 		else{
-			# Web api while update batch Record
+			/* Web api while update batch Record */ 
 
 			$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
@@ -122,11 +124,12 @@
 						'duration'=>$bean->duration,
 						'fees_inr'=>$bean->fees_inr,
 						'fees_usd'=>$bean->fees_in_usd,
+						'discount_inr'=>$bean->discount_in_inr,
+						'discount_usd'=>$bean->discount_in_usd,
 						'batch_status'=>$bean->batch_status,
 						'last_date_to_register'=>$registration_closing_date,
 						'installment_detail'=>$fee_detail,
 					];
-
 
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL,$url);
@@ -150,7 +153,6 @@
 
 
 		   # End
-
 
 		}
 	}
