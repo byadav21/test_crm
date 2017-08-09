@@ -28,7 +28,7 @@ ini_set("display_errors",0);
 
 				$statusWiseCount = '';
 //New Leads
-				$sqlCount = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'New Lead'  AND leads.assigned_user_id IN ('".$user_ids."')";
+				$sqlCount = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'New Lead'  AND leads.assigned_user_id IN ('".$user_ids."')";
 
 				$statusWiseCount .= ' <style>@media (max-width: 1024px) and (min-width: 979px) .col-sm-3.tile_stats_count { max-width: 242px !important; }</style>';
 
@@ -55,7 +55,7 @@ ini_set("display_errors",0);
 				}
 
 //Duplicate
-				$sqlDup = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Duplicate'  AND leads.assigned_user_id IN ('".$user_ids."')";
+				$sqlDup = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Duplicate'  AND leads.assigned_user_id IN ('".$user_ids."')";
 				$resDup = $GLOBALS['db']->query($sqlDup);
 				$rowDup= $GLOBALS['db']->fetchByAssoc($resDup);
 				if($rowDup['count'] > 0){
@@ -83,7 +83,7 @@ ini_set("display_errors",0);
 
 // Prospect Today
 		//~ echo date('Y-m-d');
-            $sqlPros = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
+            $sqlPros = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
 
             //~ echo $sqlPros;
             $resPros = $GLOBALS['db']->query($sqlPros);
@@ -114,7 +114,7 @@ ini_set("display_errors",0);
 
 // Followup Today
 
-            $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
+            $sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
@@ -140,7 +140,7 @@ ini_set("display_errors",0);
 
 //Over Due Prospect
 
-            $sqlPros = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
+            $sqlPros = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
             //~ echo $sqlPros;
             $resPros = $GLOBALS['db']->query($sqlPros);
             $rowPros= $GLOBALS['db']->fetchByAssoc($resPros);
@@ -167,7 +167,7 @@ ini_set("display_errors",0);
 
 //Overdue followups
 
-            $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
+            $sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
             //~ echo $sqlFoll;
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
@@ -192,7 +192,7 @@ ini_set("display_errors",0);
 
 
 //CallBack Today
-		   $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
+		   $sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
@@ -219,7 +219,7 @@ ini_set("display_errors",0);
 // Overdue CallBack
 
 
-            $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
+            $sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
             //~ echo $sqlFoll;
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);

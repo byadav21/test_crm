@@ -1,4 +1,5 @@
 <?php
+// created: 2017-07-20 11:23:49
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Payment Details',
   'LBL_COMPANY' => 'Company',
@@ -29,7 +30,7 @@ $mod_strings = array (
   'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Groups',
   'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE' => 'Payment Details',
   'COMMENT' => 'Comment',
-  'LBL_LEAD_DATE'=> 'Lead Date',
+  'LBL_LEAD_DATE' => 'Lead Date',
   'LBL_ATTEMPTS' => 'No Answer Attempts',
   'LBL_COUNTRY_LOG' => 'Country',
 );
