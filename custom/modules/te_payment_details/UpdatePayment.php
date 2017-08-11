@@ -10,7 +10,68 @@ class UpdatePaymentName
     {
         
         //echo "/var/www/html/aws/custom/modules/te_payment_details/UpdatePayment.php"; die;
-
+			$paymentSqlE = "SELECT is_sent_web FROM `te_payment_details` WHERE id='" . $bean->id . "'";
+            $paymentObjE = $GLOBALS['db']->Query($paymentSqlE);
+            $paymentrowE = $GLOBALS['db']->fetchByAssoc($paymentObjE);
+		if(isset($paymentrowE['is_sent_web']) && $paymentrowE['is_sent_web'] == 0){
+		 //echo "/var/www/html/aws/custom/modules/te_payment_details/UpdatePayment.php"; die;
+		 $sql_batch="SELECT `discount_in_inr`,`discount_in_usd` FROM `te_ba_batch` WHERE id ='".$_REQUEST['te_ba_batch_id_c']."'"; 
+		 $batchObj = $GLOBALS['db']->Query($sql_batch);
+		 $resultbatch   = $GLOBALS['db']->fetchByAssoc($batchObj);
+		
+		if ($_REQUEST['country_log'] == 'India')
+		{
+				if(($resultbatch['discount_in_inr']!= NULL || $resultbatch['discount_in_usd']!= NULL) && ($_REQUEST['discount'] !=''))
+				{
+					$discountlead=$_REQUEST['discount'];
+				}	
+				elseif(($resultbatch['discount_in_inr']!= NULL || $resultbatch['discount_in_usd']!= NULL) && ($_REQUEST['discount'] ==''))
+				{
+					$discountlead=$resultbatch['discount_in_inr'];
+					
+				}
+				
+				elseif(($resultbatch['discount_in_inr']== NULL || $resultbatch['discount_in_usd']== NULL) && ($_REQUEST['discount'] !=''))
+				{
+					$discountlead=$_REQUEST['discount'];
+					
+				}		
+				else
+				{
+					
+					$discountlead='0';
+				}
+			
+	    }      
+		elseif($_REQUEST['country_log']=='Other') 
+		 {	
+						//echo $resultbatch['discount_in_usd'];
+				if(($resultbatch['discount_in_inr']!= NULL || $resultbatch['discount_in_usd']!= NULL) && ($_REQUEST['discount'] !=''))
+				{
+					$discountlead=$_REQUEST['discount'];
+				}
+				elseif(($resultbatch['discount_in_inr']!= NULL || $resultbatch['discount_in_usd']!= NULL) && ($_REQUEST['discount'] ==''))
+				{
+					$discountlead=$resultbatch['discount_in_usd'];
+					
+				}
+				elseif(($resultbatch['discount_in_inr']== NULL || $resultbatch['discount_in_usd']== NULL) && ($_REQUEST['discount'] !=''))
+				{
+					$discountlead=$_REQUEST['discount'];
+					
+				}
+				else
+				{
+					
+					$discountlead='0';
+				}							
+		}
+		else
+		{
+			$discountlead='0';
+		}	
+	}
+	
         if (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == "web_lead_payment")
         {
             return true;
@@ -92,6 +153,7 @@ class UpdatePaymentName
             $lead_user_details['reference_number'] = $bean->reference_number . '&nbsp;' . $bean->transaction_id;
             $lead_user_details['payment_type']     = $bean->payment_type;
             $lead_user_details['date_of_payment']  = $bean->date_of_payment;
+            $lead_user_details['discount']  =  $discountlead;
         }
         else
         {
@@ -106,6 +168,7 @@ class UpdatePaymentName
             $lead_user_details['reference_number'] = $bean->reference_number . '&nbsp;' . $bean->transaction_id;
             $lead_user_details['payment_type']     = $bean->payment_type;
             $lead_user_details['date_of_payment']  = $bean->date_of_payment;
+            $lead_user_details['discount']  =  $discountlead;
         }
         if ($lead_user_details)
         {
@@ -148,6 +211,8 @@ class UpdatePaymentName
             'payment_realized'     => $lead_user_details['payment_realized'],
             'payment_referencenum' => $lead_user_details['reference_number'],
             'crm_orderid'          => $lead_user_details['id'],
+            'discount_for'   => $lead_user_details['email_address'],
+			'discount'  => $lead_user_details['discount'],
         ];
 
         $ch     = curl_init();
@@ -186,6 +251,8 @@ class UpdatePaymentName
             'payment_date'         => $bean->date_of_payment,
             'payment_realized'     => $bean->payment_realized,
             'payment_referencenum' => $bean->reference_number,
+            'discount_for'   => $lead_user_details['email_address'],
+			'discount'  => $lead_user_details['discount'],
         ];
         $ch       = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
