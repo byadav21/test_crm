@@ -99,7 +99,7 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 
 			$councelorList=array();
 
-			$leadSql="SELECT vendor.name,vendor.id FROM `te_vendor` AS vendor WHERE vendor.deleted=0";
+			/*$leadSql="SELECT vendor.name,vendor.id FROM `te_vendor` AS vendor WHERE vendor.deleted=0";
 			$leadObj =$db->query($leadSql);
 
 
@@ -109,7 +109,7 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 				$councelorList[$row['id']]['Warm']=0;
 				$councelorList[$row['id']]['Dead']=0;
 				$councelorList[$row['id']]['Converted']=0;
-			}
+			}*/
 
 			$leadCountSql="SELECT COUNT(l.id)total,vendor.name,vendor.id,l.status FROM `te_vendor` AS vendor INNER JOIN leads AS l ON l.vendor=vendor.name AND l.deleted=0 INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE vendor.deleted=0 AND l.status IN('Alive','Warm','Dead','Converted') $where  GROUP BY vendor.id,l.status";
 			$leadCountObj =$db->query($leadCountSql);
@@ -119,7 +119,20 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 				$councelorList[$rowLeadCount['id']]['name']=$rowLeadCount['name'];
 				$councelorList[$rowLeadCount['id']][$rowLeadCount['status']]=$rowLeadCount['total'];
 			}
-
+			foreach($councelorList as $key =>$val){
+				if(!array_key_exists("Alive",$councelorList[$key])){
+					$councelorList[$key]['Alive']=0;
+				}
+				if(!array_key_exists("Warm",$councelorList[$key])){
+					$councelorList[$key]['Warm']=0;
+				}
+				if(!array_key_exists("Dead",$councelorList[$key])){
+					$councelorList[$key]['Dead']=0;
+				}
+				if(!array_key_exists("Converted",$councelorList[$key])){
+					$councelorList[$key]['Converted']=0;
+				}
+			}
 
 			foreach($councelorList as $key=>$councelor){
 				$data.= "\"" . $councelor['name'] . "\",\"" . $councelor['Alive'] . "\",\"" . $councelor['Warm']."\",\"" . $councelor['Dead']."\",\"" . $councelor['Converted']. "\"\n";
@@ -133,7 +146,7 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 
 
 
-		$leadSql="SELECT vendor.name,vendor.id FROM `te_vendor` AS vendor WHERE vendor.deleted=0";
+		/*$leadSql="SELECT vendor.name,vendor.id FROM `te_vendor` AS vendor INNER JOIN leads AS l ON l.vendor=vendor.name  WHERE vendor.deleted=0 AND l.deleted=0 GROUP BY vendor.name";
 		$leadObj =$db->query($leadSql);
 
 
@@ -143,16 +156,32 @@ class AOR_ReportsViewDmstatusreport extends SugarView {
 			$councelorList[$row['id']]['Warm']=0;
 			$councelorList[$row['id']]['Dead']=0;
 			$councelorList[$row['id']]['Converted']=0;
-		}
+		}*/
 
-		$leadCountSql="SELECT COUNT(l.id)total,vendor.name,vendor.id,l.status FROM `te_vendor` AS vendor INNER JOIN leads AS l ON l.vendor=vendor.name AND l.deleted=0 INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE vendor.deleted=0 AND l.status IN('Alive','Warm','Dead','Converted') $where  GROUP BY vendor.id,l.status";
+		$leadCountSql="SELECT COUNT(l.id)total,vendor.name,vendor.id,l.status FROM `te_vendor` AS vendor INNER JOIN leads AS l ON LOWER(l.vendor)=(vendor.name) AND l.deleted=0 INNER JOIN leads_cstm AS lc ON lc.id_c=l.id WHERE vendor.deleted=0 AND l.status IN('Alive','Warm','Dead','Converted') $where  GROUP BY vendor.id,l.status";
 		$leadCountObj =$db->query($leadCountSql);
 
 
 		while($rowLeadCount =$db->fetchByAssoc($leadCountObj)){
 			$councelorList[$rowLeadCount['id']]['name']=$rowLeadCount['name'];
+
 			$councelorList[$rowLeadCount['id']][$rowLeadCount['status']]=$rowLeadCount['total'];
 		}
+		foreach($councelorList as $key =>$val){
+			if(!array_key_exists("Alive",$councelorList[$key])){
+				$councelorList[$key]['Alive']=0;
+			}
+			if(!array_key_exists("Warm",$councelorList[$key])){
+				$councelorList[$key]['Warm']=0;
+			}
+			if(!array_key_exists("Dead",$councelorList[$key])){
+				$councelorList[$key]['Dead']=0;
+			}
+			if(!array_key_exists("Converted",$councelorList[$key])){
+				$councelorList[$key]['Converted']=0;
+			}
+		}
+
 
 		$total=count($councelorList); #total records
 		$start=0;

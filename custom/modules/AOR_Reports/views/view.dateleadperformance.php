@@ -135,7 +135,20 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 					$councelorList[$row['name']][$row['vendor_name']][$row['status_description']]=$row['total'];
 			}
-
+			
+			foreach($councelorList as $key=>$val){
+				foreach($val as $vkey=>$sval){
+					$total = $sval['Call_Back']+$sval['Converted']+$sval['Dead_Number']+$sval['Fallout']+$sval['Follow_Up']+$sval['New_Lead']+$sval['Not_Eligible']+$sval['Not_Enquired']+$sval['Prospect']+$sval['Wrong_Number']+$sval['Re_Enquired']+$sval['Rejected']+$sval['Retired']+$sval['Ringing_Multiple_Times']+$sval['Duplicate']+$sval['No_Answer']+$sval['Dropout'];
+					if($total==0){
+						unset($councelorList[$key][$vkey]);
+					}
+				}
+			}
+			foreach($councelorList as $key=>$val){
+				if(count($councelorList[$key])==0){
+					unset($councelorList[$key]);
+				}
+			}
 
 			}
 
@@ -239,7 +252,22 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 				$councelorList[$row['name']][$row['vendor_name']][$row['status_description']]=$row['total'];
 		}
-
+		foreach($councelorList as $key=>$val){
+			foreach($val as $vkey=>$sval){
+				$total = $sval['Call_Back']+$sval['Converted']+$sval['Dead_Number']+$sval['Fallout']+$sval['Follow_Up']+$sval['New_Lead']+$sval['Not_Eligible']+$sval['Not_Enquired']+$sval['Prospect']+$sval['Wrong_Number']+$sval['Re_Enquired']+$sval['Rejected']+$sval['Retired']+$sval['Ringing_Multiple_Times']+$sval['Duplicate']+$sval['No_Answer']+$sval['Dropout'];
+				if($total==0){
+					unset($councelorList[$key][$vkey]);
+				}
+			}
+		}
+		foreach($councelorList as $key=>$val){
+			if(count($councelorList[$key])==0){
+				unset($councelorList[$key]);
+			}
+		}
+		/*echo "<pre>";
+		print_r($councelorList);
+		exit();*/
 
 		}
 

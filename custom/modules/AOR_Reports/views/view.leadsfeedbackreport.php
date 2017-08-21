@@ -21,10 +21,10 @@ class AOR_ReportsViewLeadsfeedbackreport extends SugarView {
 	function getbatchforlead($batch_arr=NULL){
 		$where = '';
 		if($batch_arr){
-			$where =" AND id IN('".implode("','",$batch_arr)."')";
+			$where =" AND batch.id IN('".implode("','",$batch_arr)."')";
 		}
 		global $db;
-		$batchSql="SELECT id,name from te_ba_batch WHERE deleted=0 AND batch_status<>'Closed' $where  ORDER BY name ASC";
+		$batchSql="SELECT batch.id,batch.name from te_ba_batch AS batch INNER JOIN leads_cstm AS lc on lc.te_ba_batch_id_c=batch.id INNER JOIN leads AS l on l.id=lc.id_c WHERE batch.deleted=0 AND batch.batch_status<>'Closed' AND l.deleted=0 $where GROUP BY batch.id ORDER BY batch.name ASC";
 		$batchObj =$db->query($batchSql);
 		$batchOptions=array();
 		while($row =$db->fetchByAssoc($batchObj)){

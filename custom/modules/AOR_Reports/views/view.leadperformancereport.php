@@ -100,11 +100,12 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 			}
 
 			$councelorList=array();
-			$vendorSql="SELECT vendor.name,vendor.id from te_vendor AS vendor where vendor.deleted=0";
+			/*$vendorSql="SELECT vendor.name,vendor.id from te_vendor AS vendor where vendor.deleted=0";
+			$vendorSql="SELECT vendor.name,vendor.id from te_vendor AS vendor INNER JOIN leads as l on LOWER(l.vendor)=(vendor.name) where vendor.deleted=0 AND l.deleted=0 GROUP BY vendor.name";
 			$vendorObj =$db->query($vendorSql);
 			while($rowVendor =$db->fetchByAssoc($vendorObj)){
 				$councelorList[$rowVendor['id']]['name']=$rowVendor['name'];
-			}
+			}*/
 
 			//$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
 			$leadSql="SELECT v.id,v.name ,count(l.id) as total,l.status_description from  leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c INNER JOIN te_vendor AS v on v.name=l.vendor WHERE l.deleted=0 AND v.deleted=0 $where GROUP BY v.id,l.status_description";
@@ -152,7 +153,7 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 					$councelorList[$key]['No_Answer']=0;
 				if(!isset($councelor['Dropout']))
 					$councelorList[$key]['Dropout']=0;
-					
+
 				if(!isset($councelor['Invalid_Total'])){
 					$councelorList[$key]['Invalid_Total']=$councelorList[$key]['Wrong_Number']
 					+$councelorList[$key]['Dead_Number']
@@ -162,11 +163,11 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 					+$councelorList[$key]['Not_Eligible']
 					+$councelorList[$key]['Rejected']
 					+$councelorList[$key]['Re_Enquired']
-					+$councelorList[$key]['No_Answer'];	
+					+$councelorList[$key]['No_Answer'];
 				}
 				if(!isset($councelor['Valid_Total'])){
 					$councelorList[$key]['Valid_Total']=$councelorList[$key]['Call_Back']
-					+$councelorList[$key]['Follow_Up'] /*  New Code */	
+					+$councelorList[$key]['Follow_Up'] /*  New Code */
 					+$councelorList[$key]['New_Lead']
 					+$councelorList[$key]['Converted']
 					+$councelorList[$key]['Prospect']
@@ -192,11 +193,11 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 		$councelorList=array();
 
 
-		$vendorSql="SELECT vendor.name,vendor.id from te_vendor AS vendor where vendor.deleted=0";
+		/*$vendorSql="SELECT vendor.name,vendor.id from te_vendor AS vendor INNER JOIN leads as l on LOWER(l.vendor)=(vendor.name) where vendor.deleted=0 AND l.deleted=0 GROUP BY vendor.name";
 		$vendorObj =$db->query($vendorSql);
 		while($rowVendor =$db->fetchByAssoc($vendorObj)){
 			$councelorList[$rowVendor['id']]['name']=$rowVendor['name'];
-		}
+		}*/
 
 		//$leadSql="SELECT vendor.name,vendor.id ,count(l.id) as total,l.status_description from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' $where GROUP BY vendor.name,l.status_description";
 		$leadSql="SELECT v.id,v.name ,count(l.id) as total,l.status_description from  leads AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c INNER JOIN te_vendor AS v on v.name=l.vendor WHERE l.deleted=0 AND v.deleted=0 $where GROUP BY v.id,l.status_description";
@@ -254,11 +255,11 @@ class AOR_ReportsViewLeadperformancereport extends SugarView {
 					+$councelorList[$key]['Not_Eligible']
 					+$councelorList[$key]['Rejected']
 					+$councelorList[$key]['Re_Enquired']
-					+$councelorList[$key]['No_Answer'];	
+					+$councelorList[$key]['No_Answer'];
 				}
 				if(!isset($councelor['Valid_Total'])){
 					$councelorList[$key]['Valid_Total']=$councelorList[$key]['Call_Back']
-					+$councelorList[$key]['Follow_Up'] /*  New Code */	
+					+$councelorList[$key]['Follow_Up'] /*  New Code */
 					+$councelorList[$key]['New_Lead']
 					+$councelorList[$key]['Converted']
 					+$councelorList[$key]['Prospect']
