@@ -337,6 +337,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_Mica_Referrals' => 'Mica Referrals',
   'CC_Reymonds' => 'Reymonds',
   'CC_Aditya_Birla_Group' => 'Aditya Birla Group',
+  'CC_Franklin_Templeton' => 'Franklin Templeton',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
