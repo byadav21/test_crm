@@ -1,5 +1,5 @@
 <?php
-$dictionary['te_payment_details']['fields']['invoice_url'] =array (
+$dictionary['Lead']['fields']['invoice_url'] =array (
 		'name' => 'invoice_url',
 		'vname' => 'Invoice URL',
 		'type' => 'varchar',
