@@ -297,6 +297,15 @@ array (
             'label' => 'LBL_TRANSACTIONID',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'invoice_number',
+            'label' => 'LBL_INVOICE_NUMBER',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

@@ -85,8 +85,18 @@ array (
         ),
         4 => 
         array (
-          0 => '',
-          1 => '',
+          0 => 
+          array (
+            'name' => 'invoice_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Number',
+          ),
+          1 => 
+          array (
+            'name' => 'invoice_url',
+            'studio' => 'visible',
+            'label' => 'Invoice URL',
+          ),
         ),
       ),
     ),

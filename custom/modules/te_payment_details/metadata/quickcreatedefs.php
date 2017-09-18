@@ -38,20 +38,6 @@ array (
         array (
           0 => 
           array (
-            'name' => 'payment_type',
-            'studio' => 'visible',
-            'label' => 'LBL_PAYMENT_TYPE',
-          ),
-          1 => 
-          array (
-            'name' => 'date_of_payment',
-            'label' => 'LBL_DATE_OF_PAYMENT',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
             'name' => 'currency_type',
             'studio' => 'visible',
             'label' => 'Currency Type',
@@ -62,7 +48,7 @@ array (
             'label' => 'LBL_AMOUNT',
           ),
         ),
-        2 => 
+        1 => 
         array (
           0 => 
           array (
@@ -75,7 +61,7 @@ array (
             'label' => 'LBL_PAYMENT_REALIZED',
           ),
         ),
-        3 => 
+        2 => 
         array (
           0 => 
           array (
@@ -88,9 +74,20 @@ array (
             'label' => 'LBL_TRANSACTIONID',
           ),
         ),
-        4 => 
+        3 => 
         array (
-          0 => '',
+          0 => 
+          array (
+            'name' => 'invoice_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Number',
+          ),
+          1 => 
+          array (
+            'name' => 'invoice_url',
+            'studio' => 'visible',
+            'label' => 'Invoice URL',
+          ),
         ),
       ),
     ),

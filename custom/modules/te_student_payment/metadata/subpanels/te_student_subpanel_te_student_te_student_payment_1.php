@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-05 05:06:34
+// created: 2017-09-18 11:20:05
 $subpanel_layout['list_fields'] = array (
   'batch_id' => 
   array (
@@ -41,6 +41,22 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'enum',
     'studio' => 'visible',
     'vname' => 'LBL_PAYMENT_SOURCE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'invoice_number' => 
+  array (
+    'type' => 'int',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => 'Invoice Number',
+    'width' => '10%',
+  ),
+  'invoice_url' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'vname' => 'Invoice URL',
     'width' => '10%',
     'default' => true,
   ),

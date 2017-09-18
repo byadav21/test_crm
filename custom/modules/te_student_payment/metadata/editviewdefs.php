@@ -79,6 +79,21 @@ array (
         array (
           0 => 
           array (
+            'name' => 'invoice_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Number',
+          ),
+          1 => 
+          array (
+            'name' => 'invoice_url',
+            'studio' => 'visible',
+            'label' => 'Invoice URL',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
             'name' => 'reference_number',
             'label' => 'LBL_REFERENCE_NUMBER',
           ),
@@ -88,7 +103,7 @@ array (
             'label' => 'LBL_PAYMENT_REALIZED',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
