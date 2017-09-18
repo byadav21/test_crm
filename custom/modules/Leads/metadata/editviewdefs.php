@@ -304,7 +304,12 @@ array (
             'name' => 'invoice_number',
             'label' => 'LBL_INVOICE_NUMBER',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'invoice_url',
+            'studio' => 'visible',
+            'label' => 'Invoice URL',
+          ),
         ),
       ),
     ),
