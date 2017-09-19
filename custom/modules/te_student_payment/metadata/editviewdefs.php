@@ -107,6 +107,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'invoice_order_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Order Number',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
             'name' => 'transaction_id',
             'label' => 'LBL_TRANSACTION_ID',
           ),

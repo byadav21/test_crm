@@ -78,6 +78,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'invoice_order_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Order Number',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
             'name' => 'invoice_number',
             'studio' => 'visible',
             'label' => 'Invoice Number',
