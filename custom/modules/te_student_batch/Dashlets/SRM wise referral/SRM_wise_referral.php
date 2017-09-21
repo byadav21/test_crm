@@ -153,11 +153,12 @@ class SRM_wise_referral extends Dashlet{
       }
 
       if($users_str){
-        $leadQuery ="SELECT concat(u.first_name,' ',u.last_name)userfullname,(SELECT count(*) FROM leads WHERE leads.deleted=0 AND leads.lead_source='Referrals' AND (leads.created_by IN($users_str) OR leads.parent_id IN($users_str)))toalreferral,(SELECT count(*) FROM leads WHERE leads.deleted=0 AND leads.lead_source='Referrals' AND (leads.created_by=u.id OR leads.parent_id=u.id))referral,(SELECT count(*) FROM leads WHERE leads.deleted=0 AND leads.lead_source='Referrals' AND leads.status='Converted' AND (leads.created_by=u.id OR leads.parent_id=u.id))conreferral from users AS u LEFT JOIN leads AS l ON l.created_by=u.id OR l.parent_id=u.id AND l.lead_source='Referrals'  WHERE u.id IN($users_str) GROUP BY u.id LIMIT 0 ,".$this->SRM_wise_referral;
+        /*$leadQuery ="SELECT concat(u.first_name,' ',u.last_name)userfullname,(SELECT count(*) FROM leads WHERE leads.deleted=0 AND leads.lead_source='Referrals' AND (leads.created_by IN($users_str) OR leads.parent_id IN($users_str)))toalreferral,(SELECT count(*) FROM leads WHERE leads.deleted=0 AND leads.lead_source='Referrals' AND (leads.created_by=u.id OR leads.parent_id=u.id))referral,(SELECT count(*) FROM leads WHERE leads.deleted=0 AND leads.lead_source='Referrals' AND leads.status='Converted' AND (leads.created_by=u.id OR leads.parent_id=u.id))conreferral from users AS u LEFT JOIN leads AS l ON l.created_by=u.id OR l.parent_id=u.id AND l.lead_source='Referrals'  WHERE u.id IN($users_str) GROUP BY u.id LIMIT 0 ,".$this->SRM_wise_referral;
   	    $leadObj=$GLOBALS['db']->query($leadQuery);
           while($row=$GLOBALS['db']->fetchByAssoc($leadObj)){
   			  $leadsData[]=$row;
-  		  }
+  		  }*/
+  		  $leadsData[]=array();
 
       }
 
