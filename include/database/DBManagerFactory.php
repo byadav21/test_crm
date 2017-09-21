@@ -138,7 +138,8 @@ class DBManagerFactory
         	$instanceName = '';
         }
         if(!isset(self::$instances[$instanceName])){
-            $config = $sugar_config['dbconfig'];
+            //$config = $sugar_config['dbconfig'];
+            $config = ($instanceName == '' ? $sugar_config['dbconfig'] : $sugar_config['db'][$instanceName]);
             $count++;
                 self::$instances[$instanceName] = self::getTypeInstance($config['db_type'], $config);
                 if(!empty($sugar_config['dbconfigoption'])) {
