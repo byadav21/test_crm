@@ -301,9 +301,9 @@
 				$favorite_records = $favorites->getCurrentUserSidebarFavorites();
 				$ss->assign("favoriteRecords", $favorite_records);
 
-				$tracker = new Tracker();
+				/*$tracker = new Tracker();
 				$history = $tracker->get_recently_viewed($current_user->id);
-				$ss->assign("recentRecords", $this->processRecentRecords($history));
+				$ss->assign("recentRecords", $this->processRecentRecords($history));*/
 			}
 
 			$bakModStrings = $mod_strings;
