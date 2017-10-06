@@ -38,6 +38,10 @@ class addPaymentClass
 
             $payment                                      = new te_payment_details();
             $payment->payment_type                        = $bean->payment_type;
+            $payment->invoice_number                      = $bean->invoice_number;
+            $payment->invoice_order_number                = $bean->invoice_order_number;
+            $payment->invoice_url                         = $bean->invoice_url;
+
             $payment->payment_source                      = $bean->payment_source;
             $payment->transaction_id                      = $bean->transaction_id;
             $payment->date_of_payment                     = $bean->date_of_payment;
@@ -51,7 +55,7 @@ class addPaymentClass
             $payment->save();
             $lead_payment_details_id                      = $payment->id;
             $paidAmount                                   = $bean->amount;
-            $GLOBALS['db']->query("UPDATE leads SET payment_type='',transaction_id='',payment_source='',date_of_payment='',reference_number='',amount='',payment_realized=''");
+            $GLOBALS['db']->query("UPDATE leads SET invoice_number='',invoice_order_number='',invoice_url='',payment_type='',transaction_id='',payment_source='',date_of_payment='',reference_number='',amount='',payment_realized=''");
 
             $sqlRel = "SELECT p.id FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='" . $bean->id . "' AND p.payment_realized= 0 ";
             $rel    = $GLOBALS['db']->query($sqlRel);
@@ -287,7 +291,7 @@ class addPaymentClass
         {
             #update student payment history
             $student_payment_id = create_guid();
-            $insertSql          = "INSERT INTO te_student_payment SET id='" . $student_payment_id . "', name='" . $bean->reference_number . "', date_entered='" . date('Y-m-d H:i:s') . "', date_modified='" . date('Y-m-d H:i:s') . "', te_student_batch_id_c='" . $student_batch_id . "',date_of_payment='" . $bean->date_of_payment . "', amount='" . $bean->amount . "', reference_number='" . $bean->reference_number . "', payment_type='" . $bean->payment_type . "', payment_realized='" . $bean->payment_realized . "', transaction_id='" . $bean->transaction_id . "', payment_source='" . $bean->payment_source . "',lead_payment_details_id='" . $lead_payment_details_id . "'";
+            $insertSql          = "INSERT INTO te_student_payment SET id='" . $student_payment_id . "', name='" . $bean->reference_number . "', date_entered='" . date('Y-m-d H:i:s') . "', date_modified='" . date('Y-m-d H:i:s') . "', te_student_batch_id_c='" . $student_batch_id . "',date_of_payment='" . $bean->date_of_payment . "', amount='" . $bean->amount . "', reference_number='" . $bean->reference_number . "', payment_type='" . $bean->payment_type . "', payment_realized='" . $bean->payment_realized . "', transaction_id='" . $bean->transaction_id . "', payment_source='" . $bean->payment_source . "',lead_payment_details_id='" . $lead_payment_details_id ."', invoice_number='" . $bean->invoice_number . "', invoice_url='" . $bean->invoice_url . "', invoice_order_number='" . $bean->invoice_order_number."'";
             //echo $insertSql;exit();
             $GLOBALS['db']->Query($insertSql);
 

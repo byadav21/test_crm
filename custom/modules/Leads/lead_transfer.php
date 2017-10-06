@@ -155,7 +155,7 @@ input[type=text], select {
 			 <option value="Call Back">Call Back</option><option value="Follow Up">Follow Up</option><option value="New Lead" selected="selected">New Lead</option></select>
 		
 		
-		 ></td>
+		 </td>
 		<?php
 		$acl_obj = new ACLController();
 		if($current_user->is_admin==1){ ?>

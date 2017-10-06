@@ -27,7 +27,7 @@ class StudentPayment{
 			else
 				$payment_realized=0;
 
-			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."',payment_realized='".$payment_realized."' WHERE student_payment_id='".$bean->id."'");
+			$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$bean->amount."',payment_realized='".$payment_realized."',invoice_number='".$bean->invoice_number."',invoice_url='".$bean->invoice_url."',invoice_order_number='".$bean->invoice_order_number."' WHERE student_payment_id='".$bean->id."'");
 		}else{
                     
                              $sqlpaymentState = "SELECT 
@@ -56,6 +56,11 @@ class StudentPayment{
             
 			$payment = new te_payment_details();
 			$payment->payment_type 	   = $bean->payment_type;
+			$payment->payment_type                        = $bean->payment_type;
+            $payment->invoice_number                      = $bean->invoice_number;
+            $payment->invoice_order_number                = $bean->invoice_order_number;
+            $payment->invoice_url                         = $bean->invoice_url;
+
 			$payment->payment_source 	   = $bean->payment_source;
 			$payment->transaction_id 	   = $bean->transaction_id;
 			$payment->date_of_payment  = $bean->date_of_payment;

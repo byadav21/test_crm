@@ -112,7 +112,7 @@ class UpdatePaymentName
         if (isset($_REQUEST['record']) && $_REQUEST['record'] != "" && $_REQUEST['module'] != "Leads")
         {
             
-            $GLOBALS['db']->query("UPDATE te_student_payment SET amount='" . $bean->amount . "' WHERE lead_payment_details_id='" . $_REQUEST['record'] . "'");
+            $GLOBALS['db']->query("UPDATE te_student_payment SET amount='" . $bean->amount ."',invoice_number='".$bean->invoice_number."',invoice_url='".$bean->invoice_url."',invoice_order_number='".$bean->invoice_order_number."' WHERE lead_payment_details_id='" . $_REQUEST['record'] . "'");
 
             #update student payment plan
             $paymentSql = "SELECT SUM(p.amount) as amount FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='" . $lead_id . "' AND p.payment_realized= 1 AND p.deleted=0";
