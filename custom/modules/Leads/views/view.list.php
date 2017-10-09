@@ -47,15 +47,18 @@
 
 		  
 			$this->lv->searchColumns = $this->searchForm->searchColumns;
-			//echo $this->where; 
+											//echo $this->where;
+			//echo 'ABC'.$this->where; exit;
 			if ($this->where)
 			{
 				$this->where = str_replace('leads.batch', 'leads_cstm.te_ba_batch_id_c', $this->where);
 				$this->where = str_replace('Counsellors', 'leads.assigned_user_id', $this->where);
+				$this->where = str_replace('vendor_list', 'vendor',$this->where); 
+				//$this->where.="leads.status"
 			}
 
 		  
-			// echo 'ABC'.$this->where; exit;
+			//echo 'ABC'.$this->where; exit;
 			if (!$this->headers)
 				return;
 			if (empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false)

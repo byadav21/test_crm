@@ -108,13 +108,14 @@ array (
         'default' => true,
         'name' => 'date_entered',
       ),
-      'vendor' => 
+      'vendor_list' => 
       array (
         'label' => 'LBL_VENDOR',
-        'type' => 'varchar',
+        'type' => 'enum',
+        'studio' => 'visible',
         'width' => '10%',
         'default' => true,
-        'name' => 'vendor',
+        'name' => 'vendor_list',
       ),
     ),
   ),
