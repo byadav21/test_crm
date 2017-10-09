@@ -108,6 +108,14 @@ array (
         'default' => true,
         'name' => 'date_entered',
       ),
+      'vendor' => 
+      array (
+        'label' => 'LBL_VENDOR',
+        'type' => 'varchar',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'vendor',
+      ),
     ),
   ),
   'templateMeta' => 
