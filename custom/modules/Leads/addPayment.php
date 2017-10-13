@@ -663,8 +663,8 @@ class addPaymentClass
             if ($GLOBALS['db']->getRowCount($re) > 0)
             {
                 $beanData                 = $GLOBALS['db']->fetchByAssoc($re);
-                $bean->status             = 'Duplicate';
-                $bean->status_description = 'Duplicate';
+                $bean->status             = 'Warm';
+                $bean->status_description = 'Re-Enquired';
                 $bean->duplicate_check    = '1';
                 $bean->upload_status      = -1;
                 $_SESSION['dupCheck']     = intval($_SESSION['dupCheck']) + 1;
@@ -727,8 +727,8 @@ class addPaymentClass
                 $re = $GLOBALS['db']->query($sql);
                 if ($GLOBALS['db']->getRowCount($re) > 0)
                 {
-                    $bean->status             = 'Duplicate';
-                    $bean->status_description = 'Duplicate';
+                    $bean->status             = 'Warm';
+                    $bean->status_description = 'Re-Enquired';
                     $bean->duplicate_check    = '1';
                     $data                     = $GLOBALS['db']->fetchByAssoc($re);
                     $bean->assigned_user_id   = $data['assigned_user_id'];
