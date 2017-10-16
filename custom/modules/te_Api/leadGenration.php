@@ -75,8 +75,8 @@
         
 	$re = $GLOBALS['db']->query($sql);
 	if($GLOBALS['db']->getRowCount($re)>0){
-		$status = 'Duplicate';
-		$statusDetail = 'Duplicate';
+		$status = 'Warm';
+		$statusDetail = 'Re-Enquired';
 	}
 
 
