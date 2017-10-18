@@ -525,7 +525,7 @@ $('#mass_country_log').parent().parent().css('display','none');
 	if(el.val() === "Alive" ) {
 		$("#mass_status_description option").remove() ;
 
-		$("#mass_status_description").append('<option value="Call Back">Call Back</option><option value="Follow Up">Follow Up</option><option value="New Lead">New Lead</option>');
+		$("#mass_status_description").append('<option value="Follow Up">Follow Up</option><option value="New Lead">New Lead</option>');
 	}
 	else if(el.val() === "Dead" ) {
 		$("#mass_status_description option").remove() ;
@@ -535,9 +535,9 @@ $('#mass_country_log').parent().parent().css('display','none');
 	 $("#mass_status_description").append('<option value="Ringing Multiple Times">Ringing Multiple Times</option>');
 	 $("#mass_status_description").append('<option value="Not Enquired">Not Enquired</option>');
 	 $("#mass_status_description").append('<option value="Not Eligible">Not Eligible</option>');
-	 $("#mass_status_description").append('<option value="Rejected">Rejected</option>');
+	 //$("#mass_status_description").append('<option value="Rejected">Rejected</option>');
 	 $("#mass_status_description").append('<option value="Fallout">Fallout</option>');
-	 $("#mass_status_description").append('<option value="Retired">Retired</option>');
+	 //$("#mass_status_description").append('<option value="Retired">Retired</option>');
 	}
 	else if(el.val() === "Converted" ) {
 		$("#mass_status_description option").remove() ;

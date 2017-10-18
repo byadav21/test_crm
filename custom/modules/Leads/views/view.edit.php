@@ -254,11 +254,11 @@ class LeadsViewEdit extends ViewEdit
                     $("#status_description option").remove();
                     $("#status_description").append('<option></option>');
 
-                    if (status_detail == 'Call Back') {
+                    /*if (status_detail == 'Call Back') {
                         $("#status_description").append('<option value="Call Back" selected="selected" >Call Back</option>');
                     } else {
                         $("#status_description").append('<option value="Call Back" >Call Back</option>');
-                    }
+                    }*/
                     if (status_detail == 'Follow Up') {
                         $("#status_description").append('<option value="Follow Up" selected="selected">Follow Up</option>');
                     } else {
@@ -300,21 +300,21 @@ class LeadsViewEdit extends ViewEdit
                     } else {
                         $("#status_description").append('<option>Not Eligible</option>');
                     }
-                    if (status_detail == 'Rejected') {
+                    /*if (status_detail == 'Rejected') {
                         $("#status_description").append('<option  selected="selected" >Rejected</option>');
                     } else {
                         $("#status_description").append('<option>Rejected</option>');
-                    }
+                    }*/
                     if (status_detail == 'Fallout') {
                         $("#status_description").append('<option  selected="selected" >Fallout</option>');
                     } else {
                         $("#status_description").append('<option >Fallout</option>');
                     }
-                    if (status_detail == 'Retired') {
+                    /*if (status_detail == 'Retired') {
                         $("#status_description").append('<option  selected="selected" >Retired</option>');
                     } else {
                         $("#status_description").append('<option>Retired</option>');
-                    }
+                    }*/
                 }
                 if (document.getElementById('status').value == "Converted") {
                     $("#status_description option").remove();
@@ -370,7 +370,7 @@ class LeadsViewEdit extends ViewEdit
                     if (el.val() === "Alive") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
-                        $("#status_description").append('<option>Call Back</option>');
+                        //$("#status_description").append('<option>Call Back</option>');
                         $("#status_description").append('<option>Follow Up</option>');
                         $("#status_description").append('<option>New Lead</option>');
                     } else if (el.val() === "Dead") {
@@ -381,9 +381,9 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option>Ringing Multiple Times</option>');
                         $("#status_description").append('<option>Not Enquired</option>');
                         $("#status_description").append('<option>Not Eligible</option>');
-                        $("#status_description").append('<option>Rejected</option>');
+                        //$("#status_description").append('<option>Rejected</option>');
                         $("#status_description").append('<option>Fallout</option>');
-                        $("#status_description").append('<option>Retired</option>');
+                        //$("#status_description").append('<option>Retired</option>');
                     } else if (el.val() === "Recycle") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
