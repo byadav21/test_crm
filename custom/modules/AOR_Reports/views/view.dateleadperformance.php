@@ -127,7 +127,8 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 					$councelorList[$value['batch_name']][$value['vendor_name']]['No_Answer']=0;
 					$councelorList[$value['batch_name']][$value['vendor_name']]['Dropout']=0;
 				}
-				$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
+				//$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
+				$leadSql = "SELECT l.vendor AS vendor_name,(select te_vendor.id FROM te_vendor where trim(te_vendor.name)=trim(l.vendor)) AS id ,count(l.id) as total,l.status_description,b.name,b.id from leads l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c INNER  JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND l.vendor!='' AND b.name!='' AND l.deleted=0 $where  GROUP BY l.vendor,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
 				$leadObj =$db->query($leadSql);
 
 				$data = array();
@@ -135,7 +136,7 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 					$row['status_description'] = str_replace(array(' ','-'),'_',$row['status_description']);
 					$councelorList[$row['name']][$row['vendor_name']][$row['status_description']]=$row['total'];
 			}
-			
+
 			foreach($councelorList as $key=>$val){
 				foreach($val as $vkey=>$sval){
 					$total = $sval['Call_Back']+$sval['Converted']+$sval['Dead_Number']+$sval['Fallout']+$sval['Follow_Up']+$sval['New_Lead']+$sval['Not_Eligible']+$sval['Not_Enquired']+$sval['Prospect']+$sval['Wrong_Number']+$sval['Re_Enquired']+$sval['Rejected']+$sval['Retired']+$sval['Ringing_Multiple_Times']+$sval['Duplicate']+$sval['No_Answer']+$sval['Dropout'];
@@ -244,7 +245,8 @@ class AOR_ReportsViewDateleadperformance extends SugarView {
 				$councelorList[$value['batch_name']][$value['vendor_name']]['Dropout']=0;
 
 			}
-			$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
+			//$leadSql="SELECT vendor.name AS vendor_name,vendor.id ,count(l.id) as total,l.status_description,b.name,b.id from te_vendor AS vendor LEFT JOIN leads l ON trim(vendor.name)=trim(l.vendor) AND l.deleted=0 AND vendor.deleted=0 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c LEFT JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND vendor.name!='' AND b.name!='' $where GROUP BY vendor.name,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
+			$leadSql = "SELECT l.vendor AS vendor_name,(select te_vendor.id FROM te_vendor where trim(te_vendor.name)=trim(l.vendor)) AS id ,count(l.id) as total,l.status_description,b.name,b.id from leads l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c INNER  JOIN te_ba_batch AS b ON b.id=lc.te_ba_batch_id_c WHERE l.status_description IN(SELECT DISTINCT status_description from leads) AND l.vendor!='' AND b.name!='' AND l.deleted=0 $where  GROUP BY l.vendor,l.status_description,lc.te_ba_batch_id_c ORDER BY b.name ASC,vendor_name ASC";
 			$leadObj =$db->query($leadSql);
 
 			$data = array();
