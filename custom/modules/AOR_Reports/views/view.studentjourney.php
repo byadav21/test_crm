@@ -8,18 +8,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 	public function __construct() {
 		parent::SugarView();
 	}
-	/*
-	function getBatch(){
-		global $db;
-		$batchSql="SELECT id,name from te_student_batch WHERE deleted=0 ";
-		$batchObj =$db->query($batchSql);
-		$batchOptions=array();
-		while($row =$db->fetchByAssoc($batchObj)){
-			$batchOptions[]=$row;
-		}
-		return $batchOptions;
-	}
-*/
+	
 	public function display() {
 		global $sugar_config,$app_list_strings,$current_user,$db;
 			
@@ -46,7 +35,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 		}
 		
 		$sql="SELECT
-				  p.name AS pname,i.name AS insname,l.status_description,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state,
+				  p.name AS pname,i.name AS insname,l.status_description,l.status AS lstatus,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state,
 				  l.primary_address_postalcode AS pin,l.vendor,s.work_experience,s.functional_area,s.name AS stuname,s.country,s.email,s.dob,s.gender,s.education,s.company,b.batch_code,b.name AS bname,
 				  b.date_entered,b.te_in_institutes_id_c,b.te_pr_programs_id_c,b.te_vendor_id_c AS srmid,b.leads_id,b.batch_code,b.fee_inr,b.fee_usd,CONCAT(cu.first_name,' ',cu.last_name)agent_name,CONCAT(sbu.first_name,' ',sbu.last_name)srm,
 				  b.status AS dropout,b.qualify_for_refund AS courcetrnsfer FROM te_student_batch b
@@ -100,7 +89,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 			$file = "Studentjourney";
 			$filename = $file . "_" . date ( "Y-m-d");
 			$sql="SELECT
-				  p.name AS pname,i.name AS insname,l.status_description,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state,
+				  p.name AS pname,i.name AS insname,l.status_description,l.status AS lstatus,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state,
 				  l.primary_address_postalcode AS pin,l.vendor,s.work_experience,s.functional_area,s.name AS stuname,s.country,s.email,s.dob,s.gender,s.education,s.company,b.batch_code,b.name AS bname,
 				  b.date_entered,b.te_in_institutes_id_c,b.te_pr_programs_id_c,b.te_vendor_id_c AS srmid,b.leads_id,b.batch_code,b.fee_inr,b.fee_usd,CONCAT(cu.first_name,' ',cu.last_name)agent_name,CONCAT(sbu.first_name,' ',sbu.last_name)srm,
 				  b.status AS dropout,b.qualify_for_refund AS courcetrnsfer FROM te_student_batch b
@@ -127,18 +116,105 @@ if (!defined('sugarEntry') || !sugarEntry)
 			foreach($councelorList as $key=>$councelor){
 				if($councelor['dropout']=='Dropout'){
 					$councelor['dropout']='Yes';
-				}
+				 }
+					else{
+						$councelor['dropout']='No';
+						}
 				if($councelor['functional_area']==''){
 				   $councelor['functional_area']='N/A';
 				 }
 				if($councelor['qualify_for_refund']!=''){
 				   $councelor['functional_area']='Yes';
 				 }
-				 else{
-				   $councelor['qualify_for_refund']='No';
+					 else{
+					   $councelor['qualify_for_refund']='No';
+					 }
+				 if($councelor['insname']==''){
+				   $councelor['insname']='N/A';
+				 }
+				 if($councelor['pname']==''){
+				   $councelor['pname']='N/A';
+				 }
+				 if($councelor['batch_code']==''){
+				   $councelor['batch_code']='N/A';
+				 }
+				 if($councelor['fee_inr']==''){
+				   $councelor['fee_inr']='N/A';
+				 }
+				 if($councelor['date_entered']==''){
+				   $councelor['date_entered']='N/A';
+				 }
+				 if($councelor['dropout']==''){
+				   $councelor['dropout']='N/A';
+				 }
+				 if($councelor['vendor']==''){
+				   $councelor['vendor']='N/A';
+				 }
+				 if($councelor['utm_contract_c']==''){
+				   $councelor['utm_contract_c']='N/A';
+				 }
+				 if($councelor['utm_campaign']==''){
+				   $councelor['utm_campaign']='N/A';
+				 }
+				 if($councelor['stuname']==''){
+				   $councelor['stuname']='N/A';
+				 }
+				 if($councelor['phone_mobile']==''){
+				   $councelor['phone_mobile']='N/A';
+				 }
+				 if($councelor['email']==''){
+				   $councelor['email']='N/A';
+				 }
+				 if($councelor['gender']==''){
+				   $councelor['gender']='N/A';
+				 }
+				 if($councelor['dob']==''){
+				   $councelor['dob']='N/A';
+				 }
+				 if($councelor['primary_address_city']==''){
+				   $councelor['primary_address_city']='N/A';
+				 }
+				  if($councelor['city']==''){
+				   $councelor['city']='N/A';
+				 }
+				  if($councelor['primary_address_state']==''){
+				   $councelor['primary_address_state']='N/A';
+				 }
+				  if($councelor['country']==''){
+				   $councelor['country']='N/A';
+				 }
+				  if($councelor['pin']==''){
+				   $councelor['pin']='N/A';
+				 }
+				  if($councelor['company']==''){
+				   $councelor['company']='N/A';
+				 }
+				  if($councelor['functional_area']==''){
+				   $councelor['functional_area']='N/A';
+				 }
+				 if($councelor['education']==''){
+				   $councelor['education']='N/A';
+				 }
+				 if($councelor['work_experience']==''){
+				   $councelor['work_experience']='N/A';
+				 }
+				 if($councelor['converted_date']==''){
+				   $councelor['converted_date']='N/A';
+				 }
+				 if($councelor['lstatus']==''){
+				   $councelor['lstatus']='N/A';
+				 }
+				 if($councelor['status_description']==''){
+				   $councelor['status_description']='N/A';
+				 }
+				  if($councelor['agent_name']==''){
+				   $councelor['agent_name']='N/A';
+				 }
+				  if($councelor['srm']==''){
+				   $councelor['srm']='N/A';
 				 }
 				
-			$data.= "\"" . $councelor['insname'] . "\",\"" . $councelor['pname'] . "\",\"". $councelor['batch_code']. "\",\"". $councelor['fee_inr']. "\",\"". $councelor['date_entered']. "\",\"". $councelor['dropout']. "\",\"".$councelor['qualify_for_refund']."\",\"". $councelor['vendor']. "\",\"". $councelor['utm_contract_c']. "\",\"". $councelor['utm_campaign']. "\",\"". $councelor['stuname']. "\",\"". $councelor['phone_mobile']. "\",\"". $councelor['email']. "\",\"". $councelor['gender']. "\",\"". $councelor['dob']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['city']. "\",\"". $councelor['primary_address_state']. "\",\"". $councelor['country']. "\",\"". $councelor['pin']. "\",\"". $councelor['company']. "\",\"". $councelor['functional_area']. "\",\"". $councelor['education']. "\",\"". $councelor['work_experience']. "\",\"". $councelor['converted_date']. "\",\"". $councelor['status']. "\",\"". $councelor['status_description']. "\",\"". $councelor['agent_name']. "\",N/A, N/A,N/A,N/A,N/A,N/A,N/A,\"". $councelor['srm']. "\"\n";
+			$data.= "\"" . $councelor['insname'] . "\",\"" . $councelor['pname'] . "\",\"". $councelor['batch_code']. "\",\"". $councelor['fee_inr']. "\",\"". $councelor['date_entered']. "\",\"". $councelor['dropout']. "\",\"".$councelor['qualify_for_refund']."\",\"". $councelor['vendor']. "\",\"". $councelor['utm_contract_c']. "\",\"". $councelor['utm_campaign']. "\",\"". $councelor['stuname']. "\",\"". $councelor['phone_mobile']. "\",\"". $councelor['email']. "\",\"". $councelor['gender']. "\",\"". $councelor['dob']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['city']. "\",\"". $councelor['primary_address_state']. "\",\"". $councelor['country']. "\",\"". $councelor['pin']. "\",\"". $councelor['company']. "\",\"". $councelor['functional_area']. "\",\"". $councelor['education']. "\",\"". $councelor['work_experience']. "\",\"". $councelor['converted_date']. "\",\"". $councelor['lstatus']. "\",\"". $councelor['status_description']. "\",\"". $councelor['agent_name']. "\",N/A, N/A,N/A,N/A,N/A,N/A,N/A,\"". $councelor['srm']. "\"\n";
 				}
 			
 			//echo $data;die;
@@ -181,15 +257,11 @@ if (!defined('sugarEntry') || !sugarEntry)
 
 				$left=1;
 			}
-
 			$councelorList=array_slice($councelorList,$start,$per_page);
 			if($total>$per_page){
 				$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
-
 			}else{
 				$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
-
-
 			}
 			if(isset($_SESSION['lp_from_date']) && !empty($_SESSION['lp_from_date'])){
 			$selected_from_date = date('d-m-Y',strtotime($_SESSION['lp_from_date']));
@@ -197,11 +269,8 @@ if (!defined('sugarEntry') || !sugarEntry)
 			if(isset($_SESSION['lp_to_date']) && !empty($_SESSION['lp_to_date'])){
 			$selected_to_date = date('d-m-Y',strtotime($_SESSION['lp_to_date']));
 			}
-		//	$batchList=$this->getBatch();	
 			$sugarSmarty = new Sugar_Smarty();
 			$sugarSmarty->assign("councelorList",$councelorList);
-			//$sugarSmarty->assign("batchList",$batchList);
-			//$sugarSmarty->assign("selected_batch",$_POST['batches']);
 			$sugarSmarty->assign("selected_from_date",$_POST['from_date']);
 			$sugarSmarty->assign("selected_to_date",$_POST['to_date']);
 			//$sugarSmarty->assign("retmode",$_POST['pmode']);		 
