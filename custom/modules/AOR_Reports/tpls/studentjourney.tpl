@@ -50,9 +50,7 @@
 			<td class="sumbitButtons" colspan=8 style="text-align: right;">
 				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
 				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-	            <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
-
-	        
+	            <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">  
 			</td>
 		</tr>
 		</tbody>
@@ -105,8 +103,6 @@
 											<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
 											</button>
 										{/if}
-
-
 									</td>
 									<td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
 								</tr>
@@ -117,7 +113,7 @@
 					{*End Pagination*}
 </div>
 </form>
-<table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
+<table cellpadding="0" cellspacing="0" width="100%" border="2" class="list view table footable-loaded footable default">
 	<thead>
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -202,16 +198,7 @@
 			<strong>Agent Name</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Payment Mode</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong> Amount Paid </strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>EMI 1 </strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>EMI 2 </strong>
+			<strong> Total Amount Paid </strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Outstanding</strong>
@@ -249,13 +236,9 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.lstatus==''}N/A{/if}{$councelor.lstatus}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.status_description==''}N/A{/if}{$councelor.status_description}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.agent_name==''}N/A{/if}{$councelor.agent_name}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">N/A</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">N/A</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">N/A</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">N/A</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">N/A</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.total_amount_paid==''}00.0{/if}{$councelor.total_amount_paid}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong><font color="#B22222">{$councelor.outstanding-$councelor.total_amount_paid}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.srm==''}N/A{/if}{$councelor.srm}</td>
-
 		</tr>
 	{/foreach}
 </table>
