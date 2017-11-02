@@ -34,25 +34,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 				
 		}
 		
-		$sql="SELECT
-				  p.name AS pname,i.name AS insname,l.status_description,l.status AS lstatus,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state,
-				  l.primary_address_postalcode AS pin,l.vendor,s.work_experience,s.functional_area,s.name AS stuname,s.country,s.email,s.dob,s.gender,s.education,s.company,b.batch_code,b.name AS bname,
-				  b.date_entered,b.te_in_institutes_id_c,b.te_pr_programs_id_c,b.te_vendor_id_c AS srmid,b.leads_id,b.batch_code,b.fee_inr,b.fee_usd,CONCAT(cu.first_name,' ',cu.last_name)agent_name,CONCAT(sbu.first_name,' ',sbu.last_name)srm,
-				  b.status AS dropout,b.qualify_for_refund AS courcetrnsfer FROM te_student_batch b
-				INNER JOIN
-				  te_pr_programs AS p ON p.id = b.te_pr_programs_id_c
-				INNER JOIN
-				  te_in_institutes AS i ON i.id = b.te_in_institutes_id_c
-				INNER JOIN
-				  leads AS l ON l.id = b.leads_id
-				INNER JOIN
-				  te_student AS s ON s.lead_id_c = b.leads_id
-				INNER JOIN 
-				   users AS cu ON cu.id = l.assigned_user_id
-				INNER JOIN 
-				   users AS sbu ON sbu.id = b.assigned_user_id
-				WHERE
-				  b.deleted = 0 AND s.deleted = 0 ".$where." ORDER BY b.name ASC";
+		 $sql="SELECT p.name AS pname,i.name AS insname,l.status_description,l.status AS lstatus,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state, l.primary_address_postalcode AS pin,l.vendor,s.work_experience,s.functional_area,s.name AS stuname,s.country,s.email,s.dob,s.gender,s.education,s.company,b.batch_code,b.name AS bname, b.date_entered,b.te_in_institutes_id_c,b.te_pr_programs_id_c,b.te_vendor_id_c AS srmid,b.leads_id,b.batch_code,b.fee_inr,b.fee_usd,(SELECT SUM(amount) FROM te_student_payment where te_student_batch_id_c=b.id AND deleted=0)total_amount_paid,OutstandingFee(b.id)outstanding,CONCAT(cu.first_name,' ',cu.last_name)agent_name,CONCAT(sbu.first_name,' ',sbu.last_name)srm, b.status AS dropout,b.qualify_for_refund AS courcetrnsfer FROM te_student_batch b INNER JOIN te_pr_programs AS p ON p.id = b.te_pr_programs_id_c INNER JOIN te_in_institutes AS i ON i.id = b.te_in_institutes_id_c INNER JOIN leads AS l ON l.id = b.leads_id INNER JOIN te_student AS s ON s.lead_id_c = b.leads_id INNER JOIN users AS cu ON cu.id = l.assigned_user_id INNER JOIN users AS sbu ON sbu.id = b.assigned_user_id WHERE b.deleted = 0 AND s.deleted = 0".$where." ORDER BY b.name ASC";
   	
 		// $sql="SELECT * FROM `te_student` WHERE deleted=0";	
 		/*old code
@@ -85,28 +67,10 @@ if (!defined('sugarEntry') || !sugarEntry)
 				$where.=" AND DATE(l.date_entered)='".$to_date."' ";
 			}
 			
-			$data = "Institute Name,Course Name,Batch ID,Course Fees,Lead enquiry date,Dropout,Course Transfer,Source,Medium,Campaign Name,Student Name,Mobile No.,Email ID,Gender,Date of Birth,Address,City,State,Country,PIN,Company,Functional Area,Highest Qualification,Work Experience,Conversion Date,Status,Sub Status,Agent,Payment,Mode,Amount,Paid,EMI 1,EMI 2,Outstanding,SRM\n";
+			$data = "Institute Name,Course Name,Batch ID,Course Fees,Lead enquiry date,Dropout,Course Transfer,Source,Medium,Campaign Name,Student Name,Mobile No.,Email ID,Gender,Date of Birth,Address,City,State,Country,PIN,Company,Functional Area,Highest Qualification,Work Experience,Conversion Date,Status,Sub Status,Agent,Total Amount Paid,Outstanding,SRM\n";
 			$file = "Studentjourney";
 			$filename = $file . "_" . date ( "Y-m-d");
-			$sql="SELECT
-				  p.name AS pname,i.name AS insname,l.status_description,l.status AS lstatus,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state,
-				  l.primary_address_postalcode AS pin,l.vendor,s.work_experience,s.functional_area,s.name AS stuname,s.country,s.email,s.dob,s.gender,s.education,s.company,b.batch_code,b.name AS bname,
-				  b.date_entered,b.te_in_institutes_id_c,b.te_pr_programs_id_c,b.te_vendor_id_c AS srmid,b.leads_id,b.batch_code,b.fee_inr,b.fee_usd,CONCAT(cu.first_name,' ',cu.last_name)agent_name,CONCAT(sbu.first_name,' ',sbu.last_name)srm,
-				  b.status AS dropout,b.qualify_for_refund AS courcetrnsfer FROM te_student_batch b
-				INNER JOIN
-				  te_pr_programs AS p ON p.id = b.te_pr_programs_id_c
-				INNER JOIN
-				  te_in_institutes AS i ON i.id = b.te_in_institutes_id_c
-				INNER JOIN
-				  leads AS l ON l.id = b.leads_id
-				INNER JOIN
-				  te_student AS s ON s.lead_id_c = b.leads_id
-				INNER JOIN 
-				   users AS cu ON cu.id = l.assigned_user_id
-				INNER JOIN 
-				   users AS sbu ON sbu.id = b.assigned_user_id
-				WHERE
-				  b.deleted = 0 AND s.deleted = 0 ".$where." ORDER BY b.name ASC";
+			$sql="SELECT p.name AS pname,i.name AS insname,l.status_description,l.status AS lstatus,l.converted_date,l.utm_campaign,l.utm_contract_c,l.phone_mobile,l.primary_address_city,l.primary_address_state, l.primary_address_postalcode AS pin,l.vendor,s.work_experience,s.functional_area,s.name AS stuname,s.country,s.email,s.dob,s.gender,s.education,s.company,b.batch_code,b.name AS bname, b.date_entered,b.te_in_institutes_id_c,b.te_pr_programs_id_c,b.te_vendor_id_c AS srmid,b.leads_id,b.batch_code,b.fee_inr,b.fee_usd,(SELECT SUM(amount) FROM te_student_payment where te_student_batch_id_c=b.id AND deleted=0)total_amount_paid,OutstandingFee(b.id)outstanding,CONCAT(cu.first_name,' ',cu.last_name)agent_name,CONCAT(sbu.first_name,' ',sbu.last_name)srm, b.status AS dropout,b.qualify_for_refund AS courcetrnsfer FROM te_student_batch b INNER JOIN te_pr_programs AS p ON p.id = b.te_pr_programs_id_c INNER JOIN te_in_institutes AS i ON i.id = b.te_in_institutes_id_c INNER JOIN leads AS l ON l.id = b.leads_id INNER JOIN te_student AS s ON s.lead_id_c = b.leads_id INNER JOIN users AS cu ON cu.id = l.assigned_user_id INNER JOIN users AS sbu ON sbu.id = b.assigned_user_id WHERE b.deleted = 0 AND s.deleted = 0".$where." ORDER BY b.name ASC";
 			$councelorList=array();
 			$leadObj =$db->query($sql);
 			while($row =$db->fetchByAssoc($leadObj)){
@@ -213,10 +177,15 @@ if (!defined('sugarEntry') || !sugarEntry)
 				  if($councelor['srm']==''){
 				   $councelor['srm']='N/A';
 				 }
+				 if($councelor['total_amount_paid']==''){
+				   $councelor['total_amount_paid']='N/A';
+				 }
+				  if($councelor['outstanding']!=''){
+				   $councelor['outstanding']=$councelor['outstanding']-$councelor['total_amount_paid'];
+				 }
 				
-			$data.= "\"" . $councelor['insname'] . "\",\"" . $councelor['pname'] . "\",\"". $councelor['batch_code']. "\",\"". $councelor['fee_inr']. "\",\"". $councelor['date_entered']. "\",\"". $councelor['dropout']. "\",\"".$councelor['qualify_for_refund']."\",\"". $councelor['vendor']. "\",\"". $councelor['utm_contract_c']. "\",\"". $councelor['utm_campaign']. "\",\"". $councelor['stuname']. "\",\"". $councelor['phone_mobile']. "\",\"". $councelor['email']. "\",\"". $councelor['gender']. "\",\"". $councelor['dob']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['city']. "\",\"". $councelor['primary_address_state']. "\",\"". $councelor['country']. "\",\"". $councelor['pin']. "\",\"". $councelor['company']. "\",\"". $councelor['functional_area']. "\",\"". $councelor['education']. "\",\"". $councelor['work_experience']. "\",\"". $councelor['converted_date']. "\",\"". $councelor['lstatus']. "\",\"". $councelor['status_description']. "\",\"". $councelor['agent_name']. "\",N/A, N/A,N/A,N/A,N/A,N/A,N/A,\"". $councelor['srm']. "\"\n";
-				}
-			
+				$data.= "\"" . $councelor['insname'] . "\",\"" . $councelor['pname'] . "\",\"". $councelor['batch_code']. "\",\"". $councelor['fee_inr']. "\",\"". $councelor['date_entered']. "\",\"". $councelor['dropout']. "\",\"".$councelor['qualify_for_refund']."\",\"". $councelor['vendor']. "\",\"". $councelor['utm_contract_c']. "\",\"". $councelor['utm_campaign']. "\",\"". $councelor['stuname']. "\",\"". $councelor['phone_mobile']. "\",\"". $councelor['email']. "\",\"". $councelor['gender']. "\",\"". $councelor['dob']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['city']. "\",\"". $councelor['primary_address_state']. "\",\"". $councelor['country']. "\",\"". $councelor['pin']. "\",\"". $councelor['company']. "\",\"". $councelor['functional_area']. "\",\"". $councelor['education']. "\",\"". $councelor['work_experience']. "\",\"". $councelor['converted_date']. "\",\"". $councelor['lstatus']. "\",\"". $councelor['status_description']. "\",\"". $councelor['agent_name']. "\",\"". $councelor['total_amount_paid']. "\",\"". $councelor['outstanding']. "\",\"". $councelor['srm']. "\"\n";
+				}	
 			//echo $data;die;
 			ob_end_clean();
 			header("Content-type: application/csv");
@@ -224,11 +193,21 @@ if (!defined('sugarEntry') || !sugarEntry)
 			echo $data; exit;
 			
 		}
-		
 		$councelorList=array();
 		while($row =$db->fetchByAssoc($leadObj)){
 			$councelorList[]=$row;
 		}
+		/*
+		foreach($councelorList as $key=>$councelor){
+				if(!isset($councelor['osb'])){
+					$councelor['osb']=$councelor['total_amount_paid']-$councelor['outstanding'];
+				}
+
+					}
+					
+		*/
+		
+		
 		
 			$total=count($councelorList); #total records
 			$start=0;
@@ -236,7 +215,6 @@ if (!defined('sugarEntry') || !sugarEntry)
 			$page=1;
 			$pagenext=1;
 			$last_page=ceil($total/$per_page);
-
 			if(isset($_REQUEST['page'])&&$_REQUEST['page']>0){
 				$start=$per_page*($_REQUEST['page']-1);
 				$page=($_REQUEST['page']-1);
