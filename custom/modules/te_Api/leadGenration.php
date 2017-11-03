@@ -18,7 +18,8 @@
 	$campagain_d='';
 	$lead_d='';
 	//if($source && $medium && $term  && $email)
-        if($name && $phone && $email)
+        //print_r($_REQUEST); die;
+        if($phone || $email)
             {
 
               $utm=	$leadObj->fetchUtm($source,$medium,$term);
@@ -69,7 +70,7 @@
             else
             {
              //echo json_encode(array('status'=>'error','msg'=>'Email, Utm source, utm medium and utm term is required field')); exit();	
-             echo json_encode(array('status'=>'error','msg'=>'Name, Mobile, Email is required field')); exit();	
+             echo json_encode(array('status'=>'error','msg'=>'Mobile or Email is required field')); exit();	
             }
  
 	$sql = "SELECT leads.id as id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
