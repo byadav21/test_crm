@@ -236,8 +236,8 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.lstatus==''}N/A{/if}{$councelor.lead_status}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.status_description==''}N/A{/if}{$councelor.status_description}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.agent_name==''}N/A{/if}{$councelor.agent_name}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.total_amount_paid==''}00.0{/if}{$councelor.total_amount_paid}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong><font color="#B22222">{$councelor.outstanding-$councelor.total_amount_paid}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">NA</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong><font color="#B22222">NA</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.srm==''}N/A{/if}{$councelor.srm}</td>
 		</tr>
 	{/foreach}

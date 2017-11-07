@@ -179,14 +179,14 @@ if (!defined('sugarEntry') || !sugarEntry)
 				  if($councelor['srm']==''){
 				   $councelor['srm']='N/A';
 				 }
-				 if($councelor['total_amount_paid']==''){
-				   $councelor['total_amount_paid']='N/A';
-				 }
-				  if($councelor['outstanding']!=''){
-				   $councelor['outstanding']=$councelor['outstanding']-$councelor['total_amount_paid'];
-				 }
+			//	 if($councelor['total_amount_paid']==''){
+			//	   $councelor['total_amount_paid']='N/A';
+			//	 }
+				//  if($councelor['outstanding']!=''){
+			//	   $councelor['outstanding']=$councelor['outstanding']-$councelor['total_amount_paid'];
+				// }
 				
-				$data.= "\"" . $councelor['insname'] . "\",\"" . $councelor['pname'] . "\",\"". $councelor['batch_code']. "\",\"". $councelor['fee_inr']. "\",\"". $councelor['date_entered']. "\",\"". $councelor['dropout']. "\",\"".$councelor['courcetrnsfer']."\",\"". $councelor['vendor']. "\",\"". $councelor['utm_contract_c']. "\",\"". $councelor['utm_campaign']. "\",\"". $councelor['stuname']. "\",\"". $councelor['phone_mobile']. "\",\"". $councelor['email']. "\",\"". $councelor['gender']. "\",\"". $councelor['dob']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['primary_address_state']. "\",\"". $councelor['country']. "\",\"". $councelor['pin']. "\",\"". $councelor['company']. "\",\"". $councelor['functional_area']. "\",\"". $councelor['education']. "\",\"". $councelor['work_experience']. "\",\"". $councelor['converted_date']. "\",\"". $councelor['lead_status']. "\",\"". $councelor['status_description']. "\",\"". $councelor['agent_name']. "\",\"". $councelor['total_amount_paid']. "\",\"". $councelor['outstanding']. "\",\"". $councelor['srm']. "\"\n";
+				$data.= "\"" . $councelor['insname'] . "\",\"" . $councelor['pname'] . "\",\"". $councelor['batch_code']. "\",\"". $councelor['fee_inr']. "\",\"". $councelor['date_entered']. "\",\"". $councelor['dropout']. "\",\"".$councelor['courcetrnsfer']."\",\"". $councelor['vendor']. "\",\"". $councelor['utm_contract_c']. "\",\"". $councelor['utm_campaign']. "\",\"". $councelor['stuname']. "\",\"". $councelor['phone_mobile']. "\",\"". $councelor['email']. "\",\"". $councelor['gender']. "\",\"". $councelor['dob']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['primary_address_state']. "\",\"". $councelor['country']. "\",\"". $councelor['pin']. "\",\"". $councelor['company']. "\",\"". $councelor['functional_area']. "\",\"". $councelor['education']. "\",\"". $councelor['work_experience']. "\",\"". $councelor['converted_date']. "\",\"". $councelor['lead_status']. "\",\"". $councelor['status_description']. "\",\"". $councelor['agent_name']. "\",NA,NA,\"". $councelor['srm']. "\"\n";
 				}	
 			//echo $data;die;
 			ob_end_clean();
@@ -208,9 +208,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 					}
 					
 		*/
-		
-		
-		
+			
 			$total=count($councelorList); #total records
 			$start=0;
 			$per_page=10;
