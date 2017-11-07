@@ -215,7 +215,7 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.fee_inr|number_format:2:".":","}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.date_entered==''}N/A{/if}{$councelor.date_entered}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.dropout==Dropout}Yes{else}No{/if}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.courcetrnsfer==NULL}No{else}Yes{/if}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.course_transfer==NULL}No{/if}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.vendor==''}N/A{/if}{$councelor.vendor}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.utm_contract_c==''}N/A{/if}{$councelor.utm_contract_c}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.utm_campaign==''}N/A{/if}{$councelor.utm_campaign}</td>
@@ -225,19 +225,19 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.gender==''}N/A{/if}{$councelor.gender}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.dob==''}N/A{/if}{$councelor.dob}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.primary_address_city==''}N/A{/if}{$councelor.primary_address_city }</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.city==''}N/A{/if}{$councelor.primary_address_city }</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.country==''}N/A{/if}{$councelor.primary_address_state}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.city==''}N/A{/if}{$councelor.city }</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.country==''}N/A{/if}{$councelor.city}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.pin==''}N/A{/if}{$councelor.pin}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.company==''}N/A{/if}{$councelor.company}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.functional_area==''}N/A{/if}{$councelor.functional_area}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.education==''}N/A{/if}{$councelor.education}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.work_experience==''}N/A{/if}{$councelor.work_experience}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.converted_date==''}N/A{/if}{$councelor.converted_date}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.lstatus==''}N/A{/if}{$councelor.lead_status}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.lstatus==''}N/A{/if}{$councelor.lstatus}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.status_description==''}N/A{/if}{$councelor.status_description}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.agent_name==''}N/A{/if}{$councelor.agent_name}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">NA</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong><font color="#B22222">NA</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.total_amount_paid==''}00.0{/if}{$councelor.total_amount_paid}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><strong><font color="#B22222">{$councelor.outstanding-$councelor.total_amount_paid}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{if $councelor.srm==''}N/A{/if}{$councelor.srm}</td>
 		</tr>
 	{/foreach}
