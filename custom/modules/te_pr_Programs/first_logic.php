@@ -52,8 +52,8 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				$result = curl_exec($ch);
-				$res = json_decode($result);
-				echo $res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
+				$res = json_decode($result,true);
+				echo $result.$res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
 					if(isset($res[0]->status) && $res[0]->message=='Success'){
 					//	echo "hello insert Success ";
 						$bean->web_id=$res[0]->course_id;
@@ -84,8 +84,8 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				$result = curl_exec($ch);
-				$res = json_decode($result);
-				echo $res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
+				$res = json_decode($result,true);
+				echo $result.$res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
 					if(isset($res[0]->status) && $res[0]->message=='Success'){
 
 						$bean->web_id=$res[0]->course_id;
