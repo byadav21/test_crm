@@ -56,6 +56,7 @@ class first_logic{
 				$res = json_decode(trim($result),TRUE);
 				//header('Content-type: application/json;');
 				//echo $result;echo "<pre>";print_r($res); exit();
+				echo $res[0]->status.' in add';
 					if(isset($res[0]->status) && $res[0]->status=='1'){
 						//echo "hello insert Success ";
 					//	$bean->web_id=$res[0]->course_id;
@@ -63,6 +64,7 @@ class first_logic{
 						echo "add";
 
 					}
+					exit();
 
 					curl_close($ch);
 			}
