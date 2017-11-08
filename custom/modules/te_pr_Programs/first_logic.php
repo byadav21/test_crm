@@ -70,7 +70,7 @@ class first_logic{
 						'Authorization: Basic '. base64_encode("$user:$password")
 				);
 				$post = [
-						'action' => 'add',
+						'action' => 'update',
 						'pname' => $bean->name,
 						'Inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
