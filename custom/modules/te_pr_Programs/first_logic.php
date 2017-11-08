@@ -53,8 +53,8 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				$result = curl_exec($ch);
 				$res = json_decode($result);
-					if(isset($res[0]->status) && $res[0]->status=='1'){
-						#echo "hello insert Success ";
+					if(isset($res[0]->status) && $res[0]->message=='Success'){
+					//	echo "hello insert Success ";
 						$bean->web_id=$res[0]->course_id;
 
 					}
@@ -85,10 +85,10 @@ class first_logic{
 				$result = curl_exec($ch);
 				$res = json_decode($result);
 
-					if(isset($res[0]->status) && $res[0]->status=='1'){
+					if(isset($res[0]->status) && $res[0]->message=='Success'){
 
 						$bean->web_id=$res[0]->course_id;
-
+						
 					}
 
 					curl_close($ch);
