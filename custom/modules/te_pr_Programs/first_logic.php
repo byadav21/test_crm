@@ -53,6 +53,7 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				$result = curl_exec($ch);
 				$res = json_decode(trim($result),TRUE);
+				header('Content-type: application/json;');
 				echo $result.$res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
 					if(isset($res[0]->status) && $res[0]->message=='Success'){
 					//	echo "hello insert Success ";
@@ -85,6 +86,7 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				$result = curl_exec($ch);
 				$res = json_decode(trim($result),TRUE);
+				header('Content-type: application/json;');
 				echo $result.$res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
 					if(isset($res[0]->status) && $res[0]->message=='Success'){
 
