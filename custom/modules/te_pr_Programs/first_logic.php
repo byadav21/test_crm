@@ -55,16 +55,18 @@ class first_logic{
 				$result = stripslashes(html_entity_decode($result));
 				$res = json_decode(trim($result),TRUE);
 				//header('Content-type: application/json;');
-				//echo $result;echo "<pre>";print_r($res); exit();
-				echo $res[0]->status.' in add';
-					if(isset($res[0]->status) && $res[0]->status=='1'){
+				//echo "<pre>";print_r($res);echo $res[0]['status'];
+				//echo $res[0]->status.' in add';
+					if(isset($res[0]['status']) && $res[0]['status']=='1'){
 						//echo "hello insert Success ";
-					//	$bean->web_id=$res[0]->course_id;
-					$GLOBALS['db']->query("update te_pr_programs set web_id='" . $bean->$res[0]->course_id . "' where id='{$bean->id}'");
-						echo "add";
+						$bean->web_id=$res[0]['course_id'];
+                                       //print_r($bean);
+					//echo "update te-pr_programs set web_id='".$res[0]['course_id']."' where id='".$bean->id."'";
+					$GLOBALS['db']->query("update te_pr_programs set web_id='" . $res[0]['course_id'] . "' where id='".$bean->id."'");
+						//echo "add";
 
 					}
-					exit();
+					//exit();
 
 					curl_close($ch);
 			}
@@ -94,11 +96,11 @@ class first_logic{
 				$res = json_decode(trim($result),TRUE);
 				//header('Content-type: application/json;');
 				//echo $result.$res[0]->status.' -update '.$res[0]->message;echo "<pre>";print_r($res);exit();
-					if(isset($res[0]->status) && $res[0]->status=='1'){
+					if(isset($res[0]['status']) && $res[0]['status']=='1'){
 
-						//$bean->web_id=$res[0]->course_id;
-						$GLOBALS['db']->query("update te_pr_programs set web_id='" . $bean->$res[0]->course_id . "' where id='{$bean->id}'");
-						echo "update";
+						$bean->web_id=$res[0]['course_id'];
+						$GLOBALS['db']->query("update te_pr_programs set web_id='" . $res[0]['course_id'] . "' where id='".$bean->id."'");
+						//echo "update";
 					}
 
 					curl_close($ch);
