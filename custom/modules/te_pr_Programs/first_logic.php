@@ -40,7 +40,7 @@ class first_logic{
 				$post = [
 						'action' => 'add',
 						'pname' => $bean->name,
-						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'Inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
 				 
@@ -70,9 +70,9 @@ class first_logic{
 						'Authorization: Basic '. base64_encode("$user:$password")
 				);
 				$post = [
-						'action' => 'update',
+						'action' => 'add',
 						'pname' => $bean->name,
-						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'Inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
 				$ch = curl_init();
