@@ -33,7 +33,7 @@ class first_logic{
 				/*Insert program api call here*/
 				$user = 'talentedgeadmin';
 				$password = 'Inkoniq@2016';
-				$url = 'http://webstaging.talentedge.in/programme-api/';
+				$url = 'http://talentedge.staging.wpengine.com/programme-api/';
 				$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 				);
@@ -65,7 +65,7 @@ class first_logic{
 				/*update program api call here*/
 				$user = 'talentedgeadmin';
 				$password = 'Inkoniq@2016';
-				$url = 'http://webstaging.talentedge.in/programme-api/';
+				$url = 'http://talentedge.staging.wpengine.com/programme-api/';
 				$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 				);
