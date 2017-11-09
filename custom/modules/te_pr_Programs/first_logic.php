@@ -40,7 +40,7 @@ class first_logic{
 				$post = [
 						'action' => 'add',
 						'pname' => $bean->name,
-						'Inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
 				 
@@ -81,7 +81,7 @@ class first_logic{
 				$post = [
 						'action' => 'update',
 						'pname' => $bean->name,
-						'Inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
 				$ch = curl_init();
