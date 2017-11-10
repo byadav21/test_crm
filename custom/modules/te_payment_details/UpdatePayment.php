@@ -193,7 +193,7 @@ class UpdatePaymentName
     {
         $user     = 'talentedgeadmin';
         $password = 'Inkoniq@2016';
-        $url      = 'http://webstaging.talentedge.in/order-api/';
+        $url      = 'http://talentedge.staging.wpengine.com/order-api/';
         $headers  = array(
             'Authorization: Basic ' . base64_encode("$user:$password")
         );
@@ -237,7 +237,7 @@ class UpdatePaymentName
     {
         $user     = 'talentedgeadmin';
         $password = 'Inkoniq@2016';
-        $url      = 'http://webstaging.talentedge.in/order-api/';
+        $url      = 'http://talentedge.staging.wpengine.com/order-api/';
         $headers  = array(
             'Authorization: Basic ' . base64_encode("$user:$password"),
         );
