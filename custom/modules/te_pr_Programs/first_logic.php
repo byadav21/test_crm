@@ -40,7 +40,7 @@ class first_logic{
 				$post = [
 						'action' => 'add',
 						'pname' => $bean->name,
-						'Inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
 				 
@@ -52,13 +52,21 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				$result = curl_exec($ch);
-				$res = json_decode($result);
-				echo $res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
-					if(isset($res[0]->status) && $res[0]->message=='Success'){
-					//	echo "hello insert Success ";
-						$bean->web_id=$res[0]->course_id;
+				$result = stripslashes(html_entity_decode($result));
+				$res = json_decode(trim($result),TRUE);
+				//header('Content-type: application/json;');
+				//echo "<pre>";print_r($res);echo $res[0]['status'];
+				//echo $res[0]->status.' in add';
+					if(isset($res[0]['status']) && $res[0]['status']=='1'){
+						//echo "hello insert Success ";
+						$bean->web_id=$res[0]['course_id'];
+                                       //print_r($bean);
+					//echo "update te-pr_programs set web_id='".$res[0]['course_id']."' where id='".$bean->id."'";
+					$GLOBALS['db']->query("update te_pr_programs set web_id='" . $res[0]['course_id'] . "' where id='".$bean->id."'");
+						//echo "add";
 
 					}
+					//exit();
 
 					curl_close($ch);
 			}
@@ -73,7 +81,7 @@ class first_logic{
 				$post = [
 						'action' => 'update',
 						'pname' => $bean->name,
-						'Inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
+						'inst_crm_id'   => $_REQUEST['te_in_institutes_te_pr_programs_1te_in_institutes_ida'],
 						'programmed_crmid'   => $bean->id,
 				];
 				$ch = curl_init();
@@ -84,12 +92,15 @@ class first_logic{
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 				$result = curl_exec($ch);
-				$res = json_decode($result);
-				echo $res[0]->status.' - '.$res[0]->message;echo "<pre>";print_r($res);exit();
-					if(isset($res[0]->status) && $res[0]->message=='Success'){
+				$result = stripslashes(html_entity_decode($result));
+				$res = json_decode(trim($result),TRUE);
+				//header('Content-type: application/json;');
+				//echo $result.$res[0]->status.' -update '.$res[0]->message;echo "<pre>";print_r($res);exit();
+					if(isset($res[0]['status']) && $res[0]['status']=='1'){
 
-						$bean->web_id=$res[0]->course_id;
-						
+						$bean->web_id=$res[0]['course_id'];
+						$GLOBALS['db']->query("update te_pr_programs set web_id='" . $res[0]['course_id'] . "' where id='".$bean->id."'");
+						//echo "update";
 					}
 
 					curl_close($ch);
