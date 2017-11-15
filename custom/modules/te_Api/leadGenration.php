@@ -18,6 +18,7 @@
 	$campagain_d='';
 	$lead_d='';
 	//if($source && $medium && $term  && $email)
+        //echo "LeadGenration";
         //print_r($_REQUEST); die;
         if($phone || $email)
             {
