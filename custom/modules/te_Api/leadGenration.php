@@ -36,6 +36,8 @@
                             $rex = $GLOBALS['db']->query($batchQ);
                             $BatchRow = $GLOBALS['db']->fetchByAssoc($rex);
                             $batchid=$BatchRow['id'];
+                            $camID = $BatchRow['d_campaign_id'];
+                            $leadID = $BatchRow['d_lead_id'];
 //                            if(!$batchid)
 //                                   {
 //                                       echo json_encode(array('status'=>'error','msg'=>'Utm term is required field')); exit();
@@ -95,8 +97,8 @@
 		$statusDetail = 'Re-Enquired';
 	}
         if(!$batchid && !$term){
-            $campagain_d=16;   // when only Name, Mobile & Email
-            $lead_d=92; 
+            $campagain_d=18;   // when only Name, Mobile & Email
+            $lead_d=89; 
             
         }
 
