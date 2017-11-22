@@ -133,10 +133,20 @@ function insert_payment($student_batch_detail=array(),$student_detail=array(),$d
 	  $payment->date_of_payment  = $data['payment_date'];
 	  $payment->reference_number = $data['payment_referencenum'];
 	  $payment->amount 		   = $payment_val;
-	  $payment->name 		   	   = $payment_val;
+	  $payment->name 		   = $payment_val;
 	  $payment->payment_realized = $payment_realized;
 	  $payment->leads_te_payment_details_1leads_ida = $student_detail['lead_id'];
 	  $payment->student_payment_id = $id;
+          // added pawan on 22nd Nov 2017
+          $payment->invoice_number = $data['invoice_number'];
+          $payment->invoice_url = $data['invoice_url'];
+          $payment->invoice_order_number = $data['payment_id'];
+          $payment->tax_type = $data['taxtype'];
+          $payment->tax = $data['tax1'];
+          $payment->receipt_url = $data['receipt_url'];
+          $payment->payment_type_ins=$data['payment_type'];
+          
+          
 	  $payment->save();
 
 	  $lead_payment_details_id=$payment->id;
