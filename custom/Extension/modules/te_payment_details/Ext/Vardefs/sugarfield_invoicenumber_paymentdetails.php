@@ -71,7 +71,7 @@ $dictionary['te_payment_details']['fields']['tax'] =array (
 	);
 
 
-$dictionary['te_payment_details']['fields']['payment_type'] =array (
+$dictionary['te_payment_details']['fields']['payment_type_ins'] =array (
 		'name' => 'payment_type',
 		'vname' => 'Payment Type',
 		'type' => 'varchar',

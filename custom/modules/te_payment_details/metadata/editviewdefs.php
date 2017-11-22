@@ -91,7 +91,12 @@ array (
             'studio' => 'visible',
             'label' => 'Invoice Order Number',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'receipt_url',
+            'studio' => 'visible',
+            'label' => 'Receipt Url',
+          ),
         ),
         5 => 
         array (
@@ -107,6 +112,26 @@ array (
             'studio' => 'visible',
             'label' => 'Invoice URL',
           ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tax',
+            'studio' => 'visible',
+            'label' => 'Tax',
+          ),
+          1 => 
+          array (
+            'name' => 'tax_type',
+            'studio' => 'visible',
+            'label' => 'Tax Type',
+          ),
+        ),
+        7 => 
+        array (
+          0 => '',
+          1 => '',
         ),
       ),
     ),
