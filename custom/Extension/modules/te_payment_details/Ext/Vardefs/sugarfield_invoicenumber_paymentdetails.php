@@ -72,8 +72,8 @@ $dictionary['te_payment_details']['fields']['tax'] =array (
 
 
 $dictionary['te_payment_details']['fields']['payment_type_ins'] =array (
-		'name' => 'payment_type',
-		'vname' => 'Payment Type',
+		'name' => 'payment_type_ins',
+		'vname' => 'Payment Type Ins',
 		'type' => 'varchar',
 		'required' => false,
 		'comments' => 'payment_type as Installment or Full',
