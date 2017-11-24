@@ -125,6 +125,7 @@
 	if($campagain_d)  $leadObj->dristi_campagain_id=$campagain_d;
 	if($lead_d)  $leadObj->dristi_API_id= $lead_d;
 	$leadObj->assigned_user_id= 'NULL';
+        $leadObj->autoassign= 'Yes';
 	$leadObj->save();
 	if(!$leadObj->id){
 		echo json_encode(array('status'=>'error','msg'=>'Some thing gone wrong!')); exit();
