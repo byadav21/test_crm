@@ -31,6 +31,30 @@
 
               
             }
+            /* new Status Change according to 27nov17 */
+             if($bean->status=='Active'){
+				  $user_id=$current_user->id;
+				  $current_date=date('Y-m-d H:i:s');
+				  $leadid = $bean->leads_id; 
+				  $discription=$bean->status_discription;
+				  $notes=$bean->description;
+				 
+			      $dispo_id=$this->__create_guid();
+                  $te_disposition_leads_c=$this->__create_guid();
+				 
+				  $leadSqlE="UPDATE leads set status_description='".$discription."' WHERE id='".$leadid."'";
+				  $leadObj =$db->query($leadSqlE);
+				  
+				    $leadDispoSql="INSERT INTO `te_disposition`(`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `assigned_user_id`, `status`, `status_detail`,`description`) VALUES ('".$dispo_id."','Converted','".$current_date."','".$current_date."','".$user_id."','".$user_id."','".$user_id."','Converted','".$discription."','".$notes."')";
+					$leadDispoObj =$db->query($leadDispoSql);
+
+					$leadDispoRelSql="INSERT INTO `te_disposition_leads_c`(`id`, `date_modified`, `te_disposition_leadsleads_ida`, `te_disposition_leadste_disposition_idb`) VALUES ('".$te_disposition_leads_c."','".$current_date."','".$leadid."','".$dispo_id."')";
+					$leadDispoRelObj =$db->query($leadDispoRelSql);
+				   
+			 }
+            
+            
+            
         }
         function __create_guid() {
         $microTime = microtime();
