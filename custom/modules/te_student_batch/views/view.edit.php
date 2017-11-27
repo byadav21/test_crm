@@ -43,6 +43,17 @@ class te_student_batchViewEdit extends ViewEdit {
 	<script>	
 	$(function(){
 	$("#status option[value='Inactive_transfer']").remove();
+	$("#status").trigger('click');
+	$("#status").change(function(){
+		if($(this).val()=='Active'){
+		  $("#status_discription").show();
+		  $("#status_discription_label").text('Status Discription:');
+		}
+		else{
+			$("#status_discription").hide();
+			$("#status_discription_label").text('');
+		}
+	});
 	});	
 	</script>
 	<?php

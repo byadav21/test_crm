@@ -40,6 +40,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
     ),
     'panels' => 
@@ -121,16 +126,11 @@ array (
         array (
           0 => 
           array (
-            'name' => 'status',
-            'studio' => 'visible',
-            'label' => 'LBL_STATUS',
-          ),
-          1 => 
-          array (
             'name' => 'result',
             'studio' => 'visible',
             'label' => 'LBL_RESULT',
           ),
+          1 => '',
         ),
         5 => 
         array (
@@ -204,7 +204,7 @@ array (
         ),
         10 => 
         array (
-          0 => 'description',
+          0 => '',
           1 => '',
         ),
         11 => 
@@ -311,6 +311,32 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_DROPOUT_STATUS',
           ),
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'status',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'status_discription',
+            'studio' => 'visible',
+            'label' => 'Status Discription',
+          ),
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 'description',
         ),
       ),
     ),

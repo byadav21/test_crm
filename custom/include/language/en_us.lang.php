@@ -690,3 +690,12 @@ $GLOBALS['app_list_strings']['lead_status_custom_dom']=array (
   'Warm' => 'Warm',
   'Recycle' => 'Recycle',
 );
+$GLOBALS['app_list_strings']['status_list_student_batch_discription']=array (
+  '' => '',
+  'Program enquiry' => 'Program enquiry',
+  'Payment enquiry' => 'Payment enquiry',
+  'Refund enquiry' => 'Refund enquiry',
+  'Referral' => 'Referral',
+  'Technical' => 'Technical',
+  'Miscellaneous' => 'Miscellaneous',
+  );
