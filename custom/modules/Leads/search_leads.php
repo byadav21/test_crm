@@ -1,7 +1,7 @@
 <?php
     if (!defined('sugarEntry') || !sugarEntry)die('Not A Valid Entry Point');
-	ini_set('display_errors','0');
 	error_reporting(E_ALL);
+ini_set('display_errors', 1);
 	//include_once('modules/ACLRoles/ACLRole.php');
 	require_once('modules/ACLRoles/ACLRole.php');
 	global $db; 
@@ -9,10 +9,10 @@
 	$Us=$current_user->id;
 	$acl_obj = new ACLRole();
 	$misData=$acl_obj->getUserSlug($current_user->id);
+	$whereSRM = '';
 	if($misData['slug']=='SRM' || $misData['slug']=='SRE'){
-		$where.=" tbl1.status='Converted' ";
+		$whereSRM=1;
 		$displaySRM=true;
-		 
 	}
 
 ?>
@@ -69,52 +69,55 @@ tr:nth-child(even) {
 <?php
 if(isset($_REQUEST['Search'])) {
         extract($_REQUEST);
-        $where.="";
+        $where="";
+        $whereNew = '';
         // condition add krna h
 //      name and email and mobile koi
 
         if(!empty($name)){
         if($where!=''){
-        $where.=" OR tbl1.first_name like '".$name."'";
+        $where.=" OR (tbl1.first_name like '%".$name."')";
         }
         else{
-        $where.="  tbl1.first_name like '".$name."'";
+        $where.="  (tbl1.first_name like '%".$name."')";
         }
         }
         if(!empty($last)){
         if($where!=''){
-        $where.=" OR tbl1.last_name like '".$last."'";
+        $where.=" OR (tbl1.last_name like '".$last."%')";
         }
         else{
-        $where.="  tbl1.last_name like '".$last."'";
+        $where.="  (tbl1.last_name like '%".$last."%')";
         }
         }        
         if(!empty($email)){
         if($where!=''){
-        $where.="  OR tbl4.email_address like '".$email."'";
+        $where.="  OR (tbl4.email_address like '".$email."')";
         }
         else{
-        $where.="  tbl4.email_address like '".$email."'";
+        $where.="  (tbl4.email_address like '".$email."')";
         }
         }
         
         if(!empty($mobile_number)){
         if($where!=''){
-        $where.="  OR tbl1.phone_mobile like '".$mobile_number."'";
+        $where.="  OR (tbl1.phone_mobile like '".$mobile_number."')";
         }
         else{
-        $where.="  tbl1.phone_mobile like '".$mobile_number."'";
+        $where.="  (tbl1.phone_mobile like '".$mobile_number."')";
         }
             
         }
 			if(strpos($where, 'tbl1.deleted') == false && $where!='') {
-		    $where.=" AND tbl1.deleted=0 limit 0,100";
+		    $where.=" AND (tbl1.deleted=0) ";
         }
+        if(!empty($where) && !empty($whereSRM)){
+		    $whereNew = " AND (tbl1.status = 'Converted')";	
+		}
         
         
 					$fetch="SELECT tbl1.id,tbl1.salutation,tbl1.phone_mobile,tbl4.email_address,tbl1.assigned_user_id,tbl1.first_name,tbl1.last_name, tbl1.status,tbl1.date_entered,tbl1.lead_source,tbl2.user_name,tbl2.phone_mobile FROM leads AS tbl1
-							LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id WHERE ".$where;
-        
+							LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id WHERE ".$where." $whereNew limit 0,100";
         $row = $db->query($fetch);
                     
 if($row->num_rows>0){
