@@ -1105,20 +1105,22 @@ class addPaymentClass
 //                $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
 //            }
             //echo "checkduplicateFunc=".$sql; die;
-            $re = $GLOBALS['db']->query($sql);
-            if ($GLOBALS['db']->getRowCount($re) > 0)
-            {
-                echo '<script> alert("You can\'t add duplicate lead");callPage(); function callPage(){  window.location.href="index.php?module=Leads&action=ListView&record=' . $bean->id . '" } </script>';
-                exit();
-            }
+            //
+            //
+//            $re = $GLOBALS['db']->query($sql);
+//            if ($GLOBALS['db']->getRowCount($re) > 0)
+//            {
+//                echo '<script> alert("You can\'t add duplicate lead");callPage(); function callPage(){  window.location.href="index.php?module=Leads&action=ListView&record=' . $bean->id . '" } </script>';
+//                exit();
+//            }
         }
 
 
-        if ($bean->fetched_row['status'] == 'Duplicate')
-        {
-            echo '<script> alert("You can\'t edit duplicate lead");callPage(); function callPage(){  window.location.href="index.php?module=Leads&action=DetailView&record=' . $bean->id . '" } </script>';
-            exit();
-        }
+//        if ($bean->fetched_row['status'] == 'Duplicate')
+//        {
+//            echo '<script> alert("You can\'t edit duplicate lead");callPage(); function callPage(){  window.location.href="index.php?module=Leads&action=DetailView&record=' . $bean->id . '" } </script>';
+//            exit();
+//        }
     }
 
 }
