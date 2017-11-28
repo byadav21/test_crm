@@ -650,7 +650,7 @@ class addPaymentClass
 //                $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
 //            }
             
-            echo 'while importing to crm'.$sql; die;
+            //echo 'while importing to crm'.$sql; die;
             $bean->upload_status   = 1;
             $bean->duplicate_check = '1';
             //echo $sql;die;
@@ -725,7 +725,7 @@ class addPaymentClass
 //                {
 //                    $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
 //                }
-                echo 'while manual creating'.$sql.' $bean->assigned_user_id='. $bean->assigned_user_id; die;
+                //echo 'while manual creating'.$sql.' $bean->assigned_user_id='. $bean->assigned_user_id; die;
                 $re = $GLOBALS['db']->query($sql);
                 if ($GLOBALS['db']->getRowCount($re) > 0)
                 {
@@ -1104,7 +1104,7 @@ class addPaymentClass
 //            {
 //                $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
 //            }
-            echo "checkduplicateFunc=".$sql; die;
+            //echo "checkduplicateFunc=".$sql; die;
             $re = $GLOBALS['db']->query($sql);
             if ($GLOBALS['db']->getRowCount($re) > 0)
             {
