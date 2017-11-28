@@ -70,11 +70,11 @@ ini_set("display_errors",0);
 
 				}
 				else{
-					$stat = 'Duplicate';
+					$stat = 'Re-Enquired';
 
 					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 						<div class="count">0</div>
-						<span class="count_top"> Duplicate</span>
+						<span class="count_top"> Re-Enquired</span>
 
 					</div>	';
 				}
