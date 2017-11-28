@@ -634,21 +634,23 @@ class addPaymentClass
                 $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
                 $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
             }*/
-            $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batch_id['id'] . "' and status_description!='Duplicate' and  leads.deleted=0"; // AND DATE(date_entered) = '".date('Y-m-d')."'";
+            $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batch_id['id'] . "' and (status_description!='Duplicate' or status_description!='Re-Enquired')  and  leads.deleted=0"; // AND DATE(date_entered) = '".date('Y-m-d')."'";
             if ($bean->phone_mobile && $bean->email1)
             {
 
-                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_add_c = '{$bean->email1}')";
+                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' and leads_cstm.email_add_c = '{$bean->email1}')";
             }
-            elseif (!$bean->phone_mobile && $bean->email1)
-            {
-
-                $sql .= " and email_add_c=  '{$bean->email1}'";
-            }
-            elseif ($bean->phone_mobile && !$bean->email1)
-            {
-                $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
-            }
+//            elseif (!$bean->phone_mobile && $bean->email1)
+//            {
+//
+//                $sql .= " and email_add_c=  '{$bean->email1}'";
+//            }
+//            elseif ($bean->phone_mobile && !$bean->email1)
+//            {
+//                $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
+//            }
+            
+            echo 'while importing to crm'.$sql; die;
             $bean->upload_status   = 1;
             $bean->duplicate_check = '1';
             //echo $sql;die;
@@ -708,22 +710,22 @@ class addPaymentClass
                     $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
                     $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
                 }*/
-                $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and status_description!='Duplicate' and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
+                $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and (status_description!='Duplicate' or status_description!='Re-Enquired') and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
                 if ($bean->phone_mobile && $bean->email1)
                 {
 
-                    $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_add_c = '{$bean->email1}')";
+                    $sql .= " AND leads.phone_mobile = '{$bean->phone_mobile}' AND leads_cstm.email_add_c = '{$bean->email1}' ";
                 }
-                elseif (!$bean->phone_mobile && $bean->email1)
-                {
-
-                    $sql .= " and email_add_c= '{$bean->email1}'";
-                }
-                elseif ($bean->phone_mobile && !$bean->email1)
-                {
-                    $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
-                }
-
+//                elseif (!$bean->phone_mobile && $bean->email1)
+//                {
+//
+//                    $sql .= " and email_add_c= '{$bean->email1}'";
+//                }
+//                elseif ($bean->phone_mobile && !$bean->email1)
+//                {
+//                    $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
+//                }
+                echo 'while manual creating'.$sql.' $bean->assigned_user_id='. $bean->assigned_user_id; die;
                 $re = $GLOBALS['db']->query($sql);
                 if ($GLOBALS['db']->getRowCount($re) > 0)
                 {
@@ -1087,22 +1089,22 @@ class addPaymentClass
                 $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
                 $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
             }*/
-            $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and status_description!='Duplicate' and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
+            $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and (status_description!='Duplicate' or status_description!='Re-Enquired') and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
             if ($bean->phone_mobile && $bean->email1)
             {
 
-                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' or email_add_c = '{$bean->email1}')";
+                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' and leads_cstm.email_add_c = '{$bean->email1}')";
             }
-            elseif (!$bean->phone_mobile && $bean->email1)
-            {
-
-                $sql .= " and email_add_c= '{$bean->email1}'";
-            }
-            elseif ($bean->phone_mobile && !$bean->email1)
-            {
-                $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
-            }
-
+//            elseif (!$bean->phone_mobile && $bean->email1)
+//            {
+//
+//                $sql .= " and email_add_c= '{$bean->email1}'";
+//            }
+//            elseif ($bean->phone_mobile && !$bean->email1)
+//            {
+//                $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
+//            }
+            echo "checkduplicateFunc=".$sql; die;
             $re = $GLOBALS['db']->query($sql);
             if ($GLOBALS['db']->getRowCount($re) > 0)
             {
