@@ -55,7 +55,7 @@ ini_set("display_errors",0);
 				}
 
 //Duplicate
-				$sqlDup = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Duplicate'  AND leads.assigned_user_id IN ('".$user_ids."')";
+				$sqlDup = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Re-Enquired'  AND leads.assigned_user_id IN ('".$user_ids."')";
 				$resDup = $GLOBALS['db']->query($sqlDup);
 				$rowDup= $GLOBALS['db']->fetchByAssoc($resDup);
 				if($rowDup['count'] > 0){
@@ -63,7 +63,7 @@ ini_set("display_errors",0);
 
 					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					 <div class="count">'.$rowDup['count'].'</div>
-						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowDup['status_description'].'">'.$rowDup['status_description'].'</a>s</span>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic=Re-Enquired">Re-Enquired</a></span>
 
 					</div>	';
 

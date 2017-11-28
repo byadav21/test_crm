@@ -725,7 +725,7 @@ class addPaymentClass
 //                {
 //                    $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
 //                }
-                //echo 'while manual creating'.$sql.' $bean->assigned_user_id='. $bean->assigned_user_id; die;
+                //echo 'while manual creating'.$sql.' $bean->assigned_user_id='. $bean->assigned_user_id;  die;
                 $re = $GLOBALS['db']->query($sql);
                 if ($GLOBALS['db']->getRowCount($re) > 0)
                 {
