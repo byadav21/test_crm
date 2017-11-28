@@ -63,7 +63,8 @@ ini_set("display_errors",0);
 
 					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
 					 <div class="count">'.$rowDup['count'].'</div>
-						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic=Re-Enquired">Re-Enquired</a></span>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic=Re-Enquired"> Re-Enquired</a> </span> 
+                                                
 
 					</div>	';
 
