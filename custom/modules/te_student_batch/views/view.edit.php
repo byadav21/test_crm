@@ -43,7 +43,12 @@ class te_student_batchViewEdit extends ViewEdit {
 	<script>	
 	$(function(){
 	$("#status option[value='Inactive_transfer']").remove();
-	 $("#status_discription_label").text('Dispostion Status:');
+	$("#status_discription_label").text('Dispostion Status:');
+	if($("#status").val()!='Active'){
+		$("#status_discription").val('');
+		$("#status_discription").hide();
+		$("#status_discription_label").text('');
+	}
 	$("#status").trigger('click');
 	$("#status").change(function(){
 		if($(this).val()=='Active'){
@@ -52,6 +57,7 @@ class te_student_batchViewEdit extends ViewEdit {
 		}
 		else{
 			$("#status_discription").hide();
+			$("#status_discription").val('');
 			$("#status_discription_label").text('');
 		}
 	});
