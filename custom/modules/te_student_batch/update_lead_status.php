@@ -31,8 +31,16 @@
 
               
             }
-            /* new Status Change according to 27nov17 */
-             if($bean->status=='Active'){
+            /* new Status Change according to 27nov17 @Manish */
+            if($bean->status=='Active'){
+				$dispo_status = 'Converted';
+				$discription=$bean->status_discription;
+			}
+			else{
+				$dispo_status = $bean->status;
+				$discription=$bean->status;
+			}
+             //if($bean->status=='Active'){
 				  $user_id=$current_user->id;
 				  $current_date=date('Y-m-d H:i:s');
 				  $leadid = $bean->leads_id; 
@@ -45,15 +53,25 @@
 				  $leadSqlE="UPDATE leads set status_description='".$discription."' WHERE id='".$leadid."'";
 				  $leadObj =$db->query($leadSqlE);
 				  
-				    $leadDispoSql="INSERT INTO `te_disposition`(`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `assigned_user_id`, `status`, `status_detail`,`description`) VALUES ('".$dispo_id."','Converted','".$current_date."','".$current_date."','".$user_id."','".$user_id."','".$user_id."','Converted','".$discription."','".$notes."')";
+					$leadDispoSql="INSERT INTO `te_disposition`(`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `assigned_user_id`, `status`, `status_detail`,`description`) VALUES ('".$dispo_id."','".$dispo_status."','".$current_date."','".$current_date."','".$user_id."','".$user_id."','".$user_id."','".$dispo_status."','".$discription."','".$notes."')";
 					$leadDispoObj =$db->query($leadDispoSql);
 
 					$leadDispoRelSql="INSERT INTO `te_disposition_leads_c`(`id`, `date_modified`, `te_disposition_leadsleads_ida`, `te_disposition_leadste_disposition_idb`) VALUES ('".$te_disposition_leads_c."','".$current_date."','".$leadid."','".$dispo_id."')";
 					$leadDispoRelObj =$db->query($leadDispoRelSql);
-				   
-			 }
-            
-            
+						 	
+					$dispositionCall = new te_Disposition_student_batch();
+					$dispositionCall->status        = $bean->status;
+					$dispositionCall->dispostion_status = $discription;
+					$dispositionCall->date_time   = $bean->date_time;
+					$dispositionCall->name        = $bean->status;
+					$dispositionCall->description        = $bean->description;
+					$dispositionCall->te_disposi5321t_batch_ida = $bean->id;
+					$dispositionCall->save();   
+				 
+				 
+				 //}
+			 
+			
             
         }
         function __create_guid() {
