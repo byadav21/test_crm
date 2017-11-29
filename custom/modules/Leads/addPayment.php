@@ -638,7 +638,7 @@ class addPaymentClass
             if ($bean->phone_mobile && $bean->email1)
             {
 
-                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' and leads_cstm.email_add_c = '{$bean->email1}')";
+                $sql .= " and ( leads.phone_mobile = '{$bean->phone_mobile}' and leads_cstm.email_add_c = '{$bean->email1}') order by leads.date_entered asc limit 1 ";
             }
 //            elseif (!$bean->phone_mobile && $bean->email1)
 //            {
@@ -671,8 +671,8 @@ class addPaymentClass
                 $bean->upload_status      = -1;
                 $_SESSION['dupCheck']     = intval($_SESSION['dupCheck']) + 1;
                 //$data=$GLOBALS['db']->fetchByAssoc($re);
-                $bean->assigned_user_id   = $beanData->assigned_user_id;
-                if($beanData->assigned_user_id) $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+                $bean->assigned_user_id   = $beanData['assigned_user_id'];
+                if($beanData['assigned_user_id']) $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
 				//$bean->converted_date=date('Y-m-d');
             }
             else
@@ -714,7 +714,7 @@ class addPaymentClass
                 if ($bean->phone_mobile && $bean->email1)
                 {
 
-                    $sql .= " AND leads.phone_mobile = '{$bean->phone_mobile}' AND leads_cstm.email_add_c = '{$bean->email1}' ";
+                    $sql .= " AND leads.phone_mobile = '{$bean->phone_mobile}' AND leads_cstm.email_add_c = '{$bean->email1}' order by leads.date_entered asc limit 1 ";
                 }
 //                elseif (!$bean->phone_mobile && $bean->email1)
 //                {
