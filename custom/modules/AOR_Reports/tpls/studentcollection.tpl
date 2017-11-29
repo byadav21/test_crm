@@ -117,6 +117,18 @@
 	<thead>
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Invoice No</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong> Invoice URL</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Receipt No</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong> Receipt URL</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Date</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -140,9 +152,17 @@
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Payment Mode</strong>
 		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Payment Source</strong>
+		</th>
 	 </tr>
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.invoice_number}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="{$councelor.invoice_url}" target="_blank">{$councelor.invoice_url}</a></td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.invoice_order_number}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="{$councelor.receipt_url}" target="_blank">{$councelor.receipt_url}</a></td>
+			
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.date_of_payment}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch_code}</td>
@@ -151,7 +171,7 @@
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.fee_inr|number_format:2:".":","}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.amount|number_format:2:".":","}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.payment_type }</td>
-
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.payment_source}</td>
 		</tr>
 	{/foreach}
 </table>
