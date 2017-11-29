@@ -56,7 +56,7 @@ class AOR_ReportsViewStudentcollection extends SugarView {
 		if(isset($_POST['export']) && $_POST['export']=="Export"){
 			
 			
-			$data = "Invoice No,Invoice URL,Receipt No,Receipt URL,Date,Course,Batch,Student,State,GSV,Amount,Payment Mode,Payment Source\n";
+			$data = "Invoice_No,Invoice_URL,Receipt_No,Receipt_URL,Date,Course,Batch,Student,State,GSV,Amount,Payment_Mode,Payment_Source\n";
 		 
 			while($row =$db->fetchByAssoc($leadObj)){
 				 $i=0;
