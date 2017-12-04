@@ -82,7 +82,7 @@
 		$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
 	}
 	 
-	$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$batchid."' AND DATE(date_entered) = '".date('Y-m-d')."'";
+	$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$batchid."'";
 	 
 	if($phone!=""){
 		$sql.=" AND leads.phone_mobile = '$phone'";
@@ -96,11 +96,12 @@
 		$status = 'Warm';
 		$statusDetail = 'Re-Enquired';
 	}
-        if(!$batchid && !$term){
-            $campagain_d=18;   // when only Name, Mobile & Email
-            $lead_d=89; 
-            
-        }
+        
+//        if(!$batchid && !$term){
+//            $campagain_d=18;   // when only Name, Mobile & Email
+//            $lead_d=89; 
+//            
+//        }
 
 	$leadObj->first_name=$name;
 	$leadObj->duplicate_check= 1;

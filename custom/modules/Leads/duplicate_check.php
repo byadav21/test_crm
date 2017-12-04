@@ -4,7 +4,7 @@ if (!defined('sugarEntry') || !sugarEntry)die('Not A Valid Entry Point');
 	global $db;
 
 
-	$sql = "SELECT GROUP_CONCAT(DISTINCT(l.`id`) ORDER BY l.date_entered)lead_id,count(l.id)total FROM `leads` AS l INNER JOIN leads_cstm lc ON l.id=lc.id_c LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id LEFT JOIN email_addresses e ON el.email_address_id = e.id WHERE l.deleted=0 AND (status_description!='Duplicate' or status_description!='Re-Enquired')  GROUP BY  l.phone_other ,  l.`phone_mobile`,lc.te_ba_batch_id_c,e.email_address HAVING (COUNT(l.`phone_mobile`)>1 and (COUNT(e.email_address)>1)) AND (COUNT(lc.te_ba_batch_id_c)>1) LIMIT 0,10";
+	$sql = "SELECT GROUP_CONCAT(DISTINCT(l.`id`) ORDER BY l.date_entered)lead_id,count(l.id)total FROM `leads` AS l INNER JOIN leads_cstm lc ON l.id=lc.id_c LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id LEFT JOIN email_addresses e ON el.email_address_id = e.id WHERE l.deleted=0 AND l.status!='Duplicate'   GROUP BY  l.phone_other ,  l.`phone_mobile`,lc.te_ba_batch_id_c,e.email_address HAVING (COUNT(l.`phone_other`)>1 or COUNT(l.`phone_mobile`)>1 OR (COUNT(e.email_address)>1)) AND (COUNT(lc.te_ba_batch_id_c)>1) LIMIT 0,10";
 	$row = $db->query($sql);
 		if($row->num_rows>0){
 			$res='';
