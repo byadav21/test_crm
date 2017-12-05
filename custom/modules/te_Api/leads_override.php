@@ -12,7 +12,7 @@ class leads_override extends Lead {
 	public function fetchUtm($source,$medium,$term){
 		 global $db;
 		 
-		$sql="select u.te_ba_batch_id_c,u.name from te_utm u 
+		$sql="select u.te_ba_batch_id_c,u.name,b.d_campaign_id,b.d_lead_id from te_utm u 
 					inner join te_vendor_te_utm_1_c v on v.te_vendor_te_utm_1te_utm_idb=u.id 
 					inner join te_vendor tv on tv.id=v.te_vendor_te_utm_1te_vendor_ida and tv.name='$source' 
 					inner join te_ba_batch b on b.id=u.te_ba_batch_id_c and b.batch_code='$term'

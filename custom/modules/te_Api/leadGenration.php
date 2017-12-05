@@ -27,8 +27,10 @@
                  if($utm)
                      {
 
-                        $batchid=$utm['te_ba_batch_id_c'];
-                        $uname=$utm['name'];
+                        $batchid=  $utm['te_ba_batch_id_c'];
+                        $uname  =  $utm['name'];
+                        $camID  =  $utm['d_campaign_id'];
+                        $leadID =  $utm['d_lead_id'];
                      }
                       else
                      {
