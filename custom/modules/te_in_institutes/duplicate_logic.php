@@ -22,7 +22,7 @@ class duplicate_logic{
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
 					//$url = 'http://talentedge.staging.wpengine.com/institute-api/';
-					$url = 'http://talentedge.in/institute-api/';
+					$url = 'https://talentedge.in/institute-api/';
 					 
 					$headers = array(
 					    'Authorization: Basic '. base64_encode("$user:$password")
@@ -40,7 +40,8 @@ class duplicate_logic{
 					curl_setopt($ch, CURLOPT_POST, 1);
 					curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-					$result = curl_exec($ch);
+					$result = curl_exec($ch); 
+
 					$res = json_decode($result);
 				 
 						if(isset($res[0]->status) && $res[0]->status=='1'){
@@ -59,7 +60,7 @@ class duplicate_logic{
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
 					//$url = 'http://talentedge.staging.wpengine.com/institute-api/';
-					$url = 'http://talentedge.in/institute-api/';
+					$url = 'https://talentedge.in/institute-api/';
 					$headers = array(
 					    'Authorization: Basic '. base64_encode("$user:$password")
 					);
