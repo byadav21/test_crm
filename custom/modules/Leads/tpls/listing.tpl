@@ -315,6 +315,16 @@
 								 <span style="color:red"> -NA- <span>
 							 {/if}
 							 </P>
+							 {if $is_admin }
+								<P>
+								<label>Source</label> : 
+									{if !empty($rowData.LEAD_SOURCE)} 
+									{$rowData.LEAD_SOURCE}
+									{else}
+									 <span style="color:red"> -NA- <span>
+									{/if}
+								</P>
+							{/if}
 				  
 				  </div>
 				  <div class="col-sm-3 text-right">
