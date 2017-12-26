@@ -78,7 +78,7 @@
              echo json_encode(array('status'=>'error','msg'=>'Mobile or Email is required field')); exit();	
             }
  
-	$sql = "SELECT leads.id as id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
+	$sql = "SELECT leads.id as id,leads.assigned_user_id,status,status_description FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
 	if($email!=""){
 		$sql.=" INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
 		$sql.=" INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
@@ -86,27 +86,32 @@
 	 
 	$sql .=" WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '".$batchid."'";
 	 
-	if($phone!=""){
-		$sql.=" AND leads.phone_mobile = '$phone'";
+	if($phone!="" && $email!=""){
+		$sql.=" AND leads.phone_mobile = '$phone' AND email_addresses.email_address='".$email."'";
 	}
-	if($email!=""){
-		$sql.=" AND email_addresses.email_address='".$email."'";
-	}
+	
+        
+        $autoassign='Yes';
+        $assigned_user_id='NULL';
+        $duplicate_check =0;
         
 	$re = $GLOBALS['db']->query($sql);
 	if($GLOBALS['db']->getRowCount($re)>0){
-		$status = 'Warm';
+            
+                //When Re-Enquired or New 
+                $status = 'Warm';
 		$statusDetail = 'Re-Enquired';
+                $campagain_d='';
+                $lead_d='';
+                $autoassign='No';
+                $duplicate_check=1;
+                
 	}
         
-//        if(!$batchid && !$term){
-//            $campagain_d=18;   // when only Name, Mobile & Email
-//            $lead_d=89; 
-//            
-//        }
+
 
 	$leadObj->first_name=$name;
-	$leadObj->duplicate_check= 1;
+	$leadObj->duplicate_check= $duplicate_check;
 	$leadObj->email1= $email;
         $leadObj->email_add_c= $email;
         $leadObj->phone_mobile= $phone;
@@ -127,8 +132,8 @@
 	if(!$source) $leadObj->vendor='NA_VENDOR';
 	if($campagain_d)  $leadObj->dristi_campagain_id=$campagain_d;
 	if($lead_d)  $leadObj->dristi_API_id= $lead_d;
-	$leadObj->assigned_user_id= 'NULL';
-        $leadObj->autoassign= 'Yes';
+	$leadObj->assigned_user_id= $assigned_user_id;
+        $leadObj->autoassign= $autoassign;
 	$leadObj->save();
 	if(!$leadObj->id){
 		echo json_encode(array('status'=>'error','msg'=>'Some thing gone wrong!')); exit();

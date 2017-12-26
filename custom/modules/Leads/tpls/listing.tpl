@@ -315,6 +315,15 @@
 								 <span style="color:red"> -NA- <span>
 							 {/if}
 							 </P>
+
+							<P><label>Institute</label> : 
+							 {if !empty($rowData.INSTITUTE)} 
+								{$rowData.INSTITUTE}
+							 {else}
+								 <span style="color:red"> -NA- <span>
+							 {/if}
+							 </P>
+
 							 {if $is_admin }
 								<P>
 								<label>Source</label> : 
@@ -325,6 +334,7 @@
 									{/if}
 								</P>
 							{/if}
+							
 				  
 				  </div>
 				  <div class="col-sm-3 text-right">

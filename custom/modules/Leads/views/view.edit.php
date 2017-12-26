@@ -95,7 +95,7 @@ class LeadsViewEdit extends ViewEdit
 
         $this->ss->assign('countries_list', $countries_list);
         $this->ss->assign('state_list', $state_list);
-        $this->ss->assign('disableBatch', $disableBatch);
+        $this->ss->assign('disableBatch', '$disableBatch');
         $this->ss->assign('disableDisposition', '0');
         $this->ss->assign('recID', $this->bean->id);
         if (isset($_SESSION['currentCall']) && !empty($_SESSION['currentCall']))

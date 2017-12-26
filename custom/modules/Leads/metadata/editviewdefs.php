@@ -164,16 +164,15 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_BATCH',
           ),
-          1 => 
+        ),
+        9 => 
+        array (
+          0 => 
           array (
             'name' => 'discount',
             'studio' => 'visible',
             'label' => 'Discount',
           ),
-        ),
-        9 => 
-        array (
-          0 => '',
           1 => '',
         ),
         10 => 

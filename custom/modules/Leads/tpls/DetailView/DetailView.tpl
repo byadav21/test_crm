@@ -80,7 +80,7 @@
 	</div>
 	<div class="col-sm-4 rowpadd">
 		
-		<p>{$overview.programe} - {$overview.institute}</p>
+		<p>{$overview.programe}</p>
 		 <P><label>BATCH</label> : 
 		 {if !empty($overview.batch)} 
 			{$overview.batch}
@@ -88,6 +88,13 @@
 			 <span style="color:red"> -NA- <span>
 		 {/if}
 		 </P>
+                 <P><label>Institute</label> : 
+                {if !empty($overview.institute)} 
+                       {$overview.institute}
+                {else}
+                        <span style="color:red"> -NA- <span>
+                {/if}
+                </P>
 	
 	</div>
 	<div class="col-sm-3 rowpadd">
