@@ -12,8 +12,14 @@ if(!isset($data['action']) || empty($data['action'])){
 
 }
 else{
-	if(!isset($data['crm_lead_id']) || empty($data['crm_lead_id'])){
+	/*if(!isset($data['crm_lead_id']) || empty($data['crm_lead_id'])){
 		$error_fields['crm_lead_id']=['crm_lead_id field is required.'];
+	}*/
+	if(!isset($data['email']) || empty($data['email'])){
+		$error_fields['email']=['email field is required.'];
+	}
+	if(!isset($data['mobile']) || empty($data['mobile'])){
+		$error_fields['mobile']=['mobile field is required.'];
 	}
 	if(!isset($data['batch_crm_id']) || empty($data['batch_crm_id'])){
 		$error_fields['batch_crm_id']=['batch_crm_id field is required.'];
@@ -56,6 +62,8 @@ if($error_fields){
 else{
 	$lead_id=$data['crm_lead_id'];
 	$batch_id=$data['batch_crm_id'];
+	$email=$data['email'];
+	$mobile=$data['mobile'];
 
 	/*check valid crm_payment_id in case of update*/
 	if($data['action']=='update'){
@@ -72,9 +80,15 @@ else{
 	/*check valid crm_payment_id ends here*/
 
 
-	$lead_data = __get_lead_details($lead_id,$batch_id,$discount);
+	//$lead_data = __get_lead_details($lead_id,$batch_id,$discount);
+	$lead_data = __get_lead_details($email,$mobile,$batch_id,$discount);
+	//echo "<pre>";print_r($lead_data);exit();
 	if($lead_data){
-		if(strtolower($data['currency'])=='inr' || empty($lead_data['primary_address_country'])){
+		
+		if(strtolower($data['currency'])=='usd' && empty($lead_data['primary_address_country'])){
+          $lead_data['student_country']='india';
+        }
+		else if(strtolower($data['currency'])=='inr' || empty($lead_data['primary_address_country'])){
           $lead_data['student_country']='india';
         }
         else{
@@ -316,16 +330,60 @@ function __get_student_batch_id($student_arr=array()){
     );
   }
 }
-
-function __get_lead_details($lead_id=NULL,$batch_id=NULL,$discountStr=NULL){
+//function __get_lead_details($lead_id=NULL,$batch_id=NULL,$discountStr=NULL){
+function __get_lead_details($email=NULL,$mobile=NULL,$batch_id=NULL,$discountStr=NULL){
     /*$get_lead_sql = "SELECT leads.*,leads_cstm.te_ba_batch_id_c AS batch_id FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
     $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
     $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
     return $get_lead;*/
 
-	$get_lead_sql = "SELECT leads.*,leads_cstm.* FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."'";
+	//$get_lead_sql = "SELECT leads.*,leads_cstm.* FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.id='".$lead_id."'";
+	$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and   (email_add_c='".$email."' or phone_mobile='".$mobile."') ORDER BY date_entered ASC";
     $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
-    $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
+	$get_lead=[];
+	$found_lead_data=[];
+    while($row = $GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj)){$get_lead[]=$row;}
+	if(count($get_lead)>0){
+		foreach($get_lead as $key => $lead_value){
+			if($lead_value['status']=='Converted'){
+				$found_lead_data = $get_lead[$key];
+			}
+		}
+		if(empty($found_lead_data)){
+			foreach($get_lead as $key => $lead_value){
+				if($lead_value['status']=='Alive'){
+					$found_lead_data = $get_lead[$key];
+				}
+			}
+		}
+		if(empty($found_lead_data)){
+			foreach($get_lead as $key => $lead_value){
+				if($lead_value['status']=='Warm' && $lead_value['status_description']=='Prospect'){
+					$found_lead_data = $get_lead[$key];
+					break;
+				}
+				
+			}
+		}
+		if(empty($found_lead_data)){
+			foreach($get_lead as $key => $lead_value){
+				if($lead_value['status']=='Warm' && $lead_value['status_description']!='Prospect'){
+					$found_lead_data = $get_lead[$key];
+					break;
+				}
+				else{
+					$found_lead_data = $get_lead[0];
+					break;
+				}
+			}
+		}
+	
+	}
+	else{
+		return 0;
+	}
+	
+	$get_lead=$found_lead_data;
 	if($get_lead){
     if($discountStr){
       $discount[0]=" discount=".$discountStr;
