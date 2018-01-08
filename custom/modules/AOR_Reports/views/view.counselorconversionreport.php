@@ -157,7 +157,13 @@ class AOR_ReportsViewCounselorconversionreport extends SugarView
     function getCouncelordata($user_id)
     {
         global $db;
-        $userSql = "SELECT CONCAT(first_name,' ',last_name) as name,id,reports_to_id FROM users WHERE deleted=0 AND is_admin=0";
+        //$userSql = "SELECT CONCAT(first_name,' ',last_name) as name,id,reports_to_id FROM users WHERE deleted=0 AND is_admin=0";
+         $userSql = "SELECT CONCAT(u.first_name,' ',u.last_name) as name,u.id,u.reports_to_id
+                    FROM `users` AS u
+                    INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+                    WHERE aru.role_id='270ce9dd-7f7d-a7bf-f758-582aeb4f2a45'
+                      AND aru.deleted=0
+                      AND u.deleted=0 AND u.is_admin=0 group by u.id";
         $userObj = $db->query($userSql);
         //$user    = $db->fetchByAssoc($userObj);
         
