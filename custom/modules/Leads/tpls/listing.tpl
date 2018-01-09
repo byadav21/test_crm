@@ -333,6 +333,14 @@
 									 <span style="color:red"> -NA- <span>
 									{/if}
 								</P>
+								<P>
+								<label>Vendor</label> : 
+									{if !empty($rowData.VENDOR)} 
+									{$rowData.LEAD_SOURCE}
+									{else}
+									 <span style="color:red"> -NA- <span>
+									{/if}
+								</P>
 							{/if}
 							
 				  
