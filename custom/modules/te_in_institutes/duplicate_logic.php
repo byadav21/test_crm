@@ -22,7 +22,7 @@ class duplicate_logic{
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
 					//$url = 'http://talentedge.staging.wpengine.com/institute-api/';
-					$url = 'https://talentedge.in/institute-api/';
+					$url =$sugar_config['website_URL'].'/institute-api/';
 					 
 					$headers = array(
 					    'Authorization: Basic '. base64_encode("$user:$password")
@@ -60,7 +60,7 @@ class duplicate_logic{
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
 					//$url = 'http://talentedge.staging.wpengine.com/institute-api/';
-					$url = 'https://talentedge.in/institute-api/';
+					$url =$sugar_config['website_URL'].'/institute-api/';
 					$headers = array(
 					    'Authorization: Basic '. base64_encode("$user:$password")
 					);

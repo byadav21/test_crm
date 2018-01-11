@@ -1,7 +1,7 @@
 <?php
 class first_logic{
 	function first_logic_method(&$bean, $event, $arguments){
-		global $db;
+		global $db;global $sugar_config;
 			
 			/*
 		     $qry ="select name from te_pr_programs where (deleted=0) and (id!='".$bean->id."') and (name='".$bean->name."')";
@@ -33,7 +33,7 @@ class first_logic{
 				/*Insert program api call here*/
 				$user = 'talentedgeadmin';
 				$password = 'Inkoniq@2016';
-				$url = 'https://talentedge.in/programme-api/';
+				$url =$sugar_config['website_URL'].'/programme-api/';
 				$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 				);
@@ -74,7 +74,7 @@ class first_logic{
 				/*update program api call here*/
 				$user = 'talentedgeadmin';
 				$password = 'Inkoniq@2016';
-				$url = 'https://talentedge.in/programme-api/';
+				$url =$sugar_config['website_URL'].'/programme-api/';
 				$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 				);

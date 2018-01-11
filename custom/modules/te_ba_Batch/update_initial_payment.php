@@ -4,6 +4,7 @@
 
 	class UpdateInitialPyment {
 		function updatePayment(&$bean, $event, $arguments) {
+			global $sugar_config;
 			$bean->no_of_installments=isset($_REQUEST['installment'])? $_REQUEST['installment']: '';
 			$bean->initial_payment_inr= isset($_REQUEST['initial_payment_inr'])? $_REQUEST['initial_payment_inr']: '';
 			$bean->initial_payment_usd= isset($_REQUEST['initial_payment_usd'])? $_REQUEST['initial_payment_usd']: '';
@@ -51,7 +52,7 @@
 
 						$fee_detail = implode("|",$feearray);
 
-					if($bean->is_sent_web=="0"){
+					if($bean->web_batch_id==0){
 
 					/*$feeinr=$bean->initial_payment_inr.",".$bean->initial_payment_usd.",".$bean->initial_payment_date."|";
 					//feeusd=$bean->initial_payment_usd.",".$bean->initial_payment_usd.",".$bean->initial_payment_date; */
@@ -59,7 +60,7 @@
 					$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
 					  #$url='http://talentedgewpe.wpengine.com/tecourse-api/';
-					$url = 'https://talentedge.in/tecourse-api/';
+					$url =$sugar_config['website_URL'].'/tecourse-api/';
 					$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 					);
@@ -107,7 +108,7 @@
 
 			$user = 'talentedgeadmin';
 					$password = 'Inkoniq@2016';
-					$url = 'https://talentedge.in/tecourse-api/';
+					$url =$sugar_config['website_URL'].'/tecourse-api/';
 					$headers = array(
 						'Authorization: Basic '. base64_encode("$user:$password")
 					);
