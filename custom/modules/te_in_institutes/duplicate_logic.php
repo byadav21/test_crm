@@ -1,7 +1,7 @@
 <?php
 class duplicate_logic{
 	function duplicate_logic_method(&$bean, $event, $arguments){
-		global $db;
+		global $db;global $sugar_config;
 	if(!$bean->fetched_row || $bean->fetched_row ){
 			
 		     $qry ="select name from te_in_institutes where (deleted=0) and (id!='".$bean->id."') and (name='".$bean->name."')";
