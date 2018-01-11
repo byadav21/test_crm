@@ -191,9 +191,11 @@ class UpdatePaymentName
 
     function addpayment_curl($lead_user_details)
     {
+		global $sugar_config;
         $user     = 'talentedgeadmin';
         $password = 'Inkoniq@2016';
-        $url      = 'https://talentedge.in/order-api/';
+        //$url      = 'https://talentedge.in/order-api/';
+        $url      = $sugar_config['website_URL'].'/order-api/';
         $headers  = array(
             'Authorization: Basic ' . base64_encode("$user:$password")
         );
@@ -235,9 +237,10 @@ class UpdatePaymentName
 
     function updatepayment_curl($lead_user_details)
     {
+		global $sugar_config;
         $user     = 'talentedgeadmin';
         $password = 'Inkoniq@2016';
-        $url      = 'https://talentedge.in/order-api/';
+        $url      = $sugar_config['website_URL'].'/order-api/';
         $headers  = array(
             'Authorization: Basic ' . base64_encode("$user:$password"),
         );
