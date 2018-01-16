@@ -9,6 +9,8 @@
 			$bean->initial_payment_inr= isset($_REQUEST['initial_payment_inr'])? $_REQUEST['initial_payment_inr']: '';
 			$bean->initial_payment_usd= isset($_REQUEST['initial_payment_usd'])? $_REQUEST['initial_payment_usd']: '';
 			$bean->initial_payment_date=$GLOBALS['timedate']->to_db_date((isset($_REQUEST['initial_payment_date'])? $_REQUEST['initial_payment_date']: ''),false);
+			$bean->fees_inr=(isset($_REQUEST['fees_inr'])? str_replace(",","",$_REQUEST['fees_inr']): '');
+			$bean->fees_usd=(isset($_REQUEST['fees_usd'])? str_replace(",","",$_REQUEST['fees_usd']): '');
 
 			#If batch is being updated
 			if(isset($_REQUEST['record'])&&$_REQUEST['record']!=""){
