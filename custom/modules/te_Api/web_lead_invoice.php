@@ -39,7 +39,7 @@ else{
                 $GLOBALS['db']->query("UPDATE te_payment_details SET invoice_number='".$val['invno']."' WHERE id='".$crm_orderid."'");
             
                 $fp = fopen('invoiceNo2_API_log_.txt', 'a'); 
-                fwrite($fp,$val); 
+                fwrite($fp,print_r($val,TRUE)); 
                 fclose($fp);
 	
             }
