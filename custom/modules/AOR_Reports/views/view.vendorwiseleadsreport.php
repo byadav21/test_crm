@@ -63,33 +63,24 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
             $selected_batch = $_SESSION['cccon_batch'];
             $batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
+        $programList = array();
+        $VendorList   = array();
+        
+        if (!empty($selected_batch))
+        {
 
-
+            $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch) . "')";
+        }
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
-            $vendor = $this->getVendors();
-
-            //echo 'testing............'; die;
-            foreach ($batches as $batchkey => $batchvalue)
-            {
-
-                foreach ($vendor as $vendorkey => $vendorvalue)
-                {
-                    $programList[$batchvalue['id']]['batch_code'] = $batchvalue['batch_code'];
-                    $programList[$batchvalue['id']]['name']       = $batchvalue['name'];
-                    $VendorList[$vendorvalue['id']]               = $vendorvalue['name'];
-                }
-            }
+            
+            
+            
             $file     = "VendorWiseReport_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
-
-            if (!empty($selected_batch))
-            {
-                //echo 'xxx'; die;
-                //$wherecl .=" AND id IN ('" . implode("','", $_SESSION['cccon_batch']) . "')";
-            }
+            
             $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                     leads.date_entered,
                     te_ba_batch.id AS batch_id,
@@ -102,19 +93,34 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
              LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
              LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
              LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
-             WHERE 1=1 $wherecl  
+             WHERE 1=1 $wherecl 
+  
              GROUP BY leads.vendor,batch_code";
+        //echo $leadSql;exit();
 
-            $leadObj = $db->query($leadSql);
-            while ($row     = $db->fetchByAssoc($leadObj))
-            {
-                $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
-            }
 
+        $leadObj      = $db->query($leadSql);
+
+       
+                while ($row          = $db->fetchByAssoc($leadObj))
+                {
+
+
+                    $programList[$row['batch_id']]['id']         = $row['batch_id'];
+                    $programList[$row['batch_id']]['name']       = $row['batch_name'];
+                    $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
+
+
+                    $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
+                    $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
+                }
+
+
+          
             # Create heading
             $data = "Programme Name";
             $data .= ",Batch Code";
-            foreach ($vendor as $key => $vendorVal)
+            foreach ($VendorList as $key => $vendorVal)
             {
                 $data .= "," . $vendorVal['name'];
             }
@@ -147,14 +153,10 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
 
 
 
-        $programList = array();
+        
 
 
-        if (!empty($selected_batch))
-        {
-
-            $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch) . "')";
-        }
+        
 
         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                     leads.date_entered,
@@ -175,10 +177,8 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
 
 
         $leadObj      = $db->query($leadSql);
-        $newBatchArr  = array();
-        $newVendorArr = array();
-        $programList  = array();
-        $VendorList   = array();
+
+       
         while ($row          = $db->fetchByAssoc($leadObj))
         {
 
