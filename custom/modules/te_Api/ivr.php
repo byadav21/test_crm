@@ -5,7 +5,7 @@
         $reponse['success']=false;
         $reponse['message']=$error;
         $reponse['status']='Inactive';
-        echo json_encode($reponse);exit();
+       // echo json_encode($reponse);exit();
 
 
 	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');

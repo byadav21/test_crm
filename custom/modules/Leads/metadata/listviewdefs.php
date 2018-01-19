@@ -110,6 +110,19 @@ array (
     'label' => 'LBL_STATUS_DESCRIPTION',
     'width' => '10%',
   ),
+  'LEAD_SOURCE' => 
+  array (
+    'width' => '10%',
+    'label' => 'LBL_LEAD_SOURCE',
+    'default' => true,
+  ),
+  'VENDOR' => 
+  array (
+    'label' => 'LBL_VENDOR',
+    'type' => 'varchar',
+    'width' => '10%',
+    'default' => true,
+  ),
   'DATE_MODIFIED' => 
   array (
     'type' => 'datetime',
@@ -245,12 +258,6 @@ array (
   array (
     'width' => '5%',
     'label' => 'LBL_MODIFIED',
-    'default' => false,
-  ),
-  'LEAD_SOURCE' => 
-  array (
-    'width' => '10%',
-    'label' => 'LBL_LEAD_SOURCE',
     'default' => false,
   ),
 );
