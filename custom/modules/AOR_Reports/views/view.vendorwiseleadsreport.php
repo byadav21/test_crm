@@ -61,7 +61,7 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
         if (!empty($_SESSION['cccon_batch']))
         {
             $selected_batch = $_SESSION['cccon_batch'];
-            $batches        = $this->getBatch($_SESSION['cccon_batch']);
+            //$batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
         $programList = array();
         $VendorList   = array();
