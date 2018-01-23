@@ -368,8 +368,13 @@ class AOR_ReportsViewCounselorconversionreport extends SugarView
         //echo '<pre>';
         //print_r($batches);die;
         //echo count($councelorList); die;
+        
+        if(isset($selected_batch)){
+            $wherecl .= " AND lc.te_ba_batch_id_c IN('" . implode("',
+                                              '", array_keys($programList)) . "')";
+        }
 
-        $leadSql = "SELECT COUNT(l.id)total,
+         $leadSql = "SELECT COUNT(l.id)total,
                         COUNT(l.id)converted,
                         l.assigned_user_id,
                         lc.te_ba_batch_id_c,
@@ -379,12 +384,8 @@ class AOR_ReportsViewCounselorconversionreport extends SugarView
                  INNER JOIN te_ba_batch AS tb ON lc.te_ba_batch_id_c=tb.id 
                  WHERE l.deleted=0
                    AND l.status='Converted'
-                   AND l.status IN('Alive',
-                                   'Warm',
-                                   'Dead',
-                                   'Converted')
-                   AND lc.te_ba_batch_id_c IN('" . implode("',
-                                              '", array_keys($programList)) . "') $wherecl
+                   
+                    $wherecl
                  GROUP BY l.assigned_user_id,
                           lc.te_ba_batch_id_c";
         //echo $leadSql;exit();
