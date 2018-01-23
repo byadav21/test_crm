@@ -66,7 +66,9 @@ class sendVisitReport
         if (!empty($emailData))
         {
             $userId       = $emailData['userId'];
-            $sentTo       = array($emailData['email']);
+            $sentTo       = $emailData['email'];
+            
+            //print_r($sentTo); die;
             $emailSubject = $emailData['subject'];
             $emailMessage = $emailData['email_message'];
             $certFilePath = $emailData['certFilePath'];
@@ -163,7 +165,7 @@ class sendVisitReport
 
         ///var/www/htmlVendorWiseReport_report_2018-01-22.csv
 
-        $emailData = array('email'         => 'pawan.kumar@talentedge.in,ashwani.sharma@talentedge.in',
+        $emailData = array('email'         => array('pawan.kumar@talentedge.in','ashwani.sharma@talentedge.in'),
             'subject'       => 'Vendor Wise Allocation Report - ' . date("F d, Y", strtotime($this->toDate)),
             'email_message' => '<p>Hi All,</p> '
             . '<p>Please find in here attached, vendor wise lead allocation report for "' . date("F d, Y", strtotime($this->toDate)) . '"</p>',
