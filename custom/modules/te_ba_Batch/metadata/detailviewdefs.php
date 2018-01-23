@@ -69,6 +69,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'short_name',
+            'label' => 'Short Name',
+          ),
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
             'name' => 'batch_start_date',
             'label' => 'LBL_BATCH_START_DATE',
           ),
@@ -79,7 +88,7 @@ array (
             'label' => 'LBL_BATCH_STATUS',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -92,7 +101,7 @@ array (
             'label' => 'LBL_BATCH_SIZE',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -105,7 +114,7 @@ array (
             'label' => 'LBL_MINIMUM_ATTENDANCE_CRITERIA',
           ),
         ),
-        5 => 
+        6 => 
         array (
           0 => 
           array (
@@ -118,7 +127,7 @@ array (
             'label' => 'LBL_REGISTRATION_CLOSING_DATE',
           ),
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
@@ -131,7 +140,7 @@ array (
             'label' => 'Campagain ID',
           ),
         ),
-        7 => 
+        8 => 
         array (
           0 => 'description',
           1 => 
@@ -140,7 +149,7 @@ array (
             'label' => 'Lead ID',
           ),
         ),
-        8 => 
+        9 => 
         array (
           0 => 
           array (

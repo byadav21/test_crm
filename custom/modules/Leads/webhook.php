@@ -1,5 +1,11 @@
 <?php  
 /* Db connection  @ manish 18jan2018*/
+$challenge = $_REQUEST['hub_challenge'];
+$verify_token = $_REQUEST['hub_verify_token'];
+
+if ($verify_token === 'abc@123') {
+echo $challenge;
+}
 require_once('modules/Leads/Lead.php'); 
 function getFormName($form_id='',$furl='',$access_token='') {
 	$form_name = '';
