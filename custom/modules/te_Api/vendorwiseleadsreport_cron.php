@@ -165,9 +165,9 @@ class sendVisitReport
 
         ///var/www/htmlVendorWiseReport_report_2018-01-22.csv
 
-        $emailData = array('email'         => array('pawan.kumar@talentedge.in','ashwani.sharma@talentedge.in'),
+        $emailData = array('email'         => array('pawan.kumar@talentedge.in','ashwani.sharma@talentedge.in','ajay.kumar@talentedge.in','pritam.dutta@talentedge.in'),
             'subject'       => 'Vendor Wise Allocation Report - ' . date("F d, Y", strtotime($this->toDate)),
-            'email_message' => '<p>Hi All,</p> '
+            'email_message' => '<p>Hi,</p> '
             . '<p>Please find in here attached, vendor wise lead allocation report for "' . date("F d, Y", strtotime($this->toDate)) . '"</p>',
             'pdfFileName'   => $filename,
             'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
