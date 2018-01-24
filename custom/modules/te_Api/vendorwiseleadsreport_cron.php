@@ -147,7 +147,8 @@ class sendVisitReport
 
 
         foreach ($programList as $key => $councelor)
-        {
+        {   
+            $toal  =0;
             $data .= "\"" . $councelor['name'];
             $data .= "\",\"" . $councelor['batch_code'];
             foreach ($VendorList as $key1 => $value)
@@ -168,7 +169,9 @@ class sendVisitReport
 
         ///var/www/htmlVendorWiseReport_report_2018-01-22.csv
 
-        $emailData = array('email'         => array('pawan.kumar@talentedge.in','ashwani.sharma@talentedge.in','ajay.kumar@talentedge.in','pritam.dutta@talentedge.in'),
+        $emailData = array('email'=>  array('pawan.kumar@talentedge.in','ashwani.sharma@talentedge.in','ajay.kumar@talentedge.in',
+                                            'pramod.singh@talentedge.in','pritam.dutta@talentedge.in','karan.bhatia@talentedge.in',
+                                            'amit.sati@talentedge.in','vivek.bathla@talentedge.in'),
             'subject'       => 'Vendor Wise Allocation Report - ' . date("F d, Y", strtotime($this->toDate)),
             'email_message' => '<p>Hi,</p> '
             . '<p>Please find in here attached, vendor wise lead allocation report for "' . date("F d, Y", strtotime($this->toDate)) . '"</p>',
