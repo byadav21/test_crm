@@ -71,7 +71,7 @@ class sendVisitReport
             //print_r($sentTo); die;
             $emailSubject = $emailData['subject'];
             $emailMessage = $emailData['email_message'];
-            echo 'xx=='.$certFilePath = $emailData['certFilePath'];
+            $certFilePath = $emailData['certFilePath'];
             $attachData   = array();
 
             if (file_exists($certFilePath))
