@@ -24,6 +24,7 @@ custom/application/Ext/*
 *.log
 nbproject/*
 upload/*
+reports/*
 upload_backup/*
 /excel/nbproject/private/
 /costum_import/nbproject/private/

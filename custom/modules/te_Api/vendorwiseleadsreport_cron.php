@@ -6,6 +6,8 @@ ini_set('memory_limit', '1024M');
 require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php');
 global $db;
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
 
 class sendVisitReport
 {
@@ -162,6 +164,7 @@ class sendVisitReport
         $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", "wb");
         fwrite($fp, $data);
         fclose($fp);
+        chmod($filename. ".csv", 0777); 
 
         ///var/www/htmlVendorWiseReport_report_2018-01-22.csv
 
