@@ -71,11 +71,11 @@ class sendVisitReport
             //print_r($sentTo); die;
             $emailSubject = $emailData['subject'];
             $emailMessage = $emailData['email_message'];
-            $certFilePath = $emailData['certFilePath'];
+            echo 'xx=='.$certFilePath = $emailData['certFilePath'];
             $attachData   = array();
 
             if (file_exists($certFilePath))
-            {
+            {    
                 $attachFile    = file_get_contents($certFilePath);
                 $attachName    = $emailData['pdfFileName'] . ".csv";
                 $attachContent = rawurlencode($attachFile);
@@ -159,7 +159,7 @@ class sendVisitReport
         }
         //echo $data; die;
 
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/" . $filename . ".csv", "wb");
+        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", "wb");
         fwrite($fp, $data);
         fclose($fp);
 
@@ -170,7 +170,7 @@ class sendVisitReport
             'email_message' => '<p>Hi All,</p> '
             . '<p>Please find in here attached, vendor wise lead allocation report for "' . date("F d, Y", strtotime($this->toDate)) . '"</p>',
             'pdfFileName'   => $filename,
-            'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/" . $filename . ".csv");
+            'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
 
         $this->sendCertificateEmail($emailData);
     }
