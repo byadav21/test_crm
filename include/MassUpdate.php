@@ -225,7 +225,13 @@ eoq;
 			
 			if($users){
 				$where_clauses = explode(' ) AND ( ', $this->where_clauses) ;
-				array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
+				if($current_user->is_admin==1){
+					array_push($where_clauses,"($module_name.assigned_user_id in ('".$users."')) OR ($module_name.assigned_user_id IS NULL)");
+				}
+				else{
+					array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
+				}
+				
 				$where_clauses = array_filter($where_clauses);
 				if($where_clauses){
 					$this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
@@ -236,7 +242,12 @@ eoq;
 
             // TODO: define filter array here to optimize the query
             // by not joining the unneeded tables
-            $query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
+			if($users && isset($_REQUEST['[module']) && $_REQUEST['[module']=='Leads'){
+				$query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
+			}else{
+				$query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
+			}
+            
 			$result = $db->query($query,true);
 			$new_arr = array();
 			while($val = $db->fetchByAssoc($result,false))
