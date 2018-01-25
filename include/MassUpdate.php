@@ -237,17 +237,18 @@ eoq;
 					$this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
 				}
 			}
-			echo $this->where_clauses;echo "<pre>";print_r($_REQUEST);echo $this->sugarbean->object_name;exit();
+			//echo $this->where_clauses;echo "<pre>";print_r($_REQUEST);echo $this->sugarbean->object_name;exit();
 			/*Custom code for leads ends here*/
 
             // TODO: define filter array here to optimize the query
             // by not joining the unneeded tables
-			if($users && isset($_REQUEST['[module']) && $_REQUEST['[module']=='Leads'){
+			/*if($users && isset($_REQUEST['[module']) && $_REQUEST['[module']=='Leads'){
 				$query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
 			}else{
 				$query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
-			}
-            
+			}*/
+            $query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
+			echo $query;exit();
 			$result = $db->query($query,true);
 			$new_arr = array();
 			while($val = $db->fetchByAssoc($result,false))
