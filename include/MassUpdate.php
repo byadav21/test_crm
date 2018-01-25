@@ -222,16 +222,17 @@ eoq;
 			$module_name = strtolower($_REQUEST['module']);
 			$users_arr = $this->reportingUser($current_user->id);
 			$users = implode("','",$this->report_to_id);
-			echo $users;exit();
-			if(($current_user->is_admin==0 || $current_user->is_admin==1) && $users){
+			
+			if($users){
 				$where_clauses = explode(' ) AND ( ', $this->where_clauses) ;
 				array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
 				$where_clauses = array_filter($where_clauses);
 				if($where_clauses){
 					$this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
 				}
-
+				echo "in if";
 			}
+			echo $this->where_clauses;exit();
 			/*Custom code for leads ends here*/
 
             // TODO: define filter array here to optimize the query
