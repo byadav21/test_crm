@@ -23,6 +23,12 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
 
         $where     = "";
         $wherecl   = "";
+        if(!isset($_SESSION['cccon_from_date'])){
+            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
+        }
+        if(!isset($_SESSION['cccon_to_date'])){
+            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
+        }
         if (isset($_POST['button']) || isset($_POST['export']))
         {
             $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
