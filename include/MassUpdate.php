@@ -226,7 +226,7 @@ eoq;
 			if($users){
 				$where_clauses = explode(' ) AND ( ', $this->where_clauses) ;
 				if($current_user->is_admin==1){
-					array_push($where_clauses,"($module_name.assigned_user_id in ('".$users."')) OR ($module_name.assigned_user_id IS NULL)");
+					array_push($where_clauses,"($module_name.assigned_user_id in ('".$users."')) OR ($module_name.assigned_user_id IS NULL) OR (TRIM($module_name.assigned_user_id)=='') ");
 				}
 				else{
 					array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
