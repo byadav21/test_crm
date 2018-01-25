@@ -222,6 +222,7 @@ eoq;
 			$module_name = strtolower($_REQUEST['module']);
 			$users_arr = $this->reportingUser($current_user->id);
 			$users = implode("','",$this->report_to_id);
+			echo $users;exit();
 			if(($current_user->is_admin==0 || $current_user->is_admin==1) && $users){
 				$where_clauses = explode(' ) AND ( ', $this->where_clauses) ;
 				array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
