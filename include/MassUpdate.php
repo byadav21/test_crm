@@ -230,9 +230,8 @@ eoq;
 				if($where_clauses){
 					$this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
 				}
-				echo "in if";
 			}
-			echo $this->where_clauses;exit();
+			//echo $this->where_clauses;exit();
 			/*Custom code for leads ends here*/
 
             // TODO: define filter array here to optimize the query
