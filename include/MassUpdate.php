@@ -222,20 +222,29 @@ eoq;
 			$module_name = strtolower($_REQUEST['module']);
 			$users_arr = $this->reportingUser($current_user->id);
 			$users = implode("','",$this->report_to_id);
-			if($current_user->is_admin==0 && $users){
+			
+			if($users){
 				$where_clauses = explode(' ) AND ( ', $this->where_clauses) ;
-				array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
+				if($current_user->is_admin==1){
+					array_push($where_clauses,"($module_name.assigned_user_id in ('".$users."')) OR ($module_name.assigned_user_id IS NULL) OR (TRIM($module_name.assigned_user_id)='') OR (TRIM($module_name.assigned_user_id)='NULL') ");
+				}
+				else{
+					array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
+				}
+				
 				$where_clauses = array_filter($where_clauses);
 				if($where_clauses){
 					$this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
 				}
-
 			}
+			//echo $this->where_clauses;echo "<pre>";print_r($_REQUEST);echo $this->sugarbean->object_name;exit();
 			/*Custom code for leads ends here*/
 
             // TODO: define filter array here to optimize the query
             // by not joining the unneeded tables
+			
             $query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
+			//echo $query;exit();
 			$result = $db->query($query,true);
 			$new_arr = array();
 			while($val = $db->fetchByAssoc($result,false))
@@ -243,6 +252,7 @@ eoq;
 				array_push($new_arr, $val['id']);
 			}
 			$_POST['mass'] = $new_arr;
+
 		}
 
 		if(isset($_POST['mass']) && is_array($_POST['mass'])  && $_REQUEST['massupdate'] == 'true'){
