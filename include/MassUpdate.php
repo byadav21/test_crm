@@ -222,7 +222,7 @@ eoq;
 			$module_name = strtolower($_REQUEST['module']);
 			$users_arr = $this->reportingUser($current_user->id);
 			$users = implode("','",$this->report_to_id);
-			if($current_user->is_admin==0 && $users){
+			if(($current_user->is_admin==0 || $current_user->is_admin==1) && $users){
 				$where_clauses = explode(' ) AND ( ', $this->where_clauses) ;
 				array_push($where_clauses,"$module_name.assigned_user_id in ('".$users."')");
 				$where_clauses = array_filter($where_clauses);
@@ -243,6 +243,7 @@ eoq;
 				array_push($new_arr, $val['id']);
 			}
 			$_POST['mass'] = $new_arr;
+
 		}
 
 		if(isset($_POST['mass']) && is_array($_POST['mass'])  && $_REQUEST['massupdate'] == 'true'){
