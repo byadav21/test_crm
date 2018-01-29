@@ -82,6 +82,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=conversiondatarepor
 $module_menu[] = array ('index.php?module=AOR_Reports&action=counselorconversionreport', "Counselor Conversion Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwiseleadsreport', "Vendor Wise Leads Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwiseconversionreport', "Vendor Wise Conversion Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=batchwisestatusreport', "Batch Wise Status Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
 
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dateleadperformance', "Till Date Lead Performance", 'AOR_Reports');
