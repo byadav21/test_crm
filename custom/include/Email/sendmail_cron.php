@@ -79,7 +79,7 @@ class FalconideEmail
                 'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in',
                 //CC Team:
                 'deepak.sharma@talentedge.in', 'eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
-                'amit.arora@talentedge.in', 'pramod.singh@talentedege.in', 'ishant.khanna@talentedge.in',
+                'amit.arora@talentedge.in', 'pramod.singh@talentedge.in', 'ishant.khanna@talentedge.in',
                 //Marketing Team :
                 'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in', 'vivek.bathla@talentedge.in',
                 //BA Team :
