@@ -140,6 +140,7 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
             {
                 $data .= "\"" . $councelor['name'];
                 $data .= "\",\"" . $councelor['batch_code'];
+		$toal =0;
                 foreach ($VendorList as $key1 => $value)
                 {
                     $converted = $programList[$key][$key1]['lead_count'];
