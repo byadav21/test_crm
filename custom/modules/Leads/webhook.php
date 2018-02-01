@@ -96,7 +96,7 @@
 				/* Fb capture Data*/
 				$name=$firstname;
 				$lastnamel=$lastname;
-				$phone=$fieldArr['phone_number'];
+				$phone= str_replace("+91","", $fieldArr['phone_number']);
 				$email= $fieldArr['email'];
 				$source= 'TE_Focus';
 				$medium='facebook';
