@@ -16,7 +16,7 @@
                                 {/foreach}
                             </select>
                         </td>
-                        
+
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch Code</label>
                         </td>
@@ -140,18 +140,28 @@
             </tr>
 
             {foreach from = $programList key=key item=program}
+                
+                 {foreach from = $program key=key item=program}
                 <tr height="20" class="oddListRowS1">
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.name}</td>
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
-                    {foreach from = $StatusList key=key item=vendor}
+                    
+          
+                    
+                    
+                       
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
+               
+                    
+                {foreach from = $StatusList key=key item=vendor}
 
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
 
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {$program.$key}</td>
-                    {/foreach}
-
+                {/foreach}
                 </tr>
+                {/foreach}
+               
             {/foreach}
 
     </table>

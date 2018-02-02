@@ -140,24 +140,36 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
             $leadObj = $db->query($leadSql);
 
 
+            $vendor = 'NULL';
+
             while ($row = $db->fetchByAssoc($leadObj))
             {
+                if ($row['vendor'] == '')
+                {
+                    $row['vendor'] = $vendor;
+                }
 
 
-                $programList[$row['batch_id']]['id']         = $row['batch_id'];
-                $programList[$row['batch_id']]['name']       = $row['batch_name'];
-                $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-                $programList[$row['batch_id']]['vendor']     = $row['vendor'];
 
-                $StatusList[$row['status']]                    = $row['status'];
-                $programList[$row['batch_id']][$row['status']] = $row['lead_count'];
+                $programList[$row['vendor']][$row['batch_id']]['batch_id']   = $row['batch_id'];
+                $programList[$row['vendor']][$row['batch_id']]['batch_name'] = $row['batch_name'];
+                $programList[$row['vendor']][$row['batch_id']]['batch_code'] = $row['batch_code'];
+                $programList[$row['vendor']][$row['batch_id']]['vendor']     = $row['vendor'];
+                $programList[$row['vendor']][$row['batch_id']]['lead_count'] = $row['lead_count'];
+                $programList[$row['vendor']][$row['batch_id']]['status']     = $row['status'];
+
+                $programList[$row['vendor']][$row['batch_id']][$row['status']] = $row['lead_count'];
+                $StatusList[$row['status']]                                    = $row['status'];
+                //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
             }
+
 
 
 
             # Create heading
             $data = "Programme Name";
             $data .= ",Batch Code";
+            $data .= ",Vendor";
             foreach ($StatusList as $key => $statusVal)
             {
                 $data .= "," . $key;
@@ -167,20 +179,27 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
 
 
-
-            foreach ($programList as $key => $councelor)
-            {
-                $data .= "\"" . $councelor['name'];
-                $data .= "\",\"" . $councelor['batch_code'];
-                $toal = 0;
-                foreach ($StatusList as $key1 => $value)
+            
+            foreach ($programList as $key => $valArr)
+            {   
+                foreach ($valArr as $key => $councelor)
                 {
-                    $countedLead = $programList[$key][$key1];
-                    $data        .= "\",\"" . $countedLead;
-                    $toal        += $countedLead;
-                }
+                    $data .= "\"" . $councelor['batch_name'];
+                    $data .= "\",\"" . $councelor['batch_code'];
+                    $data .= "\",\"" . $councelor['vendor'];
+                    $toal = 0;
+                    foreach ($StatusList as $key1 => $value)
+                    {
+                        $countedLead = $councelor[$key1];
+                        $data        .= "\",\"" . $countedLead;
+                        $toal        += $countedLead;
+                    }
                 $data .= "\",\"" . $toal;
                 $data .= "\"\n";
+
+                }
+                
+                
             }
 
             ob_end_clean();
@@ -218,38 +237,38 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
         $leadObj = $db->query($leadSql);
 
+        $vendor = 'NULL';
 
         while ($row = $db->fetchByAssoc($leadObj))
         {
+            if ($row['vendor'] == '')
+            {
+                $row['vendor'] = $vendor;
+            }
 
-            //$programList[$row['batch_id']][]  =$row;
-            
-                    
-            $programList[$row['vendor_id']][$row['batch_id']][$row['status']]['batch_id']           = $row['batch_id'];
-            $programList[$row['vendor_id']][$row['batch_id']][$row['status']]['batch_name']         = $row['batch_name'];
-            $programList[$row['vendor_id']][$row['batch_id']][$row['status']]['batch_code']         = $row['batch_code'];
-            $programList[$row['vendor_id']][$row['batch_id']][$row['status']]['vendor']             = $row['vendor'];
-            $programList[$row['vendor_id']][$row['batch_id']][$row['status']]['lead_count']         = $row['lead_count'];
-            $programList[$row['vendor_id']][$row['batch_id']][$row['status']]['status']             = $row['status'];
-            //$programList[$row['batch_id']]['name']       = $row['batch_name'];
-            //$programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-            //$programList[$row['batch_id']]['vendor']     = $row['vendor'];
 
-            $StatusList[$row['status']]                    = $row['status'];
+
+            $programList[$row['vendor']][$row['batch_id']]['batch_id']   = $row['batch_id'];
+            $programList[$row['vendor']][$row['batch_id']]['batch_name'] = $row['batch_name'];
+            $programList[$row['vendor']][$row['batch_id']]['batch_code'] = $row['batch_code'];
+            $programList[$row['vendor']][$row['batch_id']]['vendor']     = $row['vendor'];
+            $programList[$row['vendor']][$row['batch_id']]['lead_count'] = $row['lead_count'];
+            $programList[$row['vendor']][$row['batch_id']]['status']     = $row['status'];
+
+            $programList[$row['vendor']][$row['batch_id']][$row['status']] = $row['lead_count'];
+            $StatusList[$row['status']]                                    = $row['status'];
             //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
         }
-        
+
         $finalArr = array();
-        foreach ($programList as $key=> $val){
-            $finalArr[]= $key;
-            
+        foreach ($programList as $key => $val)
+        {
+            $finalArr[] = $key;
         }
 
         //echo 'xx='.count($programList);die;
-
-
         //echo '<pre>';
-        //print_r($programList); die;
+        //print_r($StatusList); die;
         #PS @Pawan
         $total     = count($programList); #total records
         $start     = 0;
