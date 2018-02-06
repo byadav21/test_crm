@@ -4,6 +4,21 @@
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
+
+                    <tr>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Program</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="program[]" id="program"  class="program_advanced" multiple style="width:600px !important; height: 70px !important;">
+                                {foreach from =$ProgrammeListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_program)} selected="selected"{/if}>{$program.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                    </tr>
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch</label>
@@ -140,28 +155,28 @@
             </tr>
 
             {foreach from = $programList key=key item=program}
-                
-                 {foreach from = $program key=key item=program}
-                <tr height="20" class="oddListRowS1">
-                    
-          
-                    
-                    
-                       
+
+                {foreach from = $program key=key item=program}
+                    <tr height="20" class="oddListRowS1">
+
+
+
+
+
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
-               
-                    
-                {foreach from = $StatusList key=key item=vendor}
 
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
 
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {$program.$key}</td>
+                        {foreach from = $StatusList key=key item=vendor}
+
+                            <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+
+                            <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {$program.$key}</td>
+                        {/foreach}
+                    </tr>
                 {/foreach}
-                </tr>
-                {/foreach}
-               
+
             {/foreach}
 
     </table>
