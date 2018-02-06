@@ -47,6 +47,7 @@
 			  $formData = getFormName($formId,$url,$access_token);
 			  
 			  $formName       = isset($formData['name'])?$formData['name']:''; 
+			  $formName =  trim($formName,"-");
 			  
 			  $ch = curl_init(); 
 			  curl_setopt($ch, CURLOPT_URL, $leadurl);
