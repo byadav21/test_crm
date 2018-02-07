@@ -16,6 +16,19 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
     {
         parent::SugarView();
     }
+    
+    function getVendors()
+    {
+        global $db;
+        $vendorSql      = "SELECT id,name FROM te_vendor WHERE deleted=0";
+        $vendor_Obj     = $db->query($vendorSql);
+        $vendor_Options = array();
+        while ($row            = $db->fetchByAssoc($vendor_Obj))
+        {
+            $vendor_Options[] = $row;
+        }
+        return $vendor_Options;
+    }
 
     function getProgram()
     {
@@ -52,6 +65,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
         $wherecl           = "";
         $BatchListData     = $this->getBatch();
         $ProgrammeListData = $this->getProgram();
+        $VendorListData    = $this->getVendors();
 
         if (!isset($_SESSION['cccon_from_date']))
         {
@@ -112,6 +126,10 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
             $selected_batch_code = $_SESSION['cccon_batch_code'];
             //$batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
+        if (!empty($_SESSION['cccon_vendors']))
+        {
+            $selected_vendor = $_SESSION['cccon_vendors'];
+        }
 
         $programList = array();
         $StatusList  = array();
@@ -131,6 +149,12 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
+        
+        if (!empty($selected_vendor))
+        {
+
+            $wherecl .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "')";
+        }
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
@@ -144,6 +168,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
             $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
                     te_ba_batch.id AS batch_id,
+                    p.name program_name,
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
                     l.status,
@@ -175,14 +200,15 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
 
 
-                $programList[$row['vendor']][$row['batch_id']]['batch_id']   = $row['batch_id'];
-                $programList[$row['vendor']][$row['batch_id']]['batch_name'] = $row['batch_name'];
-                $programList[$row['vendor']][$row['batch_id']]['batch_code'] = $row['batch_code'];
-                $programList[$row['vendor']][$row['batch_id']]['vendor']     = $row['vendor'];
-                $programList[$row['vendor']][$row['batch_id']]['lead_count'] = $row['lead_count'];
-                $programList[$row['vendor']][$row['batch_id']]['status']     = $row['status'];
-
-                $programList[$row['vendor']][$row['batch_id']][$row['status']] = $row['lead_count'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['status']     = $row['status'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']][$row['status']] = $row['lead_count'];
+                
                 $StatusList[$row['status']]                                    = $row['status'];
                 //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
             }
@@ -206,21 +232,21 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
             foreach ($programList as $key => $valArr)
             {
-                foreach ($valArr as $key => $councelor)
-                {
-                    $data .= "\"" . $councelor['batch_name'];
-                    $data .= "\",\"" . $councelor['batch_code'];
-                    $data .= "\",\"" . $councelor['vendor'];
+                
+                    $data .= "\"" . $valArr['program_name'];
+                    $data .= "\",\"" . $valArr['batch_name'];
+                    $data .= "\",\"" . $valArr['batch_code'];
+                    $data .= "\",\"" . $valArr['vendor'];
                     $toal = 0;
                     foreach ($StatusList as $key1 => $value)
                     {
-                        $countedLead = $councelor[$key1];
+                        $countedLead = (!empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
                         $data        .= "\",\"" . $countedLead;
                         $toal        += $countedLead;
                     }
                     $data .= "\",\"" . $toal;
                     $data .= "\"\n";
-                }
+                
             }
 
             ob_end_clean();
@@ -233,6 +259,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
         $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
+                    p.name program_name,
                     te_ba_batch.id AS batch_id,
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
@@ -264,27 +291,26 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
 
 
-            $programList[$row['vendor']][$row['batch_id']]['batch_id']   = $row['batch_id'];
-            $programList[$row['vendor']][$row['batch_id']]['batch_name'] = $row['batch_name'];
-            $programList[$row['vendor']][$row['batch_id']]['batch_code'] = $row['batch_code'];
-            $programList[$row['vendor']][$row['batch_id']]['vendor']     = $row['vendor'];
-            $programList[$row['vendor']][$row['batch_id']]['lead_count'] = $row['lead_count'];
-            $programList[$row['vendor']][$row['batch_id']]['status']     = $row['status'];
+            
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['status']     = $row['status'];
+                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']][$row['status']] = $row['lead_count'];
 
-            $programList[$row['vendor']][$row['batch_id']][$row['status']] = $row['lead_count'];
-            $StatusList[$row['status']]                                    = $row['status'];
+            //$programList[$row['vendor']][$row['batch_id']][$row['status']] = $row['lead_count'];
+                $StatusList[$row['status']]                                             = $row['status'];
             //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
         }
 
-        $finalArr = array();
-        foreach ($programList as $key => $val)
-        {
-            $finalArr[] = $key;
-        }
+        
 
         //echo 'xx='.count($programList);die;
         //echo '<pre>';
-        //print_r($StatusList); die;
+        //print_r($programList); die;
         #PS @Pawan
         $total     = count($programList); #total records
         $start     = 0;
@@ -339,6 +365,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
         $sugarSmarty->assign("BatchListData", $BatchListData);
         $sugarSmarty->assign("ProgrammeListData", $ProgrammeListData);
+        $sugarSmarty->assign("VendorListData", $VendorListData);
         $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->assign("selected_batch", $selected_batch);
         $sugarSmarty->assign("selected_status", $selected_status);

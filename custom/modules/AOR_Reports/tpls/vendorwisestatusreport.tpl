@@ -17,6 +17,18 @@
                                 {/foreach}
                             </select>
                         </td>
+                        
+                         <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Vendor</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$VendorListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
 
                     </tr>
                     <tr>
@@ -138,7 +150,10 @@
             {*End Pagination*}
             <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Name</strong>
+                    <strong>Pro. Name</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Batch Name</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
@@ -154,29 +169,18 @@
 
             </tr>
 
-            {foreach from = $programList key=key item=program}
+           {foreach from = $programList key=key item=program}
+                <tr height="20" class="oddListRowS1">
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>
+					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
+					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
+                    {foreach from = $StatusList key=statuskey item=vendor}
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {if !empty($program.$statuskey)} {$program.$statuskey} {else} 0 {/if} </td>
+                    {/foreach}
 
-                {foreach from = $program key=key item=program}
-                    <tr height="20" class="oddListRowS1">
-
-
-
-
-
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
-
-
-                        {foreach from = $StatusList key=key item=vendor}
-
-                            <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-
-                            <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {$program.$key}</td>
-                        {/foreach}
-                    </tr>
-                {/foreach}
-
+                </tr>
             {/foreach}
 
     </table>
