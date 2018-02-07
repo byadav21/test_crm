@@ -199,18 +199,13 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 }
 
 
-
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['status']     = $row['status'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']][$row['status']] = $row['lead_count'];
-                
-                $StatusList[$row['status']]                                    = $row['status'];
-                //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
+                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = $row['batch_name'];
+                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = $row['program_name'];
+                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = $row['batch_code'];
+                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = $row['vendor'];
+                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+                    $StatusList[$row['status']]                                                 = $row['status'];
             }
 
 
@@ -289,21 +284,15 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 $row['vendor'] = $vendor;
             }
 
-
-
             
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['status']     = $row['status'];
-                $programList[$row['vendor'].'_BATCH_'.$row['batch_id']][$row['status']] = $row['lead_count'];
-
-            //$programList[$row['vendor']][$row['batch_id']][$row['status']] = $row['lead_count'];
-                $StatusList[$row['status']]                                             = $row['status'];
-            //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = $row['batch_name'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = $row['program_name'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = $row['batch_code'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = $row['vendor'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+            $StatusList[$row['status']]                                                 = $row['status'];
+           
         }
 
         

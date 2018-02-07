@@ -27,24 +27,27 @@ class sendVisitReport
         $mail = new FalconideEmail();
 
         $file     = "VendorWiseStatusReport_report";
-        $where    = '';
         $filename = $file . "_" . $this->toDate;
 
         $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
                     te_ba_batch.id AS batch_id,
+                    p.name program_name,
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
                     l.status,
                     l.vendor,
                     te_vendor.id vendor_id
-                   
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
+                LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0 and l.date_entered >= '$this->toDate 00:00:00' AND l.date_entered <= '$this->toDate 23:59:59'
-               GROUP BY l.status,te_vendor.id order by  te_ba_batch.batch_code";
+                   
+              GROUP BY l.status,te_vendor.id order by  te_ba_batch.batch_code ";
+
         //echo $leadSql;exit();
 
 
@@ -61,21 +64,17 @@ class sendVisitReport
 
 
 
-            $programList[$row['vendor']][$row['batch_id']]['batch_id']   = $row['batch_id'];
-            $programList[$row['vendor']][$row['batch_id']]['batch_name'] = $row['batch_name'];
-            $programList[$row['vendor']][$row['batch_id']]['batch_code'] = $row['batch_code'];
-            $programList[$row['vendor']][$row['batch_id']]['vendor']     = $row['vendor'];
-            $programList[$row['vendor']][$row['batch_id']]['lead_count'] = $row['lead_count'];
-            $programList[$row['vendor']][$row['batch_id']]['status']     = $row['status'];
-
-            $programList[$row['vendor']][$row['batch_id']][$row['status']] = $row['lead_count'];
-            $StatusList[$row['status']]                                    = $row['status'];
-            //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = $row['batch_name'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = $row['program_name'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = $row['batch_code'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = $row['vendor'];
+            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+            $StatusList[$row['status']]                                                 = $row['status'];
         }
 
 
 
-        # Create heading
         $data = "Programme Name";
         $data .= ",Batch Code";
         $data .= ",Vendor";
@@ -89,24 +88,22 @@ class sendVisitReport
 
 
 
-
         foreach ($programList as $key => $valArr)
         {
-            foreach ($valArr as $key => $councelor)
+
+            $data .= "\"" . $valArr['program_name'];
+            $data .= "\",\"" . $valArr['batch_name'];
+            $data .= "\",\"" . $valArr['batch_code'];
+            $data .= "\",\"" . $valArr['vendor'];
+            $toal = 0;
+            foreach ($StatusList as $key1 => $value)
             {
-                $data .= "\"" . $councelor['batch_name'];
-                $data .= "\",\"" . $councelor['batch_code'];
-                $data .= "\",\"" . $councelor['vendor'];
-                $toal = 0;
-                foreach ($StatusList as $key1 => $value)
-                {
-                    $countedLead = isset($councelor[$key1]) ? $councelor[$key1] : 0;
-                    $data        .= "\",\"" . $countedLead;
-                    $toal        += $countedLead;
-                }
-                $data .= "\",\"" . $toal;
-                $data .= "\"\n";
+                $countedLead = (!empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                $data        .= "\",\"" . $countedLead;
+                $toal        += $countedLead;
             }
+            $data .= "\",\"" . $toal;
+            $data .= "\"\n";
         }
         //echo $data; die;
 
@@ -122,7 +119,7 @@ class sendVisitReport
 
 }
 
-$mainObj           = new sendVisitReport();
+$mainObj = new sendVisitReport();
 //$mainObj->toDate   = '2017-11-04';
 //$mainObj->fromDate = '2017-11-04';
 if (strtotime($mainObj->fromDate) == strtotime($mainObj->toDate))
