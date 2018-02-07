@@ -17,6 +17,19 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
         parent::SugarView();
     }
 
+    function getProgram()
+    {
+        global $db;
+        $proSql      = "SELECT id,name FROM te_pr_programs WHERE deleted=0";
+        $pro_Obj     = $db->query($proSql);
+        $pro_Options = array();
+        while ($row         = $db->fetchByAssoc($pro_Obj))
+        {
+            $pro_Options[] = $row;
+        }
+        return $pro_Options;
+    }
+
     function getBatch()
     {
         global $db;
@@ -35,9 +48,10 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-        $where         = "";
-        $wherecl       = "";
-        $BatchListData = $this->getBatch();
+        $where             = "";
+        $wherecl           = "";
+        $BatchListData     = $this->getBatch();
+        $ProgrammeListData = $this->getProgram();
 
         if (!isset($_SESSION['cccon_from_date']))
         {
@@ -49,6 +63,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
         }
         if (isset($_POST['button']) || isset($_POST['export']))
         {
+            $_SESSION['cccon_program']    = $_REQUEST['program'];
             $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
             $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
             $_SESSION['cccon_counsellor'] = $_REQUEST['counsellor'];
@@ -82,6 +97,10 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
         {
             $selected_status = $_SESSION['cccon_status'];
         }
+        if (!empty($_SESSION['cccon_program']))
+        {
+            $selected_program = $_SESSION['cccon_program'];
+        }
         $findBatch = array();
         if (!empty($_SESSION['cccon_batch']))
         {
@@ -97,6 +116,11 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
         $programList = array();
         $StatusList  = array();
 
+        if (!empty($selected_program))
+        {
+
+            $wherecl .= " AND  p.id IN ('" . implode("','", $selected_program) . "')";
+        }
         if (!empty($selected_batch))
         {
 
@@ -125,13 +149,13 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                     l.status,
                     l.vendor,
                     te_vendor.id vendor_id
-                   
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
+                LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
-        
                    $wherecl
               GROUP BY l.status,te_vendor.id order by  te_ba_batch.batch_code ";
             //echo $leadSql;exit();
@@ -179,9 +203,9 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
 
 
-            
+
             foreach ($programList as $key => $valArr)
-            {   
+            {
                 foreach ($valArr as $key => $councelor)
                 {
                     $data .= "\"" . $councelor['batch_name'];
@@ -194,12 +218,9 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                         $data        .= "\",\"" . $countedLead;
                         $toal        += $countedLead;
                     }
-                $data .= "\",\"" . $toal;
-                $data .= "\"\n";
-
+                    $data .= "\",\"" . $toal;
+                    $data .= "\"\n";
                 }
-                
-                
             }
 
             ob_end_clean();
@@ -210,12 +231,6 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
         } // End Of Export Func
 
 
-
-
-
-
-
-
         $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
                     te_ba_batch.id AS batch_id,
@@ -224,11 +239,12 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                     l.status,
                     l.vendor,
                     te_vendor.id vendor_id
-                   
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
+                LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
                GROUP BY l.status,te_vendor.id order by  te_ba_batch.batch_code ";
@@ -322,6 +338,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
 
         $sugarSmarty->assign("BatchListData", $BatchListData);
+        $sugarSmarty->assign("ProgrammeListData", $ProgrammeListData);
         $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->assign("selected_batch", $selected_batch);
         $sugarSmarty->assign("selected_status", $selected_status);
