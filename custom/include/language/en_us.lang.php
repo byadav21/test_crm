@@ -348,6 +348,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_GGN'=>'TBA GGN 2',
   'OO_CHN'=>'Channels',
   'OO_AG' =>'Avenue Growth',
+  'OO_Netambit' =>'Netambit',
 
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
