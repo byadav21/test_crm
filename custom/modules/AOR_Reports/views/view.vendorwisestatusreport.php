@@ -16,7 +16,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
     {
         parent::SugarView();
     }
-    
+
     function getVendors()
     {
         global $db;
@@ -149,7 +149,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
-        
+
         if (!empty($selected_vendor))
         {
 
@@ -199,12 +199,12 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 }
 
 
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor']: 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
                 $StatusList[$row['status']]                                                 = $row['status'];
             }
 
@@ -228,21 +228,20 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
             foreach ($programList as $key => $valArr)
             {
-                
-                    $data .= "\"" . $valArr['program_name'];
-                    $data .= "\",\"" . $valArr['batch_name'];
-                    $data .= "\",\"" . $valArr['batch_code'];
-                    $data .= "\",\"" . $valArr['vendor'];
-                    $toal = 0;
-                    foreach ($StatusList as $key1 => $value)
-                    {
-                        $countedLead = (!empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
-                        $data        .= "\",\"" . $countedLead;
-                        $toal        += $countedLead;
-                    }
-                    $data .= "\",\"" . $toal;
-                    $data .= "\"\n";
-                
+
+                $data .= "\"" . $valArr['program_name'];
+                $data .= "\",\"" . $valArr['batch_name'];
+                $data .= "\",\"" . $valArr['batch_code'];
+                $data .= "\",\"" . $valArr['vendor'];
+                $toal = 0;
+                foreach ($StatusList as $key1 => $value)
+                {
+                    $countedLead = (!empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                    $data        .= "\",\"" . $countedLead;
+                    $toal        += $countedLead;
+                }
+                $data .= "\",\"" . $toal;
+                $data .= "\"\n";
             }
 
             ob_end_clean();
@@ -285,18 +284,17 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 $row['vendor'] = $vendor;
             }
 
-            
-               $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor']: 'NULL';
-                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
-                $StatusList[$row['status']]                                                 = $row['status'];
-           
+
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+            $StatusList[$row['status']]                                                 = $row['status'];
         }
 
-        
+
 
         //echo 'xx='.count($programList);die;
         //echo '<pre>';
