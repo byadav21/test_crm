@@ -182,7 +182,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
-              GROUP BY l.status,te_vendor.id order by  te_ba_batch.batch_code ";
+              GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
             //echo $leadSql;exit();
 
 
@@ -199,13 +199,13 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 }
 
 
-                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
-                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = $row['batch_name'];
-                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = $row['program_name'];
-                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = $row['batch_code'];
-                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = $row['vendor'];
-                    $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
-                    $StatusList[$row['status']]                                                 = $row['status'];
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor']: 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+                $StatusList[$row['status']]                                                 = $row['status'];
             }
 
 
@@ -213,6 +213,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
             # Create heading
             $data = "Programme Name";
+            $data .= ",Batch Name";
             $data .= ",Batch Code";
             $data .= ",Vendor";
             foreach ($StatusList as $key => $statusVal)
@@ -269,7 +270,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
-               GROUP BY l.status,te_vendor.id order by  te_ba_batch.batch_code ";
+               GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
         //echo $leadSql;exit();
 
 
@@ -285,13 +286,13 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
             }
 
             
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = $row['batch_name'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = $row['program_name'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = $row['batch_code'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = $row['vendor'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
-            $StatusList[$row['status']]                                                 = $row['status'];
+               $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor']: 'NULL';
+                $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+                $StatusList[$row['status']]                                                 = $row['status'];
            
         }
 
