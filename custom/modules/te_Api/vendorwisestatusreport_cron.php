@@ -46,7 +46,7 @@ class sendVisitReport
                 LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0 and l.date_entered >= '$this->toDate 00:00:00' AND l.date_entered <= '$this->toDate 23:59:59'
                    
-              GROUP BY l.status,te_vendor.id order by  te_ba_batch.batch_code ";
+              GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
 
         //echo $leadSql;exit();
 
@@ -64,13 +64,13 @@ class sendVisitReport
 
 
 
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_name']   = $row['batch_name'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['program_name'] = $row['program_name'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['batch_code']   = $row['batch_code'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']]['vendor']       = $row['vendor'];
-            $programList[$row['vendor'] . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
-            $StatusList[$row['status']]                                                 = $row['status'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+            $StatusList[$row['status']]                                                             = $row['status'];
         }
 
 
