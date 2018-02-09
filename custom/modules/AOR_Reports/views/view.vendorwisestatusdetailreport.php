@@ -139,23 +139,23 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
             $wherecl .= " AND  p.id IN ('" . implode("','", $selected_program) . "')";
         }
-		$StatusList['new_lead']     = 'New Lead';
-		$StatusList['follow_up']     = 'Follow-Up';
-		$StatusList['call_back']     = 'Call-back';
-		$StatusList['dead_number']     = 'Dead Number';
-		$StatusList['fallout']     = 'Fallout';
-		$StatusList['not_eligible']     = 'Not Eligible';
-		$StatusList['not_enquired']     = 'Not Enquired';
-		$StatusList['retired']     = 'Retired';
-		$StatusList['ringing_multiple_times']     = 'Ringing Multiple Times';
-		$StatusList['wrong_number']     = 'Wrong Number';
-		$StatusList['converted']     = 'Converted';
-		$StatusList['prospect']     = 'Prospect';
-		$StatusList['re_enquired']     = 'Re-Enquired';
-		$StatusList['recycle']     = 'Recycle';
-		$StatusList['dropout']     = 'Dropout';
-		$StatusList['duplicate']     = 'Duplicate';
-		$StatusList['na']     = 'NA';
+//		$StatusList['new_lead']     = 'New Lead';
+//		$StatusList['follow_up']     = 'Follow-Up';
+//		$StatusList['call_back']     = 'Call-back';
+//		$StatusList['dead_number']     = 'Dead Number';
+//		$StatusList['fallout']     = 'Fallout';
+//		$StatusList['not_eligible']     = 'Not Eligible';
+//		$StatusList['not_enquired']     = 'Not Enquired';
+//		$StatusList['retired']     = 'Retired';
+//		$StatusList['ringing_multiple_times']     = 'Ringing Multiple Times';
+//		$StatusList['wrong_number']     = 'Wrong Number';
+//		$StatusList['converted']     = 'Converted';
+//		$StatusList['prospect']     = 'Prospect';
+//		$StatusList['re_enquired']     = 'Re-Enquired';
+//		$StatusList['recycle']     = 'Recycle';
+//		$StatusList['dropout']     = 'Dropout';
+//		$StatusList['duplicate']     = 'Duplicate';
+//		$StatusList['na']     = 'NA';
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
@@ -169,13 +169,13 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
                     te_ba_batch.id AS batch_id,
+                    #p.name program_name,
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
-                    l.status_description,
-                    lower(l.vendor)vendor,
-                    #p.name AS program_name,
-                    te_vendor.id vendor_id
-					
+                    l.status,
+                    l.vendor,
+                    te_vendor.id vendor_id,
+                    l.status_description
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
@@ -184,7 +184,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                 #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
-               GROUP BY l.status_description,te_vendor.id order by  te_ba_batch.batch_code ";
+              GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code  ";
             //echo $leadSql;exit();
 
 
@@ -211,9 +211,12 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
 
             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
+            
+            $StatusList[strtolower(str_replace(array(' ','-'),'_',$row['status_description']))]    = $row['status_description'];
             }
-
-
+            
+            //echo "<pre>";
+            //print_r($StatusList); die;
 
 
             # Create heading
@@ -265,22 +268,22 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
         $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
                     te_ba_batch.id AS batch_id,
+                    #p.name program_name,
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
-                    l.status_description,
-                    lower(l.vendor)vendor,
-                    #p.name AS program_name,
-                    te_vendor.id vendor_id
-					
+                    l.status,
+                    l.vendor,
+                    te_vendor.id vendor_id,
+                    l.status_description
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-		#LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-		#LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
-               GROUP BY l.status_description,te_vendor.id order by  te_ba_batch.batch_code ";
+              GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
         //echo $leadSql;exit();
 
 
@@ -305,16 +308,11 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
             $programList[strtolower($row['vendor']).'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
             //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
+            $StatusList[strtolower(str_replace(array(' ','-'),'_',$row['status_description']))]    = $row['status_description'];
         }
 
         
-		/*echo "<pre>";
-		print_r($programList);
-		echo "hello";
-		print_r($finalArr);
-		
-		exit();*/
-        //echo 'xx='.count($programList);die;
+	
         //echo '<pre>';
         //print_r($StatusList); die;
         #PS @Pawan

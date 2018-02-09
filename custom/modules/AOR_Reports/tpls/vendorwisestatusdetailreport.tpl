@@ -165,14 +165,14 @@
 				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Alive</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="7"><strong>Dead</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Converted</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2"><strong>Warm</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>
+                {*<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Alive</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="7"><strong>Dead</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Converted</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2"><strong>Warm</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>*}
 
             </tr>
             <tr height="20">
