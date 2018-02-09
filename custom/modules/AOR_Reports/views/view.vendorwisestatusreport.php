@@ -168,7 +168,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
             $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
                     te_ba_batch.id AS batch_id,
-                    p.name program_name,
+                    #p.name program_name,
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
                     l.status,
@@ -229,8 +229,8 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
             foreach ($programList as $key => $valArr)
             {
 
-                $data .= "\"" . $valArr['program_name'];
-                $data .= "\",\"" . $valArr['batch_name'];
+                //$data .= "\"" . $valArr['program_name'];
+                $data .= "\"" . $valArr['batch_name'];
                 $data .= "\",\"" . $valArr['batch_code'];
                 $data .= "\",\"" . $valArr['vendor'];
                 $toal = 0;
@@ -287,7 +287,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+           // $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][ucwords($row['status'])] = $row['lead_count'];
