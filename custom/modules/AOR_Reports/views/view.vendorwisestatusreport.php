@@ -212,8 +212,8 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
 
             # Create heading
-            $data = "Programme Name";
-            $data .= ",Batch Name";
+            //$data = "Programme Name";
+            $data = "Batch Name";
             $data .= ",Batch Code";
             $data .= ",Vendor";
             foreach ($StatusList as $key => $statusVal)
