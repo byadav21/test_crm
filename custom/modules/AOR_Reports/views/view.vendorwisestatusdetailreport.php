@@ -204,9 +204,9 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
             //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = isset($row['vendor']) ? $row['vendor'] : 'NULL';
             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
 
@@ -298,16 +298,16 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                 $row['vendor'] = $vendor;
             }
 
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-	    //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
+             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
+            //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = isset($row['vendor']) ? $row['vendor'] : 'NULL';
             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
 
-            $programList[strtolower($row['vendor']).'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
-            //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
+            
             $StatusList[strtolower(str_replace(array(' ','-'),'_',$row['status_description']))]    = $row['status_description'];
         }
 
