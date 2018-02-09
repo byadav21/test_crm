@@ -47,7 +47,7 @@ class sendVisitReport
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
                 #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
                 #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-                WHERE leads.date_entered >= '$this->toDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59'
+                WHERE l.date_entered >= '$this->toDate 00:00:00' AND l.date_entered <= '$this->toDate 23:59:59'
               GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
 
         //echo $leadSql;exit();
