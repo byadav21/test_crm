@@ -93,7 +93,7 @@ class sendVisitReport
         {
 
             //$data .= "\"" . $valArr['program_name'];
-            $data .= "\",\"" . $valArr['batch_name'];
+            $data .= "\"" . $valArr['batch_name'];
             $data .= "\",\"" . $valArr['batch_code'];
             $data .= "\",\"" . $valArr['vendor'];
             $toal = 0;
