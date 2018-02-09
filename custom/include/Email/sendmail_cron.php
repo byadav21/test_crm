@@ -101,9 +101,9 @@ class FalconideEmail
 
            $emailData = array('email' => array('pawan.kumar@talentedge.in',
                                                'ashwani.sharma@talentedge.in',
-//                                               'ajay.kumar@talentedge.in', 
-//                                               'pritam.dutta@talentedge.in',
-//                                               'pramod.singh@talentedge.in'
+                                               'ajay.kumar@talentedge.in', 
+                                               'pritam.dutta@talentedge.in',
+                                               'pramod.singh@talentedge.in'
                                                 ),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
