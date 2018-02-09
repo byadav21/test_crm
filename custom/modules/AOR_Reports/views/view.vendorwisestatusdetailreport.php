@@ -162,7 +162,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
 
 
-            $file     = "VendorWiseStatisDetail_report";
+            $file     = "VendorWiseStatusDetail_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
@@ -173,14 +173,15 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                     te_ba_batch.batch_code,
                     l.status_description,
                     lower(l.vendor)vendor,
-                    te_vendor.id vendor_id,
-					p.name AS program_name
+                    #p.name AS program_name,
+                    te_vendor.id vendor_id
+					
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-				LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-				LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
                GROUP BY l.status_description,te_vendor.id order by  te_ba_batch.batch_code ";
@@ -201,23 +202,23 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
 
 
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
+            //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
 
-				$programList[$row['vendor'].'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
             }
 
 
 
 
             # Create heading
-            $data = "Programme Name";
-			$data .= ",Batch Name";
+            //$data = "Programme Name";
+	    $data .= "Batch Name";
             $data .= ",Batch Code";
             $data .= ",Vendor";
             foreach ($StatusList as $key => $statusVal)
@@ -232,10 +233,10 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             //echo "<pre>";print_r($programList);exit();
             foreach ($programList as $key => $councelor)
             {
-                $data .= "\"" . $councelor['program_name'];
-				$data .= "\",\"" . $councelor['batch_name'];
+                //$data .= "\"" . $councelor['program_name'];
+                $data .= "\"" . $councelor['batch_name'];
                 $data .= "\",\"" . $councelor['batch_code'];
-				$data .= "\",\"" . $councelor['vendor'];
+		$data .= "\",\"" . $councelor['vendor'];
                 $toal=0;
                 foreach ($StatusList as $key1 => $value)
                 {
@@ -268,14 +269,15 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                     te_ba_batch.batch_code,
                     l.status_description,
                     lower(l.vendor)vendor,
-                    te_vendor.id vendor_id,
-					p.name AS program_name
+                    #p.name AS program_name,
+                    te_vendor.id vendor_id
+					
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-				LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-				LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+		#LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+		#LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
                GROUP BY l.status_description,te_vendor.id order by  te_ba_batch.batch_code ";
@@ -293,17 +295,15 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                 $row['vendor'] = $vendor;
             }
 
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
+	    //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
+            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
 
-
-            $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-			$programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-            $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_name'] = $row['batch_name'];
-            $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['batch_code'] = $row['batch_code'];
-            $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['vendor']     = $row['vendor'];
-            $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
-            $programList[$row['vendor'].'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
-
-            $programList[$row['vendor'].'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
+            $programList[strtolower($row['vendor']).'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
             //$programList[$row['batch_id']][$row['status']] = $row['lead_count'];
         }
 

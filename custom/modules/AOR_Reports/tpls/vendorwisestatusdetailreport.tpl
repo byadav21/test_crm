@@ -4,8 +4,8 @@
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
-					<tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
+		<tr>
+                        {*<td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Program</label>
                         </td>
                         <td nowrap="nowrap" >
@@ -15,23 +15,7 @@
                                     <option value="{$program.id}"{if in_array($program.id, $selected_program)} selected="selected"{/if}>{$program.name}</option>
                                 {/foreach}
                             </select>
-                        </td>
-
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Vendor</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$VendorListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-					
-                    <tr>
+                        </td>*}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch</label>
                         </td>
@@ -44,6 +28,13 @@
                             </select>
                         </td>
 
+                        
+                    </tr>
+                    <tr>
+					
+                    <tr>
+                        
+
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch Code</label>
                         </td>
@@ -55,6 +46,19 @@
                                 {/foreach}
                             </select>
                         </td>
+                        
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Vendor</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$VendorListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        
                     </tr>
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
@@ -172,11 +176,11 @@
 
             </tr>
             <tr height="20">
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+		{*<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Program Name</strong>
-                </th>
+                </th>*}
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Name</strong>
+                    <strong>Batch Name</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
@@ -191,7 +195,7 @@
             </tr>
 			{foreach from = $programList key=key item=program}
                 <tr height="20" class="oddListRowS1">
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>
+                   {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>*}
 					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
 					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
