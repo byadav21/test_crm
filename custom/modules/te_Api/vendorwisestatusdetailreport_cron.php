@@ -28,7 +28,7 @@ class sendVisitReport
 
         $file     = "VendorWiseSubStatusDetail_report";
         $filename = $file . "_" . $this->toDate;
-        
+        $StatusList=array();
      
 
           $leadSql = "SELECT COUNT(l.id) AS lead_count,
@@ -82,6 +82,7 @@ class sendVisitReport
        
         # Create heading
             //$data = "Programme Name";
+            $data='';
 	    $data .= "Batch Name";
             $data .= ",Batch Code";
             $data .= ",Vendor";
