@@ -178,8 +178,8 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-                LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-                LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
               GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
@@ -197,14 +197,15 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 {
                     $row['vendor'] = $vendor;
                 }
-              
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][ucwords($row['status'])] = $row['lead_count'];
-            $StatusList[ucwords($row['status'])]                                                             = ucwords($row['status']);
+
+
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+               // $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
+                $StatusList[$row['status']]                                                 = $row['status'];
             }
 
 
@@ -253,7 +254,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
         $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
-                    p.name program_name,
+                    #p.name program_name,
                     te_ba_batch.id AS batch_id,
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
@@ -264,8 +265,8 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-                LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-                LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
                GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
