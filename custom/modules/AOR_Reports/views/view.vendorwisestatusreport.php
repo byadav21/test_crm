@@ -161,7 +161,7 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
 
 
 
-            $file     = "VendorWiseStatis_report";
+            $file     = "VendorWiseStatus_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
@@ -197,15 +197,14 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
                 {
                     $row['vendor'] = $vendor;
                 }
-
-
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
-                $StatusList[$row['status']]                                                 = $row['status'];
+              
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']     = $row['batch_id'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']   = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][ucwords($row['status'])] = $row['lead_count'];
+            $StatusList[ucwords($row['status'])]                                                             = ucwords($row['status']);
             }
 
 
@@ -290,8 +289,8 @@ class AOR_ReportsViewVendorwisestatusreport extends SugarView
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['program_name'] = isset($row['program_name']) ? $row['program_name'] : 'NULL';
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][$row['status']] = $row['lead_count'];
-            $StatusList[$row['status']]                                                 = $row['status'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][ucwords($row['status'])] = $row['lead_count'];
+            $StatusList[ucwords($row['status'])]                                                             = ucwords($row['status']);
         }
 
 
