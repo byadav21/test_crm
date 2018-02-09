@@ -28,6 +28,24 @@ class sendVisitReport
 
         $file     = "VendorWiseSubStatusDetail_report";
         $filename = $file . "_" . $this->toDate;
+        
+        $StatusList['new_lead']     = 'New Lead';
+        $StatusList['follow_up']     = 'Follow-Up';
+        $StatusList['call_back']     = 'Call-back';
+        $StatusList['dead_number']     = 'Dead Number';
+        $StatusList['fallout']     = 'Fallout';
+        $StatusList['not_eligible']     = 'Not Eligible';
+        $StatusList['not_enquired']     = 'Not Enquired';
+        $StatusList['retired']     = 'Retired';
+        $StatusList['ringing_multiple_times']     = 'Ringing Multiple Times';
+        $StatusList['wrong_number']     = 'Wrong Number';
+        $StatusList['converted']     = 'Converted';
+        $StatusList['prospect']     = 'Prospect';
+        $StatusList['re_enquired']     = 'Re-Enquired';
+        $StatusList['recycle']     = 'Recycle';
+        $StatusList['dropout']     = 'Dropout';
+        $StatusList['duplicate']     = 'Duplicate';
+        $StatusList['na']     = 'NA';
 
         $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
