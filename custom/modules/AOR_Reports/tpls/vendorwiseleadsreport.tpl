@@ -16,19 +16,31 @@
                                 {/foreach}
                             </select>
                         </td>
-
+						<td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Status</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+                            <select name="status" id="status" style="width:300px !important;">
+                                <option value='All' {if $selected_status=='All'} selected="selected"{/if}>All</option>
+								<option value='re-enquired' {if $selected_status=='re-enquired'} selected="selected"{/if}>Re-Enquired</option>
+								<option value='duplicate' {if $selected_status=='duplicate'} selected="selected"{/if}>Duplicate</option>
+								<option value='fresh' {if $selected_status=='fresh'} selected="selected"{/if}>Fresh</option>
+                            </select>
+                        </td>
+					</tr>
+					<tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">From Date</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
-                            <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
+                            <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date' style="width:300px !important;"/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
                         </td>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">To Date</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
-                            <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
+                            <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date' style="width:300px !important;"/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
                     <tr>

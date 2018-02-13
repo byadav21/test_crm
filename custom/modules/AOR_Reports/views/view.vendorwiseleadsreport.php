@@ -33,11 +33,8 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
         {
             $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
             $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_counsellor'] = $_REQUEST['counsellor'];
             $_SESSION['cccon_batch']      = $_REQUEST['batch'];
-            $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
-            $_SESSION['cccon_medium_val'] = $_REQUEST['medium_val'];
-            $_SESSION['cccon_status']     = $_REQUEST['status'];
+            $_SESSION['vdwiseleads_status']     = $_REQUEST['status'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -59,9 +56,9 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
             $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
             $wherecl          .= " AND DATE(leads.date_entered)<='" . $to_date . "' ";
         }
-        if (!empty($_SESSION['cccon_status']))
+        if (!empty($_SESSION['vdwiseleads_status']))
         {
-            $selected_status = $_SESSION['cccon_status'];
+            $selected_status = $_SESSION['vdwiseleads_status'];
         }
         $findBatch = array();
         if (!empty($_SESSION['cccon_batch']))
@@ -72,6 +69,20 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
         $programList = array();
         $VendorList   = array();
         
+		if (!empty($selected_status)){
+			if($selected_status=='re-enquired'){
+				$wherecl .= " AND  leads.status_description IN ('Re-Enquired')";
+			}
+			elseif($selected_status=='duplicate'){
+				$wherecl .= " AND  leads.status_description IN ('Duplicate')";
+			}
+			elseif($selected_status=='fresh'){
+				$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle')";
+			}
+			else{
+				$wherecl .= " AND  leads.status IN ('Alive','Converted','Dead','Dropout','Duplicate','Recycle','Warm')";
+			}
+		}
         if (!empty($selected_batch))
         {
 
