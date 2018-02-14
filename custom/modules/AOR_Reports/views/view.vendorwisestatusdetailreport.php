@@ -184,7 +184,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                 #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
-              GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code  ";
+              GROUP BY l.status_description,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code  ";
             //echo $leadSql;exit();
 
 
@@ -283,7 +283,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                 #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
                    $wherecl
-              GROUP BY l.status,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
+              GROUP BY l.status_description,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
         //echo $leadSql;exit();
 
 
