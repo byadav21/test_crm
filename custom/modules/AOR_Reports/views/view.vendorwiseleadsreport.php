@@ -77,11 +77,14 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
 				$wherecl .= " AND  leads.status_description IN ('Duplicate')";
 			}
 			elseif($selected_status=='fresh'){
-				$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle')";
+				$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number')";
 			}
 			else{
-				$wherecl .= " AND  leads.status IN ('Alive','Converted','Dead','Dropout','Duplicate','Recycle','Warm')";
+				$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number','Duplicate','Re-Enquired')";
 			}
+		}
+		if (empty($selected_status)){
+			$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number','Duplicate','Re-Enquired')";
 		}
         if (!empty($selected_batch))
         {
