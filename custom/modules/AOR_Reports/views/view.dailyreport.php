@@ -187,7 +187,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 				$vendorArr[]=array('name'=>$vendor['name'],'id'=>$vendor['id'],'total_cost'=>$total_cost,'vendor_con'=>$total_lead_con,'total_gsv'=>$total_gsv);
 			}
 			$vendors = $vendorArr;
-			$batchSql="SELECT b.name,b.id,b.fees_inr,b.batch_status,( SELECT sum(te_actual_campaign.total_cost) from te_actual_campaign where te_actual_campaign.te_ba_batch_id_c=b.id AND te_actual_campaign.type='paid' AND te_actual_campaign.deleted=0 ) as total_cost,(SELECT count(leads.id) FROM leads INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE leads_cstm.te_ba_batch_id_c=b.id AND leads.status='Converted' AND leads.deleted=0)total_con from te_ba_batch AS b where b.deleted=0 $whereCourse group by b.id ORDER BY b.name ASC";
+			$batchSql="SELECT b.name,b.id,b.fees_inr,b.batch_status,b.batch_code,( SELECT sum(te_actual_campaign.total_cost) from te_actual_campaign where te_actual_campaign.te_ba_batch_id_c=b.id AND te_actual_campaign.type='paid' AND te_actual_campaign.deleted=0 ) as total_cost,(SELECT count(leads.id) FROM leads INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE leads_cstm.te_ba_batch_id_c=b.id AND leads.status='Converted' AND leads.deleted=0)total_con from te_ba_batch AS b where b.deleted=0 $whereCourse group by b.id ORDER BY b.name ASC";
 			$batchObj =$db->query($batchSql);
 			$batchOptions=array();
 			while($row =$db->fetchByAssoc($batchObj)){
@@ -195,11 +195,11 @@ class AOR_ReportsViewDailyreport extends SugarView {
 				$total_lead_con=($row['total_con']?$row['total_con']:0);
 				$total_cost=($row['total_cost']?$row['total_cost']:0);
 
-				$batchOptions[]=array('name'=>$row['name'],'id'=>$row['id'],'batch_total_cost'=>$total_cost,'fees_inr'=>$row['fees_inr'],'batch_status'=>$row['batch_status'],'total_lead_con'=>$total_lead_con);
+				$batchOptions[]=array('name'=>$row['name'],'batch_code'=>$row['batch_code'],'id'=>$row['id'],'batch_total_cost'=>$total_cost,'fees_inr'=>$row['fees_inr'],'batch_status'=>$row['batch_status'],'total_lead_con'=>$total_lead_con);
 			}
 
 			$batches = $batchOptions;
-
+			
 			$batchVendorArr = array();
 			if($batches && $vendors){
 				foreach($batches as $batchval){
@@ -207,6 +207,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 						$batchVendorArr[]=array(
 							'batch_id'=>$batchval['id'],
 							'batch_name'=>$batchval['name'],
+							'batch_code'=>$batchval['batch_code'],
 							'fees_inr'=>$batchval['fees_inr'],
 							'batch_status'=>$batchval['batch_status'],
 							'vendor_id'=>$vendorsVal['id'],
@@ -228,6 +229,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 				if($batchVendorArr){
 					foreach ($batchVendorArr as $value) {
 						$councelorList[$value['batch_name']][$value['vendor_name']]['course_fee'] = $value['fees_inr'];
+						$councelorList[$value['batch_name']][$value['vendor_name']]['batch_code'] = $value['batch_code'];
 						$councelorList[$value['batch_name']][$value['vendor_name']]['batch_status'] = $GLOBALS['app_list_strings']['batch_status_list'][$value['batch_status']];
 						$councelorList[$value['batch_name']][$value['vendor_name']]['Fallout'] = 0;
 						$councelorList[$value['batch_name']][$value['vendor_name']]['New_Lead'] = 0;
@@ -280,7 +282,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 					}
 				}
 				//echo "<pre>";print_r($councelorList);exit();
-				$data="Vendor,Course,Total_Leads,Registered,Leads_Validity,Leads_Validity%,Spend,Conversion_Rate,CPL,CPA,Course_Fee,CPA%,GSV,Source_CPA%,Course_CPA%,Status\n";
+				$data="Vendor,Course,Batch Code,Total_Leads,Registered,Leads_Validity,Leads_Validity%,Spend,Conversion_Rate,CPL,CPA,Course_Fee,CPA%,GSV,Source_CPA%,Course_CPA%,Status\n";
 				$file = "daily_report";
 				$filename = $file . "_" . date ( "Y-m-d");
 				foreach($councelorList as $key=>$vendorsval){
@@ -297,7 +299,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 						$cpa=($vendors['spend'] && $vendors['Converted']?number_format($vendors['spend']/$vendors['Converted']):0);
 						$cpa_percent=($vendors['spend'] && $gsv?(($vendors['spend']/str_replace(',','',$gsv))*100):0);
 						if($total>0){
-							$data.= "\"" . $vendorskey . "\",\"" . $key . "\",\"" . $total."\",\"" . $vendors['Converted']."\",\"". $validity."\",\"" . $validity_per."\",\"" . $vendors['spend']."\",\"" . $conversion_rate."\",\"" . $cpl."\",\"" . $cpa."\",\"" . number_format($vendors['course_fee'])."\",\"" .$cpa_percent."\",\"" . $gsv."\",\"" . $vendors['source_cpa_percent']."\",\"" . $vendors['course_cpa_percent']."\",\"" . $vendors['batch_status']. "\"\n";
+							$data.= "\"" . $vendorskey . "\",\"" . $key . "\",\"" . $vendors['batch_code'] . "\",\"" . $total."\",\"" . $vendors['Converted']."\",\"". $validity."\",\"" . $validity_per."\",\"" . $vendors['spend']."\",\"" . $conversion_rate."\",\"" . $cpl."\",\"" . $cpa."\",\"" . number_format($vendors['course_fee'])."\",\"" .$cpa_percent."\",\"" . $gsv."\",\"" . $vendors['source_cpa_percent']."\",\"" . $vendors['course_cpa_percent']."\",\"" . $vendors['batch_status']. "\"\n";
 						}
 
 					}
@@ -394,6 +396,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 			if($batchVendorArr){
 				foreach ($batchVendorArr as $value) {
 					$councelorList[$value['batch_name']][$value['vendor_name']]['course_fee'] = $value['fees_inr'];
+					$councelorList[$value['batch_name']][$value['vendor_name']]['batch_code'] = $value['batch_code'];
 					$councelorList[$value['batch_name']][$value['vendor_name']]['batch_status'] = $GLOBALS['app_list_strings']['batch_status_list'][$value['batch_status']];
 					$councelorList[$value['batch_name']][$value['vendor_name']]['Fallout'] = 0;
 					$councelorList[$value['batch_name']][$value['vendor_name']]['New_Lead'] = 0;
@@ -462,6 +465,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 					if($total>0){
 						$listCouncelorArr[$index]['name'] = $vendorskey;
 						$listCouncelorArr[$index]['vendor'] = $vendorskey;
+						$listCouncelorArr[$index]['batch_code'] = $vendors['batch_code'];
 						$listCouncelorArr[$index]['total_leads'] = $total;
 						$listCouncelorArr[$index]['batch'] = $key;
 						$listCouncelorArr[$index]['course_fee'] = number_format($vendors['course_fee']);

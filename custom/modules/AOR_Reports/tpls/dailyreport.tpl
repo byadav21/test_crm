@@ -133,6 +133,9 @@
 			<strong>Course</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Batch Code</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Total Leads</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -179,6 +182,7 @@
 	<tr height="20" class="oddListRowS1">
 		<td align="left" valign="top" type="relate" field="vendor" class="inlineEdit footable-visible footable-last-column">{$data.vendor}</td>
 		<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$data.batch}</td>
+		<td align="left" valign="top" type="relate" field="batch_code" class="inlineEdit footable-visible footable-last-column">{$data.batch_code}</td>
 		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.total_leads}</td>
 		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.registered}</td>
 		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.lead_validity}</td>
