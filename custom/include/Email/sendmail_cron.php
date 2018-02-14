@@ -71,7 +71,7 @@ class FalconideEmail
         }
     }
 
-    public function emailData($reponame, $filename, $date)
+    public function emailData($reponame, $filename, $date, $email_summary=NULL)
     {
 
         /*$emailData = array('email' => array(
