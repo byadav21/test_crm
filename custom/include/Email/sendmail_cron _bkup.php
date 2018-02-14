@@ -74,7 +74,7 @@ class FalconideEmail
     public function emailData($reponame, $filename, $date)
     {
 
-        /*$emailData = array('email' => array(
+        $emailData = array('email' => array(
                 'pawan.kumar@talentedge.in'
                 ,'pritam.dutta@talentedge.in',
                 'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in',
@@ -91,16 +91,6 @@ class FalconideEmail
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
             . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>',
-            'pdfFileName'   => $filename,
-            'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
-        return $emailData;*/
-		$emailData = array('email' => array(
-                'anup.kumar@engenia.in', 'ashwani.sharma@talentedge.in','pritam.dutta@talentedge.in','pramod.singh@talentedge.in'
-                ),
-            'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
-            'email_message' => '<p>Hi,</p> '
-            . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>'
-			. $email_summary,
             'pdfFileName'   => $filename,
             'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
         return $emailData;
