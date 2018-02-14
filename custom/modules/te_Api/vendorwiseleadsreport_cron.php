@@ -35,8 +35,11 @@ class sendVisitReport
 		$getSummary = $this->getSummary();
 		
 		$data = $AllLeadData;
+		$data .= "\n";
 		$data .= $FreshLeadData;
+		$data .= "\n";
 		$data .= $ReEnquiredLeadData;
+		$data .= "\n";
 		$data .= $DuplicateLeadData;
         //echo $data; die;
 		
