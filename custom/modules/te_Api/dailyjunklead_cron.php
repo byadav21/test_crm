@@ -59,7 +59,7 @@ class sendDailyJunkLead
             </tr>
         </table>';
 		//'pawan.kumar@talentedge.in','pritam.dutta@talentedge.in','ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','pramod.singh@talentedge.in'
-		$to = array('anup.kumar@engenia.in','mr.anupkmr@gmail.com');
+		$to = array('pawan.kumar@talentedge.in','pritam.dutta@talentedge.in','ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','pramod.singh@talentedge.in');
         $emailData = $mail->cron_email_Data('Daily Junk Lead Data', $filename, $this->toDate,$to,$email_summary);
         //$emailData = $mail->emailData('Daily Junk Lead Data', $filename, $this->toDate,$email_summary);
         $mail->sendCertificateEmail($emailData);
