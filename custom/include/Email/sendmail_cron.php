@@ -95,6 +95,17 @@ class FalconideEmail
             'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
         return $emailData;
     }
+	public function cron_email_Data($reponame, $filename, $date, $to, $email_summary=NULL)
+    {
+		$emailData = array('email' => $to,
+            'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
+            'email_message' => '<p>Hi,</p> '
+            . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>'
+			. $email_summary,
+            'pdfFileName'   => $filename,
+            'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
+        return $emailData;
+    }
     
     public function TestemailData($reponame, $filename, $date)
     {
