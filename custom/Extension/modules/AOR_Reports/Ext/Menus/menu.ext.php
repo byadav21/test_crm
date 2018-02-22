@@ -67,6 +67,7 @@ if($current_user->is_admin==1 || $displayMis||$displayCC){
   $module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusreport', "Counselor Wise Status Report", 'AOR_Reports');
   $module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counselor Wise Status Detail Report", 'AOR_Reports');
   $module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwisecounconreport', "Vendor wise agent conversion Report", 'AOR_Reports');
+  $module_menu[] = array ('index.php?module=AOR_Reports&action=mangerwiseleadstatusreport', "Manager wise lead status Report", 'AOR_Reports');
   $module_menu[] = array ('index.php?module=AOR_Reports&action=pipelinereport', "Pipeline Report", 'AOR_Reports');
   $module_menu[] = array ('index.php?module=AOR_Reports&action=salescyclereport', "Sales Cycle Report", 'AOR_Reports');
   $module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Status Report", 'AOR_Reports');
