@@ -296,9 +296,16 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'Recycle'                => 'Recycle');
 
         $headersss = implode(",", $selected_headers);
-        if (empty($headersss))
-            $headersss = 'leads.id';
+        if (empty($headersss)){
+        $headersss = 'leads.id';
+        }
+        if ((!empty($headersss)) && (!in_array("ID", $headersss))){
+                $IDs = "leads.id,";
+        }
+        
+        
         $leadSql   = "SELECT 
+                       $IDs
                        $headersss
                 FROM leads 
                 LEFT JOIN users ON leads.assigned_user_id =users.id
