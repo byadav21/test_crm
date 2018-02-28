@@ -98,7 +98,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=leadsfeedbackreport
 $module_menu[] = array ('index.php?module=AOR_Reports&action=leadperformancereport', "Leads Performance Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyuploadreport', "Upload Report", 'AOR_Reports');
 
-$module_menu[] = array ('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
+//$module_menu[] = array ('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
 }
 # SRM REPORTS #
 if( $current_user->is_admin==1 || $displayMis || $displaySRM){
