@@ -4,14 +4,87 @@
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
+                    
+                     <tr>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="From Date">From Date:</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+                            <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
+                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
+                        </td>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="To Date">To Date:</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+                            <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
+                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
+                        </td>
+                    </tr>
+                     <tr>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Batch Name:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="batch[]" id="batch"  class="multiselbox" multiple style="width:600px !important; height: 70px !important;">
+                                {foreach from =$BatchListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                       <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Code">Batch Code:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="batch_code[]" id="batch_code"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$BatchListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.batch_code}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                    </tr>
+                    
                     <tr>
-                        
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="status">Status:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="status" id="status" title="">
+
+                                <option label="" value="" {if isset($selected_status) && $selected_status == ''} selected="selected {/if}>Select</option>
+                                        <option label="Alive"  {if isset($selected_status) && $selected_status == 'Alive'} selected="selected {/if}>Alive</option>
+                                <option label="Converted" value="Converted" {if isset($selected_status) && $selected_status == 'Converted'} selected="selected {/if}>Converted</option>
+                                        <option label="Dead" value="Dead" {if isset($selected_status) && $selected_status == 'Dead'} selected="selected {/if}>Dead</option>
+                                <option label="Duplicate" value="Duplicate" {if isset($selected_status) && $selected_status == 'Duplicate'} selected="selected {/if}>Duplicate</option>
+                                        <option label="Dropout" value="Dropout" {if isset($selected_status) && $selected_status == 'Dropout'} selected="selected {/if}>Dropout</option>
+                                <option label="Warm" value="Warm" {if isset($selected_status) && $selected_status == 'Warm'} selected="selected {/if}>Warm</option>
+                                        <option label="Recycle" value="Recycle" {if isset($selected_status) && $selected_status == 'Recycle'} selected="selected {/if}>Recycle</option>
+                            </select>
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Source">Source:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="source[]" id="source"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+
+                                {foreach from =$lead_source_type key=key item=type}
+
+                                    <option value="{$key}" {if in_array($key, $selected_source)} selected="selected"{/if}>{$type}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Headers:</label>
                         </td>
-                       
-                          <td nowrap="nowrap" >
-                            <select name="headers[]" id="headers"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
+
+                        <td nowrap="nowrap" >
+                            <select name="headers[]" id="headers"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$headers key=key item=value}
 
                                     <option value="{$key}"{if in_array($key, $selected_headers)} selected="selected"{/if}>{$value}</option>
@@ -19,50 +92,24 @@
                             </select>
                         </td>
 
-
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Code">Batch Code</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="batch_code[]" id="batch_code"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$BatchListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.batch_code}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
-                    </tr>
-                      <tr>
-                        
-                            
-                        
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Batch</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="batch[]" id="batch"  class="batch_advanced" multiple style="width:600px !important; height: 70px !important;">
-                                {foreach from =$BatchListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                     
-                        
                          <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Vendor</label>
+                            <label for="batch_basic">Vendor:</label>
                         </td>
                         <td nowrap="nowrap" >
-                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
+                            <select name="vendors[]" id="vendor"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$VendorListData key=key item=program}
 
                                     <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
                                 {/foreach}
                             </select>
+                            
                         </td>
+                        
                     </tr>
-                    <tr>
+                    
+                   
+                    
+                    {*<tr>
 
 
                         <td scope="row" nowrap="nowrap" width="1%">
@@ -81,22 +128,22 @@
                         </td>
 
                     </tr>
-                    
+
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="status">Status:</label>
                         </td>
                         <td nowrap="nowrap" >
                             <select name="status" id="status" title="">
-                               
+
                                 <option label="" value="" {if isset($selected_status) && $selected_status == ''} selected="selected {/if}>Select</option>
-                                <option label="Alive"  {if isset($selected_status) && $selected_status == 'Alive'} selected="selected {/if}>Alive</option>
+                                        <option label="Alive"  {if isset($selected_status) && $selected_status == 'Alive'} selected="selected {/if}>Alive</option>
                                 <option label="Converted" value="Converted" {if isset($selected_status) && $selected_status == 'Converted'} selected="selected {/if}>Converted</option>
-                                <option label="Dead" value="Dead" {if isset($selected_status) && $selected_status == 'Dead'} selected="selected {/if}>Dead</option>
+                                        <option label="Dead" value="Dead" {if isset($selected_status) && $selected_status == 'Dead'} selected="selected {/if}>Dead</option>
                                 <option label="Duplicate" value="Duplicate" {if isset($selected_status) && $selected_status == 'Duplicate'} selected="selected {/if}>Duplicate</option>
-                                <option label="Dropout" value="Dropout" {if isset($selected_status) && $selected_status == 'Dropout'} selected="selected {/if}>Dropout</option>
+                                        <option label="Dropout" value="Dropout" {if isset($selected_status) && $selected_status == 'Dropout'} selected="selected {/if}>Dropout</option>
                                 <option label="Warm" value="Warm" {if isset($selected_status) && $selected_status == 'Warm'} selected="selected {/if}>Warm</option>
-                                <option label="Recycle" value="Recycle" {if isset($selected_status) && $selected_status == 'Recycle'} selected="selected {/if}>Recycle</option>
+                                        <option label="Recycle" value="Recycle" {if isset($selected_status) && $selected_status == 'Recycle'} selected="selected {/if}>Recycle</option>
                             </select>
                         </td>
 
@@ -114,7 +161,7 @@
                         </td>
 
                     </tr>
-                    
+
                     <tr>
 
 
@@ -134,7 +181,7 @@
                         </td>
                         <td nowrap="nowrap" >
                             <select name="source[]" id="source"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                   
+
                                 {foreach from =$lead_source_type key=key item=type}
 
                                     <option value="{$key}" {if in_array($key, $selected_source)} selected="selected"{/if}>{$type}</option>
@@ -145,9 +192,6 @@
                     </tr>
 
                     <tr>
-                       
-
-
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Autoassign">Autoassign:</label>
                         </td>
@@ -173,8 +217,6 @@
                     </tr>
 
                     <tr>
-
-
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Campagain ID">Campagain ID:</label>
                         </td>
@@ -200,25 +242,9 @@
                                 {/foreach}
                             </select>
                         </td>
+                    </tr>*}
 
-                    </tr>
-
-                    <tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="From Date">From Date:</label>
-                        </td>
-                        <td nowrap="nowrap" width="10%">
-                            <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
-                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
-                        </td>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="To Date">To Date:</label>
-                        </td>
-                        <td nowrap="nowrap" width="10%">
-                            <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
-                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
-                        </td>
-                    </tr>
+                   
 
                     <tr>
                         <td class="sumbitButtons" colspan="3">
@@ -293,17 +319,20 @@
                 </td>
             </tr>
             {*End Pagination*}
-           
+
             <tr height="20">
-               
+
                 {foreach from = $ExcelHeaders key=key item=column}
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$column}</strong></th>
-               {/foreach}
+                        {/foreach}
 
             </tr>   
+            
+        {if isset($error) && !empty($error)}  <td align="center" class="inlineEdit footable-visible footable-last-column"><h1>{$error.error}</h1></td>{/if}
             {foreach from = $leadList key=key item=program}
-               
+
                 <tr height="20" class="oddListRowS1">
+                    
                     {foreach from =$selected_headersKey key=key item=val}
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.$val}</td>
                     {/foreach}

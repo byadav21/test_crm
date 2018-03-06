@@ -34,7 +34,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
     function getVendors()
     {
         global $db;
-        $vendorSql      = "SELECT id,name FROM te_vendor WHERE deleted=0";
+        $vendorSql      = "SELECT id,name FROM te_vendor WHERE deleted=0 order by name";
         $vendor_Obj     = $db->query($vendorSql);
         $vendor_Options = array();
         while ($row            = $db->fetchByAssoc($vendor_Obj))
@@ -47,7 +47,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
     function getBatch()
     {
         global $db;
-        $batchSql     = "SELECT id,name,batch_code,d_campaign_id,d_lead_id FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
+        $batchSql     = "SELECT id,name,batch_code,d_campaign_id,d_lead_id FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0 order by name";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
@@ -55,6 +55,15 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $batchOptions[] = $row;
         }
         return $batchOptions;
+    }
+    
+    function getBetweenDays($fromData,$toDate){
+       
+        $fromData = strtotime($fromData);
+        $toDate = strtotime($toDate);
+        $difference = $toDate - $fromData;
+        $days = floor($difference / (60*60*24) );
+        return $days;
     }
 
     public function display()
@@ -69,6 +78,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $ProgramListData = $this->getProgram();
         $BatchListData   = $this->getBatch();
         $VendorListData  = $this->getVendors();
+        $error           =array();
 
         foreach ($BatchListData as $val)
         {
@@ -212,7 +222,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         if (!empty($selected_source))
         {
 
-            $wherecl .= " AND  leads.utm_source_c IN ('" . implode("','", $selected_source) . "')";
+            $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
         }
         if ($_SESSION['cccon_autoassign'] != "")
         {
@@ -234,7 +244,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $selected_leadIDs = $_SESSION['cccon_leadIDs'];
             $wherecl          .= " AND  leads.dristi_API_id ='" . $_SESSION['cccon_leadIDs'] . "'";
         }
-
+        
 
 
         $lead_source        = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
@@ -298,11 +308,13 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $headersss = implode(",", $selected_headers);
         if (empty($headersss)){
         $headersss = 'leads.id';
+        $error['error']='Please Select a Header.';
         }
         if ((!empty($headersss)) && (!in_array("ID", $headersss))){
                 $IDs = "leads.id,";
         }
         
+       $Days = $this->getBetweenDays($_SESSION['cccon_from_date'], $_SESSION['cccon_to_date']);     
         
         $leadSql   = "SELECT 
                        $IDs
@@ -329,14 +341,26 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $selected_headersKey[$val] = substr($val, strpos($val, ".") + 1);
         }
         //print_r($ExcelHeaders); die;
-
-        $leadObj = $db->query($leadSql) or die(mysqli_error());
+        $dayFlag=FALSE;
+        if($Days >= 1 && $Days <= 60 ){
+            
+            $leadObj = $db->query($leadSql) or die(mysqli_error());  
+        }
+        else
+        {
+          $dayFlag=TRUE;
+          $error['error']='Please Export Data between 2 months.';  
+        }
 
        
         while ($row = $db->fetchByAssoc($leadObj))
         {
             $leadList[$row['id']] = $row;
         }
+        
+       if(empty($leadList) && $dayFlag===FALSE){
+           $error['error']="No Data Found.";
+       }
         
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {   
@@ -436,7 +460,8 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         #pE
 
         $sugarSmarty = new Sugar_Smarty();
-
+        
+        $sugarSmarty->assign("error", $error);
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("headers", $headers);
 
