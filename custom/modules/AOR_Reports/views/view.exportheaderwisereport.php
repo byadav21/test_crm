@@ -1,4 +1,5 @@
 <?php
+
 // Date: Created on : 27th FEB 2018
 
 if (!defined('sugarEntry') || !sugarEntry)
@@ -56,13 +57,14 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         }
         return $batchOptions;
     }
-    
-    function getBetweenDays($fromData,$toDate){
-       
-        $fromData = strtotime($fromData);
-        $toDate = strtotime($toDate);
+
+    function getBetweenDays($fromData, $toDate)
+    {
+
+        $fromData   = strtotime($fromData);
+        $toDate     = strtotime($toDate);
         $difference = $toDate - $fromData;
-        $days = floor($difference / (60*60*24) );
+        $days       = floor($difference / (60 * 60 * 24));
         return $days;
     }
 
@@ -78,7 +80,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $ProgramListData = $this->getProgram();
         $BatchListData   = $this->getBatch();
         $VendorListData  = $this->getVendors();
-        $error           =array();
+        $error           = array();
 
         foreach ($BatchListData as $val)
         {
@@ -244,7 +246,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $selected_leadIDs = $_SESSION['cccon_leadIDs'];
             $wherecl          .= " AND  leads.dristi_API_id ='" . $_SESSION['cccon_leadIDs'] . "'";
         }
-        
+
 
 
         $lead_source        = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
@@ -306,17 +308,19 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'Recycle'                => 'Recycle');
 
         $headersss = implode(",", $selected_headers);
-        if (empty($headersss)){
-        $headersss = 'leads.id';
-        $error['error']='Please Select a Header.';
+        if (empty($headersss))
+        {
+            $headersss      = 'leads.id';
+            $error['error'] = 'Please Select a Header.';
         }
-        if ((!empty($headersss)) && (!in_array("ID", $headersss))){
-                $IDs = "leads.id,";
+        if ((!empty($headersss)) && (!in_array("ID", $headersss)))
+        {
+            $IDs = "leads.id,";
         }
-        
-       $Days = $this->getBetweenDays($_SESSION['cccon_from_date'], $_SESSION['cccon_to_date']);     
-        
-        $leadSql   = "SELECT 
+
+        $Days = $this->getBetweenDays($_SESSION['cccon_from_date'], $_SESSION['cccon_to_date']);
+
+        $leadSql = "SELECT 
                        $IDs
                        $headersss
                 FROM leads 
@@ -341,49 +345,51 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $selected_headersKey[$val] = substr($val, strpos($val, ".") + 1);
         }
         //print_r($ExcelHeaders); die;
-        $dayFlag=FALSE;
-        if($Days >= 1 && $Days <= 60 ){
-            
-            $leadObj = $db->query($leadSql) or die(mysqli_error());  
+        $dayFlag = FALSE;
+        if ($Days >= 1 && $Days <= 90)
+        {
+
+            $leadObj = $db->query($leadSql) or die(mysqli_error());
         }
         else
         {
-          $dayFlag=TRUE;
-          $error['error']='Please Export Data between 2 months.';  
+            $dayFlag        = TRUE;
+            $error['error'] = 'Please Export Data between 3 months.';
         }
 
-       
+
         while ($row = $db->fetchByAssoc($leadObj))
         {
             $leadList[$row['id']] = $row;
         }
-        
-       if(empty($leadList) && $dayFlag===FALSE){
-           $error['error']="No Data Found.";
-       }
-        
+
+        if (empty($leadList) && $dayFlag === FALSE)
+        {
+            $error['error'] = "No Data Found.";
+        }
+
         if (isset($_POST['export']) && $_POST['export'] == "Export")
-        {   
-            
+        {
+
             $file     = "HeaderWiseLead_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
-            $leadObj      = $db->query($leadSql);
-
-       
-                while ($row          = $db->fetchByAssoc($leadObj))
-                {
-                  $leadList[$row['id']] = $row;
-                }
+            $leadObj = $db->query($leadSql);
 
 
-          
+            while ($row = $db->fetchByAssoc($leadObj))
+            {
+                $leadList[$row['id']] = $row;
+            }
+
+
+
             # Create heading
             $data = "";
             foreach ($ExcelHeaders as $key => $column)
             {
-                $data .=   $column.",";
+                $data .= $column . ",";
             }
             $data .= "\n";
 
@@ -392,14 +398,14 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
 
             foreach ($leadList as $key => $value)
             {
-                
-               
+
+
                 foreach ($selected_headersKey as $key1 => $column)
                 {
-                    
-                    $data      .= $value[$column]."," ;
+
+                    $data .= $value[$column] . ",";
                 }
-               
+
                 $data .= "\n";
             }
 
@@ -409,8 +415,6 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             echo $data;
             exit;
         } // End Of Export Func
-
-
         #PS @Pawan
         $total     = count($leadList); #total records
         $start     = 0;
@@ -460,7 +464,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         #pE
 
         $sugarSmarty = new Sugar_Smarty();
-        
+
         $sugarSmarty->assign("error", $error);
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("headers", $headers);
