@@ -17,11 +17,11 @@ class AOR_ReportsViewImportlead extends SugarView {
 					}
 					return $batchOptions;
 				}
-				public function display() {
+				public function display(){
 					//error_reporting(E_ALL);
 					//ini_set('display_errors', 1);
-					echo "hi";
 					global $db ,$current_user;
+					#Get Exam drop down option
 					$selected_exams = '';
 					$reportDataList=array();
 					$search_date="";
@@ -32,9 +32,9 @@ class AOR_ReportsViewImportlead extends SugarView {
 								$fileCount = count($_FILES['files']['tmp_name']);
 								//echo "<pre>";print_r($_FILES);exit();
 								if($_FILES['files']['name']){
-									$desired_dir="upload/";
-									$target_file = $desired_dir .  date('d_m_Y_H_i_s') . '_'. basename($_FILES["csv_data"]["name"]);
-										$file_tmp =$_FILES['csv_data']['tmp_name'];
+									$desired_dir="upload/lead_import_data/";
+									$target_file = $desired_dir .  date('d_m_Y_H_i_s') . '_'. basename($_FILES["files"]["name"]);
+										$file_tmp =$_FILES['files']['tmp_name'];
 										if(is_dir($desired_dir)==false){
 											 mkdir("$desired_dir", 0700);// Create directory if it does not exist
 										}
@@ -44,7 +44,6 @@ class AOR_ReportsViewImportlead extends SugarView {
 											$file = fopen($target_file,"r");
 											$row = [];
 											while (($data = fgetcsv($file, 1000, ","))!== FALSE) {
-												
 												if(!empty($data[0])){
 													$row[] = $data;
 												}	
@@ -81,22 +80,34 @@ class AOR_ReportsViewImportlead extends SugarView {
 												//echo "<pre>";print_r($arr);print_r($leads_cstm);exit();
 												foreach($arr as $bel=>$bkey){
 												$mainlead=$imploded=implode(',',$bkey); 
-												echo $sql="UPDATE leads SET $mainlead where $bkey[0];";
+												$sql="UPDATE leads SET $mainlead where $bkey[0];";
 												#$GLOBALS['db']->query($sql);
+												$leadtable = $db->query($sql);
 												}
+												if($leadtable){
 												foreach($leads_cstm as $lcstm){
 														$leadscstmimplod=$imploded=implode(',',$lcstm); 
-														echo $sqllstm="UPDATE leads_cstm SET $leadscstmimplod where $lcstm[0];";
+														$sqllstm="UPDATE leads_cstm SET $leadscstmimplod where $lcstm[0];";
 														#$GLOBALS['db']->query($sqllstm);
+														$leadObjcstm = $db->query($sqllstm);
 													}
+												}
+												
+												#fclose($file);
+												//exit();
 												fclose($file);
-												exit();
 											}
+											if($leadObjcstm){
+													echo '<script> alert("You have Successfully Updated CSV Data Thanks !");callPage(); function callPage(){ window.location.href="index.php?module=AOR_Reports&action=importlead"} </script>';
+												exit();
+
+													
+												}
 											else{
 												echo "Error No Record found, for upload";exit();
 											}							
 										}	
-										echo "hello";
+										#echo "hello";
 									}
 								}
 								$sugarSmarty = new Sugar_Smarty();
