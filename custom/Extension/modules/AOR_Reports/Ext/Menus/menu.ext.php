@@ -111,7 +111,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=studentstudykit', "
 $module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "Referal Student Report",'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=feereport', "Fee Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=studentjourney', "Student Journey Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
 }
-
 
 ?>
