@@ -23,12 +23,31 @@ class AOR_ReportsViewStudentcollection extends SugarView {
 	public function display() {
 		global $sugar_config,$app_list_strings,$current_user,$db;
 		 
-		$sql="select pd.invoice_number,pd.invoice_url,pd.invoice_order_number,pd.receipt_url,te_student_payment.date_of_payment,te_pr_programs.name,b.batch_code,s.name as fname,s.state,fee_inr,te_student_payment.amount,te_student_payment.payment_type,te_student_payment.payment_source
-			from te_student_batch b inner join te_student_te_student_batch_1_c r on r.te_student_te_student_batch_1te_student_batch_idb=b.id 
-			inner join te_student s on te_student_te_student_batch_1te_student_ida=s.id 
-				inner join te_pr_programs_te_ba_batch_1_c on b.te_ba_batch_id_c=te_pr_programs_te_ba_batch_1te_ba_batch_idb
-				inner join te_pr_programs on te_pr_programs.id=te_pr_programs_te_ba_batch_1te_pr_programs_ida inner  join te_student_payment 
-			on te_student_payment.te_student_batch_id_c=b.id INNER JOIN te_payment_details AS pd on pd.student_payment_id=te_student_payment.id WHERE te_student_payment.payment_realized=1 and b.deleted=0 and s.deleted=0 and te_student_payment.deleted=0   ";
+		$sql="SELECT pd.invoice_number,
+                        pd.invoice_url,
+                        pd.invoice_order_number,
+                        pd.receipt_url,
+                        te_student_payment.date_of_payment,
+                        te_pr_programs.name,
+                        b.batch_code,
+                        s.name AS fname,
+                        s.state,
+                        bb.fees_inr fee_inr,
+                        te_student_payment.amount,
+                        te_student_payment.payment_type,
+                        te_student_payment.payment_source
+                 FROM te_student_batch b
+                 INNER JOIN te_ba_batch bb ON b.te_ba_batch_id_c= bb.id
+                 INNER JOIN te_student_te_student_batch_1_c r ON r.te_student_te_student_batch_1te_student_batch_idb=b.id
+                 INNER JOIN te_student s ON te_student_te_student_batch_1te_student_ida=s.id
+                 INNER JOIN te_pr_programs_te_ba_batch_1_c ON b.te_ba_batch_id_c=te_pr_programs_te_ba_batch_1te_ba_batch_idb
+                 INNER JOIN te_pr_programs ON te_pr_programs.id=te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                 INNER  JOIN te_student_payment ON te_student_payment.te_student_batch_id_c=b.id
+                 INNER JOIN te_payment_details AS pd ON pd.student_payment_id=te_student_payment.id
+                 WHERE te_student_payment.payment_realized=1
+                   AND b.deleted=0
+                   AND s.deleted=0
+                   AND te_student_payment.deleted=0";
 				
 		if(isset($_POST['batches']) && $_POST['batches']){
 		  $batches=implode(",'",$_POST['batches']);
