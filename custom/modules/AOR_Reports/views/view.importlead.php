@@ -21,6 +21,7 @@ class AOR_ReportsViewImportlead extends SugarView {
 					//error_reporting(E_ALL);
 					//ini_set('display_errors', 1);
 					global $db ,$current_user;
+					$logID=$current_user->id;  
 					#Get Exam drop down option
 					$selected_exams = '';
 					$reportDataList=array();
@@ -33,7 +34,7 @@ class AOR_ReportsViewImportlead extends SugarView {
 								//echo "<pre>";print_r($_FILES);exit();
 								if($_FILES['files']['name']){
 									$desired_dir="upload/lead_import_data/";
-									$target_file = $desired_dir .  date('d_m_Y_H_i_s') . '_'. basename($_FILES["files"]["name"]);
+									$target_file = $desired_dir .  date('d_m_Y_H_i_s').ID.$logID . '_'. basename($_FILES["files"]["name"]);
 										$file_tmp =$_FILES['files']['tmp_name'];
 										if(is_dir($desired_dir)==false){
 											 mkdir("$desired_dir", 0700);// Create directory if it does not exist
