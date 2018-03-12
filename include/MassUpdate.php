@@ -547,6 +547,7 @@ var option = document.getElementById("mass_status").options;
 var status_detail = document.getElementById('mass_status_description').value;
 $("#mass_status option[value='Converted']").hide();
 $("#mass_status option[value='Dropout']").hide();
+$("#mass_status option[value='Duplicate']").hide();
 $("#mass_status_description option").remove() ;
  $('#converted_datejscal_field').parent().css('display','none');
  $('#mass_batch').parent().css('display','none');
@@ -586,7 +587,7 @@ $("#mass_status_description option").remove() ;
 	else if(el.val() === "Warm" ) {
 		$("#mass_status_description option").remove() ;
 
-		 $("#mass_status_description").append('<option value="Re-Enquired">Re-Enquired</option><option value="Prospect">Prospect</option>');
+		 $("#mass_status_description").append('<option value="Prospect">Prospect</option>');
 
 	}
 	else if(el.val() === "Dropout" ) {

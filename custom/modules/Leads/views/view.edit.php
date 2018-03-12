@@ -399,7 +399,7 @@ class LeadsViewEdit extends ViewEdit
                     } else if (el.val() === "Warm") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
-                        $("#status_description").append('<option>Re-Enquired</option>');
+                        //$("#status_description").append('<option>Re-Enquired</option>'); Remove re-enquired status
                         $("#status_description").append('<option>Prospect</option>');
                     } else if (el.val() === "Dropout") {
                         $("#status_description option").remove();

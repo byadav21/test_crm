@@ -516,6 +516,7 @@ var option = document.getElementById("mass_status").options;
 var status_detail = document.getElementById('mass_status_description').value;
 $("#mass_status option[value='Converted']").hide();
 $("#mass_status option[value='Dropout']").hide();
+$("#mass_status option[value='Duplicate']").hide();
 $("#mass_status_description option").remove() ;
 $('#mass_Counsellors').parent().css('display','none');
 $('#mass_country_log').parent().parent().css('display','none');
@@ -552,7 +553,7 @@ $('#mass_country_log').parent().parent().css('display','none');
 	else if(el.val() === "Warm" ) {
 		$("#mass_status_description option").remove() ;
 
-		 $("#mass_status_description").append('<option value="Re-Enquired">Re-Enquired</option><option value="Prospect">Prospect</option>');
+		 $("#mass_status_description").append('<option value="Prospect">Prospect</option>');
 
 	}
 	else if(el.val() === "Dropout" ) {
