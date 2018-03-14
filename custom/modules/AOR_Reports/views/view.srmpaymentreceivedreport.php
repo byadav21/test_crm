@@ -45,7 +45,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
     function getBatch()
     {
         global $db;
-        $batchSql     = "SELECT id,name,batch_code FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
+        //batch_status='enrollment_in_progress' AND   {commented for getting old one alos}
+        $batchSql     = "SELECT id,name,batch_code FROM te_ba_batch WHERE  deleted=0 order by batch_code   ";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
@@ -183,16 +184,16 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
             $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch_code) . "')";
         }
-        if (!empty($selected_counselor))
-        {
+//        if (!empty($selected_counselor))
+//        {
+//
+//            $wherecl .= " AND  sb.assigned_user_id IN ('" . implode("','", $selected_counselor) . "')";
+//        }
 
-            //$wherecl .= " AND  sb.assigned_user_id IN ('" . implode("','", $selected_counselor) . "')";
-        }
-
-        $statusArr = ['alive', 'dead', 'converted', 'warm', 'recycle', 'dropout'];
+        //$statusArr = ['alive', 'dead', 'converted', 'warm', 'recycle', 'dropout'];
 
 
-        echo $leadSql = "SELECT 
+       $leadSql = "SELECT 
                                         s.name student_name,
                                         sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
                                         pd.id paymentID,
@@ -217,18 +218,20 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                     INNER JOIN users u ON sb.assigned_user_id=u.id
                     INNER JOIN leads l ON sb.leads_id=l.id
                     INNER JOIN leads_cstm ON l.id= leads_cstm.id_c
-                    where 1=1 $wherecl  order by s.name";
+                    where 1=1 $wherecl  "
+        #. "  and sprel.`te_student_te_student_payment_1te_student_ida` in ('bda335f8-6fc2-ec04-c89c-597b51ffc691',"
+        #. "'552b0dd5-32e4-f4bb-f583-5980b7e004c6','84d74820-3e47-5197-03f0-597b4f89d168','5bcb4525-cde6-9869-204a-597b58189d8b') "
+        . "order by pd.`date_of_payment`,s.name ";
 
 
 
-        $PaymentsArray=array();
+   
 
         $leadObj = $db->query($leadSql);
+      
         while ($row     = $db->fetchByAssoc($leadObj))
         {
 
-
-            //$paymentList[] = $row;
 
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
@@ -240,104 +243,106 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
 
-            
-            
-            $PaymentsArray[$row['paymentID']]['payment_type']       = $row['payment_type'];
-            $PaymentsArray[$row['paymentID']]['payment_type']       = $row['payment_type'];
-            $PaymentsArray[$row['paymentID']]['reference_number']   = $row['reference_number'];
-            $PaymentsArray[$row['paymentID']]['date_of_payment']    = $row['date_of_payment'];
-            $PaymentsArray[$row['paymentID']]['amount']             = $row['amount'];
-            
-//            $PaymentsArray[$row['student_id'] . '_BATCH_' . $row['batch_id']]['reference_number'][] = $row['reference_number'];
-//            $PaymentsArray[$row['student_id'] . '_BATCH_' . $row['batch_id']]['date_of_payment'][]  = $row['date_of_payment'];
-//            $PaymentsArray[$row['student_id'] . '_BATCH_' . $row['batch_id']]['amount'][]           = $row['amount'];
-            
-            
-            
-            
-            
+
+            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][]    = array(
+                ($row['amount']) ? $row['amount'] : 'N/A',
+                ($row['payment_type']) ? $row['payment_type'] : 'N/A',
+                ($row['reference_number']) ? $row['reference_number'] : 'N/A',
+                ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A'
+                );
             
         }
-//        $MyArr = array();
-//        foreach($PaymentsArray as $key=>$val){
-//            $MyArr=$val;
-//        }
-       echo '<pre>';
-       print_r($PaymentsArray);
 
-       
+        //echo "<pre>";print_r($paymentList);exit();
+  
 
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
-            $file     = "CounselorWiseStatus_report";
+            $file     = "SrmPaymentReceived_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
-
-
-            //echo $leadSql;exit();
-
+            $paymentList = array();
 
             $leadObj = $db->query($leadSql);
 
-
-            $vendor = 'NULL';
-
-            while ($row = $db->fetchByAssoc($leadObj))
+           while ($row     = $db->fetchByAssoc($leadObj))
             {
 
-                $paymentList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                 = $row['batch_id'];
-                $paymentList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']               = $row['batch_name'];
-                $paymentList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_code']               = $row['batch_code'];
-                $paymentList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']            = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['name'] : 'NA';
-                $paymentList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['reporting_user']           = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
-                $paymentList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']][strtolower($row['status'])] = $row['lead_count'];
-            }
-            foreach ($paymentList as $key => $val)
-            {
-                $total = 0;
-                foreach ($statusArr as $value)
-                {
-                    $countedLead = (!empty($paymentList[$key][$value]) ? $paymentList[$key][$value] : 0);
-                    $total       += $countedLead;
-                }
-                $paymentList[$key]['total'] = $total;
-            }
 
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
+
+
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][]    = array(
+                    ($row['amount']) ? $row['amount'] : 'N/A',
+                    ($row['payment_type']) ? $row['payment_type'] : 'N/A',
+                    ($row['reference_number']) ? $row['reference_number'] : 'N/A',
+                    ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A'
+                    );
+
+            }
+            //echo "<pre>";print_r($paymentList);exit();
             # Create heading
-            $data = "Counsellor Name";
-            $data .= "Reporting Manager";
-            $data .= "Batch Name";
+            $data = "Batch Name";
             $data .= ",Batch Code";
-            $data .= ",Total";
-            foreach ($statusArr as $statusVal)
-            {
-                $data .= "," . ucfirst($statusVal);
-            }
+            $data .= ",Name";
+            $data .= ",Email ID";
+            $data .= ",Phone Number";
+            
+            $data .= ",Registration amount received";
+            $data .= ",Mode";
+            $data .= ",Receipt number";
+            $data .= ",Date of receipt";
+            
+            $data .= ",Instalment 1 amount received";
+            $data .= ",Mode";
+            $data .= ",Receipt number";
+            $data .= ",Date of receipt";
+            
+            $data .= ",Instalment 2 amount received";
+            $data .= ",Mode";
+            $data .= ",Receipt number";
+            $data .= ",Date of receipt";
+            
+            
+//            foreach ($statusArr as $statusVal)
+//            {
+//                $data .= "," . ucfirst($statusVal);
+//            }
+            
             $data .= "\n";
 
 
 
-            //echo "<pre>";print_r($paymentList);exit();
-            foreach ($paymentList as $key => $councelor)
+            
+            foreach ($paymentList as $key => $datax)
             {
-                $data .= "\"" . $councelor['assigned_user'];
-                $data .= "\"" . $councelor['reporting_user'];
-                $data .= "\"" . $councelor['batch_name'];
-                $data .= "\",\"" . $councelor['batch_code'];
-
-
-                $data .= "\",\"" . $councelor['total'];
-                $data .= "\",\"" . (!empty($councelor['alive']) ? $councelor['alive'] : 0);
-                $data .= "\",\"" . (!empty($councelor['dead']) ? $councelor['dead'] : 0);
-                $data .= "\",\"" . (!empty($councelor['converted']) ? $councelor['converted'] : 0);
-                $data .= "\",\"" . (!empty($councelor['warm']) ? $councelor['warm'] : 0);
-                $data .= "\",\"" . (!empty($councelor['recycle']) ? $councelor['recycle'] : 0);
-                $data .= "\",\"" . (!empty($councelor['dropout']) ? $councelor['dropout'] : 0);
+                $data .= "\"" . $datax['batch_name'];
+                $data .= "\",\"" . $datax['batch_code'];
+                $data .= "\",\"" . $datax['student_name'];
+                $data .= "\",\"" . $datax['student_email'];
+                $data .= "\",\"" . $datax['phone_mobile'];
+                
+                foreach ($datax['installment'] as $key => $value)
+                {
+                     foreach ($value as $key => $valY){
+                            $data .= "\",\"" .$valY;
+                          //$data .= $val . ",";
+                     }
+                }
+                
                 $data .= "\"\n";
             }
-
+            
             ob_end_clean();
             header("Content-type: application/csv");
             header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
@@ -395,8 +400,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
         $sugarSmarty = new Sugar_Smarty();
 
-        $sugarSmarty->assign("paymentList", $paymentList); 
-        $sugarSmarty->assign("PaymentsArray", $PaymentsArray); 
+        $sugarSmarty->assign("paymentList", $paymentList);
+        $sugarSmarty->assign("PaymentsArray", $PaymentsArray);
         $sugarSmarty->assign("BatchListData", $BatchListData);
         $sugarSmarty->assign("CounselorList", $usersdd);
         $sugarSmarty->assign("selected_batch", $selected_batch);

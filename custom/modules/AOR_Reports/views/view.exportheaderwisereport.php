@@ -171,6 +171,15 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         {
             $selected_source = $_SESSION['cccon_source'];
         }
+        if (!empty($_SESSION['cccon_status']))
+        {
+            $selected_status = $_SESSION['cccon_status'];
+        }
+        
+        if (!empty($_SESSION['cccon_status_description']))
+        {
+            $selected_status_description = $_SESSION['cccon_status_description'];
+        }
 
         $leadList   = array();
         $StatusList = array();
@@ -209,12 +218,12 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         if ($_SESSION['cccon_status'] != "")
         {
             $selected_status = $_SESSION['cccon_status'];
-            $wherecl         .= " AND  leads.status ='" . $selected_status . "'";
+            $wherecl         .= " AND  leads.status IN ('" . implode("','", $selected_status) . "')";
         }
         if ($_SESSION['cccon_status_description'] != "")
         {
             $selected_status_description = $_SESSION['cccon_status_description'];
-            $wherecl                     .= " AND  leads.status_description ='" . $selected_status_description . "'";
+            $wherecl                     .= " AND  leads.status_description IN ('" . implode("','", $selected_status_description) . "')";
         }
         if ($_SESSION['cccon_lead_source_types'] != "")
         {
@@ -258,6 +267,8 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads.date_modified'                 => 'Date Modified',
             'leads.converted_date'                => 'Converted Date',
             'leads_cstm.temp_lead_date_c'         => 'Temp Lead Date',
+            'leads.date_of_followup'              => 'Date of Followup',
+            'leads.date_of_prospect'         => 'Date of Prospect',
             'leads.status'                        => 'Status',
             'leads.status_description'            => 'Status Description',
             'leads.lead_source'                   => 'Lead Source',
@@ -289,7 +300,9 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads.dristi_campagain_id'           => 'Campagain ID',
             'leads.dristi_API_id'                 => 'API_id (LeadID)',
             'leads.neoxstatus'                    => 'Ameyo Status',
-            'leads.deleted'                       => 'Deleted');
+            'leads.deleted'                       => 'Deleted',
+            'leads.comment'                       => 'Comment',
+            'leads.note'                       => 'Note');
 
         $StatusDetails = array(
             'Follow Up'              => 'Follow Up',
@@ -319,7 +332,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         }
 
         $Days = $this->getBetweenDays($_SESSION['cccon_from_date'], $_SESSION['cccon_to_date']);
-
+        
         $leadSql = "SELECT 
                        $IDs
                        $headersss
@@ -330,9 +343,11 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
                 LEFT JOIN `email_addr_bean_rel` eabr ON  leads.id=eabr.bean_id
                 LEFT JOIN `email_addresses` ed ON eabr.`email_address_id`=ed.id
                 LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
-                where 1=1 $wherecl  ";
-
-        //echo ($leadSql);
+                where leads.deleted=0  $wherecl  ";
+       
+       $dayFlag = FALSE;
+      
+        //echo ($leadSql); die;
         $ExcelHeaders        = array();
         $selected_headersKey = array();
         foreach ($selected_headers as $key => $val)
@@ -345,8 +360,12 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $selected_headersKey[$val] = substr($val, strpos($val, ".") + 1);
         }
         //print_r($ExcelHeaders); die;
-        $dayFlag = FALSE;
-        if ($Days >= 1 && $Days <= 90)
+        
+        //echo '---'.$Days;
+       
+        //echo $error['error'] ;
+        //die;
+        if ($Days >= 0 && $Days <= 93 && $wherecl!='')
         {
 
             $leadObj = $db->query($leadSql) or die(mysqli_error());
@@ -374,6 +393,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $file     = "HeaderWiseLead_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
+            $leadList = array();
 
             $leadObj = $db->query($leadSql);
 
@@ -477,6 +497,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $sugarSmarty->assign("VendorListData", $VendorListData);
         $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->assign("selected_batch", $selected_batch);
+         $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
