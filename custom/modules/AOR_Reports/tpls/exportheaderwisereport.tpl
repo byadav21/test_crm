@@ -40,7 +40,7 @@
                             <select name="batch_code[]" id="batch_code"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$BatchListData key=key item=program}
 
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.batch_code}</option>
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch_code)} selected="selected"{/if}>{$program.batch_code}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -51,20 +51,33 @@
                             <label for="status">Status:</label>
                         </td>
                         <td nowrap="nowrap" >
-                            <select name="status" id="status" title="">
+                            <select name="status[]" class="multiselbox" multiple style="width:180px !important; height: 70px !important;" id="status" title="">
 
-                                <option label="" value="" {if isset($selected_status) && $selected_status == ''} selected="selected {/if}>Select</option>
-                                        <option label="Alive"  {if isset($selected_status) && $selected_status == 'Alive'} selected="selected {/if}>Alive</option>
-                                <option label="Converted" value="Converted" {if isset($selected_status) && $selected_status == 'Converted'} selected="selected {/if}>Converted</option>
-                                        <option label="Dead" value="Dead" {if isset($selected_status) && $selected_status == 'Dead'} selected="selected {/if}>Dead</option>
-                                <option label="Duplicate" value="Duplicate" {if isset($selected_status) && $selected_status == 'Duplicate'} selected="selected {/if}>Duplicate</option>
-                                        <option label="Dropout" value="Dropout" {if isset($selected_status) && $selected_status == 'Dropout'} selected="selected {/if}>Dropout</option>
-                                <option label="Warm" value="Warm" {if isset($selected_status) && $selected_status == 'Warm'} selected="selected {/if}>Warm</option>
-                                        <option label="Recycle" value="Recycle" {if isset($selected_status) && $selected_status == 'Recycle'} selected="selected {/if}>Recycle</option>
+                                <option label="" value="" {if in_array("", $selected_status)} selected="selected"{/if}>Select</option>
+                                        <option label="Alive"  {if in_array("Alive", $selected_status)} selected="selected"{/if}>Alive</option>
+                                <option label="Converted" value="Converted" {if in_array("Converted", $selected_status)} selected="selected"{/if}>Converted</option>
+                                        <option label="Dead" value="Dead" {if in_array("Dead", $selected_status)} selected="selected"{/if}>Dead</option>
+                                <option label="Duplicate" value="Duplicate" {if in_array("Duplicate", $selected_status)} selected="selected"{/if}>Duplicate</option>
+                                        <option label="Dropout" value="Dropout" {if in_array("Dropout", $selected_status)} selected="selected"{/if}>Dropout</option>
+                                <option label="Warm" value="Warm" {if in_array("Warm", $selected_status)} selected="selected"{/if}>Warm</option>
+                                        <option label="Recycle" value="Recycle" {if in_array("Recycle", $selected_status)} selected="selected"{/if}>Recycle</option>
+                            </select>
+                        </td>
+                        
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Status Description">Status Details:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="status_description[]" class="multiselbox" multiple style="width:180px !important; height: 70px !important;" id="status_description">
+                                <option value="" {if isset($selected_status_description) && $selected_status_description ==''} selected="selected" {/if}>Select</option>
+                                {foreach from =$StatusDetails key=key item=val}
+
+                                    <option value="{$key}"{if in_array($StatusDetails.$key, $selected_status_description)} selected="selected"{/if}>{$val}</option>
+                                {/foreach}
                             </select>
                         </td>
 
-                        <td scope="row" nowrap="nowrap" width="1%">
+                       {* <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Source">Source:</label>
                         </td>
                         <td nowrap="nowrap" >
@@ -75,7 +88,7 @@
                                     <option value="{$key}" {if in_array($key, $selected_source)} selected="selected"{/if}>{$type}</option>
                                 {/foreach}
                             </select>
-                        </td>
+                        </td>*}
                     </tr>
 
                     <tr>

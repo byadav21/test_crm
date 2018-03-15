@@ -98,7 +98,10 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=leadsfeedbackreport
 $module_menu[] = array ('index.php?module=AOR_Reports&action=leadperformancereport', "Leads Performance Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyuploadreport', "Upload Report", 'AOR_Reports');
 
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
+if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1){
+$module_menu[] = array ('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
+}
+
 }
 # SRM REPORTS #
 if( $current_user->is_admin==1 || $displayMis || $displaySRM){
@@ -112,6 +115,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "R
 $module_menu[] = array ('index.php?module=AOR_Reports&action=feereport', "Fee Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=studentjourney', "Student Journey Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
 }
 
 ?>
