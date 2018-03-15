@@ -193,7 +193,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         //$statusArr = ['alive', 'dead', 'converted', 'warm', 'recycle', 'dropout'];
 
 
-       $leadSql = "SELECT 
+        $leadSql = "SELECT 
                                         s.name student_name,
                                         sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
                                         pd.id paymentID,
@@ -211,14 +211,14 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                                         pd.`payment_type`
 
                             FROM `te_student_payment` sp
-                    INNER JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
-                    INNER JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c 
-                    INNER JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
-                    INNER JOIN te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id
-                    INNER JOIN users u ON sb.assigned_user_id=u.id
-                    INNER JOIN leads l ON sb.leads_id=l.id
-                    INNER JOIN leads_cstm ON l.id= leads_cstm.id_c
-                    where 1=1 $wherecl  "
+                    LEFT JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
+                    LEFT JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c 
+                    LEFT JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
+                    LEFT JOIN te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id
+                    LEFT JOIN users u ON sb.assigned_user_id=u.id
+                    LEFT JOIN leads l ON sb.leads_id=l.id
+                    LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
+                    where l.deleted=0 $wherecl  "
         #. "  and sprel.`te_student_te_student_payment_1te_student_ida` in ('bda335f8-6fc2-ec04-c89c-597b51ffc691',"
         #. "'552b0dd5-32e4-f4bb-f583-5980b7e004c6','84d74820-3e47-5197-03f0-597b4f89d168','5bcb4525-cde6-9869-204a-597b58189d8b') "
         . "order by pd.`date_of_payment`,s.name ";

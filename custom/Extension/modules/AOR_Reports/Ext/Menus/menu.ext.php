@@ -114,7 +114,9 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=studentstudykit', "
 $module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "Referal Student Report",'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=feereport', "Fee Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=studentjourney', "Student Journey Report", 'AOR_Reports');
+if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1){
 $module_menu[] = array ('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
+}
 $module_menu[] = array ('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
 }
 
