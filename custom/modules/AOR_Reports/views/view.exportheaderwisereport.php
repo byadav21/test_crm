@@ -175,7 +175,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         {
             $selected_status = $_SESSION['cccon_status'];
         }
-        
+
         if (!empty($_SESSION['cccon_status_description']))
         {
             $selected_status_description = $_SESSION['cccon_status_description'];
@@ -268,7 +268,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads.converted_date'                => 'Converted Date',
             'leads_cstm.temp_lead_date_c'         => 'Temp Lead Date',
             'leads.date_of_followup'              => 'Date of Followup',
-            'leads.date_of_prospect'         => 'Date of Prospect',
+            'leads.date_of_prospect'              => 'Date of Prospect',
             'leads.status'                        => 'Status',
             'leads.status_description'            => 'Status Description',
             'leads.lead_source'                   => 'Lead Source',
@@ -302,7 +302,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads.neoxstatus'                    => 'Ameyo Status',
             'leads.deleted'                       => 'Deleted',
             'leads.comment'                       => 'Comment',
-            'leads.note'                       => 'Note');
+            'leads.note'                          => 'Note');
 
         $StatusDetails = array(
             'Follow Up'              => 'Follow Up',
@@ -332,7 +332,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         }
 
         $Days = $this->getBetweenDays($_SESSION['cccon_from_date'], $_SESSION['cccon_to_date']);
-        
+
         $leadSql = "SELECT 
                        $IDs
                        $headersss
@@ -344,9 +344,9 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
                 LEFT JOIN `email_addresses` ed ON eabr.`email_address_id`=ed.id
                 LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
                 where leads.deleted=0  $wherecl  ";
-       
-       $dayFlag = FALSE;
-      
+
+        $dayFlag = FALSE;
+
         //echo ($leadSql); die;
         $ExcelHeaders        = array();
         $selected_headersKey = array();
@@ -360,12 +360,10 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $selected_headersKey[$val] = substr($val, strpos($val, ".") + 1);
         }
         //print_r($ExcelHeaders); die;
-        
         //echo '---'.$Days;
-       
         //echo $error['error'] ;
         //die;
-        if ($Days >= 0 && $Days <= 93 && $wherecl!='')
+        if ($Days >= 0 && $Days <= 93 && $wherecl != '')
         {
 
             $leadObj = $db->query($leadSql) or die(mysqli_error());
@@ -394,8 +392,9 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
             $leadList = array();
-
-            $leadObj = $db->query($leadSql);
+            global $current_user;
+            global $db;
+            $leadObj  = $db->query($leadSql);
 
 
             while ($row = $db->fetchByAssoc($leadObj))
@@ -428,6 +427,16 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
 
                 $data .= "\n";
             }
+
+            $leadCount    = count($leadList);
+            $userName     = $current_user->user_name;
+            $userID       = $current_user->id;
+            $ExportRecord = array('user_name' => $userName, 'user_id' => $userID, 'Lead_Count' => $leadCount, 'from_date' => $from_date, 'to_date' => $to_date, 'Headers' => array_values($ExcelHeaders));
+
+
+
+            $sql = "insert into data_export_log set  date_entered='" . date('Y-m-d H:i:s') . "',user_name='" . $userName . "',data_record='" . json_encode($ExportRecord) . "'";
+            $db->query($sql);
 
             ob_end_clean();
             header("Content-type: application/csv");
@@ -497,7 +506,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $sugarSmarty->assign("VendorListData", $VendorListData);
         $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->assign("selected_batch", $selected_batch);
-         $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
+        $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
