@@ -431,7 +431,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $leadCount    = count($leadList);
             $userName     = $current_user->user_name;
             $userID       = $current_user->id;
-            $ExportRecord = array('user_name' => $userName, 'user_id' => $userID, 'Lead_Count' => $leadCount, 'from_date' => $from_date, 'to_date' => $to_date, 'Headers' => array_values($ExcelHeaders));
+            $ExportRecord = array('user_name' => $userName, 'user_id' => $userID, 'Lead_Count' => $leadCount, 'from_date' => $from_date, 'to_date' => $to_date, 'Headers' => array_values($ExcelHeaders),'selected_batch'=>$selected_batch,'selected_batch_code'=>$selected_batch_code,'selected_vendor'=>$selected_vendor,'selected_status'=>$selected_status,'selected_status_description'=>$selected_status_description);
 
 
 
