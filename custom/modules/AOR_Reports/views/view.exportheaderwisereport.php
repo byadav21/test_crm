@@ -435,7 +435,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
 
 
 
-            $sql = "insert into data_export_log set  date_entered='" . date('Y-m-d H:i:s') . "',user_name='" . $userName . "',data_record='" . json_encode($ExportRecord) . "'";
+            $sql = "insert into data_export_log set  source='Export tool',date_entered='" . date('Y-m-d H:i:s') . "',user_name='" . $userName . "',data_record='" . json_encode($ExportRecord) . "'";
             $db->query($sql);
 
             ob_end_clean();
