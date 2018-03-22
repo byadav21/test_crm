@@ -113,8 +113,8 @@ class sendVisitReport
         fclose($fp);
         chmod($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", 0777);
 
-        ///var/www/htmlVendorWiseReport_report_2018-01-22.csv
-        $emailData = $mail->TestemailData('Vendor Wise Status Report', $filename, $this->toDate);
+        //var/www/htmlVendorWiseReport_report_2018-01-22.csv
+        $emailData = $mail->emailData('Vendor Wise Status Report', $filename, $this->toDate);
         $mail->sendCertificateEmail($emailData);
     }
 
