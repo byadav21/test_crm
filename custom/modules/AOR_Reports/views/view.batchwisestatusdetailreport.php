@@ -14,44 +14,56 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
     {
         parent::SugarView();
     }
-    
-    
-    function getBatch(){
-		global $db;
-		$batchSql="SELECT id,name,batch_code FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
-		$batchObj =$db->query($batchSql);
-		$batchOptions=array();
-		while($row =$db->fetchByAssoc($batchObj)){
-			$batchOptions[]=$row;
-		}
-		return $batchOptions;
-	}
-	function getProgram(){
-		global $db;
-		$proSql="SELECT id,name FROM te_pr_programs WHERE deleted=0";
-		$pro_Obj =$db->query($proSql);
-		$pro_Options=array();
-		while($row =$db->fetchByAssoc($pro_Obj)){
-			$pro_Options[]=$row;
-		}
-		return $pro_Options;
-	}
-        
+
+    function getBatch()
+    {
+        global $db;
+        $batchSql     = "SELECT id,name,batch_code FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+            $batchOptions[] = $row;
+        }
+        return $batchOptions;
+    }
+
+    function getProgram()
+    {
+        global $db;
+        $proSql      = "SELECT id,name FROM te_pr_programs WHERE deleted=0";
+        $pro_Obj     = $db->query($proSql);
+        $pro_Options = array();
+        while ($row         = $db->fetchByAssoc($pro_Obj))
+        {
+            $pro_Options[] = $row;
+        }
+        return $pro_Options;
+    }
+
+    function clean($string)
+    {
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+        return preg_replace('/[^A-Za-z0-9-]/', '', $string); // Removes special chars.
+    }
 
     public function display()
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-        $where                       = "";
-        $wherecl                     = "";
-        $BatchListData = $this->getBatch();
+        $where             = "";
+        $wherecl           = "";
+        $BatchListData     = $this->getBatch();
         $ProgrammeListData = $this->getProgram();
-        
-        if(!isset($_SESSION['cccon_from_date'])){
+
+        if (!isset($_SESSION['cccon_from_date']))
+        {
             $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
         }
-        if(!isset($_SESSION['cccon_to_date'])){
+        if (!isset($_SESSION['cccon_to_date']))
+        {
             $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
         }
         if (isset($_POST['button']) || isset($_POST['export']))
@@ -60,7 +72,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
             $_SESSION['cccon_counsellor'] = $_REQUEST['counsellor'];
             $_SESSION['cccon_batch']      = $_REQUEST['batch'];
-			$_SESSION['cccon_program']      = $_REQUEST['program'];
+            $_SESSION['cccon_program']    = $_REQUEST['program'];
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
             $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
             $_SESSION['cccon_medium_val'] = $_REQUEST['medium_val'];
@@ -72,7 +84,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             $selected_to_date   = $_SESSION['cccon_to_date'];
             $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
             $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-           $wherecl            .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
+            $wherecl            .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
         }
         elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
         {
@@ -96,19 +108,20 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             $selected_batch = $_SESSION['cccon_batch'];
             //$batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
-		if(!empty($_SESSION['cccon_program'])){
-			$selected_program = $_SESSION['cccon_program'];
-		}
+        if (!empty($_SESSION['cccon_program']))
+        {
+            $selected_program = $_SESSION['cccon_program'];
+        }
         if (!empty($_SESSION['cccon_batch_code']))
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
             //$batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
-        
+
         $programList = array();
         $StatusList  = array();
-		
-		if (!empty($selected_program))
+
+        if (!empty($selected_program))
         {
 
             $wherecl .= " AND  p.id IN ('" . implode("','", $selected_program) . "')";
@@ -123,47 +136,50 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
-		
-		$StatusList['new_lead']     = 'New Lead';
-		$StatusList['follow_up']     = 'Follow-Up';
-		$StatusList['call_back']     = 'Call-back';
-		$StatusList['dead_number']     = 'Dead Number';
-		$StatusList['fallout']     = 'Fallout';
-		$StatusList['not_eligible']     = 'Not Eligible';
-		$StatusList['not_enquired']     = 'Not Enquired';
-		$StatusList['retired']     = 'Retired';
-		$StatusList['ringing_multiple_times']     = 'Ringing Multiple Times';
-		$StatusList['wrong_number']     = 'Wrong Number';
-		$StatusList['converted']     = 'Converted';
-		$StatusList['prospect']     = 'Prospect';
-		$StatusList['re_enquired']     = 'Re-Enquired';
-		$StatusList['recycle']     = 'Recycle';
-		$StatusList['dropout']     = 'Dropout';
-		$StatusList['duplicate']     = 'Duplicate';
-		$StatusList['na']     = 'NA';
-		
+
+        $StatusList['new_lead']               = 'New Lead';
+        $StatusList['follow_up']              = 'Follow-Up';
+        $StatusList['call_back']              = 'Call-back';
+        $StatusList['dead_number']            = 'Dead Number';
+        $StatusList['fallout']                = 'Fallout';
+        $StatusList['not_eligible']           = 'Not Eligible';
+        $StatusList['not_enquired']           = 'Not Enquired';
+        $StatusList['retired']                = 'Retired';
+        $StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
+        $StatusList['wrong_number']           = 'Wrong Number';
+        $StatusList['converted']              = 'Converted';
+        $StatusList['prospect']               = 'Prospect';
+        $StatusList['re_enquired']            = 'Re-Enquired';
+        $StatusList['recycle']                = 'Recycle';
+        $StatusList['dropout']                = 'Dropout';
+        $StatusList['duplicate']              = 'Duplicate';
+        $StatusList['na']                     = 'NA';
+        
+           $leadSql = "SELECT COUNT(l.id) AS lead_count,
+                                l.date_entered,
+                                IF(te_ba_batch.id IS NULL,'NA',te_ba_batch.id) AS batch_id,
+                                IF(te_ba_batch.name IS NULL,'NA',te_ba_batch.name) AS batch_name,
+                                IF(te_ba_batch.batch_code IS NULL,'NA',te_ba_batch.batch_code) AS batch_code,
+                                #IF(p.name IS NULL,'NA',p.name) AS program_name,
+                                IF(l.status_description IS NULL
+                                   OR l.status_description ='', 'NA', l.status_description) AS status_description
+                         FROM leads l
+                         INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
+                         LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+                         #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
+                         #LEFT JOIN te_pr_programs AS p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                         WHERE l.deleted=0 $wherecl
+                         GROUP BY l.status_description,
+                                  te_ba_batch.id";
+          
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
-            $file     = "BatchWiseDetailStatis_report";
+            $file     = "BatchWiseDetailStatus_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
-            $leadSql = "SELECT COUNT(l.id) AS lead_count,
-                    l.date_entered,
-                    IF(te_ba_batch.id IS NULL,'NA',te_ba_batch.id) AS batch_id,
-					IF(te_ba_batch.name IS NULL,'NA',te_ba_batch.name) AS batch_name,
-					IF(te_ba_batch.batch_code IS NULL,'NA',te_ba_batch.batch_code) AS batch_code,
-					IF(p.name IS NULL,'NA',p.name) AS program_name,
-					IF(l.status_description IS NULL OR l.status_description ='',  'NA', l.status_description) AS status_description                   
-                FROM leads l
-                INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
-                LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
-				LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-				LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-                 WHERE l.deleted=0
-                   $wherecl
-              GROUP BY l.status_description,te_ba_batch.id";
+          
             //echo $leadSql;exit();
 
 
@@ -174,21 +190,21 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             {
 
 
-                $programList[$row['batch_id']]['id']         = $row['batch_id'];
-				$programList[$row['batch_id']]['name']       = $row['batch_name'];
-				$programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-				$programList[$row['batch_id']]['program_name'] = $row['program_name'];
+                $programList[$row['batch_id']]['id']           = $row['batch_id'];
+                $programList[$row['batch_id']]['name']         = $this->clean($row['batch_name']);
+                $programList[$row['batch_id']]['batch_code']   = $row['batch_code'];
+                #$programList[$row['batch_id']]['program_name'] = $this->clean($row['program_name']);
 
 
-				
-				$programList[$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
+
+                $programList[$row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
             }
 
 
 
             # Create heading
-            $data = "Programme Name";
-			$data .= ",Batch Name";
+            #$data = "Programme Name";
+            $data = "Batch Name";
             $data .= ",Batch Code";
             foreach ($StatusList as $key => $statusVal)
             {
@@ -202,15 +218,15 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
             foreach ($programList as $key => $councelor)
             {
-                $data .= "\"" . $councelor['program_name'];
-				$data .= "\",\"" . $councelor['name'];
+                $data .= "\"" .  $this->clean($councelor['name']);
+                #$data .= "\",\"" . $councelor['name'];
                 $data .= "\",\"" . $councelor['batch_code'];
-                $toal=0;
+                $toal = 0;
                 foreach ($StatusList as $key1 => $value)
                 {
-                    $countedLead = (!empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
-                    $data      .= "\",\"" . $countedLead;
-                    $toal      += $countedLead;
+                    $countedLead = (!empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                    $data        .= "\",\"" . $countedLead;
+                    $toal        += $countedLead;
                 }
                 $data .= "\",\"" . $toal;
                 $data .= "\"\n";
@@ -225,29 +241,6 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
 
 
-
-
-
-
-
-        $leadSql = "SELECT COUNT(l.id) AS lead_count,
-                    l.date_entered,
-                    IF(te_ba_batch.id IS NULL,'NA',te_ba_batch.id) AS batch_id,
-					IF(te_ba_batch.name IS NULL,'NA',te_ba_batch.name) AS batch_name,
-					IF(te_ba_batch.batch_code IS NULL,'NA',te_ba_batch.batch_code) AS batch_code,
-					IF(p.name IS NULL,'NA',p.name) AS program_name,
-					IF(l.status_description IS NULL OR l.status_description ='',  'NA', l.status_description) AS status_description                   
-                FROM leads l
-                INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
-                LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
-				LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-				LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-                 WHERE l.deleted=0
-                   $wherecl
-              GROUP BY l.status_description,te_ba_batch.id";
-        //echo $leadSql;exit();
-
-
         $leadObj = $db->query($leadSql);
 
 
@@ -255,19 +248,18 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         {
 
 
-            $programList[$row['batch_id']]['id']         = $row['batch_id'];
-            $programList[$row['batch_id']]['name']       = $row['batch_name'];
-            $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-			$programList[$row['batch_id']]['program_name'] = $row['program_name'];
+            $programList[$row['batch_id']]['id']           = $row['batch_id'];
+            $programList[$row['batch_id']]['name']         = $row['batch_name'];
+            $programList[$row['batch_id']]['batch_code']   = $row['batch_code'];
+            #$programList[$row['batch_id']]['program_name'] = $row['program_name'];
 
 
-            
-            $programList[$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
-           
+
+            $programList[$row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
         }
 
 
-        
+
         $total     = count($programList); #total records
         $start     = 0;
         $per_page  = 60;
@@ -313,12 +305,12 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         {
             $current = "(" . ($start + 1) . "-" . count($programList) . " of " . $total . ")";
         }
-		
+
         $sugarSmarty = new Sugar_Smarty();
 
         $sugarSmarty->assign("programList", $programList);
 
-        
+
         $sugarSmarty->assign("BatchListData", $BatchListData);
         $sugarSmarty->assign("ProgrammeListData", $ProgrammeListData);
         $sugarSmarty->assign("StatusList", $StatusList);
