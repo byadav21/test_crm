@@ -52,6 +52,7 @@ class eloqua_contact
 
             $contact = $contact = array(
                 'type'        => 'CustomObjectData',
+		'contactId'   =>$contactId,
                 'fieldValues' =>
                 array(
                     0  => array('id' => '150', 'value' => $bean->email_add_c),
