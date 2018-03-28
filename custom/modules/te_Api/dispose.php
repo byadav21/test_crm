@@ -21,7 +21,7 @@ $objapi= new te_Api_override();
 if(isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId']){
 
  $objapi->createLog(print_r($_REQUEST,true),'disposeamyo',$_REQUEST);   
-	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']=='NO_ANSWER' && $_REQUEST['lead_reference'] ){
+	if( $_REQUEST['callType']=='auto.dial.customer' && $_REQUEST['dispositionName']!='CONNECTED' && $_REQUEST['lead_reference'] ){
 				
 				$sql="select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='". $_REQUEST['lead_reference'] ."'";
 				$res=$db->query($sql);
