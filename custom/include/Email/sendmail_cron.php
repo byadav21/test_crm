@@ -80,12 +80,13 @@ class FalconideEmail
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                'ritika.nayak@talentedge.in','eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
-                'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
-                'vaibhav.gupta@talentedge.in',
+                'ritika.nayak@talentedge.in',
+                //'eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
+                //'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
+                
                 //Marketing Team :
                 'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in',
+                'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in','vaibhav.gupta@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in'
                 ),

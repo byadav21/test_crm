@@ -61,18 +61,18 @@ class sendDailyJunkLead
 		//'pawan.kumar@talentedge.in','pritam.dutta@talentedge.in','ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','pramod.singh@talentedge.in'
 //		$to = array('pawan.kumar@talentedge.in','pritam.dutta@talentedge.in','ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','pramod.singh@talentedge.in','deepak.sharma@talentedge.in','vivek.bathla@talentedge.in','sreedevi.sreekumar@talentedge.in');
                 $to = array(
-                'pawan.kumar@talentedge.in'
-                ,'pritam.dutta@talentedge.in',
+                'pawan.kumar@talentedge.in','pritam.dutta@talentedge.in',
                 'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in',
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                'ritika.nayak@talentedge.in','eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
-                'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
-                'vaibhav.gupta@talentedge.in',
+                'ritika.nayak@talentedge.in','deepak.yadav@talentedge.in',
+                #'eleazer.rohit@talentedge.in', 
+                #'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
+                
                 //Marketing Team :
                 'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in',
+                'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in','vaibhav.gupta@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in');
         $emailData = $mail->cron_email_Data('Daily Junk Lead Data', $filename, $this->toDate,$to,$email_summary);

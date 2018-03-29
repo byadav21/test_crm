@@ -120,7 +120,23 @@ class sendVisitReport
         chmod($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", 0777);
 
         ///var/www/htmlVendorWiseReport_report_2018-01-22.csv
-        $emailData = $mail->emailData('Vendor Wise Sub Status Detail Report', $filename, $this->toDate);
+        $to = array(
+                'pawan.kumar@talentedge.in'
+                ,'pritam.dutta@talentedge.in',
+                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in',
+                //B Head
+                //'sreedevi.sreekumar@talentedge.in',
+                //CC Team:
+                //'ritika.nayak@talentedge.in','eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
+                //'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
+                
+                //Marketing Team :
+                'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
+                'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in','vaibhav.gupta@talentedge.in',
+                //BA Team :
+                'duke.banerjee@talentedge.in');
+        $emailData = $mail->cron_email_Data('Vendor Wise Sub Status Detail Report', $filename, $this->toDate,$to,$email_summary);
+        //$emailData = $mail->emailData('Vendor Wise Sub Status Detail Report', $filename, $this->toDate);
         $mail->sendCertificateEmail($emailData);
     }
 
