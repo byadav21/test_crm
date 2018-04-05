@@ -53,8 +53,6 @@ array (
       array (
         0 => 
         array (
-          0 => '',
-          1 => '',
         ),
         1 => 
         array (
@@ -133,6 +131,13 @@ array (
           array (
             'name' => 'user_access_type',
             'label' => 'LBL_USERTYPE',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'te_vendor_users_1_name',
           ),
         ),
       ),
