@@ -599,6 +599,11 @@ class addPaymentClass
         global $db;
 
         $bean->email_add_c=$bean->email1;
+        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
+        {
+		    $bean->lead_source='OO'.'_'.strtoupper($_SESSION['user_cp_vendor']['vendor']);;
+			 $bean->lead_source_types='OO';        
+        }
         // Capture the date of referral creation
         if (isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']))
         {

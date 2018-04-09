@@ -6,7 +6,8 @@ $hook_array = Array();
 // position, file, function 
 $hook_array['after_login'] = Array(); 
 $hook_array['after_login'][] = Array(1, 'SugarFeed old feed entry remover', 'modules/SugarFeed/SugarFeedFlush.php','SugarFeedFlush', 'flushStaleEntries'); 
-//$hook_array['after_login'][] = Array(2, 'Login to the Neox sytem ','custom/modules/Users/neoxLogin.php','neoxLogin', 'neoxLoginFunc'); 
+//$hook_array['after_login'][] = Array(2, 'Login to the Neox sytem ','custom/modules/Users/neoxLogin.php','neoxLogin', 'neoxLoginFunc');
+$hook_array['after_login'][] = Array(2, 'Logged in user vendor id', 'custom/modules/Users/userHook.php','UserHook', 'checkUserVendors'); 
 
 $hook_array['before_save'] = Array(); 
 $hook_array['before_save'][] = Array(1, 'Change user name as email id', 'custom/modules/Users/userHook.php','UserHook', 'changeUserName'); 

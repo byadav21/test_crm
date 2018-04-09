@@ -124,7 +124,7 @@
 		  if($vendor_id && $vendor_user_id){
 				$statusDetail='Follow Up';
 				$lead_source_types = 'OO';
-				$lead_source = 'OO'.'_'.ucwords($source);
+				$lead_source = 'OO'.'_'.strtoupper($source);
 				$autoassign='No';
 				$assigned_user_id=$vendor_user_id;
 		  }
