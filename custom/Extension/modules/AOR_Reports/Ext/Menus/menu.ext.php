@@ -77,6 +77,8 @@ if($current_user->is_admin==1 || $displayMis||$displayCC){
   $module_menu[] = array ('index.php?module=AOR_Reports&action=referalleads', "Referal Lead", 'AOR_Reports');
 }
 
+$module_menu[] = array ('index.php?module=AOR_Reports&action=leadutilization', "Lead Utilization", 'AOR_Reports');
+
 # DIgital Marketing #
 if( $current_user->is_admin==1 || $displayMis || $displayDM){
 $module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
