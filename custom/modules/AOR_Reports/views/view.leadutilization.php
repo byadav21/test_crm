@@ -231,6 +231,9 @@ class AOR_ReportsViewleadutilization extends SugarView
             $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
             $_SESSION['cccon_batch']      = $_REQUEST['batch'];
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
+            $_SESSION['cccon_managers'] = $_REQUEST['managers'];
+            $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
+            $_SESSION['cccon_status'] = $_REQUEST['status'];
         }
         
         //$_SESSION['cccon_from_date']='2017-10-11';
@@ -258,6 +261,8 @@ class AOR_ReportsViewleadutilization extends SugarView
             $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
             $wherecl          .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
         }
+       
+      
 
         $findBatch = array();
 
@@ -279,6 +284,14 @@ class AOR_ReportsViewleadutilization extends SugarView
         {
             $selected_councellors = $_SESSION['cccon_councellors'];
         }
+        if (!empty($_SESSION['cccon_managers']))
+        {
+            $selected_managers = $_SESSION['cccon_managers'];
+        }
+        if (!empty($_SESSION['cccon_status']))
+        {
+            $selected_status = $_SESSION['cccon_status'];
+        }
 
 
 
@@ -297,8 +310,12 @@ class AOR_ReportsViewleadutilization extends SugarView
         {
             $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
         }
-
-
+        
+        if (!empty($selected_councellors))
+        {
+            $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+  
 
 
 
@@ -411,6 +428,8 @@ class AOR_ReportsViewleadutilization extends SugarView
         $sugarSmarty->assign("selected_status", $selected_status);
 
         $sugarSmarty->assign("selected_source", $selected_source);
+        $sugarSmarty->assign("selected_managers", $selected_managers);
+         $sugarSmarty->assign("selected_councellors", $selected_councellors);
 
 
 

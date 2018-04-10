@@ -14,7 +14,47 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
     {
         parent::SugarView();
     }
+    
+   function getCouncelorForAdmin($role = '')
+    {
+        global $db;
+        $id = '';
 
+        if ($role == 'manager')
+        {
+            $id = '7e225ca3-69fa-a75d-f3f2-581d88cafd9a';
+        }
+        else
+        {
+            $id = '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45';
+        }
+
+        $userSql  = "SELECT u.first_name,
+                                u.last_name,
+                                u.id,
+                                ru.first_name AS reporting_firstname,
+                                ru.last_name AS reporting_lastname,
+                                ru.id AS reporting_id
+                         FROM users AS u
+                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+ 			 INNER join acl_roles on aru.role_id=acl_roles.id
+                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                         WHERE aru.`role_id` IN ('$id')
+                           AND u.deleted=0
+                           AND aru.deleted=0 and acl_roles.deleted=0 ";
+        $userObj  = $db->query($userSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+
+            $usersArr[$user['id']]['id']             = $user['id'];
+            $usersArr[$user['id']]['name']           = $user['first_name'] . ' ' . $user['last_name'];
+            $usersArr[$user['id']]['reporting_id']   = $user['reporting_id'];
+            $usersArr[$user['id']]['reporting_name'] = $user['reporting_firstname'] . ' ' . $user['reporting_lastname'];
+        }
+        return $usersArr;
+    }
+    
     function getBatch()
     {
         global $db;
@@ -57,6 +97,8 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         $wherecl           = "";
         $BatchListData     = $this->getBatch();
         $ProgrammeListData = $this->getProgram();
+        $managerSList    = $this->getCouncelorForAdmin('manager');
+        $CouncellorsList = $this->getCouncelorForAdmin();
 
         if (!isset($_SESSION['cccon_from_date']))
         {
@@ -70,13 +112,16 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         {
             $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
             $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_counsellor'] = $_REQUEST['counsellor'];
             $_SESSION['cccon_batch']      = $_REQUEST['batch'];
             $_SESSION['cccon_program']    = $_REQUEST['program'];
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
             $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
             $_SESSION['cccon_medium_val'] = $_REQUEST['medium_val'];
             $_SESSION['cccon_status']     = $_REQUEST['status'];
+            $_SESSION['cccon_managers']   = $_REQUEST['managers'];
+            $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
+            
+            //print_r($_REQUEST['councellors']); die;
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -117,6 +162,16 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             $selected_batch_code = $_SESSION['cccon_batch_code'];
             //$batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
+        if (!empty($_SESSION['cccon_councellors']))
+        {
+            $selected_councellors = $_SESSION['cccon_councellors'];
+            
+           
+        }
+        if (!empty($_SESSION['cccon_managers']))
+        {
+            $selected_managers = $_SESSION['cccon_managers'];
+        }
 
         $programList = array();
         $StatusList  = array();
@@ -135,6 +190,10 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         {
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
+        }
+        if (!empty($selected_councellors))
+        {
+            $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
 
         $StatusList['new_lead']               = 'New Lead';
@@ -310,7 +369,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
         $sugarSmarty->assign("programList", $programList);
 
-
+        //print_r($selected_councellors); die;
         $sugarSmarty->assign("BatchListData", $BatchListData);
         $sugarSmarty->assign("ProgrammeListData", $ProgrammeListData);
         $sugarSmarty->assign("StatusList", $StatusList);
@@ -321,7 +380,16 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
         $sugarSmarty->assign("selected_medium_val", $selected_medium_val);
-        $sugarSmarty->assign("selected_counsellor", $selected_counsellor);
+ 
+        $sugarSmarty->assign("selected_source", $selected_source);
+
+        $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
+
+        $sugarSmarty->assign("CouncellorsList", $CouncellorsList);
+        $sugarSmarty->assign("managerSList", $managerSList);
+
+        $sugarSmarty->assign("selected_managers", $selected_managers);
+        $sugarSmarty->assign("selected_councellors", $selected_councellors);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);

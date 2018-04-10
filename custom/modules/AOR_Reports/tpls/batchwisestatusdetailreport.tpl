@@ -3,62 +3,79 @@
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                <tbody>
-			{*		<tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Program</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="program[]" id="program"  class="program_advanced" multiple style="width:600px !important; height: 70px !important;">
-                                {foreach from =$ProgrammeListData key=key item=program}
+                 <tbody>
 
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_program)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        
-                    </tr>*}
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Batch</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="batch[]" id="batch"  class="batch_advanced" multiple style="width:600px !important; height: 70px !important;">
-                                {foreach from =$BatchListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Batch Code</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="batch_code[]" id="batch_code"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$BatchListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.batch_code}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">From Date</label>
+                            <label for="From Date">From Date:</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
                             <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
                         </td>
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">To Date</label>
+                            <label for="To Date">To Date:</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
                             <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
                     </tr>
+                    <tr>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Status">Batch Status:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="status[]" id="status"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                <option value="All" {if in_array('All', $selected_status)} selected="selected"{/if}>All</option>
+                                <option value="Active" {if in_array('Active', $selected_status)} selected="selected"{/if}>Active</option>
+                                <option value="Inactive" {if in_array('Inactive', $selected_status)} selected="selected"{/if}>Inactive</option>
+                            </select>
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Code">Batch Code:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="batch_code[]" id="batch_code"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$BatchListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch_code)} selected="selected"{/if}>{$program.batch_code}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="status">Manager:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="managers[]" id="managers"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$managerSList key=key item=managers}
+
+                                    <option value="{$key}"{if in_array($key, $selected_managers)} selected="selected"{/if}>{$managers.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Status Description">Agent:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="councellors[]" id="councellors"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$CouncellorsList key=key item=councellor}
+
+                                    <option value="{$key}"{if in_array($key, $selected_councellors)} selected="selected"{/if}>{$councellor.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                    </tr>
+
+
 
 
 
@@ -67,7 +84,7 @@
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
                                     return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-                            <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
+                           <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
                         </td>
                     </tr>
 
@@ -203,6 +220,38 @@
                 dateStr: "",
                 step: 1,
                 weekNumbers: false,
+            });
+            
+             function getAjax(target, arr) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: target, param: arr},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        $('#' + target).html('');
+                        $('#' + target).html(data);
+                        $('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
+            $(document).ready(function () {
+
+                $("#status").change(function () {
+                    var arg = $('#status').val();
+                    getAjax('batch_code', arg);
+                });
+                $("#managers").change(function () {
+                    var arg = $('#managers').val();
+                    getAjax('councellors', arg);
+                });
+                //getStateByZone();
             });
 
         </script>

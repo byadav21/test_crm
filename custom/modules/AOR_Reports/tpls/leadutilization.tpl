@@ -28,9 +28,9 @@
                         </td>
                         <td nowrap="nowrap" >
                             <select name="status[]" id="status"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                <option value="All" selected="">All</option>
-                                <option value="Active" >Active</option>
-                                <option value="Inactive" >Inactive</option>
+                                <option value="All" {if in_array('All', $selected_status)} selected="selected"{/if}>All</option>
+                                <option value="Active" {if in_array('Active', $selected_status)} selected="selected"{/if}>Active</option>
+                                <option value="Inactive" {if in_array('Inactive', $selected_status)} selected="selected"{/if}>Inactive</option>
                             </select>
                         </td>
 
@@ -56,7 +56,7 @@
                             <select name="managers[]" id="managers"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$managerSList key=key item=managers}
 
-                                    <option value="{$key}"{if in_array($key, $selected_managerSList)} selected="selected"{/if}>{$managers.name}</option>
+                                    <option value="{$key}"{if in_array($key, $selected_managers)} selected="selected"{/if}>{$managers.name}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -68,7 +68,7 @@
                             <select name="councellors[]" id="councellors"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$CouncellorsList key=key item=councellor}
 
-                                    <option value="{$key}"{if in_array($key, $selected_councellor)} selected="selected"{/if}>{$councellor.name}</option>
+                                    <option value="{$key}"{if in_array($key, $selected_councellors)} selected="selected"{/if}>{$councellor.name}</option>
                                 {/foreach}
                             </select>
                         </td>
