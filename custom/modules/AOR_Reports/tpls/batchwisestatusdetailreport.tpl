@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h2>Batch Wise Status Detail Report</h2><br/><br/>
+<section class="moduleTitle"> <h2>Lead connectivity report</h2><br/><br/>
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=batchwisestatusdetailreport">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -162,14 +162,14 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Alive</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="7"><strong>Dead</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Converted</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2"><strong>Warm</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Contactable</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Non-Contactable</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Dead</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="0"><strong>Converted</strong></th>
+            {*    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>*}
 
             </tr>
             <tr height="20">
@@ -194,7 +194,7 @@
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
                     {foreach from = $StatusList key=key item=vendor}
 
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {if !empty($program.$key)} {$program.$key} {else} 0 {/if} </td>
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {if !empty($program.$key)} <a href="index.php?module=AOR_Reports&action=viewleads&show={$key}&batch={$program.batch_code}&lcount={$program.$key}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">{$program.$key}</a> {else} 0 {/if} </td>
                     {/foreach}
 
                 </tr>
