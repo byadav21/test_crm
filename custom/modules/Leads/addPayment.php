@@ -596,7 +596,7 @@ class addPaymentClass
     {
         ini_set("display_errors", 0);
         error_reporting(0);
-        global $db;
+        global $db,$current_user;
 
         $bean->email_add_c=$bean->email1;
         if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
@@ -735,6 +735,11 @@ class addPaymentClass
 				}
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
+             if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
+       		 {
+		    		$bean->assigned_user_id = $current_user->id;
+		    		$bean->autoassign == 'No';
+        		 }
             $bean->vendor           = ($bean->utm_source_c)? $bean->utm_source_c : 'NA_VENDOR';   // $vendor_id['id'];
             if(!$bean->utm) $bean->utm='NA';
             $bean->te_ba_batch_id_c = $batch_id['id'];
