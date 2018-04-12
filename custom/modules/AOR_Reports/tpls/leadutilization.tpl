@@ -206,17 +206,41 @@
                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.batch_name}</td>
                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.batch_code}</td>
                  <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="index.php?module=AOR_Reports&action=viewleadutilization&show=fresh_leads&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">{$leads.fresh_leads}</a></td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                      {if ($leads.fresh_leads!=0)} 
+                     <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=fresh_leads&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">{$leads.fresh_leads}</a>
+                      {else} 0 {/if}
+                      </td>
                  <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_dialled_outside_TAT&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.leads_dialled_outside_TAT}</a></td>
+                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                    {if ($leads.leads_dialled_outside_TAT!=0)} 
+                    <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_dialled_outside_TAT&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.leads_dialled_outside_TAT}</a>
+                    {else} 0 {/if}
+                </td>
                  <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_attempted_1_3&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.leads_attempted_1_3}</a></td>
+                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                    {if ($leads.leads_attempted_1_3!=0)} 
+                    <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_attempted_1_3&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.leads_attempted_1_3}</a>
+                     {else} 0 {/if}
+                    </td>
                  <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_attempted_4_6&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank">{$leads.leads_attempted_4_6}</a></td>
+                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
+                     {if ($leads.leads_attempted_4_6!=0)} 
+                    <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_attempted_4_6&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank">{$leads.leads_attempted_4_6}</a>
+                      {else} 0 {/if}
+                     </td>
                  <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_attempted_more_than_6&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank">{$leads.leads_attempted_more_than_6}</a></td>
+                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
+                    {if ($leads.leads_attempted_more_than_6!=0)} 
+                    <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=leads_attempted_more_than_6&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank">{$leads.leads_attempted_more_than_6}</a>
+                     {else} 0 {/if}
+                    </td>
                  <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="index.php?module=AOR_Reports&action=viewleadutilization&show=lead_count&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.lead_count}</a></td>
+                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                    {if ($leads.lead_count!=0)} 
+                    <a href="index.php?module=AOR_Reports&action=viewleadutilization&show=lead_count&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.lead_count}</a>
+                    {else} 0 {/if}
+                    </td>
             </tr>
         {/foreach}
         
