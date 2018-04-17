@@ -695,11 +695,19 @@ class addPaymentClass
 				$beanData                 = $GLOBALS['db']->fetchByAssoc($re);
 				if($beanData['status']=='Dead'){
 					$bean->status             = 'Alive';
-					$bean->status_description = 'New Lead';
+					if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor'])){
+						$bean->status_description='Follow Up';
+						$bean->autoassign= 'No';	
+					}
+					else{
+						$bean->status_description = 'New Lead';
+						$bean->assigned_user_id   = NULL;
+						$bean->autoassign= 'Yes';					
+					}
+					
 					$bean->duplicate_check    = '1';
 					
-					$bean->assigned_user_id   = NULL;
-					$bean->autoassign= 'Yes';
+					
 				}
 				else{
 					$bean->status             = 'Warm';
@@ -786,11 +794,16 @@ class addPaymentClass
 					$data                     = $GLOBALS['db']->fetchByAssoc($re);
 					if($data['status']=='Dead'){
 						$bean->status             = 'Alive';
-						$bean->status_description = 'New Lead';
+						if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor'])){
+							$bean->status_description='Follow Up';
+							$bean->autoassign= 'No';
+					   }
+					   else{
+						 	$bean->status_description = 'New Lead';
+						 	$bean->assigned_user_id   = NULL;
+						 	$bean->autoassign= 'Yes';					
+					   }
 						$bean->duplicate_check    = '1';
-						
-						$bean->assigned_user_id   = NULL;
-						$bean->autoassign= 'Yes';
 					}
 					else{
 						$bean->status             = 'Warm';
