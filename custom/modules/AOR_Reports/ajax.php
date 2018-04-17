@@ -66,7 +66,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'councellors')
  			 INNER join acl_roles on aru.role_id=acl_roles.id
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
                          WHERE aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
-                           AND u.deleted=0
+                           AND u.deleted=0 AND u.employee_status='Active'
                            AND aru.deleted=0 and acl_roles.deleted=0 and ru.id in ('" . implode("','", $param) . "')";  
         $userObj  = $db->query($userSql);
         $usersArr = [];

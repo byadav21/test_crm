@@ -422,7 +422,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
         $sugarSmarty->assign("selected_medium_val", $selected_medium_val);
- 
+        $sugarSmarty->assign("councelorList",$councelorList);
         $sugarSmarty->assign("selected_source", $selected_source);
 
         $sugarSmarty->assign("selected_batch_code", $selected_batch_code);

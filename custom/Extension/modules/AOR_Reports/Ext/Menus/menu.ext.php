@@ -97,7 +97,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=utmstatusreport', "
 
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dateleadperformance', "Till Date Lead Performance", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=leadsfeedbackreport', "Leads Feedback Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=leadperformancereport', "Leads Performance Report", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=leadperformancereports', "Leads Performance Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyuploadreport', "Upload Report", 'AOR_Reports');
 
 $module_menu[] = array ('index.php?module=AOR_Reports&action=productivityform', "Create Target Report", 'AOR_Reports');

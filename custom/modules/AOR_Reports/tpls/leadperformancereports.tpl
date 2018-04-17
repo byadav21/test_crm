@@ -1,8 +1,8 @@
-<section class="moduleTitle"> <h2>Lead connectivity report</h2><br/><br/>
-    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=batchwisestatusdetailreport">
+<section class="moduleTitle"> <h2><b>Leads Performance Report</b></h2><br/><br/>
+    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadperformancereports">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
-            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                  <tbody>
 
                     <tr>
@@ -66,7 +66,7 @@
                         </td>
                         <td nowrap="nowrap" >
                             <select name="councellors[]" id="councellors"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$CouncellorsList key=key item=councellor}
+                                {foreach from =$councellors key=key item=councellor}
 
                                     <option value="{$key}"{if in_array($key, $selected_councellors)} selected="selected"{/if}>{$councellor.name}</option>
                                 {/foreach}
@@ -91,10 +91,6 @@
 
                 </tbody>
             </table>
-        </div>
-    </form>
-    <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
-        <thead>
             {*Start Pagination*}
             <tr id="pagination" role="presentation">
                 <td colspan="20">
@@ -105,11 +101,11 @@
                                 <td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
 
                                     {if $left eq 1}
-                                        <a href="index.php?module=AOR_Reports&action=batchwisestatusdetailreport"  name="listViewStartButton" title="Start" class="button" >
+                                        <a href="index.php?module=AOR_Reports&action=leadperformancereports"  name="listViewStartButton" title="Start" class="button" >
                                             <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
                                         </a>
 
-                                        <a href="index.php?module=AOR_Reports&action=batchwisestatusdetailreport&page={$page}"  class="button" title="Previous">
+                                        <a href="index.php?module=AOR_Reports&action=leadperformancereports&page={$page}"  class="button" title="Previous">
                                             <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
                                         </a>
                                     {else}
@@ -128,10 +124,10 @@
                                 </td>
                                 <td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
                                     {if $right eq 1}
-                                        <a href="index.php?module=AOR_Reports&action=batchwisestatusdetailreport&page={$pagenext}"  class="button" title="Next" disabled="disabled">
+                                        <a href="index.php?module=AOR_Reports&action=leadperformancereports&page={$pagenext}"  class="button" title="Next" disabled="disabled">
                                             <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
                                         </a>
-                                        <a href="index.php?module=AOR_Reports&action=batchwisestatusdetailreport&page={$last_page}"  class="button" title="End" disabled="disabled">
+                                        <a href="index.php?module=AOR_Reports&action=leadperformancereports&page={$last_page}"  class="button" title="End" disabled="disabled">
                                             <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
                                         </a>
                                     {else}
@@ -152,57 +148,129 @@
                 </td>
             </tr>
             {*End Pagination*}
-			<tr height="20">
+        </div>
+    </form>
+    <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
+        <thead>
+            <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
+               
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Contactable</strong></th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    &nbsp;
+                </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Non-Contactable</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Dead</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="0"><strong>Converted</strong></th>
-            {*    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
+
+                {*    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>*}
 
             </tr>
             <tr height="20">
-               {* <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Program Name</strong>
-                </th>*}
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Batch Name</strong>
-                </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
                 </th>
-                {foreach from = $StatusList key=key item=status}
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$status}</strong></th>
-				{/foreach}
-				
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>No Answer</strong>
+                </th>
+                
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Ringing Multiple Times</strong>
+                </th>
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Busy</strong>
+                </th>
+                
+                
+                
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Wrong Number</strong>
+                </th>
+                
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Not Eligible</strong>
+                </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Not Enquired</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Converted</strong>
+                </th>
+               
+
             </tr>
-			{foreach from = $programList key=key item=program}
+
+            {foreach from = $councelorList key=key item=councelor}
                 <tr height="20" class="oddListRowS1">
-                   {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>*}
-					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.name}</td>
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
-                    {foreach from = $StatusList key=key item=vendor}
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                         {if ($councelor.NO_ANSWER!=0)} 
+                            <a href="index.php?module=AOR_Reports&action=viewleadsperformance&dispositionName=NO_ANSWER&batch={$councelor.name}&lcount={$councelor.NO_ANSWER}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
+                                {$councelor.NO_ANSWER}
+                            </a>
+                        {else} 0 {/if}
+                       
+                    
+                    </td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                        {if ($councelor.Ringing_Multiple_Times!=0)} 
+                            <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Ringing_Multiple_Times&batch={$councelor.name}&lcount={$councelor.Ringing_Multiple_Times}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
+                                {$councelor.Ringing_Multiple_Times}
+                            </a>
+                        {else} 0 {/if}
+                    </td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                         {if ($councelor.BUSY!=0)} 
+                            <a href="index.php?module=AOR_Reports&action=viewleadsperformance&dispositionName=BUSY&batch={$councelor.name}&lcount={$councelor.BUSY}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
+                                {$councelor.BUSY}
+                            </a>
+                        {else} 0 {/if}
+                        
+                    </td>
 
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {if !empty($program.$key)} <a href="index.php?module=AOR_Reports&action=viewleads&show={$key}&batch={$program.batch_code}&lcount={$program.$key}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">{$program.$key}</a> {else} 0 {/if} </td>
-                    {/foreach}
-
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                         {if ($councelor.Wrong_Number!=0)} 
+                            <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Wrong_Number&batch={$councelor.name}&lcount={$councelor.Wrong_Number}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
+                                {$councelor.Wrong_Number}
+                            </a>
+                        {else} 0 {/if}
+                    </td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                         {if ($councelor.Not_Eligible!=0)} 
+                            <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Not_Eligible&batch={$councelor.name}&lcount={$councelor.Not_Eligible}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
+                                {$councelor.Not_Eligible}
+                            </a>
+                        {else} 0 {/if}
+                    </td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                        {if ($councelor.Not_Enquired!=0)} 
+                            <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Not_Enquired&batch={$councelor.name}&lcount={$councelor.Not_Enquired}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
+                                {$councelor.Not_Enquired}
+                            </a>
+                        {else} 0 {/if}
+                    </td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
+                         {if ($councelor.Converted!=0)} 
+                            <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Converted&batch={$councelor.name}&lcount={$councelor.Converted}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
+                                {$councelor.Converted}
+                            </a>
+                        {else} 0 {/if}
+                    </td>
                 </tr>
             {/foreach}
-			
+            
+            
+          
     </table>
-    {literal}
-        <script>
+    <script>
+        {literal}
             Calendar.setup({
                 inputField: "from_date",
                 daFormat: "%Y-%m-%d %I:%M%P",
@@ -212,6 +280,10 @@
                 step: 1,
                 weekNumbers: false,
             });
+        </script>
+    {/literal}
+    <script>
+        {literal}
             Calendar.setup({
                 inputField: "to_date",
                 daFormat: "%Y-%m-%d %I:%M%P",
@@ -241,8 +313,18 @@
                     }
                 });
             }
+            
             $(document).ready(function () {
-
+                $(".multiselbox").each(function () {
+                    if ($(this).find("option").eq(0).val() == '') {
+                        $(this).find("option").eq(0).remove();
+                    }
+                })
+                $(".multiselbox").multiselect({
+                    includeSelectAllOption: true
+                });
+                
+                
                 $("#status").change(function () {
                     var arg = $('#status').val();
                     getAjax('batch_code', arg);
@@ -251,8 +333,9 @@
                     var arg = $('#managers').val();
                     getAjax('councellors', arg);
                 });
-                //getStateByZone();
+                
             });
-
         </script>
     {/literal}
+    
+ 
