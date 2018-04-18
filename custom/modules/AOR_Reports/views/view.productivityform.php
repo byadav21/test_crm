@@ -181,7 +181,7 @@ class AOR_ReportsViewproductivityform extends SugarView
 
         $current_year = date('Y');
         $range        = range($current_year, $current_year - 5);
-        $years        = array_combine($range, $range);
+        $yearsList        = array_combine($range, $range);
 
 
 
@@ -262,6 +262,23 @@ class AOR_ReportsViewproductivityform extends SugarView
                                     . "created_date='" . date('Y-m-d H:i:s') . "'";
                             $GLOBALS['db']->Query($insertSql);
                         }
+                    }
+                    else if(empty($batchCodeArr)){
+                        
+                        $insertSql = "INSERT INTO agent_productivity_report SET "
+                                    . " user_id='" . $userID . "', "
+                                    . "user_name='" . $CouncellorsList[$userID]['name'] . "',"
+                                    . "reporting_to='" . $CouncellorsList[$userID]['reporting_id'] . "', "
+                                    . "batch_code='NULL', "
+                                    . "batch_id='NULL',"
+                                    . "status=1,"
+                                    . "year='$years',"
+                                    . "month=$month,"
+                                    . "target_gsv='$target_gsv',"
+                                    . "target_unit='$target_unit' , "
+                                    . "created_date='" . date('Y-m-d H:i:s') . "'";
+                            $GLOBALS['db']->Query($insertSql);
+                        
                     }
                 }
             }
@@ -360,7 +377,7 @@ class AOR_ReportsViewproductivityform extends SugarView
         $sugarSmarty->assign("CouncellorsList", $CouncellorsList);
 
         $sugarSmarty->assign("month", $months);
-        $sugarSmarty->assign("years", $years);
+        $sugarSmarty->assign("years", $yearsList);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
