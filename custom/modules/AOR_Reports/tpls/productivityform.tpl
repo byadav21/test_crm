@@ -170,6 +170,9 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
                     <strong>Unit (gsv)</strong>
                 </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="1">
+                    <strong>Action</strong>
+                </th>
             </tr>   
 
             {*{if isset($error) && !empty($error)}  
@@ -177,7 +180,7 @@
             {/if}*}
 
             {foreach from = $leadList key=key item=leads}
-                <tr height="20" class="oddListRowS1">
+                <tr height="20" class="oddListRowS1" id="Myrow_{$key}">
 
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.user_name}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$month[$leads.month]}</td>
@@ -187,8 +190,10 @@
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.batch_code}</td>
                     
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_gsv}</td>
-                                        <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_unit}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="javascript:void(0)" onclick='deleteItem("{$leads.id}","Myrow_{$key}")'>Delete</a></td>
 
                 </tr>
             {/foreach}
@@ -219,7 +224,29 @@
                 step: 1,
                 weekNumbers: false,
             });
-            
+            function deleteItem(RecordID,RowID) 
+            {
+            if (confirm("Are you sure you want to delete?")) {
+                    
+                    $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'DeleteTargetRepo', RecordID: RecordID, RowID:RowID},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        $('#' + data).html('');
+                        }
+                    });
+                
+                }
+                return false;
+            }
+
             $(document).ready(function () {
                 
                  $("#search_form").on('submit', (function(e) {
@@ -245,6 +272,7 @@
                       }
                     
                  }));
+                 
 
       
             });

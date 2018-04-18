@@ -79,4 +79,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'councellors')
     echo $option;
     die;
 }
+
+if (isset($_POST['action']) && $_POST['action'] == 'DeleteTargetRepo')
+{
+    global $db;
+    $option = '';
+    //RecordID: RecordID, RowID:RowID
+   
+    $RecordID = $_POST['RecordID'];
+    $RowID = $_POST['RowID'];
+
+    if ($RecordID!='')
+    {
+        $updateSql = "UPDATE agent_productivity_report SET deleted=1 where id=$RecordID";
+        $usObj = $GLOBALS['db']->Query($updateSql);
+       
+        if($usObj){
+            echo $RowID;
+        }
+    }
+    die;
+}
 ?>
