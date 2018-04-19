@@ -95,7 +95,7 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
                              WHERE leads.deleted=0
                                AND leads.status='Converted'
                                AND leads.deleted=0
-                               AND YEAR(leads.converted_date)='2017'
+                               #AND YEAR(leads.converted_date)='2017'
                              GROUP BY $key user_id,
                                            Converted_month,
                                            Converted_Year ";
