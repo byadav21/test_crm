@@ -88,6 +88,7 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
                                     MONTH(leads.converted_date) AS Converted_month,
                                     YEAR(leads.converted_date) AS Converted_Year,
                                     IF(te_ba_batch.batch_code IS NULL,'NULL',te_ba_batch.batch_code) AS batch_code,
+                                    SUM(te_ba_batch.fees_inr) AS GSV,
                                     te_ba_batch.fees_inr
                              FROM leads
                              LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
@@ -109,16 +110,15 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
             if (isset($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_managers']) && empty($_SESSION['cccon_councellors']))
             {
                 $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['Convertedcount'] = $row['Convertedcount'];
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['gsv']            = ($row['Convertedcount'] * $row['fees_inr']);
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['gsv']            = round($row['GSV'], 2);
                 $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['batch_code']     = $row['batch_code'];
             }
             else
             {
                 $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['Convertedcount'] = $row['Convertedcount'];
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['gsv']            = ($row['Convertedcount'] * $row['fees_inr']);
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['gsv']            = round($row['GSV'], 2);
                 $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['batch_code']     = $row['batch_code'];
             }
-            
         }
 
         return $leadList;
