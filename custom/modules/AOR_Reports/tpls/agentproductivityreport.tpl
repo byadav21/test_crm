@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h2>Agent Productivity Report</h2><br/><br/>
+<section class="moduleTitle"> <h2>Agent Productivity Report</h2><br/><br/><br/><br/><br/>
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=agentproductivityreport">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -7,18 +7,24 @@
 
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="From Date">From Date:</label>
+                            <label for="From Date">Month:</label>
                         </td>
-                        <td nowrap="nowrap" width="10%">
-                            <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
-                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
+                        <td nowrap="nowrap" >
+                            <select name="month[]" id="month"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$month key=key item=value}
+                                    <option value="{$key}" {if in_array($key, $selected_month)} selected="selected"{/if}>{$value}</option>
+                                {/foreach}
+                            </select>
                         </td>
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="To Date">To Date:</label>
+                            <label for="To Date">Year:</label>
                         </td>
-                        <td nowrap="nowrap" width="10%">
-                            <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
-                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
+                        <td nowrap="nowrap" >
+                            <select name="years[]" id="year"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$years key=key item=value}
+                                    <option value="{$key}" {if in_array($key, $selected_years)} selected="selected"{/if}>{$value}</option>
+                                {/foreach}
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -75,21 +81,7 @@
 
                     </tr>
 
-                    <tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Source">Source:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="source[]" id="source"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-
-                                {foreach from =$lead_source_type key=key item=type}
-
-                                    <option value="{$key}" {if in_array($key, $selected_source)} selected="selected"{/if}>{$type}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
-                    </tr>
+                    
 
 
 
@@ -170,29 +162,41 @@
 
             <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Batch Name</strong>
+                    <strong>Username</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Month</strong>
+                </th>
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Year</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
                 </th>
-
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Fresh Lead</strong>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Target Units</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>leads dialled outside TAT</strong>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Target GSV</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Leads attempted 1-3</strong>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Conversions (Units Sold)</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Leads attempted more than 3</strong>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>GSV</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Leads attempted more than 6</strong>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>% Target Achieved (Units)</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Total Lead</strong>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>% Target Achieved (GSV)</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Remaining Units</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Remaining GSV</strong>
                 </th>
             </tr>   
 
@@ -200,48 +204,25 @@
             <td align="center" class="inlineEdit footable-visible footable-last-column"><h1>{$error.error}</h1></td>
                 {/if}*}
            
-         {foreach from = $leadList key=key item=leads}
-            <tr height="20" class="oddListRowS1">
-                
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.batch_name}</td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.batch_code}</td>
-                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                      {if ($leads.fresh_leads!=0)} 
-                     <a href="index.php?module=AOR_Reports&action=viewagentproductivityreport&show=fresh_leads&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">{$leads.fresh_leads}</a>
-                      {else} 0 {/if}
-                      </td>
-                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                    {if ($leads.leads_dialled_outside_TAT!=0)} 
-                    <a href="index.php?module=AOR_Reports&action=viewagentproductivityreport&show=leads_dialled_outside_TAT&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.leads_dialled_outside_TAT}</a>
-                    {else} 0 {/if}
-                </td>
-                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                    {if ($leads.leads_attempted_1_3!=0)} 
-                    <a href="index.php?module=AOR_Reports&action=viewagentproductivityreport&show=leads_attempted_1_3&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.leads_attempted_1_3}</a>
-                     {else} 0 {/if}
-                    </td>
-                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
-                     {if ($leads.leads_attempted_4_6!=0)} 
-                    <a href="index.php?module=AOR_Reports&action=viewagentproductivityreport&show=leads_attempted_4_6&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank">{$leads.leads_attempted_4_6}</a>
-                      {else} 0 {/if}
-                     </td>
-                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
-                    {if ($leads.leads_attempted_more_than_6!=0)} 
-                    <a href="index.php?module=AOR_Reports&action=viewagentproductivityreport&show=leads_attempted_more_than_6&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank">{$leads.leads_attempted_more_than_6}</a>
-                     {else} 0 {/if}
-                    </td>
-                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                    {if ($leads.lead_count!=0)} 
-                    <a href="index.php?module=AOR_Reports&action=viewagentproductivityreport&show=lead_count&batch={$leads.batch_code}&lcount={$leads.fresh_leads}&totallead={$leads.lead_count}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank"" target="_blank"> {$leads.lead_count}</a>
-                    {else} 0 {/if}
-                    </td>
-            </tr>
+         {foreach from = $leadList key=key item=value}
+            
+             <tr height="20" class="oddListRowS1">
+
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.user_name}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$month[$value.month]}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.year}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.batch_code}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.target_unit}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.target_gsv}</td>
+                 
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.Conversions}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.gsv}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.percentage_target_achieved_units}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.percentage_target_achieved_gsv}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.remaining_units}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.remaining_gsv}</td>
+             </tr>
+           
         {/foreach}
         
            
@@ -299,7 +280,42 @@
                     var arg = $('#managers').val();
                     getAjax('councellors', arg);
                 });
-                //getStateByZone();
+              
+                
+                $("#search_form").on('submit', (function(e) {
+                     
+                     
+                      var batch_code  = $('#batch_code').val();
+                      var status      = $('#status').val();
+                      var month       = $('#month').val();
+                      var year       = $('#year').val();
+                      var users       = $('#users').val();
+                      var managers   = $('#managers').val();
+                      var councellors   = $('#councellors').val();
+                      
+                      
+                      
+                     
+                      if(month=='' || month ==null){
+                          $("#month").focus();
+                           alert('Please select a month!'); return false;
+                      }
+                      
+                      if(year=='' || year ==null){
+                          $("#year").focus();
+                           alert('Please select a year!'); return false;
+                      }
+                      
+                     
+                      
+                      if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
+                          $("#users").focus();
+                          alert('Please select a user!'); return false;
+                      }
+                      
+                     
+                    
+                 }));
             });
 
 

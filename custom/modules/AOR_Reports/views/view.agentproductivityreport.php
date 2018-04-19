@@ -73,117 +73,57 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
         return $batchOptions;
     }
 
-    function getFresh()
+    function getConversion()
     {
         global $db;
         $leadList = array();
-        $leadSql  = "SELECT COUNT(leads.id) AS fresh_lead_count,
-                            te_ba_batch.id AS batch_id
-                     FROM leads
-                     LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                     WHERE leads.date_entered >= '".$_SESSION['cccon_from_date']." 00:00:00'
-                       AND leads.date_entered <= '".$_SESSION['cccon_to_date']." 23:59:59'
-                       and leads.status='Alive'
-                       and leads.status_description='New Lead'
-                       and leads.deleted=0
-                     GROUP  by  batch_code";
+        $key      = '';
+        if (isset($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_managers']) && empty($_SESSION['cccon_councellors']))
+        {
+            //echo "ddd";
+            $key = 'batch_code,';
+        }
+        $leadSql = "SELECT COUNT(leads.id) AS Convertedcount,
+                                    leads.assigned_user_id user_id,
+                                    MONTH(leads.converted_date) AS Converted_month,
+                                    YEAR(leads.converted_date) AS Converted_Year,
+                                    IF(te_ba_batch.batch_code IS NULL,'NULL',te_ba_batch.batch_code) AS batch_code,
+                                    te_ba_batch.fees_inr
+                             FROM leads
+                             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
+                             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+                             WHERE leads.deleted=0
+                               AND leads.status='Converted'
+                               AND leads.deleted=0
+                               AND YEAR(leads.converted_date)='2017'
+                             GROUP BY $key user_id,
+                                           Converted_month,
+                                           Converted_Year ";
 
-        $leadObj = $db->query($leadSql) or die(mysqli_error());
+        $leadObj = $db->query($leadSql);
 
 
 
         while ($row = $db->fetchByAssoc($leadObj))
         {
-            $leadList[$row['batch_id']] = $row['fresh_lead_count'];
+            if (isset($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_managers']) && empty($_SESSION['cccon_councellors']))
+            {
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['Convertedcount'] = $row['Convertedcount'];
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['gsv']            = ($row['Convertedcount'] * $row['fees_inr']);
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['batch_code']     = $row['batch_code'];
+            }
+            else
+            {
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['Convertedcount'] = $row['Convertedcount'];
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['gsv']            = ($row['Convertedcount'] * $row['fees_inr']);
+                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['batch_code']     = $row['batch_code'];
+            }
+            
         }
 
         return $leadList;
     }
 
-    function getAttempts()
-    {
-
-        global $db;
-        //$leadList   = array();
-        $attemplist = array();
-        $leadSql    = "SELECT 
-                            te_ba_batch.batch_code AS batch_code,
-                            te_ba_batch.id AS batch_id,
-			    leads.id lead_id,
-                            leads.date_entered,
- 		            leads_cstm.`attempts_c`,
-			    dis.date_entered as dispo_date,
-				dis.status,
-				dis.status_detail
-                     FROM leads
-                     LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                     LEFT join te_disposition_leads_c disrel on disrel.te_disposition_leadsleads_ida=leads.id
-                     LEFT join te_disposition dis on disrel.te_disposition_leadste_disposition_idb=dis.id
-                     WHERE leads.date_entered >= '".$_SESSION['cccon_from_date']." 00:00:00'
-                       AND leads.date_entered <= '".$_SESSION['cccon_to_date']." 23:59:59'
-                       and leads_cstm.`attempts_c`>=1 
-                     #and te_ba_batch.batch_code in ('DS-04-0218-01')
-                         group by leads.id order by dispo_date ";
-
-
-        $leadObj = $db->query($leadSql);
-        $leadsBybatch = array();
-        $attemplist   = array();
-        
-        while ($row = $db->fetchByAssoc($leadObj)){
-            $leadsBybatch[$row['batch_code']][]=$row;
-        }
-        $TAT=1;
-        //echo '<pre>';
-        //echo print_r($leadsBybatch);
-        foreach ($leadsBybatch as $key => $val)
-        {
-
-            $outside_TAT = array();$attempted_1_3=array();$attempted_4_6=array();$attempted_more_6=array();
-            foreach ($val as $key => $data)
-            {
-
-                //echo '<pre>';
-                //print_r($val); echo 'bat='.$val[$key]['batch_code'];die;
-                $mintsdiff = round(abs((strtotime($val[$key]['date_entered']) - strtotime($val[$key]['dispo_date']))) / 60);
-                //echo 'date_entered='.$val[$key]['date_entered'].'  dispo_date='.$val[$key]['dispo_date'].' $mintsdiff=' . $mintsdiff.'attempts_c='.$val[$key]['attempts_c'].'<br>';
-               
-                //else if ($mintsdiff <= 1440 && ($val[$key]['attempts_c'] >= 1 && $val[$key]['attempts_c'] <= 3))
-                if ($val[$key]['attempts_c'] >= 1 && $val[$key]['attempts_c'] <= 3)
-                {
-                    $attempted_1_3[]   = 1;
-                    $attemplist[$val[$key]['batch_id']]['leads_attempted_1_3'] = (count($attempted_1_3));
-                }
-                //else if ($mintsdiff <= 1440 && ($val[$key]['attempts_c'] >= 4 && $val[$key]['attempts_c'] <= 6))
-                else if ($val[$key]['attempts_c'] >= 4 && $val[$key]['attempts_c'] <= 6)
-                {
-                    $attempted_4_6[]   = 1;
-                    $attemplist[$val[$key]['batch_id']]['leads_attempted_4_6'] = (count($attempted_4_6));
-                }
-                //else if ($mintsdiff <= 1440 && $row['attempts_c'] >= 6)
-                else if ($val[$key]['attempts_c'] > 6)
-                {   //echo 'helllooo';
-                    $attempted_more_6[]   = 1;
-                    $attemplist[$val[$key]['batch_id']]['leads_attempted_more_than_6'] = (count($attempted_more_6));
-                }
-                if ($mintsdiff > 1440)
-                {   //echo 'total=='.$toal; 
-                    
-                    $outside_TAT[]   = 1;
-                    $attemplist[$val[$key]['batch_id']]['leads_dialled_outside_TAT'] = (count($outside_TAT));
-                }
-                //echo '$toal='.$toal;
-            }
-        }
-
-        return $attemplist;
-        ///echo '<pre>';
-        //print_r($attemplist);
-
-    }
-    
     public function display()
     {
 
@@ -201,79 +141,32 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
 
         $managerSList    = $this->getCouncelorForAdmin('manager');
         $CouncellorsList = $this->getCouncelorForAdmin();
-        $lead_source     = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
+        
+        
 
-        foreach ($lead_source as $key => $value)
-        {
-            $exp_key = explode('_', $key);
-            if ($exp_key[0] == 'CC')
-            {
-                $arr_result[$key] = $value;
-            }
-        }
-        $lead_source = $arr_result;
-
-
-
-
-
-        if (!isset($_SESSION['cccon_from_date']))
-        {
-            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
-        }
-        if (!isset($_SESSION['cccon_to_date']))
-        {
-            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
-        }
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']      = $_REQUEST['batch'];
-            $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_managers'] = $_REQUEST['managers'];
+            $_SESSION['cccon_from_date']   = $_REQUEST['from_date'];
+            $_SESSION['cccon_to_date']     = $_REQUEST['to_date'];
+            $_SESSION['cccon_batch']       = $_REQUEST['batch'];
+            $_SESSION['cccon_batch_code']  = $_REQUEST['batch_code'];
+            $_SESSION['cccon_managers']    = $_REQUEST['managers'];
             $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
-            $_SESSION['cccon_status'] = $_REQUEST['status'];
+            $_SESSION['cccon_status']      = $_REQUEST['status'];
+            $_SESSION['cccon_status']      = $_REQUEST['status'];
+
+            $_SESSION['cccon_month'] = $_REQUEST['month'];
+            $_SESSION['cccon_years'] = $_REQUEST['years'];
         }
-        
-        //$_SESSION['cccon_from_date']='2017-10-11';
-        //$_SESSION['cccon_to_date']='2017-10-11'; 
-        
-        if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $selected_to_date   = $_SESSION['cccon_to_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            //$from_date          = "2017-10-01";
-            //$to_date            = "2017-10-05";
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' AND DATE(leads.date_entered) <= '" . $to_date . "'";
-        }
-        elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' ";
-        }
-        elseif ($_SESSION['cccon_from_date'] == "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_to_date = $_SESSION['cccon_to_date'];
-            $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            $wherecl          .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
-        }
-       
+
       
+
 
         $findBatch = array();
 
         if (!empty($_SESSION['cccon_batch_code']))
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
-        }
-
-        if (!empty($_SESSION['cccon_source']))
-        {
-            $selected_source = $_SESSION['cccon_source'];
         }
 
         if (!empty($_SESSION['cccon_status']))
@@ -288,9 +181,13 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
         {
             $selected_managers = $_SESSION['cccon_managers'];
         }
-        if (!empty($_SESSION['cccon_status']))
+        if (!empty($_SESSION['cccon_month']))
         {
-            $selected_status = $_SESSION['cccon_status'];
+            $selected_month = $_SESSION['cccon_month'];
+        }
+        if (!empty($_SESSION['cccon_years']))
+        {
+            $selected_years = $_SESSION['cccon_years'];
         }
 
 
@@ -301,63 +198,118 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
 
         if (!empty($selected_batch_code))
         {
-            $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
+            $wherecl .= " AND  batch_id IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
 
 
-        if (!empty($selected_source))
-        {
-            $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
-        }
-        
         if (!empty($selected_councellors))
         {
-            $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+            $wherecl .= " AND  user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
-  
+        
+        if (!empty($selected_month))
+        {
+            $wherecl .= " AND  month IN ('" . implode("','", $selected_month) . "')";
+        }
+        if (!empty($selected_years))
+        {
+            $wherecl .= " AND  year IN ('" . implode("','", $selected_years) . "')";
+        }
+
+
+        $months = array(1  => 'January', 2  => 'February', 3  => 'March', 4  => 'April', 5  => 'May', 6  => 'June', 7  => 'July',
+            8  => 'August', 9  => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
+
+        $current_year = date('Y');
+        $range        = range($current_year, $current_year - 5);
+        $yearsList    = array_combine($range, $range);
 
 
 
 
+       $leadSql = "SELECT id,
+                           user_name,
+                           user_id,
+                           reporting_to,
+                           month,
+                           year,
+                           target_gsv,
+                           target_unit,
+                           batch_code,
+                           batch_id,
+                           status,
+                           deleted,
+                           created_date         
+                     FROM agent_productivity_report
+                     WHERE STATUS=1 
+                     AND deleted=0 
+                     #AND YEAR(created_date)='2017' 
+                     $wherecl
+                     ORDER BY user_id,created_date DESC";
 
-        $leadSql = "SELECT COUNT(leads.id) AS lead_count,
-                            leads.date_entered,
-                            te_ba_batch.id AS batch_id,
-                            te_ba_batch.name AS batch_name,
-                            te_ba_batch.batch_code
-                     FROM leads
-                     LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                     WHERE leads.deleted=0 $wherecl
-                       #and leads.status!='Warm'
-                       #and leads.status_description!='Re-Enquired'
-                     GROUP  by  batch_code";
+        $leadObj = $db->query($leadSql);
 
-        $leadObj = $db->query($leadSql) or die(mysqli_error());
+        $ConversionArr = $this->getConversion();
 
-        $FresleadArr = $this->getFresh();
-        $attemptArr  = $this->getAttempts();
+        //echo '<pre>';
+        //print_r($ConversionArr);
 
-        while ($row = $db->fetchByAssoc($leadObj))
+        $key             = '';
+        $totalConversion = '';
+        $GSV             = '';
+        while ($row             = $db->fetchByAssoc($leadObj))
         {
 
-            $leadList[$row['batch_id']]['batch_id']     = $row['batch_id'];
-            $leadList[$row['batch_id']]['date_entered'] = $row['date_entered'];
-            $leadList[$row['batch_id']]['lead_count']   = $row['lead_count'];
-            $leadList[$row['batch_id']]['batch_name']   = $row['batch_name'];
-            $leadList[$row['batch_id']]['batch_code']   = $row['batch_code'];
-            $leadList[$row['batch_id']]['fresh_leads']  = isset($FresleadArr[$row['batch_id']]) ? $FresleadArr[$row['batch_id']] : 0;
+            if (isset($_SESSION['cccon_councellors']) && !empty($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_managers']))
+            {
+                //echo 'one';
+                $key = $row['user_id'] . '_' . $row['month'] . '_' . $row['year'];
+            }
+            else if (isset($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_managers']) && empty($_SESSION['cccon_councellors']))
+            {
+                //echo 'two';
+                $key = $row['user_id'] . '_' . $row['month'] . '_' . $row['year'] . '_' . $row['batch_id'];
+            }
+            else if (isset($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_councellors']))
+            {
+                //echo 'three';
+                $key = $row['user_id'] . '_' . $row['month'] . '_' . $row['year'];
+            }
 
-            $leadList[$row['batch_id']]['leads_dialled_outside_TAT']   = isset($attemptArr[$row['batch_id']]['leads_dialled_outside_TAT']) ? $attemptArr[$row['batch_id']]['leads_dialled_outside_TAT'] : 0;
-            $leadList[$row['batch_id']]['leads_attempted_1_3']         = isset($attemptArr[$row['batch_id']]['leads_attempted_1_3']) ? $attemptArr[$row['batch_id']]['leads_attempted_1_3'] : 0;
-            $leadList[$row['batch_id']]['leads_attempted_4_6']         = isset($attemptArr[$row['batch_id']]['leads_attempted_4_6']) ? $attemptArr[$row['batch_id']]['leads_attempted_4_6'] : 0;
-            $leadList[$row['batch_id']]['leads_attempted_more_than_6'] = isset($attemptArr[$row['batch_id']]['leads_attempted_more_than_6']) ? $attemptArr[$row['batch_id']]['leads_attempted_more_than_6'] : 0;
+            $totalConversion = isset($ConversionArr[$key]['Convertedcount']) ? $ConversionArr[$key]['Convertedcount'] : 0;
+            $GSV             = isset($ConversionArr[$key]['gsv']) ? $ConversionArr[$key]['gsv'] : 0;
+
+            $leadList[$key]['user_name']    = $row['user_name'];
+            $leadList[$key]['user_id']      = $row['user_id'];
+            $leadList[$key]['reporting_to'] = $row['reporting_to'];
+            $leadList[$key]['month']        = $row['month'];
+            $leadList[$key]['year']         = $row['year'];
+            $leadList[$key]['target_gsv']   = $row['target_gsv'];
+            $leadList[$key]['target_unit']  = $row['target_unit'];
+            $leadList[$key]['batch_code']   = $row['batch_code'];
+            $leadList[$key]['batch_id']     = $row['batch_id'];
+            $leadList[$key]['status']       = $row['status'];
+            $leadList[$key]['deleted']      = $row['deleted'];
+            $leadList[$key]['created_date'] = $row['created_date'];
+
+            $leadList[$key]['Conversions'] = $totalConversion;
+            $leadList[$key]['gsv']         = $GSV;
+
+            $leadList[$key]['percentage_target_achieved_units'] = (($totalConversion / $row['target_unit']) * 100);
+            $leadList[$key]['percentage_target_achieved_gsv']   = (($GSV / $row['target_gsv']) * 100);
+            $leadList[$key]['remaining_units']                  = ($row['target_unit'] - $totalConversion);
+            $leadList[$key]['remaining_gsv']                    = ($row['target_gsv'] - $GSV);
+        }
+
+
+        if ((!isset($_SESSION['cccon_managers']) && empty($_SESSION['cccon_managers'])) && (!isset($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_councellors'])))
+        {
+            $leadList = array();
         }
 
         //echo '<pre>';
         //print_r($leadList);
-
         #PS @Pawan
         $total     = count($leadList); #total records
         $start     = 0;
@@ -429,13 +381,15 @@ class AOR_ReportsViewagentproductivityreport extends SugarView
 
         $sugarSmarty->assign("selected_source", $selected_source);
         $sugarSmarty->assign("selected_managers", $selected_managers);
-         $sugarSmarty->assign("selected_councellors", $selected_councellors);
+        $sugarSmarty->assign("selected_councellors", $selected_councellors);
 
-
+        $sugarSmarty->assign("selected_month", $selected_month);
+        $sugarSmarty->assign("selected_years", $selected_years);
 
         $sugarSmarty->assign("CouncellorsList", $CouncellorsList);
         $sugarSmarty->assign("managerSList", $managerSList);
-
+        $sugarSmarty->assign("month", $months);
+        $sugarSmarty->assign("years", $yearsList);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);

@@ -52,9 +52,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'councellors')
     global $db;
     $option = '';
     $param  = $_POST['param'];
-
+    
+    $condition='';
     if (!empty($param))
     {
+        $condition = "and ru.id in ('" . implode("','", $param) . "')";
+    }
+    
+  
         $userSql  = "SELECT u.first_name,
                                 u.last_name,
                                 u.id,
@@ -67,14 +72,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'councellors')
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
                          WHERE aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
                            AND u.deleted=0 AND u.employee_status='Active'
-                           AND aru.deleted=0 and acl_roles.deleted=0 and ru.id in ('" . implode("','", $param) . "')";  
+                           AND aru.deleted=0 and acl_roles.deleted=0 $condition";  
         $userObj  = $db->query($userSql);
         $usersArr = [];
         while ($user     = $db->fetchByAssoc($userObj))
         {
             $option .= '<option value="' . $user['id'] . '">' . $user['first_name'] . ' ' . $user['last_name'] . '</option>';
         }
-    }
+    
 
     echo $option;
     die;
@@ -91,7 +96,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'DeleteTargetRepo')
 
     if ($RecordID!='')
     {
-        $updateSql = "UPDATE agent_productivity_report SET deleted=1 where id=$RecordID";
+        $updateSql = "UPDATE agent_productivity_report SET deleted=1,status=0 where id=$RecordID";
         $usObj = $GLOBALS['db']->Query($updateSql);
        
         if($usObj){
