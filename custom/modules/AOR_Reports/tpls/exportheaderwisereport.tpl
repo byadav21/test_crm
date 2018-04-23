@@ -69,7 +69,7 @@
                         </td>
                         <td nowrap="nowrap" >
                             <select name="status_description[]" class="multiselbox" multiple style="width:180px !important; height: 70px !important;" id="status_description">
-                                <option value="" {if isset($selected_status_description) && $selected_status_description ==''} selected="selected" {/if}>Select</option>
+                               
                                 {foreach from =$StatusDetails key=key item=val}
 
                                     <option value="{$key}"{if in_array($StatusDetails.$key, $selected_status_description)} selected="selected"{/if}>{$val}</option>
