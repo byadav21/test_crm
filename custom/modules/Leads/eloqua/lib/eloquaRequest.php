@@ -94,7 +94,7 @@ class EloquaRequest
         $this->responseInfo = curl_getinfo($this->ch);
         $httpCode = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
         
-         echo $httpCode;
+         echo '$httpCode='.$httpCode;
         if ($httpCode > 400) 
         {            
             //print_r($this->responseInfo);            
