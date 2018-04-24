@@ -27,9 +27,57 @@ class AOR_ReportsVieweloquaobjects extends SugarView
 
         $where   = "";
         $wherecl = "";
+        
+        
+//         [fieldValues] => Array
+//                (
+//                    [0] => keepemailId@here.com
+//                    [1] => keepemailId@here.com
+//                    [2] => Batch_code
+//                    [3] => Institute_Name
+//                    [4] => Batch_Status
+//                    [5] => Status
+//                    [6] => Status_description
+//                    [7] => Lead_source
+//                    [8] => Phone_mobile
+//                    [9] => UTM
+//                    [10] => Vendor
+//                    [11] => User_name
+//                    [12] => User_first_name
+//                    [13] => User_last_name
+//                    [14] => Program_Name
+//                    [15] => Attempts_c
+//                    [16] => UTM_term_c
+//                    [17] => UTM_source_c
+//                    [18] => UTM_campaign
+//                    [19] => City
+//                    [20] => Company
+//                    [21] => Functional_Area
+//                )
 
-
-
+        $headers = array(
+                         'Email'=>'Email',
+                         'EmailBatch'=>'EmailBatch',
+                        'Batch_code'=>'Batch_code',
+                        'Batch_Status'=>'Batch_Status',
+                        'Status'=>'Status',
+                        'Status_description'=>'Status_description',
+                        'Lead_source'=>'Lead_source',
+                        'Phone_mobile'=>'Phone_mobile',
+                        'UTM'=>'UTM',
+                        'Vendor'=>'Vendor',
+                        'User_name'=>'User_name',
+                        'User_first_name'=>'User_first_name',
+                        'User_last_name'=>'User_last_name',
+                        'Program_Name'=>'Program_Name',
+                        'Attempts_c'=>'Attempts_c',
+                        'UTM_term_c'=>'UTM_term_c',
+            'UTM_source_c'=>'UTM_source_c',
+            'UTM_campaign'=>'UTM_campaign',
+            'City'=>'City',
+            'Company'=>'Company',
+            'Functional_Area'=>'Functional_Area',
+              'Institute_Name'=>'Institute_Name');
 
 
        /*
@@ -77,7 +125,7 @@ class AOR_ReportsVieweloquaobjects extends SugarView
 
 
 
-        echo '<pre>'; print_r($leadList); die;
+        //echo '<pre>'; print_r($leadList); die;
         #PS @Pawan
         $total = count($leadList); #total records
 
@@ -130,7 +178,7 @@ class AOR_ReportsVieweloquaobjects extends SugarView
 
 
 
-
+        $sugarSmarty->assign("headers",$headers);
         $sugarSmarty->assign("SearchIt", $_SESSION['cccon_SearchIt']);
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
