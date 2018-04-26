@@ -48,10 +48,10 @@ class eloqua_contact
 
         $contactId = $response->id;
         
-         if($contactId){
+        if($contactId){
                 $db->query("update leads_cstm  set eloqua_contact_id=$contactId where  id_c='" .$bean->id."'");
-                $this->createLog($response);
-            }
+                $this->createLog($contact);
+        }
 
         //if ($contactId != '')
         //{
@@ -73,7 +73,7 @@ class eloqua_contact
 		       $BatchData =$db->fetchByAssoc($result_c);
 					
 
-            $contact = $contact = array(
+          $contact = array(
                 'type'        => 'CustomObjectData',
 		'contactId'   =>$contactId,
                 'fieldValues' =>
@@ -102,6 +102,8 @@ class eloqua_contact
                     21 => array('id' => 170, 'value' => isset($BatchData['institutes_name'])? $BatchData['institutes_name']: '')
                 ),
             );
+            
+            $debugArr = 
 
       
 
@@ -109,8 +111,8 @@ class eloqua_contact
 
             $contactIdx = $response->id;
             if($contactIdx){
-                $db->query("update leads_cstm  set eloqua_customobject_id=$contactId where  id_c='" .$bean->id."'");
-                $this->createLog($response);
+                $db->query("update leads_cstm  set eloqua_customobject_id=$contactIdx where  id_c='" .$bean->id."'");
+                $this->createLog($contact);
             }
         //}
        
