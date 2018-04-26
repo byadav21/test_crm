@@ -80,12 +80,15 @@ class FalconideEmail
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                'deepak.sharma@talentedge.in', 'eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
-                'amit.arora@talentedge.in', 'pramod.singh@talentedge.in', 'ishant.khanna@talentedge.in',
+                'ritika.nayak@talentedge.in',
+                //'eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
+                //'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
+                
                 //Marketing Team :
-                'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in', 'vivek.bathla@talentedge.in',
+                'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
+                'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in','vaibhav.gupta@talentedge.in',
                 //BA Team :
-                'duke.banerjee@talentedge.in', 'harsh.malik@talentedge.in'
+                'duke.banerjee@talentedge.in'
                 ),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '

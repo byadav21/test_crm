@@ -348,11 +348,16 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_JAL'=>'TBA JALANDHAR',   
   'OO_NAG'=>'TBA NAGPUR',
   'OO_GGN'=>'TBA GGN 2',
+  'OO_TBA_Jamshedpur'=>'TBA Jamshedpur',
   'OO_CHN'=>'Channels',
   'OO_AG' =>'Avenue Growth',
   'OO_Netambit' =>'Netambit',
   'OO_TBAHYD2'=>'TBA HYD 2',
   'OO_N_CORP'=>'N CORP',
+  'OO_nitashi_delhi'=>'Nitashi Delhi',
+  'OO_nitashi_noida'=>'Nitashi Noida',
+  'OO_Skolege_Dwarka'=>'Skolege Dwarka',
+  'OO_Akashline_Shahdara'=>'Akashline Shahdara',
 
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';

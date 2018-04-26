@@ -7,12 +7,12 @@ class leads_override extends Lead {
 	public function __construct() {
 		parent::__construct();
 	}
-	
+	//corp_rbs
 	
 	public function fetchUtm($source,$medium,$term){
 		 global $db;
 		 
-		$sql="select u.te_ba_batch_id_c,u.name,b.d_campaign_id,b.d_lead_id from te_utm u 
+		$sql="select u.te_ba_batch_id_c,u.name,b.d_campaign_id,b.d_lead_id,tv.id AS vendor_id from te_utm u 
 					inner join te_vendor_te_utm_1_c v on v.te_vendor_te_utm_1te_utm_idb=u.id 
 					inner join te_vendor tv on tv.id=v.te_vendor_te_utm_1te_vendor_ida and tv.name='$source' 
 					inner join te_ba_batch b on b.id=u.te_ba_batch_id_c and b.batch_code='$term'
@@ -22,6 +22,21 @@ class leads_override extends Lead {
 		 if($db->getRowCount($results)>0){
 			 $utm=$db->fetchByAssoc($results);
 			 return $utm;
+		 }else{
+			return false;	 
+		 }
+	}
+	public function fetchVendorWithUsers($source){
+		 global $db;
+		 
+		$sql="select uvr.te_vendor_users_1users_idb as u_id,v.id AS vendor_id from te_vendor AS v
+					inner join te_vendor_users_1_c AS uvr on uvr.te_vendor_users_1te_vendor_ida=v.id and v.name='$source' 
+					where v.deleted=0 and uvr.deleted=0 "; 
+						
+		 $results=$db->query($sql);
+		 if($db->getRowCount($results)>0){
+			 $vendor=$db->fetchByAssoc($results);
+			 return $vendor;
 		 }else{
 			return false;	 
 		 }

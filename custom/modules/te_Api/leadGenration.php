@@ -17,12 +17,24 @@
 	$uname='';
 	$campagain_d='';
 	$lead_d='';
-	//if($source && $medium && $term  && $email)
-        //echo "LeadGenration";
-        //print_r($_REQUEST); die;
+	$vendor_id = '';
+	$vendor_user_id = '';
+	
+	$lead_source_types = '';
+   $lead_source = '';
+	
+	
         if($phone || $email)
             {
-
+				  if($source){
+				   $vendorUsers=	$leadObj->fetchVendorWithUsers($source);
+				   
+				   if($vendorUsers){
+				   	$vendor_id = $vendorUsers['vendor_id'];
+				   	$vendor_user_id = $vendorUsers['u_id'];
+				   }
+				   			  
+				  }#echo "<pre>";print_r($vendorUsers);exit();
               $utm=	$leadObj->fetchUtm($source,$medium,$term);
                  if($utm)
                      {
@@ -109,7 +121,13 @@
 	}
         
 
-
+		  if($vendor_id && $vendor_user_id){
+				$statusDetail='Follow Up';
+				$lead_source_types = 'OO';
+				$lead_source = 'OO'.'_'.strtoupper($source);
+				$autoassign='No';
+				$assigned_user_id=$vendor_user_id;
+		  }
 	$leadObj->first_name=$name;
 	$leadObj->duplicate_check= $duplicate_check;
 	$leadObj->email1= $email;
@@ -117,6 +135,8 @@
         $leadObj->phone_mobile= $phone;
 	$leadObj->status=$status;
 	$leadObj->status_description=$statusDetail;
+	$leadObj->lead_source=$lead_source;
+	$leadObj->lead_source_types=$lead_source_types;
 	if($_REQUEST['work_experience'])  $leadObj->work_experience_c=$_REQUEST['work_experience'];
 	if($_REQUEST['education']) $leadObj->education_c= $_REQUEST['education'];
 	if($_REQUEST['city']) $leadObj->primary_address_city= $_REQUEST['city'];

@@ -596,9 +596,29 @@ class addPaymentClass
     {
         ini_set("display_errors", 0);
         error_reporting(0);
-        global $db;
+        global $db,$current_user;
 
+		if((!isset($_SESSION['user_cp_vendor']) || empty($_SESSION['user_cp_vendor'])) && ($bean->utm_source_c)){
+			$sql="select v.name AS vendor,uvr.te_vendor_users_1users_idb AS userid from te_vendor AS v
+					inner join te_vendor_users_1_c AS uvr on uvr.te_vendor_users_1te_vendor_ida=v.id and v.name='$bean->utm_source_c' 
+					where v.deleted=0 and uvr.deleted=0 limit 0,1"; 
+						
+			$results=$db->query($sql);
+			if($db->getRowCount($results)>0){
+				$vendor=$db->fetchByAssoc($results);
+				$bean->assigned_user_id = $vendor['userid'];
+				$_SESSION['user_cp_vendor'] = $vendor;
+			}
+			
+		}
+		
         $bean->email_add_c=$bean->email1;
+        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
+        {
+		    $bean->lead_source='OO'.'_'.strtoupper($_SESSION['user_cp_vendor']['vendor']);;
+			$bean->lead_source_types='OO';
+			
+        }
         // Capture the date of referral creation
         if (isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']))
         {
@@ -690,11 +710,19 @@ class addPaymentClass
 				$beanData                 = $GLOBALS['db']->fetchByAssoc($re);
 				if($beanData['status']=='Dead'){
 					$bean->status             = 'Alive';
-					$bean->status_description = 'New Lead';
+					if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor'])){
+						$bean->status_description='Follow Up';
+						$bean->autoassign= 'No';	
+					}
+					else{
+						$bean->status_description = 'New Lead';
+						$bean->assigned_user_id   = NULL;
+						$bean->autoassign= 'Yes';					
+					}
+					
 					$bean->duplicate_check    = '1';
 					
-					$bean->assigned_user_id   = NULL;
-					$bean->autoassign= 'Yes';
+					
 				}
 				else{
 					$bean->status             = 'Warm';
@@ -730,6 +758,11 @@ class addPaymentClass
 				}
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
+             if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
+       		 {
+		    		$bean->assigned_user_id = $current_user->id;
+		    		$bean->autoassign == 'No';
+        		 }
             $bean->vendor           = ($bean->utm_source_c)? $bean->utm_source_c : 'NA_VENDOR';   // $vendor_id['id'];
             if(!$bean->utm) $bean->utm='NA';
             $bean->te_ba_batch_id_c = $batch_id['id'];
@@ -776,11 +809,16 @@ class addPaymentClass
 					$data                     = $GLOBALS['db']->fetchByAssoc($re);
 					if($data['status']=='Dead'){
 						$bean->status             = 'Alive';
-						$bean->status_description = 'New Lead';
+						if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor'])){
+							$bean->status_description='Follow Up';
+							$bean->autoassign= 'No';
+					   }
+					   else{
+						 	$bean->status_description = 'New Lead';
+						 	$bean->assigned_user_id   = NULL;
+						 	$bean->autoassign= 'Yes';					
+					   }
 						$bean->duplicate_check    = '1';
-						
-						$bean->assigned_user_id   = NULL;
-						$bean->autoassign= 'Yes';
 					}
 					else{
 						$bean->status             = 'Warm';
