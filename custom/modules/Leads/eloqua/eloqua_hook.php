@@ -9,12 +9,11 @@ ini_set('display_errors', 'On');
 class eloqua_contact
 {
     
-    function createLog($curl_post_data)
+    function createLog($req)
     {
         $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/eloqua_log.txt", "a");
         fwrite($file, date('Y-m-d H:i:s') . "\n");
         fwrite($file, $req . "\n");
-        fwrite($file, $res . "\n");
         fclose($file);
     }
 
