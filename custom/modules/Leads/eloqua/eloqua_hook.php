@@ -13,7 +13,7 @@ class eloqua_contact
     {
         $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/eloqua_log.txt", "a");
         fwrite($file, date('Y-m-d H:i:s') . "\n");
-        fwrite($file, $req . "\n");
+        fwrite($file, print_r($req, TRUE) . "\n");
         fclose($file);
     }
 
