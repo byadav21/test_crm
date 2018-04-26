@@ -53,10 +53,10 @@ class eloqua_contact
                 $this->createLog($response);
             }
 
-        if ($contactId != '')
-        {
+        //if ($contactId != '')
+        //{
 
-            $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
+            //$client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
             
             
             $result_c =$db->query("SELECT 
@@ -107,12 +107,12 @@ class eloqua_contact
 
             $response = $client->post('data/customObject/7', $contact);
 
-            $contactId = $response->id;
-            if($contactId){
+            $contactIdx = $response->id;
+            if($contactIdx){
                 $db->query("update leads_cstm  set eloqua_customobject_id=$contactId where  id_c='" .$bean->id."'");
                 $this->createLog($response);
             }
-        }
+        //}
        
     }
 
