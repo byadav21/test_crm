@@ -80,7 +80,7 @@ class eloqua_contact
                 'fieldValues' =>
                 array(
                     0  => array('id' => '150', 'value' => $bean->email_add_c),
-                    1  => array('id' => 151, 'value' => $bean->email_add_c),
+                    1  => array('id' => 151, 'value' => $bean->email_add_c.'_'.$BatchData['batch_code']),
                     2  => array('id' => 152, 'value' => isset($BatchData['batch_code'])? $BatchData['batch_code']: ''),
                     3  => array('id' => 171, 'value' => isset($BatchData['batch_status'])? $BatchData['batch_status']: ''),
                     4  => array('id' => 153, 'value' => $bean->status),
