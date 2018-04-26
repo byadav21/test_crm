@@ -81,6 +81,24 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $BatchListData   = $this->getBatch();
         $VendorListData  = $this->getVendors();
         $error           = array();
+        
+        $selected_batch              = '';
+        $selected_batch_code         = '';
+        $selected_vendor             = '';
+        $selected_program            = '';
+        $selected_mobile             = '';
+        $selected_email              = '';
+        $selected_status             = '';
+        $selected_status_description = '';
+        $selected_lead_source_types  = '';
+        $selected_source             = '';
+        $selected_autoassign         = '';
+        $selected_ameyo_status       = '';
+        $selected_campaignIDs        = '';
+        $selected_leadIDs            = '';
+        $left                        = '';
+        $IDs                         = '';
+        $selected_headers            = array();
 
         foreach ($BatchListData as $val)
         {
@@ -107,20 +125,20 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         {
             $_SESSION['cccon_from_date']          = $_REQUEST['from_date'];
             $_SESSION['cccon_to_date']            = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']              = $_REQUEST['batch'];
-            $_SESSION['cccon_batch_code']         = $_REQUEST['batch_code'];
-            $_SESSION['cccon_vendors']            = $_REQUEST['vendors'];
-            $_SESSION['cccon_headers']            = $_REQUEST['headers'];
-            $_SESSION['cccon_mobile']             = $_REQUEST['mobile'];
-            $_SESSION['cccon_email']              = $_REQUEST['email'];
-            $_SESSION['cccon_status']             = $_REQUEST['status'];
-            $_SESSION['cccon_status_description'] = $_REQUEST['status_description'];
-            $_SESSION['cccon_lead_source_types']  = $_REQUEST['lead_source_types'];
-            $_SESSION['cccon_source']             = $_REQUEST['source'];
-            $_SESSION['cccon_autoassign']         = $_REQUEST['autoassign'];
-            $_SESSION['cccon_ameyo_status']       = $_REQUEST['ameyo_status'];
-            $_SESSION['cccon_campaignIDs']        = $_REQUEST['campaignIDs'];
-            $_SESSION['cccon_leadIDs']            = $_REQUEST['leadIDs'];
+            $_SESSION['cccon_batch']              = isset($_REQUEST['batch']) ? $_REQUEST['batch']:'';
+            $_SESSION['cccon_batch_code']         = isset($_REQUEST['batch_code']) ? $_REQUEST['batch_code']:array();
+            $_SESSION['cccon_vendors']            = isset($_REQUEST['vendors']) ? $_REQUEST['vendors']:array();
+            $_SESSION['cccon_headers']            = isset($_REQUEST['headers']) ? $_REQUEST['headers']: array();
+            $//_SESSION['cccon_mobile']             = $_REQUEST['mobile'];
+            //$_SESSION['cccon_email']              = $_REQUEST['email'];
+            $_SESSION['cccon_status']             = isset($_REQUEST['status']) ? $_REQUEST['status']: array();
+            $_SESSION['cccon_status_description'] = isset($_REQUEST['status_description']) ? $_REQUEST['status_description']: array();;
+            //$_SESSION['cccon_lead_source_types']  = $_REQUEST['lead_source_types'];
+            //$_SESSION['cccon_source']             = $_REQUEST['source'];
+            //$_SESSION['cccon_autoassign']         = $_REQUEST['autoassign'];
+            //$_SESSION['cccon_ameyo_status']       = $_REQUEST['ameyo_status'];
+            //$_SESSION['cccon_campaignIDs']        = $_REQUEST['campaignIDs'];
+            //$_SESSION['cccon_leadIDs']            = $_REQUEST['leadIDs'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -201,61 +219,21 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $wherecl .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "')";
         }
 
-        //echo  "xx==".$_SESSION['cccon_mobile']; die;
-        if ($_SESSION['cccon_mobile'] != "")
-        {
-            $selected_mobile = $_SESSION['cccon_mobile'];
-            $wherecl         .= " AND (leads.phone_mobile='" . $_SESSION['cccon_mobile'] . "' || leads.phone_home='" . $_SESSION['cccon_mobile'] . "' "
-                    . " || leads.phone_work='" . $_SESSION['cccon_mobile'] . "' || leads.phone_other='" . $_SESSION['cccon_mobile'] . "')";
-        }
+       
 
-        if ($_SESSION['cccon_email'] != "")
-        {
-            $selected_email = $_SESSION['cccon_email'];
-            $wherecl        .= " AND  ed.email_address ='" . $selected_email . "'";
-        }
-
+       
         if ($_SESSION['cccon_status'] != "")
         {
             $selected_status = $_SESSION['cccon_status'];
             $wherecl         .= " AND  leads.status IN ('" . implode("','", $selected_status) . "')";
         }
-        if ($_SESSION['cccon_status_description'] != "")
+        if (!empty($selected_status_description))
         {
+            
             $selected_status_description = $_SESSION['cccon_status_description'];
             $wherecl                     .= " AND  leads.status_description IN ('" . implode("','", $selected_status_description) . "')";
         }
-        if ($_SESSION['cccon_lead_source_types'] != "")
-        {
-            $selected_lead_source_types = $_SESSION['cccon_lead_source_types'];
-            $wherecl                    .= " AND  leads.lead_source_types ='" . $selected_lead_source_types . "'";
-        }
-        if (!empty($selected_source))
-        {
-
-            $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
-        }
-        if ($_SESSION['cccon_autoassign'] != "")
-        {
-            $selected_autoassign = $_SESSION['cccon_autoassign'];
-            $wherecl             .= " AND  leads.autoassign ='" . $selected_autoassign . "'";
-        }
-        if ($_SESSION['cccon_ameyo_status'] != "")
-        {
-            $selected_ameyo_status = $_SESSION['cccon_ameyo_status'];
-            $wherecl               .= " AND  leads.neoxstatus ='" . $selected_ameyo_status . "'";
-        }
-        if ($_SESSION['cccon_campaignIDs'] != "")
-        {
-            $selected_campaignIDs = $_SESSION['cccon_campaignIDs'];
-            $wherecl              .= " AND  leads.dristi_campagain_id ='" . $_SESSION['cccon_campaignIDs'] . "'";
-        }
-        if ($_SESSION['cccon_leadIDs'] != "")
-        {
-            $selected_leadIDs = $_SESSION['cccon_leadIDs'];
-            $wherecl          .= " AND  leads.dristi_API_id ='" . $_SESSION['cccon_leadIDs'] . "'";
-        }
-
+       
 
 
         $lead_source        = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
@@ -319,14 +297,17 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'Re-Enquired'            => 'Re-Enquired',
             'Prospect'               => 'Prospect',
             'Recycle'                => 'Recycle');
-
+        
+        if(!empty($selected_headers)){
         $headersss = implode(",", $selected_headers);
-        if (empty($headersss))
+        }
+        if (empty($selected_headers))
         {
             $headersss      = 'leads.id';
             $error['error'] = 'Please Select a Header.';
         }
-        if ((!empty($headersss)) && (!in_array("ID", $headersss)))
+        //print_r($selected_headers); die;
+        if ((!empty($selected_headers)) && (!in_array("leads.id", $selected_headers)))
         {
             $IDs = "leads.id,";
         }
@@ -366,24 +347,27 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         if ($Days >= 0 && $Days <= 93 && $wherecl != '')
         {
 
-            $leadObj = $db->query($leadSql) or die(mysqli_error());
+            $leadObj = $db->query($leadSql);
         }
         else
         {
             $dayFlag        = TRUE;
             $error['error'] = 'Please Export Data between 3 months.';
         }
-
+        
 
         while ($row = $db->fetchByAssoc($leadObj))
         {
             $leadList[$row['id']] = $row;
         }
+        //echo '<pre>';print_r($leadList);
 
         if (empty($leadList) && $dayFlag === FALSE)
         {
             $error['error'] = "No Data Found.";
         }
+        
+        
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
