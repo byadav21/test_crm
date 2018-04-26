@@ -103,6 +103,9 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyuploadreport',
 $module_menu[] = array ('index.php?module=AOR_Reports&action=productivityform', "Create Target Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=agentproductivityreport', "Agent Productivity Report", 'AOR_Reports');
 
+$module_menu[] = array ('index.php?module=AOR_Reports&action=eloquacontacts', "Eloqua Contacts", 'AOR_Reports');
+$module_menu[] = array ('index.php?module=AOR_Reports&action=eloquaobjects', "Eloqua Objects", 'AOR_Reports');
+
 if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1){
 $module_menu[] = array ('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
 }
