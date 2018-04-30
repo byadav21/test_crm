@@ -83,8 +83,10 @@ class eloqua_contact
             
             //echo "<pre>bean="; print_r($bean);
             //echo 'leadId='.$bean->id.'$response->id='.$responsex->id."<pre>inCreate="; print_r($responsex); die;
+            $contactIDXX='';
             if ($responsex->id!='')
-            {  
+            {   
+                $contactIDXX = $responsex->id;
                 $db->query("update leads_cstm  set eloqua_contact_id=$responsex->id where  id_c='" . $bean->id . "'");
             }
 
@@ -109,7 +111,7 @@ class eloqua_contact
 
             $contact = array(
                 'type'        => 'CustomObjectData',
-                'contactId'   => $contactId,
+                'contactId'   => $contactIDXX,
                 'fieldValues' =>
                 array(
                     0  => array('id' => '150', 'value' => isset($bean->email_add_c) ? $bean->email_add_c : ''),
