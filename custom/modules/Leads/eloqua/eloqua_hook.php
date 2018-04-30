@@ -24,28 +24,32 @@ class eloqua_contact
 
         //echo "<pre>"; print_r($bean);
 
-        $leadObj       = $db->query("SELECT eloqua_contact_id,eloqua_customobject_id FROM leads_cstm where id_c='" . $bean->id . "'");
+        $leadObj       = $db->query("SELECT eloqua_contact_id,eloqua_customobject_id,bb.batch_status FROM  leads_cstm
+                                    inner join te_ba_batch bb on leads_cstm.te_ba_batch_id_c=bb.id
+                                     where id_c='" . $bean->id . "'");
         $leadsCstmData = $db->fetchByAssoc($leadObj);
 
 
         if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '')
         {
-
+            
             $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
 
 
             $contact = array(
-                'type'        => 'CustomObjectData',
-                'contactId'   => $contactId,
+                
+                'id'   => $leadsCstmData['eloqua_customobject_id'],
                 'fieldValues' =>
                 array(
-                    0 => array('id' => 171, 'value' => isset($BatchData['batch_status']) ? $BatchData['batch_status'] : ''),
-                    1 => array('id' => 153, 'value' => $bean->status),
-                    2 => array('id' => 154, 'value' => $bean->status_description),
+                   
+                    0 => array('type'=>'FieldValue','id' => 153, 'value' => $bean->status),
+                    1 => array('type'=>'FieldValue','id' => 154, 'value' => $bean->status_description),
+                    2 => array('type'=>'FieldValue','id' => 171, 'value' => isset($leadsCstmData['batch_status']) ? $leadsCstmData['batch_status'] : ''),
                 ),
             );
 
-            //echo "<pre>inUpdate="; print_r($contact); die;
+            //echo "<pre>inUpdate="; print_r($contact); 
+            //echo json_encode($contact); die;
 
             $response = $client->put('/data/customObject/7/instance/' . $leadsCstmData['eloqua_customobject_id'], $contact);
 
@@ -56,7 +60,7 @@ class eloqua_contact
 
             $client  = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
             $contact = array();
-            $contactId='';
+            $contactIDXX='';
             // instantiate a new instance of the Contact class  
             $contact = array(
                 'emailAddress'  => $bean->email_add_c,
@@ -83,11 +87,11 @@ class eloqua_contact
             
             //echo "<pre>bean="; print_r($bean);
             //echo 'leadId='.$bean->id.'$response->id='.$responsex->id."<pre>inCreate="; print_r($responsex); die;
-            $contactIDXX='';
+            
             if ($responsex->id!='')
             {   
-                //$contactIDXX = $responsex->id;
-                $db->query("update leads_cstm  set eloqua_contact_id=$responsex->id where  id_c='" . $bean->id . "'");
+                $contactIDXX = $responsex->id;
+                $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  id_c='" . $bean->id . "'");
             }
 
             //if ($contactId != '')
@@ -111,7 +115,7 @@ class eloqua_contact
 
             $contact = array(
                 'type'        => 'CustomObjectData',
-                'contactId'   => $responsex->id,
+                'contactId'   => $contactIDXX,
                 'fieldValues' =>
                 array(
                     0  => array('id' => '150', 'value' => isset($bean->email_add_c) ? $bean->email_add_c : ''),
