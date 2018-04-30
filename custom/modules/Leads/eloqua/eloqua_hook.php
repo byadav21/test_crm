@@ -85,7 +85,7 @@ class eloqua_contact
             //echo 'leadId='.$bean->id.'$response->id='.$responsex->id."<pre>inCreate="; print_r($responsex); die;
             if ($responsex->id!='')
             {  
-                $db->query("update leads_cstm  set eloqua_contact_id=$contactId where  id_c='" . $bean->id . "'");
+                $db->query("update leads_cstm  set eloqua_contact_id=$responsex->id where  id_c='" . $bean->id . "'");
             }
 
             //if ($contactId != '')
@@ -138,14 +138,14 @@ class eloqua_contact
             );
 
             //echo "<pre>in Object Create="; print_r($contact); die;
-            $contactIdx='';
+          
             $response = $client->post('data/customObject/7', $contact);
             $this->createLog($response,'{On LeadObjec Create}');
 
             if ($response->id!='')
             {
-                $contactIdx = $response->id;
-                $db->query("update leads_cstm  set eloqua_customobject_id=$contactIdx where  id_c='" . $bean->id . "'");
+                //$contactIdx = $response->id;
+                $db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
               
             }
             //}
