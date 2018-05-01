@@ -12,78 +12,78 @@ require_once('custom/modules/Leads/eloqua/lib/eloquaRequest.php');
 global $db;
 error_reporting(-1);
 ini_set('display_errors', 'On');
+
 class eloquaRuntime
 {
-
-    public $fromDate;
-    public $toDate;
-
-    public function __construct()
+    
+    public function getBatch()
     {
-        $this->fromDate = date('Y-m-d');
-        $this->toDate   = date('Y-m-d');
+        global $db;
+        $batchSql     = "SELECT id,batch_code FROM te_ba_batch WHERE  deleted=0 order by name";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+            $batchOptions[$row['batch_code']] = $row['id'];
+        }
+        return $batchOptions;
     }
-
+    
     public function main()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        
-         $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
 
-
+        $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
+        $batchData = $this->getBatch();
         
+        //print_r($batchData); die;
+
         $leadListData = array();
-        $restultCount = 10;
-        $page =1;
-        
+        $restultCount = 1000;
+        $page         = 1;
+        $slug         = '';
+
+        //$AutomateArr = array(1=>10,2=>20);
+        //foreach ($AutomateArr as $key=>$val)  { }
         //700
-        for ($i = 1; $i <= 1; $i++)
+
+        for ($i = 1; $i <= 10; $i++)
         {
+            echo "data/customObject/7?count=$restultCount&page=$i<br>";
+            $response = $client->get("data/customObject/7?count=$restultCount&page=$i");
+            $array    = json_decode(json_encode($response), true);
 
-            //$response = $client->get("data/contacts?count=$restultCount&page=$i" . $slug, $contact);
-            
-            $response = $client->get("data/customObject/7?count=$restultCount&page=$i" . $slug, $contact);
-            if (!empty($response->elements))
+
+            if (!empty($array['elements']))
             {
-
-               /* 
-                foreach ($response->elements as $key => $val)
-                
+                foreach ($array['elements'] as $key => $val)
                 {
-                    //echo 'xxx'.$val->id;
-                    $leadList[$val->id]['id']           = $val->id;
-                    $leadList[$val->id]['name']         = $val->name;
-                    $leadList[$val->id]['emailAddress'] = $val->emailAddress;
-                }
-               */
-                foreach ($response->elements as $key => $val)
-                    {  
+                    $leadListData[$val['id']]['email'] = isset($val['fieldValues'][0]['value']) ? $val['fieldValues'][0]['value'] : '';
+                    $leadListData[$val['id']]['batch_code'] = isset($val['fieldValues'][2]['value']) ? $val['fieldValues'][2]['value'] : '';
+                    
+                    $objectID                          = $val['id'];
+                    $emailID                           = isset($val['fieldValues'][0]['value']) ? $val['fieldValues'][0]['value'] : '';
+                    $bathCode                          = isset($val['fieldValues'][2]['value']) ? $val['fieldValues'][2]['value'] : '';
 
-                        foreach ($val->fieldValues as $keyx => $valxx)
-                        {
-                            $leadList[$val->id]['email'][0] = isset($valxx)? $valxx :'N/A';
-                            $leadList[$val->id]['email'][0] = isset($valxx)? $valxx :'N/A';
-                        }
+                    if ($emailID != '' && $bathCode!='')
+                    {   
+                        $batchID = isset($batchData[$bathCode])? $batchData[$bathCode] : '';
+                  //echo "update leads_cstm set eloqua_customobject_id=$objectID where email_add_c='$emailID' and te_ba_batch_id_c='$batchID'<br>";
+                        $re = $GLOBALS['db']->query("update leads_cstm set eloqua_customobject_id=$objectID where email_add_c='$emailID' and te_ba_batch_id_c='$batchID'");
+                        
                     }
-
-                echo '<pre>';
-                print_r($leadList);
-            }
-        }
+                    else if($emailID != '' && $bathCode==''){
+                        
+                         $re = $GLOBALS['db']->query("update leads_cstm set eloqua_customobject_id=$objectID where email_add_c='$emailID'");
+                    }
+                }
+            } // End of empty array
+        } // End of For loop
+        echo '<pre>'; print_r($leadListData);
     }
 
 }
 
-$mainObj           = new eloquaRuntime();
-//$mainObj->toDate   = '2017-09-30';
-//$mainObj->fromDate = '2017-09-01';
-if (strtotime($mainObj->fromDate) == strtotime($mainObj->toDate))
-{
-    $fromDate = date('Y-m-d', (strtotime('-1 day', strtotime($mainObj->fromDate))));
-}
-
-$mainObj->toDate   = $fromDate;
-$mainObj->fromDate = $fromDate;
-
+$mainObj = new eloquaRuntime();
 $mainObj->main();
 
