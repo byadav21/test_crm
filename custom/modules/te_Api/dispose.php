@@ -8,6 +8,27 @@ require_once('modules/te_neox_call_details/te_neox_call_details.php');
 global $db,$current_user;
 
 
+ 
+  $crmDispo = array('New Lead'=>'Alive',
+                    'Follow Up'=>'Alive',
+                    'Converted'=>'Converted',
+      
+                    'Dead Number'=>'Dead',
+                    'Wrong Number'=>'Dead',
+                    'Ringing Multiple Times'=>'Dead',
+                    'Not Enquired'=>'Dead',
+                    'Not Eligible'=>'Dead',
+                    'Fallout'=>'Dead',
+                    'Cross Sell'=>'Dead',  //New
+                    'Not interested'=>'Dead', //New
+                    'Next Batch'=>'Dead', //New
+      
+                    'Duplicate'=>'Duplicate',
+                    'Dropout'=>'Dropout',
+                    'Prospect'=>'Warm',
+                    'Recycle'=>'Recycle'
+                    );
+
 function createLog($req,$action)
     {
         $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/new_dispose_log.txt", "a");
@@ -71,7 +92,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
 
     $phone = $_REQUEST['phone'];
-    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != '')
+    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] !='null')
     {
         $lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where  id='" . $_REQUEST['lead_reference'] . "' and deleted=0 and status!='Duplicate' ";
     }
@@ -89,11 +110,30 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     
     
     // Update leads Dispostion
-    if($current_user=='82b2ecdd-3a43-03e0-2dbe-590eb330122f'){
-        
-        createLog($_REQUEST,'pawan-dispostion');
-                
+    $dispositionCode = '';
+    $dispositionCode = $_REQUEST['dispositionCode'];
+    if ($dispositionCode != 'null')
+    {
+
+        $debugArr = array('lead_id'           => $records['id'],
+            'dispostion'        => $_REQUEST['dispositionCode'],
+            'status'            => $crmDispo[$dispositionCode],
+            'entryPoint'        => $_REQUEST['entryPoint'],
+            'phone'             => $_REQUEST['phone'],
+            'dispositionName'   => $_REQUEST['dispositionName'],
+            'systemDisposition' => $_REQUEST['systemDisposition'],
+            'callType'          => $_REQUEST['callType']);
+
+        if ($dispositionCode != 'wrap.timeout')  // excluding wrap.timeout 
+        {
+
+            $db->query("update leads set status='".$crmDispo[$dispositionCode]."', status_description='".$dispositionCode."' where id='" . $records['id'] . "'");
+        }
+
+        createLog($debugArr, 'pawan-dispostion');
     }
+
+
 
     if ($_REQUEST['callType'] == 'manual.dial.customer')
     {
