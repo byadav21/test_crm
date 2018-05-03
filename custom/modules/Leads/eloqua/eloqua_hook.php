@@ -24,7 +24,8 @@ class eloqua_contact
         $leadsCstmData = array();
 
         //echo "<pre>"; print_r($bean);
-
+        
+       if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import"){  
         $leadObj       = $db->query("SELECT eloqua_contact_id,eloqua_customobject_id,bb.batch_status FROM  leads_cstm
                                     inner join te_ba_batch bb on leads_cstm.te_ba_batch_id_c=bb.id
                                      where id_c='" . $bean->id . "'");
@@ -33,7 +34,7 @@ class eloqua_contact
         }
         
 
-if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '' && !isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
+if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '')
         {
             
             $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
@@ -161,6 +162,10 @@ if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '' && 
             }
             //}
         }
+        
+    }
+    
+    
     }
 
 }
