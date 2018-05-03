@@ -99,8 +99,10 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     }
     else
     {
-
-        $lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
+        
+           $lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where phone_mobile='$phone' and status!='Duplicate' and deleted=0 ";
+        
+        //$lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
     }
     $res = $db->query($lead);
     if ($db->getRowCount($res) > 0)
