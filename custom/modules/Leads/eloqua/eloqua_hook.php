@@ -21,16 +21,19 @@ class eloqua_contact
     function add_leads_eloqua($bean, $event, $arguments)
     {
         global $db;
+        $leadsCstmData = array();
 
         //echo "<pre>"; print_r($bean);
 
         $leadObj       = $db->query("SELECT eloqua_contact_id,eloqua_customobject_id,bb.batch_status FROM  leads_cstm
                                     inner join te_ba_batch bb on leads_cstm.te_ba_batch_id_c=bb.id
                                      where id_c='" . $bean->id . "'");
-        $leadsCstmData = $db->fetchByAssoc($leadObj);
+        if($leadObj){
+            $leadsCstmData = $db->fetchByAssoc($leadObj);
+        }
+        
 
-
-        if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '')
+if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '' && !isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
         {
             
             $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
@@ -98,7 +101,7 @@ class eloqua_contact
             //{
             //$client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
 
-
+            $BatchData = array();
             $result_c  = $db->query("SELECT 
                                     bb.batch_code,
                                     bb.batch_status,
@@ -110,7 +113,9 @@ class eloqua_contact
                         LEFT JOIN `te_in_institutes` inst ON inst_rel.te_in_institutes_te_ba_batch_1te_in_institutes_ida=inst.id
                         LEFT JOIN  `te_pr_programs` prog ON pr_rel.te_pr_programs_te_ba_batch_1te_pr_programs_ida=prog.id 
                         WHERE  bb.id ='" . $bean->te_ba_batch_id_c . "'");
+            if($result_c){
             $BatchData = $db->fetchByAssoc($result_c);
+            }
 
 
             $contact = array(

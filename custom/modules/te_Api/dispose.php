@@ -115,10 +115,10 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     $dispositionCode = $_REQUEST['dispositionCode'];
     if ($dispositionCode != 'null')
     {
-
+        $status   = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
         $debugArr = array('lead_id'           => $records['id'],
             'dispostion'        => $_REQUEST['dispositionCode'],
-            'status'            => $crmDispo[$dispositionCode],
+            'status'            => $status,
             'entryPoint'        => $_REQUEST['entryPoint'],
             'phone'             => $_REQUEST['phone'],
             'dispositionName'   => $_REQUEST['dispositionName'],
@@ -127,8 +127,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
         if ($dispositionCode != 'wrap.timeout')  // excluding wrap.timeout 
         {
-
-            $db->query("update leads set status='".$crmDispo[$dispositionCode]."', status_description='".$dispositionCode."' where id='" . $records['id'] . "'");
+        $db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
         }
 
         createLog($debugArr, 'pawan-dispostion');
