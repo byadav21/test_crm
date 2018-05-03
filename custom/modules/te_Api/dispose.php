@@ -20,8 +20,9 @@ global $db,$current_user;
                     'Not Eligible'=>'Dead',
                     'Fallout'=>'Dead',
                     'Cross Sell'=>'Dead',  //New
-                    'Not interested'=>'Dead', //New
+                    'Not Interested'=>'Dead', //New
                     'Next Batch'=>'Dead', //New
+                    'Retired'=>'Dead', //New
       
                     'Duplicate'=>'Duplicate',
                     'Dropout'=>'Dropout',
