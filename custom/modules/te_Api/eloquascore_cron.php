@@ -47,7 +47,7 @@ class eloquaScore
                     {
 
                         $sql = "update leads_cstm set eloqua_lead_score='$Rating' where email_add_c='$EmailAddress'";
-                        //$re  = $GLOBALS['db']->query($sql);
+                        $re  = $GLOBALS['db']->query($sql);
                     }
                 }
             } // End of empty array
