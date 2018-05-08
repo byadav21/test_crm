@@ -5,6 +5,17 @@ if(!empty($_REQUEST['lead']) && !empty($_REQUEST['number'])){
 	
 global $current_user,$db;
 
+$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/new_dispose_log.txt", "a");
+        fwrite($file, date('Y-m-d H:i:s') . "\n");
+        fwrite($file, 'clickToCall func' . "\n");
+        fwrite($file, print_r($_REQUEST, TRUE) . "\n");
+        fclose($file);
+
+if(isset($_REQUEST['lead']) && $_REQUEST['lead']!=''){
+    
+    $_SESSION['ClickToLead']=  $_REQUEST['lead'];
+}
+
 $lead=	"select * from leads where id='". $_REQUEST['lead'] ."'";
 $res=$db->query($lead);
 if($db->getRowCount($res)){
