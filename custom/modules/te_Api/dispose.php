@@ -125,17 +125,21 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             'phone'             => $_REQUEST['phone'],
             'dispositionName'   => $_REQUEST['dispositionName'],
             'systemDisposition' => $_REQUEST['systemDisposition'],
-            'callType'          => $_REQUEST['callType']);
+            'callType'          => $_REQUEST['callType'],
+            'ClickToLeadID'     =>$_SESSION['hhhhXX']);
 
         if ($dispositionCode != 'wrap.timeout')  // excluding wrap.timeout 
         {
-        $db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
+         //$db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
         }
 
         createLog($debugArr, 'pawan-dispostion');
     }
-
-
+    
+    if($_REQUEST['callType']!='auto.dial.customer'){
+        
+             createLog($_REQUEST, 'checking manual dial');
+      }
 
     if ($_REQUEST['callType'] == 'manual.dial.customer')
     {

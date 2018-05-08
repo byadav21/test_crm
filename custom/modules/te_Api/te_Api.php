@@ -111,6 +111,14 @@ class te_Api_override extends te_Api {
 			//$data= file_get_contents(  $server. urlencode(json_encode($request)));
 			$dataErr=json_decode($data);
 			$this->createLog($server. urlencode(json_encode($request)),'manual',$request,$data); 		
+                        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/new_dispose_log.txt", "a");
+       		        fwrite($file, date('Y-m-d H:i:s') . "\n");
+                        fwrite($file, 'New click to call check from te_api.php' . "\n");
+       		        fwrite($file, print_r($_REQUEST, TRUE) . "\n");
+	                fwrite($file, print_r($data, TRUE) . "\n");
+                        fclose($file);
+			$_SESSION['hhhhXX']= $session;
+
 			return ($dataErr->status=='error')?false:true;
 		}catch(Exception $e){
 			

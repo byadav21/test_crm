@@ -118,14 +118,15 @@ if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '')
             $BatchData = $db->fetchByAssoc($result_c);
             }
 
-
+	    $emailIDX = isset($bean->email_add_c) ? $bean->email_add_c : '';
+	    $batchCode = isset($BatchData['batch_code']) ? $BatchData['batch_code'] : 'Generic_2017-18';	
             $contact = array(
                 'type'        => 'CustomObjectData',
                 'contactId'   => $contactIDXX,
                 'fieldValues' =>
                 array(
-                    0  => array('id' => '150', 'value' => isset($bean->email_add_c) ? $bean->email_add_c : ''),
-                    1  => array('id' => 151, 'value' => $bean->email_add_c . '_' . isset($BatchData['batch_code']) ? $BatchData['batch_code'] : 'Generic_2017-18'),
+                    0  => array('id' => '150', 'value' => $emailIDX),
+                    1  => array('id' => 151, 'value' =>  $emailIDX .'_'. $batchCode),
                     2  => array('id' => 152, 'value' => isset($BatchData['batch_code']) ? $BatchData['batch_code'] : 'Generic_2017-18'),
                     3  => array('id' => 171, 'value' => isset($BatchData['batch_status']) ? $BatchData['batch_status'] : ''),
                     4  => array('id' => 153, 'value' => isset($bean->status) ? $bean->status : ''),
@@ -152,7 +153,9 @@ if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '')
             //echo "<pre>in Object Create="; print_r($contact); die;
           
             $response = $client->post('data/customObject/7', $contact);
-            $this->createLog($response,'{On LeadObjec Create}');
+            $this->createLog($contact,'{On LeadObjec param}');
+            $this->createLog($response,'{On LeadObjec response}');
+
 
             if ($response->id!='')
             {
