@@ -47,7 +47,7 @@ class eloquaRuntime
         //foreach ($AutomateArr as $key=>$val)  { }
         //700
 
-        for ($i = 1; $i <= 10; $i++)
+        for ($i = 1; $i <= 700; $i++)
         {
             echo "data/customObject/7?count=$restultCount&page=$i<br>";
             $response = $client->get("data/customObject/7?count=$restultCount&page=$i");
