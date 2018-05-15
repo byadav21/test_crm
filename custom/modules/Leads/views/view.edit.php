@@ -400,10 +400,13 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option></option>');
                         $("#status_description").append('<option>Dead Number</option>');
                         $("#status_description").append('<option>Wrong Number</option>');
-                        $("#status_description").append('<option>Ringing Multiple Times</option>');
+                        //$("#status_description").append('<option>Ringing Multiple Times</option>');
                         $("#status_description").append('<option>Not Enquired</option>');
                         $("#status_description").append('<option>Not Eligible</option>');
                         //$("#status_description").append('<option>Rejected</option>');
+                        $("#status_description").append('<option>Cross Sell</option>');
+                        $("#status_description").append('<option>Not Interested</option>');
+                        $("#status_description").append('<option>Next Batch</option>');
                         $("#status_description").append('<option>Fallout</option>');
                         //$("#status_description").append('<option>Retired</option>');
                     } else if (el.val() === "Recycle") {
