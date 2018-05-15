@@ -91,8 +91,8 @@ class eloquaScore
                     createdBy='" . $checkStatus->createdBy. "',
                     uri='" . $checkStatus->uri . "'");
 
-                    $itemcount = 704;
-                    $limit     = 100;
+                    $itemcount = 711180;
+                    $limit     = 1000;
                     $interval  = $itemcount / $limit;
 
                     /////////////// start it on offset with 0
