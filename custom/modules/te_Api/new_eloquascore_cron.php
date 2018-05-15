@@ -15,7 +15,7 @@ ini_set('display_errors', 'On');
 
 class eloquaScore
 {
-    
+
     function createLog($req, $action)
     {
         $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/eloquaScore_log.txt", "a");
@@ -24,7 +24,7 @@ class eloquaScore
         fwrite($file, print_r($req, TRUE) . "\n");
         fclose($file);
     }
-    
+
     public function main()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
@@ -52,7 +52,7 @@ class eloquaScore
 
         if ($exportUri != '')
         {
-
+            sleep(50);
             //2. this will be called to export   
 
             $json         = '{
@@ -67,26 +67,59 @@ class eloquaScore
 
             if ($syncStatus == 'pending' && $syncURI != '')
             {
-
+                sleep(50);
                 $checkStatus = $client->get($syncURI);
                 $this->createLog($checkStatus, '3. Check export Status API');
                 $finalStatus = $checkStatus->status;
-
+                sleep(100);
                 if ($finalStatus == 'success' || $finalStatus == 'active')
                 {
-                    
+
                     $ExportSyncurl = $checkStatus->uri;
                     //echo 'xxxx' . $finalStatus.'$ExportSyncurl='.$ExportSyncurl;
-
                     ###################
-
                     //echo '<pre>';
                     //print_r($checkStatus);
                     //die;
+                    
+                    $db->query("insert into eloqua_sync_score_api set 
+                    syncedInstanceUri='" . $checkStatus->syncedInstanceUri . "', 
+                    syncStartedAt='" . date( 'Y-m-d h:i:s', strtotime($checkStatus->syncStartedAt)) . "', 
+                    syncEndedAt='" . date( 'Y-m-d h:i:s', strtotime($checkStatus->syncEndedAt)) . "',
+                    status='" . $checkStatus->status     . "',
+                    createdAt='" . date( 'Y-m-d h:i:s', strtotime($checkStatus->createdAt)) . "',
+                    createdBy='" . $checkStatus->createdBy. "',
+                    uri='" . $checkStatus->uri . "'");
 
                     $itemcount = 704;
                     $limit     = 100;
                     $interval  = $itemcount / $limit;
+
+                    /////////////// start it on offset with 0
+                    echo "$ExportSyncurl/data?offset=0&limit=$limit<br>";
+                    $response = $client->get("$ExportSyncurl/data?offset=0&limit=$limit");
+                    $array    = json_decode(json_encode($response), true);
+
+
+                    if (!empty($array['items']))
+                    {
+                        foreach ($array['items'] as $key => $val)
+                        {
+
+                            $Rating       = isset($val['Rating']) ? $val['Rating'] : '';
+                            $EmailAddress = isset($val['EmailAddress']) ? $val['EmailAddress'] : '';
+
+                            if ($Rating != '' && $EmailAddress != '')
+                            {
+
+                                $sql = "update leads_cstm set eloqua_lead_score='$Rating' where email_add_c='$EmailAddress'";
+                                $re  = $GLOBALS['db']->query($sql);
+                            }
+                        }
+                    } // End of empty array
+                    ///////////////
+                    echo '<pre>'; print_r($array);
+                        
 
                     for ($i = 1; $i <= $interval; $i++)
                     {
