@@ -285,11 +285,11 @@ class LeadsViewEdit extends ViewEdit
                     } else {
                         $("#status_description").append('<option >Wrong Number</option>');
                     }
-                    if (status_detail == 'Ringing Multiple Times') {
-                        $("#status_description").append('<option  selected="selected" >Ringing Multiple Times</option>');
-                    } else {
-                        $("#status_description").append('<option>Ringing Multiple Times</option>');
-                    }
+//                    if (status_detail == 'Ringing Multiple Times') {
+//                        $("#status_description").append('<option  selected="selected" >Ringing Multiple Times</option>');
+//                    } else {
+//                        $("#status_description").append('<option>Ringing Multiple Times</option>');
+//                    }
                     if (status_detail == 'Not Enquired') {
                         $("#status_description").append('<option  selected="selected" >Not Enquired</option>');
                     } else {
@@ -309,6 +309,28 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option  selected="selected" >Fallout</option>');
                     } else {
                         $("#status_description").append('<option >Fallout</option>');
+                    }
+                     if (status_detail == 'Cross Sell') {
+                        $("#status_description").append('<option  selected="selected" >Cross Sell</option>');
+                    } else {
+                        $("#status_description").append('<option >Cross Sell</option>');
+                    }
+                    
+                     if (status_detail == 'Not Interested') {
+                        $("#status_description").append('<option  selected="selected" >Not Interested</option>');
+                    } else {
+                        $("#status_description").append('<option >Not Interested</option>');
+                    }
+                    
+                     if (status_detail == 'Next Batch') {
+                        $("#status_description").append('<option  selected="selected" >Next Batch</option>');
+                    } else {
+                        $("#status_description").append('<option >Next Batch</option>');
+                    }
+                     if (status_detail == 'Retired') {
+                        $("#status_description").append('<option  selected="selected" >Retired</option>');
+                    } else {
+                        $("#status_description").append('<option >Retired</option>');
                     }
                     /*if (status_detail == 'Retired') {
                         $("#status_description").append('<option  selected="selected" >Retired</option>');
