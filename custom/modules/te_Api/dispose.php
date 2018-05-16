@@ -27,7 +27,8 @@ global $db,$current_user;
                     'Duplicate'=>'Duplicate',
                     'Dropout'=>'Dropout',
                     'Prospect'=>'Warm',
-                    'Recycle'=>'Recycle'
+                    'Recycle'=>'Recycle',
+                    'wrap.timeout'=>'Wrap Out'
                     );
 
 function createLog($req,$action)
@@ -62,7 +63,13 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 {
 
     $objapi->createLog(print_r($_REQUEST, true), 'disposeamyo', $_REQUEST);
-    if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] == 'NO_ANSWER' && $_REQUEST['lead_reference'])
+  //if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] == 'NO_ANSWER' && $_REQUEST['lead_reference'])
+     $dispositionCode = '';
+     $status='';
+     $dispositionCode = $_REQUEST['dispositionCode'];
+     $status   = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
+    
+    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != '' && $_REQUEST['callType'] != 'auto.dial.customer')
     {
 
         $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
@@ -76,16 +83,42 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid++;
             $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res      = $db->query($sql);
-            if ($attempid == 10)
+
+            $disposition                                = new te_disposition();
+            $disposition->status                        = $status;
+            $disposition->status_detail                 = $dispositionCode;
+            $disposition->name                          = $_REQUEST['dispositionName'];
+            $disposition->te_disposition_leadsleads_ida = $id;
+            $disposition->save();
+        }
+    }
+
+    else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'])
+    {
+
+    $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
+        $res = $db->query($sql);
+        if ($db->getRowCount($res) > 0)
+        {
+
+            $records  = $db->fetchByAssoc($res);
+            $id       = $records['id_c'];
+            $attempid = intval($records['attempts_c']);
+            $attempid++;
+            $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+            $res      = $db->query($sql);
+     
+          
+            if ($attempid >= 6)
             {
-                $sql = "update leads set status='Dead', status_description='Retired' where id='" . $id . "'";
+                $sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
                 $res = $db->query($sql);
             }
 
             $disposition                                = new te_disposition();
-            $disposition->status                        = 'No Answer';
-            $disposition->status_detail                 = 'No Answer';
-            $disposition->name                          = 'No Answer';
+            $disposition->status                        = $status;
+            $disposition->status_detail                 = $dispositionCode;
+            $disposition->name                          = $_REQUEST['dispositionName'];
             $disposition->te_disposition_leadsleads_ida = $id;
             $disposition->save();
         }
@@ -127,10 +160,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             'systemDisposition' => $_REQUEST['systemDisposition'],
             'callType'          => $_REQUEST['callType']);
 
-        if ($dispositionCode != 'wrap.timeout')  // excluding wrap.timeout 
-        {
-         //$db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
-        }
+            $db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
 
         createLog($debugArr, 'Ameyo dispostion response');
     }
