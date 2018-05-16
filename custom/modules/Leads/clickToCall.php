@@ -7,14 +7,11 @@ global $current_user,$db;
 
 $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/new_dispose_log.txt", "a");
         fwrite($file, date('Y-m-d H:i:s') . "\n");
-        fwrite($file, 'clickToCall func' . "\n");
+        fwrite($file, '1. Click To Call func' . "\n");
         fwrite($file, print_r($_REQUEST, TRUE) . "\n");
         fclose($file);
 
-if(isset($_REQUEST['lead']) && $_REQUEST['lead']!=''){
-    
-    $_SESSION['ClickToLead']=  $_REQUEST['lead'];
-}
+
 
 $lead=	"select * from leads where id='". $_REQUEST['lead'] ."'";
 $res=$db->query($lead);
@@ -38,9 +35,9 @@ if($db->getRowCount($res)){
 						if($resdata['phone_home'] )  $customerRecords['phone2'] = $resdata['phone_home'];
 						if($resdata['phone_work'] )  $customerRecords['phone3'] = $resdata['phone_work'];
 						if($resdata['phone_other'] )  $customerRecords['phone4'] = $resdata['phone_other'] ;	 
-						if($resdata['id'] )  $customerRecords['lead_refrence'] = $resdata['id'];
+						if($resdata['id'] )  $customerRecords['lead_reference'] = $resdata['id'];
 					     
-					     $arrReq['customerRecords'][]=$customerRecords;
+					     $arrReq['customerRecord']=$customerRecords;
 					     
 						 if(!$drobj->call($session,$arrReq)){
 							 echo "Something gone wrong. Please try again!";
