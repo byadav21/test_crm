@@ -5,40 +5,38 @@ if (!defined('sugarEntry') || !sugarEntry)
 require_once('custom/modules/te_Api/te_Api.php');
 require_once('modules/te_disposition/te_disposition.php');
 require_once('modules/te_neox_call_details/te_neox_call_details.php');
-global $db,$current_user;
+global $db, $current_user;
 
 
- 
-  $crmDispo = array('New Lead'=>'Alive',
-                    'Follow Up'=>'Alive',
-                    'Converted'=>'Converted',
-      
-                    'Dead Number'=>'Dead',
-                    'Wrong Number'=>'Dead',
-                    'Ringing Multiple Times'=>'Dead',
-                    'Not Enquired'=>'Dead',
-                    'Not Eligible'=>'Dead',
-                    'Fallout'=>'Dead',
-                    'Cross Sell'=>'Dead',  //New
-                    'Not Interested'=>'Dead', //New
-                    'Next Batch'=>'Dead', //New
-                    'Retired'=>'Dead', //New
-      
-                    'Duplicate'=>'Duplicate',
-                    'Dropout'=>'Dropout',
-                    'Prospect'=>'Warm',
-                    'Recycle'=>'Recycle',
-                    'wrap.timeout'=>'Wrap Out'
-                    );
 
-function createLog($req,$action)
-    {
-        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/new_dispose_log.txt", "a");
-        fwrite($file, date('Y-m-d H:i:s') . "\n");
-        fwrite($file, $action . "\n");
-        fwrite($file, print_r($req, TRUE) . "\n");
-        fclose($file);
-    }
+$crmDispo = array('New Lead'  => 'Alive',
+    'Follow Up' => 'Alive',
+    'Converted' => 'Converted',
+    'Dead Number'            => 'Dead',
+    'Wrong Number'           => 'Dead',
+    'Ringing Multiple Times' => 'Dead',
+    'Not Enquired'           => 'Dead',
+    'Not Eligible'           => 'Dead',
+    'Fallout'                => 'Dead',
+    'Cross Sell'             => 'Dead', //New
+    'Not Interested'         => 'Dead', //New
+    'Next Batch'             => 'Dead', //New
+    'Retired'                => 'Dead', //New
+    'Duplicate'    => 'Duplicate',
+    'Dropout'      => 'Dropout',
+    'Prospect'     => 'Warm',
+    'Recycle'      => 'Recycle',
+    'wrap.timeout' => 'Wrap Out'
+);
+
+function createLog($req, $action)
+{
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/new_dispose_log.txt", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, print_r($req, TRUE) . "\n");
+    fclose($file);
+}
 
 unset($_SESSION['temp_for_newUser']);
 
@@ -63,13 +61,27 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 {
 
     $objapi->createLog(print_r($_REQUEST, true), 'disposeamyo', $_REQUEST);
-  //if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] == 'NO_ANSWER' && $_REQUEST['lead_reference'])
-     $dispositionCode = '';
-     $status='';
-     $dispositionCode = $_REQUEST['dispositionCode'];
-     $status   = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
+   
     
-    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != '' && $_REQUEST['callType'] != 'auto.dial.customer')
+    $dispositionCode = '';
+    $status          = '';
+    $dispositionCode = $_REQUEST['dispositionCode'];
+    $status          = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
+
+    $debugArr = array('lead_id'           => $records['id'],
+        'status'            => $status,
+        'subStatus'         => $dispositionCode,
+        'entryPoint'        => $_REQUEST['entryPoint'],
+        'phone'             => $_REQUEST['phone'],
+        'dispositionName'   => $_REQUEST['dispositionName'],
+        'systemDisposition' => $_REQUEST['systemDisposition'],
+        'callType'          => $_REQUEST['callType'],
+        'campaignId'          => $_REQUEST['campaignId']
+        );
+
+       
+    
+    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null' && $_REQUEST['callType'] != 'auto.dial.customer')
     {
 
         $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
@@ -84,19 +96,12 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res      = $db->query($sql);
 
-            $disposition                                = new te_disposition();
-            $disposition->status                        = $status;
-            $disposition->status_detail                 = $dispositionCode;
-            $disposition->name                          = $_REQUEST['dispositionName'];
-            $disposition->te_disposition_leadsleads_ida = $id;
-            $disposition->save();
         }
     }
-
-    else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'])
+ else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != 'null')
     {
 
-    $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
+        $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
         $res = $db->query($sql);
         if ($db->getRowCount($res) > 0)
         {
@@ -107,34 +112,29 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid++;
             $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res      = $db->query($sql);
-     
-          
+
+
             if ($attempid >= 6)
             {
                 $sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
                 $res = $db->query($sql);
             }
 
-            $disposition                                = new te_disposition();
-            $disposition->status                        = $status;
-            $disposition->status_detail                 = $dispositionCode;
-            $disposition->name                          = $_REQUEST['dispositionName'];
-            $disposition->te_disposition_leadsleads_ida = $id;
-            $disposition->save();
+           
         }
     }
 
 
     $phone = $_REQUEST['phone'];
-    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] !='null')
+    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != 'null')
     {
         $lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where  id='" . $_REQUEST['lead_reference'] . "' and deleted=0 and status!='Duplicate' ";
     }
     else
     {
-        
-           $lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where phone_mobile='$phone' and status!='Duplicate' and deleted=0 ";
-        
+
+        $lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where phone_mobile='$phone' and status!='Duplicate' and deleted=0 ";
+
         //$lead = "select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
     }
     $res = $db->query($lead);
@@ -145,14 +145,14 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     }
     
     
-    // Update leads Dispostion
-    $dispositionCode = '';
-    $dispositionCode = $_REQUEST['dispositionCode'];
+    
+
     if ($dispositionCode != 'null')
     {
         $status   = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
-        $debugArr = array('lead_id'           => $records['id'],
-            'dispostion'        => $_REQUEST['dispositionCode'],
+        $debugArr = array(
+            'lead_id'           => $_REQUEST['lead_reference'],
+            'dispostion'        => $dispositionCode,
             'status'            => $status,
             'entryPoint'        => $_REQUEST['entryPoint'],
             'phone'             => $_REQUEST['phone'],
@@ -160,12 +160,23 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             'systemDisposition' => $_REQUEST['systemDisposition'],
             'callType'          => $_REQUEST['callType']);
 
-        //$db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
-
-        createLog($debugArr, 'Ameyo dispostion response');
+        //$db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . $
+            
+            // te_disposition Hook marking status on leads as well
+        
+            $disposition                                = new te_disposition();
+            $disposition->status                        = $status;
+            $disposition->status_detail                 = $dispositionCode;
+            $disposition->name                          = $_REQUEST['dispositionName'];
+            $disposition->te_disposition_leadsleads_ida = $_REQUEST['lead_reference'];
+            $disposition->save();
+            
+            createLog($debugArr, 'Ameyo dispostion response');
     }
-    
-   
+
+
+
+
 
     if ($_REQUEST['callType'] == 'manual.dial.customer')
     {
