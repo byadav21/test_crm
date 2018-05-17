@@ -11,8 +11,7 @@ $query="SELECT lead.id, batch.d_campaign_id, batch.d_lead_id from `leads_cstm`  
 	and lead.update_flag = '0'
   group by leadcstm.te_ba_batch_id_c, lead.phone_mobile, leadcstm.email_add_c
   ORDER BY lead.date_entered ASC
-  limit 1";
-
+  limit 100";
  	$result = $db->Query($query);
   while ($row =$db->fetchByAssoc($result)){
 		$leadid=$row['id'];
@@ -21,9 +20,7 @@ $query="SELECT lead.id, batch.d_campaign_id, batch.d_lead_id from `leads_cstm`  
     $querylead="SELECT * from `leads` WHERE `id`='$leadid' ";
     $resultlead = $db->Query($querylead);
     while ($rowlead =$db->fetchByAssoc($resultlead)){
-		//	echo "<pre>";
-		//	print_r($rowlead);
-      $autoassign=$rowlead['autoassign'];
+		  $autoassign=$rowlead['autoassign'];
       $status=$rowlead['status'];
       $status_description=$rowlead['status_description'];
       $neoxstatus=$rowlead['neoxstatus'];
@@ -35,8 +32,9 @@ $query="SELECT lead.id, batch.d_campaign_id, batch.d_lead_id from `leads_cstm`  
   		$insert_logdata="INSERT INTO `CRM_NEW26MARCH`.`leads_logdata` ( `lead_id`, `autoassign`, `status`, `status_description`, `neoxstatus`, `assigned_user_id`, `update_flag`, `dristi_campagain_id`, `dristi_API_id`)
 	 		VALUES ( '$leadid', '$autoassign', '$status', '$status_description', '$neoxstatus', '$assigned_user_id', '$update_flag', '$dristi_campagain_id', '$dristi_API_id');";
       $result = $db->Query($insert_logdata);
-      //update query in lead table
-      //$update_lead= "UPDATE `leads` SET `autoassign` = 'Yes', `status` = 'Alive', `status_description` = 'New Lead', `neoxstatus` = '0',`assigned_user_id` = '', `update_flag` = '1', `dristi_campagain_id` = '$d_campaign_id',   `dristi_API_id` = '$d_lead_id' WHERE `id` = '$leadid'";
-        //  $result = $db->Query($update_lead);
+			      //update query in lead table
+      $update_lead= "UPDATE `leads` SET `autoassign` = 'Yes', `status` = 'Alive', `status_description` = 'New Lead', `neoxstatus` = '0',`assigned_user_id` = '', `update_flag` = '1', `dristi_campagain_id` = '$d_campaign_id',   `dristi_API_id` = '$d_lead_id' WHERE `id` = '$leadid'";
+      $result = $db->Query($update_lead);
+
     }
   }
