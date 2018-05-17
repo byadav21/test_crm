@@ -160,7 +160,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             'systemDisposition' => $_REQUEST['systemDisposition'],
             'callType'          => $_REQUEST['callType']);
 
-            $db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
+        //$db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . "'");
 
         createLog($debugArr, 'Ameyo dispostion response');
     }
