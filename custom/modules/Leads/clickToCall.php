@@ -25,6 +25,7 @@ if($db->getRowCount($res)){
 					     $arrReq=[];
 					     $arrReq['campaignId']=$_SESSION['amyoCID'];
 					     $arrReq['sessionId']=$session;
+                                             $arrReq['searchable']=$resdata['id'];
 					     $arrReq['phone']=$_REQUEST['number'];
 					     $customerRecords=[];
 					    if($resdata['first_name'] || $resdata['last_name']) $customerRecords['name']= $resdata['first_name']." ". $resdata['last_name'];
