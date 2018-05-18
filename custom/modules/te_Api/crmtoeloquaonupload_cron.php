@@ -69,7 +69,7 @@ class uploadToEloqua
                         LEFT JOIN  `te_in_institutes_te_ba_batch_1_c` inst_rel ON bb.id=inst_rel.te_in_institutes_te_ba_batch_1te_ba_batch_idb
                         LEFT JOIN `te_in_institutes` inst ON inst_rel.te_in_institutes_te_ba_batch_1te_in_institutes_ida=inst.id
                         LEFT JOIN  `te_pr_programs` prog ON pr_rel.te_pr_programs_te_ba_batch_1te_pr_programs_ida=prog.id
-                        WHERE DATE(leads.date_entered) =  ".date('Y-m-d')." 
+                        WHERE DATE(leads.date_entered) =  '".date('Y-m-d')."' 
                         AND leads.upload_status=1 
                         AND eloqua_manual_up_status='0'";
         $leadObj = $db->query($query);
