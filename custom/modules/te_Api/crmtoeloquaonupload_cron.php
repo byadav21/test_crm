@@ -30,9 +30,10 @@ class uploadToEloqua
 
         global $db;
        $leadsCstmData= array();
-       echo $query ="SELECT leads.`id`,
+
+       echo '<pre>'. $query ="SELECT leads.`id`,
                                         lc.email_add_c,
-                                        #'testcccWstests02@test.com' AS email_add_c,
+                                        
                                         leads.`primary_address_street`,
                                         leads.`primary_address_city`,
                                         leads.`primary_address_state`,
@@ -43,7 +44,7 @@ class uploadToEloqua
                                         leads.`last_name`,
                                         leads.`phone_other`,
                                         leads.`phone_mobile`,
-                                        #'9971502476' AS phone_mobile,
+                                        
                                         leads.`status`,
                                         leads.`status_description`,
                                         leads.`lead_source`,
@@ -58,7 +59,7 @@ class uploadToEloqua
                                         lc.`functional_area_c`,
                                         bb.id batch_id,
                                         bb.batch_code,
-                                        #'XXX_YYY' AS batch_code,
+                                        
                                         bb.batch_status,
                                         inst.name institutes_name,
                                         prog.name program_name
@@ -71,7 +72,7 @@ class uploadToEloqua
                         LEFT JOIN  `te_pr_programs` prog ON pr_rel.te_pr_programs_te_ba_batch_1te_pr_programs_ida=prog.id
                         WHERE DATE(leads.date_entered) =  '".date('Y-m-d')."' 
                         AND leads.upload_status=1 
-                        AND eloqua_manual_up_status='0'";
+                        AND eloqua_manual_up_status='0'"; 
         $leadObj = $db->query($query);
         if ($leadObj)
         {
