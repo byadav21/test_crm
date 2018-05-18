@@ -31,8 +31,8 @@ class uploadToEloqua
         global $db;
         $leadObj = $db->query("SELECT leads.`id`,
                                         lc.email_add_c,
+                                        #'testcccWstests02@test.com' AS email_add_c,
                                         leads.`primary_address_street`,
-
                                         leads.`primary_address_city`,
                                         leads.`primary_address_state`,
                                         leads.`primary_address_country`,
@@ -42,6 +42,7 @@ class uploadToEloqua
                                         leads.`last_name`,
                                         leads.`phone_other`,
                                         leads.`phone_mobile`,
+                                        #'9971502476' AS phone_mobile,
                                         leads.`status`,
                                         leads.`status_description`,
                                         leads.`lead_source`,
@@ -54,20 +55,22 @@ class uploadToEloqua
                                         lc.`attempts_c`,
                                         lc.`company_c`,
                                         lc.`functional_area_c`,
-                                       
                                         bb.id batch_id,
                                         bb.batch_code,
+                                        #'XXX_YYY' AS batch_code,
                                         bb.batch_status,
                                         inst.name institutes_name,
                                         prog.name program_name
                                  FROM `leads`
-                        LEFT join  leads_cstm lc on leads.id=lc.id_c
+                        LEFT JOIN  leads_cstm lc ON leads.id=lc.id_c
                         LEFT JOIN te_ba_batch bb ON lc.te_ba_batch_id_c= bb.id
                         LEFT JOIN `te_pr_programs_te_ba_batch_1_c` pr_rel ON bb.id=pr_rel.te_pr_programs_te_ba_batch_1te_ba_batch_idb
                         LEFT JOIN  `te_in_institutes_te_ba_batch_1_c` inst_rel ON bb.id=inst_rel.te_in_institutes_te_ba_batch_1te_ba_batch_idb
                         LEFT JOIN `te_in_institutes` inst ON inst_rel.te_in_institutes_te_ba_batch_1te_in_institutes_ida=inst.id
                         LEFT JOIN  `te_pr_programs` prog ON pr_rel.te_pr_programs_te_ba_batch_1te_pr_programs_ida=prog.id
-                        WHERE DATE(leads.date_entered) =  '2017-05-11' and leads.upload_status=1");
+                        WHERE DATE(leads.date_entered) =  ".date('Y-m-d')." 
+                        AND leads.upload_status=1 
+                        AND eloqua_manual_up_status='0'");
         if ($leadObj)
         {
 
@@ -125,10 +128,10 @@ class uploadToEloqua
             //echo "<pre>bean="; print_r($bean);
             //echo 'leadId='.$bean->id.'$response->id='.$responsex->id."<pre>inCreate="; print_r($responsex); die;
 
-            if ($responsex->id != '')
+            if (isset($responsex->id) && $responsex->id != '')
             {
                 $contactIDXX = $responsex->id;
-                $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  id_c='" . $bean->id . "'");
+                $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  id_c='" . $data['id'] . "'");
             }
 
            // if ($contactId != '')
@@ -169,16 +172,25 @@ class uploadToEloqua
             );
 
             //echo "<pre>in Object Create="; print_r($contact); die;
-
+           
             $response = $client->post('data/customObject/7', $contact);
             $this->createLog($contact, '{On LeadObjec param}');
             $this->createLog($response, '{On LeadObjec response}');
-
-
-            if ($response->id != '')
+            
+            $array    = json_decode(json_encode($response), true);
+             
+            echo '<pre>';
+            print_r($array);
+            //echo '$response->id'.$response->id;
+            //echo '$response->parameter'.$array[0]['parameter'];
+            if (isset($array['id']) && $array['id']!='')
             {
                 //$contactIdx = $response->id;
-                $db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
+                $db->query("update leads_cstm  set eloqua_customobject_id=".$array['id'].",eloqua_contact_id=".$array['contactId'].",eloqua_manual_up_status='1' where  id_c='" . $data['id'] . "'");
+            }
+            else if (isset($array[0]['parameter']) && $array[0]['parameter']=='DuplicateValue')
+            {
+                $db->query("update leads_cstm  set eloqua_manual_up_status='2' where  id_c='" . $data['id'] . "'");
             }
        // }// END of  if ($contactId != '')
     }
