@@ -169,7 +169,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $disposition->status_detail                 = $dispositionCode;
             $disposition->name                          = $_REQUEST['dispositionName'];
             $disposition->te_disposition_leadsleads_ida = $_REQUEST['lead_reference'];
-            $disposition->save();
+           // $disposition->save();
             
             createLog($debugArr, 'Ameyo dispostion response');
     }
