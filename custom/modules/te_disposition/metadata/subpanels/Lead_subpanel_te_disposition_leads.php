@@ -1,11 +1,12 @@
 <?php
-// created: 2016-11-17 02:50:05
+// created: 2018-05-19 11:38:47
 $subpanel_layout['list_fields'] = array (
-  'name' => 
+  'status' => 
   array (
+    'type' => 'enum',
+    'studio' => 'visible',
     'vname' => 'LBL_STATUS',
-    'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '15%',
+    'width' => '10%',
     'default' => true,
   ),
   'status_detail' => 
