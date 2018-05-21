@@ -9,9 +9,9 @@ global $db, $current_user;
 
 
 
-$crmDispo = array('New Lead'  => 'Alive',
-    'Follow Up' => 'Alive',
-    'Converted' => 'Converted',
+$crmDispo = array('New Lead'               => 'Alive',
+    'Follow Up'              => 'Alive',
+    'Converted'              => 'Converted',
     'Dead Number'            => 'Dead',
     'Wrong Number'           => 'Dead',
     'Ringing Multiple Times' => 'Dead',
@@ -22,11 +22,11 @@ $crmDispo = array('New Lead'  => 'Alive',
     'Not Interested'         => 'Dead', //New
     'Next Batch'             => 'Dead', //New
     'Retired'                => 'Dead', //New
-    'Duplicate'    => 'Duplicate',
-    'Dropout'      => 'Dropout',
-    'Prospect'     => 'Warm',
-    'Recycle'      => 'Recycle',
-    'wrap.timeout' => 'Wrap Out'
+    'Duplicate'              => 'Duplicate',
+    'Dropout'                => 'Dropout',
+    'Prospect'               => 'Warm',
+    'Recycle'                => 'Recycle',
+    'wrap.timeout'           => 'Wrap Out'
 );
 
 function createLog($req, $action)
@@ -61,8 +61,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 {
 
     $objapi->createLog(print_r($_REQUEST, true), 'disposeamyo', $_REQUEST);
-   
-    
+
+
     $dispositionCode = '';
     $status          = '';
     $dispositionCode = $_REQUEST['dispositionCode'];
@@ -76,11 +76,11 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         'dispositionName'   => $_REQUEST['dispositionName'],
         'systemDisposition' => $_REQUEST['systemDisposition'],
         'callType'          => $_REQUEST['callType'],
-        'campaignId'          => $_REQUEST['campaignId']
-        );
+        'campaignId'        => $_REQUEST['campaignId']
+    );
 
-       
-    
+
+
     if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null' && $_REQUEST['callType'] != 'auto.dial.customer')
     {
 
@@ -95,10 +95,9 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid++;
             $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res      = $db->query($sql);
-
         }
     }
- else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != 'null')
+    else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != 'null')
     {
 
         $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
@@ -119,8 +118,6 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
                 $res = $db->query($sql);
             }
-
-           
         }
     }
 
@@ -143,36 +140,35 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $records = $db->fetchByAssoc($res);
         $db->query("update leads set dristi_request=null where id='" . $records['id'] . "'");
     }
-    
-    
-    
+
+
+
 
     if ($dispositionCode != 'null')
     {
         $status   = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
         $debugArr = array(
             'lead_id'           => $_REQUEST['lead_reference'],
-            'dispostion'        => $dispositionCode,
             'status'            => $status,
+            'SubStatus'         => $dispositionCode,
             'entryPoint'        => $_REQUEST['entryPoint'],
             'phone'             => $_REQUEST['phone'],
             'dispositionName'   => $_REQUEST['dispositionName'],
             'systemDisposition' => $_REQUEST['systemDisposition'],
-            'callType'          => $_REQUEST['callType']);
+            'callType'          => $_REQUEST['callType'],
+            'campaignId'        => $_REQUEST['campaignId']);
 
-        //$db->query("update leads set status='" . $status . "', status_description='" . $dispositionCode . "' where id='" . $records['id'] . $
-            
-            // te_disposition Hook marking status on leads as well
-        
-            $disposition                                = new te_disposition();
-            $disposition->status                        = $status;
-            $disposition->status_detail                 = $dispositionCode;
-            $disposition->name                          = $_REQUEST['dispositionName'];
-            #$disposition->dispositionName               = $_REQUEST['dispositionName'];
-            $disposition->te_disposition_leadsleads_ida = $_REQUEST['lead_reference'];
-           // $disposition->save();
-            
-            createLog($debugArr, 'Ameyo dispostion response');
+
+
+
+        $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
+        $bean->status             = $status;
+        $bean->status_description = $dispositionCode;
+        $bean->save();
+
+
+
+        createLog($debugArr, 'Ameyo dispostion response');
     }
 
 
