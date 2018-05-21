@@ -164,6 +164,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
         $bean->status             = $status;
         $bean->status_description = $dispositionCode;
+        $bean->dispositionName    = $_REQUEST['dispositionName'];
         $bean->save();
 
 
