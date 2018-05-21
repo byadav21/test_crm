@@ -42,19 +42,16 @@ class AOR_ReportsViewEloquareport extends SugarView {
 			INNER JOIN `leads_logdata` as `leadlog` on leadcstm.id_c = leadlog.lead_id
 		  INNER JOIN `leads` as `lead` on leadcstm.id_c = lead.id ";
 
-		if(isset($_POST['batches']) && $_POST['batches']){
-		  $batches=implode(",'",$_POST['batches']);
-		  if($batches)	 $sql .=" and b.id in ('$batches') ";
-		}
+
 
 		if(isset($_POST['from_date']) && $_POST['from_date']){
 
-		 //   $sql .=" and te_student_payment.date_of_payment >= '" . date('Y-m-d',strtotime($_POST['from_date'])) ."'";
+		    $sql .=" and 	lead.date_entered >= '" . date('Y-m-d',strtotime($_POST['from_date'])) ."'";
 		}
 
 		if(isset($_POST['to_date']) && $_POST['to_date']){
 
-		//   $sql .=" and te_student_payment.date_of_payment <= '" . date('Y-m-d',strtotime($_POST['to_date'])) ."'";
+		   $sql .=" and 	lead.date_entered <= '" . date('Y-m-d',strtotime($_POST['to_date'])) ."'";
 		}
 
 	//	$sql .=" group by s.name,b.name,te_pr_programs.name,fee_inr order by s.name";
@@ -63,16 +60,47 @@ class AOR_ReportsViewEloquareport extends SugarView {
 		if(isset($_POST['export']) && $_POST['export']=="Export"){
 
 
+						$data = "Lead Id,Date Entered,Date Modified,>Email Id,Batch name,Batch code,Batch Status,Is In Eloqua,Eloqua Score,CRM Status,CRM Status Detail,New Status,New Status Detail,Is converted from Eloqua\n";
 
-			$data = "Invoice_No,Invoice_URL,Date,Course,Batch,Student,State,GSV\n";
+				 while($row =$db->fetchByAssoc($leadObj)){
+						$i=0;
+						$lead_id=$row['lead_id'];
+						$date_entered=$row['date_entered'];
+						$date_modified=$row['date_modified'];
+						$email_id=$row['email_id'];
+		$batch_name=$row['batch_name'];
+		$batch_code=$row['batch_code'];
+		$batch_status=$row['batch_status'];
+		$is_in_eloqua='';
 
-			while($row =$db->fetchByAssoc($leadObj)){
-				 $i=0;
-				foreach($row as $key1=>$value){
+		if (!empty($row['batch_status']))
+		{
+		 $is_in_eloqua='YES';
+		}
 
-					$data.= str_replace(',',' ' ,$value) ;
-					if($i++ < count($row)-1) $data.= ",";
-				}
+		else {
+		 $is_in_eloqua='No';
+		}
+
+		$eloqua_score=$row['$eloqua_score'];
+		 $CRM_status=$row['CRM_status'];
+		 $CRM_description=$row['CRM_description'];
+		 $new_status=$row['new_status'];
+		 $new_description=$row['new_description'];
+		 $Is_converted='';
+		 if ($row['new_status'] == 'CONVERTED')
+		 {
+			 $Is_converted='YES';
+		 }
+
+		else
+		 {
+				 $Is_converted='NO';
+		}
+
+		$data.=$lead_id.','.$date_entered.','.$date_modified.','.$email_id.','.$batch_name.','.
+		$batch_code.','.$batch_status.','.$is_in_eloqua.','.$eloqua_score.','.$CRM_status.','.
+		$CRM_description.','.$new_status.','.$new_description.','.$Is_converted;
 				$data.= "\n";
 			}
 			//echo $data;die;

@@ -21,7 +21,7 @@
 			</td>
 
 
-			<td scope="row" nowrap="nowrap" width="1%">
+		<!--	<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">Batch</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
@@ -31,7 +31,7 @@
 							<option value="{$batch.id}" {if array_search($batch.id,$selected_batch) } selected="selected" {/if}>{$batch.name}</option>
 						{/foreach}
 				</select>
-			</td>
+			</td> -->
 
 			<td class="sumbitButtons">
 				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
@@ -162,7 +162,7 @@
 	{foreach from = $councelorList key=key item=eloqua}
   		<tr height="20" class="oddListRowS1">
 
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$eloqua.d_lead_id}  </td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$eloqua.lead_id}  </td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$eloqua.date_entered }</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$eloqua.date_modified}</td>
       <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$eloqua.email_id}</td>
