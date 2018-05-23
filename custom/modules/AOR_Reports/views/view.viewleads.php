@@ -45,6 +45,7 @@ class AOR_ReportsViewviewleads extends SugarView
         {
             $_SESSION['cccon_show'] = $_GET['show'];
         }
+        //echo 'ccc'.$_SESSION['cccon_show'];
 //        if (isset($_POST['button']) || isset($_POST['export']))
 //        {
 //            $_SESSION['cccon_from_date'] = $_REQUEST['from_date'];
@@ -122,6 +123,7 @@ class AOR_ReportsViewviewleads extends SugarView
         $StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
         $StatusList['dispositions']            = 'Non-connect';
         
+        $StatusList['converted']              = 'converted'; 
         $StatusList['fallout']                = 'Fallout';       
         $StatusList['not_eligible']           = 'Not Eligible';
         $StatusList['not_enquired']           = 'Not Enquired';
@@ -177,7 +179,7 @@ class AOR_ReportsViewviewleads extends SugarView
 
           //echo '<pre>';
 
-          $leadSql = "SELECT 
+         $leadSql = "SELECT 
                     	    leads.id,                            
                             leads.date_entered,                 
                             leads.date_modified,                
