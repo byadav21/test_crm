@@ -87,6 +87,7 @@ class AOR_ReportsViewleadutilization extends SugarView
                        and leads.status='Alive'
                        and leads.status_description='New Lead'
                        and leads.deleted=0
+                       and leads_cstm.attempts_c=''
                      GROUP  by  batch_code";
 
         $leadObj = $db->query($leadSql) or die(mysqli_error());

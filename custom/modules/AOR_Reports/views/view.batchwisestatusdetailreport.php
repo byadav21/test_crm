@@ -95,14 +95,15 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
     {
         global $db;
         $leadList = array();
-        $leadSql  = "SELECT COUNT(l.dispositionName) AS lead_count, 
+        $leadSql  = "SELECT COUNT(l.id) AS lead_count, 
                          IF(te_ba_batch.id IS NULL,'NA',te_ba_batch.id) AS batch_id,
                          te_ba_batch.batch_code
                          FROM leads l
                          INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                          LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                          WHERE l.deleted=0 $wherecl 
-                             and l.dispositionName!='CONNECTED'
+                             and l.status_description!='Re-Enquired' 
+                             and (l.dispositionName!='CONNECTED' || l.dispositionName IS NULL)
                          GROUP BY te_ba_batch.id";
 
         $leadObj = $db->query($leadSql);
@@ -234,7 +235,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         $StatusList['prospect']               = 'Prospect';
         
         $StatusList['dead_number']            = 'Dead Number';
-        $StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
+        #$StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
         $StatusList['dispositions']            = 'Non-connect';
         
         $StatusList['fallout']                = 'Fallout';       

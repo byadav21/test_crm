@@ -117,6 +117,7 @@ class AOR_ReportsViewviewleadutilization extends SugarView
                        AND leads.date_entered <= '" . $_SESSION['cccon_to_date'] . " 23:59:59'
                        and leads.status='Alive'
                        and leads.status_description='New Lead'
+                       and leads_cstm.attempts_c=''
                        and te_ba_batch.batch_code in ('$batch_code')";
 
         $leadObj = $db->query($leadSql) or die(mysqli_error());

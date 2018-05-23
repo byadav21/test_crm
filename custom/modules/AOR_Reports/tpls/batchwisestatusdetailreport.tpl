@@ -3,7 +3,7 @@
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                 <tbody>
+                <tbody>
 
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
@@ -84,7 +84,7 @@
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
                                     return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-                           <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
+                            <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
                         </td>
                     </tr>
 
@@ -152,45 +152,45 @@
                 </td>
             </tr>
             {*End Pagination*}
-			<tr height="20">
+            <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Contactable</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2"><strong>Contactable</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Non-Contactable</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Dead</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="0"><strong>Converted</strong></th>
-            {*    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>*}
+                    {*    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
+                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
+                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
+                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>*}
 
             </tr>
             <tr height="20">
-               {* <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Program Name</strong>
+                {* <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <strong>Program Name</strong>
                 </th>*}
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Name</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
                 </th>
                 {foreach from = $StatusList key=key item=status}
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$status}</strong></th>
-				{/foreach}
-				
+                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$status}</strong></th>
+                        {/foreach}
+
             </tr>
-			{foreach from = $programList key=key item=program}
+            {foreach from = $programList key=key item=program}
                 <tr height="20" class="oddListRowS1">
-                   {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>*}
-					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.name}</td>
+                    {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>*}
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
                     {foreach from = $StatusList key=key item=vendor}
 
@@ -199,7 +199,7 @@
 
                 </tr>
             {/foreach}
-			
+
     </table>
     {literal}
         <script>
@@ -221,8 +221,8 @@
                 step: 1,
                 weekNumbers: false,
             });
-            
-             function getAjax(target, arr) {
+
+            function getAjax(target, arr) {
                 $.ajax({
                     beforeSend: function (request)
                     {

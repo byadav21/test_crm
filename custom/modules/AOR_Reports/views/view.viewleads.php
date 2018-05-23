@@ -134,7 +134,7 @@ class AOR_ReportsViewviewleads extends SugarView
         }
         else if ($_SESSION['cccon_show']!='' && $StatusList[$_SESSION['cccon_show']]=='Non-connect')
         {
-           $wherecl .= " AND  leads.dispositionName!='CONNECTED'";
+           $wherecl .= " AND leads.status_description!='Re-Enquired' and (leads.dispositionName!='CONNECTED' || leads.dispositionName IS NULL)";
             
         }
         
