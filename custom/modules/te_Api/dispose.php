@@ -165,6 +165,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean->status             = $status;
         $bean->status_description = $dispositionCode;
         $bean->dispositionName    = $_REQUEST['dispositionName'];
+        $bean->callType           = $_REQUEST['callType'];
         $bean->save();
 
 
