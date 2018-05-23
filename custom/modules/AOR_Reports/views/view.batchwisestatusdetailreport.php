@@ -235,7 +235,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         $StatusList['prospect']               = 'Prospect';
         
         $StatusList['dead_number']            = 'Dead Number';
-        #$StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
+        $StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
         $StatusList['dispositions']            = 'Non-connect';
         
         $StatusList['fallout']                = 'Fallout';       

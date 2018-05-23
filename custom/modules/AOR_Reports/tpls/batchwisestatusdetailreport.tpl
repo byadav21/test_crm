@@ -162,7 +162,7 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2"><strong>Contactable</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Contactable</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Non-Contactable</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Dead</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="0"><strong>Converted</strong></th>
