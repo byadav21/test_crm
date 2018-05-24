@@ -346,6 +346,18 @@ class LeadsViewEdit extends ViewEdit
                     } else {
                         $("#status_description").append('<option>Converted</option>');
                     }
+                    
+                    if (status_detail == 'Instalment Follow up') {
+                        $("#status_description").append('<option  selected="selected">Instalment Follow up</option>');
+                    } else {
+                        $("#status_description").append('<option>Instalment Follow up</option>');
+                    }
+                    
+                    if (status_detail == 'Referral Follow up') {
+                        $("#status_description").append('<option  selected="selected">Referral Follow up</option>');
+                    } else {
+                        $("#status_description").append('<option>Referral Follow up</option>');
+                    }
                 }
 
                 if (document.getElementById('status').value == "Recycle") {
