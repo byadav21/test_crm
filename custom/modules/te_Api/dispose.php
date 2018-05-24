@@ -224,10 +224,10 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
           
             $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/manual_dial_customer_if_18_16_17.txt", "a");
             fwrite($file, date('Y-m-d H:i:s') . "\n");
-            fwrite($file, 'manual.dial.customer if dristi_campagain_id {18,16,17}' . "\n");
-            fwrite($file, $data . "\n");
-            fwrite($file, 'manual.dial.customer if dristi_campagain_id {18,16,17}' . "\n");
-            fwrite($file, print_r($responses, TRUE) . "\n");
+            fwrite($file, '$data  if {18,16,17}' . "\n");
+            fwrite($file, print_r($data, TRUE) . "\n");
+            fwrite($file, '$responses  if {18,16,17}' . "\n");
+            fwrite($file, $responses . "\n");
             fclose($file);
     
         }
