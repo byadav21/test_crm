@@ -133,6 +133,7 @@ $GLOBALS['app_list_strings']['contract_type_list']=array (
   'Display' => 'Display',
   'CPC' => 'CPC',
   'CPI' => 'CPI',
+  'CPL'=>'CPL',
 );
 $app_strings['LBL_GROUPTAB5_1495719136'] = 'Expense';
 
