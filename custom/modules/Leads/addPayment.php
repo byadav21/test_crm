@@ -1025,10 +1025,7 @@ class addPaymentClass
             {
 
 
-                $dispoName= $bean->status;
-                if(isset( $_REQUEST['dispositionName'])){
-                   $dispoName =   $_REQUEST['dispositionName'];
-                }
+          
                 
                 $disposition = new te_disposition();
 
@@ -1041,7 +1038,7 @@ class addPaymentClass
                 $disposition->date_of_callback              = $bean->date_of_callback;
                 $disposition->date_of_followup              = $bean->date_of_followup;
                 $disposition->date_of_prospect              = $bean->date_of_prospect;
-                $disposition->name                          = $dispoName;
+                $disposition->name                          = $bean->dispositionName;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
                 $disposition->save();
 

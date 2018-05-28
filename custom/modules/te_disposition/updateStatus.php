@@ -6,11 +6,11 @@ class updateStatusClass{
 	
 	function updateStatusFunc($bean, $event, $argument){
                 
-                if (empty($bean->name)){
-		$sa = "UPDATE te_disposition SET name='".$bean->status."' WHERE id='".$bean->id."'";
-		//~ die;
+                
+               
+		$sa = "UPDATE te_disposition SET name='".$bean->dispositionName."',dispositionName='".$bean->dispositionName."' WHERE id='".$bean->id."'";
 		$GLOBALS['db']->query($sa);
-            }
+          
 		$GLOBALS['log']->fatal('Request - '.print_r($_REQUEST,true));
 		if(empty($bean->fetched_row['id']) && !empty($bean->te_disposition_leadsleads_ida)){
 			//~ $sql = "UPDATE leads SET status='".$bean->status."',status_detail='".$bean->status_description."',note='".$bean->description."' WHERE id ='".$bean->te_disposition_leadsleads_ida."'";
