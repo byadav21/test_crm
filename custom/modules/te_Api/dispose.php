@@ -12,6 +12,8 @@ global $db, $current_user;
 $crmDispo = array('New Lead'               => 'Alive',
     'Follow Up'              => 'Alive',
     'Converted'              => 'Converted',
+    'Instalment Follow up'   => 'Converted',
+    'Referral Follow up'     => 'Converted',
     'Dead Number'            => 'Dead',
     'Wrong Number'           => 'Dead',
     'Ringing Multiple Times' => 'Dead',
