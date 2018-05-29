@@ -1039,6 +1039,8 @@ class addPaymentClass
                 $disposition->date_of_followup              = $bean->date_of_followup;
                 $disposition->date_of_prospect              = $bean->date_of_prospect;
                 $disposition->name                          = $bean->dispositionName;
+                $disposition->dispositionName               = $bean->dispositionName;
+                $disposition->callType                      = $bean->callType;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
                 $disposition->save();
 
