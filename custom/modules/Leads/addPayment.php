@@ -1041,7 +1041,7 @@ class addPaymentClass
                 $disposition->name                          = $bean->dispositionName;
                 $disposition->dispositionName               = $bean->dispositionName;
                 $disposition->callType                      = $bean->callType;
-                $disposition->created_by                    = $bean->created_by;
+                $disposition->created_by                    = $bean->assigned_user_id;
                 $disposition->assigned_user_id              = $bean->assigned_user_id;
                 $disposition->modified_user_id              = $bean->modified_user_id;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
