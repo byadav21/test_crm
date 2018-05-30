@@ -46,21 +46,6 @@ $dictionary['te_disposition']['fields']['callType']['dbType']='varchar';
 $dictionary['te_disposition']['fields']['callType']['len']='150';
 $dictionary['te_disposition']['fields']['callType']['audited']='false';
 
-$dictionary['te_disposition']['fields']['callType']['name']='created_by';
-$dictionary['te_disposition']['fields']['callType']['vname']='LBL_UNIQUECALLID';
-$dictionary['te_disposition']['fields']['callType']['type']='varchar';
-$dictionary['te_disposition']['fields']['callType']['dbType']='varchar';
-$dictionary['te_disposition']['fields']['callType']['len']='150';
-$dictionary['te_disposition']['fields']['callType']['audited']='false';
-
-$dictionary['te_disposition']['fields']['callType']['name']='modified_user_id';
-$dictionary['te_disposition']['fields']['callType']['vname']='LBL_UNIQUECALLID';
-$dictionary['te_disposition']['fields']['callType']['type']='varchar';
-$dictionary['te_disposition']['fields']['callType']['dbType']='varchar';
-$dictionary['te_disposition']['fields']['callType']['len']='150';
-$dictionary['te_disposition']['fields']['callType']['audited']='false';
-
-
 $dictionary['te_disposition']['fields']['status']['required']=true;
 $dictionary['te_disposition']['fields']['status']['options']='lead_status_custom_dis_dom';
 $dictionary['te_disposition']['fields']['status_detail']['options']='lead_status_details_custom_dis_dom';
