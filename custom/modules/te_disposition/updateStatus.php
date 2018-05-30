@@ -8,7 +8,7 @@ class updateStatusClass{
                 
                 
                
-		$sa = "UPDATE te_disposition SET name='".$bean->dispositionName."',dispositionName='".$bean->dispositionName."' WHERE id='".$bean->id."'";
+		$sa = "UPDATE te_disposition SET name='".$bean->dispositionName."',dispositionName='".$bean->dispositionName."',created_by='".$bean->assigned_user_id."' WHERE id='".$bean->id."'";
 		$GLOBALS['db']->query($sa);
           
 		$GLOBALS['log']->fatal('Request - '.print_r($_REQUEST,true));
