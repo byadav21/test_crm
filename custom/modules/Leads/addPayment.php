@@ -1041,8 +1041,29 @@ class addPaymentClass
                 $disposition->name                          = $bean->dispositionName;
                 $disposition->dispositionName               = $bean->dispositionName;
                 $disposition->callType                      = $bean->callType;
+		//$disposition->created_by                  =  $bean->assigned_user_id;
+                //$disposition->assigned_user_id            =  $bean->assigned_user_id;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
-                $disposition->save();
+                $xx = $disposition->save();
+		if($xx!=''){
+		$sql     = "UPDATE `te_disposition` SET `created_by`='".$bean->assigned_user_id. "' where id ='".$xx."'";
+		$sqlData = $GLOBALS['db']->query($sql);
+		}
+		
+$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
+fwrite($file,'---------------------------'. "\n");
+fwrite($file, date('Y-m-d H:i:s') . "\n");
+fwrite($file, 'LeadID:' . "\n");
+fwrite($file, $bean->id . "\n");
+fwrite($file, 'Assigned_user_id:' . "\n");
+fwrite($file, $bean->assigned_user_id . "\n");
+fwrite($file, 'CreatedBy:' . "\n");
+fwrite($file, $bean->created_by . "\n");
+fwrite($file, 'modified_user_id:' . "\n");
+fwrite($file, $bean->modified_user_id . "\n");
+fwrite($file, 'disp save id:' . "\n");
+fwrite($file, $xx . "\n");
+fclose($file);
 
 
                 $sql     = " select dristi_request from leads WHERE id ='" . $bean->id . "'";
