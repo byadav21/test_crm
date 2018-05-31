@@ -5,6 +5,7 @@ global $mod_strings, $app_strings, $sugar_config;
 unset($module_menu[0]);
 unset($module_menu[1]);
 if(ACLController::checkAccess('te_budgeted_campaign', 'import', true))$module_menu[]=Array("index.php?module=te_budgeted_campaign&action=budget_summary", "Budgeted Campaign Plan", "");
+if(ACLController::checkAccess('te_budgeted_campaign', 'import', true))$module_menu[]=Array("index.php?module=Import&action=Step1&import_module=te_budgeted_campaign&return_module=te_budgeted_campaign&return_action=index"," Budgeted Campaign Import ");
 
 
 ?>
