@@ -107,7 +107,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=eloquacontacts', "E
 $module_menu[] = array ('index.php?module=AOR_Reports&action=eloquaobjects', "Eloqua Objects", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=eloquareport', "Eloqua Report", 'AOR_Reports');
 
-if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1){
+if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1 || $current_user->id=='d81fc9e1-91ae-eba3-19d9-5af02415c81c'){
 $module_menu[] = array ('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
 }
 
@@ -123,7 +123,7 @@ $module_menu[] = array ('index.php?module=AOR_Reports&action=leadprofilingreport
 //$module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "Referal Student Report",'AOR_Reports');
 //$module_menu[] = array ('index.php?module=AOR_Reports&action=feereport', "Fee Report", 'AOR_Reports');
 //$module_menu[] = array ('index.php?module=AOR_Reports&action=studentjourney', "Student Journey Report", 'AOR_Reports');
-if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1){
+if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1 || $current_user->id=='d81fc9e1-91ae-eba3-19d9-5af02415c81c'){
 $module_menu[] = array ('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
 }
 $module_menu[] = array ('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
