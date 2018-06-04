@@ -1043,6 +1043,7 @@ class addPaymentClass
                 $disposition->callType                      = $bean->callType;
 		//$disposition->created_by                  =  $bean->assigned_user_id;
                 //$disposition->assigned_user_id            =  $bean->assigned_user_id;
+                $disposition->attempt_count                 = $bean->attempts_c;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
                 $xx = $disposition->save();
 		if($xx!=''){
