@@ -64,24 +64,24 @@ if($misData['slug']=='SRM' || $misData['slug']=='SRE') $displaySRM=true;
 if($misData['slug']=='DMM') $displayDM=true;
 
 if($current_user->is_admin==1 || $displayMis||$displayCC){
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusreport', "Counselor Wise Status Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counselor Wise Status Detail Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusreport', "Counselor Wise Status Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counselor Wise Status Detail Report", 'AOR_Reports');
   $module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwisecounconreport', "Vendor wise agent conversion Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=mangerwiseleadstatusreport', "Manager wise lead status Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=mangerwiseleadstatusdetailreport', "Manager wise lead status Detail Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=pipelinereport', "Pipeline Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=salescyclereport', "Sales Cycle Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Status Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=mangerwiseleadstatusreport', "Manager wise lead status Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=mangerwiseleadstatusdetailreport', "Manager wise lead status Detail Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=pipelinereport', "Pipeline Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=salescyclereport', "Sales Cycle Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Status Report", 'AOR_Reports');
   $module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=gsvreport', "GSV Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=referalleads', "Referal Lead", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=gsvreport', "GSV Report", 'AOR_Reports');
+  //$module_menu[] = array ('index.php?module=AOR_Reports&action=referalleads', "Referal Lead", 'AOR_Reports');
 }
 
 $module_menu[] = array ('index.php?module=AOR_Reports&action=leadutilization', "Lead Utilization", 'AOR_Reports');
 
 # DIgital Marketing #
 if( $current_user->is_admin==1 || $displayMis || $displayDM){
-$module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
+//$module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dailyreport', "Daily Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=dmstatusreport', "DM Status Report", 'AOR_Reports');
 $module_menu[] = array ('index.php?module=AOR_Reports&action=budgeted_actual', "Budgeted Vs Actual Report", 'AOR_Reports');
