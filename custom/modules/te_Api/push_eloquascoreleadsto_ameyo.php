@@ -10,7 +10,16 @@ error_reporting(-1);
 ini_set('display_errors', 'On');
 $query  = "SELECT  lead.id,
                     batch.d_campaign_id,
-                    batch.d_lead_id
+                    batch.d_lead_id,
+                    leadcstm.email_add_c as email_id,
+                    leadcstm.te_ba_batch_id_c as batch_id,
+                    lead.phone_mobile as mobile_no,
+                    lead.autoassign,
+                    lead.neoxstatus,
+                    lead.assigned_user_id,
+                    lead.update_flag,
+                    lead.dristi_campagain_id,
+                    lead.dristi_API_id
              FROM `leads_cstm` AS `leadcstm`
              INNER JOIN `te_ba_batch` AS `batch` ON leadcstm.te_ba_batch_id_c = batch.id
              INNER JOIN `leads` AS `lead` ON leadcstm.id_c = lead.id
@@ -32,35 +41,86 @@ $query  = "SELECT  lead.id,
                       lead.phone_mobile,
                       leadcstm.email_add_c
              ORDER BY lead.date_entered ASC
-             LIMIT 100";
+             LIMIT 1";
 $result = $db->Query($query);
-//print_r($result);
-while ($row    = $db->fetchByAssoc($result))
-{
-    //print_r($row);
 
-    $leadid        = $row['id'];
-    $d_campaign_id = $row['d_campaign_id'];
-    $d_lead_id     = $row['d_lead_id'];
-    $querylead     = "SELECT * from `leads` WHERE `id`='$leadid' ";
-    $resultlead    = $db->Query($querylead);
-    while ($rowlead       = $db->fetchByAssoc($resultlead))
+if ($result->num_rows > 0)
+{
+
+    $lead_detail = array();
+    while ($row         = $db->fetchByAssoc($result))
     {
 
-        $autoassign          = $rowlead['autoassign'];
-        $status              = $rowlead['status'];
-        $status_description  = $rowlead['status_description'];
-        $neoxstatus          = $rowlead['neoxstatus'];
-        $assigned_user_id    = $rowlead['assigned_user_id'];
-        $update_flag         = $rowlead['update_flag'];
-        $dristi_campagain_id = $rowlead['dristi_campagain_id'];
-        $dristi_API_id       = $rowlead['dristi_API_id'];
-        //insert query in lead table 'lead_logdata'
-        $insert_logdata      = "INSERT INTO `leads_logdata` ( `lead_id`, `autoassign`, `status`, `status_description`, `neoxstatus`, `assigned_user_id`, `update_flag`, `dristi_campagain_id`, `dristi_API_id`)
-	 		VALUES ( '$leadid', '$autoassign', '$status', '$status_description', '$neoxstatus', '$assigned_user_id', '$update_flag', '$dristi_campagain_id', '$dristi_API_id');";
-        $db->Query($insert_logdata);
-        //update query in lead table
-        $update_lead         = "UPDATE `leads` SET `autoassign` = 'Yes', `status` = 'Alive', `status_description` = 'New Lead', `neoxstatus` = '0',`assigned_user_id` = '', `update_flag` = '1', `dristi_campagain_id` = '$d_campaign_id',   `dristi_API_id` = '$d_lead_id',`update_timestamp`= now() WHERE `id` = '$leadid'";
-        $db->Query($update_lead);
+        $lead_id               = $row['id'];
+        $lead_detail[$lead_id] = $row;
     }
 }
+
+
+
+$final_array = array();
+foreach ($lead_detail as $key => $val)
+{
+
+    $lead_id   = $key;
+    $batch_id  = $val['batch_id'];
+    $mobile_no = $val['mobile_no'];
+    $email_id  = $val['email_id'];
+
+
+    $query_new = "SELECT    leadcstm.id_c,
+                            lead.status,
+                            lead.status_description
+                     FROM `leads_cstm` AS `leadcstm`
+                     RIGHT JOIN `leads` AS `lead` ON leadcstm.id_c = lead.id
+                     WHERE leadcstm.te_ba_batch_id_c='$batch_id' && lead.phone_mobile='$mobile_no' && leadcstm.email_add_c='$email_id' ";
+
+    $resultm = $db->Query($query_new);
+    // print_r($resultm);
+
+    while ($rowm = $db->fetchByAssoc($resultm))
+    {
+
+        $new_val                     = $rowm['id_c'];
+        $final_array[$key][$new_val] = $rowm['status'];
+        if ($rowm['status'] == 'Converted')
+        {
+            unset($final_array[$key]);
+        }
+    }
+}
+
+
+print_r($final_array);
+  $to_be_update_leads=array();
+  foreach($final_array as $key=>$val)
+  {
+
+    $autoassign          = $lead_detail[$key]['autoassign'];
+    $status              = $lead_detail[$key]['status'];
+    $status_description  = $lead_detail[$key]['status_description'];
+    $neoxstatus          = $lead_detail[$key]['neoxstatus'];
+    $assigned_user_id    = $lead_detail[$key]['assigned_user_id'];
+    $update_flag         = $lead_detail[$key]['update_flag'];
+    $dristi_campagain_id = $lead_detail[$key]['dristi_campagain_id'];
+    $dristi_API_id       = $lead_detail[$key]['dristi_API_id'];
+    $d_campaign_id=$lead_detail[$key]['d_campaign_id'];
+    $d_lead_id=$lead_detail[$key]['d_lead_id'];
+
+    foreach($val as $index=>$valm)
+    {
+
+  $c_lead_id=$index;
+      //insert query in lead table 'lead_logdata'
+      $insert_logdata      = "INSERT INTO `leads_logdata` ( `lead_id`, `autoassign`, `status`, `status_description`, `neoxstatus`, `assigned_user_id`, `update_flag`, `dristi_campagain_id`, `dristi_API_id`)
+    VALUES ( '$c_lead_id', '$autoassign', '$status', '$status_description', '$neoxstatus', '$assigned_user_id', '$update_flag', '$dristi_campagain_id', '$dristi_API_id');";
+      $conn->Query($insert_logdata);
+      //update query in lead table
+      $update_lead         = "UPDATE `leads` SET `autoassign` = 'Yes', `status` = 'Alive', `status_description` = 'New Lead', `neoxstatus` = '0',`assigned_user_id` = '', `update_flag` = '1', `dristi_campagain_id` = '$d_campaign_id',   `dristi_API_id` = '$d_lead_id',`update_timestamp`= now() WHERE `id` = '$c_lead_id'";
+      $conn->Query($update_lead);
+
+
+
+    }
+  }
+

@@ -18,18 +18,33 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         parent::SugarView();
     }
     
-   function getCouncelorForAdmin($role = '')
+       function checkManager()
     {
-        global $db;
-        $id = '';
+        global $db, $current_user;
+        $userSql = "SELECT u.id
+                        FROM users AS u
+                    INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+                    INNER JOIN acl_roles ON aru.role_id=acl_roles.id
+                    INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                    WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
+                      AND u.deleted=0
+                      AND u.id='" . $current_user->id . "'
+                      AND aru.deleted=0
+                      AND acl_roles.deleted=0 ";
 
-        if ($role == 'manager')
+        $userObj = $db->query($userSql);
+        return $db->getRowCount($userObj);
+    }
+
+    function getManagers($role = '')
+    {
+        global $db, $current_user;
+
+        $is_manger = $this->checkManager();
+        $conditons = '';
+        if ($is_manger == 1)
         {
-            $id = '7e225ca3-69fa-a75d-f3f2-581d88cafd9a';
-        }
-        else
-        {
-            $id = '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45';
+            $conditons = 'AND u.id="' . $current_user->id . '"';
         }
 
         $userSql  = "SELECT u.first_name,
@@ -42,9 +57,61 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
                          INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
  			 INNER join acl_roles on aru.role_id=acl_roles.id
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
-                         WHERE aru.`role_id` IN ('$id')
-                           AND u.deleted=0
-                           AND aru.deleted=0 and acl_roles.deleted=0 ";
+                         WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
+                           AND u.deleted=0 $conditons
+                           AND aru.deleted=0 
+                           AND acl_roles.deleted=0 
+                           AND u.deleted=0  
+                           AND u.employee_status='Active'";
+        $userObj  = $db->query($userSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+
+            $usersArr[$user['id']]['id']             = $user['id'];
+            $usersArr[$user['id']]['name']           = $user['first_name'] . ' ' . $user['last_name'];
+            $usersArr[$user['id']]['reporting_id']   = $user['reporting_id'];
+            $usersArr[$user['id']]['reporting_name'] = $user['reporting_firstname'] . ' ' . $user['reporting_lastname'];
+        }
+        return $usersArr;
+    }
+
+    function getCouncelor($selectedMangers = array())
+    {
+        global $db,$current_user;
+
+
+        //print_r($selectedMangers);
+        $is_manger = $this->checkManager();
+        $conditons = '';
+
+        if ($is_manger == 1)
+        {
+            $conditons = 'AND ru.id="' . $current_user->id . '"';
+        }
+        else if (!empty($selectedMangers))
+        {
+
+
+            $conditons = "AND ru.id in ('" . implode("','", $selectedMangers) . "')";
+        }
+
+         $userSql  = "SELECT u.first_name,
+                                u.last_name,
+                                u.id,
+                                ru.first_name AS reporting_firstname,
+                                ru.last_name AS reporting_lastname,
+                                ru.id AS reporting_id
+                         FROM users AS u
+                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+ 			 INNER join acl_roles on aru.role_id=acl_roles.id
+                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                         WHERE aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
+                           AND u.deleted=0 $conditons
+                           AND aru.deleted=0 
+                           AND acl_roles.deleted=0 
+                           AND u.deleted=0 
+                           AND u.employee_status='Active'";
         $userObj  = $db->query($userSql);
         $usersArr = [];
         while ($user     = $db->fetchByAssoc($userObj))
@@ -127,8 +194,9 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         $wherecl           = "";
         $BatchListData     = $this->getBatch();
         $ProgrammeListData = $this->getProgram();
-        $managerSList    = $this->getCouncelorForAdmin('manager');
-        $CouncellorsList = $this->getCouncelorForAdmin();
+        $is_manger = $this->checkManager();
+        $managerSList    = $this->getManagers();
+        $CouncellorsList   = $this->getCouncelor($_SESSION['cccon_managers']);
         
         $selected_batch='';
         $selected_status='';
@@ -205,6 +273,11 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         if (!empty($_SESSION['cccon_managers']))
         {
             $selected_managers = $_SESSION['cccon_managers'];
+        }
+        
+         if ($is_manger == 1)
+        {
+            $selected_managers = array($current_user->id);
         }
 
         $programList = array();

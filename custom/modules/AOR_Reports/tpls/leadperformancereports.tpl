@@ -334,6 +334,55 @@
                     getAjax('councellors', arg);
                 });
                 
+                
+                 $("#search_form").on('submit', (function(e) {
+                     
+                      var from_date    = $('#from_date').val();
+                      var to_date      = $('#to_date').val();
+                      var batch_code   = $('#batch_code').val();
+                      var status       = $('#status').val();
+                      var month        = $('#month').val();
+                      var year         = $('#year').val();
+                      var users        = $('#users').val();
+                      var managers     = $('#managers').val();
+                      var councellors  = $('#councellors').val();
+                      
+                      
+                      if(from_date=='' || from_date ==null){
+                          $("#from_date").focus();
+                           alert('Please select From-Date!'); return false;
+                      }
+                      
+                      if(to_date=='' || to_date ==null){
+                          $("#to_date").focus();
+                           alert('Please select To-Date!'); return false;
+                      }
+                     
+                     if(status=='' || status ==null){
+                          $("#status").focus();
+                           alert('Please select a Status!'); return false;
+                      }
+                     
+                      if(batch_code=='' || batch_code ==null){
+                          $("#batch_code").focus();
+                           alert('Please select a Batch Code!'); return false;
+                      }
+                      
+                      if(managers=='' || managers ==null){
+                          $("#manager").focus();
+                          alert('Please select a Manager!'); return false;
+                      }
+                      
+                       if(councellors=='' || councellors ==null){
+                          $("#councellors").focus();
+                          alert('Please select a Councellor!'); return false;
+                      }
+                      
+                      
+                     
+                    
+                 }));
+                
             });
         </script>
     {/literal}

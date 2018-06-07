@@ -20,18 +20,33 @@ class AOR_ReportsViewleadutilization extends SugarView
         parent::SugarView();
     }
 
-    function getCouncelorForAdmin($role = '')
+    function checkManager()
     {
-        global $db;
-        $id = '';
+        global $db, $current_user;
+        $userSql = "SELECT u.id
+                        FROM users AS u
+                    INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+                    INNER JOIN acl_roles ON aru.role_id=acl_roles.id
+                    INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                    WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
+                      AND u.deleted=0
+                      AND u.id='" . $current_user->id . "'
+                      AND aru.deleted=0
+                      AND acl_roles.deleted=0 ";
 
-        if ($role == 'manager')
+        $userObj = $db->query($userSql);
+        return $db->getRowCount($userObj);
+    }
+
+    function getManagers($role = '')
+    {
+        global $db, $current_user;
+
+        $is_manger = $this->checkManager();
+        $conditons = '';
+        if ($is_manger == 1)
         {
-            $id = '7e225ca3-69fa-a75d-f3f2-581d88cafd9a';
-        }
-        else
-        {
-            $id = '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45';
+            $conditons = 'AND u.id="' . $current_user->id . '"';
         }
 
         $userSql  = "SELECT u.first_name,
@@ -44,9 +59,60 @@ class AOR_ReportsViewleadutilization extends SugarView
                          INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
  			 INNER join acl_roles on aru.role_id=acl_roles.id
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
-                         WHERE aru.`role_id` IN ('$id')
-                           AND u.deleted=0
-                           AND aru.deleted=0 and acl_roles.deleted=0 ";
+                         WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
+                           AND u.deleted=0 $conditons
+                           AND aru.deleted=0 
+                           AND acl_roles.deleted=0 
+                           AND u.deleted=0  
+                           AND u.employee_status='Active'";
+        $userObj  = $db->query($userSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+
+            $usersArr[$user['id']]['id']             = $user['id'];
+            $usersArr[$user['id']]['name']           = $user['first_name'] . ' ' . $user['last_name'];
+            $usersArr[$user['id']]['reporting_id']   = $user['reporting_id'];
+            $usersArr[$user['id']]['reporting_name'] = $user['reporting_firstname'] . ' ' . $user['reporting_lastname'];
+        }
+        return $usersArr;
+    }
+
+    function getCouncelor($selectedMangers = array())
+    {
+        global $db,$current_user;
+
+         $is_manger = $this->checkManager();
+         $conditons = '';
+        //print_r($selectedMangers);
+
+        if ($is_manger == 1)
+        {
+            $conditons = 'AND ru.id="' . $current_user->id . '"';
+        }
+        else if (!empty($selectedMangers))
+        {
+
+
+            $conditons = "AND ru.id in ('" . implode("','", $selectedMangers) . "')";
+        }
+
+        $userSql  = "SELECT u.first_name,
+                                u.last_name,
+                                u.id,
+                                ru.first_name AS reporting_firstname,
+                                ru.last_name AS reporting_lastname,
+                                ru.id AS reporting_id
+                         FROM users AS u
+                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+ 			 INNER join acl_roles on aru.role_id=acl_roles.id
+                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                         WHERE aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
+                           AND u.deleted=0 $conditons
+                           AND aru.deleted=0 
+                           AND acl_roles.deleted=0 
+                           AND u.deleted=0 
+                           AND u.employee_status='Active'";
         $userObj  = $db->query($userSql);
         $usersArr = [];
         while ($user     = $db->fetchByAssoc($userObj))
@@ -82,8 +148,8 @@ class AOR_ReportsViewleadutilization extends SugarView
                      FROM leads
                      LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
                      LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                     WHERE leads.date_entered >= '".$_SESSION['cccon_from_date']." 00:00:00'
-                       AND leads.date_entered <= '".$_SESSION['cccon_to_date']." 23:59:59'
+                     WHERE leads.date_entered >= '" . $_SESSION['cccon_from_date'] . " 00:00:00'
+                       AND leads.date_entered <= '" . $_SESSION['cccon_to_date'] . " 23:59:59'
                        and leads.status='Alive'
                        and leads.status_description='New Lead'
                        and leads.deleted=0
@@ -122,27 +188,31 @@ class AOR_ReportsViewleadutilization extends SugarView
                      LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
                      LEFT join te_disposition_leads_c disrel on disrel.te_disposition_leadsleads_ida=leads.id
                      LEFT join te_disposition dis on disrel.te_disposition_leadste_disposition_idb=dis.id
-                     WHERE leads.date_entered >= '".$_SESSION['cccon_from_date']." 00:00:00'
-                       AND leads.date_entered <= '".$_SESSION['cccon_to_date']." 23:59:59'
+                     WHERE leads.date_entered >= '" . $_SESSION['cccon_from_date'] . " 00:00:00'
+                       AND leads.date_entered <= '" . $_SESSION['cccon_to_date'] . " 23:59:59'
                        and leads_cstm.`attempts_c`>=1 
                      #and te_ba_batch.batch_code in ('DS-04-0218-01')
                          group by leads.id order by dispo_date ";
 
 
-        $leadObj = $db->query($leadSql);
+        $leadObj      = $db->query($leadSql);
         $leadsBybatch = array();
         $attemplist   = array();
-        
-        while ($row = $db->fetchByAssoc($leadObj)){
-            $leadsBybatch[$row['batch_code']][]=$row;
+
+        while ($row = $db->fetchByAssoc($leadObj))
+        {
+            $leadsBybatch[$row['batch_code']][] = $row;
         }
-        $TAT=1;
+        $TAT = 1;
         //echo '<pre>';
         //echo print_r($leadsBybatch);
         foreach ($leadsBybatch as $key => $val)
         {
 
-            $outside_TAT = array();$attempted_1_3=array();$attempted_4_6=array();$attempted_more_6=array();
+            $outside_TAT      = array();
+            $attempted_1_3    = array();
+            $attempted_4_6    = array();
+            $attempted_more_6 = array();
             foreach ($val as $key => $data)
             {
 
@@ -150,29 +220,27 @@ class AOR_ReportsViewleadutilization extends SugarView
                 //print_r($val); echo 'bat='.$val[$key]['batch_code'];die;
                 $mintsdiff = round(abs((strtotime($val[$key]['date_entered']) - strtotime($val[$key]['dispo_date']))) / 60);
                 //echo 'date_entered='.$val[$key]['date_entered'].'  dispo_date='.$val[$key]['dispo_date'].' $mintsdiff=' . $mintsdiff.'attempts_c='.$val[$key]['attempts_c'].'<br>';
-               
                 //else if ($mintsdiff <= 1440 && ($val[$key]['attempts_c'] >= 1 && $val[$key]['attempts_c'] <= 3))
                 if ($val[$key]['attempts_c'] >= 1 && $val[$key]['attempts_c'] <= 3)
                 {
-                    $attempted_1_3[]   = 1;
+                    $attempted_1_3[]                                           = 1;
                     $attemplist[$val[$key]['batch_id']]['leads_attempted_1_3'] = (count($attempted_1_3));
                 }
                 //else if ($mintsdiff <= 1440 && ($val[$key]['attempts_c'] >= 4 && $val[$key]['attempts_c'] <= 6))
                 else if ($val[$key]['attempts_c'] >= 4 && $val[$key]['attempts_c'] <= 6)
                 {
-                    $attempted_4_6[]   = 1;
+                    $attempted_4_6[]                                           = 1;
                     $attemplist[$val[$key]['batch_id']]['leads_attempted_4_6'] = (count($attempted_4_6));
                 }
                 //else if ($mintsdiff <= 1440 && $row['attempts_c'] >= 6)
                 else if ($val[$key]['attempts_c'] > 6)
                 {   //echo 'helllooo';
-                    $attempted_more_6[]   = 1;
+                    $attempted_more_6[]                                                = 1;
                     $attemplist[$val[$key]['batch_id']]['leads_attempted_more_than_6'] = (count($attempted_more_6));
                 }
                 if ($mintsdiff > 1440)
                 {   //echo 'total=='.$toal; 
-                    
-                    $outside_TAT[]   = 1;
+                    $outside_TAT[]                                                   = 1;
                     $attemplist[$val[$key]['batch_id']]['leads_dialled_outside_TAT'] = (count($outside_TAT));
                 }
                 //echo '$toal='.$toal;
@@ -182,14 +250,14 @@ class AOR_ReportsViewleadutilization extends SugarView
         return $attemplist;
         ///echo '<pre>';
         //print_r($attemplist);
-
     }
-    
+
     public function display()
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
+        $is_manger = $this->checkManager();
 
         $where      = "";
         $wherecl    = "";
@@ -200,8 +268,8 @@ class AOR_ReportsViewleadutilization extends SugarView
 
         $error = array();
 
-        $managerSList    = $this->getCouncelorForAdmin('manager');
-        $CouncellorsList = $this->getCouncelorForAdmin();
+        $managerSList    = $this->getManagers();
+        $CouncellorsList = $this->getCouncelor($_SESSION['cccon_managers']);
         $lead_source     = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
 
         foreach ($lead_source as $key => $value)
@@ -228,18 +296,18 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']      = $_REQUEST['batch'];
-            $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_managers'] = $_REQUEST['managers'];
+            $_SESSION['cccon_from_date']   = $_REQUEST['from_date'];
+            $_SESSION['cccon_to_date']     = $_REQUEST['to_date'];
+            $_SESSION['cccon_batch']       = $_REQUEST['batch'];
+            $_SESSION['cccon_batch_code']  = $_REQUEST['batch_code'];
+            $_SESSION['cccon_managers']    = $_REQUEST['managers'];
             $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
-            $_SESSION['cccon_status'] = $_REQUEST['status'];
+            $_SESSION['cccon_status']      = $_REQUEST['status'];
         }
-        
+
         //$_SESSION['cccon_from_date']='2017-10-11';
         //$_SESSION['cccon_to_date']='2017-10-11'; 
-        
+
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
             $selected_from_date = $_SESSION['cccon_from_date'];
@@ -262,8 +330,8 @@ class AOR_ReportsViewleadutilization extends SugarView
             $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
             $wherecl          .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
         }
-       
-      
+
+
 
         $findBatch = array();
 
@@ -294,7 +362,10 @@ class AOR_ReportsViewleadutilization extends SugarView
             $selected_status = $_SESSION['cccon_status'];
         }
 
-
+        if ($is_manger == 1)
+        {
+            $selected_managers = array($current_user->id);
+        }
 
         $leadList   = array();
         $StatusList = array();
@@ -311,12 +382,12 @@ class AOR_ReportsViewleadutilization extends SugarView
         {
             $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
         }
-        
+
         if (!empty($selected_councellors))
         {
             $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
-  
+
 
 
 
@@ -358,7 +429,6 @@ class AOR_ReportsViewleadutilization extends SugarView
 
         //echo '<pre>';
         //print_r($leadList);
-
         #PS @Pawan
         $total     = count($leadList); #total records
         $start     = 0;
@@ -430,7 +500,7 @@ class AOR_ReportsViewleadutilization extends SugarView
 
         $sugarSmarty->assign("selected_source", $selected_source);
         $sugarSmarty->assign("selected_managers", $selected_managers);
-         $sugarSmarty->assign("selected_councellors", $selected_councellors);
+        $sugarSmarty->assign("selected_councellors", $selected_councellors);
 
 
 
