@@ -304,6 +304,9 @@
 								 
 							{/if}
 						<p>Counsellor : {$rowData.ASSIGNED_USER_NAME}</p>
+						<p>Individual Id: {$rowData.INDIVIDUAL_ID_C}  </p>
+						<p>Individual Id Status: {$rowData.INDIVIDUAL_IDSTATUS_C}  </p>
+						<p>Individual Id Batch Status:{$rowData.INDIVIDUAL_IDBATCHSTATUS_C}  </p>
 				  </div>
 				  <div class="col-sm-4">
 				  

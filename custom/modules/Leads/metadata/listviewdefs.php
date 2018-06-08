@@ -37,6 +37,27 @@ array (
     'width' => '10%',
     'sortable' => false,
   ),
+  'INDIVIDUAL_IDBATCHSTATUS_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_INDIVIDUAL_IDBATCHSTATUS',
+    'width' => '10%',
+  ),
+  'INDIVIDUAL_IDSTATUS_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_INDIVIDUAL_IDSTATUS',
+    'width' => '10%',
+  ),
+  'INDIVIDUAL_ID_C' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'LBL_INDIVIDUAL_ID',
+    'width' => '10%',
+  ),
   'INSTITUTE' => 
   array (
     'type' => 'varchar',
