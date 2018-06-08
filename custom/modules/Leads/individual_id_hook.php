@@ -30,7 +30,7 @@ class individualIdClass
             $enq_batch = $same_batch;
           }
 
-          $s = "UPDATE leads_cstm SET individual_id_c='".$ind_id."',individual_idbatch_c='".$enq_batch."',individual_idtype_c='".$repeated_status."' WHERE id_c='" . $bean->id . "'";
+          $s = "UPDATE leads_cstm SET individual_id_c='".$ind_id."',individual_idbatchstatus_c='".$enq_batch."',individual_idstatus_c='".$repeated_status."' WHERE id_c='" . $bean->id . "'";
           $GLOBALS['db']->query($s);
       }
       else
@@ -38,7 +38,7 @@ class individualIdClass
           $enq_batch = "Fresh";
 
           $ind_id = base64_encode($bean->id);
-          $s = "UPDATE leads_cstm SET individual_id_c='".$ind_id."',individual_idbatch_c='".$enq_batch."',individual_idtype_c='".$fresh_status."' WHERE id_c='" . $bean->id . "'";
+          $s = "UPDATE leads_cstm SET individual_id_c='".$ind_id."',individual_idbatchstatus_c='".$enq_batch."',individual_idstatus_c='".$fresh_status."' WHERE id_c='" . $bean->id . "'";
           $GLOBALS['db']->query($s);
       }
     }
