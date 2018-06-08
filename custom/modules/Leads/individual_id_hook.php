@@ -15,7 +15,7 @@ class individualIdClass
     $repeated_status = 'Repeated';
 
     if(!empty($lead_email)){
-      $sqlRel = "SELECT l.id,lc.te_ba_batch_id_c,l.date_entered,lc.email_add_c FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c AND l.delete=0 WHERE l.id!='" . $lead_id . "' AND lc.email_add_c='" . $lead_email . "' ORDER BY l.date_entered ASC LIMIT 0,1 ";
+      $sqlRel = "SELECT l.id,lc.te_ba_batch_id_c,l.date_entered,lc.email_add_c FROM leads l INNER JOIN leads_cstm lc ON l.id=lc.id_c AND l.deleted=0 WHERE l.id!='" . $lead_id . "' AND lc.email_add_c='" . $lead_email . "' ORDER BY l.date_entered ASC LIMIT 0,1 ";
       $rel    = $GLOBALS['db']->query($sqlRel);
       $ind_id = '';
       if ($GLOBALS['db']->getRowCount($rel) > 0)
