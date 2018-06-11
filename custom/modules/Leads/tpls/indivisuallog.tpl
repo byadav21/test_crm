@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h1>Indivisual Log</h1><br/><br/>
+<section class="moduleTitle"> <h1>Indivisual Log Details</h1><br/><br/>
 
 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=Leads&action=indivisuallog" enctype="multipart/form-data">
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -26,29 +26,55 @@
 	<thead>
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Vendors</strong>
+			<strong>Name</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Alive</strong>
+			<strong>Batch</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Warm</strong>
+			<strong>Batch Code</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Dead</strong>
+			<strong>Status</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Converted</strong>
+			<strong>Status Description</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Entered Date</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Counselor</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Individual Id</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Individual Id Status</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Individual Id Batch Status</strong>
 		</th>
 	</tr>
-	<tr height="20" class="oddListRowS1">
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">1</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">2</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">3</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">4</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">5</td>
-						
-		</tr>
+	{foreach from = $result_data key=key item=value}
+            
+             <tr height="20" class="oddListRowS1">
+
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.first_name}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.batch_name}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.batch_code}</td>
+		 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.status}</td>
+		 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.status_description}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.date_entered}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.user_fname}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.individual_id_c}</td>                 
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.individual_idstatus_c}</td>
+                 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.individual_idbatchstatus_c}</td>
+
+
+             </tr>
+           
+        {/foreach}
 		 </tbody>
 	 </table>
   </div>
@@ -66,5 +92,4 @@ Calendar.setup ({
 });
 </script>
 {/literal}
-
 
