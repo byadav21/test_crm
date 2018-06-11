@@ -304,7 +304,11 @@
 								 
 							{/if}
 						<p>Counsellor : {$rowData.ASSIGNED_USER_NAME}</p>
-						<p>Individual Id: {$rowData.INDIVIDUAL_ID_C}  </p>
+						  {if !empty($rowData.INDIVIDUAL_ID_C)} 
+                          <p>Individual Id:<a href="index.php?module=Leads&action=indivisuallog&ivd={$rowData.INDIVIDUAL_ID_C}">{$rowData.INDIVIDUAL_ID_C}</a></p>
+                          {else}
+                          <p>Individual Id: <span style="color:red">-NA-<span></p>
+                          {/if}
 						<p>Individual Id Status: {$rowData.INDIVIDUAL_IDSTATUS_C}  </p>
 						<p>Individual Id Batch Status:{$rowData.INDIVIDUAL_IDBATCHSTATUS_C}</p>
 				  </div>
