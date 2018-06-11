@@ -367,6 +367,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_franchise_goog'=>'franchise_goog',
   'OO_franchise_FB'=>'franchise_FB',
   'OO_franchise_FB_leads'=>'franchise_FB_leads',
+  'OO_ag1'=>'Avenue Growth 1',
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';

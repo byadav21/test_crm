@@ -25,6 +25,15 @@ array (
         'default' => true,
         'name' => 'email',
       ),
+      'mobile' => 
+      array (
+        'type' => 'varchar',
+        'studio' => 'visible',
+        'label' => 'Phone',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'mobile',
+      ),
       'institute' => 
       array (
         'type' => 'relate',
