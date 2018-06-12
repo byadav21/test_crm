@@ -1,8 +1,8 @@
 <?php
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
-require_once('modules/Campaigns/utils.php');
-$query = "SELECT leads.id AS Lead_id,leads.date_entered,leads.date_modified,
+//require_once('modules/Campaigns/utils.php');
+echo $query = "SELECT leads.id AS Lead_id,leads.date_entered,leads.date_modified,
 				leads.modified_user_id,leads.assigned_user_id,ru.reports_to_id,
 				leads.deleted,leads.converted,leads.converted_date,leads.lead_source_types,
 				leads.lead_source,leads.vendor,leads.lead_source_description,leads.status,
@@ -22,7 +22,7 @@ $query = "SELECT leads.id AS Lead_id,leads.date_entered,leads.date_modified,
 			INNER JOIN te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=leads_cstm.te_ba_batch_id_c AND pb.deleted=0
 			INNER JOIN te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida AND p.deleted=0
 			LEFT JOIN users AS ru ON ru.id=leads.assigned_user_id 
-			order by leads.id limit 10";
+			order by leads.id limit 10";exit;
 $res = $db->query($query);
 $row = $db->fetchByAssoc($res);
 echo "<pre>";print_r($row);echo "</pre>";
