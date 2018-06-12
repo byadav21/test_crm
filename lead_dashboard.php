@@ -25,5 +25,5 @@ echo $query = "SELECT leads.id AS Lead_id,leads.date_entered,leads.date_modified
 			order by leads.id limit 10";exit;
 $res = $db->query($query);
 $row = $db->fetchByAssoc($res);
-echo "<pre>";print_r($row);echo "</pre>";
+echo "<pre>";print_r($row);echo "</pre>";exit;
  ?>
