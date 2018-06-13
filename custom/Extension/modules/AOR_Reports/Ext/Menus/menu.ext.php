@@ -1,9 +1,11 @@
 <?php
- //WARNING: The contents of this file are auto-generated
+
+//WARNING: The contents of this file are auto-generated
 
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-/*********************************************************************************
+if (!defined('sugarEntry') || !sugarEntry)
+    die('Not A Valid Entry Point');
+/* * *******************************************************************************
  * The contents of this file are subject to the SugarCRM Master Subscription
  * Agreement ("License") which can be viewed at
  * http://www.sugarcrm.com/crm/master-subscription-agreement
@@ -28,17 +30,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * in the License.  Please refer to the License for the specific language
  * governing these rights and limitations under the License.  Portions created
  * by SugarCRM are Copyright (C) 2004-2011 SugarCRM, Inc.; All Rights Reserved.
- ********************************************************************************/
+ * ****************************************************************************** */
 
-/*********************************************************************************
+/* * *******************************************************************************
 
  * Description:  TODO To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
- ********************************************************************************/
+ * ****************************************************************************** */
 
-global $current_user,$db;
+global $current_user, $db;
 global $mod_strings, $app_strings;
 //require_once('modules/ACL/ACLController.php');
 //$acl_obj = new ACLController();
@@ -46,87 +48,79 @@ global $mod_strings, $app_strings;
 require_once('modules/ACLRoles/ACLRole.php');
 $acl_obj = new ACLRole();
 # CC #
-if($current_user->is_admin==1){
-//$module_menu[] = array ('index.php?module=te_report_recipients&action=index', "Report Recipients", 'te_report_recipients');  
-}
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=batchwisereferals', "Batch Wise Referals", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=studentgsv', "Student GSV", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=studentcollection', "Student Collection", 'AOR_Reports');
 
-$misData=$acl_obj->getUserSlug($current_user->id);
-$displayCC=false;
-$displayMis=false;
-$displaySRM=false;
-$displayDM=false;
-if($misData['slug']=='CCM' || $misData['slug']=='CCC' || $misData['slug']=='CCTL' || $misData['slug']=='CCH') $displayCC=true;
-if($misData['slug']=='mis') $displayMis=true;
-if($misData['slug']=='SRM' || $misData['slug']=='SRE') $displaySRM=true;
-if($misData['slug']=='DMM') $displayDM=true;
 
-if($current_user->is_admin==1 || $displayMis||$displayCC){
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusreport', "Counselor Wise Status Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counselor Wise Status Detail Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwisecounconreport', "Vendor wise agent conversion Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=mangerwiseleadstatusreport', "Manager wise lead status Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=mangerwiseleadstatusdetailreport', "Manager wise lead status Detail Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=pipelinereport', "Pipeline Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=salescyclereport', "Sales Cycle Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=statusreport', "Status Report", 'AOR_Reports');
-  $module_menu[] = array ('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=gsvreport', "GSV Report", 'AOR_Reports');
-  //$module_menu[] = array ('index.php?module=AOR_Reports&action=referalleads', "Referal Lead", 'AOR_Reports');
+
+$misData    = $acl_obj->getUserSlug($current_user->id);
+$displayCC  = false;
+$displayMis = false;
+$displaySRM = false;
+$displayDM  = false;
+if ($misData['slug'] == 'CCM' || $misData['slug'] == 'CCC' || $misData['slug'] == 'CCTL' || $misData['slug'] == 'CCH')
+    $displayCC  = true;
+if ($misData['slug'] == 'mis')
+    $displayMis = true;
+if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE')
+    $displaySRM = true;
+if ($misData['slug'] == 'DMM')
+    $displayDM  = true;
+
+if ($current_user->is_admin == 1 || $displayMis || $displayCC)
+{
+
+    $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisecounconreport', "Vendor wise agent conversion Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
 }
 
-$module_menu[] = array ('index.php?module=AOR_Reports&action=leadutilization', "Lead Utilization", 'AOR_Reports');
 
 # DIgital Marketing #
-if( $current_user->is_admin==1 || $displayMis || $displayDM){
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=weeklyreport', "Weekly Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=dailyreport', "Daily Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=dmstatusreport', "DM Status Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=budgeted_actual', "Budgeted Vs Actual Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=conversiondatareport', "Conversion Data Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=counselorconversionreport', "Counselor Conversion Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwiseleadsreport', "Vendor Wise Leads Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwiseconversionreport', "Vendor Wise Conversion Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=batchwisestatusreport', "Batch Wise Status Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwisestatusreport', "Vendor Wise Status Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=batchwisestatusdetailreport', "Lead connectivity report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
+if ($current_user->is_admin == 1 || $displayMis || $displayDM)
+{
 
-$module_menu[] = array ('index.php?module=AOR_Reports&action=dateleadperformance', "Till Date Lead Performance", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=leadsfeedbackreport', "Leads Feedback Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=leadperformancereports', "Leads Performance Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=dailyuploadreport', "Upload Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=studentgsv', "Student GSV", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=studentcollection', "Student Collection", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=leadutilization', "Lead Utilization", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=dailyreport', "Daily Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=dmstatusreport', "DM Status Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=budgeted_actual', "Budgeted Vs Actual Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=conversiondatareport', "Conversion Data Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counselorconversionreport', "Counselor Conversion Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwiseleadsreport', "Vendor Wise Leads Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwiseconversionreport', "Vendor Wise Conversion Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusreport', "Batch Wise Status Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusreport', "Vendor Wise Status Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusdetailreport', "Lead connectivity report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
 
-$module_menu[] = array ('index.php?module=AOR_Reports&action=productivityform', "Create Target Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=agentproductivityreport', "Agent Productivity Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=dateleadperformance', "Till Date Lead Performance", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=leadsfeedbackreport', "Leads Feedback Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=leadperformancereports', "Leads Performance Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=dailyuploadreport', "Upload Report", 'AOR_Reports');
 
-$module_menu[] = array ('index.php?module=AOR_Reports&action=eloquacontacts', "Eloqua Contacts", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=eloquaobjects', "Eloqua Objects", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=eloquareport', "Eloqua Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=productivityform', "Create Target Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=agentproductivityreport', "Agent Productivity Report", 'AOR_Reports');
 
-if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1 || $current_user->id=='d81fc9e1-91ae-eba3-19d9-5af02415c81c'){
-$module_menu[] = array ('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
-}
+    $module_menu[] = array('index.php?module=AOR_Reports&action=eloquacontacts', "Eloqua Contacts", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=eloquaobjects', "Eloqua Objects", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=eloquareport', "Eloqua Report", 'AOR_Reports');
 
+    if ($current_user->id == '5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id == 'ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id == 1 || $current_user->id == 'd81fc9e1-91ae-eba3-19d9-5af02415c81c')
+    {
+        $module_menu[] = array('index.php?module=AOR_Reports&action=exportheaderwisereport', "Export Report By Headers", 'AOR_Reports');
+    }
 }
 # SRM REPORTS #
-if( $current_user->is_admin==1 || $displayMis || $displaySRM){
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=feedbackreport', "Feedback Report", 'AOR_Reports');
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=resultreport', "Result Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
-$module_menu[] = array ('index.php?module=AOR_Reports&action=leadprofilingreport', "Lead Profiling Report", 'AOR_Reports');
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=certificate', "Certificate Report", 'AOR_Reports');
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=studentstudykit', "Student Study Kit Report", 'AOR_Reports');
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=referalstudent', "Referal Student Report",'AOR_Reports');
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=feereport', "Fee Report", 'AOR_Reports');
-//$module_menu[] = array ('index.php?module=AOR_Reports&action=studentjourney', "Student Journey Report", 'AOR_Reports');
-if( $current_user->id=='5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id=='ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id==1 || $current_user->id=='d81fc9e1-91ae-eba3-19d9-5af02415c81c'){
-$module_menu[] = array ('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
-}
-$module_menu[] = array ('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
-}
+if ($current_user->is_admin == 1 || $displayMis || $displaySRM)
+{
 
+    $module_menu[] = array('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=leadprofilingreport', "Lead Profiling Report", 'AOR_Reports');
+
+    if ($current_user->id == '5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id == 'ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id == 1 || $current_user->id == 'd81fc9e1-91ae-eba3-19d9-5af02415c81c')
+    {
+        $module_menu[] = array('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
+    }
+    $module_menu[] = array('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
+}
 ?>
