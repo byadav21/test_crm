@@ -145,7 +145,8 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-        if ($is_Vendor == 1 && $vendorName == 'Infoedge')
+        //if ($is_Vendor == 1 && $vendorName == 'Infoedge')
+        if ($current_user->id =='36990877-a094-db61-6610-5b20f95a6e6e')
         {
             $selected_vendor = array($vendorID);
             $VendorListData  = array(array('id' => $vendorID, 'name' => $vendorName));

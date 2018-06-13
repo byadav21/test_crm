@@ -79,7 +79,8 @@ if ($current_user->is_admin == 1 || $displayMis || $displayCC)
     $module_menu[] = array('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
 }
 
-  if ($is_Vendor == 1 && $vendorName == 'Infoedge')
+  //if ($is_Vendor == 1 && $vendorName == 'Infoedge')
+if ($current_user->id == '36990877-a094-db61-6610-5b20f95a6e6e')
         {
             $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
         }
