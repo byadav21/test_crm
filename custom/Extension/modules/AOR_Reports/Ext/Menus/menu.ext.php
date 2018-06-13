@@ -49,8 +49,15 @@ require_once('modules/ACLRoles/ACLRole.php');
 $acl_obj = new ACLRole();
 # CC #
 
-
-
+//echo '<pre>';
+//print_r($current_user);
+$vendorID   = $current_user->te_vendor_users_1te_vendor_ida;
+$vendorName = $current_user->te_vendor_users_1_name;
+$is_Vendor  = 0;
+if ($vendorID != '' && $vendorName != '')
+{
+    $is_Vendor = 1;
+}
 $misData    = $acl_obj->getUserSlug($current_user->id);
 $displayCC  = false;
 $displayMis = false;
@@ -72,6 +79,11 @@ if ($current_user->is_admin == 1 || $displayMis || $displayCC)
     $module_menu[] = array('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
 }
 
+  if ($is_Vendor == 1 && $vendorName == 'Infoedge')
+        {
+            $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
+        }
+        
 
 # DIgital Marketing #
 if ($current_user->is_admin == 1 || $displayMis || $displayDM)
@@ -90,6 +102,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusreport', "Batch Wise Status Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusreport', "Vendor Wise Status Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
+  
     $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusdetailreport', "Lead connectivity report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
 
