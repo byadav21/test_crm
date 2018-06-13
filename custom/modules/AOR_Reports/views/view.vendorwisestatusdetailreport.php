@@ -149,7 +149,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
         if ($current_user->id =='36990877-a094-db61-6610-5b20f95a6e6e')
         {
             $selected_vendor = array($vendorID);
-            $VendorListData  = array(array('id' => $vendorID, 'name' => $vendorName));
+            $VendorListData  = array(array('id' =>'92f19224-b7b2-68e2-a112-590d64d59115', 'name' => 'Infoedge'));
         }
 
         if (!empty($selected_vendor))
