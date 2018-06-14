@@ -48,7 +48,6 @@ global $mod_strings, $app_strings;
 require_once('modules/ACLRoles/ACLRole.php');
 $acl_obj = new ACLRole();
 # CC #
-
 //echo '<pre>';
 //print_r($current_user);
 $vendorID   = $current_user->te_vendor_users_1te_vendor_ida;
@@ -58,6 +57,27 @@ if ($vendorID != '' && $vendorName != '')
 {
     $is_Vendor = 1;
 }
+
+
+
+$userSql = "SELECT u.id
+                FROM users AS u
+            INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+            INNER JOIN acl_roles ON aru.role_id=acl_roles.id
+            INNER JOIN users AS ru ON ru.id=u.reports_to_id
+            WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
+              AND u.deleted=0
+              AND u.id='" . $current_user->id . "'
+              AND aru.deleted=0
+              AND acl_roles.deleted=0 ";
+
+$userObj   = $db->query($userSql);
+$is_manger = $db->getRowCount($userObj);
+
+
+
+
+
 $misData    = $acl_obj->getUserSlug($current_user->id);
 $displayCC  = false;
 $displayMis = false;
@@ -79,12 +99,21 @@ if ($current_user->is_admin == 1 || $displayMis || $displayCC)
     $module_menu[] = array('index.php?module=AOR_Reports&action=conversionreport', "Conversion Report", 'AOR_Reports');
 }
 
-  //if ($is_Vendor == 1 && $vendorName == 'Infoedge')
+// if Counsellors managers logged in;
+if ($is_manger == 1)
+{
+    $module_menu[] = array('index.php?module=AOR_Reports&action=leadutilization', "Lead Utilization", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=agentproductivityreport', "Agent Productivity Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=leadperformancereports', "Leads Performance Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusdetailreport', "Lead connectivity report", 'AOR_Reports');
+}
+
+//if ($is_Vendor == 1 && $vendorName == 'Infoedge')
 if ($current_user->id == '36990877-a094-db61-6610-5b20f95a6e6e')
-        {
-            $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
-        }
-        
+{
+    $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
+}
+
 
 # DIgital Marketing #
 if ($current_user->is_admin == 1 || $displayMis || $displayDM)
@@ -103,7 +132,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusreport', "Batch Wise Status Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusreport', "Vendor Wise Status Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
-  
+
     $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusdetailreport', "Lead connectivity report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
 
