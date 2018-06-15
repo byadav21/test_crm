@@ -4,6 +4,7 @@
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
+ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
 
 //error_reporting(-1);
@@ -393,7 +394,7 @@ class AOR_ReportsViewleadutilization extends SugarView
 
 
 
-       echo $leadSql = "SELECT COUNT(leads.id) AS lead_count,
+        $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                             leads.date_entered,
                             te_ba_batch.id AS batch_id,
                             te_ba_batch.name AS batch_name,
