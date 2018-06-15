@@ -94,12 +94,13 @@ if ($misData['slug'] == 'DMM')
 
         
         $UsersVendrArr = array(
-            'e7c007d2-5ca7-57e5-64ba-5b23a435c4b7' => 'ileap',
-            'b28d0f4a-b486-731e-2781-5b23a41da9cf' => 'TBS',
-            'b80c8a52-5174-3d92-feae-5b23a453bbcf' => 'iimjobs',
-            'ca7ed5d5-daaf-7bf9-110e-5b23a58965dd' => 'CiteHR',
-            '3d29ebfb-23a7-ea3e-b4d8-5b23a590f80f' => 'Career360',
-            '36990877-a094-db61-6610-5b20f95a6e6e' => 'Infoedge');
+            'e7c007d2-5ca7-57e5-64ba-5b23a435c4b7',// => 'ileap',
+            'b28d0f4a-b486-731e-2781-5b23a41da9cf',// => 'TBS',
+            'b80c8a52-5174-3d92-feae-5b23a453bbcf',// => 'iimjobs',
+            'ca7ed5d5-daaf-7bf9-110e-5b23a58965dd',// => 'CiteHR',
+            '3d29ebfb-23a7-ea3e-b4d8-5b23a590f80f',// => 'Career360',
+            '36990877-a094-db61-6610-5b20f95a6e6e',// => 'Infoedge'
+            );
          
         
         /*
