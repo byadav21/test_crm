@@ -69,6 +69,36 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
         {
             $is_Vendor = 1;
         }
+        
+        
+        $UsersVendrArr = array(
+            'e7c007d2-5ca7-57e5-64ba-5b23a435c4b7' => 'ileap',
+            'b28d0f4a-b486-731e-2781-5b23a41da9cf' => 'TBS',
+            'b80c8a52-5174-3d92-feae-5b23a453bbcf' => 'iimjobs',
+            'ca7ed5d5-daaf-7bf9-110e-5b23a58965dd' => 'CiteHR',
+            '3d29ebfb-23a7-ea3e-b4d8-5b23a590f80f' => 'Career360',
+            '36990877-a094-db61-6610-5b20f95a6e6e' => 'Infoedge');
+         
+        
+        /*
+        $UsersVendrArr = array(
+            '29a6c441-8c9c-a49a-a28e-5b234fa1ecf9' => 'ileap',
+            '1cbd38c1-2a63-3ab8-a85c-5b234febc8a4' => 'TBS',
+            '93e39ed4-487b-e35c-62bc-5b234f7cd078' => 'iimjobs',
+            'e86be88c-3f72-3211-a058-5b2350c211cd' => 'CiteHR',
+            'b27c5fd1-f781-bcab-a7e5-5b2350b22896' => 'Career360',
+            '87d1f4da-c6c9-81fe-944a-5b1fb537fc1c' => 'Infoedge');
+         
+         */
+
+        $vendorsIdArr = array(
+            'ileap'=>'4a9e16bf-0396-fffc-b848-5b084550f2a8',
+            'TBS'=>'abe14a6c-00cb-13d6-2e2e-590d6f806ff4',
+            'iimjobs'=>'ee1d169a-ca0c-f3fe-d6d6-590d636bc19b',
+            'CiteHR'=>'14a4e733-b709-8c60-7731-590d5cb3b1f7',
+            'Career360'=>'71a590a5-0616-44d3-5248-590d5b158460',
+            'Infoedge'=>'92f19224-b7b2-68e2-a112-590d64d59115');
+
         $where           = "";
         $wherecl         = "";
         $ProgramListData = $this->getProgram();
@@ -145,11 +175,37 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-        //if ($is_Vendor == 1 && $vendorName == 'Infoedge')
-        if ($current_user->id =='36990877-a094-db61-6610-5b20f95a6e6e')
+     
+        
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Infoedge')
         {
-            $selected_vendor = array('92f19224-b7b2-68e2-a112-590d64d59115');
-            $VendorListData  = array(array('id' =>'92f19224-b7b2-68e2-a112-590d64d59115', 'name' => 'Infoedge'));
+            $selected_vendor = array($vendorsIdArr['Infoedge']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Infoedge'], 'name' => 'Infoedge'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Career360')
+        {
+            $selected_vendor = array($vendorsIdArr['Career360']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Career360'], 'name' => 'Career360'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'CiteHR')
+        {
+            $selected_vendor = array($vendorsIdArr['CiteHR']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['CiteHR'], 'name' => 'CiteHR'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'iimjobs')
+        {
+            $selected_vendor = array($vendorsIdArr['iimjobs']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['iimjobs'], 'name' => 'iimjobs'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'TBS')
+        {
+            $selected_vendor = array($vendorsIdArr['TBS']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['TBS'], 'name' => 'TBS'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'ileap')
+        {
+            $selected_vendor = array($vendorsIdArr['ileap']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['ileap'], 'name' => 'ileap'));
         }
 
         if (!empty($selected_vendor))

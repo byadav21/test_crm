@@ -92,6 +92,27 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE')
 if ($misData['slug'] == 'DMM')
     $displayDM  = true;
 
+        
+        $UsersVendrArr = array(
+            'e7c007d2-5ca7-57e5-64ba-5b23a435c4b7' => 'ileap',
+            'b28d0f4a-b486-731e-2781-5b23a41da9cf' => 'TBS',
+            'b80c8a52-5174-3d92-feae-5b23a453bbcf' => 'iimjobs',
+            'ca7ed5d5-daaf-7bf9-110e-5b23a58965dd' => 'CiteHR',
+            '3d29ebfb-23a7-ea3e-b4d8-5b23a590f80f' => 'Career360',
+            '36990877-a094-db61-6610-5b20f95a6e6e' => 'Infoedge');
+         
+        
+        /*
+        $UsersVendrArr = array(
+            '29a6c441-8c9c-a49a-a28e-5b234fa1ecf9', // => 'ileap', 
+            '1cbd38c1-2a63-3ab8-a85c-5b234febc8a4', // => 'TBS',
+            '93e39ed4-487b-e35c-62bc-5b234f7cd078', // => 'iimjobs',
+            'e86be88c-3f72-3211-a058-5b2350c211cd', // => 'CiteHR',
+            'b27c5fd1-f781-bcab-a7e5-5b2350b22896', // => 'Career360',
+            '87d1f4da-c6c9-81fe-944a-5b1fb537fc1c', // => 'Infoedge'
+            );
+        */
+        
 if ($current_user->is_admin == 1 || $displayMis || $displayCC)
 {
 
@@ -108,10 +129,10 @@ if ($is_manger == 1)
     $module_menu[] = array('index.php?module=AOR_Reports&action=batchwisestatusdetailreport', "Lead connectivity report", 'AOR_Reports');
 }
 
-//if ($is_Vendor == 1 && $vendorName == 'Infoedge')
-if ($current_user->id == '36990877-a094-db61-6610-5b20f95a6e6e')
-{
-    $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
+
+if(in_array($current_user->id, $UsersVendrArr))
+{       
+ $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
 }
 
 
