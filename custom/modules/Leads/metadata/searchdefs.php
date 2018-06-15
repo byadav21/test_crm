@@ -29,7 +29,7 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'Counsellors' => 
+      'counsellors' => 
       array (
         'label' => 'Counsellors',
         'type' => 'enum',
@@ -44,6 +44,14 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'phone_mobile',
+      ),
+      'lead_id' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'Lead ID',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'lead_id',
       ),
     ),
     'advanced_search' => 
