@@ -25,9 +25,9 @@ class AOR_ReportsViewleadutilization extends SugarView
         global $db, $current_user;
         $userSql = "SELECT u.id
                         FROM users AS u
-                    INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
-                    INNER JOIN acl_roles ON aru.role_id=acl_roles.id
-                    INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                    LEFT JOIN acl_roles_users AS aru ON aru.user_id=u.id
+                    LEFT JOIN acl_roles ON aru.role_id=acl_roles.id
+                    LEFT JOIN users AS ru ON ru.id=u.reports_to_id
                     WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
                       AND u.deleted=0
                       AND u.id='" . $current_user->id . "'
@@ -56,9 +56,9 @@ class AOR_ReportsViewleadutilization extends SugarView
                                 ru.last_name AS reporting_lastname,
                                 ru.id AS reporting_id
                          FROM users AS u
-                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
- 			 INNER join acl_roles on aru.role_id=acl_roles.id
-                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                         LEFT JOIN acl_roles_users AS aru ON aru.user_id=u.id
+ 			 LEFT join acl_roles on aru.role_id=acl_roles.id
+                         LEFT JOIN users AS ru ON ru.id=u.reports_to_id
                          WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
                            AND u.deleted=0 $conditons
                            AND aru.deleted=0 
@@ -104,9 +104,9 @@ class AOR_ReportsViewleadutilization extends SugarView
                                 ru.last_name AS reporting_lastname,
                                 ru.id AS reporting_id
                          FROM users AS u
-                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
- 			 INNER join acl_roles on aru.role_id=acl_roles.id
-                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
+                         LEFT JOIN acl_roles_users AS aru ON aru.user_id=u.id
+ 			 LEFT join acl_roles on aru.role_id=acl_roles.id
+                         LEFT JOIN users AS ru ON ru.id=u.reports_to_id
                          WHERE aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
                            AND u.deleted=0 $conditons
                            AND aru.deleted=0 
@@ -393,7 +393,7 @@ class AOR_ReportsViewleadutilization extends SugarView
 
 
 
-        $leadSql = "SELECT COUNT(leads.id) AS lead_count,
+       echo $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                             leads.date_entered,
                             te_ba_batch.id AS batch_id,
                             te_ba_batch.name AS batch_name,

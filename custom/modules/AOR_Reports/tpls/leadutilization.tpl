@@ -324,10 +324,10 @@
                            alert('Please select To-Date!'); return false;
                       }
                      
-                     if(status=='' || status ==null){
+                     /*if(status=='' || status ==null){
                           $("#status").focus();
                            alert('Please select a Status!'); return false;
-                      }
+                      }*/
                      
                       if(batch_code=='' || batch_code ==null){
                           $("#batch_code").focus();
