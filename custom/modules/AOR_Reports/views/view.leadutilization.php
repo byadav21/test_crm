@@ -152,7 +152,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
         if(!empty($selected_batch_code)){
             
-              $and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
+              //$and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
         }
         
         $leadSql  = "SELECT COUNT(leads.id) AS fresh_lead_count,
@@ -194,7 +194,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
         if(!empty($selected_batch_code)){
             
-              $and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
+              //$and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
         }
         
         //echo '<pre>'.
