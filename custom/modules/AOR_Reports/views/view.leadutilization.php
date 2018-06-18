@@ -26,9 +26,9 @@ class AOR_ReportsViewleadutilization extends SugarView
         global $db, $current_user;
         $userSql = "SELECT u.id
                         FROM users AS u
-                    LEFT JOIN acl_roles_users AS aru ON aru.user_id=u.id
-                    LEFT JOIN acl_roles ON aru.role_id=acl_roles.id
-                    LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+                    INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+                    INNER JOIN acl_roles ON aru.role_id=acl_roles.id
+                    INNER JOIN users AS ru ON ru.id=u.reports_to_id
                     WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
                       AND u.deleted=0
                       AND u.id='" . $current_user->id . "'
@@ -57,9 +57,9 @@ class AOR_ReportsViewleadutilization extends SugarView
                                 ru.last_name AS reporting_lastname,
                                 ru.id AS reporting_id
                          FROM users AS u
-                         LEFT JOIN acl_roles_users AS aru ON aru.user_id=u.id
- 			 LEFT join acl_roles on aru.role_id=acl_roles.id
-                         LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+ 			 INNER join acl_roles on aru.role_id=acl_roles.id
+                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
                          WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
                            AND u.deleted=0 $conditons
                            AND aru.deleted=0 
@@ -105,9 +105,9 @@ class AOR_ReportsViewleadutilization extends SugarView
                                 ru.last_name AS reporting_lastname,
                                 ru.id AS reporting_id
                          FROM users AS u
-                         LEFT JOIN acl_roles_users AS aru ON aru.user_id=u.id
- 			 LEFT join acl_roles on aru.role_id=acl_roles.id
-                         LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+ 			 INNER join acl_roles on aru.role_id=acl_roles.id
+                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
                          WHERE aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
                            AND u.deleted=0 $conditons
                            AND aru.deleted=0 
@@ -140,21 +140,32 @@ class AOR_ReportsViewleadutilization extends SugarView
         return $batchOptions;
     }
 
-    function getFresh()
+    function getFresh($selected_batch_code,$selected_councellors)
     {
         global $db;
         $leadList = array();
+        
+        $and='';
+        if(!empty($selected_councellors)){
+            
+              $and .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if(!empty($selected_batch_code)){
+            
+              $and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
+        }
+        
         $leadSql  = "SELECT COUNT(leads.id) AS fresh_lead_count,
                             te_ba_batch.id AS batch_id
                      FROM leads
-                     LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+                     INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
+                     INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
                      WHERE leads.date_entered >= '" . $_SESSION['cccon_from_date'] . " 00:00:00'
                        AND leads.date_entered <= '" . $_SESSION['cccon_to_date'] . " 23:59:59'
-                       and leads.status='Alive'
-                       and leads.status_description='New Lead'
+                      and leads.status_description in ('New Lead','Follow Up','Prospect')
                        and leads.deleted=0
                        and leads_cstm.attempts_c=''
+                       $and
                      GROUP  by  batch_code";
 
         $leadObj = $db->query($leadSql) or die(mysqli_error());
@@ -169,13 +180,25 @@ class AOR_ReportsViewleadutilization extends SugarView
         return $leadList;
     }
 
-    function getAttempts()
+    function getAttempts($selected_batch_code,$selected_councellors)
     {
 
         global $db;
         //$leadList   = array();
         $attemplist = array();
-        $leadSql    = "SELECT 
+        
+        $and='';
+        if(!empty($selected_councellors)){
+            
+              $and .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if(!empty($selected_batch_code)){
+            
+              $and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
+        }
+        
+        //echo '<pre>'.
+                $leadSql    = "SELECT 
                             te_ba_batch.batch_code AS batch_code,
                             te_ba_batch.id AS batch_id,
 			    leads.id lead_id,
@@ -185,14 +208,15 @@ class AOR_ReportsViewleadutilization extends SugarView
 				dis.status,
 				dis.status_detail
                      FROM leads
-                     LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                     LEFT join te_disposition_leads_c disrel on disrel.te_disposition_leadsleads_ida=leads.id
-                     LEFT join te_disposition dis on disrel.te_disposition_leadste_disposition_idb=dis.id
+                     INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
+                     INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id and te_ba_batch.deleted=0
+                     INNER join te_disposition_leads_c disrel on disrel.te_disposition_leadsleads_ida=leads.id and disrel.deleted=0
+                     INNER join te_disposition dis on disrel.te_disposition_leadste_disposition_idb=dis.id and dis.deleted=0
                      WHERE leads.date_entered >= '" . $_SESSION['cccon_from_date'] . " 00:00:00'
                        AND leads.date_entered <= '" . $_SESSION['cccon_to_date'] . " 23:59:59'
-                       and leads_cstm.`attempts_c`>=1 
-                     #and te_ba_batch.batch_code in ('DS-04-0218-01')
+                       AND leads.`deleted`=0 
+                       AND leads_cstm.`attempts_c`>=1 
+                       $and
                          group by leads.id order by dispo_date ";
 
 
@@ -394,23 +418,22 @@ class AOR_ReportsViewleadutilization extends SugarView
 
 
 
-        $leadSql = "SELECT COUNT(leads.id) AS lead_count,
+                 //echo '<pre>'.  
+                 $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                             leads.date_entered,
                             te_ba_batch.id AS batch_id,
                             te_ba_batch.name AS batch_name,
                             te_ba_batch.batch_code
                      FROM leads
-                     LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+                     INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
+                     INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id and te_ba_batch.deleted=0
                      WHERE leads.deleted=0 $wherecl
-                       #and leads.status!='Warm'
-                       #and leads.status_description!='Re-Enquired'
                      GROUP  by  batch_code";
 
         $leadObj = $db->query($leadSql) or die(mysqli_error());
 
-        $FresleadArr = $this->getFresh();
-        $attemptArr  = $this->getAttempts();
+        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors);
+        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors);
 
         while ($row = $db->fetchByAssoc($leadObj))
         {
