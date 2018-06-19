@@ -6,7 +6,7 @@ $query ="SELECT lead_modified_date FROM dashboard_leads order by lead_modified_d
 $resultselect = $db->query($query);
 $row = $db->fetchByAssoc($resultselect);
 $modifieddate=$row['lead_modified_date'];
-echo $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
+$query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 				leads.modified_user_id,leads.assigned_user_id,ru.reports_to_id,
 				leads.deleted,leads.converted,leads.converted_date,leads.lead_source_types,
 				leads.lead_source,leads.vendor,leads.lead_source_description,leads.status,
@@ -42,5 +42,5 @@ while (($row = $db->fetchByAssoc($result)) != null) {
 		$updatequerydata=$db->query($updatedata);
 	}
 }
-echo "done";exit;
+echo "done cron";exit;
  ?>
