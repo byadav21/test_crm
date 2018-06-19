@@ -4,7 +4,7 @@ require_once('include/entryPoint.php');
 
 $query = "SELECT *  FROM dashboard_leads order by lead_modified_date desc limit 1 ";
 $resultselect = $db->query($query);
-$row = $db->fetchByAssoc($resultselect)
+$row = $db->fetchByAssoc($resultselect);
 echo "<pre>";print_r($row);exit;
 /*$query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 				leads.modified_user_id,leads.assigned_user_id,ru.reports_to_id,
