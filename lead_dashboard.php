@@ -21,8 +21,7 @@ $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 			INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0
 			INNER JOIN te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=leads_cstm.te_ba_batch_id_c AND pb.deleted=0
 			INNER JOIN te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida AND p.deleted=0
-			LEFT JOIN users AS ru ON ru.id=leads.assigned_user_id 
-			order by leads.id asc limit 10";
+			LEFT JOIN users AS ru ON ru.id=leads.assigned_user_id order by leads.date_modified limit 100";
 $result = $db->query($query);
 //$row = $db->fetchByAssoc($res);
 while (($row = $db->fetchByAssoc($result)) != null) {
