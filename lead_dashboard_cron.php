@@ -2,11 +2,11 @@
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
 
-$query = "SELECT *  FROM dashboard_leads order by lead_modified_date desc limit 1 ";
+$query ="SELECT lead_modified_date FROM dashboard_leads order by lead_modified_date desc limit 1";
 $resultselect = $db->query($query);
 $row = $db->fetchByAssoc($resultselect);
-echo "<pre>";print_r($row);exit;
-/*$query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
+$modifieddate=$row['lead_modified_date'];
+echo $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 				leads.modified_user_id,leads.assigned_user_id,ru.reports_to_id,
 				leads.deleted,leads.converted,leads.converted_date,leads.lead_source_types,
 				leads.lead_source,leads.vendor,leads.lead_source_description,leads.status,
@@ -26,6 +26,6 @@ echo "<pre>";print_r($row);exit;
 			INNER JOIN te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=leads_cstm.te_ba_batch_id_c AND pb.deleted=0
 			INNER JOIN te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida AND p.deleted=0
 			LEFT JOIN users AS ru ON ru.id=leads.assigned_user_id 
-			where leads.date_modify>=
-			order by leads.id limit 10";
-$result = $db->query($query);*/
+			where leads.date_modify>=$modifieddate
+			order by leads.id limit 10";exit;
+$result = $db->query($query);
