@@ -26,7 +26,7 @@ $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 $result = $db->query($query);
 //$row = $db->fetchByAssoc($res);
 while (($row = $db->fetchByAssoc($result)) != null) {
-	echo "<pre>";print_r($row);echo "</pre>";
+	//echo "<pre>";print_r($row);echo "</pre>";
 	$query = "SELECT *  FROM dashboard_leads WHERE lead_id='".$row['lead_id']."' ";
 	$resultselect = $db->query($query, false);
 	//echo $resultselect->num_rows;
