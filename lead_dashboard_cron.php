@@ -26,6 +26,5 @@ echo $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified
 			INNER JOIN te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=leads_cstm.te_ba_batch_id_c AND pb.deleted=0
 			INNER JOIN te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida AND p.deleted=0
 			LEFT JOIN users AS ru ON ru.id=leads.assigned_user_id 
-			where leads.date_modify>=$modifieddate
-			order by leads.id limit 10";exit;
+			where leads.date_modified>="'.$modifieddate.'" order by leads.id limit 10";exit;
 $result = $db->query($query);
