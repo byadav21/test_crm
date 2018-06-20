@@ -9,8 +9,8 @@ class individualIdClass
   {
     $lead_email = $bean->email_add_c;
     $lead_id = $bean->id;
-    $same_batch = 'Enquired for same batch';
-    $diff_batch = 'Enquired for different batch';
+    $same_batch = 'Same Course Return';
+    $diff_batch = 'Different Course Return';
     $fresh_status = 'Fresh';
     $repeated_status = 'Repeated';
 
