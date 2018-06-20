@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry'))define('sugarEntry', true);
-require_once('include/entryPoint.php');
+require_once('include/entryPoint.php'); 
 
 $query ="SELECT lead_modified_date FROM dashboard_leads order by lead_modified_date desc limit 1";
 $resultselect = $db->query($query);
