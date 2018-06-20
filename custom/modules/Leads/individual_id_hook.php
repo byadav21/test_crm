@@ -46,7 +46,7 @@ class individualIdClass
       {
           $enq_batch = "Fresh";
 
-          $ind_id = base64_encode($bean->id);
+          $ind_id = time();
           $s = "UPDATE leads_cstm SET individual_id_c='".$ind_id."',individual_idbatchstatus_c='".$enq_batch."',individual_idstatus_c='".$fresh_status."' WHERE id_c='" . $bean->id . "'";
           $GLOBALS['db']->query($s);
       }
