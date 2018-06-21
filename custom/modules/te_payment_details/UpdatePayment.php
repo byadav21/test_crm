@@ -188,7 +188,9 @@ class UpdatePaymentName
             }
         }
     }
-
+    
+    
+    /*------------------- stop syncing from crm to web for payment
     function addpayment_curl($lead_user_details)
     {
 		global $sugar_config;
@@ -234,7 +236,7 @@ class UpdatePaymentName
 
         curl_close($ch);
     }
-
+    
     function updatepayment_curl($lead_user_details)
     {
 		global $sugar_config;
@@ -270,7 +272,9 @@ class UpdatePaymentName
 
         curl_close($ch);
     }
-
+       */
+    
+    
     function get_lead_details($lead_id)
     {
         $leadSql = "SELECT e.email_address,leads.first_name,leads.last_name,leads.phone_mobile FROM `email_addr_bean_rel` AS eabr INNER JOIN email_addresses as e ON e.id=eabr.`email_address_id` INNER JOIN leads ON leads.id=eabr.`bean_id` WHERE eabr.`bean_id`='" . $lead_id . "' AND eabr.`bean_module`='Leads' LIMIT 0,1";
