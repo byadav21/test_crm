@@ -1040,7 +1040,7 @@ class addPaymentClass
                 $disposition->date_of_prospect              = $bean->date_of_prospect;
                 $disposition->name                          = $bean->dispositionName;
                 $disposition->dispositionName               = $bean->dispositionName;
-                $disposition->callType                      = $bean->callType;
+                $disposition->calltype                      = $bean->callType;
 		//$disposition->created_by                  =  $bean->assigned_user_id;
                 //$disposition->assigned_user_id            =  $bean->assigned_user_id;
                 $disposition->attempt_count                 = $bean->attempts_c;
