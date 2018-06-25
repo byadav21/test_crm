@@ -44,6 +44,7 @@ class updatecampaignByBatch
                              OR (leads.dristi_campagain_id is null OR leads.dristi_campagain_id=''))
                             AND leads.neoxstatus='0'
                             AND leads.deleted =0
+                            AND leads.autoassign='yes'
                             AND (leads.assigned_user_id= 'NULL'
                                        OR leads.assigned_user_id =''
                                        OR leads.assigned_user_id IS NULL)";
@@ -87,6 +88,9 @@ class updatecampaignByBatch
                                     WHERE id='" . $data['id'] . "'";
                 $db->query($sql);
                 $this->createLog($sql, ':new line:');
+            }else{
+                
+                 $this->createLog('LeadID: '.$data['id'], 'd_campaign_id not found!');
             }
         }
     }
