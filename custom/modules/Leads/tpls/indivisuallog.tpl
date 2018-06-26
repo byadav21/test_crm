@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h1>Indivisual Log Details</h1><br/><br/>
+<section class="moduleTitle"> <h1>Individual Log Details</h1><br/><br/>
 
 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=Leads&action=indivisuallog" enctype="multipart/form-data">
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -6,7 +6,7 @@
 		<tbody>
 			<tr>      
 				<td scope="row" nowrap="nowrap" width="1%">		
-					<label for="batch_basic">Indivisual Logs</label>
+					<label for="batch_basic">Individual Logs</label>
 				</td>
 				<td nowrap="nowrap" width="10%">
 								<td width="30%">
