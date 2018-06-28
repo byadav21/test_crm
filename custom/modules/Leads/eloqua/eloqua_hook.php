@@ -46,6 +46,7 @@ class eloqua_contact
                 {
                 $contact = array(
                     'id'          => $leadsCstmData['eloqua_customobject_id'],
+                    'contactId'   => $leadsCstmData['eloqua_contact_id'],
                     'fieldValues' =>
                     array(
                         0 => array('type' => 'FieldValue', 'id' => 153, 'value' => $bean->status),
@@ -58,7 +59,8 @@ class eloqua_contact
                 //echo json_encode($contact); die;
 
                 $response = $client->put('/data/customObject/7/instance/' . $leadsCstmData['eloqua_customobject_id'], $contact);
-		if ($response->id != '')
+		
+                if ($response->id != '')
                 {
                  $contactIDXX = $response->contactId;
                  if($contactIDXX==''){  $contactIDXX = $leadsCstmData['eloqua_contact_id'];  }
