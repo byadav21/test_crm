@@ -69,7 +69,7 @@ class eloqua_contact
                                   AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
                     $db->query($sqlQuery);
                     
-                    $db->query("update leads_cstm  set eloqua_contact_id=$response->id where  email_add_c='" . $bean->email_add_c . "'");
+                    $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  email_add_c='" . $bean->email_add_c . "'");
 		
         	$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/checkUpdateoneloqua_log.txt", "a");
         	fwrite($file, date('Y-m-d H:i:s') . "\n");
