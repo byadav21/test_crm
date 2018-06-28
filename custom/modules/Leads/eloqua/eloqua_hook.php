@@ -53,12 +53,29 @@ class eloqua_contact
                         2 => array('type' => 'FieldValue', 'id' => 171, 'value' => isset($leadsCstmData['batch_status']) ? $leadsCstmData['batch_status'] : ''),
                     ),
                 );
-
+		//$this->createLog($contact, '{On Request status update}');
                 //echo "<pre>inUpdate="; print_r($contact); 
                 //echo json_encode($contact); die;
 
                 $response = $client->put('/data/customObject/7/instance/' . $leadsCstmData['eloqua_customobject_id'], $contact);
-
+		if ($response->id != '')
+                {
+                   $contactIDXX = $response->contactId;
+                   $contactObjIDXX = $response->id;
+		   $sqlQuery="UPDATE leads_cstm
+                                        SET eloqua_contact_id=$contactIDXX,
+                                            eloqua_customobject_id=$contactObjIDXX
+                                WHERE email_add_c='" . $bean->email_add_c . "'
+                                  AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
+                    $db->query($sqlQuery);
+		
+        	$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/checkUpdateoneloqua_log.txt", "a");
+        	fwrite($file, date('Y-m-d H:i:s') . "\n");
+        	fwrite($file, 'checking update on email and batch' . "\n");
+		fwrite($file, $sqlQuery . "\n");
+        	//fwrite($file, print_r($bean, TRUE) . "\n");
+        	fclose($file);
+                }
                 $this->createLog($response, '{On Refresh lead}');
                 }
             }
