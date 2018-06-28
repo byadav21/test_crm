@@ -117,6 +117,10 @@ class eloqua_contact
                     $contactIDXX = $responsex->id;
                     $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  id_c='" . $bean->id . "'");
                 }
+                else if (!empty($leadsCstmData) && $leadsCstmData['eloqua_contact_id'] != '')
+                {
+                    $contactIDXX = $leadsCstmData['eloqua_contact_id'];   
+                }
 
                 //if ($contactId != '')
                 //{
@@ -180,8 +184,24 @@ class eloqua_contact
 
                 if ($response->id != '')
                 {
-                    //$contactIdx = $response->id;
-                    $db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
+                    //$contactIdx = $response->contactId;
+                    //$db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
+                    
+                    $contactIDXX = $response->contactId;
+                    $contactObjIDXX = $response->id;
+                    $sqlQuery="UPDATE leads_cstm
+                                         SET eloqua_contact_id=$contactIDXX,
+                                             eloqua_customobject_id=$contactObjIDXX
+                                 WHERE email_add_c='" . $bean->email_add_c . "'
+                                   AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
+                     $db->query($sqlQuery);
+
+                    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/checkUpdateoneloqua_log.txt", "a");
+                    fwrite($file, date('Y-m-d H:i:s') . "\n");
+                    fwrite($file, 'update contactID and ObjID On Object create in eloqua' . "\n");
+                    fwrite($file, $sqlQuery . "\n");
+                    //fwrite($file, print_r($bean, TRUE) . "\n");
+                    fclose($file);
                 }
                 //}
             }
