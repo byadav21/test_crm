@@ -60,9 +60,9 @@ class eloqua_contact
                 $response = $client->put('/data/customObject/7/instance/' . $leadsCstmData['eloqua_customobject_id'], $contact);
 		if ($response->id != '')
                 {
-                   $contactIDXX = $response->contactId;
-                   $contactObjIDXX = $response->id;
-		   $sqlQuery="UPDATE leads_cstm
+                 $contactIDXX = $response->contactId;
+                 if($contactIDXX==''){  $contactIDXX = $leadsCstmData['eloqua_contact_id'];  }
+                 $sqlQuery="UPDATE leads_cstm
                                         SET eloqua_contact_id=$contactIDXX,
                                             eloqua_customobject_id=$contactObjIDXX
                                 WHERE email_add_c='" . $bean->email_add_c . "'
