@@ -20,12 +20,18 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         parent::SugarView();
     }
 
-    function getAttempts($showByClick, $batch_code)
+    function getAttempts($showByClick, $batch_code,$selected_councellors)
     {
 
         global $db;
         $leadList   = array();
         $attemplist = array();
+        $and='';
+        if(!empty($selected_councellors)){
+            
+              $and .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        
         $leadSql    = "SELECT 
                             te_ba_batch.batch_code AS batch_code,
                             te_ba_batch.id AS batch_id,
@@ -37,13 +43,14 @@ class AOR_ReportsViewviewleadutilization extends SugarView
 				dis.status_detail
                      FROM leads
                      LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                     LEFT join te_disposition_leads_c disrel on disrel.te_disposition_leadsleads_ida=leads.id
-                     LEFT join te_disposition dis on disrel.te_disposition_leadste_disposition_idb=dis.id
+                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id and te_ba_batch.deleted=0
+                     LEFT join te_disposition_leads_c disrel on disrel.te_disposition_leadsleads_ida=leads.id and disrel.deleted=0
+                     LEFT join te_disposition dis on disrel.te_disposition_leadste_disposition_idb=dis.id and dis.deleted=0
                      WHERE leads.date_entered >= '" . $_SESSION['cccon_from_date'] . " 00:00:00'
                        AND leads.date_entered <= '" . $_SESSION['cccon_to_date'] . " 23:59:59'
                        and leads_cstm.`attempts_c`>=1 
                       and te_ba_batch.batch_code in ('$batch_code')
+                          $and
                          group by leads.id order by dispo_date ";
 
 
@@ -104,19 +111,26 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         return $attemplist;
     }
 
-    function getFresh($batch_code)
+    function getFresh($batch_code,$selected_councellors)
     {
         global $db;
         $leadList = array();
+        
+        $and='';
+        if(!empty($selected_councellors)){
+            
+              $and .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        
         $leadSql  = "SELECT 
                             leads.id AS lead_id
                      FROM leads
-                     LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+                     INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
+                     INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
                      WHERE leads.date_entered >= '" . $_SESSION['cccon_from_date'] . " 00:00:00'
                        AND leads.date_entered <= '" . $_SESSION['cccon_to_date'] . " 23:59:59'
-                       and leads.status='Alive'
-                       and leads.status_description='New Lead'
+                        and leads.status_description in ('New Lead','Follow Up','Prospect')
+                        $and
                        and leads_cstm.attempts_c=''
                        and te_ba_batch.batch_code in ('$batch_code')";
 
@@ -215,25 +229,43 @@ class AOR_ReportsViewviewleadutilization extends SugarView
 
             $showByClick = $_SESSION['cccon_show'];
         }
+        
+         if (!empty($_SESSION['cccon_councellors']))
+        {
+            $selected_councellors = $_SESSION['cccon_councellors'];
+        }
+          if (!empty($_SESSION['cccon_batch_code']))
+        {
+            $selected_batch_code = $_SESSION['cccon_batch_code'];
+        }
+        
+        
+        if (!empty($selected_batch_code))
+        {
+            $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
+        }
 
-
-
-        if (!empty($selected_source))
+        if (!empty($selected_councellors))
+        {
+            $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        
+          if (!empty($selected_source))
         {
             $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
         }
-
+       
 
 
         if ($_SESSION['cccon_show'] == "fresh_leads")
         {
-            //echo 'in fressh_';  die;
-            $showLeads = $this->getFresh($batchCode);
+            ///echo 'in fressh_';  die;
+            $showLeads = $this->getFresh($batchCode,$selected_councellors);
         }
         else if ($ $_SESSION['cccon_show'] != "fresh_leads" || $_SESSION['cccon_show'] != "lead_count")
         {
             //echo 'not in fresh and TotalCOunt';
-            $showLeads = $this->getAttempts($showByClick, $batchCode);
+            $showLeads = $this->getAttempts($showByClick, $batchCode,$selected_councellors);
         }
 
 
@@ -274,7 +306,8 @@ class AOR_ReportsViewviewleadutilization extends SugarView
 
 
 
-         $leadSql = "SELECT 
+                //echo '<pre>'.
+                $leadSql = "SELECT 
                     	    leads.id,                            
                             leads.date_entered,                 
                             leads.date_modified,                
@@ -298,9 +331,9 @@ class AOR_ReportsViewviewleadutilization extends SugarView
                             leads.neoxstatus,                    
                             leads.deleted             
                     FROM leads
-                    LEFT JOIN users ON leads.assigned_user_id =users.id
-                    LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
-                    LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
+                    INNER JOIN users ON leads.assigned_user_id =users.id and users.deleted=0
+                    INNER JOIN leads_cstm ON leads.id= leads_cstm.id_c
+                    INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id and te_ba_batch.deleted=0
                     WHERE leads.deleted=0 $wherecl
                     order by leads.id"; 
 

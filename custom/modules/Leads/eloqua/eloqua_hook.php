@@ -46,6 +46,7 @@ class eloqua_contact
                 {
                 $contact = array(
                     'id'          => $leadsCstmData['eloqua_customobject_id'],
+                    'contactId'   => $leadsCstmData['eloqua_contact_id'],
                     'fieldValues' =>
                     array(
                         0 => array('type' => 'FieldValue', 'id' => 153, 'value' => $bean->status),
@@ -53,12 +54,33 @@ class eloqua_contact
                         2 => array('type' => 'FieldValue', 'id' => 171, 'value' => isset($leadsCstmData['batch_status']) ? $leadsCstmData['batch_status'] : ''),
                     ),
                 );
-
+		//$this->createLog($contact, '{On Request status update}');
                 //echo "<pre>inUpdate="; print_r($contact); 
                 //echo json_encode($contact); die;
 
                 $response = $client->put('/data/customObject/7/instance/' . $leadsCstmData['eloqua_customobject_id'], $contact);
-
+		
+                if ($response->id != '')
+                {
+                 $contactIDXX = $response->contactId;
+                 $contactObjIDXX = $response->id;
+                 if($contactIDXX==''){  $contactIDXX = $leadsCstmData['eloqua_contact_id'];  }
+                 $sqlQuery="UPDATE leads_cstm
+                                        SET eloqua_contact_id=$contactIDXX,
+                                            eloqua_customobject_id=$contactObjIDXX
+                                WHERE email_add_c='" . $bean->email_add_c . "'
+                                  AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
+                    $db->query($sqlQuery);
+                    
+                    $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  email_add_c='" . $bean->email_add_c . "'");
+		
+        	$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/checkUpdateoneloqua_log.txt", "a");
+        	fwrite($file, date('Y-m-d H:i:s') . "\n");
+        	fwrite($file, 'checking update on email and batch' . "\n");
+		fwrite($file, $sqlQuery . "\n");
+        	//fwrite($file, print_r($bean, TRUE) . "\n");
+        	fclose($file);
+                }
                 $this->createLog($response, '{On Refresh lead}');
                 }
             }
@@ -99,6 +121,10 @@ class eloqua_contact
                 {
                     $contactIDXX = $responsex->id;
                     $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  id_c='" . $bean->id . "'");
+                }
+                else if (!empty($leadsCstmData) && $leadsCstmData['eloqua_contact_id'] != '')
+                {
+                    $contactIDXX = $leadsCstmData['eloqua_contact_id'];   
                 }
 
                 //if ($contactId != '')
@@ -163,8 +189,24 @@ class eloqua_contact
 
                 if ($response->id != '')
                 {
-                    //$contactIdx = $response->id;
-                    $db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
+                    //$contactIdx = $response->contactId;
+                    //$db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
+                    
+                    $contactIDXX = $response->contactId;
+                    $contactObjIDXX = $response->id;
+                    $sqlQuery="UPDATE leads_cstm
+                                         SET eloqua_contact_id=$contactIDXX,
+                                             eloqua_customobject_id=$contactObjIDXX
+                                 WHERE email_add_c='" . $bean->email_add_c . "'
+                                   AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
+                     $db->query($sqlQuery);
+
+                    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/checkUpdateoneloqua_log.txt", "a");
+                    fwrite($file, date('Y-m-d H:i:s') . "\n");
+                    fwrite($file, 'update contactID and ObjID On Object create in eloqua' . "\n");
+                    fwrite($file, $sqlQuery . "\n");
+                    //fwrite($file, print_r($bean, TRUE) . "\n");
+                    fclose($file);
                 }
                 //}
             }

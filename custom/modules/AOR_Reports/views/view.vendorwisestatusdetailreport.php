@@ -16,26 +16,33 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
     {
         parent::SugarView();
     }
-	function getProgram(){
-		global $db;
-		$proSql="SELECT id,name FROM te_pr_programs WHERE deleted=0";
-		$pro_Obj =$db->query($proSql);
-		$pro_Options=array();
-		while($row =$db->fetchByAssoc($pro_Obj)){
-			$pro_Options[]=$row;
-		}
-		return $pro_Options;
-	}
-	function getVendors(){
-		global $db;
-		$vendorSql="SELECT id,name FROM te_vendor WHERE deleted=0";
-		$vendor_Obj =$db->query($vendorSql);
-		$vendor_Options=array();
-		while($row =$db->fetchByAssoc($vendor_Obj)){
-			$vendor_Options[]=$row;
-		}
-		return $vendor_Options;
-	}
+
+    function getProgram()
+    {
+        global $db;
+        $proSql      = "SELECT id,name FROM te_pr_programs WHERE deleted=0";
+        $pro_Obj     = $db->query($proSql);
+        $pro_Options = array();
+        while ($row         = $db->fetchByAssoc($pro_Obj))
+        {
+            $pro_Options[] = $row;
+        }
+        return $pro_Options;
+    }
+
+    function getVendors()
+    {
+        global $db;
+        $vendorSql      = "SELECT id,name FROM te_vendor WHERE deleted=0";
+        $vendor_Obj     = $db->query($vendorSql);
+        $vendor_Options = array();
+        while ($row            = $db->fetchByAssoc($vendor_Obj))
+        {
+            $vendor_Options[] = $row;
+        }
+        return $vendor_Options;
+    }
+
     function getBatch()
     {
         global $db;
@@ -54,11 +61,49 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-        $where         = "";
-        $wherecl       = "";
+        //echo '<pre>';print_r($current_user); die;
+        $vendorID   = $current_user->te_vendor_users_1te_vendor_ida;
+        $vendorName = $current_user->te_vendor_users_1_name;
+        $is_Vendor  = 0;
+        if ($vendorID != '' && $vendorName != '')
+        {
+            $is_Vendor = 1;
+        }
+        
+        
+        $UsersVendrArr = array(
+            'e7c007d2-5ca7-57e5-64ba-5b23a435c4b7' => 'ileap',
+            'b28d0f4a-b486-731e-2781-5b23a41da9cf' => 'TBS',
+            'b80c8a52-5174-3d92-feae-5b23a453bbcf' => 'iimjobs',
+            'ca7ed5d5-daaf-7bf9-110e-5b23a58965dd' => 'CiteHR',
+            '3d29ebfb-23a7-ea3e-b4d8-5b23a590f80f' => 'Career360',
+            '36990877-a094-db61-6610-5b20f95a6e6e' => 'Infoedge');
+         
+        
+        /*
+        $UsersVendrArr = array(
+            '29a6c441-8c9c-a49a-a28e-5b234fa1ecf9' => 'ileap',
+            '1cbd38c1-2a63-3ab8-a85c-5b234febc8a4' => 'TBS',
+            '93e39ed4-487b-e35c-62bc-5b234f7cd078' => 'iimjobs',
+            'e86be88c-3f72-3211-a058-5b2350c211cd' => 'CiteHR',
+            'b27c5fd1-f781-bcab-a7e5-5b2350b22896' => 'Career360',
+            '87d1f4da-c6c9-81fe-944a-5b1fb537fc1c' => 'Infoedge');
+         
+         */
+
+        $vendorsIdArr = array(
+            'ileap'=>'4a9e16bf-0396-fffc-b848-5b084550f2a8',
+            'TBS'=>'abe14a6c-00cb-13d6-2e2e-590d6f806ff4',
+            'iimjobs'=>'ee1d169a-ca0c-f3fe-d6d6-590d636bc19b',
+            'CiteHR'=>'14a4e733-b709-8c60-7731-590d5cb3b1f7',
+            'Career360'=>'71a590a5-0616-44d3-5248-590d5b158460',
+            'Infoedge'=>'92f19224-b7b2-68e2-a112-590d64d59115');
+
+        $where           = "";
+        $wherecl         = "";
         $ProgramListData = $this->getProgram();
-		$BatchListData = $this->getBatch();
-		$VendorListData = $this->getVendors();
+        $BatchListData   = $this->getBatch();
+        $VendorListData  = $this->getVendors();
 
         if (!isset($_SESSION['cccon_from_date']))
         {
@@ -97,7 +142,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
             $wherecl          .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
         }
-        
+
         $findBatch = array();
         if (!empty($_SESSION['cccon_batch']))
         {
@@ -107,11 +152,11 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
         }
-		if (!empty($_SESSION['cccon_vendors']))
+        if (!empty($_SESSION['cccon_vendors']))
         {
             $selected_vendor = $_SESSION['cccon_vendors'];
         }
-		if (!empty($_SESSION['cccon_program']))
+        if (!empty($_SESSION['cccon_program']))
         {
             $selected_program = $_SESSION['cccon_program'];
         }
@@ -129,12 +174,46 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
-		if (!empty($selected_vendor))
+
+     
+        
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Infoedge')
+        {
+            $selected_vendor = array($vendorsIdArr['Infoedge']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Infoedge'], 'name' => 'Infoedge'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Career360')
+        {
+            $selected_vendor = array($vendorsIdArr['Career360']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Career360'], 'name' => 'Career360'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'CiteHR')
+        {
+            $selected_vendor = array($vendorsIdArr['CiteHR']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['CiteHR'], 'name' => 'CiteHR'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'iimjobs')
+        {
+            $selected_vendor = array($vendorsIdArr['iimjobs']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['iimjobs'], 'name' => 'iimjobs'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'TBS')
+        {
+            $selected_vendor = array($vendorsIdArr['TBS']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['TBS'], 'name' => 'TBS'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'ileap')
+        {
+            $selected_vendor = array($vendorsIdArr['ileap']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['ileap'], 'name' => 'ileap'));
+        }
+
+        if (!empty($selected_vendor))
         {
 
             $wherecl .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "')";
         }
-		if (!empty($selected_program))
+        if (!empty($selected_program))
         {
 
             $wherecl .= " AND  p.id IN ('" . implode("','", $selected_program) . "')";
@@ -166,7 +245,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
-            $leadSql = "SELECT COUNT(l.id) AS lead_count,
+            echo $leadSql = "SELECT COUNT(l.id) AS lead_count,
                     l.date_entered,
                     te_ba_batch.id AS batch_id,
                     #p.name program_name,
@@ -202,26 +281,24 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 
 
 
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-            //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = isset($row['vendor']) ? $row['vendor'] : 'NULL';
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']           = $row['batch_id'];
+                //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']         = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']         = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']             = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['lead_count']         = $row['lead_count'];
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['status_description'] = $row['status_description'];
 
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
-            
-            $StatusList[strtolower(str_replace(array(' ','-'),'_',$row['status_description']))]    = $row['status_description'];
+                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
+
+                $StatusList[strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['status_description'];
             }
-            
+
             //echo "<pre>";
             //print_r($StatusList); die;
-
-
             # Create heading
             //$data = "Programme Name";
-	    $data .= "Batch Name";
+            $data .= "Batch Name";
             $data .= ",Batch Code";
             $data .= ",Vendor";
             foreach ($StatusList as $key => $statusVal)
@@ -239,13 +316,13 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                 //$data .= "\"" . $councelor['program_name'];
                 $data .= "\"" . $councelor['batch_name'];
                 $data .= "\",\"" . $councelor['batch_code'];
-		$data .= "\",\"" . $councelor['vendor'];
-                $toal=0;
+                $data .= "\",\"" . $councelor['vendor'];
+                $toal = 0;
                 foreach ($StatusList as $key1 => $value)
                 {
-                    $countedLead = (!empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
-                    $data      .= "\",\"" . $countedLead;
-                    $toal      += $countedLead;
+                    $countedLead = (!empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                    $data        .= "\",\"" . $countedLead;
+                    $toal        += $countedLead;
                 }
                 $data .= "\",\"" . $toal;
                 $data .= "\"\n";
@@ -298,21 +375,21 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
                 $row['vendor'] = $vendor;
             }
 
-             $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']           = $row['batch_id'];
             //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_name'] = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['batch_code'] = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['vendor']     = isset($row['vendor']) ? $row['vendor'] : 'NULL';
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['lead_count'] = $row['lead_count'];
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['status_description']     = $row['status_description'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']         = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']         = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']             = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['lead_count']         = $row['lead_count'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['status_description'] = $row['status_description'];
 
-            $programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))] = $row['lead_count'];
-            
-            $StatusList[strtolower(str_replace(array(' ','-'),'_',$row['status_description']))]    = $row['status_description'];
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
+
+            $StatusList[strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['status_description'];
         }
 
-        
-	
+
+
         //echo '<pre>';
         //print_r($StatusList); die;
         #PS @Pawan
@@ -362,7 +439,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $current = "(" . ($start + 1) . "-" . count($programList) . " of " . $total . ")";
         }
         #pE
-		
+
         $sugarSmarty = new Sugar_Smarty();
 
         $sugarSmarty->assign("programList", $programList);

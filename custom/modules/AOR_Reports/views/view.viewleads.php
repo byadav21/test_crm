@@ -159,7 +159,7 @@ class AOR_ReportsViewviewleads extends SugarView
             'leads.status'                        => 'Status',
             'leads.status_description'            => 'Status Description',
             'leads.lead_source'                   => 'Lead Source',
-            'leads.vendor'                        => 'Vendor',
+            #'leads.vendor'                        => 'Vendor',
             'users.first_name as user_first_name' => 'Counsellor F.Name',
             'users.last_name as user_last_name'   => 'Counsellor L.Name',
             'leads.assigned_user_id'              => 'Assigned User',

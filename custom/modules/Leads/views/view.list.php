@@ -54,6 +54,7 @@
 				$this->where = str_replace('leads.batch', 'leads_cstm.te_ba_batch_id_c', $this->where);
 				$this->where = str_replace('Counsellors', 'leads.assigned_user_id', $this->where);
 				$this->where = str_replace('vendor_list', 'vendor',$this->where); 
+                                $this->where = str_replace('lead_id', 'leads.id', $this->where);
 				//$this->where.="leads.status"
 			}
 

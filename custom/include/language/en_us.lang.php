@@ -340,7 +340,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_Aditya_Birla_Group' => 'Aditya Birla Group',
   'CC_Franklin_Templeton' => 'Franklin Templeton',
   'CC_SRM_Referrals' => 'SRM Referrals',
-  'CC_Jet'=>'Jet',
+  //'CC_Jet'=>'Jet',
   'CC_Corp_Mannapuram'=>'Corp Mannapuram',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
@@ -367,6 +367,9 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_franchise_goog'=>'franchise_goog',
   'OO_franchise_FB'=>'franchise_FB',
   'OO_franchise_FB_leads'=>'franchise_FB_leads',
+  'OO_ag1'=>'Avenue Growth 1',
+  'OO_IC'=>'Investors clinic',
+  'CO_Jet'=>'Jet',
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';
@@ -697,6 +700,7 @@ $GLOBALS['app_list_strings']['country_log']=array (
 $GLOBALS['app_list_strings']['lead_source_custom_dom_type']=array (
   'CC' => 'Call Center',
   'OO' => 'Channel',
+  'CO' => 'Corporate',
 );
 
 $GLOBALS['app_list_strings']['lead_status_custom_dom']=array (
