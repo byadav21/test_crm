@@ -368,7 +368,7 @@
                            alert('Please select a Batch Code!'); return false;
                       }
                       
-                      if(managers=='' || managers ==null){
+                      /*if(managers=='' || managers ==null){
                           $("#manager").focus();
                           alert('Please select a Manager!'); return false;
                       }
@@ -376,7 +376,7 @@
                        if(councellors=='' || councellors ==null){
                           $("#councellors").focus();
                           alert('Please select a Councellor!'); return false;
-                      }
+                      }*/
                       
                       
                      

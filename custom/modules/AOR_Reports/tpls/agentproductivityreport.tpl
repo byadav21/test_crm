@@ -308,10 +308,10 @@
                       
                      
                       
-                      if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
+                      /*if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
                           $("#users").focus();
                           alert('Please select a user!'); return false;
-                      }
+                      }*/
                       
                      
                     

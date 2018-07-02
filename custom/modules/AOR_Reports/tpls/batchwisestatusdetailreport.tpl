@@ -247,10 +247,10 @@
                     var arg = $('#status').val();
                     getAjax('batch_code', arg);
                 });
-                $("#managers").change(function () {
+                /*$("#managers").change(function () {
                     var arg = $('#managers').val();
                     getAjax('councellors', arg);
-                });
+                });*/
                 //getStateByZone();
             });
 
