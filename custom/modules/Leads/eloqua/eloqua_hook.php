@@ -63,6 +63,7 @@ class eloqua_contact
                 if ($response->id != '')
                 {
                  $contactIDXX = $response->contactId;
+                 $contactObjIDXX = $response->id;
                  if($contactIDXX==''){  $contactIDXX = $leadsCstmData['eloqua_contact_id'];  }
                  $sqlQuery="UPDATE leads_cstm
                                         SET eloqua_contact_id=$contactIDXX,
