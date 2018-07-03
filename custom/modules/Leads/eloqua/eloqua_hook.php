@@ -205,7 +205,7 @@ class eloqua_contact
                 );
 
                 //echo "<pre>in Object Create="; print_r($contact); die;
-
+                $client      = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
                 $response = $client->post('data/customObject/7', $contact);
                
                 $this->createLog('{On LeadObjec param}','eloqua_log.txt','',$contact);  
