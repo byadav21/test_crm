@@ -10,12 +10,13 @@ include_once('lib/eloquaRequest.php');
 class eloqua_contact
 {
 
-    function createLog($req, $action)
+    function createLog($action,$filename,$field='',$dataArray=array())
     {
-        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/eloqua_log.txt", "a");
+        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
         fwrite($file, date('Y-m-d H:i:s') . "\n");
         fwrite($file, $action . "\n");
-        fwrite($file, print_r($req, TRUE) . "\n");
+        fwrite($file, $field . "\n");
+        fwrite($file, print_r($dataArray, TRUE) . "\n");
         fclose($file);
     }
 
@@ -39,8 +40,13 @@ class eloqua_contact
 
             if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '')
             {
+                
 
                 $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
+                
+                $GetContactID = $client->get('/data/contacts?search=*'.$bean->email_add_c);
+                
+                $this->createLog('{checking update on email and batch}','checkUpdateoneloqua_log.txt','',$GetContactID);    
                 
                 if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
                 {
@@ -74,14 +80,10 @@ class eloqua_contact
                     
                     $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  email_add_c='" . $bean->email_add_c . "'");
 		
-        	$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/checkUpdateoneloqua_log.txt", "a");
-        	fwrite($file, date('Y-m-d H:i:s') . "\n");
-        	fwrite($file, 'checking update on email and batch' . "\n");
-		fwrite($file, $sqlQuery . "\n");
-        	//fwrite($file, print_r($bean, TRUE) . "\n");
-        	fclose($file);
+                
+                $this->createLog('{checking update on email and batch}','checkUpdateoneloqua_log.txt',$sqlQuery,array());     
                 }
-                $this->createLog($response, '{On Refresh lead}');
+                $this->createLog('{On Refresh lead}','eloqua_log.txt','',$response);     
                 }
             }
             else
@@ -112,7 +114,9 @@ class eloqua_contact
 
                 $responsex = $client->post('data/contact', $contact);
 
-                $this->createLog($responsex, '{On lead Create}');
+               
+             
+                $this->createLog('{On lead Create}','eloqua_log.txt','',$response);  
 
                 //echo "<pre>bean="; print_r($bean);
                 //echo 'leadId='.$bean->id.'$response->id='.$responsex->id."<pre>inCreate="; print_r($responsex); die;
@@ -183,8 +187,9 @@ class eloqua_contact
                 //echo "<pre>in Object Create="; print_r($contact); die;
 
                 $response = $client->post('data/customObject/7', $contact);
-                $this->createLog($contact, '{On LeadObjec param}');
-                $this->createLog($response, '{On LeadObjec response}');
+               
+                $this->createLog('{On LeadObjec param}','eloqua_log.txt','',$response);  
+                $this->createLog('{On LeadObjec response}','eloqua_log.txt','',$response);     
 
 
                 if ($response->id != '')
@@ -201,12 +206,9 @@ class eloqua_contact
                                    AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
                      $db->query($sqlQuery);
 
-                    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/checkUpdateoneloqua_log.txt", "a");
-                    fwrite($file, date('Y-m-d H:i:s') . "\n");
-                    fwrite($file, 'update contactID and ObjID On Object create in eloqua' . "\n");
-                    fwrite($file, $sqlQuery . "\n");
-                    //fwrite($file, print_r($bean, TRUE) . "\n");
-                    fclose($file);
+                
+                    
+                      $this->createLog('{update contactID and ObjID On Object create in eloqua}','checkUpdateoneloqua_log.txt',$sqlQuery,array());     
                 }
                 //}
             }
