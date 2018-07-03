@@ -122,7 +122,7 @@ class eloqua_contact
 
                
              
-                $this->createLog('{On lead Create}','eloqua_log.txt','',$response);  
+                $this->createLog('{On new contact Create}','eloqua_log.txt','',$responsex);  
 
                 //echo "<pre>bean="; print_r($bean);
                 //echo 'leadId='.$bean->id.'$response->id='.$responsex->id."<pre>inCreate="; print_r($responsex); die;
@@ -208,8 +208,8 @@ class eloqua_contact
 
                 $response = $client->post('data/customObject/7', $contact);
                
-                $this->createLog('{On LeadObjec param}','eloqua_log.txt','',$response);  
-                $this->createLog('{On LeadObjec response}','eloqua_log.txt','',$response);     
+                $this->createLog('{On LeadObjec param}','eloqua_log.txt','',$contact);  
+                $this->createLog('{On new LeadObjec response}','eloqua_log.txt','',$response);     
 
 
                 if ($response->id != '')
