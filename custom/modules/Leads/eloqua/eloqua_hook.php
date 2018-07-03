@@ -46,7 +46,7 @@ class eloqua_contact
                 
                 $GetContactID = $client->get('/data/contacts?search=*'.$bean->email_add_c);
                 
-                $this->createLog('{checking update on email and batch}','checkUpdateoneloqua_log.txt','',$GetContactID);    
+                $this->createLog('{getContactID}','checkContactID_log.txt','',$GetContactID);    
                 
                 if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
                 {
