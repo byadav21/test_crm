@@ -142,8 +142,8 @@ class eloqua_contact
                     $GetContactID = $client->get('/data/contacts?search=*'.$bean->email_add_c);
                     if(!empty($GetContactID->elements)){ 
                     $contactArr = $GetContactID->elements;
-                    $contactIDAPI = $contactArr[0]->id;
-                    $contactIDAPI= ($contactIDAPI!='') ? $contactIDAPI : $contactIDXX;
+                    $contactIDAPIx = $contactArr[0]->id;
+                    $contactIDAPI= ($contactIDXX!='') ? $contactIDXX : $contactIDAPIx;
                     }
                     
                     
@@ -218,10 +218,10 @@ class eloqua_contact
                     //$contactIdx = $response->contactId;
                     //$db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
                     
-                    $contactIDXX = ($response->contactId!='')? $response->contactId : $contactIDAPI;
+                   
                     $contactObjIDXX = $response->id;
                     $sqlQuery="UPDATE leads_cstm
-                                         SET eloqua_contact_id='$contactIDXX',
+                                         SET eloqua_contact_id='$contactIDAPI',
                                              eloqua_customobject_id='$contactObjIDXX'
                                  WHERE email_add_c='" . $bean->email_add_c . "'
                                    AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
