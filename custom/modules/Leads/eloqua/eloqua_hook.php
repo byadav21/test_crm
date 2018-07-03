@@ -24,7 +24,8 @@ class eloqua_contact
     {
         global $db;
         $leadsCstmData = array();
-
+        $contactArr = array();
+        $contactIDAPI ='';
         //echo "<pre>"; print_r($bean);
 
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
@@ -41,18 +42,23 @@ class eloqua_contact
             if (!empty($leadsCstmData) && $leadsCstmData['eloqua_customobject_id'] != '')
             {
                 
-
+                
                 $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
                 
                 $GetContactID = $client->get('/data/contacts?search=*'.$bean->email_add_c);
-                
-                $this->createLog('{getContactID}','checkContactID_log.txt','',$GetContactID);    
+                if(!empty($GetContactID->elements)){ 
+                $contactArr = $GetContactID->elements;
+                $contactIDAPI = $contactArr[0]->id;
+                $contactIDAPI= ($contactIDAPI!='') ? $contactIDAPI : $leadsCstmData['eloqua_contact_id'];
+                }
+                $this->createLog('{getContactID}','checkContactID_log.txt',$contactArr[0]->id,$GetContactID->elements);    
+
                 
                 if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
                 {
                 $contact = array(
                     'id'          => $leadsCstmData['eloqua_customobject_id'],
-                    'contactId'   => $leadsCstmData['eloqua_contact_id'],
+                    'contactId'   => $contactIDAPI,
                     'fieldValues' =>
                     array(
                         0 => array('type' => 'FieldValue', 'id' => 153, 'value' => $bean->status),
@@ -68,9 +74,9 @@ class eloqua_contact
 		
                 if ($response->id != '')
                 {
-                 $contactIDXX = $response->contactId;
+                
                  $contactObjIDXX = $response->id;
-                 if($contactIDXX==''){  $contactIDXX = $leadsCstmData['eloqua_contact_id'];  }
+                 $contactIDXX =$contactIDAPI;
                  $sqlQuery="UPDATE leads_cstm
                                         SET eloqua_contact_id='$contactIDXX',
                                             eloqua_customobject_id='$contactObjIDXX'
@@ -123,14 +129,28 @@ class eloqua_contact
 
                 if ($responsex->id != '')
                 {
-                    $contactIDXX = $responsex->id;
-                    $db->query("update leads_cstm  set eloqua_contact_id='$contactIDXX' where  id_c='" . $bean->id . "'");
+                    $contactIDAPI = $responsex->id;
+                    $db->query("update leads_cstm  set eloqua_contact_id='$contactIDXX'  email_add_c='" . $bean->email_add_c . "'");
                 }
                 else if (!empty($leadsCstmData) && $leadsCstmData['eloqua_contact_id'] != '')
                 {
-                    $contactIDXX = $leadsCstmData['eloqua_contact_id'];   
+                    $contactIDXX = $leadsCstmData['eloqua_contact_id']; 
+                    
+                    
+                    $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
+                
+                    $GetContactID = $client->get('/data/contacts?search=*'.$bean->email_add_c);
+                    if(!empty($GetContactID->elements)){ 
+                    $contactArr = $GetContactID->elements;
+                    $contactIDAPI = $contactArr[0]->id;
+                    $contactIDAPI= ($contactIDAPI!='') ? $contactIDAPI : $leadsCstmData['eloqua_contact_id'];
+                    
+                    
+                    
                 }
-
+                
+               
+                
                 //if ($contactId != '')
                 //{
                 //$client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
@@ -156,7 +176,7 @@ class eloqua_contact
                 $batchCode = isset($BatchData['batch_code']) ? $BatchData['batch_code'] : 'Generic_2017-18';
                 $contact   = array(
                     'type'        => 'CustomObjectData',
-                    'contactId'   => $contactIDXX,
+                    'contactId'   => $contactIDAPI,
                     'fieldValues' =>
                     array(
                         0  => array('id' => '150', 'value' => $emailIDX),
@@ -197,7 +217,7 @@ class eloqua_contact
                     //$contactIdx = $response->contactId;
                     //$db->query("update leads_cstm  set eloqua_customobject_id=$response->id where  id_c='" . $bean->id . "'");
                     
-                    $contactIDXX = $response->contactId;
+                    $contactIDXX = ($response->contactId!='')? $response->contactId : $contactIDAPI;
                     $contactObjIDXX = $response->id;
                     $sqlQuery="UPDATE leads_cstm
                                          SET eloqua_contact_id='$contactIDXX',
