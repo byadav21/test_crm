@@ -66,8 +66,8 @@ class eloqua_contact
                  $contactObjIDXX = $response->id;
                  if($contactIDXX==''){  $contactIDXX = $leadsCstmData['eloqua_contact_id'];  }
                  $sqlQuery="UPDATE leads_cstm
-                                        SET eloqua_contact_id=$contactIDXX,
-                                            eloqua_customobject_id=$contactObjIDXX
+                                        SET eloqua_contact_id='$contactIDXX',
+                                            eloqua_customobject_id='$contactObjIDXX'
                                 WHERE email_add_c='" . $bean->email_add_c . "'
                                   AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
                     $db->query($sqlQuery);
@@ -120,7 +120,7 @@ class eloqua_contact
                 if ($responsex->id != '')
                 {
                     $contactIDXX = $responsex->id;
-                    $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  id_c='" . $bean->id . "'");
+                    $db->query("update leads_cstm  set eloqua_contact_id='$contactIDXX' where  id_c='" . $bean->id . "'");
                 }
                 else if (!empty($leadsCstmData) && $leadsCstmData['eloqua_contact_id'] != '')
                 {
@@ -195,8 +195,8 @@ class eloqua_contact
                     $contactIDXX = $response->contactId;
                     $contactObjIDXX = $response->id;
                     $sqlQuery="UPDATE leads_cstm
-                                         SET eloqua_contact_id=$contactIDXX,
-                                             eloqua_customobject_id=$contactObjIDXX
+                                         SET eloqua_contact_id='$contactIDXX',
+                                             eloqua_customobject_id='$contactObjIDXX'
                                  WHERE email_add_c='" . $bean->email_add_c . "'
                                    AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
                      $db->query($sqlQuery);
