@@ -130,7 +130,7 @@ class eloqua_contact
                 if ($responsex->id != '')
                 {
                     $contactIDAPI = $responsex->id;
-                    $db->query("update leads_cstm  set eloqua_contact_id='$contactIDXX'  email_add_c='" . $bean->email_add_c . "'");
+                    $db->query("update leads_cstm  set eloqua_contact_id='$contactIDAPI'  email_add_c='" . $bean->email_add_c . "'");
                 }
                 else if (!empty($leadsCstmData) && $leadsCstmData['eloqua_contact_id'] != '')
                 {
@@ -143,7 +143,7 @@ class eloqua_contact
                     if(!empty($GetContactID->elements)){ 
                     $contactArr = $GetContactID->elements;
                     $contactIDAPI = $contactArr[0]->id;
-                    $contactIDAPI= ($contactIDAPI!='') ? $contactIDAPI : $leadsCstmData['eloqua_contact_id'];
+                    $contactIDAPI= ($contactIDAPI!='') ? $contactIDAPI : $contactIDXX;
                     }
                     
                     
