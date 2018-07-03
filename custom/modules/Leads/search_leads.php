@@ -88,7 +88,7 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
             if ($where != '') {
                 $where .= " OR (tbl1.id = '" . $lead_id . "')";
             } else {
-                $where .= "  (tbl1.last_name like '%" . $last . "%')";
+                $where .= "  (tbl1.id = '" . $lead_id . "')";
             }
         }
 
