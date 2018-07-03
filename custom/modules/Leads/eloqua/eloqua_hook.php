@@ -144,6 +144,7 @@ class eloqua_contact
                     $contactArr = $GetContactID->elements;
                     $contactIDAPI = $contactArr[0]->id;
                     $contactIDAPI= ($contactIDAPI!='') ? $contactIDAPI : $leadsCstmData['eloqua_contact_id'];
+                    }
                     
                     
                     
