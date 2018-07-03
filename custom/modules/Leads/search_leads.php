@@ -54,7 +54,7 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
                             <td><input type="text" name="last" id="last"/></td>
                             <td><b>Email Name</b></td> 
                             <td><input type="text" name="email" id="email"/></td>
-                            <td><b>Mobie Number</b></td> 
+                            <td><b>Mobile Number</b></td> 
                             <td><input type="text" name="mobile_number" id="mobile_name"/></td> 
                             <td><b>Lead ID</b></td> 
                             <td><input type="text" name="lead_id" id="lead_id"/></td> 
