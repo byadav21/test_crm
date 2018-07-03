@@ -132,11 +132,12 @@ class eloqua_contact
                     $contactIDAPI = $responsex->id;
                     $db->query("update leads_cstm  set eloqua_contact_id='$contactIDAPI'  email_add_c='" . $bean->email_add_c . "'");
                 }
-                else if (!empty($leadsCstmData) && $leadsCstmData['eloqua_contact_id'] != '')
+                else if (!empty($leadsCstmData))
                 {
                     $contactIDXX = $leadsCstmData['eloqua_contact_id']; 
                     
-                    
+                }
+                
                     $client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
                 
                     $GetContactID = $client->get('/data/contacts?search=*'.$bean->email_add_c);
@@ -148,9 +149,6 @@ class eloqua_contact
                     }
                     
                     $this->createLog('{update contactID and ObjID On Object create in eloqua}','checkContactID_log.txt','$contactIDAPI=='.$contactIDAPI,$GetContactID);   
-                    
-                }
-                
                
                 
                 //if ($contactId != '')
