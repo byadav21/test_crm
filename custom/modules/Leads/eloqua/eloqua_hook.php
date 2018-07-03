@@ -144,11 +144,10 @@ class eloqua_contact
                     $contactArr = $GetContactID->elements;
                     $contactIDAPIx = $contactArr[0]->id;
                     $contactIDAPI= ($contactIDXX!='') ? $contactIDXX : $contactIDAPIx;
-                    
-                     $this->createLog('{update contactID and ObjID On Object create in eloqua}','checkContactID_log.txt','$contactIDAPI=='.$contactIDAPI,$GetContactID->elements);   
+                     
                     }
                     
-                    
+                    $this->createLog('{update contactID and ObjID On Object create in eloqua}','checkContactID_log.txt','$contactIDAPI=='.$contactIDAPI,$GetContactID);   
                     
                 }
                 
