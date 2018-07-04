@@ -190,7 +190,7 @@ class UpdatePaymentName
     }
     
     
-    /*------------------- stop syncing from crm to web for payment
+    /*------------------- stop syncing from crm to web for payment*/
     function addpayment_curl($lead_user_details)
     {
 		global $sugar_config;
@@ -272,7 +272,7 @@ class UpdatePaymentName
 
         curl_close($ch);
     }
-       */
+      /* */
     
     
     function get_lead_details($lead_id)
