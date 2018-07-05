@@ -6,7 +6,7 @@ $query ="SELECT lead_modified_date FROM dashboard_leads order by lead_modified_d
 $resultselect = $db->query($query);
 $row = $db->fetchByAssoc($resultselect);
 $modifieddate=$row['lead_modified_date'];
-$query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
+echo $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 				leads.modified_user_id,CONCAT(modifyusr.first_name,' ',modifyusr.last_name) as modified_user_name,leads.assigned_user_id,CONCAT(ru.first_name,' ',ru.last_name) as assigned_user_name,ru.reports_to_id,CONCAT(repotrty.first_name,' ',repotrty.last_name) as manager_name,
 				leads.deleted,leads.converted,leads.converted_date,leads.lead_source_types,
 				leads.lead_source,leads.vendor,leads.lead_source_description,leads.status,
