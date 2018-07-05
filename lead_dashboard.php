@@ -27,7 +27,7 @@ $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 			LEFT JOIN users AS repotrty ON repotrty.id=ru.reports_to_id
 			LEFT JOIN users AS modifyusr ON modifyusr.id=ru.modified_user_id
 			group by lead_id
-			order by leads.date_modified limit 100";
+			order by leads.date_modified";
 $result = $db->query($query);
 //$row = $db->fetchByAssoc($res);
 while (($row = $db->fetchByAssoc($result)) != null) {
