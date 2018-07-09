@@ -31,14 +31,15 @@ $crmDispo = array('New Lead'               => 'Alive',
     'wrap.timeout'           => 'Wrap Out'
 );
 
-function createLog($req, $action)
-{
-    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/new_dispose_log.txt", "a");
-    fwrite($file, date('Y-m-d H:i:s') . "\n");
-    fwrite($file, $action . "\n");
-    fwrite($file, print_r($req, TRUE) . "\n");
-    fclose($file);
-}
+ function createLog($action,$filename,$field='',$dataArray=array())
+    {
+        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+        fwrite($file, date('Y-m-d H:i:s') . "\n");
+        fwrite($file, $action . "\n");
+        fwrite($file, $field . "\n");
+        fwrite($file, print_r($dataArray, TRUE) . "\n");
+        fclose($file);
+    }
 
 unset($_SESSION['temp_for_newUser']);
 
@@ -102,7 +103,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != 'null')
     {
 
-        $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
+        $sql = "select attempts_c,id_c,assigned_user_id from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
         $res = $db->query($sql);
         if ($db->getRowCount($res) > 0)
         {
@@ -110,15 +111,23 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $records  = $db->fetchByAssoc($res);
             $id       = $records['id_c'];
             $attempid = intval($records['attempts_c']);
+            $assignedUserId       = $records['assigned_user_id'];
             $attempid++;
             $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res      = $db->query($sql);
 
 
-            if ($attempid >= 6)
+            if ($attempid >= 6 && $assignedUserId=='')
             {
-                $sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
-                $res = $db->query($sql);
+                //$sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
+                //$res = $db->query($sql);
+                $bean                     = BeanFactory::getBean('Leads', $id);
+                $bean->status             = 'Dead';
+                $bean->status_description = 'Auto Retired';
+                $bean->save();
+             
+                $xxar = array('ref_id'=>$id,'status'=>'Dead','status_description'=>'Auto Retired');
+                createLog('{Auto Retired}','auto_retired_log.txt',$id,$xxar);  
             }
         }
     }
@@ -171,8 +180,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean->save();
 
 
-
-        createLog($debugArr, 'Ameyo dispostion response');
+        createLog('{Ameyo dispostion response}','new_dispose_log.txt',$_REQUEST['lead_reference'],$debugArr); 
     }
 
 
