@@ -1015,7 +1015,7 @@ class addPaymentClass
     function addDispositionFunc($bean, $event, $argument)
     {
         ini_set('display_errors', "off");
-        global $db;
+        global $db,$current_user;
         $db->query("delete from  session_call where  session_id='" . session_id() . "'");
 #If record is being created manually
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
@@ -1047,7 +1047,7 @@ class addPaymentClass
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
                 $xx = $disposition->save();
 		if($xx!=''){
-		$sql     = "UPDATE `te_disposition` SET `created_by`='".$bean->assigned_user_id. "' where id ='".$xx."'";
+		$sql     = "UPDATE `te_disposition` SET `created_by`='".$bean->assigned_user_id. "',modified_user_id='".$current_user->id."' where id ='".$xx."'";
 		$sqlData = $GLOBALS['db']->query($sql);
 		}
 		
