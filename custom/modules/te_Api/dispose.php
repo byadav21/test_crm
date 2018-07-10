@@ -52,7 +52,7 @@ function getAttemptCount()
                                             leads.status_description,
                                             leads.status,
                                             lc.attempts_c,
-                                            te_disposition_leads_c.te_disposition_leadsleads_ida AS dispo_id
+                                            te_disposition_leads_c.te_disposition_leadste_disposition_idb AS dispo_id
                                      FROM leads_cstm lc
                                      INNER JOIN leads ON lc.id_c=leads.id
                                      AND leads.status_description='New Lead'
