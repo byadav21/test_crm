@@ -31,15 +31,40 @@ $crmDispo = array('New Lead'               => 'Alive',
     'wrap.timeout'           => 'Wrap Out'
 );
 
- function createLog($action,$filename,$field='',$dataArray=array())
+function createLog($action, $filename, $field = '', $dataArray = array())
+{
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+}
+
+function getAttemptCount()
+{
+    global $db, $current_user;
+    $records = array();
+    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null')
     {
-        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
-        fwrite($file, date('Y-m-d H:i:s') . "\n");
-        fwrite($file, $action . "\n");
-        fwrite($file, $field . "\n");
-        fwrite($file, print_r($dataArray, TRUE) . "\n");
-        fclose($file);
+        $sql     = " SELECT id_c lead_id,
+                                            count(te_disposition_leads_c.te_disposition_leadsleads_ida) total_dispo,
+                                            leads.status_description,
+                                            leads.status,
+                                            lc.attempts_c,
+                                            te_disposition_leads_c.te_disposition_leadsleads_ida AS dispo_id
+                                     FROM leads_cstm lc
+                                     INNER JOIN leads ON lc.id_c=leads.id
+                                     AND leads.status_description='New Lead'
+                                     INNER JOIN te_disposition_leads_c ON te_disposition_leads_c.te_disposition_leadsleads_ida=leads.id
+                                     WHERE leads.deleted=0
+                                       AND (lc.attempts_c > 0  OR lc.attempts_c='')
+                             AND leads.id='" . $_REQUEST['lead_reference'] . "'";
+        $res     = $db->query($sql);
+        $records = $db->fetchByAssoc($res);
     }
+    return $records;
+}
 
 unset($_SESSION['temp_for_newUser']);
 
@@ -98,6 +123,17 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid++;
             $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res      = $db->query($sql);
+
+            $dispCountArr = getAttemptCount();
+            if (!empty($dispCountArr))
+            {
+                if ($dispCountArr['total_dispo'] == 1)
+                {
+                   $sql      = "update te_disposition set attempt_count='" . $attempid . "' where id='" . $dispCountArr['dispo_id'] . "'";
+                   $res      = $db->query($sql); 
+                   createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
+                }
+            }
         }
     }
     else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != 'null')
@@ -108,16 +144,26 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         if ($db->getRowCount($res) > 0)
         {
 
-            $records  = $db->fetchByAssoc($res);
-            $id       = $records['id_c'];
-            $attempid = intval($records['attempts_c']);
-            $assignedUserId       = $records['assigned_user_id'];
+            $records        = $db->fetchByAssoc($res);
+            $id             = $records['id_c'];
+            $attempid       = intval($records['attempts_c']);
+            $assignedUserId = $records['assigned_user_id'];
             $attempid++;
-            $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
-            $res      = $db->query($sql);
+            $sql            = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+            $res            = $db->query($sql);
+            
+            $dispCountArr = getAttemptCount();
+            if (!empty($dispCountArr))
+            {
+                if ($dispCountArr['total_dispo'] == 1)
+                {
+                   $sql      = "update te_disposition set attempt_count='" . $attempid . "' where id='" . $dispCountArr['dispo_id'] . "'";
+                   $res      = $db->query($sql); 
+                   createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
+                }
+            }
 
-
-            if ($attempid >= 6 && $assignedUserId=='')
+            if ($attempid >= 6 && $assignedUserId == '')
             {
                 //$sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
                 //$res = $db->query($sql);
@@ -125,9 +171,9 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $bean->status             = 'Dead';
                 $bean->status_description = 'Auto Retired';
                 $bean->save();
-             
-                $xxar = array('ref_id'=>$id,'status'=>'Dead','status_description'=>'Auto Retired');
-                createLog('{Auto Retired}','auto_retired_log.txt',$id,$xxar);  
+
+                $xxar = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
+                createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $xxar);
             }
         }
     }
@@ -180,8 +226,9 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean->save();
 
 
-        createLog('{Ameyo dispostion response}','new_dispose_log.txt',$_REQUEST['lead_reference'],$debugArr); 
+        createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $debugArr);
     }
+   
 
 
 
@@ -230,8 +277,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             }
 
             $responses = $api->uploadContacts($data, $campID, $apiID);
-            
-          
+
+
             $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/manual_dial_customer_if_18_16_17.txt", "a");
             fwrite($file, date('Y-m-d H:i:s') . "\n");
             fwrite($file, '$data  if {18,16,17}' . "\n");
@@ -239,7 +286,6 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             fwrite($file, '$responses  if {18,16,17}' . "\n");
             fwrite($file, $responses . "\n");
             fclose($file);
-    
         }
     }
     exit();
