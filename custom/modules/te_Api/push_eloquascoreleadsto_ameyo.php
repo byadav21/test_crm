@@ -133,14 +133,14 @@ foreach ($final_array as $key => $val)
         
         
         //update query in lead table
-        echo $update_lead    = "UPDATE `leads` SET `autoassign` = 'Yes', `status` = 'Alive', `status_description` = 'New Lead', `neoxstatus` = '0',`assigned_user_id` = '', `update_flag` = '1', `dristi_campagain_id` = '$d_campaign_id',   `dristi_API_id` = '$d_lead_id',`update_timestamp`= now() WHERE `id` = '$c_lead_id'";
+        echo $update_lead    = "UPDATE `leads` SET `autoassign` = 'Yes', `status` = 'Alive', `status_description` = 'New Lead', `neoxstatus` = '0',`assigned_user_id` = '', `update_flag` = '1', `dristi_campagain_id` = '$d_campaign_id',   `dristi_API_id` = '$dristi_API_id',`update_timestamp`= now() WHERE `id` = '$c_lead_id'";
         $db->query($update_lead);
           echo '<br>';
           
         $bean                     = BeanFactory::getBean('Leads', $c_lead_id); 
         $bean->status             = 'Alive';
         $bean->status_description = 'New Lead';
-        $bean->note               = 'Statu updated via elouqa rule';
+        $bean->note               = 'Status updated via elouqa rule';
         $bean->save();
         createLog('{Auto Retired}','push_eloquascoreleadsto_ameyo_log.txt',$update_lead,$val);  
     }
