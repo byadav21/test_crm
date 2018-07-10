@@ -129,7 +129,11 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             {
                 if ($dispCountArr['total_dispo'] == 1)
                 {
-                   $sql      = "update te_disposition set attempt_count='" . $attempid . "' where id='" . $dispCountArr['dispo_id'] . "'";
+                   $sql      = "UPDATE te_disposition
+                                SET attempt_count='" . $attempid . "',
+                                    dispositionName='" . $_REQUEST['dispositionName'] . "',
+                                    callType='" . $_REQUEST['callType'] . "'
+                                WHERE id='" . $dispCountArr['dispo_id'] . "'";
                    $res      = $db->query($sql); 
                    createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
                 }
@@ -157,7 +161,11 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             {
                 if ($dispCountArr['total_dispo'] == 1)
                 {
-                   $sql      = "update te_disposition set attempt_count='" . $attempid . "' where id='" . $dispCountArr['dispo_id'] . "'";
+                   $sql      = "UPDATE te_disposition
+                                SET attempt_count='" . $attempid . "',
+                                    dispositionName='" . $_REQUEST['dispositionName'] . "',
+                                    callType='" . $_REQUEST['callType'] . "'
+                                WHERE id='" . $dispCountArr['dispo_id'] . "'";
                    $res      = $db->query($sql); 
                    createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
                 }
