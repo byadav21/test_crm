@@ -223,22 +223,31 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             'callType'          => $_REQUEST['callType'],
             'campaignId'        => $_REQUEST['campaignId']);
 
-        $disPosedUser ='';
-        if (isset($_REQUEST['userAssociations']))
-        {
-            $userAssociations = $_REQUEST['userAssociations'];
-            $userSJson        = str_replace('&quot;', '"', $userAssociations);
-            $userDispoArr     = json_decode($userSJson, TRUE);
-            $disPosedUser     = $userDispoArr[0]['userId'];
-            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt','user: '.$disPosedUser.'lead_reference: '.$_REQUEST['lead_reference'], $userDispoArr);
-        }
+            $disPosedUser    = '';
+            $modifieduserIDX = '';
+            if (isset($_REQUEST['userAssociations']))
+            {
+                $userAssociations = $_REQUEST['userAssociations'];
+                $userSJson        = str_replace('&quot;', '"', $userAssociations);
+                $userDispoArr     = json_decode($userSJson, TRUE);
+                $disPosedUser     = $userDispoArr[0]['userId'];
+                if ($disPosedUser != '')
+                {
+                    $getusrQery      = $db->query("SELECT id,user_name FROM `users` WHERE `status`='Active' and `deleted`=0 and user_name='".$disPosedUser."'");
+                    $recordsData     = $db->fetchByAssoc($getusrQery);
+                    $modifieduserIDX = $recordsData['id'];
+                    $db->query("update leads set modified_user_id='".$modifieduserIDX."' where id='" . $_REQUEST['lead_reference'] . "'");
+                    
+                }
+                createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
+            }
 
         $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
         $bean->status             = $status;
         $bean->status_description = $dispositionCode;
         $bean->dispositionName    = $_REQUEST['dispositionName'];
         $bean->callType           = $_REQUEST['callType'];
-        $bean->modified_user_id   = $disPosedUser;
+        //$bean->modified_user_id   = $modifieduserIDX;
         $bean->save();
 
         
