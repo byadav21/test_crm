@@ -263,6 +263,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $bean->date_of_callback = $finalDatTime;
                     //$bean->date_of_followup = $bean->date_of_followup;
                     //$bean->date_of_prospect = $bean->date_of_prospect;
+                    createLog('{Ameyo callback response}', 'callback_dispose_log.txt', 'callback='.$finalDatTime, $_REQUEST);
                 }
 
                 $bean->save();
