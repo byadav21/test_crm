@@ -241,14 +241,31 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 }
                 createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
             }
+                
+                $finalDatTime='';
+                if (isset($_REQUEST['callbackTime']) && $_REQUEST['callbackTime'] != '')
+                {
+                    $CALLBACKDATEArr = (explode("T", $callbackTime));
+                    $callBackDate    = $CALLBACKDATEArr[0];
+                    $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
+                    $callBackHis     = $callBackHisArr[0];
+                    $finalDatTime    =  $callBackDate.' '.$callBackHis; 
+                }
+            
+                $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
+                $bean->status             = $status;
+                $bean->status_description = $dispositionCode;
+                $bean->dispositionName    = $_REQUEST['dispositionName'];
+                $bean->callType           = $_REQUEST['callType'];
+                //$bean->modified_user_id   = $modifieduserIDX;
+                if ($dispositionCode == 'Demo_calender' && $finalDatTime != '')
+                {
+                    $bean->date_of_callback = $finalDatTime;
+                    //$bean->date_of_followup = $bean->date_of_followup;
+                    //$bean->date_of_prospect = $bean->date_of_prospect;
+                }
 
-        $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
-        $bean->status             = $status;
-        $bean->status_description = $dispositionCode;
-        $bean->dispositionName    = $_REQUEST['dispositionName'];
-        $bean->callType           = $_REQUEST['callType'];
-        //$bean->modified_user_id   = $modifieduserIDX;
-        $bean->save();
+                $bean->save();
 
         
 
