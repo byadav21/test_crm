@@ -1015,7 +1015,7 @@ class addPaymentClass
     function addDispositionFunc($bean, $event, $argument)
     {
         ini_set('display_errors', "off");
-        global $db,$current_user;
+        global $db,$current_user,$sugar_config;
         $db->query("delete from  session_call where  session_id='" . session_id() . "'");
 #If record is being created manually
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
@@ -1054,12 +1054,13 @@ class addPaymentClass
                 $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
                 fwrite($file,'---------------------------'. "\n");
                 fwrite($file, date('Y-m-d H:i:s') . "\n");
-                fwrite($file, '$current_user:'.$current_user->id . "\n");
-                fwrite($file, 'LeadID:'.$bean->id . "\n");
-                fwrite($file, 'Assigned_user_id:'.$bean->assigned_user_id . "\n");
-                fwrite($file, 'CreatedBy:'.$bean->created_by . "\n");
-                fwrite($file, 'modified_user_id:'.$bean->modified_user_id  . "\n");
-                fwrite($file, 'disp save id:'.$xx . "\n");
+                fwrite($file, 'ameyo_import_login: '.$sugar_config['ameyo_import_login'] . "\n");
+                fwrite($file, '$current_user: '.$current_user->id . "\n");
+                fwrite($file, 'LeadID: '.$bean->id . "\n");
+                fwrite($file, 'Assigned_user_id: '.$bean->assigned_user_id . "\n");
+                fwrite($file, 'CreatedBy: '.$bean->created_by . "\n");
+                fwrite($file, 'modified_user_id: '.$bean->modified_user_id  . "\n");
+                fwrite($file, 'disp save id: '.$xx . "\n");
                 fclose($file);
 
                 $sql     = " select dristi_request from leads WHERE id ='" . $bean->id . "'";
