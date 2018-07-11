@@ -238,8 +238,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $userAssociations = $_REQUEST['lead_reference'];
             $userSJson        = str_replace('&quot;', '"', $userAssociations);
             $userDispoArr     = json_decode($userSJson, TRUE);
-
-            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', $_REQUEST['userAssociations'], $userDispoArr);
+            $disPosedUser     = $userDispoArr[0]['userId'];
+            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', $disPosedUser, $userDispoArr);
         }
 
 
