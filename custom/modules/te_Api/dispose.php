@@ -235,7 +235,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
 
         createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $debugArr);
-        createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', $_REQUEST['userAssociations'], $_REQUEST['userAssociations']);
+        createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', $_REQUEST['userAssociations'], json_decode($_REQUEST['userAssociations']));
     }
    
 
