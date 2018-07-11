@@ -1054,6 +1054,7 @@ class addPaymentClass
                 $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
                 fwrite($file,'---------------------------'. "\n");
                 fwrite($file, date('Y-m-d H:i:s') . "\n");
+                fwrite($file, 'ameyo_userId='.$_SESSION['ameyo_userId'] . "\n");
                 fwrite($file, 'userId='.$_REQUEST['userId'] . "\n");
                 //fwrite($file, print_r($current_user, TRUE) . "\n");
                 fwrite($file, 'ameyo_import_login: '.$sugar_config['ameyo_import_login'] . "\n");
