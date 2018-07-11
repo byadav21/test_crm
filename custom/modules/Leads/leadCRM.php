@@ -12,7 +12,6 @@ $callObjId= $_REQUEST['userCrtObjectId'];
 $mainMenu= $_REQUEST['mainMenu']; 
 $_REQUEST['customerInfo']=$customers=json_decode(html_entity_decode($_REQUEST['customerInfo']));
 $_SESSION['temp_for_newUser']= json_encode($_REQUEST) ;
-$_SESSION['ameyo_userId']= $_REQUEST['userId'];
 
 try{
 	$objapi= new te_Api_override();

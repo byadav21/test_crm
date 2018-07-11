@@ -234,7 +234,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean->save();
 
 
-        createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $debugArr);
+        createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
     }
    
 
