@@ -1041,17 +1041,31 @@ class addPaymentClass
                 $disposition->name                          = $bean->dispositionName;
                 $disposition->dispositionName               = $bean->dispositionName;
                 $disposition->calltype                      = $bean->callType;
-		$disposition->created_by                  =  $bean->created_by;
-                $disposition->assigned_user_id            =  $bean->assigned_user_id;
-                $disposition->modified_user_id            =  $bean->modified_user_id;
+		//$disposition->created_by                  =  $bean->created_by;
+                //$disposition->assigned_user_id            =  $bean->assigned_user_id;
+                //$disposition->modified_user_id            =  $bean->modified_user_id;
                 $disposition->attempt_count                 = $bean->attempts_c;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
-                $xx = $disposition->save();
-		if($xx!=''){
-		$sql     = "UPDATE `te_disposition` SET `created_by`='".$bean->assigned_user_id. "',modified_user_id='".$bean->modified_user_id."' where id ='".$xx."'";
-		$sqlData = $GLOBALS['db']->query($sql);
-		}
-		
+                $xx                                         = $disposition->save();
+                $created_byIDX                              = '';
+                $assigned_user_IDX                          = '';
+                $modified_user_IDX                          = '';
+                if ($xx != '')
+                {
+                    $getusrQery        = $db->query("SELECT created_by,assigned_user_id,modified_user_id  FROM `leads` WHERE `id`='" . $bean->id . "'");
+                    $recordsData       = $db->fetchByAssoc($getusrQery);
+                    $created_byIDX     = $recordsData['created_by'];
+                    $assigned_user_IDX = $recordsData['assigned_user_id'];
+                    $modified_user_IDX = $recordsData['modified_user_id'];
+                    $sql               = "UPDATE `te_disposition`
+                                                SET 
+                                                   `created_by`='" . $created_byIDX . "',
+                                                    modified_user_id='" . $modified_user_IDX . "',
+                                                    assigned_user_id='" . $assigned_user_IDX . "'
+                                                WHERE id ='" . $xx . "'";
+                    $sqlData           = $GLOBALS['db']->query($sql);
+                }
+
                 $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
                 fwrite($file,'---------------------------'. "\n");
                 fwrite($file, date('Y-m-d H:i:s') . "\n");
