@@ -233,9 +233,9 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean->callType           = $_REQUEST['callType'];
         $bean->save();
 
-        if (isset($_REQUEST['lead_reference']))
+        if (isset($_REQUEST['userAssociations']))
         {
-            $userAssociations = $_REQUEST['lead_reference'];
+            $userAssociations = $_REQUEST['userAssociations'];
             $userSJson        = str_replace('&quot;', '"', $userAssociations);
             $userDispoArr     = json_decode($userSJson, TRUE);
             $disPosedUser     = $userDispoArr[0]['userId'];
