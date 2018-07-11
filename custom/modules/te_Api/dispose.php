@@ -244,8 +244,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 
                 $finalDatTime='';
                 if (isset($_REQUEST['callbackTime']) && $_REQUEST['callbackTime'] != '')
-                {
-                    $CALLBACKDATEArr = (explode("T", $callbackTime));
+                {   
+                    $CALLBACKDATEArr = (explode("T", $_REQUEST['callbackTime']));
                     $callBackDate    = $CALLBACKDATEArr[0];
                     $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
                     $callBackHis     = $callBackHisArr[0];
