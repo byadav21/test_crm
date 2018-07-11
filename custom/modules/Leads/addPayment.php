@@ -1047,7 +1047,7 @@ class addPaymentClass
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
                 $xx = $disposition->save();
 		if($xx!=''){
-		$sql     = "UPDATE `te_disposition` SET `created_by`='".$bean->assigned_user_id. "',modified_user_id='".$current_user->id."' where id ='".$xx."'";
+		$sql     = "UPDATE `te_disposition` SET `created_by`='".$bean->assigned_user_id. "',modified_user_id='".$bean->modified_user_id."' where id ='".$xx."'";
 		$sqlData = $GLOBALS['db']->query($sql);
 		}
 		
