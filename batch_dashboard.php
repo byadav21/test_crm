@@ -2,7 +2,7 @@
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
  
-$query="SELECT b.id Batch_id,b.name batch,b.batch_code,u.name AS utm,v.name AS Utm_source,
+echo $query="SELECT b.id Batch_id,b.name batch,b.batch_code,u.name AS utm,v.name AS Utm_source,
 u.`contract_type` AS Utm_medium,b.name AS Utm_term,u.`utm_status` AS utm_status,
 c.name AS contract,bcc.id Budget_id,bcc.volume Budget_volume,bcc.cost Budget_amount,
 tac_ac.id Actual_Budget_id,tac_ac.volume Actual_volume,tac_ac.total_cost Actual_amount,bcc.date_entered budget_date_entered, bcc.date_modified budget_date_modified, tac_ac.date_entered actual_budget_date_entered, tac_ac.date_modified actual_budget_date_modified
@@ -15,7 +15,7 @@ INNER JOIN te_utm_te_budgeted_campaign_1_c tbc on u.id=tbc.te_utm_te_budgeted_ca
 INNER JOIN te_budgeted_campaign bcc on tbc.te_utm_te_budgeted_campaign_1te_budgeted_campaign_idb=bcc.id and bcc.deleted=0
 INNER JOIN te_utm_te_actual_campaign_1_c tac on u.id=tac.te_utm_te_actual_campaign_1te_utm_ida and tac.deleted=0
 INNER JOIN te_actual_campaign tac_ac on tac.te_utm_te_actual_campaign_1te_actual_campaign_idb=tac_ac.id and tac_ac.deleted=0
-WHERE u.deleted=0 limit 100";
+WHERE u.deleted=0 limit 100";exit;
 $result = $db->query($query);
 while (($row = $db->fetchByAssoc($result)) != null) {
 	//echo "<pre>";print_r($row);echo "</pre>";
