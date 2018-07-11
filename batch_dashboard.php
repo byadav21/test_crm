@@ -15,7 +15,7 @@ INNER JOIN te_utm_te_budgeted_campaign_1_c tbc on u.id=tbc.te_utm_te_budgeted_ca
 INNER JOIN te_budgeted_campaign bcc on tbc.te_utm_te_budgeted_campaign_1te_budgeted_campaign_idb=bcc.id and bcc.deleted=0
 INNER JOIN te_utm_te_actual_campaign_1_c tac on u.id=tac.te_utm_te_actual_campaign_1te_utm_ida and tac.deleted=0
 INNER JOIN te_actual_campaign tac_ac on tac.te_utm_te_actual_campaign_1te_actual_campaign_idb=tac_ac.id and tac_ac.deleted=0
-WHERE u.deleted=0 limit 100";
+WHERE u.deleted=0";
 $result = $db->query($query);
 while (($row = $db->fetchByAssoc($result)) != null) {
 	//echo "<pre>";print_r($row);echo "</pre>";
