@@ -1051,21 +1051,16 @@ class addPaymentClass
 		$sqlData = $GLOBALS['db']->query($sql);
 		}
 		
-$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
-fwrite($file,'---------------------------'. "\n");
-fwrite($file, date('Y-m-d H:i:s') . "\n");
-fwrite($file, 'LeadID:' . "\n");
-fwrite($file, $bean->id . "\n");
-fwrite($file, 'Assigned_user_id:' . "\n");
-fwrite($file, $bean->assigned_user_id . "\n");
-fwrite($file, 'CreatedBy:' . "\n");
-fwrite($file, $bean->created_by . "\n");
-fwrite($file, 'modified_user_id:' . "\n");
-fwrite($file, $bean->modified_user_id . "\n");
-fwrite($file, 'disp save id:' . "\n");
-fwrite($file, $xx . "\n");
-fclose($file);
-
+                $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
+                fwrite($file,'---------------------------'. "\n");
+                fwrite($file, date('Y-m-d H:i:s') . "\n");
+                fwrite($file, '$current_user:'.$current_user->id . "\n");
+                fwrite($file, 'LeadID:'.$bean->id . "\n");
+                fwrite($file, 'Assigned_user_id:'.$bean->assigned_user_id . "\n");
+                fwrite($file, 'CreatedBy:'.$bean->created_by . "\n");
+                fwrite($file, 'modified_user_id:'.$bean->modified_user_id  . "\n");
+                fwrite($file, 'disp save id:'.$xx . "\n");
+                fclose($file);
 
                 $sql     = " select dristi_request from leads WHERE id ='" . $bean->id . "'";
                 $sqlData = $GLOBALS['db']->query($sql);
