@@ -223,24 +223,25 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             'callType'          => $_REQUEST['callType'],
             'campaignId'        => $_REQUEST['campaignId']);
 
-
-
-
-        $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
-        $bean->status             = $status;
-        $bean->status_description = $dispositionCode;
-        $bean->dispositionName    = $_REQUEST['dispositionName'];
-        $bean->callType           = $_REQUEST['callType'];
-        $bean->save();
-
+        $disPosedUser ='';
         if (isset($_REQUEST['userAssociations']))
         {
             $userAssociations = $_REQUEST['userAssociations'];
             $userSJson        = str_replace('&quot;', '"', $userAssociations);
             $userDispoArr     = json_decode($userSJson, TRUE);
             $disPosedUser     = $userDispoArr[0]['userId'];
-            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', $disPosedUser, $userDispoArr);
+            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt','user: '.$disPosedUser.'lead_reference: '.$_REQUEST['lead_reference'], $userDispoArr);
         }
+
+        $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
+        $bean->status             = $status;
+        $bean->status_description = $dispositionCode;
+        $bean->dispositionName    = $_REQUEST['dispositionName'];
+        $bean->callType           = $_REQUEST['callType'];
+        $bean->modified_user_id   = $disPosedUser;
+        $bean->save();
+
+        
 
 
         createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $debugArr);
