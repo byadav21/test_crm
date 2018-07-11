@@ -1041,8 +1041,9 @@ class addPaymentClass
                 $disposition->name                          = $bean->dispositionName;
                 $disposition->dispositionName               = $bean->dispositionName;
                 $disposition->calltype                      = $bean->callType;
-		//$disposition->created_by                  =  $bean->assigned_user_id;
-                //$disposition->assigned_user_id            =  $bean->assigned_user_id;
+		$disposition->created_by                  =  $bean->created_by;
+                $disposition->assigned_user_id            =  $bean->assigned_user_id;
+                $disposition->modified_user_id            =  $bean->modified_user_id;
                 $disposition->attempt_count                 = $bean->attempts_c;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
                 $xx = $disposition->save();
@@ -1063,6 +1064,7 @@ class addPaymentClass
                 fwrite($file, 'CreatedBy: '.$bean->created_by . "\n");
                 fwrite($file, 'modified_user_id: '.$bean->modified_user_id  . "\n");
                 fwrite($file, 'disp save id: '.$xx . "\n");
+                fwrite($file, 'sqlQuery: '.$sql . "\n");
                 fclose($file);
 
                 $sql     = " select dristi_request from leads WHERE id ='" . $bean->id . "'";
