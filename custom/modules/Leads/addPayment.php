@@ -1065,6 +1065,7 @@ class addPaymentClass
                 fwrite($file, 'modified_user_id: '.$bean->modified_user_id  . "\n");
                 fwrite($file, 'disp save id: '.$xx . "\n");
                 fwrite($file, 'sqlQuery: '.$sql . "\n");
+                fwrite($file, 'leadID: '.$bean->id . "\n");
                 fclose($file);
 
                 $sql     = " select dristi_request from leads WHERE id ='" . $bean->id . "'";
