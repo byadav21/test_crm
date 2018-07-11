@@ -129,13 +129,13 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             {
                 if ($dispCountArr['total_dispo'] == 1)
                 {
-                   $sql      = "UPDATE te_disposition
+                    $sql = "UPDATE te_disposition
                                 SET attempt_count='" . $attempid . "',
                                     dispositionName='" . $_REQUEST['dispositionName'] . "',
                                     callType='" . $_REQUEST['callType'] . "'
                                 WHERE id='" . $dispCountArr['dispo_id'] . "'";
-                   $res      = $db->query($sql); 
-                   createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
+                    $res = $db->query($sql);
+                    createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
                 }
             }
         }
@@ -155,19 +155,19 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid++;
             $sql            = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res            = $db->query($sql);
-            
+
             $dispCountArr = getAttemptCount();
             if (!empty($dispCountArr))
             {
                 if ($dispCountArr['total_dispo'] == 1)
                 {
-                   $sql      = "UPDATE te_disposition
+                    $sql = "UPDATE te_disposition
                                 SET attempt_count='" . $attempid . "',
                                     dispositionName='" . $_REQUEST['dispositionName'] . "',
                                     callType='" . $_REQUEST['callType'] . "'
                                 WHERE id='" . $dispCountArr['dispo_id'] . "'";
-                   $res      = $db->query($sql); 
-                   createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
+                    $res = $db->query($sql);
+                    createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
                 }
             }
 
@@ -233,11 +233,19 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean->callType           = $_REQUEST['callType'];
         $bean->save();
 
+        if (isset($_REQUEST['lead_reference']))
+        {
+            $userAssociations = $_REQUEST['lead_reference'];
+            $userSJson        = str_replace('&quot;', '"', $userAssociations);
+            $userDispoArr     = json_decode($userSJson, TRUE);
+
+            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', $_REQUEST['userAssociations'], $userDispoArr);
+        }
+
 
         createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $debugArr);
-        createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', $_REQUEST['userAssociations'], json_decode($_REQUEST['userAssociations']));
     }
-   
+
 
 
 
