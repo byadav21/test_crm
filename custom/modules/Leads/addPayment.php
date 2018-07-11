@@ -1050,18 +1050,33 @@ class addPaymentClass
                 $created_byIDX                              = '';
                 $assigned_user_IDX                          = '';
                 $modified_user_IDX                          = '';
+                $date_of_callbackX                          = '';
+                $date_of_followupX                          = '';
+                $date_of_prospectX                          = '';
                 if ($xx != '')
                 {
-                    $getusrQery        = $db->query("SELECT created_by,assigned_user_id,modified_user_id  FROM `leads` WHERE `id`='" . $bean->id . "'");
+                    $getusrQery        = $db->query("SELECT date_of_callback,
+                                                                date_of_followup,
+                                                                date_of_prospect,
+                                                                created_by,
+                                                                assigned_user_id,
+                                                                modified_user_id
+                                                         FROM `leads`
+                                                         WHERE `id`='" . $bean->id . "'");
                     $recordsData       = $db->fetchByAssoc($getusrQery);
                     $created_byIDX     = $recordsData['created_by'];
                     $assigned_user_IDX = $recordsData['assigned_user_id'];
                     $modified_user_IDX = $recordsData['modified_user_id'];
+                    $date_of_callbackX = $recordsData['date_of_callback'];
+                    $date_of_followupX = $recordsData['date_of_followup'];
+                    $date_of_prospectX = $recordsData['date_of_prospect'];
+                    
                     $sql               = "UPDATE `te_disposition`
                                                 SET 
                                                    `created_by`='" . $created_byIDX . "',
                                                     modified_user_id='" . $modified_user_IDX . "',
-                                                    assigned_user_id='" . $assigned_user_IDX . "'
+                                                    assigned_user_id='" . $assigned_user_IDX . "',
+                                                    date_of_callback='" . $date_of_callbackX . "'
                                                 WHERE id ='" . $xx . "'";
                     $sqlData           = $GLOBALS['db']->query($sql);
                 }
