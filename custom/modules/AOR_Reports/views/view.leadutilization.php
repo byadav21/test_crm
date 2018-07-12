@@ -140,7 +140,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         return $batchOptions;
     }
 
-    function getFresh($selected_batch_code,$selected_councellors)
+    function getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types)
     {
         global $db;
         $leadList = array();
@@ -153,6 +153,10 @@ class AOR_ReportsViewleadutilization extends SugarView
         if(!empty($selected_batch_code)){
             
               //$and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
+        }
+         if (!empty($selected_lead_source_types))
+        {
+            $and .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
         }
         
         $leadSql  = "SELECT COUNT(leads.id) AS fresh_lead_count,
@@ -180,7 +184,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         return $leadList;
     }
 
-    function getAttempts($selected_batch_code,$selected_councellors)
+    function getAttempts($selected_batch_code,$selected_councellors,$selected_lead_source_types)
     {
 
         global $db;
@@ -191,6 +195,10 @@ class AOR_ReportsViewleadutilization extends SugarView
         if(!empty($selected_councellors)){
             
               $and .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if (!empty($selected_lead_source_types))
+        {
+            $and .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
         }
         if(!empty($selected_batch_code)){
             
@@ -442,8 +450,8 @@ class AOR_ReportsViewleadutilization extends SugarView
 
         $leadObj = $db->query($leadSql) or die(mysqli_error());
 
-        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors);
-        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors);
+        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types);
+        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors,$selected_lead_source_types);
 
         while ($row = $db->fetchByAssoc($leadObj))
         {
