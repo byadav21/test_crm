@@ -307,7 +307,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
         $lead_source = $arr_result;
 
-        $lead_source_types = array('NULL'=>'NULL','CC'=>'CC','OO'=>'OO','CO'=>'CO');
+        
 
 
 
@@ -424,7 +424,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
 
 
-
+         $lead_source_typesArr = array('NULL'=>'NULL','CC'=>'CC','OO'=>'OO','CO'=>'CO');
 
 
 
@@ -528,7 +528,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("lead_source_type", $lead_source);
         
-        $sugarSmarty->assign("lead_source_types", $lead_source_types);
+        $sugarSmarty->assign("lead_source_types", $lead_source_typesArr);
         
         $sugarSmarty->assign("selected_lead_source_types", $selected_lead_source_types);
         
