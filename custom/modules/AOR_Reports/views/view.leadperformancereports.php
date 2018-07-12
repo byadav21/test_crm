@@ -169,7 +169,7 @@ class AOR_ReportsViewLeadperformancereports extends SugarView
                          INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                          WHERE l.deleted=0 $wherecl 
                              and l.dispositionName in ('BUSY','NO_ANSWER')
-                             and l.lead_source_types!='OO'
+                             #and l.lead_source_types!='OO'
                          GROUP BY te_ba_batch.id,l.dispositionName";
 
         $leadObj = $db->query($leadSql);
