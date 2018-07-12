@@ -307,7 +307,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
         $lead_source = $arr_result;
 
-
+        $lead_source_types = array('NULL'=>'NULL','CC'=>'CC','OO'=>'OO','CO'=>'CO');
 
 
 
@@ -328,6 +328,7 @@ class AOR_ReportsViewleadutilization extends SugarView
             $_SESSION['cccon_managers']    = $_REQUEST['managers'];
             $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
             $_SESSION['cccon_status']      = $_REQUEST['status'];
+            $_SESSION['cccon_lead_source_types']      = $_REQUEST['lead_source_types'];
         }
 
         //$_SESSION['cccon_from_date']='2017-10-11';
@@ -517,8 +518,9 @@ class AOR_ReportsViewleadutilization extends SugarView
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("lead_source_type", $lead_source);
-
-
+        
+        $sugarSmarty->assign("lead_source_types", $lead_source_types);
+        
 
         $sugarSmarty->assign("selected_status", $selected_status);
 
