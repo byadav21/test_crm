@@ -162,14 +162,13 @@ class AOR_ReportsViewLeadperformancereports extends SugarView
         $leadList = array();
         $leadSql  = "SELECT COUNT(l.dispositionName) AS lead_count, 
                                                  l.dispositionName,
-                                        te_ba_batch.id AS batch_id,
-                         te_ba_batch.batch_code
+                                        b.id AS id,
+                         b.batch_code
                          FROM leads l
                          INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
-                         INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+                         INNER JOIN te_ba_batch b ON lc.te_ba_batch_id_c = b.id
                          WHERE l.deleted=0 $wherecl 
                              and l.dispositionName in ('BUSY','NO_ANSWER')
-                             #and l.lead_source_types!='OO'
                          GROUP BY te_ba_batch.id,l.dispositionName";
 
         $leadObj = $db->query($leadSql);
@@ -178,7 +177,7 @@ class AOR_ReportsViewLeadperformancereports extends SugarView
 
         while ($row = $db->fetchByAssoc($leadObj))
         {
-            $leadList[$row['batch_id']][$row['dispositionName']] = $row['lead_count'];
+            $leadList[$row['id']][$row['dispositionName']] = $row['lead_count'];
         }
 
         return $leadList;
