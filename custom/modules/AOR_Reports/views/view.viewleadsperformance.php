@@ -171,12 +171,12 @@ class AOR_ReportsViewviewleadsperformance extends SugarView
                             leads.neoxstatus,                    
                             leads.deleted             
                     FROM leads
-                    INNER JOIN users ON leads.assigned_user_id =users.id
+                    LEFT JOIN users ON leads.assigned_user_id =users.id
                     INNER JOIN leads_cstm ON leads.id= leads_cstm.id_c
                     INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
                     WHERE leads.deleted=0
                     AND te_ba_batch.deleted=0 
-                    AND users.deleted=0 
+                    
                     $wherecl 
                     order by leads.id"; 
         //echo '<pre>'.$leadSql;
