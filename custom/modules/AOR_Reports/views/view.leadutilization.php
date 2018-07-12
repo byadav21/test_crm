@@ -417,6 +417,11 @@ class AOR_ReportsViewleadutilization extends SugarView
         {
             $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
+        
+        if (!empty($selected_lead_source_types))
+        {
+            $wherecl .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
+        }
 
 
 

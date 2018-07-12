@@ -238,6 +238,11 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
         }
+        if (!empty($_SESSION['cccon_lead_source_types']))
+        {
+            $selected_lead_source_types = $_SESSION['cccon_lead_source_types'];
+        }
+        
         
         
         if (!empty($selected_batch_code))
@@ -266,6 +271,11 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         {
             //echo 'not in fresh and TotalCOunt';
             $showLeads = $this->getAttempts($showByClick, $batchCode,$selected_councellors);
+        }
+        
+        if (!empty($selected_lead_source_types))
+        {
+            $wherecl .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
         }
 
 
