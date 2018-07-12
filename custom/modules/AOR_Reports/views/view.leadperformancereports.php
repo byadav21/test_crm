@@ -165,8 +165,8 @@ class AOR_ReportsViewLeadperformancereports extends SugarView
                                         te_ba_batch.id AS batch_id,
                          te_ba_batch.batch_code
                          FROM leads l
-                         LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c
-                         LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+                         INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
+                         INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                          WHERE l.deleted=0 $wherecl 
                              and l.dispositionName in ('BUSY','NO_ANSWER')
                              and l.lead_source_types!='OO'
@@ -320,12 +320,12 @@ class AOR_ReportsViewLeadperformancereports extends SugarView
                         count(l.id) AS total,
                         l.status_description
                  FROM leads AS l
-                 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c
-                 LEFT JOIN te_ba_batch b ON lc.te_ba_batch_id_c = b.id
-                 WHERE l.deleted=0 AND l.lead_source_types!='OO'
+                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
+                 INNER JOIN te_ba_batch b ON lc.te_ba_batch_id_c = b.id
+                 WHERE l.deleted=0 
+                   #AND l.lead_source_types!='OO'
                    AND b.deleted=0 $wherecl
-                 GROUP BY b.id,
-                          l.status_description";
+                 GROUP BY l.status_description,b.id";
         //echo '<pre>'.$leadSql;
         $leadObj = $db->query($leadSql);
         while ($row     = $db->fetchByAssoc($leadObj))
@@ -396,12 +396,11 @@ class AOR_ReportsViewLeadperformancereports extends SugarView
                                             count(l.id) AS total,
                                             l.status_description
                                      FROM leads AS l
-                                     LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c
-                                     LEFT JOIN te_ba_batch b ON lc.te_ba_batch_id_c = b.id
+                                     INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
+                                     INNER JOIN te_ba_batch b ON lc.te_ba_batch_id_c = b.id
                                      WHERE l.deleted=0
                                        AND b.deleted=0 $where
-                                     GROUP BY b.id,
-                                              l.status_description";
+                                     GROUP BY l.status_description,b.id";
             $leadObj = $db->query($leadSql);
             while ($row     = $db->fetchByAssoc($leadObj))
             {
