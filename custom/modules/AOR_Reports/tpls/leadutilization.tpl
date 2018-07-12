@@ -88,21 +88,25 @@
                                 {/foreach}
                             </select>
                         </td>
-
-                    </tr>
-                    
-                    
-                     <tr>
+                        
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Lead Source Type">Lead Source Type:</label>
                         </td>
                         <td nowrap="nowrap" >
                             <select name="lead_source_types[]" id="lead_source_types"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                 <option value="{$key}" {if in_array($key, $lead_source_types)} selected="selected"{/if}>{$type}</option>
+                                 {foreach from =$lead_source_type key=key item=type} 
+                                    <option value="{$key}" {if in_array($key, $selected_lead_source_types)} selected="selected"{/if}>{$type}</option>
+                                {/foreach}
                             </select>
                         </td>
 
                     </tr>
+                    
+                    
+                     
+                        
+
+                   
 
 
 

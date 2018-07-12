@@ -387,6 +387,10 @@ class AOR_ReportsViewleadutilization extends SugarView
         {
             $selected_status = $_SESSION['cccon_status'];
         }
+        if (!empty($_SESSION['cccon_lead_source_types']))
+        {
+            $selected_lead_source_types = $_SESSION['cccon_lead_source_types'];
+        }
 
         if ($is_manger == 1)
         {
@@ -520,6 +524,9 @@ class AOR_ReportsViewleadutilization extends SugarView
         $sugarSmarty->assign("lead_source_type", $lead_source);
         
         $sugarSmarty->assign("lead_source_types", $lead_source_types);
+        
+        $sugarSmarty->assign("selected_lead_source_types", $selected_lead_source_types);
+        
         
 
         $sugarSmarty->assign("selected_status", $selected_status);
