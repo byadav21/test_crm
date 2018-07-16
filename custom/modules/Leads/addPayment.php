@@ -1015,7 +1015,7 @@ class addPaymentClass
     function addDispositionFunc($bean, $event, $argument)
     {
         ini_set('display_errors', "off");
-        global $db;
+        global $db,$current_user,$sugar_config;
         $db->query("delete from  session_call where  session_id='" . session_id() . "'");
 #If record is being created manually
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
@@ -1041,31 +1041,61 @@ class addPaymentClass
                 $disposition->name                          = $bean->dispositionName;
                 $disposition->dispositionName               = $bean->dispositionName;
                 $disposition->calltype                      = $bean->callType;
-		//$disposition->created_by                  =  $bean->assigned_user_id;
+		//$disposition->created_by                  =  $bean->created_by;
                 //$disposition->assigned_user_id            =  $bean->assigned_user_id;
+                //$disposition->modified_user_id            =  $bean->modified_user_id;
                 $disposition->attempt_count                 = $bean->attempts_c;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
-                $xx = $disposition->save();
-		if($xx!=''){
-		$sql     = "UPDATE `te_disposition` SET `created_by`='".$bean->assigned_user_id. "' where id ='".$xx."'";
-		$sqlData = $GLOBALS['db']->query($sql);
-		}
-		
-$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
-fwrite($file,'---------------------------'. "\n");
-fwrite($file, date('Y-m-d H:i:s') . "\n");
-fwrite($file, 'LeadID:' . "\n");
-fwrite($file, $bean->id . "\n");
-fwrite($file, 'Assigned_user_id:' . "\n");
-fwrite($file, $bean->assigned_user_id . "\n");
-fwrite($file, 'CreatedBy:' . "\n");
-fwrite($file, $bean->created_by . "\n");
-fwrite($file, 'modified_user_id:' . "\n");
-fwrite($file, $bean->modified_user_id . "\n");
-fwrite($file, 'disp save id:' . "\n");
-fwrite($file, $xx . "\n");
-fclose($file);
+                $xx                                         = $disposition->save();
+                $created_byIDX                              = '';
+                $assigned_user_IDX                          = '';
+                $modified_user_IDX                          = '';
+                $date_of_callbackX                          = '';
+                $date_of_followupX                          = '';
+                $date_of_prospectX                          = '';
+                if ($xx != '')
+                {
+                    $getusrQery        = $db->query("SELECT date_of_callback,
+                                                                date_of_followup,
+                                                                date_of_prospect,
+                                                                created_by,
+                                                                assigned_user_id,
+                                                                modified_user_id
+                                                         FROM `leads`
+                                                         WHERE `id`='" . $bean->id . "'");
+                    $recordsData       = $db->fetchByAssoc($getusrQery);
+                    $created_byIDX     = $recordsData['created_by'];
+                    $assigned_user_IDX = $recordsData['assigned_user_id'];
+                    $modified_user_IDX = $recordsData['modified_user_id'];
+                    $date_of_callbackX = $recordsData['date_of_callback'];
+                    $date_of_followupX = $recordsData['date_of_followup'];
+                    $date_of_prospectX = $recordsData['date_of_prospect'];
+                    
+                    $sql               = "UPDATE `te_disposition`
+                                                SET 
+                                                   `created_by`='" . $created_byIDX . "',
+                                                    modified_user_id='" . $modified_user_IDX . "',
+                                                    assigned_user_id='" . $assigned_user_IDX . "',
+                                                    date_of_callback='" . $date_of_callbackX . "'
+                                                WHERE id ='" . $xx . "'";
+                    $sqlData           = $GLOBALS['db']->query($sql);
+                }
 
+                $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
+                fwrite($file,'---------------------------'. "\n");
+                fwrite($file, date('Y-m-d H:i:s') . "\n");
+                fwrite($file, 'userId='.$_REQUEST['userId'] . "\n");
+                //fwrite($file, print_r($current_user, TRUE) . "\n");
+                fwrite($file, 'ameyo_import_login: '.$sugar_config['ameyo_import_login'] . "\n");
+                fwrite($file, '$current_user: '.$current_user->id . "\n");
+                fwrite($file, 'LeadID: '.$bean->id . "\n");
+                fwrite($file, 'Assigned_user_id: '.$bean->assigned_user_id . "\n");
+                fwrite($file, 'CreatedBy: '.$bean->created_by . "\n");
+                fwrite($file, 'modified_user_id: '.$bean->modified_user_id  . "\n");
+                fwrite($file, 'disp save id: '.$xx . "\n");
+                fwrite($file, 'sqlQuery: '.$sql . "\n");
+                fwrite($file, 'leadID: '.$bean->id . "\n");
+                fclose($file);
 
                 $sql     = " select dristi_request from leads WHERE id ='" . $bean->id . "'";
                 $sqlData = $GLOBALS['db']->query($sql);
