@@ -82,8 +82,8 @@ class updatecampaignByBatch
             {
 
                 $sql = "UPDATE leads
-                                    SET dristi_api_id=$d_campaign_id,
-                                        dristi_campagain_id=$d_lead_id,
+                                    SET dristi_api_id=$d_lead_id,
+                                        dristi_campagain_id=$d_campaign_id,
                                         date_modified=NOW()
                                     WHERE id='" . $data['id'] . "'";
                 $db->query($sql);
