@@ -186,7 +186,7 @@ class MysqliManager extends MysqlManager
                 //$con_list = mysqli_connect($sugar_config['db']['listviews']['db_host_name'], $sugar_config['db']['listviews']['db_user_name'], $sugar_config['db']['listviews']['db_password'], $sugar_config['db']['listviews']['db_name']);
                 if (isset($sugar_config['report_lists'][$GLOBALS['action']]))
                 {
-                    $con_list = DBManagerFactory::getInstance('reportsx');
+                    $con_list = DBManagerFactory::getInstance('cust_report_list');
                 }
                 else
                 {

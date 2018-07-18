@@ -111,7 +111,7 @@ class SugarView
        
          if(isset($sugar_config['report_lists'][$GLOBALS['action']])){
              //echo 'action=='.$GLOBALS['action'];
-             $GLOBALS['db'] = DBManagerFactory::getInstance('reportsx');
+             $GLOBALS['db'] = DBManagerFactory::getInstance('cust_report_list');
             
              //echo '<pre>';
              //print_r($dbx);  
