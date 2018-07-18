@@ -184,8 +184,15 @@ class MysqliManager extends MysqlManager
             if ($queryType == 'select')
             {
                 //$con_list = mysqli_connect($sugar_config['db']['listviews']['db_host_name'], $sugar_config['db']['listviews']['db_user_name'], $sugar_config['db']['listviews']['db_password'], $sugar_config['db']['listviews']['db_name']);
-                $con_list = DBManagerFactory::getInstance('listviews');
-               // echo "<pre>";print_r($con_list);exit;
+                if (isset($sugar_config['report_lists'][$GLOBALS['action']]))
+                {
+                    $con_list = DBManagerFactory::getInstance('reportsx');
+                }
+                else
+                {
+                    $con_list = DBManagerFactory::getInstance('listviews');
+                }
+                // echo "<pre>";print_r($con_list);exit;
                 $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
             }
             else

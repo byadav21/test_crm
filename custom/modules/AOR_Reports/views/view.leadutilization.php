@@ -447,7 +447,7 @@ class AOR_ReportsViewleadutilization extends SugarView
                      INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id and te_ba_batch.deleted=0
                      WHERE leads.deleted=0 $wherecl
                      GROUP  by  batch_code";
-
+                 
         $leadObj = $db->query($leadSql) or die(mysqli_error());
 
         $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types);
