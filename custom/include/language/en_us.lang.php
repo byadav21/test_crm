@@ -369,6 +369,10 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_franchise_FB_leads'=>'franchise_FB_leads',
   'OO_ag1'=>'Avenue Growth 1',
   'OO_IC'=>'Investors clinic',
+  'OO_coursopedia'=>'coursopedia',
+  'OO_IC'=>'Tulsi Academy',
+  'OO_IC'=>'Investors clinic',
+  'OO_IC'=>'Investors clinic',
   'CO_Jet'=>'Jet',
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
