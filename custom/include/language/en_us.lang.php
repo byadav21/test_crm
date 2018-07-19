@@ -374,6 +374,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_eduwin'=>'Eduwin',
   'OO_Off_track_creations'=>'Off Track Creations',
   'OO_shobhawati_foundation'=>'Shobhawati Foundation',
+  'OO_vagmine_education'=>'Vagmine Education',
   'CO_Jet'=>'Jet',
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
