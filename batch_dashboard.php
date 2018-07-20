@@ -15,7 +15,7 @@ INNER JOIN te_utm_te_budgeted_campaign_1_c tbc on u.id=tbc.te_utm_te_budgeted_ca
 INNER JOIN te_budgeted_campaign bcc on tbc.te_utm_te_budgeted_campaign_1te_budgeted_campaign_idb=bcc.id and bcc.deleted=0
 INNER JOIN te_utm_te_actual_campaign_1_c tac on u.id=tac.te_utm_te_actual_campaign_1te_utm_ida and tac.deleted=0
 INNER JOIN te_actual_campaign tac_ac on tac.te_utm_te_actual_campaign_1te_actual_campaign_idb=tac_ac.id and tac_ac.deleted=0
-WHERE u.deleted=0 limit 100";
+WHERE u.deleted=0";
 $result = $db->query($query);
 while (($row = $db->fetchByAssoc($result)) != null) {
 	//echo "<pre>";print_r($row);echo "</pre>";
@@ -26,5 +26,6 @@ while (($row = $db->fetchByAssoc($result)) != null) {
 	if($resultselect->num_rows==0){
 
 	}*/
-	$insertquery="INSERT INTO `dashboard_batch` ( `batch_id`, `batch`, `batch_code`, `utm`, `utm_source`, `utm_medium`, `utm_term`, `utm_status`, `contract`, `budget_id`, `budget_volume`, `budget_amount`, `actual_Budget_id`, `actual_volume`, `actual_amount`, `budget_entry_date`, `budget_modified_date`, `actual_budget_entry_date`, `actual_budget_modified_date`) VALUES ('".$row['Batch_id']."', '".$row['batch']."', '".$row['batch_code']."', '".$row['utm']."', '".$row['Utm_source']."', '".$row['Utm_medium']."', '".$row['Utm_term']."', '".$row['utm_status']."', '".$row['contract']."', '".$row['Budget_id']."', '".$row['Budget_volume']."','".$row['Budget_amount']."', '".$row['Actual_Budget_id']."', '".$row['Actual_volume']."', '".$row['Actual_amount']."', '".$row['budget_date_entered']."', '".$row['budget_date_modified']."', '".$row['actual_budget_date_entered']."', '".$row['actual_budget_date_modified']."');";
+	$insertquery="INSERT INTO `dashboard_actual_budget` ( `batch_id`, `batch`, `batch_code`, `utm`, `utm_source`, `utm_medium`, `utm_term`, `utm_status`, `contract`, `budget_id`, `budget_volume`, `budget_amount`, `actual_Budget_id`, `actual_volume`, `actual_amount`, `budget_entry_date`, `budget_modified_date`, `actual_budget_entry_date`, `actual_budget_modified_date`) VALUES ('".$row['Batch_id']."', '".$row['batch']."', '".$row['batch_code']."', '".$row['utm']."', '".$row['Utm_source']."', '".$row['Utm_medium']."', '".$row['Utm_term']."', '".$row['utm_status']."', '".$row['contract']."', '".$row['Budget_id']."', '".$row['Budget_volume']."','".$row['Budget_amount']."', '".$row['Actual_Budget_id']."', '".$row['Actual_volume']."', '".$row['Actual_amount']."', '".$row['budget_date_entered']."', '".$row['budget_date_modified']."', '".$row['actual_budget_date_entered']."', '".$row['actual_budget_date_modified']."')";
+	$insert = $db->query($insertquery);
 }	
