@@ -109,7 +109,7 @@ class SugarView
             trigger_error($deprecatedMessage, E_USER_DEPRECATED);
         }
        
-         if(isset($sugar_config['report_lists'][$GLOBALS['action']])){
+         /*if(isset($sugar_config['report_lists'][$GLOBALS['action']])){
              //echo 'action=='.$GLOBALS['action'];
              $GLOBALS['db'] = DBManagerFactory::getInstance('cust_report_list');
             
@@ -118,7 +118,7 @@ class SugarView
              echo 'db_name='. $GLOBALS['db']->connectOptions['db_name'];
              
                 
-        }
+        }*/
         self::__construct($bean, $view_object_map);
     }
 
