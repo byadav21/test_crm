@@ -8,6 +8,17 @@ require_once('include/entryPoint.php');
 global $db;
 error_reporting(-1);
 ini_set('display_errors', 'On');
+
+function createLog($action,$filename,$field='',$dataArray=array())
+    {
+        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+        fwrite($file, date('Y-m-d H:i:s') . "\n");
+        fwrite($file, $action . "\n");
+        fwrite($file, $field . "\n");
+        fwrite($file, print_r($dataArray, TRUE) . "\n");
+        fclose($file);
+    }
+    
 $query  = "SELECT  lead.id,
                     batch.d_campaign_id,
                     batch.d_lead_id,
@@ -33,7 +44,6 @@ $query  = "SELECT  lead.id,
                AND lead.status_description IN ('Fallout',
                                                'Not interested',
                                                'Retired',
-                                               'Cross Sell',
                                                'Not Enquired',
                                                'Next Batch')
                AND batch.batch_status = 'enrollment_in_progress'
@@ -126,6 +136,13 @@ foreach ($final_array as $key => $val)
         echo $update_lead    = "UPDATE `leads` SET `autoassign` = 'Yes', `status` = 'Alive', `status_description` = 'New Lead', `neoxstatus` = '0',`assigned_user_id` = '', `update_flag` = '1', `dristi_campagain_id` = '$d_campaign_id',   `dristi_API_id` = '$d_lead_id',`update_timestamp`= now() WHERE `id` = '$c_lead_id'";
         $db->query($update_lead);
           echo '<br>';
+          
+        $bean                     = BeanFactory::getBean('Leads', $c_lead_id); 
+        $bean->status             = 'Alive';
+        $bean->status_description = 'New Lead';
+        $bean->note               = 'Status updated via elouqa rule';
+        $bean->save();
+        createLog('{Auto Retired}','push_eloquascoreleadsto_ameyo_log.txt',$update_lead,$val);  
     }
 }
 

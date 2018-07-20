@@ -1,5 +1,5 @@
 <?php
-// created: 2018-05-19 11:38:47
+// created: 2018-07-20 17:58:03
 $subpanel_layout['list_fields'] = array (
   'status' => 
   array (
@@ -39,6 +39,18 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'orderBy' => 'date_entered',
     'default' => true,
+  ),
+  'modified_by_name' => 
+  array (
+    'type' => 'relate',
+    'link' => true,
+    'vname' => 'LBL_MODIFIED_NAME',
+    'id' => 'MODIFIED_USER_ID',
+    'width' => '10%',
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'Users',
+    'target_record_key' => 'modified_user_id',
   ),
   'created_by_name' => 
   array (
