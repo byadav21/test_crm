@@ -238,6 +238,11 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
         }
+        if (!empty($_SESSION['cccon_lead_source_types']))
+        {
+            $selected_lead_source_types = $_SESSION['cccon_lead_source_types'];
+        }
+        
         
         
         if (!empty($selected_batch_code))
@@ -266,6 +271,11 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         {
             //echo 'not in fresh and TotalCOunt';
             $showLeads = $this->getAttempts($showByClick, $batchCode,$selected_councellors);
+        }
+        
+        if (!empty($selected_lead_source_types))
+        {
+            $wherecl .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
         }
 
 
@@ -331,7 +341,7 @@ class AOR_ReportsViewviewleadutilization extends SugarView
                             leads.neoxstatus,                    
                             leads.deleted             
                     FROM leads
-                    INNER JOIN users ON leads.assigned_user_id =users.id and users.deleted=0
+                    left JOIN users ON leads.assigned_user_id =users.id 
                     INNER JOIN leads_cstm ON leads.id= leads_cstm.id_c
                     INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id and te_ba_batch.deleted=0
                     WHERE leads.deleted=0 $wherecl

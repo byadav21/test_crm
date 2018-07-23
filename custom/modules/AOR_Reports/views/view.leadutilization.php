@@ -140,7 +140,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         return $batchOptions;
     }
 
-    function getFresh($selected_batch_code,$selected_councellors)
+    function getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types)
     {
         global $db;
         $leadList = array();
@@ -153,6 +153,10 @@ class AOR_ReportsViewleadutilization extends SugarView
         if(!empty($selected_batch_code)){
             
               //$and .= " AND  te_ba_batch.batch_code IN ('" . implode("','", $selected_batch_code) . "')";
+        }
+         if (!empty($selected_lead_source_types))
+        {
+            $and .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
         }
         
         $leadSql  = "SELECT COUNT(leads.id) AS fresh_lead_count,
@@ -180,7 +184,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         return $leadList;
     }
 
-    function getAttempts($selected_batch_code,$selected_councellors)
+    function getAttempts($selected_batch_code,$selected_councellors,$selected_lead_source_types)
     {
 
         global $db;
@@ -191,6 +195,10 @@ class AOR_ReportsViewleadutilization extends SugarView
         if(!empty($selected_councellors)){
             
               $and .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if (!empty($selected_lead_source_types))
+        {
+            $and .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
         }
         if(!empty($selected_batch_code)){
             
@@ -307,7 +315,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
         $lead_source = $arr_result;
 
-
+        
 
 
 
@@ -328,6 +336,7 @@ class AOR_ReportsViewleadutilization extends SugarView
             $_SESSION['cccon_managers']    = $_REQUEST['managers'];
             $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
             $_SESSION['cccon_status']      = $_REQUEST['status'];
+            $_SESSION['cccon_lead_source_types']      = $_REQUEST['lead_source_types'];
         }
 
         //$_SESSION['cccon_from_date']='2017-10-11';
@@ -386,6 +395,10 @@ class AOR_ReportsViewleadutilization extends SugarView
         {
             $selected_status = $_SESSION['cccon_status'];
         }
+        if (!empty($_SESSION['cccon_lead_source_types']))
+        {
+            $selected_lead_source_types = $_SESSION['cccon_lead_source_types'];
+        }
 
         if ($is_manger == 1)
         {
@@ -412,9 +425,14 @@ class AOR_ReportsViewleadutilization extends SugarView
         {
             $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
+        
+        if (!empty($selected_lead_source_types))
+        {
+            $wherecl .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
+        }
 
 
-
+         $lead_source_typesArr = array('NULL'=>'NULL','CC'=>'CC','OO'=>'OO','CO'=>'CO');
 
 
 
@@ -429,11 +447,11 @@ class AOR_ReportsViewleadutilization extends SugarView
                      INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id and te_ba_batch.deleted=0
                      WHERE leads.deleted=0 $wherecl
                      GROUP  by  batch_code";
-
+                 
         $leadObj = $db->query($leadSql) or die(mysqli_error());
 
-        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors);
-        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors);
+        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types);
+        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors,$selected_lead_source_types);
 
         while ($row = $db->fetchByAssoc($leadObj))
         {
@@ -517,8 +535,12 @@ class AOR_ReportsViewleadutilization extends SugarView
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("lead_source_type", $lead_source);
-
-
+        
+        $sugarSmarty->assign("lead_source_types", $lead_source_typesArr);
+        
+        $sugarSmarty->assign("selected_lead_source_types", $selected_lead_source_types);
+        
+        
 
         $sugarSmarty->assign("selected_status", $selected_status);
 

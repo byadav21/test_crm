@@ -167,7 +167,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
                          te_ba_batch.batch_code
                          FROM leads l
                          INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
-                         LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+                         INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                          WHERE l.deleted=0 $wherecl 
                              and l.status_description!='Re-Enquired' 
                              and (l.dispositionName!='CONNECTED' || l.dispositionName IS NULL)
@@ -337,7 +337,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
                                    OR l.status_description ='', 'NA', l.status_description) AS status_description
                          FROM leads l
                          INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
-                         LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+                         INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                          WHERE l.deleted=0 $wherecl 
                              #and te_ba_batch.batch_code='GSCM-01-0318-01'
                          GROUP BY l.status_description,
