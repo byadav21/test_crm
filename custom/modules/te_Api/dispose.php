@@ -156,7 +156,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid++;
             $sql            = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res            = $db->query($sql);
-
+                
+            
             /*$dispCountArr = getAttemptCount();
             if (!empty($dispCountArr))
             {

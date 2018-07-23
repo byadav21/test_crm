@@ -5,6 +5,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 ini_set('memory_limit', '1024M');
 require_once('include/entryPoint.php');
 
+
 global $db;
 error_reporting(-1);
 ini_set('display_errors', 'On');

@@ -732,4 +732,5 @@ $GLOBALS['app_list_strings']['status_list_student_batch_discription']=array (
   'Referral' => 'Referral',
   'Technical' => 'Technical',
   'Miscellaneous' => 'Miscellaneous',
+    
   );
