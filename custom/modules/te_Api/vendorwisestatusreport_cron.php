@@ -125,7 +125,7 @@ class sendVisitReport
                 #'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
                 
                 //Marketing Team :
-                'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
+                'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
                 'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in','vaibhav.gupta@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in');
