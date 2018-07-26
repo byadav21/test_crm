@@ -118,6 +118,8 @@ class AOR_ReportsViewDailyreport extends SugarView {
 		return $actualPlan;
 	}
 	public function display() {
+                
+                return true;
 		global $db;
 		#Get vendor drop down option
 		$vendorList=$this->getVendors();

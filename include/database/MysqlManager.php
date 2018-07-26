@@ -188,6 +188,12 @@ class MysqlManager extends DBManager
 
                             $con_list = DBManagerFactory::getInstance('listviews');
                             $result = $suppress?@mysql_query($sql, $con_list->database):mysql_query($sql, $con_list->database);
+                            DBManagerFactory::getInstance('listviews');
+                        }
+                         else if ($queryType == 'update' || $queryType == 'insert')
+                        {
+                            $con_list = DBManagerFactory::getInstance('master_view');
+                           $result = $suppress?@mysql_query($sql, $con_list->database):mysql_query($sql, $con_list->database);
                         }
                         else
                         {
