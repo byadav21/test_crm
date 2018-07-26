@@ -184,27 +184,30 @@ class MysqliManager extends MysqlManager
             if ($queryType == 'select')
             {
                 //$con_list = mysqli_connect($sugar_config['db']['listviews']['db_host_name'], $sugar_config['db']['listviews']['db_user_name'], $sugar_config['db']['listviews']['db_password'], $sugar_config['db']['listviews']['db_name']);
-                if (isset($sugar_config['report_lists'][$GLOBALS['action']]))
+                /*if (isset($sugar_config['report_lists'][$GLOBALS['action']]))
                 {
                     $con_list = DBManagerFactory::getInstance('cust_report_list');
                 }
                 else
                 {
                     $con_list = DBManagerFactory::getInstance('listviews');
-                }
+                }*/
                 // echo "<pre>";print_r($con_list);exit;
+                $con_list = DBManagerFactory::getInstance('listviews');
                 $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
             }
             else
             {
-                $this->checkConnection();
-                $result = $suppress ? @mysqli_query($this->database, $sql) : mysqli_query($this->database, $sql);
+                //$this->checkConnection();
+                $con_list = DBManagerFactory::getInstance('master_view');
+                $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
             }
         }
         else
         {
-            $this->checkConnection();
-            $result = $suppress ? @mysqli_query($this->database, $sql) : mysqli_query($this->database, $sql);
+            //$this->checkConnection();
+            $con_list = DBManagerFactory::getInstance('master_view');
+            $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
         }
 
         //$result = $suppress?@mysqli_query($this->database,$sql):mysqli_query($this->database,$sql);
