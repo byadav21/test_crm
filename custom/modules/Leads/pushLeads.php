@@ -159,7 +159,7 @@ if($db->getRowCount($result)>0){
 }
  
  
- 
+/* 
 if($countLead['ctr']>0){
 	$sql="select distinct te_utm_te_actual_campaign_1te_utm_ida as utm,te_utm.name from te_utm_te_actual_campaign_1_c inner join te_utm on te_utm.id=te_utm_te_actual_campaign_1_c.te_utm_te_actual_campaign_1te_utm_ida where te_utm_te_actual_campaign_1_c.deleted=0 and te_utm.deleted=0";
 	$result=$db->query($sql);
@@ -178,7 +178,7 @@ if($countLead['ctr']>0){
 		
 	}
 }	
-
+*/
  
 $db->query("update cron_job set lead_id='0' where session_id='cron_job'");
 exit();
