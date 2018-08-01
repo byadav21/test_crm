@@ -289,15 +289,24 @@ Calendar.setup ({
 {/literal}
 <script>
 {literal}
-Calendar.setup ({
-   inputField : "to_date",
-   daFormat : "%d/%m/%Y %I:%M%P",
-   button : "to_date_trigger",
-   singleClick : true,
-   dateStr : "",
-   step : 1,
-   weekNumbers:false,
-});
+Calendar.setup({
+                inputField: "from_date",
+                daFormat: "%d-%m-%Y %I:%M%P",
+                button: "from_date_trigger",
+                singleClick: true,
+                dateStr: "",
+                step: 1,
+                weekNumbers: false,
+            });
+            Calendar.setup({
+                inputField: "to_date",
+                daFormat: "%d-%m-%Y %I:%M%P",
+                button: "to_date_trigger",
+                singleClick: true,
+                dateStr: "",
+                step: 1,
+                weekNumbers: false,
+            });
 $( document ).ready(function() {
     $(".multiselbox").each(function(){
       if($(this).find("option").eq(0).val()==''){
@@ -310,3 +319,4 @@ $( document ).ready(function() {
 });
 </script>
 {/literal}
+
