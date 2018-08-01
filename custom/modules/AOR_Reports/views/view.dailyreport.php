@@ -143,6 +143,12 @@ class AOR_ReportsViewDailyreport extends SugarView {
 			$selected_course = '';
 			$selected_from_date = '';
 			$selected_to_date = '';
+			if(!isset($_SESSION['dsr_from_date']) || empty($_SESSION['dsr_from_date'])){
+				$_SESSION['dsr_from_date']=date('Y-m-d');
+			}
+			if(!isset($_SESSION['dsr_to_date']) || empty($_SESSION['dsr_to_date'])){
+				$_SESSION['dsr_to_date']=date('Y-m-d');
+			}
 			if(isset($_POST['button']) || isset($_POST['export']) || isset($_POST['sendemail'])) {
 					$_SESSION['dsr_vendor'] = $_POST['vendor'];
 					$_SESSION['dsr_course'] = $_POST['course'];
