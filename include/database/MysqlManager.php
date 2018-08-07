@@ -185,8 +185,17 @@ class MysqlManager extends DBManager
                         $queryType = strtolower(mb_substr(trim($sql), 0, 6));
                         if ($queryType == 'select')
                         {
-
+                            $report_action = '';
+                            $report_action = isset($GLOBALS['action'])? $GLOBALS['action'] : '';
+                            if (isset($sugar_config['report_lists'][$report_action]))
+                            {
+                            $con_list = DBManagerFactory::getInstance('cust_report_list');
+                            }
+                            else
+                            {
                             $con_list = DBManagerFactory::getInstance('listviews');
+                            }
+                            //$con_list = DBManagerFactory::getInstance('listviews');
                             $result = $suppress?@mysql_query($sql, $con_list->database):mysql_query($sql, $con_list->database);
                             DBManagerFactory::getInstance('listviews');
                         }
