@@ -137,10 +137,17 @@
 	$leadObj->status_description=$statusDetail;
 	$leadObj->lead_source=$lead_source;
 	$leadObj->lead_source_types=$lead_source_types;
-	if($_REQUEST['work_experience'])  $leadObj->work_experience_c=$_REQUEST['work_experience'];
-	if($_REQUEST['education']) $leadObj->education_c= $_REQUEST['education'];
+	//if($_REQUEST['work_experience'])  $leadObj->work_experience_c=$_REQUEST['work_experience'];
+	//if($_REQUEST['education']) $leadObj->education_c= $_REQUEST['education'];
 	if($_REQUEST['city']) $leadObj->primary_address_city= $_REQUEST['city'];
 	if($_REQUEST['functional_area']) $leadObj->functional_area_c=$_REQUEST['functional_area'];
+
+	if($_REQUEST['experience'])  $leadObj->work_experience_c=$_REQUEST['experience'];
+	if($_REQUEST['qualification']) $leadObj->education_c= $_REQUEST['qualification'];
+	if($_REQUEST['unknownone']) $leadObj->dummy_one=$_REQUEST['unknownone'];
+	if($_REQUEST['unknowntwo']) $leadObj->dummy_two=$_REQUEST['unknowntwo'];
+	if($_REQUEST['state']) $leadObj->primary_address_state=$_REQUEST['state'];
+
 	if($term) $leadObj->utm_term_c=$term;
 	if($source) $leadObj->utm_source_c=$source;
 	if($medium) $leadObj->utm_contract_c=$medium;
