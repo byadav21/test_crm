@@ -35,13 +35,13 @@
 			return $formresponsedata;
 	}
 			$input = json_decode(file_get_contents('php://input'), true); 
-			$url="https://graph.facebook.com/v2.9";
+			$url="https://graph.facebook.com/v3.1";
 			$GLOBALS['log']->special(json_encode($input));
 			$formData = ''; 
 			$form_id  = '';
 			if(!empty($input['entry'][0]['changes'][0]['value']['leadgen_id'])) {	
-			  $leadgen_id = $input['entry'][0]['changes'][0]['value']['leadgen_id'];	
-			  $access_token = 'EAAKcZB1mOFl4BACKJxZA5mqKZBzYtPu3KwYVGa1BEQm1uaDovstZC4V3x7JZBQH9UeOGZAmde7VkjoyQTiXcDWJSqsWZCeAgI8WgUzNPB4Om47cY2BE871ZAW8miY72kWGIPg8M3eZBjkxWD1uh4FnGp7jtgefgzmkvJH2leXycsl1gZDZD';
+			  $leadgen_id = $input['entry'][0]['changes'][0]['value']['leadgen_id'];
+                          $access_token ='EAAKcZB1mOFl4BAFPyL2ZAeaMNwsn3DhTh6uMd7FyNwb6ftr6HAyQY9t4P9VRZBngzicpHtXhc4yohZCZBjjZAwWefkoHpLrIvZCwbwVdgCQFZAnX4Ea0bt5J2w9cpRyrU96WZCdUQ3oNg96PIzp8UnCBYZBXUiOSPdJz2nvO9rQjJsBgZDZD';
 			  $leadurl = $url.'/'.$leadgen_id.'?access_token='.$access_token;
 			  $formId = $input['entry'][0]['changes'][0]['value']['form_id'];
 			  $formData = getFormName($formId,$url,$access_token);
