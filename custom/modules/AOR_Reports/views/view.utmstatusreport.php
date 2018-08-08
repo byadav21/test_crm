@@ -460,11 +460,11 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
 
         if (isset($_SESSION['us_from_date']) && !empty($_SESSION['us_from_date']))
         {
-            $from_date = date('d-m-Y', strtotime($_SESSION['us_from_date']));
+            $from_date = date('Y-m-d', strtotime($_SESSION['us_from_date']));
         }
         if (isset($_SESSION['us_to_date']) && !empty($_SESSION['us_to_date']))
         {
-            $to_date = date('d-m-Y', strtotime($_SESSION['us_to_date']));
+            $to_date = date('Y-m-d', strtotime($_SESSION['us_to_date']));
         }
         if (isset($_SESSION['us_batch']) && !empty($_SESSION['us_batch']))
         {
