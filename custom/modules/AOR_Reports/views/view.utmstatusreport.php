@@ -60,6 +60,60 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
         $_SESSION['us_from_date'] = $from_date;
         $_SESSION['us_to_date']   = $to_date;
         
+         $leadSql = "SELECT u.contract_type,
+                                        l.vendor,
+                                        u.id AS utmid,
+                                        if(l.utm_campaign IS NULL
+                                           OR l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,
+                                        l.utm,
+                                        b.id,
+                                        b.name,
+                                        b.batch_code,
+                                        COUNT(DISTINCT l.id)total,
+                                        l.status_description
+                                 FROM te_ba_batch AS b
+                                 LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id
+                                 LEFT JOIN leads AS l ON l.id=lc.id_c
+                                 LEFT JOIN `te_utm` AS u ON l.utm=u.name
+                                 WHERE b.deleted=0
+                                   AND l.status_description!='' $where
+                                   AND l.deleted=0
+                                 GROUP BY b.id,
+                                          l.status_description,
+                                          l.utm,
+                                          utm_campaign,
+                                          u.contract_type,
+                                          l.vendor,
+                                          u.id
+                                 ORDER BY b.name ASC";
+         
+        if ($_SESSION['us_from_date'] != "" && $_SESSION['us_to_date'])
+        {
+            $from_date       = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_from_date'])));
+            $to_date         = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_to_date'])));
+            $where           .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
+            $whereInvalidUtm .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
+        }
+        elseif ($_SESSION['us_from_date'] != "" && $_SESSION['us_to_date'] == "")
+        {
+            $from_date       = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_from_date'])));
+            $where           .= " AND DATE(l.date_entered)>='" . $from_date . "' ";
+            $whereInvalidUtm .= " AND DATE(l.date_entered)>='" . $from_date . "' ";
+        }
+        elseif ($_SESSION['us_from_date'] == "" && $_SESSION['us_to_date'] != "")
+        {
+            $to_date         = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_to_date'])));
+            $where           .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
+            $whereInvalidUtm .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
+        }
+        if (!empty($_SESSION['us_batch']))
+        {
+            $where           .= " AND lc.te_ba_batch_id_c IN('" . implode("','", $_SESSION['us_batch']) . "') ";
+            $whereInvalidUtm .= " AND lc.te_ba_batch_id_c IN('" . implode("','", $_SESSION['us_batch']) . "') ";
+            $whereBatch      = "AND b.id IN('" . implode("','", $_SESSION['us_batch']) . "')";
+        }
+        
+         
         if (isset($_POST['button']) && $_POST['button'] == "Search")
         {
             $_SESSION['us_from_date'] = $from_date;
@@ -74,35 +128,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             $from_date                = "";
             $to_date                  = "";
             $filename                 = $file . "_" . date("Y-m-d");
-            $_SESSION['us_from_date'] = $from_date;
-            $_SESSION['us_to_date']   = $to_date;
-
-            $_SESSION['us_batch'] = $_REQUEST['batch'];
-            if ($_SESSION['us_from_date'] != "" && $_SESSION['us_to_date'])
-            {
-                $from_date       = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_from_date'])));
-                $to_date         = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_to_date'])));
-                $where           .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
-                $whereInvalidUtm .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
-            }
-            elseif ($_SESSION['us_from_date'] != "" && $_SESSION['us_to_date'] == "")
-            {
-                $from_date       = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_from_date'])));
-                $where           .= " AND DATE(l.date_entered)>='" . $from_date . "' ";
-                $whereInvalidUtm .= " AND DATE(l.date_entered)>='" . $from_date . "' ";
-            }
-            elseif ($_SESSION['us_from_date'] == "" && $_SESSION['us_to_date'] != "")
-            {
-                $to_date         = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_to_date'])));
-                $where           .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
-                $whereInvalidUtm .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
-            }
-            if (!empty($_SESSION['us_batch']))
-            {
-                $where           .= " AND lc.te_ba_batch_id_c IN('" . implode("','", $_SESSION['us_batch']) . "') ";
-                $whereInvalidUtm .= " AND lc.te_ba_batch_id_c IN('" . implode("','", $_SESSION['us_batch']) . "') ";
-                $whereBatch      = "AND b.id IN('" . implode("','", $_SESSION['us_batch']) . "')";
-            }
+            
 
             $councelorList = array();
             $utmArr        = [];
@@ -150,42 +176,17 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
                 /* if($utmArr){
                   $where.=" AND u.id IN('".implode("','",$utmArr)."') ";
                   } */
-                $leadSql = "SELECT  u.contract_type,
-                                    l.vendor,
-                                    u.name AS utm,
-                                    u.id AS utmid,
-                                    if(l.utm_campaign IS NULL
-                                       OR l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,
-                                    l.utm,
-                                    b.id,
-                                    b.name,
-                                    COUNT(DISTINCT l.id)total,
-                                    l.status_description
-                             FROM te_ba_batch AS b
-                             LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id
-                             LEFT JOIN leads AS l ON l.id=lc.id_c
-                             LEFT JOIN `te_utm` AS u ON l.utm=u.name
-                             WHERE b.deleted=0
-                               AND l.status_description!='' $where
-                               AND l.deleted=0
-                             GROUP BY b.id,
-                                      l.status_description,
-                                      l.utm,
-                                      utm_campaign,
-                                      u.contract_type,
-                                      l.vendor,
-                                      u.id
-                             ORDER BY b.name ASC";
+               
                 $leadObj = $db->query($leadSql);
                 while ($row     = $db->fetchByAssoc($leadObj))
                 {
                     $row['status_description'] = str_replace(array(' ', '-'), '_', $row['status_description']);
                     if ($row['utmid'] == '' || $row['utmid'] == NULL)
                     {
-                        $idn = 'NA_VENDOR#' . $row['name'] . '#NA';
+                        $idn = 'NA_VENDOR#' . $row['batch_code'] . '#NA';
 
-                        $councelorList[$idn . 'TE__TENA']['name']          = 'NA_VENDOR';
-                        $councelorList[$idn . 'TE__TENA']['batch']         = $row['name'];
+                        $councelorList[$idn . 'TE__TENA']['batch_code']          = 'NA_VENDOR';
+                        $councelorList[$idn . 'TE__TENA']['batch']         = $row['batch_code'];
                         $councelorList[$idn . 'TE__TENA']['contract_type'] = 'NA';
                         if (!array_key_exists($idn . 'TE__TENA', $councelorList))
                         {
@@ -198,9 +199,9 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
                     }
                     else
                     {
-                        $idn                                                                = $row['vendor'] . '#' . $row['name'] . '#' . $row['contract_type'];
+                        $idn                                                                = $row['vendor'] . '#' . $row['batch_code'] . '#' . $row['contract_type'];
                         $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['name']          = $row['vendor'];
-                        $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['batch']         = $row['name'];
+                        $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['batch']         = $row['batch_code'];
                         $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['contract_type'] = $row['contract_type'];
 
                         if (!array_key_exists($idn . 'TE__TE' . $row['utm_campaign'], $councelorList))
@@ -309,33 +310,6 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
 
         //echo 'xx===' . $_SESSION['us_to_date'];
         //die;
-
-        if ($_SESSION['us_from_date'] != "" && $_SESSION['us_to_date'])
-        {
-            $from_date       = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_from_date'])));
-            $to_date         = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_to_date'])));
-            $where           .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
-            $whereInvalidUtm .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
-        }
-        elseif ($_SESSION['us_from_date'] != "" && $_SESSION['us_to_date'] == "")
-        {
-            $from_date       = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_from_date'])));
-            $where           .= " AND DATE(l.date_entered)>='" . $from_date . "' ";
-            $whereInvalidUtm .= " AND DATE(l.date_entered)>='" . $from_date . "' ";
-        }
-        elseif ($_SESSION['us_from_date'] == "" && $_SESSION['us_to_date'] != "")
-        {
-            $to_date         = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['us_to_date'])));
-            $where           .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
-            $whereInvalidUtm .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
-        }
-        if (!empty($_SESSION['us_batch']))
-        {
-            $where           .= " AND lc.te_ba_batch_id_c IN('" . implode("','", $_SESSION['us_batch']) . "') ";
-            $whereInvalidUtm .= " AND lc.te_ba_batch_id_c IN('" . implode("','", $_SESSION['us_batch']) . "') ";
-            $whereBatch      = "AND b.id IN('" . implode("','", $_SESSION['us_batch']) . "')";
-        }
-        
         
         $vendorSql = "SELECT    u.id,
                                 u.name AS utm_name,
@@ -391,32 +365,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
               } */
             
             //echo '<pre>'. 
-                     $leadSql = "SELECT u.contract_type,
-                                        l.vendor,
-                                        u.id AS utmid,
-                                        if(l.utm_campaign IS NULL
-                                           OR l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,
-                                        l.utm,
-                                        b.id,
-                                        b.name,
-                                        b.batch_code,
-                                        COUNT(DISTINCT l.id)total,
-                                        l.status_description
-                                 FROM te_ba_batch AS b
-                                 LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id
-                                 LEFT JOIN leads AS l ON l.id=lc.id_c
-                                 LEFT JOIN `te_utm` AS u ON l.utm=u.name
-                                 WHERE b.deleted=0
-                                   AND l.status_description!='' $where
-                                   AND l.deleted=0
-                                 GROUP BY b.id,
-                                          l.status_description,
-                                          l.utm,
-                                          utm_campaign,
-                                          u.contract_type,
-                                          l.vendor,
-                                          u.id
-                                 ORDER BY b.name ASC";
+                    
             $leadObj = $db->query($leadSql);
             while ($row     = $db->fetchByAssoc($leadObj))
             {
