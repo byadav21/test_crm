@@ -150,7 +150,32 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
                 /* if($utmArr){
                   $where.=" AND u.id IN('".implode("','",$utmArr)."') ";
                   } */
-                $leadSql = "SELECT u.contract_type, l.vendor,u.name AS utm,u.id AS utmid,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,l.utm,b.id,b.name,COUNT(DISTINCT l.id)total,l.status_description from te_ba_batch AS b LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id LEFT JOIN leads AS l ON l.id=lc.id_c LEFT JOIN `te_utm` AS u on l.utm=u.name  WHERE b.deleted=0  AND l.status_description!=''  $where AND l.deleted=0 GROUP BY b.id,l.status_description,l.utm,utm_campaign,u.contract_type,l.vendor,u.id  ORDER BY b.name ASC";
+                $leadSql = "SELECT  u.contract_type,
+                                    l.vendor,
+                                    u.name AS utm,
+                                    u.id AS utmid,
+                                    if(l.utm_campaign IS NULL
+                                       OR l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,
+                                    l.utm,
+                                    b.id,
+                                    b.name,
+                                    COUNT(DISTINCT l.id)total,
+                                    l.status_description
+                             FROM te_ba_batch AS b
+                             LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id
+                             LEFT JOIN leads AS l ON l.id=lc.id_c
+                             LEFT JOIN `te_utm` AS u ON l.utm=u.name
+                             WHERE b.deleted=0
+                               AND l.status_description!='' $where
+                               AND l.deleted=0
+                             GROUP BY b.id,
+                                      l.status_description,
+                                      l.utm,
+                                      utm_campaign,
+                                      u.contract_type,
+                                      l.vendor,
+                                      u.id
+                             ORDER BY b.name ASC";
                 $leadObj = $db->query($leadSql);
                 while ($row     = $db->fetchByAssoc($leadObj))
                 {
@@ -310,12 +335,22 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             $whereInvalidUtm .= " AND lc.te_ba_batch_id_c IN('" . implode("','", $_SESSION['us_batch']) . "') ";
             $whereBatch      = "AND b.id IN('" . implode("','", $_SESSION['us_batch']) . "')";
         }
-        $vendorSql = "SELECT u.id ,u.name AS utm_name,v.name,b.name as batch,contract_type from te_utm as u
-						inner join te_ba_batch as b on b.id=u.te_ba_batch_id_c
-						inner join te_vendor_te_utm_1_c on te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
-						inner join te_vendor as v on v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
-						WHERE u.utm_status ='Live' AND u.deleted=0 AND b.deleted=0 AND v.deleted=0 $whereBatch
-						order by u.date_modified desc";
+        
+        
+        $vendorSql = "SELECT    u.id,
+                                u.name AS utm_name,
+                                v.name,
+                                b.name AS batch,
+                                contract_type
+                         FROM te_utm AS u
+                         INNER JOIN te_ba_batch AS b ON b.id=u.te_ba_batch_id_c
+                         INNER JOIN te_vendor_te_utm_1_c ON te_vendor_te_utm_1_c.te_vendor_te_utm_1te_utm_idb=u.id
+                         INNER JOIN te_vendor AS v ON v.id=te_vendor_te_utm_1_c.te_vendor_te_utm_1te_vendor_ida
+                         WHERE u.utm_status ='Live'
+                           AND u.deleted=0
+                           AND b.deleted=0
+                           AND v.deleted=0 $whereBatch
+                         ORDER BY u.date_modified DESC";
 
         $vendorObj = $db->query($vendorSql);
         $vendorArr = [];
@@ -354,18 +389,44 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             /* if($utmArr){
               $where.=" AND u.id IN('".implode("','",$utmArr)."') ";
               } */
-
-            $leadSql = "SELECT u.contract_type, l.vendor,u.id AS utmid,if(l.utm_campaign is null or l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,l.utm,b.id,b.name,COUNT(DISTINCT l.id)total,l.status_description from te_ba_batch AS b LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id LEFT JOIN leads AS l ON l.id=lc.id_c LEFT JOIN `te_utm` AS u on l.utm=u.name  WHERE b.deleted=0  AND l.status_description!=''  $where AND l.deleted=0 GROUP BY b.id,l.status_description,l.utm,utm_campaign,u.contract_type,l.vendor,u.id  ORDER BY b.name ASC";
+            
+            //echo '<pre>'. 
+                     $leadSql = "SELECT u.contract_type,
+                                        l.vendor,
+                                        u.id AS utmid,
+                                        if(l.utm_campaign IS NULL
+                                           OR l.utm_campaign = '', 'NA', l.utm_campaign)utm_campaign,
+                                        l.utm,
+                                        b.id,
+                                        b.name,
+                                        b.batch_code,
+                                        COUNT(DISTINCT l.id)total,
+                                        l.status_description
+                                 FROM te_ba_batch AS b
+                                 LEFT JOIN leads_cstm AS lc ON lc.te_ba_batch_id_c=b.id
+                                 LEFT JOIN leads AS l ON l.id=lc.id_c
+                                 LEFT JOIN `te_utm` AS u ON l.utm=u.name
+                                 WHERE b.deleted=0
+                                   AND l.status_description!='' $where
+                                   AND l.deleted=0
+                                 GROUP BY b.id,
+                                          l.status_description,
+                                          l.utm,
+                                          utm_campaign,
+                                          u.contract_type,
+                                          l.vendor,
+                                          u.id
+                                 ORDER BY b.name ASC";
             $leadObj = $db->query($leadSql);
             while ($row     = $db->fetchByAssoc($leadObj))
             {
                 $row['status_description'] = str_replace(array(' ', '-'), '_', $row['status_description']);
                 if ($row['utmid'] == '' || $row['utmid'] == NULL)
                 {
-                    $idn = 'NA_VENDOR#' . $row['name'] . '#NA';
+                    $idn = 'NA_VENDOR#' . $row['batch_code'] . '#NA';
 
                     $councelorList[$idn . 'TE__TENA']['name']          = 'NA_VENDOR';
-                    $councelorList[$idn . 'TE__TENA']['batch']         = $row['name'];
+                    $councelorList[$idn . 'TE__TENA']['batch']         = $row['batch_code'];
                     $councelorList[$idn . 'TE__TENA']['contract_type'] = 'NA';
                     if (!array_key_exists($idn . 'TE__TENA', $councelorList))
                     {
@@ -378,9 +439,9 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
                 }
                 else
                 {
-                    $idn                                                                = $row['vendor'] . '#' . $row['name'] . '#' . $row['contract_type'];
+                    $idn                                                                = $row['vendor'] . '#' . $row['batch_code'] . '#' . $row['contract_type'];
                     $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['name']          = $row['vendor'];
-                    $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['batch']         = $row['name'];
+                    $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['batch']         = $row['batch_code'];
                     $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['contract_type'] = $row['contract_type'];
 
                     if (!array_key_exists($idn . 'TE__TE' . $row['utm_campaign'], $councelorList))
