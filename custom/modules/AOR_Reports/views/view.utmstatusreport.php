@@ -52,14 +52,14 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
         $from_date  = "";
         $to_date    = "";
         $whereBatch = "";
-        
+
         //date('Y-m-d', (strtotime("-1 day"))) // date('Y-m-d')
         $from_date = isset($_REQUEST['from_date']) ? $_REQUEST['from_date'] : date('Y-m-d', (strtotime("-1 day")));
         $to_date   = isset($_REQUEST['to_date']) ? $_REQUEST['to_date'] : date('Y-m-d');
-        
+
         $_SESSION['us_from_date'] = $from_date;
         $_SESSION['us_to_date']   = $to_date;
-        
+
         if (isset($_POST['button']) && $_POST['button'] == "Search")
         {
             $_SESSION['us_from_date'] = $from_date;
@@ -173,7 +173,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
                     }
                     else
                     {
-                        $idn                                                                = $row['vendor'] . '#' . $row['name'] . '#' . $row['contract_type'];
+                        $idn                                                                    = $row['vendor'] . '#' . $row['name'] . '#' . $row['contract_type'];
                         $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['name']          = $row['vendor'];
                         $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['batch']         = $row['name'];
                         $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['contract_type'] = $row['contract_type'];
@@ -378,7 +378,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
                 }
                 else
                 {
-                    $idn                                                                = $row['vendor'] . '#' . $row['name'] . '#' . $row['contract_type'];
+                    $idn                                                                    = $row['vendor'] . '#' . $row['name'] . '#' . $row['contract_type'];
                     $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['name']          = $row['vendor'];
                     $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['batch']         = $row['name'];
                     $councelorList[$idn . 'TE__TE' . $row['utm_campaign']]['contract_type'] = $row['contract_type'];
@@ -488,6 +488,5 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
     }
 
 }
-
 ?>
 
