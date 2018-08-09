@@ -66,7 +66,7 @@ class sendDailyJunkLead
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                'ritika.nayak@talentedge.in','pramod.singh@talentedge.in',
+                'ritika.nayak@talentedge.in','kiran.mathew@talentedge.in',
                 #'eleazer.rohit@talentedge.in', 
                 #'amit.arora@talentedge.in', 'deepak.yadav@talentedge.in','abha.saxena@talentedge.in',
                 
