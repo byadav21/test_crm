@@ -29,28 +29,29 @@ class updatecampaignByBatch
         $leadsCstmData = array();
 
         $query   = "select
-                                    leads.id,
-                                    leads.utm_term_c,
-                                    lc.te_ba_batch_id_c,
-                                    leads.dristi_api_id,
-                                    leads.dristi_campagain_id,
-                                    bb.d_campaign_id,
-                                    bb.d_lead_id
-                            from leads 
-                            inner join leads_cstm lc on leads.id=lc.id_c 
-                            inner join te_ba_batch bb on lc.te_ba_batch_id_c=bb.id
-                            where
-                            date(leads.date_entered)='".date('Y-m-d')."' 
-                            #date(leads.date_entered) >= '2018-08-01' 
-                            AND ((leads.dristi_api_id is null OR leads.dristi_api_id='') 
-                             OR (leads.dristi_campagain_id is null OR leads.dristi_campagain_id=''))
-                            AND leads.neoxstatus='0'
-                            AND leads.deleted =0
-                            AND leads.autoassign='yes'
-                            AND leads.status_description= 'New Lead'
-                            AND (leads.assigned_user_id= 'NULL'
-                                       OR leads.assigned_user_id =''
-                                       OR leads.assigned_user_id IS NULL)";
+                    leads.id,
+                    leads.utm_term_c,
+                    lc.te_ba_batch_id_c,
+                    leads.dristi_api_id,
+                    leads.dristi_campagain_id,
+                    bb.d_campaign_id,
+                    bb.d_lead_id
+            from leads 
+            inner join leads_cstm lc on leads.id=lc.id_c 
+            inner join te_ba_batch bb on lc.te_ba_batch_id_c=bb.id
+            where 
+            leads.deleted =0
+            AND date(leads.date_entered) >= '".date('Y-m-d',strtotime("-1 days"))."'
+            AND date(leads.date_entered) <='".date('Y-m-d')."' 
+            #AND date(leads.date_entered) >= '2018-08-01' 
+            AND ((leads.dristi_api_id is null OR leads.dristi_api_id='') 
+             OR (leads.dristi_campagain_id is null OR leads.dristi_campagain_id=''))
+            AND leads.neoxstatus='0'
+            AND leads.autoassign='yes'
+            AND leads.status_description= 'New Lead'
+            AND (leads.assigned_user_id= 'NULL'
+                       OR leads.assigned_user_id =''
+                       OR leads.assigned_user_id IS NULL)";
         $leadObj = $db->query($query);
         if ($leadObj)
         {
