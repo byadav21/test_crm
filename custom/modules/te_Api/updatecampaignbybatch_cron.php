@@ -51,7 +51,8 @@ class updatecampaignByBatch
             AND leads.status_description= 'New Lead'
             AND (leads.assigned_user_id= 'NULL'
                        OR leads.assigned_user_id =''
-                       OR leads.assigned_user_id IS NULL)";
+                       OR leads.assigned_user_id IS NULL) 
+           AND (bb.d_campaign_id <> '' or  bb.d_lead_id <> '') ";
         $leadObj = $db->query($query);
         if ($leadObj)
         {
