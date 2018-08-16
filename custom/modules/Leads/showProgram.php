@@ -52,7 +52,7 @@ class LeadsListView extends Lead{
                                 }
 				if($users_batch_filter){
 				 	$ret_array["where"]  .= " OR leads_cstm.te_ba_batch_id_c IN ('";
-					$ret_array["where"]  .= implode("', '", array_keys($users_batch_filter));
+					$ret_array["where"]  .= implode("', '", $users_batch_filter);
 					$ret_array["where"]  .= "')";
 				}
                                 
@@ -89,6 +89,7 @@ class LeadsListView extends Lead{
 			//~ if(isset($_REQUEST['status']) && !empty($_REQUEST['status'])){
 				//~ $ret_array["where"]  .= " AND leads.status ='".$_REQUEST['status']."'";
 			//~ }
+			
 			return $ret_array;
 	}
 	
@@ -145,17 +146,17 @@ class LeadsListView extends Lead{
 	
 	}
 
-	function get_batch_by_userID($currentUserId){
+	function get_batch_by_userID($user_id){
 	
-		$query = "SELECT distict(te_ba_batch_users_1te_ba_batch_ida) AS batch_id".
-                "FROM te_ba_batch_users_1_c ".
+		$query = "SELECT distinct(te_ba_batch_users_1te_ba_batch_ida) AS batch_id".
+                " FROM te_ba_batch_users_1_c ".
                 "WHERE te_ba_batch_users_1users_idb = '$user_id' AND deleted=0";
 
             $result = $GLOBALS['db']->query($query);
             $user_batches ='';
 
             while($row = $GLOBALS['db']->fetchByAssoc($result) ){
-                $user_batches = $row['batch_id'];
+                $user_batches[] = $row['batch_id'];
             }
 	    return $user_batches;
 	}
