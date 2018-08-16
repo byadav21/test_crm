@@ -51,9 +51,6 @@ array (
     array (
       'LBL_USER_INFORMATION' => 
       array (
-        0 => 
-        array (
-        ),
         1 => 
         array (
           0 => 
@@ -137,7 +134,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'te_vendor_users_1_name',
+            'name' => 'te_ba_batch_users_1_name',
           ),
         ),
       ),
