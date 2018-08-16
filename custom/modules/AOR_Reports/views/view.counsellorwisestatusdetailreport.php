@@ -172,23 +172,35 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             $wherecl .= " AND  l.assigned_user_id IN ('" . implode("','", $selected_counselor) . "')";
         }
 		
-		$statusArr = ['alive','dead','converted','warm','recycle','dropout'];
-		$StatusList['new_lead']     = 'New Lead';
-		$StatusList['follow_up']     = 'Follow-Up';
-		$StatusList['call_back']     = 'Call-back';
-		$StatusList['dead_number']     = 'Dead Number';
-		$StatusList['fallout']     = 'Fallout';
-		$StatusList['not_eligible']     = 'Not Eligible';
-		$StatusList['not_enquired']     = 'Not Enquired';
-		$StatusList['retired']     = 'Retired';
-		$StatusList['ringing_multiple_times']     = 'Ringing Multiple Times';
-		$StatusList['wrong_number']     = 'Wrong Number';
-		$StatusList['converted']     = 'Converted';
-		$StatusList['prospect']     = 'Prospect';
-		$StatusList['re_enquired']     = 'Re-Enquired';
-		$StatusList['recycle']     = 'Recycle';
-		$StatusList['dropout']     = 'Dropout';
-		$StatusList['duplicate']     = 'Duplicate';
+	$statusArr = ['alive','dead','converted','warm','recycle','dropout'];
+	$StatusList['new_lead']               = 'New Lead';
+        $StatusList['follow_up']              = 'Follow-Up';
+        $StatusList['call_back']              = 'Call-back';
+        $StatusList['dead_number']            = 'Dead Number';
+        $StatusList['fallout']                = 'Fallout';
+        $StatusList['not_eligible']           = 'Not Eligible';
+        $StatusList['not_enquired']           = 'Not Enquired';
+        $StatusList['retired']                = 'Retired';
+        $StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
+        $StatusList['wrong_number']           = 'Wrong Number';
+        $StatusList['converted']              = 'Converted';
+        $StatusList['prospect']               = 'Prospect';
+        $StatusList['re_enquired']            = 'Re-Enquired';
+        $StatusList['recycle']                = 'Recycle';
+        $StatusList['dropout']                = 'Dropout';
+        $StatusList['duplicate']              = 'Duplicate';
+
+        ///New added
+        $StatusList['rejected']               = 'Rejected';
+        $StatusList['not_interested']         = 'Not Interested';
+        $StatusList['instalment_follow_up']   = 'Instalment Follow Up';
+        $StatusList['referral_follow_up']     = 'Referral Follow Up';
+        $StatusList['null']                   = 'null';
+        $StatusList['cross_sell']             = 'Cross Sell';
+        $StatusList['next_batch']             = 'Next Batch';
+        $StatusList['program_enquiry']        = 'Program Enquiry';
+        $StatusList['wrap.timeout']           = 'Wrap Timeout';
+        ///
 		$StatusList['na']     = 'NA';
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
@@ -240,8 +252,8 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
             # Create heading
             $data = "Counsellor Name";
-		    $data .= "Reporting Manager";
-		    $data .= "Batch Name";
+	    $data .= ",Reporting Manager";
+	    $data .= ",Batch Name";
             $data .= ",Batch Code";
             $data .= ",Total";
             foreach ($StatusList as $statusVal)
@@ -256,12 +268,12 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             foreach ($programList as $key => $councelor)
             {
                 $data .= "\"" . $councelor['assigned_user'];
-                $data .= "\"" . $councelor['reporting_user'];
-                $data .= "\"" . $councelor['batch_name'];
+                $data .= "\",\"" . $councelor['reporting_user'];
+                $data .= "\",\"" . $councelor['batch_name'];
                 $data .= "\",\"" . $councelor['batch_code'];
                 $data .= "\",\"" . $councelor['total'];
-				
-				foreach($StatusList as $key1=>$val){
+
+                foreach($StatusList as $key1=>$val){
 					$countedLead = (!empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
                     $data      .= "\",\"" . $countedLead;
 				}
