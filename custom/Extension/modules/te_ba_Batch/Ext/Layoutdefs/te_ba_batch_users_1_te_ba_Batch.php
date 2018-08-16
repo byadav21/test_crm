@@ -10,10 +10,12 @@ $layout_defs["te_ba_Batch"]["subpanel_setup"]['te_ba_batch_users_1'] = array (
   'get_subpanel_data' => 'te_ba_batch_users_1',
   'top_buttons' => 
   array (
-    0 => 
+  /*	
+    0 =>
     array (
       'widget_class' => 'SubPanelTopButtonQuickCreate',
     ),
+*/
     1 => 
     array (
       'widget_class' => 'SubPanelTopSelectButton',
