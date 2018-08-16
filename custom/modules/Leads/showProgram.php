@@ -34,7 +34,8 @@ class LeadsListView extends Lead{
 				//~ 
                         
                                 $rolObj    = new ACLRole();
-                                $role_slug = $rolObj->getUserRoleSlug($currentUserIdid);
+                                $role_slug = $rolObj->getUserRoleSlug($currentUserId);
+				$users_batch_filter = $this->get_batch_by_userID($currentUserId);
                                 
 				$reportingUserIds = array();
 				$reportUserObj = new customfunctionforcrm();
@@ -49,6 +50,11 @@ class LeadsListView extends Lead{
 				$ret_array["where"]  .= "')";
                                     
                                 }
+				if($users_batch_filter){
+				 	$ret_array["where"]  .= " OR leads_cstm.te_ba_batch_id_c IN ('";
+					$ret_array["where"]  .= implode("', '", array_keys($users_batch_filter));
+					$ret_array["where"]  .= "')";
+				}
                                 
 			//~ }
 			//~ 
@@ -137,6 +143,21 @@ class LeadsListView extends Lead{
 		//~ $this->program = 'test';
 		
 	
+	}
+
+	function get_batch_by_userID($currentUserId){
+	
+		$query = "SELECT distict(te_ba_batch_users_1te_ba_batch_ida) AS batch_id".
+                "FROM te_ba_batch_users_1_c ".
+                "WHERE te_ba_batch_users_1users_idb = '$user_id' AND deleted=0";
+
+            $result = $GLOBALS['db']->query($query);
+            $user_batches ='';
+
+            while($row = $GLOBALS['db']->fetchByAssoc($result) ){
+                $user_batches = $row['batch_id'];
+            }
+	    return $user_batches;
 	}
 	
 	
