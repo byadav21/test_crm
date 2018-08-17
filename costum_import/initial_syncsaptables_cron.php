@@ -16,6 +16,7 @@ ini_set('display_errors', 'On');
 #Projects : WEB_OPRJ
 
 include 'db.php';
+include 'sap_db.php';
 
 class syncsaptables
 {
@@ -45,7 +46,7 @@ class syncsaptables
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+        
 
 
         $query   = "SELECT  replace(`te_in_institutes`.`id`, '-', '') AS `U_BPID`,
@@ -72,7 +73,7 @@ class syncsaptables
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+       
         
         
         $query = "SELECT
@@ -121,7 +122,7 @@ class syncsaptables
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+        
         
     
         
@@ -152,7 +153,7 @@ class syncsaptables
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+        
         
   
         $query   = "SELECT 
@@ -183,7 +184,7 @@ class syncsaptables
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+        
         
      
 
@@ -225,12 +226,12 @@ class syncsaptables
         return $leadsCstmData;
     }
 
-    function Stud_OINV1()
+    function Stud_INV1()
     {
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+       
         
         $query   = "SELECT replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
                                     '1' AS `U_OrigLine`,
@@ -284,24 +285,27 @@ class syncsaptables
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+       
        
 
-        $query   = "SELECT replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
+        $query   = "SELECT 		
+                            replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
                             (CASE
-                                 WHEN (`leads`.`primary_address_state` = 'BR') THEN 'BH'
-                                 ELSE `leads`.`primary_address_state`
-                             END) AS `BpStateCod`,
+                             WHEN (`leads`.`primary_address_state` = 'BR') THEN 'BH'
+                             ELSE `leads`.`primary_address_state`
+                            END) AS `BpStateCod`,
                             `pd`.`SAP_Status` AS `SAP_Status`
-                     FROM (((((`te_student` `s`
-                               JOIN `te_student_te_student_batch_1_c` `stsb` on((`s`.`id` = `stsb`.`te_student_te_student_batch_1te_student_ida`)))
-                              JOIN `te_student_batch` `sb` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`)))
-                             JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
-                            JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
-                           JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-                     WHERE ((`s`.`deleted` = 0)
-                            AND (`leads`.`primary_address_state` <> '')
-                            AND (`leads`.`primary_address_state` <> 0)";
+                            
+                            FROM `te_student` AS  `s`
+
+                            JOIN `te_student_te_student_batch_1_c` `stsb` on `s`.`id` = `stsb`.`te_student_te_student_batch_1te_student_ida`
+                            JOIN `te_student_batch` `sb` on `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`
+                            JOIN `te_student_payment` `sp` on `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`
+                            JOIN `te_payment_details` `pd` on `sp`.`id` = `pd`.`student_payment_id`
+                            JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
+                    WHERE `s`.`deleted` = 0
+                        AND `leads`.`primary_address_state` <> ''
+                        AND `leads`.`primary_address_state` <> 0 ";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -320,7 +324,7 @@ class syncsaptables
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
+       
         
         
         $query   = "SELECT replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
@@ -358,8 +362,8 @@ FROM (((((`te_student` `s`
         JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
        JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
       JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-WHERE   `sb`.`deleted` = ''
-       AND `pd`.`deleted` = ''
+WHERE   `sb`.`deleted` = 0
+       AND `pd`.`deleted` = 0
        AND `pd`.`date_of_payment` > '2018-03-31'
        AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);
@@ -380,9 +384,7 @@ WHERE   `sb`.`deleted` = ''
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
-        
-       
+      
 
         $query   = "SELECT 
                         replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
@@ -396,7 +398,6 @@ WHERE   `sb`.`deleted` = ''
                        JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE `pd`.`Pay_Status` = 0
-                        AND `pd`.`SAP_DocEntry` <> ''
                         AND `pd`.`date_of_payment` > '2018-03-31'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -416,7 +417,6 @@ WHERE   `sb`.`deleted` = ''
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
         
       
         $query   = "SELECT replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
@@ -430,9 +430,7 @@ WHERE   `sb`.`deleted` = ''
                              JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
                             JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
                            JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-                     WHERE ((`pd`.`Pay_Status` = 0)
-                            AND (`pd`.`SAP_DocEntry` <> '')
-                            AND (`pd`.`date_of_payment` > '2018-04-31'))";
+                     WHERE pd.deleted=0 AND `pd`.`date_of_payment` > '2018-04-31'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -451,8 +449,7 @@ WHERE   `sb`.`deleted` = ''
 
         global $conn;
         $leadsCstmData    = array();
-        $SyncSapTimestamp = $this->SyncSapTimestamp();
-
+       
         $query   = "SELECT replace(`bb`.`id`, '-', '') AS `U_OrigCode`,
                             replace(`bb`.`batch_code`, '-', '_') AS `PrjCode`,
                             replace(`bb`.`batch_code`, '-', '_') AS `PrjName`,
@@ -477,7 +474,7 @@ WHERE   `sb`.`deleted` = ''
     function main()
     {
 
-        global $conn;
+        global $sap_conn;
 
 
         #1. /////////// Customer Table Syncing //////////////////
@@ -498,38 +495,42 @@ WHERE   `sb`.`deleted` = ''
 
         $SyncSapTimestamp = $this->SyncSapTimestamp();
         
-        //$CustomersArr     = $this->Customers();
-        //$StudCustomersArr = $this->StudCustomers();
-        //$ItemsArr         = $this->Items();
-        //$SupplierArr      = $this->Supplier();
-        //$Stud_OINVArr     = $this->Stud_OINV();
-        $Stud_INV1Arr     = $this->Stud_OINV1();
-        //$Stud_INV12Arr    = $this->Stud_INV12();
-        //$WEB_ORCTArr      = $this->WEB_ORCT();
-        //$WEB_RCT1Arr      = $this->WEB_RCT1();
-        //$WEB_RCT2Arr      = $this->WEB_RCT2();
-        //$WEB_OPRJArr      = $this->WEB_OPRJ();
+        $CustomersArr     = $this->Customers();
+        $StudCustomersArr = $this->StudCustomers();
+        $ItemsArr         = $this->Items();
+        $SupplierArr      = $this->Supplier();
+        $Stud_OINVArr     = $this->Stud_OINV();
+        $Stud_INV1Arr     = $this->Stud_INV1();
+        $Stud_INV12Arr    = $this->Stud_INV12();
+        $WEB_ORCTArr      = $this->WEB_ORCT();
+        $WEB_RCT1Arr      = $this->WEB_RCT1();
+        $WEB_RCT2Arr      = $this->WEB_RCT2();
+        $WEB_OPRJArr      = $this->WEB_OPRJ();
 
         //echo 'xx==='.$SyncSapTimestamp;
         //echo "<pre>";
         //print_r($WEB_OPRJArr);
         //die;
-
+        
+        #1. /////////// Customers Table Syncing //////////////////
+        echo '<hr>Customers Table Syncing ';
 
         foreach ($CustomersArr as $key => $data)
         {
-            $sql = "INSERT INTO Customers 
+            echo  $sql = "INSERT INTO Customers 
                                   SET 
                         U_BPID='" . $data['U_BPID'] . "',
                         CardName='" . $data['CardName'] . "',
                         CardFName='" . $data['CardFName'] . "'";
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
 
 
 
         #2. /////////// StudCustomers Table Syncing //////////////////
-
+        echo '<hr>StudCustomers Table Syncing ';
+         
+         
         foreach ($StudCustomersArr as $key => $data)
         {
             echo $sql = "INSERT INTO StudCustomers 
@@ -544,28 +545,32 @@ WHERE   `sb`.`deleted` = ''
                         State2='" . $data['State2'] . "',
                         Country='" . $data['Country'] . "',
                         MailCountr='" . $data['MailCountr'] . "'";
-           mysqli_query($conn,$sql);
+           mysqli_query($sap_conn,$sql);
         }
 
         #3. /////////// Items Table Syncing //////////////////
-
+        echo '<hr>Items Table Syncing ';
+        
+        
         foreach ($ItemsArr as $key => $data)
         {
-            $sql = "INSERT INTO Items 
+           echo $sql = "INSERT INTO Items 
                                 SET 
                         U_CourseID='" . $data['U_CourseID'] . "',
                         ItemName='" . $data['ItemName'] . "',
                         FrgnName='" . $data['FrgnName'] . "',
                         U_Institute='" . $data['U_Institute'] . "'";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
 
         #4. /////////// Supplier Table Syncing //////////////////
-
+        echo '<hr>Supplier Table Syncing ';
+         
+         
         foreach ($SupplierArr as $key => $data)
         {
-            echo '<hr>Supplier Table Syncing '.$sql = "INSERT INTO Supplier 
+            echo $sql = "INSERT INTO Supplier 
                                 SET 
                         U_BPID='" . $data['U_BPID'] . "',
                         CardName='" . $data['CardName'] . "',
@@ -573,7 +578,7 @@ WHERE   `sb`.`deleted` = ''
                         Phone1='" . $data['Phone1'] . "',
                         E_Mail='" . $data['E_Mail'] . "'";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
 
         #5. /////////// Stud_OINV Table Syncing //////////////////
@@ -595,14 +600,15 @@ WHERE   `sb`.`deleted` = ''
                         NumAtCard='" . $data['NumAtCard'] . "',
                         U_Batch='" . $data['U_Batch'] . "'";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
 
-        #6. /////////// Stud_OINV1 Table Syncing //////////////////
+        #6. /////////// Stud_INV1 Table Syncing //////////////////
         echo '<hr>Stud_INV1 Table Syncing ';
+        
         foreach ($Stud_INV1Arr as $key => $data)
         {
-            echo $sql = "INSERT INTO Stud_OINV1 
+            echo $sql = "INSERT INTO Stud_INV1 
                                 SET 
                         U_OrigEntry='" . $data['U_OrigEntry'] . "',
                         U_OrigLine='" . $data['U_OrigLine'] . "',
@@ -617,28 +623,30 @@ WHERE   `sb`.`deleted` = ''
                         OcrCode5='" . $data['OcrCode5'] . "',
                         Project='" . $data['Project'] . "'";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
 
         #7. /////////// Stud_INV12 Table Syncing //////////////////
-
+        echo '<hr>Stud_INV12 Table Syncing ';
+        
         foreach ($Stud_INV12Arr as $key => $data)
         {
-            $sql = "INSERT INTO Stud_INV12 
+            echo $sql = "INSERT INTO Stud_INV12 
                                 SET 
                         U_OrigEntry='" . $data['U_OrigEntry'] . "',
                         BpStateCod='" . $data['BpStateCod'] . "'<br>";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
 
         #8. /////////// WEB_ORCT Table Syncing //////////////////
-
+        echo '<hr>WEB_ORCT Table Syncing ';
+        
         foreach ($WEB_ORCTArr as $key => $data)
         {
-            $sql = "INSERT INTO WEB_ORCT 
+            echo $sql = "INSERT INTO WEB_ORCT 
                                 SET 
-                        U_OrigEntry='" . $data['U_OrigEntry'] . "',
+                        U_OrigEntry= '" . $data['U_OrigEntry'] . "',
                         DocDate='" . $data['DocDate'] . "',
                         DocDueDate='" . $data['DocDueDate'] . "',
                         TaxDate='" . $data['TaxDate'] . "',
@@ -649,46 +657,50 @@ WHERE   `sb`.`deleted` = ''
                         U_PaymentGateway='" . $data['U_PaymentGateway'] . "',
                         CheckAcct='" . $data['CheckAcct'] . "',
                         CashAcct='" . $data['CashAcct'] . "',
-                        TrsfrAcct='" . $data['TrsfrAcct'] . "',
                         TrsfrSum='" . $data['TrsfrSum'] . "',
                         TrsfrAcct='" . $data['TrsfrAcct'] . "',
                         CheckSum='" . $data['CheckSum'] . "',
-                        CashSum='" . $data['CashSum'] . "'";
+                        CashSum='" . $data['CashSum'] . "'"; 
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql); 
         }
 
         #9. /////////// WEB_RCT1 Table Syncing //////////////////
-
+        echo '<hr>WEB_RCT1 Table Syncing ';
+        
         foreach ($WEB_RCT1Arr as $key => $data)
         {
-            $sql = "INSERT INTO WEB_RCT1 
+           echo $sql = "INSERT INTO WEB_RCT1 
                                 SET 
                         U_OrigEntry='" . $data['U_OrigEntry'] . "',
-                        DueDate='" . $data['DocDate'] . "',
-                        CheckSum='" . $data['DocDueDate'] . "'";
+                        DueDate='" . $data['DueDate'] . "',
+                        CheckSum='" . $data['CheckSum'] . "'";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
 
         #10. /////////// WEB_RCT2 Table Syncing //////////////////
+        echo '<hr>WEB_RCT2 Table Syncing ';
+        
 
         foreach ($WEB_RCT2Arr as $key => $data)
         {
-            $sql = "INSERT INTO WEB_RCT2 
+           echo $sql = "INSERT INTO WEB_RCT2 
                                 SET 
                         U_OrigEntry='" . $data['U_OrigEntry'] . "',
-                        DocEntry='" . $data['	DocEntry'] . "',
+                        DocEntry='" . $data['DocEntry'] . "',
                         SumApplied='" . $data['SumApplied'] . "'";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql); 
         }
 
         #11. /////////// WEB_OPRJ Table Syncing //////////////////
-
+        echo '<hr>WEB_OPRJ Table Syncing ';
+        
+        
         foreach ($WEB_OPRJArr as $key => $data)
         {
-             $sql = "INSERT INTO WEB_OPRJ 
+           echo $sql = "INSERT INTO WEB_OPRJ 
                                 SET 
                         U_OrigCode='" . $data['U_OrigCode'] . "',
                         PrjCode='" . $data['PrjCode'] . "',
@@ -696,7 +708,7 @@ WHERE   `sb`.`deleted` = ''
                         Locked='" . $data['Locked'] . "',
                         Active='" . $data['Active'] . "'";
 
-            mysqli_query($conn,$sql);
+            mysqli_query($sap_conn,$sql);
         }
     }
 
