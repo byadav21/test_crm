@@ -197,8 +197,8 @@ function update_payment($student_batch_detail=array(),$student_detail=array(),$d
 	else{
 		$payment_realized = 0;
 	}
-	$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$data['amount']."',payment_realized='".$payment_realized."' WHERE id='".$data['crm_payment_id']."'");
-	$GLOBALS['db']->query("UPDATE te_student_payment SET amount='".$data['amount']."',payment_realized='".$payment_realized."' WHERE id='".$check_payment_row['student_payment_id']."'");
+	$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$data['amount']."',payment_realized='".$payment_realized."',invoice_number='".$data['invoice_number']."',invoice_url='".$data['invoice_url']."',invoice_order_number='".$data['payment_id']."',receipt_url='".$data['receipt_url']."' WHERE id='".$data['crm_payment_id']."'");
+	$GLOBALS['db']->query("UPDATE te_student_payment SET amount='".$data['amount']."',payment_realized='".$payment_realized."',invoice_number='".$data['invoice_number']."',invoice_url='".$data['invoice_url']."',invoice_order_number='".$data['payment_id']."' WHERE id='".$check_payment_row['student_payment_id']."'");
 
 	$get_student_payment_sql = "SELECT SUM(amount)amount FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$student_batch_detail['batch_id']."' AND deleted=0 AND payment_realized= 1";
 
