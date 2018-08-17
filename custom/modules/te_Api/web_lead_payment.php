@@ -15,41 +15,74 @@ else{
 	/*if(!isset($data['crm_lead_id']) || empty($data['crm_lead_id'])){
 		$error_fields['crm_lead_id']=['crm_lead_id field is required.'];
 	}*/
-	if(!isset($data['email']) || empty($data['email'])){
-		$error_fields['email']=['email field is required.'];
-	}
-	if(!isset($data['mobile']) || empty($data['mobile'])){
-		$error_fields['mobile']=['mobile field is required.'];
-	}
-	if(!isset($data['batch_crm_id']) || empty($data['batch_crm_id'])){
-		$error_fields['batch_crm_id']=['batch_crm_id field is required.'];
-	}
-	if(!isset($data['amount']) || empty($data['amount'])){
-		$error_fields['amount']=['amount field is required.'];
-
-	}
-	if(!isset($data['payment_date']) || empty($data['payment_date'])){
-		$error_fields['payment_date']=['payment_date field is required.'];
-
-	}
-	if(!isset($data['payment_realized']) || empty($data['payment_realized'])){
-		$error_fields['payment_realized']=['payment_realized field is required.'];
-	}
-	if(!isset($data['payment_source']) || empty($data['payment_source'])){
-		$error_fields['payment_source']=['payment_source field is required.'];
-	}
-	if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
-		$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
-	}
-	if(!isset($data['payment_id']) || empty($data['payment_id'])){
-		$error_fields['payment_id']=['payment_id field is required.'];
-	}
-  if(isset($data['discount']) && !empty($data['discount'])){
-			$discount=$data['discount'];
-	}
+	
 	if($data['action']=='update'){
 		if(!isset($data['crm_payment_id']) || empty($data['crm_payment_id'])){
 			$error_fields['crm_payment_id']=['crm_payment_id field is required.'];
+		}
+		if(!isset($data['amount']) || empty($data['amount'])){
+			$error_fields['amount']=['amount field is required.'];
+
+		}
+		if(!isset($data['payment_date']) || empty($data['payment_date'])){
+			$error_fields['payment_date']=['payment_date field is required.'];
+
+		}
+		if(!isset($data['payment_realized']) || empty($data['payment_realized'])){
+			$error_fields['payment_realized']=['payment_realized field is required.'];
+		}
+		if(!isset($data['payment_source']) || empty($data['payment_source'])){
+			$error_fields['payment_source']=['payment_source field is required.'];
+		}
+		if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
+			$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
+		}
+		/* new Fields Added */
+		if(!isset($data['invoice_number']) || empty($data['invoice_number'])){
+			$error_fields['invoice_number']=['invoice_number field is required.'];
+		}
+		if(!isset($data['invoice_url']) || empty($data['invoice_url'])){
+			$error_fields['invoice_url']=['invoice_url field is required.'];
+		}
+		if(!isset($data['payment_id']) || empty($data['payment_id'])){
+			$error_fields['payment_id']=['payment_id field is required.'];
+		}
+		if(!isset($data['receipt_url']) || empty($data['receipt_url'])){
+			$error_fields['receipt_url']=['receipt_url field is required.'];
+		}	
+	}
+	else{
+		if(!isset($data['email']) || empty($data['email'])){
+		$error_fields['email']=['email field is required.'];
+		}
+		if(!isset($data['mobile']) || empty($data['mobile'])){
+			$error_fields['mobile']=['mobile field is required.'];
+		}
+		if(!isset($data['batch_crm_id']) || empty($data['batch_crm_id'])){
+			$error_fields['batch_crm_id']=['batch_crm_id field is required.'];
+		}
+		if(!isset($data['amount']) || empty($data['amount'])){
+			$error_fields['amount']=['amount field is required.'];
+
+		}
+		if(!isset($data['payment_date']) || empty($data['payment_date'])){
+			$error_fields['payment_date']=['payment_date field is required.'];
+
+		}
+		if(!isset($data['payment_realized']) || empty($data['payment_realized'])){
+			$error_fields['payment_realized']=['payment_realized field is required.'];
+		}
+		if(!isset($data['payment_source']) || empty($data['payment_source'])){
+			$error_fields['payment_source']=['payment_source field is required.'];
+		}
+		if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
+			$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
+		}
+		if(!isset($data['payment_id']) || empty($data['payment_id'])){
+			$error_fields['payment_id']=['payment_id field is required.'];
+		}
+		if(isset($data['discount']) && !empty($data['discount'])){
+				$discount=$data['discount'];
 		}
 	}
 }
