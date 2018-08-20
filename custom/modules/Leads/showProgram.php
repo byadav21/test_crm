@@ -34,7 +34,10 @@ class LeadsListView extends Lead{
 				//~ 
                         
                                 $rolObj    = new ACLRole();
-                                $role_slug = $rolObj->getUserRoleSlug($currentUserIdid);
+                                $role_slug = $rolObj->getUserRoleSlug($currentUserId);
+				$users_batch_filter = $this->get_batch_by_userID($currentUserId);
+				$user_role_slug = $this->get_user_role_by_id($currentUserId);
+				$all_leads = 0;
                                 
 				$reportingUserIds = array();
 				$reportUserObj = new customfunctionforcrm();
@@ -42,13 +45,26 @@ class LeadsListView extends Lead{
 				$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 				$reportingUserIds = $reportUserObj->report_to_id;
 				//~ print_r($reportingUserIds);
-                                if ($role_slug != 'mis' && $current_user->is_admin != 1)
+                                if (in_array("mis",$user_role_slug) ||  $current_user->is_admin = 1 || in_array("ba",$user_role_slug))
                                 {
-                                $ret_array["where"]  .= " AND leads.assigned_user_id IN ('";
-				$ret_array["where"]  .= implode("', '", array_keys($reportingUserIds));
-				$ret_array["where"]  .= "')";
-                                    
+				 $all_leads = 1;
+                                
                                 }
+				else{
+				         $all_leads = 0;
+				}
+				if($all_leads==0){
+					 $ret_array["where"]  .= " AND leads.assigned_user_id IN ('";
+                               		 $ret_array["where"]  .= implode("', '", array_keys($reportingUserIds));
+                               		 $ret_array["where"]  .= "')";
+
+				}
+				
+				if($users_batch_filter){
+				 	$ret_array["where"]  .= " OR leads_cstm.te_ba_batch_id_c IN ('";
+					$ret_array["where"]  .= implode("', '", $users_batch_filter);
+					$ret_array["where"]  .= "')";
+				}
                                 
 			//~ }
 			//~ 
@@ -83,6 +99,7 @@ class LeadsListView extends Lead{
 			//~ if(isset($_REQUEST['status']) && !empty($_REQUEST['status'])){
 				//~ $ret_array["where"]  .= " AND leads.status ='".$_REQUEST['status']."'";
 			//~ }
+			//echo $ret_array["where"];
 			return $ret_array;
 	}
 	
@@ -138,9 +155,38 @@ class LeadsListView extends Lead{
 		
 	
 	}
+
+	function get_batch_by_userID($user_id){
+	
+		$query = "SELECT distinct(te_ba_batch_users_1te_ba_batch_ida) AS batch_id".
+                " FROM te_ba_batch_users_1_c ".
+                "WHERE te_ba_batch_users_1users_idb = '$user_id' AND deleted=0";
+
+            $result = $GLOBALS['db']->query($query);
+            $user_batches ='';
+
+            while($row = $GLOBALS['db']->fetchByAssoc($result) ){
+                $user_batches[] = $row['batch_id'];
+            }
+	    return $user_batches;
+	}
+
+	function get_user_role_by_id($user_id){
+
+                $query = "SELECT name,slug".
+                " FROM acl_roles ".
+                "WHERE id IN (SELECT role_id FROM acl_roles_users WHERE user_id = '$user_id' AND deleted=0)";
+
+            $result = $GLOBALS['db']->query($query);
+            $user_batches ='';
+
+            while($row = $GLOBALS['db']->fetchByAssoc($result) ){
+                $user_batches[] = strtolower($row['slug']);
+            }
+            return $user_batches;
+        }
 	
 	
 }
 ?>
-
 

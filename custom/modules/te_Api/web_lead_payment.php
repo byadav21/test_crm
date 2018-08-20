@@ -15,41 +15,74 @@ else{
 	/*if(!isset($data['crm_lead_id']) || empty($data['crm_lead_id'])){
 		$error_fields['crm_lead_id']=['crm_lead_id field is required.'];
 	}*/
-	if(!isset($data['email']) || empty($data['email'])){
-		$error_fields['email']=['email field is required.'];
-	}
-	if(!isset($data['mobile']) || empty($data['mobile'])){
-		$error_fields['mobile']=['mobile field is required.'];
-	}
-	if(!isset($data['batch_crm_id']) || empty($data['batch_crm_id'])){
-		$error_fields['batch_crm_id']=['batch_crm_id field is required.'];
-	}
-	if(!isset($data['amount']) || empty($data['amount'])){
-		$error_fields['amount']=['amount field is required.'];
-
-	}
-	if(!isset($data['payment_date']) || empty($data['payment_date'])){
-		$error_fields['payment_date']=['payment_date field is required.'];
-
-	}
-	if(!isset($data['payment_realized']) || empty($data['payment_realized'])){
-		$error_fields['payment_realized']=['payment_realized field is required.'];
-	}
-	if(!isset($data['payment_source']) || empty($data['payment_source'])){
-		$error_fields['payment_source']=['payment_source field is required.'];
-	}
-	if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
-		$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
-	}
-	if(!isset($data['payment_id']) || empty($data['payment_id'])){
-		$error_fields['payment_id']=['payment_id field is required.'];
-	}
-  if(isset($data['discount']) && !empty($data['discount'])){
-			$discount=$data['discount'];
-	}
+	
 	if($data['action']=='update'){
 		if(!isset($data['crm_payment_id']) || empty($data['crm_payment_id'])){
 			$error_fields['crm_payment_id']=['crm_payment_id field is required.'];
+		}
+		if(!isset($data['amount']) || empty($data['amount'])){
+			$error_fields['amount']=['amount field is required.'];
+
+		}
+		if(!isset($data['payment_date']) || empty($data['payment_date'])){
+			$error_fields['payment_date']=['payment_date field is required.'];
+
+		}
+		if(!isset($data['payment_realized']) || empty($data['payment_realized'])){
+			$error_fields['payment_realized']=['payment_realized field is required.'];
+		}
+		if(!isset($data['payment_source']) || empty($data['payment_source'])){
+			$error_fields['payment_source']=['payment_source field is required.'];
+		}
+		if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
+			$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
+		}
+		/* new Fields Added */
+		if(!isset($data['invoice_number']) || empty($data['invoice_number'])){
+			$error_fields['invoice_number']=['invoice_number field is required.'];
+		}
+		if(!isset($data['invoice_url']) || empty($data['invoice_url'])){
+			$error_fields['invoice_url']=['invoice_url field is required.'];
+		}
+		if(!isset($data['payment_id']) || empty($data['payment_id'])){
+			$error_fields['payment_id']=['payment_id field is required.'];
+		}
+		if(!isset($data['receipt_url']) || empty($data['receipt_url'])){
+			$error_fields['receipt_url']=['receipt_url field is required.'];
+		}	
+	}
+	else{
+		if(!isset($data['email']) || empty($data['email'])){
+		$error_fields['email']=['email field is required.'];
+		}
+		if(!isset($data['mobile']) || empty($data['mobile'])){
+			$error_fields['mobile']=['mobile field is required.'];
+		}
+		if(!isset($data['batch_crm_id']) || empty($data['batch_crm_id'])){
+			$error_fields['batch_crm_id']=['batch_crm_id field is required.'];
+		}
+		if(!isset($data['amount']) || empty($data['amount'])){
+			$error_fields['amount']=['amount field is required.'];
+
+		}
+		if(!isset($data['payment_date']) || empty($data['payment_date'])){
+			$error_fields['payment_date']=['payment_date field is required.'];
+
+		}
+		if(!isset($data['payment_realized']) || empty($data['payment_realized'])){
+			$error_fields['payment_realized']=['payment_realized field is required.'];
+		}
+		if(!isset($data['payment_source']) || empty($data['payment_source'])){
+			$error_fields['payment_source']=['payment_source field is required.'];
+		}
+		if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
+			$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
+		}
+		if(!isset($data['payment_id']) || empty($data['payment_id'])){
+			$error_fields['payment_id']=['payment_id field is required.'];
+		}
+		if(isset($data['discount']) && !empty($data['discount'])){
+				$discount=$data['discount'];
 		}
 	}
 }
@@ -104,12 +137,14 @@ else{
 			$ins_res = insert_payment($student_batch_detail,$student_detail,$data);
 			$response_result = array('status' => '1','result' => 'success','payment_id'=>$ins_res,'lead_id'=>$lead_data['id']);
 			echo json_encode($response_result);
+			createLog('{payment Add}', 'add_payment.txt',$data['action'], $response_result);
 			exit();
 		}
 		else{
 			$update_res = update_payment($student_batch_detail,$student_detail,$data,$check_payment_row);
 			$response_result = array('status' => '1','result' => 'success','payment_id'=>$update_res,'lead_id'=>$lead_data['id']);
 			echo json_encode($response_result);
+			createLog('{payment update}', 'update_payment.txt',$data['action'], $response_result);
 			exit();
 		}
 
@@ -118,6 +153,7 @@ else{
 		$errors=array('type'=>'Invalid Lead with batch id');
 		$response_result = array('status' => '0','result' => $errors);
 		echo json_encode($response_result);
+		createLog('{payment Error}', 'error_payment.txt',$errors['type'], $response_result);
 		exit();
 	}
 
@@ -189,6 +225,16 @@ function insert_payment($student_batch_detail=array(),$student_detail=array(),$d
 	return $lead_payment_details_id;
 
 }
+/* Log create Function  */
+function createLog($action, $filename, $field = '', $dataArray = array())
+{
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+}
 
 function update_payment($student_batch_detail=array(),$student_detail=array(),$data=array(),$check_payment_row=array()){
 	if($data['payment_realized']=='yes'){
@@ -197,8 +243,8 @@ function update_payment($student_batch_detail=array(),$student_detail=array(),$d
 	else{
 		$payment_realized = 0;
 	}
-	$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$data['amount']."',payment_realized='".$payment_realized."' WHERE id='".$data['crm_payment_id']."'");
-	$GLOBALS['db']->query("UPDATE te_student_payment SET amount='".$data['amount']."',payment_realized='".$payment_realized."' WHERE id='".$check_payment_row['student_payment_id']."'");
+	$GLOBALS['db']->query("UPDATE te_payment_details SET amount='".$data['amount']."',payment_realized='".$payment_realized."',invoice_number='".$data['invoice_number']."',invoice_url='".$data['invoice_url']."',invoice_order_number='".$data['payment_id']."',receipt_url='".$data['receipt_url']."' WHERE id='".$data['crm_payment_id']."'");
+	$GLOBALS['db']->query("UPDATE te_student_payment SET amount='".$data['amount']."',payment_realized='".$payment_realized."',invoice_number='".$data['invoice_number']."',invoice_url='".$data['invoice_url']."',invoice_order_number='".$data['payment_id']."' WHERE id='".$check_payment_row['student_payment_id']."'");
 
 	$get_student_payment_sql = "SELECT SUM(amount)amount FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$student_batch_detail['batch_id']."' AND deleted=0 AND payment_realized= 1";
 
