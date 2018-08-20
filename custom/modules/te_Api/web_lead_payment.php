@@ -137,12 +137,17 @@ else{
 			$ins_res = insert_payment($student_batch_detail,$student_detail,$data);
 			$response_result = array('status' => '1','result' => 'success','payment_id'=>$ins_res,'lead_id'=>$lead_data['id']);
 			echo json_encode($response_result);
-			exit();
+			
+			 $handle = fopen("leadlogs.txt", "w");
+			 fwrite($handle,'Message: add# '.json_encode($response_result).' inserted Payment data');
+			 exit();
 		}
 		else{
 			$update_res = update_payment($student_batch_detail,$student_detail,$data,$check_payment_row);
 			$response_result = array('status' => '1','result' => 'success','payment_id'=>$update_res,'lead_id'=>$lead_data['id']);
 			echo json_encode($response_result);
+			$handle = fopen("leadlogs.txt", "w");
+			fwrite($handle,'Message: Update#'.json_encode($response_result).' Update Payment data');
 			exit();
 		}
 
@@ -151,6 +156,8 @@ else{
 		$errors=array('type'=>'Invalid Lead with batch id');
 		$response_result = array('status' => '0','result' => $errors);
 		echo json_encode($response_result);
+		$handle = fopen("leadlogs.txt", "w");
+		fwrite($handle,'Message: Errors# '.json_encode($response_result).' Errors Data');
 		exit();
 	}
 
