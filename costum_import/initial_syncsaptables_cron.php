@@ -479,7 +479,7 @@ WHERE   `sb`.`deleted` = 0
         $contRow = mysqli_num_rows(mysqli_query($sap_conn,"SELECT id FROM SYNC_SAP_TIMESTAMP limit 1"));
             //echo 'xx'.$contRow; die;
             if($contRow > 0) {  
-                    echo "Already Synced";  
+                    echo "Already Synched!";  
                     
                     return TRUE;
             }
