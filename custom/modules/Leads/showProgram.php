@@ -45,7 +45,7 @@ class LeadsListView extends Lead{
 				$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 				$reportingUserIds = $reportUserObj->report_to_id;
 				//~ print_r($reportingUserIds);
-                                if (in_array("mis",$user_role_slug) ||  $current_user->is_admin = 1 || in_array("ba",$user_role_slug))
+                                if (in_array("mis",$user_role_slug) ||  $current_user->is_admin == 1 || in_array("ba",$user_role_slug))
                                 {
 				 $all_leads = 1;
                                 
