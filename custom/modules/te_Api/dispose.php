@@ -41,37 +41,10 @@ function createLog($action, $filename, $field = '', $dataArray = array())
     fclose($file);
 }
 
-/*function getAttemptCount()
-{
-    global $db, $current_user;
-    $records = array();
-    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null')
-    {
-        $sql     = " SELECT id_c lead_id,
-                                            count(te_disposition_leads_c.te_disposition_leadsleads_ida) total_dispo,
-                                            leads.status_description,
-                                            leads.status,
-                                            lc.attempts_c,
-                                            te_disposition_leads_c.te_disposition_leadste_disposition_idb AS dispo_id
-                                     FROM leads_cstm lc
-                                     INNER JOIN leads ON lc.id_c=leads.id
-                                     AND leads.status_description='New Lead'
-                                     INNER JOIN te_disposition_leads_c ON te_disposition_leads_c.te_disposition_leadsleads_ida=leads.id
-                                     WHERE leads.deleted=0
-                                       AND (lc.attempts_c > 0  OR lc.attempts_c='')
-                             AND leads.id='" . $_REQUEST['lead_reference'] . "'";
-        $res     = $db->query($sql);
-        $records = $db->fetchByAssoc($res);
-    }
-    return $records;
-}
-*/
-
 unset($_SESSION['temp_for_newUser']);
 
 if (isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQUEST['checkCallStatus'] == 1 && $_REQUEST['records'])
 {
-    //echo "select id from  session_call where lead_id='". $_REQUEST['records'] ."' session_id='" . session_id() ."'";
     $res = $db->query("select id from  session_call where lead_id='" . $_REQUEST['records'] . "' and session_id='" . $_REQUEST['customerCRTId'] . "'");
     if ($db->getRowCount($res) > 0)
     {
@@ -110,41 +83,15 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
 
 
-    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null' && $_REQUEST['callType'] != 'auto.dial.customer')
+    if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null')
     {
 
-        $sql = "select attempts_c,id_c from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
-        $res = $db->query($sql);
-        if ($db->getRowCount($res) > 0)
-        {
-
-            $records  = $db->fetchByAssoc($res);
-            $id       = $records['id_c'];
-            $attempid = intval($records['attempts_c']);
-            $attempid++;
-            $sql      = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
-            $res      = $db->query($sql);
-
-            /*$dispCountArr = getAttemptCount();
-            if (!empty($dispCountArr))
-            {
-                if ($dispCountArr['total_dispo'] == 1)
-                {
-                    $sql = "UPDATE te_disposition
-                                SET attempt_count='" . $attempid . "',
-                                    dispositionName='" . $_REQUEST['dispositionName'] . "',
-                                    callType='" . $_REQUEST['callType'] . "'
-                                WHERE id='" . $dispCountArr['dispo_id'] . "'";
-                    $res = $db->query($sql);
-                    createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
-                }
-            }*/
-        }
-    }
-    else if ($_REQUEST['callType'] == 'auto.dial.customer' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['lead_reference'] && $_REQUEST['lead_reference'] != 'null')
-    {
-
-        $sql = "select attempts_c,id_c,assigned_user_id from leads inner join  leads_cstm on id_c=id where id='" . $_REQUEST['lead_reference'] . "'";
+        $sql = "SELECT attempts_c,
+                        id_c,
+                        assigned_user_id
+                 FROM leads
+                 INNER JOIN leads_cstm ON id_c=id
+                 WHERE id='" . $_REQUEST['lead_reference'] . "'";
         $res = $db->query($sql);
         if ($db->getRowCount($res) > 0)
         {
@@ -152,31 +99,22 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $records        = $db->fetchByAssoc($res);
             $id             = $records['id_c'];
             $attempid       = intval($records['attempts_c']);
+            $auto_attempts  = intval($records['auto_attempts_c']);
             $assignedUserId = $records['assigned_user_id'];
             $attempid++;
             $sql            = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res            = $db->query($sql);
-                
-            
-            /*$dispCountArr = getAttemptCount();
-            if (!empty($dispCountArr))
-            {
-                if ($dispCountArr['total_dispo'] == 1)
-                {
-                    $sql = "UPDATE te_disposition
-                                SET attempt_count='" . $attempid . "',
-                                    dispositionName='" . $_REQUEST['dispositionName'] . "',
-                                    callType='" . $_REQUEST['callType'] . "'
-                                WHERE id='" . $dispCountArr['dispo_id'] . "'";
-                    $res = $db->query($sql);
-                    createLog('{Ameyo dispostion is null}', 'null_dispose_log.txt', $sql, $_REQUEST);
-                }
-            }*/
 
-            if ($attempid >= 6 && $assignedUserId == '')
+            if (($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] =='outbound.auto.dial') && $_REQUEST['dispositionName'] != 'CONNECTED')
             {
-                //$sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
-                //$res = $db->query($sql);
+                $auto_attempts++;
+                $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "' where id_c='" . $id . "'";
+                $res = $db->query($sql);
+            }
+            
+            if ($auto_attempts >= 6 && $assignedUserId == '')
+            {
+
                 $bean                     = BeanFactory::getBean('Leads', $id);
                 $bean->status             = 'Dead';
                 $bean->status_description = 'Auto Retired';
@@ -225,52 +163,51 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             'callType'          => $_REQUEST['callType'],
             'campaignId'        => $_REQUEST['campaignId']);
 
-            $disPosedUser    = '';
-            $modifieduserIDX = '';
-            if (isset($_REQUEST['userAssociations']))
+        $disPosedUser    = '';
+        $modifieduserIDX = '';
+        if (isset($_REQUEST['userAssociations']))
+        {
+            $userAssociations = $_REQUEST['userAssociations'];
+            $userSJson        = str_replace('&quot;', '"', $userAssociations);
+            $userDispoArr     = json_decode($userSJson, TRUE);
+            $disPosedUser     = $userDispoArr[0]['userId'];
+            if ($disPosedUser != '')
             {
-                $userAssociations = $_REQUEST['userAssociations'];
-                $userSJson        = str_replace('&quot;', '"', $userAssociations);
-                $userDispoArr     = json_decode($userSJson, TRUE);
-                $disPosedUser     = $userDispoArr[0]['userId'];
-                if ($disPosedUser != '')
-                {
-                    $getusrQery      = $db->query("SELECT id,user_name FROM `users` WHERE `status`='Active' and `deleted`=0 and user_name='".$disPosedUser."'");
-                    $recordsData     = $db->fetchByAssoc($getusrQery);
-                    $modifieduserIDX = $recordsData['id'];
-                    $db->query("update leads set modified_user_id='".$modifieduserIDX."' where id='" . $_REQUEST['lead_reference'] . "'");
-                    
-                }
-                createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
+                $getusrQery      = $db->query("SELECT id,user_name FROM `users` WHERE `status`='Active' and `deleted`=0 and user_name='" . $disPosedUser . "'");
+                $recordsData     = $db->fetchByAssoc($getusrQery);
+                $modifieduserIDX = $recordsData['id'];
+                $db->query("update leads set modified_user_id='" . $modifieduserIDX . "' where id='" . $_REQUEST['lead_reference'] . "'");
             }
-                
-                $finalDatTime='';
-                if (isset($_REQUEST['callbackTime']) && $_REQUEST['callbackTime'] != '')
-                {   
-                    $CALLBACKDATEArr = (explode("T", $_REQUEST['callbackTime']));
-                    $callBackDate    = $CALLBACKDATEArr[0];
-                    $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
-                    $callBackHis     = $callBackHisArr[0];
-                    $finalDatTime    =  $callBackDate.' '.$callBackHis; 
-                }
-            
-                $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
-                $bean->status             = $status;
-                $bean->status_description = $dispositionCode;
-                $bean->dispositionName    = $_REQUEST['dispositionName'];
-                $bean->callType           = $_REQUEST['callType'];
-                //$bean->modified_user_id   = $modifieduserIDX;
-                if ($dispositionCode == 'Demo_calender' && $finalDatTime != '')
-                {
-                    $bean->date_of_callback = $finalDatTime;
-                    //$bean->date_of_followup = $bean->date_of_followup;
-                    //$bean->date_of_prospect = $bean->date_of_prospect;
-                    createLog('{Ameyo callback response}', 'callback_dispose_log.txt', 'callback='.$finalDatTime, $_REQUEST);
-                }
+            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
+        }
 
-                $bean->save();
+        $finalDatTime = '';
+        if (isset($_REQUEST['callbackTime']) && $_REQUEST['callbackTime'] != '')
+        {
+            $CALLBACKDATEArr = (explode("T", $_REQUEST['callbackTime']));
+            $callBackDate    = $CALLBACKDATEArr[0];
+            $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
+            $callBackHis     = $callBackHisArr[0];
+            $finalDatTime    = $callBackDate . ' ' . $callBackHis;
+        }
 
-        
+        $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
+        $bean->status             = $status;
+        $bean->status_description = $dispositionCode;
+        $bean->dispositionName    = $_REQUEST['dispositionName'];
+        $bean->callType           = $_REQUEST['callType'];
+        //$bean->modified_user_id   = $modifieduserIDX;
+        if ($dispositionCode == 'Demo_calender' && $finalDatTime != '')
+        {
+            $bean->date_of_callback = $finalDatTime;
+            //$bean->date_of_followup = $bean->date_of_followup;
+            //$bean->date_of_prospect = $bean->date_of_prospect;
+            createLog('{Ameyo callback response}', 'callback_dispose_log.txt', 'callback=' . $finalDatTime, $_REQUEST);
+        }
+
+        $bean->save();
+
+
 
 
         createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
