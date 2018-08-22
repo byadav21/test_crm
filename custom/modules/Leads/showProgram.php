@@ -32,8 +32,13 @@ class LeadsListView extends Lead{
 			//~ if ($search ==0)
     		//~ {
 				//~ 
-                        
-                                $rolObj    = new ACLRole();
+				//echo $ret_array["where"];print_r($_REQUEST);echo "----------------------";
+				$user_filter=0;                        
+                                if(!empty($_REQUEST['Counsellors_advanced']) || !empty($_REQUEST['Counsellors_basic']))
+				{
+					$user_filter=1;
+				}
+				$rolObj    = new ACLRole();
                                 $role_slug = $rolObj->getUserRoleSlug($currentUserId);
 				$users_batch_filter = $this->get_batch_by_userID($currentUserId);
 				$user_role_slug = $this->get_user_role_by_id($currentUserId);
@@ -53,14 +58,14 @@ class LeadsListView extends Lead{
 				else{
 				         $all_leads = 0;
 				}
-				if($all_leads==0){
+				if($all_leads==0 && $user_filter==0){
 					 $ret_array["where"]  .= " AND leads.assigned_user_id IN ('";
                                		 $ret_array["where"]  .= implode("', '", array_keys($reportingUserIds));
                                		 $ret_array["where"]  .= "')";
 
 				}
 				
-				if($users_batch_filter){
+				if($users_batch_filter && $user_filter==0){
 				 	$ret_array["where"]  .= " OR leads_cstm.te_ba_batch_id_c IN ('";
 					$ret_array["where"]  .= implode("', '", $users_batch_filter);
 					$ret_array["where"]  .= "')";
