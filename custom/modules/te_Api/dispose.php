@@ -85,13 +85,23 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
     if (isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null')
     {
+        $disPosedUser = '';
+        if (isset($_REQUEST['userAssociations']))
+        {
+            $userAssociations = $_REQUEST['userAssociations'];
+            $userSJson        = str_replace('&quot;', '"', $userAssociations);
+            $userDispoArr     = json_decode($userSJson, TRUE);
+            $disPosedUser     = $userDispoArr[0]['userId'];
+        }
 
-        $sql = "SELECT attempts_c,
+        $sql = "SELECT  attempts_c,
+                        auto_attempts_c,
                         id_c,
                         assigned_user_id
                  FROM leads
                  INNER JOIN leads_cstm ON id_c=id
                  WHERE id='" . $_REQUEST['lead_reference'] . "'";
+
         $res = $db->query($sql);
         if ($db->getRowCount($res) > 0)
         {
@@ -101,17 +111,31 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid       = intval($records['attempts_c']);
             $auto_attempts  = intval($records['auto_attempts_c']);
             $assignedUserId = $records['assigned_user_id'];
-            $attempid++;
-            $sql            = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
-            $res            = $db->query($sql);
 
-            if (($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] =='outbound.auto.dial') && $_REQUEST['dispositionName'] != 'CONNECTED')
+            $attempid++;
+
+            $sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+            $res = $db->query($sql);
+
+
+            $AtmpLogSql = "INSERT INTO attempt_log
+                                        SET lead_id='$id',
+                                            user='$disPosedUser',
+                                            dispositionName='" . $_REQUEST['dispositionName'] . "',
+                                            systemDisposition='" . $_REQUEST['systemDisposition'] . "',
+                                            attempts_c='$attempid',
+                                            dispositionCode='$dispositionCode',
+                                            callType='" . $_REQUEST['callType'] . "'";
+            $res        = $db->query($AtmpLogSql);
+
+
+            if (($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial') && $_REQUEST['dispositionName'] != 'CONNECTED')
             {
                 $auto_attempts++;
                 $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "' where id_c='" . $id . "'";
                 $res = $db->query($sql);
             }
-            
+
             if ($auto_attempts >= 6 && $assignedUserId == '')
             {
 
@@ -120,8 +144,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $bean->status_description = 'Auto Retired';
                 $bean->save();
 
-                $xxar = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
-                createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $xxar);
+                $autoArrr = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
+                createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $autoArrr);
             }
         }
     }
