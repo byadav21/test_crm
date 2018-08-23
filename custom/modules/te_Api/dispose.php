@@ -173,7 +173,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 }
             }*/
 
-            if ($attempid >= 6 && $assignedUserId == '')
+            if ($attempid >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
             {
                 //$sql = "update leads set status='Dead', status_description='Auto Retired' where id='" . $id . "'";
                 //$res = $db->query($sql);
