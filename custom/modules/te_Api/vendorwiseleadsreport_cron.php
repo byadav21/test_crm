@@ -102,9 +102,9 @@ class sendVisitReport
                     te_vendor.id vendor_id
              FROM leads
           
-             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
-             INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-             INNER JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
+             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
+             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+             LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
              WHERE leads.status_description IN ('Re-Enquired') AND leads.date_entered >= '$this->fromDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59'
   
              GROUP BY leads.vendor,batch_code";
@@ -169,9 +169,9 @@ class sendVisitReport
                     te_vendor.id vendor_id
              FROM leads
           
-             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
-             INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-             INNER JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
+             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
+             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+             LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
              WHERE leads.status_description IN ('Duplicate') AND leads.date_entered >= '$this->fromDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59'
   
              GROUP BY leads.vendor,batch_code";
@@ -236,9 +236,9 @@ class sendVisitReport
                     te_vendor.id vendor_id
              FROM leads
           
-             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
-             INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-             INNER JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
+             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
+             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+             LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
              WHERE leads.status_description NOT IN ('Re-Enquired','Duplicate') 
              AND leads.date_entered >= '$this->fromDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59'
   
@@ -304,9 +304,9 @@ class sendVisitReport
                     te_vendor.id vendor_id
              FROM leads
           
-             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
-             INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-             INNER JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
+             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
+             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+             LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
              WHERE leads.date_entered >= '$this->fromDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59' 
   
              GROUP BY leads.vendor,batch_code";
