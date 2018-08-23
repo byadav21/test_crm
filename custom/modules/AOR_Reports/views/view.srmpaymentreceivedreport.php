@@ -201,6 +201,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                                         p. name program_name,
                                         l.vendor,
                                         sb.fee_inr,
+                                        p.payment_source,
                                         
                                         u.user_name,
                                         sb.name batch_name,
