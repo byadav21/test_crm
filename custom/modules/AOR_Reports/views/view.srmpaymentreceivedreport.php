@@ -193,11 +193,15 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         //$statusArr = ['alive', 'dead', 'converted', 'warm', 'recycle', 'dropout'];
 
 
-        $leadSql = "SELECT 
+         $leadSql = "SELECT 
                                         s.name student_name,
                                         sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
                                         pd.id paymentID,
-
+                                        
+                                        p. name program_name,
+                                        l.vendor,
+                                        sb.fee_inr,
+                                        
                                         u.user_name,
                                         sb.name batch_name,
                                         sb.assigned_user_id,
@@ -212,7 +216,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
                             FROM `te_student_payment` sp
                     LEFT JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
-                    LEFT JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c 
+                    LEFT JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c
+                    LEFT JOIN `te_pr_programs` `p` ON`sb`.`te_pr_programs_id_c` = `p`.`id`
                     LEFT JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
                     LEFT JOIN te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id
                     LEFT JOIN users u ON sb.assigned_user_id=u.id
@@ -242,6 +247,9 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
+            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']     = $row['program_name'];
+            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor/Lead Source']  = $row['Vendor'];
+            
 
 
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][]    = array(
