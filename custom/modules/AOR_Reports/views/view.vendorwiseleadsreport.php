@@ -15,26 +15,26 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
         parent::SugarView();
     }
 
-    
-
     public function display()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-        $where     = "";
-        $wherecl   = "";
-        if(!isset($_SESSION['cccon_from_date'])){
+        $where   = "";
+        $wherecl = "";
+        if (!isset($_SESSION['cccon_from_date']))
+        {
             $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
         }
-        if(!isset($_SESSION['cccon_to_date'])){
+        if (!isset($_SESSION['cccon_to_date']))
+        {
             $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
         }
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']      = $_REQUEST['batch'];
-            $_SESSION['vdwiseleads_status']     = $_REQUEST['status'];
+            $_SESSION['cccon_from_date']    = $_REQUEST['from_date'];
+            $_SESSION['cccon_to_date']      = $_REQUEST['to_date'];
+            $_SESSION['cccon_batch']        = $_REQUEST['batch'];
+            $_SESSION['vdwiseleads_status'] = $_REQUEST['status'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -67,41 +67,38 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
             //$batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
         $programList = array();
-        $VendorList   = array();
-        
-		if (!empty($selected_status)){
-			if($selected_status=='re-enquired'){
-				$wherecl .= " AND  leads.status_description IN ('Re-Enquired')";
-			}
-			elseif($selected_status=='duplicate'){
-				$wherecl .= " AND  leads.status_description IN ('Duplicate')";
-			}
-			elseif($selected_status=='fresh'){
-				$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number')";
-			}
-			else{
-				$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number','Duplicate','Re-Enquired')";
-			}
-		}
-		if (empty($selected_status)){
-			$wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number','Duplicate','Re-Enquired')";
-		}
+        $VendorList  = array();
+
+        if (!empty($selected_status))
+        {
+            if ($selected_status == 're-enquired')
+            {
+                $wherecl .= " AND  leads.status_description IN ('Re-Enquired')";
+            }
+            elseif ($selected_status == 'duplicate')
+            {
+                $wherecl .= " AND  leads.status_description IN ('Duplicate')";
+            }
+            elseif ($selected_status == 'fresh')
+            {
+                $wherecl .= " AND  leads.status_description NOT IN ('Re-Enquired','Duplicate')";
+            }
+            /*
+              else{
+              $wherecl .= " AND  leads.status_description IN ('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number','Duplicate','Re-Enquired')";
+              } */
+        }
+
         if (!empty($selected_batch))
         {
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch) . "')";
         }
 
-        if (isset($_POST['export']) && $_POST['export'] == "Export")
-        {
-            
-            
-            
-            $file     = "VendorWiseReport_report";
-            $where    = '';
-            $filename = $file . "_" . $from_date . "_" . $to_date;
-            
-            $leadSql = "SELECT COUNT(leads.id) AS lead_count,
+
+
+
+         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                     leads.date_entered,
                     te_ba_batch.id AS batch_id,
                     te_ba_batch.name AS batch_name,
@@ -110,33 +107,60 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
                     te_vendor.id vendor_id
              FROM leads
           
-             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-             LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
-             WHERE 1=1 $wherecl 
+             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c
+             INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
+             INNER JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
+             WHERE leads.deleted=0  $wherecl 
   
              GROUP BY leads.vendor,batch_code";
         //echo $leadSql;exit();
 
 
-        $leadObj      = $db->query($leadSql);
-
-       
-                while ($row          = $db->fetchByAssoc($leadObj))
-                {
+        $leadObj = $db->query($leadSql);
 
 
-                    $programList[$row['batch_id']]['id']         = $row['batch_id'];
-                    $programList[$row['batch_id']]['name']       = $row['batch_name'];
-                    $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
+        while ($row = $db->fetchByAssoc($leadObj))
+        {
 
 
-                    $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
-                    $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
-                }
+            $programList[$row['batch_id']]['id']         = $row['batch_id'];
+            $programList[$row['batch_id']]['name']       = $row['batch_name'];
+            $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
 
 
-          
+            $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
+            $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
+        }
+
+
+
+        if (isset($_POST['export']) && $_POST['export'] == "Export")
+        {
+
+
+
+            $file     = "VendorWiseReport_report";
+            $where    = '';
+            $filename = $file . "_" . $from_date . "_" . $to_date;
+
+            $leadObj = $db->query($leadSql);
+
+
+            while ($row = $db->fetchByAssoc($leadObj))
+            {
+
+
+                $programList[$row['batch_id']]['id']         = $row['batch_id'];
+                $programList[$row['batch_id']]['name']       = $row['batch_name'];
+                $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
+
+
+                $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
+                $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
+            }
+
+
+
             # Create heading
             $data = "Programme Name";
             $data .= ",Batch Code";
@@ -154,7 +178,7 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
             {
                 $data .= "\"" . $councelor['name'];
                 $data .= "\",\"" . $councelor['batch_code'];
-		$toal =0;
+                $toal = 0;
                 foreach ($VendorList as $key1 => $value)
                 {
                     $converted = $programList[$key][$key1]['lead_count'];
@@ -171,52 +195,6 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
             echo $data;
             exit;
         } // End Of Export Func
-
-
-
-        
-
-
-        
-
-        $leadSql = "SELECT COUNT(leads.id) AS lead_count,
-                    leads.date_entered,
-                    te_ba_batch.id AS batch_id,
-                    te_ba_batch.name AS batch_name,
-                    te_ba_batch.batch_code,
-                    leads.vendor,
-                    te_vendor.id vendor_id
-             FROM leads
-          
-             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-             LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
-             WHERE 1=1 $wherecl 
-  
-             GROUP BY leads.vendor,batch_code";
-        //echo $leadSql;exit();
-
-
-        $leadObj      = $db->query($leadSql);
-
-       
-        while ($row          = $db->fetchByAssoc($leadObj))
-        {
-
-
-            $programList[$row['batch_id']]['id']         = $row['batch_id'];
-            $programList[$row['batch_id']]['name']       = $row['batch_name'];
-            $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-
-
-            $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
-            $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
-        }
-
-
-
-
-
         //echo '<pre>';
         //print_r($programList); die;
         #PS @Pawan
@@ -267,10 +245,10 @@ class AOR_ReportsViewVendorwiseleadsreport extends SugarView
         }
         #pE
         $sugarSmarty = new Sugar_Smarty();
-    
+
         $sugarSmarty->assign("programList", $programList);
 
-       
+
         $sugarSmarty->assign("VendorList", $VendorList);
         $sugarSmarty->assign("selected_batch", $selected_batch);
         $sugarSmarty->assign("selected_status", $selected_status);
