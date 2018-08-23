@@ -5,40 +5,36 @@
 		<tbody>
 		<tr>
 
-			<td scope="row" nowrap="nowrap" width="1%">
-				<label for="batch_basic">Vendor</label>
-			</td>
-			<td nowrap="nowrap" width="10%">
-				<select name="vendor"  id="vendor">
-					<option  value="">Select Vendor</option>
-					{foreach from = $vendorOptionList key=key item=vendor}
-						<option value="{$vendor.id}" {if $selected_vendor eq $vendor.id} selected="selected" {/if}>{$vendor.name}</option>
-					{/foreach}
-				</select>
-			</td>
+			 <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Status">Batch Status:</label>
+                        </td>
+                        <td nowrap="nowrap" width="1%">
+                            <select name="status" id="status">
+                                <option value="All" {if $selected_status=="All"} selected="selected"{/if}>All</option>
+                                <option value="Active" {if $selected_status=="Active"} selected="selected"{/if}>Active</option>
+                                <option value="Inactive" {if $selected_status=="Inactive"} selected="selected"{/if}>Inactive</option>
+                            </select>
+                        </td>
+
 			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">Course</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
-				<select name="course" id="course">
+				<select name="course[]" id="course"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
 					<option  value="">Select Batch</option>
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.id}" data-all="1" {if $batch.batch_status == "enrollment_in_progress"} data-type="active" {/if} {if $batch.batch_status != "enrollment_in_progress"} data-type="inactive" {/if} {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
-			</td>
-			<!--<td scope="row" nowrap="nowrap" width="1%">
-				<label for="batch_basic">Course Status</label>
-			</td>
-			<td nowrap="nowrap" width="10%">
-				<select name="course_status" id="course_status">
+				<select name="coursefilter" id="coursefilter"  style="display:none;">
 					<option  value="">Select Batch</option>
-					{foreach from = $batchStatusList key=key item=status}
-						<option value="{$key}" {if $selected_status eq $key} selected="selected" {/if}>{$status}</option>
+					{foreach from = $batchList key=key item=batch}
+						<option value="{$batch.id}" data-all="1" {if $batch.batch_status == "enrollment_in_progress"} data-type="active" {/if} {if $batch.batch_status != "enrollment_in_progress"} data-type="inactive" {/if} {if in_array($batch.id, $selected_batch)} selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
-			</td>-->
-      <td scope="row" nowrap="nowrap" width="1%">
+			</td>
+			
+      			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">From Date</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
@@ -59,7 +55,7 @@
 				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
 				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
 				<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
-				<input tabindex="2" title="Send Email" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="sendemail" value="Send Email" id="sendemail_form_submit">
+
 	        </td>
 		</tr>
 		</tbody>
@@ -69,134 +65,95 @@
 <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
 	<thead>
 	{*Start Pagination*}
-	<tr id="pagination" role="presentation">
-		<td colspan="20">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
-				<tbody><tr>
-					<td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
+            <tr id="pagination" role="presentation">
+                <td colspan="20">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
+                        <tbody><tr>
+                                <td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
 
-					<td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
+                                <td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
 
-						{if $left eq 1}
-							<a href="index.php?module=AOR_Reports&action=dailyreport"  name="listViewStartButton" title="Start" class="button" >
-							<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
-							</a>
+                                    {if $left eq 1}
+                                        <a href="index.php?module=AOR_Reports&action=dailyreport"  name="listViewStartButton" title="Start" class="button" >
+                                            <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
+                                        </a>
 
-							<a href="index.php?module=AOR_Reports&action=dailyreport&page={$leftpage}"  class="button" title="Previous">
-							<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
-							</a>
-						{else}
-							<button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
-							<img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
-							</button>
+                                        <a href="index.php?module=AOR_Reports&action=dailyreport&page={$page}"  class="button" title="Previous">
+                                            <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
+                                        </a>
+                                    {else}
+                                        <button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
+                                            <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
+                                        </button>
 
-							<button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
-							<img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
-							</button>
-						{/if}
+                                        <button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
+                                            <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
+                                        </button>
+                                    {/if}
 
-					</td>
-					<td nowrap="nowrap" width="1%" class="paginationActionButtons">
-						<div class="pageNumbers">{$current_records}</div>
-					</td>
-					<td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
-						{if $right eq 1}
-						<a href="index.php?module=AOR_Reports&action=dailyreport&page={$page}"  class="button" title="Next" disabled="disabled">
-							<img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
-						</a>
-						<a href="index.php?module=AOR_Reports&action=dailyreport&page={$last_page}"  class="button" title="End" disabled="disabled">
-							<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
-						</a>
-						{else}
-							<button type="button" id="listViewNextButton_top" name="listViewNextButton" class="button" title="Next" disabled="disabled">
-							<img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
-							</button>
-							<button type="button" id="listViewEndButton_top" name="listViewEndButton" title="End" class="button" disabled="disabled">
-							<img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
-							</button>
-						{/if}
+                                </td>
+                                <td nowrap="nowrap" width="1%" class="paginationActionButtons">
+                                    <div class="pageNumbers">{$current_records}</div>
+                                </td>
+                                <td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
+                                    {if $right eq 1}
+                                        <a href="index.php?module=AOR_Reports&action=dailyreport&page={$pagenext}"  class="button" title="Next" disabled="disabled">
+                                            <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
+                                        </a>
+                                        <a href="index.php?module=AOR_Reports&action=dailyreport&page={$last_page}"  class="button" title="End" disabled="disabled">
+                                            <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
+                                        </a>
+                                    {else}
+                                        <button type="button" id="listViewNextButton_top" name="listViewNextButton" class="button" title="Next" disabled="disabled">
+                                            <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
+                                        </button>
+                                        <button type="button" id="listViewEndButton_top" name="listViewEndButton" title="End" class="button" disabled="disabled">
+                                            <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
+                                        </button>
+                                    {/if}
 
 
-					</td>
-					<td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
-				</tr>
-			</tbody>
-		</table>
-		</td>
-	</tr>
-	{*End Pagination*}
+                                </td>
+                                <td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            {*End Pagination*}
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Vendor</strong>
+			<strong>Source</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Course</strong>
+			<strong>Program Name</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>Batch Name</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Batch Code</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Total Leads</strong>
+			<strong>No. of Leads Generated</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Registered</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Leads Validity</strong>
-		</th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Leads Validity%</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Spend</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Conversion Rate</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>CPL</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>CPA</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Course Fee</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>CPA%</strong>
+			<strong>No. of Conversions</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>GSV</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Source CPA%</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Course CPA%</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Status</strong>
 		</th>
 	</tr>
 	{foreach from = $reportDataList key=key item=data}
 	<tr height="20" class="oddListRowS1">
 		<td align="left" valign="top" type="relate" field="vendor" class="inlineEdit footable-visible footable-last-column">{$data.vendor}</td>
-		<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$data.batch}</td>
-		<td align="left" valign="top" type="relate" field="batch_code" class="inlineEdit footable-visible footable-last-column">{$data.batch_code}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.total_leads}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.registered}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.lead_validity}</td>
-    <td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.lead_validity_per}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.spend}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.conversion_rate}%</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.cpl}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.cpa}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.course_fee}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.cpa_percent}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.revenue}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.source_cpa_percent}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.course_cpa_percent}</td>
-		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.batch_status}</td>
+		<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$data.program_name}</td>
+		<td align="left" valign="top" type="relate" field="batch_code" class="inlineEdit footable-visible footable-last-column">{$data.batch}</td>
+		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.batch_code}</td>
+		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.total}</td>
+		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.converted}</td>
+    		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.gsv}</td>
+		
 	</tr>
 	{/foreach}
 
@@ -221,5 +178,29 @@ Calendar.setup ({
    step : 1,
    weekNumbers:false,
 });
+$(document).ready(function () {
+	$("#status").change(function () {
+	    var statusVal = $('#status').val();
+	    if(statusVal=="Active"){
+		$("#course").html(" ");
+		$("#course").html($("#coursefilter").html());
+		$("#course option[data-type!=active]").remove();
+		$('select[multiple]').multiselect('reload');
+	    }
+	    else if(statusVal=="Inactive"){
+		$("#course").html(" ");
+		$("#course").html($("#coursefilter").html());
+		$("#course option[data-type!=inactive]").remove();
+		$('select[multiple]').multiselect('reload');
+	    }
+	    else{
+		$("#course").html(" ");
+		$("#course").html($("#coursefilter").html());
+		$('select[multiple]').multiselect('reload');
+	    }
+	});
+	$( "#status" ).trigger( "change" );
+});
+
 </script>
 {/literal}
