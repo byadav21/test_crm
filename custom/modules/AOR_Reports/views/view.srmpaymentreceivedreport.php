@@ -129,7 +129,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                             l.id lead_id,
                             l.vendor,
                             l.converted_date,
-                            sb.fee_inr,
+                            te_ba_batch.fees_inr fee_inr,
                             pd.payment_source,
                             inst.due_date,
 
