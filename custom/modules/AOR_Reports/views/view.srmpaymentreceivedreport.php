@@ -15,32 +15,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         parent::SugarView();
     }
 
-    function reportingUser($currentUserId)
-    {
-        $userObj                             = new User();
-        $userObj->disable_row_level_security = true;
-        $userList                            = $userObj->get_full_list("", "users.reports_to_id='" . $currentUserId . "'");
-        if (!empty($userList))
-        {
-            foreach ($userList as $record)
-            {
-                if (!empty($record->reports_to_id) && !empty($record->id))
-                {
-                    $this->report_to_id[] = $record->id;
-                    $this->reportingUser($record->id);
-                }
-            }
-        }
-    }
 
-    function getCouncelor($user_id)
-    {
-        global $db;
-        $userSql = "SELECT CONCAT(first_name,' ',last_name) as name FROM users WHERE deleted=0 AND id='" . $user_id . "'";
-        $userObj = $db->query($userSql);
-        $user    = $db->fetchByAssoc($userObj);
-        return $user['name'];
-    }
 
     function getBatch()
     {
@@ -56,41 +31,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         return $batchOptions;
     }
 
-    function getCouncelorForAdmin($user_id = NULL)
-    {
-        global $db;
-        $userSql  = "select u.first_name,u.last_name,u.id,ru.first_name AS reporting_firstname,ru.last_name AS reporting_lastname,ru.id AS reporting_id FROM users AS u INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id LEFT JOIN users AS ru ON ru.id=u.reports_to_id WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a',  '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45',  'cc7133be-0db9-d50a-2684-582c0078e74e') AND u.deleted=0 AND aru.deleted=0";
-        $userObj  = $db->query($userSql);
-        $usersArr = [];
-        while ($user     = $db->fetchByAssoc($userObj))
-        {
-            $usersArr[$user['id']] = array(
-                'id'             => $user['id'],
-                'name'           => $user['first_name'] . ' ' . $user['last_name'],
-                'reporting_id'   => $user['reporting_id'],
-                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
-            );
-        }
-        return $usersArr;
-    }
 
-    function getCouncelorForUsers($user_ids = array())
-    {
-        global $db;
-        $userSql  = "select u.first_name,u.last_name,u.id,ru.first_name AS reporting_firstname,ru.last_name AS reporting_lastname,ru.id AS reporting_id FROM users AS u LEFT JOIN users AS ru ON ru.id=u.reports_to_id WHERE u.id IN ('" . implode("','", $user_ids) . "') AND u.deleted=0";
-        $userObj  = $db->query($userSql);
-        $usersArr = [];
-        while ($user     = $db->fetchByAssoc($userObj))
-        {
-            $usersArr[$user['id']] = array(
-                'id'             => $user['id'],
-                'name'           => $user['first_name'] . ' ' . $user['last_name'],
-                'reporting_id'   => $user['reporting_id'],
-                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
-            );
-        }
-        return $usersArr;
-    }
 
     public function display()
     {
@@ -101,20 +42,11 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $wherecl               = "";
         $BatchListData         = $this->getBatch();
         $usersdd               = "";
-        if ($current_user_is_admin == 1)
-        {
-            $usersdd = $this->getCouncelorForAdmin();
-        }
-        else
-        {
-            $this->report_to_id[] = $current_user_id;
-            $reportingusersids    = $this->reportingUser($current_user_id);
-
-            $uid = $this->report_to_id;
-
-            $usersdd = $this->getCouncelorForUsers($uid);
-        }
+       
         #echo "<pre>";print_r($usersdd);exit();
+        
+      
+        
         if (!isset($_SESSION['cccon_from_date']))
         {
             $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
@@ -133,7 +65,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
             $_SESSION['cccon_batch']      = $_REQUEST['batch'];
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_counselor']  = $_REQUEST['counselor'];
+            $_SESSION['cccon_status']      = $_REQUEST['status'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -169,7 +101,10 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         {
             $selected_counselor = $_SESSION['cccon_counselor'];
         }
-
+          if (!empty($_SESSION['cccon_status']))
+        {
+            $selected_status = $_SESSION['cccon_status'];
+        }
 
         $paymentList = array();
         $StatusList  = array();
@@ -184,14 +119,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
             $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch_code) . "')";
         }
-//        if (!empty($selected_counselor))
-//        {
-//
-//            $wherecl .= " AND  sb.assigned_user_id IN ('" . implode("','", $selected_counselor) . "')";
-//        }
-        //$statusArr = ['alive', 'dead', 'converted', 'warm', 'recycle', 'dropout'];
-        //echo '<pre>'.
-        $leadSql = "SELECT 
+
+                                $leadSql = "SELECT 
                                         s.name student_name,
                                         sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
                                         pd.id paymentID,
@@ -488,7 +417,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         #pE
 
         $sugarSmarty = new Sugar_Smarty();
-
+        $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
+        $sugarSmarty->assign("selected_status", $selected_status);
         $sugarSmarty->assign("paymentList", $paymentList);
         $sugarSmarty->assign("PaymentsArray", $PaymentsArray);
         $sugarSmarty->assign("BatchListData", $BatchListData);
@@ -497,7 +427,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_counselor", $selected_counselor);
-
+      
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
         $sugarSmarty->assign("pagenext", $pagenext);
