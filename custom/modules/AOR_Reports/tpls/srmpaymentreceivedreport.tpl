@@ -30,18 +30,18 @@
 
                     </tr>
 
-               {*     <tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="counselor_basic">Counselor</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="counselor[]" id="vendor"  class="multiselbox_batch" multiple style="width:600px !important; height: 70px !important;">
-                                {foreach from =$CounselorList key=key item=counselor}
+                    {*     <tr>
+                    <td scope="row" nowrap="nowrap" width="1%">
+                    <label for="counselor_basic">Counselor</label>
+                    </td>
+                    <td nowrap="nowrap" >
+                    <select name="counselor[]" id="vendor"  class="multiselbox_batch" multiple style="width:600px !important; height: 70px !important;">
+                    {foreach from =$CounselorList key=key item=counselor}
 
-                                    <option value="{$counselor.id}"{if in_array($counselor.id, $selected_counselor)} {/if}>{$counselor.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
+                    <option value="{$counselor.id}"{if in_array($counselor.id, $selected_counselor)} {/if}>{$counselor.name}</option>
+                    {/foreach}
+                    </select>
+                    </td>
 
                     </tr>*}
 
@@ -161,14 +161,28 @@
 
             </tr>
             <tr height="20">
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Batch Name</strong>
-                </th>
+
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Name</strong>
+                    <strong>Batch Name</strong>
+                </th>
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Program Name</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Vendor/Lead Source Name</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Registration/Conversion Date</strong>
+                </th>
+
+
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Student Name</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Email ID</strong>
@@ -176,81 +190,180 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Phone Number</strong>
                 </th>
-                
-                
-                  <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Registration amount received</strong>
-                </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Mode</strong>
-                </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Receipt number</strong>
-                </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Date of receipt</strong>
-                </th>
-                
-                
+
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Instalment 1 amount received</strong>
+                    <strong>Course Fee</strong>
                 </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Mode</strong>
-                </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Receipt number</strong>
-                </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Date of receipt</strong>
-                </th>
-                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Instalment 2 amount received</strong>
+                    <strong>GST</strong>
                 </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Total Amount</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Amount Left to be Paid</strong>
+                </th>
+
+
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Instalment 1/Payment 1</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Mode</strong>
                 </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Payment Source</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Receipt number</strong>
                 </th>
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Date of receipt</strong>
                 </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Due Date</strong>
+                </th>
+
+
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Instalment 2/Payment 2</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Mode</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Payment Source</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Receipt number</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of receipt</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Due Date</strong>
+                </th>
+
+
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Instalment 3/Payment 3</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Mode</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Payment Source</strong>
+                </th>
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Receipt number</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of receipt</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Due Date</strong>
+                </th>
+
+
+
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Instalment 4/Payment 4</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Mode</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Payment Source</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Receipt number</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of receipt</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Due Date</strong>
+                </th>
                 
-               
                 
-               {*{foreach from = $paymentList key=keyx item=program}
-                     {foreach from = $program.installment key=key item=value}
-                         <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                            <strong>Instalment 1 amount received</strong>
-                        </th>
-                     {/foreach}
-              {/foreach}*}
-                    
-                   
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Instalment 5/Payment 5</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Mode</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Payment Source</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Receipt number</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of receipt</strong>
+                </th>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Due Date</strong>
+                </th>
+
+
+                {*{foreach from = $paymentList key=keyx item=program}
+                {foreach from = $program.installment key=key item=value}
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <strong>Instalment 1 amount received</strong>
+                </th>
+                {/foreach}
+                {/foreach}*}
+
+
 
 
             </tr>
             {foreach from = $paymentList key=keyx item=program}
+            
+            {assign var='toBePay' value=0}
+            {assign var='toBePay' value=$program.total_amount-$program.amt_tobe_pay}
+            
                 <tr height="20" class="oddListRowS1">
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.Vendor}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.converted_date}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.student_name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.student_email}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_mobile}</td>
-                    
-                     {foreach from = $program.installment key=key item=value}
-                         {foreach from = $value key=key item=value}
-                             
-                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {$value}</td>
-                         
-                         {/foreach}
-                        
-                         {*{$value |  print_r}*}
-                        
-                     {/foreach}
-                    
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.fee_inr}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.gst}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.total_amount}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$toBePay}</td>
+
+                    {foreach from = $program.installment key=key item=value}
+                        {foreach from = $value key=key item=value}
+
+                            <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {$value}</td>
+
+                        {/foreach}
+
+                        {*{$value |  print_r}*}
+
+                    {/foreach}
+
                 </tr>
             {/foreach}
 
