@@ -131,7 +131,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                             l.converted_date,
                             te_ba_batch.fees_inr fee_inr,
                             pd.payment_source,
-                            inst.due_date,
+                            #inst.due_date,
 
                             u.user_name,
                             te_ba_batch.name batch_name,
@@ -155,8 +155,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
         LEFT JOIN  te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
         LEFT JOIN  te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-        LEFT JOIN `te_ba_batch_te_installments_1_c` binst_rel ON te_ba_batch.id=binst_rel.te_ba_batch_te_installments_1te_ba_batch_ida 
-        LEFT JOIN  te_installments inst on binst_rel.te_ba_batch_te_installments_1te_installments_idb = inst.id
+        #LEFT JOIN `te_ba_batch_te_installments_1_c` binst_rel ON te_ba_batch.id=binst_rel.te_ba_batch_te_installments_1te_ba_batch_ida 
+        #LEFT JOIN  te_installments inst on binst_rel.te_ba_batch_te_installments_1te_installments_idb = inst.id
     where l.deleted=0  $wherecl  "
 #. "  and sprel.`te_student_te_student_payment_1te_student_ida` in ('47f844b9-5cf2-38bf-8609-5b603189a22d','bf0e02c2-c8a6-b4bc-2d40-5b57287a820f') "
 . "order by pd.`date_of_payment`,s.name ";
@@ -191,8 +191,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']            = (0.18 * $row['fee_inr']);
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']   = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['amt_tobe_pay']   += $row['amount'];
-            //$paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source']     = $row['payment_source'];
-            //$paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']           = $row['due_date'];
+            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source']     = $row['payment_source'];
+            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']           = '';
 
 
 
@@ -242,8 +242,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']              = (0.18 * $row['fee_inr']);
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']     = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['amt_tobe_pay']     += $row['amount'];
-            //$paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source']     = $row['payment_source'];
-            //$paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']           = $row['due_date'];
+            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source']     = $row['payment_source'];
+            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']           = '';
 
 
 
