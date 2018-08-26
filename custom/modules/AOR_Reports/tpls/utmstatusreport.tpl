@@ -5,18 +5,37 @@
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 		<tr>
+
+			 <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Status">Batch Status:</label>
+                        </td>
+                        <td nowrap="nowrap" width="1%">
+                            <select name="status" id="status">
+                                <option value="All" {if $selected_status=="All"} selected="selected"{/if}>All</option>
+                                <option value="Active" {if $selected_status=="Active"} selected="selected"{/if}>Active</option>
+                                <option value="Inactive" {if $selected_status=="Inactive"} selected="selected"{/if}>Inactive</option>
+                            </select>
+                        </td>
+
 			<td scope="row" nowrap="nowrap" width="1%">
-				<label for="batch_basic">Batch</label>
+				<label for="batch_basic">Course</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
-				<select name="batch[]" id="batch" multiple="1" class="multiselbox"  size="6" style="width: 150px;">
+				<select name="course[]" id="course"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+					<option  value="">Select Batch</option>
 					{foreach from = $batchList key=key item=batch}
-						<option value="{$batch.id}" {if in_array($batch.id, $selected_batch) } selected="selected" {/if}>{$batch.name}</option>
+						<option value="{$batch.id}" data-all="1" {if $batch.batch_status == "enrollment_in_progress"} data-type="active" {/if} {if $batch.batch_status != "enrollment_in_progress"} data-type="inactive" {/if} {if $selected_batch eq $batch.id} selected="selected" {/if}>{$batch.name}</option>
+					{/foreach}
+				</select>
+				<select name="coursefilter" id="coursefilter"  style="display:none;">
+					<option  value="">Select Batch</option>
+					{foreach from = $batchList key=key item=batch}
+						<option value="{$batch.id}" data-all="1" {if $batch.batch_status == "enrollment_in_progress"} data-type="active" {/if} {if $batch.batch_status != "enrollment_in_progress"} data-type="inactive" {/if} {if in_array($batch.id, $selected_batch)} selected="selected" {/if}>{$batch.name}</option>
 					{/foreach}
 				</select>
 			</td>
-
-			<td scope="row" nowrap="nowrap" width="1%">
+			
+      			<td scope="row" nowrap="nowrap" width="1%">
 				<label for="batch_basic">From Date</label>
 			</td>
 			<td nowrap="nowrap" width="10%">
@@ -30,20 +49,15 @@
 				<input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
 				<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
 			</td>
-
-
-			<td class="sumbitButtons">
+		</tr>
+		<tr><td colspan="8">&nbsp;</td></tr>
+		<tr>
+			<td  colspan="8">
 				<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
 				<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-	        </td>
-			<td nowrap="nowrap" width="10%">&nbsp;</td>
-			<td class="helpIcon" width="*"><img alt="Help" border="0" id="filterHelp" src="themes/SuiteR/images/help-dashlet.png?v=mjry3sKU3KG11ojfGn-sdg"></td>
-		</tr>
-		<tr>
-			<td scope="row" nowrap="nowrap" width="1%">
 				<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
 
-			</td>
+	        </td>
 		</tr>
 		</tbody>
 	</table>
@@ -118,161 +132,38 @@
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Medium</strong>
 		</th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Campaign</strong>
 		</th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Duplicate</strong>
-		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Dead Number</strong>
+			<strong>Batch Code</strong>
 		</th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Dropout</strong>
+	{foreach from = $leadStatusList key=key item=status}
+		 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>{$status}</strong>
 		</th>
+	{/foreach}
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Fallout</strong>
+			<strong>Total</strong>
 		</th>
-    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>No Answer</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Not Eligible</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Not Enquired</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Rejected</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Retired</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Ringing Multiple</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Wrong Number</strong>
-		</th>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Call Back</strong>
-		</th>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Converted</strong>
-		</th>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Follow Up</strong>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>New Lead</strong>
-		</th>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Prospect</strong>
-		</th>
-		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Re-Enquired</strong>
-		</th>
+    
 
 	</tr>
-	{foreach from = $councelorList key=key item=councelor}
-    {assign var=campaign value="TE__TE"|explode:$key}
-		<tr height="20" class="oddListRowS1">
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.contract_type}</td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$campaign[1]}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Duplicate }
-        {$councelor.Duplicate}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Dead_Number }
-        {$councelor.Dead_Number}
-        {else}0{/if}
-      </td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Dropout }
-        {$councelor.Dropout}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Fallout }
-        {$councelor.Fallout}
-        {else}0{/if}
-      </td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.No_Answer }
-        {$councelor.No_Answer}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Not_Eligible }
-        {$councelor.Not_Eligible}
-        {else}0{/if}
-      </td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Not_Enquired }
-        {$councelor.Not_Enquired}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Rejected }
-        {$councelor.Rejected}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Retired }
-        {$councelor.Retired}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Ringing_Multiple_Times }
-        {$councelor.Ringing_Multiple_Times}
-        {else}0{/if}
-      </td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Wrong_Number }
-        {$councelor.Wrong_Number}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Call_Back }
-        {$councelor.Call_Back}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Converted }
-        {$councelor.Converted}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Follow_Up }
-        {$councelor.Follow_Up}
-        {else}0{/if}
-      </td>
-      <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.New_Lead }
-        {$councelor.New_Lead}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Prospect }
-        {$councelor.Prospect}
-        {else}0{/if}
-      </td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-        {if $councelor.Re_Enquired }
-        {$councelor.Re_Enquired}
-        {else}0{/if}
-      </td>
-		</tr>
+	{foreach from = $reportDataList key=key item=data}
+	<tr height="20" class="oddListRowS1">
+		<td align="left" valign="top" type="relate" field="vendor" class="inlineEdit footable-visible footable-last-column">{$data.utm_source_c}</td>
+		<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$data.utm_term_c}</td>
+		<td align="left" valign="top" type="relate" field="batch_code" class="inlineEdit footable-visible footable-last-column">{$data.utm_contract_c}</td>
+		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.utm_campaign}</td>
+		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.batch_code}</td>
+		{foreach from = $leadStatusList key=key item=statusval}
+		  <td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.$statusval}</td>
+		{/foreach}
+    		<td align="left" valign="top" type="relate" field="total_leads" class="inlineEdit footable-visible footable-last-column">{$data.total}</td>
+		
+	</tr>
 	{/foreach}
+	
 </table>
 <script>
 {literal}
@@ -289,34 +180,47 @@ Calendar.setup ({
 {/literal}
 <script>
 {literal}
-    Calendar.setup({
-                inputField: "from_date",
-                daFormat: "%Y-%m-%d %I:%M%P",
-                button: "from_date_trigger",
-                singleClick: true,
-                dateStr: "",
-                step: 1,
-                weekNumbers: false,
-            });
-            Calendar.setup({
-                inputField: "to_date",
-                daFormat: "%Y-%m-%d %I:%M%P",
-                button: "to_date_trigger",
-                singleClick: true,
-                dateStr: "",
-                step: 1,
-                weekNumbers: false,
-            });
-$( document ).ready(function() {
-    $(".multiselbox").each(function(){
-      if($(this).find("option").eq(0).val()==''){
-        $(this).find("option").eq(0).remove();
-      }
-    })
-	 $(".multiselbox").multiselect({
-     includeSelectAllOption: true
-   });
+Calendar.setup ({
+   inputField : "from_date",
+   daFormat : "%d-%m-%Y %I:%M%P",
+   button : "from_date_trigger",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
 });
+Calendar.setup ({
+   inputField : "to_date",
+   daFormat : "%d-%m-%Y %I:%M%P",
+   button : "to_date_trigger",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+$(document).ready(function () {
+	$("#status").change(function () {
+	    var statusVal = $('#status').val();
+	    if(statusVal=="Active"){
+		$("#course").html(" ");
+		$("#course").html($("#coursefilter").html());
+		$("#course option[data-type!=active]").remove();
+		$('select[multiple]').multiselect('reload');
+	    }
+	    else if(statusVal=="Inactive"){
+		$("#course").html(" ");
+		$("#course").html($("#coursefilter").html());
+		$("#course option[data-type!=inactive]").remove();
+		$('select[multiple]').multiselect('reload');
+	    }
+	    else{
+		$("#course").html(" ");
+		$("#course").html($("#coursefilter").html());
+		$('select[multiple]').multiselect('reload');
+	    }
+	});
+	$( "#status" ).trigger( "change" );
+});
+
 </script>
 {/literal}
-
