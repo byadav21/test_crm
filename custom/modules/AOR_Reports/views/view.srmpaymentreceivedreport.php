@@ -30,6 +30,28 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         }
         return $batchOptions;
     }
+    
+    function getDueDate(){
+        
+         global $db;
+        
+        $batchSql     = "SELECT 
+            bb.id batch_id, bb.batch_code, inst.due_date
+        FROM te_ba_batch bb
+            INNER JOIN  `te_ba_batch_te_installments_1_c` binst_rel ON bb.id = binst_rel.te_ba_batch_te_installments_1te_ba_batch_ida
+            INNER JOIN te_installments inst ON binst_rel.te_ba_batch_te_installments_1te_installments_idb = inst.id
+        WHERE bb.deleted =0
+        AND binst_rel.deleted =0
+        AND inst.deleted =0
+        ORDER BY bb.id, inst.due_date";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        while ($row = $db->fetchByAssoc($batchObj))
+        {
+            $batchOptions[$row['batch_id']][] = $row['due_date'];
+        }
+        return $batchOptions;
+    }
 
 
 
@@ -41,9 +63,10 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $where                 = "";
         $wherecl               = "";
         $BatchListData         = $this->getBatch();
+        $getDueDateData        = $this->getDueDate();
         $usersdd               = "";
        
-        #echo "<pre>";print_r($usersdd);exit();
+        //echo "<pre>";print_r($getDueDateData);exit();
         
       
         
@@ -120,7 +143,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-                $leadSql = "SELECT 
+                 $leadSql = "SELECT 
                             s.name student_name,
                             sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
                             pd.id paymentID,
@@ -131,7 +154,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                             l.converted_date,
                             te_ba_batch.fees_inr fee_inr,
                             pd.payment_source,
-                            inst.due_date,
+                            
 
                             u.user_name,
                             te_ba_batch.name batch_name,
@@ -155,8 +178,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
         LEFT JOIN  te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
         LEFT JOIN  te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-        LEFT JOIN `te_ba_batch_te_installments_1_c` binst_rel ON te_ba_batch.id=binst_rel.te_ba_batch_te_installments_1te_ba_batch_ida 
-        LEFT JOIN  te_installments inst on binst_rel.te_ba_batch_te_installments_1te_installments_idb = inst.id
+    
     where l.deleted=0  $wherecl  "
 #. "  and sprel.`te_student_te_student_payment_1te_student_ida` in ('47f844b9-5cf2-38bf-8609-5b603189a22d','bf0e02c2-c8a6-b4bc-2d40-5b57287a820f') "
 . "order by pd.`date_of_payment`,s.name ";
@@ -202,9 +224,18 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                 ($row['payment_source']) ? $row['payment_source'] : 'N/A',
                 ($row['reference_number']) ? $row['reference_number'] : 'N/A',
                 ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
-                ($row['due_date']) ? $row['due_date'] : 'N/A'
+                
             );
         }
+        //echo "<pre>";
+         foreach ($paymentList as $key=>$val){
+                $paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
+                
+                foreach ($val['installment'] as $key2=>$val2){
+                    $paymentList[$key]['installment'][$key2][6] = isset($getDueDateData[$val['batch_id']][$key2]) ? $getDueDateData[$val['batch_id']][$key2]: 'N/A';
+                }
+            }
+            
 
         //echo "<pre>";print_r($paymentList);exit();
 
@@ -252,14 +283,21 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                     (in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
                     ($row['payment_source']) ? $row['payment_source'] : 'N/A',
                     ($row['reference_number']) ? $row['reference_number'] : 'N/A',
-                    ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
-                    ($row['due_date']) ? $row['due_date'] : 'N/A'
+                    ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A'
+                    //($row['due_date']) ? $row['due_date'] : 'N/A'
                 );
             }
             
             foreach ($paymentList as $key=>$val){
                 $paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
+                
+              foreach ($val['installment'] as $key2=>$val2){
+                    $paymentList[$key]['installment'][$key2][6] = isset($getDueDateData[$val['batch_id']][$key2]) ? $getDueDateData[$val['batch_id']][$key2]: 'N/A';
+                }
+                
             }
+            
+            
                 
             
             
