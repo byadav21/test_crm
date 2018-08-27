@@ -223,13 +223,21 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $bean->dispositionName    = $_REQUEST['dispositionName'];
         $bean->callType           = $_REQUEST['callType'];
         //$bean->modified_user_id   = $modifieduserIDX;
-        if ($dispositionCode == 'Demo_calender' && $finalDatTime != '')
+        if ($dispositionCode == 'Follow Up' && $finalDatTime != '')
         {
-            $bean->date_of_callback = $finalDatTime;
-            //$bean->date_of_followup = $bean->date_of_followup;
-            //$bean->date_of_prospect = $bean->date_of_prospect;
-            createLog('{Ameyo callback response}', 'callback_dispose_log.txt', 'callback=' . $finalDatTime, $_REQUEST);
+           
+            $bean->date_of_followup =   $finalDatTime;
+           
+            createLog('{Ameyo Follow Up response}', 'callback_dispose_log.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
         }
+	if ($dispositionCode == 'Prospect' && $finalDatTime != '')
+        {
+            $bean->date_of_prospect = $finalDatTime;
+           
+           
+            createLog('{Ameyo Prospect response}', 'callback_dispose_log.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
+        }
+
 
         $bean->save();
 
@@ -240,6 +248,36 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     }
     else
     {
+
+	        
+    if ((isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null') && ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial'))
+        {
+             		
+
+		     /* $sql = "SELECT `status`,`status_description` FROM `leads` WHERE id='" . $_REQUEST['lead_reference'] . "'";
+                      $res = $db->query($sql);
+                      $records        = $db->fetchByAssoc($res);
+                      $status         = $records['status'];
+                      $status_description = $records['status_description'];
+               
+		     $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
+		     $bean->status             = $status;
+	             $bean->status_description = $status_description;
+
+                     $bean->dispositionName    = $_REQUEST['dispositionName'];
+                     $bean->callType           = $_REQUEST['callType'];
+                     $checkSave = $bean->save();
+		     if($checkSave)
+		       {
+			 createLog('{Ameyo null dispostion response}', 'checkSave_with_null_dispose_log.txt', $checkSave, $_REQUEST);
+		       }
+                    */
+                   
+                   
+         createLog('{Ameyo null dispostion response}', 'leads_with_null_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
+		    // $bean->save();
+        }
+
     createLog('{Ameyo null dispostion response}', 'null_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);    
     }
 

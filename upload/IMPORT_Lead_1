@@ -1,25 +1,6 @@
-First Name,Last Name,Salutation,Title,Department,Account Name,Account Description,Website,Email Address,Non Primary E-mails,Mobile Phone,Office Phone,Home Phone,Other Phone,Fax,Primary Address Street,Primary Address City,Primary Address State,Primary Address Postalcode,Primary Address Country,Alt Address Street,Alt Address City,Alt Address State,Alt Address Postalcode,Alt Address Country,Status,Status Details,Source,Source Details,Description,Opportunity Name,Opportunity Amount,Referred By,Campaign ID,Portal Name,Portal Application,Reports To ID,Assistant,Assistant Phone,Date Of Birth,Contact ID,Account ID,Opportunity ID,Assigned User Name,Assigned User ID,Photo,Notes,gender,Reference Number,Payment Type,Payment Realized,Transaction Id,Payment Source,Call back Date,Followup Date,Prospect Date,Lead Assignment Flag,Vendor,Converted Date,Comment,Mailer Day,Batch,assigned_date,channel,Invoice Number,duplicate_check,parrent_leads,is_seen,Parent Type,Parent ID,Date of Referral Creation,is_new_dropout
-Karthik Gupta,,,,,,,,karthikprinceps1@gmail.com,,9010990001,,,,,,,,,,,,,,,Alive,New Lead,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0,TE_Focus,,,,,,,0,0,,0,,,,
-Rojan Kumar Nayak,,,,,,,,sri.rojan1@gmail.com,,9777704917,,,,,,,,,,,,,,,Alive,New Lead,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0,Taboola,,,,,,,0,0,,0,,,,
-Anita Mishra,,,,,,,,anita24m1@gmail.com,,9158844466,,,,,,,,,,,,,,,Alive,New Lead,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0,facebook,,,,,,,0,0,,0,,,,
-,,,,,,,,rishi_rishi601@rediffmail.com,,,,,9674030167,,,,,,,,,,,,Alive,New Lead,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0,google,,,,,,,0,0,,0,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-   ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+First Name,Email Address,Mobile Phone,Primary Address City,utm_campaign,Work Experience,Functional Area,utm_source_c,Other Phone,Company,utm_term_c,dristi_campagain_id,dristi_api_id,Status,Status Details,AutoAssign
+Rakesh_test,RakeshTest_101_05August@test.com,9953851487,,NaukriCamp4,,,infoedge,,,Generic_2017-18,16,105,Alive,New Lead,Yes
+param_test,paramTest_102_05june@test.com,9911580172,,NaukriCamp4,,,infoedge,,,Generic_2017-18,16,105,Alive,New Lead,Yes
+Ashwani_test,AshwaniTest_103_05june@test.com,9899046730,,NaukriCamp4,,,infoedge,,,Generic_2017-18,16,105,Alive,New Lead,Yes
+Pritam_test,PritamTest_104_05june@test.com,9958294275,,NaukriCamp4,,,infoedge,,,Generic_2017-18,16,105,Alive,New Lead,Yes
+pawan_test,PawanTest_104_05june@test.com,9971502476,,NaukriCamp4,,,infoedge,,,Generic_2017-18,16,105,Alive,New Lead,Yes
