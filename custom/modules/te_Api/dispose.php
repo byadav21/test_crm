@@ -238,6 +238,10 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
         createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
     }
+    else
+    {
+    createLog('{Ameyo null dispostion response}', 'null_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);    
+    }
 
 
 
