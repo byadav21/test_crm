@@ -660,6 +660,26 @@ if(!isset($_SESSION['referral'])){
 		}});
 
 	}
+        
+         function getLogger(lead_id) {
+             alert(lead_id);
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=attemptlogger",
+                    data: {action: getLogger, param: lead_id},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                       
+                        $('#list_subpanel_te_dispositionlogger_leads').html(data);
+                    }
+                });
+            }
+            
 	$(document).ready(function() {
 		//function to hide edit button on lead details page
 		if($("#seenbtn").attr('data-seen')=='1') {
@@ -670,6 +690,15 @@ if(!isset($_SESSION['referral'])){
 		   $(".clickMenu").hide();
 		  });
 		}
+                
+                
+                $('#tab5').click(function(){
+                    var lead_id ='<?=$_REQUEST['record'];?>';
+                        $.ajax({url: "index.php?entryPoint=attemptlogger&action=getLogger&lead_id="+lead_id, success: function(result){
+                               $('#list_subpanel_te_dispositionlogger_leads').html(result);
+                        }});
+                    
+                });
 	});
 
 
