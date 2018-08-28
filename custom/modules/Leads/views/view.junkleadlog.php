@@ -14,18 +14,38 @@ class LeadsViewJunkleadlog extends SugarView
 //SELECT l.id,l.first_name,l.last_name,l.phone_mobile,l.date_entered,lc.email_add_c,lc.te_ba_batch_id_c,l.autoassign,l.dristi_campagain_id,dristi_API_id FROM  `leads` AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE LENGTH( l.phone_mobile ) <>10 AND l.neoxstatus=0  AND l.deleted=0 order by l.date_entered DESC limit 0,100
         global $db, $current_user;
         $logID = $current_user->id;
-	if($current_user->is_admin==1){}
 	$councelorList = [];
-        
-        
-		$sqlRel = "SELECT l.id,l.date_entered,l.first_name, l.last_name, l.phone_mobile, l.date_entered, lc.email_add_c, b.name AS batch_name, b.batch_code, l.autoassign, l.dristi_campagain_id, l.dristi_API_id, l.assigned_user_id
+        if (isset($_REQUEST['button']) || isset($_REQUEST['export']))
+	{
+	    $_SESSION['jl_from_date']   = ($_REQUEST['from_date']) ? date("Y-m-d",strtotime($_REQUEST['from_date'])) : '';
+	    $_SESSION['jl_to_date']     = ($_REQUEST['to_date']) ? date("Y-m-d",strtotime($_REQUEST['to_date'])) : '';
+	}
+	if(!isset($_SESSION['jl_from_date']) || empty($_SESSION['jl_from_date'])){
+		$_SESSION['jl_from_date'] = date('Y-m-d');
+	}
+	if(!isset($_SESSION['jl_to_date']) || empty($_SESSION['jl_to_date'])){
+		$_SESSION['jl_to_date'] = date('Y-m-d');
+	}
+        $wheredr = "";
+	if (!empty($_SESSION['jl_from_date']))
+	{
+	    $selected_from_date = date("d-m-Y",strtotime($_SESSION['jl_from_date']));
+	    $wheredr .= " AND DATE(l.date_entered)>='" . $_SESSION['jl_from_date'] . "'";
+	}
+	if (!empty($_SESSION['jl_to_date']))
+	{
+	   $selected_to_date = date("d-m-Y",strtotime($_SESSION['jl_to_date']));
+	   $wheredr .= " AND DATE(l.date_entered)<='" . $_SESSION['jl_to_date'] . "'";
+	}
+
+		$sqlRel = "SELECT l.id,l.date_entered,l.first_name, l.last_name, l.phone_mobile, l.date_entered, lc.email_add_c, b.name AS batch_name, b.batch_code, l.autoassign, l.dristi_campagain_id, l.dristi_API_id, l.assigned_user_id,l.utm_term_c
 FROM  `leads` AS l
 INNER JOIN leads_cstm AS lc ON l.id = lc.id_c
 LEFT JOIN te_ba_batch AS b ON b.id = lc.te_ba_batch_id_c
 WHERE l.neoxstatus =0
 AND l.deleted =0
 AND l.status_description='New Lead'
-AND (l.assigned_user_id='' || l.assigned_user_id='NULL' || l.assigned_user_id=null)
+AND (l.assigned_user_id='' || l.assigned_user_id='NULL' || l.assigned_user_id=null) $wheredr
 ORDER BY l.date_entered DESC ";
       		$rel    = $db->query($sqlRel);
 		if($db->getRowCount($rel) > 0){
@@ -36,8 +56,8 @@ ORDER BY l.date_entered DESC ";
 				if(strlen($row['phone_mobile'])!=10){
 					$reason='Incorrect phone number format';
 				}
-				else if(empty($row['batch_name'])){
-					$reason='Batch ID is missing on CRM ';
+				else if(empty($row['batch_name']) && !empty($row['utm_term_c'])){
+					$reason='Batch code is Missing due to INCORRECT UTM ';
 				}
 				else if(empty($row['batch_name'])){
 					$reason='Batch ID is missing on CRM ';
@@ -51,14 +71,18 @@ ORDER BY l.date_entered DESC ";
 				else if(empty($row['dristi_API_id'])){
 					$reason='Api ID missing on CRM ';
 				}
+				
 				else{
-					$reason='Pass ';
+					$reason='All fields are correct. Lead is yet to go into Ameyo ';
 				}
 				$councelorList[$i]['reason']=$reason;
 				$i++;
 				
 			}
 		}
+			if(isset($_REQUEST['export'])){
+				$this->__export_data($councelorList);
+			}
 			#Pagination
 			$total=count($councelorList); #total records
 			$start=0;
@@ -101,6 +125,9 @@ ORDER BY l.date_entered DESC ";
         $sugarSmarty = new Sugar_Smarty();
 	$sugarSmarty->assign("result_data", $councelorList);
 	
+	$sugarSmarty->assign("selected_from_date",$selected_from_date);
+	$sugarSmarty->assign("selected_to_date",$selected_to_date);
+
 	$sugarSmarty->assign("current_records",$current);
 	$sugarSmarty->assign("page",$page);
 	$sugarSmarty->assign("pagenext", $pagenext);
@@ -110,8 +137,20 @@ ORDER BY l.date_entered DESC ";
 	$sugarSmarty->assign("last_page",$last_page);
         $sugarSmarty->display('custom/modules/Leads/tpls/junkleadlog.tpl');
     }
-    public function get_user_role($user_id=NULL){
-	
-   }
+    function __export_data($row_data=array()){
+	    $data     = "Lead ID, Full Name,Email,Mobile No,Date Entered,Batch Code,UTM Term,Campaign ID,API ID, Reason\n";
+	    $file     = "junk_lead_log".$_SESSION['jl_from_date']."_".$_SESSION['jl_to_date'];
+	    $filename = $file;
+	    foreach ($row_data as $key => $councelor)
+	    {
+	        $full_name = $councelor['first_name']." ".$councelor['last_name'];
+	        $data .= "\"" . $councelor['id'] . "\",\"" . $full_name . "\",\"" . $councelor['email_add_c'] . "\",\"" . $councelor['phone_mobile'] . "\",\"" .$councelor['date_entered'] . "\",\"" .$councelor['batch_code'] . "\",\"" .$councelor['utm_term_c'] . "\",\"" .$councelor['dristi_campagain_id'] . "\",\"" .$councelor['dristi_API_id'] . "\",\"" . $councelor['reason'] . "\"\n";
+	    }
+	    ob_end_clean();
+	    header("Content-type: application/csv");
+	    header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
+	    echo $data;
+	    exit;
+  }
 }
 ?>

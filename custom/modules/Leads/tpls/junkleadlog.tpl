@@ -1,5 +1,41 @@
-<section class="moduleTitle"> <h1>Junk Lead Log Details</h1><br/><br/>
+<section class="moduleTitle"> 
+<div class="panel panel-default" style="margin-top: 5%;">
+      <div class="panel-heading"><h1>Junk Lead Log Details</h1></div>
+      <div class="panel-body">
+		<form class="form-inline" method="post" action="index.php?module=Leads&action=junkleadlog">
+		    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+			<tbody>
+			<tr>
+				
+	      			<td scope="row" nowrap="nowrap" width="1%">
+					<label for="batch_basic">From Date</label>
+				</td>
+				<td nowrap="nowrap" width="10%">
+					<input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
+					<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
+				</td>
+				<td scope="row" nowrap="nowrap" width="1%">
+					<label for="batch_basic">To Date</label>
+				</td>
+				<td nowrap="nowrap" width="10%">
+					<input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
+					<img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
+				</td>
+			</tr>
+			<tr><td colspan="8">&nbsp;</td></tr>
+			<tr>
+			<td  colspan="8">
+			<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
+			<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
+			<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
 
+			</td>
+			</tr>
+			</tbody>
+		</table>
+		  </form>
+      </div>
+</div>
 
 <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
     <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
@@ -85,6 +121,9 @@
 			<strong>Batch Code</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+			<strong>UTM Term</strong>
+		</th>
+		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Campaign ID</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -103,6 +142,7 @@
 		 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.phone_mobile}</td>
                  <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.date_entered}</td>
                  <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.batch_code}</td>
+		 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.utm_term_c}</td>
 		 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.dristi_campagain_id}</td>
 		 <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.dristi_API_id}</td>
                  <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$value.reason}</td>
@@ -112,3 +152,25 @@
 		 </tbody>
 	 </table>
   </div>
+<script>
+{literal}
+Calendar.setup ({
+   inputField : "from_date",
+   daFormat : "%d-%m-%Y %I:%M%P",
+   button : "from_date_trigger",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+Calendar.setup ({
+   inputField : "to_date",
+   daFormat : "%d-%m-%Y %I:%M%P",
+   button : "to_date_trigger",
+   singleClick : true,
+   dateStr : "",
+   step : 1,
+   weekNumbers:false,
+});
+</script>
+{/literal}
