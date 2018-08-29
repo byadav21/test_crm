@@ -34,11 +34,13 @@ class syncsaptables
     function SyncSapTimestamp()
     {
         global $conn;
+        $row = array();
         $query   = "SELECT reg_date FROM   `SYNC_SAP_TIMESTAMP` order by reg_date desc limit 1";
         $leadObj = mysqli_query($conn, $query);
+        if($leadObj)
         $row     = mysqli_fetch_assoc($leadObj);
 
-        return $row['reg_date'];
+        return isset($row['reg_date'])? $row['reg_date']: '';
     }
 
     function Customers()
@@ -51,7 +53,8 @@ class syncsaptables
 
         $query   = "SELECT  replace(`te_in_institutes`.`id`, '-', '') AS `U_BPID`,
                             replace(`te_in_institutes`.`name`, '&', ' ') AS `CardName`,
-                            replace(`te_in_institutes`.`description`, '&', ' ') AS `CardFName`
+                            replace(`te_in_institutes`.`description`, '&', ' ') AS `CardFName`,
+                            te_in_institutes.SAP_CardCode
                      FROM   `te_in_institutes`
                      WHERE  `te_in_institutes`.`deleted` = 0 
                      AND    `te_in_institutes`.`date_entered` > '2018-04-01'";
@@ -95,7 +98,8 @@ class syncsaptables
                          END) AS `State2`,
                         replace(replace(`leads`.`primary_address_country`, 'India', 'IN'), 'Other', '') AS `Country`,
                         replace(replace(`leads`.`primary_address_country`, 'India', 'IN'), 'Other', '') AS `MailCountr`, 
-                        `te_student`.`SAP_Status` AS `SAP_Status`
+                        `te_student`.`SAP_Status` AS `SAP_Status`,
+                        `te_student`.`SAP_CardCode` 
                         
                  FROM `te_student`
                  JOIN `te_student_te_student_batch_1_c` `stsb` on `te_student`.`id` = `stsb`.`te_student_te_student_batch_1te_student_ida`
@@ -129,7 +133,8 @@ class syncsaptables
                             replace(`pr`.`name`, '&', ' ') AS `ItemName`,
                             replace(`pr`.`description`, '&', ' ') AS `FrgnName`,
                             `inst`.`name` AS `U_Institute`,
-                            `pr`.`SAP_Status` AS `SAP_Status`
+                            `pr`.`SAP_Status` AS `SAP_Status`,
+                            `pr`.`SAP_ItemCode` AS `SAP_ItemCode`
                       FROM  `te_pr_programs` `pr`
                             JOIN `te_in_institutes_te_pr_programs_1_c` `inst_rel` on `pr`.`id` = `inst_rel`.`te_in_institutes_te_pr_programs_1te_pr_programs_idb`
                             JOIN `te_in_institutes` `inst` on `inst_rel`.`te_in_institutes_te_pr_programs_1te_in_institutes_ida` = `inst`.`id`
@@ -161,7 +166,8 @@ class syncsaptables
                                 `te_vendor`.`description` AS `CardFName`,
                                 `te_vendor`.`phone` AS `Phone1`,
                                 `te_vendor`.`email` AS `E_Mail`,
-                                `te_vendor`.`SAP_Status` AS `SAP_Status`
+                                `te_vendor`.`SAP_Status`,
+                                `te_vendor`.`SAP_CardCode`
                             FROM `te_vendor`
                             WHERE  `te_vendor`.`name` <> ''
                                    AND `te_vendor`.`date_entered` > '2018-04-01'";
@@ -506,12 +512,12 @@ WHERE   `sb`.`deleted` = 0
         $CustomersArr = $this->Customers();
         echo '<hr>Customers Table Syncing ';
 
-        $custSQL = "INSERT INTO `Customers` (`U_BPID`, `CardName`, `CardFName`) VALUES ";
+        $custSQL = "INSERT INTO `Customers` (`U_BPID`, `CardName`, `CardFName`,`SAP_CardCode`) VALUES ";
         
         $i=1;
         foreach ($CustomersArr as $key => $data)
         {
-            $custSQL .= "('" . $data['U_BPID'] . "','" . $data['CardName'] . "','" . $data['CardFName'] . "'),";
+            $custSQL .= "('" . $data['U_BPID'] . "','" . $data['CardName'] . "','" . $data['CardFName'] . "','" . $data['SAP_CardCode'] . "'),";
         $i++;
         }
         $exeSql = rtrim($custSQL, ',');
@@ -528,7 +534,7 @@ WHERE   `sb`.`deleted` = 0
         $StudCustomersArr = $this->StudCustomers();
         echo '<hr>StudCustomers Table Syncing ';
 
-        $custSQL2 = "INSERT INTO `StudCustomers` (`U_BPId`, `CardName`, `CardFName`,`E_Mail`,`Phone1`,`Cellular`,`State1`,`State2`,`Country`,`MailCountr`) VALUES ";
+        $custSQL2 = "INSERT INTO `StudCustomers` (`U_BPId`, `CardName`, `CardFName`,`E_Mail`,`Phone1`,`Cellular`,`State1`,`State2`,`Country`,`MailCountr`,`SAP_CardCode`) VALUES ";
         $i        = 1;
         foreach ($StudCustomersArr as $key => $data)
         {
@@ -544,7 +550,7 @@ WHERE   `sb`.`deleted` = 0
 		'" . $data['State1'] . "',
 		'" . $data['State2'] . "',
 		'" . $data['Country'] . "',
-		'" . $data['MailCountr'] . "'),";
+		'" . $data['MailCountr'] . "','" . $data['SAP_CardCode'] . "'),";
             $i++;
         }
         $exeSql2 = rtrim($custSQL2, ',');
@@ -562,7 +568,7 @@ WHERE   `sb`.`deleted` = 0
         $ItemsArr = $this->Items();
         echo '<hr>Items Table Syncing ';
 
-        $custSQL2 = "INSERT INTO `Items` (`U_CourseID`, `ItemName`, `FrgnName`,`U_Institute`) VALUES ";
+        $custSQL2 = "INSERT INTO `Items` (`U_CourseID`, `ItemName`, `FrgnName`,`U_Institute`,`SAP_ItemCode`) VALUES ";
         $i        = 1;
         foreach ($ItemsArr as $key => $data)
         {
@@ -575,7 +581,7 @@ WHERE   `sb`.`deleted` = 0
             $custSQL2 .= "('" . $data['U_CourseID'] . "',
                 '" . $ItemName . "',
 	        '" . $FrgnName . "',
-		'" . $U_Institute . "'),";
+		'" . $U_Institute . "','" . $data['SAP_ItemCode'] . "'),";
             $i++;
         }
         $exeSql2 = rtrim($custSQL2, ',');
@@ -592,7 +598,7 @@ WHERE   `sb`.`deleted` = 0
         $SupplierArr = $this->Supplier();
         echo '<hr>Supplier Table Syncing ';
 
-        $custSQL = "INSERT INTO `Supplier` (`U_BPID`, `CardName`, `CardFName`,`Phone1`,`E_Mail`) VALUES ";
+        $custSQL = "INSERT INTO `Supplier` (`U_BPID`, `CardName`, `CardFName`,`Phone1`,`E_Mail`,`SAP_CardCode`) VALUES ";
         $i       = 1;
         foreach ($SupplierArr as $key => $data)
         {
@@ -605,7 +611,7 @@ WHERE   `sb`.`deleted` = 0
                 '" . $CardName . "',
 	        '" . $CardFName . "',
                 '" . $Phone1 . "',
-		'" . $E_Mail . "'),";
+		'" . $E_Mail . "','" . $data['SAP_CardCode'] . "'),";
             $i++;
         }
         $exeSql = rtrim($custSQL, ',');
