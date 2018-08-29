@@ -11,7 +11,6 @@ class LeadsViewJunkleadlog extends SugarView
     
     public function display()
     {
-//SELECT l.id,l.first_name,l.last_name,l.phone_mobile,l.date_entered,lc.email_add_c,lc.te_ba_batch_id_c,l.autoassign,l.dristi_campagain_id,dristi_API_id FROM  `leads` AS l INNER JOIN leads_cstm AS lc ON l.id=lc.id_c WHERE LENGTH( l.phone_mobile ) <>10 AND l.neoxstatus=0  AND l.deleted=0 order by l.date_entered DESC limit 0,100
         global $db, $current_user;
         $logID = $current_user->id;
 	$councelorList = [];
@@ -37,7 +36,6 @@ class LeadsViewJunkleadlog extends SugarView
 	   $selected_to_date = date("d-m-Y",strtotime($_SESSION['jl_to_date']));
 	   $wheredr .= " AND DATE(l.date_entered)<='" . $_SESSION['jl_to_date'] . "'";
 	}
-
 		$sqlRel = "SELECT l.id,l.date_entered,l.first_name, l.last_name, l.phone_mobile, l.date_entered, lc.email_add_c, b.name AS batch_name, b.batch_code, l.autoassign, l.dristi_campagain_id, l.dristi_API_id, l.assigned_user_id,l.utm_term_c
 FROM  `leads` AS l
 INNER JOIN leads_cstm AS lc ON l.id = lc.id_c
@@ -52,6 +50,7 @@ ORDER BY l.date_entered DESC ";
 			$i = 0;
 			while($row = $db->fetchByAssoc($rel)){
 				$reason='';
+				$is_correct=0;
 				$councelorList[$i] = $row;
 				if(strlen($row['phone_mobile'])!=10){
 					$reason='Incorrect phone number format';
@@ -73,9 +72,13 @@ ORDER BY l.date_entered DESC ";
 				}
 				
 				else{
+					$is_correct=1;
 					$reason='All fields are correct. Lead is yet to go into Ameyo ';
 				}
 				$councelorList[$i]['reason']=$reason;
+				if($is_correct==1){
+					unset($councelorList[$i]);
+				}
 				$i++;
 				
 			}
