@@ -104,7 +104,7 @@
 	
         
         $autoassign='Yes';
-        $assigned_user_id='NULL';
+        $assigned_user_id=NULL;
         $duplicate_check =0;
         
 	$re = $GLOBALS['db']->query($sql);
