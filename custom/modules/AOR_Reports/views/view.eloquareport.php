@@ -82,7 +82,7 @@ class AOR_ReportsViewEloquareport extends SugarView {
 		 $is_in_eloqua='No';
 		}
 
-		$eloqua_score=$row['$eloqua_score'];
+		$eloqua_score=$row['eloqua_score'];
 		 $CRM_status=$row['CRM_status'];
 		 $CRM_description=$row['CRM_description'];
 		 $new_status=$row['new_status'];
