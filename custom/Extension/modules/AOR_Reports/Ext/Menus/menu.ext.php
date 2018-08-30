@@ -187,6 +187,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM)
         $module_menu[] = array('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
     }
     $module_menu[] = array('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=debtorreport', "Debtor Report", 'AOR_Reports');
 }
 
 
