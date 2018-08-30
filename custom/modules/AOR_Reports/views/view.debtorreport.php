@@ -248,7 +248,7 @@ class AOR_ReportsViewdebtorreport extends SugarView
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
-            $file        = "SrmPaymentReceived_report";
+            $file        = "debtor_report";
             $where       = '';
             $filename    = $file . "_" . $from_date . "_" . $to_date;
             $paymentList = array();
