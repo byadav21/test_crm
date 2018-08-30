@@ -168,7 +168,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displayDM)
 
     //$module_menu[] = array('index.php?module=AOR_Reports&action=eloquacontacts', "Eloqua Contacts", 'AOR_Reports');
     //$module_menu[] = array('index.php?module=AOR_Reports&action=eloquaobjects', "Eloqua Objects", 'AOR_Reports');
-    //$module_menu[] = array('index.php?module=AOR_Reports&action=eloquareport', "Eloqua Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=eloquareport', "Eloqua Report", 'AOR_Reports');
 
     if ($current_user->id == '5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id == 'ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id == 1 || $current_user->id == 'd81fc9e1-91ae-eba3-19d9-5af02415c81c' || $current_user->id == 'a790cb6d-961d-85ac-27d1-590d9dc00adc')
     {
