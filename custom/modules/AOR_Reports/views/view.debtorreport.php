@@ -178,7 +178,7 @@ class AOR_ReportsViewdebtorreport extends SugarView
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
         LEFT JOIN  te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
         LEFT JOIN  te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-    where l.deleted=0  $wherecl  AND DATE(pd.`date_of_payment`)<='2018-02-07'"
+    where l.deleted=0  $wherecl "
 #. "  and sprel.`te_student_te_student_payment_1te_student_ida` in ('47f844b9-5cf2-38bf-8609-5b603189a22d','bf0e02c2-c8a6-b4bc-2d40-5b57287a820f') "
 . "order by pd.`date_of_payment`,s.name ";
 
