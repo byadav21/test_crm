@@ -25,7 +25,7 @@ class sendVisitReport
         global $sugar_config, $app_list_strings, $current_user, $db;
         $mail = new FalconideEmail();
 
-        $file     = "VendorWiseAllocation_report";
+        $file     = "VendorWiseLeadAllocation_report";
         $where    = '';
         $filename = $file . "_" . $this->toDate;
 		$AllLeadData = $this->getAll();

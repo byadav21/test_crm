@@ -110,7 +110,7 @@ class FalconideEmail
         return $emailData;
     }
     
-    public function TestemailData($reponame, $filename, $date)
+    public function TestemailData($reponame, $filename, $date, $email_summary=NULL)
     {
 
            $emailData = array('email' => array('pawan.kumar@talentedge.in'
@@ -119,9 +119,10 @@ class FalconideEmail
                                                //'pritam.dutta@talentedge.in',
                                                //'pramod.singh@talentedge.in'
                                                 ),
-            'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
+             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
-            . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>',
+            . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>'
+			. $email_summary,
             'pdfFileName'   => $filename,
             'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
         return $emailData;
