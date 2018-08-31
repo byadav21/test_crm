@@ -78,84 +78,44 @@ class AOR_ReportsViewdebtorreport extends SugarView
 //        {
 //            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
 //        }
-        if (!isset($_SESSION['cccon_counselor']))
-        {
-            $_SESSION['cccon_counselor'] = array_keys($usersdd);
-        }
+        
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']      = $_REQUEST['batch'];
+         
+         
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_status']      = $_REQUEST['status'];
+           
         }
-//        if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
-//        {
-//            $selected_from_date = $_SESSION['cccon_from_date'];
-//            $selected_to_date   = $_SESSION['cccon_to_date'];
-//            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-//            $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-//            $wherecl            .= " AND DATE(pd.`date_of_payment`)>='" . $from_date . "' AND DATE(pd.`date_of_payment`)<='" . $to_date . "'";
-//        }
-//        elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
-//        {
-//            $selected_from_date = $_SESSION['cccon_from_date'];
-//            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-//            $wherecl            .= " AND DATE(pd.`date_of_payment`)>='" . $from_date . "' ";
-//        }
-//        elseif ($_SESSION['cccon_from_date'] == "" && $_SESSION['cccon_to_date'] != "")
-//        {
-//            $selected_to_date = $_SESSION['cccon_to_date'];
-//            $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-//            $wherecl          .= " AND DATE(pd.`date_of_payment`)<='" . $to_date . "' ";
-//        }
+
 
         $findBatch = array();
-        if (!empty($_SESSION['cccon_batch']))
-        {
-            $selected_batch = $_SESSION['cccon_batch'];
-        }
+      
         if (!empty($_SESSION['cccon_batch_code']))
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
         }
-        if (!empty($_SESSION['cccon_counselor']))
-        {
-            $selected_counselor = $_SESSION['cccon_counselor'];
-        }
-          if (!empty($_SESSION['cccon_status']))
-        {
-            $selected_status = $_SESSION['cccon_status'];
-        }
+   
 
         $paymentList = array();
         $StatusList  = array();
 
-        if (!empty($selected_batch))
-        {
-
-            $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch) . "')";
-        }
+       
         if (!empty($selected_batch_code))
         {
 
             $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch_code) . "')";
         }
-
-                 $leadSql = "SELECT 
+ 
+                  //echo '<pre>'.
+                    $leadSql = "SELECT 
                             s.name student_name,
                             sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
                             pd.id paymentID,
-
-                            p. name program_name,
                             l.id lead_id,
                             l.vendor,
                             l.converted_date,
                             te_ba_batch.fees_inr fee_inr,
                             pd.payment_source,
-
-
                             u.user_name,
                             te_ba_batch.name batch_name,
                             l.assigned_user_id,
@@ -176,21 +136,20 @@ class AOR_ReportsViewdebtorreport extends SugarView
         LEFT JOIN  leads l ON sb.leads_id=l.id
         LEFT JOIN  leads_cstm ON l.id= leads_cstm.id_c
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
-        LEFT JOIN  te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-        LEFT JOIN  te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-    where l.deleted=0  $wherecl "
-#. "  and sprel.`te_student_te_student_payment_1te_student_ida` in ('47f844b9-5cf2-38bf-8609-5b603189a22d','bf0e02c2-c8a6-b4bc-2d40-5b57287a820f') "
-. "order by pd.`date_of_payment`,s.name ";
+    where l.deleted=0  $wherecl order by pd.`date_of_payment`,s.name"; 
 
 
 
 
 
-        $leadObj      = $db->query($leadSql);
+       
         $checkOffline = array("Atom Gateway Payments", "paytm", "PayU");
         $Amountpaid = 0;
-        $_SESSION['cccon_batch_code']=array();
+        //$_SESSION['cccon_batch_code']=array();
         if(!empty($_SESSION['cccon_batch_code'])){
+            
+        $leadObj      = $db->query($leadSql);
+        
         while ($row          = $db->fetchByAssoc($leadObj))
         {
             //$Amountpaid += $row['amount'];
@@ -258,8 +217,8 @@ class AOR_ReportsViewdebtorreport extends SugarView
 
             $leadObj = $db->query($leadSql);
 
-        while ($row          = $db->fetchByAssoc($leadObj))
-        {
+           while ($row          = $db->fetchByAssoc($leadObj))
+          {
             //$Amountpaid += $row['amount'];
 
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
@@ -295,7 +254,10 @@ class AOR_ReportsViewdebtorreport extends SugarView
                 );
             
             
-             foreach ($paymentList as $key=>$val){
+          
+            }
+            
+            foreach ($paymentList as $key=>$val){
                 $paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
                 
               foreach ($val['installment'] as $key2=>$val2){
@@ -303,8 +265,6 @@ class AOR_ReportsViewdebtorreport extends SugarView
                 }
                 
             }
-            }
-            
            
             
             

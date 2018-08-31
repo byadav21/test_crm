@@ -272,25 +272,19 @@
                     <strong>Month</strong>
                 </th>
                 
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-                {*{foreach from = $paymentList key=keyx item=program}
-                {foreach from = $program.installment key=key item=value}
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                <strong>Instalment 1 amount received</strong>
-                </th>
-                {/foreach}
-                {/foreach}*}
+            
 
 
 
 
             </tr>
             
-            {if empty($paymentList)}<tr height="20" class="oddListRowS1"><td align="center" class="">Please select a Batch Code.</td></tr>{/if}
+            {if empty($paymentList)}<tr class="oddListRowS1"><td align="left"  colspan="30">Please select a Batch Code.</td></tr>{/if}
             {foreach from = $paymentList key=keyx item=program}
           
             
