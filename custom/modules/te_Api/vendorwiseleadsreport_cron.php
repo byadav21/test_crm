@@ -88,7 +88,7 @@ class sendVisitReport
             </tr>
         </table>';
 
-        $emailData = $mail->TestemailData('Vendor Wise Lead Allocation Report', $filename, $this->toDate,$email_summary);
+        $emailData = $mail->emailData('Vendor Wise Lead Allocation Report', $filename, $this->toDate,$email_summary);
         $mail->sendCertificateEmail($emailData);
     }
 	public function getReEnquired(){
