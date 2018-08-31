@@ -189,7 +189,8 @@ class AOR_ReportsViewdebtorreport extends SugarView
         $leadObj      = $db->query($leadSql);
         $checkOffline = array("Atom Gateway Payments", "paytm", "PayU");
         $Amountpaid = 0;
-        
+        $_SESSION['cccon_batch_code']=array();
+        if(!empty($_SESSION['cccon_batch_code'])){
         while ($row          = $db->fetchByAssoc($leadObj))
         {
             //$Amountpaid += $row['amount'];
@@ -239,7 +240,9 @@ class AOR_ReportsViewdebtorreport extends SugarView
                 }
                 $i++;
             }
+        }
             
+         
 
         //echo "<pre>";print_r($paymentList);exit();
 
@@ -290,9 +293,9 @@ class AOR_ReportsViewdebtorreport extends SugarView
                     ($row['date_of_payment']) ? date('F', strtotime($row['date_of_payment'])) : 'N/A'
                     //($row['due_date']) ? $row['due_date'] : 'N/A'
                 );
-            }
             
-            foreach ($paymentList as $key=>$val){
+            
+             foreach ($paymentList as $key=>$val){
                 $paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
                 
               foreach ($val['installment'] as $key2=>$val2){
@@ -300,6 +303,9 @@ class AOR_ReportsViewdebtorreport extends SugarView
                 }
                 
             }
+            }
+            
+           
             
             
                 

@@ -290,7 +290,7 @@
 
             </tr>
             
-             
+            {if empty($paymentList)}<tr height="20" class="oddListRowS1"><td align="center" class="">Please select a Batch Code.</td></tr>{/if}
             {foreach from = $paymentList key=keyx item=program}
           
             
