@@ -32,7 +32,7 @@ class sendVisitReport
 		$FreshLeadData = $this->getFresh();
 		$ReEnquiredLeadData = $this->getReEnquired();
 		$DuplicateLeadData = $this->getDuplicate();
-		//$getSummary = $this->getSummary();
+		$getSummary = $this->getSummary();
 		
 		$data = $AllLeadData;
 		$data .= "\n";
@@ -56,7 +56,7 @@ class sendVisitReport
                                 All Leads.
                             </td>
 							<td valign="top">
-                                '.count($AllLeadData).'
+                                '.$getSummary['total'].'
                             </td>
                         </tr>
 						<tr>
@@ -64,7 +64,7 @@ class sendVisitReport
                                 Fresh Leads.
                             </td>
 							<td valign="top">
-                                '.count($FreshLeadData).'
+                                '.$getSummary['fresh'].'
                             </td>
                         </tr>
 						<tr>
@@ -72,7 +72,7 @@ class sendVisitReport
                                 Duplicate Leads.
                             </td>
 							<td valign="top">
-                                '.count($DuplicateLeadData).'
+                                '.$getSummary['duplicate'].'
                             </td>
                         </tr>
 						<tr>
@@ -80,7 +80,7 @@ class sendVisitReport
                                 Re-Enquired Leads.
                             </td>
 							<td valign="top">
-                                '.count($ReEnquiredLeadData).'
+                                '.$getSummary['re_enquired'].'
                             </td>
                         </tr>
                     </table>
@@ -363,11 +363,11 @@ class sendVisitReport
 	public function getSummary(){
 		global $sugar_config, $app_list_strings, $current_user, $db;
 		$leadSql = "SELECT COUNT(leads.id) AS lead_count,
-                    leads.status_description
-             FROM leads
-             WHERE leads.date_entered >= '$this->fromDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59' AND leads.status_description IN('Call Back','Converted','Follow Up','Miscellaneous','New Lead','Payment enquiry','Program enquiry','Prospect','Recycle','Dead Number','Fallout','Not Eligible','Not Enquired','Ringing Multiple Times','Wrong Number','Duplicate','Re-Enquired')
-  
-             GROUP BY leads.status_description";
+                                    leads.status_description
+                            FROM leads
+                            WHERE leads.date_entered >= '$this->fromDate 00:00:00'
+                              AND leads.date_entered <= '$this->toDate 23:59:59'
+                            GROUP BY leads.status_description";
         
 
 
