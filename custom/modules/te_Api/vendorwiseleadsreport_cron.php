@@ -32,7 +32,7 @@ class sendVisitReport
 		$FreshLeadData = $this->getFresh();
 		$ReEnquiredLeadData = $this->getReEnquired();
 		$DuplicateLeadData = $this->getDuplicate();
-		$getSummary = $this->getSummary();
+		//$getSummary = $this->getSummary();
 		
 		$data = $AllLeadData;
 		$data .= "\n";
@@ -56,7 +56,7 @@ class sendVisitReport
                                 All Leads.
                             </td>
 							<td valign="top">
-                                '.$getSummary['total'].'
+                                '.count($AllLeadData).'
                             </td>
                         </tr>
 						<tr>
@@ -64,7 +64,7 @@ class sendVisitReport
                                 Fresh Leads.
                             </td>
 							<td valign="top">
-                                '.$getSummary['fresh'].'
+                                '.count($FreshLeadData).'
                             </td>
                         </tr>
 						<tr>
@@ -72,7 +72,7 @@ class sendVisitReport
                                 Duplicate Leads.
                             </td>
 							<td valign="top">
-                                '.$getSummary['duplicate'].'
+                                '.count($DuplicateLeadData).'
                             </td>
                         </tr>
 						<tr>
@@ -80,7 +80,7 @@ class sendVisitReport
                                 Re-Enquired Leads.
                             </td>
 							<td valign="top">
-                                '.$getSummary['re_enquired'].'
+                                '.count($ReEnquiredLeadData).'
                             </td>
                         </tr>
                     </table>
@@ -88,7 +88,7 @@ class sendVisitReport
             </tr>
         </table>';
 
-        $emailData = $mail->emailData('Vendor Wise Lead Allocation Report', $filename, $this->toDate,$email_summary);
+        $emailData = $mail->TestemailData('Vendor Wise Lead Allocation Report', $filename, $this->toDate,$email_summary);
         $mail->sendCertificateEmail($emailData);
     }
 	public function getReEnquired(){
