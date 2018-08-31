@@ -216,9 +216,10 @@ class AOR_ReportsViewdebtorreport extends SugarView
             $paymentList = array();
 
             $leadObj = $db->query($leadSql);
-
+            
+           if(!empty($_SESSION['cccon_batch_code'])){ 
            while ($row          = $db->fetchByAssoc($leadObj))
-          {
+           {
             //$Amountpaid += $row['amount'];
 
             $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
@@ -265,6 +266,7 @@ class AOR_ReportsViewdebtorreport extends SugarView
                 }
                 
             }
+           }
            
             
             
