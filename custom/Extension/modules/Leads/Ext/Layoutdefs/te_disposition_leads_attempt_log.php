@@ -7,7 +7,7 @@ $layout_defs["Leads"]["subpanel_setup"]['te_dispositionxx_leads'] = array (
   'subpanel_name' => 'default',
   'sort_order' => 'desc',
   'sort_by' => 'date_entered',
-  'title_key' => 'Attempt Log',
+  'title_key' => 'Disposition log',
   'get_subpanel_data' => 'te_disposition_leads',
   'top_buttons' => 
   array (
