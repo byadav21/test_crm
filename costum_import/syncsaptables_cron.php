@@ -202,7 +202,7 @@ class syncsaptables
                              `pd`.`date_of_payment` AS `TaxDate`,
                              `pd`.`date_of_payment` AS `DocDueDate`,
                              `s`.`SAP_CardCode` AS `CardCode`,
-                             concat(`leads`.`primary_address_street`, '', `leads`.`primary_address_city`, '', `leads`.`primary_address_state`, '', `leads`.`primary_address_postalcode`) AS `Address`,
+                             concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
                              `pd`.`invoice_order_number` AS `NumAtCard`,
                              `sb`.`batch_code` AS `U_Batch`,
                              `pd`.`SAP_Status` AS `SAP_Status`
@@ -341,7 +341,7 @@ class syncsaptables
                         `pd`.`date_of_payment` AS `DocDueDate`,
                         `pd`.`date_of_payment` AS `TaxDate`,
                         `s`.`SAP_CardCode` AS `CardCode`,
-                        concat(`leads`.`primary_address_street`, '', `leads`.`primary_address_city`, '', `leads`.`primary_address_state`, '', `leads`.`primary_address_postalcode`) AS `Address`,
+                        concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
                         `pd`.`Pay_Status` AS `Pay_Status`,
                         `pd`.`transaction_id` AS `U_PaymnetID`,
                         (CASE

@@ -54,7 +54,8 @@ class syncsaptables
         $query   = "SELECT  replace(`te_in_institutes`.`id`, '-', '') AS `U_BPID`,
                             replace(`te_in_institutes`.`name`, '&', ' ') AS `CardName`,
                             replace(`te_in_institutes`.`description`, '&', ' ') AS `CardFName`,
-                            te_in_institutes.SAP_CardCode
+                            te_in_institutes.SAP_CardCode,
+                            te_in_institutes.SAP_Status
                      FROM   `te_in_institutes`
                      WHERE  `te_in_institutes`.`deleted` = 0 
                      AND    `te_in_institutes`.`date_entered` > '2018-04-01'";
@@ -202,7 +203,7 @@ class syncsaptables
                              `pd`.`date_of_payment` AS `TaxDate`,
                              `pd`.`date_of_payment` AS `DocDueDate`,
                              `s`.`SAP_CardCode` AS `CardCode`,
-                             concat(`leads`.`primary_address_street`, '', `leads`.`primary_address_city`, '', `leads`.`primary_address_state`, '', `leads`.`primary_address_postalcode`) AS `Address`,
+                             concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
                              `pd`.`invoice_order_number` AS `NumAtCard`,
                              `sb`.`batch_code` AS `U_Batch`,
                              `pd`.`SAP_Status` AS `SAP_Status`
@@ -337,7 +338,7 @@ class syncsaptables
        `pd`.`date_of_payment` AS `DocDueDate`,
        `pd`.`date_of_payment` AS `TaxDate`,
        `s`.`SAP_CardCode` AS `CardCode`,
-       concat(`leads`.`primary_address_street`, '', `leads`.`primary_address_city`, '', `leads`.`primary_address_state`, '', `leads`.`primary_address_postalcode`) AS `Address`,
+        concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
        `pd`.`Pay_Status` AS `Pay_Status`,
        `pd`.`transaction_id` AS `U_PaymnetID`,
        (CASE
@@ -512,12 +513,12 @@ WHERE   `sb`.`deleted` = 0
         $CustomersArr = $this->Customers();
         echo '<hr>Customers Table Syncing ';
 
-        $custSQL = "INSERT INTO `Customers` (`U_BPID`, `CardName`, `CardFName`,`SAP_CardCode`) VALUES ";
+        $custSQL = "INSERT INTO `Customers` (`U_BPID`, `CardName`, `CardFName`,`SAP_CardCode`,`SAP_Status`) VALUES ";
         
         $i=1;
         foreach ($CustomersArr as $key => $data)
         {
-            $custSQL .= "('" . $data['U_BPID'] . "','" . $data['CardName'] . "','" . $data['CardFName'] . "','" . $data['SAP_CardCode'] . "'),";
+            $custSQL .= "('" . $data['U_BPID'] . "','" . $data['CardName'] . "','" . $data['CardFName'] . "','" . $data['SAP_CardCode'] . "','" . $data['SAP_Status'] . "'),";
         $i++;
         }
         $exeSql = rtrim($custSQL, ',');
@@ -534,7 +535,7 @@ WHERE   `sb`.`deleted` = 0
         $StudCustomersArr = $this->StudCustomers();
         echo '<hr>StudCustomers Table Syncing ';
 
-        $custSQL2 = "INSERT INTO `StudCustomers` (`U_BPId`, `CardName`, `CardFName`,`E_Mail`,`Phone1`,`Cellular`,`State1`,`State2`,`Country`,`MailCountr`,`SAP_CardCode`) VALUES ";
+        $custSQL2 = "INSERT INTO `StudCustomers` (`U_BPId`, `CardName`, `CardFName`,`E_Mail`,`Phone1`,`Cellular`,`State1`,`State2`,`Country`,`MailCountr`,`SAP_CardCode`,`SAP_Status`) VALUES ";
         $i        = 1;
         foreach ($StudCustomersArr as $key => $data)
         {
@@ -550,7 +551,7 @@ WHERE   `sb`.`deleted` = 0
 		'" . $data['State1'] . "',
 		'" . $data['State2'] . "',
 		'" . $data['Country'] . "',
-		'" . $data['MailCountr'] . "','" . $data['SAP_CardCode'] . "'),";
+		'" . $data['MailCountr'] . "','" . $data['SAP_CardCode'] . "','" . $data['SAP_Status'] . "'),";
             $i++;
         }
         $exeSql2 = rtrim($custSQL2, ',');
@@ -568,7 +569,7 @@ WHERE   `sb`.`deleted` = 0
         $ItemsArr = $this->Items();
         echo '<hr>Items Table Syncing ';
 
-        $custSQL2 = "INSERT INTO `Items` (`U_CourseID`, `ItemName`, `FrgnName`,`U_Institute`,`SAP_ItemCode`) VALUES ";
+        $custSQL2 = "INSERT INTO `Items` (`U_CourseID`, `ItemName`, `FrgnName`,`U_Institute`,`SAP_ItemCode`,`SAP_Status`) VALUES ";
         $i        = 1;
         foreach ($ItemsArr as $key => $data)
         {
@@ -581,7 +582,7 @@ WHERE   `sb`.`deleted` = 0
             $custSQL2 .= "('" . $data['U_CourseID'] . "',
                 '" . $ItemName . "',
 	        '" . $FrgnName . "',
-		'" . $U_Institute . "','" . $data['SAP_ItemCode'] . "'),";
+		'" . $U_Institute . "','" . $data['SAP_ItemCode'] . "','" . $data['SAP_Status'] . "'),";
             $i++;
         }
         $exeSql2 = rtrim($custSQL2, ',');
@@ -598,7 +599,7 @@ WHERE   `sb`.`deleted` = 0
         $SupplierArr = $this->Supplier();
         echo '<hr>Supplier Table Syncing ';
 
-        $custSQL = "INSERT INTO `Supplier` (`U_BPID`, `CardName`, `CardFName`,`Phone1`,`E_Mail`,`SAP_CardCode`) VALUES ";
+        $custSQL = "INSERT INTO `Supplier` (`U_BPID`, `CardName`, `CardFName`,`Phone1`,`E_Mail`,`SAP_CardCode`,`SAP_Status`) VALUES ";
         $i       = 1;
         foreach ($SupplierArr as $key => $data)
         {
@@ -611,7 +612,7 @@ WHERE   `sb`.`deleted` = 0
                 '" . $CardName . "',
 	        '" . $CardFName . "',
                 '" . $Phone1 . "',
-		'" . $E_Mail . "','" . $data['SAP_CardCode'] . "'),";
+		'" . $E_Mail . "','" . $data['SAP_CardCode'] . "','" . $data['SAP_Status'] . "'),";
             $i++;
         }
         $exeSql = rtrim($custSQL, ',');
@@ -628,7 +629,7 @@ WHERE   `sb`.`deleted` = 0
         $Stud_OINVArr = $this->Stud_OINV();
         echo '<hr>Stud_OINV Table Syncing ';
 
-        $custSQL = "INSERT INTO `Stud_OINV` (`U_OrigEntry`, `U_OrigNum`,`U_ARInvNo`,`SlpCode`,`DocDate`,`TaxDate`,`DocDueDate`,`CardCode`,`Address`,`NumAtCard`,`U_Batch`) VALUES ";
+        $custSQL = "INSERT INTO `Stud_OINV` (`U_OrigEntry`, `U_OrigNum`,`U_ARInvNo`,`SlpCode`,`DocDate`,`TaxDate`,`DocDueDate`,`CardCode`,`Address`,`NumAtCard`,`U_Batch`,`SAP_Status`) VALUES ";
 
         $i = 1;
         foreach ($Stud_OINVArr as $key => $data)
@@ -646,7 +647,7 @@ WHERE   `sb`.`deleted` = 0
 		'" . $data['DocDueDate'] . "',
 		'" . $data['CardCode'] . "',
 		'" . $Address . "',
-		'" . $data['NumAtCard'] . "','" . $data['U_Batch'] . "'),";
+		'" . $data['NumAtCard'] . "','" . $data['U_Batch'] . "','" . $data['SAP_Status'] . "'),";
 
             $i++;
         }
@@ -665,7 +666,7 @@ WHERE   `sb`.`deleted` = 0
         $Stud_INV1Arr = $this->Stud_INV1();
         echo '<hr>Stud_INV1 Table Syncing ';
 
-        $custSQL = "INSERT INTO `Stud_INV1` (`U_OrigEntry`, `U_OrigLine`,`ItemCode`,`Quantity`,`PriceBefDi`,`TaxCode`,`OcrCode`,`OcrCode2`,`OcrCode3`,`OcrCode4`,`OcrCode5`,`Project`) VALUES ";
+        $custSQL = "INSERT INTO `Stud_INV1` (`U_OrigEntry`, `U_OrigLine`,`ItemCode`,`Quantity`,`PriceBefDi`,`TaxCode`,`OcrCode`,`OcrCode2`,`OcrCode3`,`OcrCode4`,`OcrCode5`,`Project`,`SAP_Status`) VALUES ";
 
         $i = 1;
         foreach ($Stud_INV1Arr as $key => $data)
@@ -685,7 +686,7 @@ WHERE   `sb`.`deleted` = 0
                 '" . $data['OcrCode3'] . "',
                 '" . $data['OcrCode4'] . "',
                 '" . $data['OcrCode5'] . "',
-		'" . $Project . "'),";
+		'" . $Project . "','" . $data['SAP_Status']  . "'),";
 
             $i++;
         }
@@ -704,12 +705,12 @@ WHERE   `sb`.`deleted` = 0
         $Stud_INV12Arr = $this->Stud_INV12();
         echo '<hr>Stud_INV12 Table Syncing ';
 
-        $custSQL = "INSERT INTO `Stud_INV12` (`U_OrigEntry`, `BpStateCod`) VALUES ";
+        $custSQL = "INSERT INTO `Stud_INV12` (`U_OrigEntry`, `BpStateCod`,'SAP_Status') VALUES ";
 
         $i = 1;
         foreach ($Stud_INV12Arr as $key => $data)
         {
-            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['BpStateCod'] . "'),";
+            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['BpStateCod'] . "','" . $data['SAP_Status'] . "'),";
             $i++;
         }
 
@@ -770,11 +771,11 @@ WHERE   `sb`.`deleted` = 0
 
         echo '<hr>WEB_RCT1 Table Syncing ';
 
-        $custSQL = "INSERT INTO `WEB_RCT1` (`U_OrigEntry`, `DueDate`,`CheckSum`) VALUES ";
+        $custSQL = "INSERT INTO `WEB_RCT1` (`U_OrigEntry`, `DueDate`,`CheckSum`,`Pay_Status`) VALUES ";
         $i       = 1;
         foreach ($WEB_RCT1Arr as $key => $data)
         {
-            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DueDate'] . "','" . $data['CheckSum'] . "'),";
+            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DueDate'] . "','" . $data['CheckSum'] . "','" . $data['Pay_Status'] . "'),";
 
             $i++;
         }
@@ -794,11 +795,11 @@ WHERE   `sb`.`deleted` = 0
 
         echo '<hr>WEB_RCT2 Table Syncing ';
 
-        $custSQL = "INSERT INTO `WEB_RCT2` (`U_OrigEntry`, `DocEntry`,`SumApplied`) VALUES ";
+        $custSQL = "INSERT INTO `WEB_RCT2` (`U_OrigEntry`, `DocEntry`,`SumApplied`,`Pay_Status`) VALUES ";
         $i       = 1;
         foreach ($WEB_RCT2Arr as $key => $data)
         {
-            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DocEntry'] . "','" . $data['SumApplied'] . "'),";
+            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DocEntry'] . "','" . $data['SumApplied'] . "','" . $data['Pay_Status'] . "'),";
             $i++;
         }
         $exeSql = rtrim($custSQL, ',');
@@ -817,7 +818,7 @@ WHERE   `sb`.`deleted` = 0
         $WEB_OPRJArr = $this->WEB_OPRJ();
         echo '<hr>WEB_OPRJ Table Syncing ';
 
-        $custSQL = "INSERT INTO `WEB_OPRJ` (`U_OrigCode`, `PrjCode`,`PrjName`,`Locked`,`Active`) VALUES ";
+        $custSQL = "INSERT INTO `WEB_OPRJ` (`U_OrigCode`, `PrjCode`,`PrjName`,`Locked`,`Active`,`SAP_Status`) VALUES ";
         $i       = 1;
         foreach ($WEB_OPRJArr as $key => $data)
         {
@@ -828,7 +829,7 @@ WHERE   `sb`.`deleted` = 0
                         '" . $PrjCode . "',
                         '" . $PrjName . "',
                         '" . $data['Locked'] . "',
-                        '" . $data['Active'] . "'),";
+                        '" . $data['Active'] . "','" . $data['SAP_Status'] . "'),";
 
 
             $i++;
