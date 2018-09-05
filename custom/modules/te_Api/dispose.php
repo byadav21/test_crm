@@ -94,13 +94,13 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $disPosedUser     = $userDispoArr[0]['userId'];
         }
 
-        $sql = "SELECT  attempts_c,
-                        auto_attempts_c,
-                        id_c,
-                        assigned_user_id
-                 FROM leads
-                 INNER JOIN leads_cstm ON id_c=id
-                 WHERE id='" . $_REQUEST['lead_reference'] . "'";
+        $sql = "SELECT  lc.attempts_c,
+                        lc.auto_attempts_c,
+                        lc.id_c,
+                        l.assigned_user_id
+                 FROM leads l
+                 INNER JOIN leads_cstm lc ON lc.id_c=l.id
+                 WHERE l.id='" . $_REQUEST['lead_reference'] . "'";
 
         $res = $db->query($sql);
         if ($db->getRowCount($res) > 0)
@@ -116,17 +116,19 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
             $sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res = $db->query($sql);
-
-
-            $AtmpLogSql = "INSERT INTO attempt_log
-                                        SET lead_id='$id',
-                                            user='$disPosedUser',
-                                            dispositionName='" . $_REQUEST['dispositionName'] . "',
-                                            systemDisposition='" . $_REQUEST['systemDisposition'] . "',
-                                            attempts_c='$attempid',
-                                            dispositionCode='$dispositionCode',
-                                            callType='" . $_REQUEST['callType'] . "'";
-            $res        = $db->query($AtmpLogSql);
+            //createLog('{update leads_cstm}', 'update_leads_cstm.txt', $sql, $debugArr);
+            if ($res)
+            {
+                $AtmpLogSql = "INSERT INTO attempt_log
+                                            SET lead_id='$id',
+                                                user='$disPosedUser',
+                                                dispositionName='" . $_REQUEST['dispositionName'] . "',
+                                                systemDisposition='" . $_REQUEST['systemDisposition'] . "',
+                                                attempts_c='$attempid',
+                                                dispositionCode='$dispositionCode',
+                                                callType='" . $_REQUEST['callType'] . "'";
+                $res        = $db->query($AtmpLogSql);
+            }
 
 
             if ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial')
@@ -153,7 +155,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             //////////////////////////////
             if ($dispositionCode != 'null')
             {
-              
+
 
                 $disPosedUser    = '';
                 $modifieduserIDX = '';
@@ -205,8 +207,25 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 }
 
                 createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
-                
-                $bean->save();
+
+                $checkSaveBean = $bean->save();
+
+                if ($checkSaveBean)
+                {
+                    $sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+                    $res = $db->query($sql);
+                    createLog('{update leads_cstm}', 'update_leads_cstm.txt', $sql, $debugArr);
+
+                    $AtmpLogSql = "INSERT INTO attempt_log
+                                                    SET lead_id='$id',
+                                                        user='$disPosedUser',
+                                                        dispositionName='" . $_REQUEST['dispositionName'] . "',
+                                                        systemDisposition='" . $_REQUEST['systemDisposition'] . "',
+                                                        attempts_c='$attempid',
+                                                        dispositionCode='$dispositionCode',
+                                                        callType='" . $_REQUEST['callType'] . "'";
+                    $res        = $db->query($AtmpLogSql);
+                }
             }
             else
             {
@@ -216,6 +235,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 }
             }
             /////////////////////////////
+            //createLog('{update leads_cstm}', 'update_leads_cstm02.txt', 'attempt'.$attempid, $debugArr);
         }
     }
 
