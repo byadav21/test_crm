@@ -130,25 +130,92 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
 
             if ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial')
-                {
-                    $auto_attempts++;
-                    $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "' where id_c='" . $id . "'";
-                    $res = $db->query($sql);
-                }
+            {
+                $auto_attempts++;
+                $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "' where id_c='" . $id . "'";
+                $res = $db->query($sql);
+            }
 
 
             if ($auto_attempts >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
+            {
+
+                $bean                     = BeanFactory::getBean('Leads', $id);
+                $bean->status             = 'Dead';
+                $bean->status_description = 'Auto Retired';
+                $bean->save();
+
+                $autoArrr = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
+                createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $autoArrr);
+            }
+
+
+            //////////////////////////////
+            if ($dispositionCode != 'null')
+            {
+              
+
+                $disPosedUser    = '';
+                $modifieduserIDX = '';
+                if (isset($_REQUEST['userAssociations']))
                 {
-
-                    $bean                     = BeanFactory::getBean('Leads', $id);
-                    $bean->status             = 'Dead';
-                    $bean->status_description = 'Auto Retired';
-                    $bean->save();
-
-                    $autoArrr = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
-                    createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $autoArrr);
+                    $userAssociations = $_REQUEST['userAssociations'];
+                    $userSJson        = str_replace('&quot;', '"', $userAssociations);
+                    $userDispoArr     = json_decode($userSJson, TRUE);
+                    $disPosedUser     = $userDispoArr[0]['userId'];
+                    if ($disPosedUser != '')
+                    {
+                        $getusrQery      = $db->query("SELECT id,user_name FROM `users` WHERE `status`='Active' and `deleted`=0 and user_name='" . $disPosedUser . "'");
+                        $recordsData     = $db->fetchByAssoc($getusrQery);
+                        $modifieduserIDX = $recordsData['id'];
+                        $db->query("update leads set modified_user_id='" . $modifieduserIDX . "' where id='" . $_REQUEST['lead_reference'] . "'");
+                    }
+                    createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
                 }
 
+                $finalDatTime = '';
+                if (isset($_REQUEST['callbackTime']) && $_REQUEST['callbackTime'] != '')
+                {
+                    $CALLBACKDATEArr = (explode("T", $_REQUEST['callbackTime']));
+                    $callBackDate    = $CALLBACKDATEArr[0];
+                    $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
+                    $callBackHis     = $callBackHisArr[0];
+                    $finalDatTime    = $callBackDate . ' ' . $callBackHis;
+                }
+
+                $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
+                $bean->status             = $status;
+                $bean->status_description = $dispositionCode;
+                $bean->dispositionName    = $_REQUEST['dispositionName'];
+                $bean->callType           = $_REQUEST['callType'];
+                //$bean->modified_user_id   = $modifieduserIDX;
+                if ($dispositionCode == 'Follow Up' && $finalDatTime != '')
+                {
+
+                    $bean->date_of_followup = $finalDatTime;
+
+                    createLog('{Ameyo Follow Up response}', 'callback_dispose_log.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
+                }
+                if ($dispositionCode == 'Prospect' && $finalDatTime != '')
+                {
+                    $bean->date_of_prospect = $finalDatTime;
+
+
+                    createLog('{Ameyo Prospect response}', 'callback_dispose_log.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
+                }
+
+                createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
+                
+                $bean->save();
+            }
+            else
+            {
+                if ((isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null') && ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial'))
+                {
+                    createLog('{Ameyo null dispostion response}', 'leads_with_null_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
+                }
+            }
+            /////////////////////////////
         }
     }
 
@@ -174,172 +241,60 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
 
 
-
-    if ($dispositionCode != 'null')
-    {
-        $status   = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
-        $debugArr = array(
-            'lead_id'           => $_REQUEST['lead_reference'],
-            'status'            => $status,
-            'SubStatus'         => $dispositionCode,
-            'entryPoint'        => $_REQUEST['entryPoint'],
-            'phone'             => $_REQUEST['phone'],
-            'dispositionName'   => $_REQUEST['dispositionName'],
-            'systemDisposition' => $_REQUEST['systemDisposition'],
-            'callType'          => $_REQUEST['callType'],
-            'campaignId'        => $_REQUEST['campaignId']);
-
-        $disPosedUser    = '';
-        $modifieduserIDX = '';
-        if (isset($_REQUEST['userAssociations']))
-        {
-            $userAssociations = $_REQUEST['userAssociations'];
-            $userSJson        = str_replace('&quot;', '"', $userAssociations);
-            $userDispoArr     = json_decode($userSJson, TRUE);
-            $disPosedUser     = $userDispoArr[0]['userId'];
-            if ($disPosedUser != '')
-            {
-                $getusrQery      = $db->query("SELECT id,user_name FROM `users` WHERE `status`='Active' and `deleted`=0 and user_name='" . $disPosedUser . "'");
-                $recordsData     = $db->fetchByAssoc($getusrQery);
-                $modifieduserIDX = $recordsData['id'];
-                $db->query("update leads set modified_user_id='" . $modifieduserIDX . "' where id='" . $_REQUEST['lead_reference'] . "'");
-            }
-            createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
-        }
-
-        $finalDatTime = '';
-        if (isset($_REQUEST['callbackTime']) && $_REQUEST['callbackTime'] != '')
-        {
-            $CALLBACKDATEArr = (explode("T", $_REQUEST['callbackTime']));
-            $callBackDate    = $CALLBACKDATEArr[0];
-            $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
-            $callBackHis     = $callBackHisArr[0];
-            $finalDatTime    = $callBackDate . ' ' . $callBackHis;
-        }
-
-        $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
-        $bean->status             = $status;
-        $bean->status_description = $dispositionCode;
-        $bean->dispositionName    = $_REQUEST['dispositionName'];
-        $bean->callType           = $_REQUEST['callType'];
-        //$bean->modified_user_id   = $modifieduserIDX;
-        if ($dispositionCode == 'Follow Up' && $finalDatTime != '')
-        {
-           
-            $bean->date_of_followup =   $finalDatTime;
-           
-            createLog('{Ameyo Follow Up response}', 'callback_dispose_log.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
-        }
-	if ($dispositionCode == 'Prospect' && $finalDatTime != '')
-        {
-            $bean->date_of_prospect = $finalDatTime;
-           
-           
-            createLog('{Ameyo Prospect response}', 'callback_dispose_log.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
-        }
+    /* if ($_REQUEST['callType'] == 'manual.dial.customer')
+      {
 
 
-        $bean->save();
+      //$res=$db->query($lead);
+      if ($db->getRowCount($res) > 0)
+      {
+      $campID                            = 18;
+      $apiID                             = 42;
+      $records                           = $db->fetchByAssoc($res);
+      $api                               = new te_Api_override();
+      $data                              = [];
+      $session                           = $api->doLogin();
+      $data['sessionId']                 = $session;
+      $data['properties']                = array('update.customer' => true, 'migrate.customer' => true);
+      $data['customerRecords']           = [];
+      $customerRecords['name']           = $records['first_name'] . " " . $records['last_name'];
+      $customerRecords['first_name']     = $records['first_name'];
+      $customerRecords['last_name']      = ($records['last_name']) ? $records['last_name'] : '';
+      $customerRecords['phone1']         = $phone;
+      $customerRecords['lead_reference'] = $records['id'];
+      $data['customerRecords'][]         = $customerRecords;
+
+      if ($records['dristi_campagain_id'] == 18)
+      {
+
+      $campID = 18;
+      $apiID  = 46;
+      }
+      else if ($records['dristi_campagain_id'] == 16)
+      {
+
+      $campID = 16;
+      $apiID  = 47;
+      }
+      else if ($records['dristi_campagain_id'] == 17)
+      {
+
+      $campID = 17;
+      $apiID  = 48;
+      }
+
+      $responses = $api->uploadContacts($data, $campID, $apiID);
 
 
-
-
-        createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
-    }
-    else
-    {
-
-	        
-    if ((isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null') && ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial'))
-        {
-             		
-
-		     /* $sql = "SELECT `status`,`status_description` FROM `leads` WHERE id='" . $_REQUEST['lead_reference'] . "'";
-                      $res = $db->query($sql);
-                      $records        = $db->fetchByAssoc($res);
-                      $status         = $records['status'];
-                      $status_description = $records['status_description'];
-               
-		     $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
-		     $bean->status             = $status;
-	             $bean->status_description = $status_description;
-
-                     $bean->dispositionName    = $_REQUEST['dispositionName'];
-                     $bean->callType           = $_REQUEST['callType'];
-                     $checkSave = $bean->save();
-		     if($checkSave)
-		       {
-			 createLog('{Ameyo null dispostion response}', 'checkSave_with_null_dispose_log.txt', $checkSave, $_REQUEST);
-		       }
-                    */
-                   
-                   
-         createLog('{Ameyo null dispostion response}', 'leads_with_null_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
-		    // $bean->save();
-        }
-
-    createLog('{Ameyo null dispostion response}', 'null_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);    
-    }
-
-
-
-
-
-
-    if ($_REQUEST['callType'] == 'manual.dial.customer')
-    {
-
-
-        //$res=$db->query($lead);
-        if ($db->getRowCount($res) > 0)
-        {
-            $campID                            = 18;
-            $apiID                             = 42;
-            $records                           = $db->fetchByAssoc($res);
-            $api                               = new te_Api_override();
-            $data                              = [];
-            $session                           = $api->doLogin();
-            $data['sessionId']                 = $session;
-            $data['properties']                = array('update.customer' => true, 'migrate.customer' => true);
-            $data['customerRecords']           = [];
-            $customerRecords['name']           = $records['first_name'] . " " . $records['last_name'];
-            $customerRecords['first_name']     = $records['first_name'];
-            $customerRecords['last_name']      = ($records['last_name']) ? $records['last_name'] : '';
-            $customerRecords['phone1']         = $phone;
-            $customerRecords['lead_reference'] = $records['id'];
-            $data['customerRecords'][]         = $customerRecords;
-
-            if ($records['dristi_campagain_id'] == 18)
-            {
-
-                $campID = 18;
-                $apiID  = 46;
-            }
-            else if ($records['dristi_campagain_id'] == 16)
-            {
-
-                $campID = 16;
-                $apiID  = 47;
-            }
-            else if ($records['dristi_campagain_id'] == 17)
-            {
-
-                $campID = 17;
-                $apiID  = 48;
-            }
-
-            $responses = $api->uploadContacts($data, $campID, $apiID);
-
-
-            $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/manual_dial_customer_if_18_16_17.txt", "a");
-            fwrite($file, date('Y-m-d H:i:s') . "\n");
-            fwrite($file, '$data  if {18,16,17}' . "\n");
-            fwrite($file, print_r($data, TRUE) . "\n");
-            fwrite($file, '$responses  if {18,16,17}' . "\n");
-            fwrite($file, $responses . "\n");
-            fclose($file);
-        }
-    }
+      $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/manual_dial_customer_if_18_16_17.txt", "a");
+      fwrite($file, date('Y-m-d H:i:s') . "\n");
+      fwrite($file, '$data  if {18,16,17}' . "\n");
+      fwrite($file, print_r($data, TRUE) . "\n");
+      fwrite($file, '$responses  if {18,16,17}' . "\n");
+      fwrite($file, $responses . "\n");
+      fclose($file);
+      }
+      } */
     exit();
 }
 die;
