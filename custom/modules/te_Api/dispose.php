@@ -117,7 +117,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
             $res = $db->query($sql);
             //createLog('{update leads_cstm}', 'update_leads_cstm.txt', $sql, $debugArr);
-            if ($res)
+            //if ($res)
+	   if ($res && $_REQUEST['callType']!='manual.dial.customer')
             {
                 $AtmpLogSql = "INSERT INTO attempt_log
                                             SET lead_id='$id',
@@ -210,7 +211,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
                 $checkSaveBean = $bean->save();
 
-                if ($checkSaveBean)
+                //if ($checkSaveBean)
+                if ($checkSaveBean && $_REQUEST['callType']=='manual.dial.customer')
                 {
                     $sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
                     $res = $db->query($sql);
