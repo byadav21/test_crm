@@ -122,9 +122,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             {
                 $attempid++;
                 $auto_attempts++;
-		$sql = "update leads_cstm set attempts_c='" . $attempid . "',auto_attempts_c='" . $auto_attempts . "' where id_c='" . $id . "'";
-                $res = $db->query($sql);
-
+                
 		$AtmpLogSql = "INSERT INTO attempt_log
                                             SET lead_id='$id',
                                                 user='$disPosedUser',
@@ -134,6 +132,13 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                 dispositionCode='$dispositionCode',
                                                 callType='" . $_REQUEST['callType'] . "'";
                 $res        = $db->query($AtmpLogSql);
+                
+                
+                $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
+                $resx = $db->query($sql);
+                if($resx){
+                createLog('{In Auto Dial}', 'auto_dial_log_6.txt', $sql, $debugArr);
+                }
             }
 
 
