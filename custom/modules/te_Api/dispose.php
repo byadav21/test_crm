@@ -111,16 +111,20 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid       = intval($records['attempts_c']);
             $auto_attempts  = intval($records['auto_attempts_c']);
             $assignedUserId = $records['assigned_user_id'];
+	    
+           
 
-            $attempid++;
-
-            $sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
-            $res = $db->query($sql);
+            //$sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+            //$res = $db->query($sql);
             //createLog('{update leads_cstm}', 'update_leads_cstm.txt', $sql, $debugArr);
             //if ($res)
-	   if ($res && $_REQUEST['callType']!='manual.dial.customer')
+	   if ($_REQUEST['callType']!='manual.dial.customer')
             {
-                $AtmpLogSql = "INSERT INTO attempt_log
+                $attempid++;
+		$sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+                $res = $db->query($sql);
+
+		$AtmpLogSql = "INSERT INTO attempt_log
                                             SET lead_id='$id',
                                                 user='$disPosedUser',
                                                 dispositionName='" . $_REQUEST['dispositionName'] . "',
@@ -215,7 +219,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 if ($checkSaveBean && $_REQUEST['callType']=='manual.dial.customer')
                 {   
 		    $attempid++;
-                    $sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+                    
+                    $sql = "update leads_cstm set attempts_c='" . $attempid. "' where id_c='" . $id . "'";
                     $res = $db->query($sql);
                     createLog('{update leads_cstm}', 'update_leads_cstm.txt', $sql, $debugArr);
 
