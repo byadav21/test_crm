@@ -121,7 +121,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 	   if ($_REQUEST['callType']!='manual.dial.customer')
             {
                 $attempid++;
-		$sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+                $auto_attempts++;
+		$sql = "update leads_cstm set attempts_c='" . $attempid . "',auto_attempts_c='" . $auto_attempts . "' where id_c='" . $id . "'";
                 $res = $db->query($sql);
 
 		$AtmpLogSql = "INSERT INTO attempt_log
@@ -136,12 +137,12 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             }
 
 
-            if ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial')
-            {
-                $auto_attempts++;
-                $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
-                $res = $db->query($sql);
-            }
+//            if ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial')
+//            {
+//                
+//                $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
+//                $res = $db->query($sql);
+//            }
 
 
             if ($auto_attempts >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
