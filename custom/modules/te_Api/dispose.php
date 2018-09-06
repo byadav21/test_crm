@@ -133,11 +133,14 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                 callType='" . $_REQUEST['callType'] . "'";
                 $res        = $db->query($AtmpLogSql);
                 
-                
-                $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
-                $resx = $db->query($sql);
-                if($resx){
-                createLog('{In Auto Dial}', 'auto_dial_log_6.txt', $sql, $debugArr);
+                if ($dispositionCode == 'null')
+                {
+                    $sql  = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+                    $resx = $db->query($sql);
+                    if ($resx)
+                    {
+                        createLog('{In Auto Dial}', 'auto_dial_log_6.txt', $sql, $debugArr);
+                    }
                 }
             }
 
@@ -244,6 +247,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 else if($checkSaveBean && $_REQUEST['callType']!='manual.dial.customer'){
                     
                     $attempid++;
+                    $auto_attempts++;
                     $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
                     $resx = $db->query($sql);
                     createLog('{Auto Retired with Status}', 'auto_retired_log.txt', $id, $autoArrr);
