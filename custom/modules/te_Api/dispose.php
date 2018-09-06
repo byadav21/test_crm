@@ -111,19 +111,13 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid       = intval($records['attempts_c']);
             $auto_attempts  = intval($records['auto_attempts_c']);
             $assignedUserId = $records['assigned_user_id'];
-	    
            
-
-            //$sql = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
-            //$res = $db->query($sql);
-            //createLog('{update leads_cstm}', 'update_leads_cstm.txt', $sql, $debugArr);
-            //if ($res)
-	   if ($_REQUEST['callType']!='manual.dial.customer')
+	    if ($_REQUEST['callType']!='manual.dial.customer' && $dispositionCode == 'null')
             {
-                $attempid++;
-                $auto_attempts++;
+                 $attempid++;
+                 $auto_attempts++;
                 
-		$AtmpLogSql = "INSERT INTO attempt_log
+		 $AtmpLogSql = "INSERT INTO attempt_log
                                             SET lead_id='$id',
                                                 user='$disPosedUser',
                                                 dispositionName='" . $_REQUEST['dispositionName'] . "',
@@ -133,24 +127,15 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                 callType='" . $_REQUEST['callType'] . "'";
                 $res        = $db->query($AtmpLogSql);
                 
-                if ($dispositionCode == 'null')
-                {
+             
                     $sql  = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='" . $attempid . "' where id_c='" . $id . "'";
                     $resx = $db->query($sql);
                     if ($resx)
                     {
                         createLog('{In Auto Dial}', 'auto_dial_log_6.txt', $sql, $debugArr);
                     }
-                }
+                
             }
-
-
-//            if ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial')
-//            {
-//                
-//                $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
-//                $res = $db->query($sql);
-//            }
 
 
             if ($auto_attempts >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
@@ -164,7 +149,6 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $autoArrr = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
                 createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $autoArrr);
             }
-
 
             //////////////////////////////
             if ($dispositionCode != 'null')
@@ -228,7 +212,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 if ($checkSaveBean && $_REQUEST['callType']=='manual.dial.customer')
                 {   
 		    $attempid++;
-                    $auto_attempts++;
+                  
                     
                     $sql = "update leads_cstm set attempts_c='" . $attempid. "' where id_c='" . $id . "'";
                     $res = $db->query($sql);
@@ -252,17 +236,19 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $resx = $db->query($sql);
                     createLog('{Auto Retired with Status}', 'auto_retired_log.txt', $id, $autoArrr);
                     
+                    $AtmpLogSql = "INSERT INTO attempt_log
+                                                    SET lead_id='$id',
+                                                        user='$disPosedUser',
+                                                        dispositionName='" . $_REQUEST['dispositionName'] . "',
+                                                        systemDisposition='" . $_REQUEST['systemDisposition'] . "',
+                                                        attempts_c='$attempid',
+                                                        dispositionCode='$dispositionCode',
+                                                        callType='" . $_REQUEST['callType'] . "'";
+                    $res        = $db->query($AtmpLogSql);
+                    
                 }
             }
-            else
-            {
-                if ((isset($_REQUEST['lead_reference']) && $_REQUEST['lead_reference'] != 'null') && ($_REQUEST['callType'] == 'auto.dial.customer' or $_REQUEST['callType'] == 'outbound.auto.dial'))
-                {
-                    createLog('{Ameyo null dispostion response}', 'leads_with_null_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
-                }
-            }
-            /////////////////////////////
-            //createLog('{update leads_cstm}', 'update_leads_cstm02.txt', 'attempt'.$attempid, $debugArr);
+       
         }
     }
 
