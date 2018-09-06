@@ -225,6 +225,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 if ($checkSaveBean && $_REQUEST['callType']=='manual.dial.customer')
                 {   
 		    $attempid++;
+                    $auto_attempts++;
                     
                     $sql = "update leads_cstm set attempts_c='" . $attempid. "' where id_c='" . $id . "'";
                     $res = $db->query($sql);
@@ -239,6 +240,14 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                         dispositionCode='$dispositionCode',
                                                         callType='" . $_REQUEST['callType'] . "'";
                     $res        = $db->query($AtmpLogSql);
+                }
+                else if($checkSaveBean && $_REQUEST['callType']!='manual.dial.customer'){
+                    
+                    $attempid++;
+                    $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
+                    $resx = $db->query($sql);
+                    createLog('{Auto Retired with Status}', 'auto_retired_log.txt', $id, $autoArrr);
+                    
                 }
             }
             else
