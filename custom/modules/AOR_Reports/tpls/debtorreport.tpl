@@ -161,6 +161,11 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Vendor/Lead Source Name</strong>
                 </th>
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Institute Name</strong>
+                </th>
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Registration Date</strong>
                 </th>
@@ -169,9 +174,22 @@
 
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Student Name</strong>
+                </th> 
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Lead ID</strong>
                 </th>
-           
-
+                
+                
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Counselor Name</strong>
+                </th>
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Invoice Number</strong>
+                </th>
+                    
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Course Fee</strong>
                 </th>
@@ -187,7 +205,9 @@
                 </th>
 
 
-
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 1/Payment 1</strong>
                 </th>
@@ -199,13 +219,19 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Month</strong>
                 </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
+                </th>
                 
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 2/Payment 2</strong>
                 </th>
@@ -217,13 +243,18 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Month</strong>
                 </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
+                </th>
                 
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 3/Payment 3</strong>
                 </th>
@@ -235,13 +266,18 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Month</strong>
                 </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
+                </th>
                 
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 4/Payment 4</strong>
                 </th>
@@ -253,13 +289,18 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Month</strong>
                 </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
+                </th>
                 
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
                 
                 
-                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 5/Payment 5</strong>
                 </th>
@@ -270,6 +311,9 @@
              
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Month</strong>
+                </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
                 </th>
                 
                 <th data-hide="phone" class="footable-visible footable-first-column">
@@ -297,9 +341,13 @@
           
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.Vendor}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.institute}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.converted_date}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.student_name}</td>
-
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.lead_id}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.counselor_name}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.invoice_number}</td>
+                    
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.fee_inr}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.gst}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.total_amount}</td>
