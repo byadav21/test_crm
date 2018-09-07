@@ -329,10 +329,11 @@ class AOR_ReportsViewsummarised extends SugarView
                     
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number']   = $row['invoice_number'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_state']    = empty($lead_state) ? $pay_state : $lead_state;
-
+                    
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor']         = empty($row['vendor']) ? $row['utm_source_c'] : $row['vendor'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['converted_date'] = $row['converted_date'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['registration_month'] = date('F', strtotime($row['converted_date']));
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['fee_inr']        = $row['fee_inr'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']            = (0.18 * $row['fee_inr']);
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']   = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
@@ -403,7 +404,7 @@ class AOR_ReportsViewsummarised extends SugarView
                 $data .= "\",\"" . $datax['counselor_name'];
                 $data .= "\",\"" . $datax['invoice_number'];
                 
-                $data .= "\",\"" . date('F', strtotime($row['converted_date']));
+                $data .= "\",\"" . $datax['registration_month'];
                 $data .= "\",\"" . $datax['student_state'];
                 
 
