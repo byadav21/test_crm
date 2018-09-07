@@ -102,8 +102,8 @@ function fn60sec() {
 	}
 	
 }
-fn60sec();
-setInterval(fn60sec, 300*1000);
+//fn60sec();
+setInterval(fn60sec, 120*1000);
 </script>
 <?php
 	/*echo '<script type="text/javascript">
