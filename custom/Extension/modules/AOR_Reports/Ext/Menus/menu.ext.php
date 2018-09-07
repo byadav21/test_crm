@@ -176,7 +176,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displayDM)
     }
 }
 # SRM REPORTS #
-if ($current_user->is_admin == 1 || $displayMis || $displaySRM)
+if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
 {
 
     $module_menu[] = array('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
