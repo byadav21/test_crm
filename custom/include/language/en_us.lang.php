@@ -342,6 +342,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_SRM_Referrals' => 'SRM Referrals',
   //'CC_Jet'=>'Jet',
   'CC_Corp_Mannapuram'=>'Corp Mannapuram',
+  'CC_Investor_Clinic'=>'Investor Clinic',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
