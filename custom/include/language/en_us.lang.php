@@ -375,6 +375,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_Off_track_creations'=>'Off Track Creations',
   'OO_shobhawati_foundation'=>'Shobhawati Foundation',
   'OO_coursopedia'=>'coursopedia',
+  'OO_Arizona'=>'Arizona',
   'CO_Jet'=>'Jet',
   'CO_manappuram'=>'Manappuram',
   'CO_genpact'=>'Genpact',

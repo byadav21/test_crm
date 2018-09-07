@@ -56,6 +56,26 @@ class AOR_ReportsViewsummarised extends SugarView
         }
         return $batchOptions;
     }
+    
+    function getInstitute()
+    {
+
+        global $db;
+
+        $batchSql     = "SELECT 
+            bb.id batch_id, bb.batch_code, i.name
+        FROM te_ba_batch bb
+            INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON bb.id=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb AND ib.deleted=0
+            INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0
+        WHERE bb.deleted =0";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+            $batchOptions[$row['batch_id']] = $row['name'];
+        }
+        return $batchOptions;
+    }
 
     public function display()
     {
@@ -68,7 +88,8 @@ class AOR_ReportsViewsummarised extends SugarView
         
         $getPaymentSourceData  = $this->getPaymentSource();
         $getVendorData         = $this->getVendor();
-
+        $getInstituteData      = $this->getInstitute();
+        
         $usersdd = "";
 
         //echo "<pre>";print_r($getDueDateData);exit();
@@ -185,16 +206,21 @@ class AOR_ReportsViewsummarised extends SugarView
                             te_ba_batch.fees_inr fee_inr,
                             pd.payment_source,
                             u.user_name,
+                            concat(counselor.first_name,' ',counselor.last_name) as counselor_name,
                             te_ba_batch.name batch_name,
                             l.assigned_user_id,
                             te_ba_batch.id AS batch_id ,
                             te_ba_batch.batch_code,
                             pd.`date_of_payment`, 
                             l.phone_mobile,
+                            l.primary_address_state,
+                            pd.`state`, 
                             leads_cstm.email_add_c student_email,
                             pd.`amount`, 
                             pd.`reference_number`, 
-                            pd.`payment_type`
+                            pd.`payment_type`,
+                            pd.invoice_number,
+                            pd.invoice_order_number
         FROM `te_student_payment` sp
         LEFT JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
         LEFT JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c
@@ -202,6 +228,7 @@ class AOR_ReportsViewsummarised extends SugarView
         LEFT JOIN  te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id 
         LEFT JOIN  users u ON sb.assigned_user_id=u.id
         LEFT JOIN  leads l ON sb.leads_id=l.id
+        LEFT JOIN  users as counselor ON l.assigned_user_id=counselor.id
         LEFT JOIN  leads_cstm ON l.id= leads_cstm.id_c
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
     where l.deleted=0  $wherecl order by pd.`date_of_payment`,s.name";
@@ -222,22 +249,31 @@ class AOR_ReportsViewsummarised extends SugarView
             while ($row = $db->fetchByAssoc($leadObj))
             {
                 //$Amountpaid += $row['amount'];
-
+                $lead_state = empty($row['primary_address_state'])? '': $row['primary_address_state'];
+                $pay_state  = empty($row['state'])? '': $row['state'];
+                
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['institute']        = $getInstituteData[$row['batch_id']];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['counselor_name']   = $row['counselor_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['lead_id']          = $row['lead_id'];
-
+                
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number']   = $row['invoice_number'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_state']    = empty($lead_state) ? $pay_state : $lead_state;
 
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor']         = empty($row['vendor']) ? $row['utm_source_c'] : $row['vendor'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['converted_date'] = $row['converted_date'];
+                
+                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['registration_month'] = date('F', strtotime($row['converted_date']));
+                 
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['fee_inr']        = $row['fee_inr'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']            = (0.18 * $row['fee_inr']);
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']   = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
@@ -275,17 +311,24 @@ class AOR_ReportsViewsummarised extends SugarView
                 while ($row = $db->fetchByAssoc($leadObj))
                 {
                     //$Amountpaid += $row['amount'];
-
+                    $lead_state = empty($row['primary_address_state'])? '': $row['primary_address_state'];
+                    $pay_state  = empty($row['state'])? '': $row['state'];
+                
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['institute']        = $getInstituteData[$row['batch_id']];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['counselor_name']   = $row['counselor_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
-
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['lead_id']          = $row['lead_id'];
+                    
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number']   = $row['invoice_number'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_state']    = empty($lead_state) ? $pay_state : $lead_state;
 
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor']         = empty($row['vendor']) ? $row['utm_source_c'] : $row['vendor'];
@@ -311,11 +354,19 @@ class AOR_ReportsViewsummarised extends SugarView
 
             $data .= ",Course Name";
             $data .= ",Lead Source Name";
+            $data .= ",Institute Name";
             $data .= ",Registration Date";
 
 
             $data .= ",Student Name";
-
+            
+            $data .= ",Lead ID";
+            $data .= ",Counselor Name";
+            $data .= ",Invoice Number";
+            
+          
+            $data .= ",Month of Registration";
+            $data .= ",State of Student";
 
             $data .= ",Course Fee";
             $data .= ",GST";
@@ -343,10 +394,18 @@ class AOR_ReportsViewsummarised extends SugarView
 
                 $data .= "\",\"" . $datax['batch_name'];
                 $data .= "\",\"" . $datax['Vendor'];
+                $data .= "\",\"" . $datax['institute'];
                 $data .= "\",\"" . $datax['converted_date'];
 
                 $data .= "\",\"" . $datax['student_name'];
-
+                
+                $data .= "\",\"" . $datax['lead_id'];
+                $data .= "\",\"" . $datax['counselor_name'];
+                $data .= "\",\"" . $datax['invoice_number'];
+                
+                $data .= "\",\"" . date('F', strtotime($row['converted_date']));
+                $data .= "\",\"" . $datax['student_state'];
+                
 
                 $data .= "\",\"" . $datax['fee_inr'];
                 $data .= "\",\"" . $datax['gst'];
