@@ -636,7 +636,7 @@ WHERE   `sb`.`deleted` = 0
         {
 
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
-
+            $Address = ($Address=='0')? '': $Address;
 
             $custSQL .= "('" . $data['U_OrigEntry'] . "',
                 '" . $data['U_OrigNum'] . "',
@@ -735,7 +735,7 @@ WHERE   `sb`.`deleted` = 0
         {
 
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
-
+            $Address = ($Address=='0')? '': $Address;
             $custSQL .= "('" . $data['U_OrigEntry'] . "',
                 '" . $data['DocDate'] . "',
 	        '" . $data['DocDueDate'] . "',
