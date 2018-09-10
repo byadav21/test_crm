@@ -141,7 +141,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             if ($auto_attempts >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
             {
 
-                $attempid++;
+                //$attempid++;
 
 
 
@@ -153,7 +153,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 if ($checkSaveAutoBean && $_REQUEST['callType'] != 'manual.dial.customer')
                 {
 
-                    $sql  = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+                    $sql  = "update leads_cstm set attempts_c='" .$attempid. "' where id_c='" . $id . "'";
                     $resy = $db->query($sql);
                     if ($resy)
                     {

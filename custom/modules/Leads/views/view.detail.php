@@ -692,7 +692,7 @@ if(!isset($_SESSION['referral'])){
 		}
                 
                 
-                $('#tab5').click(function(){
+                $('#tab4').click(function(){
                     var lead_id ='<?=$_REQUEST['record'];?>';
                         $.ajax({url: "index.php?entryPoint=attemptlogger&action=getLogger&lead_id="+lead_id, success: function(result){
                                $('#list_subpanel_te_dispositionlogger_leads').html(result);
