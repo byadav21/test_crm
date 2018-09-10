@@ -140,20 +140,26 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
             if ($auto_attempts >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
             {
-                
+
                 $attempid++;
-                  
-                    
-                $sql = "update leads_cstm set attempts_c='" . $attempid. "' where id_c='" . $id . "'";
-                $resy = $db->query($sql);
-                if ($resy)
-                    {
-                        createLog('{Dead: Auto Retired}', 'auto_retired_log_10SEP.txt', $sql, $debugArr);
-                    }
+
+
+
                 $bean                     = BeanFactory::getBean('Leads', $id);
                 $bean->status             = 'Dead';
                 $bean->status_description = 'Auto Retired';
-                $bean->save();
+                $checkSaveAutoBean        = $bean->save();
+
+                if ($checkSaveAutoBean && $_REQUEST['callType'] != 'manual.dial.customer')
+                {
+
+                    $sql  = "update leads_cstm set attempts_c='" . $attempid . "' where id_c='" . $id . "'";
+                    $resy = $db->query($sql);
+                    if ($resy)
+                    {
+                        createLog('{Dead: Auto Retired}', 'auto_retired_log_10SEP.txt', $sql, $debugArr);
+                    }
+                }
 
                 $autoArrr = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
                 createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $autoArrr);
