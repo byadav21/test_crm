@@ -140,7 +140,16 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
             if ($auto_attempts >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
             {
-
+                
+                $attempid++;
+                  
+                    
+                $sql = "update leads_cstm set attempts_c='" . $attempid. "' where id_c='" . $id . "'";
+                $resy = $db->query($sql);
+                if ($resy)
+                    {
+                        createLog('{Dead: Auto Retired}', 'auto_retired_log_10SEP.txt', $sql, $debugArr);
+                    }
                 $bean                     = BeanFactory::getBean('Leads', $id);
                 $bean->status             = 'Dead';
                 $bean->status_description = 'Auto Retired';
