@@ -1,5 +1,5 @@
 <?php
-// created: 2018-05-31 16:31:37
+// created: 2018-09-11 13:14:14
 $subpanel_layout['list_fields'] = array (
   'date_entered' => 
   array (
@@ -80,13 +80,6 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'varchar',
     'vname' => 'LBL_Call_Type',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'attempt_count' => 
-  array (
-    'type' => 'varchar',
-    'vname' => 'LBL_Attempt_Count',
     'width' => '10%',
     'default' => true,
   ),
