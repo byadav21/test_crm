@@ -6,6 +6,7 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
+require_once('custom/modules/AOR_Reports/leads_utility.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
@@ -289,7 +290,8 @@ class AOR_ReportsViewleadutilization extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
-
+        $objBenchMarking = new benchmarking();
+        $objBenchMarking->start('overall');
         $is_manger = $this->checkManager();
 
         $where      = "";
@@ -315,7 +317,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
         $lead_source = $arr_result;
 
-        
+
 
 
 
@@ -340,7 +342,7 @@ class AOR_ReportsViewleadutilization extends SugarView
         }
 
         //$_SESSION['cccon_from_date']='2017-10-11';
-        //$_SESSION['cccon_to_date']='2017-10-11'; 
+        //$_SESSION['cccon_to_date']='2017-10-11';
 
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -409,35 +411,29 @@ class AOR_ReportsViewleadutilization extends SugarView
         $StatusList = array();
 
 
-        if (!empty($selected_batch_code))
-        {
-            $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
-        }
+        //queries will not run untill batch code is selected
+        if (!empty($selected_batch_code)) {
+          $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
 
 
-
-        if (!empty($selected_source))
-        {
+          if (!empty($selected_source)) {
             $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
-        }
+          }
 
-        if (!empty($selected_councellors))
-        {
+          if (!empty($selected_councellors)) {
             $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
-        }
-        
-        if (!empty($selected_lead_source_types))
-        {
+          }
+
+          if (!empty($selected_lead_source_types)) {
             $wherecl .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
-        }
+          }
 
 
-         $lead_source_typesArr = array('NULL'=>'NULL','CC'=>'CC','OO'=>'OO','CO'=>'CO');
+          $lead_source_typesArr = array('NULL' => 'NULL', 'CC' => 'CC', 'OO' => 'OO', 'CO' => 'CO');
 
-
-
-                 //echo '<pre>'.  
-                 $leadSql = "SELECT COUNT(leads.id) AS lead_count,
+          $objBenchMarking->start('leadsql');
+          //echo '<pre>'.
+          $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                             leads.date_entered,
                             te_ba_batch.id AS batch_id,
                             te_ba_batch.name AS batch_name,
@@ -447,28 +443,38 @@ class AOR_ReportsViewleadutilization extends SugarView
                      INNER JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id and te_ba_batch.deleted=0
                      WHERE leads.deleted=0 $wherecl
                      GROUP  by  batch_code";
-                 
-        $leadObj = $db->query($leadSql) or die(mysqli_error());
 
-        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types);
-        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors,$selected_lead_source_types);
+          $leadObj = $db->query($leadSql) or die(mysqli_error());
+            $objBenchMarking->end('leadsql');
+          //old
+            $objBenchMarking->start('attempts');
+//        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types);
+//        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors,$selected_lead_source_types);
 
-        while ($row = $db->fetchByAssoc($leadObj))
-        {
+          //new
+          $objLeadsUtility = new leadsUtility($selected_batch_code, $selected_councellors, $selected_lead_source_types);
+          $attemptDetails = $objLeadsUtility->getAttempts();
+          $attemptArr = $attemptDetails['attempts'];
+          $FresleadArr = $attemptDetails['freshLeads'];
+            $objBenchMarking->end('attempts');
 
-            $leadList[$row['batch_id']]['batch_id']     = $row['batch_id'];
+          while ($row = $db->fetchByAssoc($leadObj)) {
+
+            $leadList[$row['batch_id']]['batch_id'] = $row['batch_id'];
             $leadList[$row['batch_id']]['date_entered'] = $row['date_entered'];
-            $leadList[$row['batch_id']]['lead_count']   = $row['lead_count'];
-            $leadList[$row['batch_id']]['batch_name']   = $row['batch_name'];
-            $leadList[$row['batch_id']]['batch_code']   = $row['batch_code'];
-            $leadList[$row['batch_id']]['fresh_leads']  = isset($FresleadArr[$row['batch_id']]) ? $FresleadArr[$row['batch_id']] : 0;
+            $leadList[$row['batch_id']]['lead_count'] = $row['lead_count'];
+            $leadList[$row['batch_id']]['batch_name'] = $row['batch_name'];
+            $leadList[$row['batch_id']]['batch_code'] = $row['batch_code'];
+            $leadList[$row['batch_id']]['fresh_leads'] = isset($FresleadArr[$row['batch_id']]) ? $FresleadArr[$row['batch_id']] : 0;
 
-            $leadList[$row['batch_id']]['leads_dialled_outside_TAT']   = isset($attemptArr[$row['batch_id']]['leads_dialled_outside_TAT']) ? $attemptArr[$row['batch_id']]['leads_dialled_outside_TAT'] : 0;
-            $leadList[$row['batch_id']]['leads_attempted_1_3']         = isset($attemptArr[$row['batch_id']]['leads_attempted_1_3']) ? $attemptArr[$row['batch_id']]['leads_attempted_1_3'] : 0;
-            $leadList[$row['batch_id']]['leads_attempted_4_6']         = isset($attemptArr[$row['batch_id']]['leads_attempted_4_6']) ? $attemptArr[$row['batch_id']]['leads_attempted_4_6'] : 0;
+            $leadList[$row['batch_id']]['leads_dialled_outside_TAT'] = isset($attemptArr[$row['batch_id']]['leads_dialled_outside_TAT']) ? $attemptArr[$row['batch_id']]['leads_dialled_outside_TAT'] : 0;
+            $leadList[$row['batch_id']]['leads_attempted_1_3'] = isset($attemptArr[$row['batch_id']]['leads_attempted_1_3']) ? $attemptArr[$row['batch_id']]['leads_attempted_1_3'] : 0;
+            $leadList[$row['batch_id']]['leads_attempted_4_6'] = isset($attemptArr[$row['batch_id']]['leads_attempted_4_6']) ? $attemptArr[$row['batch_id']]['leads_attempted_4_6'] : 0;
             $leadList[$row['batch_id']]['leads_attempted_more_than_6'] = isset($attemptArr[$row['batch_id']]['leads_attempted_more_than_6']) ? $attemptArr[$row['batch_id']]['leads_attempted_more_than_6'] : 0;
-        }
+          }
 
+        }
+        $objBenchMarking->end('overall');
         //echo '<pre>';
         //print_r($leadList);
         #PS @Pawan

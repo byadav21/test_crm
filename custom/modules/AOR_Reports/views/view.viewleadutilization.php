@@ -5,7 +5,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
-
+require_once('custom/modules/AOR_Reports/leads_utility.php');
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
 
@@ -148,7 +148,8 @@ class AOR_ReportsViewviewleadutilization extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
-
+        $objBenchmarking = new benchmarking();
+        $objBenchmarking->start('Overall');
         $wherecl = '';
         $left    = '';
 
@@ -259,18 +260,20 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         {
             $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
         }
-       
 
-
+        $objLeadsUtility = new leadsUtility($selected_batch_code,$selected_councellors);
+        $attemptsDetails = $objLeadsUtility->getAttempts(true, $_SESSION['cccon_show']);
         if ($_SESSION['cccon_show'] == "fresh_leads")
         {
             ///echo 'in fressh_';  die;
-            $showLeads = $this->getFresh($batchCode,$selected_councellors);
+//            $showLeads = $this->getFresh($batchCode,$selected_councellors);
+            $showLeads = $attemptsDetails['freshLeads'];
         }
         else if ($ $_SESSION['cccon_show'] != "fresh_leads" || $_SESSION['cccon_show'] != "lead_count")
         {
             //echo 'not in fresh and TotalCOunt';
-            $showLeads = $this->getAttempts($showByClick, $batchCode,$selected_councellors);
+//            $showLeads = $this->getAttempts($showByClick, $batchCode,$selected_councellors);
+            $showLeads = $attemptsDetails['attempts'];
         }
         
         if (!empty($selected_lead_source_types))
@@ -353,28 +356,36 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         //$attemptArr  = $this->getAttempts();
         //$i   = 0;
         $leadArr = array();
-        while ($row     = $db->fetchByAssoc($leadObj))
+        while ($row = $db->fetchByAssoc($leadObj))
         {
-            $leadArr[$row['id']] = $row;
+//            $leadArr[$row['id']] = $row;
+            if(empty($showLeads)){
+                $leadList[$row['id']] = $row;
+            }else {
+              if (isset($showLeads[$row['id']])) {
+                $leadList[$row['id']] = $row;
+              }
+            }
         }
 
+        /*
         foreach ($leadArr as $key => $val)
         {
 
             if (!empty($showLeads))
             {
-                if (array_key_exists($key, $showLeads))
-                    $leadList[$showLeads[$key]] = $val;
+                if (isset($showLeads[$key]))
+                    $leadList[$key] = $val;
             }
             else
             {
                 $leadList[$key] = $val;
             }
-        }
+        }*/
 
         //echo '<pre>';
         //print_r($leadList); 
-
+        $objBenchmarking->end('Overall');
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
@@ -418,6 +429,7 @@ class AOR_ReportsViewviewleadutilization extends SugarView
         } // End Of Export Func
         #PS @Pawan
         $total     = count($leadList); #total records
+//      echo "total records: $total";
         $start     = 0;
         $per_page  = 60;
         $page      = 1;
