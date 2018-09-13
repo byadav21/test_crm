@@ -5,6 +5,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
+require_once('custom/modules/AOR_Reports/pagination.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
@@ -13,10 +14,11 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
 
     var $report_to_id;
     var $counsellors_arr;
-
+    private $objPagination;
     public function __construct()
     {
         parent::SugarView();
+        $this->objPagination = new pagination(60, 'page');
     }
 
     function getProgram()
@@ -72,7 +74,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
-
+        $_export = isset($_POST['export']) && $_POST['export'] == "Export";
         $where           = "";
         $wherecl         = "";
         $campaignID      = array();
@@ -314,9 +316,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
 
         $Days = $this->getBetweenDays($_SESSION['cccon_from_date'], $_SESSION['cccon_to_date']);
 
-        $leadSql = "SELECT 
-                       $IDs
-                       $headersss
+        $sqlPart = "
                 FROM leads 
                 LEFT JOIN users ON leads.assigned_user_id =users.id
                 LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
@@ -326,50 +326,47 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
                 LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
                 where leads.deleted=0  $wherecl  ";
 
-        $dayFlag = FALSE;
+        $countSql = "SELECT count(1) as count ". $sqlPart;
 
-        //echo ($leadSql); die;
+        $leadSql = "SELECT $IDs $headersss " . $sqlPart;
+
+        if(!$_export) {
+          $limit = $this->objPagination->get_limit();
+          $leadSql .= ' ' . $limit;
+        }
+        $rowCount = 0;
+        $leadObj = null;
+
+//      if ($Days >= 0 && $Days <= 93 && $wherecl != '') {
+          if($this->objPagination->get_page() == 1 || !isset($_SESSION['_row_count'])) {
+            $objLeadsCount = $db->query($countSql);
+            $row = $db->fetchByAssoc($objLeadsCount);
+            $rowCount = $row['count'];
+            $_SESSION['_row_count'] = $rowCount;
+          }else{
+            $rowCount = $_SESSION['_row_count'];
+          }
+          $this->objPagination->set_total($rowCount);
+          if($rowCount <= 0){
+            $error['error'] = "No Data Found.";
+          }else {
+            $leadObj = $db->query($leadSql);
+          }
+//        } else {
+//          $error['error'] = 'Please Export Data between 3 months.';
+//        }
+
         $ExcelHeaders        = array();
         $selected_headersKey = array();
         foreach ($selected_headers as $key => $val)
         {
-
-
             $ExcelHeaders[$val]        = $headers[$val];
             ($val == 'users.first_name as user_first_name') ? $val                       = '.user_first_name' : '';
             ($val == 'users.last_name as user_last_name') ? $val                       = '.user_last_name' : '';
             $selected_headersKey[$val] = substr($val, strpos($val, ".") + 1);
         }
-        //print_r($ExcelHeaders); die;
-        //echo '---'.$Days;
-        //echo $error['error'] ;
-        //die;
-        if ($Days >= 0 && $Days <= 93 && $wherecl != '')
-        {
 
-            $leadObj = $db->query($leadSql);
-        }
-        else
-        {
-            $dayFlag        = TRUE;
-            $error['error'] = 'Please Export Data between 3 months.';
-        }
-        
-
-        while ($row = $db->fetchByAssoc($leadObj))
-        {
-            $leadList[$row['id']] = $row;
-        }
-        //echo '<pre>';print_r($leadList);
-
-        if (empty($leadList) && $dayFlag === FALSE)
-        {
-            $error['error'] = "No Data Found.";
-        }
-        
-        
-
-        if (isset($_POST['export']) && $_POST['export'] == "Export")
+        if ($_export && empty($error))
         {
 
             $file     = "HeaderWiseLead_report";
@@ -429,51 +426,22 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             exit;
         } // End Of Export Func
         #PS @Pawan
-        $total     = count($leadList); #total records
-        $start     = 0;
-        $per_page  = 60;
-        $page      = 1;
-        $pagenext  = 1;
-        $last_page = ceil($total / $per_page);
 
-        if (isset($_REQUEST['page']) && $_REQUEST['page'] > 0)
-        {
-            $start    = $per_page * ($_REQUEST['page'] - 1);
-            $page     = ($_REQUEST['page'] - 1);
-            $pagenext = ($_REQUEST['page'] + 1);
-        }
-        else
-        {
+        $page      = $this->objPagination->get_page();
+        $last_page = $this->objPagination->get_last_page();
+        $pagenext = $page + 1;
 
-            $pagenext++;
-        }
-        if (($start + $per_page) < $total)
-        {
-            $right = 1;
-        }
-        else
-        {
-            $right = 0;
-        }
-        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 1)
-        {
-            $left = 0;
-        }
-        elseif (isset($_REQUEST['page']))
-        {
+        $right = $page < $last_page;
+        $left = $page > 1;
 
-            $left = 1;
+        if(empty($error)) {
+          while ($row = $db->fetchByAssoc($leadObj)) {
+            $leadList[$row['id']] = $row;
+          }
+          $this->objPagination->set_found_rows(count($leadList));
         }
+        $current = $this->objPagination->getHeading();
 
-        $leadList = array_slice($leadList, $start, $per_page);
-        if ($total > $per_page)
-        {
-            $current = "(" . ($start + 1) . "-" . ($start + $per_page) . " of " . $total . ")";
-        }
-        else
-        {
-            $current = "(" . ($start + 1) . "-" . count($leadList) . " of " . $total . ")";
-        }
         #pE
 
         $sugarSmarty = new Sugar_Smarty();
