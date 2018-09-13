@@ -140,7 +140,7 @@ foreach ($final_array as $key => $val)
         $bean                     = BeanFactory::getBean('Leads', $c_lead_id); 
         $bean->status             = 'Alive';
         $bean->status_description = 'New Lead';
-        $bean->note               = 'Status updated via elouqa rule';
+        //$bean->note               = 'Status updated via elouqa rule';
         $bean->save();
         createLog('{Auto Retired}','push_eloquascoreleadsto_ameyo_log.txt',$update_lead,$val);  
     }
