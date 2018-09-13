@@ -280,9 +280,10 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads.dristi_campagain_id'           => 'Campagain ID',
             'leads.dristi_API_id'                 => 'API_id (LeadID)',
             'leads.neoxstatus'                    => 'Ameyo Status',
-            'leads.deleted'                       => 'Deleted',
-            'leads.comment'                       => 'Comment',
-            'leads.note'                          => 'Note');
+            'leads.deleted'                       => 'Deleted'
+//            'leads.comment'                       => 'Comment',
+//            'leads.note'                          => 'Note'
+        );
 
         $StatusDetails = array(
             'Follow Up'              => 'Follow Up',
