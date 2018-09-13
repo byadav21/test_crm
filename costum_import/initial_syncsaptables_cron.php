@@ -341,6 +341,7 @@ class syncsaptables
         concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
        `pd`.`Pay_Status` AS `Pay_Status`,
        `pd`.`transaction_id` AS `U_PaymnetID`,
+       `pd`.`invoice_number` AS `U_OrigNum`,
        (CASE
             WHEN (`pd`.`payment_source` IN ('PayU',
                                             'payu_in')) THEN 'PayU'
@@ -729,7 +730,7 @@ WHERE   `sb`.`deleted` = 0
         $WEB_ORCTArr = $this->WEB_ORCT();
         echo '<hr>WEB_ORCT Table Syncing ';
 
-        $custSQL = "INSERT INTO `WEB_ORCT` (`U_OrigEntry`, `DocDate`,`DocDueDate`,`TaxDate`,`CardCode`,`Address`,`Pay_Status`,`U_PaymnetID`,`U_PaymentGateway`,`CheckAcct`,`CashAcct`,`TrsfrSum`,`TrsfrAcct`,`CheckSum`,`CashSum`) VALUES ";
+        $custSQL = "INSERT INTO `WEB_ORCT` (`U_OrigEntry`, `DocDate`,`DocDueDate`,`TaxDate`,`CardCode`,`Address`,`Pay_Status`,`U_PaymnetID`,`U_PaymentGateway`,`CheckAcct`,`CashAcct`,`TrsfrSum`,`TrsfrAcct`,`CheckSum`,`CashSum`,`U_OrigNum`) VALUES ";
         $i       = 1;
         foreach ($WEB_ORCTArr as $key => $data)
         {
@@ -750,7 +751,7 @@ WHERE   `sb`.`deleted` = 0
                 '" . $data['TrsfrSum'] . "',
                 '" . $data['TrsfrAcct'] . "',
                 '" . $data['CheckSum'] . "',
-                '" . $data['CashSum'] . "'),";
+                '" . $data['CashSum'] . "','" . $data['U_OrigNum'] . "'),";
 
 
             $i++;
