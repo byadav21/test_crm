@@ -338,7 +338,8 @@
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$column}</strong></th>
                         {/foreach}
 
-            </tr>   
+            </tr>
+        </thead>
             
         {if isset($error) && !empty($error)}  <td align="center" class="inlineEdit footable-visible footable-last-column"><h1>{$error.error}</h1></td>{/if}
             {foreach from = $leadList key=key item=program}
