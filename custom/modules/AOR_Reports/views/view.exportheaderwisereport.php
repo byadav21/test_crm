@@ -409,10 +409,11 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
             echo $data;
           while ($row = $db->fetchByAssoc($leadObj)){
-              $data='';
-            foreach ($selected_headersKey as $key1 => $column) {
-              $data .= $row[$column] . ",";
-            }
+//              $data='';
+//            foreach ($selected_headersKey as $key1 => $column) {
+//              $data .= $row[$column] . ",";
+//            }
+            $data = implode(',', $row);
             $data .= "\n";
             echo $data;
           }
