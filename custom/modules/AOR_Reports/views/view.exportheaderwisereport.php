@@ -338,20 +338,28 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $leadObj = null;
 
 //      if ($Days >= 0 && $Days <= 93 && $wherecl != '') {
-          if($this->objPagination->get_page() == 1 || !isset($_SESSION['_row_count'])) {
+        if($_export){
+          $leadObj = $db->query($leadSql);
+          $rowCount = $leadObj->num_rows;
+          if($rowCount <= 0){
+            $error['error'] = "No Data Found.";
+          }
+        }else {
+          if ($this->objPagination->get_page() == 1 || !isset($_SESSION['_row_count'])) {
             $objLeadsCount = $db->query($countSql);
             $row = $db->fetchByAssoc($objLeadsCount);
             $rowCount = $row['count'];
             $_SESSION['_row_count'] = $rowCount;
-          }else{
+          } else {
             $rowCount = $_SESSION['_row_count'];
           }
           $this->objPagination->set_total($rowCount);
-          if($rowCount <= 0){
+          if ($rowCount <= 0) {
             $error['error'] = "No Data Found.";
-          }else {
+          } else {
             $leadObj = $db->query($leadSql);
           }
+        }
 //        } else {
 //          $error['error'] = 'Please Export Data between 3 months.';
 //        }
@@ -370,20 +378,10 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         {
 
             $file     = "HeaderWiseLead_report";
-            $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
-            $leadList = array();
             global $current_user;
             global $db;
             $leadObj  = $db->query($leadSql);
-
-
-            while ($row = $db->fetchByAssoc($leadObj))
-            {
-                $leadList[$row['id']] = $row;
-            }
-
-
 
             # Create heading
             $data = "";
@@ -392,24 +390,10 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
                 $data .= $column . ",";
             }
             $data .= "\n";
+          ob_end_clean();
 
 
-
-
-            foreach ($leadList as $key => $value)
-            {
-
-
-                foreach ($selected_headersKey as $key1 => $column)
-                {
-
-                    $data .= $value[$column] . ",";
-                }
-
-                $data .= "\n";
-            }
-
-            $leadCount    = count($leadList);
+            $leadCount    = $rowCount; //count($leadList);
             $userName     = $current_user->user_name;
             $userID       = $current_user->id;
             $ExportRecord = array('user_name' => $userName, 'user_id' => $userID, 'Lead_Count' => $leadCount, 'from_date' => $from_date, 'to_date' => $to_date, 'Headers' => array_values($ExcelHeaders),'selected_batch'=>$selected_batch,'selected_batch_code'=>$selected_batch_code,'selected_vendor'=>$selected_vendor,'selected_status'=>$selected_status,'selected_status_description'=>$selected_status_description);
@@ -419,10 +403,19 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $sql = "insert into data_export_log set  source='Export tool',date_entered='" . date('Y-m-d H:i:s') . "',user_name='" . $userName . "',data_record='" . json_encode($ExportRecord) . "'";
             $db->query($sql);
 
-            ob_end_clean();
+
             header("Content-type: application/csv");
             header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
             echo $data;
+          while ($row = $db->fetchByAssoc($leadObj)){
+              $data='';
+            foreach ($selected_headersKey as $key1 => $column) {
+              $data .= $row[$column] . ",";
+            }
+            $data .= "\n";
+            echo $data;
+          }
+//            echo $data;
             exit;
         } // End Of Export Func
         #PS @Pawan
