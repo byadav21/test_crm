@@ -1151,6 +1151,58 @@ class addPaymentClass
 
                 //~ die;
             }
+			/************************** Mail 1Trigers Code 14Sep18 by MKG  Mail=> Not Interested ******************/
+				$useremail=$bean->email1;
+				if($bean->status_description=="Not Interested"){
+				$template = "<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+							<p>We regret not having been able to help you with your query regarding ".$bean->batch_c." We do hope </p>
+							<p>you will consider us to be your learning partner, should you decide to boost your skill set with online</p>
+							<p>executive courses.</p>
+							<p>Talentedge partners with leading academic Indian & International institutes – such as IIMs,</p>
+							<p>MICA, XLRI, JWMI, SPJIR etc. to bring to working professionals industry relevant executive courses online.</p>
+							<p> Delivered through a technologically advanced education platform, we offer Live & Interactive digital learning across popular domains.</p>
+							</br>
+							<p>Give us a call at +91-8376000600 or visit www.talentedge.in  and we will be happy to assist with </p><p>more information.</p>
+							<p>Regards,</p>
+							<p>Team Talentedge</p>";
+
+                $mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Team Talentedge", $template);
+				}
+				
+				/** Mail2 => Fallout: ***/
+				if($bean->status_description=="Fallout"){
+				$template = "<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+								<p>We are sorry to see you go from " . $bean->batch_c ." .</p>  
+								<p>However, you can be sure that we will continue to bring to you the most industry relevant </p>
+								<p>courses and do our best to help you fast-track your career.</p> 
+								<p>We hope you will consider us to be your learning partner whenever you decide to take </p>
+								<p>up online executive courses.</p> 
+								<p>You can always give us a call at +91-8376000600 or visit www.talentedge.in</p>
+								<p>if you need any assistance with your career.</p>
+								</br> 
+								<p>Regards,</p>
+								<p>Team Talentedge</p>";
+			    $mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Team Talentedge", $template);
+				}
+				/** Triger Mail Mail3> Next batch: ***/
+				if($bean->status_description=="Next Batch"){
+					
+				$template="<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+							<p>We are sorry to see you go from " .$bean->batch_c . ".</p>  
+							<p>However, you can be sure that we will continue to bring to you the most industry relevant </p>
+							<p>courses and do our best to help you fast-track your career.</p> 
+							<p>We hope you will consider us to be your learning partner whenever you decide to take up online </p>
+							<p>executive courses.</p> 
+							<p>You can always give us a call at +91-8376000600 or visit www.talentedge.in  if you need any </p><p>assistance with your career.</p>
+							</br> 
+							<p>Regards,</p>
+							<p>Team Talentedge</p>";
+				$mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Team Talentedge", $template);
+				}
+				/***End */		
         }
     }
 
