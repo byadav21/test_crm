@@ -1184,7 +1184,7 @@ class addPaymentClass
 								<p>Regards,</p>
 								<p>Team Talentedge</p>";
 			    $mail = new NetCoreEmail();
-                $mail->sendEmail($useremail, "Team Talentedge", $template);
+                $mail->sendEmail($useremail, "Leaving us already?", $template);
 				}
 				/** Triger Mail Mail3> Next batch: ***/
 				if($bean->status_description=="Next Batch"){
@@ -1200,7 +1200,22 @@ class addPaymentClass
 							<p>Regards,</p>
 							<p>Team Talentedge</p>";
 				$mail = new NetCoreEmail();
-                $mail->sendEmail($useremail, "Team Talentedge", $template);
+                $mail->sendEmail($useremail, "Until next time, fare well!", $template);
+				}
+				/** Triger Mail Mail4> Auto-retired: ***/
+				
+				if($bean->status_description=="Auto Retired"){	
+				$template="<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+							<p>We tried reaching you a few times, regarding your query for " .$bean->batch_c . ", but could not get through. </p>
+							<p>Our courses have been rated to have a 92% satisfaction score by learners, with a referability rate of 78%.</p>
+							<p> Live & interactive online sessions for each course are scheduled to suit the convenience of working professionals like you.</p>
+							<p >Enrol now(to be linked with course page) to get certified from leading academic institutes.</p> <p>Give us a call back at +91-8376000600 for more information. </p>
+							</br>
+							<p>Regards,</p>
+							<p>Team Talentedge</p>";
+
+				$mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Knock, knock! Are you there? ", $template);
 				}
 				/***End */		
         }
