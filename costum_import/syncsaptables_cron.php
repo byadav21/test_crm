@@ -201,6 +201,7 @@ class syncsaptables
                              `pd`.`date_of_payment` AS `DocDate`,
                              `pd`.`date_of_payment` AS `TaxDate`,
                              `pd`.`date_of_payment` AS `DocDueDate`,
+                              replace(`s`.`id`, '-', '') AS `U_BPId`,
                              `s`.`SAP_CardCode` AS `CardCode`,
                              concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
                              `pd`.`invoice_order_number` AS `NumAtCard`,
@@ -637,7 +638,7 @@ class syncsaptables
         $Stud_OINVArr = $this->Stud_OINV();
         echo '<hr>Stud_OINV Table Syncing ';
 
-        $custSQL = "INSERT INTO `Stud_OINV` (`U_OrigEntry`, `U_OrigNum`,`U_ARInvNo`,`SlpCode`,`DocDate`,`TaxDate`,`DocDueDate`,`CardCode`,`Address`,`NumAtCard`,`U_Batch`) VALUES ";
+        $custSQL = "INSERT INTO `Stud_OINV` (`U_OrigEntry`, `U_OrigNum`,`U_ARInvNo`,`SlpCode`,`DocDate`,`TaxDate`,`DocDueDate`,`U_BPId`,`CardCode`,`Address`,`NumAtCard`,`U_Batch`) VALUES ";
 
         $i = 1;
         foreach ($Stud_OINVArr as $key => $data)
@@ -653,6 +654,7 @@ class syncsaptables
 		'" . $data['DocDate'] . "',
 		'" . $data['TaxDate'] . "',
 		'" . $data['DocDueDate'] . "',
+                '" . $data['U_BPId'] . "',
 		'" . $data['CardCode'] . "',
 		'" . ($Address==0)? '': $Address. "',
 		'" . $data['NumAtCard'] . "','" . $data['U_Batch'] . "'),";
