@@ -507,11 +507,35 @@ if(!isset($_SESSION['referral'])){
         }
 
     }
+	public function getUserRolesForDetailView($user_id){
+		$query = "SELECT acl_roles.* ".
+		    "FROM acl_roles ".
+		    "INNER JOIN acl_roles_users ON acl_roles_users.user_id = '$user_id' ".
+		        "AND acl_roles_users.role_id = acl_roles.id AND acl_roles_users.deleted = 0 ".
+		    "WHERE acl_roles.deleted=0 ";
 
+		$result = $GLOBALS['db']->query($query);
+		$user_roles = array();
+
+		while($row = $GLOBALS['db']->fetchByAssoc($result) ){
+			$user_roles[$row['id']] = $row;
+		}
+		return $user_roles;
+	}
 	public function display(){		
 		
 		global $current_user;
-		if(!is_admin($current_user)){
+		$can_see_detail = 0;
+		$UserRolesForDetailView = $this->getUserRolesForDetailView($current_user->id);
+		$UserRolesForDetailViewSlug = [];
+		if($UserRolesForDetailView){
+			foreach($UserRolesForDetailView as $key=>$rdv){
+				$UserRolesForDetailViewSlug[$key] = $rdv['slug'];
+			}
+		}//print_r($UserRolesForDetailViewSlug);exit();
+		if(is_admin($current_user)){$can_see_detail = 1;}
+		if(in_array('BA',$UserRolesForDetailViewSlug)){$can_see_detail = 1;}//echo $can_see_detail; exit();
+		if($can_see_detail === 0){
 			 
 			//check users
 			self::$reporters[]=$this->bean->assigned_user_id;
@@ -542,7 +566,8 @@ if(!isset($_SESSION['referral'])){
 		$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 		$reportingUserIds = $reportUserObj->report_to_id;
 
-		if (!array_key_exists($this->bean->assigned_user_id,$reportingUserIds)){
+		if (!array_key_exists($this->bean->assigned_user_id,$reportingUserIds)){//$('.actionsContainer').hide();
+				if(!is_admin($current_user) && $can_see_detail === 1){ ?><script>$(function(){$('.actionsContainer').hide();})</script><?php  }
 				echo "<span> You don't have access to view this record</span>";
 					//~ die;
 		}
