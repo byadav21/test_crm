@@ -532,9 +532,9 @@ if(!isset($_SESSION['referral'])){
 			foreach($UserRolesForDetailView as $key=>$rdv){
 				$UserRolesForDetailViewSlug[$key] = $rdv['slug'];
 			}
-		}//print_r($UserRolesForDetailViewSlug);exit();
+		}
 		if(is_admin($current_user)){$can_see_detail = 1;}
-		if(in_array('BA',$UserRolesForDetailViewSlug)){$can_see_detail = 1;}//echo $can_see_detail; exit();
+		if(in_array('BA',$UserRolesForDetailViewSlug)){$can_see_detail = 1;}
 		if($can_see_detail === 0){
 			 
 			//check users
