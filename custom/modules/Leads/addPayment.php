@@ -1155,9 +1155,8 @@ class addPaymentClass
 				$useremail=$bean->email1;
 				if($bean->status_description=="Not Interested"){
 				$template = "<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
-							<p>We regret not having been able to help you with your query regarding ".$bean->batch_c." We do hope </p>
-							<p>you will consider us to be your learning partner, should you decide to boost your skill set with online</p>
-							<p>executive courses.</p>
+							<p>We regret not having been able to help you with your query regarding ".$bean->batch_c.".</p>
+							<p>We do hope you will consider us to be your learning partner, should you decide to boost your skill set with online executive courses.</p>
 							<p>Talentedge partners with leading academic Indian & International institutes – such as IIMs,</p>
 							<p>MICA, XLRI, JWMI, SPJIR etc. to bring to working professionals industry relevant executive courses online.</p>
 							<p> Delivered through a technologically advanced education platform, we offer Live & Interactive digital learning across popular domains.</p>
