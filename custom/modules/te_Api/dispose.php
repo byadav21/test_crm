@@ -138,7 +138,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             }
 
 
-            if ($auto_attempts >= 6 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
+            if ($auto_attempts >= 10 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
             {
 
                 //$attempid++;
