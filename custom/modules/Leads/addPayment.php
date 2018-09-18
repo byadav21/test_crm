@@ -1190,12 +1190,11 @@ class addPaymentClass
 				if($bean->status_description=="Next Batch"){
 					
 				$template="<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
-							<p>We are sorry to see you go from " .$bean->batch_c . ".</p>  
-							<p>However, you can be sure that we will continue to bring to you the most industry relevant </p>
-							<p>courses and do our best to help you fast-track your career.</p> 
-							<p>We hope you will consider us to be your learning partner whenever you decide to take up online </p>
-							<p>executive courses.</p> 
-							<p>You can always give us a call at +91-8376000600 or visit www.talentedge.in  if you need any </p><p>assistance with your career.</p>
+							<p>We hate to see you go.</p>  
+							<p>While we will have other courses in this domain to offer, we cannot promise when this batch will
+return, or if it will with the same curriculum or class schedule. </p>
+							<p>Don't lose this great opportunity for you to transform your career. While the seats for the " . $bean->batch_c ." are filling up fast, we have a few left, if you still want to enrol in this batch.</p> 
+							<p>Give us a call at +91-8376000600 and we will be happy to assist with more information. </p>
 							</br> 
 							<p>Regards,</p>
 							<p>Team Talentedge</p>";
