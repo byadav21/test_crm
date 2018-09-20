@@ -191,15 +191,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         {
             $selected_source = $_SESSION['cccon_source'];
         }
-        if (!empty($_SESSION['cccon_status']))
-        {
-            $selected_status = $_SESSION['cccon_status'];
-        }
 
-        if (!empty($_SESSION['cccon_status_description']))
-        {
-            $selected_status_description = $_SESSION['cccon_status_description'];
-        }
 
         $leadList   = array();
         $StatusList = array();
@@ -224,7 +216,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
        
 
        
-        if ($_SESSION['cccon_status'] != "")
+        if (!empty($_SESSION['cccon_status']))
         {
             $selected_status = $_SESSION['cccon_status'];
             $wherecl         .= " AND  leads.status IN ('" . implode("','", $selected_status) . "')";
@@ -260,7 +252,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads_cstm.attempts_c'               => 'No of Attempts',
             'leads.first_name'                    => 'First Name',
             'leads.last_name'                     => 'Last Name',
-            'ed.email_address'                    => 'Email Address',
+            'leads_cstm.email_add_c'              => 'Email Address',
             'leads.phone_mobile'                  => 'Phone Mobile',
             'leads.phone_home'                    => 'Phone Home',
             'leads.phone_work'                    => 'Phone Work',
@@ -322,12 +314,13 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
                 LEFT JOIN users ON leads.assigned_user_id =users.id
                 LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
                 LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
-                LEFT JOIN `email_addr_bean_rel` eabr ON  leads.id=eabr.bean_id
-                LEFT JOIN `email_addresses` ed ON eabr.`email_address_id`=ed.id
+                #LEFT JOIN `email_addr_bean_rel` eabr ON  leads.id=eabr.bean_id
+                #LEFT JOIN `email_addresses` ed ON eabr.`email_address_id`=ed.id
                 LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
                 where leads.deleted=0  $wherecl  ";
 
         $countSql = "SELECT count(1) as count ". $sqlPart;
+//        echo $countSql;
 
         $leadSql = "SELECT $IDs $headersss " . $sqlPart;
 
@@ -425,6 +418,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $page      = $this->objPagination->get_page();
         $last_page = $this->objPagination->get_last_page();
         $pagenext = $page + 1;
+        $pageprevious = $page - 1;
 
         $right = $page < $last_page;
         $left = $page > 1;
@@ -444,6 +438,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $sugarSmarty->assign("error", $error);
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("headers", $headers);
+        $sugarSmarty->assign("tablewidth", count($headers) * 130);
 
         $sugarSmarty->assign("campaignIDs", $campaignID);
         $sugarSmarty->assign("leadIDs", $leadID);
@@ -479,6 +474,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
         $sugarSmarty->assign("pagenext", $pagenext);
+        $sugarSmarty->assign("pageprevious", $pageprevious);
         $sugarSmarty->assign("right", $right);
         $sugarSmarty->assign("left", $left);
         $sugarSmarty->assign("last_page", $last_page);

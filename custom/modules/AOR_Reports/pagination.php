@@ -76,7 +76,7 @@ class pagination{
   }
 
   public function getHeading(){
-    if ($this->_totalRows > $this->get_page()){
+    if ($this->_foundRows > $this->get_page()){
       $heading = "(" . ($this->get_start() + 1) . "-" . ($this->get_start() + $this->_perPage) . " of " . $this->_totalRows . ")";
     }else{
       $heading = "(" . ($this->get_start() + 1) . "-" . ($this->get_start() + $this->_foundRows) . " of " . $this->_totalRows . ")";

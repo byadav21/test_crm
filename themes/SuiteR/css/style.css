@@ -255,7 +255,7 @@ th, td {
     margin-bottom:3px;
     margin-top:3px;
     padding:20px 16px 22px 30px;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .view tr td input[type=checkbox] {
@@ -5213,3 +5213,14 @@ table tr#delegates_search {
 input[type=text].sqsEnabled{width: 70%!important;}
 /* End SuiteCRM Responsive/Bootstrap additional CSS */
 /* End Global CSS */
+
+div.div-leads-list table tbody tr:nth-child(odd){
+    background:#c6dff9 !important;
+}
+
+div.div-leads-list table tbody tr:nth-child(even){
+    background:#efefef !important;
+}
+div.div-leads-list table tbody tr td {
+    border-top:1px solid #ddd
+}
