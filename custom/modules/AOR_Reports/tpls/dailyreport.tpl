@@ -78,7 +78,7 @@
                                             <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
                                         </a>
 
-                                        <a href="index.php?module=AOR_Reports&action=dailyreport&page={$page}"  class="button" title="Previous">
+                                        <a href="index.php?module=AOR_Reports&action=dailyreport&page={$pageprevious}"  class="button" title="Previous">
                                             <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
                                         </a>
                                     {else}
@@ -121,6 +121,11 @@
                 </td>
             </tr>
             {*End Pagination*}
+	</thead>
+</table>
+	<div style="width:99%;overflow:auto;border:2px dashed #d0d0d0;" class="div-leads-list">
+	<table cellpadding="0" cellspacing="0" width="{$table_width}" border="0" class="list view table footable-loaded footable default">
+	<thead>
 	<tr height="20">
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Source</strong>
@@ -158,6 +163,7 @@
 	{/foreach}
 
 </table>
+	</div>
 <script>
 {literal}
 Calendar.setup ({

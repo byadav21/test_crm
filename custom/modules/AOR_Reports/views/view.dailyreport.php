@@ -2,10 +2,13 @@
 if (!defined('sugarEntry') || !sugarEntry)
 	die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
+require_once('custom/modules/AOR_Reports/pagination.php');
 class AOR_ReportsViewDailyreport extends SugarView {
 
+    private $objPagination;
 	public function __construct() {
 		parent::SugarView();
+        $this->objPagination = new pagination(10, 'page');
 	}
 	
 	function getBatch()
@@ -24,6 +27,7 @@ class AOR_ReportsViewDailyreport extends SugarView {
 	public function display() {
 		global $sugar_config, $app_list_strings, $current_user, $db;
 		$batchList = $this->getBatch();
+        $_export = isset($_POST['export']) && $_POST['export'] == "Export";
 		//echo "<pre>";print_r($batchList);echo "</pre>";
 		//echo "<pre>";print_r($app_list_strings['lead_status_custom_dom']);exit();
 		$listCouncelorArr = [];
@@ -45,17 +49,17 @@ class AOR_ReportsViewDailyreport extends SugarView {
 		if (!empty($_SESSION['dr_from_date']))
 		{
 		    $selected_from_date = date("d-m-Y",strtotime($_SESSION['dr_from_date']));
-		    $wheredr .= " AND DATE(l.date_entered)>='" . $_SESSION['dr_from_date'] . "'";
+		    $wheredr .= " AND DATE(date_entered)>='" . $_SESSION['dr_from_date'] . "'";
 		}
 		if (!empty($_SESSION['dr_to_date']))
 		{
 		   $selected_to_date = date("d-m-Y",strtotime($_SESSION['dr_to_date']));
-		   $wheredr .= " AND DATE(l.date_entered)<='" . $_SESSION['dr_to_date'] . "'";
+		   $wheredr .= " AND DATE(date_entered)<='" . $_SESSION['dr_to_date'] . "'";
 		}
 		if (!empty($_SESSION['dr_batch']))
 		{
 		    $selected_course = $_SESSION['dr_batch'];
-		    $wheredr .= " AND lc.te_ba_batch_id_c IN ('" . implode("','", $selected_course) . "')";
+		    $wheredr .= " AND batch_id IN ('" . implode("','", $selected_course) . "')";
 		}
 		if (!empty($_SESSION['dr_status']))
 		{
@@ -77,54 +81,74 @@ class AOR_ReportsViewDailyreport extends SugarView {
 		}/*Date Range is <=30Days*/
 		else{
 			SugarApplication::appendErrorMessage('');
-			$leadSql = "SELECT l.status,lc.te_ba_batch_id_c,l.vendor FROM leads AS l INNER JOIN leads_cstm AS lc on l.id=lc.id_c WHERE l.deleted=0 $wheredr";
-			$leadObj = $db->query($leadSql);
-			while ($row = $db->fetchByAssoc($leadObj)){
-				$dataArr[] = $row;
-			}
-			$councelorList = $this->__formate_data($dataArr,$batchList);
-			if(isset($_REQUEST['export'])){
+
+            $leadSql = "SELECT l.status,lc.te_ba_batch_id_c,l.vendor FROM leads AS l INNER JOIN leads_cstm AS lc on l.id=lc.id_c WHERE l.deleted=0 $wheredr";
+            $leadObj = null;
+            $leadObj = $db->query($leadSql);
+
+            $dataArr = array();
+            while ($row = $db->fetchByAssoc($leadObj)){
+                $batchID = ($row['te_ba_batch_id_c'] != '') ? $row['te_ba_batch_id_c'] : "NA";
+                $vendorName = $row['vendor'];
+                $k = $batchID.'_'.$vendorName;
+                if(!isset($dataArr[$k])) {
+                    $batch = isset($batchList[$batchID])?$batchList[$batchID]:array();
+                    $dataArr[$k]['vendor']          = $vendorName;
+                    $dataArr[$k]['batch']           = ($batch['name']) ? $batch['name'] : "NA";
+                    $dataArr[$k]['batch_code']      = ($batch['batch_code']) ? $batch['batch_code'] : "NA";
+                    $dataArr[$k]['program_name']    = ($batch['program_name']) ? $batch['program_name'] : "NA";
+                    $dataArr[$k]['fees_inr']        = ($batch['fees_inr']) ? $batch['fees_inr'] : 0;
+                }
+                $dataArr[$k]['status'][$row['status']][]=1;
+            }
+
+            $rowCount = count($dataArr);
+            if($rowCount <= 0){
+                $error['error'] = "No Data Found.";
+            }
+            $this->objPagination->set_total($rowCount);
+            $councelorList = array();
+            if(!empty($dataArr)){
+                $dataArr = array_slice($dataArr, $this->objPagination->get_start(), $this->objPagination->get_page_length());
+                foreach($dataArr as $key=>$val){
+                    $councelorList[$key]=$val;
+                    $total = [];
+                    $converted = 0;
+                    $fee = $val['fees_inr'];
+                    foreach($val['status'] as $statuskey=>$statusval){
+                        if($statuskey=='Converted'){$converted = count($val['status']['Converted']);}
+                        $total[]=count($statusval);
+                    }
+                    $councelorList[$key]['total']=array_sum($total);
+                    $councelorList[$key]['converted']=$converted;
+                    $councelorList[$key]['gsv']=0;
+                    if($fee>0 && $converted>0){
+                        $gsv = $fee*$converted;
+                        $councelorList[$key]['gsv']=round($gsv,2);
+                    }
+                    unset($councelorList[$key]['status']);
+                }
+                unset($dataArr);
+            }
+
+			if($_export && empty($error)){
 				$this->__export_data($councelorList);
 			}
+
 			#Pagination
-			$total=count($councelorList); #total records
-			$start=0;
-			$per_page=10;
-			$page=1;
-			$pagenext=1;
-			$last_page=ceil($total/$per_page);
+            $page      = $this->objPagination->get_page();
+            $last_page = $this->objPagination->get_last_page();
+            $pagenext = $page + 1;
+            $pageprevious = $page - 1;
 
-			if(isset($_REQUEST['page']) && $_REQUEST['page']>0){
-				$start=$per_page*($_REQUEST['page']-1);
-				$page=($_REQUEST['page']-1);
-				$pagenext = ($_REQUEST['page']+1);
+            $right = $page < $last_page;
+            $left = $page > 1;
 
-			}else{
-
-				$pagenext++;
-			}
-			if(($start+$per_page)<$total){
-				$right=1;
-			}else{
-				$right=0;
-			}
-			if(isset($_REQUEST['page'])&&$_REQUEST['page']==1){
-				$left=0;
-			}elseif(isset($_REQUEST['page'])){
-
-				$left=1;
-			}
-
-			$councelorList=array_slice($councelorList,$start,$per_page);
-			if($total>$per_page){
-				$current="(".($start+1)."-".($start+$per_page)." of ".$total.")";
-
-			}else{
-				$current="(".($start+1)."-".count($councelorList)." of ".$total.")";
-
-
-			}
-		}
+            if(empty($error)) {
+                $this->objPagination->set_found_rows(count($councelorList));
+            }
+            $current = $this->objPagination->getHeading();
+        }
 
 		
 		#pE
@@ -142,45 +166,20 @@ class AOR_ReportsViewDailyreport extends SugarView {
 		$sugarSmarty->assign("current_records",$current);
 		$sugarSmarty->assign("page",$page);
 		$sugarSmarty->assign("pagenext", $pagenext);
+		$sugarSmarty->assign("pageprevious", $pageprevious);
 		$sugarSmarty->assign("right",$right);
-		$sugarSmarty->assign("leftpage",$leftpage);
+//		$sugarSmarty->assign("leftpage",$leftpage);
 		$sugarSmarty->assign("left",$left);
+		$sugarSmarty->assign("table_width",7*200);
+
 		$sugarSmarty->assign("last_page",$last_page);
 		$sugarSmarty->display('custom/modules/AOR_Reports/tpls/dailyreport.tpl');
 	}
+
+
 	function __formate_data($dataArr,$batchArr){
-		$formate_arr = [];
 		$formate__res_arr = [];
-		foreach($dataArr as $val){
-			$batchID = ($val['te_ba_batch_id_c']) ? $val['te_ba_batch_id_c'] : "NA";
-			$vendorName = $val['vendor'];
-			$formate_arr[$batchID.'_'.$vendorName]['vendor']=$vendorName;
-			$formate_arr[$batchID.'_'.$vendorName]['batch']=($batchArr[$val['te_ba_batch_id_c']]['name']) ? $batchArr[$val['te_ba_batch_id_c']]['name'] : "NA";
-			$formate_arr[$batchID.'_'.$vendorName]['batch_code']=($batchArr[$val['te_ba_batch_id_c']]['batch_code']) ? $batchArr[$val['te_ba_batch_id_c']]['batch_code'] : "NA";
-			$formate_arr[$batchID.'_'.$vendorName]['program_name']=($batchArr[$val['te_ba_batch_id_c']]['program_name']) ? $batchArr[$val['te_ba_batch_id_c']]['program_name'] : "NA";
-			$formate_arr[$batchID.'_'.$vendorName]['fees_inr']=($batchArr[$val['te_ba_batch_id_c']]['fees_inr']) ? $batchArr[$val['te_ba_batch_id_c']]['fees_inr'] : 0;
-			$formate_arr[$batchID.'_'.$vendorName]['status'][$val['status']][]=1;
-		}
-		if($formate_arr){
-			foreach($formate_arr as $key=>$val){
-				$formate__res_arr[$key]=$val;
-				$total = [];
-				$converted = 0;
-				$fee = $val['fees_inr'];
-				foreach($val['status'] as $statuskey=>$statusval){
-					if($statuskey=='Converted'){$converted = count($val['status']['Converted']);}
-					$total[]=count($statusval);
-				}
-				$formate__res_arr[$key]['total']=array_sum($total);
-				$formate__res_arr[$key]['converted']=$converted;
-				$formate__res_arr[$key]['gsv']=0;
-				if($fee>0 && $converted>0){
-					$gsv = $fee*$converted;
-					$formate__res_arr[$key]['gsv']=round($gsv,2);
-				}
-				unset($formate__res_arr[$key]['status']);
-			}
-		}
+
 		return $formate__res_arr;
 	}
 

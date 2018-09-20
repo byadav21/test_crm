@@ -75,7 +75,15 @@ class pagination{
     return (($this->_page-1) * $this->_perPage);
   }
 
+
+  public function get_page_length(){
+    return $this->_perPage;
+  }
+
   public function getHeading(){
+    if($this->_foundRows <= 0){
+        $this->_foundRows = $this->_totalRows - $this->get_start();
+    }
     if ($this->_foundRows > $this->get_page()){
       $heading = "(" . ($this->get_start() + 1) . "-" . ($this->get_start() + $this->_perPage) . " of " . $this->_totalRows . ")";
     }else{
