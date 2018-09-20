@@ -131,7 +131,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $_SESSION['cccon_batch_code']         = isset($_REQUEST['batch_code']) ? $_REQUEST['batch_code']:array();
             $_SESSION['cccon_vendors']            = isset($_REQUEST['vendors']) ? $_REQUEST['vendors']:array();
             $_SESSION['cccon_headers']            = isset($_REQUEST['headers']) ? $_REQUEST['headers']: array();
-            $//_SESSION['cccon_mobile']             = $_REQUEST['mobile'];
+//            $_SESSION['cccon_mobile']             = $_REQUEST['mobile'];
             //$_SESSION['cccon_email']              = $_REQUEST['email'];
             $_SESSION['cccon_status']             = isset($_REQUEST['status']) ? $_REQUEST['status']: array();
             $_SESSION['cccon_status_description'] = isset($_REQUEST['status_description']) ? $_REQUEST['status_description']: array();;
@@ -382,7 +382,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $filename = $file . "_" . $from_date . "_" . $to_date;
             global $current_user;
             global $db;
-            $leadObj  = $db->query($leadSql);
+//            $leadObj  = $db->query($leadSql);
 
             # Create heading
             $data = "";
