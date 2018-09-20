@@ -375,7 +375,46 @@
                 step: 1,
                 weekNumbers: false,
             });
-
+            $(document).ready(function () {
+                $(".multiselbox").each(function () {
+                    if ($(this).find("option").eq(0).val() == '') {
+                        $(this).find("option").eq(0).remove();
+                    }
+                })
+                $(".multiselbox").multiselect({
+                    includeSelectAllOption: true
+                });
+                
+                
+                $("#status").change(function () {
+                    var arg = $('#status').val();
+                    getAjax('batch_code', arg);
+                });
+                $("#managers").change(function () {
+                    var arg = $('#managers').val();
+                    getAjax('councellors', arg);
+                });
+                
+                
+                 $("#search_form").on('submit', (function(e) {
+                     
+                      var from_date    = $('#from_date').val();
+                      var to_date      = $('#to_date').val();
+                      
+                      if(from_date=='' || from_date ==null){
+                          $("#from_date").focus();
+                           alert('Please select From-Date!'); return false;
+                      }
+                      
+                      if(to_date=='' || to_date ==null){
+                          $("#to_date").focus();
+                           alert('Please select To-Date!'); return false;
+                      }
+                     
+                    
+                 }));
+                
+            });
         </script>
 
 
