@@ -7,19 +7,22 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
 require_once('custom/modules/AOR_Reports/pagination.php');
+require_once('custom/modules/AOR_Reports/UserInput.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
 class AOR_ReportsViewexportheaderwisereport extends SugarView
 {
-
     var $report_to_id;
     var $counsellors_arr;
     private $objPagination;
+    private $_objInputs;
     public function __construct()
     {
         parent::SugarView();
         $this->objPagination = new pagination(60, 'page');
+        $this-> _objInputs = new UserInput();
+        $this->_objInputs->syncSessions('exportHeaderWiseReport');
     }
 
     function getProgram()
@@ -76,7 +79,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
         $current_user_id = $current_user->id;
-        $_export = isset($_POST['export']) && $_POST['export'] == "Export";
+        $_export = isset($this->_objInputs->post['export']) && $this->_objInputs->post['export'] == "Export";
         $where           = "";
         $wherecl         = "";
         $campaignID      = array();
@@ -123,7 +126,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             }
         }
 
-      
+        /*
         if (!isset($_POST['from_date']))
         {
             $selected_from_date = date('Y-m-d', strtotime('-1 days'));
@@ -132,84 +135,60 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         {
             $selected_to_date = date('Y-m-d', strtotime('-1 days'));
         }
+        */
         
-        
-        if (isset($_POST['button']) || isset($_POST['export']))
-        {
-            $selected_from_date          = isset($_POST['from_date']) ? $_POST['from_date'] : '';
-            $selected_to_date            = isset($_POST['to_date']) ? $_POST['to_date'] : '';
-            $selected_batch              = isset($_POST['batch']) ? $_POST['batch'] : '';
-            $selected_batch_code         = isset($_POST['batch_code']) ? $_POST['batch_code'] : array();
-            $selected_vendor             = isset($_POST['vendors']) ? $_POST['vendors'] : array();
-            $selected_headers            = isset($_POST['headers']) ? $_POST['headers'] : array();
-            $selected_status             = isset($_REQUEST['status']) ? $_REQUEST['status'] : array();
-            $selected_status_description = isset($_REQUEST['status_description']) ? $_REQUEST['status_description'] : array();
+//        if (isset($_POST['button']) || isset($_POST['export']))
+//        {
+            $selected_from_date          = $this->_objInputs->getVal('from_date', 'post', date('Y-m-d', strtotime('-1 days')));
+            $selected_to_date            = $this->_objInputs->getVal('to_date', 'post', date('Y-m-d', strtotime('-1 days')));
+            $selected_batch              = $this->_objInputs->getVal('batch', 'post', array());
+            $selected_batch_code         = $this->_objInputs->getVal('batch_code', 'post', array());
+            $selected_vendor             = $this->_objInputs->getVal('vendors', 'post', array());
+            $selected_headers            = $this->_objInputs->getVal('headers', 'post', array());
+            $selected_status             = $this->_objInputs->getVal('status', 'post', array());
+            $selected_status_description = $this->_objInputs->getVal('status_description', 'post', '');
           
-        }
+//        }
        
         
-        if ($selected_from_date != "" && $selected_to_date != "")
-        {  
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $selected_from_date)));
-            $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $selected_to_date)));
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' AND DATE(leads.date_entered) <= '" . $to_date . "'";
-        }
-        elseif ($selected_from_date != "" && $selected_to_date == "")
-        {  
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $selected_from_date)));
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' ";
-        }
-        elseif ($selected_from_date == "" && $selected_to_date != "")
-        {
-            
-            $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $selected_to_date)));
-            $wherecl          .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
+        if ($selected_from_date != "" ){
+            $from_date  = date('Y-m-d', strtotime(str_replace('/', '-', $selected_from_date)));
+            $wherecl    .= " AND DATE(leads.date_entered) >= '" . $from_date . "'";
         }
 
+        if ($selected_to_date != ""){
+            $to_date = date('Y-m-d', strtotime(str_replace('/', '-', $selected_to_date)));
+            $wherecl .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
+        }
 
-
-
-       
-
-
-        if (!empty($selected_batch))
-        {
+        if (!empty($selected_batch)){
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch) . "')";
         }
-        if (!empty($selected_batch_code))
-        {
+
+        if (!empty($selected_batch_code)){
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-        if (!empty($selected_vendor))
-        {
+        if (!empty($selected_vendor)){
 
             $wherecl .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "')";
         }
 
-
-       
-
-       
-
-        
-        if (!empty($selected_status))
-
-        {
+        if (!empty($selected_status)){
             
-            $wherecl         .= " AND  leads.status IN ('" . implode("','", $selected_status) . "')";
+            $wherecl .= " AND  leads.status IN ('" . implode("','", $selected_status) . "')";
         }
-        if (!empty($selected_status_description))
-        {  
-            $wherecl                     .= " AND  leads.status_description IN ('" . implode("','", $selected_status_description) . "')";
+
+        if (!empty($selected_status_description)){
+            $wherecl .= " AND  leads.status_description IN ('" . implode("','", $selected_status_description) . "')";
         }
         
         // while CC team will use this
         if(in_array($current_user_id, $usersAccessId)){
             
-            $wherecl                     .= " AND  lead_source_types in ('CC','NULL','null','') ";
+            $wherecl .= " AND  lead_source_types in ('CC','NULL','null','') ";
         }
         
 
