@@ -431,7 +431,9 @@ WHERE   `sb`.`deleted` = 0
                             `pd`.`SAP_DocEntry` AS `DocEntry`,
                              0 AS `InvoiceId`,
                             `pd`.`amount` AS `SumApplied`,
-                            `pd`.`Pay_Status` AS `Pay_Status`
+                            `pd`.`Pay_Status` AS `Pay_Status`,
+                             `s`.`SAP_CardCode` AS `CardCode`,
+                            `pd`.`invoice_number` AS `U_OrigNum`
                      FROM (((((`te_student` `s`
                                JOIN `te_student_te_student_batch_1_c` `stsb` on((`s`.`id` = `stsb`.`te_student_te_student_batch_1te_student_ida`)))
                               JOIN `te_student_batch` `sb` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`)))
@@ -798,11 +800,11 @@ WHERE   `sb`.`deleted` = 0
 
         echo '<hr>WEB_RCT2 Table Syncing ';
 
-        $custSQL = "INSERT INTO `WEB_RCT2` (`U_OrigEntry`, `DocEntry`,`SumApplied`,`Pay_Status`) VALUES ";
+        $custSQL = "INSERT INTO `WEB_RCT2` (`U_OrigEntry`, `DocEntry`,`SumApplied`,`Pay_Status`,`CardCode`,`U_OrigNum`) VALUES ";
         $i       = 1;
         foreach ($WEB_RCT2Arr as $key => $data)
         {
-            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DocEntry'] . "','" . $data['SumApplied'] . "','" . $data['Pay_Status'] . "'),";
+            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DocEntry'] . "','" . $data['SumApplied'] . "','" . $data['Pay_Status'] . "','" . $data['CardCode'] . "','" . $data['U_OrigNum'] . "'),";
             $i++;
         }
         $exeSql = rtrim($custSQL, ',');
