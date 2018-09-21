@@ -109,7 +109,8 @@ class AOR_ReportsViewDailyreport extends SugarView {
             $this->objPagination->set_total($rowCount);
             $councelorList = array();
             if(!empty($dataArr)){
-                $dataArr = array_slice($dataArr, $this->objPagination->get_start(), $this->objPagination->get_page_length());
+                if(!$_export)
+                    $dataArr = array_slice($dataArr, $this->objPagination->get_start(), $this->objPagination->get_page_length());
                 foreach($dataArr as $key=>$val){
                     $councelorList[$key]=$val;
                     $total = [];
@@ -184,19 +185,20 @@ class AOR_ReportsViewDailyreport extends SugarView {
 	}
 
 	function __export_data($row_data=array()){
-		    $data     = "Source, Program Name, Batch Name, Batch Code,No. of Leads Generated,No. of Conversions, GSV\n";
-		    $file     = "daily_report";
-		    $filename = $file . "_" . date("Y-m-d");
-		    foreach ($row_data as $key => $councelor)
-		    {
-		       
-		        $data .= "\"" . $councelor['vendor'] . "\",\"" . $councelor['program_name'] . "\",\"" . $councelor['batch'] . "\",\"" . $councelor['batch_code'] . "\",\"" .$councelor['total'] . "\",\"" .$councelor['converted'] . "\",\"" . $councelor['gsv'] . "\"\n";
-		    }
-		    ob_end_clean();
-		    header("Content-type: application/csv");
-		    header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
-		    echo $data;
-		    exit;
+        $data     = "Source, Program Name, Batch Name, Batch Code,No. of Leads Generated,No. of Conversions, GSV\n";
+        $file     = "daily_report";
+        $filename = $file . "_" . date("Y-m-d");
+        ob_end_clean();
+
+        header("Content-type: application/csv");
+        header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
+        echo $data;
+        foreach ($row_data as $key => $councelor)
+        {
+            echo "\"" . $councelor['vendor'] . "\",\"" . $councelor['program_name'] . "\",\"" . $councelor['batch'] . "\",\"" . $councelor['batch_code'] . "\",\"" .$councelor['total'] . "\",\"" .$councelor['converted'] . "\",\"" . $councelor['gsv'] . "\"\n";
+        }
+
+        exit;
 	}
 	function dateDiff ($d1, $d2) {
 		// Return the number of days between the two dates:
