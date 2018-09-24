@@ -11,10 +11,12 @@
     var $selected_councellors       =array();
     var $selected_lead_source_types =array();
     var $attempts                   =array();
+    var $fromDate                   ='';
+    var $toDate                     ='';
     var $turnAroundTime = 1440;
     private  $sqlPart = '';
 
-    function __construct($selected_batch_ids=array(),$selected_councellors=array(),$selected_lead_source_types=array()){
+    function __construct($selected_batch_ids=array(),$selected_councellors=array(),$selected_lead_source_types=array(), $fromDate='', $toDate=''){
       $this->selected_batch_ids = $selected_batch_ids;
       $this->selected_councellors = $selected_councellors;
       $this->selected_lead_source_types = $selected_lead_source_types;
@@ -31,6 +33,8 @@
         $this ->sqlPart .= " AND batch_id IN ('" . implode("','", $this->selected_batch_ids) . "')";
       }
 
+      $this->fromDate = $fromDate;
+      $this->toDate = $toDate;
     }
 
     public function setTurnArountTime($tat=1440){
@@ -180,8 +184,8 @@
 
 
       $attemptList = array();
-      $fromDate = $_SESSION['cccon_from_date'];
-      $toDate = $_SESSION['cccon_to_date'];
+      $fromDate = $this->fromDate;
+      $toDate = $this->toDate;
       if($isReturnLeads){
         if($show == 'fresh_leads') $attemptList = $this->getFreshLeads($fromDate, $toDate, $isReturnLeads);
         if($show == 'leads_attempted_1_3') $attemptList = $this->getLeads1to3($fromDate, $toDate, $isReturnLeads);
