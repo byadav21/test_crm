@@ -19,5 +19,5 @@ $hook_array['after_save'][] = Array(11, 'add leads indivialids', 'custom/modules
 $hook_array['after_retrieve'][] = Array(10, 'leads details', 'custom/modules/Leads/program_istitute.php','detail_view','detail_pro_ins');
 $hook_array['process_record'][] = Array(6, 'statusoleads', 'custom/modules/Leads/lead_report.php','listviewlead', 'lead_report');
 $hook_array['after_relationship_add'][] = Array(7, 'abcd', 'custom/modules/Leads/refree_lead.php','Alogic', 'Bmethod');
-$hook_array['after_save'][] = Array(13, 'add leads primary vendor', 'custom/modules/Leads/save_primary_vendor.php','saveVendorClass','save_primary_vendor');
+//$hook_array['after_save'][] = Array(13, 'add leads primary vendor', 'custom/modules/Leads/save_primary_vendor.php','saveVendorClass','save_primary_vendor');
 ?>
