@@ -6,8 +6,8 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
 
-//error_reporting(-1);
-//ini_set('display_errors', 'On');
+error_reporting(-1);
+ini_set('display_errors', 'On');
 
 class LeadsViewutmleadassignmentrule extends SugarView
 {
@@ -57,7 +57,9 @@ class LeadsViewutmleadassignmentrule extends SugarView
         $wherecl    = "";
         $campaignID = array();
         $leadID     = array();
-
+        $findBatch = array();
+        $leadList   = array();
+        $StatusList = array();
 
 
         $error = array();
@@ -66,54 +68,38 @@ class LeadsViewutmleadassignmentrule extends SugarView
         $VendorListData = $this->getVendors();
         
         
-       
+       $submit_button=''; $submit_export=''; $vendor=array(); $batch_code=array(); $campaign_id=''; $lead_id='';
         
         $submit_button     = filter_var($_POST['button'], FILTER_SANITIZE_STRING);
         $submit_export     = filter_var($_POST['export'], FILTER_SANITIZE_STRING);
 
         $left = '';
         
-        $vendor=''; $batch_code=''; $campaign_id=''; $lead_id='';
+        
 
 
 
         if (isset($submit_button) || isset($submit_export))
         {
-             $source_vendor      = filter_var($_POST['vendor'], FILTER_SANITIZE_STRING);
+             $source_vendor = filter_var($_POST['vendor'], FILTER_SANITIZE_STRING);
              $batch_code  = filter_var($_POST['batch_code'], FILTER_SANITIZE_STRING);
              $campaign_id = filter_var($_POST['campaign_id'], FILTER_SANITIZE_NUMBER_INT);
              $lead_id     = filter_var($_POST['lead_id'], FILTER_SANITIZE_NUMBER_INT);
         }
 
       
-
+        //print_r($source_vendor); die;
      
 
 
 
-        $findBatch = array();
 
-
-
-        if (!empty($_SESSION['cccon_source']))
-        {
-            $selected_source = $_SESSION['cccon_source'];
-        }
-
-
-
-
-
-
-
-        $leadList   = array();
-        $StatusList = array();
 
 
 
         if (!empty($selected_source))
         {
-            $wherecl .= " AND  leads.lead_source IN ('" . implode("','", $selected_source) . "')";
+            $wherecl .= " AND  leads.vendor IN ('" . implode("','", $source_vendor) . "')";
         }
 
         if (!empty($selected_councellors))

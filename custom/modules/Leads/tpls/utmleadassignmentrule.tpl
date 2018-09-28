@@ -1,5 +1,5 @@
 <section class="moduleTitle"> <h2>Source Lead Assignment Rule</h2><br/><br/><br/><br/><br/><br/>
-    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=utmleadassignmentrule">
+    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=Leads&action=utmleadassignmentrule">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
