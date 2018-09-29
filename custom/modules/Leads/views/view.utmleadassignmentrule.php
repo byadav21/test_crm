@@ -33,6 +33,27 @@ class LeadsViewutmleadassignmentrule extends SugarView
         }
         return $vendor_Options;
     }
+       function getRules()
+    {
+        global $db;
+        $ruleSql      =     "SELECT   `rule_name`,
+                                        `source_name`,
+                                        `batch_code`,
+                                        `campaign_id`,
+                                        `lead_id`
+                                 FROM source_lead_assignment_rule
+                                 WHERE status=1
+                                   AND deleted=0
+                                 ORDER BY reg_date DESC";
+        $rule_Obj     = $db->query($ruleSql);
+        $rule_Options = array();
+        while ($row            = $db->fetchByAssoc($rule_Obj))
+        {
+            $rule_Options[strtolower($row['source_name'].'_'.$row['batch_code'])]['campaign_id'] = $row['campaign_id'];
+            $rule_Options[strtolower($row['source_name'].'_'.$row['batch_code'])]['lead_id'] = $row['lead_id'];
+        }
+        return $rule_Options;
+    }
 
     function getBatch()
     {
@@ -65,8 +86,9 @@ class LeadsViewutmleadassignmentrule extends SugarView
         $BatchListData = $this->getBatch();
         $VendorListData = $this->getVendors();
         
+       //echo '<pre>'; print_r($this->getRules()); die;
         
-       $submit_button=''; $submit_export=''; $vendor=array(); $batch_code=array(); $campaign_id=''; $lead_id='';
+       $submit_button=''; $submit_export=''; $vendor=array(); $batch_code=array(); $campaign_id=''; $lead_id=''; $rule_name='';
         
         $submit_button     = isset($_POST['button'])? $_POST['button'] : '';
         $submit_export     = isset($_POST['export'])? $_POST['export'] : '';
@@ -95,6 +117,7 @@ class LeadsViewutmleadassignmentrule extends SugarView
             $batch_code    = isset($_POST['batch_code']) ? $_POST['batch_code'] : array();
             $campaign_id   = isset($_POST['campaign_id']) ? $_POST['campaign_id'] : '';
             $lead_id       = isset($_POST['lead_id']) ? $_POST['lead_id'] : '';
+            $rule_name     = isset($_POST['rule_name']) ? $_POST['rule_name'] : 'N/A';
 
             
 
@@ -115,6 +138,7 @@ class LeadsViewutmleadassignmentrule extends SugarView
                         foreach ($batch_code as $key => $value_id)
                         {
                              $insertSql = "INSERT INTO source_lead_assignment_rule SET "
+                                    ."rule_name='" . $rule_name . "', "
                                     . "source_id='" . $val . "', "
                                     . "source_name='" . $VendorListData[$val] . "',"
                                     . "batch_id='" . $value_id . "', "

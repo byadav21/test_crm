@@ -4,6 +4,28 @@
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
+                    
+                      <tr>
+                        <td scope="row" nowrap="nowrap" width="5%">
+                            <label for="status">Rule Name:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <input type="textbox" value="" id="rule_name" name="rule_name" >
+                        </td>
+
+                        {*<td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Code">Batch Code:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="batch_code[]" id="batch_code"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$BatchListData key=key item=batch_code}
+
+                                    <option value="{$key}">{$batch_code}</option>
+                                {/foreach}
+                            </select>
+                        </td>*}
+
+                    </tr>
 
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
@@ -131,6 +153,9 @@
 
             <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Rule Name</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Source Name</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -160,7 +185,8 @@
 
             {foreach from = $leadList key=key item=leads}
                 <tr height="20" class="oddListRowS1" id="Myrow_{$key}">
-
+                    
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.rule_name}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.source_name}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.batch_code}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
@@ -219,7 +245,7 @@
                     type: "POST",
                     async: true,
                     success: function (data) {
-                        $('#' + data).html('');
+                        $('#'+data).html('');
                         }
                     });
                 
@@ -235,9 +261,13 @@
                       var batch_code   = $('#batch_code').val();
                       var campaign_id  = $('#campaign_id').val();
                       var lead_id      = $('#lead_id').val();
+                      var rule_name      = $('#rule_name').val();
                       
-                      
-                      if(vendor=='' || vendor ==null){
+                      if(rule_name=='' && rule_name ==''){
+                           $("#rule_name").focus();$("#rule_name").focus();
+                           alert('Please fill the rule name!'); return false;
+                      }
+                      else if(vendor=='' || vendor ==null){
                           $("#vendor").focus();
                            alert('Please select a vendor!'); return false;
                       }
