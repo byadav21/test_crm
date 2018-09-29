@@ -13,7 +13,7 @@
                             <select name="vendor[]" id="vendor"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$VendorListData key=key item=values}
 
-                                    <option value="{$values.id}">{$values.name}</option>
+                                    <option value="{$key}">{$values}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -23,9 +23,9 @@
                         </td>
                         <td nowrap="nowrap" >
                             <select name="batch_code[]" id="batch_code"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$BatchListData key=key item=program}
+                                {foreach from =$BatchListData key=key item=batch_code}
 
-                                    <option value="{$program.id}">{$program.batch_code}</option>
+                                    <option value="{$key}">{$batch_code}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -131,25 +131,25 @@
 
             <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>User Name</strong>
+                    <strong>Source Name</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Month</strong>
+                    <strong>Batch Code</strong>
                 </th>
 
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Year</strong>
+                    <strong>Campaign ID</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Batch Code</strong>
+                    <strong>Lead ID</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Target (gsv)</strong>
+                    <strong>Status</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Unit (gsv)</strong>
+                    <strong>Created Date</strong>
                 </th>
-                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="1">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="1">
                     <strong>Action</strong>
                 </th>
             </tr>   
@@ -161,16 +161,17 @@
             {foreach from = $leadList key=key item=leads}
                 <tr height="20" class="oddListRowS1" id="Myrow_{$key}">
 
-                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.user_name}</td>
-                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$month[$leads.month]}</td>
-                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.year}</td>
-                                        <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.source_name}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.batch_code}</td>
-                    
-                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_gsv}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
-                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_unit}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.campaign_id}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.lead_id}</td>
+                    
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.status}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.reg_date}</td>
+                    
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="javascript:void(0)" onclick='deleteItem("{$leads.id}","Myrow_{$key}")'>Delete</a></td>
 
@@ -213,7 +214,7 @@
                         //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
                     },
                     url: "index.php?entryPoint=reportsajax",
-                    data: {action: 'DeleteTargetRepo', RecordID: RecordID, RowID:RowID},
+                    data: {action: 'SourceLeadAssignmentRule', RecordID: RecordID, RowID:RowID},
                     dataType: "html",
                     type: "POST",
                     async: true,

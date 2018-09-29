@@ -6,8 +6,8 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
 
-error_reporting(-1);
-ini_set('display_errors', 'On');
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
 
 class LeadsViewutmleadassignmentrule extends SugarView
 {
@@ -29,7 +29,7 @@ class LeadsViewutmleadassignmentrule extends SugarView
         $vendor_Options = array();
         while ($row            = $db->fetchByAssoc($vendor_Obj))
         {
-            $vendor_Options[] = $row;
+            $vendor_Options[$row['id']] = $row['name'];
         }
         return $vendor_Options;
     }
@@ -37,12 +37,12 @@ class LeadsViewutmleadassignmentrule extends SugarView
     function getBatch()
     {
         global $db;
-        $batchSql     = "SELECT id,name,batch_code,d_campaign_id,d_lead_id FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0 order by name";
+        $batchSql     = "SELECT id,batch_code FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0 order by batch_code";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
         {
-            $batchOptions[$row['id']] = $row;
+            $batchOptions[$row['id']] = $row['batch_code'];
         }
         return $batchOptions;
     }
@@ -57,9 +57,7 @@ class LeadsViewutmleadassignmentrule extends SugarView
         $wherecl    = "";
         $campaignID = array();
         $leadID     = array();
-        $findBatch = array();
-        $leadList   = array();
-        $StatusList = array();
+     
 
 
         $error = array();
@@ -70,8 +68,8 @@ class LeadsViewutmleadassignmentrule extends SugarView
         
        $submit_button=''; $submit_export=''; $vendor=array(); $batch_code=array(); $campaign_id=''; $lead_id='';
         
-        $submit_button     = filter_var($_POST['button'], FILTER_SANITIZE_STRING);
-        $submit_export     = filter_var($_POST['export'], FILTER_SANITIZE_STRING);
+        $submit_button     = isset($_POST['button'])? $_POST['button'] : '';
+        $submit_export     = isset($_POST['export'])? $_POST['export'] : '';
 
         $left = '';
         
@@ -79,47 +77,10 @@ class LeadsViewutmleadassignmentrule extends SugarView
 
 
 
-        if (isset($submit_button) || isset($submit_export))
-        {
-             $source_vendor = filter_var($_POST['vendor'], FILTER_SANITIZE_STRING);
-             $batch_code  = filter_var($_POST['batch_code'], FILTER_SANITIZE_STRING);
-             $campaign_id = filter_var($_POST['campaign_id'], FILTER_SANITIZE_NUMBER_INT);
-             $lead_id     = filter_var($_POST['lead_id'], FILTER_SANITIZE_NUMBER_INT);
-        }
-
-      
+        
         //print_r($source_vendor); die;
-     
-
-
-
-
-
-
-
-        if (!empty($selected_source))
-        {
-            $wherecl .= " AND  leads.vendor IN ('" . implode("','", $source_vendor) . "')";
-        }
-
-        if (!empty($selected_councellors))
-        {
-            $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
-        }
-
-
-        $months = array(1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
-
-        $current_year = date('Y');
-        $range        = range($current_year, $current_year - 5);
-        $yearsList        = array_combine($range, $range);
-
-
-
-        //$insertSql          = "INSERT INTO te_student_payment SET id='" . $student_payment_id . "', name='" . $bean->reference_number . "'";
-        //$GLOBALS['db']->Query($insertSql);
-
-        if (isset($_POST['button']))
+        
+        if (isset($submit_button))
         {
 
             $error        = array();
@@ -129,95 +90,54 @@ class LeadsViewutmleadassignmentrule extends SugarView
             $years        = '';
             $target_gsv   = '';
             $target_unit  = '';
+            
+            $source_vendor = isset($_POST['vendor']) ? $_POST['vendor'] : array();
+            $batch_code    = isset($_POST['batch_code']) ? $_POST['batch_code'] : array();
+            $campaign_id   = isset($_POST['campaign_id']) ? $_POST['campaign_id'] : '';
+            $lead_id       = isset($_POST['lead_id']) ? $_POST['lead_id'] : '';
 
-            if (isset($_POST['users']) && !empty($_POST['users']))
+            
+
+
+            if (!empty($source_vendor) && !empty($batch_code) && $campaign_id!='' && $lead_id!='')
             {
+                //echo 'ss'; die;
+                //print_r($batch_code); die;
 
-                $userArr = $_POST['users'];
-            }
-
-            if (isset($_POST['batch_code']) && !empty($_POST['batch_code']))
-            {
-
-                $batchCodeArr = $_POST['batch_code'];
-            }
-
-            if (isset($_POST['month']) && $_POST['month'] != '')
-            {
-
-                $month = $_POST['month'];
-            }
-
-            if (isset($_POST['years']) && $_POST['years'] != '')
-            {
-
-                $years = $_POST['years'];
-            }
-            if (isset($_POST['target_gsv']) && $_POST['target_gsv'] != '')
-            {
-
-                $target_gsv = $_POST['target_gsv'];
-            }
-            if (isset($_POST['target_unit']) && $_POST['target_unit'] != '')
-            {
-
-                $target_unit = $_POST['target_unit'];
-            }
-
-
-
-            if (!empty($userArr))
-            {
-
-                foreach ($userArr as $key => $userID)
+                foreach ($source_vendor as $key => $val)
                 {
                     //$insertSql = "INSERT INTO agent_productivity_report SET user_id='" . $value . "', user_name='',reporting_to='',status=1,created_date='" . date('Y-m-d H:i:s') . "' ";
                     //$GLOBALS['db']->Query($insertSql);
 
-                    if (!empty($batchCodeArr))
+                    if (!empty($batch_code))
                     {
 
-                        foreach ($batchCodeArr as $key => $value_id)
+                        foreach ($batch_code as $key => $value_id)
                         {
-                            $insertSql = "INSERT INTO agent_productivity_report SET "
-                                    . " user_id='" . $userID . "', "
-                                    . "user_name='" . $CouncellorsList[$userID]['name'] . "',"
-                                    . "reporting_to='" . $CouncellorsList[$userID]['reporting_id'] . "', "
-                                    . "batch_code='" . $BatchListData[$value_id]['batch_code'] . "', "
-                                    . "batch_id='$value_id',"
-                                    . "status=1,"
-                                    . "year='$years',"
-                                    . "month=$month,"
-                                    . "target_gsv='$target_gsv',"
-                                    . "target_unit='$target_unit' , "
-                                    . "created_date='" . date('Y-m-d H:i:s') . "'";
+                             $insertSql = "INSERT INTO source_lead_assignment_rule SET "
+                                    . "source_id='" . $val . "', "
+                                    . "source_name='" . $VendorListData[$val] . "',"
+                                    . "batch_id='" . $value_id . "', "
+                                    . "batch_code='" . $BatchListData[$value_id]. "', "
+                                    . "campaign_id='$campaign_id',"
+                                    . "lead_id='$lead_id',"
+                                    . "created_by='$current_user->id',"
+                                    . "status='1',"
+                                    . "reg_date='" . date('Y-m-d H:i:s') . "'"; 
                             $GLOBALS['db']->Query($insertSql);
                         }
                     }
-                    else if(empty($batchCodeArr)){
-                        
-                        $insertSql = "INSERT INTO agent_productivity_report SET "
-                                    . " user_id='" . $userID . "', "
-                                    . "user_name='" . $CouncellorsList[$userID]['name'] . "',"
-                                    . "reporting_to='" . $CouncellorsList[$userID]['reporting_id'] . "', "
-                                    . "batch_code='NULL', "
-                                    . "batch_id='NULL',"
-                                    . "status=1,"
-                                    . "year='$years',"
-                                    . "month=$month,"
-                                    . "target_gsv='$target_gsv',"
-                                    . "target_unit='$target_unit' , "
-                                    . "created_date='" . date('Y-m-d H:i:s') . "'";
-                            $GLOBALS['db']->Query($insertSql);
-                        
-                    }
+                  
                 }
+            }else
+            {
+                //echo 'Please input all fields.';
             }
         }
 
         $leadSql = "SELECT *
-                     FROM agent_productivity_report
-                     where status=1 and deleted=0 order by created_date desc";
+                     FROM source_lead_assignment_rule
+                     where status=1 and deleted=0 order by reg_date desc";
 
         $leadObj = $db->query($leadSql) or die(mysqli_error());
 
@@ -282,34 +202,10 @@ class LeadsViewutmleadassignmentrule extends SugarView
 
         $sugarSmarty->assign("error", $error);
         $sugarSmarty->assign("leadList", $leadList);
-
-
-
-
-
         $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("BatchListData", $BatchListData);
-
-        $sugarSmarty->assign("selected_from_date", $selected_from_date);
-        $sugarSmarty->assign("selected_to_date", $selected_to_date);
-
-
-
-
-
-
-
-
-        // $sugarSmarty->assign("selected_councellors", $selected_councellors);
-
-
-
         $sugarSmarty->assign("VendorListData", $VendorListData);
-
-        $sugarSmarty->assign("month", $months);
-        $sugarSmarty->assign("years", $yearsList);
-
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
         $sugarSmarty->assign("pagenext", $pagenext);
