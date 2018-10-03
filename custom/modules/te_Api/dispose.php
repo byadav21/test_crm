@@ -204,10 +204,18 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $bean->dispositionName    = $_REQUEST['dispositionName'];
                 $bean->callType           = $_REQUEST['callType'];
                 //$bean->modified_user_id   = $modifieduserIDX;
+                
+                $callbackSql = "INSERT INTO callback_log
+                                    SET lead_id='$id',
+                                    status_description='$dispositionCode',
+                                    callback_date_time='" .$finalDatTime . "',
+                                    assigned_user_id='" . $assignedUserId . "'";
+                    
                 if ($dispositionCode == 'Follow Up' && $finalDatTime != '')
                 {
 
                     $bean->date_of_followup = $finalDatTime;
+                    $res         = $db->query($callbackSql);
 
                     createLog('{Ameyo Follow Up response}', 'callback_dispose_log.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
                 }
@@ -215,7 +223,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 {
                     $bean->date_of_prospect = $finalDatTime;
 
-
+                    $res         = $db->query($callbackSql);
                     createLog('{Ameyo Prospect response}', 'callback_dispose_log.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
                 }
 
