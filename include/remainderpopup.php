@@ -65,7 +65,9 @@ if(t1.length>0){
 	t1 = JSON.stringify(t1);
 	localStorage.setItem("call_back", t1);	
 }
-
+else{
+	localStorage.setItem("call_back", '');	
+}
 
 //var d1 = new Date("2018-09-03 17:45:00");
 //var d2 = new Date();
@@ -115,4 +117,3 @@ setInterval(fn60sec, 120*1000);
 
 }
 ?>
-
