@@ -47,7 +47,12 @@
 
 		  
 			$this->lv->searchColumns = $this->searchForm->searchColumns;
-											//echo $this->where;
+                        
+                        $acl_obj = new ACLRole();
+                        $misData    = $acl_obj->getUserSlug($current_user->id);
+                        $this->lv->ss->assign("ROLE_NAME", $misData['slug']);
+                        
+			//echo $this->where;
 			//echo 'ABC'.$this->where; exit;
 			if ($this->where)
 			{
