@@ -105,4 +105,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'DeleteTargetRepo')
     }
     die;
 }
+
+if (isset($_POST['action']) && $_POST['action'] == 'SourceLeadAssignmentRule')
+{
+    global $db;
+    $option = '';
+    //RecordID: RecordID, RowID:RowID
+   
+    $RecordID = $_POST['RecordID'];
+    $RowID = $_POST['RowID'];
+
+    if ($RecordID!='')
+    {
+        $updateSql = "UPDATE source_lead_assignment_rule SET deleted=1,status=0 where id=$RecordID";
+        $usObj = $GLOBALS['db']->Query($updateSql);
+       
+        if($usObj){
+            echo $RowID;
+        }
+    }
+    die;
+}
 ?>
