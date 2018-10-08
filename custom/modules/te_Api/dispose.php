@@ -191,11 +191,23 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $finalDatTime = '';
                 if (isset($_REQUEST['callbackTime']) && $_REQUEST['callbackTime'] != '')
                 {
-                    $CALLBACKDATEArr = (explode("T", $_REQUEST['callbackTime']));
-                    $callBackDate    = $CALLBACKDATEArr[0];
-                    $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
-                    $callBackHis     = $callBackHisArr[0];
-                    $finalDatTime    = $callBackDate . ' ' . $callBackHis;
+                    if (strpos($_REQUEST['callbackTime'], 'T') !== false)
+                    {
+                        //echo "\"T\" exists in the callbackTime variable";
+
+                        $CALLBACKDATEArr = (explode("T", $_REQUEST['callbackTime']));
+                        $callBackDate    = $CALLBACKDATEArr[0];
+                        $callBackHisArr  = (explode(" ", $CALLBACKDATEArr[1]));
+                        $callBackHis     = $callBackHisArr[0];
+                        $finalDatTime    = $callBackDate . ' ' . $callBackHis;
+                    }
+                    else
+                    {
+                        $CALLBACKDATE = str_replace("0530", "", $_REQUEST['callbackTime']);
+                        $finalDatTime = date('Y-m-d H:i:s', strtotime($CALLBACKDATE));
+                        
+                        createLog('{Ameyo Follow Up diffrent date}', 'other_callback_dispose_log.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
+                    }
                 }
 
                 $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
