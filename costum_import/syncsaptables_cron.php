@@ -261,6 +261,7 @@ class syncsaptables
                                          ELSE 'Channel'
                                      END) AS `OcrCode5`,
                                     `sb`.`batch_code` AS `Project`,
+                                    replace(`p`.`id`, '-', '') AS `U_CourseID`,
                                     `pd`.`SAP_Status` AS `SAP_Status`
                              FROM `te_student_payment` `sp`
                                           JOIN `te_student_batch_te_student_payment_plan_1_c` `sp_rel` on `sp`.`te_student_batch_id_c` = `sp_rel`.`te_student_batch_te_student_payment_plan_1te_student_batch_ida`
@@ -678,7 +679,7 @@ class syncsaptables
         $Stud_INV1Arr = $this->Stud_INV1();
         echo '<hr>Stud_INV1 Table Syncing ';
 
-        $custSQL = "INSERT INTO `Stud_INV1` (`U_OrigEntry`, `U_OrigLine`,`ItemCode`,`Quantity`,`PriceBefDi`,`TaxCode`,`OcrCode`,`OcrCode2`,`OcrCode3`,`OcrCode4`,`OcrCode5`,`Project`) VALUES ";
+        $custSQL = "INSERT INTO `Stud_INV1` (`U_OrigEntry`, `U_OrigLine`,`ItemCode`,`Quantity`,`PriceBefDi`,`TaxCode`,`OcrCode`,`OcrCode2`,`OcrCode3`,`OcrCode4`,`OcrCode5`,`Project`,`U_CourseID`) VALUES ";
 
         $i = 1;
         foreach ($Stud_INV1Arr as $key => $data)
@@ -698,7 +699,7 @@ class syncsaptables
                 '" . $data['OcrCode3'] . "',
                 '" . $data['OcrCode4'] . "',
                 '" . $data['OcrCode5'] . "',
-		'" . $Project . "'),";
+		'" . $Project . "','" . $data['U_CourseID'] . "'),";
 
             $i++;
         }
