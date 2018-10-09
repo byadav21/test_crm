@@ -3,6 +3,8 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
+require_once('/../AOR_Reports/leads_utility.php');
+
 class saveLeadClass
 {
 
@@ -18,17 +20,19 @@ class saveLeadClass
 
     function add_lead(&$bean, $event, $argument)
     {
-     global $db;
-     $beanId       = $bean->id;
+        global $db;
+        $beanId = $bean->id;
 
-     
-    $lead_rel   =$db->query($insert_query); 
-    
-    if($lead_rel){
-        
-        $this->createLog('{"LeadID:'.$beanId.'" sucsessfully insert into report_leads}', 'lead_created_"'.date('Y-m-d').'".txt', $lead_rel, $_REQUEST);
-    }
-     
+        $leadsUtility = new leadsUtility();
+
+        $lead_rel = $leadsUtility->updateLeads($beanId);
+
+
+        if ($lead_rel)
+        {
+
+            $this->createLog('{"LeadID:' . $beanId . '" sucsessfully insert into report_leads}', 'lead_created_"' . date('Y-m-d') . '".txt', $lead_rel, $_REQUEST);
+        }
     }
 
 }
