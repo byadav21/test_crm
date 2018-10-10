@@ -3,8 +3,8 @@
 require_once('custom/modules/te_Api/te_Api.php');
 //Client to test Neox Dial Call API with JSON format 
 
-$number = filter_var($_GET['number'], FILTER_SANITIZE_STRING);
-$lead   = filter_var($_GET['lead'], FILTER_SANITIZE_STRING);
+$mobile_number = filter_var($_GET['number'], FILTER_SANITIZE_NUMBER_INT);
+$lead_id   = filter_var($_GET['lead'], FILTER_SANITIZE_STRING);
 
 if (!empty($lead) && !empty($number))
 {
@@ -21,14 +21,14 @@ if (!empty($lead) && !empty($number))
         fclose($file);
     }
 
-    writeLog('new_dispose_log.txt', '1. Click To Call func ', $lead, $_GET);
+    writeLog('new_dispose_log.txt', '1. Click To Call func ', $lead_id, $_GET);
 
 
-    $lead = "select id,first_name,last_name,phone_mobile,phone_home,phone_work,phone_other from leads where id='" . $lead . "'";
-    $res  = $db->query($lead);
+    $leadQuery = "select id,first_name,last_name,phone_mobile,phone_home,phone_work,phone_other,assigned_user_id from leads where id='" . $lead_id . "'";
+    $res  = $db->query($leadQuery);
 
 
-    $SBlead = "select leads_id,assigned_user_id from te_student_batch where leads_id='" . $lead . "'";
+    $SBlead = "select leads_id,assigned_user_id from te_student_batch where leads_id='" . $lead_id . "'";
     $SBres  = $db->query($SBlead);
 
 
@@ -54,7 +54,7 @@ if (!empty($lead) && !empty($number))
                 $arrReq['campaignId']              = $_SESSION['amyoCID'];
                 $arrReq['sessionId']               = $session;
                 $arrReq['searchable']              = $resdata['id'];
-                $arrReq['phone']                   = $_REQUEST['number'];
+                $arrReq['phone']                   = $mobile_number;
                 $customerRecords                   = [];
                 if ($resdata['first_name'] || $resdata['last_name'])
                     $customerRecords['name']           = $resdata['first_name'] . " " . $resdata['last_name'];
