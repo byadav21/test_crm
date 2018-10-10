@@ -116,14 +116,17 @@ class LeadsListView extends Lead{
 	    
 	    /* Modified to get batch programe and institue by either utm or batch */
 	    //$sql_ba = "SELECT te_ba_batch_id_c FROM leads_cstm  WHERE id_c = '".$this->id."'";
-	    $sql_ba = "SELECT b.id batch_id, b.name, l.id FROM leads l INNER JOIN leads_cstm lc ON l.id = lc.id_c AND l.id='".$this->id."' LEFT JOIN te_utm ON l.utm = te_utm.name LEFT JOIN te_ba_batch b ON b.id = CASE WHEN l.utm =  'NA' THEN lc.te_ba_batch_id_c WHEN l.utm !=  'NA' THEN te_utm.te_ba_batch_id_c END";
+	    //$sql_ba = "SELECT b.id batch_id, b.name, l.id FROM leads l INNER JOIN leads_cstm lc ON l.id = lc.id_c AND l.id='".$this->id."' LEFT JOIN te_utm ON l.utm = te_utm.name LEFT JOIN te_ba_batch b ON b.id = CASE WHEN l.utm =  'NA' THEN lc.te_ba_batch_id_c WHEN l.utm !=  'NA' THEN te_utm.te_ba_batch_id_c END";
+   $sql_ba = "SELECT b.id batch_id, b.name, l.id FROM leads l 
+LEFT JOIN leads_cstm lc ON l.id = lc.id_c  
+LEFT JOIN te_ba_batch b ON b.id=lc.te_ba_batch_id_c  where l.id='".$this->id."'";
 		$res_ba = $GLOBALS['db']->query($sql_ba);
 		$ba = $GLOBALS['db']->fetchByAssoc($res_ba);
 	  
 		/*Modified to get batch programe and institue by either utm or batch* date-1dec2016 */
 		//$bid = $ba['te_ba_batch_id_c']; old
 		
-		  $bid = $ba['batch_id'];
+		$bid = $ba['batch_id'];
        // Get programs details based on the Batch			
 		$sql_pro = "SELECT te_pr_programs_te_ba_batch_1te_pr_programs_ida,name FROM te_pr_programs p INNER JOIN te_pr_programs_te_ba_batch_1_c  pb ON p.id = pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida WHERE te_pr_programs_te_ba_batch_1te_ba_batch_idb = '{$bid}' AND pb.deleted = 0 AND p.deleted=0";
 		$res_pro = $GLOBALS['db']->query($sql_pro);

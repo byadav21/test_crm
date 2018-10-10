@@ -459,7 +459,8 @@
     public function updateLeads($leadId){
       global $db;
       $sql = "delete from report_leads where id = '$leadId'";
-      $leadObj = $db->query($sql) or die(mysqli_error());
+
+      $leadObj = $db->query($sql);
 
       $sqlUpdate = "
         insert into report_leads
@@ -493,7 +494,19 @@
             leads_cstm.temp_lead_date_c,
             te_ba_batch.batch_code AS batch_code,
             te_ba_batch.id AS batch_id,
-            te_ba_batch.name AS batch_name
+            te_ba_batch.name AS batch_name,
+            te_ba_batch.batch_status   AS batch_status,
+            leads.utm_contract_c,
+            leads.utm_source_c,
+            leads.utm_term_c,
+            leads.utm_campaign,
+            CONCAT(
+                if(te_ba_batch.id IS NULL, 'NA', te_ba_batch.id), '_UR_',
+                if(utm_source_c IS NULL, 'NA', utm_source_c), '_UR_',
+                if(utm_contract_c IS NULL, 'NA', utm_contract_c), '_UR_',
+                if(utm_term_c IS NULL, 'NA', utm_term_c), '_UR_',
+                if(utm_campaign IS NULL, 'NA', utm_campaign)
+            ) AS utm_key
         
           FROM leads
             LEFT JOIN users ON leads.assigned_user_id = users.id and users.deleted = 0
@@ -501,12 +514,8 @@
             left JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id and te_ba_batch.deleted=0
             left join te_disposition_leads_c disrel on disrel.te_disposition_leadsleads_ida=leads.id and disrel.deleted=0
             left join te_disposition dis on disrel.te_disposition_leadste_disposition_idb=dis.id and dis.deleted=0
-        
-        
-          where leads.id='$leadId';      
-      ";
-
-      $leadObj = $db->query($sqlUpdate) or die(mysqli_error());
+          where leads.id='$leadId'"; 
+      $leadObj = $db->query($sqlUpdate);
     }
 
     private function calculateAttempts($fromDate, $toDate, $returnLeads=false){
@@ -744,5 +753,6 @@
 
     return $attemplist;
   }
+
 
    * */

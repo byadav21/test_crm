@@ -366,7 +366,7 @@ $(document).ready(function() {ldelim}
 	
 	})
         
-              $("#status_description").on('change',function(){
+        $("#status_description").on('change',function(){
                   if($("#status_description").val()=='Converted'){
                       
                        var status_description = $("#status_description").val();
@@ -395,5 +395,39 @@ $(document).ready(function() {ldelim}
                   }
             
                 });
+                
+        function updateNote(actionvar,arr) {
+                
+                var leadid = $("#CheckEditView").val();
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint="+actionvar,
+                    data: {action: actionvar, param: arr, leadid:leadid,},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        //$('#' + target).html('');
+                    }
+                });
+            }
+            
+        $(document).ready(function () {
+          $("#note").focusout(function(){
+              var note = $("#note").val();
+               
+                  updateNote('updatenoteajax',note);
+          });
+          
+           $("#comment").focusout(function(){
+              var comment = $("#comment").val();
+               
+                  updateNote('updatecommentajax',comment);
+          });
+      });
+      
 </script>
 {/literal}

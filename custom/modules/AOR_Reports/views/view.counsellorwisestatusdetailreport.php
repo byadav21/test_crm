@@ -80,13 +80,14 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
     public function display()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
+        $additionalUsr = array('7016c0b1-bc5a-423d-8aaf-590c64f62aa0','4fa58025-3c9d-aa2a-d355-59a062393942');
 		$current_user_id = $current_user->id;
 		$current_user_is_admin = $current_user->is_admin;
         $where         = "";
         $wherecl       = "";
 		$BatchListData = $this->getBatch();
 		$usersdd = "";
-		if($current_user_is_admin==1){
+		if($current_user_is_admin==1 || in_array($current_user_id, $additionalUsr)){
 			$usersdd = $this->getCouncelorForAdmin();
 		}
 		else{

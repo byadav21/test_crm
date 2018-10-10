@@ -40,10 +40,9 @@ class LeadsViewJunkleadlog extends SugarView
 FROM  `leads` AS l
 INNER JOIN leads_cstm AS lc ON l.id = lc.id_c
 LEFT JOIN te_ba_batch AS b ON b.id = lc.te_ba_batch_id_c
-WHERE l.neoxstatus =0
-AND l.deleted =0
+WHERE l.deleted =0
 AND l.status_description='New Lead'
-AND (l.assigned_user_id='' || l.assigned_user_id='NULL' || l.assigned_user_id=null) $wheredr
+AND (l.assigned_user_id='' || l.assigned_user_id='NULL' || l.assigned_user_id IS NULL) $wheredr
 ORDER BY l.date_entered DESC ";
       		$rel    = $db->query($sqlRel);
 		if($db->getRowCount($rel) > 0){
