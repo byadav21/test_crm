@@ -3,8 +3,8 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
-require_once('/../AOR_Reports/leads_utility.php');
 
+require_once('custom/modules/AOR_Reports/leads_utility.php');
 class saveLeadClass
 {
 
@@ -31,7 +31,7 @@ class saveLeadClass
         if ($lead_rel)
         {
 
-            //$this->createLog('{"LeadID:' . $beanId . '" sucsessfully insert into report_leads}', 'lead_created_"' . date('Y-m-d') . '".txt', $lead_rel, $_REQUEST);
+            $this->createLog('{"LeadID:' . $beanId . '" sucsessfully insert into report_leads}', 'lead_created_"' . date('Y-m-d') . '".txt', $lead_rel, $_REQUEST);
         }
     }
 
