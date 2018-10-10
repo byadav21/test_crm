@@ -481,6 +481,7 @@
             leads.date_of_prospect,
             leads_cstm.attempts_c,
             leads.autoassign,
+            leads.vendor,
             leads.dristi_campagain_id,
             leads.dristi_API_id,
             leads.neoxstatus,
