@@ -6,7 +6,7 @@ require_once('custom/modules/te_Api/te_Api.php');
 $mobile_number = filter_var($_GET['number'], FILTER_SANITIZE_NUMBER_INT);
 $lead_id   = filter_var($_GET['lead'], FILTER_SANITIZE_STRING);
 
-if (!empty($lead) && !empty($number))
+if (!empty($lead_id) && !empty($mobile_number ))
 {
 
     global $current_user, $db;
@@ -89,12 +89,12 @@ if (!empty($lead) && !empty($number))
     }
     else
     {
-        echo "Call Can't be connected";
+        echo "1st: Call Can't be connected";
     }
 }
 else
 {
-    echo "Call Can't be connected";
+    echo "2nd: Call Can't be connected";
 }
 
 exit();
