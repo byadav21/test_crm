@@ -31,7 +31,7 @@ class saveLeadClass
         if ($lead_rel)
         {
 
-            $this->createLog('{"LeadID:' . $beanId . '" sucsessfully insert into report_leads}', 'lead_created_"' . date('Y-m-d') . '".txt', $lead_rel, $_REQUEST);
+            //$this->createLog('{"LeadID:' . $beanId . '" sucsessfully insert into report_leads}', 'lead_created_"' . date('Y-m-d') . '".txt', $lead_rel, $_REQUEST);
         }
     }
 
