@@ -1153,7 +1153,7 @@ class addPaymentClass
             }
 			/************************** Mail 1Trigers Code 14Sep18 by MKG  Mail=> Not Interested ******************/
 				$useremail=$bean->email1;
-				if($bean->status_description=="Not Interested"){
+				if($bean->status_description=="Not Interested" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){
 				$template = "<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
 							<p>We regret not having been able to help you with your query regarding ".$bean->batch_c.".</p>
 							<p>We do hope you will consider us to be your learning partner, should you decide to boost your skill set with online executive courses.</p>
@@ -1169,7 +1169,7 @@ class addPaymentClass
 				}
 				
 				/** Mail2 => Fallout: ***/
-				if($bean->status_description=="Fallout"){
+				if($bean->status_description=="Fallout" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){
 				$template = "<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
 								<p>We are sorry to see you go from " . $bean->batch_c ." .</p>  
 								<p>However, you can be sure that we will continue to bring to you the most industry relevant courses and do our best to help you fast-track your career.</p>
@@ -1182,7 +1182,7 @@ class addPaymentClass
                 $mail->sendEmail($useremail, "Leaving us already?", $template);
 				}
 				/** Triger Mail Mail3> Next batch: ***/
-				if($bean->status_description=="Next Batch"){
+				if($bean->status_description=="Next Batch" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){
 					
 				$template="<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
 							<p>We hate to see you go.</p>  
@@ -1198,7 +1198,7 @@ return, or if it will with the same curriculum or class schedule. </p>
 				}
 				/** Triger Mail Mail4> Auto-retired: ***/
 				
-				if($bean->status_description=="Auto Retired"){	
+				if($bean->status_description=="Auto Retired" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){	
 				$template="<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
 							<p>We tried reaching you a few times, regarding your query for " .$bean->batch_c . ", but could not get through. </p>
 							<p>Our courses have been rated to have a 92% satisfaction score by learners, with a referability rate of 78%.</p>
