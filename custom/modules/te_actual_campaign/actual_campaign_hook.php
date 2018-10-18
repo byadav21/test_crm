@@ -63,8 +63,9 @@ class AutoCalculate
                 $bean->cpl              = floatval($bean->total_cost / $total_leads);
             else
                 $bean->cpl              = 0;
-
-              $sql="update te_actual_campaign set te_ba_batch_id_c='". $utm['te_ba_batch_id_c'] . "', name ='".$vendor['name']."', vendor_id='". $vendor['id'] . "' , cpl='". $bean->cpl  ."' where id='" . $bean->id . "'"  ;
+                 
+                //echo '<pre>'; print_r($bean); die; $bean->te_vendor_id_c $bean->te_ba_batch_id_c
+              $sql="update te_actual_campaign set te_ba_batch_id_c='". $bean->te_ba_batch_id_c . "', name ='".$bean->vendor_c."', vendor_id='". $bean->te_vendor_id_c . "' , cpl='". $bean->cpl  ."' where id='" . $bean->id . "'"  ;
               $db->query($sql);
         }
 

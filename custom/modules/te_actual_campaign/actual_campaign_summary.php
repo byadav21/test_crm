@@ -5,7 +5,7 @@
  * */
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
-ini_set('display_errors', '0');
+ini_set('display_errors', '1');
 error_reporting(E_ALL);
 global $app_list_strings, $current_user, $sugar_config, $db;
 ?>
@@ -64,8 +64,8 @@ Create
       
       <div class="col-xs-12 innerdiv">
 		  <div class="col-xs-6 div text-center headrtbl">Batch</div>
-		  <div class="col-xs-2 div text-center headrtbl">Volume</div>
-		  <div class="col-xs-2 div text-center headrtbl">Rate</div>
+              <!--<div class="col-xs-2 div text-center headrtbl">Volume</div>
+		  <div class="col-xs-2 div text-center headrtbl">Rate</div>-->
 		  <div class="col-xs-2 div text-center headrtbl">Cost</div>
  
       </div>
@@ -73,8 +73,8 @@ Create
       
       <div class="col-xs-12 innerdiv" ng-if="results.length > 0" ng-repeat="(key,obj) in results">
           <div class="col-xs-6 text-left div"><a ng-href='index.php?searchFormTab=basic_search&module=te_actual_campaign&action=index&query=true&batch_basic=<% obj.name %>'  ><% obj.name %></a></div>
-          <div class="col-xs-2 text-center div"><% obj.volume  | number : 0 %></div>	
-          <div class="col-xs-2 text-center div"><% obj.rate  | number : 0 %></div>	
+        <!--<div class="col-xs-2 text-center div"><% obj.volume  | number : 0 %></div>	
+          <div class="col-xs-2 text-center div"><% obj.rate  | number : 0 %></div>-->
           <div class="col-xs-2 text-center div"><% obj.total_cost  | number : 0 %></div>	
       </div>
       <div ng-show="isload==1" class="col-xs-12 text-center"><button ng-click="loadMore()" class="loadmore button">Load More</button></div>

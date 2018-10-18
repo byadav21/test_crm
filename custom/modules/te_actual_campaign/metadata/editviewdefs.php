@@ -73,7 +73,21 @@ array (
             'label' => 'LBL_TOTAL_COST',
           ),
         ),
-
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'batch',
+            'studio' => 'visible',
+            'label' => 'LBL_BATCH',
+          ),
+          1 => 
+          array (
+            'name' => 'vendor_c',
+            'studio' => 'visible',
+            'label' => 'LBL_VENDOR',
+          ),
+        ),
       ),
     ),
   ),

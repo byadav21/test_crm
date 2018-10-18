@@ -39,6 +39,7 @@ $isadmin = ($current_user->is_admin) ? 1 : 0;
 //$results = $obj->getAllStudentInstallmentSummary($isadmin, $batchqry, $user_ids, $start, $noofRow);
 $results = $obj->getBatchList($isadmin, $batchqry, $user_ids, $start, $noofRow);
 
+//echo 'xxx'; print_r($results); die;
 
 
 $isload  = ($results && count($results) > 17) ? 1 : 0;

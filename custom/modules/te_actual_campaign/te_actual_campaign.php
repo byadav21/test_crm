@@ -58,21 +58,27 @@ class te_actual_campaign_override extends te_actual_campaign
 
  
     function getBatchList($isadmin = '0', $batches = '', $userID = '', $start = 0, $noofRow = 18)
-    {
+    {   
+        global $db;
+        
+        //ini_set('display_errors', '1');
+        //error_reporting(E_ALL);
 
-        $sql = " SELECT  
-                    bb.name ,sum(volume) as volume,sum(rate) as rate, sum(total_cost) as total_cost 
-                FROM te_actual_campaign tac 
-                INNER JOIN te_utm_te_actual_campaign_1_c uac ON tac.id=uac.te_utm_te_actual_campaign_1te_actual_campaign_idb
-                INNER JOIN te_utm ON uac.te_utm_te_actual_campaign_1te_utm_ida=te_utm. id
-                INNER JOIN `te_ba_batch` bb ON te_utm.te_ba_batch_id_c=bb.id  WHERE bb.deleted=0 AND te_utm.deleted=0 AND tac.deleted=0 GROUP BY bb.id ";
+       $sql = " SELECT bb.name,
+                    sum(tac.total_cost) AS total_cost
+             FROM te_actual_campaign tac
+             INNER JOIN `te_ba_batch` bb ON tac.te_ba_batch_id_c=bb.id
+             WHERE bb.deleted=0
+               AND tac.deleted=0
+             GROUP BY bb.id";
 
-        $itemDetal = $this->dbinstance->query($sql);
+        $itemDetal = $this->$db->query($sql) or die('Error:');
+        
         $rowData   = [];
         $current   = '';
-        while ($row       = $this->dbinstance->fetchByAssoc($itemDetal))
+        while ($row       = $this->$db->fetchByAssoc($itemDetal))
         {
-
+            print_r($row);
             $addrows   = $row;
 
             $addrows['name']   = strtoupper($row['name']);
