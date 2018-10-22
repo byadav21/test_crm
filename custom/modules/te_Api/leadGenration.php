@@ -1,7 +1,8 @@
 <?php				
-	require_once('custom/modules/te_Api/leads_override.php');
-	ini_set('display_errors',0);
-	error_reporting(0);
+	
+	ini_set('display_errors',1);
+	error_reporting(1);
+        require_once('custom/modules/te_Api/leads_override.php');
 	$name=$_REQUEST['name'];
 	$phone=$_REQUEST['phone'];
 	$email= $_REQUEST['email'];
@@ -164,9 +165,12 @@
 	$leadObj->save();
 	if(!$leadObj->id){
 		echo json_encode(array('status'=>'error','msg'=>'Some thing gone wrong!')); exit();
+	}else{
+	       echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); 
 	}
 	if($campagain_d && $lead_d)	{
 		$sql="update te_ba_batch set lastCampagain='". $campagain_d.$lead_d ."' where id='" .  $batchid ."'";   
 		$db->query($sql);
 	}
-	echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); exit();
+	exit();
+	//echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); exit();
