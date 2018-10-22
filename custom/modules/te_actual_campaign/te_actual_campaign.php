@@ -45,44 +45,44 @@
 
 class te_actual_campaign_override extends te_actual_campaign
 {
+
     public $dbinstance;
-    
+
     function __construct()
     {
         parent::__construct();
         $this->dbinstance = DBManagerFactory::getInstance();
     }
-    
- 
 
-
- 
     function getBatchList($isadmin = '0', $batches = '', $userID = '', $start = 0, $noofRow = 18)
-    {   
-        global $db;
-        
+    {
+
         //ini_set('display_errors', '1');
         //error_reporting(E_ALL);
 
-       $sql = " SELECT bb.name,
+        $sql = "SELECT bb.batch_code,bb.name,
+                    v.name as vendor_name,
                     sum(tac.total_cost) AS total_cost
              FROM te_actual_campaign tac
              INNER JOIN `te_ba_batch` bb ON tac.te_ba_batch_id_c=bb.id
+             left join te_vendor v on tac.vendor_id=v.id
              WHERE bb.deleted=0
                AND tac.deleted=0
-             GROUP BY bb.id";
+             GROUP BY bb.id ";
 
-        $itemDetal = $this->$db->query($sql) or die('Error:');
-        
-        $rowData   = [];
-        $current   = '';
-        while ($row       = $this->$db->fetchByAssoc($itemDetal))
+        $itemDetal = $this->dbinstance->query($sql) or die('Error:');
+
+        $rowData = [];
+        $current = '';
+        while ($row     = $this->dbinstance->fetchByAssoc($itemDetal))
         {
-            print_r($row);
-            $addrows   = $row;
 
-            $addrows['name']   = strtoupper($row['name']);
-            $rowData[] = $addrows;
+            $addrows = $row;
+
+            $addrows['batch_code']  = strtoupper($row['batch_code']);
+            $addrows['name']        = strtoupper($row['name']);
+            $addrows['vendor_name'] = ($row['vendor_name']) ? strtoupper($row['vendor_name']) : 'N/A';
+            $rowData[]              = $addrows;
         }
         return $rowData;
     }
