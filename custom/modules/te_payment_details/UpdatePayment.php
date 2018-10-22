@@ -72,7 +72,7 @@ class UpdatePaymentName
 		}	
 	}
 	
-        if (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == "web_lead_payment")
+        if (isset($_REQUEST['entryPoint']) && ($_REQUEST['entryPoint'] == "web_lead_payment" || $_REQUEST['entryPoint'] == "migrate_student"))
         {
             return true;
         }
