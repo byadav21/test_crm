@@ -34,9 +34,11 @@ else{
 		if(!isset($data['payment_source']) || empty($data['payment_source'])){
 			$error_fields['payment_source']=['payment_source field is required.'];
 		}
-		if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
+                
+		/*if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
 			$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
-		}
+		}*/
+                
 		/* new Fields Added */
 		if(!isset($data['invoice_number']) || empty($data['invoice_number'])){
 			$error_fields['invoice_number']=['invoice_number field is required.'];
@@ -75,9 +77,11 @@ else{
 		if(!isset($data['payment_source']) || empty($data['payment_source'])){
 			$error_fields['payment_source']=['payment_source field is required.'];
 		}
-		if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
+                
+		/*if(!isset($data['payment_referencenum']) || empty($data['payment_referencenum'])){
 			$error_fields['payment_referencenum']=['payment_referencenum field is required.'];
-		}
+		}*/
+                
 		if(!isset($data['payment_id']) || empty($data['payment_id'])){
 			$error_fields['payment_id']=['payment_id field is required.'];
 		}
