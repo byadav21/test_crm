@@ -33,9 +33,9 @@ class syncsaptables
 
     function SyncSapTimestamp()
     {
-        global $conn;
+        global $conn,$sap_conn;
         $query   = "SELECT reg_date FROM   `SYNC_SAP_TIMESTAMP` order by reg_date desc limit 1";
-        $leadObj = mysqli_query($conn, $query);
+        $leadObj = mysqli_query($sap_conn, $query);
         $row     = mysqli_fetch_assoc($leadObj);
 
         return $row['reg_date'];
@@ -193,7 +193,7 @@ class syncsaptables
         $currentTime      = date('Y-m-d H:i:s');
        
 
-        $query   = "SELECT          
+       $query   = "SELECT          
                              replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
                              `pd`.`invoice_number` AS `U_OrigNum`,
                              `pd`.`invoice_number` AS `U_ARInvNo`,
@@ -659,12 +659,12 @@ class syncsaptables
 		'" . $data['DocDueDate'] . "',
                 '" . $data['U_BPId'] . "',
 		'" . $data['CardCode'] . "',
-		'" . ($Address==0)? '': $Address. "',
+		'" . $Address. "',
 		'" . $data['NumAtCard'] . "','" . $data['U_Batch'] . "'),";
 
             $i++;
         }
-        $exeSql = rtrim($custSQL, ',');
+        $exeSql = rtrim($custSQL, ','); 
         if ($i > 1)
         {
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
@@ -755,7 +755,7 @@ class syncsaptables
 	        '" . $data['DocDueDate'] . "',
 		'" . $data['TaxDate'] . "',
 		'" . $data['CardCode'] . "',
-		'" . ($Address==0)? '': $Address. "',
+		'" . $Address. "',
 		'" . $data['Pay_Status'] . "',
                 '" . $data['U_PaymnetID'] . "',
                 '" . $data['U_PaymentGateway'] . "',
