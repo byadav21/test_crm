@@ -213,7 +213,7 @@ class syncsaptables
                       JOIN `te_student_payment` `sp` ON `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`
                       JOIN `te_payment_details` `pd` ON `sp`.`id` = `pd`.`student_payment_id`
                       JOIN `leads` ON `sb`.`leads_id` = `leads`.`id`
-                      JOIN `te_vendor` ON lower(`leads`.`vendor`) = lower(`te_vendor`.`name`)
+                      LEFT JOIN `te_vendor` ON lower(`leads`.`vendor`) = lower(`te_vendor`.`name`)
                       WHERE `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0
                         AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 

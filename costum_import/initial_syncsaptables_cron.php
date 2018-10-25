@@ -198,7 +198,11 @@ class syncsaptables
                              replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
                              `pd`.`invoice_number` AS `U_OrigNum`,
                              `pd`.`invoice_number` AS `U_ARInvNo`,
-                             `te_vendor`.`SlpCode` AS `SlpCode`,
+                             #`te_vendor`.`SlpCode` AS `SlpCode`,
+			     (CASE
+            		      WHEN ( `te_vendor`.`SlpCode` IS NULL) THEN 0
+            		      ELSE `te_vendor`.`SlpCode`
+        		     END) AS `SlpCode`,
                              `pd`.`date_of_payment` AS `DocDate`,
                              `pd`.`date_of_payment` AS `TaxDate`,
                              `pd`.`date_of_payment` AS `DocDueDate`,
@@ -214,12 +218,12 @@ class syncsaptables
                       JOIN `te_student_payment` `sp` ON `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`
                       JOIN `te_payment_details` `pd` ON `sp`.`id` = `pd`.`student_payment_id`
                       JOIN `leads` ON `sb`.`leads_id` = `leads`.`id`
-                      JOIN `te_vendor` ON lower(`leads`.`vendor`) = lower(`te_vendor`.`name`)
+                      LEFT JOIN `te_vendor` ON lower(`leads`.`vendor`) = lower(`te_vendor`.`name`)
                       WHERE `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0
-                        AND `pd`.`date_of_payment` > '2018-03-31'
+                        AND `pd`.`date_entered` > '2018-03-31'
                       GROUP BY `sb`.`leads_id`
-                      ORDER BY `pd`.`date_of_payment`";
+                      ORDER BY `pd`.`date_entered`";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
