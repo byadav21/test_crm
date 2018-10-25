@@ -216,9 +216,9 @@ class syncsaptables
                       JOIN `te_vendor` ON lower(`leads`.`vendor`) = lower(`te_vendor`.`name`)
                       WHERE `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0
-                        AND `pd`.`date_of_payment` >= '$SyncSapTimestamp' AND `pd`.`date_of_payment` <= '$currentTime' 
+                        AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                       GROUP BY `sb`.`leads_id`
-                      ORDER BY `pd`.`date_of_payment`";
+                      ORDER BY `pd`.`date_entered`";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -314,7 +314,7 @@ class syncsaptables
                      WHERE `s`.`deleted` = 0
                             AND `leads`.`primary_address_state` <> ''
                             AND `leads`.`primary_address_state` <> 0 
-                            AND `pd`.`date_of_payment` >= '$SyncSapTimestamp' AND `pd`.`date_of_payment` <= '$currentTime' 
+                            AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                             ";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -376,7 +376,7 @@ class syncsaptables
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE   `sb`.`deleted` = ''
                         AND `pd`.`deleted` = ''
-                        AND `pd`.`date_of_payment` >= '$SyncSapTimestamp' AND `pd`.`date_of_payment` <= '$currentTime' 
+                        AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                         AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -413,7 +413,7 @@ class syncsaptables
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE `pd`.`Pay_Status` = 0
                         AND `pd`.`SAP_DocEntry` <> ''
-                        AND `pd`.`date_of_payment` >= '$SyncSapTimestamp' AND `pd`.`date_of_payment` <= '$currentTime'";
+                        AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -450,7 +450,7 @@ class syncsaptables
                            JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
                      WHERE `pd`.`Pay_Status` = 0
                             AND `pd`.`SAP_DocEntry` <> ''
-                            AND `pd`.`date_of_payment` >= '$SyncSapTimestamp' AND `pd`.`date_of_payment` <= '$currentTime'";
+                            AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -480,8 +480,8 @@ class syncsaptables
                             'Y' AS `Active`,
                             `bb`.`SAP_Status` AS `SAP_Status`
                      FROM `te_ba_batch` `bb`
-                     WHERE `bb`.`deleted` = 0 AND `bb`.`date_of_payment` >= '$SyncSapTimestamp' "
-                . "AND `bb`.`date_of_payment` <= '$currentTime'";
+                     WHERE `bb`.`deleted` = 0 AND `bb`.`date_entered` >= '$SyncSapTimestamp' "
+                . "AND `bb`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
