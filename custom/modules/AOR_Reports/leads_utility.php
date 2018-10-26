@@ -45,8 +45,8 @@
     public function getAttempts($isReturnLeads=false, $show='fresh_leads'){
 
 //      global $db;
-      $objBenchmarking = new benchmarking();
-      $objBenchmarking->start('Attempts');
+//      $objBenchmarking = new benchmarking();
+//      $objBenchmarking->start('Attempts');
    /*
       $and = '';
       if (!empty($this->selected_councellors)) {
@@ -245,8 +245,8 @@
         $sql .= " GROUP by batch_code  ";
 //      echo $sql;
 
-      $objBenchmarking = new benchmarking();
-      $objBenchmarking -> start('TAT');
+//      $objBenchmarking = new benchmarking();
+//      $objBenchmarking -> start('TAT');
       $objSql = $db->query($sql);
       $return = array();
       while ($row = $db->fetchByAssoc($objSql)) {
@@ -256,7 +256,7 @@
           $return[$row['batch_id']] = $row['leads_count'];
         }
       }
-      $objBenchmarking->end('TAT');
+//      $objBenchmarking->end('TAT');
       return $return;
     }
 
@@ -289,8 +289,8 @@
 
 //      echo $sql;
 
-      $objBenchmarking = new benchmarking();
-      $objBenchmarking -> start('fresh');
+//      $objBenchmarking = new benchmarking();
+//      $objBenchmarking -> start('fresh');
       $objSql = $db->query($sql);
       $return = array();
       while ($row = $db->fetchByAssoc($objSql)) {
@@ -300,7 +300,7 @@
           $return[$row['batch_id']] = $row['leads_count'];
         }
       }
-      $objBenchmarking->end('fresh');
+//      $objBenchmarking->end('fresh');
       return $return;
     }
 
@@ -338,8 +338,8 @@
       if(!$returnLeads)
         $sql .= " GROUP by batch_code  ";
 
-      $objBenchmarking = new benchmarking();
-      $objBenchmarking -> start('1to3');
+//      $objBenchmarking = new benchmarking();
+//      $objBenchmarking -> start('1to3');
 //      echo $sql;
 
       $objSql = $db->query($sql);
@@ -351,7 +351,7 @@
           $return[$row['batch_id']] = $row['leads_count'];
         }
       }*/
-      $objBenchmarking->end('1to3');
+//      $objBenchmarking->end('1to3');
       return $return;
     }
 
@@ -391,8 +391,8 @@
         $sql .= " GROUP by batch_code  ";
 
 //      echo $sql;
-      $objBenchmarking = new benchmarking();
-      $objBenchmarking -> start('4to6');
+//      $objBenchmarking = new benchmarking();
+//      $objBenchmarking -> start('4to6');
       $objSql = $db->query($sql);
       $return = array();
       while ($row = $db->fetchByAssoc($objSql)) {
@@ -402,7 +402,7 @@
           $return[$row['batch_id']] = $row['leads_count'];
         }
       }
-      $objBenchmarking->end('4to6');
+//      $objBenchmarking->end('4to6');
       return $return;*/
     }
 
@@ -441,8 +441,8 @@
         $sql .= " GROUP by batch_code  ";
 
 //      echo $sql;
-      $objBenchmarking = new benchmarking();
-      $objBenchmarking -> start('6to');
+//      $objBenchmarking = new benchmarking();
+//      $objBenchmarking -> start('6to');
       $objSql = $db->query($sql);
       $return = array();
       while ($row = $db->fetchByAssoc($objSql)) {
@@ -452,7 +452,7 @@
           $return[$row['batch_id']] = $row['leads_count'];
         }
       }
-      $objBenchmarking->end('6to');
+//      $objBenchmarking->end('6to');
       return $return;*/
     }
 
@@ -462,7 +462,7 @@
 
       $leadObj = $db->query($sql);
 
-      $sqlUpdate = "
+     $sqlUpdate = "
         insert into report_leads
         select
             leads.id as id,
@@ -507,7 +507,11 @@
                 if(utm_contract_c IS NULL, 'NA', utm_contract_c), '_UR_',
                 if(utm_term_c IS NULL, 'NA', utm_term_c), '_UR_',
                 if(utm_campaign IS NULL, 'NA', utm_campaign)
-            ) AS utm_key
+            ) AS utm_key,
+	   concat(
+        if(te_ba_batch.id is NULL, 'NA',te_ba_batch.id) , '_',
+        if(leads.vendor is NULL, 'NA', leads.vendor)
+          ) as batch_key
         
           FROM leads
             LEFT JOIN users ON leads.assigned_user_id = users.id and users.deleted = 0
@@ -547,8 +551,8 @@
         $sql .= " GROUP by batch_code, attempts  ";
 
 //      echo $sql;
-      $objBenchmarking = new benchmarking();
-      $objBenchmarking -> start('global');
+//      $objBenchmarking = new benchmarking();
+//      $objBenchmarking -> start('global');
       $objSql = $db->query($sql);
       $return = array();
       while ($row = $db->fetchByAssoc($objSql)) {
@@ -575,7 +579,7 @@
           }
         }
       }
-      $objBenchmarking->end('global');
+//      $objBenchmarking->end('global');
       $this->attempts = $return;
       return $return;
     }
