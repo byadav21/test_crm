@@ -462,7 +462,7 @@
 
       $leadObj = $db->query($sql);
 
-      $sqlUpdate = "
+     $sqlUpdate = "
         insert into report_leads
         select
             leads.id as id,
@@ -507,7 +507,11 @@
                 if(utm_contract_c IS NULL, 'NA', utm_contract_c), '_UR_',
                 if(utm_term_c IS NULL, 'NA', utm_term_c), '_UR_',
                 if(utm_campaign IS NULL, 'NA', utm_campaign)
-            ) AS utm_key
+            ) AS utm_key,
+	   concat(
+        if(te_ba_batch.id is NULL, 'NA',te_ba_batch.id) , '_',
+        if(leads.vendor is NULL, 'NA', leads.vendor)
+          ) as batch_key
         
           FROM leads
             LEFT JOIN users ON leads.assigned_user_id = users.id and users.deleted = 0
