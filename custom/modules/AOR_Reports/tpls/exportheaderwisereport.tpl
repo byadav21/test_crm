@@ -273,65 +273,64 @@
             </table>
         </div>
     </form>
-    <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
+
+  <div style="width:99%;overflow:hidden;">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
+    <tbody><tr>
+      <td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
+
+      <td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
+
+        {if $left eq 1}
+          <a href="index.php?module=AOR_Reports&action=exportheaderwisereport"  name="listViewStartButton" title="Start" class="button" >
+            <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
+          </a>
+
+          <a href="index.php?module=AOR_Reports&action=exportheaderwisereport&page={$pageprevious}"  class="button" title="Previous">
+            <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
+          </a>
+        {else}
+          <button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
+            <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
+          </button>
+
+          <button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
+            <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
+          </button>
+        {/if}
+
+      </td>
+      <td nowrap="nowrap" width="1%" class="paginationActionButtons">
+        <div class="pageNumbers">{$current_records}</div>
+      </td>
+      <td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
+        {if $right eq 1}
+          <a href="index.php?module=AOR_Reports&action=exportheaderwisereport&page={$pagenext}"  class="button" title="Next" disabled="disabled">
+            <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
+          </a>
+          <a href="index.php?module=AOR_Reports&action=exportheaderwisereport&page={$last_page}"  class="button" title="End" disabled="disabled">
+            <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
+          </a>
+        {else}
+          <button type="button" id="listViewNextButton_top" name="listViewNextButton" class="button" title="Next" disabled="disabled">
+            <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
+          </button>
+          <button type="button" id="listViewEndButton_top" name="listViewEndButton" title="End" class="button" disabled="disabled">
+            <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
+          </button>
+        {/if}
+
+
+      </td>
+      <td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="width:99%;overflow:auto;border:2px dashed #d0d0d0;" class="div-leads-list">
+
+    <table cellpadding="0" cellspacing="0" width="{$tablewidth}" border="0" class="list view table footable-loaded footable default">
         <thead>
-            {*Start Pagination*}
-            <tr id="pagination" role="presentation">
-                <td colspan="20">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
-                        <tbody><tr>
-                                <td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
-
-                                <td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
-
-                                    {if $left eq 1}
-                                        <a href="index.php?module=AOR_Reports&action=exportheaderwisereport"  name="listViewStartButton" title="Start" class="button" >
-                                            <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
-                                        </a>
-
-                                        <a href="index.php?module=AOR_Reports&action=exportheaderwisereport&page={$page}"  class="button" title="Previous">
-                                            <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
-                                        </a>
-                                    {else}
-                                        <button type="button" id="listViewStartButton_top" name="listViewStartButton" title="Start" class="button" disabled="disabled">
-                                            <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
-                                        </button>
-
-                                        <button type="button" id="listViewPrevButton_top" name="listViewPrevButton" class="button" title="Previous" disabled="disabled">
-                                            <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
-                                        </button>
-                                    {/if}
-
-                                </td>
-                                <td nowrap="nowrap" width="1%" class="paginationActionButtons">
-                                    <div class="pageNumbers">{$current_records}</div>
-                                </td>
-                                <td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
-                                    {if $right eq 1}
-                                        <a href="index.php?module=AOR_Reports&action=exportheaderwisereport&page={$pagenext}"  class="button" title="Next" disabled="disabled">
-                                            <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
-                                        </a>
-                                        <a href="index.php?module=AOR_Reports&action=exportheaderwisereport&page={$last_page}"  class="button" title="End" disabled="disabled">
-                                            <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
-                                        </a>
-                                    {else}
-                                        <button type="button" id="listViewNextButton_top" name="listViewNextButton" class="button" title="Next" disabled="disabled">
-                                            <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
-                                        </button>
-                                        <button type="button" id="listViewEndButton_top" name="listViewEndButton" title="End" class="button" disabled="disabled">
-                                            <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
-                                        </button>
-                                    {/if}
-
-
-                                </td>
-                                <td nowrap="nowrap" width="4px" class="paginationActionButtons"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            {*End Pagination*}
 
             <tr height="20">
 
@@ -339,7 +338,8 @@
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$column}</strong></th>
                         {/foreach}
 
-            </tr>   
+            </tr>
+        </thead>
             
         {if isset($error) && !empty($error)}  <td align="center" class="inlineEdit footable-visible footable-last-column"><h1>{$error.error}</h1></td>{/if}
             {foreach from = $leadList key=key item=program}
@@ -354,6 +354,7 @@
 
 
     </table>
+  </div>
     {literal}
         <script>
             Calendar.setup({
@@ -374,7 +375,46 @@
                 step: 1,
                 weekNumbers: false,
             });
-
+            $(document).ready(function () {
+                $(".multiselbox").each(function () {
+                    if ($(this).find("option").eq(0).val() == '') {
+                        $(this).find("option").eq(0).remove();
+                    }
+                })
+                $(".multiselbox").multiselect({
+                    includeSelectAllOption: true
+                });
+                
+                
+                $("#status").change(function () {
+                    var arg = $('#status').val();
+                    getAjax('batch_code', arg);
+                });
+                $("#managers").change(function () {
+                    var arg = $('#managers').val();
+                    getAjax('councellors', arg);
+                });
+                
+                
+                 $("#search_form").on('submit', (function(e) {
+                     
+                      var from_date    = $('#from_date').val();
+                      var to_date      = $('#to_date').val();
+                      
+                      if(from_date=='' || from_date ==null){
+                          $("#from_date").focus();
+                           alert('Please select From-Date!'); return false;
+                      }
+                      
+                      if(to_date=='' || to_date ==null){
+                          $("#to_date").focus();
+                           alert('Please select To-Date!'); return false;
+                      }
+                     
+                    
+                 }));
+                
+            });
         </script>
 
 

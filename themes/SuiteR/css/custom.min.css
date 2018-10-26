@@ -9108,3 +9108,14 @@ fieldset{   min-width: 100px; }
 
     width: 200px!important;
 }
+
+div.div-leads-list table tbody tr:nth-child(odd){
+    background:#c6dff9 !important;
+}
+
+div.div-leads-list table tbody tr:nth-child(even){
+    background:#efefef !important;
+}
+div.div-leads-list table tbody tr td {
+    border-top:1px solid #ddd
+}
