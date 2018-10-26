@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+First Name,Email Address,Mobile Phone,Primary Address City,utm_campaign,Work Experience,Functional Area,utm_source_c,Other Phone,Company,utm_term_c,dristi_campagain_id,dristi_api_id,Status,Status Details,AutoAssign
+Pawan_21Sept_101,pawan.kumar01@te.in101,9643743604,,NaukriCamp124,,,infoedge,,,DM-02-0316-01,23,182,Alive,New Lead,Yes
+Pawan_21Sept_109,pawan.kumar01@te.in109,9971502476,,NaukriCamp124,,,infoedge,,,EC-01-0216-01,23,182,Alive,New Lead,Yes
+Pawan_21Sept_108,pawan.kumar01@te.in108,8588096285,,NaukriCamp124,,,infoedge,,,DT-01-0915-01,23,182,Alive,New Lead,Yes
+Pawan_21Sept_128,pawan.kumar01@te.in128,8588096285,,NaukriCamp124,,,infoedge,,,PF-01-0116-01,18,186,Alive,New Lead,Yes
+Pawan_21Sept_129,pawan.kumar01@te.in129,9873401515,,NaukriCamp124,,,infoedge,,,PF-02-0816-01,18,186,Alive,New Lead,Yes
+Pawan_21Sept_130,pawan.kumar01@te.in130,9873401515,,NaukriCamp124,,,infoedge,,,PF-02-0816-01,23,182,Alive,New Lead,Yes
+=======
 First Name,Email Address,Mobile Phone,Primary Address City,utm_campaign,Work Experience,Functional Area,utm_source_c,Other Phone,Company,utm_term_c,dristi_campagain_id,dristi_api_id,Status,Status Details,AutoAssign
 Pawan_21Sept_101,pawan.kumar01@te.in101,9643743604,,NaukriCamp124,,,infoedge,,,DM-02-0316-01,23,182,Alive,New Lead,Yes
 Pawan_21Sept_102,pawan.kumar01@te.in102,9911580172,,NaukriCamp124,,,infoedge,,,DM-02-0316-02,23,182,Alive,New Lead,Yes
@@ -30,3 +39,4 @@ Pawan_21Sept_128,pawan.kumar01@te.in128,8588096285,,NaukriCamp124,,,infoedge,,,P
 Pawan_21Sept_129,pawan.kumar01@te.in129,9971502476,,NaukriCamp124,,,infoedge,,,PF-02-0816-01,18,186,Alive,New Lead,Yes
 Pawan_21Sept_130,pawan.kumar01@te.in130,9899046730,,NaukriCamp124,,,infoedge,,,PF-03-0217-01,18,186,Alive,New Lead,Yes
 Pawan_21Sept_131,pawan.kumar01@te.in131,9911580172,,NaukriCamp124,,,infoedge,,,PM-01-0915-01,18,186,Alive,New Lead,Yes
+>>>>>>> feature_TECRM-249

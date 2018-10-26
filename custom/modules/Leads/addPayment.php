@@ -733,7 +733,7 @@ class addPaymentClass
 					$bean->autoassign= 'No';
 					$bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
 					$lead_lead_id = create_guid();
-					$GLOBALS['db']->query("INSERT INTO `crm_new`.`leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('".$lead_lead_id."','".(date('Y-m-d H:i:s'))."','".$bean->id."','".$beanData['id']."')");
+					//$GLOBALS['db']->query("INSERT INTO `crm_new`.`leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('".$lead_lead_id."','".(date('Y-m-d H:i:s'))."','".$bean->id."','".$beanData['id']."')");
 					
 				}
                 /*End Re-Enquired Logic*/

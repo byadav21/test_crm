@@ -1,22 +1,28 @@
 <?php
 
 // Date: Created on : 27th FEB 2018
+// Last modified on:  20th SEP 2018
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
+require_once('custom/modules/AOR_Reports/pagination.php');
+require_once('custom/modules/AOR_Reports/UserInput.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
 class AOR_ReportsViewexportheaderwisereport extends SugarView
 {
-
     var $report_to_id;
     var $counsellors_arr;
-
+    private $objPagination;
+    private $_objInputs;
     public function __construct()
     {
         parent::SugarView();
+        $this->objPagination = new pagination(60, 'page');
+        $this-> _objInputs = new UserInput();
+        $this->_objInputs->syncSessions('exportHeaderWiseReport');
     }
 
     function getProgram()
@@ -72,7 +78,8 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
-
+        $current_user_id = $current_user->id;
+        $_export = isset($this->_objInputs->post['export']) && $this->_objInputs->post['export'] == "Export";
         $where           = "";
         $wherecl         = "";
         $campaignID      = array();
@@ -82,6 +89,8 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $VendorListData  = $this->getVendors();
         $error           = array();
         
+        $selected_from_date          = '';
+        $selected_to_date            = '';
         $selected_batch              = '';
         $selected_batch_code         = '';
         $selected_vendor             = '';
@@ -99,7 +108,13 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $left                        = '';
         $IDs                         = '';
         $selected_headers            = array();
-
+        $findBatch = array();
+        $leadList   = array();
+        $StatusList = array();
+     
+        
+        $usersAccessId = array('d81fc9e1-91ae-eba3-19d9-5af02415c81c');
+        
         foreach ($BatchListData as $val)
         {
             $d_campaign_id = $val['d_campaign_id'];
@@ -111,129 +126,71 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             }
         }
 
-
-
-        if (!isset($_SESSION['cccon_from_date']))
+        /*
+        if (!isset($_POST['from_date']))
         {
-            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
+            $selected_from_date = date('Y-m-d', strtotime('-1 days'));
         }
-        if (!isset($_SESSION['cccon_to_date']))
+        if (!isset($_POST['to_date']))
         {
-            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
+            $selected_to_date = date('Y-m-d', strtotime('-1 days'));
         }
-        if (isset($_POST['button']) || isset($_POST['export']))
-        {
-            $_SESSION['cccon_from_date']          = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']            = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']              = isset($_REQUEST['batch']) ? $_REQUEST['batch']:'';
-            $_SESSION['cccon_batch_code']         = isset($_REQUEST['batch_code']) ? $_REQUEST['batch_code']:array();
-            $_SESSION['cccon_vendors']            = isset($_REQUEST['vendors']) ? $_REQUEST['vendors']:array();
-            $_SESSION['cccon_headers']            = isset($_REQUEST['headers']) ? $_REQUEST['headers']: array();
-            $//_SESSION['cccon_mobile']             = $_REQUEST['mobile'];
-            //$_SESSION['cccon_email']              = $_REQUEST['email'];
-            $_SESSION['cccon_status']             = isset($_REQUEST['status']) ? $_REQUEST['status']: array();
-            $_SESSION['cccon_status_description'] = isset($_REQUEST['status_description']) ? $_REQUEST['status_description']: array();;
-            //$_SESSION['cccon_lead_source_types']  = $_REQUEST['lead_source_types'];
-            //$_SESSION['cccon_source']             = $_REQUEST['source'];
-            //$_SESSION['cccon_autoassign']         = $_REQUEST['autoassign'];
-            //$_SESSION['cccon_ameyo_status']       = $_REQUEST['ameyo_status'];
-            //$_SESSION['cccon_campaignIDs']        = $_REQUEST['campaignIDs'];
-            //$_SESSION['cccon_leadIDs']            = $_REQUEST['leadIDs'];
-        }
-        if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $selected_to_date   = $_SESSION['cccon_to_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            //$from_date          = "2017-10-01";
-            //$to_date            = "2017-10-05";
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' AND DATE(leads.date_entered) <= '" . $to_date . "'";
-        }
-        elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' ";
-        }
-        elseif ($_SESSION['cccon_from_date'] == "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_to_date = $_SESSION['cccon_to_date'];
-            $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            $wherecl          .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
+        */
+        
+//        if (isset($_POST['button']) || isset($_POST['export']))
+//        {
+            $selected_from_date          = $this->_objInputs->getVal('from_date', 'post', date('Y-m-d', strtotime('-1 days')));
+            $selected_to_date            = $this->_objInputs->getVal('to_date', 'post', date('Y-m-d', strtotime('-1 days')));
+            $selected_batch              = $this->_objInputs->getVal('batch', 'post', array());
+            $selected_batch_code         = $this->_objInputs->getVal('batch_code', 'post', array());
+            $selected_vendor             = $this->_objInputs->getVal('vendors', 'post', array());
+            $selected_headers            = $this->_objInputs->getVal('headers', 'post', array());
+            $selected_status             = $this->_objInputs->getVal('status', 'post', array());
+            $selected_status_description = $this->_objInputs->getVal('status_description', 'post', '');
+          
+//        }
+       
+        
+        if ($selected_from_date != "" ){
+            $from_date  = date('Y-m-d', strtotime(str_replace('/', '-', $selected_from_date)));
+            $wherecl    .= " AND DATE(leads.date_entered) >= '" . $from_date . "'";
         }
 
-        $findBatch = array();
-        if (!empty($_SESSION['cccon_batch']))
-        {
-            $selected_batch = $_SESSION['cccon_batch'];
-        }
-        if (!empty($_SESSION['cccon_batch_code']))
-        {
-            $selected_batch_code = $_SESSION['cccon_batch_code'];
-        }
-        if (!empty($_SESSION['cccon_vendors']))
-        {
-            $selected_vendor = $_SESSION['cccon_vendors'];
-        }
-        if (!empty($_SESSION['cccon_program']))
-        {
-            $selected_program = $_SESSION['cccon_program'];
+        if ($selected_to_date != ""){
+            $to_date = date('Y-m-d', strtotime(str_replace('/', '-', $selected_to_date)));
+            $wherecl .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
         }
 
-        if (!empty($_SESSION['cccon_headers']))
-        {
-            $selected_headers = $_SESSION['cccon_headers'];
-        }
-        if (!empty($_SESSION['cccon_source']))
-        {
-            $selected_source = $_SESSION['cccon_source'];
-        }
-        if (!empty($_SESSION['cccon_status']))
-        {
-            $selected_status = $_SESSION['cccon_status'];
-        }
-
-        if (!empty($_SESSION['cccon_status_description']))
-        {
-            $selected_status_description = $_SESSION['cccon_status_description'];
-        }
-
-        $leadList   = array();
-        $StatusList = array();
-
-        if (!empty($selected_batch))
-        {
+        if (!empty($selected_batch)){
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch) . "')";
         }
-        if (!empty($selected_batch_code))
-        {
+
+        if (!empty($selected_batch_code)){
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-        if (!empty($selected_vendor))
-        {
+        if (!empty($selected_vendor)){
 
             $wherecl .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "')";
         }
 
-       
-
-       
-        if ($_SESSION['cccon_status'] != "")
-        {
-            $selected_status = $_SESSION['cccon_status'];
-            $wherecl         .= " AND  leads.status IN ('" . implode("','", $selected_status) . "')";
-        }
-        if (!empty($selected_status_description))
-        {
+        if (!empty($selected_status)){
             
-            $selected_status_description = $_SESSION['cccon_status_description'];
-            $wherecl                     .= " AND  leads.status_description IN ('" . implode("','", $selected_status_description) . "')";
+            $wherecl .= " AND  leads.status IN ('" . implode("','", $selected_status) . "')";
         }
-       
+
+        if (!empty($selected_status_description)){
+            $wherecl .= " AND  leads.status_description IN ('" . implode("','", $selected_status_description) . "')";
+        }
+        
+        // while CC team will use this
+        if(in_array($current_user_id, $usersAccessId)){
+            
+            $wherecl .= " AND  lead_source_types in ('CC','NULL','null','') ";
+        }
+        
 
 
         $lead_source        = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
@@ -258,7 +215,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads_cstm.attempts_c'               => 'No of Attempts',
             'leads.first_name'                    => 'First Name',
             'leads.last_name'                     => 'Last Name',
-            'ed.email_address'                    => 'Email Address',
+            'leads_cstm.email_add_c'              => 'Email Address',
             'leads.phone_mobile'                  => 'Phone Mobile',
             'leads.phone_home'                    => 'Phone Home',
             'leads.phone_work'                    => 'Phone Work',
@@ -278,26 +235,34 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             'leads.dristi_campagain_id'           => 'Campagain ID',
             'leads.dristi_API_id'                 => 'API_id (LeadID)',
             'leads.neoxstatus'                    => 'Ameyo Status',
-            'leads.deleted'                       => 'Deleted',
-            'leads.comment'                       => 'Comment',
-            'leads.note'                          => 'Note');
+            'leads.deleted'                       => 'Deleted'
+//            'leads.comment'                       => 'Comment',
+//            'leads.note'                          => 'Note'
+        );
 
         $StatusDetails = array(
             'Follow Up'              => 'Follow Up',
             'New Lead'               => 'New Lead',
             'Converted'              => 'Converted',
-            'Dead Number'            => 'Converted Date',
+            'Instalment Follow up'   => 'Instalment Follow up',
+            'Referral Follow up'     => 'Referral Follow up',
+            'Dead Number'            => 'Dead Number',
             'Wrong Number'           => 'Wrong Number',
             'Ringing Multiple Times' => 'Ringing Multiple Times',
             'Not Enquired'           => 'Not Enquired',
             'Not Eligible'           => 'Not Eligible',
             'Fallout'                => 'Fallout',
+            'Cross Sell'             => 'Cross Sell', //New
+            'Not Interested'         => 'Not Interested', //New
+            'Next Batch'             => 'Next Batch', //New
+            'Retired'                => 'Retired', //New
             'Duplicate'              => 'Duplicate',
             'Dropout'                => 'Dropout',
             'Re-Enquired'            => 'Re-Enquired',
             'Prospect'               => 'Prospect',
-            'Recycle'                => 'Recycle');
-        
+            'Recycle'                => 'Recycle',
+            'wrap.timeout'           => 'wrap.timeout');
+
         if(!empty($selected_headers)){
         $headersss = implode(",", $selected_headers);
         }
@@ -312,81 +277,79 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $IDs = "leads.id,";
         }
 
-        $Days = $this->getBetweenDays($_SESSION['cccon_from_date'], $_SESSION['cccon_to_date']);
+        $Days = $this->getBetweenDays($selected_from_date, $selected_to_date);
 
-        $leadSql = "SELECT 
-                       $IDs
-                       $headersss
+        $sqlPart = "
                 FROM leads 
                 LEFT JOIN users ON leads.assigned_user_id =users.id
                 LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
                 LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
-                LEFT JOIN `email_addr_bean_rel` eabr ON  leads.id=eabr.bean_id
-                LEFT JOIN `email_addresses` ed ON eabr.`email_address_id`=ed.id
                 LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
                 where leads.deleted=0  $wherecl  ";
 
-        $dayFlag = FALSE;
+        $countSql = "SELECT count(1) as count ". $sqlPart;
+//        echo $countSql;
 
-        //echo ($leadSql); die;
+        $leadSql = "SELECT $IDs $headersss " . $sqlPart;
+
+        if(!$_export) {
+          $limit = $this->objPagination->get_limit();
+          $leadSql .= ' ' . $limit;
+        }
+        $rowCount = 0;
+        $leadObj = null;
+
+//      if ($Days >= 0 && $Days <= 93 && $wherecl != '') {
+        if($_export){
+          $leadObj = $db->query($leadSql);
+          $rowCount = $leadObj->num_rows;
+          if($rowCount <= 0){
+            $error['error'] = "No Data Found.";
+          }
+        }else {
+          if ($this->objPagination->get_page() == 1 || !isset($_SESSION['_row_count'])) {
+            $objLeadsCount = $db->query($countSql);
+            $row = $db->fetchByAssoc($objLeadsCount);
+            $rowCount = $row['count'];
+            $_SESSION['_row_count'] = $rowCount;
+          } else {
+            $rowCount = $_SESSION['_row_count'];
+          }
+          $this->objPagination->set_total($rowCount);
+          if ($rowCount <= 0) {
+            $error['error'] = "No Data Found.";
+          } else {
+            $leadObj = $db->query($leadSql);
+          }
+        }
+        
+        if (empty($selected_headers))
+        {
+            $headersss      = 'leads.id';
+            $error['error'] = 'Please Select a Header.';
+        }
+//        } else {
+//          $error['error'] = 'Please Export Data between 3 months.';
+//        }
+
         $ExcelHeaders        = array();
         $selected_headersKey = array();
         foreach ($selected_headers as $key => $val)
         {
-
-
             $ExcelHeaders[$val]        = $headers[$val];
             ($val == 'users.first_name as user_first_name') ? $val                       = '.user_first_name' : '';
             ($val == 'users.last_name as user_last_name') ? $val                       = '.user_last_name' : '';
             $selected_headersKey[$val] = substr($val, strpos($val, ".") + 1);
         }
-        //print_r($ExcelHeaders); die;
-        //echo '---'.$Days;
-        //echo $error['error'] ;
-        //die;
-        if ($Days >= 0 && $Days <= 93 && $wherecl != '')
-        {
 
-            $leadObj = $db->query($leadSql);
-        }
-        else
-        {
-            $dayFlag        = TRUE;
-            $error['error'] = 'Please Export Data between 3 months.';
-        }
-        
-
-        while ($row = $db->fetchByAssoc($leadObj))
-        {
-            $leadList[$row['id']] = $row;
-        }
-        //echo '<pre>';print_r($leadList);
-
-        if (empty($leadList) && $dayFlag === FALSE)
-        {
-            $error['error'] = "No Data Found.";
-        }
-        
-        
-
-        if (isset($_POST['export']) && $_POST['export'] == "Export")
+        if ($_export && empty($error))
         {
 
             $file     = "HeaderWiseLead_report";
-            $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
-            $leadList = array();
             global $current_user;
             global $db;
-            $leadObj  = $db->query($leadSql);
-
-
-            while ($row = $db->fetchByAssoc($leadObj))
-            {
-                $leadList[$row['id']] = $row;
-            }
-
-
+//            $leadObj  = $db->query($leadSql);
 
             # Create heading
             $data = "";
@@ -395,24 +358,10 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
                 $data .= $column . ",";
             }
             $data .= "\n";
+          ob_end_clean();
 
 
-
-
-            foreach ($leadList as $key => $value)
-            {
-
-
-                foreach ($selected_headersKey as $key1 => $column)
-                {
-
-                    $data .= $value[$column] . ",";
-                }
-
-                $data .= "\n";
-            }
-
-            $leadCount    = count($leadList);
+            $leadCount    = $rowCount; //count($leadList);
             $userName     = $current_user->user_name;
             $userID       = $current_user->id;
             $ExportRecord = array('user_name' => $userName, 'user_id' => $userID, 'Lead_Count' => $leadCount, 'from_date' => $from_date, 'to_date' => $to_date, 'Headers' => array_values($ExcelHeaders),'selected_batch'=>$selected_batch,'selected_batch_code'=>$selected_batch_code,'selected_vendor'=>$selected_vendor,'selected_status'=>$selected_status,'selected_status_description'=>$selected_status_description);
@@ -422,65 +371,49 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
             $sql = "insert into data_export_log set  source='Export tool',date_entered='" . date('Y-m-d H:i:s') . "',user_name='" . $userName . "',data_record='" . json_encode($ExportRecord) . "'";
             $db->query($sql);
 
-            ob_end_clean();
+
             header("Content-type: application/csv");
             header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
             echo $data;
+          while ($row = $db->fetchByAssoc($leadObj)){
+//              $data='';
+//            foreach ($selected_headersKey as $key1 => $column) {
+//              $data .= $row[$column] . ",";
+//            }
+            $data = implode(',', $row);
+            $data .= "\n";
+            echo $data;
+          }
+//            echo $data;
             exit;
         } // End Of Export Func
         #PS @Pawan
-        $total     = count($leadList); #total records
-        $start     = 0;
-        $per_page  = 60;
-        $page      = 1;
-        $pagenext  = 1;
-        $last_page = ceil($total / $per_page);
 
-        if (isset($_REQUEST['page']) && $_REQUEST['page'] > 0)
-        {
-            $start    = $per_page * ($_REQUEST['page'] - 1);
-            $page     = ($_REQUEST['page'] - 1);
-            $pagenext = ($_REQUEST['page'] + 1);
-        }
-        else
-        {
+        $page      = $this->objPagination->get_page();
+        $last_page = $this->objPagination->get_last_page();
+        $pagenext = $page + 1;
+        $pageprevious = $page - 1;
 
-            $pagenext++;
-        }
-        if (($start + $per_page) < $total)
-        {
-            $right = 1;
-        }
-        else
-        {
-            $right = 0;
-        }
-        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 1)
-        {
-            $left = 0;
-        }
-        elseif (isset($_REQUEST['page']))
-        {
+        $right = $page < $last_page;
+        $left = $page > 1;
 
-            $left = 1;
+        if(empty($error)) {
+          while ($row = $db->fetchByAssoc($leadObj)) {
+            $leadList[$row['id']] = $row;
+          }
+          $this->objPagination->set_found_rows(count($leadList));
         }
+        $current = $this->objPagination->getHeading();
 
-        $leadList = array_slice($leadList, $start, $per_page);
-        if ($total > $per_page)
-        {
-            $current = "(" . ($start + 1) . "-" . ($start + $per_page) . " of " . $total . ")";
-        }
-        else
-        {
-            $current = "(" . ($start + 1) . "-" . count($leadList) . " of " . $total . ")";
-        }
         #pE
-
+        
+        
         $sugarSmarty = new Sugar_Smarty();
 
         $sugarSmarty->assign("error", $error);
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("headers", $headers);
+        $sugarSmarty->assign("tablewidth", count($headers) * 130);
 
         $sugarSmarty->assign("campaignIDs", $campaignID);
         $sugarSmarty->assign("leadIDs", $leadID);
@@ -516,6 +449,7 @@ class AOR_ReportsViewexportheaderwisereport extends SugarView
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
         $sugarSmarty->assign("pagenext", $pagenext);
+        $sugarSmarty->assign("pageprevious", $pageprevious);
         $sugarSmarty->assign("right", $right);
         $sugarSmarty->assign("left", $left);
         $sugarSmarty->assign("last_page", $last_page);

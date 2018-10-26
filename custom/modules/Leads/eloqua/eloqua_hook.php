@@ -84,7 +84,7 @@ class eloqua_contact
                                   AND te_ba_batch_id_c='" . $bean->te_ba_batch_id_c . "'";
                     $db->query($sqlQuery);
                     
-                    $db->query("update leads_cstm  set eloqua_contact_id=$contactIDXX where  email_add_c='" . $bean->email_add_c . "'");
+                    $db->query("update leads_cstm  set eloqua_contact_id='$contactIDXX' where  email_add_c='" . $bean->email_add_c . "'");
 		
                 
                 $this->createLog('{checking update on email and batch}','checkUpdateoneloqua_log.txt',$sqlQuery,array());     
