@@ -398,7 +398,8 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_UTC'=>'UTC',
   'CO_Miscellaneous'=>'Miscellaneous',
   'CO_Ankels'=>'Ankels',
-  'CO_BLRTE'  => 'BLRTE', 
+  'CO_BLRTE'  => 'BLRTE',
+  'CO_NK'=>'NK', 
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';
