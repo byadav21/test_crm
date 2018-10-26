@@ -54,13 +54,14 @@
                             <select name="status[]" class="multiselbox" multiple style="width:180px !important; height: 70px !important;" id="status" title="">
 
                                 <option label="" value="" {if in_array("", $selected_status)} selected="selected"{/if}>Select</option>
-                                        <option label="Alive"  {if in_array("Alive", $selected_status)} selected="selected"{/if}>Alive</option>
+                                <option label="Alive"  {if in_array("Alive", $selected_status)} selected="selected"{/if}>Alive</option>
                                 <option label="Converted" value="Converted" {if in_array("Converted", $selected_status)} selected="selected"{/if}>Converted</option>
-                                        <option label="Dead" value="Dead" {if in_array("Dead", $selected_status)} selected="selected"{/if}>Dead</option>
+                                <option label="Dead" value="Dead" {if in_array("Dead", $selected_status)} selected="selected"{/if}>Dead</option>
                                 <option label="Duplicate" value="Duplicate" {if in_array("Duplicate", $selected_status)} selected="selected"{/if}>Duplicate</option>
-                                        <option label="Dropout" value="Dropout" {if in_array("Dropout", $selected_status)} selected="selected"{/if}>Dropout</option>
+                                <option label="Dropout" value="Dropout" {if in_array("Dropout", $selected_status)} selected="selected"{/if}>Dropout</option>
                                 <option label="Warm" value="Warm" {if in_array("Warm", $selected_status)} selected="selected"{/if}>Warm</option>
-                                        <option label="Recycle" value="Recycle" {if in_array("Recycle", $selected_status)} selected="selected"{/if}>Recycle</option>
+                                <option label="Recycle" value="Recycle" {if in_array("Recycle", $selected_status)} selected="selected"{/if}>Recycle</option>
+                                <option label="Recycle" value="Recycle" {if in_array("Wrap Out", $selected_status)} selected="selected"{/if}>Wrap Out</option>
                             </select>
                         </td>
                         

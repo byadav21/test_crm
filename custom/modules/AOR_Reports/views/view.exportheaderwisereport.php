@@ -283,20 +283,32 @@
                 'leads.note'                          => 'Note');
 
             $StatusDetails = array(
-                'Follow Up'              => 'Follow Up',
                 'New Lead'               => 'New Lead',
+                'Follow Up'              => 'Follow Up',
                 'Converted'              => 'Converted',
-                'Dead Number'            => 'Converted Date',
+                'Instalment Follow up'   => 'Instalment Follow up',
+                'Referral Follow up'     => 'Referral Follow up',
+                
+                'Dead Number'            => 'Dead Number',
                 'Wrong Number'           => 'Wrong Number',
                 'Ringing Multiple Times' => 'Ringing Multiple Times',
                 'Not Enquired'           => 'Not Enquired',
                 'Not Eligible'           => 'Not Eligible',
                 'Fallout'                => 'Fallout',
+                
+                'Cross Sell'             => 'Cross Sell', 
+                'Not Interested'         => 'Not Interested', 
+                'Next Batch'             => 'Next Batch', 
+                'Retired'                => 'Retired', 
+                
                 'Duplicate'              => 'Duplicate',
                 'Dropout'                => 'Dropout',
-                'Re-Enquired'            => 'Re-Enquired',
                 'Prospect'               => 'Prospect',
-                'Recycle'                => 'Recycle');
+                'Recycle'                => 'Recycle',
+                
+                'wrap.timeout'           => 'Wrap Out',
+                'Re-Enquired'            => 'Re-Enquired',
+                );
 
             if(!empty($selected_headers)){
                 $headersss = implode(",", $selected_headers);
