@@ -300,7 +300,7 @@ class AOR_ReportsViewleadutilizationtest extends SugarView
         $wherecl    = "";
         $campaignID = array();
         $leadID     = array();
-
+        $left = 0;
         $BatchListData = $this->getBatch();
 
         $error = array();
@@ -353,6 +353,7 @@ class AOR_ReportsViewleadutilizationtest extends SugarView
         $leadList   = array();
         $StatusList = array();
 
+        $lead_source_typesArr = array('NULL' => 'NULL', 'CC' => 'CC', 'OO' => 'OO', 'CO' => 'CO');
 
         //queries will not run untill batch code is selected
         if (!empty($selected_batch_code)) {
@@ -370,9 +371,6 @@ class AOR_ReportsViewleadutilizationtest extends SugarView
           if (!empty($selected_lead_source_types)) {
             $wherecl .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
           }
-
-
-          $lead_source_typesArr = array('NULL' => 'NULL', 'CC' => 'CC', 'OO' => 'OO', 'CO' => 'CO');
 
 //          $objBenchMarking->start('leadsql');
           //echo '<pre>'.
