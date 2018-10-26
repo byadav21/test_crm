@@ -148,8 +148,8 @@ class AOR_ReportsViewviewleadutilization extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $objBenchmarking = new benchmarking();
-        $objBenchmarking->start('Overall');
+//        $objBenchmarking = new benchmarking();
+//        $objBenchmarking->start('Overall');
         $wherecl = '';
         $left    = '';
 
@@ -385,7 +385,7 @@ class AOR_ReportsViewviewleadutilization extends SugarView
 
         //echo '<pre>';
         //print_r($leadList); 
-        $objBenchmarking->end('Overall');
+//        $objBenchmarking->end('Overall');
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 

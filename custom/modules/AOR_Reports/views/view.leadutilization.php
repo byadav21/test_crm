@@ -292,8 +292,8 @@ class AOR_ReportsViewleadutilization extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $objBenchMarking = new benchmarking();
-        $objBenchMarking->start('overall');
+//        $objBenchMarking = new benchmarking();
+//        $objBenchMarking->start('overall');
         $is_manger = $this->checkManager();
 
         $where      = "";
@@ -374,7 +374,7 @@ class AOR_ReportsViewleadutilization extends SugarView
 
           $lead_source_typesArr = array('NULL' => 'NULL', 'CC' => 'CC', 'OO' => 'OO', 'CO' => 'CO');
 
-          $objBenchMarking->start('leadsql');
+//          $objBenchMarking->start('leadsql');
           //echo '<pre>'.
           $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                             leads.date_entered,
@@ -388,9 +388,9 @@ class AOR_ReportsViewleadutilization extends SugarView
                      GROUP  by  batch_code";
 
           $leadObj = $db->query($leadSql) or die(mysqli_error());
-            $objBenchMarking->end('leadsql');
+//            $objBenchMarking->end('leadsql');
           //old
-            $objBenchMarking->start('attempts');
+//            $objBenchMarking->start('attempts');
 //        $FresleadArr = $this->getFresh($selected_batch_code,$selected_councellors,$selected_lead_source_types);
 //        $attemptArr  = $this->getAttempts($selected_batch_code,$selected_councellors,$selected_lead_source_types);
 
@@ -399,7 +399,7 @@ class AOR_ReportsViewleadutilization extends SugarView
           $attemptDetails = $objLeadsUtility->getAttempts();
           $attemptArr = $attemptDetails['attempts'];
           $FresleadArr = $attemptDetails['freshLeads'];
-            $objBenchMarking->end('attempts');
+//            $objBenchMarking->end('attempts');
 
           while ($row = $db->fetchByAssoc($leadObj)) {
             $r = array();
@@ -419,7 +419,7 @@ class AOR_ReportsViewleadutilization extends SugarView
           }
 
         }
-        $objBenchMarking->end('overall');
+//        $objBenchMarking->end('overall');
         $total     = count($leadList); #total records
         $start     = 0;
         $per_page  = 60;
