@@ -4,8 +4,9 @@
 //print_r($_REQUEST);exit;
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php'); 
-$datestart=date("Y-m-d",strtotime("-".$_REQUEST['daystart']." days"));
-$dateend=date("Y-m-d",strtotime("-".$_REQUEST['dayend']." days"));
+global $db;
+$datestart=date("Y-m-d",strtotime("-".$_POST['daystart']." days"));
+$dateend=date("Y-m-d",strtotime("-".$_POST['dayend']." days"));
 $startdate = $datestart." 00:00:00";
 $enddate = $dateend." 00:00:00";
 //$modifieddate=$date;
