@@ -10,7 +10,7 @@ $dateend=date("Y-m-d",strtotime("-".$_POST['dayend']." days"));
 $startdate = $datestart." 00:00:00";
 $enddate = $dateend." 00:00:00";
 //$modifieddate=$date;
-echo $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
+$query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 				leads.modified_user_id,CONCAT(modifyusr.first_name,' ',modifyusr.last_name) as modified_user_name,leads.assigned_user_id,CONCAT(ru.first_name,' ',ru.last_name) as assigned_user_name,ru.employee_status as assigned_user_status,ru.reports_to_id,CONCAT(repotrty.first_name,' ',repotrty.last_name) as manager_name,repotrty.employee_status as manager_status,
 				leads.deleted,leads.converted,leads.converted_date,leads.lead_source_types,
 				leads.lead_source,leads.vendor,leads.lead_source_description,leads.status,
