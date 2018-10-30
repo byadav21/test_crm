@@ -6,6 +6,7 @@ $hook_array = Array();
 
 $hook_array['after_save'] = Array(); 
 $hook_array['after_save'][] = Array(1, 'actual_campaign_hook', 'custom/modules/te_actual_campaign/actual_campaign_hook.php','AutoCalculate', 'calculateCPA');
+$hook_array['after_save'][] = Array(2, 'ac_import_hook', 'custom/modules/te_actual_campaign/ac_import_hook.php','ImportClass', 'importFunc');
 
 
 ?>
