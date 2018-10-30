@@ -88,7 +88,7 @@ class FalconideEmail
                 'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
                 'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in','vaibhav.gupta@talentedge.in',
                 //BA Team :
-                'duke.banerjee@talentedge.in'
+                'duke.banerjee@talentedge.in','shubhra.kochar@talentedge.in'
                 ),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
