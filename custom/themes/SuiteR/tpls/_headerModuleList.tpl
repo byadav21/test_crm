@@ -75,7 +75,7 @@
                                         <li>
                                             {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
                                             {if  $modulekey =='te_actual_campaign'}
-                                                <a href="index.php?module=te_actual_campaign&action=actual_campaign_summary" id="moduleTab_-1_Actual Campaign Plan" module="te_actual_campaign">Actual Campaign Plan</a>
+                                                <a href="index.php?module=te_actual_campaign&action=actualcampaignsummary" id="moduleTab_-1_Actual Campaign Plan" module="te_actual_campaign">Actual Campaign Plan</a>
                                             {elseif $modulekey =='te_budgeted_campaign'}
                                                 <a href="index.php?module=te_budgeted_campaign&action=budget_summary" id="moduleTab_-1_Budgeted Campaign Plan" module="te_budgeted_campaign">Budgeted Campaign Plan</a>
 
