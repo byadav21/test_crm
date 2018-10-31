@@ -49,6 +49,9 @@ global $app_list_strings, $current_user, $sugar_config, $db;
 <span class="utils">
 <a id="create_image" href="?action=ajaxui#ajaxUILoc=index.php?Fmodule=te_budgeted_campaign&action=EditView&return_module=te_budgeted_campaign&return_action=budget_summary" class="utilsLink">
 <img src="themes/default/images/create-record.gif?v=G9oBIubjfusviQdLpVzJkw" alt="Create"></a>
+<a id="create_link" href="index.php?entryPoint=budgtedvsactual&export=true" class="utilsLink">
+Export
+</a>&nbsp;
 <a id="create_link" href="index.php?module=te_budgeted_campaign&action=EditView&return_module=te_budgeted_campaign&return_action=budget_summary" class="utilsLink">
 Create
 </a>
