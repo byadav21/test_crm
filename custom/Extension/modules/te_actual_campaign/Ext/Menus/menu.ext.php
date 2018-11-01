@@ -7,7 +7,7 @@ global $mod_strings, $app_strings, $sugar_config;
 unset($module_menu[0]);
 unset($module_menu[1]);
 //print_r($module_menu);
-$module_menu[]=Array("index.php?module=te_actual_campaign&action=actual_campaign_summary", "Actual Campaign Plan", "");
+$module_menu[]=Array("index.php?module=te_actual_campaign&action=actualcampaignsummary", "Actual Campaign Plan", "");
 if(ACLController::checkAccess('te_actual_campaign', 'import', true))$module_menu[]=Array("index.php?module=Import&action=Step1&import_module=te_actual_campaign&return_module=te_actual_campaign&return_action=index", "Actual Campaign Import");
 
 

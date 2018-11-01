@@ -12,7 +12,7 @@ $dictionary["te_actual_campaign"]["fields"]["te_utm_te_actual_campaign_1"] = arr
 );
 $dictionary["te_actual_campaign"]["fields"]["te_utm_te_actual_campaign_1_name"] = array (
   'name' => 'te_utm_te_actual_campaign_1_name',
-  'required' => true,
+  'required' => FALSE,
   'type' => 'relate',
   'source' => 'non-db',
   'vname' => 'LBL_TE_UTM_TE_ACTUAL_CAMPAIGN_1_FROM_TE_UTM_TITLE',
