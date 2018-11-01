@@ -55,7 +55,7 @@ class syncsaptables
                             replace(`te_in_institutes`.`description`, '&', ' ') AS `CardFName`
                      FROM   `te_in_institutes`
                      WHERE  `te_in_institutes`.`deleted` = 0 
-                     AND    `te_in_institutes`.`date_entered` >= '" . $SyncSapTimestamp . "'
+                     AND    `te_in_institutes`.`date_entered` > '" . $SyncSapTimestamp . "'
                      AND    `te_in_institutes`.`date_entered` <= '" . date('Y-m-d H:i:s') . "'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -105,7 +105,7 @@ class syncsaptables
                  JOIN `te_student_batch` `sb` on `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`
                  JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
                  WHERE `leads`.`deleted` = 0
-                   AND `te_student`.`date_entered` >= '$SyncSapTimestamp' AND `te_student`.`date_entered` <= '$currentTime'";
+                   AND `te_student`.`date_entered` > '$SyncSapTimestamp' AND `te_student`.`date_entered` <= '$currentTime'";
 
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -137,7 +137,7 @@ class syncsaptables
                             JOIN `te_in_institutes_te_pr_programs_1_c` `inst_rel` on `pr`.`id` = `inst_rel`.`te_in_institutes_te_pr_programs_1te_pr_programs_idb`
                             JOIN `te_in_institutes` `inst` on `inst_rel`.`te_in_institutes_te_pr_programs_1te_in_institutes_ida` = `inst`.`id`
                      WHERE  pr.deleted=0 
-                     AND `pr`.`date_entered` >= '$SyncSapTimestamp' AND `pr`.`date_entered` <= '$currentTime'";
+                     AND `pr`.`date_entered` > '$SyncSapTimestamp' AND `pr`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -170,7 +170,7 @@ class syncsaptables
                     `te_vendor`.`SAP_Status` AS `SAP_Status`
                 FROM `te_vendor`
                 WHERE  `te_vendor`.`name` <> ''
-                       AND `te_vendor`.`date_entered` >= '$SyncSapTimestamp' AND `te_vendor`.`date_entered` >= '$currentTime'";
+                       AND `te_vendor`.`date_entered` > '$SyncSapTimestamp' AND `te_vendor`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -216,7 +216,7 @@ class syncsaptables
                       LEFT JOIN `te_vendor` ON lower(`leads`.`vendor`) = lower(`te_vendor`.`name`)
                       WHERE `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0
-                        AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
+                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                       GROUP BY `sb`.`leads_id`
                       ORDER BY `pd`.`date_entered`";
         $leadObj = mysqli_query($conn, $query);
@@ -276,7 +276,7 @@ class syncsaptables
                                     AND `p`.`short_name` <> ''
                                     AND `te_ba_batch`.`BusinessSegment` <> ''
                                     AND `l`.`lead_source_types` <> ''
-                                    AND sp.date_entered >= '$SyncSapTimestamp' AND sp.date_entered <= '$currentTime'
+                                    AND sp.date_entered > '$SyncSapTimestamp' AND sp.date_entered <= '$currentTime'
                              GROUP BY `sp`.`id`";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -314,7 +314,7 @@ class syncsaptables
                      WHERE `s`.`deleted` = 0
                             AND `leads`.`primary_address_state` <> ''
                             AND `leads`.`primary_address_state` <> 0 
-                            AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
+                            AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                             ";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -374,9 +374,9 @@ class syncsaptables
                          JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
                         JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-                 WHERE   `sb`.`deleted` = ''
-                        AND `pd`.`deleted` = ''
-                        AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
+                 WHERE   `sb`.`deleted` = 0
+                        AND `pd`.`deleted` = 0
+                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                         AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -413,7 +413,7 @@ class syncsaptables
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE `pd`.`Pay_Status` = 0
                         AND `pd`.`SAP_DocEntry` <> ''
-                        AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
+                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -450,7 +450,7 @@ class syncsaptables
                            JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
                      WHERE `pd`.`Pay_Status` = 0
                             AND `pd`.`SAP_DocEntry` <> ''
-                            AND `pd`.`date_entered` >= '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
+                            AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -480,7 +480,7 @@ class syncsaptables
                             'Y' AS `Active`,
                             `bb`.`SAP_Status` AS `SAP_Status`
                      FROM `te_ba_batch` `bb`
-                     WHERE `bb`.`deleted` = 0 AND `bb`.`date_entered` >= '$SyncSapTimestamp' "
+                     WHERE `bb`.`deleted` = 0 AND `bb`.`date_entered` > '$SyncSapTimestamp' "
                 . "AND `bb`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
