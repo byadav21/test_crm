@@ -2,17 +2,10 @@
 $module_name = 'te_budgeted_campaign';
 $listViewDefs [$module_name] = 
 array (
-  'YEAR' => 
+  'CAMPAIGN_DATE' => 
   array (
-    'type' => 'varchar',
-    'label' => 'LBL_YEAR',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'WEEK' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_WEEK',
+    'type' => 'date',
+    'label' => 'LBL_CAMPAIGN_DATE',
     'width' => '10%',
     'default' => true,
   ),
@@ -25,7 +18,7 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'batch' => 
+  'BATCH' => 
   array (
     'type' => 'relate',
     'link' => true,
@@ -33,7 +26,7 @@ array (
     'id' => 'LBL_BATCH_TE_BA_BATCH_ID',
     'width' => '10%',
     'default' => true,
-  ), 
+  ),
   'VOLUME' => 
   array (
     'type' => 'int',
