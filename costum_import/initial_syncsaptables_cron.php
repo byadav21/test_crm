@@ -858,7 +858,7 @@ WHERE   `sb`.`deleted` = 0
 $mainObj = new syncsaptables();
 $mainObj->main();
 
-$sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . date("Y-m-d h:i:s") . "'";
+$sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . date("Y-m-d H:i:s") . "'";
 mysqli_query($sap_conn, $sql);
 
 //mysqli_close($conn);
