@@ -411,9 +411,7 @@ class syncsaptables
                        JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
                        JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-                 WHERE `pd`.`Pay_Status` = 0
-                        AND `pd`.`SAP_DocEntry` <> ''
-                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
+                 WHERE pd.deleted=0   AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -448,9 +446,7 @@ class syncsaptables
                              JOIN `te_student_payment` `sp` on `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`
                             JOIN `te_payment_details` `pd` on `sp`.`id` = `pd`.`student_payment_id`
                            JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
-                     WHERE `pd`.`Pay_Status` = 0
-                            AND `pd`.`SAP_DocEntry` <> ''
-                            AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
+                     WHERE `pd.deleted=0  AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
