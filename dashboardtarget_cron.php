@@ -21,9 +21,9 @@ INNER JOIN te_budgeted_campaign bcc on tbc.te_utm_te_budgeted_campaign_1te_budge
 INNER JOIN te_utm_te_actual_campaign_1_c tac on u.id=tac.te_utm_te_actual_campaign_1te_utm_ida and tac.deleted=0
 INNER JOIN te_actual_campaign tac_ac on tac.te_utm_te_actual_campaign_1te_actual_campaign_idb=tac_ac.id and tac_ac.deleted=0
 WHERE u.deleted=0 AND tac_ac.date_entered > '$modifieddate'";//exit;
-$result = $db->query($query);
-$data= array();
-while (($row = $db->fetchByAssoc($result)) != null) {
-	$data[]=$row;
-}	
-echo json_encode($data);exit;
+//$result = $db->query($query);
+//$data= array();
+//while (($row = $db->fetchByAssoc($result)) != null) {
+//	$data[]=$row;
+//}	
+//echo json_encode($data);exit;

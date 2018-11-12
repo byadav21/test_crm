@@ -36,9 +36,9 @@ $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 			LEFT JOIN users AS modifyusr ON modifyusr.id=ru.modified_user_id			
 			where leads.date_modified BETWEEN  '$startdate'
 AND  '$enddate' group by lead_id order by leads.date_modified asc limit 10000";
-$result = $db->query($query);
-$data= array();
-while (($row = $db->fetchByAssoc($result)) != null) {
-	$data[]=$row;
-}	
-echo json_encode($data);exit;
+//$result = $db->query($query);
+//$data= array();
+//while (($row = $db->fetchByAssoc($result)) != null) {
+//	$data[]=$row;
+//}	
+//echo json_encode($data);exit;
