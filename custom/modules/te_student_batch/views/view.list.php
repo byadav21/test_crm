@@ -681,3 +681,10 @@ function getisSent($id)
     $data = $obj->getApproval($id);
     echo (!$data || $data['status']!='Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>' : 'Pending';
 }
+
+function xxx()
+{
+    global $current_user;
+   
+    echo 'xxx eee';
+}
