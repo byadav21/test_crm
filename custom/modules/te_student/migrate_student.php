@@ -7,7 +7,7 @@ require_once('include/entryPoint.php');
 global $db;
 $studentDetails=[];
 $Insert_student_counter=0;
-$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id FROM te_migrate_student WHERE is_completed=0 limit 0,1000";
+$studentSql="SELECT id AS migration_id,name,batch_code,mobile,email,currency,batch_id,email_batch FROM te_migrate_student WHERE is_completed=0 AND is_payment_deleted=1 limit 0,10";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
@@ -27,6 +27,7 @@ if($studentDetails){
         $lead_detail['student_mobile']=$value['mobile'];
         $lead_detail['batch_id']=$value['batch_id'];
         $lead_detail['migration_id']=$value['migration_id'];
+	$lead_detail['email_batch']=$value['email_batch'];
 
         if(strtolower($value['currency'])=='inr' || empty($lead_detail['primary_address_country'])){
           $lead_detail['student_country']='india';
@@ -47,7 +48,7 @@ if($studentDetails){
               $amt_arr=[];
               $payment = '';
               foreach ($migrate_payment_Data as $key => $migratevalue) {
-                if($migratevalue['payment_mode']=='Online'){
+                /*if($migratevalue['payment_mode']=='Online'){
                   $amt_arr[]=$migratevalue['payment_tax'];
                   $payment_val = $migratevalue['payment_tax'];
                 }
@@ -56,18 +57,23 @@ if($studentDetails){
                     $amt_arr[]=$migratevalue['payment_tax'];
                     $payment_val = $migratevalue['payment_tax'];
                   }
-                }
+                }*/
+		$amt_arr[]=$migratevalue['payment_tax'];
+                $payment_val = $migratevalue['payment_tax'];
                 if($payment_val){
                   #update new student payment history
                   $id=create_guid();
                   $payment = new te_payment_details();
                   $payment->payment_type 	   = $migratevalue['payment_mode'];
-                  $payment->payment_source 	   = $migratevalue['payment_mode'];
+                  $payment->payment_source 	   = $migratevalue['paymodes'];
                   $payment->transaction_id 	   = $migratevalue['order_no'].''.$migratevalue['payment_chqno'].''.$migratevalue['payment_remarks'];
-                  $payment->date_of_payment  = $migratevalue['payment_date'];
-                  $payment->reference_number = $migratevalue['order_no'].''.$migratevalue['payment_chqno'].''.$migratevalue['payment_remarks'];
+                  $payment->date_of_payment        = $migratevalue['payment_date'];
+		  $payment->invoice_order_number   = $migratevalue['order_no'];
+                  $payment->invoice_number         = $migratevalue['invoice_no'];
+		  $payment->is_sent_web  = 1;
+                  $payment->reference_number       = $migratevalue['order_no'].''.$migratevalue['payment_chqno'].''.$migratevalue['payment_remarks'];
                   $payment->amount 		   = $payment_val;
-                  $payment->name 		   	   = $payment_val;
+                  $payment->name 		   = $payment_val;
                   $payment->payment_realized = 1;
                   $payment->leads_te_payment_details_1leads_ida = $student_detail['lead_id'];
                   $payment->student_payment_id = $id;
@@ -82,7 +88,7 @@ if($studentDetails){
                   $reference_number=$migratevalue['order_no'].''.$migratevalue['payment_chqno'].''.$migratevalue['payment_remarks'];
                   $date_of_payment=$migratevalue['payment_date'];
                   $payment_type=$migratevalue['payment_mode'];
-                  $payment_source=$migratevalue['payment_mode'];
+                  $payment_source=$migratevalue['paymodes'];
 
                   $insertSql="INSERT INTO te_student_payment SET id='".$id."',lead_payment_details_id='".$lead_payment_details_id."', name='".$paidAmount."', date_entered='".date('Y-m-d H:i:s')."', date_modified='".date('Y-m-d H:i:s')."', te_student_batch_id_c='".$student_batch_id."',date_of_payment='".$date_of_payment."', amount='".$paidAmount."', reference_number='".$reference_number."', payment_type='".$payment_type."', payment_realized=1, transaction_id='".$transaction_id."', payment_source='".$payment_source."'";
                   $GLOBALS['db']->Query($insertSql);
@@ -119,7 +125,7 @@ if($studentDetails){
 }
 
 function __get_migrate_student_payment($student_arr=array()){
-  $migrate_student_paymentsql = "SELECT * FROM `te_migrate_student_payments` WHERE student_id=".$student_arr['migration_id']." AND is_completed=0 AND `payment_tax`>0 ORDER BY payment_date ASC";
+  $migrate_student_paymentsql = "SELECT * FROM `te_migrate_student_payments` WHERE student_id_batch_code='".$student_arr['email_batch']."' AND is_completed=0 AND `payment_tax`>0 ORDER BY payment_date ASC";
   $migrate_student_payment_Obj= $GLOBALS['db']->query($migrate_student_paymentsql);
   while($row=$GLOBALS['db']->fetchByAssoc($migrate_student_payment_Obj)){
     $migrate_student_payment[]=$row;
@@ -150,6 +156,7 @@ function __get_student_id($student_arr=array()){
       'lead_id'=>$student_arr['id'],
       'vendor'=>$student_arr['vendor'],
       'migration_id'=>$student_arr['migration_id'],
+      'email_batch'=>$student_arr['email_batch'],
       'student_country'=>$student_arr['student_country'],
       'student_city'=>$student_arr['city_c'],
       'student_state'=>$state
@@ -182,6 +189,7 @@ function __get_student_id($student_arr=array()){
       'lead_id'=>$student_arr['id'],
       'vendor'=>$student_arr['vendor'],
       'migration_id'=>$student_arr['migration_id'],
+      'email_batch'=>$student_arr['email_batch'],
       'student_country'=>$student_arr['student_country'],
       'student_city'=>$student_arr['city_c'],
       'student_state'=>$state
@@ -240,29 +248,6 @@ function __get_student_batch_id($student_arr=array()){
 }
 
 function __get_lead_details($student_email=NULL,$student_mobile=NULL,$batch_id=NULL){
- /* $lead_id = '';
-  $find_lead_by_email_sql="SELECT eabr.bean_id FROM email_addr_bean_rel eabr INNER JOIN email_addresses ea ON (ea.id = eabr.email_address_id) INNER JOIN leads ON leads.id=eabr.bean_id INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE eabr.deleted = 0 AND eabr.bean_module='Leads' AND ea.email_address='".$student_email."' AND leads_cstm.te_ba_batch_id_c='".$batch_id."'";
-  $find_lead_by_email_Obj= $GLOBALS['db']->query($find_lead_by_email_sql);
-  $find_lead_by_email=$GLOBALS['db']->fetchByAssoc($find_lead_by_email_Obj);
-  if($find_lead_by_email){
-    $lead_id = $find_lead_by_email['bean_id'];
-  }
-  else{
-    $find_lead_by_mobile_sql="SELECT leads.id FROM leads INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE leads_cstm.te_ba_batch_id_c='".$batch_id."' AND leads.phone_mobile='".$student_mobile."'";
-    $find_lead_by_mobile_Obj= $GLOBALS['db']->query($find_lead_by_mobile_sql);
-    $find_lead_by_mobile=$GLOBALS['db']->fetchByAssoc($find_lead_by_mobile_Obj);
-    if($find_lead_by_mobile){
-      $lead_id = $find_lead_by_mobile['id'];
-    }
-  }
-  if($lead_id){
-    $get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND leads.id='".$lead_id."'";
-    $get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
-    $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
-    return $get_lead;
-  }*/
-  
-  
  	$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and status='Converted' and (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."')";
 	
 	$get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
