@@ -4,7 +4,19 @@
 //print_r($_REQUEST);exit;
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php'); 
-global $db;
+//global $db;
+
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
+
+
+
+$con_list = DBManagerFactory::getInstance('cust_report_list');
+//print_r($con_list); die;
+
+//$_POST['daystart'] = '2';
+//$_POST['dayend']='1';
+
 $datestart=date("Y-m-d",strtotime("-".$_POST['daystart']." days"));
 $dateend=date("Y-m-d",strtotime("-".$_POST['dayend']." days"));
 $startdate = $datestart." 00:00:00";
@@ -35,10 +47,10 @@ $query = "SELECT leads.id AS lead_id,leads.date_entered,leads.date_modified,
 			LEFT JOIN users AS repotrty ON repotrty.id=ru.reports_to_id
 			LEFT JOIN users AS modifyusr ON modifyusr.id=ru.modified_user_id			
 			where leads.date_modified BETWEEN  '$startdate'
-AND  '$enddate' group by lead_id order by leads.date_modified asc limit 10000";
-//$result = $db->query($query);
-//$data= array();
-//while (($row = $db->fetchByAssoc($result)) != null) {
-//	$data[]=$row;
-//}	
-//echo json_encode($data);exit;
+AND  '$enddate' group by lead_id order by leads.date_modified asc limit 5000";
+$result = $con_list->query($query);
+$data= array();
+while (($row = $con_list->fetchByAssoc($result)) != null) {
+	$data[]=$row;
+}	
+echo json_encode($data);exit;
