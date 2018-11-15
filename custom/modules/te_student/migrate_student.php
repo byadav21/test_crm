@@ -67,12 +67,13 @@ if($studentDetails){
                   $payment->payment_type 	   = $migratevalue['payment_mode'];
                   $payment->payment_source 	   = $migratevalue['paymodes'];
                   $payment->transaction_id 	   = $migratevalue['order_no'].''.$migratevalue['payment_chqno'].''.$migratevalue['payment_remarks'];
-                  $payment->date_of_payment  = $migratevalue['payment_date'];
-		  $payment->invoice_order_number  = $migratevalue['invoice_no'];
+                  $payment->date_of_payment        = $migratevalue['payment_date'];
+		  $payment->invoice_order_number   = $migratevalue['order_no'];
+                  $payment->invoice_number         = $migratevalue['invoice_no'];
 		  $payment->is_sent_web  = 1;
-                  $payment->reference_number = $migratevalue['order_no'].''.$migratevalue['payment_chqno'].''.$migratevalue['payment_remarks'];
+                  $payment->reference_number       = $migratevalue['order_no'].''.$migratevalue['payment_chqno'].''.$migratevalue['payment_remarks'];
                   $payment->amount 		   = $payment_val;
-                  $payment->name 		   	   = $payment_val;
+                  $payment->name 		   = $payment_val;
                   $payment->payment_realized = 1;
                   $payment->leads_te_payment_details_1leads_ida = $student_detail['lead_id'];
                   $payment->student_payment_id = $id;
