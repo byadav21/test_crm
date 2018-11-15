@@ -142,7 +142,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateStudentEligibility')
         $usObj = $GLOBALS['db']->Query($updateSql);
        
         if($usObj){
-            echo $studentID;
+            //echo $studentID;
+            echo json_encode(array('status'=>'success','student_id'=>$studentID)); 
         }
     }
     die;

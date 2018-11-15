@@ -446,11 +446,12 @@ input:checked + .slider:before {
                     },
                     url: "index.php?entryPoint=reportsajax",
                     data: {action: 'updateStudentEligibility',studentID: RecordID,ISeligible:is_eligible},
-                    dataType: "html",
+                    dataType: 'json',
                     type: "POST",
                     async: true,
                     success: function (data) {
-                        $('#student_id' + data).html(eligStatus);
+                        //alert(data.student_id);
+                        $('#student_id' + data.student_id).html(eligStatus);
                         }
                     });
                 
