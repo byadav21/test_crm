@@ -238,13 +238,11 @@
 
 				{/foreach}
                                 
-				<td>ss {$rowData.ID|getisSent} {$rowData.ID|xxx}</td>
+				<td>{$rowData.ID|getisSent}</td>
 				<td align='right' style="display:none;">{$pageData.additionalDetails.$id}</td>
                                 <td>
-                                    <label class="switch">
-                                        <input type="checkbox" id="Eligibility{$rowData.ID}"  onclick="CheckEligibility('{$rowData.ID}')" checked>
-                                        <span class="slider round"></span>
-                                     </label>
+                                    {$rowData.ID|is_Eligibile}
+                                   
                                 </td>
 
 		    	</tr>
@@ -430,19 +428,41 @@ input:checked + .slider:before {
 
 {literal}
     <script> 
-       $(document).ready(function () { 
-           
-           $("#countries input:checkbox").change(function() {
-                    var ischecked= $(this).is(':checked');
-                    if(!ischecked)
-                    alert('uncheckd ' + $(this).val());
-                });
+   
+    function updateStudentEligibility(RecordID,is_eligible) 
+            {
+            if (confirm("Are you sure you want to update?")) {
+                    
+                    var eligStatus = ''
+                    if(is_eligible==1){
+                        eligStatus ='No';
+                    }else{
+                        eligStatus ='Yes';
+                    }
+                    $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'updateStudentEligibility',studentID: RecordID,ISeligible:is_eligible},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        $('#student_id' + data).html(eligStatus);
+                        }
+                    });
                 
-                
-    });
-    
-    function CheckEligibility(vvv){
-                    alert(vvv);
+                }
+                return false;
+            }
+            
+            
+    function CheckEligibility(student_id,is_eligible){
+                    //alert(student_id);
+                    updateStudentEligibility(student_id,is_eligible);
+                    
                 }
 {/literal}
      </script>

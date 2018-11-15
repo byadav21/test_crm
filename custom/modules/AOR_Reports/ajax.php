@@ -126,4 +126,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'SourceLeadAssignmentRule')
     }
     die;
 }
+if (isset($_POST['action']) && $_POST['action'] == 'updateStudentEligibility')
+{
+    global $db;
+    $option = '';
+    //RecordID: RecordID, RowID:RowID
+   
+    $studentID = $_POST['studentID']; $ISeligible = $_POST['ISeligible'];
+    
+    $eligStatus= ($ISeligible==1)? 0 : 1;
+    
+    if ($studentID!='')
+    {
+        $updateSql = "UPDATE te_student SET is_eligible='$eligStatus'  where id='$studentID'";
+        $usObj = $GLOBALS['db']->Query($updateSql);
+       
+        if($usObj){
+            echo $studentID;
+        }
+    }
+    die;
+}
 ?>
