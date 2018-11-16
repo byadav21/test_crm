@@ -76,7 +76,7 @@ class FalconideEmail
 		$emailData = array('email' => array(
                 'pawan.kumar@talentedge.in'
                 ,'pritam.dutta@talentedge.in',
-                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in',
+                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','aastha.verma@talentedge.in',
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
@@ -86,7 +86,7 @@ class FalconideEmail
                 
                 //Marketing Team :
                 'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in', 'rajendra.digari@talentedge.in','vaibhav.gupta@talentedge.in',
+                'vivek.bathla@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in','shubhra.kochar@talentedge.in'
                 ),
@@ -113,8 +113,10 @@ class FalconideEmail
     public function TestemailData($reponame, $filename, $date, $email_summary=NULL)
     {
 
-           $emailData = array('email' => array('pawan.kumar@talentedge.in'
-                                               //,'ashwani.sharma@talentedge.in',
+           $emailData = array('email' => array('pawan.kumar@talentedge.in',
+                                               'ashwani.sharma@talentedge.in',
+                                               'aastha.verma@talentedge.in',
+                                               'pritam.dutta@talentedge.in',
                                                //'ajay.kumar@talentedge.in', 
                                                //'pritam.dutta@talentedge.in',
                                                //'pramod.singh@talentedge.in'
