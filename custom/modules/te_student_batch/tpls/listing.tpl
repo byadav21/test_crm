@@ -451,7 +451,7 @@ input:checked + .slider:before {
                     async: true,
                     success: function (data) {
                         //alert(data.student_id);
-                        $('#student_id' + data.student_id).html(eligStatus);
+                        $('#student_id'+data.student_id).html(eligStatus);
                         }
                     });
                 
