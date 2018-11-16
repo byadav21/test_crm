@@ -57,7 +57,7 @@ class sendVisitReport
             </tr>
         </table>';
 
-        $emailData = $mail->TestemailData('TE_FOCUS Leads Report', $filename, $this->toDate, $email_summary);
+        $emailData = $mail->emailData('TE_FOCUS Leads Report', $filename, $this->toDate, $email_summary);
         $mail->sendCertificateEmail($emailData);
     }
 
