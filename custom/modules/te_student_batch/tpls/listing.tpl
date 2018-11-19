@@ -169,6 +169,7 @@
 				{counter name="colCounter"}
 			{/foreach}
 			 <th>Action</th>
+                         <th>Eligibility</th>
 		</tr>
 	</thead>
 		{counter start=$pageData.offsets.current print=false assign="offset" name="offset"}
@@ -236,8 +237,13 @@
 					{counter name="colCounter"}
 
 				{/foreach}
-				<td> {$rowData.ID|getisSent}</td>
+                                
+				<td>{$rowData.ID|getisSent}</td>
 				<td align='right' style="display:none;">{$pageData.additionalDetails.$id}</td>
+                                <td>
+                                    {$rowData.ID|is_Eligibile}
+                                   
+                                </td>
 
 		    	</tr>
 
@@ -353,5 +359,113 @@ function lvg_nav(m,id,act,offset,t){
 </div>
 </div>
 <script type='text/javascript' src='custom/modules/te_student_batch/js/batchtransfer.js'></script>
+{literal}
+    {literal} 
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 20px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+{/literal}
+
+</style>
+
+
+{literal}
+    <script> 
+   
+    function updateStudentEligibility(RecordID,is_eligible) 
+            {
+            if (confirm("Are you sure you want to update?")) {
+                    
+                    var eligStatus = ''
+                    if(is_eligible==1){
+                        eligStatus ='No';
+                    }else{
+                        eligStatus ='Yes';
+                    }
+                    $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'updateStudentEligibility',studentID: RecordID,ISeligible:is_eligible},
+                    dataType: 'json',
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        //alert(data.student_id);
+                        $('#student_id'+data.student_id).html(eligStatus);
+                        }
+                    });
+                
+                }
+                return false;
+            }
+            
+            
+    function CheckEligibility(student_id,is_eligible){
+                    //alert(student_id);
+                    updateStudentEligibility(student_id,is_eligible);
+                    
+                }
+{/literal}
+     </script>
 </body>
 </html>

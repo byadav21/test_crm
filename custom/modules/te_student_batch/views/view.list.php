@@ -676,8 +676,25 @@ function getisSent($id)
     global $current_user;
     $obj = new te_student_override();
     //get Student ID
-   // $sid = $obj->getStudentID($id);
+    // $sid = $obj->getStudentID($id);
 
     $data = $obj->getApproval($id);
-    echo (!$data || $data['status']!='Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>' : 'Pending';
+    echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>' : 'Pending';
+}
+
+function is_Eligibile($id)
+{
+    global $current_user,$db;
+    
+    $row1 =$db->query("SELECT 
+                         te_student.is_eligible,
+                         strel.te_student_te_student_batch_1te_student_ida student_id
+                     FROM `te_student_te_student_batch_1_c` strel join te_student on strel.te_student_te_student_batch_1te_student_ida=te_student.id
+                        WHERE 
+                     strel.`te_student_te_student_batch_1te_student_batch_idb` ='$id'");
+    $dataC =$db->fetchByAssoc($row1);
+    $student_id = $dataC['student_id']; $is_eligible = $dataC['is_eligible'];
+    $status = ($is_eligible=='1')? 'Yes' : 'No';
+    $checked = ($is_eligible=='1')? 'checked' : '';
+    echo '<label class="switch"><input type="checkbox" id="Eligibility_'.$student_id.'"  onclick="CheckEligibility(\'' . $student_id . '\','.$is_eligible.')" '.$checked.'><span class="slider round"></span></label><div id="student_id'.$student_id.'">'.$status.'</div>';
 }

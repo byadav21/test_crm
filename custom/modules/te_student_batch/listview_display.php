@@ -10,12 +10,14 @@ class listviewClass {
        //**** Student list View Details **************/
 	//	$aa="SELECT mobile,email,country FROM te_student WHERE id=(SELECT te_student_te_student_batch_1te_student_ida FROM te_student_te_student_batch_1_c WHERE 'te_student_te_student_batch_1te_student_batch_idb'='".$bean->id."'";
 
-			$row1 =$db->query("SELECT mobile,email,country,lead_id_c FROM te_student WHERE id=(SELECT te_student_te_student_batch_1te_student_ida FROM te_student_te_student_batch_1_c WHERE `te_student_te_student_batch_1te_student_batch_idb`='".$bean->id."')");
+			$row1 =$db->query("SELECT mobile,email,country,lead_id_c,is_eligible FROM te_student WHERE id=(SELECT te_student_te_student_batch_1te_student_ida FROM te_student_te_student_batch_1_c WHERE `te_student_te_student_batch_1te_student_batch_idb`='".$bean->id."')");
 			$res1 =$db->fetchByAssoc($row1);
                         $mobile = $res1['mobile'];
                         $LeadID = $res1['lead_id_c'];
 
 			$bean->email=$res1['email'];
+                        $bean->is_eligible=$res1['is_eligible'];
+                        
 			$bean->mobile= $mobile.'  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$mobile.',\''.$LeadID.'\')" alt="Smiley face" height="20" width="20">';
       //echo "SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$bean->id."'";
       //exit();
