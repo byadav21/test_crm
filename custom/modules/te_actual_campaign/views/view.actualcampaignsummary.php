@@ -78,13 +78,13 @@ class te_actual_campaignViewactualcampaignsummary extends SugarView
 
         if ($selected_from_date != '')
         {
-            $wherecl .= " AND DATE(tac.date_entered) >= '" . $fromDateFormatted . "'";
+            $wherecl .= " AND DATE(tac.plan_date) >= '" . $fromDateFormatted . "'";
         }
 
 
         if ($selected_to_date != '')
         {
-            $wherecl .= " AND DATE(tac.date_entered) <= '" . $toDateFormatted . "' ";
+            $wherecl .= " AND DATE(tac.plan_date) <= '" . $toDateFormatted . "' ";
         }
 
 
@@ -116,7 +116,7 @@ class te_actual_campaignViewactualcampaignsummary extends SugarView
              left join te_vendor v on tac.vendor_id=v.id
              WHERE bb.deleted=0
                AND tac.deleted=0 $wherecl
-             GROUP BY bb.id order by tac.date_entered desc";
+             GROUP BY bb.id,v.id order by bb.id,tac.date_entered desc";
 
         //echo $leadSql;
         $leadObj = $db->query($leadSql) or die(mysqli_error());
