@@ -25,7 +25,7 @@ class ImportClass
             $batchObj               = $db->query($batchSql);
             }else
             {
-            echo json_encode(array('status'=>'error','msg'=>'Wrong Batch Code {'.$bean->batch.'}!')); exit(); 
+            //echo json_encode(array('status'=>'error','msg'=>'Wrong Batch Code {'.$bean->batch.'}!')); exit(); 
             }
         }
     }
