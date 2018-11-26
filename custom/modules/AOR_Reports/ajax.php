@@ -128,17 +128,19 @@ if (isset($_POST['action']) && $_POST['action'] == 'SourceLeadAssignmentRule')
 }
 if (isset($_POST['action']) && $_POST['action'] == 'updateStudentEligibility')
 {
-    global $db;
+    global $db,$current_user;
     $option = '';
     //RecordID: RecordID, RowID:RowID
+   //echo 'xxx='.$current_user->id;
    
+    $curruserID= $_SESSION['authenticated_user_id'];
     $studentBatchID = $_POST['studentBatchID']; $ISeligible = $_POST['ISeligible'];
     
     $eligStatus= ($ISeligible==1)? 0 : 1;
     
     if ($studentBatchID!='')
     {
-        $updateSql = "UPDATE  te_student_batch  SET srm_is_eligible='$eligStatus'  where id='$studentBatchID'";
+       $updateSql = "UPDATE  te_student_batch  SET srm_is_eligible='$eligStatus',date_modified=NOW(),modified_user_id='$curruserID'  where id='$studentBatchID'";
         $usObj = $GLOBALS['db']->Query($updateSql);
        
         if($usObj){
