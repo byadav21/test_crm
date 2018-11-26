@@ -134,9 +134,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateStudentEligibility')
    //echo 'xxx='.$current_user->id;
    
     $curruserID= $_SESSION['authenticated_user_id'];
-    $studentBatchID = $_POST['studentBatchID']; $ISeligible = $_POST['ISeligible'];
+    $studentBatchID = $_POST['studentBatchID']; 
+    $eligStatus = $_POST['ISeligible'];
     
-    $eligStatus= ($ISeligible==1)? 0 : 1;
+    //$eligStatus= ($ISeligible==1)? 0 : 1;
     
     if ($studentBatchID!='')
     {

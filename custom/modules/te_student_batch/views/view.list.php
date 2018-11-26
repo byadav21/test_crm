@@ -695,5 +695,5 @@ function is_Eligibile($id)
     $status = ($is_eligible=='1')? 'Yes' : 'No';
     $checked = ($is_eligible=='1')? 'checked' : '';
     //echo '<label class="switch"><input type="checkbox" id="Eligibility_'.$student_id.'"  onclick="CheckEligibility(\'' . $student_id . '\','.$is_eligible.')" '.$checked.'><span class="slider round"></span></label><div id="student_id'.$student_id.'">'.$status.'</div>';
-     echo '<label class="switch"><input type="checkbox" id="Eligibility_'.$id.'"  onclick="CheckEligibility(\'' . $id . '\','.$is_eligible.')" '.$checked.'><span class="slider round"></span></label>';
+     echo '<label class="switch"><input type="checkbox" id="Eligibility_'.$id.'"  onclick="CheckEligibility(\'' . $id . '\','.$is_eligible.')" '.$checked.'><span class="slider round"></span></label><div id="student_id'.$id.'">'.$status.'</div>';
 }

@@ -433,19 +433,24 @@ input:checked + .slider:before {
             {
             if (confirm("Are you sure you want to update?")) {
                     
-                    var eligStatus = ''
-                    if(is_eligible==1){
+                    var eligStatus = ''; var xis_eligible = '';
+                    is_eligible = $('#Eligibility_'+student_batch_id).is(":checked");
+ 
+                    if(is_eligible==false){
                         eligStatus ='No';
+                        xis_eligible= 0;
                     }else{
                         eligStatus ='Yes';
+                        xis_eligible= 1;
                     }
+                    
                     $.ajax({
                     beforeSend: function (request)
                     {
                         //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
                     },
                     url: "index.php?entryPoint=reportsajax",
-                    data: {action: 'updateStudentEligibility',studentBatchID: student_batch_id,ISeligible:is_eligible},
+                    data: {action: 'updateStudentEligibility',studentBatchID: student_batch_id,ISeligible:xis_eligible},
                     dataType: 'json',
                     type: "POST",
                     async: true,
