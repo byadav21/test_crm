@@ -132,18 +132,18 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateStudentEligibility')
     $option = '';
     //RecordID: RecordID, RowID:RowID
    
-    $studentID = $_POST['studentID']; $ISeligible = $_POST['ISeligible'];
+    $studentBatchID = $_POST['studentBatchID']; $ISeligible = $_POST['ISeligible'];
     
     $eligStatus= ($ISeligible==1)? 0 : 1;
     
-    if ($studentID!='')
+    if ($studentBatchID!='')
     {
-        $updateSql = "UPDATE te_student SET is_eligible='$eligStatus'  where id='$studentID'";
+        $updateSql = "UPDATE  te_student_batch  SET srm_is_eligible='$eligStatus'  where id='$studentBatchID'";
         $usObj = $GLOBALS['db']->Query($updateSql);
        
         if($usObj){
             //echo $studentID;
-            echo json_encode(array('status'=>'success','student_id'=>$studentID)); 
+            echo json_encode(array('status'=>'success','student_batch_id'=>$studentBatchID)); 
         }
     }
     die;

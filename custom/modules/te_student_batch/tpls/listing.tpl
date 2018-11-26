@@ -429,7 +429,7 @@ input:checked + .slider:before {
 {literal}
     <script> 
    
-    function updateStudentEligibility(RecordID,is_eligible) 
+    function updateStudentEligibility(student_batch_id,is_eligible) 
             {
             if (confirm("Are you sure you want to update?")) {
                     
@@ -445,13 +445,13 @@ input:checked + .slider:before {
                         //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
                     },
                     url: "index.php?entryPoint=reportsajax",
-                    data: {action: 'updateStudentEligibility',studentID: RecordID,ISeligible:is_eligible},
+                    data: {action: 'updateStudentEligibility',studentBatchID: student_batch_id,ISeligible:is_eligible},
                     dataType: 'json',
                     type: "POST",
                     async: true,
                     success: function (data) {
                         //alert(data.student_id);
-                        $('#student_id'+data.student_id).html(eligStatus);
+                        $('#student_id'+data.student_batch_id).html(eligStatus);
                         }
                     });
                 
@@ -460,9 +460,9 @@ input:checked + .slider:before {
             }
             
             
-    function CheckEligibility(student_id,is_eligible){
+    function CheckEligibility(student_batch_id,is_eligible){
                     //alert(student_id);
-                    updateStudentEligibility(student_id,is_eligible);
+                    updateStudentEligibility(student_batch_id,is_eligible);
                     
                 }
 {/literal}
