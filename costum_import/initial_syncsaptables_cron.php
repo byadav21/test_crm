@@ -275,7 +275,8 @@ class syncsaptables
                                     JOIN `leads` `l` on `sb`.`leads_id` = `l`.`id`
                                    LEFT JOIN `te_in_institutes` `inst` on `sb`.`te_in_institutes_id_c` = `inst`.`id`
                              WHERE `inst`.`short_name` <> ''
-                                    AND `p`.`short_name` <> ''
+                                    AND `p`.`short_name` <> '' 
+                                    AND pd.deleted=0
                                     AND `te_ba_batch`.`BusinessSegment` <> ''
                                     AND `l`.`lead_source_types` <> ''
                              GROUP BY `sp`.`id`";
@@ -316,6 +317,7 @@ class syncsaptables
                             JOIN `te_payment_details` `pd` on `sp`.`id` = `pd`.`student_payment_id`
                             JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
                     WHERE `s`.`deleted` = 0
+                        AND pd.deleted=0
                         AND `leads`.`primary_address_state` <> ''
                         AND `leads`.`primary_address_state` <> 0 ";
         $leadObj = mysqli_query($conn, $query);
@@ -411,6 +413,7 @@ WHERE   `sb`.`deleted` = 0
                        JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE `pd`.`Pay_Status` = 0
+                        AND pd.deleted=0
                         AND `pd`.`date_of_payment` > '2018-03-31'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
