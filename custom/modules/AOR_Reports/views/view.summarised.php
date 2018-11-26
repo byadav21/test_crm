@@ -231,7 +231,7 @@ class AOR_ReportsViewsummarised extends SugarView
         LEFT JOIN  users as counselor ON l.assigned_user_id=counselor.id
         LEFT JOIN  leads_cstm ON l.id= leads_cstm.id_c
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
-    where l.deleted=0  $wherecl order by pd.`date_of_payment`,s.name";
+    where l.deleted=0 and pd.deleted=0  $wherecl order by pd.`date_of_payment`,s.name";
 
 
 
