@@ -223,6 +223,7 @@ class AOR_ReportsViewsummarised extends SugarView
                             pd.invoice_order_number
         FROM `te_student_payment` sp
         LEFT JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
+        LEFT JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
         LEFT JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c
         LEFT JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
         LEFT JOIN  te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id 
@@ -231,7 +232,7 @@ class AOR_ReportsViewsummarised extends SugarView
         LEFT JOIN  users as counselor ON l.assigned_user_id=counselor.id
         LEFT JOIN  leads_cstm ON l.id= leads_cstm.id_c
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
-    where l.deleted=0 and pd.deleted=0  $wherecl order by pd.`date_of_payment`,s.name";
+    where l.deleted=0 and pd.deleted=0 and lp.deleted=0  $wherecl order by pd.`date_of_payment`,s.name";
 
 
 
