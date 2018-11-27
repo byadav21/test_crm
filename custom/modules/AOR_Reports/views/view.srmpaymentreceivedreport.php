@@ -263,6 +263,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['email_add']       = $row['email_add_c'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
@@ -331,7 +332,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
 
             $data .= ",Student Name";
-            
+            $data .= ",Email ID";
+            $data .= ",Phone Number";
             $data .= ",Lead ID";
             $data .= ",Counselor Name";
             $data .= ",Invoice Number";
@@ -401,6 +403,9 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
                 $data .= "\",\"" . $datax['student_name'];
                 
+                $data .= "\",\"" . $datax['email_add'];
+                $data .= "\",\"" . $datax['phone_mobile'];
+                  
                 $data .= "\",\"" . $datax['lead_id'];
                 $data .= "\",\"" . $datax['counselor_name'];
                 $data .= "\",\"" . $datax['invoice_number'];
