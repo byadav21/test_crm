@@ -5,7 +5,7 @@
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
 
-                    <tr>
+                  {*  <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="From Date">From Date:</label>
                         </td>
@@ -20,7 +20,7 @@
                             <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
-                    </tr>
+                    </tr>*}
                     <tr>
 
                         <td scope="row" nowrap="nowrap" width="1%">
@@ -64,11 +64,9 @@
             </table>
         </div>
     </form>
-    <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
-        <thead>
-            {*Start Pagination*}
-            <tr id="pagination" role="presentation">
-                <td colspan="20">
+                            
+                          
+            <div style="width:99%;overflow:hidden;">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">
                         <tbody><tr>
                                 <td nowrap="nowrap" class="paginationActionButtons">&nbsp;</td>
@@ -120,49 +118,36 @@
                             </tr>
                         </tbody>
                     </table>
-                </td>
-            </tr>
+            </div>
+           
+<div style="width:99%;overflow:auto;border:2px dashed #d0d0d0;" class="div-leads-list">
+    <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default"  style="overflow-x:auto;">
+        <thead>
+            
             {*End Pagination*}
+           
             <tr height="20">
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
+                  <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Sr. No.</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
-                {*<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Alive</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="7"><strong>Dead</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Converted</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2"><strong>Warm</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>*}
-
-            </tr>
-            <tr height="20">
-
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Batch Name</strong>
-                </th>
+              
 
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Program Name</strong>
+                    <strong>Course Name</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Vendor/Lead Source Name</strong>
                 </th>
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Registration/Conversion Date</strong>
+                    <strong>Institute Name</strong>
+                </th>
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Registration Date</strong>
                 </th>
 
 
@@ -172,11 +157,26 @@
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Email ID</strong>
-                </th>
+                </th> 
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Phone Number</strong>
+                </th> 
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Lead ID</strong>
                 </th>
-
+                
+                
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Counselor Name</strong>
+                </th>
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Invoice Number</strong>
+                </th>
+                    
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Course Fee</strong>
                 </th>
@@ -188,156 +188,161 @@
                     <strong>Total Amount</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Amount Left to be Paid</strong>
+                    <strong>Outstanding Balance</strong>
                 </th>
 
 
-
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 1/Payment 1</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Mode</strong>
-                </th>
-                </th>
+            
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Payment Source</strong>
                 </th>
+             
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Receipt number</strong>
+                    <strong>Month</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Date of receipt</strong>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
                 </th>
-                </th>
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-
+                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 2/Payment 2</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Mode</strong>
-                </th>
-                </th>
+            
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Payment Source</strong>
                 </th>
+             
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Receipt number</strong>
+                    <strong>Month</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Date of receipt</strong>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
                 </th>
-                </th>
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
+               <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 3/Payment 3</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Mode</strong>
-                </th>
-                </th>
+            
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Payment Source</strong>
                 </th>
-
+             
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Receipt number</strong>
+                    <strong>Month</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Date of receipt</strong>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
                 </th>
-                </th>
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-
-
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
+               <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 4/Payment 4</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Mode</strong>
-                </th>
-                </th>
+            
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Payment Source</strong>
                 </th>
+             
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Receipt number</strong>
+                    <strong>Month</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Date of receipt</strong>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
                 </th>
-                </th>
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
                 
                 
-                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Order Number</strong>
+                </th>
+               <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Instalment 5/Payment 5</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Mode</strong>
-                </th>
-                </th>
+            
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Payment Source</strong>
                 </th>
+             
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Receipt number</strong>
+                    <strong>Month</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Date of receipt</strong>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Date of Payment</strong>
                 </th>
-                </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                
+                <th data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Due Date</strong>
                 </th>
 
 
-                {*{foreach from = $paymentList key=keyx item=program}
-                {foreach from = $program.installment key=key item=value}
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                <strong>Instalment 1 amount received</strong>
-                </th>
-                {/foreach}
-                {/foreach}*}
+            
 
 
 
 
             </tr>
+            
+            {if empty($paymentList)}<tr class="oddListRowS1"><td align="left"  colspan="30">Please select a Batch Code.</td></tr>{/if}
             {foreach from = $paymentList key=keyx item=program}
+          
             
             {assign var='toBePay' value=0}
             {assign var='toBePay' value=$program.total_amount-$program.amt_tobe_pay}
             
                 <tr height="20" class="oddListRowS1">
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.srno}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
+          
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.Vendor}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.institute}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.converted_date}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.student_name}</td>
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.student_email}</td>
+                    
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.email_add}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_mobile}</td>
+                    
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.lead_id}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.counselor_name}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.invoice_number}</td>
+                    
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.fee_inr}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.gst}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.total_amount}</td>
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$toBePay}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.amt_tobe_pay}</td>
 
                     {foreach from = $program.installment key=key item=value}
                         {foreach from = $value key=key item=value}
@@ -355,6 +360,7 @@
 
 
     </table>
+</div>  
   {literal}
         <script>
             Calendar.setup({
@@ -403,29 +409,7 @@
                
                 //getStateByZone();
                 
-                  $("#search_form").on('submit', (function(e) {
-                     
-                      var from_date    = $('#from_date').val();
-                      var to_date      = $('#to_date').val();
-                    
-                      var status       = $('#status').val();
-                      
-                      
-                      
-                      if(from_date=='' || from_date ==null){
-                          $("#from_date").focus();
-                           alert('Please select From-Date!'); return false;
-                      }
-                      
-                      if(to_date=='' || to_date ==null){
-                          $("#to_date").focus();
-                           alert('Please select To-Date!'); return false;
-                      }
-                     
-                 
-                     
-                    
-                 }));
+            
             });
 
 

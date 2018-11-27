@@ -4,6 +4,7 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
 
+
 class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 {
 
@@ -14,8 +15,6 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
     {
         parent::SugarView();
     }
-
-
 
     function getBatch()
     {
@@ -30,11 +29,12 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         }
         return $batchOptions;
     }
-    
-    function getDueDate(){
-        
-         global $db;
-        
+
+    function getDueDate()
+    {
+
+        global $db;
+
         $batchSql     = "SELECT 
             bb.id batch_id, bb.batch_code, inst.due_date
         FROM te_ba_batch bb
@@ -46,14 +46,32 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         ORDER BY bb.id, inst.due_date";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
-        while ($row = $db->fetchByAssoc($batchObj))
+        while ($row          = $db->fetchByAssoc($batchObj))
         {
             $batchOptions[$row['batch_id']][] = $row['due_date'];
         }
         return $batchOptions;
     }
 
+    function getInstitute()
+    {
 
+        global $db;
+
+        $batchSql     = "SELECT 
+            bb.id batch_id, bb.batch_code, i.name
+        FROM te_ba_batch bb
+            INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON bb.id=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb AND ib.deleted=0
+            INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0
+        WHERE bb.deleted =0";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+            $batchOptions[$row['batch_id']] = $row['name'];
+        }
+        return $batchOptions;
+    }
 
     public function display()
     {
@@ -64,99 +82,57 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $wherecl               = "";
         $BatchListData         = $this->getBatch();
         $getDueDateData        = $this->getDueDate();
+        $getInstituteData      = $this->getInstitute();
         $usersdd               = "";
-       
+
         //echo "<pre>";print_r($getDueDateData);exit();
-        
-      
-        
-        if (!isset($_SESSION['cccon_from_date']))
-        {
-            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
-        }
-        if (!isset($_SESSION['cccon_to_date']))
-        {
-            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
-        }
-        if (!isset($_SESSION['cccon_counselor']))
-        {
-            $_SESSION['cccon_counselor'] = array_keys($usersdd);
-        }
+//        if (!isset($_SESSION['cccon_from_date']))
+//        {
+//            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
+//        }
+//        if (!isset($_SESSION['cccon_to_date']))
+//        {
+//            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
+//        }
+
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']      = $_REQUEST['batch'];
+
+
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_status']      = $_REQUEST['status'];
-        }
-        if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $selected_to_date   = $_SESSION['cccon_to_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            $wherecl            .= " AND DATE(pd.`date_of_payment`)>='" . $from_date . "' AND DATE(pd.`date_of_payment`)<='" . $to_date . "'";
-        }
-        elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $wherecl            .= " AND DATE(pd.`date_of_payment`)>='" . $from_date . "' ";
-        }
-        elseif ($_SESSION['cccon_from_date'] == "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_to_date = $_SESSION['cccon_to_date'];
-            $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            $wherecl          .= " AND DATE(pd.`date_of_payment`)<='" . $to_date . "' ";
         }
 
+
         $findBatch = array();
-        if (!empty($_SESSION['cccon_batch']))
-        {
-            $selected_batch = $_SESSION['cccon_batch'];
-        }
+
         if (!empty($_SESSION['cccon_batch_code']))
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
         }
-        if (!empty($_SESSION['cccon_counselor']))
-        {
-            $selected_counselor = $_SESSION['cccon_counselor'];
-        }
-          if (!empty($_SESSION['cccon_status']))
-        {
-            $selected_status = $_SESSION['cccon_status'];
-        }
+
 
         $paymentList = array();
         $StatusList  = array();
 
-        if (!empty($selected_batch))
-        {
 
-            $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch) . "')";
-        }
         if (!empty($selected_batch_code))
         {
 
             $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-                 $leadSql = "SELECT 
+        //echo '<pre>'.
+        $leadSql = "SELECT 
                             s.name student_name,
                             sprel.`te_student_te_student_payment_1te_student_ida` AS student_id,
                             pd.id paymentID,
-
-                            p. name program_name,
                             l.id lead_id,
                             l.vendor,
                             l.converted_date,
                             te_ba_batch.fees_inr fee_inr,
                             pd.payment_source,
-
-
                             u.user_name,
+                            concat(counselor.first_name,' ',counselor.last_name) as counselor_name,
                             te_ba_batch.name batch_name,
                             l.assigned_user_id,
                             te_ba_batch.id AS batch_id ,
@@ -166,194 +142,240 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                             leads_cstm.email_add_c student_email,
                             pd.`amount`, 
                             pd.`reference_number`, 
-                            pd.`payment_type`
+                            pd.`payment_type`,
+                            pd.invoice_number,
+                            pd.invoice_order_number,
+                            leads_cstm.email_add_c
         FROM `te_student_payment` sp
         LEFT JOIN `te_payment_details` pd ON pd.student_payment_id=sp.id
+        LEFT JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
         LEFT JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c
         LEFT JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
         LEFT JOIN  te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id 
         LEFT JOIN  users u ON sb.assigned_user_id=u.id
         LEFT JOIN  leads l ON sb.leads_id=l.id
+        LEFT JOIN  users as counselor ON l.assigned_user_id=counselor.id
         LEFT JOIN  leads_cstm ON l.id= leads_cstm.id_c
         LEFT JOIN  te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
-        LEFT JOIN  te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-        LEFT JOIN  te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida
-    where l.deleted=0 and pd.deleted=0  $wherecl  "
-#. "  and sprel.`te_student_te_student_payment_1te_student_ida` in ('47f844b9-5cf2-38bf-8609-5b603189a22d','bf0e02c2-c8a6-b4bc-2d40-5b57287a820f') "
-. "order by pd.`date_of_payment`,s.name ";
+    where l.deleted=0 
+    and pd.deleted=0 
+    and lp.deleted=0 
+    $wherecl order by pd.`date_of_payment`,s.name";
 
 
 
 
 
-        $leadObj      = $db->query($leadSql);
+
         $checkOffline = array("Atom Gateway Payments", "paytm", "PayU");
-        $Amountpaid = 0;
-        while ($row          = $db->fetchByAssoc($leadObj))
+        $Amountpaid   = 0;
+        //$_SESSION['cccon_batch_code']=array();
+        if (!empty($_SESSION['cccon_batch_code']))
         {
-            //$Amountpaid += $row['amount'];
 
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['lead_id']          = $row['lead_id'];
+            $leadObj = $db->query($leadSql);
 
-
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor']         = empty($row['vendor']) ? $row['utm_source_c'] : $row['vendor'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['converted_date'] = $row['converted_date'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['fee_inr']        = $row['fee_inr'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']            = (0.18 * $row['fee_inr']);
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']   = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['amt_tobe_pay']   += $row['amount'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source']     = $row['payment_source'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']           = '';
-
-
-
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][] = array(
-                ($row['amount']) ? $row['amount'] : 'N/A',
-                (in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
-                ($row['payment_source']) ? $row['payment_source'] : 'N/A',
-                ($row['reference_number']) ? $row['reference_number'] : 'N/A',
-                ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
+            while ($row = $db->fetchByAssoc($leadObj))
+            {
+                //$Amountpaid += $row['amount'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['institute']        = $getInstituteData[$row['batch_id']];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
+                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['email_add']       = $row['email_add_c'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['counselor_name']   = $row['counselor_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['lead_id']          = $row['lead_id'];
                 
-            );
-        }
-        //echo "<pre>";
-         foreach ($paymentList as $key=>$val){
-                $paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number']   = $row['invoice_number'];
                 
-                foreach ($val['installment'] as $key2=>$val2){
-                    $paymentList[$key]['installment'][$key2][6] = isset($getDueDateData[$val['batch_id']][$key2]) ? $getDueDateData[$val['batch_id']][$key2]: 'N/A';
-                }
+
+
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor']         = empty($row['vendor']) ? $row['utm_source_c'] : $row['vendor'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['converted_date'] = $row['converted_date'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['fee_inr']        = $row['fee_inr'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']            = (0.18 * $row['fee_inr']);
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']   = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['amt_tobe_pay']   += $row['amount'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source'] = $row['payment_source'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']       = '';
+
+
+
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][] = array(
+                    ($row['invoice_order_number']) ? $row['invoice_order_number'] : 'N/A',
+                    ($row['amount']) ? $row['amount'] : 'N/A',
+                    //(in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
+                    
+                    ($row['payment_source']) ? $row['payment_source'] : 'N/A',
+                    //($row['reference_number']) ? $row['reference_number'] : 'N/A',
+                    ($row['date_of_payment']) ? date('F', strtotime($row['date_of_payment'])) : 'N/A',
+                    ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
+                    
+                );
             }
-            
+            //echo "<pre>";
+            $i = 1;
+            foreach ($paymentList as $key => $val)
+            {   
+                $total_amount= $val['total_amount'];
+                $amt_tobe_pay= $val['amt_tobe_pay'];
+                $paymentList[$key]['srno']         = $i;
+                //$paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
+                $paymentList[$key]['amt_tobe_pay'] = ($total_amount!=0)?   ($total_amount-$amt_tobe_pay):0;
+
+                foreach ($val['installment'] as $key2 => $val2)
+                {
+                    $paymentList[$key]['installment'][$key2][6] = isset($getDueDateData[$val['batch_id']][$key2]) ? $getDueDateData[$val['batch_id']][$key2] : 'N/A';
+                }
+                $i++;
+            }
+        }
+
+
 
         //echo "<pre>";print_r($paymentList);exit();
 
-        
+
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
-            $file        = "SrmPaymentReceived_report";
+            $file        = "srm_payment_received_report";
             $where       = '';
             $filename    = $file . "_" . $from_date . "_" . $to_date;
             $paymentList = array();
 
             $leadObj = $db->query($leadSql);
 
-        while ($row          = $db->fetchByAssoc($leadObj))
-        {
-            //$Amountpaid += $row['amount'];
-
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
-
-
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']     = $row['program_name'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor']           = empty($row['vendor']) ? $row['utm_source_c'] : $row['vendor'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['converted_date']   = $row['converted_date'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['fee_inr']          = $row['fee_inr'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']              = (0.18 * $row['fee_inr']);
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']     = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['amt_tobe_pay']     += $row['amount'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source']     = $row['payment_source'];
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']           = '';
+            if (!empty($_SESSION['cccon_batch_code']))
+            {
+                while ($row = $db->fetchByAssoc($leadObj))
+                {
+                    //$Amountpaid += $row['amount'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['institute']        = $getInstituteData[$row['batch_id']];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['counselor_name']   = $row['counselor_name'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_id']         = $row['batch_id'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['lead_id']          = $row['lead_id'];
+                
+                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number']   = $row['invoice_number'];
 
 
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['Vendor']         = empty($row['vendor']) ? $row['utm_source_c'] : $row['vendor'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['converted_date'] = $row['converted_date'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['fee_inr']        = $row['fee_inr'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['gst']            = (0.18 * $row['fee_inr']);
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['total_amount']   = ($row['fee_inr'] + (0.18 * $row['fee_inr']));
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['amt_tobe_pay']   += $row['amount'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['payment_source'] = $row['payment_source'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['due_date']       = '';
 
-            $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][] = array(
+
+
+                    
+                   $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][] = array(
+                    ($row['invoice_order_number']) ? $row['invoice_order_number'] : 'N/A',
                     ($row['amount']) ? $row['amount'] : 'N/A',
-                    (in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
+                    //(in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
+                    
                     ($row['payment_source']) ? $row['payment_source'] : 'N/A',
-                    ($row['reference_number']) ? $row['reference_number'] : 'N/A',
-                    ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A'
-                    //($row['due_date']) ? $row['due_date'] : 'N/A'
-                );
-            }
-            
-            foreach ($paymentList as $key=>$val){
-                $paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
-                
-              foreach ($val['installment'] as $key2=>$val2){
-                    $paymentList[$key]['installment'][$key2][6] = isset($getDueDateData[$val['batch_id']][$key2]) ? $getDueDateData[$val['batch_id']][$key2]: 'N/A';
+                    //($row['reference_number']) ? $row['reference_number'] : 'N/A',
+                    ($row['date_of_payment']) ? date('F', strtotime($row['date_of_payment'])) : 'N/A',
+                    ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
+                    );
                 }
-                
+
+                foreach ($paymentList as $key => $val)
+                {   
+                     $total_amount= $val['total_amount'];
+                     $amt_tobe_pay= $val['amt_tobe_pay'];
+                    //$paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
+                     $paymentList[$key]['amt_tobe_pay'] = ($total_amount!=0)?   ($total_amount-$amt_tobe_pay):0;
+
+                    foreach ($val['installment'] as $key2 => $val2)
+                    {
+                        $paymentList[$key]['installment'][$key2][6] = isset($getDueDateData[$val['batch_id']][$key2]) ? $getDueDateData[$val['batch_id']][$key2] : 'N/A';
+                    }
+                }
             }
-            
-            
-                
-            
-            
+
+
+
+
+
+
             //echo "<pre>";print_r($paymentList);exit();
             # Create heading
             $data = "Batch Code";
-            $data .= ",Batch Name";
-            
-            $data .= ",Program Name";
+
+
+            $data .= ",Course Name";
             $data .= ",Lead Source Name";
-            $data .= ",Conversion Date";
-           
-            
+            $data .= ",Institute Name";
+            $data .= ",Registration Date";
+
+
             $data .= ",Student Name";
-            $data .= ",Email ID";
-            $data .= ",Phone Number";
             
+            $data .= ",Lead ID";
+            $data .= ",Counselor Name";
+            $data .= ",Invoice Number";
+
+
             $data .= ",Course Fee";
             $data .= ",GST";
             $data .= ",Total Amount";
-            $data .= ",Amount Left to be Paid";
+            $data .= ",Outstanding Balance";
 
-           
 
+            $data .= ",Order Number";
             $data .= ",Instalment 1/Payment 1";
-            $data .= ",Mode";
             $data .= ",Payment Source";
-            $data .= ",Receipt number";
-            $data .= ",Date of receipt";
+            $data .= ",Month";
+            $data .= ",Date of Payment";
             $data .= ",Due Date";
-
+            
+            $data .= ",Order Number";
             $data .= ",Instalment 2/Payment 2";
-            $data .= ",Mode";
             $data .= ",Payment Source";
-            $data .= ",Receipt number";
-            $data .= ",Date of receipt";
+            $data .= ",Month";
+            $data .= ",Date of Payment";
             $data .= ",Due Date";
             
+            $data .= ",Order Number";
             $data .= ",Instalment 3/Payment 3";
-            $data .= ",Mode";
             $data .= ",Payment Source";
-            $data .= ",Receipt number";
-            $data .= ",Date of receipt";
+            $data .= ",Month";
+            $data .= ",Date of Payment";
             $data .= ",Due Date";
             
+            $data .= ",Order Number";
             $data .= ",Instalment 4/Payment 4";
-            $data .= ",Mode";
             $data .= ",Payment Source";
-            $data .= ",Receipt number";
-            $data .= ",Date of receipt";
+            $data .= ",Month";
+            $data .= ",Date of Payment";
             $data .= ",Due Date";
             
+            $data .= ",Order Number";
             $data .= ",Instalment 5/Payment 5";
-            $data .= ",Mode";
             $data .= ",Payment Source";
-            $data .= ",Receipt number";
-            $data .= ",Date of receipt";
+            $data .= ",Month";
+            $data .= ",Date of Payment";
             $data .= ",Due Date";
 
 
@@ -370,22 +392,26 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             foreach ($paymentList as $key => $datax)
             {
                 $data .= "\"" . $datax['batch_code'];
+
+
                 $data .= "\",\"" . $datax['batch_name'];
-                
-                $data .= "\",\"" . $datax['program_name'];
                 $data .= "\",\"" . $datax['Vendor'];
+                $data .= "\",\"" . $datax['institute'];
                 $data .= "\",\"" . $datax['converted_date'];
-                   
+
                 $data .= "\",\"" . $datax['student_name'];
-                $data .= "\",\"" . $datax['student_email'];
-                $data .= "\",\"" . $datax['phone_mobile'];
                 
+                $data .= "\",\"" . $datax['lead_id'];
+                $data .= "\",\"" . $datax['counselor_name'];
+                $data .= "\",\"" . $datax['invoice_number'];
+                
+
                 $data .= "\",\"" . $datax['fee_inr'];
                 $data .= "\",\"" . $datax['gst'];
                 $data .= "\",\"" . $datax['total_amount'];
                 $data .= "\",\"" . $datax['amt_tobe_pay'];
-                
-    
+
+
 
                 foreach ($datax['installment'] as $key => $value)
                 {
@@ -409,7 +435,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         //print_r($paymentList); die;
         $total     = count($paymentList); #total records
         $start     = 0;
-        $per_page  = 60;
+        $per_page  = 30;
         $page      = 1;
         $pagenext  = 1;
         $last_page = ceil($total / $per_page);
@@ -465,7 +491,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_counselor", $selected_counselor);
-      
+
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
         $sugarSmarty->assign("pagenext", $pagenext);
