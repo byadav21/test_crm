@@ -4,8 +4,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 set_time_limit(0); 
 ini_set('memory_limit','1024M');
 require_once('include/entryPoint.php');
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 global $db;
 $studentDetails=[];
 $Insert_student_counter=0;
