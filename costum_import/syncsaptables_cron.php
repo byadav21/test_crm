@@ -275,7 +275,8 @@ class syncsaptables
                              WHERE `inst`.`short_name` <> ''
                                     AND `p`.`short_name` <> ''
                                     AND `te_ba_batch`.`BusinessSegment` <> ''
-                                    AND `l`.`lead_source_types` <> ''
+                                    AND `l`.`lead_source_types` <> '' 
+                                    AND  pd.deleted=0
                                     AND sp.date_entered > '$SyncSapTimestamp' AND sp.date_entered <= '$currentTime'
                              GROUP BY `sp`.`id`";
         $leadObj = mysqli_query($conn, $query);
@@ -313,6 +314,7 @@ class syncsaptables
                            JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
                      WHERE `s`.`deleted` = 0
                             AND `leads`.`primary_address_state` <> ''
+                            AND  pd.deleted=0
                             AND `leads`.`primary_address_state` <> 0 
                             AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                             ";
@@ -375,7 +377,7 @@ class syncsaptables
                         JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE   `sb`.`deleted` = 0
-                        AND `pd`.`deleted` = 0
+                        AND `pd`.`deleted` = 0 AND pd.deleted=0
                         AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                         AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);

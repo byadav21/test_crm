@@ -685,17 +685,15 @@ function getisSent($id)
 function is_Eligibile($id)
 {
     global $current_user,$db;
-    
-    $row1 =$db->query("SELECT 
-                         te_student.is_eligible,
-                         strel.te_student_te_student_batch_1te_student_ida student_id
-                     FROM `te_student_te_student_batch_1_c` strel join te_student on strel.te_student_te_student_batch_1te_student_ida=te_student.id
-                        WHERE 
-                     strel.`te_student_te_student_batch_1te_student_batch_idb` ='$id'");
+  
+    $row1 =$db->query("SELECT sb.srm_is_eligible
+                     FROM `te_student_batch` sb
+                        WHERE  sb.deleted=0  and 
+                     sb.`id` ='$id'");
     $dataC =$db->fetchByAssoc($row1);
-    $student_id = $dataC['student_id']; $is_eligible = $dataC['is_eligible'];
+    $is_eligible = $dataC['srm_is_eligible'];
     $status = ($is_eligible=='1')? 'Yes' : 'No';
     $checked = ($is_eligible=='1')? 'checked' : '';
     //echo '<label class="switch"><input type="checkbox" id="Eligibility_'.$student_id.'"  onclick="CheckEligibility(\'' . $student_id . '\','.$is_eligible.')" '.$checked.'><span class="slider round"></span></label><div id="student_id'.$student_id.'">'.$status.'</div>';
-     echo '<label class="switch"><input type="checkbox" id="Eligibility_'.$student_id.'_'.$id.'"  onclick="CheckEligibility(\'' . $student_id . '\','.$is_eligible.')" '.$checked.'><span class="slider round"></span></label>';
+     echo '<label class="switch"><input type="checkbox" id="Eligibility_'.$id.'"  onclick="CheckEligibility(\'' . $id . '\','.$is_eligible.')" '.$checked.'><span class="slider round"></span></label><div id="student_id'.$id.'">'.$status.'</div>';
 }
