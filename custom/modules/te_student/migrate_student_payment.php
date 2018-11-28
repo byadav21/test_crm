@@ -8,7 +8,7 @@ require_once('include/entryPoint.php');
 global $db;
 $studentDetails=[];
 $Insert_student_counter=0;
-$studentSql="SELECT id AS migration_id,batch,mobile,email,country,state,payment,payment_tax,payment_mode,payment_date,order_no,paymodes,invoice_no,transaction_id FROM te_migrate_student_part_pay WHERE is_completed=0 limit 0,10";
+$studentSql="SELECT id AS migration_id,batch,mobile,email,country,state,payment,payment_tax,payment_mode,payment_date,order_no,paymodes,invoice_no,transaction_id,tax_type FROM te_migrate_student_part_pay WHERE is_completed=0 limit 0,10";
 $studentObj= $GLOBALS['db']->query($studentSql);
 while($row=$GLOBALS['db']->fetchByAssoc($studentObj)){
 $studentDetails[] =$row;
@@ -34,10 +34,13 @@ if($studentDetails){
                   $payment->payment_type 	   = $studentDetails[$i]['payment_mode'];
                   $payment->payment_source 	   = $studentDetails[$i]['paymodes'];
                   $payment->transaction_id 	   = $studentDetails[$i]['transaction_id'];
+                  $payment->tax_type 	   = $studentDetails[$i]['tax_type'];
+                  $payment->country 	   = $studentDetails[$i]['country'];
+                  $payment->state 	   = $studentDetails[$i]['state'];
                   $payment->date_of_payment        = $studentDetails[$i]['payment_date'];
-		  $payment->invoice_order_number   = $studentDetails[$i]['order_no'];
+		          $payment->invoice_order_number   = $studentDetails[$i]['order_no'];
                   $payment->invoice_number         = $studentDetails[$i]['invoice_no'];
-		  $payment->is_sent_web  = 1;
+		          $payment->is_sent_web  = 1;
                   $payment->amount 		   = $currentPayment;
                   $payment->name 		   = $currentPayment;
                   $payment->payment_realized = 1;
