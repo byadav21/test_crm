@@ -72,7 +72,12 @@ array (
             'name' => 'short_name',
             'label' => 'Short Name',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'batch_completion_date_2',
+            'label' => 'LBL_BATCH_COMPLETION_DATE_2',
+            'comment' => '',
+          ),
         ),
         3 => 
         array (
