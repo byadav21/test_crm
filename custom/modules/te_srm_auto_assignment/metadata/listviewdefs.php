@@ -12,6 +12,13 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'BATCH_CODE' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'label' => 'Batch Code',
+    'width' => '10%',
+  ),
   'ASSIGNED_USER_NAME' => 
   array (
     'width' => '9%',
