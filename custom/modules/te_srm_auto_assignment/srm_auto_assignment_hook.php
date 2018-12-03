@@ -21,6 +21,8 @@ class SrmAutoAssignment{
 			global $db;
 			$dropoutSql="UPDATE te_student_batch SET assigned_user_id='".$_REQUEST['assigned_user_id']."' WHERE te_ba_batch_id_c='".$_REQUEST['te_ba_batch_id_c']."'";
 			$GLOBALS['db']->query($dropoutSql);
+		        $Data = $db->fetchByAssoc($db->query("SELECT batch_code FROM `te_ba_batch` WHERE id='".$_REQUEST['te_ba_batch_id_c']."'"));
+                        $GLOBALS['db']->query("UPDATE  te_srm_auto_assignment SET batch_code='".$Data['batch_code']."' WHERE te_ba_batch_id_c='".$_REQUEST['te_ba_batch_id_c']."'");
 		}
 	}
 }
