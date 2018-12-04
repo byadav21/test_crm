@@ -679,7 +679,13 @@ function getisSent($id)
     // $sid = $obj->getStudentID($id);
 
     $data = $obj->getApproval($id);
-    echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>' : 'Pending';
+    //$viewUrl = '</br></br><span><a href="index.php?module=te_student_batch&action=DetailView&record='.$id.'" target="_blank">View Lead</span>';
+    $viewUrl = '<div class="action-icons">
+                <a class="action-icon" data-toggle="tooltip" title="View" href="index.php?module=te_student_batch&action=DetailView&record='.$id.'" target="_blank">
+                <br>View <i class="fa fa-eye"></i>
+                </a>
+                </div>';
+    echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>'.$viewUrl : 'Pending'.$viewUrl;
 }
 
 function is_Eligibile($id)
