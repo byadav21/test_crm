@@ -74,13 +74,13 @@ if($studentDetails){
 	   	die;*/ 
 	}
 	else{
-	    $update_migrate_studentSql="UPDATE te_migrate_student SET is_completed=3,reason='Student Batch not found' WHERE id='".$value['migration_id']."'";
+	    $update_migrate_studentSql="UPDATE te_migrate_student_part_pay SET is_completed=3,reason='Student Batch not found' WHERE id='".$value['migration_id']."'";
             $GLOBALS['db']->Query($update_migrate_studentSql);
 	}
 	
    }
    else{
-	$update_migrate_studentSql="UPDATE te_migrate_student SET is_completed=2,reason='lead not found' WHERE id='".$value['migration_id']."'";
+	$update_migrate_studentSql="UPDATE te_migrate_student_part_pay SET is_completed=2,reason='lead not found' WHERE id='".$value['migration_id']."'";
         $GLOBALS['db']->Query($update_migrate_studentSql);
    }
 	$i++; 

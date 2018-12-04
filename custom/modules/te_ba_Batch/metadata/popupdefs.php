@@ -7,11 +7,13 @@ $popupMeta = array (
   'name' => 'te_ba_batch.name',
   'te_in_institutes_te_ba_batch_1_name' => 'te_ba_batch.te_in_institutes_te_ba_batch_1_name',
   'batch_status' => 'te_ba_batch.batch_status',
+  'batch_code' => 'te_ba_batch.batch_code',
 ),
     'searchInputs' => array (
   1 => 'name',
   4 => 'te_in_institutes_te_ba_batch_1_name',
   5 => 'batch_status',
+  6 => 'batch_code',
 ),
     'searchdefs' => array (
   'name' => 
@@ -35,6 +37,13 @@ $popupMeta = array (
     'label' => 'LBL_BATCH_STATUS',
     'width' => '10%',
     'name' => 'batch_status',
+  ),
+  'batch_code' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_BATCH_CODE',
+    'width' => '10%',
+    'name' => 'batch_code',
   ),
 ),
 );
