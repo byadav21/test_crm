@@ -89,7 +89,7 @@ if ($misData['slug'] == 'mis')
     $displayMis = true;
 if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE')
     $displaySRM = true;
-if ($misData['slug'] == 'DMM')
+if ($misData['slug'] == 'DMM' || $misData['slug'] == 'BA')
     $displayDM  = true;
 
         
