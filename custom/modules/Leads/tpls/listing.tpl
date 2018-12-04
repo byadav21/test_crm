@@ -331,7 +331,7 @@
 							 {/if}
 							 </P>
 
-							 {if $is_admin }
+							 {if $is_admin || $ROLE_NAME=='BA'}
 								<P>
 								<label>Source</label> : 
 									{if !empty($rowData.LEAD_SOURCE)} 
