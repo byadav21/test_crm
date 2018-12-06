@@ -345,6 +345,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_Investor_Clinic'=>'Investor Clinic CC',
   'CC_CC-TE'=>'CC-TE',
   'CC_Webinar'=>'Webinar',
+  'CC_Click2Call'=>'Click2Call',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
@@ -401,6 +402,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_Ankels'=>'Ankels',
   'CO_BLRTE'  => 'BLRTE',
   'CO_NK'=>'NK', 
+  'CO_mark'=>'mark',
 );
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';
