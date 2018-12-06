@@ -30,6 +30,20 @@ class pushActualLeads
 		return $resultArr;
 	}
 	
+	public function get_total_data($utms){
+		global $db;
+		$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
+		$sql="SELECT count(id)total,sum(case when status ='Converted' then 1 else 0 end) as converted,utm FROM `leads` WHERE date(date_entered)<='".$this->fromDate."' AND vendor NOT IN ($ignore_vendors) AND utm IN ($utms) group by utm";
+		$result = $db->query($sql);
+		$resultArr = [];
+		if($db->getRowCount($result)>0){
+			while ($row = $db->fetchByAssoc($result)){
+				$resultArr[$row['utm']]=$row;
+			}
+		}
+		return $resultArr;
+	}
+	
 	public function get_utm(){
 		global $db;
 		//$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
@@ -70,8 +84,18 @@ class pushActualLeads
 }
 
 $mainObj           = new pushActualLeads();
-$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today']: date('Y-m-d', (strtotime('-1 day', strtotime($mainObj->fromDate))));
+$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today']: date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
+
 $result = $mainObj->get_data();
+$utms_arr = [];
+$utm_str = '';
+if($result){
+	foreach($result as $rval){
+		$utms_arr[] = $rval['utm'];
+	}
+	$utm_str = "'".implode("','",$utms_arr)."'";
+}
+$total_data_res = $mainObj->get_total_data($utm_str);
 $utm = $mainObj->get_utm();
 $insertable_arr = '';
 $insertable_sub_arr = '';
@@ -94,14 +118,18 @@ if($result && $utm){
 		
 		if($cpl>0){
 			$id = create_guid();
-			$insertable_arr[] = " ('".$id."','".$key."','".$mainObj->fromDate."','".$cpl_sum."','".$cpl."','".$cpa."','".$utm[$key]['batch_id']."','".$utm[$key]['vendor_id']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."') ";
+			$totalLeads = $total_data_res[$key]['total'];
+			$totalConversion = $total_data_res[$key]['converted'];
+			$ActualLead = $val['total'];
+			$ActualConversion = $val['converted'];
+			$insertable_arr[] = " ('".$id."','".$key."','".$mainObj->fromDate."',$ActualLead,'".$totalLeads."','".$ActualConversion."','".$totalConversion."','".$cpl_sum."','".$cpl."','".$cpa."','".$utm[$key]['batch_id']."','".$utm[$key]['vendor_id']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."') ";
 			$insertable_sub_arr[] = " ('".create_guid()."','".$utm[$key]['utm_id']."','".$id."','".date('Y-m-d H:i:s')."') ";		
-		}
+		}//echo $mainObj->fromDate.'<br>';
 	}
-}
+}//exit();
 global $db;
 if($insertable_arr){
-	$insert_str = "INSERT INTO `te_actual_campaign`(`id`, `name`, `plan_date`, `total_cost`, `cpl`, `cpa`, `te_ba_batch_id_c`, `vendor_id`,`date_entered`,`date_modified`) VALUES ";
+	$insert_str = "INSERT INTO `te_actual_campaign`(`id`, `name`, `plan_date`,`leads`,`total_leads`,`actual_conversion`,`total_conversion`, `total_cost`, `cpl`, `cpa`, `te_ba_batch_id_c`, `vendor_id`,`date_entered`,`date_modified`) VALUES ";
 	$insert_str .= implode(',',$insertable_arr);
 	$db->query($insert_str);
 	//echo $insert_str.'<br>';
