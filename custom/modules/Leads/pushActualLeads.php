@@ -37,9 +37,12 @@ class pushActualLeads
 			u.id utm_id,
 			u.name AS utm_name,
 			b.id batch_id,
+			b.fees_inr,
 			v.id vendor_id,
 			cc.rate_c,
-			c.contract_type
+			c.contract_type,
+			c.performance_metrics,
+			cc.target_c
 			FROM te_utm u
 			INNER JOIN te_vendor_te_utm_1_c v ON v.te_vendor_te_utm_1te_utm_idb=u.id
 			INNER JOIN te_vendor tv ON tv.id=v.te_vendor_te_utm_1te_vendor_ida 
@@ -75,9 +78,20 @@ $insertable_sub_arr = '';
 
 if($result && $utm){
 	foreach($result as $key => $val){
-		$cpl = (isset($utm[$key]['rate_c']) && !empty($utm[$key]['rate_c'])) ? $utm[$key]['rate_c']  : 0;
-		$cpl_sum = (isset($utm[$key]['rate_c']) && !empty($utm[$key]['rate_c'])) ? $utm[$key]['rate_c'] * $val['total'] : 0;
-                $cpa = ($cpl_sum>0 && $val['converted']) ? $cpl_sum/$val['converted'] : 0;
+		if(isset($utm[$key]['performance_metrics']) && $utm[$key]['performance_metrics']=='CPA'){
+
+			$target_c = (!empty($utm[$key]['target_c'])) ? str_replace('%','',$utm[$key]['target_c']): 0;
+			$target_per = $target_c/100;
+
+			$cpl_sum = ($target_c>0 && !empty($utm[$key]['fees_inr']) && $val['converted']>0 && $target_per>0) ? ($utm[$key]['fees_inr'] * $val['converted']) * $target_per : 0;
+			$cpa = ($cpl_sum>0 && $val['converted']) ? $cpl_sum/$val['converted'] : 0;
+			$cpl = ($cpl_sum>0 && $val['total']) ? $cpl_sum/$val['total'] : 0;
+		}else{
+			$cpl = (isset($utm[$key]['rate_c']) && !empty($utm[$key]['rate_c'])) ? $utm[$key]['rate_c']  : 0;
+			$cpl_sum = (isset($utm[$key]['rate_c']) && !empty($utm[$key]['rate_c'])) ? $utm[$key]['rate_c'] * $val['total'] : 0;
+		        $cpa = ($cpl_sum>0 && $val['converted']) ? $cpl_sum/$val['converted'] : 0;
+		}
+		
 		if($cpl>0){
 			$id = create_guid();
 			$insertable_arr[] = " ('".$id."','".$key."','".$mainObj->fromDate."','".$cpl_sum."','".$cpl."','".$cpa."','".$utm[$key]['batch_id']."','".$utm[$key]['vendor_id']."','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."') ";
