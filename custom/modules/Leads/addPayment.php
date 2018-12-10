@@ -1152,6 +1152,67 @@ class addPaymentClass
 
                 //~ die;
             }
+			/************************** Mail 1Trigers Code 14Sep18 by MKG  Mail=> Not Interested ******************/
+				$useremail=$bean->email1;
+				if($bean->status_description=="Not Interested" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){
+				$template = "<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+							<p>We regret not having been able to help you with your query regarding ".$bean->batch_c.".</p>
+							<p>We do hope you will consider us to be your learning partner, should you decide to boost your skill set with online executive courses.</p>
+							<p>Talentedge partners with leading academic Indian & International institutes – such as IIMs, MICA, XLRI, JWMI, SPJIR etc. to bring to working professionals industry relevant executive courses online.</p>
+							<p> Delivered through a technologically advanced education platform, we offer Live & Interactive digital learning across popular domains.</p>
+							</br>
+							<p>Give us a call at +91-8376000600 or visit www.talentedge.in  and we will be happy to assist with </p><p>more information.</p>
+							<p>Regards,</p>
+							<p>Team Talentedge</p>";
+
+                $mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Team Talentedge", $template);
+				}
+				
+				/** Mail2 => Fallout: ***/
+				if($bean->status_description=="Fallout" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){
+				$template = "<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+								<p>We are sorry to see you go from " . $bean->batch_c ." .</p>  
+								<p>However, you can be sure that we will continue to bring to you the most industry relevant courses and do our best to help you fast-track your career.</p>
+								<p>We hope you will consider us to be your learning partner whenever you decide to take up online executive courses.</p>
+								<p>You can always give us a call at +91-8376000600 or visit www.talentedge.in ,if you need any assistance with your career.</p>
+								</br> 
+								<p>Regards,</p>
+								<p>Team Talentedge</p>";
+			    $mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Leaving us already?", $template);
+				}
+				/** Triger Mail Mail3> Next batch: ***/
+				if($bean->status_description=="Next Batch" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){
+					
+				$template="<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+							<p>We hate to see you go.</p>  
+							<p>While we will have other courses in this domain to offer, we cannot promise when this batch will
+return, or if it will with the same curriculum or class schedule. </p>
+							<p>Don't lose this great opportunity for you to transform your career. While the seats for the " . $bean->batch_c ." are filling up fast, we have a few left, if you still want to enrol in this batch.</p> 
+							<p>Give us a call at +91-8376000600 and we will be happy to assist with more information. </p>
+							</br> 
+							<p>Regards,</p>
+							<p>Team Talentedge</p>";
+				$mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Until next time, fare well!", $template);
+				}
+				/** Triger Mail Mail4> Auto-retired: ***/
+				
+				if($bean->status_description=="Auto Retired" && $bean->lead_source_types != "OO" || $bean->lead_source_types != "CO"){	
+				$template="<p>Hi " .$bean->first_name ." " .$bean->last_name .",</p>
+							<p>We tried reaching you a few times, regarding your query for " .$bean->batch_c . ", but could not get through. </p>
+							<p>Our courses have been rated to have a 92% satisfaction score by learners, with a referability rate of 78%.</p>
+							<p> Live & interactive online sessions for each course are scheduled to suit the convenience of working professionals like you.</p>
+							<p >Enrol now(to be linked with course page) to get certified from leading academic institutes.</p> <p>Give us a call back at +91-8376000600 for more information. </p>
+							</br>
+							<p>Regards,</p>
+							<p>Team Talentedge</p>";
+
+				$mail = new NetCoreEmail();
+                $mail->sendEmail($useremail, "Knock, knock! Are you there? ", $template);
+				}
+				/***End */		
         }
     }
 
