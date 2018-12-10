@@ -52,7 +52,7 @@ class pushActualLeads
 			u.name AS utm_name,
 			b.id batch_id,
 			b.fees_inr,
-			v.id vendor_id,
+			tv.id vendor_id,
 			cc.rate_c,
 			c.contract_type,
 			c.performance_metrics,
