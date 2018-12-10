@@ -1167,7 +1167,7 @@ class addPaymentClass
                 <p>Team Talentedge</p>";
 
                 $mail = new NetCoreEmail();
-                $mail->sendEmail($useremail, "Team Talentedge", $template);
+                $mail->sendEmail2($useremail, "Team Talentedge", $template);
             }
 
             /** Mail2 => Fallout: ** */
@@ -1182,7 +1182,7 @@ class addPaymentClass
                 <p>Regards,</p>
                 <p>Team Talentedge</p>";
                 $mail     = new NetCoreEmail();
-                $mail->sendEmail($useremail, "Leaving us already?", $template);
+                $mail->sendEmail2($useremail, "Leaving us already?", $template);
             }
             /** Triger Mail Mail3> Next batch: ** */
             if (($bean->lead_source_types != "OO" && $bean->lead_source_types != "CO") && $bean->status_description == "Next Batch")
@@ -1198,7 +1198,7 @@ return, or if it will with the same curriculum or class schedule. </p>
                 <p>Regards,</p>
                 <p>Team Talentedge</p>";
                 $mail     = new NetCoreEmail();
-                $mail->sendEmail($useremail, "Until next time, fare well!", $template);
+                $mail->sendEmail2($useremail, "Until next time, fare well!", $template);
             }
             /** Triger Mail Mail4> Auto-retired: ** */
             if (($bean->lead_source_types != "OO" && $bean->lead_source_types != "CO") && $bean->status_description == "Auto Retired")
@@ -1213,7 +1213,7 @@ return, or if it will with the same curriculum or class schedule. </p>
                 <p>Team Talentedge</p>";
 
                 $mail = new NetCoreEmail();
-                $mail->sendEmail($useremail, "Knock, knock! Are you there? ", $template);
+                $mail->sendEmail2($useremail, "Knock, knock! Are you there? ", $template);
             }
             /*             * *End */
         }
