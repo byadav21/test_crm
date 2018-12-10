@@ -15,6 +15,22 @@ class NetCoreEmail{
 		$apiresult = $this->callApi($data);
 		return trim($apiresult);
 	}
+	public function sendEmail2($to,$subject,$body){
+		$from = "admission@talentedge.in";
+		$fromname = "TalentEdge";
+		$api_key = "fbb5606b326850fce2fa335cdce8dc16";
+		$content = $body;
+		$data=array();
+		$data['subject']= $subject;
+		$data['fromname']= rawurlencode($fromname);
+		$data['api_key'] = $api_key;
+		$data['from'] = $from;
+		$data['content']= $content;
+		$data['recipients']= $to;		
+		$apiresult = $this->callApi($data);
+		return trim($apiresult);
+	}
+
 	public function callApi($api_input='') {
 		$result = $this->http_post_form("https://api.falconide.com/falconapi/web.send.rest",$api_input);
 		return $result;
