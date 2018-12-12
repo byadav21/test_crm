@@ -171,6 +171,17 @@ array (
             'label' => 'Discount In USD',
           ),
         ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'batch_cc_cue',
+            'label' => 'Cue Text',
+            'comment' => 'Cue info as batch attribute and view on CRM corresponding to every lead',
+            'studio' => 'visible',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

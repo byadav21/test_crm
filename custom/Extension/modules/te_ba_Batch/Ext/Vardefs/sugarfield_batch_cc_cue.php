@@ -2,7 +2,7 @@
 
 $dictionary['te_ba_Batch']['fields']['batch_cc_cue'] = array (
       'name' => 'batch_cc_cue',
-      'label' => 'LBL_BATCH_CC_CUE',
+      'label' => 'Cue Text',
       'type' => 'text',
       'comment' => 'Cue info as batch attribute and view on CRM corresponding to every lead',
       'rows' => 6,
