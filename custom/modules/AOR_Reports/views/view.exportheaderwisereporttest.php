@@ -188,7 +188,8 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
         // while CC team will use this
         if(in_array($current_user_id, $usersAccessId)){
             
-            $wherecl .= " AND  lead_source_types in ('CC','NULL','null','') ";
+            //$wherecl .= " AND  lead_source_types in ('CC','NULL','null','') ";
+             $wherecl .= " and ( leads.lead_source_types is NULL or leads.lead_source_types is null or leads.lead_source_types='CC' or leads.lead_source_types='') ";
         }
         
 
