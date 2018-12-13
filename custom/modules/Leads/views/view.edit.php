@@ -18,7 +18,9 @@ class LeadsViewEdit extends ViewEdit
         //print_r($_REQUEST);
         global $current_user, $app_strings,$db;
         
-        //$cue_txt ='';
+        $cue_txt ='N/A';
+            
+        
 
         $sql = "select batch_cc_cue from te_ba_batch where id='" . $this->bean->te_ba_batch_id_c . "' and deleted=0";
         $res = $db->query($sql);
@@ -31,7 +33,7 @@ class LeadsViewEdit extends ViewEdit
                 $cue_txt = $records['batch_cc_cue'];
             }
         }
-        echo '$cue_txt==='.$cue_txt;
+        //echo '$cue_txt==='.$cue_txt;
         
         $disableBatch = false;
         if (!is_admin($current_user) && !empty($this->bean->id))
@@ -81,10 +83,10 @@ class LeadsViewEdit extends ViewEdit
                 var name_to_value_array = popup_reply_data.name_to_value_array;
                 var id = name_to_value_array['id'];
                 var name = name_to_value_array['name'];
-                var cue_text = name_to_value_array['batch_cc_cue']; alert(cue_text);
+                //var cue_text = name_to_value_array['batch_cc_cue']; alert(cue_text);
                 document.getElementById('batch_c').value = name;
                 document.getElementById('te_ba_batch_id_c').value = id;
-                document.getElementById('cue_text').value = cue_text;
+                //document.getElementById('cue_text').value = cue_text;
             }
         </script>
         <?php
@@ -108,6 +110,7 @@ class LeadsViewEdit extends ViewEdit
         
         //added hidden box for lead check
         echo "<input type='hidden' id='CheckEditView' value='".$_REQUEST['record']."'>"; 
+        echo "<input type='hidden' id='cute_txt_id' value='".$cue_txt."'>"; 
         
         //print_r($GLOBALS['app_list_strings']['indian_states']); die;
 
@@ -142,14 +145,15 @@ class LeadsViewEdit extends ViewEdit
         ?>
         <style>.dcQuickEdit{display:none!important}</style>
         <script>
-
+            var jjj = $("#cute_txt_id").val();
+            var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="'+jjj+'" data-placement="bottom"></i>';
 
             $(document).ready(function () {
                 
-                var fff = '<?php echo $this->bean->id; ?>';
+                
                 $("#primary_address_country_label").text('');
                 
-                $("input#batch_c").after('&nbsp;<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="<?php echo $cue_txt; ?>" data-placement="bottom"></i>');;
+                $("input#batch_c").after(xxx);
                 
                 $("#primary_address_state").replaceWith('<select id="primary_address_state" name="primary_address_state" class="ProductDetailsQuantityTextBox"><?php
                                     $state_list='<option value="0">Select State</option>';
