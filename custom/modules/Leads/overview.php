@@ -25,12 +25,13 @@ $obj->save();*/
 		<p><label>BATCH</label> : 
 		<?php 
 		
-			$sql="SELECT te_ba_batch.name FROM `leads_cstm` inner join te_ba_batch on te_ba_batch.id=leads_cstm.`te_ba_batch_id_c` WHERE  `id_c`='".  $records['id'] ."'";
+			$sql="SELECT te_ba_batch.name,te_ba_batch.batch_cc_cue cue_text FROM `leads_cstm` inner join te_ba_batch on te_ba_batch.id=leads_cstm.`te_ba_batch_id_c` WHERE  `id_c`='".  $records['id'] ."'";
 			$batchrs=$db->query($sql);
 			$barches=$db->fetchByAssoc($batchrs);
 			echo $barches['name'];
+			$cue_text =  ($barches['cue_text']!='')? $barches['cue_text'] : 'N/A';
 		 ?> 
-		<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="<?php echo $barches['name']; ?>" data-placement="bottom"></i>
+		<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="<?php echo $cue_text; ?>" data-placement="bottom"></i>
 
 		</p>
 		
