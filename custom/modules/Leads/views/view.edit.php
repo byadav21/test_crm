@@ -16,11 +16,27 @@ class LeadsViewEdit extends ViewEdit
     function display()
     {
         //print_r($_REQUEST);
-        global $current_user, $app_strings;
+        global $current_user, $app_strings,$db;
+        
+        //$cue_txt ='';
+
+        $sql = "select batch_cc_cue from te_ba_batch where id='" . $this->bean->te_ba_batch_id_c . "' and deleted=0";
+        $res = $db->query($sql);
+
+        if ($db->getRowCount($res) > 0)
+        {
+            $records = $db->fetchByAssoc($res);
+            if ($records['batch_cc_cue'])
+            {
+                $cue_txt = $records['batch_cc_cue'];
+            }
+        }
+        echo '$cue_txt==='.$cue_txt;
+        
         $disableBatch = false;
         if (!is_admin($current_user) && !empty($this->bean->id))
         {
-
+            
             //check users
             self::$reporters[] = $this->bean->assigned_user_id;
             self::getUsers($this->bean->assigned_user_id);
@@ -65,8 +81,10 @@ class LeadsViewEdit extends ViewEdit
                 var name_to_value_array = popup_reply_data.name_to_value_array;
                 var id = name_to_value_array['id'];
                 var name = name_to_value_array['name'];
+                var cue_text = name_to_value_array['batch_cc_cue']; alert(cue_text);
                 document.getElementById('batch_c').value = name;
                 document.getElementById('te_ba_batch_id_c').value = id;
+                document.getElementById('cue_text').value = cue_text;
             }
         </script>
         <?php
@@ -127,7 +145,12 @@ class LeadsViewEdit extends ViewEdit
 
 
             $(document).ready(function () {
+                
+                var fff = '<?php echo $this->bean->id; ?>';
                 $("#primary_address_country_label").text('');
+                
+                $("input#batch_c").after('&nbsp;<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="<?php echo $cue_txt; ?>" data-placement="bottom"></i>');;
+                
                 $("#primary_address_state").replaceWith('<select id="primary_address_state" name="primary_address_state" class="ProductDetailsQuantityTextBox"><?php
                                     $state_list='<option value="0">Select State</option>';
                                     foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
