@@ -9,9 +9,9 @@ $obj->list_id=  $records['id'] ;
 $obj->save();*/
 ?>
 <style>
-.col-sm-4,.row{overflow:hidden;display:block}.col-sm-4,.row,button{display:block}.row{width:750px;font-family:sans-serif}.col-sm-4{width:45%;float:left;font-size:14px}.overview{background:#F6F6F6;padding:12px;margin:25px 11px;border-radius:5px;color:#595959}button{background-color:#232c42;border-radius:4px;-moz-border-radius:4px;border:none;color:#fff;cursor:pointer;font-size:15px!important;padding:5px 8px;float:right}h2{margin:0 0 14px;font-weight:400;font-size:22px;color:#666;text-transform:uppercase;padding-top:5px}  
+.col-sm-4,.row{overflow:hidden;display:block}.col-sm-4,.row,button{display:block}.row{width:750px;font-family:sans-serif}.col-sm-4{width:45%;float:left;font-size:14px}.overview{background:#F6F6F6;padding:12px;margin:25px 11px;border-radius:5px;color:#595959}button{background-color:#232c42;border-radius:4px;-moz-border-radius:4px;border:none;color:#fff;cursor:pointer;font-size:15px!important;padding:5px 8px;float:right}h2{margin:0 0 14px;font-weight:400;font-size:22px;color:#666;text-transform:uppercase;padding-top:5px} 
 </style>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body  >
 <div class="row" style="width:780px;margin: 0 14px">	
 	<h2> <?php echo $records['first_name'] . ' ' . $records['last_name'] ?> </h2>
@@ -25,11 +25,14 @@ $obj->save();*/
 		<p><label>BATCH</label> : 
 		<?php 
 		
-			$sql="SELECT te_ba_batch.name FROM `leads_cstm` inner join te_ba_batch on te_ba_batch.id=leads_cstm.`te_ba_batch_id_c` WHERE  `id_c`='".  $records['id'] ."'";
+			$sql="SELECT te_ba_batch.name,te_ba_batch.batch_cc_cue cue_text FROM `leads_cstm` inner join te_ba_batch on te_ba_batch.id=leads_cstm.`te_ba_batch_id_c` WHERE  `id_c`='".  $records['id'] ."'";
 			$batchrs=$db->query($sql);
 			$barches=$db->fetchByAssoc($batchrs);
 			echo $barches['name'];
+			$cue_text =  ($barches['cue_text']!='')? $barches['cue_text'] : 'N/A';
 		 ?> 
+		<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="<?php echo $cue_text; ?>" data-placement="bottom"></i>
+
 		</p>
 		
 		
@@ -45,3 +48,4 @@ $obj->save();*/
  
 </div>
 </body>
+

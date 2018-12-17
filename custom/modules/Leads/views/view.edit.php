@@ -16,11 +16,29 @@ class LeadsViewEdit extends ViewEdit
     function display()
     {
         //print_r($_REQUEST);
-        global $current_user, $app_strings;
+        global $current_user, $app_strings,$db;
+        
+        $cue_txt ='N/A';
+            
+        
+
+        $sql = "select batch_cc_cue from te_ba_batch where id='" . $this->bean->te_ba_batch_id_c . "' and deleted=0";
+        $res = $db->query($sql);
+
+        if ($db->getRowCount($res) > 0)
+        {
+            $records = $db->fetchByAssoc($res);
+            if ($records['batch_cc_cue'])
+            {
+                $cue_txt = $records['batch_cc_cue'];
+            }
+        }
+        //echo '$cue_txt==='.$cue_txt;
+        
         $disableBatch = false;
         if (!is_admin($current_user) && !empty($this->bean->id))
         {
-
+            
             //check users
             self::$reporters[] = $this->bean->assigned_user_id;
             self::getUsers($this->bean->assigned_user_id);
@@ -65,8 +83,10 @@ class LeadsViewEdit extends ViewEdit
                 var name_to_value_array = popup_reply_data.name_to_value_array;
                 var id = name_to_value_array['id'];
                 var name = name_to_value_array['name'];
+                //var cue_text = name_to_value_array['batch_cc_cue']; alert(cue_text);
                 document.getElementById('batch_c').value = name;
                 document.getElementById('te_ba_batch_id_c').value = id;
+                //document.getElementById('cue_text').value = cue_text;
             }
         </script>
         <?php
@@ -90,6 +110,7 @@ class LeadsViewEdit extends ViewEdit
         
         //added hidden box for lead check
         echo "<input type='hidden' id='CheckEditView' value='".$_REQUEST['record']."'>"; 
+        echo "<input type='hidden' id='cute_txt_id' value='".$cue_txt."'>"; 
         
         //print_r($GLOBALS['app_list_strings']['indian_states']); die;
 
@@ -124,10 +145,16 @@ class LeadsViewEdit extends ViewEdit
         ?>
         <style>.dcQuickEdit{display:none!important}</style>
         <script>
-
+            var jjj = $("#cute_txt_id").val();
+            var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="'+jjj+'" data-placement="bottom"></i>';
 
             $(document).ready(function () {
+                
+                
                 $("#primary_address_country_label").text('');
+                
+                $("input#batch_c").after(xxx);
+                
                 $("#primary_address_state").replaceWith('<select id="primary_address_state" name="primary_address_state" class="ProductDetailsQuantityTextBox"><?php
                                     $state_list='<option value="0">Select State</option>';
                                     foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
