@@ -346,6 +346,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_CC-TE'=>'CC-TE',
   'CC_Webinar'=>'Webinar',
   'CC_Click2Call'=>'Click2Call',
+  'CC_mark'=>'mark',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
@@ -402,7 +403,6 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_Ankels'=>'Ankels',
   'CO_BLRTE'  => 'BLRTE',
   'CO_NK'=>'NK', 
-  'CO_mark'=>'mark',
   'CO_AV'=> 'AV',
   'CO_MT'=>'MT',
 );
