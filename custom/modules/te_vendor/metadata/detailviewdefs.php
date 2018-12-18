@@ -83,7 +83,12 @@ array (
         3 => 
         array (
           0 => 'description',
-          1 => '',
+          1 => 
+          array (
+            'name' => 'source_type',
+            'label' => 'LBL_SOURCE_TYPE',
+            'comment' => 'source_type',
+          ),
         ),
       ),
     ),
