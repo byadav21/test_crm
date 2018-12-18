@@ -62,16 +62,20 @@ $dictionary['te_vendor']['fields']['SAP_CardCode'] =array (
        );
 $dictionary["te_vendor"]["fields"]["source_type"] = array(
             'name' => 'source_type',
-            'label' => 'LBL_SOURCE_TYPE',
+            //'label' => 'LBL_SOURCE_TYPE',
 	    'vname' => 'Source Type',
             'type' => 'enum',
             'help' => '',
             'comment' => 'source_type',
-	    'ext1' => 'lead_source_custom_dom_type', //maps to options - specify list name
+	    //'ext1' => 'lead_source_custom_dom_type', //maps to options - specify list name
             'mass_update' => false, 
             'required' => false, 
             'reportable' => true,
             'audited' => true,
             'importable' => 'true', 
             'duplicate_merge' => false,
+	     'len' => 100,
+		'size' => '20',
+		'options' => 'lead_source_custom_dom_type',
+		'studio' => 'visible',
         );
