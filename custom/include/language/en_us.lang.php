@@ -761,6 +761,7 @@ $GLOBALS['app_list_strings']['country_log']=array (
 );
 
 $GLOBALS['app_list_strings']['lead_source_custom_dom_type']=array (
+  ''   => '',
   'CC' => 'Call Center',
   'OO' => 'Channel',
   'CO' => 'Corporate',

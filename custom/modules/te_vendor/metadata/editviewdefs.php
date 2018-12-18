@@ -62,7 +62,8 @@ array (
         ),
         2 => 
         array (
-          0 => array (
+          0 => 
+          array (
             'name' => 'description',
             'displayParams' => 
             array (
@@ -76,6 +77,16 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_VENDOR_STATUS',
           ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'source_type',
+            'label' => 'LBL_SOURCE_TYPE',
+            'comment' => 'source_type',
+          ),
+          1 => '',
         ),
       ),
     ),

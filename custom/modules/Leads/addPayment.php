@@ -599,10 +599,9 @@ class addPaymentClass
         global $db,$current_user;
 
 		if((!isset($_SESSION['user_cp_vendor']) || empty($_SESSION['user_cp_vendor'])) && ($bean->utm_source_c)){
-			$sql="select v.name AS vendor,uvr.te_vendor_users_1users_idb AS userid from te_vendor AS v
+			$sql="select v.name AS vendor,v.source_type,uvr.te_vendor_users_1users_idb AS userid from te_vendor AS v
 					inner join te_vendor_users_1_c AS uvr on uvr.te_vendor_users_1te_vendor_ida=v.id and v.name='$bean->utm_source_c' 
 					where v.deleted=0 and uvr.deleted=0 limit 0,1"; 
-						
 			$results=$db->query($sql);
 			if($db->getRowCount($results)>0){
 				$vendor=$db->fetchByAssoc($results);
@@ -614,10 +613,14 @@ class addPaymentClass
 		
         $bean->email_add_c=$bean->email1;
         $bean->primary_vendor=$bean->vendor;
-        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']) && ($bean->lead_source_types !='CC'))
+        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
         {
-		    $bean->lead_source='OO'.'_'.strtoupper($_SESSION['user_cp_vendor']['vendor']);;
-		    $bean->lead_source_types='OO';
+		    $source_type = 'OO';
+		    if(!empty($vendor['source_type'])){
+			$source_type = $vendor['source_type'];
+		    }
+		    $bean->lead_source=$source_type.'_'.strtoupper($_SESSION['user_cp_vendor']['vendor']);;
+		    $bean->lead_source_types=$source_type;
         
 			
         }
