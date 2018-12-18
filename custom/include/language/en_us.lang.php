@@ -346,6 +346,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_CC-TE'=>'CC-TE',
   'CC_Webinar'=>'Webinar',
   'CC_Click2Call'=>'Click2Call',
+  'CC_mark'=>'mark',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
@@ -402,9 +403,37 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_Ankels'=>'Ankels',
   'CO_BLRTE'  => 'BLRTE',
   'CO_NK'=>'NK', 
-  'CO_mark'=>'mark',
-  'CO_AK'=> 'AK',
+  'CO_AV'=> 'AV',
+  'CO_MT'=>'MT',
 );
+
+$GLOBALS['app_list_strings']['lead_status_details_custom_dom']=array (
+  '' => '',
+  'Dead Number' => 'Dead Number',
+  'Wrong Number' => 'Wrong Number',
+  'Ringing Multiple Times'=> 'Ringing Multiple Times',
+  'Not Enquired'=> 'Not Enquired',
+  'Not Eligible'=> 'Not Eligible',
+  'Rejected'=> 'Rejected',
+  'Fallout'=> 'Fallout',
+  'Retired'=> 'Retired',
+  'Call Back'=> 'Call Back',
+  'Follow Up'=> 'Follow Up',
+  'New Lead'=> 'New Lead',
+  'Re-Enquired'=> 'Re-Enquired',
+  'Prospect'=> 'Prospect',
+  'Converted'=> 'Converted',
+  'Instalment Follow up'=> 'Instalment Follow up',
+  'Referral Follow up'=> 'Referral Follow up',
+  'Cross Sel'=> 'Cross Sel',
+  'Not Interested'=> 'Not Interested',
+  'Next Batch'=> 'Next Batch',
+  'Dropout'=> 'Dropout',
+  'Recycle'=> 'Recycle',
+  'wrap.timeout'=> 'wrap.timeout',
+);
+
+
 $app_list_strings['moduleList']['te_ExpensePO']='Expense Vouchers';
 $app_list_strings['moduleListSingular']['te_ExpensePO']='Expense Vouchers';
 $GLOBALS['app_list_strings']['list_cost_center']=array (

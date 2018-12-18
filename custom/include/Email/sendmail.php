@@ -16,7 +16,7 @@ class NetCoreEmail{
 		return trim($apiresult);
 	}
 	public function sendEmail2($to,$subject,$body){
-		$from = "admission@talentedge.in";
+		$from = "admissions@talentedge.in";
 		$fromname = "TalentEdge";
 		$api_key = "fbb5606b326850fce2fa335cdce8dc16";
 		$content = $body;
