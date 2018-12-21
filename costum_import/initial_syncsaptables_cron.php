@@ -217,10 +217,12 @@ class syncsaptables
                       JOIN `te_student_batch` `sb` ON `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`
                       JOIN `te_student_payment` `sp` ON `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`
                       JOIN `te_payment_details` `pd` ON `sp`.`id` = `pd`.`student_payment_id`
+                      JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
                       JOIN `leads` ON `sb`.`leads_id` = `leads`.`id`
                       LEFT JOIN `te_vendor` ON lower(`leads`.`vendor`) = lower(`te_vendor`.`name`)
                       WHERE `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0
+                        AND  lp.deleted    = 0 
                         AND `pd`.`date_entered` > '2018-03-31'
                       GROUP BY `sb`.`leads_id`
                       ORDER BY `pd`.`date_entered`";
@@ -272,11 +274,13 @@ class syncsaptables
                                        JOIN `te_ba_batch` on `sb`.`te_ba_batch_id_c` = `te_ba_batch`.`id`
                                       JOIN `te_pr_programs` `p` on `sb`.`te_pr_programs_id_c` = `p`.`id`
                                      JOIN `te_payment_details` `pd` on `sp`.`id` = `pd`.`student_payment_id`
+                                     JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
                                     JOIN `leads` `l` on `sb`.`leads_id` = `l`.`id`
                                    LEFT JOIN `te_in_institutes` `inst` on `sb`.`te_in_institutes_id_c` = `inst`.`id`
                              WHERE `inst`.`short_name` <> ''
                                     AND `p`.`short_name` <> '' 
                                     AND pd.deleted=0
+                                    AND lp.deleted=0 
                                     AND `te_ba_batch`.`BusinessSegment` <> ''
                                     AND `l`.`lead_source_types` <> ''
                              GROUP BY `sp`.`id`";
@@ -315,9 +319,11 @@ class syncsaptables
                             JOIN `te_student_batch` `sb` on `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`
                             JOIN `te_student_payment` `sp` on `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`
                             JOIN `te_payment_details` `pd` on `sp`.`id` = `pd`.`student_payment_id`
+                            JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
                             JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
                     WHERE `s`.`deleted` = 0
                         AND pd.deleted=0
+                        AND lp.deleted=0 
                         AND `leads`.`primary_address_state` <> ''
                         AND `leads`.`primary_address_state` <> 0 ";
         $leadObj = mysqli_query($conn, $query);
@@ -376,9 +382,11 @@ FROM (((((`te_student` `s`
          JOIN `te_student_batch` `sb` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`)))
         JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
        JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
+       JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
       JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
 WHERE   `sb`.`deleted` = 0
        AND `pd`.`deleted` = 0
+       AND lp.deleted=0 
        AND `pd`.`date_of_payment` > '2018-03-31'
        AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);
@@ -411,9 +419,11 @@ WHERE   `sb`.`deleted` = 0
                        JOIN `te_student_batch` `sb` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`)))
                        JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
                        JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
+                       JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE `pd`.`Pay_Status` = 0
                         AND pd.deleted=0
+                        AND lp.deleted=0 
                         AND `pd`.`date_of_payment` > '2018-03-31'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -447,8 +457,9 @@ WHERE   `sb`.`deleted` = 0
                               JOIN `te_student_batch` `sb` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`)))
                              JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
                             JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
+                            JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
                            JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-                     WHERE pd.deleted=0 AND `pd`.`date_of_payment` > '2018-04-31'";
+                     WHERE pd.deleted=0 AND lp.deleted=0  AND `pd`.`date_of_payment` > '2018-04-31'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
