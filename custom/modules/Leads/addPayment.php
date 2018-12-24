@@ -613,6 +613,10 @@ class addPaymentClass
 		}
 		
         $bean->email_add_c=$bean->email1;
+	if(!empty($bean->phone_mobile)){
+		$bean->phone_mobile=trim(str_replace('+91','',$bean->phone_mobile));
+	}
+	
         $bean->primary_vendor=$bean->vendor;
         if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']) && ($bean->lead_source_types !='CC'))
         {
