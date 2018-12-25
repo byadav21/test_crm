@@ -1,11 +1,10 @@
 <?php
 
-// Date: Created on : 27th FEB 2018
-// Last modified on:  20th SEP 2018
+// Date: Created on : 25th DEC 2018
+
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
-require_once('custom/include/Email/sendmail.php');
 require_once('custom/modules/AOR_Reports/pagination.php');
 require_once('custom/modules/AOR_Reports/UserInput.php');
 
@@ -23,8 +22,118 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
     {
         parent::SugarView();
         $this->objPagination = new pagination(60, 'page');
-        $this->_objInputs   = new UserInput();
+        $this->_objInputs    = new UserInput();
         //$this->_objInputs->syncSessions('exportHeaderWiseReport');
+    }
+
+    public function getAll()
+    {
+        global $sugar_config, $app_list_strings, $current_user, $db;
+        $leadSql = "SELECT id,phone_mobile FROM  `leads` WHERE LENGTH( phone_mobile ) <>10 AND neoxstatus=0";
+        //$leadSql = "SELECT id,phone_mobile FROM  `leads` WHERE LENGTH( phone_mobile ) <>10 AND neoxstatus=0";
+
+        $leadObj     = $db->query($leadSql);
+        $programList = '';
+        while ($row         = $db->fetchByAssoc($leadObj))
+        {
+            $programList[$row['id']]['id']           = $row['id'];
+            $programList[$row['id']]['phone_mobile'] = $row['phone_mobile'];
+        }
+        //echo "<pre>";print_r($programList);exit();
+        # Create heading
+        $data = "Id";
+        $data .= ",Mobile";
+        $data .= "\n";
+        foreach ($programList as $key => $councelor)
+        {
+            $data .= "\"" . $councelor['id'];
+            $data .= "\",\"" . $councelor['phone_mobile'];
+            $data .= "\"\n";
+        }
+        return $data;
+    }
+
+    public function JunkCount()
+    {
+        global $db;
+        $rowx = $db->fetchByAssoc($db->query("SELECT count(id) countx FROM  `leads` WHERE LENGTH( phone_mobile ) <>10 AND neoxstatus=0"));
+        return $rowx['countx'];
+    }
+
+    public function updateLeads()
+    {
+        global $sugar_config, $app_list_strings, $current_user, $db;
+        $headers  = array('id', 'dristi_campagain_id', 'dristi_API_id');
+        $headers2 = array();
+        $filename = $_FILES["file"]["tmp_name"];
+        if ($_FILES["file"]["size"] > 0)
+        {
+
+            $file     = fopen($filename, "r");
+            while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+            {
+                $headers2 = array($emapData[0], $emapData[1], $emapData[2]);
+                if ($headers == $headers2)
+                {
+                    
+                }
+                else
+                {
+                    $LeadID              = $emapData[0];
+                    $dristi_campagain_id = $emapData[1];
+                    $dristi_API_id       = $emapData[2];
+
+                    $bean = BeanFactory::getBean('Leads', $LeadID);
+
+
+                    if ($bean)
+                    {
+
+
+                        $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
+                        SET lead_id='$bean->id',
+                            last_status='$bean->status',
+                            last_sub_status='$bean->status_description',
+                            last_dristi_customer_id='$bean->dristi_customer_id',
+                            last_dristi_campagain_id='$bean->dristi_campagain_id',
+                            last_dristi_API_id='$bean->dristi_API_id',
+                            changed_dristi_campagain_id='$dristi_campagain_id',
+                            changed_dristi_API_id='$dristi_API_id',
+                            last_assigned_user_id='$bean->assigned_user_id',
+                            last_modified_user_id='$bean->modified_user_id',
+                            last_created_user_id='$bean->created_by',
+                            last_date_modified='$bean->date_modified',
+                            lead_pushed_by='$current_user->id',
+                        date_entered='" . date('Y-m-d H:i:s') . "'";
+
+                        $res = $db->query($AtmpLogSql);
+
+                        //print_r($bean); die;
+                        $bean->autoassign          = 'Yes';
+                        $bean->neoxstatus          = 0;
+                        $bean->assigned_user_id    = '';
+                        $bean->status_description  = 'New Lead';
+                        $bean->status              = 'Alive';
+                        $bean->dristi_campagain_id = $dristi_campagain_id;
+                        $bean->dristi_API_id       = $dristi_API_id;
+                        $bean->date_modified       = date('Y-m-d H:i:s');
+                        $bean->dristi_customer_id  = '';
+                        $checkSaveBean             = $bean->save();
+                    }
+                }
+            }
+
+            //throws a message if data successfully imported to mysql database from excel file
+            echo "<script type=\"text/javascript\">
+                        alert(\"CSV File has been successfully Imported.\");
+                        window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
+                     </script>";
+        }
+        else
+        {
+            echo 'dhechu2';
+            die;
+        }
     }
 
     public function display()
@@ -32,33 +141,37 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
         $current_user_id = $current_user->id;
-        $_export         = isset($this->_objInputs->post['export']) && $this->_objInputs->post['export'] == "Export";
-        $where           = "";
-        $wherecl         = "";
-       
+        $_export         = isset($this->_objInputs->post['export_queue_list']) && $this->_objInputs->post['export_queue_list'] == "export_queue_list";
+        $_export_junk    = isset($this->_objInputs->post['export_junk_leads']) && $this->_objInputs->post['export_junk_leads'] == "export_junk_leads";
+        $_update_leadset = isset($this->_objInputs->post['update_leadset']) && $this->_objInputs->post['update_leadset'] == "Upload";
 
 
+        $where   = "";
+        $wherecl = "";
 
-      
+
+        $junkCount = $this->JunkCount();
+
+
 
 
         $headers = array(
-            'l.id'=>'Lead ID',
-            'l.first_name'=>'First Name',
-            'l.last_name'=>'Last Name',
-            'l.phone_mobile'=>'Phone Mobile',
-            'l.phone_home'=>'Phone Home',
-            'l.phone_work'=>'Phone Work',
-            'l.phone_other'=>'Phone Other',
-            'e.email_address'=>'Email Address',
-            'dristi_campagain_id'=>'Dristi Campagain ID',
-            'dristi_api_id'=>'Drisit API ID',
-            'te_ba_batch.batch_code'=>'Batch Code',
-            'te_ba_batch.d_campaign_id'=>'Batch Campagain ID',
-            'te_ba_batch.d_lead_id'=>'Batch API ID');
-        
+            'l.id'                      => 'Lead ID',
+            'l.first_name'              => 'First Name',
+            'l.last_name'               => 'Last Name',
+            'l.phone_mobile'            => 'Phone Mobile',
+            'l.phone_home'              => 'Phone Home',
+            'l.phone_work'              => 'Phone Work',
+            'l.phone_other'             => 'Phone Other',
+            'e.email_address'           => 'Email Address',
+            'dristi_campagain_id'       => 'Dristi Campagain ID',
+            'dristi_api_id'             => 'Drisit API ID',
+            'te_ba_batch.batch_code'    => 'Batch Code',
+            'te_ba_batch.d_campaign_id' => 'Batch Campagain ID',
+            'te_ba_batch.d_lead_id'     => 'Batch API ID');
+
         $stringHeaders = implode(",", array_keys($headers));
-        
+
         $sqlPart = "
                FROM leads l
                  LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id
@@ -76,29 +189,21 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                    AND (l.assigned_user_id= 'NULL'
                         OR l.assigned_user_id =''
                         OR l.assigned_user_id IS NULL)
-                 ORDER BY concat (dristi_campagain_id,dristi_api_id) ";
+                 ORDER BY l.date_entered desc";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
-
-
-        $leadSql = "SELECT $stringHeaders " . $sqlPart;
-
-
-
-
+        $leadSql  = "SELECT $stringHeaders " . $sqlPart;
         if (!$_export)
         {
             $limit   = $this->objPagination->get_limit();
             $leadSql .= ' ' . $limit;
         }
-        //echo $leadSql;
         $rowCount = 0;
         $leadObj  = null;
 
-//      if ($Days >= 0 && $Days <= 93 && $wherecl != '') {
         if ($_export)
         {
-            $leadObj = $db->query($leadSql);
+            $leadObj  = $db->query($leadSql);
             $rowCount = $leadObj->num_rows;
             if ($rowCount <= 0)
             {
@@ -107,19 +212,17 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         }
         else
         {
-           
+
             if ($this->objPagination->get_page() == 1 || !isset($_SESSION['_row_count']))
             {
                 $objLeadsCount          = $db->query($countSql);
                 $row                    = $db->fetchByAssoc($objLeadsCount);
                 $rowCount               = $row['count'];
                 $_SESSION['_row_count'] = $rowCount;
-
             }
             else
             {
                 $rowCount = $_SESSION['_row_count'];
-                
             }
             $this->objPagination->set_total($rowCount);
             if ($rowCount <= 0)
@@ -132,44 +235,45 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
             }
         }
 
+        if ($_export_junk)
+        {
+
+
+            $data = $this->getAll();
+            ob_end_clean();
+            header("Content-type: application/csv");
+            header('Content-disposition: attachment;filename="JunkLeads_' . date('Y-m-d H:i:s') . '.csv";');
+            echo $data;
+            exit;
+        }
 
         if ($_export)
         {
-
-            $file     = "HeaderWiseLead_report";
-            $filename = $file . "_" . $from_date . "_" . $to_date;
-            global $current_user;
             global $db;
-            //$leadObj  = $db->query($leadSql);
-            # Create heading
             $data = "";
-            
-            $data .= $stringHeaders;
+            $data .= implode(",", $headers);
             $data .= "\n";
             ob_end_clean();
-
-
-            //$leadCount    = $rowCount; //count($leadList);
-            //$userName     = $current_user->user_name;
-            //$userID       = $current_user->id;
-            //$ExportRecord = array('user_name' => $userName, 'user_id' => $userID, 'Lead_Count' => $leadCount, 'from_date' => $from_date, 'to_date' => $to_date, 'Headers' => array_values($ExcelHeaders), 'selected_batch' => $selected_batch, 'selected_batch_code' => $selected_batch_code, 'selected_vendor' => $selected_vendor, 'selected_status' => $selected_status, 'selected_status_description' => $selected_status_description);
-            //$sql          = "insert into data_export_log set  source='Export tool',date_entered='" . date('Y-m-d H:i:s') . "',user_name='" . $userName . "',data_record='" . json_encode($ExportRecord) . "'";
-            //$db->query($sql);
-
-
             header("Content-type: application/csv");
-            header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
+            header('Content-disposition: attachment;filename="QueueListLeads_' . date('Y-m-d H:i:s') . '.csv";');
             echo $data;
-            while ($row = $db->fetchByAssoc($leadObj))
+            while ($row  = $db->fetchByAssoc($leadObj))
             {
-
                 $data = implode(',', $row);
                 $data .= "\n";
                 echo $data;
             }
-//            echo $data;
             exit;
-        } // End Of Export Func
+        }
+        if ($_update_leadset)
+        {
+            global $db, $current_user;
+            $this->updateLeads();
+            echo 'xx';
+            die;
+        }
+
+
         #PS @Pawan
 
         $page         = $this->objPagination->get_page();
@@ -199,6 +303,8 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("headers", $headers);
         $sugarSmarty->assign("tablewidth", count($headers) * 130);
+        $sugarSmarty->assign("QueueCount", $_SESSION['_row_count']);
+        $sugarSmarty->assign("junkCount", $junkCount);
 
         $sugarSmarty->assign("campaignIDs", $campaignID);
         $sugarSmarty->assign("leadIDs", $leadID);
