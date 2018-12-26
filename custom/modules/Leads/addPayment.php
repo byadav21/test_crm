@@ -646,6 +646,7 @@ class addPaymentClass
             $batch     = $bean->utm_term_c;
             $batch_id  = 0;
             $vendor_id = '';
+	    
             if ($batch)
             {
                 $sql = "select id from te_ba_batch  where batch_code='" . $batch . "' and deleted=0";
@@ -782,6 +783,10 @@ class addPaymentClass
             $bean->te_ba_batch_id_c = $batch_id['id'];
             
             if($bean->status == 'Converted')  $bean->converted_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
+	    if(isset($_REQUEST['status']) && $_REQUEST['status']=='Converted'){
+	    	$bean->status             = 'Converted';
+		$bean->status_description = 'Converted';	
+	    }
             
         }
         else
