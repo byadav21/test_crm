@@ -605,7 +605,10 @@ class addPaymentClass
 			$results=$db->query($sql);
 			if($db->getRowCount($results)>0){
 				$vendor=$db->fetchByAssoc($results);
+                                
+                                if($bean->assigned_user_id==''){
 				$bean->assigned_user_id = $vendor['userid'];
+                                }
 				$_SESSION['user_cp_vendor'] = $vendor;
 			}
 			
@@ -768,8 +771,10 @@ class addPaymentClass
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
              if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
-       		 {
+       		 {              
+                                if($bean->assigned_user_id ==''){
 		    		$bean->assigned_user_id = $current_user->id;
+                                }
 		    		$bean->autoassign == 'No';
         		 }
             $bean->vendor           = ($bean->utm_source_c)? $bean->utm_source_c : 'NA_VENDOR';   // $vendor_id['id'];
