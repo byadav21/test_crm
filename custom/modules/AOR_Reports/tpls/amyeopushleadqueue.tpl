@@ -64,7 +64,7 @@
             <div class="dashboard-block">
                 <h3 class="heading-title"><span>Push Leads</span></h3>
                 <form name="search_update" id="search_upload"  method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue" enctype="multipart/form-data">
-                    <div class="actions"><a href="index.php?entryPoint=pushLeads">
+                    <div class="actions"><a href="index.php?entryPoint=pushLeadsxxx">
                             <span class="glyphicon glyphicon-open"></span>
                     </a>
                     </div>
