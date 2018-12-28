@@ -620,7 +620,7 @@ class addPaymentClass
 	}
 	
         $bean->primary_vendor=$bean->vendor;
-        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
+        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']) && $vendor['source_type']=='OO')
         {
 		    $source_type = 'OO';
 		    if(!empty($vendor['source_type'])){
