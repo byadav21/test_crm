@@ -29,7 +29,7 @@ class leads_override extends Lead {
 	public function fetchVendorWithUsers($source){
 		 global $db;
 		 
-		$sql="select uvr.te_vendor_users_1users_idb as u_id,v.id AS vendor_id from te_vendor AS v
+		$sql="select uvr.te_vendor_users_1users_idb as u_id,v.id AS vendor_id,v.source_type from te_vendor AS v
 					inner join te_vendor_users_1_c AS uvr on uvr.te_vendor_users_1te_vendor_ida=v.id and v.name='$source' 
 					where v.deleted=0 and uvr.deleted=0 "; 
 						

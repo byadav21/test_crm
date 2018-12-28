@@ -20,6 +20,7 @@
 	$lead_d='';
 	$vendor_id = '';
 	$vendor_user_id = '';
+        $vendor_source_type = '';
 	
 	$lead_source_types = '';
    $lead_source = '';
@@ -33,6 +34,7 @@
 				   if($vendorUsers){
 				   	$vendor_id = $vendorUsers['vendor_id'];
 				   	$vendor_user_id = $vendorUsers['u_id'];
+                                        $vendor_source_type = $vendorUsers['source_type'];
 				   }
 				   			  
 				  }#echo "<pre>";print_r($vendorUsers);exit();
@@ -124,8 +126,8 @@
 
 		  if($vendor_id && $vendor_user_id){
 				$statusDetail='Follow Up';
-				$lead_source_types = 'OO';
-				$lead_source = 'OO'.'_'.strtoupper($source);
+				$lead_source_types = ($vendor_source_type) ? $vendor_source_type : "OO";
+				$lead_source = $lead_source_types.'_'.strtoupper($source);
 				$autoassign='No';
 				$assigned_user_id=$vendor_user_id;
 		  }
