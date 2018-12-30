@@ -168,7 +168,9 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
             'dristi_api_id'             => 'Drisit API ID',
             'te_ba_batch.batch_code'    => 'Batch Code',
             'te_ba_batch.d_campaign_id' => 'Batch Campagain ID',
-            'te_ba_batch.d_lead_id'     => 'Batch API ID');
+            'te_ba_batch.d_lead_id'     => 'Batch API ID',
+            'dul.resultTypeString'      => 'Status',
+            'dul.text'                  => 'Reaseon');
 
         $stringHeaders = implode(",", array_keys($headers));
 
@@ -180,6 +182,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                  LEFT JOIN email_addresses e ON el.email_address_id = e.id
                  LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
                  LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
+                 LEFT JOIN dristi_upload_logs dul on l.id= dul.lead_id
                  AND e.deleted=0
                  WHERE l.deleted =0
                    AND l.status_description= 'New Lead'
@@ -189,7 +192,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                    AND (l.assigned_user_id= 'NULL'
                         OR l.assigned_user_id =''
                         OR l.assigned_user_id IS NULL)
-                 ORDER BY l.date_entered desc";
+                 ORDER BY dul.dated,l.date_entered desc";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
         $leadSql  = "SELECT $stringHeaders " . $sqlPart;
