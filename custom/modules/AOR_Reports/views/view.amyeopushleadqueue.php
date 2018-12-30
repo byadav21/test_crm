@@ -29,7 +29,14 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
     public function getAll()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $leadSql = "SELECT id,phone_mobile FROM  `leads` WHERE LENGTH( phone_mobile ) <>10 AND neoxstatus=0";
+        $leadSql = "SELECT l.id,l.phone_mobile FROM  `leads` l WHERE LENGTH(l.phone_mobile) <>10 AND l.deleted =0
+                                            AND l.status_description= 'New Lead'
+                                            AND l.neoxstatus='0'
+                                            AND dristi_campagain_id !=''
+                                            AND dristi_api_id !=''
+                                            AND (l.assigned_user_id= 'NULL'
+                                                 OR l.assigned_user_id =''
+                                                 OR l.assigned_user_id IS NULL)";
         //$leadSql = "SELECT id,phone_mobile FROM  `leads` WHERE LENGTH( phone_mobile ) <>10 AND neoxstatus=0";
 
         $leadObj     = $db->query($leadSql);
@@ -56,7 +63,18 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
     public function JunkCount()
     {
         global $db;
-        $rowx = $db->fetchByAssoc($db->query("SELECT count(id) countx FROM  `leads` WHERE LENGTH( phone_mobile ) <>10 AND neoxstatus=0"));
+        $rowx = $db->fetchByAssoc($db->query("SELECT 
+                                            count(l.id) countx
+                                        FROM `leads` l
+                                        WHERE LENGTH(l.phone_mobile) <>10
+                                            AND l.deleted =0
+                                            AND l.status_description= 'New Lead'
+                                            AND l.neoxstatus='0'
+                                            AND dristi_campagain_id !=''
+                                            AND dristi_api_id !=''
+                                            AND (l.assigned_user_id= 'NULL'
+                                                 OR l.assigned_user_id =''
+                                                 OR l.assigned_user_id IS NULL)"));
         return $rowx['countx'];
     }
 
