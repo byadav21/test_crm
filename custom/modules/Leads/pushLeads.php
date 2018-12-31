@@ -82,7 +82,8 @@
         $data['properties'] = array('update.customer' => true, 'migrate.customer' => true);
         if (!$session)
         {
-            echo 'Invalid Session';
+            //echo 'Invalid Session';
+            echo json_encode(array('status'=>'error','current_queue'=>'Invalid Session, Login failed!')); 
             exit();
         }
 
