@@ -599,25 +599,35 @@ class addPaymentClass
         global $db,$current_user;
 
 		if((!isset($_SESSION['user_cp_vendor']) || empty($_SESSION['user_cp_vendor'])) && ($bean->utm_source_c)){
-			$sql="select v.name AS vendor,uvr.te_vendor_users_1users_idb AS userid from te_vendor AS v
+			$sql="select v.name AS vendor,v.source_type,uvr.te_vendor_users_1users_idb AS userid from te_vendor AS v
 					inner join te_vendor_users_1_c AS uvr on uvr.te_vendor_users_1te_vendor_ida=v.id and v.name='$bean->utm_source_c' 
 					where v.deleted=0 and uvr.deleted=0 limit 0,1"; 
-						
 			$results=$db->query($sql);
 			if($db->getRowCount($results)>0){
 				$vendor=$db->fetchByAssoc($results);
+                                
+                                if($bean->assigned_user_id==''){
 				$bean->assigned_user_id = $vendor['userid'];
+                                }
 				$_SESSION['user_cp_vendor'] = $vendor;
 			}
 			
 		}
 		
         $bean->email_add_c=$bean->email1;
+	if(!empty($bean->phone_mobile)){
+		$bean->phone_mobile=trim(str_replace('+91','',$bean->phone_mobile));
+	}
+	
         $bean->primary_vendor=$bean->vendor;
-        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']) && ($bean->lead_source_types !='CC'))
+        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']) && $vendor['source_type']=='OO')
         {
-		    $bean->lead_source='OO'.'_'.strtoupper($_SESSION['user_cp_vendor']['vendor']);;
-		    $bean->lead_source_types='OO';
+		    $source_type = 'OO';
+		    if(!empty($vendor['source_type'])){
+			$source_type = $vendor['source_type'];
+		    }
+		    $bean->lead_source=$source_type.'_'.strtoupper($_SESSION['user_cp_vendor']['vendor']);;
+		    $bean->lead_source_types=$source_type;
         
 			
         }
@@ -636,6 +646,7 @@ class addPaymentClass
             $batch     = $bean->utm_term_c;
             $batch_id  = 0;
             $vendor_id = '';
+	    
             if ($batch)
             {
                 $sql = "select id from te_ba_batch  where batch_code='" . $batch . "' and deleted=0";
@@ -761,8 +772,10 @@ class addPaymentClass
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
              if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
-       		 {
+       		 {              
+                                if($bean->assigned_user_id ==''){
 		    		$bean->assigned_user_id = $current_user->id;
+                                }
 		    		$bean->autoassign == 'No';
         		 }
             $bean->vendor           = ($bean->utm_source_c)? $bean->utm_source_c : 'NA_VENDOR';   // $vendor_id['id'];
@@ -770,6 +783,10 @@ class addPaymentClass
             $bean->te_ba_batch_id_c = $batch_id['id'];
             
             if($bean->status == 'Converted')  $bean->converted_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
+	    if(isset($_REQUEST['status']) && $_REQUEST['status']=='Converted'){
+	    	$bean->status             = 'Converted';
+		$bean->status_description = 'Converted';	
+	    }
             
         }
         else

@@ -53,5 +53,18 @@ class saveVendorClass
         $s = "UPDATE leads SET primary_vendor='".$primary_vendor."' WHERE id='" . $bean->id . "'";
         $GLOBALS['db']->query($s);
     }
+    if(!empty($bean->batch) && !empty($bean->id)){
+	$this->find_batch_by_batchCode($bean->batch,$bean->id);
+    }
+  }
+  function find_batch_by_batchCode($batch_code=NULL,$lead_id=NULL){
+	$batch_query = "SELECT id from te_ba_batch WHERE batch_code='".$batch_code."'";
+	$batch_res = $GLOBALS['db']->query($batch_query);
+	if ($GLOBALS['db']->getRowCount($batch_res) > 0){
+		$batch  = $GLOBALS['db']->fetchByAssoc($batch_res);
+		$s = "UPDATE leads_cstm SET te_ba_batch_id_c='".$batch['id']."' WHERE id_c='" . $lead_id . "'";
+		//echo $s;exit();
+        	$GLOBALS['db']->query($s);
+	}
   }
 }
