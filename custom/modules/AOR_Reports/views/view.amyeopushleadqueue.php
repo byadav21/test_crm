@@ -108,7 +108,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                     {
 
 
-                        echo $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
+                        $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
                         SET lead_id='$bean->id',
                             last_status='$bean->status',
                             last_sub_status='$bean->status_description',
@@ -140,7 +140,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                     }
                 }
             }
-                die;
+                
             //throws a message if data successfully imported to mysql database from excel file
             echo "<script type=\"text/javascript\">
                         alert(\"CSV File has been successfully Imported.\");

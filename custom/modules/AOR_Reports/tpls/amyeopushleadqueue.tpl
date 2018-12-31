@@ -217,11 +217,11 @@
                     async: true,
                     success: function (data) {
 
-                        if (status == 'success') {
+                        if (data.status == 'success') {
                             SUGAR.ajaxUI.hideLoadingPanel();
 
                             location.reload();
-                        } else if (status == 'error')
+                        } else if (data.status == 'error')
                         {
                             alert(data.current_queue);
                         }
