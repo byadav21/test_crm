@@ -203,7 +203,7 @@ SET                                                 lead_id='" . $allInserted[$k
             $request                 = $data;
             $data['customerRecords'] = [];
             $pushed                  = true;
-            echo '==' . $db->getRowCount($result);
+            
             $responses               = $api->uploadContacts($request, $currentCamp, $currentApi);
             if (isset($responses->beanResponse) && count($responses->beanResponse) > 0)
             {
@@ -219,7 +219,8 @@ SET                                                 lead_id='" . $allInserted[$k
                                        WHERE id = '" . $allInserted[$key]['id'] . "'";
                             $db->query($update);
                             $sql    = "INSERT INTO dristi_upload_logs
-SET                                                     lead_id='" . $allInserted[$key]['id'] . "',
+                                                        SET   
+                                                        lead_id='" . $allInserted[$key]['id'] . "',
                                                         dated='" . date('Y-m-d H:i:s') . "',
                                                         customer_id='" . $res->customerId . "',
                                                         resultTypeString='" . $res->resultTypeString . "',text='" . json_encode($res) . "'";
@@ -236,8 +237,9 @@ SET                                                     lead_id='" . $allInserte
                     {
                         try
                         {
-                            $sql = "INSERT INTO dristi_upload_logs
-SET                                             lead_id='" . $allInserted[$key]['id'] . "',
+                            $sql = "INSERT INTO dristi_upload_logs 
+                                                SET
+                                                lead_id='" . $allInserted[$key]['id'] . "',
                                                 dated='" . date('Y-m-d H:i:s') . "',
                                                 customer_id='" . $res->customerId . "',
                                                 resultTypeString='" . $res->resultTypeString . "',text='" . json_encode($res) . "'";
@@ -275,6 +277,7 @@ SET                                             lead_id='" . $allInserted[$key][
     }
 
 
-
+    
     $db->query("update cron_job set lead_id='0' where session_id='cron_job'");
+    echo json_encode(array('status'=>'success','current_queue'=>$db->getRowCount($result))); 
     exit();
