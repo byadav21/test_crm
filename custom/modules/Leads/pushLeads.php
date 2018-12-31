@@ -121,7 +121,7 @@
                                                         resultTypeString='" . $res->resultTypeString . "',text='" . json_encode($res) . "'";
                                 $db->query($sql);
                                 
-                                createLog('{createLog 1.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
+                                //createLog('{createLog 1.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
                                 
                             } catch (Exception $e)
                             {
@@ -139,7 +139,7 @@ SET                                                 lead_id='" . $allInserted[$k
                                                     resultTypeString='" . $res->resultTypeString . "',text='" . json_encode($res) . "'";
                                 $db->query($sql);
                                 
-                                createLog('{createLog 2.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
+                                //createLog('{createLog 2.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
                                 
                             } catch (Exception $e)
                             {
@@ -154,13 +154,13 @@ SET                                                 lead_id='" . $allInserted[$k
                     {
                         $sql = "INSERT INTO dristi_upload_logs
                                                 SET 
-                                                lead_id='" . $allInserted[$key]['id'] . "',
+                                                lead_id='" . $allInserted[0]['id'] . "',
                                                 dated='" . date('Y-m-d H:i:s') . "',
                                                 customer_id='error',
                                                 resultTypeString='error',text='" . json_encode($responses) . "'";
                         $db->query($sql);
                         
-                        createLog('{createLog 3.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
+                        //createLog('{createLog 3.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
                         
                     } catch (Exception $e)
                     {
@@ -225,7 +225,7 @@ SET                                                     lead_id='" . $allInserte
                                                         resultTypeString='" . $res->resultTypeString . "',text='" . json_encode($res) . "'";
                             $db->query($sql);
                             
-                            createLog('{createLog 4.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
+                            //createLog('{createLog 4.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
                             
                         } catch (Exception $e)
                         {
@@ -243,7 +243,7 @@ SET                                             lead_id='" . $allInserted[$key][
                                                 resultTypeString='" . $res->resultTypeString . "',text='" . json_encode($res) . "'";
                             $db->query($sql);
                             
-                             createLog('{createLog 5.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
+                             //createLog('{createLog 5.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
                              
                         } catch (Exception $e)
                         {
@@ -258,13 +258,13 @@ SET                                             lead_id='" . $allInserted[$key][
                 {
                     $sql = "INSERT INTO dristi_upload_logs
                                         SET 
-                                        lead_id='" . $allInserted[$key]['id'] . "',
+                                        lead_id='" . $allInserted[0]['id'] . "',
                                         dated='" . date('Y-m-d H:i:s') . "',
                                         customer_id='error',
                                         resultTypeString='error',text='" . json_encode($responses) . "'";
                     $db->query($sql);
                     
-                     createLog('{createLog 6.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
+                     //createLog('{createLog 6.}', 'pushLead_xx_'.date('Y-m-d').'.txt', $sql, json_encode($res));
                      
                 } catch (Exception $e)
                 {
