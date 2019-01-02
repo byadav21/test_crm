@@ -135,7 +135,7 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
         $fetch = "SELECT tbl1.id,
                     tbl1.salutation,
                     tbl1.phone_mobile,
-                    tbl4.email_add_c email_address,
+                    tbl4.email_address,
                     tbl1.assigned_user_id,
                     tbl1.first_name,
                     tbl1.last_name,
@@ -146,12 +146,14 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
                     tbl2.phone_mobile
              FROM leads AS tbl1
              LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id
-             LEFT JOIN leads_cstm tbl4 ON tbl1.id= tbl4.id_c
-             WHERE " . $where . " $whereNew LIMIT 0,100";
+             INNER JOIN email_addr_bean_rel AS tbl3 ON tbl1.id=tbl3.bean_id
+             INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id
+             WHERE " . $where . " $whereNew
+             LIMIT 0, 100";
         
         $row = $db->query($fetch);
         
-         createLog('{createLog 1.}', 'search_leads_xx_'.date('Y-m-d').'.txt', $fetch,$row);
+        //createLog('{createLog 1.}', 'search_leads_xx_'.date('Y-m-d').'.txt', $fetch,$row);
         
         if ($row->num_rows > 0) {
 
