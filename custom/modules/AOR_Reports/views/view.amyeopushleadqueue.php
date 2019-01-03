@@ -181,7 +181,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
             'l.phone_home'              => 'Phone Home',
             'l.phone_work'              => 'Phone Work',
             'l.phone_other'             => 'Phone Other',
-            'e.email_address'           => 'Email Address',
+            'leads_cstm.email_add_c'           => 'Email Address',
             'dristi_campagain_id'       => 'Dristi Campagain ID',
             'dristi_api_id'             => 'Drisit API ID',
             'te_ba_batch.batch_code'    => 'Batch Code',
@@ -194,14 +194,10 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         $sqlPart = "
                FROM leads l
-                 LEFT JOIN email_addr_bean_rel el ON l.id = el.bean_id
-                 AND el.bean_module='Leads'
-                 AND el.deleted=0
-                 LEFT JOIN email_addresses e ON el.email_address_id = e.id
                  LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
                  LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
                  LEFT JOIN dristi_upload_logs dul on l.id= dul.lead_id
-                 AND e.deleted=0
+                 
                  WHERE l.deleted =0
                    AND l.status_description= 'New Lead'
                    AND l.neoxstatus='0'
@@ -210,7 +206,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                    AND (l.assigned_user_id= 'NULL'
                         OR l.assigned_user_id =''
                         OR l.assigned_user_id IS NULL)
-                 ORDER BY dul.dated,l.date_entered desc";
+                 group by l.id ORDER BY dul.dated,l.date_entered desc";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
         $leadSql  = "SELECT $stringHeaders " . $sqlPart;
