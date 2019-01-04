@@ -49,7 +49,7 @@
                      }
                       else
                      {
-                            $batchQ = "SELECT b.id,b.name,b.d_campaign_id,b.d_lead_id,b.lastCampagain FROM  `te_ba_batch`  b WHERE b.`batch_code`='".$term."'"; 
+                            $batchQ = "SELECT b.id,b.name,b.d_campaign_id,b.d_lead_id,b.lastCampagain FROM  `te_ba_batch`  b WHERE b.deleted=0 and b.`batch_code`='".$term."'"; 
                             $rex = $GLOBALS['db']->query($batchQ);
                             $BatchRow = $GLOBALS['db']->fetchByAssoc($rex);
                             $batchid=$BatchRow['id'];
