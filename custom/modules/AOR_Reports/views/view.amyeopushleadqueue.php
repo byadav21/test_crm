@@ -170,7 +170,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         $junkCount = $this->JunkCount();
 
-
+        
 
 
         $headers = array(
@@ -209,6 +209,9 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                  group by l.id ORDER BY dul.dated,l.date_entered desc";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
+        
+        $QueueCount = $db->getRowCount($db->query($countSql));
+        
         $leadSql  = "SELECT $stringHeaders " . $sqlPart;
         if (!$_export)
         {
@@ -320,7 +323,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("headers", $headers);
         $sugarSmarty->assign("tablewidth", count($headers) * 130);
-        $sugarSmarty->assign("QueueCount", $_SESSION['_row_count']);
+        $sugarSmarty->assign("QueueCount", $QueueCount);
         $sugarSmarty->assign("junkCount", $junkCount);
 
         $sugarSmarty->assign("campaignIDs", $campaignID);
