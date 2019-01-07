@@ -391,20 +391,8 @@ $(document).ready(function() {ldelim}
                             }
                             
                    
-                     $('#disposition_reason>option:not(:first)').hide();
+                     
                   }
-		  else if($("#status_description").val()=='Not Eligible'){
-
-		  }
-		  else if($("#status_description").val()=='Not Interested'){
-
-		  }
-		  else if($("#status_description").val()=='Fallout'){
-
-		  }
-		  else{
-			$('#disposition_reason>option:not(:first)').hide();
-		  }alert('hi');
             
                 });
                 
