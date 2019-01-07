@@ -64,3 +64,25 @@ $dictionary["Lead"]["fields"]["call_object_id"] = array (
   'type' => 'text',
   
 );
+
+
+$dictionary["Lead"]["fields"]["disposition_reason"] = array (
+  	    'name' => 'disposition_reason',
+            //'label' => 'LBL_SOURCE_TYPE',
+	    'vname' => 'Disposition Reason',
+            'type' => 'enum',
+            'help' => '',
+            'comment' => 'source_type',
+	    //'ext1' => 'lead_source_custom_dom_type', //maps to options - specify list name
+            'mass_update' => false, 
+            'required' => false, 
+            'reportable' => true,
+            'audited' => true,
+            'importable' => 'true', 
+            'duplicate_merge' => false,
+	     'len' => 100,
+		'size' => '20',
+		'options' => 'leads_disposition_reason_list',
+		'studio' => 'visible',
+  
+);

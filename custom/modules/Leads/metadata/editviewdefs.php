@@ -215,6 +215,16 @@ array (
         array (
           0 => 
           array (
+            'name' => 'disposition_reason',
+            'comment' => 'source_type',
+            'studio' => 'visible',
+            'label' => 'Disposition Reason',
+          ),
+        ),
+        15 => 
+        array (
+          0 => 
+          array (
             'name' => 'note',
             'label' => 'LBL_NOTE',
           ),
@@ -224,7 +234,7 @@ array (
             'label' => 'LBL_ASSIGNED_TO',
           ),
         ),
-        15 => 
+        16 => 
         array (
           0 => 
           array (
@@ -237,7 +247,7 @@ array (
             'label' => 'LBL_DATEOFCALLBACK',
           ),
         ),
-        16 => 
+        17 => 
         array (
           0 => 
           array (
