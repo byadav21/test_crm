@@ -5,7 +5,7 @@
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
 
-                  {*  <tr>
+                   <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="From Date">From Date:</label>
                         </td>
@@ -20,31 +20,14 @@
                             <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
-                    </tr>*}
-                    <tr>
-
-                        {*<td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Status">Batch Status:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            
-                        </td>
-
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Code">Batch Code:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            
-                        </td>*}
-
                     </tr>
 
                  
 
                     <tr>
                         <td class="sumbitButtons" colspan="3">
-                            {*<input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
-                            <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
+                            <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
+                            {*<input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
                                     return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">*}
                            <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
                         </td>
@@ -288,36 +271,6 @@
                 dateStr: "",
                 step: 1,
                 weekNumbers: false,
-            });
-                function getAjax(target, arr) {
-                $.ajax({
-                    beforeSend: function (request)
-                    {
-                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
-                    },
-                    url: "index.php?entryPoint=reportsajax",
-                    data: {action: target, param: arr},
-                    dataType: "html",
-                    type: "POST",
-                    async: true,
-                    success: function (data) {
-                        $('#' + target).html('');
-                        $('#' + target).html(data);
-                        $('select[multiple]').multiselect('reload');
-
-                    }
-                });
-            }
-            $(document).ready(function () {
-
-                $("#status").change(function () {
-                    var arg = $('#status').val();
-                    getAjax('batch_code', arg);
-                });
-               
-                //getStateByZone();
-                
-            
             });
 
 

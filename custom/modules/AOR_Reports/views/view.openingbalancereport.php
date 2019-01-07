@@ -89,11 +89,13 @@ class AOR_ReportsViewopeningbalancereport extends SugarView
         if ($from_date)
         {
             $_SESSION['ob_from_date'] = $from_date;
+	    $selected_from_date = $from_date; 
 	    $wherecl .= " AND  DATE(p.date_of_payment ) >='".$from_date."' ";
         }
 	if ($to_date)
         {
             $_SESSION['ob_to_date'] = $to_date;
+	    $selected_to_date = $to_date; 
 	    $wherecl .= " AND  DATE(p.date_of_payment ) <='".$to_date."' ";
         }
 
@@ -102,13 +104,6 @@ class AOR_ReportsViewopeningbalancereport extends SugarView
 
         $paymentList = array();
         $StatusList  = array();
-
-
-        if (!empty($selected_batch_code))
-        {
-
-            $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch_code) . "')";
-        }
 
 		$leadSql = "SELECT l.id,lc.email_add_c,l.first_name,l.last_name,l.phone_mobile,l.converted_date,l.vendor,lc.te_ba_batch_id_c,b.name AS batch,b.batch_code,b.fees_inr,p.id AS payment_id,p.`payment_source`,p.`date_of_payment` , p.`amount` , p.`invoice_number` , p.`invoice_order_number` , p.`tax_type` , p.`tax` , p.`country` , DATE_FORMAT( p.date_of_payment,'%b')Month , 
 		CASE WHEN MONTH( l.`converted_date` ) >=4
