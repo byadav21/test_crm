@@ -188,6 +188,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     }
     $module_menu[] = array('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=debtorreport', "Debtor Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=openingbalancereport', "GSV/Opening Balance Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=Leads&action=junkleadlog ', "Leads Snag List", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=summarised', "Summarised GSV", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
