@@ -603,6 +603,7 @@ class LeadsViewEdit extends ViewEdit
 		});
 		$('#disposition_reason').closest('tr').hide();
 		$("#status_description").trigger('change');
+		//if($("#disposition_reason option:selected").length==0)
             });
             function triggerPaymentType() {
                 $("#payment_type").change(function () {

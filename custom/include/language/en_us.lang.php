@@ -10,7 +10,7 @@ $GLOBALS['app_list_strings']['batch_status_list']=array (
   'closed' => 'Closed',
 );
 $GLOBALS['app_list_strings']['leads_disposition_reason_list']=array (
-  '' => '',
+  '' => 'Select Reason',
   'language_barrier' => 'Language Barrier',
   'eligibility_criteria' => 'Eligibility Criteria',
   'fees_high' => 'Fees High',
