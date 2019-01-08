@@ -141,12 +141,13 @@ class LeadsViewEdit extends ViewEdit
         else
         {
             $this->ss->assign('from_pusher', '0');
-        }
+        }$dispo_reason=$this->bean->disposition_reason;
         ?>
         <style>.dcQuickEdit{display:none!important}</style>
         <script>
             var jjj = $("#cute_txt_id").val();
             var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="'+jjj+'" data-placement="bottom"></i>';
+	    var dispo_reason = '<?php echo $dispo_reason; ?>';
 
             $(document).ready(function () {
                 
@@ -603,7 +604,9 @@ class LeadsViewEdit extends ViewEdit
 		});
 		$('#disposition_reason').closest('tr').hide();
 		$("#status_description").trigger('change');
-
+		if(dispo_reason){
+			$("#disposition_reason option[value='"+dispo_reason+"']").prop("selected", true);
+		}
 		$("#status").change(function () {
 			$('#disposition_reason').closest('tr').hide();
 			$("#disposition_reason option:selected").prop("selected", false);
