@@ -255,7 +255,13 @@ array (
             'studio' => 'visible',
             'label' => 'Parrent Lead',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'disposition_reason',
+            'comment' => 'source_type',
+            'studio' => 'visible',
+            'label' => 'Disposition Reason',
+          ),
         ),
       ),
     ),
