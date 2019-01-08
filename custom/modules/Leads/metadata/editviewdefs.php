@@ -213,7 +213,8 @@ array (
         ),
         14 => 
         array (
-          0 => 
+          0 => '',
+          1 => 
           array (
             'name' => 'disposition_reason',
             'comment' => 'source_type',
