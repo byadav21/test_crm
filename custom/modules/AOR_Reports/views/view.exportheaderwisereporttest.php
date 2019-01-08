@@ -236,6 +236,7 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
             'leads.dristi_campagain_id'           => 'Campagain ID',
             'leads.dristi_API_id'                 => 'API_id (LeadID)',
             'leads.neoxstatus'                    => 'Ameyo Status',
+	    'leads.disposition_reason'            => 'Disposition Reason',
             'leads.deleted'                       => 'Deleted'
 //            'leads.comment'                       => 'Comment',
 //            'leads.note'                          => 'Note'

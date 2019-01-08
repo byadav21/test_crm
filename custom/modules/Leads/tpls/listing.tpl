@@ -398,7 +398,9 @@
 
                                          </p>	
 						
-						 
+					{if $rowData.DISPOSITION_REASON!='Select Reason'} 
+						<p style="display:inline"><strong>Disposition Reason:</strong> {$rowData.DISPOSITION_REASON}</p>
+					{/if} 
 				  </div>
 			</div>
 		   {/foreach} 

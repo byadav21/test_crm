@@ -58,6 +58,14 @@ array (
     'label' => 'LBL_INDIVIDUAL_ID',
     'width' => '10%',
   ),
+  'DISPOSITION_REASON' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'Disposition Reason',
+    'width' => '10%',
+    'default' => true,
+  ),
   'INSTITUTE' => 
   array (
     'type' => 'varchar',

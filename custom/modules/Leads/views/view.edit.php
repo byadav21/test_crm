@@ -141,12 +141,13 @@ class LeadsViewEdit extends ViewEdit
         else
         {
             $this->ss->assign('from_pusher', '0');
-        }
+        }$dispo_reason=$this->bean->disposition_reason;
         ?>
         <style>.dcQuickEdit{display:none!important}</style>
         <script>
             var jjj = $("#cute_txt_id").val();
             var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="'+jjj+'" data-placement="bottom"></i>';
+	    var dispo_reason = '<?php echo $dispo_reason; ?>';
 
             $(document).ready(function () {
                 
@@ -576,7 +577,40 @@ class LeadsViewEdit extends ViewEdit
                     }
 
                 })
-
+		$("#status_description").change(function () {
+			$("#disposition_reason option").hide();
+			if($(this).val()=='Not Eligible'){
+				$("#disposition_reason option[value='language_barrier']").show();
+				$("#disposition_reason option[value='eligibility_criteria']").show();
+				$('#disposition_reason').closest('tr').show();
+			}
+			else if($(this).val()=='Not Interested'){
+				$("#disposition_reason option[value='fees_high']").show();
+				$("#disposition_reason option[value='offline_courses']").show();
+				$("#disposition_reason option[value='long_duration']").show();
+				$("#disposition_reason option[value='syllabus']").show();
+				$('#disposition_reason').closest('tr').show();
+			}
+			else if($(this).val()=='Fallout'){
+				$("#disposition_reason option[value='finance_issue']").show();
+				$("#disposition_reason option[value='time_constraint']").show();
+				$("#disposition_reason option[value='enrolled_somewhere_else']").show();
+				$('#disposition_reason').closest('tr').show();
+			}
+			else{
+				$('#disposition_reason').closest('tr').hide();
+			}
+			$("#disposition_reason option:selected").prop("selected", false);
+		});
+		$('#disposition_reason').closest('tr').hide();
+		$("#status_description").trigger('change');
+		if(dispo_reason){
+			$("#disposition_reason option[value='"+dispo_reason+"']").prop("selected", true);
+		}
+		$("#status").change(function () {
+			$('#disposition_reason').closest('tr').hide();
+			$("#disposition_reason option:selected").prop("selected", false);
+		});
             });
             function triggerPaymentType() {
                 $("#payment_type").change(function () {

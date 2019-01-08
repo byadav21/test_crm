@@ -111,6 +111,10 @@
 						   {/if}
 					
 						  <p> <label>Status Detail  </label>: {$overview.statusDetail}</p>
+						  	{if !empty($overview.disposition_reason)} 
+								<p style="display:inline"><strong>Disposition Reason:</strong> {$overview.disposition_reason}</p>
+							{/if}
+							
 						  {if !empty($overview.note)} 
 								<small>Note: {$overview.note}</small>
 						  {/if}

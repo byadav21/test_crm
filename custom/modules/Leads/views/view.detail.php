@@ -615,6 +615,11 @@ if(!isset($_SESSION['referral'])){
 		$overview['programe'] = $this->bean->program;
 		$overview['status'] = $this->bean->status;
 		$overview['statusDetail'] = $this->bean->status_description;
+		$dr = $this->bean->disposition_reason;
+		if(!empty($this->bean->disposition_reason)){
+			$dr  = $GLOBALS['app_list_strings']['leads_disposition_reason_list'][$this->bean->disposition_reason];
+		}
+		$overview['disposition_reason'] = $dr;
 		$overview['dated'] = $this->bean->date_entered;//DATE_ENTERED;
 		//print_r($overview);die;
 		$this->dv->ss->assign('overview',$overview);
