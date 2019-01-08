@@ -280,6 +280,7 @@
                 'leads.neoxstatus'                    => 'Ameyo Status',
                 'leads.deleted'                       => 'Deleted',
                 'leads.comment'                       => 'Comment',
+		'leads.disposition_reason'            => 'Disposition Reason',
                 'leads.note'                          => 'Note');
 
             $StatusDetails = array(
