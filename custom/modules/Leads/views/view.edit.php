@@ -581,7 +581,8 @@ class LeadsViewEdit extends ViewEdit
 			$("#disposition_reason option").hide();
 			if($(this).val()=='Not Eligible'){
 				$("#disposition_reason option[value='language_barrier']").show();
-				$("#disposition_reason option[value='eligibility_criteria']").show();
+				$("#disposition_reason option[value='eligibility_criteria_education']").show();
+                                $("#disposition_reason option[value='eligibility_criteria_experience']").show();
 				$('#disposition_reason').closest('tr').show();
 			}
 			else if($(this).val()=='Not Interested'){
@@ -589,6 +590,10 @@ class LeadsViewEdit extends ViewEdit
 				$("#disposition_reason option[value='offline_courses']").show();
 				$("#disposition_reason option[value='long_duration']").show();
 				$("#disposition_reason option[value='syllabus']").show();
+                                
+                                $("#disposition_reason option[value='time_constraint']").show();
+                                $("#disposition_reason option[value='enrolled_elsewhere']").show();
+                                $("#disposition_reason option[value='customer_hang_up']").show();
 				$('#disposition_reason').closest('tr').show();
 			}
 			else if($(this).val()=='Fallout'){
