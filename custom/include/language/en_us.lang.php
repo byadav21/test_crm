@@ -11,22 +11,22 @@ $GLOBALS['app_list_strings']['batch_status_list']=array (
 );
 $GLOBALS['app_list_strings']['leads_disposition_reason_list']=array (
   '' => 'Select Reason',
-  'language_barrier' => 'Language Barrier',
-  'eligibility_criteria_education' => 'Eligibility Criteria – Education',
-  'eligibility_criteria_experience' => 'Eligibility Criteria – Experience',
+  'Language Barrier' => 'Language Barrier',
+  'Eligibility Criteria – Education' => 'Eligibility Criteria – Education',
+  'Eligibility Criteria – Experience' => 'Eligibility Criteria – Experience',
     
-  'fees_high' => 'Fees High',
-  'offline_courses' => 'Offline courses',
-  'long_duration' => 'Long duration',
-  'syllabus' => 'Syllabus',
+  'Fees High' => 'Fees High',
+  'Offline courses' => 'Offline courses',
+  'Long duration' => 'Long duration',
+  'Syllabus' => 'Syllabus',
   
-  'time_constraint' => 'Time Constraint',
-  'enrolled_elsewhere' => 'Enrolled Elsewhere',
-  'customer_hang_up' => 'Customer Hang Up',
+  'Time Constraint' => 'Time Constraint',
+  'Enrolled Elsewhere' => 'Enrolled Elsewhere',
+  'Customer Hang Up' => 'Customer Hang Up',
     
-  'finance_issue' => 'Finance Issue',
-  'time_constraint' => 'Time constraint',
-  'enrolled_somewhere_else' => 'Enrolled somewhere else',
+  'Finance Issue' => 'Finance Issue',
+  'Time constraint' => 'Time constraint',
+  'Enrolled somewhere else' => 'Enrolled somewhere else',
 );
 $GLOBALS['app_list_strings']['lead_status_dom']=array (
   '' => '',

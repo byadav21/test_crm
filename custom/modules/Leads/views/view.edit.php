@@ -580,26 +580,26 @@ class LeadsViewEdit extends ViewEdit
 		$("#status_description").change(function () {
 			$("#disposition_reason option").hide();
 			if($(this).val()=='Not Eligible'){
-				$("#disposition_reason option[value='language_barrier']").show();
-				$("#disposition_reason option[value='eligibility_criteria_education']").show();
-                                $("#disposition_reason option[value='eligibility_criteria_experience']").show();
+				$("#disposition_reason option[value='Language Barrier']").show();
+				$("#disposition_reason option[value='Eligibility Criteria – Education']").show();
+                                $("#disposition_reason option[value='Eligibility Criteria – Experience']").show();
 				$('#disposition_reason').closest('tr').show();
 			}
 			else if($(this).val()=='Not Interested'){
-				$("#disposition_reason option[value='fees_high']").show();
-				$("#disposition_reason option[value='offline_courses']").show();
-				$("#disposition_reason option[value='long_duration']").show();
-				$("#disposition_reason option[value='syllabus']").show();
+				$("#disposition_reason option[value='Fees High']").show();
+				$("#disposition_reason option[value='Offline courses']").show();
+				$("#disposition_reason option[value='Long duration']").show();
+				$("#disposition_reason option[value='Syllabus']").show();
                                 
-                                $("#disposition_reason option[value='time_constraint']").show();
-                                $("#disposition_reason option[value='enrolled_elsewhere']").show();
-                                $("#disposition_reason option[value='customer_hang_up']").show();
+                                $("#disposition_reason option[value='Time Constraint']").show();
+                                $("#disposition_reason option[value='Enrolled Elsewhere']").show();
+                                $("#disposition_reason option[value='Customer Hang Up']").show();
 				$('#disposition_reason').closest('tr').show();
 			}
 			else if($(this).val()=='Fallout'){
-				$("#disposition_reason option[value='finance_issue']").show();
-				$("#disposition_reason option[value='time_constraint']").show();
-				$("#disposition_reason option[value='enrolled_somewhere_else']").show();
+				$("#disposition_reason option[value='Finance Issue']").show();
+				$("#disposition_reason option[value='Time constraint']").show();
+				$("#disposition_reason option[value='Enrolled somewhere else']").show();
 				$('#disposition_reason').closest('tr').show();
 			}
 			else{
