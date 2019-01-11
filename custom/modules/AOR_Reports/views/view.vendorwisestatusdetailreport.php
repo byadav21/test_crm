@@ -77,7 +77,8 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             'b80c8a52-5174-3d92-feae-5b23a453bbcf' => 'iimjobs',
             'ca7ed5d5-daaf-7bf9-110e-5b23a58965dd' => 'CiteHR',
             '3d29ebfb-23a7-ea3e-b4d8-5b23a590f80f' => 'Career360',
-            '36990877-a094-db61-6610-5b20f95a6e6e' => 'Infoedge');
+            '36990877-a094-db61-6610-5b20f95a6e6e' => 'Infoedge',
+            'e7dafa0f-2d5e-9885-90d4-5c383bda6353'=>'intellactads');
          
         
         /*
@@ -97,7 +98,8 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             'iimjobs'=>'ee1d169a-ca0c-f3fe-d6d6-590d636bc19b',
             'CiteHR'=>'14a4e733-b709-8c60-7731-590d5cb3b1f7',
             'Career360'=>'71a590a5-0616-44d3-5248-590d5b158460',
-            'Infoedge'=>'92f19224-b7b2-68e2-a112-590d64d59115');
+            'Infoedge'=>'92f19224-b7b2-68e2-a112-590d64d59115',
+            'intellactads'=>'7eb40efc-b353-0885-1f7f-5c3733292e86');
 
         $where           = "";
         $wherecl         = "";
