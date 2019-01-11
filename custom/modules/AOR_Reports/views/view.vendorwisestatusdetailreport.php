@@ -209,6 +209,11 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $selected_vendor = array($vendorsIdArr['ileap']);
             $VendorListData  = array(array('id' => $vendorsIdArr['ileap'], 'name' => 'ileap'));
         }
+	if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'intellactads')
+        {
+            $selected_vendor = array($vendorsIdArr['intellactads']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['intellactads'], 'name' => 'intellactads'));
+        }
 
         if (!empty($selected_vendor))
         {
