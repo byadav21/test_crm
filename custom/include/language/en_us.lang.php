@@ -11,15 +11,22 @@ $GLOBALS['app_list_strings']['batch_status_list']=array (
 );
 $GLOBALS['app_list_strings']['leads_disposition_reason_list']=array (
   '' => 'Select Reason',
-  'language_barrier' => 'Language Barrier',
-  'eligibility_criteria' => 'Eligibility Criteria',
-  'fees_high' => 'Fees High',
-  'offline_courses' => 'Offline courses',
-  'long_duration' => 'Long duration',
-  'syllabus' => 'Syllabus',
-  'finance_issue' => 'Finance Issue',
-  'time_constraint' => 'Time constraint',
-  'enrolled_somewhere_else' => 'Enrolled somewhere else',
+  'Language Barrier' => 'Language Barrier',
+  'Eligibility Criteria – Education' => 'Eligibility Criteria – Education',
+  'Eligibility Criteria – Experience' => 'Eligibility Criteria – Experience',
+    
+  'Fees High' => 'Fees High',
+  'Offline courses' => 'Offline courses',
+  'Long duration' => 'Long duration',
+  'Syllabus' => 'Syllabus',
+  
+  'Time Constraint' => 'Time Constraint',
+  'Enrolled Elsewhere' => 'Enrolled Elsewhere',
+  'Customer Hang Up' => 'Customer Hang Up',
+    
+  'Finance Issue' => 'Finance Issue',
+  'Time constraint' => 'Time constraint',
+  'Enrolled somewhere else' => 'Enrolled somewhere else',
 );
 $GLOBALS['app_list_strings']['lead_status_dom']=array (
   '' => '',
