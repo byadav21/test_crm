@@ -113,7 +113,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                 
 
                 $bean = BeanFactory::getBean('Leads', $LeadID);
-                die($bean);
+                //die($bean);
 
                 if ($bean)
                 {
