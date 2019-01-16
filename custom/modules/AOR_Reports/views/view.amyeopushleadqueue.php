@@ -90,32 +90,36 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 21))
         {
-                        //echo count($fileRows); die;
-                        $file     = fopen($filename, "r");
-                        //fgetcsv($file);
-                        while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
-                        {
-                            $emapData = array($emapData[0], $emapData[1], $emapData[2]);
+            //echo count($fileRows); die;
+            $file      = fopen($filename, "r");
+            $headerRow = fgetcsv($file, 10000, ",");
+            if (($headerRow == $headers) === FALSE)
+            {
+                //echo 'good'; die;
+                //echo 'No';
+                //echo '<pre>'; print_r($emapData);print_r($headers);die;
+                echo "<script type=\"text/javascript\">
+                                    alert(\"Please check the csv headers.\");
+                                    window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
+                                 </script>";
+                die;
+            }
+            //fgetcsv($file);
+            while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+            {
+                $LeadID              = $emapData[0];
+                $dristi_campagain_id = $emapData[1];
+                $dristi_API_id       = $emapData[2];
+                
+
+                $bean = BeanFactory::getBean('Leads', $LeadID);
+                die($bean);
+
+                if ($bean)
+                {
 
 
-
-                            if (($emapData == $headers2) === TRUE)
-                            {
-                                //echo 'yes';
-
-                                $LeadID              = $emapData[0];
-                                $dristi_campagain_id = $emapData[1];
-                                $dristi_API_id       = $emapData[2];
-                                die($dristi_API_id);
-
-                                $bean = BeanFactory::getBean('Leads', $LeadID);
-
-
-                                if ($bean)
-                                {
-
-
-                                    $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
+                    $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
                                     SET lead_id='$bean->id',
                                         last_status='$bean->status',
                                         last_sub_status='$bean->status_description',
@@ -131,34 +135,23 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                                         lead_pushed_by='$current_user->id',
                                     date_entered='" . date('Y-m-d H:i:s') . "'";
 
-                                    $res = $db->query($AtmpLogSql);
+                    $res = $db->query($AtmpLogSql);
 
-                                    //print_r($bean); die;
-                                    $bean->autoassign          = 'Yes';
-                                    $bean->neoxstatus          = 0;
-                                    $bean->assigned_user_id    = '';
-                                    $bean->status_description  = 'New Lead';
-                                    $bean->status              = 'Alive';
-                                    $bean->dristi_campagain_id = $dristi_campagain_id;
-                                    $bean->dristi_API_id       = $dristi_API_id;
-                                    $bean->date_modified       = date('Y-m-d H:i:s');
-                                    $bean->dristi_customer_id  = '';
-                                    $checkSaveBean             = $bean->save();
-                                }
-                            }
-                            else
-                            {
-                                //echo 'No';
-                                echo '<pre>';  print_r($emapData);   print_r($headers); die;
-                                echo "<script type=\"text/javascript\">
-                                    alert(\"Please check the csv headers.\");
-                                    window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
-                                 </script>";
-                                die;
-                            }
-                        }
-                        
-                        
+                    //print_r($bean); die;
+                    $bean->autoassign          = 'Yes';
+                    $bean->neoxstatus          = 0;
+                    $bean->assigned_user_id    = '';
+                    $bean->status_description  = 'New Lead';
+                    $bean->status              = 'Alive';
+                    $bean->dristi_campagain_id = $dristi_campagain_id;
+                    $bean->dristi_API_id       = $dristi_API_id;
+                    $bean->date_modified       = date('Y-m-d H:i:s');
+                    $bean->dristi_customer_id  = '';
+                    $checkSaveBean             = $bean->save();
+                }
+            }
+
+
             fclose($file);
             clearstatcache();
             //throws a message if data successfully imported to mysql database from excel file

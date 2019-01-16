@@ -219,11 +219,11 @@
 
                         if (data.status == 'success') {
                             SUGAR.ajaxUI.hideLoadingPanel();
-
                             location.reload();
                         } else if (data.status == 'error')
                         {
                             alert(data.current_queue);
+                            ocation.reload();
                         }
 
                     }
