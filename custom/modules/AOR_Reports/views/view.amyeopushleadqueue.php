@@ -1,7 +1,7 @@
 <?php
 
 // Date: Created on : 25th DEC 2018
-
+//echo 'test'; die;
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
@@ -88,7 +88,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $fileRows = file($filename);
 
 
-        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 21))
+        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 5))
         {
             //echo count($fileRows); die;
             $file      = fopen($filename, "r");
@@ -165,7 +165,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         {
 
             echo "<script type=\"text/javascript\">
-                        alert(\"error: Lead Records are up-to 500.\");
+                        alert(\"error: Lead Records are up-to 5.\");
                         window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
                      </script>";
             die;
@@ -224,6 +224,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                    AND (l.assigned_user_id= 'NULL'
                         OR l.assigned_user_id =''
                         OR l.assigned_user_id IS NULL)
+		 and dul.dated >='2019-01-17 12:40:11'
                  group by l.id ORDER BY dul.dated,l.date_entered desc";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
