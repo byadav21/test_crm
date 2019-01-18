@@ -26,17 +26,9 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         //$this->_objInputs->syncSessions('exportHeaderWiseReport');
     }
 
-    public function getAll()
+    public function getAll($leadSql)
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $leadSql = "SELECT l.id,l.phone_mobile FROM  `leads` l WHERE LENGTH(l.phone_mobile) <>10 AND l.deleted =0
-                                            AND l.status_description= 'New Lead'
-                                            AND l.neoxstatus='0'
-                                            AND dristi_campagain_id !=''
-                                            AND dristi_api_id !=''
-                                            AND (l.assigned_user_id= 'NULL'
-                                                 OR l.assigned_user_id =''
-                                                 OR l.assigned_user_id IS NULL)";
         //$leadSql = "SELECT id,phone_mobile FROM  `leads` WHERE LENGTH( phone_mobile ) <>10 AND neoxstatus=0";
 
         $leadObj     = $db->query($leadSql);
@@ -44,38 +36,58 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         while ($row         = $db->fetchByAssoc($leadObj))
         {
             $programList[$row['id']]['id']           = $row['id'];
+            $programList[$row['id']]['first_name'] = $row['first_name'];
+            $programList[$row['id']]['last_name'] = $row['last_name'];
             $programList[$row['id']]['phone_mobile'] = $row['phone_mobile'];
+            $programList[$row['id']]['email_add_c'] = $row['email_add_c'];
+            $programList[$row['id']]['planed_campagain_id'] = $row['planed_campagain_id'];
+            $programList[$row['id']]['planed_api_id'] = $row['planed_api_id'];
+            $programList[$row['id']]['batch_code'] = $row['batch_code'];
+            $programList[$row['id']]['default_campagain_id'] = $row['default_campagain_id'];
+            $programList[$row['id']]['default_api_id'] = $row['default_api_id'];
+            $programList[$row['id']]['push_status'] = $row['push_status'];
+            $programList[$row['id']]['reasons'] = $row['reasons'];
         }
         //echo "<pre>";print_r($programList);exit();
         # Create heading
         $data = "Id";
-        $data .= ",Mobile";
+        $data .= ",first_name";
+        $data .= ",last_name";
+        $data .= ",phone_mobile";
+        $data .= ",email_add_c";
+        $data .= ",planed_campagain_id";
+        $data .= ",planed_api_id";
+        $data .= ",batch_code";
+        $data .= ",default_campagain_id";
+        $data .= ",default_api_id";
+        $data .= ",push_status";
+        $data .= ",reasons";
         $data .= "\n";
         foreach ($programList as $key => $councelor)
         {
             $data .= "\"" . $councelor['id'];
+            $data .= "\",\"" . $councelor['first_name'];
+            $data .= "\",\"" . $councelor['last_name'];
             $data .= "\",\"" . $councelor['phone_mobile'];
+            $data .= "\",\"" . $councelor['email_add_c'];
+            $data .= "\",\"" . $councelor['planed_campagain_id'];
+            $data .= "\",\"" . $councelor['planed_api_id'];
+            $data .= "\",\"" . $councelor['batch_code'];
+            $data .= "\",\"" . $councelor['default_campagain_id'];
+            $data .= "\",\"" . $councelor['default_api_id'];
+            $data .= "\",\"" . $councelor['push_status'];
+            $data .= "\",\"" . $councelor['reasons'];
             $data .= "\"\n";
         }
         return $data;
     }
 
-    public function JunkCount()
+    public function JunkCount($leadSql)
     {
         global $db;
-        $rowx = $db->fetchByAssoc($db->query("SELECT 
-                                            count(l.id) countx
-                                        FROM `leads` l
-                                        WHERE LENGTH(l.phone_mobile) <>10
-                                            AND l.deleted =0
-                                            AND l.status_description= 'New Lead'
-                                            AND l.neoxstatus='0'
-                                            AND dristi_campagain_id !=''
-                                            AND dristi_api_id !=''
-                                            AND (l.assigned_user_id= 'NULL'
-                                                 OR l.assigned_user_id =''
-                                                 OR l.assigned_user_id IS NULL)"));
-        return $rowx['countx'];
+        //$rowx = $db->fetchByAssoc($db->query($leadSql));
+        $QueueCount = $db->getRowCount($db->query($leadSql));
+        return count($QueueCount);
     }
 
     public function updateLeads()
@@ -88,7 +100,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $fileRows = file($filename);
 
 
-        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 5))
+        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 51))
         {
             //echo count($fileRows); die;
             $file      = fopen($filename, "r");
@@ -184,9 +196,40 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         $where   = "";
         $wherecl = "";
+        
+        $snagLeadSql = "SELECT  l.id,
+                            l.first_name,
+                            l.last_name,
+                            l.phone_mobile,
+                            leads_cstm.email_add_c,
+                            dristi_campagain_id planed_campagain_id,
+                            dristi_api_id as planed_api_id,
+                            te_ba_batch.batch_code,
+                            te_ba_batch.d_campaign_id as default_campagain_id,
+                            te_ba_batch.d_lead_id as default_api_id,
+                            dul.resultTypeString push_status,
+                            dul.text reasons
+                     FROM leads l
+                     LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
+                     LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
+                     LEFT JOIN dristi_upload_logs dul ON l.id= dul.lead_id
+                     WHERE l.deleted =0
+                       AND l.status_description= 'New Lead'
+                       AND l.neoxstatus='0'
+                       AND dristi_campagain_id !=''
+                       AND dristi_api_id !=''
+                       AND (l.assigned_user_id= 'NULL'
+                            OR l.assigned_user_id =''
+                            OR l.assigned_user_id IS NULL) 
+                       and dul.resultTypeString!='ADDED'
+                       and dul.dated >= NOW() - INTERVAL 30 DAY
+                       and dul.dated <= NOW()
+                     group by l.id
+                     ORDER BY dul.dated desc";
+        
 
 
-        $junkCount = $this->JunkCount();
+        $junkCount = $this->JunkCount($snagLeadSql);
 
 
 
@@ -196,17 +239,12 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
             'l.first_name'              => 'First Name',
             'l.last_name'               => 'Last Name',
             'l.phone_mobile'            => 'Phone Mobile',
-            'l.phone_home'              => 'Phone Home',
-            'l.phone_work'              => 'Phone Work',
-            'l.phone_other'             => 'Phone Other',
             'leads_cstm.email_add_c'    => 'Email Address',
-            'dristi_campagain_id'       => 'Dristi Campagain ID',
-            'dristi_api_id'             => 'Drisit API ID',
+            'dristi_campagain_id'       => 'Planed Campagain ID',
+            'dristi_api_id'             => 'Planed API ID',
             'te_ba_batch.batch_code'    => 'Batch Code',
-            'te_ba_batch.d_campaign_id' => 'Batch Campagain ID',
-            'te_ba_batch.d_lead_id'     => 'Batch API ID',
-            'dul.resultTypeString'      => 'Status',
-            'dul.text'                  => 'Reaseon');
+            'te_ba_batch.d_campaign_id' => 'Defualt Campagain ID',
+            'te_ba_batch.d_lead_id'     => 'Defualt API ID');
 
         $stringHeaders = implode(",", array_keys($headers));
 
@@ -214,8 +252,6 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                FROM leads l
                  LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
                  LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
-                 LEFT JOIN dristi_upload_logs dul on l.id= dul.lead_id
-                 
                  WHERE l.deleted =0
                    AND l.status_description= 'New Lead'
                    AND l.neoxstatus='0'
@@ -224,14 +260,14 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                    AND (l.assigned_user_id= 'NULL'
                         OR l.assigned_user_id =''
                         OR l.assigned_user_id IS NULL)
-		 and dul.dated >='2019-01-17 12:40:11'
-                 group by l.id ORDER BY dul.dated,l.date_entered desc";
+                 ORDER BY l.date_entered desc";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
 
-        $QueueCount = $db->getRowCount($db->query($countSql));
+        
 
         $leadSql = "SELECT $stringHeaders " . $sqlPart;
+        $QueueCount = $db->getRowCount($db->query($leadSql));
         if (!$_export)
         {
             $limit   = $this->objPagination->get_limit();
@@ -278,10 +314,10 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         {
 
 
-            $data = $this->getAll();
+            $data = $this->getAll($snagLeadSql);
             ob_end_clean();
             header("Content-type: application/csv");
-            header('Content-disposition: attachment;filename="JunkLeads_' . date('Y-m-d H:i:s') . '.csv";');
+            header('Content-disposition: attachment;filename="SnagList_' . date('Y-m-d H:i:s') . '.csv";');
             echo $data;
             exit;
         }

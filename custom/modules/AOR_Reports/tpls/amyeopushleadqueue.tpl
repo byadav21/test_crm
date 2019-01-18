@@ -21,7 +21,7 @@
     <div class="dashboard-block">
         <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue">
 
-            <h3 class="heading-title"><span>JUNK LEADS</span></h3>
+            <h3 class="heading-title"><span>SNAG LIST</span></h3>
             <div class="count">{$junkCount}</div>
             <div class="actions">
                 <button type="submit" name="export_junk_leads" value="export_junk_leads" id="export_junk_leads">
@@ -52,7 +52,7 @@
                 <label for="batch_basic">Select Upload .CSV File</label>
                 <input type="file" value="" name="file" required accept=".csv"><br>
                 <div>
-                    <a href="custom\modules\AOR_Reports\demo/amyeopushleadqueue.csv">Download Template</a>
+                    <a href="custom\modules\AOR_Reports\demo/amyeopushleadqueue.csv">Sample Template</a>
                     <input tabindex="2"  onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="update_leadset" value="Upload" id="update_leadset">
                 </div>
             </form> 
@@ -158,19 +158,15 @@
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.first_name}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.last_name}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_mobile}</td>
-                <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_home}</td>
+               {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_home}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_work}</td>
-                <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_other}</td>
-                <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.email_address}</td>
+                <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_other}</td>*}
+                <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.email_add_c}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.dristi_campagain_id}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.dristi_api_id}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.d_campaign_id}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.d_lead_id}</td>
-
-                <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.resultTypeString}</td>
-                <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.text}</td>
-
 
             </tr>
         {/foreach}
