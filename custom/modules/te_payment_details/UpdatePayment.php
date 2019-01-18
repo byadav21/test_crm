@@ -280,10 +280,18 @@ class UpdatePaymentName
 
     function get_lead_details($lead_id)
     {
-        $leadSql = "SELECT e.email_address,leads.first_name,leads.last_name,leads.phone_mobile FROM `email_addr_bean_rel` AS eabr INNER JOIN email_addresses as e ON e.id=eabr.`email_address_id` INNER JOIN leads ON leads.id=eabr.`bean_id` WHERE eabr.`bean_id`='" . $lead_id . "' AND eabr.`bean_module`='Leads' LIMIT 0,1";
-        $leadObj = $GLOBALS['db']->Query($leadSql);
-        $row     = $GLOBALS['db']->fetchByAssoc($leadObj);
-        return $row;
+    $leadSql = "SELECT  lc.email_add_c email_address,
+                        l.first_name,
+                        l.last_name,
+                        l.phone_mobile
+                 FROM `leads` l
+                 INNER JOIN leads_cstm lc ON l.id= lc.id_c
+                 WHERE l.id='" . $lead_id . "'";
+
+    //$leadSql = "SELECT e.email_address,leads.first_name,leads.last_name,leads.phone_mobile FROM `email_addr_bean_rel` AS eabr INNER JOIN email_addresses as e ON e.id=eabr.`email_address_id` INNER JOIN leads ON leads.id=eabr.`bean_id` WHERE eabr.`bean_id`='" . $lead_id . "' AND eabr.`bean_module`='Leads' LIMIT 0,1";
+    $leadObj = $GLOBALS['db']->Query($leadSql);
+    $row     = $GLOBALS['db']->fetchByAssoc($leadObj);
+    return $row;
     }
 
     function removePaymentPlan($student_id, $batch_id, $student_country)
