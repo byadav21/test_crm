@@ -62,7 +62,7 @@
             OR l.assigned_user_id =''
             OR l.assigned_user_id IS NULL)
      ORDER BY concat (dristi_campagain_id, dristi_api_id)
-     LIMIT 500";
+     LIMIT 1000";
 
     $allInserted = [];
     $result      = $db->query($sql);

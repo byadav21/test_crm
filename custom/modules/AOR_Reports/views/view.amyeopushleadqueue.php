@@ -87,7 +87,8 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         global $db;
         //$rowx = $db->fetchByAssoc($db->query($leadSql));
         $QueueCount = $db->getRowCount($db->query($leadSql));
-        return count($QueueCount);
+	//echo $QueueCount;
+        return $QueueCount;
     }
 
     public function updateLeads()
@@ -222,7 +223,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                             OR l.assigned_user_id =''
                             OR l.assigned_user_id IS NULL) 
                        and dul.resultTypeString!='ADDED'
-                       and dul.dated >= NOW() - INTERVAL 30 DAY
+                       and dul.dated >= NOW() - INTERVAL 10 DAY
                        and dul.dated <= NOW()
                      group by l.id
                      ORDER BY dul.dated desc";
