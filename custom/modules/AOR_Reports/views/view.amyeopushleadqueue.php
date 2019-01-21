@@ -35,18 +35,18 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $programList = '';
         while ($row         = $db->fetchByAssoc($leadObj))
         {
-            $programList[$row['id']]['id']           = $row['id'];
-            $programList[$row['id']]['first_name'] = $row['first_name'];
-            $programList[$row['id']]['last_name'] = $row['last_name'];
-            $programList[$row['id']]['phone_mobile'] = $row['phone_mobile'];
-            $programList[$row['id']]['email_add_c'] = $row['email_add_c'];
-            $programList[$row['id']]['planed_campagain_id'] = $row['planed_campagain_id'];
-            $programList[$row['id']]['planed_api_id'] = $row['planed_api_id'];
-            $programList[$row['id']]['batch_code'] = $row['batch_code'];
+            $programList[$row['id']]['id']                   = $row['id'];
+            $programList[$row['id']]['first_name']           = $row['first_name'];
+            $programList[$row['id']]['last_name']            = $row['last_name'];
+            $programList[$row['id']]['phone_mobile']         = $row['phone_mobile'];
+            $programList[$row['id']]['email_add_c']          = $row['email_add_c'];
+            $programList[$row['id']]['planed_campagain_id']  = $row['planed_campagain_id'];
+            $programList[$row['id']]['planed_api_id']        = $row['planed_api_id'];
+            $programList[$row['id']]['batch_code']           = $row['batch_code'];
             $programList[$row['id']]['default_campagain_id'] = $row['default_campagain_id'];
-            $programList[$row['id']]['default_api_id'] = $row['default_api_id'];
-            $programList[$row['id']]['push_status'] = $row['push_status'];
-            $programList[$row['id']]['reasons'] = $row['reasons'];
+            $programList[$row['id']]['default_api_id']       = $row['default_api_id'];
+            $programList[$row['id']]['push_status']          = $row['push_status'];
+            $programList[$row['id']]['reasons']              = $row['reasons'];
         }
         //echo "<pre>";print_r($programList);exit();
         # Create heading
@@ -87,7 +87,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         global $db;
         //$rowx = $db->fetchByAssoc($db->query($leadSql));
         $QueueCount = $db->getRowCount($db->query($leadSql));
-	//echo $QueueCount;
+        //echo $QueueCount;
         return $QueueCount;
     }
 
@@ -123,7 +123,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                 $LeadID              = $emapData[0];
                 $dristi_campagain_id = $emapData[1];
                 $dristi_API_id       = $emapData[2];
-                
+
 
                 $bean = BeanFactory::getBean('Leads', $LeadID);
                 //die($bean);
@@ -132,35 +132,77 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                 {
 
 
-                    $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
-                                    SET lead_id='$bean->id',
-                                        last_status='$bean->status',
-                                        last_sub_status='$bean->status_description',
-                                        last_dristi_customer_id='$bean->dristi_customer_id',
-                                        last_dristi_campagain_id='$bean->dristi_campagain_id',
-                                        last_dristi_API_id='$bean->dristi_API_id',
-                                        changed_dristi_campagain_id='$dristi_campagain_id',
-                                        changed_dristi_API_id='$dristi_API_id',
-                                        last_assigned_user_id='$bean->assigned_user_id',
-                                        last_modified_user_id='$bean->modified_user_id',
-                                        last_created_user_id='$bean->created_by',
-                                        last_date_modified='$bean->date_modified',
-                                        lead_pushed_by='$current_user->id',
-                                    date_entered='" . date('Y-m-d H:i:s') . "'";
 
-                    $res = $db->query($AtmpLogSql);
+                        $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
+                                        SET lead_id='$bean->id',
+                                            last_status='$bean->status',
+                                            last_sub_status='$bean->status_description',
+                                            last_dristi_customer_id='$bean->dristi_customer_id',
+                                            last_dristi_campagain_id='$bean->dristi_campagain_id',
+                                            last_dristi_API_id='$bean->dristi_API_id',
+                                            changed_dristi_campagain_id='$dristi_campagain_id',
+                                            changed_dristi_API_id='$dristi_API_id',
+                                            last_assigned_user_id='$bean->assigned_user_id',
+                                            last_modified_user_id='$bean->modified_user_id',
+                                            last_created_user_id='$bean->created_by',
+                                            last_date_modified='$bean->date_modified',
+                                            lead_pushed_by='$current_user->id',
+                                        date_entered='" . date('Y-m-d H:i:s') . "'";
 
-                    //print_r($bean); die;
-                    $bean->autoassign          = 'Yes';
-                    $bean->neoxstatus          = 0;
-                    $bean->assigned_user_id    = '';
-                    $bean->status_description  = 'New Lead';
-                    $bean->status              = 'Alive';
-                    $bean->dristi_campagain_id = $dristi_campagain_id;
-                    $bean->dristi_API_id       = $dristi_API_id;
-                    $bean->date_modified       = date('Y-m-d H:i:s');
-                    $bean->dristi_customer_id  = '';
-                    $checkSaveBean             = $bean->save();
+                        $res = $db->query($AtmpLogSql);
+                    
+                    
+
+                        $updateSql = "update leads 
+                                                SET
+                                            autoassign          = 'Yes',
+                                            neoxstatus          = '0',
+                                            assigned_user_id    = '',
+                                            status_description   = 'New Lead',
+                                            status              = 'Alive',
+                                            dristi_campagain_id = $dristi_campagain_id,
+                                            dristi_API_id       = $dristi_API_id,
+                                            date_modified       = NOW(),
+                                            dristi_customer_id  = '' where id='$bean->id'"; 
+                        $updateSqlres = $db->Query($updateSql);
+
+                        if ($updateSqlres)
+                        {
+                            $guidid = create_guid();
+                            $insertSql         = "INSERT INTO te_disposition
+                                                SET id          =   '$guidid',
+                                            status              =   'Alive',
+                                            status_detail       =   'New Lead',
+                                            date_modified       =   NOW(),
+                                            date_entered        =   NOW()";
+                            $te_disposition_id = $db->Query($insertSql);
+                            
+                            
+                            $guidid2        = create_guid();
+                            $insertDis_cSql = "INSERT INTO te_disposition_leads_c
+                                                SET id          =   '$guidid2',
+                          te_disposition_leadste_disposition_idb=   '$guidid',
+                          te_disposition_leadsleads_ida         =   '$bean->id',
+                                            date_modified=NOW()";
+                            $db->Query($insertDis_cSql);
+                        }
+                   
+
+
+                        /*$bean->autoassign          = 'Yes';
+                          $bean->neoxstatus          = 0;
+                          $bean->assigned_user_id    = '';
+                          $bean->status_description  = 'New Lead';
+                          $bean->status              = 'Alive';
+                          $bean->dristi_campagain_id = $dristi_campagain_id;
+                          $bean->dristi_API_id       = $dristi_API_id;
+                          $bean->date_modified       = date('Y-m-d H:i:s');
+                          $bean->dristi_customer_id  = '';
+                          $checkSaveBean             = $bean->save();
+                         */
+
+
+                    
                 }
             }
 
@@ -197,7 +239,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         $where   = "";
         $wherecl = "";
-        
+
         $snagLeadSql = "SELECT  l.id,
                             l.first_name,
                             l.last_name,
@@ -227,7 +269,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                        and dul.dated <= NOW()
                      group by l.id
                      ORDER BY dul.dated desc";
-        
+
 
 
         $junkCount = $this->JunkCount($snagLeadSql);
@@ -265,9 +307,9 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
 
-        
 
-        $leadSql = "SELECT $stringHeaders " . $sqlPart;
+
+        $leadSql    = "SELECT $stringHeaders " . $sqlPart;
         $QueueCount = $db->getRowCount($db->query($leadSql));
         if (!$_export)
         {
