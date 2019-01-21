@@ -63,7 +63,7 @@
 
     <div class="dashboard-block">
         <h3 class="heading-title"><span>Push Leads</span></h3>
-        <form name="search_update" id="search_upload"  method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue" enctype="multipart/form-data">
+        <form name="search_update" id="pushe_button"  method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue" enctype="multipart/form-data">
             <div class="actions"><a href="javascript:void()" onclick="pushLeads()">
                     <span class="glyphicon glyphicon-open"></span>
                 </a>
@@ -236,7 +236,9 @@
 
         }
 
-
+        $("#search_upload").submit(function(e) {
+            SUGAR.ajaxUI.showLoadingPanel();
+        });
 
     </script>
 {/literal}
