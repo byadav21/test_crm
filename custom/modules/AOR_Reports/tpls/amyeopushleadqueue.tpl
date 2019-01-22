@@ -2,43 +2,6 @@
 
 
 <div class="dashboard-top-wrapper">
-    <div class="dashboard-block">
-        <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue">
-
-            <h3 class="heading-title"><span>Queue List</span></h3>
-            <div class="count">{$QueueCount}</div>
-            <div class="actions">
-                <button type="submit" name="export_queue_list" value="export_queue_list" id="export_queue_list">
-                    <i style="font-size:24px" class="fa" >&#xf1c3;</i>
-                </button>
-
-            </div>
-
-
-        </form>
-    </div>
-
-    <div class="dashboard-block">
-        <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue">
-
-            <h3 class="heading-title"><span>SNAG LIST</span></h3>
-            <div class="count">{$junkCount}</div>
-            <div class="actions">
-                <button type="submit" name="export_junk_leads" value="export_junk_leads" id="export_junk_leads">
-                    <i style="font-size:24px" class="fa">&#xf1c3;</i>
-                </button>
-            </div>
-
-        </form>
-    </div>
-
-
-
-
-
-
-
-
 
     <div class="dashboard-block">
         <h3 class="heading-title"><span>Upload to New Leads</span></h3>
@@ -52,7 +15,7 @@
                 <label for="batch_basic">Select Upload .CSV File</label>
                 <input type="file" value="" name="file" required accept=".csv"><br>
                 <div>
-                    <a href="custom\modules\AOR_Reports\demo/amyeopushleadqueue.csv">Sample Template</a>
+                    <a href="custom\modules\AOR_Reports\demo/amyeopushleadqueue.csv">(Sample Template)</a>
                     <input tabindex="2"  onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="update_leadset" value="Upload" id="update_leadset">
                 </div>
             </form> 
@@ -60,16 +23,59 @@
     </div>
 
 
+    <div class="dashboard-block">
+       
+
+            <h3 class="heading-title"><span>Leads to be push</span></h3>
+            <div class="count">{$QueueCount}</div>
+             <div class="button-actions">
+                <form name="search_update" id="pushe_button"  method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue" enctype="multipart/form-data">
+                <a href="javascript:void()" class="button" onclick="pushLeads()">
+                    <span class="glyphicon glyphicon-open"></span>Push
+                </a>
+               </form>
+            </div>
+            <div class="actions">
+                <span>(Export Queue List)</span>
+                 <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue">
+                <button type="submit" name="export_queue_list" value="export_queue_list" id="export_queue_list">
+                    <i style="font-size:24px" class="fa" >&#xf1c3;</i>
+                </button>
+              </form>
+            </div>
+
+
+        
+
+        
+           
+        
+    </div>
 
     <div class="dashboard-block">
-        <h3 class="heading-title"><span>Push Leads</span></h3>
-        <form name="search_update" id="pushe_button"  method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue" enctype="multipart/form-data">
-            <div class="actions"><a href="javascript:void()" onclick="pushLeads()">
-                    <span class="glyphicon glyphicon-open"></span>
-                </a>
+        <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue">
+
+            <h3 class="heading-title"><span>Leads with isseus</span></h3>
+            <div class="count">{$junkCount}</div>
+            <div class="actions">
+                <span>(Export Junk List)</span>
+                <button type="submit" name="export_junk_leads" value="export_junk_leads" id="export_junk_leads">
+                    <i style="font-size:24px" class="fa">&#xf1c3;</i>
+                </button>
             </div>
-        </form>   
+
+        </form>
     </div>
+
+    {*  <div class="dashboard-block">
+    <h3 class="heading-title"><span>Push Leads</span></h3>
+    <form name="search_update" id="pushe_button"  method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue" enctype="multipart/form-data">
+    <div class="actions"><a href="javascript:void()" onclick="pushLeads()">
+    <span class="glyphicon glyphicon-open"></span>
+    </a>
+    </div>
+    </form>   
+    </div>*}
 
 
 
@@ -158,7 +164,7 @@
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.first_name}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.last_name}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_mobile}</td>
-               {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_home}</td>
+                {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_home}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_work}</td>
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_other}</td>*}
                 <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.email_add_c}</td>
@@ -183,8 +189,13 @@
         .heading-title{display: flex; width: 100%; margin-bottom:15px; align-items: center; justify-content: center}
         .heading-title span{ font-size: 14px; color: #303188; text-transform: uppercase; font-weight: normal;}
         .dashboard-block .count{font-size:20px; display: flex; align-items: center; justify-content: center}
-        .dashboard-block .actions{margin-top:auto; display: flex; width:100%; justify-content:flex-end;}
-        .dashboard-block .actions button{margin:0;}
+        .dashboard-block .button-actions{display: flex; width:100%; justify-content:center;}
+        .dashboard-block .button-actions form{height:auto; align-items: center;}
+        .dashboard-block .button-actions button{margin:0;}
+        .dashboard-block .button-actions a span{margin:0 5px 0 0;}
+        .dashboard-block .actions{margin-top:auto; display: flex; width:100%; align-items: center; justify-content:flex-end;}
+        .dashboard-block .actions button{margin:0 0px 0 5px;}
+        .dashboard-block .actions form{height:auto; align-items: center; width:auto;}
         .upload-block{display: flex; flex-direction: column; justify-content:space-between; width:100%;}
         .upload-block ul{margin:0 0 10px; padding:0; display:flex; width:100%; flex-direction: column; }
         .upload-block ul li{margin:0; padding:0; list-style-type: none; display:flex; width:100%;}
@@ -236,7 +247,7 @@
 
         }
 
-        $("#search_upload").submit(function(e) {
+        $("#search_upload").submit(function (e) {
             SUGAR.ajaxUI.showLoadingPanel();
         });
 
