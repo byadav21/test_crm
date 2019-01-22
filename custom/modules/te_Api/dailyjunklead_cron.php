@@ -62,7 +62,7 @@ class sendDailyJunkLead
 //		$to = array('pawan.kumar@talentedge.in','pritam.dutta@talentedge.in','ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','pramod.singh@talentedge.in','deepak.sharma@talentedge.in','vivek.bathla@talentedge.in','sreedevi.sreekumar@talentedge.in');
                 $to = array(
                 'pawan.kumar@talentedge.in','pritam.dutta@talentedge.in',
-                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','aastha.verma@talentedge.in',
+                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in',
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
@@ -72,7 +72,7 @@ class sendDailyJunkLead
                 
                 //Marketing Team :
                 'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in',
+                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in');
         $emailData = $mail->cron_email_Data('Daily Junk Lead Data', $filename, $this->toDate,$to,$email_summary);

@@ -76,7 +76,7 @@ class FalconideEmail
 		$emailData = array('email' => array(
                 'pawan.kumar@talentedge.in'
                 ,'pritam.dutta@talentedge.in',
-                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','aastha.verma@talentedge.in',
+                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in',
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
@@ -86,7 +86,7 @@ class FalconideEmail
                 
                 //Marketing Team :
                 'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in',
+                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in','shubhra.kochar@talentedge.in'
                 ),
