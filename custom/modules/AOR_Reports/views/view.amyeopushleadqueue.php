@@ -232,6 +232,16 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
         $current_user_id = $current_user->id;
+        
+        $people = array("d81fc9e1-91ae-eba3-19d9-5af02415c81c", //kiran
+                        "c7e41406-1f7b-770e-6d0b-5ab0076957ce", //ritika
+                        "9e6a7631-ca80-74f6-b734-599b04f9af60", //anup
+                        ); 
+        
+        if(!in_array($current_user->id, $people) && ($current_user->is_admin != 1)){
+           echo 'You are not authorized to access!';
+           return;
+        }
         $_export         = isset($this->_objInputs->post['export_queue_list']) && $this->_objInputs->post['export_queue_list'] == "export_queue_list";
         $_export_junk    = isset($this->_objInputs->post['export_junk_leads']) && $this->_objInputs->post['export_junk_leads'] == "export_junk_leads";
         $_update_leadset = isset($this->_objInputs->post['update_leadset']) && $this->_objInputs->post['update_leadset'] == "Upload";
