@@ -111,9 +111,9 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
         }
         if (!empty($email)) {
             if ($where != '') {
-                $where .= "  OR (tbl4.email_address like '" . $email . "')";
+                $where .= "  OR (tbl4.email_add_c like '" . $email . "')";
             } else {
-                $where .= "  (tbl4.email_address like '" . $email . "')";
+                $where .= "  (tbl4.email_add_c like '" . $email . "')";
             }
         }
 
@@ -131,7 +131,8 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
             $whereNew = " AND (tbl1.status = 'Converted')";
         }
 
-
+	
+	/*
         $fetch = "SELECT tbl1.id,
                     tbl1.salutation,
                     tbl1.phone_mobile,
@@ -150,6 +151,25 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
              INNER JOIN email_addresses AS tbl4 ON tbl3.email_address_id=tbl4.id
              WHERE " . $where . " $whereNew
              LIMIT 0, 100";
+	*/
+	$fetch ="SELECT tbl1.id,
+       tbl1.salutation,
+       tbl1.phone_mobile,
+       tbl4.email_add_c AS email_address,
+       #tbl4.email_address,
+       tbl1.assigned_user_id,
+       tbl1.first_name,
+       tbl1.last_name,
+       tbl1.status,
+       tbl1.date_entered,
+       tbl1.lead_source,
+       tbl2.user_name,
+       tbl2.phone_mobile
+FROM leads AS tbl1
+LEFT JOIN leads_cstm AS tbl4 ON tbl1.id= tbl4.id_c
+LEFT JOIN users AS tbl2 ON tbl1.assigned_user_id = tbl2.id
+WHERE " . $where . " $whereNew
+             LIMIT 0, 100"; 
         
         $row = $db->query($fetch);
         
