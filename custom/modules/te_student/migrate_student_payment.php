@@ -18,6 +18,7 @@ if($studentDetails){
   $i = 0;
   foreach ($studentDetails as $key => $value) {
    $lead_detail = __get_lead_details(trim($value['email']),trim($value['mobile']),trim($value['batch'])); 
+   echo $lead_detail;print_r($lead_detail);exit();
    if($lead_detail){
 	$studentDetails[$i]['lead_details'] = $lead_detail;
 	$get_student =  __get_student_details($lead_detail['id']);
@@ -104,14 +105,16 @@ function __get_lead_payments($lead_id){
 }
 
 function __get_lead_details($student_email=NULL,$student_mobile=NULL,$batch_id=NULL){
- 		$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and status='Converted' and (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."')";
+ 		//$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and status='Converted' and (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."')";
+		$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id WHERE leads.deleted=0 AND te_ba_batch_id_c='".$batch_id."' and status='Converted' and (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."') LIMIT 0,1";
 	
 		$get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
 		$get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
 	if($get_lead){
 		return $get_lead;
 	}else{
-		$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and   (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."')";
+		//$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c WHERE leads.deleted=0 AND   te_ba_batch_id_c='".$batch_id."' and   (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."')";
+		$get_lead_sql = "SELECT leads.*,leads_cstm.company_c,leads_cstm.functional_area_c,leads_cstm.work_experience_c,leads_cstm.education_c,leads_cstm.city_c,leads_cstm.age_c FROM leads INNER JOIN leads_cstm ON leads.id=leads_cstm.id_c INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id WHERE leads.deleted=0 AND te_ba_batch_id_c='".$batch_id."' and (email_add_c='".$student_email."' or phone_mobile='".$student_mobile."') LIMIT 0,1";
 		$get_lead_sql_Obj= $GLOBALS['db']->query($get_lead_sql);
 		return   $get_lead=$GLOBALS['db']->fetchByAssoc($get_lead_sql_Obj);
    }
@@ -168,4 +171,3 @@ function updateStudentPaymentPlan($batch_id,$student_id,$amount,$student_country
 		}
 	}
 }
-
