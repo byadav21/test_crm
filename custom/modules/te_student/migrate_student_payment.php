@@ -18,7 +18,6 @@ if($studentDetails){
   $i = 0;
   foreach ($studentDetails as $key => $value) {
    $lead_detail = __get_lead_details(trim($value['email']),trim($value['mobile']),trim($value['batch'])); 
-   echo 'hi'.$lead_detail;print_r($lead_detail);exit();
    if($lead_detail){
 	$studentDetails[$i]['lead_details'] = $lead_detail;
 	$get_student =  __get_student_details($lead_detail['id']);
