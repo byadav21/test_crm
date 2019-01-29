@@ -58,7 +58,7 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
     function getBatch()
     {
         global $db;
-        $batchSql     = "SELECT id,name,batch_code FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
+        $batchSql     = "SELECT id,name,batch_code FROM te_ba_batch WHERE  deleted=0";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
@@ -239,24 +239,16 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
         $StatusList = $statusHeader;
 
 
-
-
         //echo '<pre>';
         //print_r($StatusList); die;
         #PS @Pawan
 
 
 
-
-
-
-
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
-
-
-            $file     = "VendorWiseStatusDetail_report";
+            $file     = "VendorStatusDateWiseReport_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
