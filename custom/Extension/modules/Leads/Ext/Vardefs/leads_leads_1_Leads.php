@@ -86,3 +86,19 @@ $dictionary["Lead"]["fields"]["disposition_reason"] = array (
 		'studio' => 'visible',
   
 );
+$dictionary['Lead']['fields']['landing_url'] =array (
+	'name' => 'landing_url',
+	'label' => 'Landing URL',
+	'type' => 'text',
+	'required' => false,
+	'massupdate' => 0,
+	'comments' => '',
+	'help' => '',
+	'default'=>'NA',
+	'importable' => 'true',
+	'duplicate_merge' => 'disabled',
+	'duplicate_merge_dom_value' => '0',
+	'audited' => false,
+	'reportable' => true,
+	'source' => 'custom_fields',
+);
