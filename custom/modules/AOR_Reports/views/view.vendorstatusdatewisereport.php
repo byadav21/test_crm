@@ -73,16 +73,16 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
         
+        $report_action = '';
+        $reportAccess  = reportAccessLog();
+       
         $current_user_id = $current_user->id;
-        $people = array("95caf635-bec3-4b9e-b27b-5b4dc60b755e", //varun
-                        "4edb3e22-4614-8d89-cb93-5c2ef5443088", //sandeep
-                        "7868140c-534e-a609-235a-5c2ef45b11c9", //ashish.somvanshi
-                        "7016c0b1-bc5a-423d-8aaf-590c64f62aa0", //amit.sati
-                        ); 
+        $report_action = isset($GLOBALS['action'])? $GLOBALS['action'] : '';
+                  
         
-        if(!in_array($current_user->id, $people) && ($current_user->is_admin != 1)){
+        if(!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1)){
            echo 'You are not authorized to access!';
-           return;
+           return ;
         }
         
         $vendorID   = $current_user->te_vendor_users_1te_vendor_ida;
