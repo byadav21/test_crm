@@ -131,7 +131,37 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             $selected_status = $_SESSION['ur_status'];
         }
         
-        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'intellactads')
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Infoedge')
+        {
+            $selected_vendor = array($vendorsIdArr['Infoedge']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Infoedge'], 'name' => 'Infoedge'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Career360')
+        {
+            $selected_vendor = array($vendorsIdArr['Career360']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Career360'], 'name' => 'Career360'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'CiteHR')
+        {
+            $selected_vendor = array($vendorsIdArr['CiteHR']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['CiteHR'], 'name' => 'CiteHR'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'iimjobs')
+        {
+            $selected_vendor = array($vendorsIdArr['iimjobs']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['iimjobs'], 'name' => 'iimjobs'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'TBS')
+        {
+            $selected_vendor = array($vendorsIdArr['TBS']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['TBS'], 'name' => 'TBS'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'ileap')
+        {
+            $selected_vendor = array($vendorsIdArr['ileap']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['ileap'], 'name' => 'ileap'));
+        }
+	if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'intellactads')
         {
             $selected_vendor = array($vendorsIdArr['intellactads']);
             $VendorListData  = array(array('id' => $vendorsIdArr['intellactads'], 'name' => 'intellactads'));
