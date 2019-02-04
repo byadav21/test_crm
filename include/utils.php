@@ -6117,3 +6117,19 @@ function getTaxStatus($user_id=0,$dated=false)
 		}
     }
 }
+
+
+ function reportAccessLog()
+    {
+        global $db;
+        $proSql       = "SELECT `report_action`, `assigned_user_id` FROM `report_access_log` WHERE `is_enabled`=1";
+        $pro_Obj     = $db->query($proSql);
+        $pro_Options = array();
+        while ($row         = $db->fetchByAssoc($pro_Obj))
+        {
+            $pro_Options[$row['report_action']][] = $row['assigned_user_id'];
+        }   
+        return $pro_Options;
+    }
+
+
