@@ -46,9 +46,7 @@ class updateEloquaStatus
              where 
              l.deleted=0 
              and (l.status='Converted' or l.status_description='Converted')
-             and lc.email_add_c in ('arjun.badhan@gmail.com','priteishmac@gmail.com','kollanag@gmail.com','manvikajhala@gmail.com',
-             'sandeepvasujoshi@gmail.com','koilavikas@gmail.com','ashish.ruwatia@gmail.com','nmalhotra71@gmail.com','kuls@sidbi.in'
-             ,'navalneerad26jun@gmail.com')";
+             and lc.email_add_c in ('niranjan889@rediffmail.com')";
 
         $leadObj = $db->query($query);
         if ($leadObj)
