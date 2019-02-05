@@ -17,8 +17,8 @@ class updateEloquaStatus
 {
 
     function createLog($action, $filename, $field = '', $dataArray = array())
-    {   
-        
+    {
+
         $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
         fwrite($file, date('Y-m-d H:i:s') . "\n");
         fwrite($file, $action . "\n");
@@ -41,11 +41,14 @@ class updateEloquaStatus
                     lc.email_add_c,
                     bb.batch_status
              FROM leads_cstm lc
-             INNER JOIN leads l ON leads_cstm.id_c=l.id
+             INNER JOIN leads l ON lc.id_c=l.id
              inner join te_ba_batch bb on lc.te_ba_batch_id_c=bb.id
              where 
              l.deleted=0 
-             and (l.status='Converted' or l.status_description='Converted') limit 10";
+             and (l.status='Converted' or l.status_description='Converted')
+             and lc.email_add_c in ('arjun.badhan@gmail.com','priteishmac@gmail.com','kollanag@gmail.com','manvikajhala@gmail.com',
+             'sandeepvasujoshi@gmail.com','koilavikas@gmail.com','ashish.ruwatia@gmail.com','nmalhotra71@gmail.com','kuls@sidbi.in'
+             ,'navalneerad26jun@gmail.com')";
 
         $leadObj = $db->query($query);
         if ($leadObj)
@@ -95,7 +98,7 @@ class updateEloquaStatus
                     $contactIDAPI = ($contactIDAPI != '') ? $contactIDAPI : $contact_id;
                 }
 
-                $this->createLog('{getContactID}', 'eloquaConverted_'.date('Y-m-').'.txt', $contactArr[0]->id, $GetContactID->elements);
+                $this->createLog('{getContactID}', 'eloquaConverted_' . date('Y-m-d') . '.txt', $contactArr[0]->id, $GetContactID->elements);
 
 
                 if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
@@ -131,9 +134,9 @@ class updateEloquaStatus
                         $db->query("update leads_cstm  set eloqua_contact_id='$contactIDXX' where  email_add_c='" . $email_add_c . "'");
 
 
-                        $this->createLog('{checking update on email and batch}', 'eloquaConverted.txt', $sqlQuery, array());
+                        $this->createLog('{checking update on email and batch}', 'eloquaConverted_' . date('Y-m-d') . '.txt', $sqlQuery, array());
                     }
-                    $this->createLog('{On Refresh lead}', 'eloquaConverted.txt', '', $response);
+                    $this->createLog('{On Refresh lead}', 'eloquaConverted_' . date('Y-m-d') . '.txt', '', $response);
                 }
             }
         }
