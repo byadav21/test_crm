@@ -101,7 +101,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $fileRows = file($filename);
 
 
-        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 51))
+        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 111))
         {
             //echo count($fileRows); die;
             $file      = fopen($filename, "r");
@@ -220,7 +220,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         {
 
             echo "<script type=\"text/javascript\">
-                        alert(\"error: Lead Records are up-to 5.\");
+                        alert(\"error: Lead Records are up-to 111.\");
                         window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
                      </script>";
             die;
