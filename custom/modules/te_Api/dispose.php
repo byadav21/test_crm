@@ -28,7 +28,13 @@ $crmDispo = array('New Lead'               => 'Alive',
     'Dropout'                => 'Dropout',
     'Prospect'               => 'Warm',
     'Recycle'                => 'Recycle',
-    'wrap.timeout'           => 'Wrap Out'
+    'wrap.timeout'           => 'Wrap Out',
+    'Program enquiry' 	     => 'Converted',
+    'Payment enquiry' 	     => 'Converted',
+    'Refund enquiry'         => 'Converted',
+    'Referral'               => 'Converted',
+    'Technical' 	     => 'Converted',
+    'Miscellaneous'          => 'Converted'
 );
 
 function createLog($action, $filename, $field = '', $dataArray = array())
