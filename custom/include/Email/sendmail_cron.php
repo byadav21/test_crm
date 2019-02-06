@@ -86,7 +86,7 @@ class FalconideEmail
                 
                 //Marketing Team :
                 'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in',
+                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in','shubhra.kochar@talentedge.in'
                 ),
