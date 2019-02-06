@@ -46,9 +46,8 @@ class updateEloquaStatus
              where 
              l.deleted=0 
              and (l.status='Converted' or l.status_description='Converted')
-             and lc.email_add_c in ('arjun.badhan@gmail.com','priteishmac@gmail.com','kollanag@gmail.com','manvikajhala@gmail.com',
-             'sandeepvasujoshi@gmail.com','koilavikas@gmail.com','ashish.ruwatia@gmail.com','nmalhotra71@gmail.com','kuls@sidbi.in'
-             ,'navalneerad26jun@gmail.com')";
+	     and DATE(l.date_entered) >=  '2019-01-01'";
+             
 
         $leadObj = $db->query($query);
         if ($leadObj)
@@ -71,8 +70,8 @@ class updateEloquaStatus
 
         $DataArr = $this->getLeads();
 
-        //echo "<pre>";
-        //print_r($DataArr);
+        echo "<pre>";
+        print_r($DataArr);
         //die;
 
 
@@ -117,7 +116,7 @@ class updateEloquaStatus
                     //echo "<pre>inUpdate="; print_r($contact); 
                     //echo json_encode($contact); die;
 
-                    $response = $client->put('/data/customObject/7/instance/' . $leadsCstmData['eloqua_customobject_id'], $contact);
+                    $response = $client->put('/data/customObject/7/instance/' . $customobject_id, $contact);
 
                     if ($response->id != '')
                     {
@@ -136,7 +135,10 @@ class updateEloquaStatus
 
                         $this->createLog('{checking update on email and batch}', 'eloquaConverted_' . date('Y-m-d') . '.txt', $sqlQuery, array());
                     }
-                    $this->createLog('{On Refresh lead}', 'eloquaConverted_' . date('Y-m-d') . '.txt', '', $response);
+		    else
+		    {
+                        $this->createLog('{if response have no id}', 'eloquaConverted_' . date('Y-m-d') . '.txt', $email_add_c, array());
+		    }
                 }
             }
         }
