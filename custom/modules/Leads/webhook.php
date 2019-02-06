@@ -22,11 +22,11 @@ function createLog($action, $filename, $field = '', $dataArray = array())
     fclose($file);
 }
 
-//createLog('{when api called from fb}', 'facebookleadCreated.txt', 'xx', $_REQUEST);
+createLog('{when api called from fb}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', 'xx', $_REQUEST);
 
 function getFormName($form_id = '', $furl = '', $access_token = '')
 {
-    //createLog('{inside getFormName function}', 'facebookleadCreated.txt', 'xx', $_REQUEST);
+    createLog('{inside getFormName function}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', 'xx', $_REQUEST);
 
 
     $form_name = '';
@@ -51,7 +51,7 @@ function getFormName($form_id = '', $furl = '', $access_token = '')
     /* inserting into leads */
     $formresponsedata = json_decode($formresponse, true);
     $GLOBALS['log']->special($form_id . '#' . $furl);
-    //createLog('{getFormName resposne}', 'facebookleadCreated.txt', $formresponsedata, $formresponsedata);
+    createLog('{getFormName resposne}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', $formresponsedata, $formresponsedata);
 
     return $formresponsedata;
 }
@@ -61,12 +61,12 @@ $url      = "https://graph.facebook.com/v3.1";
 $GLOBALS['log']->special(json_encode($input));
 $formData = '';
 $form_id  = '';
-//createLog('{Input array call}', 'facebookleadCreated.txt', $url, $input);
+createLog('{Input array call}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', $url, $input);
 
 if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
 {
 
-    //createLog('{inside  empty check entry}', 'facebookleadCreated.txt', 'xx', $_REQUEST);
+    createLog('{inside  empty check entry}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', 'xx', $_REQUEST);
 
     $leadgen_id   = $input['entry'][0]['changes'][0]['value']['leadgen_id'];
     //$access_token = 'EAAKcZB1mOFl4BAE2haWnu4Po8r6vOOkPJkajx5K83WidCOIGIDtoppfNssWR13es9ae4fexZCZB8dhkui92kMBcF92mGzdMxATX6MNbuXQIldmvTGie3QEX79wt9pDVRdO5jhtOTYjQOlYXQmx6uj1fvbNhWZBcHR097Xgj3ZBAZDZD';
@@ -280,7 +280,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
         $leadObj->save();
         if (!$leadObj->id)
         {
-            //createLog('{if lead not created}', 'facebookleadCreated.txt', $lead_d, $_REQUEST);
+            createLog('{if lead not created}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', $lead_d, $_REQUEST);
             echo json_encode(array('status' => 'error', 'msg' => 'Some thing gone wrong!'));
             exit();
         }
@@ -289,7 +289,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
             $sql = "update te_ba_batch set lastCampagain='" . $campagain_d . $lead_d . "' where id='" . $batchid . "'";
             $db->query($sql);
         }
-        //createLog('{when lead created on sucsess}', 'facebookleadCreated.txt', 'xx', $_REQUEST);
+        createLog('{when lead created on sucsess}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', 'xx', $_REQUEST);
 
         echo json_encode(array('status' => 'success', 'msg' => 'Lead saved successfully!'));
         exit();
