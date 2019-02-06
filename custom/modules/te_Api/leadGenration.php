@@ -149,6 +149,7 @@
 	if($_REQUEST['qualification']) $leadObj->education_c= $_REQUEST['qualification'];
 	if($_REQUEST['unknownone']) $leadObj->dummy_one=$_REQUEST['unknownone'];
 	if($_REQUEST['unknowntwo']) $leadObj->dummy_two=$_REQUEST['unknowntwo'];
+	if($_REQUEST['landing_url']) $leadObj->landing_url=$_REQUEST['landing_url'];
 	if($_REQUEST['state']) $leadObj->primary_address_state=$_REQUEST['state'];
 
 	if($term) $leadObj->utm_term_c=$term;
