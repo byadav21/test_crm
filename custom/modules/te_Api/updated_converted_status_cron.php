@@ -46,7 +46,9 @@ class updateEloquaStatus
              where 
              l.deleted=0 
              and (l.status='Converted' or l.status_description='Converted')
-	     and DATE(l.date_entered) >=  '2019-01-01'";
+	     AND date(l.date_entered) >= '".date('Y-m-d',strtotime("-1 days"))."'
+             AND date(l.date_entered) <='".date('Y-m-d')."'";
+        die($query);
              
 
         $leadObj = $db->query($query);
