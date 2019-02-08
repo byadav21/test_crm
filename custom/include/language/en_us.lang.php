@@ -777,6 +777,7 @@ $GLOBALS['app_list_strings']['countries_list']  = array
 
 $GLOBALS['app_list_strings']['country_log']=array (
   'India' => 'India',
+  'United Arab Emirates' => 'United Arab Emirates',
   'Other' => 'Other',
 );
 
