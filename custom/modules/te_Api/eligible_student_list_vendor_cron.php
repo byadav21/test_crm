@@ -29,10 +29,10 @@ class sendVisitReport
         $file        = "TE_Focus_Leads_report";
         $where       = '';
         $filename    = $file . "_" . $this->toDate;
-        $AllLeadData = $this->getAll();
-        $getSummary  = $this->getSummary();
-        //print_r($AllLeadData); die;
-        //echo $data; die;
+        //$AllLeadData = $this->getAll();
+        $getBatches  = $this->getBatches();
+        echo '<pre>'; print_r($getBatches); die;
+        echo $data; die;
 
         $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", "wb");
         fwrite($fp, $AllLeadData);
@@ -64,21 +64,26 @@ class sendVisitReport
     public function getAll()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $leadSql = "SELECT COUNT(leads.id) AS lead_count,
-                    leads.date_entered,
-                    te_ba_batch.id AS batch_id,
-                    te_ba_batch.name AS batch_name,
-                    te_ba_batch.batch_code,
-                    leads.vendor,
-                    te_vendor.id vendor_id
-             FROM leads
-          
-             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-             LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
-             WHERE leads.date_entered >= '$this->fromDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59' 
-             AND leads.vendor LIKE  '%te_focus%'
-             GROUP BY leads.vendor,batch_code";
+        $leadSql = "SELECT  
+                            bb.`id`,
+                            bb.`date_entered`,
+                            bb.`batch_status`,
+                            bb.`batch_code`,
+                            bb.`batch_start_date`,
+                            bb.`duration`,
+                            bb.`batch_completion_date`,
+                            bb.`batch_completion_date_2`,
+                            DATEDIFF(NOW(), bb.batch_completion_date_2) AS diff_of_days
+                     FROM `te_ba_batch` bb
+                     INNER JOIN te_student_batch sb ON bb.id=sb.te_ba_batch_id_c
+                     WHERE bb.deleted=0 and sb.deleted=0
+                       AND DATEDIFF(NOW(), bb.batch_completion_date_2) =90 
+                       #AND DATEDIFF(NOW(), bb.batch_completion_date_2) <=150
+                       AND bb.batch_status IN ('closed',
+                                               'completed',
+                                               'enrollment_closed',
+                                               'planned')
+                    ";
         //echo $leadSql;exit();
 
 
@@ -89,11 +94,9 @@ class sendVisitReport
         {
 
 
-            $programList[$row['batch_id']]['id']         = $row['batch_id'];
-            $programList[$row['batch_id']]['name']       = $row['batch_name'];
-            $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-
-
+            $programList[$row['batch_id']]['id']                            = $row['batch_id'];
+            $programList[$row['batch_id']]['name']                          = $row['batch_name'];
+            $programList[$row['batch_id']]['batch_code']                    = $row['batch_code'];
             $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
             $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
         }
@@ -124,19 +127,31 @@ class sendVisitReport
         return $data;
     }
 
-    public function getSummary()
+    public function getBatches()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $leadSql = "SELECT COUNT(leads.id) AS lead_count
-                         FROM leads
-                         LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                         LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                         LEFT JOIN te_vendor on lower(leads.vendor)=lower(te_vendor.name)
-                         WHERE leads.date_entered >= '$this->fromDate 00:00:00' AND leads.date_entered <= '$this->toDate 23:59:59' 
-                         AND leads.vendor LIKE  '%te_focus%'";
+        $leadSql = "SELECT 
+                    `id`,
+                    `date_entered`,
+                    `batch_status`, 
+                    `batch_code`,
+                    `batch_start_date`,
+                    `duration`,
+                    `batch_completion_date`,
+                    `batch_completion_date_2`,
+                    DATEDIFF(NOW(),batch_completion_date_2) as diff_of_days
+                    FROM `te_ba_batch`
+                    WHERE deleted=0
+                    AND DATEDIFF(NOW(),batch_completion_date_2) =90
+                    #AND DATEDIFF(NOW(),batch_completion_date_2) <=150
+                    AND batch_status IN ('closed','completed','enrollment_closed','planned')";
         $leadObj = $db->query($leadSql);
-        $row     = $db->fetchByAssoc($leadObj);
-        return array('total' => $row['lead_count']);
+        $vendorOptions = array();
+        while ($row          = $db->fetchByAssoc($leadObj))
+        {   
+            $vendorOptions[$row['batch_code']] = $row['diff_of_days'];
+        }
+        return $vendorOptions;
     }
 
 }
