@@ -72,19 +72,20 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
-        
+
         $report_action = '';
         $reportAccess  = reportAccessLog();
-       
+
         $current_user_id = $current_user->id;
-        $report_action = isset($GLOBALS['action'])? $GLOBALS['action'] : '';
-                  
-        
-        if(!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1)){
-           echo 'You are not authorized to access!';
-           return ;
+        $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
+
+
+        if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+        {
+            echo 'You are not authorized to access!';
+            return;
         }
-        
+
         $vendorID   = $current_user->te_vendor_users_1te_vendor_ida;
         $vendorName = $current_user->te_vendor_users_1_name;
         $is_Vendor  = 0;
@@ -171,7 +172,7 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
-        
+
 
         if (!empty($selected_vendor))
         {
@@ -207,11 +208,11 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-                #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-                #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
                  WHERE l.deleted=0
+                   #AND DATE(l.date_entered)>='2018-11-11'
+                   #AND DATE(l.date_entered)<='2018-11-11'
                    $wherecl
-              GROUP BY date(l.date_entered),l.status_description,te_vendor.id,te_ba_batch.batch_code order by  l.date_entered ";
+              GROUP BY date(l.date_entered),l.status_description,te_vendor.id,te_ba_batch.batch_code order by  l.date_entered,te_ba_batch.batch_code ";
         //echo $leadSql;exit();
 
 
@@ -226,21 +227,22 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
                 $row['vendor'] = $vendor;
             }
 
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']                                                                = $row['batch_id'];
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']                                                              = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']                                                              = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']                                                                  = isset($row['vendor']) ? $row['vendor'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['date_entered']                                                            = isset($row['date_entered']) ? $row['date_entered'] : 'NULL';
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['lead_count']                                                              = $row['lead_count'];
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['status_description']                                                      = $row['status_description'];
-            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['batch_id']                                                                = $row['batch_id'];
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['batch_name']                                                              = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['batch_code']                                                              = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['vendor']                                                                  = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['date_entered']                                                            = isset($row['date_entered']) ? $row['date_entered'] : 'NULL';
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['lead_count']                                                              = $row['lead_count'];
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['status_description']                                                      = $row['status_description'];
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
         }
 
         $StatusList = $statusHeader;
 
 
         //echo '<pre>';
-        //print_r($StatusList); die;
+        //print_r($programList);
+        //die;
         #PS @Pawan
 
 
