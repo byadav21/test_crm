@@ -19,7 +19,7 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
     function statusHeader()
     {
         global $db;
-        $proSql      = "select status_description from leads group by status_description order by status_description";
+        $proSql      = "select status_description from leads where status_description!='' group by status_description order by status_description";
         $pro_Obj     = $db->query($proSql);
         $pro_Options = array();
         while ($row         = $db->fetchByAssoc($pro_Obj))
