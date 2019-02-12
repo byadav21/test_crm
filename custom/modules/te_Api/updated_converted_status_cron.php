@@ -34,12 +34,14 @@ class updateEloquaStatus
         $leadsCstmData = array();
 
         $query = "SELECT              
-                    l.id lead_id,
+                    l.date_entered,
+		    l.id lead_id,
                     lc.eloqua_contact_id,
                     lc.eloqua_customobject_id,
                     lc.te_ba_batch_id_c,
                     lc.email_add_c,
-                    bb.batch_status
+                    bb.batch_status,
+		    bb.batch_code
              FROM leads_cstm lc
              INNER JOIN leads l ON lc.id_c=l.id
              inner join te_ba_batch bb on lc.te_ba_batch_id_c=bb.id
@@ -47,9 +49,15 @@ class updateEloquaStatus
              l.deleted=0 
              and (l.status='Converted' or l.status_description='Converted')
 	     AND date(l.date_entered) >= '".date('Y-m-d',strtotime("-1 days"))."'
-             AND date(l.date_entered) <='".date('Y-m-d')."'";
-        die($query);
-             
+             AND date(l.date_entered) <='".date('Y-m-d')."'
+	     #AND date(l.date_entered) >= '2017-01-01' 
+	     #AND date(l.date_entered) <='2017-06-31'
+             and (l.status='Converted' or l.status_description='Converted') 
+	      order by l.date_entered";
+
+	echo '<pre>'.$query; 
+	//die();
+                     
 
         $leadObj = $db->query($query);
         if ($leadObj)
