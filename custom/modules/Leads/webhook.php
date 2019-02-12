@@ -70,7 +70,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
 
     $leadgen_id   = $input['entry'][0]['changes'][0]['value']['leadgen_id'];
     //$access_token = 'EAAKcZB1mOFl4BAE2haWnu4Po8r6vOOkPJkajx5K83WidCOIGIDtoppfNssWR13es9ae4fexZCZB8dhkui92kMBcF92mGzdMxATX6MNbuXQIldmvTGie3QEX79wt9pDVRdO5jhtOTYjQOlYXQmx6uj1fvbNhWZBcHR097Xgj3ZBAZDZD';
-    $access_token='EAAKcZB1mOFl4BAL54wR7plZCnYQ3ZBafG4JUb2klZCXKAoQWpD5PpZAHodZAwxQpzfV6BR0it3tdxJ502dqdnZCBYmK8jt5pR7PVJhlZAwjzNpJGhziiVFRSrEliGgNJqZBj13Yiv1NfGtDiCZAwHKVZAB4JeYx3oPCGJ0ZD';
+    $access_token = 'EAAKcZB1mOFl4BAL54wR7plZCnYQ3ZBafG4JUb2klZCXKAoQWpD5PpZAHodZAwxQpzfV6BR0it3tdxJ502dqdnZCBYmK8jt5pR7PVJhlZAwjzNpJGhziiVFRSrEliGgNJqZBj13Yiv1NfGtDiCZAwHKVZAB4JeYx3oPCGJ0ZD';
     $leadurl      = $url . '/' . $leadgen_id . '?access_token=' . $access_token;
     $formId       = $input['entry'][0]['changes'][0]['value']['form_id'];
     $formData     = getFormName($formId, $url, $access_token);
@@ -99,6 +99,8 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
 
     if ($fbresponsedecode['id'])
     {
+        global $sugar_config, $app_list_strings;
+
         $date_entered   = $fbresponsedecode['created_time']; /* facebook created time */
         $source_lead_id = $fbresponsedecode['id'];  /* facebook lead id */
         $source_type    = 'Facebook';
@@ -122,8 +124,34 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
                 {
                     $fieldArr['phone_number'] = str_replace($replacestr, '', $val['values'][0]);
                 }
+                if ($val['name'] && $val['name'] == 'country')
+                {
+                    $fieldArr['country'] = str_replace($replacestr, '', $val['values'][0]);
+                }
             }
         }
+
+        
+        $country_name        = 'India';
+        $country_code        = '+91';
+        
+        if (isset($fieldArr['country']) && $fieldArr['country'] != 'IN')
+        {
+
+            $country_name = $app_list_strings['countries_list_code'][$fieldArr['country']]['name'];
+            $country_code = $app_list_strings['countries_list_code'][$fieldArr['country']]['code'];
+
+            if ($country_name != '')
+            {
+                $country_name = ucwords(strtolower($country_name));
+            }
+            
+            createLog('{other_country_log}', 'facebook_other_country_log_' . date('Y-m-d') . '.txt', $country_name, $fbresponsedecode['field_data']);
+        }
+
+
+
+
         $name      = explode(' ', $fieldArr['full_name']); /* facebook name */
         $firstname = ($name[0]) ? $name[0] : '';
         $lastname  = ($name[1]) ? $name[1] : '';
@@ -132,7 +160,16 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
         /* Fb capture Data */
         $name         = $firstname;
         $lastnamel    = $lastname;
-        $phone        = str_replace("+91", "", $fieldArr['phone_number']);
+        
+        if ($fieldArr['country'] == 'IN')
+        {
+            $phone = str_replace("+91", "", $fieldArr['phone_number']);
+        }
+        else
+        {
+            $phone = $fieldArr['phone_number'];
+        }
+        
         $email        = $fieldArr['email'];
         $source       = 'TE_Focus';
         $medium       = 'facebook';
@@ -254,6 +291,14 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
             $leadObj->primary_address_city = $_REQUEST['city'];
         if ($_REQUEST['functional_area'])
             $leadObj->functional_area_c    = $_REQUEST['functional_area'];
+        
+        if ($country_code)
+            $leadObj->country_code            = $country_code;
+        if ($country_name)
+            $leadObj->primary_address_country = $country_name;
+        if ($country_name)
+            $leadObj->country_log             = $country_name;
+
         if ($term)
             $leadObj->utm_term_c           = $term;
         if ($source)
