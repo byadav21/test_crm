@@ -131,7 +131,8 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
             }
         }
 
-        
+        createLog('{other_country_log}', 'facebook_form_log_' . date('Y-m-d') . '.txt', $fieldArr['country'], $fbresponsedecode['field_data']);         
+
         $country_name        = 'India';
         $country_code        = '+91';
         
