@@ -148,7 +148,7 @@ require_once('custom/modules/te_Api/leads_override.php');
     $leadObj->email_add_c          = $email;
     $leadObj->phone_mobile         = $phone;
     
-    if (isset($_REQUEST['country_code']) && isset($_REQUEST['country_name']) && $_REQUEST['country_name'] != 'India')
+    if (isset($_REQUEST['country_code']) && isset($_REQUEST['country_name']) && $_REQUEST['country_name'] != 'India' && $_REQUEST['country_code'] != '')
     {
         $leadObj->phone_mobile = '+' . $_REQUEST['country_code'] . ' ' . $phone;
     }
