@@ -426,7 +426,7 @@ function __get_student_batch_id($student_arr = array())
         $checkSaveBean             = $LBean->save();
         if ($checkSaveBean)
         {
-            createLog('{captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt', $sql, $debugArr);
+            createLog('{captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt',$student_arr['lead_id'],$student_arr);
         }
         
         #get new student batch id
