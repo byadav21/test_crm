@@ -52,7 +52,6 @@ class updateEloquaStatus
              AND date(l.date_entered) <='".date('Y-m-d')."'
 	     #AND date(l.date_entered) >= '2017-01-01' 
 	     #AND date(l.date_entered) <='2017-06-31'
-             and (l.status='Converted' or l.status_description='Converted') 
 	      order by l.date_entered";
 
 	echo '<pre>'.$query; 
