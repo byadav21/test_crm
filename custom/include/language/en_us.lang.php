@@ -425,6 +425,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_NK'=>'NK', 
   'CO_AV'=> 'AV',
   'CO_MT'=>'MT',
+  'CO_Vivek'=>'Vivek',
 );
 
 $GLOBALS['app_list_strings']['lead_status_details_custom_dom']=array (

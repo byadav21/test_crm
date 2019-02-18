@@ -457,7 +457,7 @@ class syncsaptables
                             JOIN `te_payment_details` `pd` on `sp`.`id` = `pd`.`student_payment_id`
                             JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
                            JOIN `leads` on `sb`.`leads_id` = `leads`.`id`
-                     WHERE `pd.deleted=0  AND lp.deleted=0  AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
+                     WHERE pd.deleted=0  AND lp.deleted=0  AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
