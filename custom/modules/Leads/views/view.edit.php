@@ -17,11 +17,11 @@ class LeadsViewEdit extends ViewEdit
     {
         //print_r($_REQUEST);
         global $current_user, $app_strings,$db;
+        $getRoleSlug  = getUsersRole();
+        $usersRole=''; //Contact Center Counselor 
+        $usersRole= !empty($getRoleSlug[$current_user->id]['role_name'])? $getRoleSlug[$current_user->id]['role_name'] : '';
         
         $cue_txt ='N/A';
-            
-        
-
         $sql = "select batch_cc_cue from te_ba_batch where id='" . $this->bean->te_ba_batch_id_c . "' and deleted=0";
         $res = $db->query($sql);
 
@@ -148,10 +148,16 @@ class LeadsViewEdit extends ViewEdit
             var jjj = $("#cute_txt_id").val();
             var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="'+jjj+'" data-placement="bottom"></i>';
 	    var dispo_reason = '<?php echo $dispo_reason; ?>';
+            var role_name    = '<?php echo $usersRole; ?>';
 
             $(document).ready(function () {
                 
-                
+                //alert(role_name);
+                if(role_name=='Contact Center Counselor'){
+                     $( "#tab1" ).hide();
+                     $( "#tabcontent1" ).hide();
+                     //$( "#tabcontent0" ).hide();
+                }
                 $("#primary_address_country_label").text('');
                 
                 $("input#batch_c").after(xxx);
