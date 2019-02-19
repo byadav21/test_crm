@@ -19,18 +19,21 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
     function statusHeader()
     {
         $headerArr = array();
-
-        $headerArr = array(
-            'id'                   => 'Lead ID',
-            'date_entered'         => 'Date',
-            'vendor'               => 'Vendor',
-            'batch_code'           => 'Batch Code',
-            'status'               => 'Status',
-            'status_description'   => 'Sub Status',
-            'disposition_reason'   => 'Disposition Reason',
-            'primary_address_city' => 'City',
-            'comment'              => 'Comments',
-            'note'                 => 'Note'
+           
+            $headerArr = array(
+            'id'                      => 'Lead ID',
+            'date_entered'            => 'Date',
+            'vendor'                  => 'Vendor',
+            'batch_code'              => 'Batch Code',
+            'status'                  => 'Status',
+            'status_description'      => 'Sub Status',
+            'disposition_reason'      => 'Disposition Reason',
+            'primary_address_city'    => 'City',
+            'note'                    => 'Note',
+            'comment'                 => 'Comments',
+            'primary_address_state'   => 'state',
+            'primary_address_country' => 'country',
+            'landing_url'             => 'Landing Url'
                 #'id'                   =>'User Name',
         );
 
@@ -177,7 +180,10 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
                     l.disposition_reason,
                     l.primary_address_city,
                     l.note,
-                    l.comment
+                    l.comment,
+                    l.primary_address_state,
+                    l.primary_address_country,
+                    lc.landing_url
                     
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
@@ -197,16 +203,19 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         {
 
             //isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-            $programList[$row['id']]['id']                   = $row['id'];
-            $programList[$row['id']]['date_entered']         = $row['date_entered'];
-            $programList[$row['id']]['vendor']               = isset($row['vendor']) ? $row['vendor'] : 'N/A';
-            $programList[$row['id']]['batch_code']           = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
-            $programList[$row['id']]['status']               = isset($row['status']) ? $row['status'] : 'N/A';
-            $programList[$row['id']]['status_description']   = isset($row['status_description']) ? $row['status_description'] : 'N/A';
-            $programList[$row['id']]['disposition_reason']   = isset($row['disposition_reason']) ? $row['disposition_reason'] : 'N/A';
-            $programList[$row['id']]['primary_address_city'] = isset($row['primary_address_city']) ? $row['primary_address_city'] : 'N/A';
-            $programList[$row['id']]['note']                 = addslashes(isset($row['note']) ? $row['note'] : 'N/A');
-            $programList[$row['id']]['comment']              = addslashes(isset($row['comment']) ? $row['comment'] : 'N/A');
+            $programList[$row['id']]['id']                      = $row['id'];
+            $programList[$row['id']]['date_entered']            = $row['date_entered'];
+            $programList[$row['id']]['vendor']                  = isset($row['vendor']) ? $row['vendor'] : 'N/A';
+            $programList[$row['id']]['batch_code']              = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
+            $programList[$row['id']]['status']                  = isset($row['status']) ? $row['status'] : 'N/A';
+            $programList[$row['id']]['status_description']      = isset($row['status_description']) ? $row['status_description'] : 'N/A';
+            $programList[$row['id']]['disposition_reason']      = isset($row['disposition_reason']) ? $row['disposition_reason'] : 'N/A';
+            $programList[$row['id']]['primary_address_city']    = isset($row['primary_address_city']) ? $row['primary_address_city'] : 'N/A';
+            $programList[$row['id']]['note']                    = addslashes(isset($row['note']) ? $row['note'] : 'N/A');
+            $programList[$row['id']]['comment']                 = addslashes(isset($row['comment']) ? $row['comment'] : 'N/A');
+            $programList[$row['id']]['primary_address_state']   = addslashes(isset($row['primary_address_state']) ? $row['primary_address_state'] : 'N/A');
+            $programList[$row['id']]['primary_address_country'] = addslashes(isset($row['primary_address_country']) ? $row['primary_address_country'] : 'N/A');
+            $programList[$row['id']]['landing_url']             = addslashes(isset($row['landing_url']) ? $row['landing_url'] : 'N/A');
         }
 
         $StatusList = $statusHeader;
@@ -233,8 +242,11 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $data .= ",Sub Status";
             $data .= ",Disposition Reason";
             $data .= ",City";
-            $data .= ",Comments";
             $data .= ",Note";
+            $data .= ",Comments";
+            $data .= ",State";
+            $data .= ",Country";
+            $data .= ",Landing Url";
             $data .= "\n";
 
             

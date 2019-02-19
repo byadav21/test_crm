@@ -159,6 +159,25 @@
                 step: 1,
                 weekNumbers: false,
             });
+            $(document).ready(function () {
+              $("#search_form").on('submit', (function(e) {
 
+                   var from_date    = $('#from_date').val();
+                   var to_date      = $('#to_date').val();
+
+                   if(from_date=='' || from_date ==null){
+                       $("#from_date").focus();
+                        alert('Please select From-Date!'); return false;
+                   }
+
+                   if(to_date=='' || to_date ==null){
+                       $("#to_date").focus();
+                        alert('Please select To-Date!'); return false;
+                   }
+
+
+              }));
+
+         });
         </script>
     {/literal}
