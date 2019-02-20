@@ -419,9 +419,36 @@ function __get_student_batch_id($student_arr = array())
         $GLOBALS['db']->query("UPDATE leads SET status='Converted',status_description='Converted' ,converted_date='".date('Y-m-d')."' WHERE id='".$student_arr['lead_id']."'");
         */
         
+        $c_status             = 'Converted';
+        $c_status_description = 'Converted';
+        $c_test_status        = 'NA';
+
+        if (isset($data['test_status']) && !empty($data['test_status']) && $data['test_status'] == 'fees')
+        {
+            $c_status             = 'Alive';
+            $c_status_description = 'New Lead';
+            $c_test_status        = 'fees';
+            createLog('{Test Status Payment}', 'test_status_payment_' . date('Y-m-d') . '_log.txt',$data['test_status'],$student_arr);
+        }
+        if (isset($data['test_status']) && !empty($data['test_status']) && $data['test_status'] == 'pass')
+        {
+            $c_status             = 'Warm';
+            $c_status_description = 'Prospect';
+            $c_test_status        = 'pass';
+            createLog('{Test Status Payment}', 'test_status_payment_' . date('Y-m-d') . '_log.txt',$data['test_status'],$student_arr);
+        }
+        if (isset($data['test_status']) && !empty($data['test_status']) && $data['test_status'] == 'fail')
+        {
+            $c_status             = 'Dead';
+            $c_status_description = 'Not Eligible';
+            $c_test_status        = 'fail';
+            createLog('{Test Status Payment}', 'test_status_payment_' . date('Y-m-d') . '_log.txt',$data['test_status'],$student_arr);
+        }
+
         $LBean                     = BeanFactory::getBean('Leads', $student_arr['lead_id']);
-        $LBean->status             = 'Converted';
-        $LBean->status_description = 'Converted';
+        $LBean->status             = $c_status;
+        $LBean->status_description = $c_status_description;
+        $LBean->test_status        = $c_test_status;
         $LBean->converted_date     = date('Y-m-d');
         $checkSaveBean             = $LBean->save();
         if ($checkSaveBean)
