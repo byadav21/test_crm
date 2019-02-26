@@ -258,10 +258,12 @@ class syncsaptables
                                     `p`.`short_name` AS `OcrCode3`,
                                     `te_ba_batch`.`BusinessSegment` AS `OcrCode4`,
                                     (CASE
-                                         WHEN (`l`.`lead_source_types` IN ('NULL',
-                                                                           'CC')) THEN 'Digital'
-                                         ELSE 'Channel'
-                                     END) AS `OcrCode5`,
+                                        WHEN (`l`.`lead_source_types` = 'null') THEN 'Digital'
+                                        WHEN (`l`.`lead_source_types` IS NULL) THEN 'Digital'
+                                        WHEN (`l`.`lead_source_types` ='') THEN 'Digital'
+                                        WHEN (`l`.`lead_source_types` ='CC') THEN 'Digital'
+                                        ELSE 'Channel'
+                                   END) AS `OcrCode5`,
                                     `sb`.`batch_code` AS `Project`,
                                     replace(`p`.`id`, '-', '') AS `U_CourseID`,
                                     `pd`.`SAP_Status` AS `SAP_Status`
@@ -278,7 +280,7 @@ class syncsaptables
                              WHERE `inst`.`short_name` <> ''
                                     AND `p`.`short_name` <> ''
                                     AND `te_ba_batch`.`BusinessSegment` <> ''
-                                    AND `l`.`lead_source_types` <> '' 
+                                    #AND `l`.`lead_source_types` <> '' 
                                     AND  pd.deleted=0
                                     AND lp.deleted=0 
                                     AND sp.date_entered > '$SyncSapTimestamp' AND sp.date_entered <= '$currentTime'

@@ -260,10 +260,12 @@ class syncsaptables
                                     `p`.`short_name` AS `OcrCode3`,
                                     `te_ba_batch`.`BusinessSegment` AS `OcrCode4`,
                                     (CASE
-                                         WHEN (`l`.`lead_source_types` IN ('NULL',
-                                                                           'CC')) THEN 'Digital'
-                                         ELSE 'Channel'
-                                     END) AS `OcrCode5`,
+                                        WHEN (`l`.`lead_source_types` = 'null') THEN 'Digital'
+                                        WHEN (`l`.`lead_source_types` IS NULL) THEN 'Digital'
+                                        WHEN (`l`.`lead_source_types` ='') THEN 'Digital'
+                                        WHEN (`l`.`lead_source_types` ='CC') THEN 'Digital'
+                                        ELSE 'Channel'
+                                   END) AS `OcrCode5`,
                                     `sb`.`batch_code` AS `Project`,
                                      replace(`p`.`id`, '-', '') AS `U_CourseID`,
                                     `pd`.`SAP_Status` AS `SAP_Status`
@@ -282,7 +284,7 @@ class syncsaptables
                                     AND pd.deleted=0
                                     AND lp.deleted=0 
                                     AND `te_ba_batch`.`BusinessSegment` <> ''
-                                    AND `l`.`lead_source_types` <> ''
+                                    #AND `l`.`lead_source_types` <> ''
                              GROUP BY `sp`.`id`";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
