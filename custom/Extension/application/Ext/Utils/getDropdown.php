@@ -96,21 +96,44 @@ function assigned_users_list(){
 	}
 	return $dropDown;
 }
-function reportingUser($currentUserId){
-			$userObj = new User();
-			$userObj->disable_row_level_security = true;
-			$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."' AND users.employee_status='Active'");
-			
-			if(!empty($userList)){
-				
-				foreach($userList as $record){
+function reportingUser($currentUserId)
+{
+    global $current_user;
+    $userObj                             = new User();
+    $userObj->disable_row_level_security = true;
 
-					if(!empty($record->reports_to_id)){
-						$GLOBALS['userArr'][] = $record->name."__".$record->id;
-						reportingUser($record->id);
-					}
-				}
-			}
-		}
-		 
+    if ($current_user->is_admin == 1)
+    {
+        $userList = $userObj->get_full_list("", "users.employee_status='Active'");
+
+        if (!empty($userList))
+        {
+
+            foreach ($userList as $record)
+            {
+                $GLOBALS['userArr'][] = $record->name . "__" . $record->id;
+            }
+        }
+    }
+    else
+    {
+
+        $userList = $userObj->get_full_list("", "users.reports_to_id='" . $currentUserId . "' AND users.employee_status='Active'");
+
+        if (!empty($userList))
+        {
+
+            foreach ($userList as $record)
+            {
+
+                if (!empty($record->reports_to_id))
+                {
+                    $GLOBALS['userArr'][] = $record->name . "__" . $record->id;
+                    reportingUser($record->id);
+                }
+            }
+        }
+    }
+}
+
 ?>
