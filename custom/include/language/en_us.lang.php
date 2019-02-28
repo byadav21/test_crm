@@ -367,6 +367,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_Click2Call'=>'Click2Call',
   'CC_MARK'=>'mark',
   'CC_XLRI'=>'XLRI Forms',
+  'CC_Crosssell_Churned'=>'Crosssell Churned',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
