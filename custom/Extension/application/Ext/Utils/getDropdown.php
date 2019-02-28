@@ -63,7 +63,7 @@ function getBatchList(){
 	static $dropDown = null;
 	if(!$dropDown){
 		global $db;
-		$query = "SELECT distinct(b.id),b.name FROM `te_ba_batch` "
+		$query = "SELECT distinct(b.id),b.name,b.batch_code FROM `te_ba_batch` "
                         . "b INNER JOIN leads_cstm lc ON b.id=lc.te_ba_batch_id_c "
                         . " where b.deleted=0 "
                         . " and b.batch_status in ('enrollment_in_progress')";
@@ -71,9 +71,11 @@ function getBatchList(){
 		$dropDown = array();
 		$dropDown[''] = '';
 		while (($row = $db->fetchByAssoc($result)) != null) {
-			$dropDown[$row['id']] = $row['batch_code'];
+			$dropDown[$row['id']] = $row['name'].' ( '.$row['batch_code'].' ) ';
 		}
 	}
+       
+        
 	return $dropDown;
 }
 # Current Users Details
