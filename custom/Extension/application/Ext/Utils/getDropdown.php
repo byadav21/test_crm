@@ -63,12 +63,15 @@ function getBatchList(){
 	static $dropDown = null;
 	if(!$dropDown){
 		global $db;
-		$query = "SELECT distinct(b.id),b.name FROM `te_ba_batch` b INNER JOIN leads_cstm lc ON b.id=lc.te_ba_batch_id_c";
+		$query = "SELECT distinct(b.id),b.name FROM `te_ba_batch` "
+                        . "b INNER JOIN leads_cstm lc ON b.id=lc.te_ba_batch_id_c "
+                        . " where b.deleted=0 "
+                        . " and b.batch_status in ('enrollment_in_progress')";
 		$result = $db->query($query, false);
 		$dropDown = array();
 		$dropDown[''] = '';
 		while (($row = $db->fetchByAssoc($result)) != null) {
-			$dropDown[$row['id']] = $row['name'];
+			$dropDown[$row['id']] = $row['batch_code'];
 		}
 	}
 	return $dropDown;
@@ -94,7 +97,7 @@ function assigned_users_list(){
 function reportingUser($currentUserId){
 			$userObj = new User();
 			$userObj->disable_row_level_security = true;
-			$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+			$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."' AND users.employee_status='Active'");
 			
 			if(!empty($userList)){
 				

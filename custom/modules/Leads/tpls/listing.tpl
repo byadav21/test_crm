@@ -461,3 +461,12 @@ function lvg_nav(m,id,act,offset,t){
 </script>
 <script type="text/javascript" src="include/InlineEditing/inlineEditing.js"></script>
 {/if}
+    
+    <style>
+    {literal}
+        
+           #date_entered_advanced_range_div{position:relative;} 
+           #date_entered_advanced_trigger{position:absolute; right:15px; top:1px !important;}
+        </style>    
+    {/literal}
+
