@@ -6131,5 +6131,25 @@ function getTaxStatus($user_id=0,$dated=false)
         }   
         return $pro_Options;
     }
-
-
+    
+    
+ function getUsersRole()
+    {
+        global $db;
+        $proSql      = "SELECT slug, 
+                        user_id, 
+                        name role_name
+                                                 FROM acl_roles
+                                INNER JOIN acl_roles_users ON acl_roles_users.role_id = acl_roles.id
+                                AND acl_roles.deleted =0
+                                AND acl_roles_users.deleted =0";
+        $pro_Obj     = $db->query($proSql);
+        $pro_Options = array();
+        while ($row         = $db->fetchByAssoc($pro_Obj))
+        {
+            $pro_Options[$row['user_id']]['user_id']   = $row['user_id'];
+            $pro_Options[$row['user_id']]['slug']      = $row['slug'];
+            $pro_Options[$row['user_id']]['role_name'] = $row['role_name'];
+        }
+        return $pro_Options;
+    }

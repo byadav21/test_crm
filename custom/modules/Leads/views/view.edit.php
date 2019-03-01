@@ -16,14 +16,14 @@ class LeadsViewEdit extends ViewEdit
     function display()
     {
         //print_r($_REQUEST);
-        global $current_user, $app_strings,$db;
-        
-        $cue_txt ='N/A';
-            
-        
+        global $current_user, $app_strings, $db;
+        $getRoleSlug = getUsersRole();
+        $usersRole   = ''; //Contact Center Counselor 
+        $usersRole   = !empty($getRoleSlug[$current_user->id]['role_name']) ? $getRoleSlug[$current_user->id]['role_name'] : 'NA';
 
-        $sql = "select batch_cc_cue from te_ba_batch where id='" . $this->bean->te_ba_batch_id_c . "' and deleted=0";
-        $res = $db->query($sql);
+        $cue_txt = 'N/A';
+        $sql     = "select batch_cc_cue from te_ba_batch where id='" . $this->bean->te_ba_batch_id_c . "' and deleted=0";
+        $res     = $db->query($sql);
 
         if ($db->getRowCount($res) > 0)
         {
@@ -34,11 +34,11 @@ class LeadsViewEdit extends ViewEdit
             }
         }
         //echo '$cue_txt==='.$cue_txt;
-        
+
         $disableBatch = false;
         if (!is_admin($current_user) && !empty($this->bean->id))
         {
-            
+
             //check users
             self::$reporters[] = $this->bean->assigned_user_id;
             self::getUsers($this->bean->assigned_user_id);
@@ -107,18 +107,21 @@ class LeadsViewEdit extends ViewEdit
                 $state_list .= ' selected ';
             $state_list .= ' >' . $val . '</option>';
         }
-        
+
         //added hidden box for lead check
-        echo "<input type='hidden' id='CheckEditView' value='".$_REQUEST['record']."'>"; 
-        echo "<input type='hidden' id='cute_txt_id' value='".$cue_txt."'>"; 
-        
+        //echo 'xxxxxxxxxxx'.$usersRole;
+        echo "<input type='hidden' id='CheckEditView' value='" . $_REQUEST['record'] . "'>";
+        echo "<input type='hidden' id='cute_txt_id' value='" . $cue_txt . "'>";
+        echo "<input type='hidden' id='role_name_id' value='" . $usersRole . "'>";
+
         //print_r($GLOBALS['app_list_strings']['indian_states']); die;
 
         $this->ss->assign('countries_list', $countries_list);
         $this->ss->assign('state_list', $state_list);
         $this->ss->assign('disableBatch', '$disableBatch');
         $this->ss->assign('disableDisposition', '0');
-        $this->ss->assign('recID', $this->bean->id);
+        $this->ss->assign('disableDisposition', '0');
+      
         if (isset($_SESSION['currentCall']) && !empty($_SESSION['currentCall']))
         {
             $this->ss->assign('disableDisposition', '1');
@@ -141,35 +144,46 @@ class LeadsViewEdit extends ViewEdit
         else
         {
             $this->ss->assign('from_pusher', '0');
-        }$dispo_reason=$this->bean->disposition_reason;
+        }$dispo_reason = $this->bean->disposition_reason;
         ?>
         <style>.dcQuickEdit{display:none!important}</style>
         <script>
             var jjj = $("#cute_txt_id").val();
-            var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="'+jjj+'" data-placement="bottom"></i>';
-	    var dispo_reason = '<?php echo $dispo_reason; ?>';
+            var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="' + jjj + '" data-placement="bottom"></i>';
+            var dispo_reason = '<?php echo $dispo_reason; ?>';
+            var role_name = '<?php echo $usersRole; ?>';
 
             $(document).ready(function () {
-                
-                
+
+                //alert(role_name);
+                if (role_name == 'Contact Center Counselor') {
+                    $("#tab1").hide();
+                    $("#tabcontent1").hide();
+                    //$( "#tabcontent0" ).hide();
+
+                    if ($("#status_description").val() == 'Converted') {
+
+                        $("#tabcontent0").click();
+                    }
+                }
                 $("#primary_address_country_label").text('');
-                
+
                 $("input#batch_c").after(xxx);
-                
+
                 $("#primary_address_state").replaceWith('<select id="primary_address_state" name="primary_address_state" class="ProductDetailsQuantityTextBox"><?php
-                                    $state_list='<option value="0">Select State</option>';
-                                    foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
-                                    {   
-                                        
-                                        $state_list .= '<option value="' . $key . '"';
-                                        if ($this->bean->primary_address_state == $key)
-                                            $state_list .= ' selected ';
-                                          $state_list .= ' >' . $val . '</option>';
-                                    }
-                                    echo $state_list;
-                                    ?></select>');
+        $state_list   = '<option value="0">Select State</option>';
+        foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
+        {
+
+            $state_list .= '<option value="' . $key . '"';
+            if ($this->bean->primary_address_state == $key)
+                $state_list .= ' selected ';
+            $state_list .= ' >' . $val . '</option>';
+        }
+        echo $state_list;
+        ?></select>');
                 $('#primary_address_country').hide();
-                
+
                 $('#country_log').change(function () {
                     if ($('#country_log').val() == 'Other') {
                         $('#primary_address_country').show();
@@ -181,26 +195,26 @@ class LeadsViewEdit extends ViewEdit
                         $('#primary_address_country').hide();
                         $("#primary_address_state")
                                 .replaceWith('<select id="primary_address_state" name="primary_address_state" class="ProductDetailsQuantityTextBox"><?php
-                                    $state_list='<option value="0">Select State</option>';
-                                    foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
-                                    {
-                                        $state_list .= '<option value="' . $key . '"';
-                                        if ($this->bean->primary_address_state == $key)
-                                            $state_list .= ' selected ';
-                                         $state_list .=  ' >' . $val . '</option>';
-                                    }
-                                    echo $state_list;
-                                    ?></select>');
+        $state_list = '<option value="0">Select State</option>';
+        foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
+        {
+            $state_list .= '<option value="' . $key . '"';
+            if ($this->bean->primary_address_state == $key)
+                $state_list .= ' selected ';
+            $state_list .= ' >' . $val . '</option>';
+        }
+        echo $state_list;
+        ?></select>');
 
                         $("#primary_address_country_label").text('');
 
                     }
-                    
-                     
-                    
+
+
+
                 });
-                
-              
+
+
 
 
                 //Lead Referral hide /show
@@ -283,10 +297,10 @@ class LeadsViewEdit extends ViewEdit
                     $("#status_description").append('<option></option>');
 
                     /*if (status_detail == 'Call Back') {
-                        $("#status_description").append('<option value="Call Back" selected="selected" >Call Back</option>');
-                    } else {
-                        $("#status_description").append('<option value="Call Back" >Call Back</option>');
-                    }*/
+                     $("#status_description").append('<option value="Call Back" selected="selected" >Call Back</option>');
+                     } else {
+                     $("#status_description").append('<option value="Call Back" >Call Back</option>');
+                     }*/
                     if (status_detail == 'Follow Up') {
                         $("#status_description").append('<option value="Follow Up" selected="selected">Follow Up</option>');
                     } else {
@@ -313,11 +327,11 @@ class LeadsViewEdit extends ViewEdit
                     } else {
                         $("#status_description").append('<option >Wrong Number</option>');
                     }
-//                    if (status_detail == 'Ringing Multiple Times') {
-//                        $("#status_description").append('<option  selected="selected" >Ringing Multiple Times</option>');
-//                    } else {
-//                        $("#status_description").append('<option>Ringing Multiple Times</option>');
-//                    }
+        //                    if (status_detail == 'Ringing Multiple Times') {
+        //                        $("#status_description").append('<option  selected="selected" >Ringing Multiple Times</option>');
+        //                    } else {
+        //                        $("#status_description").append('<option>Ringing Multiple Times</option>');
+        //                    }
                     if (status_detail == 'Not Enquired') {
                         $("#status_description").append('<option  selected="selected" >Not Enquired</option>');
                     } else {
@@ -329,42 +343,42 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option>Not Eligible</option>');
                     }
                     /*if (status_detail == 'Rejected') {
-                        $("#status_description").append('<option  selected="selected" >Rejected</option>');
-                    } else {
-                        $("#status_description").append('<option>Rejected</option>');
-                    }*/
+                     $("#status_description").append('<option  selected="selected" >Rejected</option>');
+                     } else {
+                     $("#status_description").append('<option>Rejected</option>');
+                     }*/
                     if (status_detail == 'Fallout') {
                         $("#status_description").append('<option  selected="selected" >Fallout</option>');
                     } else {
                         $("#status_description").append('<option >Fallout</option>');
                     }
-                     if (status_detail == 'Cross Sell') {
+                    if (status_detail == 'Cross Sell') {
                         $("#status_description").append('<option  selected="selected" >Cross Sell</option>');
                     } else {
                         $("#status_description").append('<option >Cross Sell</option>');
                     }
-                    
-                     if (status_detail == 'Not Interested') {
+
+                    if (status_detail == 'Not Interested') {
                         $("#status_description").append('<option  selected="selected" >Not Interested</option>');
                     } else {
                         $("#status_description").append('<option >Not Interested</option>');
                     }
-                    
-                     if (status_detail == 'Next Batch') {
+
+                    if (status_detail == 'Next Batch') {
                         $("#status_description").append('<option  selected="selected" >Next Batch</option>');
                     } else {
                         $("#status_description").append('<option >Next Batch</option>');
                     }
-                     if (status_detail == 'Retired') {
+                    if (status_detail == 'Retired') {
                         $("#status_description").append('<option  selected="selected" >Retired</option>');
                     } else {
                         $("#status_description").append('<option >Retired</option>');
                     }
                     /*if (status_detail == 'Retired') {
-                        $("#status_description").append('<option  selected="selected" >Retired</option>');
-                    } else {
-                        $("#status_description").append('<option>Retired</option>');
-                    }*/
+                     $("#status_description").append('<option  selected="selected" >Retired</option>');
+                     } else {
+                     $("#status_description").append('<option>Retired</option>');
+                     }*/
                 }
                 if (document.getElementById('status').value == "Converted") {
                     $("#status_description option").remove();
@@ -374,13 +388,13 @@ class LeadsViewEdit extends ViewEdit
                     } else {
                         $("#status_description").append('<option>Converted</option>');
                     }
-                    
+
                     if (status_detail == 'Instalment Follow up') {
                         $("#status_description").append('<option  selected="selected">Instalment Follow up</option>');
                     } else {
                         $("#status_description").append('<option>Instalment Follow up</option>');
                     }
-                    
+
                     if (status_detail == 'Referral Follow up') {
                         $("#status_description").append('<option  selected="selected">Referral Follow up</option>');
                     } else {
@@ -577,45 +591,42 @@ class LeadsViewEdit extends ViewEdit
                     }
 
                 })
-		$("#status_description").change(function () {
-			$("#disposition_reason option").hide();
-			if($(this).val()=='Not Eligible'){
-				$("#disposition_reason option[value='Language Barrier']").show();
-				$("#disposition_reason option[value='Eligibility Criteria – Education']").show();
-                                $("#disposition_reason option[value='Eligibility Criteria – Experience']").show();
-				$('#disposition_reason').closest('tr').show();
-			}
-			else if($(this).val()=='Not Interested'){
-				$("#disposition_reason option[value='Fees High']").show();
-				$("#disposition_reason option[value='Offline courses']").show();
-				$("#disposition_reason option[value='Long duration']").show();
-				$("#disposition_reason option[value='Syllabus']").show();
-                                
-                                $("#disposition_reason option[value='Time Constraint']").show();
-                                $("#disposition_reason option[value='Enrolled Elsewhere']").show();
-                                $("#disposition_reason option[value='Customer Hang Up']").show();
-				$('#disposition_reason').closest('tr').show();
-			}
-			else if($(this).val()=='Fallout'){
-				$("#disposition_reason option[value='Finance Issue']").show();
-				$("#disposition_reason option[value='Time constraint']").show();
-				$("#disposition_reason option[value='Enrolled somewhere else']").show();
-				$('#disposition_reason').closest('tr').show();
-			}
-			else{
-				$('#disposition_reason').closest('tr').hide();
-			}
-			$("#disposition_reason option:selected").prop("selected", false);
-		});
-		$('#disposition_reason').closest('tr').hide();
-		$("#status_description").trigger('change');
-		if(dispo_reason){
-			$("#disposition_reason option[value='"+dispo_reason+"']").prop("selected", true);
-		}
-		$("#status").change(function () {
-			$('#disposition_reason').closest('tr').hide();
-			$("#disposition_reason option:selected").prop("selected", false);
-		});
+                $("#status_description").change(function () {
+                    $("#disposition_reason option").hide();
+                    if ($(this).val() == 'Not Eligible') {
+                        $("#disposition_reason option[value='Language Barrier']").show();
+                        $("#disposition_reason option[value='Eligibility Criteria – Education']").show();
+                        $("#disposition_reason option[value='Eligibility Criteria – Experience']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } else if ($(this).val() == 'Not Interested') {
+                        $("#disposition_reason option[value='Fees High']").show();
+                        $("#disposition_reason option[value='Offline courses']").show();
+                        $("#disposition_reason option[value='Long duration']").show();
+                        $("#disposition_reason option[value='Syllabus']").show();
+
+                        $("#disposition_reason option[value='Time Constraint']").show();
+                        $("#disposition_reason option[value='Enrolled Elsewhere']").show();
+                        $("#disposition_reason option[value='Customer Hang Up']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } else if ($(this).val() == 'Fallout') {
+                        $("#disposition_reason option[value='Finance Issue']").show();
+                        $("#disposition_reason option[value='Time constraint']").show();
+                        $("#disposition_reason option[value='Enrolled somewhere else']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } else {
+                        $('#disposition_reason').closest('tr').hide();
+                    }
+                    $("#disposition_reason option:selected").prop("selected", false);
+                });
+                $('#disposition_reason').closest('tr').hide();
+                $("#status_description").trigger('change');
+                if (dispo_reason) {
+                    $("#disposition_reason option[value='" + dispo_reason + "']").prop("selected", true);
+                }
+                $("#status").change(function () {
+                    $('#disposition_reason').closest('tr').hide();
+                    $("#disposition_reason option:selected").prop("selected", false);
+                });
             });
             function triggerPaymentType() {
                 $("#payment_type").change(function () {
@@ -676,7 +687,7 @@ class LeadsViewEdit extends ViewEdit
             ?>
 
 
-        <?php
+            <?php
         }
 
 
@@ -699,7 +710,7 @@ class LeadsViewEdit extends ViewEdit
                 return false;
 
             </script>
-        <?php
+            <?php
         }
 
 
@@ -925,9 +936,9 @@ class LeadsViewEdit extends ViewEdit
             $favorite_records = $favorites->getCurrentUserSidebarFavorites();
             $ss->assign("favoriteRecords", $favorite_records);
 
-            /*$tracker = new Tracker();
-            $history = $tracker->get_recently_viewed($current_user->id);
-            $ss->assign("recentRecords", $this->processRecentRecords($history));*/
+            /* $tracker = new Tracker();
+              $history = $tracker->get_recently_viewed($current_user->id);
+              $ss->assign("recentRecords", $this->processRecentRecords($history)); */
         }
 
         $bakModStrings = $mod_strings;
