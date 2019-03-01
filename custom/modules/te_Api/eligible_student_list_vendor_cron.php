@@ -26,13 +26,11 @@ class sendVisitReport
         global $sugar_config, $app_list_strings, $current_user, $db;
         $mail = new FalconideEmail();
 
-        $file        = "TE_Focus_Leads_report";
-        $where       = '';
-        $filename    = $file . "_" . $this->toDate;
-        //$AllLeadData = $this->getAll();
-        $getBatches  = $this->getBatches();
-        echo '<pre>'; print_r($getBatches); die;
-        echo $data; die;
+        $file       = "Eligible_Student_List_Report_Batch_Wise_report";
+        $where      = '';
+        $filename   = $file . "_" . $this->toDate;
+        $AllLeadData = $this->getAll();
+                
 
         $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", "wb");
         fwrite($fp, $AllLeadData);
@@ -48,7 +46,7 @@ class sendVisitReport
                                 All Eligible Student List.
                             </td>
 			    <td valign="top">
-                                ' . $getSummary['total'] . '
+                                cc
                             </td>
                         </tr>
 						
@@ -57,7 +55,7 @@ class sendVisitReport
             </tr>
         </table>';
 
-        $emailData = $mail->emailData('Eligible Student List Report Batch Wise', $filename, $this->toDate, $email_summary);
+        $emailData = $mail->toVendorData('Eligible Student List Report Batch Wise', $filename, $this->toDate, $email_summary);
         $mail->sendCertificateEmail($emailData);
     }
 
@@ -67,7 +65,7 @@ class sendVisitReport
         $leadSql = "SELECT 
                          l.first_name,
                          l.last_name,
-                         leads_cstm.email_add_c,
+                         #leads_cstm.email_add_c,
                          l.phone_mobile, 
                          bb.`id` batch_id,
                          bb.`name` as batch_name,
@@ -78,7 +76,7 @@ class sendVisitReport
                      FROM `te_ba_batch` bb
                      INNER JOIN te_student_batch sb ON bb.id=sb.te_ba_batch_id_c
                      INNER JOIN leads l on sb.leads_id=l.id
-                     LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
+                     #LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
                      WHERE 
                      bb.deleted=0 
                      AND sb.deleted=0 
@@ -88,74 +86,38 @@ class sendVisitReport
                      #AND DATEDIFF(NOW(), bb.batch_completion_date_2) <=150
                      AND bb.batch_status IN ('closed','completed','enrollment_closed','planned')
                      ";
-        //echo $leadSql;exit();
-
 
         $leadObj = $db->query($leadSql);
 
         $programList = array();
         while ($row         = $db->fetchByAssoc($leadObj))
         {
-
-
-            $programList[$row['batch_id']][]                            = $row;
-            
+            $programList[$row['batch_id']][] = $row;
         }
-        
-        echo '<pre>'; print_r($programList); die;
 
-        #Create Section
-        $dataAllSecHed = "All Leads Data\n";
-        $data          = $dataAllSecHed . "Programme Name";
-        $data          .= ",Batch Code";
-        $data          .= ",Total";
-        $data          .= "\n";
+   
+
+        $data = "Name";
+        $data .= ",Batch Name";
+        $data .= ",Batch Code";
+        $data .= ",Phone number";
+        $data .= "\n";
 
 
 
 
         foreach ($programList as $key => $councelor)
         {
-            $toal = 0;
-            $data .= "\"" . $councelor['name'];
+           
+            $data .= "\"" . $councelor['first_name'].' '.$councelor['last_name'];
+            $data .= "\",\"" . $councelor['batch_name'];
             $data .= "\",\"" . $councelor['batch_code'];
-            foreach ($VendorList as $key1 => $value)
-            {
-                $converted = isset($programList[$key][$key1]) ? $programList[$key][$key1]['lead_count'] : 0;
-                $toal      += $converted;
-            }
-            $data .= "\",\"" . $toal;
+            $data .= "\",\"" . $councelor['phone_mobile'];
             $data .= "\"\n";
         }
         return $data;
     }
 
-    public function getBatches()
-    {
-        global $sugar_config, $app_list_strings, $current_user, $db;
-        $leadSql = "SELECT 
-                    `id`,
-                    `date_entered`,
-                    `batch_status`, 
-                    `batch_code`,
-                    `batch_start_date`,
-                    `duration`,
-                    `batch_completion_date`,
-                    `batch_completion_date_2`,
-                    DATEDIFF(NOW(),batch_completion_date_2) as diff_of_days
-                    FROM `te_ba_batch`
-                    WHERE deleted=0
-                    AND DATEDIFF(NOW(),batch_completion_date_2) =90
-                    #AND DATEDIFF(NOW(),batch_completion_date_2) <=150
-                    AND batch_status IN ('closed','completed','enrollment_closed','planned')";
-        $leadObj = $db->query($leadSql);
-        $vendorOptions = array();
-        while ($row          = $db->fetchByAssoc($leadObj))
-        {   
-            $vendorOptions[$row['batch_code']] = $row['diff_of_days'];
-        }
-        return $vendorOptions;
-    }
 
 }
 
