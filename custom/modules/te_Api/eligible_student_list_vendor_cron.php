@@ -64,26 +64,30 @@ class sendVisitReport
     public function getAll()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $leadSql = "SELECT  
-                            bb.`id`,
-                            bb.`date_entered`,
-                            bb.`batch_status`,
-                            bb.`batch_code`,
-                            bb.`batch_start_date`,
-                            bb.`duration`,
-                            bb.`batch_completion_date`,
-                            bb.`batch_completion_date_2`,
-                            DATEDIFF(NOW(), bb.batch_completion_date_2) AS diff_of_days
+        $leadSql = "SELECT 
+                         l.first_name,
+                         l.last_name,
+                         leads_cstm.email_add_c,
+                         l.phone_mobile, 
+                         bb.`id` batch_id,
+                         bb.`name` as batch_name,
+                         bb.`batch_code`,
+                         #DATEDIFF(NOW(), bb.batch_completion_date_2) AS diff_of_days,
+                         sb.srm_is_eligible
+                        
                      FROM `te_ba_batch` bb
                      INNER JOIN te_student_batch sb ON bb.id=sb.te_ba_batch_id_c
-                     WHERE bb.deleted=0 and sb.deleted=0
-                       AND DATEDIFF(NOW(), bb.batch_completion_date_2) =90 
-                       #AND DATEDIFF(NOW(), bb.batch_completion_date_2) <=150
-                       AND bb.batch_status IN ('closed',
-                                               'completed',
-                                               'enrollment_closed',
-                                               'planned')
-                    ";
+                     INNER JOIN leads l on sb.leads_id=l.id
+                     LEFT JOIN leads_cstm ON l.id= leads_cstm.id_c
+                     WHERE 
+                     bb.deleted=0 
+                     AND sb.deleted=0 
+                     AND l.deleted=0 
+                     AND sb.srm_is_eligible=1
+                     AND DATEDIFF(NOW(), bb.batch_completion_date_2) =90 
+                     #AND DATEDIFF(NOW(), bb.batch_completion_date_2) <=150
+                     AND bb.batch_status IN ('closed','completed','enrollment_closed','planned')
+                     ";
         //echo $leadSql;exit();
 
 
@@ -94,12 +98,11 @@ class sendVisitReport
         {
 
 
-            $programList[$row['batch_id']]['id']                            = $row['batch_id'];
-            $programList[$row['batch_id']]['name']                          = $row['batch_name'];
-            $programList[$row['batch_id']]['batch_code']                    = $row['batch_code'];
-            $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
-            $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
+            $programList[$row['batch_id']][]                            = $row;
+            
         }
+        
+        echo '<pre>'; print_r($programList); die;
 
         #Create Section
         $dataAllSecHed = "All Leads Data\n";
