@@ -108,14 +108,6 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'date_entered' => 
-      array (
-        'type' => 'datetime',
-        'label' => 'LBL_DATE_ENTERED',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'date_entered',
-      ),
       'vendor_list' => 
       array (
         'label' => 'LBL_VENDOR',
@@ -124,6 +116,14 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'vendor_list',
+      ),
+      'date_entered' => 
+      array (
+        'type' => 'datetime',
+        'label' => 'LBL_DATE_ENTERED',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'date_entered',
       ),
     ),
   ),

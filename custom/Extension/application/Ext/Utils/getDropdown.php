@@ -63,14 +63,19 @@ function getBatchList(){
 	static $dropDown = null;
 	if(!$dropDown){
 		global $db;
-		$query = "SELECT distinct(b.id),b.name FROM `te_ba_batch` b INNER JOIN leads_cstm lc ON b.id=lc.te_ba_batch_id_c";
+		$query = "SELECT distinct(b.id),b.name,b.batch_code FROM `te_ba_batch` "
+                        . "b INNER JOIN leads_cstm lc ON b.id=lc.te_ba_batch_id_c "
+                        . " where b.deleted=0 "
+                        . " and b.batch_status in ('enrollment_in_progress')";
 		$result = $db->query($query, false);
 		$dropDown = array();
 		$dropDown[''] = '';
 		while (($row = $db->fetchByAssoc($result)) != null) {
-			$dropDown[$row['id']] = $row['name'];
+			$dropDown[$row['id']] = $row['name'].' ( '.$row['batch_code'].' ) ';
 		}
 	}
+       
+        
 	return $dropDown;
 }
 # Current Users Details
@@ -91,21 +96,44 @@ function assigned_users_list(){
 	}
 	return $dropDown;
 }
-function reportingUser($currentUserId){
-			$userObj = new User();
-			$userObj->disable_row_level_security = true;
-			$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
-			
-			if(!empty($userList)){
-				
-				foreach($userList as $record){
+function reportingUser($currentUserId)
+{
+    global $current_user;
+    $userObj                             = new User();
+    $userObj->disable_row_level_security = true;
 
-					if(!empty($record->reports_to_id)){
-						$GLOBALS['userArr'][] = $record->name."__".$record->id;
-						reportingUser($record->id);
-					}
-				}
-			}
-		}
-		 
+    if ($current_user->is_admin == 1)
+    {
+        $userList = $userObj->get_full_list("", "users.employee_status='Active'");
+
+        if (!empty($userList))
+        {
+
+            foreach ($userList as $record)
+            {
+                $GLOBALS['userArr'][] = $record->name . "__" . $record->id;
+            }
+        }
+    }
+    else
+    {
+
+        $userList = $userObj->get_full_list("", "users.reports_to_id='" . $currentUserId . "' AND users.employee_status='Active'");
+
+        if (!empty($userList))
+        {
+
+            foreach ($userList as $record)
+            {
+
+                if (!empty($record->reports_to_id))
+                {
+                    $GLOBALS['userArr'][] = $record->name . "__" . $record->id;
+                    reportingUser($record->id);
+                }
+            }
+        }
+    }
+}
+
 ?>
