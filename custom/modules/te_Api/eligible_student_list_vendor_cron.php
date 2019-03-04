@@ -25,36 +25,26 @@ class sendVisitReport
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
         $mail = new FalconideEmail();
+        $email_summary='';
 
-        $file       = "Eligible_Student_List_Report_Batch_Wise_report";
-        $where      = '';
-        $filename   = $file . "_" . $this->toDate;
+        $file        = "Eligible_Student_List_Report_Batch_Wise_report";
+        $where       = '';
+        $filename    = $file . "_" . $this->toDate;
         $AllLeadData = $this->getAll();
-                
+        
+        if(empty($AllLeadData)){
+            echo json_encode(array('status'=>'error','msg'=>'No Data found for Eligible Student!')); 
+            return;
+        }
+        
+        
+
 
         $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", "wb");
         fwrite($fp, $AllLeadData);
         fclose($fp);
         chmod($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", 0777);
-
-        $email_summary = '<table border="0" cellpadding="0" cellspacing="0" border="1" height="100%" width="100%" id="bodyTable">
-            <tr>
-                <td align="center" valign="top">
-                    <table border="0" cellpadding="20" cellspacing="0" border="1" width="600" id="emailContainer">
-                        <tr>
-                            <td valign="top">
-                                All Eligible Student List.
-                            </td>
-			    <td valign="top">
-                                cc
-                            </td>
-                        </tr>
-						
-                    </table>
-                </td>
-            </tr>
-        </table>';
-
+        
         $emailData = $mail->toVendorData('Eligible Student List Report Batch Wise', $filename, $this->toDate, $email_summary);
         $mail->sendCertificateEmail($emailData);
     }
@@ -85,6 +75,7 @@ class sendVisitReport
                      AND DATEDIFF(NOW(), bb.batch_completion_date_2) =90 
                      #AND DATEDIFF(NOW(), bb.batch_completion_date_2) <=150
                      AND bb.batch_status IN ('closed','completed','enrollment_closed','planned')
+                     order by bb.`batch_code`
                      ";
 
         $leadObj = $db->query($leadSql);
@@ -92,10 +83,10 @@ class sendVisitReport
         $programList = array();
         while ($row         = $db->fetchByAssoc($leadObj))
         {
-            $programList[$row['batch_id']][] = $row;
+            $programList[] = $row;
         }
 
-   
+
 
         $data = "Name";
         $data .= ",Batch Name";
@@ -108,8 +99,8 @@ class sendVisitReport
 
         foreach ($programList as $key => $councelor)
         {
-           
-            $data .= "\"" . $councelor['first_name'].' '.$councelor['last_name'];
+
+            $data .= "\""    . $councelor['first_name'] . ' ' . $councelor['last_name'];
             $data .= "\",\"" . $councelor['batch_name'];
             $data .= "\",\"" . $councelor['batch_code'];
             $data .= "\",\"" . $councelor['phone_mobile'];
@@ -117,7 +108,6 @@ class sendVisitReport
         }
         return $data;
     }
-
 
 }
 
