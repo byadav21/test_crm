@@ -175,9 +175,9 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
 
         /* Check Date Range */
         $filter_date_diff = $this->dateDiff($_SESSION['ur_from_date'], $_SESSION['ur_to_date']);
-        if ($filter_date_diff > 30)
+        if ($filter_date_diff > 186)
         {
-            SugarApplication::appendErrorMessage('Action Prohibited: Please select a max of 30 days date range.');
+            SugarApplication::appendErrorMessage('Action Prohibited: Please select a max of six months date range.');
             //set params
             $params = array(
                 'module' => 'AOR_Reports', //the module you want to redirect to
