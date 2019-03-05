@@ -296,12 +296,6 @@ class AOR_ReportsViewVendordataexport extends SugarView
             $data .= ",Status Description";
             $data .= ",Comment";
             $data .= ",UTM Campaign";
-
-            foreach ($StatusList as $key => $statusVal)
-            {
-                $data .= "," . $key;
-            }
-            $data .= ",Total";
             $data .= "\n";
 
 
