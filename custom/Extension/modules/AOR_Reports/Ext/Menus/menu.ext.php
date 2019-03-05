@@ -135,6 +135,8 @@ if ($is_manger == 1)
 if(in_array($current_user->id, $UsersVendrArr))
 {       
  $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwisestatusdetailreport', "Vendor Wise Status Detail Report", 'AOR_Reports');
+ $module_menu[] = array('index.php?module=AOR_Reports&action=utmstatusreport', "UTM Status Report", 'AOR_Reports');
+ $module_menu[] = array('index.php?module=AOR_Reports&action=vendordataexport', "Vendor Data Export Report", 'AOR_Reports');
 }
 
 
