@@ -162,7 +162,7 @@ else
         $row                        = $GLOBALS['db']->fetchByAssoc($student_email_Obj);
         $lead_data['student_email'] = $row['email_address'];
         $student_detail             = __get_student_id($lead_data);
-        $student_batch_detail       = __get_student_batch_id($student_detail);
+        $student_batch_detail       = __get_student_batch_id($student_detail,$data);
         if ($data['action'] == 'add')
         {
             $ins_res         = insert_payment($student_batch_detail, $student_detail, $data);
@@ -363,7 +363,7 @@ function __get_student_id($student_arr = array())
     }
 }
 
-function __get_student_batch_id($student_arr = array())
+function __get_student_batch_id($student_arr = array(),$data = array())
 {
     $find_student_batch_sql = "SELECT s.id AS student_id,sb.id AS student_batch_id,sb.te_ba_batch_id_c FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS sbr ON sbr.te_student_te_student_batch_1te_student_ida=s.id INNER JOIN te_student_batch AS sb ON sb.id=sbr.te_student_te_student_batch_1te_student_batch_idb WHERE sb.leads_id='" . $student_arr['lead_id'] . "' AND s.deleted=0 AND sb.deleted=0 LIMIT 0,1";
     $find_student_batch_Obj = $GLOBALS['db']->query($find_student_batch_sql);
@@ -456,6 +456,8 @@ function __get_student_batch_id($student_arr = array())
             createLog('{captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt',$student_arr['lead_id'],$student_arr);
         }
         
+         createLog('{all data captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt',$student_arr['lead_id'],$data);
+
         #get new student batch id
         return array(
             'batch_id'         => $studentBatchObj->id,

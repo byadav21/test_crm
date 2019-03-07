@@ -50,7 +50,7 @@ if ($error_fields)
 
 function getLeadId($order_id)
 {
-
+    global $db;
     $getLeadSql  = "SELECT 
                          lp.leads_te_payment_details_1leads_ida as lead_id 
                          FROM `te_payment_details` pd
@@ -87,7 +87,7 @@ if ($order_id != '' && $test_status != '')
             $LBean                     = BeanFactory::getBean('Leads', $lead_id);
             $LBean->status             = $c_status;
             $LBean->status_description = $c_status_description;
-            $LBean->test_status        = $c_test_status;
+            $LBean->test_status        = $test_status;
             $LBean->converted_date     = date('Y-m-d');
             $checkSaveBean             = $LBean->save();
             if ($checkSaveBean)
