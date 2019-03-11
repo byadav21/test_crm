@@ -166,7 +166,7 @@ eoq;
 
         require_once('include/formbase.php');
         global $current_user, $db, $disable_date_format, $timedate;
-
+        $current_user_id = $current_user->id;
         foreach ($_POST as $post => $value)
         {
             if (is_array($value))
@@ -235,63 +235,110 @@ eoq;
         $old_value           = $disable_date_format;
         $disable_date_format = true;
             
-        //echo '<pre>ssss'; print_r($_REQUEST);; die;
+            //echo '<pre>ssss'; print_r($_REQUEST); die;
         if (!empty($_REQUEST['uid']))
             $_POST['mass'] = explode(',', $_REQUEST['uid']); // coming from listview
+        
+        
         elseif (isset($_REQUEST['entire']) && empty($_POST['mass']))
         {
-            if (empty($order_by))
-                $order_by = '';
 
-            /* Custom code for leads goes here */
-            if (isset($_REQUEST['module']) && strtolower($_REQUEST['module']) == 'leads')
+            if (isset($_REQUEST['current_query_by_page']) && strtolower($_REQUEST['module']) == 'leads')
             {
-                $this->where_clauses = str_replace('leads.batch in', 'leads_cstm.te_ba_batch_id_c in', $this->where_clauses);
-                $this->where_clauses = str_replace('Counsellors', 'leads.assigned_user_id', $this->where_clauses);
+
+
+                $jsonText              = $_REQUEST['current_query_by_page'];
+                $decodedText           = html_entity_decode($jsonText);
+                $myArray               = json_decode($decodedText, true);
+                $Counsellors_advanced  = $myArray['Counsellors_advanced'];
+                $batch_advanced        = $myArray['batch_advanced'];
+                $email_advanced        = $myArray['email_advanced'];
+                $phone_mobile_advanced = $myArray['phone_mobile_advanced'];
+                $Counsellorstring       = array();
+                $Batchstring            = array();
+                $wherecl                ='';
+                //$Counsellorstring    = implode("','", $Counsellors_advanced);
+                //$Batchstring         = implode("','", $batch_advanced);
+                
+                if (!empty($Counsellors_advanced))
+            {
+
+                $wherecl .= " AND  l.assigned_user_id IN ('" . implode("','", $Counsellors_advanced) . "')";
             }
-            $this->report_to_id[] = $current_user->id;
-            $module_name          = strtolower($_REQUEST['module']);
-            $users_arr            = $this->reportingUser($current_user->id);
-            $users                = implode("','", $this->report_to_id);
 
-            if ($users)
+
+            if (!empty($batch_advanced))
             {
-                $where_clauses = explode(' ) AND ( ', $this->where_clauses);
-                if ($current_user->is_admin == 1)
-                {
-                    array_push($where_clauses, "($module_name.assigned_user_id in ('" . $users . "')) OR ($module_name.assigned_user_id IS NULL) OR (TRIM($module_name.assigned_user_id)='') OR (TRIM($module_name.assigned_user_id)='NULL') ");
-                }
+
+                $wherecl .= " AND  lc.te_ba_batch_id_c IN ('" . implode("','", $batch_advanced) . "')";
+            }
+
+
+            $leadSql = "SELECT 
+                    l.id
+                FROM leads l
+                INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
+                 WHERE l.deleted=0
+                   $wherecl
+               order by  l.date_entered ";
+
+          
+                //echo '<pre>';
+                print_r($leadSql);
+                //die;
+                
+                
+                
+            }
                 else
                 {
-                    array_push($where_clauses, "$module_name.assigned_user_id in ('" . $users . "')");
-                }
+                $this->report_to_id[] = $current_user->id;
+                $module_name          = strtolower($_REQUEST['module']);
+                $users_arr            = $this->reportingUser($current_user->id);
+                $users                = implode("','", $this->report_to_id);
 
-                $where_clauses = array_filter($where_clauses);
-                if ($where_clauses)
+                if ($users)
                 {
-                    $this->where_clauses = '(' . implode(' ) AND ( ', $where_clauses) . ')';
+                    $where_clauses = explode(' ) AND ( ', $this->where_clauses);
+                    if ($current_user->is_admin == 1)
+                    {
+                        array_push($where_clauses, "($module_name.assigned_user_id in ('" . $users . "')) OR ($module_name.assigned_user_id IS NULL) OR (TRIM($module_name.assigned_user_id)='') OR (TRIM($module_name.assigned_user_id)='NULL') ");
+                    }
+                    else
+                    {
+                        array_push($where_clauses, "$module_name.assigned_user_id in ('" . $users . "')");
+                    }
+
+                    $where_clauses = array_filter($where_clauses);
+                    if ($where_clauses)
+                    {
+                        $this->where_clauses = '(' . implode(' ) AND ( ', $where_clauses) . ')';
+                    }
                 }
-            }
-            //echo $this->where_clauses;echo "<pre>";print_r($_REQUEST);echo $this->sugarbean->object_name;exit();
-            /* Custom code for leads ends here */
+                    $query   = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
+                }
 
-            // TODO: define filter array here to optimize the query
-            // by not joining the unneeded tables
+                //            if (isset($_REQUEST['module']) && strtolower($_REQUEST['module']) == 'leads')
+                //            {
+                //                $this->where_clauses = str_replace('leads.batch in', 'leads_cstm.te_ba_batch_id_c in', $this->where_clauses);
+                //                $this->where_clauses = str_replace('Counsellors', 'leads.assigned_user_id', $this->where_clauses);
+                //            }
 
-            //$query   = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
-//            echo $query;exit();
-//            $result  = $db->query($query, true);
-//            $new_arr = array();
-//            while ($val     = $db->fetchByAssoc($result, false))
-//            {   
-//                //echo 'xxx==='. $val['id']; 
-//                array_push($new_arr, $val['id']);
-//            }
-            $_POST['mass'] = $new_arr;
-            
-            
+                $result  = $db->query($leadSql, true);
+                $new_arr = array();
+                while ($val     = $db->fetchByAssoc($result, false))
+                {
+
+                    array_push($new_arr, $val['id']);
+                }
+                $_POST['mass'] = $new_arr;
+
+
+            //echo '<pre>';
+            //print_r($_POST['mass']);
+            //die;
         }
-        
+
         if (isset($_POST['mass']) && is_array($_POST['mass']) && $_REQUEST['massupdate'] == 'true')
         {
 
@@ -311,44 +358,116 @@ eoq;
                 $assigned_user_id   = $_REQUEST['assigned_user_id'];
                 $statusX            = $_REQUEST['status'];
                 $statusDescriptionX = $_REQUEST['status_description'];
-                echo '<pre>';print_r($_REQUEST); die;
-                $string       = implode("','", $_POST['mass']);
-                //print_r($_POST['mass']);
-                $custSQL      = "update leads set assigned_user_id='$assigned_user_id',status='$statusX',status_description='$statusDescriptionX' where id in ('$string')";
-                 die($custSQL);
-                $updateSqlres = $db->query($custSQL);
-               
+                $leadList           = $_POST['mass'];
+                $error_fields       = [];
 
-                if ($updateSqlres)
+                if (!isset($assigned_user_id) || empty($assigned_user_id))
                 {
-                      //die('xxx');
+                    $error_fields['assigned_user_id'] = ['assigned_user_id field is required.'];
+                }
+                if (!isset($leadList) || empty($leadList))
+                {
+                    $error_fields['leadList'] = ['Lead list is required.'];
+                }
 
-                    $dispoSQL    = "INSERT INTO `te_disposition` (`id`, `status`,`status_detail`,`date_modified`,`date_entered`) VALUES ";
-                    $dispoRelSQL = "INSERT INTO `te_disposition_leads_c` (`id`, `te_disposition_leadste_disposition_idb`,`te_disposition_leadsleads_ida`,`date_modified`) VALUES ";
-                    $i           = 1;
-                    foreach ($_POST['mass'] as $id)
-                    {
-                        $guidid      = create_guid();
-                        $guidid2     = create_guid();
-                        $dispoSQL    .= "('$guidid','$statusX','$statusDescriptionX','" . date('Y-m-d H:i:s') . "'," . date('Y-m-d H:i:s') . "'),";
-                        $dispoRelSQL .= "('$guidid2','$guidid','$id','" . date('Y-m-d H:i:s') . "'),";
+                if ($error_fields)
+                {
+                    $response_result = array('status' => '400', 'result' => $error_fields);
+                    $statusx         = json_encode($response_result);
+                    echo "<script type=\"text/javascript\">
+                                                         alert('$statusx');
+                                                         window.location = \"index.php?module=Leads&action=index\"
+                                                 </script>";
+                }
 
-                        $i++;
-                    }
-                    $exeSql    = rtrim($dispoSQL, ',');
-                    $disExeSql = rtrim($dispoRelSQL, ',');
-                    if ($i > 1)
+                if (!empty($assigned_user_id) && !empty($leadList))
+                {
+
+                    //echo '<pre>';print_r($_REQUEST);print_r(partition($leadList, count($assigned_user_id))); die;
+
+                    $finalarray = array();
+                    $finalx     = $this->partition($leadList, count($assigned_user_id));
+
+
+                    //echo '<pre>'; print_r($finalx);die;
+                    foreach ($assigned_user_id as $key => $val)
                     {
-                        //mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
-                        $db->query($exeSql);
-                        $db->query($disExeSql);
+                        $finalarray[$val] = $finalx[$key];
                     }
+
+                    //echo '<pre>'; print_r($finalarray);die;
+                    if (!empty($finalarray))
+                    {
+                        $assignSQL = '';
+                        $dispoSQL    = "INSERT INTO `te_disposition` (`id`, `status`,`status_detail`,`date_modified`,`date_entered`,`modified_user_id`,`created_by`,`assigned_user_id`) VALUES ";
+                        $dispoRelSQL = "INSERT INTO `te_disposition_leads_c` (`id`, `te_disposition_leadste_disposition_idb`,`te_disposition_leadsleads_ida`,`date_modified`) VALUES ";
+                        foreach ($finalarray as $assignedUser => $lead_list)
+                        {
+                            if (!empty($assignedUser) || !empty($lead_list))
+                            {
+
+                                $string    = implode("','", $lead_list);
+                                $assignSQL = "update leads set assigned_user_id='$assignedUser',status='$statusX',status_description='$statusDescriptionX',modified_user_id='$current_user_id',date_modified='". date('Y-m-d H:i:s')."' where id in ('$string');";
+
+                                //echo '<pre>'; print_r($lead_list);
+                                $query= $db->query($assignSQL);
+                                $i = 1;
+                                foreach ($lead_list as $key => $leadID)
+                                {
+                                    //echo $leadID . '<br>';
+                                    $guidid      = create_guid();
+                                    $guidid2     = create_guid();
+                                    $dispoSQL    .= "('$guidid','$statusX','$statusDescriptionX','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "','$current_user_id','$current_user_id','$assignedUser'),";
+                                    $dispoRelSQL .= "('$guidid2','$guidid','$leadID','" . date('Y-m-d H:i:s') . "'),";
+
+                                $i++;
+                                }
+                            }
+
+                        }
+                        $exeSql    = rtrim($dispoSQL, ',');
+                        $disExeSql = rtrim($dispoRelSQL, ',');
+
+                        if ($i > 1)
+                        {
+                            //echo $exeSql.'xx='.$disExeSql;print_r($finalarray);die;
+
+                            $db->query($exeSql);
+                            $db->query($disExeSql);
+                        }
+                    }
+
+                    //echo $assignSQL; die;
+                    //$db->query($assignSQL);
+                    //echo '<pre>';
+                    //print_r($finalarray);
+                    //die;
                 }
             }
-        }
+            }
         $disable_date_format = $old_value;
-    }
 
+    }
+    
+    /**
+     * split the array in chunks
+     */
+    function partition(Array $list, $p)
+    {
+        $listlen   = count($list);
+        $partlen   = floor($listlen / $p);
+        $partrem   = $listlen % $p;
+        $partition = array();
+        $mark      = 0;
+        for ($px = 0; $px < $p; $px ++)
+        {
+            $incr           = ($px < $partrem) ? $partlen + 1 : $partlen;
+            $partition[$px] = array_slice($list, $mark, $incr);
+            $mark           += $incr;
+        }
+        return $partition;
+    }
+                        
     /**
      * Displays the massupdate form
      */
@@ -538,7 +657,13 @@ eoq;
             $html .= '<style>#converted_datejscal_field{display:none}</style>';
             $html .= <<<EOJS
 <script>
-                    
+              
+
+                   
+  
+ 
+
+           
     $(".multiselbox").each(function () {
           if ($(this).find("option").eq(0).val() == '') {
               $(this).find("option").eq(0).remove();
@@ -562,7 +687,9 @@ $('#mass_assigned_user_name').parent().css('display','none');
                     
                     
 $('#mass_assigned_user_id').addClass('multiselbox');
+$('#mass_assigned_user_id').attr('multiple','multiple');
 $('#mass_assigned_user_id').attr('name', 'assigned_user_id[]');
+
 
  $("body").on('change','#mass_status',function() {
 
@@ -1126,7 +1253,7 @@ EOQ;
                 $options = $new_options;
             }
             $options = get_select_options_with_id_separate_key(
-                    $options, $options, '__SugarMassUpdateClearField__', true
+                    $options, $options, '__SugarMassUpdateClearField__', FALSE
             );
             $html    .= '<select id="mass_' . $varname . '" name="' . $varname . '">' . $options . '</select>';
         }
