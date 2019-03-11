@@ -162,7 +162,7 @@ else
         $row                        = $GLOBALS['db']->fetchByAssoc($student_email_Obj);
         $lead_data['student_email'] = $row['email_address'];
         $student_detail             = __get_student_id($lead_data);
-        $student_batch_detail       = __get_student_batch_id($student_detail);
+        $student_batch_detail       = __get_student_batch_id($student_detail,$data);
         if ($data['action'] == 'add')
         {
             $ins_res         = insert_payment($student_batch_detail, $student_detail, $data);
@@ -363,7 +363,7 @@ function __get_student_id($student_arr = array())
     }
 }
 
-function __get_student_batch_id($student_arr = array())
+function __get_student_batch_id($student_arr = array(),$data = array())
 {
     $find_student_batch_sql = "SELECT s.id AS student_id,sb.id AS student_batch_id,sb.te_ba_batch_id_c FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS sbr ON sbr.te_student_te_student_batch_1te_student_ida=s.id INNER JOIN te_student_batch AS sb ON sb.id=sbr.te_student_te_student_batch_1te_student_batch_idb WHERE sb.leads_id='" . $student_arr['lead_id'] . "' AND s.deleted=0 AND sb.deleted=0 LIMIT 0,1";
     $find_student_batch_Obj = $GLOBALS['db']->query($find_student_batch_sql);
@@ -419,9 +419,36 @@ function __get_student_batch_id($student_arr = array())
         $GLOBALS['db']->query("UPDATE leads SET status='Converted',status_description='Converted' ,converted_date='".date('Y-m-d')."' WHERE id='".$student_arr['lead_id']."'");
         */
         
+        $c_status             = 'Converted';
+        $c_status_description = 'Converted';
+        $c_test_status        = 'NA';
+
+        if (isset($data['test_status']) && !empty($data['test_status']) && $data['test_status'] == 'fees')
+        {
+            $c_status             = 'Alive';
+            $c_status_description = 'New Lead';
+            $c_test_status        = 'fees';
+            createLog('{Test Status Payment}', 'test_status_payment_' . date('Y-m-d') . '_log.txt',$data['test_status'],$student_arr);
+        }
+        if (isset($data['test_status']) && !empty($data['test_status']) && $data['test_status'] == 'pass')
+        {
+            $c_status             = 'Warm';
+            $c_status_description = 'Prospect';
+            $c_test_status        = 'pass';
+            createLog('{Test Status Payment}', 'test_status_payment_' . date('Y-m-d') . '_log.txt',$data['test_status'],$student_arr);
+        }
+        if (isset($data['test_status']) && !empty($data['test_status']) && $data['test_status'] == 'fail')
+        {
+            $c_status             = 'Dead';
+            $c_status_description = 'Not Eligible';
+            $c_test_status        = 'fail';
+            createLog('{Test Status Payment}', 'test_status_payment_' . date('Y-m-d') . '_log.txt',$data['test_status'],$student_arr);
+        }
+
         $LBean                     = BeanFactory::getBean('Leads', $student_arr['lead_id']);
-        $LBean->status             = 'Converted';
-        $LBean->status_description = 'Converted';
+        $LBean->status             = $c_status;
+        $LBean->status_description = $c_status_description;
+        $LBean->test_status        = $c_test_status;
         $LBean->converted_date     = date('Y-m-d');
         $checkSaveBean             = $LBean->save();
         if ($checkSaveBean)
@@ -429,6 +456,8 @@ function __get_student_batch_id($student_arr = array())
             createLog('{captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt',$student_arr['lead_id'],$student_arr);
         }
         
+         createLog('{all data captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt',$student_arr['lead_id'],$data);
+
         #get new student batch id
         return array(
             'batch_id'         => $studentBatchObj->id,

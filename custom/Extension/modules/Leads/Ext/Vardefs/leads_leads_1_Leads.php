@@ -112,3 +112,19 @@ $dictionary["Lead"]["fields"]["country_code"] = array(
             'duplicate_merge' => false,
             'source'          => 'custom_fields',
 );
+
+$dictionary["Lead"]["fields"]["test_status"] = array(
+            'name'            => 'test_status',
+            'vname'           => 'Test Status',
+            'type'            => 'varchar',
+            'len'             => '50',
+            'size'            => '20',
+            //'module' => 'Leads',
+            'default'         => 'NA',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);
