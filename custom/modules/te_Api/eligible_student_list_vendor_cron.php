@@ -24,29 +24,94 @@ class sendVisitReport
     public function main()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $mail = new FalconideEmail();
-        $email_summary='';
+        $mail          = new FalconideEmail();
+        $email_summary = '';
 
-        $file        = "Eligible_Student_List_Report_Batch_Wise_report";
+        $file        = "Data_for_Post-Course_feedback_Report";
         $where       = '';
         $filename    = $file . "_" . $this->toDate;
         $AllLeadData = $this->getAll();
+        $BodyData    = $this->getBodydata();
         
-        if(empty($AllLeadData)){
-            echo json_encode(array('status'=>'error','msg'=>'No Data found for Eligible Student!')); 
+        //echo '<pre>';print_r($BodyData);die;
+        
+        if (empty($AllLeadData))
+        {
+            echo json_encode(array('status' => 'error', 'msg' => 'No Data found for Eligible Student!'));
             return;
         }
-        
-        
 
 
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", "wb");
+
+
+        $fp            = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", "wb");
         fwrite($fp, $AllLeadData);
         fclose($fp);
         chmod($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", 0777);
-        
-        $emailData = $mail->toVendorData('Eligible Student List Report Batch Wise', $filename, $this->toDate, $email_summary);
+        $email_summary = '';
+        $email_summary = 'Hello,<br><br>
+
+                            Greetings from Talentedge !<br><br>
+                            
+                            We would like to inform you that we have successfully completed a course. Please find attached detail sheet :<br><br>
+                           
+                                <table border="1"  width="600">
+                                 <tr height="20">
+                                    <th>
+                                        <strong>Batch Code</strong>
+                                    </th>
+                                    <th>
+                                        <strong>No. of Students</strong>
+                                    </th>
+                                  </tr>';
+                            foreach ($BodyData as $key => $val)
+                            {
+                                $email_summary .= '<tr>';
+                                $email_summary .= '<td valign="top">' . $key . '</td>';
+                                $email_summary .= '<td valign="top">' . $val . '</td>';
+                                $email_summary .= '</tr>';
+                            }
+
+                 $email_summary .= '</table>
+                               <br><br>
+                           
+                            Please save this information and start the process once we give a go-ahead.<br><br>
+                            
+                            Thank-You.<br>
+                            <br>-<br>
+                            Note : This is an automated email, Kindly do not reply on this.<br>';
+
+        $emailData = $mail->toVendorData('Data for Post-Course feedback', $filename, $this->toDate, $email_summary);
         $mail->sendCertificateEmail($emailData);
+    }
+
+    public function getBodydata()
+    {
+        global $sugar_config, $app_list_strings, $current_user, $db;
+
+        $leadSql     = "SELECT 
+                        bb.batch_code,
+                        count(l.id) as studenCount
+                    FROM `te_ba_batch` bb
+                    INNER JOIN te_student_batch sb ON bb.id=sb.te_ba_batch_id_c
+                    INNER JOIN leads l on sb.leads_id=l.id
+                    WHERE 
+                        bb.deleted=0 
+                        AND sb.deleted=0 
+                        AND l.deleted=0 
+                        AND sb.srm_is_eligible=1
+                        AND DATEDIFF(NOW(), bb.batch_completion_date_2) =90 
+                        AND bb.batch_status IN ('closed','completed','enrollment_closed','planned')
+                        group by bb.id
+                        order by bb.`batch_code`";
+        $leadObj     = $db->query($leadSql);
+        $programList = array();
+        while ($row         = $db->fetchByAssoc($leadObj))
+        {
+            $programList[$row['batch_code']] = $row['studenCount'];
+        }
+
+        return $programList;
     }
 
     public function getAll()
@@ -100,7 +165,7 @@ class sendVisitReport
         foreach ($programList as $key => $councelor)
         {
 
-            $data .= "\""    . $councelor['first_name'] . ' ' . $councelor['last_name'];
+            $data .= "\"" . $councelor['first_name'] . ' ' . $councelor['last_name'];
             $data .= "\",\"" . $councelor['batch_name'];
             $data .= "\",\"" . $councelor['batch_code'];
             $data .= "\",\"" . $councelor['phone_mobile'];
