@@ -674,6 +674,7 @@ eoq;
 
    $("#mass_assigned_user_id").closest('tr').children('td:first').html("<span id='massUpdate_level'>Counsellors</span>");
    $("#mass_vendor_list").closest('tr').children('td:nth-child(3)').html("<span id='massVendor_level'>Vendors</span>");
+  $("#mass_lead_source_types").parents("tr").children("td:nth-child(3)").html("<span id='massUpdate_level'>Lead Source Type</span>");
                     
     });
            
