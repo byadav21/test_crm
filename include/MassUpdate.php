@@ -662,13 +662,24 @@ eoq;
                    
   
  
+   $(document).ready(function () {
+   $(".multiselbox").each(function () {
+                    if ($(this).find("option").eq(0).val() == '') {
+                        $(this).find("option").eq(0).remove();
+                    }
+                });
+                $(".multiselbox").multiselect({
+                    includeSelectAllOption: true
+                });
 
+
+    });
            
     $(".multiselbox").each(function () {
           if ($(this).find("option").eq(0).val() == '') {
               $(this).find("option").eq(0).remove();
           }
-      })
+      });
       $(".multiselbox").multiselect({
           includeSelectAllOption: true
       }); 
