@@ -234,12 +234,12 @@ eoq;
         //to correctly retrieve the user's date format preferences
         $old_value           = $disable_date_format;
         $disable_date_format = true;
-            
-            //echo '<pre>ssss'; print_r($_REQUEST); die;
+
+        //echo '<pre>ssss'; print_r($_REQUEST); die;
         if (!empty($_REQUEST['uid']))
             $_POST['mass'] = explode(',', $_REQUEST['uid']); // coming from listview
-        
-        
+
+
         elseif (isset($_REQUEST['entire']) && empty($_POST['mass']))
         {
 
@@ -250,31 +250,85 @@ eoq;
                 $jsonText              = $_REQUEST['current_query_by_page'];
                 $decodedText           = html_entity_decode($jsonText);
                 $myArray               = json_decode($decodedText, true);
-                $Counsellors_advanced  = $myArray['Counsellors_advanced'];
-                $batch_advanced        = $myArray['batch_advanced'];
+                $Counsellors_advanced  = $myArray['Counsellors_advanced']; // done
+                $batch_advanced        = $myArray['batch_advanced'];       // done
                 $email_advanced        = $myArray['email_advanced'];
                 $phone_mobile_advanced = $myArray['phone_mobile_advanced'];
-                $Counsellorstring       = array();
-                $Batchstring            = array();
-                $wherecl                ='';
+
+                $date_entered_advanced_range_choice = $myArray['date_entered_advanced_range_choice']; // need not to add
+                $range_date_entered_advanced        = $myArray['range_date_entered_advanced'];
+
+                $start_range_date_entered_advanced = $myArray['start_range_date_entered_advanced'];
+                $end_range_date_entered_advanced   = $myArray['end_range_date_entered_advanced'];
+
+
+                $status_advanced             = $myArray['status_advanced'];
+                $status_description_advanced = $myArray['status_description_advanced'];
+                $lead_source_advanced        = $myArray['lead_source_advanced'];
+                $vendor_list_advanced        = $myArray['vendor_list_advanced'];
+
+
+
+                $Counsellorstring = array();
+                $Batchstring      = array();
+                $wherecl          = '';
                 //$Counsellorstring    = implode("','", $Counsellors_advanced);
                 //$Batchstring         = implode("','", $batch_advanced);
-                
+                if (!empty($status_advanced))
+                {
+                    $wherecl .= " AND  l.status IN ('" . implode("','", $status_advanced) . "')";
+                }
+                if (!empty($status_description_advanced))
+                {
+                    $wherecl .= " AND  l.status_description IN ('" . implode("','", $status_description_advanced) . "')";
+                }
+
+                if (!empty($start_range_date_entered_advanced))
+                {
+                    $date1   = str_replace('/', '-', $start_range_date_entered_advanced);
+                    $wherecl .= " AND  l.date_entered  >= '" . date('Y-m-d', strtotime($date1)) . "'";
+                }
+                if (!empty($end_range_date_entered_advanced))
+                {
+                    $date2   = str_replace('/', '-', $end_range_date_entered_advanced);
+                    $wherecl .= " AND  l.date_entered  <= '" . date('Y-m-d', strtotime($date2)) . "'";
+                }
+
+                if (!empty($range_date_entered_advanced))
+                {
+                    $date3   = str_replace('/', '-', $range_date_entered_advanced);
+                    $wherecl .= " AND  l.date_entered  = '" . date('Y-m-d', strtotime($date3)) . "'";
+                }
+
+
+
+
                 if (!empty($Counsellors_advanced))
-            {
+                {
 
-                $wherecl .= " AND  l.assigned_user_id IN ('" . implode("','", $Counsellors_advanced) . "')";
-            }
-
-
-            if (!empty($batch_advanced))
-            {
-
-                $wherecl .= " AND  lc.te_ba_batch_id_c IN ('" . implode("','", $batch_advanced) . "')";
-            }
+                    $wherecl .= " AND  l.assigned_user_id IN ('" . implode("','", $Counsellors_advanced) . "')";
+                }
 
 
-            $leadSql = "SELECT 
+                if (!empty($batch_advanced))
+                {
+
+                    $wherecl .= " AND  lc.te_ba_batch_id_c IN ('" . implode("','", $batch_advanced) . "')";
+                }
+
+                if (!empty($lead_source_advanced))
+                {
+
+                    $wherecl .= " AND  l.lead_source IN ('" . implode("','", $lead_source_advanced) . "')";
+                }
+                if (!empty($vendor_list_advanced))
+                {
+
+                    $wherecl .= " AND  l.vendor IN ('" . implode("','", $vendor_list_advanced) . "')";
+                }
+
+
+                $leadSql = "SELECT 
                     l.id
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
@@ -282,16 +336,13 @@ eoq;
                    $wherecl
                order by  l.date_entered ";
 
-          
+
                 //echo '<pre>';
-                print_r($leadSql);
+                //print_r($leadSql);
                 //die;
-                
-                
-                
             }
-                else
-                {
+            else
+            {
                 $this->report_to_id[] = $current_user->id;
                 $module_name          = strtolower($_REQUEST['module']);
                 $users_arr            = $this->reportingUser($current_user->id);
@@ -315,23 +366,23 @@ eoq;
                         $this->where_clauses = '(' . implode(' ) AND ( ', $where_clauses) . ')';
                     }
                 }
-                    $query   = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
-                }
+                $query = $this->sugarbean->create_new_list_query($order_by, $this->where_clauses, array(), array(), 0, '', false, $this, true, true);
+            }
 
-                //            if (isset($_REQUEST['module']) && strtolower($_REQUEST['module']) == 'leads')
-                //            {
-                //                $this->where_clauses = str_replace('leads.batch in', 'leads_cstm.te_ba_batch_id_c in', $this->where_clauses);
-                //                $this->where_clauses = str_replace('Counsellors', 'leads.assigned_user_id', $this->where_clauses);
-                //            }
+            //            if (isset($_REQUEST['module']) && strtolower($_REQUEST['module']) == 'leads')
+            //            {
+            //                $this->where_clauses = str_replace('leads.batch in', 'leads_cstm.te_ba_batch_id_c in', $this->where_clauses);
+            //                $this->where_clauses = str_replace('Counsellors', 'leads.assigned_user_id', $this->where_clauses);
+            //            }
 
-                $result  = $db->query($leadSql, true);
-                $new_arr = array();
-                while ($val     = $db->fetchByAssoc($result, false))
-                {
+            $result  = $db->query($leadSql, true);
+            $new_arr = array();
+            while ($val     = $db->fetchByAssoc($result, false))
+            {
 
-                    array_push($new_arr, $val['id']);
-                }
-                $_POST['mass'] = $new_arr;
+                array_push($new_arr, $val['id']);
+            }
+            $_POST['mass'] = $new_arr;
 
 
             //echo '<pre>';
@@ -398,7 +449,7 @@ eoq;
                     //echo '<pre>'; print_r($finalarray);die;
                     if (!empty($finalarray))
                     {
-                        $assignSQL = '';
+                        $assignSQL   = '';
                         $dispoSQL    = "INSERT INTO `te_disposition` (`id`, `status`,`status_detail`,`date_modified`,`date_entered`,`modified_user_id`,`created_by`,`assigned_user_id`) VALUES ";
                         $dispoRelSQL = "INSERT INTO `te_disposition_leads_c` (`id`, `te_disposition_leadste_disposition_idb`,`te_disposition_leadsleads_ida`,`date_modified`) VALUES ";
                         foreach ($finalarray as $assignedUser => $lead_list)
@@ -407,11 +458,11 @@ eoq;
                             {
 
                                 $string    = implode("','", $lead_list);
-                                $assignSQL = "update leads set assigned_user_id='$assignedUser',status='$statusX',status_description='$statusDescriptionX',modified_user_id='$current_user_id',date_modified='". date('Y-m-d H:i:s')."' where id in ('$string');";
+                                $assignSQL = "update leads set assigned_user_id='$assignedUser',status='$statusX',status_description='$statusDescriptionX',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id in ('$string');";
 
                                 //echo '<pre>'; print_r($lead_list);
-                                $query= $db->query($assignSQL);
-                                $i = 1;
+                                $query = $db->query($assignSQL);
+                                $i     = 1;
                                 foreach ($lead_list as $key => $leadID)
                                 {
                                     //echo $leadID . '<br>';
@@ -420,10 +471,9 @@ eoq;
                                     $dispoSQL    .= "('$guidid','$statusX','$statusDescriptionX','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "','$current_user_id','$current_user_id','$assignedUser'),";
                                     $dispoRelSQL .= "('$guidid2','$guidid','$leadID','" . date('Y-m-d H:i:s') . "'),";
 
-                                $i++;
+                                    $i++;
                                 }
                             }
-
                         }
                         $exeSql    = rtrim($dispoSQL, ',');
                         $disExeSql = rtrim($dispoRelSQL, ',');
@@ -444,11 +494,10 @@ eoq;
                     //die;
                 }
             }
-            }
+        }
         $disable_date_format = $old_value;
-
     }
-    
+
     /**
      * split the array in chunks
      */
@@ -467,7 +516,7 @@ eoq;
         }
         return $partition;
     }
-                        
+
     /**
      * Displays the massupdate form
      */
@@ -746,6 +795,11 @@ $('#mass_assigned_user_id').attr('name', 'assigned_user_id[]');
 		$("#mass_status_description option").remove() ;
 
 		 $("#mass_status_description").append('<option>Dropout</option>');
+	}
+        else if(el.val() === "Recycle" ) {
+		$("#mass_status_description option").remove() ;
+
+		 $("#mass_status_description").append('<option>Recycle</option>');
 	}
   });
 </script>
