@@ -6,12 +6,27 @@ array (
   array (
     'basic_search' => 
     array (
-      0 => 'name',
-      1 => 
+      'name' => 
+      array (
+        'name' => 'name',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'batch_code' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_BATCH_CODE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'batch_code',
+      ),
+      'current_user_only' => 
       array (
         'name' => 'current_user_only',
         'label' => 'LBL_CURRENT_USER_FILTER',
         'type' => 'bool',
+        'default' => true,
+        'width' => '10%',
       ),
     ),
     'advanced_search' => 

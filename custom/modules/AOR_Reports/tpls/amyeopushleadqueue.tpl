@@ -55,7 +55,7 @@
     <div class="dashboard-block">
         <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=amyeopushleadqueue">
 
-            <h3 class="heading-title"><span>Leads with isseus</span></h3>
+            <h3 class="heading-title"><span>Leads with issues</span></h3>
             <div class="count">{$junkCount}</div>
             <div class="actions">
                 <span>(Export Junk List)</span>
