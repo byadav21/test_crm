@@ -426,7 +426,7 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         if (isset($data['test_status']) && !empty($data['test_status']) && $data['test_status'] == 'fees')
         {
             $c_status             = 'Alive';
-            $c_status_description = 'New Lead';
+            $c_status_description = 'Follow Up';
             $c_test_status        = 'fees';
             createLog('{Test Status Payment}', 'test_status_payment_' . date('Y-m-d') . '_log.txt',$data['test_status'],$student_arr);
         }
