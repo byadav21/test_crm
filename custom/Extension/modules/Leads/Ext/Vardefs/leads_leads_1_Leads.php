@@ -128,3 +128,18 @@ $dictionary["Lead"]["fields"]["test_status"] = array(
             'duplicate_merge' => false,
             'source'          => 'custom_fields',
 );
+
+$dictionary["Lead"]["fields"]["site_lead_id"] = array(
+            'name'            => 'site_lead_id',
+            'vname'           => 'Site Lead ID',
+            'type'            => 'varchar',
+            'len'             => '100',
+            'size'            => '20',
+            //'module' => 'Leads',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);

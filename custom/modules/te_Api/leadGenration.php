@@ -183,6 +183,8 @@ require_once('custom/modules/te_Api/leads_override.php');
         $leadObj->primary_address_country = $_REQUEST['country_name'];
     if ($_REQUEST['country_name'])
         $leadObj->country_log = $_REQUEST['country_name'];
+    if ($_REQUEST['site_lead_id'])
+        $leadObj->site_lead_id = $_REQUEST['site_lead_id'];
     
     if ($term)
         $leadObj->utm_term_c          = $term;
