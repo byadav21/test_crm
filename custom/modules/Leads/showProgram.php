@@ -75,7 +75,7 @@ class LeadsListView extends Lead{
 			//~ 
 			//add duplicate serach leads Query seen=o
 			if(isset($_REQUEST['status_description_basic'])){
-				$ret_array["where"]  .= "AND leads.is_seen=0";
+				$ret_array["where"]  .= " AND leads.is_seen=0";
 			}
 			if(isset($_REQUEST['payment_realized_check_basic'])){
 				$ret_array["where"]  .= " AND payment_realized_check = 0 AND  leads.id IN (SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0)";
