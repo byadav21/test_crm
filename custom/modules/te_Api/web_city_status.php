@@ -70,7 +70,7 @@ function getLeadId($site_lead_id)
 
 if ($site_lead_id != '')
 {
-    $lead_id = getLeadId($order_id);
+    $lead_id = getLeadId($site_lead_id);
 
     if ($lead_id)
     {
@@ -81,6 +81,7 @@ if ($site_lead_id != '')
         $functional_area = isset($data['functional_area']) ? $data['functional_area'] : 'NA';
         $experience      = isset($data['experience']) ? $data['experience'] : 'NA';
         $qualification   = isset($data['qualification']) ? $data['qualification'] : 'NA';
+	$company         = isset($data['company']) ? $data['company'] : 'NA';
 
         $country_name = isset($data['country_name']) ? $data['country_name'] : 'NA';
         $state        = isset($data['state']) ? $data['state'] : 'NA';
@@ -95,6 +96,7 @@ if ($site_lead_id != '')
         $LBean->country_code            = $country_code;
         $LBean->primary_address_country = $country_name;
         $LBean->country_log             = $country_name;
+        $LBean->company_c               = $company;
 
         $checkSaveBean = $LBean->save();
 
@@ -114,7 +116,7 @@ if ($site_lead_id != '')
     }
     else
     {
-        echo json_encode(array('status' => 'success', 'msg' => 'Lead ID not get fetched!'));
+        echo json_encode(array('status' => 'error', 'msg' => 'Lead ID not get fetched!'));
         createLog('{while Lead ID not get Fetched from DB:}', 'web_city_status_' . date('Y-m-d') . '_log.txt', $site_lead_id, $data);
         exit();
     }
