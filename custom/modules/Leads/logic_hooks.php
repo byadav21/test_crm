@@ -21,4 +21,5 @@ $hook_array['process_record'][] = Array(6, 'statusoleads', 'custom/modules/Leads
 $hook_array['after_relationship_add'][] = Array(7, 'abcd', 'custom/modules/Leads/refree_lead.php','Alogic', 'Bmethod');
 $hook_array['after_save'][] = Array(13, 'add leads primary vendor', 'custom/modules/Leads/save_primary_vendor.php','saveVendorClass','save_primary_vendor');
 //$hook_array['after_save'][] = Array(14, 'add leads in report', 'custom/modules/Leads/add_leads_in_report_lead_tbl.php','saveLeadClass','add_lead');
+$hook_array['after_save'][] = Array(15, 'mark duplicate leads', 'custom/modules/Leads/check_zapier_duplicate.php','checkZapierLeads','check_duplicate_leads');
 ?>
