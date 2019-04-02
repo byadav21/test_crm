@@ -3,6 +3,7 @@
 ini_set('display_errors', 1);
 error_reporting(1);
 require_once('custom/modules/te_Api/leads_override.php');
+    global $db;
     $name         = $_REQUEST['name'];
     $phone        = $_REQUEST['phone'];
     $email        = $_REQUEST['email'];
