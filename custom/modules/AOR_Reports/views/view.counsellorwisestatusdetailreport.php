@@ -3,6 +3,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
+
 class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 {
 
@@ -13,30 +14,47 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
     {
         parent::SugarView();
     }
-	function reportingUser($currentUserId){
-		$userObj = new User();
-		$userObj->disable_row_level_security = true;
-		$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
-		if(!empty($userList)){
-			foreach($userList as $record){
-				if(!empty($record->reports_to_id) && !empty($record->id)){
-					$this->report_to_id[] = $record->id;
-					$this->reportingUser($record->id);
-				}
-			}
-		}
-	}
-	function getCouncelor($user_id){
-		global $db;
-		$userSql="SELECT CONCAT(first_name,' ',last_name) as name FROM users WHERE deleted=0 AND id='".$user_id."'";
-		$userObj =$db->query($userSql);
-		$user =$db->fetchByAssoc($userObj);
-		return $user['name'];
-	}
+
+    function reportingUser($currentUserId)
+    {
+        $userObj                             = new User();
+        $userObj->disable_row_level_security = true;
+        $userList                            = $userObj->get_full_list("", "users.reports_to_id='" . $currentUserId . "'");
+        if (!empty($userList))
+        {
+            foreach ($userList as $record)
+            {
+                if (!empty($record->reports_to_id) && !empty($record->id))
+                {
+                    $this->report_to_id[] = $record->id;
+                    $this->reportingUser($record->id);
+                }
+            }
+        }
+    }
+
+    function getCouncelor($user_id)
+    {
+        global $db;
+        $userSql = "SELECT 
+                        CONCAT(first_name, ' ', last_name) AS name
+                    FROM users
+                    WHERE deleted=0
+                      AND id='" . $user_id . "'";
+        $userObj = $db->query($userSql);
+        $user    = $db->fetchByAssoc($userObj);
+        return $user['name'];
+    }
+
     function getBatch()
     {
         global $db;
-        $batchSql     = "SELECT id,name,batch_code FROM te_ba_batch WHERE batch_status='enrollment_in_progress' AND deleted=0";
+        $batchSql     = "SELECT id,
+                                name,
+                                batch_code
+                         FROM te_ba_batch
+                         WHERE batch_status='enrollment_in_progress'
+                           AND deleted=0";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
@@ -45,59 +63,89 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         }
         return $batchOptions;
     }
-	
-	function getCouncelorForAdmin($user_id=NULL){
-		global $db;
-		$userSql="select u.first_name,u.last_name,u.id,ru.first_name AS reporting_firstname,ru.last_name AS reporting_lastname,ru.id AS reporting_id FROM users AS u INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id LEFT JOIN users AS ru ON ru.id=u.reports_to_id WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a',  '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45',  'cc7133be-0db9-d50a-2684-582c0078e74e') AND u.deleted=0 AND aru.deleted=0";
-		$userObj =$db->query($userSql);
-		$usersArr = [];
-		while($user =$db->fetchByAssoc($userObj)){
-			$usersArr[$user['id']]=array(
-			'id'=>$user['id'],
-			'name'=>$user['first_name'].' '.$user['last_name'],
-			'reporting_id'=>$user['reporting_id'],
-			'reporting_name'=>$user['reporting_firstname'].' '.$user['reporting_lastname']
-			);
-		}
-		return $usersArr;
-	}
-	
-	function getCouncelorForUsers($user_ids=array()){
-		global $db;
-		$userSql="select u.first_name,u.last_name,u.id,ru.first_name AS reporting_firstname,ru.last_name AS reporting_lastname,ru.id AS reporting_id FROM users AS u LEFT JOIN users AS ru ON ru.id=u.reports_to_id WHERE u.id IN ('".implode("','",$user_ids)."') AND u.deleted=0";
-		$userObj =$db->query($userSql);
-		$usersArr = [];
-		while($user =$db->fetchByAssoc($userObj)){
-			$usersArr[$user['id']]=array(
-			'id'=>$user['id'],
-			'name'=>$user['first_name'].' '.$user['last_name'],
-			'reporting_id'=>$user['reporting_id'],
-			'reporting_name'=>$user['reporting_firstname'].' '.$user['reporting_lastname']
-			);
-		}
-		return $usersArr;
-	}
+
+    function getCouncelorForAdmin($user_id = NULL)
+    {
+        global $db;
+        $userSql  = "SELECT u.first_name,
+                            u.last_name,
+                            u.id,
+                            ru.first_name AS reporting_firstname,
+                            ru.last_name AS reporting_lastname,
+                            ru.id AS reporting_id
+                     FROM users AS u
+                     INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
+                     LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+                     WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a',
+                                             '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45',
+                                             'cc7133be-0db9-d50a-2684-582c0078e74e')
+                       AND u.deleted=0
+                       AND aru.deleted=0";
+        $userObj  = $db->query($userSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+            $usersArr[$user['id']] = array(
+                'id'             => $user['id'],
+                'name'           => $user['first_name'] . ' ' . $user['last_name'],
+                'reporting_id'   => $user['reporting_id'],
+                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
+            );
+        }
+        return $usersArr;
+    }
+
+    function getCouncelorForUsers($user_ids = array())
+    {
+        global $db;
+        $userSql  = "SELECT u.first_name,
+                            u.last_name,
+                            u.id,
+                            ru.first_name AS reporting_firstname,
+                            ru.last_name AS reporting_lastname,
+                            ru.id AS reporting_id
+                     FROM users AS u
+                     LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+                     WHERE u.id IN ('" . implode("',
+                                    '", $user_ids) . "')
+                       AND u.deleted=0";
+        $userObj  = $db->query($userSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+            $usersArr[$user['id']] = array(
+                'id'             => $user['id'],
+                'name'           => $user['first_name'] . ' ' . $user['last_name'],
+                'reporting_id'   => $user['reporting_id'],
+                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
+            );
+        }
+        return $usersArr;
+    }
+
     public function display()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $additionalUsr = array('7016c0b1-bc5a-423d-8aaf-590c64f62aa0','4fa58025-3c9d-aa2a-d355-59a062393942');
-		$current_user_id = $current_user->id;
-		$current_user_is_admin = $current_user->is_admin;
-        $where         = "";
-        $wherecl       = "";
-		$BatchListData = $this->getBatch();
-		$usersdd = "";
-		if($current_user_is_admin==1 || in_array($current_user_id, $additionalUsr)){
-			$usersdd = $this->getCouncelorForAdmin();
-		}
-		else{
-			$this->report_to_id[]=$current_user_id;
-			$reportingusersids = $this->reportingUser($current_user_id);
-			
-			$uid=$this->report_to_id;
-			
-			$usersdd = $this->getCouncelorForUsers($uid);
-		}
+        $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942','581d9edd-a5e4-349a-fe28-5c59b9d2fe37');
+        $current_user_id       = $current_user->id;
+        $current_user_is_admin = $current_user->is_admin;
+        $where                 = "";
+        $wherecl               = "";
+        $BatchListData         = $this->getBatch();
+        $usersdd               = "";
+        if ($current_user_is_admin == 1 || in_array($current_user_id, $additionalUsr))
+        {
+            $usersdd = $this->getCouncelorForAdmin();
+        }
+        else
+        {
+            $this->report_to_id[] = $current_user_id;
+            $reportingusersids    = $this->reportingUser($current_user_id);
+
+            $uid = $this->report_to_id;
+
+            $usersdd = $this->getCouncelorForUsers($uid);
+        }
         if (!isset($_SESSION['cccon_from_date']))
         {
             $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
@@ -106,17 +154,17 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         {
             $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
         }
-		if(!isset($_SESSION['cccon_counselor'])){
-			$_SESSION['cccon_counselor'] = array_keys($usersdd);
-		}
+        if (!isset($_SESSION['cccon_counselor']))
+        {
+            $_SESSION['cccon_counselor'] = array_keys($usersdd);
+        }
         if (isset($_POST['button']) || isset($_POST['export']))
         {
             $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
             $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
             $_SESSION['cccon_batch']      = $_REQUEST['batch'];
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_counselor'] = $_REQUEST['counselor'];
-            
+            $_SESSION['cccon_counselor']  = $_REQUEST['counselor'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -138,7 +186,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
             $wherecl          .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
         }
-        
+
         $findBatch = array();
         if (!empty($_SESSION['cccon_batch']))
         {
@@ -148,11 +196,11 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         {
             $selected_batch_code = $_SESSION['cccon_batch_code'];
         }
-		if (!empty($_SESSION['cccon_counselor']))
+        if (!empty($_SESSION['cccon_counselor']))
         {
             $selected_counselor = $_SESSION['cccon_counselor'];
         }
-		
+
 
         $programList = array();
         $StatusList  = array();
@@ -167,14 +215,14 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
-		if (!empty($selected_counselor))
+        if (!empty($selected_counselor))
         {
 
             $wherecl .= " AND  l.assigned_user_id IN ('" . implode("','", $selected_counselor) . "')";
         }
-		
-	$statusArr = ['alive','dead','converted','warm','recycle','dropout'];
-	$StatusList['new_lead']               = 'New Lead';
+
+        $statusArr                            = ['alive', 'dead', 'converted', 'warm', 'recycle', 'dropout'];
+        $StatusList['new_lead']               = 'New Lead';
         $StatusList['follow_up']              = 'Follow-Up';
         $StatusList['call_back']              = 'Call-back';
         $StatusList['dead_number']            = 'Dead Number';
@@ -192,17 +240,17 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $StatusList['duplicate']              = 'Duplicate';
 
         ///New added
-        $StatusList['rejected']               = 'Rejected';
-        $StatusList['not_interested']         = 'Not Interested';
-        $StatusList['instalment_follow_up']   = 'Instalment Follow Up';
-        $StatusList['referral_follow_up']     = 'Referral Follow Up';
-        $StatusList['null']                   = 'null';
-        $StatusList['cross_sell']             = 'Cross Sell';
-        $StatusList['next_batch']             = 'Next Batch';
-        $StatusList['program_enquiry']        = 'Program Enquiry';
-        $StatusList['wrap.timeout']           = 'Wrap Timeout';
+        $StatusList['rejected']             = 'Rejected';
+        $StatusList['not_interested']       = 'Not Interested';
+        $StatusList['instalment_follow_up'] = 'Instalment Follow Up';
+        $StatusList['referral_follow_up']   = 'Referral Follow Up';
+        $StatusList['null']                 = 'null';
+        $StatusList['cross_sell']           = 'Cross Sell';
+        $StatusList['next_batch']           = 'Next Batch';
+        $StatusList['program_enquiry']      = 'Program Enquiry';
+        $StatusList['wrap.timeout']         = 'Wrap Timeout';
         ///
-		$StatusList['na']     = 'NA';
+        $StatusList['na']                   = 'NA';
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
@@ -232,29 +280,30 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
 
             while ($row = $db->fetchByAssoc($leadObj))
-			{
-			   
-				$programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-				$programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['batch_name']   = $row['batch_name'];
-				$programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['batch_code']   = $row['batch_code'];
-				$programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['assigned_user']   = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['name'] : 'NA';
-				$programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['reporting_user']   = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
-				$programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))]   = $row['lead_count'];
-				
-			}
-			foreach($programList as $key=>$val){
-				$total=0;
-				foreach ($StatusList as $key1=>$value){
-					$countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
-					$total      += $countedLead;
-				}
-				$programList[$key]['total']   = $total;
-			}
+            {
+
+                $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                                                             = $row['batch_id'];
+                $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']                                                           = $row['batch_name'];
+                $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_code']                                                           = $row['batch_code'];
+                $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']                                                        = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['name'] : 'NA';
+                $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['reporting_user']                                                       = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
+                $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
+            }
+            foreach ($programList as $key => $val)
+            {
+                $total = 0;
+                foreach ($StatusList as $key1 => $value)
+                {
+                    $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                    $total       += $countedLead;
+                }
+                $programList[$key]['total'] = $total;
+            }
 
             # Create heading
             $data = "Counsellor Name";
-	    $data .= ",Reporting Manager";
-	    $data .= ",Batch Name";
+            $data .= ",Reporting Manager";
+            $data .= ",Batch Name";
             $data .= ",Batch Code";
             $data .= ",Total";
             foreach ($StatusList as $statusVal)
@@ -274,10 +323,11 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
                 $data .= "\",\"" . $councelor['batch_code'];
                 $data .= "\",\"" . $councelor['total'];
 
-                foreach($StatusList as $key1=>$val){
-					$countedLead = (!empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
-                    $data      .= "\",\"" . $countedLead;
-				}
+                foreach ($StatusList as $key1 => $val)
+                {
+                    $countedLead = (!empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                    $data        .= "\",\"" . $countedLead;
+                }
                 $data .= "\"\n";
             }
 
@@ -310,29 +360,30 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         //echo $leadSql;exit();
 
 
-        $leadObj = $db->query($leadSql);		
-        while ($row = $db->fetchByAssoc($leadObj))
+        $leadObj = $db->query($leadSql);
+        while ($row     = $db->fetchByAssoc($leadObj))
         {
-           
-            $programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['batch_id']   = $row['batch_id'];
-            $programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['batch_name']   = $row['batch_name'];
-            $programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['batch_code']   = $row['batch_code'];
-            $programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['assigned_user']   = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['name'] : 'NA';
-            $programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']]['reporting_user']   = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
-			$programList[$row['assigned_user_id'] .'_BATCH_'.$row['batch_id']][strtolower(str_replace(array(' ','-'),'_',$row['status_description']))]   = $row['lead_count'];
-			
-        }
-		
-		foreach($programList as $key=>$val){
-			$total=0;
-			foreach ($StatusList as $key1=>$value){
-				$countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1])? $programList[$key][$key1] : 0);
-				$total      += $countedLead;
-			}
-			$programList[$key]['total']   = $total;
-		}
 
-        
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                                                             = $row['batch_id'];
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']                                                           = $row['batch_name'];
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_code']                                                           = $row['batch_code'];
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']                                                        = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['name'] : 'NA';
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['reporting_user']                                                       = !empty($row['assigned_user_id']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
+        }
+
+        foreach ($programList as $key => $val)
+        {
+            $total = 0;
+            foreach ($StatusList as $key1 => $value)
+            {
+                $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                $total       += $countedLead;
+            }
+            $programList[$key]['total'] = $total;
+        }
+
+
         $total     = count($programList); #total records
         $start     = 0;
         $per_page  = 60;
@@ -395,8 +446,8 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("right", $right);
         $sugarSmarty->assign("left", $left);
         $sugarSmarty->assign("last_page", $last_page);
-		$sugarSmarty->assign("statusArr", $statusArr);
-		$sugarSmarty->assign("StatusList", $StatusList);
+        $sugarSmarty->assign("statusArr", $statusArr);
+        $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->display('custom/modules/AOR_Reports/tpls/counsellorwisestatusdetailreport.tpl');
     }
 
