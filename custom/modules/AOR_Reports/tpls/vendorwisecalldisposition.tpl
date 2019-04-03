@@ -61,11 +61,12 @@
 
                 </tbody>
             </table>
+                            <div><span style="float:right; font-style: italic;">(* Only 31 Days of data can be downloaded.)</span></div>
         </div>
     </form>
 
 
-
+                            
     <div style="width:99%;overflow:hidden;">                  
         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">  
             <thead>
@@ -137,7 +138,7 @@
                         {/foreach}
 
             </tr>
-            {if empty($paymentList)}<tr class="oddListRowS1"><td align="left"  colspan="30">Only 31 Days of data can be downloaded.</td></tr>{/if}
+            {if empty($programList)}<tr class="oddListRowS1"><td align="left"  colspan="30">No Data Found.</td></tr>{/if}
             {foreach from = $programList key=key item=program}
                 <tr height="20" class="oddListRowS1">
                     {foreach from = $StatusList key=statuskey item=vendor}
