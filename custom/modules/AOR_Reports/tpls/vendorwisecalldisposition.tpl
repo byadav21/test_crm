@@ -12,7 +12,7 @@
                             <select name="batch_code[]" id="batch_code"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$BatchListData key=key item=program}
 
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch)} selected="selected"{/if}>{$program.batch_code}</option>
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch_code)} selected="selected"{/if}>{$program.batch_code}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -24,7 +24,7 @@
                             <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$VendorListData key=key item=program}
 
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
+                                    <option value="{$program.name}"{if in_array($program.name, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
                                 {/foreach}
                             </select>
                         </td>

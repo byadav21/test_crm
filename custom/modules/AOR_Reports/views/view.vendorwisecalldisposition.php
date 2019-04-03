@@ -176,10 +176,10 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-        if (!empty($selected_vendor))
+        if (!empty($selected_vendors))
         {
-
-            $wherecl .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "')";
+            
+            $wherecl .= " AND  l.vendor IN ('" . implode("','", $selected_vendors) . "')";
         }
 
 
@@ -207,9 +207,8 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 ///wwww
         $sqlPart = "
                 FROM leads l
-                INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
+                LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
-                LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
                  WHERE l.deleted=0
                    $wherecl
                order by  l.date_entered,te_ba_batch.batch_code,l.vendor  ";
@@ -219,6 +218,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 
         $leadSql = "SELECT  $headersss " . $sqlPart;
 
+        //echo '<pre>'.$leadSql;
         //die($leadSql);
         if (!$_export)
         {
@@ -262,11 +262,11 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
                     $leadObj = $db->query($leadSql);
                 }
             }
-
-
+            //print_r($leadObj);
+            
             while ($row = $db->fetchByAssoc($leadObj))
             {
-
+                
                 $programList[$row['id']]['id']                      = $row['id'];
                 $programList[$row['id']]['date_entered']            = $row['date_entered'];
                 $programList[$row['id']]['vendor']                  = isset($row['vendor']) ? $row['vendor'] : 'N/A';
