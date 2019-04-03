@@ -1,26 +1,37 @@
 <?php
 
+// Last modified on:  03th APP 2019
+
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
+require_once('custom/include/Email/sendmail.php');
+require_once('custom/modules/AOR_Reports/pagination.php');
+require_once('custom/modules/AOR_Reports/UserInput.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
+
 class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 {
 
     var $report_to_id;
     var $counsellors_arr;
+    private $objPagination;
+    private $_objInputs;
 
     public function __construct()
     {
         parent::SugarView();
+        $this->objPagination = new pagination(60, 'page');
+        $this->_objInputs    = new UserInput();
+        $this->_objInputs->syncSessions('vendorWiseCallDisposition');
     }
 
     function statusHeader()
     {
         $headerArr = array();
-           
-            $headerArr = array(
+
+        $headerArr = array(
             'id'                      => 'Lead ID',
             'date_entered'            => 'Date',
             'vendor'                  => 'Vendor',
@@ -66,10 +77,23 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         return $batchOptions;
     }
 
+    function getBetweenDays($fromData, $toDate)
+    {
+
+        $fromData   = strtotime($fromData);
+        $toDate     = strtotime($toDate);
+        $difference = $toDate - $fromData;
+        $days       = floor($difference / (60 * 60 * 24));
+        return $days;
+    }
+
     public function display()
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
+        $current_user_id       = $current_user->id;
+        $current_user_is_admin = $current_user->is_admin;
+        $_export               = isset($this->_objInputs->post['export']) && $this->_objInputs->post['export'] == "Export";
 
         $report_action = '';
         $reportAccess  = reportAccessLog();
@@ -86,70 +110,60 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 
 
 
-        $where          = "";
-        $wherecl        = "";
+
+        $where            = "";
+        $wherecl          = "";
+        $selected_vendors = "";
+        $programList      = array();
+        $StatusList       = array();
+        $leadList         = array();
+
+
+
+
+
+
+
+
+        $selected_from_date = $this->_objInputs->getVal('from_date', 'post', date('Y-m-d', strtotime('-1 days')));
+        $selected_to_date   = $this->_objInputs->getVal('to_date', 'post', date('Y-m-d', strtotime('-1 days')));
+
+
+
+        $selected_batch_code = $this->_objInputs->getVal('batch_code', 'post', array());
+        $selected_vendors    = $this->_objInputs->getVal('vendors', 'post', array());
+        $selected_program    = $this->_objInputs->getVal('program', 'post', array());
+        $selected_batch      = $this->_objInputs->getVal('batch', 'post', array());
+
+        $error = array();
+        $Days  = $this->getBetweenDays($selected_from_date, $selected_to_date);
+
+        if ($Days >= 32)
+        {
+
+            $error['error'] = 'Only one month of data are allowed to export.';
+        }
+        //echo '$Days=='.$Days; 
+
+
         $statusHeader   = $this->statusHeader();
         $BatchListData  = $this->getBatch();
         $VendorListData = $this->getVendors();
 
-        if (!isset($_SESSION['cccon_from_date']))
+
+
+        if ($selected_from_date != "")
         {
-            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
-        }
-        if (!isset($_SESSION['cccon_to_date']))
-        {
-            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
-        }
-        if (isset($_POST['button']) || isset($_POST['export']))
-        {
-            $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']      = $_REQUEST['batch'];
-            $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
-            $_SESSION['cccon_program']    = $_REQUEST['program'];
-        }
-        if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $selected_to_date   = $_SESSION['cccon_to_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            $wherecl            .= " AND DATE(l.date_entered)>='" . $from_date . "' AND DATE(l.date_entered)<='" . $to_date . "'";
-        }
-        elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
-        {
-            $selected_from_date = $_SESSION['cccon_from_date'];
-            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $wherecl            .= " AND DATE(l.date_entered)>='" . $from_date . "' ";
-        }
-        elseif ($_SESSION['cccon_from_date'] == "" && $_SESSION['cccon_to_date'] != "")
-        {
-            $selected_to_date = $_SESSION['cccon_to_date'];
-            $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            $wherecl          .= " AND DATE(l.date_entered)<='" . $to_date . "' ";
+            $from_date = date('Y-m-d', strtotime(str_replace('/', '-', $selected_from_date)));
+            $wherecl   .= " AND DATE(l.`date_entered`) >= '" . $from_date . "'";
         }
 
-        $findBatch = array();
-        if (!empty($_SESSION['cccon_batch']))
+        if ($selected_to_date != "")
         {
-            $selected_batch = $_SESSION['cccon_batch'];
-        }
-        if (!empty($_SESSION['cccon_batch_code']))
-        {
-            $selected_batch_code = $_SESSION['cccon_batch_code'];
-        }
-        if (!empty($_SESSION['cccon_vendors']))
-        {
-            $selected_vendor = $_SESSION['cccon_vendors'];
-        }
-        if (!empty($_SESSION['cccon_program']))
-        {
-            $selected_program = $_SESSION['cccon_program'];
+            $to_date = date('Y-m-d', strtotime(str_replace('/', '-', $selected_to_date)));
+            $wherecl .= " AND DATE(l.`date_entered`) <= '" . $to_date . "' ";
         }
 
-        $programList = array();
-        $StatusList  = array();
 
         if (!empty($selected_batch))
         {
@@ -162,7 +176,6 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
 
-
         if (!empty($selected_vendor))
         {
 
@@ -170,61 +183,111 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         }
 
 
-        $leadSql = "SELECT 
-                    l.id,
-                    date(l.date_entered) date_entered,
-                    l.vendor,
-                    te_ba_batch.batch_code,
-                    l.status,
-                    l.status_description,
-                    l.disposition_reason,
-                    l.primary_address_city,
-                    l.note,
-                    l.comment,
-                    l.primary_address_state,
-                    l.primary_address_country,
-                    lc.landing_url
-                    
+
+
+
+        $headers = array('l.id'                              => 'id',
+            'date(l.date_entered) date_entered' => 'date_entered',
+            'l.vendor'                          => 'vendor',
+            'te_ba_batch.batch_code'            => 'batch_code',
+            'l.status'                          => 'status',
+            'l.status_description'              => 'status_description',
+            'l.disposition_reason'              => 'disposition_reason',
+            'l.primary_address_city'            => 'primary_address_city',
+            'l.note'                            => 'note',
+            'l.comment'                         => 'comment',
+            'l.primary_address_state'           => 'primary_address_state',
+            'l.primary_address_country'         => 'primary_address_country',
+            'lc.landing_url'                    => 'landing_url');
+
+
+        $headersss = implode(', ', array_keys($headers));
+
+
+///wwww
+        $sqlPart = "
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
                  WHERE l.deleted=0
                    $wherecl
-               order by  l.date_entered,te_ba_batch.batch_code,l.vendor ";
-        //echo $leadSql;exit();
+               order by  l.date_entered,te_ba_batch.batch_code,l.vendor  ";
+
+        $countSql = "SELECT count(1) as count " . $sqlPart;
 
 
-        $leadObj = $db->query($leadSql);
+        $leadSql = "SELECT  $headersss " . $sqlPart;
 
-
-
-        while ($row = $db->fetchByAssoc($leadObj))
+        //die($leadSql);
+        if (!$_export)
         {
-
-            //isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-            $programList[$row['id']]['id']                      = $row['id'];
-            $programList[$row['id']]['date_entered']            = $row['date_entered'];
-            $programList[$row['id']]['vendor']                  = isset($row['vendor']) ? $row['vendor'] : 'N/A';
-            $programList[$row['id']]['batch_code']              = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
-            $programList[$row['id']]['status']                  = isset($row['status']) ? $row['status'] : 'N/A';
-            $programList[$row['id']]['status_description']      = isset($row['status_description']) ? $row['status_description'] : 'N/A';
-            $programList[$row['id']]['disposition_reason']      = isset($row['disposition_reason']) ? $row['disposition_reason'] : 'N/A';
-            $programList[$row['id']]['primary_address_city']    = isset($row['primary_address_city']) ? $row['primary_address_city'] : 'N/A';
-            $programList[$row['id']]['note']                    = addslashes(isset($row['note']) ? $row['note'] : 'N/A');
-            $programList[$row['id']]['comment']                 = addslashes(isset($row['comment']) ? $row['comment'] : 'N/A');
-            $programList[$row['id']]['primary_address_state']   = addslashes(isset($row['primary_address_state']) ? $row['primary_address_state'] : 'N/A');
-            $programList[$row['id']]['primary_address_country'] = addslashes(isset($row['primary_address_country']) ? $row['primary_address_country'] : 'N/A');
-            $programList[$row['id']]['landing_url']             = addslashes(isset($row['landing_url']) ? $row['landing_url'] : 'N/A');
+            $limit   = $this->objPagination->get_limit();
+            $leadSql .= ' ' . $limit;
         }
+        $rowCount = 0;
+        $leadObj  = null;
 
-        $StatusList = $statusHeader;
+        if (empty($error))
+        {
+            if ($_export && empty($error))
+            {
+                $leadObj  = $db->query($leadSql);
+                $rowCount = $leadObj->num_rows;
+                if ($rowCount <= 0)
+                {
+                    $error['error'] = "No Data Found.";
+                }
+            }
+            else
+            {
+                if ($this->objPagination->get_page() == 1 || !isset($_SESSION['_row_count']))
+                {
+                    $objLeadsCount          = $db->query($countSql);
+                    $row                    = $db->fetchByAssoc($objLeadsCount);
+                    $rowCount               = $row['count'];
+                    $_SESSION['_row_count'] = $rowCount;
+                }
+                else
+                {
+                    $rowCount = $_SESSION['_row_count'];
+                }
+                $this->objPagination->set_total($rowCount);
+                if ($rowCount <= 0)
+                {
+                    $error['error'] = "No Data Found.";
+                }
+                else
+                {
+                    $leadObj = $db->query($leadSql);
+                }
+            }
 
 
-        //echo '<pre>';
-        //print_r($programList); die;
-        #PS @Pawan
-        if (isset($_POST['export']) && $_POST['export'] == "Export")
+            while ($row = $db->fetchByAssoc($leadObj))
+            {
+
+                $programList[$row['id']]['id']                      = $row['id'];
+                $programList[$row['id']]['date_entered']            = $row['date_entered'];
+                $programList[$row['id']]['vendor']                  = isset($row['vendor']) ? $row['vendor'] : 'N/A';
+                $programList[$row['id']]['batch_code']              = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
+                $programList[$row['id']]['status']                  = isset($row['status']) ? $row['status'] : 'N/A';
+                $programList[$row['id']]['status_description']      = isset($row['status_description']) ? $row['status_description'] : 'N/A';
+                $programList[$row['id']]['disposition_reason']      = isset($row['disposition_reason']) ? $row['disposition_reason'] : 'N/A';
+                $programList[$row['id']]['primary_address_city']    = isset($row['primary_address_city']) ? $row['primary_address_city'] : 'N/A';
+                $programList[$row['id']]['note']                    = addslashes(isset($row['note']) ? $row['note'] : 'N/A');
+                $programList[$row['id']]['comment']                 = addslashes(isset($row['comment']) ? $row['comment'] : 'N/A');
+                $programList[$row['id']]['primary_address_state']   = addslashes(isset($row['primary_address_state']) ? $row['primary_address_state'] : 'N/A');
+                $programList[$row['id']]['primary_address_country'] = addslashes(isset($row['primary_address_country']) ? $row['primary_address_country'] : 'N/A');
+                $programList[$row['id']]['landing_url']             = addslashes(isset($row['landing_url']) ? $row['landing_url'] : 'N/A');
+            }
+
+            $StatusList = $statusHeader;
+        }// checking error end if line no. 226
+        //echo "<pre>";print_r($paymentList);exit();
+
+
+        if ($_export && empty($error))
         {
 
             $file     = "VendorwiseCallDispositionReport_report";
@@ -249,7 +312,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $data .= ",Landing Url";
             $data .= "\n";
 
-            
+
             foreach ($programList as $key => $councelor)
             {
                 $i = 0;
@@ -276,83 +339,52 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             echo $data;
             exit;
         } // End Of Export Func
+        #PS @Pawan
 
+        $page         = $this->objPagination->get_page();
+        $last_page    = $this->objPagination->get_last_page();
+        $pagenext     = $page + 1;
+        $pageprevious = $page - 1;
 
+        $right = $page < $last_page;
+        $left  = $page > 1;
 
-
-
-
-
-
-
-
-
-
-        $total     = count($programList); #total records
-        $start     = 0;
-        $per_page  = 60;
-        $page      = 1;
-        $pagenext  = 1;
-        $last_page = ceil($total / $per_page);
-
-        if (isset($_REQUEST['page']) && $_REQUEST['page'] > 0)
+        if (empty($error))
         {
-            $start    = $per_page * ($_REQUEST['page'] - 1);
-            $page     = ($_REQUEST['page'] - 1);
-            $pagenext = ($_REQUEST['page'] + 1);
+            while ($row = $db->fetchByAssoc($leadObj))
+            {
+                $leadList[$row['id']] = $row;
+            }
+            $this->objPagination->set_found_rows(count($leadList));
         }
-        else
-        {
+        $current = $this->objPagination->getHeading();
 
-            $pagenext++;
-        }
-        if (($start + $per_page) < $total)
-        {
-            $right = 1;
-        }
-        else
-        {
-            $right = 0;
-        }
-        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 1)
-        {
-            $left = 0;
-        }
-        elseif (isset($_REQUEST['page']))
-        {
-
-            $left = 1;
-        }
-
-        $programList = array_slice($programList, $start, $per_page);
-        if ($total > $per_page)
-        {
-            $current = "(" . ($start + 1) . "-" . ($start + $per_page) . " of " . $total . ")";
-        }
-        else
-        {
-            $current = "(" . ($start + 1) . "-" . count($programList) . " of " . $total . ")";
-        }
         #pE
+
 
         $sugarSmarty = new Sugar_Smarty();
 
+        $sugarSmarty->assign("error", $error);
+
+        $sugarSmarty->assign("headers", $headers);
+        $sugarSmarty->assign("tablewidth", count($headers) * 130);
+
         $sugarSmarty->assign("programList", $programList);
-
-
         $sugarSmarty->assign("BatchListData", $BatchListData);
-        //$sugarSmarty->assign("ProgramListData", $ProgramListData);
         $sugarSmarty->assign("VendorListData", $VendorListData);
         $sugarSmarty->assign("StatusList", $StatusList);
+
+        $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
+        //$sugarSmarty->assign("selected_status", $selected_status);
         $sugarSmarty->assign("selected_batch", $selected_batch);
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
-        $sugarSmarty->assign("selected_vendor", $selected_vendor);
-        $sugarSmarty->assign("selected_program", $selected_program);
+        $sugarSmarty->assign("selected_vendor", $selected_vendors);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
         $sugarSmarty->assign("pagenext", $pagenext);
+        $sugarSmarty->assign("pageprevious", $pageprevious);
         $sugarSmarty->assign("right", $right);
         $sugarSmarty->assign("left", $left);
         $sugarSmarty->assign("last_page", $last_page);
@@ -360,5 +392,5 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
     }
 
 }
-
 ?>
+
