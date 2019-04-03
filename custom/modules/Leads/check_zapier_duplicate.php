@@ -43,7 +43,7 @@ class checkZapierLeads
         if (in_array($vendor, $sourcesArr) && $status_description = 'New Lead' && in_array('695fff76-e5ed-19b1-a61f-5c20f44b3efe', $userIdArr))
         {
 
-            $this->createLog('{while true return:}', 'check_zapier_duplicate_' . date('Y-m-d') . '_log.txt', $vendor, array('$beanId' => $beanId, 'vendor' => $vendor, 'modified_user_id' => $modified_user_id));
+            $this->createLog('{while true return:}', 'check_zapier_duplicate_' . date('Y-m-d') . '_log.txt', $vendor, array('$beanId' => $beanId, 'vendor' => $vendor, 'modified_user_id' => $modified_user_id,'created_by' => $created_by));
 
 
             $sql = "SELECT  
@@ -76,7 +76,7 @@ class checkZapierLeads
             {
 
 
-                $this->createLog('{while duplicate found:}', 'check_zapier_duplicate_' . date('Y-m-d') . '_log.txt', $vendor, array('LeadID' => $beanId, 'vendor' => $vendor, 'modified_user_id' => $modified_user_id));
+                $this->createLog('{while duplicate found:}', 'check_zapier_duplicate_' . date('Y-m-d') . '_log.txt', $sql, array('LeadID' => $beanId, 'vendor' => $vendor, 'modified_user_id' => $modified_user_id,'created_by' => $created_by));
 
 
 
