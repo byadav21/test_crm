@@ -72,7 +72,7 @@ class checkZapierLeads
 
 
             $re = $db->query($sql);
-            if ($db->getRowCount($re) > 0)
+            if ($db->getRowCount($re) > 1)
             {
 
 
