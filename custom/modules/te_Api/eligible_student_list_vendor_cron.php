@@ -35,7 +35,7 @@ class sendVisitReport
         
         //echo '<pre>';print_r($BodyData);die;
         
-        if (empty($AllLeadData))
+        if (empty($BodyData))
         {
             echo json_encode(array('status' => 'error', 'msg' => 'No Data found for Eligible Student!'));
             return;
