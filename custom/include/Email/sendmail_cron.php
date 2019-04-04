@@ -133,7 +133,7 @@ class FalconideEmail
        public function toVendorData($reponame, $filename, $date, $email_summary=NULL)
     {
 
-           $emailData = array('email' => array('pawan.kumar@talentedge.in','duke.banerjee@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in'),
+           $emailData = array('email' => array('pawan.kumar@talentedge.in','duke.banerjee@talentedge.in','kunal.soni@talentedge.in'),
              'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => ''
 			. $email_summary,
