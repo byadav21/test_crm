@@ -10,6 +10,7 @@ require_once('custom/modules/AOR_Reports/UserInput.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
+ini_set('memory_limit', '-1');
 
 class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 {
@@ -40,9 +41,9 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             'status_description'      => 'Sub Status',
             'disposition_reason'      => 'Disposition Reason',
             'primary_address_city'    => 'City',
-            //'note'                    => 'Note',
+            'note'                    => 'Note',
             'comment'                 => 'Comments',
-            //'primary_address_state'   => 'state',
+            'primary_address_state'   => 'state',
             'primary_address_country' => 'country',
             'landing_url'             => 'Landing Url'
                 #'id'                   =>'User Name',
@@ -138,7 +139,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         $error = array();
         $Days  = $this->getBetweenDays($selected_from_date, $selected_to_date);
 
-        if ($Days >= 32)
+        if ($Days >= 31)
         {
 
             $error['error'] = 'Only one month of data are allowed to export.';
@@ -194,9 +195,9 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             'l.status_description'              => 'status_description',
             'l.disposition_reason'              => 'disposition_reason',
             'l.primary_address_city'            => 'primary_address_city',
-            //'l.note'                            => 'note',
+            'l.note'                            => 'note',
             'l.comment'                         => 'comment',
-            //'l.primary_address_state'           => 'primary_address_state',
+            'l.primary_address_state'           => 'primary_address_state',
             'l.primary_address_country'         => 'primary_address_country',
             'lc.landing_url'                    => 'landing_url');
 
@@ -275,9 +276,9 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
                 $programList[$row['id']]['status_description']      = isset($row['status_description']) ? $row['status_description'] : 'N/A';
                 $programList[$row['id']]['disposition_reason']      = isset($row['disposition_reason']) ? $row['disposition_reason'] : 'N/A';
                 $programList[$row['id']]['primary_address_city']    = isset($row['primary_address_city']) ? $row['primary_address_city'] : 'N/A';
-                //$programList[$row['id']]['note']                    = addslashes(isset($row['note']) ? $row['note'] : 'N/A');
+                $programList[$row['id']]['note']                    = addslashes(isset($row['note']) ? $row['note'] : 'N/A');
                 $programList[$row['id']]['comment']                 = addslashes(isset($row['comment']) ? $row['comment'] : 'N/A');
-                //$programList[$row['id']]['primary_address_state']   = addslashes(isset($row['primary_address_state']) ? $row['primary_address_state'] : 'N/A');
+                $programList[$row['id']]['primary_address_state']   = addslashes(isset($row['primary_address_state']) ? $row['primary_address_state'] : 'N/A');
                 $programList[$row['id']]['primary_address_country'] = addslashes(isset($row['primary_address_country']) ? $row['primary_address_country'] : 'N/A');
                 $programList[$row['id']]['landing_url']             = addslashes(isset($row['landing_url']) ? $row['landing_url'] : 'N/A');
             }
@@ -305,7 +306,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $data .= ",Sub Status";
             $data .= ",Disposition Reason";
             $data .= ",City";
-            //$data .= ",Note";
+            $data .= ",Note";
             $data .= ",Comments";
             $data .= ",State";
             $data .= ",Country";
