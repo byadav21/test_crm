@@ -61,7 +61,7 @@ class checkZapierLeads
                 $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
             }
 
-            $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batchid . "'";
+            $sql .= " WHERE leads.deleted = 0 AND leads.status_description = 'New Lead' AND leads_cstm.te_ba_batch_id_c = '" . $batchid . "'";
 
             if ($phone != "" && $email != "")
             {
