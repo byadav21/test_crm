@@ -151,4 +151,27 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateStudentEligibility')
     }
     die;
 }
+
+
+
+if (isset($_POST['action']) && $_POST['action'] == 'DeleteRrepotAccessRepo')
+{
+    global $db;
+    $option = '';
+    //RecordID: RecordID, RowID:RowID
+   
+    $RecordID = $_POST['RecordID'];
+    $RowID = $_POST['RowID'];
+
+    if ($RecordID!='')
+    {
+        $updateSql = "UPDATE report_access_log  SET is_enabled=0,modified_date='" . date('Y-m-d H:i:s') . "' where id=$RecordID";
+        $usObj = $GLOBALS['db']->Query($updateSql);
+       
+        if($usObj){
+            echo $RowID;
+        }
+    }
+    die;
+}
 ?>
