@@ -129,6 +129,18 @@ class FalconideEmail
             'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
         return $emailData;
     }
+    
+       public function toVendorData($reponame, $filename, $date, $email_summary=NULL)
+    {
+
+           $emailData = array('email' => array('pawan.kumar@talentedge.in','duke.banerjee@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in'),
+             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
+            'email_message' => ''
+			. $email_summary,
+            'pdfFileName'   => $filename,
+            'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
+        return $emailData;
+    }
 
 }
 
