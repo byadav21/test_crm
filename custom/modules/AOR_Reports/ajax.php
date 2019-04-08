@@ -96,7 +96,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'DeleteTargetRepo')
 
     if ($RecordID!='')
     {
-        $updateSql = "UPDATE agent_productivity_report SET deleted=1,status=0 where id=$RecordID";
+        $updateSql = "UPDATE agent_productivity_report SET deleted=1,status=0,modified_date='" . date('Y-m-d H:i:s') . "' where id=$RecordID";
         $usObj = $GLOBALS['db']->Query($updateSql);
        
         if($usObj){

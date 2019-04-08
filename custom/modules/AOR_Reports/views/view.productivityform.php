@@ -259,6 +259,7 @@ class AOR_ReportsViewproductivityform extends SugarView
                                     . "month=$month,"
                                     . "target_gsv='$target_gsv',"
                                     . "target_unit='$target_unit' , "
+                                    . "modified_date='" . date('Y-m-d H:i:s') . "' , "
                                     . "created_date='" . date('Y-m-d H:i:s') . "'";
                             $GLOBALS['db']->Query($insertSql);
                         }
@@ -276,6 +277,7 @@ class AOR_ReportsViewproductivityform extends SugarView
                                     . "month=$month,"
                                     . "target_gsv='$target_gsv',"
                                     . "target_unit='$target_unit' , "
+                                    . "modified_date='" . date('Y-m-d H:i:s') . "' , "
                                     . "created_date='" . date('Y-m-d H:i:s') . "'";
                             $GLOBALS['db']->Query($insertSql);
                         
