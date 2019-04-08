@@ -98,7 +98,7 @@ class sendVisitReport
         chmod($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", 0777);
 
 
-        $to        = array('pawan.kumar@talentedge.in');
+        $to        = array('pawan.kumar@talentedge.in','ankit.singh@talentedge.in');
         $emailData = $mail->cron_email_Data('Concentrix Conversions Detail Report', $filename, $this->toDate, $to, $email_summary);
         $mail->sendCertificateEmail($emailData);
     }

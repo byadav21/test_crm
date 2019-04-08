@@ -80,7 +80,7 @@ class checkZapierLeads
 
 
 
-                /* $updateSql    = "update leads
+                 $updateSql    = "update leads
                   SET
                   autoassign          = 'No',
                   neoxstatus          = '',
@@ -88,11 +88,11 @@ class checkZapierLeads
                   status_description   = 'Re-Enquired',
                   status              = 'Warm',
                   dristi_campagain_id = '',
-                  dristi_API_id       = '',
+                  dristi_API_id       = '786',
                   date_modified       = NOW()  where id='$beanId'";
                   $updateSqlres = $db->Query($updateSql);
 
-                  if ($updateSqlres)
+                 /*if ($updateSqlres)
                   {
                   $this->createLog('{Lead get updated:}', 'check_zapier_duplicate_' . date('Y-m-d') . '_log.txt', $updateSqlres, array());
 
