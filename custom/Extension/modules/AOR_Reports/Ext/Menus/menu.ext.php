@@ -101,6 +101,7 @@ if ($misData['slug'] == 'DMM' || $misData['slug'] == 'BA')
             '3d29ebfb-23a7-ea3e-b4d8-5b23a590f80f',// => 'Career360',
             '36990877-a094-db61-6610-5b20f95a6e6e',// => 'Infoedge'
             'e7dafa0f-2d5e-9885-90d4-5c383bda6353',// =>'intellactads'
+            'bbbea66c-1aee-a0bc-2654-5cb02b0123f0',// =>'OneyearMBA'
             );
          
         
