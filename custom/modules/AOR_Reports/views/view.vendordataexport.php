@@ -217,6 +217,11 @@ class AOR_ReportsViewVendordataexport extends SugarView
             $selected_vendor = array($vendorsIdArr['intellactads']);
             $VendorListData  = array(array('id' => $vendorsIdArr['intellactads'], 'name' => 'intellactads'));
         }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'OneyearMBA')
+        {
+            $selected_vendor = array($vendorsIdArr['OneyearMBA']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['OneyearMBA'], 'name' => 'OneyearMBA'));
+        }
 
         if (!empty($selected_vendor))
         {
