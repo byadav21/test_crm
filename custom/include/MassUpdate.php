@@ -457,7 +457,7 @@ eoq;
 							}
 							 break;
 						case "contact_id":$even = !$even; $newhtml .=$this->addContactID($displayname, $field["name"]); break;
-						case "assigned_user_name":$even = !$even; $newhtml .= $this->addAssignedUserID($displayname,  $field["name"]); break;
+						//case "assigned_user_name":$even = !$even; $newhtml .= $this->addAssignedUserID($displayname,  $field["name"]); break;
 						case "account_id":$even = !$even; $newhtml .= $this->addAccountID($displayname,  $field["name"]); break;
 						case "account_name":$even = !$even; $newhtml .= $this->addAccountID($displayname,  $field["id_name"]); break;
 						case "bool": $even = !$even; $newhtml .= $this->addBool($displayname,  $field["name"]); break;
@@ -1025,7 +1025,7 @@ EOHTML;
 						$img = SugarThemeRegistry::current()->getImageURL("id-ff-select.png");
 						$html = <<<EOQ
 		<td width="15%" scope="row">$displayname</td>
-		<td ><input class="sqsEnabled" autocomplete="off" id="mass_assigned_user_name" name='assigned_user_name' type="text" value=""><input id='mass_assigned_user_id' name='assigned_user_id' type="hidden" value="" />
+		<td ><input class="sqsEnabled" autocomplete="off" id="mass_assigned_user_name" name='assigned_user_name' type="text" value=""><input id='mass_assigned_user_id' name='assigned_user_id[]' type="hidden" value="" />
 		<span class="id-ff multiple"><button id="mass_assigned_user_name_btn" title="{$app_strings['LBL_SELECT_BUTTON_TITLE']}" type="button" class="button" value='{$app_strings['LBL_SELECT_BUTTON_LABEL']}' name=btn1
 				onclick='open_popup("Users", 600, 400, "", true, false, $encoded_popup_request_data);' /><img src="$img"></button></span>
 		</td>
