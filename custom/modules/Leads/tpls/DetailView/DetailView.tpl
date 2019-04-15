@@ -108,7 +108,10 @@
 								<p style="color:limegreen;font-weight:bold;display:inline"><i class="fa fa-check-square-o" aria-hidden="true"></i> {$overview.status}</p>
 						  {elseif $overview.status eq 'Alive'}
 								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$overview.status}</p>
+                                                    {elseif $overview.status eq 'Recycle'}
+                                                    <p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$overview.status}</p>
 						   {/if}
+                                                   
 					
 						  <p> <label>Status Detail  </label>: {$overview.statusDetail}</p>
 						  	{if !empty($overview.disposition_reason)} 
