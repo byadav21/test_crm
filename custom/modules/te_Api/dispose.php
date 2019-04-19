@@ -11,9 +11,6 @@ global $db, $current_user;
 
 $crmDispo = array('New Lead'               => 'Alive',
     'Follow Up'              => 'Alive',
-    'Converted'              => 'Converted',
-    'Instalment Follow up'   => 'Converted',
-    'Referral Follow up'     => 'Converted',
     'Dead Number'            => 'Dead',
     'Wrong Number'           => 'Dead',
     'Ringing Multiple Times' => 'Dead',
@@ -29,6 +26,9 @@ $crmDispo = array('New Lead'               => 'Alive',
     'Prospect'               => 'Warm',
     'Recycle'                => 'Recycle',
     'wrap.timeout'           => 'Wrap Out',
+    'Converted'              => 'Converted',
+    'Instalment Follow up'   => 'Converted',
+    'Referral Follow up'     => 'Converted',
     'Program enquiry' 	     => 'Converted',
     'Payment enquiry' 	     => 'Converted',
     'Refund enquiry'         => 'Converted',
@@ -138,13 +138,13 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $resx = $db->query($sql);
                     if ($resx)
                     {
-                        createLog('{In Auto Dial}', 'auto_dial_log_6.txt', $sql, $debugArr);
+                        createLog('{In Auto Dial}', 'auto_dial_log_'.date('Y-m-d').'.txt', $sql, $debugArr);
                     }
                 
             }
 
 
-            if ($auto_attempts >= 10 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
+            if ($auto_attempts >= 25 && (empty($assignedUserId) || $assignedUserId == 'NULL'))
             {
 
                 //$attempid++;
@@ -163,12 +163,12 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $resy = $db->query($sql);
                     if ($resy)
                     {
-                        createLog('{Dead: Auto Retired}', 'auto_retired_log_10SEP.txt', $sql, $debugArr);
+                        createLog('{Dead: Auto Retired}', 'auto_retired_log_'.date('Y-m-d').'.txt', $sql, $debugArr);
                     }
                 }
 
                 $autoArrr = array('ref_id' => $id, 'status' => 'Dead', 'status_description' => 'Auto Retired');
-                createLog('{Auto Retired}', 'auto_retired_log.txt', $id, $autoArrr);
+                createLog('{Auto Retired}', 'auto_retired_log_'.date('Y-m-d').'.txt', $id, $autoArrr);
             }
 
             //////////////////////////////
@@ -191,7 +191,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                         $modifieduserIDX = $recordsData['id'];
                         $db->query("update leads set modified_user_id='" . $modifieduserIDX . "' where id='" . $_REQUEST['lead_reference'] . "'");
                     }
-                    createLog('{Ameyo userAssociations}', 'userassociations_dispose_log.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
+                    createLog('{Ameyo userAssociations}', 'userassociations_dispose_log_'.date('Y-m-d').'.txt', 'user: ' . $modifieduserIDX . 'lead_reference: ' . $_REQUEST['lead_reference'], $userDispoArr);
                 }
 
                 $finalDatTime = '';
@@ -212,7 +212,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                         $CALLBACKDATE = str_replace("0530", "", $_REQUEST['callbackTime']);
                         $finalDatTime = date('Y-m-d H:i:s', strtotime($CALLBACKDATE));
                         
-                        createLog('{Ameyo Follow Up diffrent date}', 'other_callback_dispose_log.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
+                        createLog('{Ameyo Follow Up diffrent date}', 'other_callback_dispose_log_'.date('Y-m-d').'.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
                     }
                 }
 
@@ -227,17 +227,17 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
                     $bean->date_of_followup = $finalDatTime;
 
-                    createLog('{Ameyo Follow Up response}', 'callback_dispose_log.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
+                    createLog('{Ameyo Follow Up response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
                 }
                 if ($dispositionCode == 'Prospect' && $finalDatTime != '')
                 {
                     $bean->date_of_prospect = $finalDatTime;
 
 
-                    createLog('{Ameyo Prospect response}', 'callback_dispose_log.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
+                    createLog('{Ameyo Prospect response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
                 }
 
-                createLog('{Ameyo dispostion response}', 'new_dispose_log.txt', $_REQUEST['lead_reference'], $_REQUEST);
+                createLog('{Ameyo dispostion response}', 'new_dispose_log_'.date('Y-m-d').'.txt', $_REQUEST['lead_reference'], $_REQUEST);
 
                 $checkSaveBean = $bean->save();
 
@@ -249,7 +249,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     
                     $sql = "update leads_cstm set attempts_c='" . $attempid. "' where id_c='" . $id . "'";
                     $res = $db->query($sql);
-                    createLog('{update leads_cstm}', 'update_leads_cstm.txt', $sql, $debugArr);
+                    createLog('{update leads_cstm}', 'update_leads_cstm_log_'.date('Y-m-d').'.txt', $sql, $debugArr);
 
                     $AtmpLogSql = "INSERT INTO attempt_log
                                                     SET lead_id='$id',
@@ -267,7 +267,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $auto_attempts++;
                     $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
                     $resx = $db->query($sql);
-                    createLog('{Auto Retired with Status}', 'auto_retired_log.txt', $id, $autoArrr);
+                    createLog('{Auto Retired with Status}', 'auto_retired_log_'.date('Y-m-d').'.txt', $id, $autoArrr);
                     
                     $AtmpLogSql = "INSERT INTO attempt_log
                                                     SET lead_id='$id',
