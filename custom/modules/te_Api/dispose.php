@@ -267,7 +267,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $auto_attempts++;
                     $sql = "update leads_cstm set auto_attempts_c='" . $auto_attempts . "', attempts_c='".$attempid."' where id_c='" . $id . "'";
                     $resx = $db->query($sql);
-                    createLog('{Auto Retired with Status}', 'auto_retired_log_'.date('Y-m-d').'.txt', $id, $autoArrr);
+                    //createLog('{Auto Retired with Status}', 'auto_retired_log_'.date('Y-m-d').'.txt', $id, $autoArrr);
+		   createLog('{if call type not manual.dial}', 'attempts_increse_log_'.date('Y-m-d').'.txt', $id, $autoArrr);
                     
                     $AtmpLogSql = "INSERT INTO attempt_log
                                                     SET lead_id='$id',
