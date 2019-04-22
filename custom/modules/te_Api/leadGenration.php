@@ -5,7 +5,7 @@ error_reporting(1);
 require_once('custom/modules/te_Api/leads_override.php');
     global $db;
     $name         = $_REQUEST['name'];
-    $phone        = $_REQUEST['phone'];
+    $phone        = ltrim($_REQUEST['phone'], '0');
     $email        = $_REQUEST['email'];
     $source       = $_REQUEST['utm_source'];
     $medium       = $_REQUEST['utm_medium'];

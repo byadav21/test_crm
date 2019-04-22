@@ -171,7 +171,7 @@ LEFT JOIN te_ba_batch b ON b.id=lc.te_ba_batch_id_c  where l.id='".$this->id."'"
                 "WHERE te_ba_batch_users_1users_idb = '$user_id' AND deleted=0";
 
             $result = $GLOBALS['db']->query($query);
-            $user_batches ='';
+            $user_batches =array();
 
             while($row = $GLOBALS['db']->fetchByAssoc($result) ){
                 $user_batches[] = $row['batch_id'];
@@ -186,7 +186,7 @@ LEFT JOIN te_ba_batch b ON b.id=lc.te_ba_batch_id_c  where l.id='".$this->id."'"
                 "WHERE id IN (SELECT role_id FROM acl_roles_users WHERE user_id = '$user_id' AND deleted=0)";
 
             $result = $GLOBALS['db']->query($query);
-            $user_batches ='';
+            $user_batches =array();
 
             while($row = $GLOBALS['db']->fetchByAssoc($result) ){
                 $user_batches[] = strtolower($row['slug']);
