@@ -430,6 +430,9 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_AV'=> 'AV',
   'CO_MT'=>'MT',
   'CO_Vivek'=>'Vivek',
+  'IS_INS'=>'INS',
+  'IS_INS_Source_1'=>'INS_Source_1',
+  'IS_INS_Source_2'=>'INS_Source_2',
 );
 
 $GLOBALS['app_list_strings']['lead_status_details_custom_dom']=array (
@@ -1022,6 +1025,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom_type']=array (
   'CC' => 'Call Center',
   'OO' => 'Channel',
   'CO' => 'Corporate',
+  'IS' => 'Inside Sales',
 );
 
 $GLOBALS['app_list_strings']['lead_status_custom_dom']=array (
