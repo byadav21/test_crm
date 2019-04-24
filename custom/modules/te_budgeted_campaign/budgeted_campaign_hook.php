@@ -32,7 +32,7 @@ class MapUtm
 				$week=(Integer)date("W", mktime(0,0,0,$m,$d,$y));			
 				$bean->week=$week;
 				$bean->year=$y;
-				$bean->te_ba_batch_id_c=$utm['te_ba_batch_id_c'];
+				//$bean->te_ba_batch_id_c=$utm['te_ba_batch_id_c'];
 						
 			}else{
 				# If record is being created from module
