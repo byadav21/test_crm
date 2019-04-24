@@ -15,9 +15,9 @@ class MapUtm
 	public function assignUtm(&$bean, $event, $arguments)
 	    {
 			global $db;
-			$bean->clp=($bean->leads>0)?round($bean->cost/$bean->leads,2):0;
-			$bean->cpa=($bean->conversion>0)?round($bean->cost/$bean->conversion,2):0;		 
-			$bean->conversion_rate=($bean->leads>0)?round(($bean->conversion*100)/$bean->leads,2) . '%':0 . '%';
+			//$bean->clp=($bean->leads>0)?round($bean->cost/$bean->leads,2):0;
+			//$bean->cpa=($bean->conversion>0)?round($bean->cost/$bean->conversion,2):0;		 
+			//$bean->conversion_rate=($bean->leads>0)?round(($bean->conversion*100)/$bean->leads,2) . '%':0 . '%';
 			
 			#Record is being created while import
 			if(isset($_REQUEST['import_module'])&&$_REQUEST['module']=="Import"){
