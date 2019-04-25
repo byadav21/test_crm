@@ -165,13 +165,16 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
         if ($fieldArr['country'] == 'IN')
         {
             $phone = str_replace("+91", "", $fieldArr['phone_number']);
-            $phone = ltrim($phone, '0');
+            //$phone = ltrim($phone, '0');
         }
         else
         {
             $phone = $fieldArr['phone_number'];
-            $phone = ltrim($phone, '0');
+            //$phone = ltrim($phone, '0');
         }
+	// Removing +91 & 0
+	$phone = ltrim($phone, '+91');
+        $phone = ltrim($phone, '0');
         
         $email        = $fieldArr['email'];
         $source       = 'TE_Focus';

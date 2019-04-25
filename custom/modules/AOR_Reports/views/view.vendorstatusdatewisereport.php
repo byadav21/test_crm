@@ -5,6 +5,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
+ini_set('memory_limit', '30M');
 class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
 {
 
