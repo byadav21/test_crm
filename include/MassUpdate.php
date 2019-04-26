@@ -745,13 +745,14 @@ $('#mass_batch').parent().css('display','none');
 $('#mass_Counsellors').parent().css('display','none')
 $('#converted_datejscal_field').parent().css('display','none');
 $('#mass_country_log').parent().parent().css('display','none');                 
-$('#mass_assigned_user_name').parent().css('display','none');  
+$('#mass_assigned_mass_user_id').parent().css('display','none');  
   
                     
-                    
-$('#mass_assigned_user_id').addClass('multiselbox');
-$('#mass_assigned_user_id').attr('multiple','multiple');
-$('#mass_assigned_user_id').attr('name', 'assigned_user_id[]');
+$("#mass_assigned_user_name").closest('tr').children('td:nth-child(2)').html("<select id='mass_assigned_user_name'>"+$('#mass_assigned_mass_user_id').html()+"</select>");
+    
+$('#mass_assigned_mass_user_id').addClass('multiselbox');
+$('#mass_assigned_mass_user_id').attr('multiple','multiple');
+$('#mass_assigned_mass_user_id').attr('name', 'assigned_user_id[]');
 
 
  $("body").on('change','#mass_status',function() {

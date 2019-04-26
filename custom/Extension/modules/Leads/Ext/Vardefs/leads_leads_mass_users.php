@@ -1,6 +1,6 @@
 <?php
-$dictionary['Lead']['fields']['assigned_user_id'] =array (
-	'name' => 'assigned_user_id',
+$dictionary['Lead']['fields']['assigned_mass_user_id'] =array (
+	'name' => 'assigned_mass_user_id',
 	'label' => 'Counsellors',
 	'type' => 'enum',
 	'source' => 'non-db',
