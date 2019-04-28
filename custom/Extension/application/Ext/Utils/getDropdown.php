@@ -96,6 +96,23 @@ function assigned_users_list(){
 	}
 	return $dropDown;
 }
+function massReportingUsers(){
+    global $current_user;
+    $userObj                             = new User();
+    $userObj->disable_row_level_security = true;
+    $dropDown = array();
+    $userList = $userObj->get_full_list("", "users.employee_status='Active'");
+
+        if (!empty($userList))
+        {
+
+            foreach ($userList as $record)
+            {
+                $dropDown[$record->id] = $record->name;
+            }
+        }
+    return $dropDown;
+}
 function reportingUser($currentUserId)
 {
     global $current_user;

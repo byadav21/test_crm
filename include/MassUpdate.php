@@ -405,7 +405,8 @@ eoq;
             {
 
                 $count = 0;
-
+               
+                 
                 $assigned_user_id   = $_REQUEST['assigned_user_id'];
                 $statusX            = $_REQUEST['status'];
                 $statusDescriptionX = $_REQUEST['status_description'];
@@ -448,7 +449,8 @@ eoq;
 
                     //echo '<pre>'; print_r($finalarray);die;
                     if (!empty($finalarray))
-                    {
+                    {   
+                        $records        = $db->fetchByAssoc($res);
                         $assignSQL   = '';
                         $dispoSQL    = "INSERT INTO `te_disposition` (`id`, `status`,`status_detail`,`date_modified`,`date_entered`,`modified_user_id`,`created_by`,`assigned_user_id`) VALUES ";
                         $dispoRelSQL = "INSERT INTO `te_disposition_leads_c` (`id`, `te_disposition_leadste_disposition_idb`,`te_disposition_leadsleads_ida`,`date_modified`) VALUES ";
@@ -461,7 +463,9 @@ eoq;
                                 $assignSQL = "update leads set assigned_user_id='$assignedUser',status='$statusX',status_description='$statusDescriptionX',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id in ('$string');";
 
                                 //echo '<pre>'; print_r($lead_list);
+                                if (!empty($statusDescriptionX) or !empty($statusX)){
                                 $query = $db->query($assignSQL);
+                                }
                                 $i     = 1;
                                 foreach ($lead_list as $key => $leadID)
                                 {
@@ -470,6 +474,14 @@ eoq;
                                     $guidid2     = create_guid();
                                     $dispoSQL    .= "('$guidid','$statusX','$statusDescriptionX','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "','$current_user_id','$current_user_id','$assignedUser'),";
                                     $dispoRelSQL .= "('$guidid2','$guidid','$leadID','" . date('Y-m-d H:i:s') . "'),";
+                                    
+                                    if (empty($statusDescriptionX) or empty($statusX))
+                                    {
+                                        $sql               = "select status,status_description from leads where id='$leadID'";
+                                        $LeadRecordrecords = $db->fetchByAssoc($db->query($sql));
+                                        $assignStatusSQL = "update leads set assigned_user_id='$assignedUser',status='".$LeadRecordrecords['status']."',status_description='".$LeadRecordrecords['status_description']."',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id='$leadID'";
+                                        $query = $db->query($assignStatusSQL);
+                                    }
 
                                     $i++;
                                 }
@@ -526,7 +538,11 @@ eoq;
     {
         global $app_strings;
         global $current_user;
-
+        
+        $getRoleSlug = getUsersRole();
+        $usersRole   = ''; //Contact Center Counselor 
+        $usersRole   = !empty($getRoleSlug[$current_user->id]['role_name']) ? $getRoleSlug[$current_user->id]['role_name'] : 'NA';
+        
         if ($this->sugarbean->bean_implements('ACL') && (!ACLController::checkAccess($this->sugarbean->module_dir, 'edit', true) || !ACLController::checkAccess($this->sugarbean->module_dir, 'massupdate', true) ))
         {
             return '';
@@ -704,6 +720,7 @@ eoq;
         if ($this->sugarbean->object_name == 'Lead')
         {
             $html .= '<style>#converted_datejscal_field{display:none}</style>';
+            $html .= '<script>var role_name = "'.$usersRole.'"</script>';
             $html .= <<<EOJS
 <script>
               
@@ -712,14 +729,7 @@ eoq;
   
  
    $(document).ready(function () {
-   $(".multiselbox").each(function () {
-                    if ($(this).find("option").eq(0).val() == '') {
-                        $(this).find("option").eq(0).remove();
-                    }
-                });
-                $(".multiselbox").multiselect({
-                    includeSelectAllOption: true
-                });
+
 
    $("#mass_assigned_user_id").closest('tr').children('td:first').html("<span id='massUpdate_level'>Counsellors</span>");
    $("#mass_vendor_list").closest('tr').children('td:nth-child(3)').html("<span id='massVendor_level'>Vendors</span>");
@@ -727,14 +737,8 @@ eoq;
                     
     });
            
-    $(".multiselbox").each(function () {
-          if ($(this).find("option").eq(0).val() == '') {
-              $(this).find("option").eq(0).remove();
-          }
-      });
-      $(".multiselbox").multiselect({
-          includeSelectAllOption: true
-      }); 
+
+                    
 var option = document.getElementById("mass_status").options;
 var status_detail = document.getElementById('mass_status_description').value;
 $("#mass_status option[value='Converted']").hide();
@@ -746,15 +750,23 @@ $('#mass_Counsellors').parent().css('display','none')
 $('#converted_datejscal_field').parent().css('display','none');
 $('#mass_country_log').parent().parent().css('display','none');                 
 $('#mass_assigned_mass_user_id').parent().css('display','none');  
-  
-                    
+$('#mass_disposition_reason').parent().css('display','none');   
+$('#mass_vendor_list').parent().css('display','none'); 
+$("#mass_disposition_reason").closest('tr').children('td:nth-child(3)').html("");  
+$("#mass_vendor_list").closest('tr').children('td:nth-child(3)').html("");
+     
 $("#mass_assigned_user_name").closest('tr').children('td:nth-child(2)').html("<select id='mass_assigned_user_name'>"+$('#mass_assigned_mass_user_id').html()+"</select>");
     
-$('#mass_assigned_mass_user_id').addClass('multiselbox');
-$('#mass_assigned_mass_user_id').attr('multiple','multiple');
-$('#mass_assigned_mass_user_id').attr('name', 'assigned_user_id[]');
+$('#mass_assigned_user_name').addClass('multiselbox');
+$('#mass_assigned_user_name').attr('multiple','multiple');
+$('#mass_assigned_user_name').attr('name', 'assigned_user_id[]');
 
-
+//alert(role_name);
+if(role_name=="Contact Center Counselor"){
+$('#mass_assigned_user_name').parent().css('display','none'); 
+$('#mass_status').parent().css('display','none'); 
+$('#mass_status_description').parent().css('display','none'); 
+    }
  $("body").on('change','#mass_status',function() {
 
 	var el = $(this) ;
