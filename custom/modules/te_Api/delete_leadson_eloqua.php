@@ -26,20 +26,20 @@ class eloqua_contact
 
         //echo "<pre>"; print_r($bean);
 
-        $leadObj = $db->query("SELECT 
+        $leadObj =   "SELECT 
                                     lc.eloqua_contact_id,
                                     lc.eloqua_customobject_id,
                                     lc.eloqua_contact_status,
-                                    lc.eloqua_customobject_status
+                                    lc.eloqua_customobject_status,
+				    l.id lead_id
                              FROM leads_cstm lc
                              INNER JOIN leads l ON lc.id_c=l.id
                              WHERE l.deleted=0
                                AND (lc.eloqua_contact_id!=''
                                     OR lc.eloqua_customobject_id!='')
-                               and lc.email_add_c like 'test%'
-                             LIMIT 10");
+                               and lc.email_add_c like '%test%'";
 
-        $result = $db->query($query);
+        $result = $db->query($leadObj);
 
         $contact_client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
         $custome_client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
@@ -52,24 +52,26 @@ class eloqua_contact
 
                 $contact_id      = $row['eloqua_contact_id'];
                 $customobject_id = $row['eloqua_customobject_id'];
-                $lead_id         = $row['eloqua_contact_id'];
+                $lead_id         = $row['lead_id'];
 
                 if ($contact_id != '')
                 {
-                    $response = $contact_client->delete('/data/contact/' . $contact_id, '');
+                    $response = $contact_client->delete('/data/contact/'.$contact_id, '');
 
-                    if ($response)
+                    if ($response==200)
                     {
-                        createLog('{In $contact_id}', 'delete_eloqua_log_' . date('Y-m-d') . '.txt', $contact_id, $response);
+			$db->query("update leads_cstm set eloqua_contact_status=1 where eloqua_contact_id='$contact_id'");
+                        $this->createLog('{In $contact_id}', 'delete_eloqua_log_' . date('Y-m-d') . '.txt', $contact_id, $response);
                     }
                 }
 
                 if ($customobject_id != '')
                 {
                     $response = $custome_client->delete('/data/customObject/7/instance/' . $customobject_id, '');
-                    if ($response)
-                    {
-                        createLog('{In $customobject_id}', 'delete_eloqua_log_' . date('Y-m-d') . '.txt', $customobject_id, $response);
+                    if ($response==200)
+                    {	
+			$db->query("update leads_cstm set eloqua_customobject_status=1 where eloqua_customobject_id='$customobject_id'");
+                        $this->createLog('{In $customobject_id}', 'delete_eloqua_log_' . date('Y-m-d') . '.txt', $customobject_id, $response);
                     }
                 }
             }
