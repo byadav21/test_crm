@@ -15,7 +15,7 @@ $lead_id     = '';
 $batch_id    = isset($data['batch_crm_id']) ? $data['batch_crm_id'] : '';
 $email       = isset($data['email']) ? $data['email'] : '';
 $mobile      = isset($data['mobile']) ? $data['mobile'] : '';
-$test_status = isset($data['lead_source']) ? $data['lead_source'] : '';
+$lead_source = isset($data['lead_source']) ? $data['lead_source'] : '';
 
 //$order_id    = isset($data['order_id']) ? $data['order_id'] : '';
 
@@ -47,11 +47,11 @@ if (!isset($data['lead_source']) || empty($data['lead_source']))
 }
 
 
-createLog('{on initial action}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $test_status, $data);
+createLog('{on initial action}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $data);
 
 if ($error_fields)
 {
-    createLog('{while get an error}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $test_status, $data);
+    createLog('{while get an error}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $data);
 
     $response_result = array('status' => '400', 'result' => $error_fields);
     echo json_encode($response_result);
@@ -80,13 +80,24 @@ if ($phone != "" && $email != "")
     $sql .= " AND leads.phone_mobile = '$phone' AND email_addresses.email_address='" . $email . "'";
 }
 
-if ($GLOBALS['db']->getRowCount($re) > 0)
+if ($db->getRowCount($sql) > 0)
 {
+    $records      = $db->fetchByAssoc($sql);
+    $leadID        = $records['id'];
+    $updateSql    = "update leads
+                        SET
+                  lead_source         = '$lead_source',
+                  date_modified       = NOW()  where id='$leadID'";
+    $updateSqlres = $db->Query($updateSql);
+    
+    createLog('{Lead get update on success:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $leadID, $data);
     
 }
 else
 {
     echo json_encode(array('status' => 'success', 'msg' => 'Lead ID not get fetched!'));
+    
+    createLog('{Lead ID not get fetched:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $data);
 }
 
 
