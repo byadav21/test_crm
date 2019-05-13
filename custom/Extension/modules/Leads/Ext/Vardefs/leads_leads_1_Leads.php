@@ -143,3 +143,19 @@ $dictionary["Lead"]["fields"]["site_lead_id"] = array(
             'duplicate_merge' => false,
             'source'          => 'custom_fields',
 );
+
+$dictionary["Lead"]["fields"]["course_type"] = array(
+            'name'            => 'course_type',
+            'vname'           => 'Course Type',
+            'type'            => 'varchar',
+            'len'             => '100',
+            'size'            => '20',
+            //'module' => 'Leads',
+            //'default'         => 'NA',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);
