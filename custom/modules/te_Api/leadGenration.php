@@ -25,8 +25,17 @@ require_once('custom/modules/te_Api/leads_override.php');
 
     $lead_source_types = '';
     $lead_source       = '';
-
-
+    $lead_source  = $_REQUEST['lead_source']; 
+     function createLog($action, $filename, $field = '', $dataArray = array())
+     {
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+    }
+   createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') . '_log.txt', $lead_source,$_REQUEST);	
     if ($phone || $email)
     {
         if ($source)

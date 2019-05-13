@@ -75,14 +75,14 @@ if ($email != "")
 
 $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batch_id . "'";
 
-if ($phone != "" && $email != "")
+if ($mobile != "" && $email != "")
 {
-    $sql .= " AND leads.phone_mobile = '$phone' AND email_addresses.email_address='" . $email . "'";
+    $sql .= " AND leads.phone_mobile = '$mobile' AND email_addresses.email_address='" .$email . "'";
 }
-
-if ($db->getRowCount($sql) > 0)
+$sqlobj = $db->query($sql);
+if ($db->getRowCount($sqlobj) > 0)
 {
-    $records      = $db->fetchByAssoc($sql);
+    $records      = $db->fetchByAssoc($sqlobj);
     $leadID        = $records['id'];
     $updateSql    = "update leads
                         SET
@@ -90,14 +90,14 @@ if ($db->getRowCount($sql) > 0)
                   date_modified       = NOW()  where id='$leadID'";
     $updateSqlres = $db->Query($updateSql);
     
-    createLog('{Lead get update on success:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $leadID, $data);
+    createLog('{Lead get update on success:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt',$sql, $data);
     
 }
 else
 {
-    echo json_encode(array('status' => 'success', 'msg' => 'Lead ID not get fetched!'));
+    echo json_encode(array('status' => 'failed', 'msg' => 'Lead ID not get fetched!'));
     
-    createLog('{Lead ID not get fetched:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $data);
+    createLog('{Lead ID not get fetched:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt', $sql, $data);
 }
 
 
