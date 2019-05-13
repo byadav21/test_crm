@@ -2,7 +2,7 @@
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
-require_once('custom/modules/Leads/eloqua/lib/eloquaRequest.php');
+//require_once('custom/modules/Leads/eloqua/lib/eloquaRequest.php');
 
 error_reporting(-1);
 ini_set('display_errors', 'On');
@@ -47,6 +47,7 @@ class eloqua_contact
         //$contact_client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/1.0');
         $custome_client = new EloquaRequest('https://secure.p07.eloqua.com/API/REST/2.0');
 	$response='';
+
         if ($db->getRowCount($result) > 0)
         {
             $lead_detail = array();
@@ -64,12 +65,10 @@ class eloqua_contact
 		     echo '$response='.$response.'<br>'; 
 
                     if ($response==200)
-                    {
-			$db->query("update leads_cstm set eloqua_contact_status=1 where eloqua_contact_id='$contact_id'");
-                        $this->createLog('{In $contact_id}', 'delete_eloqua_log_' . date('Y-m-d') . '.txt', $contact_id, $response);
-                    }
-                }*/
-
+                if ($contact_id != '')
+                {
+                    //$response = $contact_client->delete('/data/contact/' . $contact_id, '');
+                   
                 if ($customobject_id != '')
                 {	
 		    echo 'customobject_id='.$customobject_id.'<br>';
@@ -79,6 +78,11 @@ class eloqua_contact
                     {	
 			$db->query("update leads_cstm set eloqua_customobject_status=1 where eloqua_customobject_id='$customobject_id'");
                         $this->createLog('{In $customobject_id}', 'delete_eloqua_log_' . date('Y-m-d') . '.txt', $customobject_id, $response);
+                {
+                    //$response = $custome_client->delete('/data/customObject/7/instance/' . $customobject_id, '');
+                    if ($response)
+                    {
+                        createLog('{In $customobject_id}', 'delete_eloqua_log_' . date('Y-m-d') . '.txt', $customobject_id,$response);
                     }
                 }
             }
