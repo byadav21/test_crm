@@ -729,7 +729,16 @@ eoq;
   
  
    $(document).ready(function () {
-
+	
+   $(".multiselbox").each(function () {
+                    if ($(this).find("option").eq(0).val() == '') {
+                        $(this).find("option").eq(0).remove();
+                    }
+                })
+                $(".multiselbox").multiselect({
+                    includeSelectAllOption: true
+                });
+                
 
    $("#mass_assigned_user_id").closest('tr').children('td:first').html("<span id='massUpdate_level'>Counsellors</span>");
    $("#mass_vendor_list").closest('tr').children('td:nth-child(3)').html("<span id='massVendor_level'>Vendors</span>");
@@ -754,6 +763,9 @@ $('#mass_disposition_reason').parent().css('display','none');
 $('#mass_vendor_list').parent().css('display','none'); 
 $("#mass_disposition_reason").closest('tr').children('td:nth-child(3)').html("");  
 $("#mass_vendor_list").closest('tr').children('td:nth-child(3)').html("");
+$("#mass_status_description").closest('tr').children('td:nth-child(3)').html("");
+$('#mass_lead_source_types').parent().css('display','none');
+
      
 $("#mass_assigned_user_name").closest('tr').children('td:nth-child(2)').html("<select id='mass_assigned_user_name'>"+$('#mass_assigned_mass_user_id').html()+"</select>");
     
