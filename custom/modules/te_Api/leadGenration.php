@@ -27,7 +27,7 @@ $lead_source_types = '';
 $lead_source       = '';
 $lead_source       = $_REQUEST['lead_source'];
 
-/*
+
 function createLog($action, $filename, $field = '', $dataArray = array())
 {
     $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
@@ -38,7 +38,7 @@ function createLog($action, $filename, $field = '', $dataArray = array())
     fclose($file);
 }
 createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $_REQUEST);
-*/
+
 if ($phone || $email)
 {
     if ($source)

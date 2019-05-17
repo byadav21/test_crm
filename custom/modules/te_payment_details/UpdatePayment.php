@@ -189,6 +189,16 @@ class UpdatePaymentName
     }
 
     /* ------------------- stop syncing from crm to web for payment */
+    
+   function createLog($action, $filename, $field = '', $dataArray = array())
+        {
+            $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+            fwrite($file, date('Y-m-d H:i:s') . "\n");
+            fwrite($file, $action . "\n");
+            fwrite($file, $field . "\n");
+            fwrite($file, print_r($dataArray, TRUE) . "\n");
+            fclose($file);
+        }
 
     function addpayment_curl($lead_user_details)
     {
@@ -220,6 +230,7 @@ class UpdatePaymentName
             'country_log'           => $lead_user_details['country_log'],
         ];
         //echo '<pre>'; print_r($post); die;
+	//$this->createLog('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $url, $lead_user_details);
 
 
         $ch     = curl_init();
@@ -230,7 +241,8 @@ class UpdatePaymentName
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $result = curl_exec($ch);
         $res    = json_decode($result);
-
+	$this->createLog('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $result, $post);
+        $this->createLog('{In Add api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $res, $result);
         if (isset($res[0]->status) && $res[0]->status == '1')
         {
             $insertRelSql = "UPDATE te_payment_details SET is_sent_web=1 Where id='" . $lead_user_details['id'] . "'";
@@ -272,6 +284,8 @@ class UpdatePaymentName
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $result   = curl_exec($ch);
         $res      = json_decode($result);
+        $this->createLog('{In Update Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $result, $lead_user_details);
+        $this->createLog('{In Update api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $res, $result);
 
         curl_close($ch);
     }
