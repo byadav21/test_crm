@@ -405,18 +405,18 @@ eoq;
             {
 
                 $count = 0;
-               
-                 
-                $assigned_user_id   = $_REQUEST['assigned_user_id'];
+
+
+                $assigned_user_id   = isset($_REQUEST['assigned_user_id']) ? $_REQUEST['assigned_user_id'] : array();
                 $statusX            = $_REQUEST['status'];
                 $statusDescriptionX = $_REQUEST['status_description'];
                 $leadList           = $_POST['mass'];
                 $error_fields       = [];
 
-                if (!isset($assigned_user_id) || empty($assigned_user_id))
-                {
-                    $error_fields['assigned_user_id'] = ['assigned_user_id field is required.'];
-                }
+                /* if (!isset($assigned_user_id) || empty($assigned_user_id))
+                  {
+                  $error_fields['assigned_user_id'] = ['assigned_user_id field is required.'];
+                  } */
                 if (!isset($leadList) || empty($leadList))
                 {
                     $error_fields['leadList'] = ['Lead list is required.'];
@@ -449,8 +449,8 @@ eoq;
 
                     //echo '<pre>'; print_r($finalarray);die;
                     if (!empty($finalarray))
-                    {   
-                        $records        = $db->fetchByAssoc($res);
+                    {
+                        $records     = $db->fetchByAssoc($res);
                         $assignSQL   = '';
                         $dispoSQL    = "INSERT INTO `te_disposition` (`id`, `status`,`status_detail`,`date_modified`,`date_entered`,`modified_user_id`,`created_by`,`assigned_user_id`) VALUES ";
                         $dispoRelSQL = "INSERT INTO `te_disposition_leads_c` (`id`, `te_disposition_leadste_disposition_idb`,`te_disposition_leadsleads_ida`,`date_modified`) VALUES ";
@@ -463,10 +463,11 @@ eoq;
                                 $assignSQL = "update leads set assigned_user_id='$assignedUser',status='$statusX',status_description='$statusDescriptionX',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id in ('$string');";
 
                                 //echo '<pre>'; print_r($lead_list);
-                                if (!empty($statusDescriptionX) or !empty($statusX)){
-                                $query = $db->query($assignSQL);
+                                if (!empty($statusDescriptionX) or ! empty($statusX))
+                                {
+                                    $query = $db->query($assignSQL);
                                 }
-                                $i     = 1;
+                                $i = 1;
                                 foreach ($lead_list as $key => $leadID)
                                 {
                                     //echo $leadID . '<br>';
@@ -474,13 +475,13 @@ eoq;
                                     $guidid2     = create_guid();
                                     $dispoSQL    .= "('$guidid','$statusX','$statusDescriptionX','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "','$current_user_id','$current_user_id','$assignedUser'),";
                                     $dispoRelSQL .= "('$guidid2','$guidid','$leadID','" . date('Y-m-d H:i:s') . "'),";
-                                    
+
                                     if (empty($statusDescriptionX) or empty($statusX))
                                     {
                                         $sql               = "select status,status_description from leads where id='$leadID'";
                                         $LeadRecordrecords = $db->fetchByAssoc($db->query($sql));
-                                        $assignStatusSQL = "update leads set assigned_user_id='$assignedUser',status='".$LeadRecordrecords['status']."',status_description='".$LeadRecordrecords['status_description']."',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id='$leadID'";
-                                        $query = $db->query($assignStatusSQL);
+                                        $assignStatusSQL   = "update leads set assigned_user_id='$assignedUser',status='" . $LeadRecordrecords['status'] . "',status_description='" . $LeadRecordrecords['status_description'] . "',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id='$leadID'";
+                                        $query             = $db->query($assignStatusSQL);
                                     }
 
                                     $i++;
@@ -504,6 +505,47 @@ eoq;
                     //echo '<pre>';
                     //print_r($finalarray);
                     //die;
+                }
+                elseif (empty($assigned_user_id) && !empty($leadList))
+                {
+                    //print_r($leadList); die;
+
+
+
+
+                    $assignSQL   = '';
+                    $dispoSQL    = "INSERT INTO `te_disposition` (`id`, `status`,`status_detail`,`date_modified`,`date_entered`,`modified_user_id`,`created_by`,`assigned_user_id`) VALUES ";
+                    $dispoRelSQL = "INSERT INTO `te_disposition_leads_c` (`id`, `te_disposition_leadste_disposition_idb`,`te_disposition_leadsleads_ida`,`date_modified`) VALUES ";
+
+
+                    $i = 1;
+                    foreach ($leadList as $key => $leadID)
+                    {
+
+                        $sql               = "select assigned_user_id from leads where id='$leadID'";
+                        $LeadRecordrecords = $db->fetchByAssoc($db->query($sql));
+                        $XassignedUser     = $LeadRecordrecords['assigned_user_id'];
+                        $guidid            = create_guid();
+                        $guidid2           = create_guid();
+                        $dispoSQL          .= "('$guidid','$statusX','$statusDescriptionX','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "','$current_user_id','$current_user_id','$XassignedUser'),";
+                        $dispoRelSQL       .= "('$guidid2','$guidid','$leadID','" . date('Y-m-d H:i:s') . "'),";
+
+
+                        $assignStatusSQL = "update leads set assigned_user_id='$XassignedUser',status='" . $statusX . "',status_description='" . $statusDescriptionX . "',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id='$leadID'";
+                        $query           = $db->query($assignStatusSQL);
+
+
+                        $i++;
+                    }
+
+                    $exeSql    = rtrim($dispoSQL, ',');
+                    $disExeSql = rtrim($dispoRelSQL, ',');
+
+                    if ($i > 1)
+                    {
+                        $db->query($exeSql);
+                        $db->query($disExeSql);
+                    }
                 }
             }
         }
