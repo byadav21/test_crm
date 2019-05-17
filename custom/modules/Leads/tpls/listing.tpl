@@ -384,7 +384,11 @@
 						  {elseif $rowData.STATUS eq 'Converted'}
 								<p style="color:limegreen;font-weight:bold;display:inline"><i class="fa fa-check-square-o" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}</p>
 						  {elseif $rowData.STATUS eq 'Alive'}
-								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}</p>
+								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}
+                                                                </p>
+                                                  {elseif $rowData.STATUS eq 'Recycle'}
+								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}
+                                                                </p>
 						   {/if}
 					<p>
                                              {if $rowData.STATUS_DESCRIPTION=='Call Back'}
