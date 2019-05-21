@@ -155,7 +155,15 @@ eoq;
 
         return $tempString;
     }
-
+   function createLog($action, $filename, $field = '', $dataArray = array())
+    {
+    	$file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    	fwrite($file, date('Y-m-d H:i:s') . "\n");
+    	fwrite($file, $action . "\n");
+    	fwrite($file, $field . "\n");
+    	fwrite($file, print_r($dataArray, TRUE) . "\n");
+    	fclose($file);
+    }
     /**
      * Executes the massupdate form
      * @param displayname Name to display in the popup window
@@ -286,18 +294,18 @@ eoq;
                 if (!empty($start_range_date_entered_advanced))
                 {
                     $date1   = str_replace('/', '-', $start_range_date_entered_advanced);
-                    $wherecl .= " AND  l.date_entered  >= '" . date('Y-m-d', strtotime($date1)) . "'";
+                    $wherecl .= " AND  DATE(l.date_entered)  >= '" . date('Y-m-d', strtotime($date1)) . "'";
                 }
                 if (!empty($end_range_date_entered_advanced))
                 {
                     $date2   = str_replace('/', '-', $end_range_date_entered_advanced);
-                    $wherecl .= " AND  l.date_entered  <= '" . date('Y-m-d', strtotime($date2)) . "'";
+                    $wherecl .= " AND  DATE(l.date_entered)  <= '" . date('Y-m-d', strtotime($date2)) . "'";
                 }
 
                 if (!empty($range_date_entered_advanced))
                 {
                     $date3   = str_replace('/', '-', $range_date_entered_advanced);
-                    $wherecl .= " AND  l.date_entered  = '" . date('Y-m-d', strtotime($date3)) . "'";
+                    $wherecl .= " AND  DATE(l.date_entered)  = '" . date('Y-m-d', strtotime($date3)) . "'";
                 }
 
 
@@ -340,6 +348,7 @@ eoq;
                 //echo '<pre>';
                 //print_r($leadSql);
                 //die;
+	     $this->createLog('{on initial action}', 'massUpdate_log_mysql_and_req_log' . date('Y-m-d') . '_log.txt', $leadSql, $_REQUEST);
             }
             else
             {
@@ -471,15 +480,20 @@ eoq;
                                 foreach ($lead_list as $key => $leadID)
                                 {
                                     //echo $leadID . '<br>';
+ 				    $sql                 = "select status,status_description from leads where id='$leadID'";
+                                    $LeadRecordrecords   = $db->fetchByAssoc($db->query($sql));
+                                    $statusXY            = empty($statusX) ? $LeadRecordrecords['status'] : $statusX;
+                                    $statusDescriptionXY = empty($statusDescriptionX) ? $LeadRecordrecords['status_description'] : $LeadRecordrecords;
+
                                     $guidid      = create_guid();
                                     $guidid2     = create_guid();
-                                    $dispoSQL    .= "('$guidid','$statusX','$statusDescriptionX','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "','$current_user_id','$current_user_id','$assignedUser'),";
+                                    $dispoSQL    .= "('$guidid','$statusXY','$statusDescriptionXY','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "','$current_user_id','$current_user_id','$assignedUser'),";
                                     $dispoRelSQL .= "('$guidid2','$guidid','$leadID','" . date('Y-m-d H:i:s') . "'),";
 
                                     if (empty($statusDescriptionX) or empty($statusX))
                                     {
-                                        $sql               = "select status,status_description from leads where id='$leadID'";
-                                        $LeadRecordrecords = $db->fetchByAssoc($db->query($sql));
+                                        //$sql               = "select status,status_description from leads where id='$leadID'";
+                                        //$LeadRecordrecords = $db->fetchByAssoc($db->query($sql));
                                         $assignStatusSQL   = "update leads set assigned_user_id='$assignedUser',status='" . $LeadRecordrecords['status'] . "',status_description='" . $LeadRecordrecords['status_description'] . "',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id='$leadID'";
                                         $query             = $db->query($assignStatusSQL);
                                     }
