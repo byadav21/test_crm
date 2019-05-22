@@ -70,14 +70,14 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $cSql    = "SELECT  
                         count(l.id) lead_count, 
                         l.assigned_user_id,
-                        date(l.converted_date) converted_date, 
+                        date(l.date_entered) date_entered, 
                         lc.te_ba_batch_id_c,
                         l.vendor
                                         FROM leads l
                                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                          WHERE l.deleted=0
-                        AND DATE(l.`converted_date`) >= '$fdate' 
-                        AND DATE(l.`converted_date`) <= '$todate' 
+                        AND DATE(l.`date_entered`) >= '$fdate' 
+                        AND DATE(l.`date_entered`) <= '$todate' 
                         AND l.status='Converted'
                         group by  l.assigned_user_id,date(l.date_entered),lc.te_ba_batch_id_c,l.vendor
                         order by  l.assigned_user_id,date(l.date_entered),lc.te_ba_batch_id_c,l.vendor";
@@ -86,7 +86,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $dateArr = [];
         while ($cdata   = $db->fetchByAssoc($cObj))
         {
-            $keyX           = strtolower($cdata['assigned_user_id'] . '_' . $cdata['converted_date'] . '_' . $cdata['te_ba_batch_id_c'] . '_' . $cdata['vendor']);
+            $keyX           = strtolower($cdata['assigned_user_id'] . '_' . $cdata['date_entered'] . '_' . $cdata['te_ba_batch_id_c'] . '_' . $cdata['vendor']);
             $dateArr[$keyX] = $cdata['lead_count'];
         }
         return $dateArr;
@@ -190,7 +190,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $error = array();
         $Days  = $this->getBetweenDays($selected_from_date, $selected_to_date);
 
-        if ($Days >= 30000000)
+        if ($Days >= 31)
         {
 
             $error['error'] = 'Only one month of data are allowed to export.';
@@ -252,7 +252,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                group by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor
                order by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor ";
 
-        $countSql = "SELECT count(1) as count " . $sqlPart;
+        $countSql = "SELECT $headersss ". $sqlPart;
 
 
         $leadSql = "SELECT  $headersss " . $sqlPart;
@@ -282,9 +282,15 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
             {
                 if ($this->objPagination->get_page() == 1 || !isset($_SESSION['_row_count']))
                 {
-                    $objLeadsCount          = $db->query($countSql);
-                    $row                    = $db->fetchByAssoc($objLeadsCount);
-                    $rowCount               = $row['count'];
+                     $objLeadsCount          = $db->query($countSql);
+                    //$row                    = $db->fetchByAssoc($objLeadsCount);
+                    //echo 'xxx='.$rowCount               = count($row);
+                    while ($row = $db->fetchByAssoc($objLeadsCount))
+                    {   
+                        $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                        $leadList[$keyX] = $row;
+                    }
+                   //echo 'xxx=='. $rowCount               = count($leadList);
                     $_SESSION['_row_count'] = $rowCount;
                 }
                 else
@@ -314,11 +320,11 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
             while ($row = $db->fetchByAssoc($leadObj))
             {
                 $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
-                $conversionX = strtolower($row['counsellor_id'] . '_' . $row['converted_date'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                //$conversionX = strtolower($row['counsellor_id'] . '_' . $row['converted_date'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
                 $SpendskeyX  = strtolower($row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
 
                 $leadCount       = isset($row['lead_count']) ? $row['lead_count'] : 0;
-                $conversion      = isset($conversionArr[$conversionX]) ? $conversionArr[$conversionX] : 0;
+                $conversion      = isset($conversionArr[$keyX]) ? $conversionArr[$keyX] : 0;
                 $coursefee       = ($row['fees_inr']!='')? $row['fees_inr'] : 0;
                 $spend           = isset($spendsArr[$SpendskeyX])? $spendsArr[$SpendskeyX] : 0;
                 $gsv             = ($coursefee * $conversion);
@@ -357,40 +363,43 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
 
 
             $StatusList = $statusHeader;
+            
+            
 
-            $data .= "Lead ID";
+            $data .= "Counsellor Name";
+            $data .= ",Manager Name";
+            $data .= ",TL Name";
             $data .= ",Date";
-            $data .= ",Vendor";
             $data .= ",Batch Code";
-            $data .= ",Status";
-            $data .= ",Sub Status";
-            $data .= ",Disposition Reason";
-            $data .= ",City";
-            $data .= ",Note";
-            $data .= ",Comments";
-            $data .= ",State";
-            $data .= ",Country";
-            $data .= ",Landing Url";
+            $data .= ",Source/Vendor";
+            $data .= ",Leads";
+            $data .= ",Conversion";
+            $data .= ",Spend";
+            $data .= ",gsv";
+            $data .= ",Conversion Rate";
+            $data .= ",CPL";
+            $data .= ",CPA";
             $data .= "\n";
+            
+      
 
 
-            foreach ($programList as $key => $councelor)
+           foreach ($programList as $key => $councelor)
             {
-                $i = 0;
-                foreach ($StatusList as $key1 => $value)
-                {
-
-                    if ($i == 0)
-                    {
-                        $data .= "\"" . $councelor[$key1];
-                    }
-                    else
-                    {
-                        $data .= "\",\"" . $councelor[$key1];
-                    }
-                    $i++;
-                }
-
+                //$data .= "\"" . $councelor['program_name'];
+                $data .= "\"" . $councelor['counsellor_name'];
+                 $data .= "\",\"" . $councelor['manager_name'];
+                $data .= "\",\"" . $councelor['tl_name'];
+                $data .= "\",\"" . $councelor['date_entered'];
+                $data .= "\",\"" . $councelor['batch_code'];
+                $data .= "\",\"" . $councelor['vendor'];
+                $data .= "\",\"" . $councelor['lead_count'];
+                $data .= "\",\"" . $councelor['conversion'];
+                $data .= "\",\"" . $councelor['spend'];
+                $data .= "\",\"" . $councelor['gsv'];
+                $data .= "\",\"" . $councelor['conversion_rate'];
+                $data .= "\",\"" . $councelor['cpl'];
+                $data .= "\",\"" . $councelor['cpa'];
                 $data .= "\"\n";
             }
 
@@ -413,8 +422,9 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         if (empty($error))
         {
             while ($row = $db->fetchByAssoc($leadObj))
-            {
-                $leadList[$row['id']] = $row;
+            {   
+                $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                $leadList[$keyX] = $row;
             }
             $this->objPagination->set_found_rows(count($leadList));
         }

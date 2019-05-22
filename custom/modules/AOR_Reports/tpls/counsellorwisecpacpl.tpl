@@ -36,7 +36,7 @@
 
                 </tbody>
             </table>
-         {*<div><span style="float:right; font-style: italic;">(* Only 31 Days of data can be downloaded.)</span></div>*}
+         <div><span style="float:right; font-style: italic;">(* Only 31 Days of data can be downloaded.)</span></div>
         </div>
     </form>
 
