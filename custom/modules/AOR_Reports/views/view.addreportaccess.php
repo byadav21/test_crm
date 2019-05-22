@@ -23,41 +23,20 @@ class AOR_ReportsViewaddreportaccess extends SugarView
     function getCouncelorForAdmin($role = '')
     {
         global $db;
-        $id = '';
 
-        if ($role == 'manager')
-        {
-            $id = '7e225ca3-69fa-a75d-f3f2-581d88cafd9a';
-        }
-        else
-        {
-            $id = '270ce9dd-7f7d-a7bf-f758-582aeb4f2a45';
-        }
-
-        $userSql  = "SELECT u.first_name,
+        $userSql  = "SELECT     u.first_name,
                                 u.last_name,
-                                 u.user_name,
-                                u.id,
-                                ru.first_name AS reporting_firstname,
-                                ru.last_name AS reporting_lastname,
-                                ru.id AS reporting_id
+                                u.id
                          FROM users AS u
-                         INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
-                         INNER join acl_roles on aru.role_id=acl_roles.id
-                         INNER JOIN users AS ru ON ru.id=u.reports_to_id
-                         WHERE aru.`role_id` IN ('$id')
-                           AND u.deleted=0
-                           AND aru.deleted=0 and acl_roles.deleted=0 ";
+                         WHERE 
+                            u.deleted=0
+                           AND u.status='Active' ";
         $userObj  = $db->query($userSql);
         $usersArr = [];
         while ($user     = $db->fetchByAssoc($userObj))
         {
-
-            $usersArr[$user['id']]['id']             = $user['id'];
-            $usersArr[$user['id']]['name']           = $user['first_name'] . ' ' . $user['last_name'];
-            $usersArr[$user['id']]['email']          = $user['user_name'];
-            $usersArr[$user['id']]['reporting_id']   = $user['reporting_id'];
-            $usersArr[$user['id']]['reporting_name'] = $user['reporting_firstname'] . ' ' . $user['reporting_lastname'];
+            $usersArr[$user['id']]['id']   = $user['id'];
+            $usersArr[$user['id']]['name'] = $user['first_name'] . ' ' . $user['last_name'];
         }
         return $usersArr;
     }
@@ -88,7 +67,7 @@ class AOR_ReportsViewaddreportaccess extends SugarView
         $error = array();
 
         $CouncellorsList = $this->getCouncelorForAdmin();
-        $left = '';
+        $left            = '';
         if (isset($_POST['button']) || isset($_POST['export']))
         {
 
