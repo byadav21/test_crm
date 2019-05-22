@@ -10,7 +10,7 @@ require_once('custom/modules/AOR_Reports/UserInput.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
-ini_set('memory_limit', '-1');
+//ini_set('memory_limit', '-1');
 
 class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
 {
@@ -53,7 +53,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         while ($user     = $db->fetchByAssoc($userObj))
         {
 
-            $usersArr[$user['user_id']]['id']             = $user['id'];
+            //$usersArr[$user['user_id']]['id']             = $user['id'];
             $usersArr[$user['user_id']]['name']           = $user['User_Name'];
             $usersArr[$user['user_id']]['reporting_id']   = $user['reporting_id'];
             $usersArr[$user['user_id']]['reporting_name'] = $user['Reporting_Name'];
@@ -330,7 +330,9 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                 $gsv             = ($coursefee * $conversion);
                 $conversion_rate = ($conversion / $leadCount);
                 $cpl             = ($spend / $leadCount);
-                $cpa             = ($spend / $gsv);
+                //echo '$gsv'. $gsv;
+                //echo '$spend'. $spend;
+                $cpa             = ($gsv!=0)? ($spend / $gsv) : 0;
 
                 $programList[$keyX]['counsellor_id']   = $row['counsellor_id'];
                 $programList[$keyX]['date_entered']    = $row['date_entered'];
