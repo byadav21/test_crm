@@ -127,6 +127,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
             'Counsellor Name',
             'Manager Name',
             'TL Name',
+            'Date',
             'Batch Code',
             'Source/Vendor',
             'Leads',
@@ -226,6 +227,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $headers = array(
             'count(l.id) lead_count'               => 'lead_count',
             'date(l.date_entered) date_entered'    => 'date_entered',
+            'l.converted_date'                       => 'converted_date',
             'users.first_name as counsellor_fname' => 'counsellor_fname',
             'users.last_name as counsellor_lname'  => 'counsellor_lname',
             'l.assigned_user_id as counsellor_id'  => 'counsellor_id',
@@ -311,11 +313,12 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
 
             while ($row = $db->fetchByAssoc($leadObj))
             {
-                $keyX = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
-                $SpendskeyX = strtolower($row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                $conversionX = strtolower($row['counsellor_id'] . '_' . $row['converted_date'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                $SpendskeyX  = strtolower($row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
 
                 $leadCount       = isset($row['lead_count']) ? $row['lead_count'] : 0;
-                $conversion      = isset($conversionArr[$keyX]) ? $conversionArr[$keyX] : 0;
+                $conversion      = isset($conversionArr[$conversionX]) ? $conversionArr[$conversionX] : 0;
                 $coursefee       = ($row['fees_inr']!='')? $row['fees_inr'] : 0;
                 $spend           = isset($spendsArr[$SpendskeyX])? $spendsArr[$SpendskeyX] : 0;
                 $gsv             = ($coursefee * $conversion);
