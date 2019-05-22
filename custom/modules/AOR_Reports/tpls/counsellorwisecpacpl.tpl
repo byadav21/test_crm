@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h2>Vendor wise Call Disposition Report</h2><br/><br/>
+<section class="moduleTitle"> <h2>Counsellor Wise CPA/CPL Report</h2><br/><br/>
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=counsellorwisecpacpl">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">

@@ -290,7 +290,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                         $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
                         $leadList[$keyX] = $row;
                     }
-                   //echo 'xxx=='. $rowCount               = count($leadList);
+                    $rowCount               = count($leadList);
                     $_SESSION['_row_count'] = $rowCount;
                 }
                 else
@@ -388,7 +388,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
             {
                 //$data .= "\"" . $councelor['program_name'];
                 $data .= "\"" . $councelor['counsellor_name'];
-                 $data .= "\",\"" . $councelor['manager_name'];
+                $data .= "\",\"" . $councelor['manager_name'];
                 $data .= "\",\"" . $councelor['tl_name'];
                 $data .= "\",\"" . $councelor['date_entered'];
                 $data .= "\",\"" . $councelor['batch_code'];
