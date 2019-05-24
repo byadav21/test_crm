@@ -70,17 +70,17 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $cSql    = "SELECT  
                         count(l.id) lead_count, 
                         l.assigned_user_id,
-                        date(l.date_entered) date_entered, 
+                        date(l.converted_date) date_entered, 
                         lc.te_ba_batch_id_c,
                         l.vendor
                                         FROM leads l
                                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                          WHERE l.deleted=0
-                        AND DATE(l.`date_entered`) >= '$fdate' 
-                        AND DATE(l.`date_entered`) <= '$todate' 
+                        AND DATE(l.`converted_date`) >= '$fdate' 
+                        AND DATE(l.`converted_date`) <= '$todate' 
                         AND l.status='Converted'
-                        group by  l.assigned_user_id,date(l.date_entered),lc.te_ba_batch_id_c,l.vendor
-                        order by  l.assigned_user_id,date(l.date_entered),lc.te_ba_batch_id_c,l.vendor";
+                        group by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor
+                        order by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor";
         //echo $cSql;
         $cObj    = $db->query($cSql);
         $dateArr = [];
@@ -320,11 +320,11 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
             while ($row = $db->fetchByAssoc($leadObj))
             {
                 $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
-                //$conversionX = strtolower($row['counsellor_id'] . '_' . $row['converted_date'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                $conversionX = strtolower($row['counsellor_id'] . '_' . $row['converted_date'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
                 $SpendskeyX  = strtolower($row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
 
                 $leadCount       = isset($row['lead_count']) ? $row['lead_count'] : 0;
-                $conversion      = isset($conversionArr[$keyX]) ? $conversionArr[$keyX] : 0;
+                $conversion      = isset($conversionArr[$conversionX]) ? $conversionArr[$conversionX] : 0;
                 $coursefee       = ($row['fees_inr']!='')? $row['fees_inr'] : 0;
                 $spend           = isset($spendsArr[$SpendskeyX])? $spendsArr[$SpendskeyX] : 0;
                 $gsv             = ($coursefee * $conversion);
