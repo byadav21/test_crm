@@ -258,6 +258,16 @@ eoq;
                 $jsonText              = $_REQUEST['current_query_by_page'];
                 $decodedText           = html_entity_decode($jsonText);
                 $myArray               = json_decode($decodedText, true);
+                //print_r($myArray); die;
+                
+                $email_basic           = $myArray['email_basic'];
+                $Counsellors_basic     = $myArray['Counsellors_basic'];
+                $phone_mobile_basic    = $myArray['phone_mobile_basic'];
+                $lead_id_basic         = $myArray['lead_id_basic'];
+                
+                
+
+                
                 $Counsellors_advanced  = $myArray['Counsellors_advanced']; // done
                 $batch_advanced        = $myArray['batch_advanced'];       // done
                 $email_advanced        = $myArray['email_advanced'];
@@ -282,6 +292,29 @@ eoq;
                 $wherecl          = '';
                 //$Counsellorstring    = implode("','", $Counsellors_advanced);
                 //$Batchstring         = implode("','", $batch_advanced);
+                if (!empty($Counsellors_basic))
+                {
+
+                    $wherecl .= " AND  l.assigned_user_id IN ('" . implode("','", $Counsellors_basic) . "')";
+                }
+                if (!empty($email_basic))
+                {
+
+                    $wherecl .= " AND  lc.email_add_c IN ('" . implode("','", $email_basic) . "')";
+                }
+                if (!empty($phone_mobile_basic))
+                {
+
+                    $wherecl .= " AND  l.phone_mobile IN ('" . implode("','", $phone_mobile_basic) . "')";
+                }
+                if (!empty($lead_id_basic))
+                {
+
+                    $wherecl .= " AND  l.id IN ('" . implode("','", $lead_id_basic) . "')";
+                }
+                
+                
+                
                 if (!empty($status_advanced))
                 {
                     $wherecl .= " AND  l.status IN ('" . implode("','", $status_advanced) . "')";
@@ -336,13 +369,13 @@ eoq;
                 }
 
 
-                $leadSql = "SELECT 
+                 $leadSql = "SELECT 
                     l.id
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                  WHERE l.deleted=0
                    $wherecl
-               order by  l.date_entered ";
+               order by  l.date_entered limit 500"; 
 
 
                 //echo '<pre>';
@@ -383,8 +416,20 @@ eoq;
             //                $this->where_clauses = str_replace('leads.batch in', 'leads_cstm.te_ba_batch_id_c in', $this->where_clauses);
             //                $this->where_clauses = str_replace('Counsellors', 'leads.assigned_user_id', $this->where_clauses);
             //            }
-
+            //echo 'sss=='.$wherecl; die;
+            
+            if($wherecl!='')
+            {  
             $result  = $db->query($leadSql, true);
+            }
+            else
+            {
+                    
+                    echo "<script type=\"text/javascript\">
+                                                         alert('Please filter with advanced search.');
+                                                         window.location = \"index.php?module=Leads&action=index\"
+                                                 </script>";    
+            }
             $new_arr = array();
             while ($val     = $db->fetchByAssoc($result, false))
             {
@@ -469,7 +514,7 @@ eoq;
                             {
 
                                 $string    = implode("','", $lead_list);
-                                $assignSQL = "update leads set assigned_user_id='$assignedUser',status='$statusX',status_description='$statusDescriptionX',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id in ('$string');";
+                                $assignSQL = "update leads set assigned_user_id='$assignedUser',status='$statusX',status_description='$statusDescriptionX',modified_user_id='$current_user_id',date_modified='" . date('Y-m-d H:i:s') . "' where id in ('$string');"; 
 
                                 //echo '<pre>'; print_r($lead_list);
                                 if (!empty($statusDescriptionX) or ! empty($statusX))
@@ -483,7 +528,7 @@ eoq;
  				    $sql                 = "select status,status_description from leads where id='$leadID'";
                                     $LeadRecordrecords   = $db->fetchByAssoc($db->query($sql));
                                     $statusXY            = empty($statusX) ? $LeadRecordrecords['status'] : $statusX;
-                                    $statusDescriptionXY = empty($statusDescriptionX) ? $LeadRecordrecords['status_description'] : $LeadRecordrecords;
+                                    $statusDescriptionXY = empty($statusDescriptionX) ? $LeadRecordrecords['status_description'] : $statusDescriptionX;
 
                                     $guidid      = create_guid();
                                     $guidid2     = create_guid();
