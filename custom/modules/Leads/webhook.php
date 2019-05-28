@@ -163,8 +163,9 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
         /* Fb capture Data */
         $name         = $firstname;
         $lastnamel    = $lastname;
-        
-        if ($fieldArr['country'] == 'IN')
+        //$phone        = $fieldArr['phone_number'];
+        $phone = str_replace("+", "", $fieldArr['phone_number']);
+	/*if ($fieldArr['country'] == 'IN')
         {
             $phone = str_replace("+91", "", $fieldArr['phone_number']);
             //$phone = ltrim($phone, '0');
@@ -173,10 +174,10 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
         {
             $phone = $fieldArr['phone_number'];
             //$phone = ltrim($phone, '0');
-        }
+        }*/
 	// Removing +91 & 0
-	$phone = ltrim($phone, '+91');
-        $phone = ltrim($phone, '0');
+	//$phone = ltrim($phone, '+91');
+        //$phone = ltrim($phone, '0');
         
         $email        = $fieldArr['email'];
         $source       = 'TE_Focus';
