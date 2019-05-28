@@ -79,8 +79,8 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                         AND DATE(l.`converted_date`) >= '$fdate' 
                         AND DATE(l.`converted_date`) <= '$todate' 
                         AND l.status='Converted'
-                        group by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor
-                        order by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor";
+                        group by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor,l.status
+                        order by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor.l.status";
         //echo $cSql;
         $cObj    = $db->query($cSql);
         $dateArr = [];
@@ -190,7 +190,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $error = array();
         $Days  = $this->getBetweenDays($selected_from_date, $selected_to_date);
 
-        if ($Days >= 31)
+        if ($Days >= 3999999991)
         {
 
             $error['error'] = 'Only one month of data are allowed to export.';
@@ -227,13 +227,14 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $headers = array(
             'count(l.id) lead_count'               => 'lead_count',
             'date(l.date_entered) date_entered'    => 'date_entered',
-            'l.converted_date'                       => 'converted_date',
+            'l.converted_date'                     => 'converted_date',
             'users.first_name as counsellor_fname' => 'counsellor_fname',
             'users.last_name as counsellor_lname'  => 'counsellor_lname',
             'l.assigned_user_id as counsellor_id'  => 'counsellor_id',
             'l.vendor'                             => 'vendor',
             'te_ba_batch.batch_code'               => 'batch_code',
             'te_ba_batch.id as batch_id'           => 'batch_id',
+            'l.status'                             => 'status',
             'te_ba_batch.fees_inr'                 => 'fees_inr'
         );
 
@@ -249,8 +250,8 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                 INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                  WHERE l.deleted=0 and te_ba_batch.deleted=0 and users.deleted=0
                    $wherecl
-               group by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor
-               order by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor ";
+               group by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor,l.status
+               order by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor,l.status ";
 
         $countSql = "SELECT $headersss ". $sqlPart;
 
@@ -287,7 +288,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                     //echo 'xxx='.$rowCount               = count($row);
                     while ($row = $db->fetchByAssoc($objLeadsCount))
                     {   
-                        $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                        $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']. '_' . $row['status']);
                         $leadList[$keyX] = $row;
                     }
                     $rowCount               = count($leadList);
@@ -319,8 +320,8 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
 
             while ($row = $db->fetchByAssoc($leadObj))
             {
-                $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
-                $conversionX = strtolower($row['counsellor_id'] . '_' . $row['converted_date'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
+                $keyX        = strtolower($row['counsellor_id'] . '_' . $row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']. '_' . $row['status']);
+                $conversionX = strtolower($row['counsellor_id'] . '_' . $row['converted_date'] . '_' . $row['batch_id'] . '_' . $row['vendor']. '_' . $row['status']);
                 $SpendskeyX  = strtolower($row['date_entered'] . '_' . $row['batch_id'] . '_' . $row['vendor']);
 
                 $leadCount       = isset($row['lead_count']) ? $row['lead_count'] : 0;
