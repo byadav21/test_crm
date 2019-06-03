@@ -69,10 +69,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
     createLog('{inside  empty check entry}', 'facebookleadCreated_' . date('Y-m-d') . '.txt', 'xx', $_REQUEST);
 
     $leadgen_id   = $input['entry'][0]['changes'][0]['value']['leadgen_id'];
-    
-    //$access_token = 'EAAKcZB1mOFl4BAB7XHzYfS2GFzO4bZBu9xfZBm1WTV7zj6Rf9DXCdCjPqEDpZCkh4Fat7jWXv9elJrkplcaxhpmcDyUZAkESgSSsO34d5krCZC4GdiZAxPAZCiHi49Q4kXZB6xOZAvChNSuCwGRJ3nQWYqt7hahSkkr9CGD85M2xRj9AZDZD';
-    //$access_token = 'EAAKcZB1mOFl4BADyZAEVsTzTSGUZBHNzM68vU3wZCZCPW6vIqi6Knnn1aKwZCIv1RecZAJVVataGZCS6FxMOrEZBZBk9TTSs7VZAa7MqskMfTxWEqjeZBlSbf2ZA7TSDXrW7nJNw6wzrwgoM9NMpEAWyLynVdUipQ53Sejd0RPRW3rAqnKDrv9ZBH1NsBETD7zm08y4RLwnt3kzi7EtafzkL8RYy821CQTsJF1cWgvCPZAbR7PIgwZDZD';
-    $access_token='EAAKcZB1mOFl4BAIu8XE0F4eaTxwes12QZADWvpwL6nnygNJPjPa0HVYWJpNVfwvlEnSGgANt1ndoM9sR9nliZAg2Do4ciEeI7Iq9jVZBb0wGAobNM1AHlNtQ0W2fxcz7uqp5IvgZAhWNCxa4q6hKC8gVxORCWeE9O50bGKY9JJQZDZD';
+    $access_token='EAAKcZB1mOFl4BAJ3mZBPd8XYxsDZAoOKUwITqxqK2qDZBTFTDrVALMYIB70klO8EwSnCpRCyU11xsw07ZCDBoU6srmEEihEi5ruFIEfjiumpghu3ON5F6liRoGTCZAh0gAhfo5Txurzra3WQkSLrQCZBFnJpw3n3h0ZD';
     $leadurl      = $url . '/' . $leadgen_id . '?access_token=' . $access_token;
     $formId       = $input['entry'][0]['changes'][0]['value']['form_id'];
     $formData     = getFormName($formId, $url, $access_token);
@@ -164,7 +161,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
         $name         = $firstname;
         $lastnamel    = $lastname;
         //$phone        = $fieldArr['phone_number'];
-        $phone = str_replace("+", "", $fieldArr['phone_number']);
+        $phone = str_replace("+91", "", $fieldArr['phone_number']);
 	/*if ($fieldArr['country'] == 'IN')
         {
             $phone = str_replace("+91", "", $fieldArr['phone_number']);
