@@ -249,6 +249,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                 INNER JOIN users ON l.assigned_user_id =users.id
                 INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                  WHERE l.deleted=0 and te_ba_batch.deleted=0 and users.deleted=0
+ 	         AND l.status_description NOT IN ('Duplicate','Re-Enquired')
                    $wherecl
                group by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor,l.status
                order by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor,l.status ";
