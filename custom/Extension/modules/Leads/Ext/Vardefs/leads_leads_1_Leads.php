@@ -159,3 +159,20 @@ $dictionary["Lead"]["fields"]["course_type"] = array(
             'duplicate_merge' => false,
             'source'          => 'custom_fields',
 );
+
+$dictionary["Lead"]["fields"]["abnd_reenquired_status"] = array(
+            'name'            => 'abnd_reenquired_status',
+            'vname'           => 'ABND RE-Enquired Status',
+            'type'            => 'varchar',
+            'len'             => '10',
+            'size'            => '10',
+            //'module' => 'Leads',
+            'default'         => '0',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);
+

@@ -452,7 +452,7 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         $LBean->status_description = $c_status_description;
         $LBean->test_status        = $c_test_status;
         $LBean->converted_date     = date('Y-m-d');
-	if($lead_source!='' && in_array($LBean->lead_source, $ABNDArr)){
+	if($lead_source!='' && $LBean->abnd_reenquired_status!=1){
             $LBean->lead_source        = $lead_source;
 	}
         $LBean->course_type        = $course_type;
