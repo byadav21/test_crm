@@ -4,6 +4,8 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
 require_once('custom/modules/te_Api/te_Api.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 
 class addPaymentClass
 {
@@ -852,11 +854,12 @@ class addPaymentClass
                 }
                 
                 $sql .= " order by date_entered DESC limit 1";
-
+                
                 $re = $GLOBALS['db']->query($sql);
 
                 if ($GLOBALS['db']->getRowCount($re) > 0)
                 {
+                   
                     /* Re-Enquired Logic Added */
                     $data = $GLOBALS['db']->fetchByAssoc($re);
                     if ($data['status'] == 'Dead')
@@ -880,21 +883,23 @@ class addPaymentClass
                         $DBleadsource = $data['lead_source'];
                         $lead_source  = $_REQUEST['lead_source'];
                         $lead_xID       = $data['id'];
+                        
                         // && in_array($DBleadsource, $ABNDArr) this removed because in every case of abnd lead will not be created as re-Enquired
                         if (isset($_REQUEST['lead_source']) && in_array($lead_source, $ABNDArr) )
                         {
-                            $this->createLogPay('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+                             
+                              $this->createLogPay('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
                             
                             
-                             $updateSql    = "update leads
+                              $updateSql    = "update leads_cstm
                                                     SET
-                                              abnd_reenquired_status   = '1',
-                                              where id='$lead_xID'";
-                            $updateSqlres = $db->Query($updateSql);
+                                              abnd_reenquired_status   = '1' 
+                                              where id_c='$lead_xID'"; 
+                            $GLOBALS['db']->query($updateSql);
                             $this->createLogPay('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
                               
                               
-                             exit();
+                             //exit();
                         }
                         else
                         {
