@@ -7,6 +7,15 @@ require_once('custom/modules/te_Api/te_Api.php');
 
 class addPaymentClass
 {
+    function createLog($action, $filename, $field = '', $dataArray = array())
+    {
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+    }
 
     function addPaymentFunc($bean, $event, $argument)
     {
@@ -821,7 +830,9 @@ class addPaymentClass
                     $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
                 }
 				 $sql .= " order by date_entered DESC";
+                
                 $re = $GLOBALS['db']->query($sql);
+                
                 if ($GLOBALS['db']->getRowCount($re) > 0)
                 {
 					/*Re-Enquired Logic Added*/
@@ -840,6 +851,7 @@ class addPaymentClass
 						$bean->duplicate_check    = '1';
 					}
 					else{
+                                                createLog('{Re-Enquired check!}', 'Re-Enquired check' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
 						$bean->status             = 'Warm';
 						$bean->status_description = 'Re-Enquired';
 						$bean->duplicate_check    = '1';
