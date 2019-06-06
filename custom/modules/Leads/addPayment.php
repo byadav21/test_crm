@@ -880,7 +880,8 @@ class addPaymentClass
                         $DBleadsource = $data['lead_source'];
                         $lead_source  = $_REQUEST['lead_source'];
                         $lead_xID       = $data['id'];
-                        if (isset($_REQUEST['lead_source']) && in_array($lead_source, $ABNDArr) && in_array($DBleadsource, $ABNDArr))
+                        // && in_array($DBleadsource, $ABNDArr) this removed because in every case of abnd lead will not be created as re-Enquired
+                        if (isset($_REQUEST['lead_source']) && in_array($lead_source, $ABNDArr) )
                         {
                             createLog('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
                             
