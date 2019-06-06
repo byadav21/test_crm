@@ -8,7 +8,7 @@ require_once('custom/modules/te_Api/te_Api.php');
 class addPaymentClass
 {
 
-    function createLog($action, $filename, $field = '', $dataArray = array())
+    function createLogPay($action, $filename, $field = '', $dataArray = array())
     {
         $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
         fwrite($file, date('Y-m-d H:i:s') . "\n");
@@ -883,7 +883,7 @@ class addPaymentClass
                         // && in_array($DBleadsource, $ABNDArr) this removed because in every case of abnd lead will not be created as re-Enquired
                         if (isset($_REQUEST['lead_source']) && in_array($lead_source, $ABNDArr) )
                         {
-                            $this->createLog('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+                            $this->createLogPay('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
                             
                             
                              $updateSql    = "update leads
@@ -891,14 +891,14 @@ class addPaymentClass
                                               abnd_reenquired_status   = '1',
                                               where id='$lead_xID'";
                             $updateSqlres = $db->Query($updateSql);
-                            $this->createLog('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
+                            $this->createLogPay('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
                               
                               
                              exit();
                         }
                         else
                         {
-                            $this->createLog('{If Re-Enquired check}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+                            $this->createLogPay('{If Re-Enquired check}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
                             $bean->status             = 'Warm';
                             $bean->status_description = 'Re-Enquired';
                             $bean->duplicate_check    = '1';
