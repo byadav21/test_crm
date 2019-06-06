@@ -885,13 +885,15 @@ class addPaymentClass
                             createLog('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
                             
                             
-                            $updateSql    = "update leads
+                             /*$updateSql    = "update leads
                                                     SET
                                               lead_source         = '$lead_source',
                                               date_modified       = NOW()  where id='$lead_xID'";
-                            //$updateSqlres = $db->Query($updateSql);
-                            //createLog('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
-                            return;
+                            $updateSqlres = $db->Query($updateSql);
+                            createLog('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
+                              */ 
+                              
+                             exit();
                         }
                         else
                         {
