@@ -850,8 +850,24 @@ class addPaymentClass
 					   }
 						$bean->duplicate_check    = '1';
 					}
-					else{
-                                                createLog('{Re-Enquired check!}', 'Re-Enquired check' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+					else{   
+						if(isset($_REQUEST['lead_source']) && $_REQUEST['lead_source']=='CC_ABND')
+						{
+	createLog('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+        $lead_source   = $_REQUEST['lead_source'];
+        $leadID        = $data['id'];
+        $updateSql     = "update leads
+                        SET
+                  lead_source         = '$lead_source',
+                  date_modified       = NOW()  where id='$leadID'";
+     $updateSqlres = $db->Query($updateSql);
+     createLog('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
+	exit;
+
+                                                }
+						else
+						{
+                                                createLog('{If Re-Enquired check}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
 						$bean->status             = 'Warm';
 						$bean->status_description = 'Re-Enquired';
 						$bean->duplicate_check    = '1';
@@ -860,7 +876,8 @@ class addPaymentClass
 						$bean->autoassign= 'No';
 						$bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
 						$lead_lead_id = create_guid();
-						$GLOBALS['db']->query("INSERT INTO `crm_new`.`leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('".$lead_lead_id."','".(date('Y-m-d H:i:s'))."','".$bean->id."','".$data['id']."')");
+						$GLOBALS['db']->query("INSERT INTO `leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('".$lead_lead_id."','".(date('Y-m-d H:i:s'))."','".$bean->id."','".$data['id']."')");
+						}
 						
 					}
                     /*End Re-Enquired Logic*/
