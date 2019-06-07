@@ -233,7 +233,16 @@ $leadObj->autoassign          = $autoassign;
 
 if ($statusDetail == 'Re-Enquired' && in_array($lead_source, $ABNDArr))
 {       
+        $data = $GLOBALS['db']->fetchByAssoc($re);
+        $lead_xID       = $data['id'];
         createLog('{on ABND_CASE action}', 'leadGenration_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $_REQUEST);
+        
+        $updateSql    = "update leads_cstm
+                            SET
+                      abnd_reenquired_status   = '1' 
+                      where id_c='$lead_xID'"; 
+        createLog('{If Re-Enquired & with ABND from leadGenration API}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
+        $db->query($updateSql);
         echo json_encode(array('status' => 'ABND_CASE', 'msg' => 'Re-Enquired found no action taken'));
         exit();
 }
