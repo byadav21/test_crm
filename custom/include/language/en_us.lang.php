@@ -461,6 +461,7 @@ $GLOBALS['app_list_strings']['lead_status_details_custom_dom']=array (
   'Dropout'=> 'Dropout',
   'Recycle'=> 'Recycle',
   'wrap.timeout'=> 'wrap.timeout',
+  'Enrolled with TE'=>'Enrolled with TE'
 );
 
 

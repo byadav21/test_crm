@@ -379,6 +379,13 @@ class LeadsViewEdit extends ViewEdit
                      } else {
                      $("#status_description").append('<option>Retired</option>');
                      }*/
+        
+                    if (status_detail == 'Enrolled with TE'){
+                                   $("#status_description").append('<option  selected="selected" >Enrolled with TE</option>');
+                           }
+                           else{
+                                   $("#status_description").append('<option>Enrolled with TE</option>');
+                           }
                 }
                 if (document.getElementById('status').value == "Converted") {
                     $("#status_description option").remove();
@@ -462,6 +469,7 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option>Not Interested</option>');
                         $("#status_description").append('<option>Next Batch</option>');
                         $("#status_description").append('<option>Fallout</option>');
+                        $("#status_description").append('<option>Enrolled with TE</option>');
                         //$("#status_description").append('<option>Retired</option>');
                     } else if (el.val() === "Recycle") {
                         $("#status_description option").remove();
