@@ -76,7 +76,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
 
     $formName = isset($formData['name']) ? $formData['name'] : '';
     $formName = trim($formName, "-");
-
+    
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $leadurl);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
@@ -129,7 +129,15 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
                 }
             }
         }
-
+        
+        $zapierBatchArr = array("IIMK-HR-01-0919");
+    
+        if (in_array($formName, $zapierBatchArr))
+        {   
+            createLog('{zapier Batch Arr}', 'zapier_batches_leads_' . date('Y-m-d') . '.txt', $formName, $fbresponsedecode['field_data']);
+            exit();
+        }
+        
         createLog('{other_country_log}', 'facebook_form_log_' . date('Y-m-d') . '.txt', $fieldArr['country'], $fbresponsedecode['field_data']);         
 
         $country_name        = 'India';
