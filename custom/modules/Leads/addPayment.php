@@ -4,13 +4,25 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
 require_once('custom/modules/te_Api/te_Api.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 
 class addPaymentClass
 {
 
+    function createLogPay($action, $filename, $field = '', $dataArray = array())
+    {
+        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+        fwrite($file, date('Y-m-d H:i:s') . "\n");
+        fwrite($file, $action . "\n");
+        fwrite($file, $field . "\n");
+        fwrite($file, print_r($dataArray, TRUE) . "\n");
+        fclose($file);
+    }
+
     function addPaymentFunc($bean, $event, $argument)
     {
-        
+
         $primary_address_country = strtolower($bean->primary_address_country);
         $paidAmount              = 0;
         $student_id              = "";
@@ -26,20 +38,20 @@ class addPaymentClass
         {
             $student_country = strtolower($bean->primary_address_country);
         }
-        
-       
-        
-        
+
+
+
+
 
         if (!empty($bean->payment_type) || !empty($bean->date_of_payment) || !empty($bean->reference_number))
         {
-           
 
-            $payment                                      = new te_payment_details();
-            $payment->payment_type                        = $bean->payment_type;
-            $payment->invoice_number                      = $bean->invoice_number;
-            $payment->invoice_order_number                = $bean->invoice_order_number;
-            $payment->invoice_url                         = $bean->invoice_url;
+
+            $payment                       = new te_payment_details();
+            $payment->payment_type         = $bean->payment_type;
+            $payment->invoice_number       = $bean->invoice_number;
+            $payment->invoice_order_number = $bean->invoice_order_number;
+            $payment->invoice_url          = $bean->invoice_url;
 
             $payment->payment_source                      = $bean->payment_source;
             $payment->transaction_id                      = $bean->transaction_id;
@@ -68,9 +80,9 @@ class addPaymentClass
                 $s = "UPDATE leads SET payment_realized_check=1 WHERE id='" . $bean->id . "'";
                 $GLOBALS['db']->query($s);
             }
-            
-            /*update last state ID in */
-            
+
+            /* update last state ID in */
+
             $sqlpaymentState = "SELECT 
                     s.name,
                     sp.te_student_batch_id_c AS batch_id ,
@@ -84,17 +96,16 @@ class addPaymentClass
                     INNER JOIN `te_student_batch` sb ON sb.id=sp.te_student_batch_id_c 
                     INNER JOIN `te_student_te_student_payment_1_c` sprel ON sprel.`te_student_te_student_payment_1te_student_payment_idb`=sp.id
                     INNER JOIN te_student s ON sprel.`te_student_te_student_payment_1te_student_ida`=s.id
-                    WHERE s.email='".$bean->email1."'
-                    ORDER BY  pd.`date_entered` DESC limit 1"; 
-            $stateData    = $GLOBALS['db']->query($sqlpaymentState);
+                    WHERE s.email='" . $bean->email1 . "'
+                    ORDER BY  pd.`date_entered` DESC limit 1";
+            $stateData       = $GLOBALS['db']->query($sqlpaymentState);
             if ($GLOBALS['db']->getRowCount($stateData) > 0)
             {
-                $statedata    = $GLOBALS['db']->fetchByAssoc($stateData);
-                $s = "UPDATE te_payment_details SET state='".$statedata['state']."' WHERE id='" . $lead_payment_details_id . "'"; 
+                $statedata = $GLOBALS['db']->fetchByAssoc($stateData);
+                $s         = "UPDATE te_payment_details SET state='" . $statedata['state'] . "' WHERE id='" . $lead_payment_details_id . "'";
                 $GLOBALS['db']->query($s);
             }
-            /*End of update last state name in payment*/
-            
+            /* End of update last state name in payment */
         }
 
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
@@ -248,31 +259,32 @@ class addPaymentClass
 
                 $GLOBALS['db']->query("update leads set is_new_dropout=1 where id='{$bean->id}'");
             }
-			/*Re-Enquired Logic Added*/
-			if ($bean->status == 'Dead')
+            /* Re-Enquired Logic Added */
+            if ($bean->status == 'Dead')
             {
-				$findReenquriedSql = "SELECT GROUP_CONCAT(leads_leads_1leads_ida)lead_id FROM leads_leads_1_c WHERE leads_leads_1leads_idb='" . $bean->id . "' AND deleted=0";
-				$findReenquriedObj = $bean->db->Query($findReenquriedSql);
-				$findReenquriedRes    = $GLOBALS['db']->fetchByAssoc($findReenquriedObj);
-				if(isset($findReenquriedRes['lead_id']) && !empty($findReenquriedRes['lead_id'])){
-					$leads_id_arr=explode(',',$findReenquriedRes['lead_id']) ;
-					$res_id_arr = "'" . implode ( "', '", $leads_id_arr ) . "'";
-					$GLOBALS['db']->query("update leads set status='".$bean->status."',status_description='".$bean->status_description."' where id IN($res_id_arr) AND status!='Converted' ");
-				}
-				
-                
+                $findReenquriedSql = "SELECT GROUP_CONCAT(leads_leads_1leads_ida)lead_id FROM leads_leads_1_c WHERE leads_leads_1leads_idb='" . $bean->id . "' AND deleted=0";
+                $findReenquriedObj = $bean->db->Query($findReenquriedSql);
+                $findReenquriedRes = $GLOBALS['db']->fetchByAssoc($findReenquriedObj);
+                if (isset($findReenquriedRes['lead_id']) && !empty($findReenquriedRes['lead_id']))
+                {
+                    $leads_id_arr = explode(',', $findReenquriedRes['lead_id']);
+                    $res_id_arr   = "'" . implode("', '", $leads_id_arr) . "'";
+                    $GLOBALS['db']->query("update leads set status='" . $bean->status . "',status_description='" . $bean->status_description . "' where id IN($res_id_arr) AND status!='Converted' ");
+                }
             }
-			if(!empty($bean->assigned_user_id) && $bean->assigned_user_id!=NULL){
-				$findReenquriedSql = "SELECT GROUP_CONCAT(leads_leads_1leads_ida)lead_id FROM leads_leads_1_c WHERE leads_leads_1leads_idb='" . $bean->id . "' AND deleted=0";
-				$findReenquriedObj = $bean->db->Query($findReenquriedSql);
-				$findReenquriedRes    = $GLOBALS['db']->fetchByAssoc($findReenquriedObj);
-				if(isset($findReenquriedRes['lead_id']) && !empty($findReenquriedRes['lead_id'])){
-					$leads_id_arr=explode(',',$findReenquriedRes['lead_id']) ;
-					$res_id_arr = "'" . implode ( "', '", $leads_id_arr ) . "'";
-					$GLOBALS['db']->query("update leads set assigned_user_id='".$bean->assigned_user_id."',assigned_date='".$bean->assigned_date."' where id IN($res_id_arr)");
-				}
-			}
-			/*End Re-Enquired Logic Added*/
+            if (!empty($bean->assigned_user_id) && $bean->assigned_user_id != NULL)
+            {
+                $findReenquriedSql = "SELECT GROUP_CONCAT(leads_leads_1leads_ida)lead_id FROM leads_leads_1_c WHERE leads_leads_1leads_idb='" . $bean->id . "' AND deleted=0";
+                $findReenquriedObj = $bean->db->Query($findReenquriedSql);
+                $findReenquriedRes = $GLOBALS['db']->fetchByAssoc($findReenquriedObj);
+                if (isset($findReenquriedRes['lead_id']) && !empty($findReenquriedRes['lead_id']))
+                {
+                    $leads_id_arr = explode(',', $findReenquriedRes['lead_id']);
+                    $res_id_arr   = "'" . implode("', '", $leads_id_arr) . "'";
+                    $GLOBALS['db']->query("update leads set assigned_user_id='" . $bean->assigned_user_id . "',assigned_date='" . $bean->assigned_date . "' where id IN($res_id_arr)");
+                }
+            }
+            /* End Re-Enquired Logic Added */
         }
         /* elseif( isset($_REQUEST['import_module']) && $_REQUEST['module']=="Import"){
 
@@ -315,7 +327,7 @@ class addPaymentClass
         {
             #update student payment history
             $student_payment_id = create_guid();
-            $insertSql          = "INSERT INTO te_student_payment SET id='" . $student_payment_id . "', name='" . $bean->reference_number . "', date_entered='" . date('Y-m-d H:i:s') . "', date_modified='" . date('Y-m-d H:i:s') . "', te_student_batch_id_c='" . $student_batch_id . "',date_of_payment='" . $bean->date_of_payment . "', amount='" . $bean->amount . "', reference_number='" . $bean->reference_number . "', payment_type='" . $bean->payment_type . "', payment_realized='" . $bean->payment_realized . "', transaction_id='" . $bean->transaction_id . "', payment_source='" . $bean->payment_source . "',lead_payment_details_id='" . $lead_payment_details_id ."', invoice_number='" . $bean->invoice_number . "', invoice_url='" . $bean->invoice_url . "', invoice_order_number='" . $bean->invoice_order_number."'";
+            $insertSql          = "INSERT INTO te_student_payment SET id='" . $student_payment_id . "', name='" . $bean->reference_number . "', date_entered='" . date('Y-m-d H:i:s') . "', date_modified='" . date('Y-m-d H:i:s') . "', te_student_batch_id_c='" . $student_batch_id . "',date_of_payment='" . $bean->date_of_payment . "', amount='" . $bean->amount . "', reference_number='" . $bean->reference_number . "', payment_type='" . $bean->payment_type . "', payment_realized='" . $bean->payment_realized . "', transaction_id='" . $bean->transaction_id . "', payment_source='" . $bean->payment_source . "',lead_payment_details_id='" . $lead_payment_details_id . "', invoice_number='" . $bean->invoice_number . "', invoice_url='" . $bean->invoice_url . "', invoice_order_number='" . $bean->invoice_order_number . "'";
             //echo $insertSql;exit();
             $GLOBALS['db']->Query($insertSql);
 
@@ -479,7 +491,7 @@ class addPaymentClass
         if (empty($student_country) || $student_country == "india")
         {
             //getTaxStatus($student_id);
-            $service_tax =  getTaxStatus($student_id); 
+            $service_tax = getTaxStatus($student_id);
             $tax         = (($amount * $service_tax) / 100);
             //$amount=($amount-$tax); //since tax is already added in fees
 
@@ -596,40 +608,49 @@ class addPaymentClass
     {
         ini_set("display_errors", 0);
         error_reporting(0);
-        global $db,$current_user;
+        global $db, $current_user;
 
-		if((!isset($_SESSION['user_cp_vendor']) || empty($_SESSION['user_cp_vendor'])) && ($bean->utm_source_c)){
-			$sql="select v.name AS vendor,v.source_type,uvr.te_vendor_users_1users_idb AS userid from te_vendor AS v
-					inner join te_vendor_users_1_c AS uvr on uvr.te_vendor_users_1te_vendor_ida=v.id and v.name='$bean->utm_source_c' 
-					where v.deleted=0 and uvr.deleted=0 limit 0,1"; 
-			$results=$db->query($sql);
-			if($db->getRowCount($results)>0){
-				$vendor=$db->fetchByAssoc($results);
-                                
-                                if($bean->assigned_user_id==''){
-				$bean->assigned_user_id = $vendor['userid'];
-                                }
-				$_SESSION['user_cp_vendor'] = $vendor;
-			}
-			
-		}
-		
-        $bean->email_add_c=$bean->email1;
-	if(!empty($bean->phone_mobile)){
-		$bean->phone_mobile=trim(str_replace('+91','',$bean->phone_mobile));
-	}
-	
-        $bean->primary_vendor=$bean->vendor;
-        if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']) && $vendor['source_type']=='OO')
+        if ((!isset($_SESSION['user_cp_vendor']) || empty($_SESSION['user_cp_vendor'])) && ($bean->utm_source_c))
         {
-		    $source_type = 'OO';
-		    if(!empty($vendor['source_type'])){
-			$source_type = $vendor['source_type'];
-		    }
-		    $bean->lead_source=$source_type.'_'.strtoupper($_SESSION['user_cp_vendor']['vendor']);;
-		    $bean->lead_source_types=$source_type;
-        
-			
+            $sql     = "SELECT v.name AS vendor,
+                                     v.source_type,
+                                     uvr.te_vendor_users_1users_idb AS userid
+                             FROM te_vendor AS v
+                             INNER JOIN te_vendor_users_1_c AS uvr ON uvr.te_vendor_users_1te_vendor_ida=v.id
+                             AND v.name='$bean->utm_source_c'
+                             WHERE v.deleted=0
+                               AND uvr.deleted=0
+                             LIMIT 0,1";
+            $results = $db->query($sql);
+            if ($db->getRowCount($results) > 0)
+            {
+                $vendor = $db->fetchByAssoc($results);
+
+                if ($bean->assigned_user_id == '')
+                {
+                    $bean->assigned_user_id = $vendor['userid'];
+                }
+                $_SESSION['user_cp_vendor'] = $vendor;
+            }
+        }
+
+        $bean->email_add_c = $bean->email1;
+        if (!empty($bean->phone_mobile))
+        {
+            $bean->phone_mobile = trim(str_replace('+91', '', $bean->phone_mobile));
+        }
+
+        $bean->primary_vendor = $bean->vendor;
+        if (isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']) && $vendor['source_type'] == 'OO')
+        {
+            $source_type = 'OO';
+            if (!empty($vendor['source_type']))
+            {
+                $source_type = $vendor['source_type'];
+            }
+            $bean->lead_source       = $source_type . '_' . strtoupper($_SESSION['user_cp_vendor']['vendor']);
+            ;
+            $bean->lead_source_types = $source_type;
         }
         // Capture the date of referral creation
         if (isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id']) && empty($_REQUEST['date_of_referral']))
@@ -646,7 +667,7 @@ class addPaymentClass
             $batch     = $bean->utm_term_c;
             $batch_id  = 0;
             $vendor_id = '';
-	    
+
             if ($batch)
             {
                 $sql = "select id from te_ba_batch  where batch_code='" . $batch . "' and deleted=0";
@@ -685,11 +706,11 @@ class addPaymentClass
             //if(!isset($utmDetails['batch'] || !$utmDetails['batch'] ))  $utmDetails['batch']=$bean->batch; 
             #check duplicate leads
             $sql = "SELECT leads.id as id,leads.assigned_user_id,leads.status FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
-            /*if ($bean->email1 != "")
-            {
-                $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
-                $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-            }*/
+            /* if ($bean->email1 != "")
+              {
+              $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
+              $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
+              } */
             $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batch_id['id'] . "' and status_description!='Duplicate' and status_description!='Re-Enquired' and  leads.deleted=0"; // AND DATE(date_entered) = '".date('Y-m-d')."'";
             if ($bean->phone_mobile && $bean->email1)
             {
@@ -707,7 +728,7 @@ class addPaymentClass
             }
             $bean->upload_status   = 1;
             $bean->duplicate_check = '1';
-			$sql .= " order by date_entered DESC";
+            $sql                   .= " order by date_entered DESC";
             //echo $sql;die;
             try
             {
@@ -719,75 +740,80 @@ class addPaymentClass
 
             if ($GLOBALS['db']->getRowCount($re) > 0)
             {
-				/*Re-Enquired Logic Added*/
-				$beanData                 = $GLOBALS['db']->fetchByAssoc($re);
-				if($beanData['status']=='Dead'){
-					$bean->status             = 'Alive';
-					if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor'])){
-						$bean->status_description='Follow Up';
-						$bean->autoassign= 'No';	
-					}
-					else{
-						$bean->status_description = 'New Lead';
-						$bean->assigned_user_id   = NULL;
-						$bean->autoassign= 'Yes';					
-					}
-					
-					$bean->duplicate_check    = '1';
-					
-					
-				}
-				else{
-					$bean->status             = 'Warm';
-					$bean->status_description = 'Re-Enquired';
-					$bean->duplicate_check    = '1';
-					
-					$bean->assigned_user_id   = $beanData['assigned_user_id'];
-					$bean->autoassign= 'No';
-					$bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
-					$lead_lead_id = create_guid();
-					//$GLOBALS['db']->query("INSERT INTO `crm_new`.`leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('".$lead_lead_id."','".(date('Y-m-d H:i:s'))."','".$bean->id."','".$beanData['id']."')");
-					
-				}
-                /*End Re-Enquired Logic*/
-               /* $bean->status             = 'Warm';
-                $bean->status_description = 'Re-Enquired';
-                $bean->duplicate_check    = '1';
-                $bean->upload_status      = -1;
-                $_SESSION['dupCheck']     = intval($_SESSION['dupCheck']) + 1;
-                //$data=$GLOBALS['db']->fetchByAssoc($re);
-                $bean->assigned_user_id   = $beanData->assigned_user_id;
-                if($beanData->assigned_user_id) $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');*/
-				//$bean->converted_date=date('Y-m-d');
+                /* Re-Enquired Logic Added */
+                $beanData = $GLOBALS['db']->fetchByAssoc($re);
+                if ($beanData['status'] == 'Dead')
+                {
+                    $bean->status = 'Alive';
+                    if (isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
+                    {
+                        $bean->status_description = 'Follow Up';
+                        $bean->autoassign         = 'No';
+                    }
+                    else
+                    {
+                        $bean->status_description = 'New Lead';
+                        $bean->assigned_user_id   = NULL;
+                        $bean->autoassign         = 'Yes';
+                    }
+
+                    $bean->duplicate_check = '1';
+                }
+                else
+                {
+                    $bean->status             = 'Warm';
+                    $bean->status_description = 'Re-Enquired';
+                    $bean->duplicate_check    = '1';
+
+                    $bean->assigned_user_id = $beanData['assigned_user_id'];
+                    $bean->autoassign       = 'No';
+                    $bean->assigned_date    = ($bean->temp_lead_date_c) ? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+                    $lead_lead_id           = create_guid();
+                    //$GLOBALS['db']->query("INSERT INTO `crm_new`.`leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('".$lead_lead_id."','".(date('Y-m-d H:i:s'))."','".$bean->id."','".$beanData['id']."')");
+                }
+                /* End Re-Enquired Logic */
+                /* $bean->status             = 'Warm';
+                  $bean->status_description = 'Re-Enquired';
+                  $bean->duplicate_check    = '1';
+                  $bean->upload_status      = -1;
+                  $_SESSION['dupCheck']     = intval($_SESSION['dupCheck']) + 1;
+                  //$data=$GLOBALS['db']->fetchByAssoc($re);
+                  $bean->assigned_user_id   = $beanData->assigned_user_id;
+                  if($beanData->assigned_user_id) $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s'); */
+                //$bean->converted_date=date('Y-m-d');
             }
             else
             {
                 if ($bean->autoassign == 'Yes')
                 {
                     $bean->assigned_user_id = NULL;
-                }else{
-					$bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
-					 
-				}
+                }
+                else
+                {
+                    $bean->assigned_date = ($bean->temp_lead_date_c) ? $bean->temp_lead_date_c : date('Y-m-d');
+                }
                 $_SESSION['aliveCheck'] = intval($_SESSION['aliveCheck']) + 1;
             }
-             if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
-       		 {              
-                                if($bean->assigned_user_id ==''){
-		    		$bean->assigned_user_id = $current_user->id;
-                                }
-		    		$bean->autoassign == 'No';
-        		 }
-            $bean->vendor           = ($bean->utm_source_c)? $bean->utm_source_c : 'NA_VENDOR';   // $vendor_id['id'];
-            if(!$bean->utm) $bean->utm='NA';
+            if (isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
+            {
+                if ($bean->assigned_user_id == '')
+                {
+                    $bean->assigned_user_id = $current_user->id;
+                }
+                $bean->autoassign == 'No';
+            }
+            $bean->vendor           = ($bean->utm_source_c) ? $bean->utm_source_c : 'NA_VENDOR';   // $vendor_id['id'];
+            if (!$bean->utm)
+                $bean->utm              = 'NA';
             $bean->te_ba_batch_id_c = $batch_id['id'];
-            
-            if($bean->status == 'Converted')  $bean->converted_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d');
-	    if(isset($_REQUEST['status']) && $_REQUEST['status']=='Converted'){
-	    	$bean->status             = 'Converted';
-		$bean->status_description = 'Converted';	
-	    }
-            
+
+            if ($bean->status == 'Converted')
+                $bean->converted_date = ($bean->temp_lead_date_c) ? $bean->temp_lead_date_c : date('Y-m-d');
+            if (isset($_REQUEST['status']) && $_REQUEST['status'] == 'Converted')
+            {
+                $bean->status             = 'Converted';
+                $bean->status_description = 'Converted';
+            }
         }
         else
         {
@@ -798,13 +824,14 @@ class addPaymentClass
 
             if (empty($bean->fetched_row['id']))
             {
-
-                $sql = "SELECT leads.id  as id,leads.assigned_user_id,leads.status FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
-                /*if ($bean->email1 != "")
-                {
-                    $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
-                    $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-                }*/
+                $lead_source       = isset($_REQUEST['lead_source'])? $_REQUEST['lead_source'] : '';
+                $ABNDArr           = array('CC_ABND', 'CC_FAILD', 'CC_DIRECT');
+                $sql = "SELECT leads.id  as id,leads.assigned_user_id,leads.status,leads.lead_source FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
+                /* if ($bean->email1 != "")
+                  {
+                  $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
+                  $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
+                  } */
                 $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and status_description!='Duplicate'  and status_description!='Re-Enquired' and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
                 if ($bean->phone_mobile && $bean->email1)
                 {
@@ -820,221 +847,94 @@ class addPaymentClass
                 {
                     $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
                 }
-				 $sql .= " order by date_entered DESC";
+                
+                if (in_array($lead_source, $ABNDArr))
+                {
+                    $sql .= " AND leads.status IN ('Alive','Warm') AND leads.status_description IN ('New Lead','Follow Up','Prospect')";
+                }
+                
+                $sql .= " order by date_entered DESC limit 1";
+                
                 $re = $GLOBALS['db']->query($sql);
+
                 if ($GLOBALS['db']->getRowCount($re) > 0)
                 {
-					/*Re-Enquired Logic Added*/
-					$data                     = $GLOBALS['db']->fetchByAssoc($re);
-					if($data['status']=='Dead'){
-						$bean->status             = 'Alive';
-						if(isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor'])){
-							$bean->status_description='Follow Up';
-							$bean->autoassign= 'No';
-					   }
-					   else{
-						 	$bean->status_description = 'New Lead';
-						 	$bean->assigned_user_id   = NULL;
-						 	$bean->autoassign= 'Yes';					
-					   }
-						$bean->duplicate_check    = '1';
-					}
-					else{
-						$bean->status             = 'Warm';
-						$bean->status_description = 'Re-Enquired';
-						$bean->duplicate_check    = '1';
-						
-						$bean->assigned_user_id   = $data['assigned_user_id'];
-						$bean->autoassign= 'No';
-						$bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
-						$lead_lead_id = create_guid();
-						$GLOBALS['db']->query("INSERT INTO `crm_new`.`leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('".$lead_lead_id."','".(date('Y-m-d H:i:s'))."','".$bean->id."','".$data['id']."')");
-						
-					}
-                    /*End Re-Enquired Logic*/
-					//$bean->converted_date=date('Y-m-d');
-                    
-                }
-                
-                $bean->assigned_date=($bean->temp_lead_date_c)? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
-                
-				if(!$bean->utm) $bean->utm='NA';
-				if(!$bean->vendor) $bean->vendor='NA_VENDOR';
-				//$bean->converted_date=date('Y-m-d');
-            }
-        }
-        # 	>>>>----------------web Services ----------------------------<<<<<<
-        /*if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
-        {
-
-            $Query3     = "SELECT email_address,id FROM `email_addresses` WHERE deleted=0 AND email_address='" . $bean->email1 . "'";
-            $lead3      = $GLOBALS['db']->query($Query3);
-            $Emails     = $GLOBALS['db']->fetchByAssoc($lead3);
-            $leadEmail  = $Emails['email_address'];
-            $emailaddid = $Emails['id'];
-            $webid      = '';
-
-            /*if ($emailaddid)
-            {
-                $findUserWebidSql = "SELECT l.web_lead_id FROM `email_addr_bean_rel` as eabr INNER JOIN leads as l on l.id=eabr.bean_id WHERE eabr.`email_address_id`='" . $emailaddid . "' AND l.web_lead_id!='' LIMIT 0,1";
-                $findUserWebidobj = $GLOBALS['db']->query($findUserWebidSql);
-                $findUserWebidRes = $GLOBALS['db']->fetchByAssoc($findUserWebidobj);
-                $webid            = $findUserWebidRes['web_lead_id'];
-            }
-            $Fields = array();
-
-            if (!empty($bean->first_name))
-            {
-                $Fields[] = "first_name = '" . $bean->first_name . "'";
-            }
-            if (!empty($bean->last_name))
-            {
-                $Fields[] = "last_name = '" . $bean->last_name . "'";
-            }
-            if (!empty($bean->birthdate))
-            {
-                $Fields[] = "birthdate = '" . $bean->birthdate . "'";
-            }
-            if (!empty($bean->phone_mobile))
-            {
-                $Fields[] = "phone_mobile = '" . $bean->phone_mobile . "'";
-            }
-            if (!empty($bean->primary_address_country))
-            {
-                $Fields[] = "primary_address_country = '" . $bean->primary_address_country . "'";
-            }
-            if (!empty($bean->primary_address_city))
-            {
-                $Fields[] = "primary_address_city = '" . $bean->primary_address_city . "'";
-            }
-            $updateColumns = '';
-            if ($Fields)
-            {
-                $updateColumns = implode(",", $Fields);
-            }
-            if ($bean->email1 == $leadEmail && $webid)
-            {
-                $user     = 'talentedgeadmin';
-                $password = 'Inkoniq@2016';
-                $url      = 'http://webstaging.talentedge.in/user-api/';
-                $headers  = array(
-                    'Authorization: Basic ' . base64_encode("$user:$password")
-                );
-                $post     = [
-                    'action'      => 'update',
-                    'crm_user_id' => $bean->id,
-                    'email'       => $bean->email1,
-                    'first_name'  => $bean->first_name,
-                    'last_name'   => $bean->last_name,
-                    'gender'      => $bean->gender,
-                    'dob'         => $bean->birthdate,
-                    'mobile'      => $bean->phone_mobile,
-                    'country'     => $bean->primary_address_country,
-                    'state'       => $bean->primary_address_state,
-                    'city'        => $bean->primary_address_city,
-                    'pincode'     => '1',
-                    'address'     => '1',
-                ];
-
-                $ch     = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                $result = curl_exec($ch);
-                $res    = json_decode($result);
-                if (isset($res[0]->status) && $res[0]->status == '1')
-                {
-                    $bean->web_lead_id = $res[0]->userid;
-                    #$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");
-                }
-                $bean->web_lead_id = $webid;
-                $bean->is_sent_web = "1";
-
-                //curl_close($ch);
-                if ($updateColumns)
-                {
-                    #find ID of email address
-                    $sql6   = "SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='" . $bean->email1 . "'";
-                    $email6 = $GLOBALS['db']->query($sql6);
-
-                    while ($row6 = $GLOBALS['db']->fetchByAssoc($email6))
+                   
+                    /* Re-Enquired Logic Added */
+                    $data = $GLOBALS['db']->fetchByAssoc($re);
+                    if ($data['status'] == 'Dead')
                     {
-
-                        # ****update When Records When Email id Same ******	
-                        #echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
-                        $GLOBALS['db']->Query("UPDATE leads SET " . $updateColumns . ",web_lead_id='" . $webid . "' WHERE id='" . $row6['bean_id'] . "'");
-                        #$qs="UPDATE leads SET ".$updateColumns.",web_lead_id='".$webid."' WHERE id='".$row6['bean_id']."'";
-                        #$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$webid."' WHERE id_c='".$row6['bean_id']."'");					
-                    }
-                }
-            }
-            else
-            {
-                $user     = 'talentedgeadmin';
-                $password = 'Inkoniq@2016';
-                $url      = 'http://webstaging.talentedge.in/user-api/';
-                $headers  = array(
-                    'Authorization: Basic ' . base64_encode("$user:$password")
-                );
-                $post     = [
-                    'action'      => 'add',
-                    'crm_user_id' => $bean->id,
-                    'email'       => $bean->email1,
-                    'first_name'  => $bean->first_name,
-                    'last_name'   => $bean->last_name,
-                    'gender'      => $bean->gender,
-                    'dob'         => $bean->birthdate,
-                    'mobile'      => $bean->phone_mobile,
-                    'country'     => $bean->primary_address_country,
-                    'state'       => $bean->primary_address_state,
-                    'city'        => $bean->primary_address_city,
-                    'pincode'     => '1',
-                    'address'     => '1',
-                ];
-                #print_r ($post);
-                #die();
-                $ch       = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                $result   = curl_exec($ch);
-                $res      = json_decode($result);
-
-                if (isset($res[0]->status) && $res[0]->status == '1')
-                {
-                    $bean->is_sent_web = "1";
-                    $bean->web_lead_id = $res[0]->userid;
-                    #$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$bean->id."'");	
-                    if ($updateColumns)
-                    {
-                        #find ID of email address
-                        #echo $sql6="SELECT ebr.bean_id,ebr.email_address_id,ea.id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='".$bean->email1."'";
-                        $sql6   = "SELECT ebr.bean_id,ebr.email_address_id,ea.id,l.web_lead_id FROM `email_addr_bean_rel` ebr INNER JOIN email_addresses ea ON ebr.email_address_id = ea.id  INNER JOIN  leads l ON ebr.bean_id=l.id WHERE ea.deleted=0 AND ebr.deleted=0 AND ebr.bean_module='Leads' AND ea.email_address ='" . $bean->email1 . "'";
-                        $email6 = $GLOBALS['db']->query($sql6);
-
-                        while ($row6 = $GLOBALS['db']->fetchByAssoc($email6))
+                        $bean->status = 'Alive';
+                        if (isset($_SESSION['user_cp_vendor']) && !empty($_SESSION['user_cp_vendor']))
                         {
-                            # ****update When Records When Email id Same ******	
-                            #echo $ts="UPDATE leads SET ".$updateColumns." WHERE id='".$row6['bean_id']."'";
-                            $GLOBALS['db']->Query("UPDATE leads SET " . $updateColumns . ",web_lead_id='" . $webid . "' WHERE id='" . $row6['bean_id'] . "'");
-                            #$GLOBALS['db']->Query("UPDATE leads_cstm SET web_id_c='".$res[0]->userid."' WHERE id_c='".$row6['bean_id']."'");					
+                            $bean->status_description = 'Follow Up';
+                            $bean->autoassign         = 'No';
+                        }
+                        else
+                        {
+                            $bean->status_description = 'New Lead';
+                            $bean->assigned_user_id   = NULL;
+                            $bean->autoassign         = 'Yes';
+                        }
+                        $bean->duplicate_check = '1';
+                    }
+                    else
+                    {
+                        $DBleadsource = $data['lead_source'];
+                        $lead_source  = $_REQUEST['lead_source'];
+                        $lead_xID       = $data['id'];
+                        
+                        // && in_array($DBleadsource, $ABNDArr) this removed because in every case of abnd lead will not be created as re-Enquired
+                        if (isset($_REQUEST['lead_source']) && in_array($lead_source, $ABNDArr) )
+                        {
+                             
+                              $this->createLogPay('{If Re-Enquired & with ABND}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+                            
+                            
+                              $updateSql    = "update leads_cstm
+                                                    SET
+                                              abnd_reenquired_status   = '1' 
+                                              where id_c='$lead_xID'"; 
+                            $GLOBALS['db']->query($updateSql);
+                            $this->createLogPay('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
+                              
+                              
+                             exit();
+                        }
+                        else
+                        {
+                            $this->createLogPay('{If Re-Enquired check}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+                            $bean->status             = 'Warm';
+                            $bean->status_description = 'Re-Enquired';
+                            $bean->duplicate_check    = '1';
+
+                            $bean->assigned_user_id = $data['assigned_user_id'];
+                            $bean->autoassign       = 'No';
+                            $bean->assigned_date    = ($bean->temp_lead_date_c) ? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+                            $lead_lead_id           = create_guid();
+                            $GLOBALS['db']->query("INSERT INTO `leads_leads_1_c` (`id`, `date_modified`, `leads_leads_1leads_ida`, `leads_leads_1leads_idb`) VALUES ('" . $lead_lead_id . "','" . (date('Y-m-d H:i:s')) . "','" . $bean->id . "','" . $data['id'] . "')");
                         }
                     }
+                    /* End Re-Enquired Logic */
+                    //$bean->converted_date=date('Y-m-d');
                 }
 
-                //curl_close($ch);  						
+                $bean->assigned_date = ($bean->temp_lead_date_c) ? $bean->temp_lead_date_c : date('Y-m-d H:i:s');
+
+                if (!$bean->utm)
+                    $bean->utm    = 'NA';
+                if (!$bean->vendor)
+                    $bean->vendor = 'NA_VENDOR';
+                //$bean->converted_date=date('Y-m-d');
             }
-        }*/
+        }
+        
     }
 
     function addDispositionFunc($bean, $event, $argument)
     {
         ini_set('display_errors', "off");
-        global $db,$current_user,$sugar_config;
+        global $db, $current_user, $sugar_config;
         $db->query("delete from  session_call where  session_id='" . session_id() . "'");
 #If record is being created manually
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
@@ -1044,8 +944,8 @@ class addPaymentClass
             {
 
 
-          
-                
+
+
                 $disposition = new te_disposition();
 
                 $disposition->status        = $bean->status;
@@ -1060,7 +960,7 @@ class addPaymentClass
                 $disposition->name                          = $bean->dispositionName;
                 $disposition->dispositionName               = $bean->dispositionName;
                 $disposition->calltype                      = $bean->callType;
-		//$disposition->created_by                  =  $bean->created_by;
+                //$disposition->created_by                  =  $bean->created_by;
                 //$disposition->assigned_user_id            =  $bean->assigned_user_id;
                 //$disposition->modified_user_id            =  $bean->modified_user_id;
                 $disposition->attempt_count                 = $bean->attempts_c;
@@ -1089,31 +989,31 @@ class addPaymentClass
                     $date_of_callbackX = $recordsData['date_of_callback'];
                     $date_of_followupX = $recordsData['date_of_followup'];
                     $date_of_prospectX = $recordsData['date_of_prospect'];
-                    
-                    $sql               = "UPDATE `te_disposition`
+
+                    $sql     = "UPDATE `te_disposition`
                                                 SET 
                                                    `created_by`='" . $created_byIDX . "',
                                                     modified_user_id='" . $modified_user_IDX . "',
                                                     assigned_user_id='" . $assigned_user_IDX . "',
                                                     date_of_callback='" . $date_of_callbackX . "'
                                                 WHERE id ='" . $xx . "'";
-                    $sqlData           = $GLOBALS['db']->query($sql);
+                    $sqlData = $GLOBALS['db']->query($sql);
                 }
 
                 $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
-                fwrite($file,'---------------------------'. "\n");
+                fwrite($file, '---------------------------' . "\n");
                 fwrite($file, date('Y-m-d H:i:s') . "\n");
-                fwrite($file, 'userId='.$_REQUEST['userId'] . "\n");
+                fwrite($file, 'userId=' . $_REQUEST['userId'] . "\n");
                 //fwrite($file, print_r($current_user, TRUE) . "\n");
-                fwrite($file, 'ameyo_import_login: '.$sugar_config['ameyo_import_login'] . "\n");
-                fwrite($file, '$current_user: '.$current_user->id . "\n");
-                fwrite($file, 'LeadID: '.$bean->id . "\n");
-                fwrite($file, 'Assigned_user_id: '.$bean->assigned_user_id . "\n");
-                fwrite($file, 'CreatedBy: '.$bean->created_by . "\n");
-                fwrite($file, 'modified_user_id: '.$bean->modified_user_id  . "\n");
-                fwrite($file, 'disp save id: '.$xx . "\n");
-                fwrite($file, 'sqlQuery: '.$sql . "\n");
-                fwrite($file, 'leadID: '.$bean->id . "\n");
+                fwrite($file, 'ameyo_import_login: ' . $sugar_config['ameyo_import_login'] . "\n");
+                fwrite($file, '$current_user: ' . $current_user->id . "\n");
+                fwrite($file, 'LeadID: ' . $bean->id . "\n");
+                fwrite($file, 'Assigned_user_id: ' . $bean->assigned_user_id . "\n");
+                fwrite($file, 'CreatedBy: ' . $bean->created_by . "\n");
+                fwrite($file, 'modified_user_id: ' . $bean->modified_user_id . "\n");
+                fwrite($file, 'disp save id: ' . $xx . "\n");
+                fwrite($file, 'sqlQuery: ' . $sql . "\n");
+                fwrite($file, 'leadID: ' . $bean->id . "\n");
                 fclose($file);
 
                 $sql     = " select dristi_request from leads WHERE id ='" . $bean->id . "'";
@@ -1170,7 +1070,7 @@ class addPaymentClass
 
                 //~ die;
             }
-            /* * ************************ Mail 1Trigers Code 14Sep18 by MKG  Mail=> Not Interested ***************** */
+            /*             * ************************ Mail 1Trigers Code 14Sep18 by MKG  Mail=> Not Interested ***************** */
             $useremail = $bean->email1;
             if (($bean->lead_source_types != "OO" && $bean->lead_source_types != "CO") && $bean->status_description == "Not Interested")
             {
@@ -1303,9 +1203,10 @@ return, or if it will with the same curriculum or class schedule. </p>
         ini_set('display_errors', "off");
         if (isset($_REQUEST['import_module']) && $_REQUEST['module'] == "Import")
             return false;
-            
-        if (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == "lead-genration") return false;    
-            
+
+        if (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == "lead-genration")
+            return false;
+
         global $db, $current_user;
         $sql     = "select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $current_user->id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
         $mis     = $db->query($sql);
@@ -1313,17 +1214,17 @@ return, or if it will with the same curriculum or class schedule. </p>
         //echo 'p';die;
         if ($misData['slug'] == 'CCM' || $misData['slug'] == 'CCTL' || $misData['slug'] == 'CCH' || $current_user->is_admin == 1)
             return false;
-            
-        
+
+
 
         if ($bean->fetched_row['id'] == '')
         {
             $sql = "SELECT leads.id  as id,leads.assigned_user_id FROM leads INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
-           /* if ($bean->email1 != "")
-            {
-                $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
-                $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-            }*/
+            /* if ($bean->email1 != "")
+              {
+              $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id AND email_addr_bean_rel.bean_module ='Leads' ";
+              $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
+              } */
             $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $bean->te_ba_batch_id_c . "' and status_description!='Duplicate' and leads.deleted=0 "; // AND DATE(date_entered) = '".date('Y-m-d')."'";
             if ($bean->phone_mobile && $bean->email1)
             {

@@ -79,6 +79,7 @@ if ($mobile != "" && $email != "")
 {
     $sql .= " AND leads.phone_mobile = '$mobile' AND email_addresses.email_address='" .$email . "'";
 }
+$sql .="AND leads.status='Alive' AND leads.status_description='New Lead'";
 $sqlobj = $db->query($sql);
 if ($db->getRowCount($sqlobj) > 0)
 {

@@ -418,10 +418,10 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         $disposition->save();
         $GLOBALS['db']->query("UPDATE leads SET status='Converted',status_description='Converted' ,converted_date='".date('Y-m-d')."' WHERE id='".$student_arr['lead_id']."'");
         */
-        
+        $ABNDArr           = array('CC_ABND', 'CC_FAILD', 'CC_DIRECT');
         $c_status             = 'Converted';
         $c_status_description = 'Converted';
-        //$lead_source          = (isset($data['lead_source']) && !empty($data['lead_source'])) ? $data['lead_source'] : '';
+        $lead_source          = (isset($data['lead_source']) && !empty($data['lead_source'])) ? $data['lead_source'] : '';
         $course_type          = (isset($data['course_type']) && !empty($data['course_type'])) ? $data['course_type'] : '';
         $c_test_status        = 'NA';
 
@@ -452,7 +452,13 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         $LBean->status_description = $c_status_description;
         $LBean->test_status        = $c_test_status;
         $LBean->converted_date     = date('Y-m-d');
+
         //$LBean->lead_source        = $lead_source;
+
+	if($lead_source!='' && $LBean->abnd_reenquired_status!=1){
+            $LBean->lead_source        = $lead_source;
+	}
+
         $LBean->course_type        = $course_type;
         $checkSaveBean             = $LBean->save();
         if ($checkSaveBean)

@@ -26,7 +26,7 @@ $vendor_source_type = '';
 $lead_source_types = '';
 $lead_source       = '';
 $lead_source       = $_REQUEST['lead_source'];
-
+$ABNDArr           = array('CC_ABND', 'CC_FAILD', 'CC_DIRECT');
 
 function createLog($action, $filename, $field = '', $dataArray = array())
 {
@@ -37,6 +37,7 @@ function createLog($action, $filename, $field = '', $dataArray = array())
     fwrite($file, print_r($dataArray, TRUE) . "\n");
     fclose($file);
 }
+
 //createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $_REQUEST);
 
 if ($phone || $email)
@@ -127,7 +128,14 @@ if ($phone != "" && $email != "")
 {
     $sql .= " AND leads.phone_mobile = '$phone' AND email_addresses.email_address='" . $email . "'";
 }
+; 
 
+if (in_array($lead_source, $ABNDArr))
+{
+    $sql .= " AND leads.status IN ('Alive','Warm') AND leads.status_description IN ('New Lead','Follow Up','Prospect')";
+}
+
+//echo '<pre>'; echo $sql; echo 'xxxx=='.$lead_source; print_r($ABNDArr); die;
 
 $autoassign       = 'Yes';
 $assigned_user_id = NULL;
@@ -222,20 +230,39 @@ if ($lead_d)
     $leadObj->dristi_API_id       = $lead_d;
 $leadObj->assigned_user_id    = $assigned_user_id;
 $leadObj->autoassign          = $autoassign;
-$leadObj->save();
-if (!$leadObj->id)
-{
-    echo json_encode(array('status' => 'error', 'msg' => 'Some thing gone wrong!'));
-    exit();
+
+if ($statusDetail == 'Re-Enquired' && in_array($lead_source, $ABNDArr))
+{       
+        $data = $GLOBALS['db']->fetchByAssoc($re);
+        $lead_xID       = $data['id'];
+        createLog('{on ABND_CASE action}', 'leadGenration_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $_REQUEST);
+        
+        $updateSql    = "update leads_cstm
+                            SET
+                      abnd_reenquired_status   = '1' 
+                      where id_c='$lead_xID'"; 
+        createLog('{If Re-Enquired & with ABND from leadGenration API}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
+        $db->query($updateSql);
+        echo json_encode(array('status' => 'ABND_CASE', 'msg' => 'Re-Enquired found no action taken'));
+        exit();
 }
 else
 {
-    echo json_encode(array('status' => 'success', 'msg' => 'Lead saved successfully!'));
+    $leadObj->save();
+    if (!$leadObj->id)
+    {
+        echo json_encode(array('status' => 'error', 'msg' => 'Some thing gone wrong!'));
+        exit();
+    }
+    else
+    {
+        echo json_encode(array('status' => 'success', 'msg' => 'Lead saved successfully!'));
+    }
+    if ($campagain_d && $lead_d)
+    {
+        $sql = "update te_ba_batch set lastCampagain='" . $campagain_d . $lead_d . "' where id='" . $batchid . "'";
+        $db->query($sql);
+    }
+    exit();
 }
-if ($campagain_d && $lead_d)
-{
-    $sql = "update te_ba_batch set lastCampagain='" . $campagain_d . $lead_d . "' where id='" . $batchid . "'";
-    $db->query($sql);
-}
-exit();
 //echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); exit();
