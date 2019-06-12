@@ -899,7 +899,7 @@ class addPaymentClass
                             $this->createLogPay('{ABND Re-Enquired update on parent lead}', 're_enquired_check_log_' . date('Y-m-d') . '_log.txt', $updateSql, $_REQUEST);
                               
                               
-                             //exit();
+                             exit();
                         }
                         else
                         {
