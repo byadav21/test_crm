@@ -410,6 +410,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'OO_knowledge' => 'Knowledge',
   'OO_reviewadda' => 'reviewadda',
   'OO_pactolus' => 'pactolus',
+  'OO_Skilledge' => 'Skilledge',
   'CO_Jet'=>'Jet',
   'CO_manappuram'=>'Manappuram',
   'CO_genpact'=>'Genpact',
