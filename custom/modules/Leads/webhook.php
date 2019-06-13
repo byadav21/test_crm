@@ -130,7 +130,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
             }
         }
         
-        $zapierBatchArr = array("IIMK-HR-01-0919","XLRI-PM-05-1119","XLRI-SPM-08-0819-01");
+        $zapierBatchArr = array("IIMK-HR-01-0919","XLRI-PM-05-1119","XLRI-SPM-08-0819-01","MICA-ADPR-13-0819-01","XLRI-TM-06-0819-01");
     
         if (in_array($formName, $zapierBatchArr))
         {   
