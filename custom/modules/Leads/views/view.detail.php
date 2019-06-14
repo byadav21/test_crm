@@ -721,8 +721,9 @@ if(!isset($_SESSION['referral'])){
 		  });
 		}
                 
-                $(".yui-nav li").click(function() {
+                $("#Leads_detailview_tabs .yui-nav li").click(function() {
                      var getTabName = $(this).find("a em").html();
+                     //alert(getTabName);
                      if(getTabName=='Call log')
                      {
                        var lead_id ='<?=$_REQUEST['record'];?>';

@@ -391,7 +391,7 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
     </script>
 {/if}
 <script>
-    var ModuleSubPanels = {$module_sub_panels};
+    var ModuleSubPanels = '{$module_sub_panels}';
     {literal}
 
     var updateSubpanelGroup = function() {
