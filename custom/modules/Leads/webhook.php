@@ -130,7 +130,7 @@ if (!empty($input['entry'][0]['changes'][0]['value']['leadgen_id']))
             }
         }
         
-        $zapierBatchArr = array("IIMK-HR-01-0919","XLRI-PM-05-1119","XLRI-SPM-08-0819-01","MICA-ADPR-13-0819-01","XLRI-TM-06-0819-01");
+        $zapierBatchArr = array("IIMK-HR-01-0919","XLRI-PM-05-1119","XLRI-SPM-08-0819-01","MICA-ADPR-13-0819-01","XLRI-TM-06-0819-01","XLRI-LCM-05-0619-01","XLRI-SM-02-0219-01","XLRI-MA-01-0819","IIMK-SCSM-01-0819","UOD-HRM-01-0219-01","MICA-DM-06-0819","IIMK-GM-02-0919","AFM-05-0819-01");
     
         if (in_array($formName, $zapierBatchArr))
         {   
