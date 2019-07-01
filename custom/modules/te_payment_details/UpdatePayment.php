@@ -16,11 +16,15 @@ class UpdatePaymentName
         if (isset($paymentrowE['is_sent_web']) && $paymentrowE['is_sent_web'] == 0)
         {
             //echo "/var/www/html/aws/custom/modules/te_payment_details/UpdatePayment.php"; die;
-            $sql_batch   = "SELECT `discount_in_inr`,`discount_in_usd` FROM `te_ba_batch` WHERE id ='" . $_REQUEST['te_ba_batch_id_c'] . "'";
+            $te_ba_batch_id_c = isset($_REQUEST['te_ba_batch_id_c'])? $_REQUEST['te_ba_batch_id_c']:'';
+            $sql_batch   = "SELECT `discount_in_inr`,`discount_in_usd` FROM `te_ba_batch` WHERE id ='".$te_ba_batch_id_c. "'";
             $batchObj    = $GLOBALS['db']->Query($sql_batch);
             $resultbatch = $GLOBALS['db']->fetchByAssoc($batchObj);
-
-            if ($_REQUEST['country_log'] == 'India')
+            
+             $country_log = isset($_REQUEST['country_log'])? $_REQUEST['country_log']:'';
+             $primary_address_state = isset($_REQUEST['primary_address_state'])? $_REQUEST['primary_address_state']:'';
+             
+            if ($country_log == 'India')
             {
                 if (($resultbatch['discount_in_inr'] != NULL || $resultbatch['discount_in_usd'] != NULL) && ($_REQUEST['discount'] != ''))
                 {
@@ -40,7 +44,7 @@ class UpdatePaymentName
                     $discountlead = '0';
                 }
             }
-            elseif ($_REQUEST['country_log'] == 'Other')
+            elseif ($country_log == 'Other')
             {
                 //echo $resultbatch['discount_in_usd'];
                 if (($resultbatch['discount_in_inr'] != NULL || $resultbatch['discount_in_usd'] != NULL) && ($_REQUEST['discount'] != ''))
@@ -135,7 +139,7 @@ class UpdatePaymentName
         # WEB Payment Api
         $lead_user_details = [];
         if (isset($_REQUEST['Leads0emailAddress0']) && !empty($_REQUEST['Leads0emailAddress0']))
-        {
+        {   
             $lead_user_details['email_address']         = $_REQUEST['Leads0emailAddress0'];
             $lead_user_details['first_name']            = $_REQUEST['first_name'];
             $lead_user_details['last_name']             = $_REQUEST['last_name'];
@@ -149,8 +153,8 @@ class UpdatePaymentName
             $lead_user_details['payment_type']          = $bean->payment_type;
             $lead_user_details['date_of_payment']       = $bean->date_of_payment;
             $lead_user_details['discount']              = $discountlead;
-            $lead_user_details['primary_address_state'] =($_REQUEST['primary_address_state'] != '') ? $_REQUEST['primary_address_state'] : 'AK';
-            $lead_user_details['country_log']           = ($_REQUEST['country_log'] == 'India') ? 'IN' : 'US';
+            $lead_user_details['primary_address_state'] = ($primary_address_state != '') ? $primary_address_state : 'AK';
+            $lead_user_details['country_log']           = ($country_log == 'India') ? 'IN' : 'US';
         }
         else
         {
@@ -166,8 +170,8 @@ class UpdatePaymentName
             $lead_user_details['payment_type']          = $bean->payment_type;
             $lead_user_details['date_of_payment']       = $bean->date_of_payment;
             $lead_user_details['discount']              = $discountlead;
-            $lead_user_details['primary_address_state'] = ($_REQUEST['primary_address_state'] != '') ? $_REQUEST['primary_address_state'] : 'AK';
-            $lead_user_details['country_log']           = ($_REQUEST['country_log'] == 'India') ? 'IN' : 'US';
+            $lead_user_details['primary_address_state'] = ($primary_address_state != '') ? $primary_address_state : 'AK';
+            $lead_user_details['country_log']           = ($country_log == 'India') ? 'IN' : 'US';
         }
         if ($lead_user_details)
         {
@@ -190,7 +194,7 @@ class UpdatePaymentName
 
     /* ------------------- stop syncing from crm to web for payment */
     
-   function createLog($action, $filename, $field = '', $dataArray = array())
+   function createLogX($action, $filename, $field = '', $dataArray = array())
         {
             $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
             fwrite($file, date('Y-m-d H:i:s') . "\n");
@@ -230,7 +234,7 @@ class UpdatePaymentName
             'country_log'           => $lead_user_details['country_log'],
         ];
         //echo '<pre>'; print_r($post); die;
-	//$this->createLog('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $url, $lead_user_details);
+	//$this->createLogX('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $url, $lead_user_details);
 
 
         $ch     = curl_init();
@@ -240,9 +244,9 @@ class UpdatePaymentName
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $result = curl_exec($ch);
-        $res    = json_decode($result);
-	$this->createLog('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $result, $post);
-        $this->createLog('{In Add api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $res, $result);
+        $res    = json_decode($result,TRUE);
+	$this->createLogX('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', 'Case', $post);
+        $this->createLogX('{In Add api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', 'rest', $result);
         if (isset($res[0]->status) && $res[0]->status == '1')
         {
             $insertRelSql = "UPDATE te_payment_details SET is_sent_web=1 Where id='" . $lead_user_details['id'] . "'";
@@ -284,8 +288,8 @@ class UpdatePaymentName
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $result   = curl_exec($ch);
         $res      = json_decode($result);
-        $this->createLog('{In Update Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $result, $lead_user_details);
-        $this->createLog('{In Update api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $res, $result);
+        $this->createLogX('{In Update Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', '$result', $lead_user_details);
+        $this->createLogX('{In Update api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', '$res', $result);
 
         curl_close($ch);
     }
