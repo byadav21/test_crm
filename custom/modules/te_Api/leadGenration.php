@@ -108,32 +108,61 @@ else
     exit();
 }
 
-$sql = "SELECT  leads.id AS id,
-                    leads.assigned_user_id,
-                    status,
-                    status_description
-             FROM leads
-             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c";
-if ($email != "")
-{
-    $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id
-                AND email_addr_bean_rel.bean_module ='Leads'";
+            /*
+            $sql = "SELECT  leads.id AS id,
+                                leads.assigned_user_id,
+                                status,
+                                status_description
+                         FROM leads
+                         INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c";
+            if ($email != "")
+            {
+                $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id
+                            AND email_addr_bean_rel.bean_module ='Leads'";
 
-    $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-}
+                $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
+            }
 
-$sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batchid . "'";
+            $sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batchid . "'";
 
-if ($phone != "" && $email != "")
-{
-    $sql .= " AND leads.phone_mobile = '$phone' AND email_addresses.email_address='" . $email . "'";
-}
-; 
+            if ($phone != "" && $email != "")
+            {
+                $sql .= " AND leads.phone_mobile = '$phone' AND email_addresses.email_address='" . $email . "'";
+            }
+            */
 
-if (in_array($lead_source, $ABNDArr))
-{
-    $sql .= " AND leads.status IN ('Alive','Warm') AND leads.status_description IN ('New Lead','Follow Up','Prospect')";
-}
+            $sql = "SELECT  leads.id AS id,
+                            leads.assigned_user_id,
+                            leads.status,
+                            leads.status_description
+                     FROM leads
+                     INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
+           
+            $sql .= " WHERE leads.deleted = 0
+                          AND leads_cstm.te_ba_batch_id_c = '" . $batchid . "'
+                          AND status_description!='Duplicate'
+                          AND status_description!='Re-Enquired'
+                          AND leads.deleted=0 "; 
+                        // AND DATE(date_entered) = '".date('Y-m-d')."'";
+            if ($phone && $email)
+            {
+
+                $sql .= " AND ( leads.phone_mobile = '{$phone}' or email_add_c = '{$email}')";
+            }
+            elseif (!$phone && $email)
+            {
+
+                $sql .= " AND email_add_c=  '{$email}'";
+            }
+            elseif ($phone && !$email)
+            {
+                $sql .= " AND leads.phone_mobile = '{$phone}'";
+            }
+            
+            if (in_array($lead_source, $ABNDArr))
+            {
+                $sql .= " AND leads.status IN ('Alive','Warm') AND leads.status_description IN ('New Lead','Follow Up','Prospect')";
+            }
 
 //echo '<pre>'; echo $sql; echo 'xxxx=='.$lead_source; print_r($ABNDArr); die;
 
