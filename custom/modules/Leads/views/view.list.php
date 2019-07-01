@@ -594,18 +594,18 @@
 			global $current_user;
 			$id = $current_user->id;
 			?>
-			<script src="http://js.pusher.com/3.2/pusher.min.js"></script>
+			<!--<script src="http://js.pusher.com/3.2/pusher.min.js"></script>-->
 			<script>
 
 				// Enable pusher logging - don't include this in production
-				Pusher.logToConsole = true;
+				/* Pusher.logToConsole = true;
 
 				var pusher = new Pusher('467cd9d1723f2650b8ad', {
 					encrypted: true
 				});
 
 				var channel = pusher.subscribe('my-channel');
-				var logged_in_user_id = '<?= $id ?>';
+				var logged_in_user_id = '<?//= $id ?>';
 				channel.bind(logged_in_user_id, function (data) {
 					//~ alert(data.first_name+"-"+data.last_name+"-"+data.email_address+"-"+data.primary_address_country+"-"+data.batch_name+"-"+data.programe_name+"-"+data.programe_name+"-"+data.education_c+"-"+data.work_experience_c)
 
@@ -618,7 +618,7 @@
 					window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
 
 				});
-
+				*/
 
 
 

@@ -72,21 +72,22 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                         l.assigned_user_id,
                         date(l.converted_date) date_entered, 
                         lc.te_ba_batch_id_c,
-                        l.vendor
+                        l.vendor,l.status
                                         FROM leads l
                                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                          WHERE l.deleted=0
+			#AND l.assigned_user_id='af0c99fb-c21d-78bd-086c-590d9bdeeaa4'
                         AND DATE(l.`converted_date`) >= '$fdate' 
                         AND DATE(l.`converted_date`) <= '$todate' 
                         AND l.status='Converted'
                         group by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor,l.status
-                        order by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor.l.status";
+                        order by  l.assigned_user_id,date(l.converted_date),lc.te_ba_batch_id_c,l.vendor,l.status";
         //echo $cSql;
         $cObj    = $db->query($cSql);
         $dateArr = [];
         while ($cdata   = $db->fetchByAssoc($cObj))
         {
-            $keyX           = strtolower($cdata['assigned_user_id'] . '_' . $cdata['date_entered'] . '_' . $cdata['te_ba_batch_id_c'] . '_' . $cdata['vendor']);
+            $keyX           = strtolower($cdata['assigned_user_id'] . '_' . $cdata['date_entered'] . '_' . $cdata['te_ba_batch_id_c'] . '_' . $cdata['vendor'].'_'.$cdata['status']);
             $dateArr[$keyX] = $cdata['lead_count'];
         }
         return $dateArr;
@@ -222,7 +223,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
         $spendsArr      = $this->getSpends($from_date, $to_date);
         
 
-        //print_r($conversionArr);
+        //echo '<pre>';print_r($conversionArr);
 
         $headers = array(
             'count(l.id) lead_count'               => 'lead_count',
@@ -250,6 +251,7 @@ class AOR_ReportsViewCounsellorwisecpacpl extends SugarView
                 INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                  WHERE l.deleted=0 and te_ba_batch.deleted=0 and users.deleted=0
  	         AND l.status_description NOT IN ('Duplicate','Re-Enquired')
+		 #AND l.assigned_user_id='af0c99fb-c21d-78bd-086c-590d9bdeeaa4'
                    $wherecl
                group by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor,l.status
                order by  date(l.date_entered),l.assigned_user_id,te_ba_batch.batch_code,l.vendor,l.status ";
