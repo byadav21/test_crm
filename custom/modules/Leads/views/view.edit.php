@@ -154,8 +154,17 @@ class LeadsViewEdit extends ViewEdit
             var role_name = '<?php echo $usersRole; ?>';
 
             $(document).ready(function () {
-
+                
                 //alert(role_name);
+                var ConvertedStatus = ['Converted', 'Instalment Follow up', 'Referral Follow up'];
+                var status_descriptionX = $('#status_description').val();
+                 if ($.inArray(status_descriptionX, ConvertedStatus)!='-1') {
+                    //alert(name + ' is in the array!');
+                     $("#status").attr('disabled','disabled');
+                     //$("#status_description").attr('disabled','disabled');
+                }
+        
+                
                 if (role_name == 'Contact Center Counselor') {
                     $("#tab1").hide();
                     $("#tabcontent1").hide();
