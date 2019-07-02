@@ -378,11 +378,19 @@
 
 
         })
+        
+            var usersRole = $("#role_name_id").val();
+              //alert(usersRole);
+             $('#status option[value="Duplicate"]').remove(); 
+            if(usersRole=='Contact Center Counselor' && $("#status_description").val() != 'Converted'){
+                 $('#status option[value="Converted"]').remove();
+              }
+              
+              
 
         $("#status_description").on('change', function () {
 
-              var usersRole = $("#role_name_id").val();
-              //alert(usersRole);
+          
             if ($("#status_description").val() == 'Converted') {
 
                 var status_description = $("#status_description").val();

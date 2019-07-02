@@ -428,15 +428,15 @@ class LeadsViewEdit extends ViewEdit
                     }
                 }
 
-                if (document.getElementById('status').value == "Duplicate") {
-                    $("#status_description option").remove();
-                    $("#status_description").append('<option></option>');
-                    if (status_detail == 'Duplicate') {
-                        $("#status_description").append('<option  selected="selected">Duplicate</option>');
-                    } else {
-                        $("#status_description").append('<option>Duplicate</option>');
-                    }
-                }
+//                if (document.getElementById('status').value == "Duplicate") {
+//                    $("#status_description option").remove();
+//                    $("#status_description").append('<option></option>');
+//                    if (status_detail == 'Duplicate') {
+//                        $("#status_description").append('<option  selected="selected">Duplicate</option>');
+//                    } else {
+//                        $("#status_description").append('<option>Duplicate</option>');
+//                    }
+//                }
 
 
                 if (document.getElementById('status').value == "Warm") {
@@ -490,11 +490,15 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option>Converted</option>');
                         $("#status_description").append('<option>Instalment Follow up</option>');
                         $("#status_description").append('<option>Referral Follow up</option>');
-                    } else if (el.val() === "Duplicate") {
+                    } 
+                    
+                    /*else if (el.val() === "Duplicate") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
                         $("#status_description").append('<option>Duplicate</option>');
-                    } else if (el.val() === "Warm") {
+                    }*/
+                    
+                    else if (el.val() === "Warm") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
                         //$("#status_description").append('<option>Re-Enquired</option>'); Remove re-enquired status
