@@ -240,9 +240,9 @@ class UpdatePaymentName
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $result = curl_exec($ch);
-        $res    = json_decode($result);
-	$this->createLog('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $result, $post);
-        $this->createLog('{In Add api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $res, $result);
+        $res    = json_decode($result,TRUE);
+	$this->createLog('{In Add Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', '', $post);
+        $this->createLog('{In Add api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', '', $result);
         if (isset($res[0]->status) && $res[0]->status == '1')
         {
             $insertRelSql = "UPDATE te_payment_details SET is_sent_web=1 Where id='" . $lead_user_details['id'] . "'";
@@ -283,9 +283,9 @@ class UpdatePaymentName
         curl_setopt($ch, CURLOPT_TIMEOUT, 50);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $result   = curl_exec($ch);
-        $res      = json_decode($result);
-        $this->createLog('{In Update Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $result, $lead_user_details);
-        $this->createLog('{In Update api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', $res, $result);
+        $res      = json_decode($result,TRUE);
+        $this->createLog('{In Update Case}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', '', $lead_user_details);
+        $this->createLog('{In Update api response}', 'send_payment_info_web_log_'.date('Y-m-d').'.txt', '', $result);
 
         curl_close($ch);
     }

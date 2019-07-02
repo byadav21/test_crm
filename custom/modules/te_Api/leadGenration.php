@@ -38,7 +38,7 @@ function createLog($action, $filename, $field = '', $dataArray = array())
     fclose($file);
 }
 
-//createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $_REQUEST);
+createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') . '_log.txt', $lead_source, $_REQUEST);
 
 if ($phone || $email)
 {
