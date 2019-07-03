@@ -451,7 +451,9 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         $LBean->status             = $c_status;
         $LBean->status_description = $c_status_description;
         $LBean->test_status        = $c_test_status;
+        if ($LBean->converted_date == ''){
         $LBean->converted_date     = date('Y-m-d');
+        }
 
         //$LBean->lead_source        = $lead_source;
 

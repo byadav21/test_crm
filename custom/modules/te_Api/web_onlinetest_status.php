@@ -88,7 +88,9 @@ if ($order_id != '' && $test_status != '')
             $LBean->status             = $c_status;
             $LBean->status_description = $c_status_description;
             $LBean->test_status        = $test_status;
-            $LBean->converted_date     = date('Y-m-d');
+            if ($LBean->converted_date == ''){
+                $LBean->converted_date     = date('Y-m-d');
+            }
             $checkSaveBean             = $LBean->save();
             if ($checkSaveBean)
             {
