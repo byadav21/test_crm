@@ -105,4 +105,46 @@ if (isset($_POST['action']) && $_POST['action'] == 'DeleteTargetRepo')
     }
     die;
 }
+
+if (isset($_POST['action']) && $_POST['action'] == 'dissmisscallback')
+{
+    global $db;
+    $option = '';
+    //RecordID: RecordID, RowID:RowID
+   
+    $leadID = $_POST['leadID'];
+    $CallTime = $_POST['CallTime'];
+    $dismissID = $_POST['dismissID'];
+
+    if ($leadID!='' && $CallTime!='')
+    {
+         $updateSql = "UPDATE callback_log SET deleted=1,is_seen=1 where lead_id='$leadID' and callback_date_time='$CallTime'";
+        $usObj = $GLOBALS['db']->Query($updateSql);
+       
+        if($usObj){
+            echo $dismissID;
+        }
+    }
+    die;
+}
+if (isset($_POST['action']) && $_POST['action'] == 'dissmissremainderPop')
+{
+    global $db;
+    $option = '';
+    //RecordID: RecordID, RowID:RowID
+   
+    $callbackID = $_POST['callbackID'];
+
+
+    if ($callbackID!='')
+    {
+        $updateSql = "UPDATE callback_log SET deleted=1,is_seen=1 where id='$callbackID'";
+        $usObj = $GLOBALS['db']->Query($updateSql);
+       
+        if($usObj){
+            echo $callbackID;
+        }
+    }
+    die;
+}
 ?>

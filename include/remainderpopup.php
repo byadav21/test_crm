@@ -39,10 +39,21 @@
 
 
 class remainderpopup{
-
-    function __get_user_callback(){
+    
+     function __get_userPopup(){
 	global $db, $current_user;
-	$call_backSql     = "SELECT c.id,c.lead_id,c.status_description,c.callback_date_time,l.first_name FROM callback_log AS c INNER JOIN leads AS l on l.id=c.lead_id WHERE c.is_seen=0 AND c.deleted=0 AND DATE(c.callback_date_time)<='".date('Y-m-d')."' AND c.assigned_user_id='".$current_user->id."' LIMIT 0,30";
+	$call_backSql     = "SELECT c.id,
+                                    c.lead_id,
+                                    c.callback_date_time,
+                                    l.first_name
+                             FROM callback_log AS c
+                             INNER JOIN leads AS l ON l.id=c.lead_id
+                             WHERE c.is_seen=0
+                               AND c.deleted=0
+                               AND DATE(c.callback_date_time)<='".date('Y-m-d')."'
+                               AND c.assigned_user_id='".$current_user->id."'
+                             LIMIT 0,
+                                   30";
 	$call_backObj     = $db->query($call_backSql);
 	$call_backOptions = array();
 	while ($row   = $db->fetchByAssoc($call_backObj))
@@ -52,15 +63,117 @@ class remainderpopup{
 	return $call_backOptions;
 	
     }
+
+    function __get_user_callback(){
+	     global $db, $current_user;
+       date_default_timezone_set('Asia/Calcutta');
+       $todayFrom = date('Y-m-d', strtotime(date('Y-m-d'). ' - 8 days')).' 00:01:00';
+       $todayTo = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s'). ' + 20 minute'));
+  //echo $todayFrom." - ".$todayTo;exit();
+        $call_backSql     = "SELECT c.id,
+                                   c.lead_id,
+                                   c.status_description,
+                                   date(c.callback_date_time)callback_date,
+                                   c.callback_date_time,
+                                   c.id callbackID,
+                                   l.first_name,
+                                   b.name AS batch
+                            FROM callback_log AS c
+                            INNER JOIN leads AS l ON l.id=c.lead_id
+                            INNER JOIN leads_cstm AS lc ON l.id = lc.id_c
+                            LEFT JOIN te_ba_batch AS b ON b.id = lc.te_ba_batch_id_c
+                            WHERE c.is_seen=0
+                              AND c.deleted=0
+                              AND DATE(c.callback_date_time)>='".$todayFrom."'
+                              AND DATE(c.callback_date_time)<='".$todayTo."'
+                              AND c.assigned_user_id='".$current_user->id."'
+                            ORDER BY c.callback_date_time DESC
+                            LIMIT 0,
+                                  50";
+  //echo $call_backSql;exit();
+       $call_backObj     = $db->query($call_backSql);
+	     $call_backOptions = array();
+    	while ($row   = $db->fetchByAssoc($call_backObj))
+    	{
+          if($row['callback_date']==date('Y-m-d')){
+            $call_backOptions['today'][] = $row;
+          }
+          else{
+            $call_backOptions['overdue'][] = $row;
+          }
+    	}
+    	return $call_backOptions;
+    }
+    
+    
     function load_js($event, $arguments){
 	global $db, $current_user;
+        $datax=$this->__get_userPopup();
 	$data=$this->__get_user_callback();
-	$json_data = json_encode($data);
+	 $overdue_count = (isset($data['overdue'])) ? count($data['overdue']) : 0;
+      $today_count = (isset($data['today'])) ? count($data['today']) : 0;
+      $overdue_arr = (isset($data['overdue'])) ? $data['overdue'] : [];
+      $today_arr = (isset($data['today'])) ? $data['today'] : [];
+      $overdue = "<div class='list-content'>No Result Found!</div>";
+      $today = "<div class='list-content'>No Result Found!</div>";
+      if($overdue_count>0){
+        $overdue ="";
+        $i=1;
+        foreach($overdue_arr as $val){
+            $leadIDx = 'overdue_'.$val['lead_id'].'_'.$i;
+            $lead_id = $val['lead_id'];
+            $callBack = $val['callback_date_time'];
+            $callbackID = $val['callbackID'];
+            $onClick = "onclick=dissmisscallback('$callbackID')";
+            
+            $overdue .= "<div class='list-content' id='$callbackID'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id'>".$val['first_name']."</a></p>";
+            $overdue .= "<p>".$val['batch']."</p>";
+            $overdue .= "<p>".$callBack."</p></div>";
+            $overdue .= "<div><p class='dismiss_p'><a href='javascript:void(0)' $onClick title='Dismiss'><i class='fa fa-times-circle'></i></a></p></div></div>";
+            
+        $i++;
+        }
+      }
+      if($today_count>0){
+        $today ="";
+        $i=1;
+        foreach($today_arr as $val){
+            $leadIDx = 'overdue_'.$val['lead_id'].'_'.$i;
+            $lead_id = $val['lead_id'];
+            $callBack = $val['callback_date_time'];
+            $callbackID = $val['callbackID'];
+            $onClick = "onclick=dissmisscallback('$callbackID')";
+            
+            $today .= "<div class='list-content' id='$callbackID'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id'>".$val['first_name']."</a></p>";
+            $today .= "<p>".$val['batch']."</p>";
+            $today .= "<p>".$val['callback_date_time']."</p>";
+            $today .= "<p class='dismiss_p'><a href='javascript:void(0)' $onClick title='Dismiss'><i class='fa fa-times-circle'></i></a></p></div></div>";
+        $i++;
+        }
+      }
+
+
+	$json_data = json_encode($datax);
 	$popup_url = $GLOBALS['sugar_config']['site_url']."/index.php?entryPoint=leads_callback";
 ?>
 <script type="text/javascript">
+
 var t1=<?php echo $json_data ?>;
 var popup_url="<?php echo $popup_url ?>";
+
+var todayCount="<?php echo $today_count ?>";
+var OverdueCount="<?php echo $overdue_count ?>";
+var Overdue="<?php echo $overdue ?>";
+var today="<?php echo $today ?>";
+$(function(){
+  var total = parseInt(todayCount)+parseInt(OverdueCount);
+  $(".notifications_alert_count").text(total);
+  $("#today_tab").text('Today ('+todayCount+')');
+  $("#overdue_tab").text('Overdue ('+OverdueCount+')');
+  $("#todayMenu").html(today);
+  $("#prvMenu").html(Overdue);
+});
+
 if(t1.length>0){
 	t1 = JSON.stringify(t1);
 	localStorage.setItem("call_back", t1);	
@@ -69,6 +182,39 @@ else{
 	localStorage.setItem("call_back", '');	
 }
 
+$(function(){
+  $(".info-number").click(function(){
+    $("#notifications_alerts").toggle();
+  });
+
+});
+
+function dissmisscallback(callbackID){
+                //alert(CallTime);
+                
+                if (confirm("Are you sure you want to delete?")) {
+                    
+                    $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'dissmissremainderPop', callbackID: callbackID},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        $('#'+callbackID).html('');
+                        }
+                    });
+                
+                }
+                return false;
+                
+                //$('#'+dismissID).html('');
+            }
+            
 //var d1 = new Date("2018-09-03 17:45:00");
 //var d2 = new Date();
 //alert(d1);
@@ -87,17 +233,19 @@ function diff_minutes(dt2, dt1)
 function fn60sec() {
         var callback_data = JSON.parse(localStorage.getItem("call_back"));
 	var lead_url = '';
+        
+       
 	for(var i=0;i<callback_data.length;i++){
 		var d2 = new Date();
 		var d1 = new Date(callback_data[i].callback_date_time);
-		if(diff_minutes(d2,d1)>=-15){
-		lead_url ="&lead_id="+callback_data[i].lead_id;
-		lead_url +="&id="+callback_data[i].id;
-		lead_url +="&first_name="+callback_data[i].first_name;
-		lead_url +="&callback_date_time="+callback_data[i].callback_date_time;
-		lead_url +="&status_description="+callback_data[i].status_description;
-		
-		window.open(popup_url+lead_url, "popupWindow", "width=600,height=600,scrollbars=yes");
+		if(diff_minutes(d2,d1)>=-60){
+//		lead_url ="&lead_id="+callback_data[i].lead_id;
+//		lead_url +="&id="+callback_data[i].id;
+//		lead_url +="&first_name="+callback_data[i].first_name;
+//		lead_url +="&callback_date_time="+callback_data[i].callback_date_time;
+//		lead_url +="&status_description="+callback_data[i].status_description;
+//		
+		window.open(popup_url, "popupWindow", "width=600,height=600,scrollbars=yes");
 		//console.log(popup_url);
 		break;
 		}

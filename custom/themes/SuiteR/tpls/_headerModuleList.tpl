@@ -214,12 +214,54 @@
                     </ul>
                 </li>
 
-                <li id="desktop_notifications" role="presentation" class=" ">
+                <!--<li id="desktop_notifications" role="presentation" class=" ">
                     <a href="javascript:;" class=" info-number alertsButton" style="background: transparent;  "    m  data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-green alert_count">0</span>
                     </a>
                     <div id="alerts" class="dropdown-menu" role="menu">{$APP.LBL_EMAIL_ERROR_VIEW_RAW_SOURCE}</div>
+
+                </li>-->
+                <li id="custom_notifications" role="presentation" class="custom_notifications">
+                    <a href="javascript:;" class=" info-number alertsButton" style="background: transparent;" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge bg-red notifications_alert_count">20</span>
+                    </a>
+                    <div id="notifications_alerts" class="dropdown-menu" role="menu">
+
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" id="today_tab" href="#todayMenu">Today (0)</a></li>
+                        <li><a data-toggle="tab" id="overdue_tab" href="#prvMenu">Overdue (0)</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div id="todayMenu" class="tab-pane fade in active">
+                            <div class="list-content">
+                                <div>adsfg sgdf dgd dg gdfg dgd sgdf dgd dg gdfg dgd sgdf dgd dg gdfg dgd sgdf dgd dg gdfg dgd </div>
+                                <a href="javascript:void(0)" title="Dismiss"><i class="fa fa-times-circle"></i></a>
+                            </div>
+                            <div class="list-content">
+                                <div>adsfg sgdf dgd dg gdfg dgd </div>
+                                <a href="javascript:void(0)" title="Dismiss"><i class="fa fa-times-circle"></i></a>
+                            </div>
+                            <div class="list-content">
+                                <div>adsfg sgdf dgd dg gdfg dgd </div>
+                                <a href="javascript:void(0)" title="Dismiss"><i class="fa fa-times-circle"></i></a>
+                            </div>
+                            <div class="list-content">
+                                <div>adsfg sgdf dgd dg gdfg dgd </div>
+                                <a href="javascript:void(0)" title="Dismiss"><i class="fa fa-times-circle"></i></a>
+                            </div>
+                          </div>
+                          <div id="prvMenu" class="tab-pane fade">
+                            <h3>Menu 1</h3>
+                            <p>Some content in menu 1.</p>
+                          </div>
+
+                        </div>
+
+
+                    </div>
 
                 </li>
             </ul>

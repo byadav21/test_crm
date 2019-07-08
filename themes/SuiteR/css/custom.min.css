@@ -3138,9 +3138,10 @@ ul.msg_list li a .message {
 
     position: absolute;
 
-    right: -8px;
+    right: -13px;
 
-    top: 7px;
+    top: 4px;
+    color:#fff;
 
 }
 
@@ -9108,3 +9109,31 @@ fieldset{   min-width: 100px; }
 
     width: 200px!important;
 }
+
+
+div.div-leads-list table tbody tr:nth-child(odd){
+    background:#c6dff9 !important;
+}
+
+div.div-leads-list table tbody tr:nth-child(even){
+    background:#efefef !important;
+}
+div.div-leads-list table tbody tr td {
+    border-top:1px solid #ddd
+}
+
+.custom_notifications .dropdown-menu {background-color: #fff; width:300px;}
+/*.custom_notifications .dropdown-menu {display: block!important; background-color: #fff; width:300px;}*/
+.custom_notifications .dropdown-menu ul{display: flex; width:100%; margin:0; padding: 0;  border:0px solid #ddd}
+.custom_notifications .dropdown-menu ul li{display: flex; width:100%; margin:0; padding: 0;}
+.custom_notifications .dropdown-menu ul li a{display: flex; white-space: nowrap; padding:0 20px; border:0px none; border-bottom:2px solid transparent; color:#999;}
+.custom_notifications .dropdown-menu ul li a:hover{ border-bottom:2px solid #2A3F54; background-color:transparent; color:#2A3F54}
+.custom_notifications .dropdown-menu ul li a:focus{ border-bottom:2px solid #2A3F54; background-color:transparent; color:#2A3F54}
+.custom_notifications .dropdown-menu ul li.active::hover a{ border-bottom:2px solid #2A3F54; color:#2A3F54}
+.custom_notifications .dropdown-menu ul li.active a{display: flex; white-space: nowrap; border:0px none; border-bottom:2px solid #2A3F54; color:#2A3F54; background-color:transparent; }
+.custom_notifications .dropdown-menu  .tab-content{padding:10px; border:1px solid #ddd; max-height:300px; overflow-y:auto;}
+.custom_notifications .dropdown-menu  .tab-content .list-content{display: flex; width:100%; justify-content: space-between; align-items:flex-start; padding: 6px; box-shadow: 0 0 5px #f6f6f6; border: 1px solid #ddd; margin-bottom: 10px;}
+.custom_notifications .dropdown-menu  .tab-content .list-content div{color:#999}
+.custom_notifications .dropdown-menu  .tab-content .list-content i{color:#2A3F54; font-size:17px;}
+.dismiss_p{text-align: right;}
+
