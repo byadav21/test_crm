@@ -125,7 +125,8 @@ $GLOBALS['app_list_strings']['designation_list']=array (
 'ET' => 'Executive trainee',
 'M_CC' => 'Manager counselling center',
 'SE_CC' => 'Senior executive counselling center',
-'SH' => 'Sales Head'
+'SH' => 'Sales Head',
+'OT'=>'Others'
 );
 
 $GLOBALS['app_list_strings']['department_list']=array (

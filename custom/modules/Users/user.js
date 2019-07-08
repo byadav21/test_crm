@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$('#designation').change(function (){
 		var designation = $("#designation").val();			
 		$.ajax({
@@ -16,4 +16,4 @@ $(document).ready(function(){
 	
 	});
 	
-});
+});*/
