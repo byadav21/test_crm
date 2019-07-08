@@ -158,7 +158,8 @@ class LeadsViewEdit extends ViewEdit
                 //alert(role_name);
                 var ConvertedStatus = ['Converted', 'Instalment Follow up', 'Referral Follow up'];
                 var status_descriptionX = $('#status_description').val();
-                 if ($.inArray(status_descriptionX, ConvertedStatus)!='-1') {
+		 var statusX = $('#status').val();
+                 if ($.inArray(statusX, ConvertedStatus)!='-1') {
                     //alert(name + ' is in the array!');
                      $("#status").attr('disabled','disabled');
                      //$("#status_description").attr('disabled','disabled');

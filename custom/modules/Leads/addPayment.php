@@ -848,10 +848,10 @@ class addPaymentClass
                     $sql .= " and leads.phone_mobile = '{$bean->phone_mobile}'";
                 }
                 
-                if (in_array($lead_source, $ABNDArr))
+                /*if (in_array($lead_source, $ABNDArr))
                 {
                     $sql .= " AND leads.status IN ('Alive','Warm') AND leads.status_description IN ('New Lead','Follow Up','Prospect')";
-                }
+                }*/
                 
                 $sql .= " order by date_entered DESC limit 1";
                 

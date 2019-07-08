@@ -21,6 +21,7 @@ $crmDispo = array('New Lead'               => 'Alive',
     'Not Interested'         => 'Dead', //New
     'Next Batch'             => 'Dead', //New
     'Retired'                => 'Dead', //New
+    'Enrolled with TE'       => 'Dead', //New
     'Duplicate'              => 'Duplicate',
     'Dropout'                => 'Dropout',
     'Prospect'               => 'Warm',

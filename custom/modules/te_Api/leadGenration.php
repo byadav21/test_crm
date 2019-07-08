@@ -159,10 +159,10 @@ else
                 $sql .= " AND leads.phone_mobile = '{$phone}'";
             }
             
-            if (in_array($lead_source, $ABNDArr))
+           /*if (in_array($lead_source, $ABNDArr))
             {
                 $sql .= " AND leads.status IN ('Alive','Warm') AND leads.status_description IN ('New Lead','Follow Up','Prospect')";
-            }
+            }*/
 
 //echo '<pre>'; echo $sql; echo 'xxxx=='.$lead_source; print_r($ABNDArr); die;
 
