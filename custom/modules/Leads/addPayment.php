@@ -944,12 +944,27 @@ class addPaymentClass
 #If record is being created manually
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
         {
-            // echo $bean->fetched_row['status'] . '='. $bean->status;die;
+             //echo $bean->fetched_row['status'] . '='. $bean->status;die;
+            //echo $bean->date_of_followup; die;
+            
+                $dateOfCall='';
+                $callArray = array('Follow Up','Prospect');
+                if($bean->date_of_callback!=''){$dateOfCall=$bean->date_of_callback;}
+                elseif($bean->date_of_followup!=''){$dateOfCall=$bean->date_of_followup;}
+                elseif($bean->date_of_prospect!=''){$dateOfCall=$bean->date_of_prospect;}
+                
+                if (in_array($bean->status_description, $callArray) && $dateOfCall!=''){
+                $callbackSql = "INSERT INTO callback_log
+                                    SET lead_id='$bean->id',
+                                    status_description='$bean->status_description',
+                                    callback_date_time='" .$dateOfCall . "',
+                                    assigned_user_id='" . $bean->assigned_user_id . "'"; 
+                 $res         = $db->query($callbackSql);
+                }
+
+                        
             if ($bean->fetched_row['status'] = '' || ($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description == 'Call Back' && $bean->fetched_row['date_of_callback'] != $bean->date_of_callback) || ($bean->status_description == 'Follow Up' && $bean->fetched_row['date_of_followup'] != $bean->date_of_followup) || ($bean->status_description == 'Prospect' && $bean->fetched_row['date_of_prospect'] != $bean->date_of_prospect))
             {
-
-
-
 
                 $disposition = new te_disposition();
 

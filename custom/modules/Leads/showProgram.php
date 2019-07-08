@@ -2,7 +2,8 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 //~ require_once('custom/modules/Accounts/customFunctions.php');
 
-ini_set('display_errors','on');
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 class LeadsListView extends Lead{
 	function create_new_list_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean, $singleSelect = false) {
         $ret_array = parent::create_new_list_query($order_by, $where,$filter,$params, $show_deleted,$join_type, $return_array,$parentbean, $singleSelect);
@@ -45,7 +46,7 @@ class LeadsListView extends Lead{
 				$all_leads = 0;
                                 
 				$reportingUserIds = array();
-				$reportUserObj = new customfunctionforcrm();
+				$reportUserObj = new customfunctionforcrm(); 
 				$reportUserObj->reportingUser($currentUserId);
 				$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 				$reportingUserIds = $reportUserObj->report_to_id;
