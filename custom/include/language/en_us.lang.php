@@ -116,8 +116,29 @@ $GLOBALS['app_list_strings']['dropuout_status_list']=array (
 );
 $GLOBALS['app_list_strings']['designation_list']=array (
   '' => '',
-  'BUH' => 'Business Head',
+'BUH' => 'Business Head',
+'AM_MIS_QA' => 'Assistant Manager MIS and QA ',
+'TL_CC' => 'Team leader counselling center',
+'TDCC' => 'Team developer counselling center',
+'SMCC' => 'Senior manager counselling center',
+'EC' => 'Executive Counselling',
+'ET' => 'Executive trainee',
+'M_CC' => 'Manager counselling center',
+'SE_CC' => 'Senior executive counselling center',
+'SH' => 'Sales Head'
 );
+
+$GLOBALS['app_list_strings']['department_list']=array (
+  '' => '',
+'CC' => 'Call Center',
+'CH' => 'Channel',
+'SRM' => 'SRM',
+'CO' => 'Corporate',
+'IS' => 'Inside Sales',
+'DM' => 'Digital Marketing',
+'Other' => 'Other'
+);
+
 $GLOBALS['app_list_strings']['study_kit_status_list']=array (
   '' => '',
   'Pending' => 'Pending',

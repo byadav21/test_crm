@@ -251,7 +251,10 @@ class addPaymentClass
                     $student_batch_id                                             = $studentBatchObj->id;
                 }
                 $GLOBALS['db']->query("update te_student set state='" . $bean->primary_address_state . "' where email='{$bean->email1}'");
-                $GLOBALS['db']->query("update leads set converted_date='" . date('Y-m-d H:i:s') . "' where id='{$bean->id}'");
+                if ($bean->converted_date == '')
+                {
+                    $GLOBALS['db']->query("update leads set converted_date='" . date('Y-m-d H:i:s') . "' where id='{$bean->id}'");
+                }
             }
 
             if ($bean->status == 'Dropout')
@@ -808,7 +811,9 @@ class addPaymentClass
             $bean->te_ba_batch_id_c = $batch_id['id'];
 
             if ($bean->status == 'Converted')
+                if ($bean->converted_date == ''){
                 $bean->converted_date = ($bean->temp_lead_date_c) ? $bean->temp_lead_date_c : date('Y-m-d');
+                }
             if (isset($_REQUEST['status']) && $_REQUEST['status'] == 'Converted')
             {
                 $bean->status             = 'Converted';
