@@ -1,6 +1,9 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
+
+ global $db, $current_user;
+ 
 if (isset($_REQUEST['redirect']) && !empty($_REQUEST['redirect']) && isset($_REQUEST['id']) && !empty($_REQUEST['id']) && isset($_REQUEST['lead_id']) && !empty($_REQUEST['lead_id']))
 {
     global $db;
@@ -21,7 +24,8 @@ function callbackdata()
                                     c.callback_date_time,
                                     l.first_name,
                                     l.phone_mobile,
-                                    te_ba_batch.batch_code
+                                    te_ba_batch.batch_code,
+                                    te_ba_batch.name batch_name
                                     
                              FROM callback_log AS c
                              INNER JOIN leads AS l ON l.id=c.lead_id
@@ -30,10 +34,9 @@ function callbackdata()
                              WHERE c.is_seen=0
                                AND te_ba_batch.deleted=0
                                AND c.deleted=0
-                               AND DATE(c.callback_date_time)<='" . date('Y-m-d') . "'
+                               AND DATE(c.callback_date_time) ='" . date('Y-m-d') . "'
                                AND c.assigned_user_id='" . $current_user->id . "'
-                             LIMIT 0,
-                                   30";
+                              ORDER BY c.callback_date_time";
     $call_backObj     = $db->query($call_backSql);
     $call_backOptions = array();
     while ($row              = $db->fetchByAssoc($call_backObj))
@@ -67,7 +70,7 @@ function callbackdata()
                 <ol>
                 <?php
                 $datax = callbackdata();
-
+                
                 //print_r($datax); 
                 $i=1;
                 foreach ($datax as $val)
@@ -76,7 +79,7 @@ function callbackdata()
                 <li class="" id="<?= 'call_'.$val['lead_id'].'_'.$i ?>">
                     <div>
                         <a href="index.php?action=DetailView&module=Leads&record=<?=$val['lead_id'];?>"><strong><?php echo $val['first_name']; ?></strong></a> 
-                        <span> Pawan Pawan Pawan Pawan Pawan Pawan(<?= $val['batch_code'] ?>)</span>
+                        <span> <?= $val['batch_name'] ?> (<?= $val['batch_code'] ?>)</span>
                         <?php echo $val['callback_date_time']; ?>
                     </div>    
                     <div>
@@ -130,9 +133,10 @@ function callbackdata()
                 }
             }
             
+            
             function dissmisscallback(dismissID,leadID,CallTime){
                 //alert(CallTime);
-                
+                var userID = "<?=$current_user->id;?>";
                 if (confirm("Are you sure you want to delete?")) {
                     
                     $.ajax({
@@ -141,11 +145,16 @@ function callbackdata()
                         //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
                     },
                     url: "index.php?entryPoint=reportsajax",
-                    data: {action: 'dissmisscallback', leadID: leadID, CallTime:CallTime,dismissID:dismissID},
+                    data: {action: 'dissmisscallback', leadID: leadID, CallTime:CallTime,dismissID:dismissID,userID:userID},
                     dataType: "html",
                     type: "POST",
                     async: true,
                     success: function (data) {
+                            callobj = JSON.parse(data);
+                            $(".notifications_alert_count").text(callobj.total);
+                            $("#today_tab").text('Today (' + callobj.today + ')');
+                            $("#overdue_tab").text('Overdue (' + callobj.overdue + ')');
+                            
                         $('#'+dismissID).html('');
                         }
                     });

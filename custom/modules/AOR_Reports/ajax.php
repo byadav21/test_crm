@@ -8,6 +8,43 @@ error_reporting(E_ALL);
 global $app_list_strings, $current_user, $sugar_config, $db;
 
 
+function __get_user_callback($userID)
+    {
+        global $db, $current_user; 
+       
+         $call_backSql     = "SELECT 
+                                   date(c.callback_date_time) callback_date,
+                                   c.callback_date_time
+                            FROM callback_log AS c
+                            WHERE c.is_seen=0
+                              AND c.deleted=0
+                              AND date(c.callback_date_time) >='" . date('Y-m-d') . "'
+                              AND c.assigned_user_id='" .$userID. "'
+                            ORDER BY c.callback_date_time";
+        //echo $call_backSql;exit();
+        $call_backObj     = $db->query($call_backSql);
+        $call_backOptions = array();
+        while ($row              = $db->fetchByAssoc($call_backObj))
+        {
+            if ($row['callback_date'] == date('Y-m-d'))
+            {
+                $call_backOptions['today'][] = $row;
+            }
+            else
+            {
+                $call_backOptions['overdue'][] = $row;
+            }
+        }
+        if(!empty($call_backOptions)){
+           $total =  (count($call_backOptions['today']) + count($call_backOptions['overdue']));
+           return  json_encode(array('today' => count($call_backOptions['today']), 'overdue' =>count($call_backOptions['overdue']), 'total' =>$total));
+        }
+        else
+        {
+           return  json_encode(array('today' => 0, 'overdue' =>0, 'total' =>0));
+        }
+    }
+
 if (isset($_POST['action']) && $_POST['action'] == 'batch_code')
 {
     $where  = '';
@@ -184,6 +221,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'dissmisscallback')
     $leadID = $_POST['leadID'];
     $CallTime = $_POST['CallTime'];
     $dismissID = $_POST['dismissID'];
+    $userID = $_POST['userID'];
 
     if ($leadID!='' && $CallTime!='')
     {
@@ -191,7 +229,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'dissmisscallback')
         $usObj = $GLOBALS['db']->Query($updateSql);
        
         if($usObj){
-            echo $dismissID;
+            echo __get_user_callback($userID);
         }
     }
     die;
@@ -203,6 +241,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'dissmissremainderPop')
     //RecordID: RecordID, RowID:RowID
    
     $callbackID = $_POST['callbackID'];
+    $userID = $_POST['userID'];
 
 
     if ($callbackID!='')
@@ -211,7 +250,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'dissmissremainderPop')
         $usObj = $GLOBALS['db']->Query($updateSql);
        
         if($usObj){
-            echo $callbackID;
+                echo __get_user_callback($userID);
         }
     }
     die;
