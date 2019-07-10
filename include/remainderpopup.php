@@ -79,6 +79,8 @@ class remainderpopup
                                    c.callback_date_time,
                                    c.id callbackID,
                                    l.first_name,
+                                   l.last_name,
+                                   l.phone_mobile,
                                    b.name AS batch
                             FROM callback_log AS c
                             INNER JOIN leads AS l ON l.id=c.lead_id
@@ -129,7 +131,7 @@ class remainderpopup
                 $callbackID = $val['callbackID'];
                 $onClick    = "onclick=dissmisscallback('$callbackID')";
 
-                $overdue .= "<div id='$callbackID'><div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>" . $val['first_name'] . "</a></p>";
+                $overdue .= "<div id='$callbackID'><div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>".$val['first_name'].' '.$val['last_name']. "</a></p>";
                 $overdue .= "<p>" . $val['batch'] . "</p>";
                 $overdue .= "<p>" . $callBack . "</p></div>";
                 $overdue .= "<div><p class='dismiss_p'><a href='javascript:void(0)' $onClick title='Dismiss'><i class='fa fa-times-circle'></i></a></p></div></div></div>";
@@ -149,7 +151,7 @@ class remainderpopup
                 $callbackID = $val['callbackID'];
                 $onClick    = "onclick=dissmisscallback('$callbackID')";
 
-                $today .= "<div id='$callbackID'> <div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>" . $val['first_name'] . "</a></p>";
+                $today .= "<div id='$callbackID'> <div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>" . $val['first_name'].' '.$val['last_name']. "</a></p>";
                 $today .= "<p>" . $val['batch'] . "</p>";
                 $today .= "<p>" . $val['callback_date_time'] . "</p>";
                 $today .= "<p class='dismiss_p'><a href='javascript:void(0)' $onClick title='Dismiss'><i class='fa fa-times-circle'></i></a></p></div></div></div>";

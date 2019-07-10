@@ -23,6 +23,7 @@ function callbackdata()
                                     c.status_description,
                                     c.callback_date_time,
                                     l.first_name,
+                                    l.last_name,
                                     l.phone_mobile,
                                     te_ba_batch.batch_code,
                                     te_ba_batch.name batch_name
@@ -78,7 +79,7 @@ function callbackdata()
                     ?>
                 <li class="" id="<?= 'call_'.$val['lead_id'].'_'.$i ?>">
                     <div>
-                        <a href="index.php?action=DetailView&module=Leads&record=<?=$val['lead_id'];?>"><strong><?php echo $val['first_name']; ?></strong></a> 
+                        <a href="index.php?action=DetailView&module=Leads&record=<?=$val['lead_id'];?>"><strong><?php echo $val['first_name'].' '.$val['last_name']; ?></strong></a> 
                         <span> <?= $val['batch_name'] ?> (<?= $val['batch_code'] ?>)</span>
                         <?php echo $val['callback_date_time']; ?>
                     </div>    
