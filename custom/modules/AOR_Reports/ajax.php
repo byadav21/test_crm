@@ -11,26 +11,29 @@ global $app_list_strings, $current_user, $sugar_config, $db;
 function __get_user_callback($userID)
     {
         global $db, $current_user; 
-       
+         $todayFrom        = date('Y-m-d 00:00:00');
+        $todayTo          = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' + 15 minute'));
          $call_backSql     = "SELECT 
                                    date(c.callback_date_time) callback_date,
                                    c.callback_date_time
                             FROM callback_log AS c
                             WHERE c.is_seen=0
                               AND c.deleted=0
-                              AND date(c.callback_date_time) >='" . date('Y-m-d') . "'
+                              AND date(c.callback_date_time) <='" . date('Y-m-d') . "'
                               AND c.assigned_user_id='" .$userID. "'
                             ORDER BY c.callback_date_time";
         //echo $call_backSql;exit();
         $call_backObj     = $db->query($call_backSql);
         $call_backOptions = array();
+        $call_backOptions['today'] = array();
+        $call_backOptions['overdue'] = array();
         while ($row              = $db->fetchByAssoc($call_backObj))
         {
             if ($row['callback_date'] == date('Y-m-d'))
             {
                 $call_backOptions['today'][] = $row;
             }
-            else
+            else if ($todayTo > $row['callback_date_time'])
             {
                 $call_backOptions['overdue'][] = $row;
             }

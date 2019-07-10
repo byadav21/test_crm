@@ -86,7 +86,7 @@ class remainderpopup
                             LEFT JOIN te_ba_batch AS b ON b.id = lc.te_ba_batch_id_c
                             WHERE c.is_seen=0
                               AND c.deleted=0
-                              AND date(c.callback_date_time) >='" . date('Y-m-d') . "'
+                              AND date(c.callback_date_time) <='" . date('Y-m-d') . "'
                               AND c.assigned_user_id='" . $current_user->id . "'
                             ORDER BY c.callback_date_time";
         //echo $call_backSql;exit();
@@ -98,7 +98,7 @@ class remainderpopup
             {
                 $call_backOptions['today'][] = $row;
             }
-            else
+            else if ($todayTo > $row['callback_date_time'])
             {
                 $call_backOptions['overdue'][] = $row;
             }
@@ -209,6 +209,7 @@ class remainderpopup
                         type: "POST",
                         async: true,
                         success: function (data) {
+                            //alert(data);
                             callobj = JSON.parse(data);
                             
                             $(".notifications_alert_count").text(callobj.total);
