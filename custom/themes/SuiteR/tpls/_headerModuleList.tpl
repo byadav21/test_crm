@@ -225,7 +225,7 @@
                 <li id="custom_notifications" role="presentation" class="custom_notifications">
                     <a href="javascript:;" class=" info-number alertsButton" style="background: transparent;" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        <span class="badge bg-red notifications_alert_count">20</span>
+                        <span class="badge bg-red notifications_alert_count">0</span>
                     </a>
                     <div id="notifications_alerts" class="dropdown-menu" role="menu">
 
