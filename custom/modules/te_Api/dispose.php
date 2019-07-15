@@ -247,7 +247,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $bean->date_of_followup = $finalDatTime;
                     if (array_key_exists($assignedUserId, $popUserArr)) {
                     $res         = $db->query($callbackSql);
-                    $this->createLogPay('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                    createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
                     }
 
                     createLog('{Ameyo Follow Up response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
@@ -257,7 +257,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                    $bean->date_of_prospect = $finalDatTime;
                    if (array_key_exists($assignedUserId, $popUserArr)) {
                    $res         = $db->query($callbackSql);
-                   $this->createLogPay('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                   createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
                    }
                    createLog('{Ameyo Prospect response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
 
