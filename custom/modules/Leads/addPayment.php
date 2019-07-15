@@ -1011,6 +1011,17 @@ class addPaymentClass
                     $sqlData = $GLOBALS['db']->query($sql);
                     
                     ////////////////////////////////////////////////////////////////////////
+                    $popUserArr = array();
+                    $popUserArr = array('b2e5e387-de9c-62ea-e5da-590d9fadcc80'=>'rohit.mittal@talentedge.in',
+                            '9a1885f3-58b9-b492-463b-590d9eee5afe'=>'kshitij.verma@talentedge.in',
+                            '2700cf6e-ad31-1ee4-d95f-590d9c1fd4bd'=>'nitin.arora@talentedge.in',
+                            '83c8abe3-0eb6-8550-b571-590d9efb26d8'=>'robert.charles@talentedge.in',
+                            '776b1d89-6750-3ccb-007c-590d9fa5ab27'=>'prateek.sharma@talentedge.in',
+                            'd217ea49-1d84-05c0-f1ea-59b6960834ed'=>'arup.das@talentedge.in',
+                            '5d853fbf-8089-68a5-a234-590da0475409'=>'gurpreet.singh@talentedge.in',
+                            '82b2ecdd-3a43-03e0-2dbe-590eb330122f'=>'pawan.kumar@talentedge.in',
+                            'af0c99fb-c21d-78bd-086c-590d9bdeeaa4'=>'mayank.sharma@talentedge.in');
+                    
                     $dateOfCall='';
                     $callArray = array('Follow Up','Prospect');
                     //date_of_followup //date_of_callback //date_of_prospect 
@@ -1032,7 +1043,12 @@ class addPaymentClass
                                         status_description='$bean->status_description',
                                         callback_date_time='" .$dateOfCall . "',
                                         assigned_user_id='" . $bean->assigned_user_id . "'"; 
-                     $res         = $db->query($callbackSql);
+                         
+                         if (array_key_exists($bean->assigned_user_id, $popUserArr)) {
+                                $res         = $db->query($callbackSql);
+                                $this->createLogPay('{If popupuser_check_loged}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+                          }
+                    
                      //die;
                     }
                     ////////////////////////////////////////////////////////////////////////////
