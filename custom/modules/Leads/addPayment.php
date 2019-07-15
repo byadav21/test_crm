@@ -944,12 +944,14 @@ class addPaymentClass
 #If record is being created manually
         if (!isset($_REQUEST['import_module']) && $_REQUEST['module'] != "Import")
         {
-            // echo $bean->fetched_row['status'] . '='. $bean->status;die;
+             //echo $bean->fetched_row['status'] . '='. $bean->status;die;
+            //echo $bean->date_of_followup; die;
+            
+                
+
+                        
             if ($bean->fetched_row['status'] = '' || ($bean->fetched_row['status'] != $bean->status) || ($bean->fetched_row['status_description'] != $bean->status_description) || ($bean->status_description == 'Call Back' && $bean->fetched_row['date_of_callback'] != $bean->date_of_callback) || ($bean->status_description == 'Follow Up' && $bean->fetched_row['date_of_followup'] != $bean->date_of_followup) || ($bean->status_description == 'Prospect' && $bean->fetched_row['date_of_prospect'] != $bean->date_of_prospect))
             {
-
-
-
 
                 $disposition = new te_disposition();
 
@@ -971,6 +973,10 @@ class addPaymentClass
                 $disposition->attempt_count                 = $bean->attempts_c;
                 $disposition->te_disposition_leadsleads_ida = $bean->id;
                 $xx                                         = $disposition->save();
+                
+               
+                
+                
                 $created_byIDX                              = '';
                 $assigned_user_IDX                          = '';
                 $modified_user_IDX                          = '';
@@ -1003,6 +1009,49 @@ class addPaymentClass
                                                     date_of_callback='" . $date_of_callbackX . "'
                                                 WHERE id ='" . $xx . "'";
                     $sqlData = $GLOBALS['db']->query($sql);
+                    
+                    ////////////////////////////////////////////////////////////////////////
+                    $popUserArr = array();
+                    $popUserArr = array('b2e5e387-de9c-62ea-e5da-590d9fadcc80'=>'rohit.mittal@talentedge.in',
+                            '9a1885f3-58b9-b492-463b-590d9eee5afe'=>'kshitij.verma@talentedge.in',
+                            '2700cf6e-ad31-1ee4-d95f-590d9c1fd4bd'=>'nitin.arora@talentedge.in',
+                            '83c8abe3-0eb6-8550-b571-590d9efb26d8'=>'robert.charles@talentedge.in',
+                            '776b1d89-6750-3ccb-007c-590d9fa5ab27'=>'prateek.sharma@talentedge.in',
+                            'd217ea49-1d84-05c0-f1ea-59b6960834ed'=>'arup.das@talentedge.in',
+                            '5d853fbf-8089-68a5-a234-590da0475409'=>'gurpreet.singh@talentedge.in',
+                            '82b2ecdd-3a43-03e0-2dbe-590eb330122f'=>'pawan.kumar@talentedge.in',
+                            'af0c99fb-c21d-78bd-086c-590d9bdeeaa4'=>'mayank.sharma@talentedge.in');
+                    
+                    $dateOfCall='';
+                    $callArray = array('Follow Up','Prospect');
+                    //date_of_followup //date_of_callback //date_of_prospect 
+                    
+                    $dateofcallback = isset($_REQUEST['date_of_callback'])? $_REQUEST['date_of_callback'] : '';
+                    $dateoffollowup = isset($_REQUEST['date_of_followup'])? $_REQUEST['date_of_followup'] : '';
+                    $dateofprospect = isset($_REQUEST['date_of_prospect'])? $_REQUEST['date_of_prospect'] : '';
+                    
+                    if($dateofcallback!=''){$dateOfCall=$dateofcallback;}
+                    elseif($dateoffollowup!=''){$dateOfCall=$dateoffollowup;}
+                    elseif($dateofprospect!=''){$dateOfCall=$dateofprospect;}
+                    
+                    //echo '<pre>';print_r($_REQUEST);
+                    //echo 'date_of_callback'.$dateofcallback.'date_of_followup'.$dateoffollowup.'date_of_prospect'.$dateofprospect;
+                    if (in_array($bean->status_description, $callArray) && $dateOfCall!=''){
+                         $dateOfCall = date('Y-m-d H:i:s', strtotime($dateOfCall));
+                         $callbackSql = "INSERT INTO callback_log
+                                        SET lead_id='$bean->id',
+                                        status_description='$bean->status_description',
+                                        callback_date_time='" .$dateOfCall . "',
+                                        assigned_user_id='" . $bean->assigned_user_id . "'"; 
+                         
+                         if (array_key_exists($bean->assigned_user_id, $popUserArr)) {
+                                $res         = $db->query($callbackSql);
+                                $this->createLogPay('{If popupuser_check_loged}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
+                          }
+                    
+                     //die;
+                    }
+                    ////////////////////////////////////////////////////////////////////////////
                 }
 
                 $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/check_user01.txt", "a");
