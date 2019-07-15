@@ -224,6 +224,17 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $bean->callType           = $_REQUEST['callType'];
                 //$bean->modified_user_id   = $modifieduserIDX;
                 
+               $popUserArr = array();
+               $popUserArr = array('b2e5e387-de9c-62ea-e5da-590d9fadcc80'=>'rohit.mittal@talentedge.in',
+                       '9a1885f3-58b9-b492-463b-590d9eee5afe'=>'kshitij.verma@talentedge.in',
+                       '2700cf6e-ad31-1ee4-d95f-590d9c1fd4bd'=>'nitin.arora@talentedge.in',
+                       '83c8abe3-0eb6-8550-b571-590d9efb26d8'=>'robert.charles@talentedge.in',
+                       '776b1d89-6750-3ccb-007c-590d9fa5ab27'=>'prateek.sharma@talentedge.in',
+                       'd217ea49-1d84-05c0-f1ea-59b6960834ed'=>'arup.das@talentedge.in',
+                       '5d853fbf-8089-68a5-a234-590da0475409'=>'gurpreet.singh@talentedge.in',
+                       '82b2ecdd-3a43-03e0-2dbe-590eb330122f'=>'pawan.kumar@talentedge.in',
+                       'af0c99fb-c21d-78bd-086c-590d9bdeeaa4'=>'mayank.sharma@talentedge.in');
+                    
                 $callbackSql = "INSERT INTO callback_log
                                     SET lead_id='$id',
                                     status_description='$dispositionCode',
@@ -234,14 +245,20 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 {
 
                     $bean->date_of_followup = $finalDatTime;
+                    if (array_key_exists($assignedUserId, $popUserArr)) {
                     $res         = $db->query($callbackSql);
+                    $this->createLogPay('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                    }
 
                     createLog('{Ameyo Follow Up response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
                 }
                 if ($dispositionCode == 'Prospect' && $finalDatTime != '')
                 {
                    $bean->date_of_prospect = $finalDatTime;
+                   if (array_key_exists($assignedUserId, $popUserArr)) {
                    $res         = $db->query($callbackSql);
+                   $this->createLogPay('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                   }
                    createLog('{Ameyo Prospect response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
 
                 }
