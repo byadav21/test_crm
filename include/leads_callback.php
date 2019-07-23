@@ -37,7 +37,7 @@ function callbackdata()
                                AND c.deleted=0
                                AND DATE(c.callback_date_time) ='" . date('Y-m-d') . "'
                                AND c.assigned_user_id='" . $current_user->id . "'
-                              ORDER BY c.callback_date_time";
+                              ORDER BY c.callback_date_time limit 50";
     $call_backObj     = $db->query($call_backSql);
     $call_backOptions = array();
     while ($row              = $db->fetchByAssoc($call_backObj))
@@ -138,7 +138,7 @@ function callbackdata()
             function dissmisscallback(dismissID,leadID,CallTime){
                 //alert(CallTime);
                 var userID = "<?=$current_user->id;?>";
-                if (confirm("Are you sure you want to delete?")) {
+                //if (confirm("Are you sure you want to delete?")) {
                     
                     $.ajax({
                     beforeSend: function (request)
@@ -160,7 +160,7 @@ function callbackdata()
                         }
                     });
                 
-                }
+                //}
                 return false;
                 
                 //$('#'+dismissID).html('');

@@ -55,7 +55,7 @@ class remainderpopup
                                AND c.deleted=0
                                AND date(c.callback_date_time) ='" . date('Y-m-d') . "'
                                AND c.assigned_user_id='" . $current_user->id . "'
-                               order by c.callback_date_time";
+                               order by c.callback_date_time limit 50";
         $call_backObj     = $db->query($call_backSql);
         $call_backOptions = array();
         while ($row              = $db->fetchByAssoc($call_backObj))
@@ -90,7 +90,7 @@ class remainderpopup
                               AND c.deleted=0
                               AND date(c.callback_date_time) <='" . date('Y-m-d') . "'
                               AND c.assigned_user_id='" . $current_user->id . "'
-                            ORDER BY c.callback_date_time";
+                            ORDER BY c.callback_date_time limit 50";
         //echo $call_backSql;exit();
         $call_backObj     = $db->query($call_backSql);
         $call_backOptions = array();
@@ -107,6 +107,12 @@ class remainderpopup
         }
         return $call_backOptions;
     }
+    
+    function cleanString($string) {
+       // $string = str_replace(' ', ' ', $string); // Replaces all spaces with hyphens.
+
+        return preg_replace('/[^a-zA-Z0-9_ -]/s','',$string);
+     }
 
     function load_js($event, $arguments)
     {
@@ -134,9 +140,12 @@ class remainderpopup
                 $callBack   = $val['callback_date_time'];
                 $callbackID = $val['callbackID'];
                 $onClick    = "onclick=dissmisscallback('$callbackID')";
+                $nameFN     = $val['first_name'].' '.$val['last_name'];
+                $nameFN     = $this->cleanString($nameFN);
+                $Batchname  = $this->cleanString($val['batch']);
 
-                $overdue .= "<div id='$callbackID'><div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>".$val['first_name'].' '.$val['last_name']. "</a></p>";
-                $overdue .= "<p>" . $val['batch'] . "</p>";
+                $overdue .= "<div id='$callbackID'><div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>".$nameFN. "</a></p>";
+                $overdue .= "<p>" . $Batchname . "</p>";
                 $overdue .= "<p>" . $callBack . "</p></div>";
                 $overdue .= "<div><p class='dismiss_p'><a href='javascript:void(0)' $onClick title='Dismiss'><i class='fa fa-times-circle'></i></a></p></div></div></div>";
 
@@ -154,9 +163,12 @@ class remainderpopup
                 $callBack   = $val['callback_date_time'];
                 $callbackID = $val['callbackID'];
                 $onClick    = "onclick=dissmisscallback('$callbackID')";
+                $nameFN     = $val['first_name'].' '.$val['last_name'];
+                $nameFN     = $this->cleanString($nameFN);
+                $Batchname     = $this->cleanString($val['batch']);
 
-                $today .= "<div id='$callbackID'> <div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>" . $val['first_name'].' '.$val['last_name']. "</a></p>";
-                $today .= "<p>" . $val['batch'] . "</p>";
+                $today .= "<div id='$callbackID'> <div class='list-content'><div><p><a href='index.php?action=DetailView&module=Leads&record=$lead_id' target='_blank'>".$nameFN."</a></p>";
+                $today .= "<p>" . $Batchname . "</p>";
                 $today .= "<p>" . $val['callback_date_time'] . "</p>";
                 $today .= "<p class='dismiss_p'><a href='javascript:void(0)' $onClick title='Dismiss'><i class='fa fa-times-circle'></i></a></p></div></div></div>";
                 $i++;
@@ -202,7 +214,7 @@ class remainderpopup
             function dissmisscallback(callbackID) {
                 //alert(CallTime);
 
-                if (confirm("Are you sure you want to delete?")) {
+                //if (confirm("Are you sure you want to delete?")) {
 
                     $.ajax({
                         beforeSend: function (request)
@@ -221,13 +233,11 @@ class remainderpopup
                             $(".notifications_alert_count").text(callobj.total);
                             $("#today_tab").text('Today (' + callobj.today + ')');
                             $("#overdue_tab").text('Overdue (' + callobj.overdue + ')');
-                            
-                            
                             $('#' + callbackID).html('');
                         }
                     });
 
-                }
+                //}
                 return false;
 
                 //$('#'+dismissID).html('');
