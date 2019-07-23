@@ -457,7 +457,7 @@ function __get_student_batch_id($student_arr = array(),$data = array())
 
         //$LBean->lead_source        = $lead_source;
 
-	if($lead_source!='' && $LBean->abnd_reenquired_status!=1){
+	if($lead_source!='' && $LBean->abnd_reenquired_status!=1 && in_array($LBean->lead_source, $ABNDArr)){
             $LBean->lead_source        = $lead_source;
 	}
 
