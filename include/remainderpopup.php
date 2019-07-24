@@ -55,7 +55,7 @@ class remainderpopup
                                AND c.deleted=0
                                AND date(c.callback_date_time) ='" . date('Y-m-d') . "'
                                AND c.assigned_user_id='" . $current_user->id . "'
-                               order by c.callback_date_time limit 50";
+                               order by c.callback_date_time ";
         $call_backObj     = $db->query($call_backSql);
         $call_backOptions = array();
         while ($row              = $db->fetchByAssoc($call_backObj))
@@ -75,7 +75,7 @@ class remainderpopup
         $call_backSql     = "SELECT c.id,
                                    c.lead_id,
                                    c.status_description,
-                                   date(c.callback_date_time)callback_date,
+                                   date(c.callback_date_time) callback_date,
                                    c.callback_date_time,
                                    c.id callbackID,
                                    l.first_name,
@@ -90,7 +90,7 @@ class remainderpopup
                               AND c.deleted=0
                               AND date(c.callback_date_time) <='" . date('Y-m-d') . "'
                               AND c.assigned_user_id='" . $current_user->id . "'
-                            ORDER BY c.callback_date_time limit 50";
+                            ORDER BY c.callback_date_time ";
         //echo $call_backSql;exit();
         $call_backObj     = $db->query($call_backSql);
         $call_backOptions = array();
