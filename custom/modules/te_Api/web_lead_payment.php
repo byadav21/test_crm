@@ -480,17 +480,22 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         $updateLeadquery = "UPDATE leads
                                     SET status='$c_status',
                                         status_description='$c_status_description',
-                                        test_status='$c_test_status',
                                         converted_date='$converted_datex',
                                         lead_source='$lead_sourceX',
-                                        lead_source='$course_type'
+                                        course_type='$course_type'
                                     WHERE id='" . $LBean->id . "'";
+        
+        $updateLeadCstmquery = "UPDATE leads_cstm
+                                    SET test_status='$c_test_status'
+                                    WHERE id_c='" . $LBean->id . "'";
+        
         $checkSaveBean      = $GLOBALS['db']->Query($updateLeadquery);
         
-        createLog('{update lead query}', 'student_captured_payment_' . date('Y-m-d') . '_log.txt', $updateLeadquery, array());
+        createLog('{update lead query}', 'student_captured_payment_' . date('Y-m-d') . '_log.txt', $updateLeadquery.''.$updateLeadCstmquery, array());
         if ($checkSaveBean)
         {
             createLog('{student captured payment}', 'student_captured_payment_' . date('Y-m-d') . '_log.txt', $student_arr['lead_id'], $student_arr);
+            $GLOBALS['db']->Query($updateLeadCstmquery);
         }
 
         createLog('{all data captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt', $student_arr['lead_id'], $data);
