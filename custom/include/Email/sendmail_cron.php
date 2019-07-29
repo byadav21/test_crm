@@ -73,18 +73,27 @@ class FalconideEmail
     
     public function emailData3pm($reponame, $filename, $date, $email_summary=NULL)
     {
-		$emailData = array('email' => array(
-                'pawan.kumar@talentedge.in'
-                //'kunal.soni@talentedge.in',
-                //'ritika.nayak@talentedge.in'
+		 $emailData = array('email' => array(
+                'pawan.kumar@talentedge.in',
+                'kunal.soni@talentedge.in',
+                //B Head
+                //'sreedevi.sreekumar@talentedge.in',
+                //CC Team:
+                'ritika.nayak@talentedge.in',
+                //Marketing Team :
+                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
+                'parvez.ali@talentedge.in',
+                //BA Team :
+                'duke.banerjee@talentedge.in'
                 ),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
             . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>'
-			. $email_summary,
+                        . $email_summary,
             'pdfFileName'   => $filename,
             'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv");
         return $emailData;
+
     }
 
     public function emailData($reponame, $filename, $date, $email_summary=NULL)
