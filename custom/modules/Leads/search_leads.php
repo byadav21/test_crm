@@ -399,6 +399,7 @@ WHERE " . $where . " $whereNew
 </body>
 
 <script>
+    var Usrx = "<?=$Us;?>";
     $(document).ready(function () {
 
         $("#installment_followup").hide();
@@ -481,7 +482,7 @@ WHERE " . $where . " $whereNew
                                 swal(b.responseText);
                         }
                     }
-                    var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead=' + lead_id + '&number=' + phone, callback);
+                    var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead=' + lead_id + '&number=' + phone + '&installment_followup_user=' + Usrx + '&installment_status=1', callback);
                 }
             }
             

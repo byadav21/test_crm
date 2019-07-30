@@ -77,7 +77,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByMobileFollowup')
             $phone              = $row['batch_code'];
             $phone_mobile       = $row['phone_mobile'];
             $table              .= "<tr><td>$userName</td><td>$status_description</td><td>$agentName</td><td>$batch_code</td><td>$phone_mobile</td>";
-            $table              .= '<td><img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall(\''.$phone_mobile.'\', \''.$leadID.'\')" alt="" height="20" width="20"><td>';
+            $table              .= '<td><img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$phone_mobile.', \''.$leadID.'\')" alt="" height="20" width="20"><td>';
             $table              .= "</tr>";
         }
 
