@@ -18,12 +18,12 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByMobileFollowup')
     $Mobile = $_POST['Mobile'];
     
     $sqlConditions = '';
-    if(isset($Email) && $Email!=''){
+    if(isset($Mobile) && $Mobile!=''){
         
         $sqlConditions .= " AND leads.phone_mobile Like '%$Mobile%' ";
     }
     
-    if(isset($Mobile) && $Mobile!=''){
+    if(isset($Email) && $Email!=''){
         
         $sqlConditions .= " AND lc.email_add_c  like '%$Email%' ";
     }
