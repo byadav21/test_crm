@@ -16,6 +16,17 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByMobileFollowup')
 
     $Email  = $_POST['Email'];
     $Mobile = $_POST['Mobile'];
+    
+    $sqlConditions = '';
+    if(isset($Email) && $Email!=''){
+        
+        $sqlConditions .= " AND leads.phone_mobile Like '%$Mobile%' ";
+    }
+    
+    if(isset($Mobile) && $Mobile!=''){
+        
+        $sqlConditions .= " AND lc.email_add_c  like '%$Email%' ";
+    }
 
     if ($Email != '' || $Mobile != '')
     {
@@ -39,7 +50,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByMobileFollowup')
                         where
                         leads.deleted =0 
                         AND bb.deleted=0
-                        AND (leads.phone_mobile Like '%$Mobile%'  OR lc.email_add_c  like '%$Email%')
+                        $sqlConditions
                         AND leads.status='Converted'
                         ";
         $usObj     = $db->query($updateSql);
