@@ -6,6 +6,12 @@ require_once('custom/modules/te_Api/te_Api.php');
 $mobile_number = filter_var($_GET['number'], FILTER_SANITIZE_NUMBER_INT);
 $lead_id   = filter_var($_GET['lead'], FILTER_SANITIZE_STRING);
 
+$installment_followup_user = isset($_GET['installment_followup_user']) ? $_GET['installment_followup_user'] : '';
+$installment_status        = isset($_GET['installment_status']) ? $_GET['installment_status'] : '';
+
+
+
+
 if (!empty($lead_id) && !empty($mobile_number ))
 {
 
@@ -43,7 +49,7 @@ if (!empty($lead_id) && !empty($mobile_number ))
     {
         $resdata = $db->fetchByAssoc($res);
 
-        if (($current_user->id == $resdata['assigned_user_id']) || $current_user->id == $SBdata['assigned_user_id'])
+        if (($current_user->id == $resdata['assigned_user_id']) || $current_user->id == $SBdata['assigned_user_id'] || $installment_status==1 || $installment_followup_user==$current_user->id)
         {
             $drobj = new te_Api_override();
 
