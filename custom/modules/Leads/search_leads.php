@@ -52,6 +52,8 @@ function createLog($action, $filename, $field = '', $dataArray = array())
                 display: inline-block;
                 width: 48px;
                 height: 20px;
+                margin-bottom:0;
+                margin-right: 10px;
             }
 
             .switch input { 
@@ -106,17 +108,19 @@ function createLog($action, $filename, $field = '', $dataArray = array())
             .slider.round:before {
                 border-radius: 50%;
             }
-
+            
+            .block{display:flex; align-items: center; margin:20px 0}
+            .block label + span{font-size: 14px; color:#4d4d4d; font-weight: bold;}
         </style>
 
     </head>
     <body>
         <h2>Search Leads</h2>
-        <div style="display:flex;">
+        <div class="block">
             <label class="switch"><input type="checkbox" id="openInstallmentForm"  onclick="openInstallmentForm()" >
                 <span class="slider round"></span>
-                <span>Installment Follow-Up</span>
             </label>
+            <span>Installment Follow-Up</span>
         </div>
         
         <div id="installment_followup">
