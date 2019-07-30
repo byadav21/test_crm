@@ -118,6 +118,7 @@ function createLog($action, $filename, $field = '', $dataArray = array())
                 <span>Installment Follow-Up</span>
             </label>
         </div>
+        
         <div id="installment_followup">
             <section class="moduleTitle">
                 <fieldset>
@@ -147,15 +148,15 @@ function createLog($action, $filename, $field = '', $dataArray = array())
                             <tr>
                                 <!---update code 5-dec-16 Manish Kumar-->
                                 <td><b>First Name</b></td> 
-                                <td><input type="text" name="name" id="name"/></td>
+                                <td><input type="text" name="name" id="name" class="inputx"/></td>
                                 <td><b>Last Name</b></td> 
-                                <td><input type="text" name="last" id="last"/></td>
+                                <td><input type="text" name="last" id="last" class="inputx"/></td>
                                 <td><b>Email Name</b></td> 
-                                <td><input type="text" name="email" id="email"/></td>
+                                <td><input type="text" name="email" id="email" class="inputx"/></td>
                                 <td><b>Mobile Number</b></td> 
-                                <td><input type="text" name="mobile_number" id="mobile_name"/></td> 
+                                <td><input type="text" name="mobile_number" id="mobile_name" class="inputx"/></td> 
                                 <td><b>Lead ID</b></td> 
-                                <td><input type="text" name="lead_id" id="lead_id"/></td> 
+                                <td><input type="text" name="lead_id" id="lead_id" class="inputx"/></td> 
                                 <td><input type="Submit" name="Search" value="Search Lead"></td> 
 
                                 </td></tr></br></br>
@@ -285,13 +286,16 @@ WHERE " . $where . " $whereNew
              LIMIT 0, 100";
 
             $row = $db->query($fetch);
+            
+            
 
             //createLog('{createLog 1.}', 'search_leads_xx_'.date('Y-m-d').'.txt', $fetch,$row);
-
-            if ($row->num_rows > 0)
+            $cur_user='';
+           $countX = isset($row->num_rows)? $row->num_rows : 0 ;
+            if ($countX > 0)
             {
 
-                $lead_ids = '';
+                $lead_ids = array();
                 while ($records  = $db->fetchByAssoc($row))
                 {
                     $lead_ids[]    = $records['id'];
@@ -314,8 +318,9 @@ WHERE " . $where . " $whereNew
 
 
         if (isset($_REQUEST['search_leads']) && $_REQUEST['search_leads'] == 1)
-        {
-            echo '<table>';
+        {   
+            $cur_user='';
+            echo '<div id="default_table_result"><table>';
             echo ' <tr>
                 <th>Name</th>
                 <th>Status</th>
@@ -388,7 +393,7 @@ WHERE " . $where . " $whereNew
             }
         }
     }
-    echo '</table>';
+    echo '</table></div>';
     ?>
                 <div id="showFollowupList"></div>
 </body>
@@ -397,6 +402,26 @@ WHERE " . $where . " $whereNew
     $(document).ready(function () {
 
         $("#installment_followup").hide();
+        
+           /*$("#lead_trans").on('submit', (function (e) {
+                    //class="inputx"
+                            event.preventDefault();
+                            var hasInput=false;
+                             $('.inputx').each(function () {
+                              if($(this).val()  !== ""){
+                               hasInput=true;
+                              }
+                             }); 
+                           
+                                if(!hasInput){
+                              alert("Need input!");
+                              
+                             }
+                             
+                             return true;
+                    console.log('test');
+                }));*/
+                
 
         $("#follow_up_leads").on('submit', (function (e) {
             
@@ -430,13 +455,17 @@ WHERE " . $where . " $whereNew
 
         if ($("#openInstallmentForm").is(':checked') == true) {
             $("#default_search").hide();
+             $("#default_table_result").hide();
             $("#installment_followup").show();
             $("#showFollowupList").show();
+            
+            
 
         } else if ($("#openInstallmentForm").is(':checked') == false) {
             $("#default_search").show();
             $("#installment_followup").hide();
              $("#showFollowupList").hide();
+              $("#default_table_result").show();
             
 
         }
@@ -455,6 +484,9 @@ WHERE " . $where . " $whereNew
                     var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead=' + lead_id + '&number=' + phone, callback);
                 }
             }
+            
+            
+           
 </script>
 
 </html>
