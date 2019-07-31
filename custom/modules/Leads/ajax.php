@@ -194,7 +194,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByDefaultSearch')
                     tbl1.lead_source,
                     tbl2.user_name,
                     tbl2.phone_mobile,
-                    bb.batch_code
+                    bb.batch_code,
+                    bb.name batch_name
                     
              FROM leads AS tbl1
              LEFT JOIN leads_cstm AS tbl4 ON tbl1.id= tbl4.id_c
@@ -214,7 +215,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByDefaultSearch')
                 <th>Sub Status</th>
                 <th>Counsellor</th>               
                 <th>Batch</th>               
-                <th>Phone</th>  
+                 <th>Batch Name</th>      
                 </tr>';
         while ($row            = $db->fetchByAssoc($usObj))
         {
@@ -225,9 +226,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByDefaultSearch')
             $status_description = $row['status_description'];
             $agentName          = $row['user_name'];
             $batch_code         = $row['batch_code'];
-            $phone              = $row['batch_code'];
+            $batch_name              = $row['batch_name'];
             $phone_mobile       = $row['phone_mobile'];
-            $table              .= "<tr><td>$userName</td><td>$status_description</td><td>$status</td><td>$agentName</td><td>$batch_code</td><td>$phone_mobile</td>";
+            $table              .= "<tr><td>$userName</td><td>$status_description</td><td>$status</td><td>$agentName</td><td>$batch_code</td><td>$batch_name</td>";
             //$table              .= '<td><img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall(' . $phone_mobile . ', \'' . $leadID . '\')" alt="" height="20" width="20"><td>';
             $table              .= "</tr>";
         }
