@@ -228,7 +228,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByDefaultSearch')
             $batch_code         = $row['batch_code'];
             $batch_name              = $row['batch_name'];
             $phone_mobile       = $row['phone_mobile'];
-            $table              .= "<tr><td>$userName</td><td>$status_description</td><td>$status</td><td>$agentName</td><td>$batch_code</td><td>$batch_name</td>";
+            $table              .= "<tr><td>$userName</td><td>$status</td><td>$status_description</td><td>$agentName</td><td>$batch_code</td><td>$batch_name</td>";
             //$table              .= '<td><img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall(' . $phone_mobile . ', \'' . $leadID . '\')" alt="" height="20" width="20"><td>';
             $table              .= "</tr>";
         }
