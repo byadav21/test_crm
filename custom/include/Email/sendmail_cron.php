@@ -81,7 +81,7 @@ class FalconideEmail
                 //CC Team:
                 'ritika.nayak@talentedge.in',
                 //Marketing Team :
-                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
+                'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 'parvez.ali@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in'
@@ -110,7 +110,7 @@ class FalconideEmail
                 
                 //Marketing Team :
                 //'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
+                'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 'parvez.ali@talentedge.in',
                 //BA Team :
                 'duke.banerjee@talentedge.in'
