@@ -60,6 +60,7 @@ if (isset($_REQUEST['checkCallStatus']) && isset($_REQUEST['records']) && $_REQU
     exit();
 }
 
+createLog('{check installment follow up things}', 'checking_installment_followup_log_'.date('Y-m-d').'.txt','', $_REQUEST);
 
 $sql    = "delete from  session_call where  session_id='" . $_REQUEST['customerCRTId'] . "'";
 $db->query($sql);
