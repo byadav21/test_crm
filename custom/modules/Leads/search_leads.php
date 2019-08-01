@@ -274,7 +274,7 @@ WHERE " . $where . " $whereNew
         
         if ($row->num_rows > 0) {
 
-            $lead_ids = '';
+            $lead_ids = array();
             while ($records = $db->fetchByAssoc($row)) {
                 $lead_ids[] = $records['id'];
                 $records_arr[] = $records;
