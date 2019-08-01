@@ -30,11 +30,13 @@ class addPaymentClass
         $student_email           = "";
         $student_batch_id        = "";
         $lead_payment_details_id = "";
-        if ($bean->country_log == 'India')
+        $country_log             = "";
+        $country_log             = isset($bean->country_log)? $bean->country_log : '';
+        if ($country_log == 'India')
         {
             $student_country = strtolower($bean->country_log);
         }
-        else if ($bean->country_log == 'Other')
+        else if ($country_log == 'Other')
         {
             $student_country = strtolower($bean->primary_address_country);
         }
