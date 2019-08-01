@@ -294,7 +294,7 @@ WHERE " . $where . " $whereNew
 
 
     if (isset($_REQUEST['search_leads']) && $_REQUEST['search_leads'] == 1) {
-        echo '<table>';
+        echo '<div id="Ameyo_auot_list"><table>';
         echo ' <tr>
                 <th>Name</th>
                 <th>Status</th>
@@ -362,7 +362,7 @@ WHERE " . $where . " $whereNew
             }
         }
     }
-    echo '</table>';
+    echo '</table></div>';
     ?>
 </body>
 
@@ -463,7 +463,9 @@ WHERE " . $where . " $whereNew
             $("#default_table_result").hide();
             $("#installment_followup").show();
             $("#showFollowupList").show();
-             $("#showDefaultList").hide();
+            $("#showDefaultList").hide();
+            $("#Ameyo_auot_list").hide();
+             
             
 
 
