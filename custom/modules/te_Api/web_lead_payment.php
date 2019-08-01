@@ -176,7 +176,7 @@ else
             $update_res      = update_payment($student_batch_detail, $student_detail, $data, $check_payment_row);
             $response_result = array('status' => '1', 'result' => 'success', 'payment_id' => $update_res, 'lead_id' => $lead_data['id']);
             echo json_encode($response_result);
-            createLog('{payment update}', 'update_payment.txt', $data['action'], $response_result);
+            createLog('{payment update}', 'update_payment_' . date('Y-m-d') . '_log.txt', $data['action'], $response_result);
             exit();
         }
     }
@@ -185,7 +185,7 @@ else
         $errors          = array('type' => 'Invalid Lead with batch id');
         $response_result = array('status' => '0', 'result' => $errors);
         echo json_encode($response_result);
-        createLog('{payment Error}', 'error_payment.txt', $errors['type'], $response_result);
+        createLog('{payment Error}', 'error_payment_' . date('Y-m-d') . '_log.txt', $errors['type'], $response_result);
         exit();
     }
 }
@@ -364,7 +364,8 @@ function __get_student_id($student_arr = array())
 }
 
 function __get_student_batch_id($student_arr = array(),$data = array())
-{
+{   
+    global $db;
     $find_student_batch_sql = "SELECT s.id AS student_id,sb.id AS student_batch_id,sb.te_ba_batch_id_c FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS sbr ON sbr.te_student_te_student_batch_1te_student_ida=s.id INNER JOIN te_student_batch AS sb ON sb.id=sbr.te_student_te_student_batch_1te_student_batch_idb WHERE sb.leads_id='" . $student_arr['lead_id'] . "' AND s.deleted=0 AND sb.deleted=0 LIMIT 0,1";
     $find_student_batch_Obj = $GLOBALS['db']->query($find_student_batch_sql);
     $find_student_batch     = $GLOBALS['db']->fetchByAssoc($find_student_batch_Obj);
@@ -451,24 +452,54 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         $LBean->status             = $c_status;
         $LBean->status_description = $c_status_description;
         $LBean->test_status        = $c_test_status;
-        if ($LBean->converted_date == ''){
-        $LBean->converted_date     = date('Y-m-d');
+        $converted_datex           = '';
+        $lead_sourceX              = '';
+        if ($LBean->converted_date == '')
+        {
+            $LBean->converted_date = date('Y-m-d');
+            $converted_datex       = date('Y-m-d');
+        }
+        else
+        {
+            $converted_datex = $LBean->converted_date;
         }
 
         //$LBean->lead_source        = $lead_source;
 
-	if($lead_source!='' && $LBean->abnd_reenquired_status!=1 && in_array($LBean->lead_source, $ABNDArr)){
-            $LBean->lead_source        = $lead_source;
-	}
+        if ($lead_source != '' && $LBean->abnd_reenquired_status != 1 && in_array($LBean->lead_source, $ABNDArr))
+        {
+            $LBean->lead_source = $lead_source;
+            $lead_sourceX       = $lead_source;
+        }
+        else
+        {
+            $lead_sourceX = $LBean->lead_source;
+        }
 
-        $LBean->course_type        = $course_type;
-        $checkSaveBean             = $LBean->save();
+        $LBean->course_type = $course_type;
+        //$checkSaveBean             = $LBean->save();
+        $updateLeadquery = "UPDATE leads
+                                    SET status='$c_status',
+                                        status_description='$c_status_description',
+                                        converted_date='$converted_datex',
+                                        lead_source='$lead_sourceX',
+                                        course_type='$course_type'
+                                    WHERE id='" . $LBean->id . "'";
+        
+        $updateLeadCstmquery = "UPDATE leads_cstm
+                                    SET test_status='$c_test_status'
+                                    WHERE id_c='" . $LBean->id . "'";
+        
+        $checkSaveBean      = $db->query($updateLeadquery);
+        
+        createLog('{update lead query}', 'student_captured_payment_' . date('Y-m-d') . '_log.txt', $updateLeadquery.''.$updateLeadCstmquery, array());
         if ($checkSaveBean)
         {
-            createLog('{captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt',$student_arr['lead_id'],$student_arr);
+            createLog('{student captured payment}', 'student_captured_payment_' . date('Y-m-d') . '_log.txt', $student_arr['lead_id'], $student_arr);
+            $db->query($updateLeadCstmquery);
         }
-        
-         createLog('{all data captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt',$student_arr['lead_id'],$data);
+
+        createLog('{all data captured payment}', 'captured_payment_' . date('Y-m-d') . '_log.txt', $student_arr['lead_id'], $data);
 
         #get new student batch id
         return array(
