@@ -482,12 +482,12 @@ function __get_student_batch_id($student_arr = array(),$data = array())
                                     SET status='$c_status',
                                         status_description='$c_status_description',
                                         converted_date='$converted_datex',
-                                        lead_source='$lead_sourceX',
-                                        course_type='$course_type'
+                                        lead_source='$lead_sourceX'
+                                        
                                     WHERE id='" . $LBean->id . "'";
         
         $updateLeadCstmquery = "UPDATE leads_cstm
-                                    SET test_status='$c_test_status'
+                                    SET test_status='$c_test_status',course_type='$course_type'
                                     WHERE id_c='" . $LBean->id . "'";
         
         $checkSaveBean      = $db->query($updateLeadquery);

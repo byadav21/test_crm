@@ -53,7 +53,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByMobileFollowup')
                         leads.deleted =0 
                         AND bb.deleted=0
                         $sqlConditions
-                        AND leads.status='Converted'
+                        AND leads.status='Converted' limit 100
                         ";
         $usObj     = $db->query($updateSql);
 
