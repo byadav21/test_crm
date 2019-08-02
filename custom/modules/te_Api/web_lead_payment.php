@@ -470,10 +470,12 @@ function __get_student_batch_id($student_arr = array(),$data = array())
         {
             $LBean->lead_source = $lead_source;
             $lead_sourceX       = $lead_source;
+            createLog('{Entry into DIRECT condtions}', 'direct_captured_payment_' . date('Y-m-d') . '_log.txt', 'new lead_sourceX=='.$lead_sourceX.' | default='.$LBean->lead_source, array());
         }
         else
         {
             $lead_sourceX = $LBean->lead_source;
+            createLog('{Default old value reamin update}', 'direct_captured_payment_' . date('Y-m-d') . '_log.txt', '$lead_sourceX=='.$lead_sourceX, array());
         }
 
         $LBean->course_type = $course_type;
