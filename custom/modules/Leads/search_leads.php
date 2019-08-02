@@ -7,24 +7,25 @@ ini_set('display_errors', 1);
 require_once('modules/ACLRoles/ACLRole.php');
 global $db;
 global $current_user;
-$Us = $current_user->id;
-$acl_obj = new ACLRole();
-$misData = $acl_obj->getUserSlug($current_user->id);
+$Us       = $current_user->id;
+$acl_obj  = new ACLRole();
+$misData  = $acl_obj->getUserSlug($current_user->id);
 $whereSRM = '';
-if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
-    $whereSRM = 1;
+if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE')
+{
+    $whereSRM   = 1;
     $displaySRM = true;
 }
 
-  function createLog($action, $filename, $field = '', $dataArray = array())
-    {
-        $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
-        fwrite($file, date('Y-m-d H:i:s') . "\n");
-        fwrite($file, $action . "\n");
-        fwrite($file, $field . "\n");
-        fwrite($file, print_r($dataArray, TRUE) . "\n");
-        fclose($file);
-    }
+function createLog($action, $filename, $field = '', $dataArray = array())
+{
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+}
 ?>
 <html>
     <title>CRM Lead Search</title>
@@ -46,39 +47,135 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE') {
             tr:nth-child(even) {
                 background-color: #dddddd;
             }
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 48px;
+                height: 20px;
+                margin-bottom:0;
+                margin-right: 10px;
+            }
 
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 4px;
+                bottom: 3px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+            .block{display:flex; align-items: center; margin:20px 0}
+            .block label + span{font-size: 14px; color:#4d4d4d; font-weight: bold;}
         </style>
 
     </head>
     <body>
-        <section class="moduleTitle">
-            <fieldset>
-                <form action="index.php?module=Leads&action=search_leads&search_leads=1" method="post" id="lead_trans">
-                    <h2>Search Leads</h2><br/><br/>
-                    <table width="100%">
-                        <tr>
-                            <!---update code 5-dec-16 Manish Kumar-->
-                            <td><b>First Name</b></td> 
-                            <td><input type="text" name="name" id="name"/></td>
-                            <td><b>Last Name</b></td> 
-                            <td><input type="text" name="last" id="last"/></td>
-                            <td><b>Email Name</b></td> 
-                            <td><input type="text" name="email" id="email"/></td>
-                            <td><b>Mobile Number</b></td> 
-                            <td><input type="text" name="mobile_number" id="mobile_name"/></td> 
-                            <td><b>Lead ID</b></td> 
-                            <td><input type="text" name="lead_id" id="lead_id"/></td> 
-                            <td><input type="Submit" name="Search" value="Search Lead"></td> 
+        <h2>Search Leads</h2>
+        <div class="block">
+            <label class="switch"><input type="checkbox" id="openInstallmentForm"  onclick="openInstallmentForm()" >
+                <span class="slider round"></span>
+            </label>
+            <span>Installment Follow-Up</span>
+        </div>
 
-                            </td></tr></br></br>
-                    </table>       
+        <div id="installment_followup">
+            <section class="moduleTitle">
+                <fieldset>
+                    <form action="" method="post" id="follow_up_leads">
 
-            </fieldset>
-        </section>
+                        <table width="100%">
+                            <tr>
+                                <td><b>Email Name</b></td> 
+                                <td><input type="text" name="followup_email" id="followup_email" class="inputy" /></td>
+                                <td><b>Mobile Number</b></td> 
+                                <td><input type="text" name="followup_mobile_number" id="followup_mobile_number" class="inputy" /></td> 
+                                <td><input type="Submit" name="Search_Converted_LeadX" value="Search Lead"></td> 
+                                </td></tr></br></br>
+                        </table>       
+                    </form>
 
+                </fieldset>
+            </section>
+        </div>
+
+        <div id="default_search">
+            <section class="moduleTitle">
+                <fieldset>
+                    <form action="" method="post" id="default_lead_trans">
+
+                        <table width="100%">
+                            <tr>
+                                <!---update code 5-dec-16 Manish Kumar-->
+                                <td><b>First Name</b></td> 
+                                <td><input type="text" name="first_name" id="first_name" class="inputx"/></td>
+                                <td><b>Last Name</b></td> 
+                                <td><input type="text" name="last_name" id="last_name" class="inputx"/></td>
+                                <td><b>Email Name</b></td> 
+                                <td><input type="text" name="email" id="email_id" class="inputx"/></td>
+                                <td><b>Mobile Number</b></td> 
+                                <td><input type="text" name="mobile_number" id="mobile_numbery" class="inputx"/></td> 
+<!--                                <td><b>Lead ID</b></td> 
+                                <td><input type="text" name="lead_id" id="lead_id" class="inputx"/></td> -->
+                                <td><input type="Submit" name="Search_default_value" value="Search Lead"></td> 
+
+                                </td></tr></br></br>
+                        </table>       
+                    </form>
+
+                </fieldset>
+            </section>
+        </div>
         <br/>
-    </form>
-    <?php
+        
+    <div id="showFollowupList"></div>
+    <div id="showDefaultList"></div>
+    
+     <?php
     if (isset($_REQUEST['Search'])) {
         extract($_REQUEST);
         $where = "";
@@ -177,7 +274,7 @@ WHERE " . $where . " $whereNew
         
         if ($row->num_rows > 0) {
 
-            $lead_ids = '';
+            $lead_ids = array();
             while ($records = $db->fetchByAssoc($row)) {
                 $lead_ids[] = $records['id'];
                 $records_arr[] = $records;
@@ -197,7 +294,7 @@ WHERE " . $where . " $whereNew
 
 
     if (isset($_REQUEST['search_leads']) && $_REQUEST['search_leads'] == 1) {
-        echo '<table>';
+        echo '<div id="Ameyo_auot_list"><table>';
         echo ' <tr>
                 <th>Name</th>
                 <th>Status</th>
@@ -265,10 +362,141 @@ WHERE " . $where . " $whereNew
             }
         }
     }
-    echo '</table>';
+    echo '</table></div>';
     ?>
-
 </body>
+
+<script>
+    var Usrx = "<?= $Us; ?>";
+    $(document).ready(function () {
+
+        $("#installment_followup").hide();
+
+        
+        $("#default_lead_trans").on('submit', (function (e) {
+
+            //class="inputy"
+            event.preventDefault();
+            var hasInput = false;
+            $('.inputx').each(function () {
+                if ($(this).val() !== "") {
+                    hasInput = true;
+                }
+            });
+
+            if (!hasInput) {
+                alert("Need input!");
+                return false;
+            }
+
+            $.ajax({
+                beforeSend: function (request)
+                {
+                    SUGAR.ajaxUI.showLoadingPanel();
+                },
+                url: "index.php?entryPoint=accessleadajax",
+                data: {action: 'seachLeadByDefaultSearch', first_name: $("#first_name").val(), last_name: $("#last_name").val(),email_id: $("#email_id").val(),mobile_number: $("#mobile_numbery").val()},
+                dataType: "html",
+                type: "POST",
+                async: true,
+                success: function (data) {
+
+
+                    $("#showDefaultList").html(data);
+                    SUGAR.ajaxUI.hideLoadingPanel();
+
+                }
+            });
+
+
+
+
+            return false;
+        }));
+        
+        $("#follow_up_leads").on('submit', (function (e) {
+
+            //class="inputy"
+            event.preventDefault();
+            var hasInput = false;
+            $('.inputy').each(function () {
+                if ($(this).val() !== "") {
+                    hasInput = true;
+                }
+            });
+
+            if (!hasInput) {
+                alert("Need input!");
+                return false;
+            }
+
+            $.ajax({
+                beforeSend: function (request)
+                {
+                    SUGAR.ajaxUI.showLoadingPanel();
+                },
+                url: "index.php?entryPoint=accessleadajax",
+                data: {action: 'seachLeadByMobileFollowup', Email: $("#followup_email").val(), Mobile: $("#followup_mobile_number").val()},
+                dataType: "html",
+                type: "POST",
+                async: true,
+                success: function (data) {
+
+
+                    $("#showFollowupList").html(data);
+                    SUGAR.ajaxUI.hideLoadingPanel();
+
+                }
+            });
+
+
+
+
+            return false;
+        }));
+    });
+
+    function openInstallmentForm() {
+
+        if ($("#openInstallmentForm").is(':checked') == true) {
+            $("#default_search").hide();
+            $("#default_table_result").hide();
+            $("#installment_followup").show();
+            $("#showFollowupList").show();
+            $("#showDefaultList").hide();
+            $("#Ameyo_auot_list").hide();
+             
+            
+
+
+
+        } else if ($("#openInstallmentForm").is(':checked') == false) {
+            $("#default_search").show();
+            $("#showDefaultList").show();
+            $("#installment_followup").hide();
+            $("#showFollowupList").hide();
+            $("#default_table_result").show();
+
+
+        }
+    }
+
+    function clickToCall(phone, lead_id) {
+        if (confirm('Are you sure to make a call')) {
+            SUGAR.ajaxUI.showLoadingPanel();
+            var callback = {
+                success: function (b) {
+                    SUGAR.ajaxUI.hideLoadingPanel();
+                    if (b.responseText)
+                        swal(b.responseText);
+                }
+            }
+            var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead=' + lead_id + '&number=' + phone + '&installment_followup_user=' + Usrx + '&installment_status=1', callback);
+        }
+    }
+
+</script>
+
 </html>
-    <?php ?>
+<?php ?>
 
