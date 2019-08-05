@@ -34,7 +34,7 @@ switch ($_REQUEST['type']) {
 			
 			$data = $studentObj->getStudentID($batchID);
  
-			echo json_encode(array('result'=>array('id'=>$data['sid'],'name'=>$data['name'],'email'=>$data['email'],'status'=>$data['status']),'programme'=>$programm,'selbatch'=>$selBatch,'batch'=>array('id'=>$batches['id'],'name'=>$batches['name'],'id_org'=>$batches['batch_id'],'is_transfer'=>$isTransfer),'currentbatchid'=>$batches['id']));
+			echo json_encode(array('result'=>array('id'=>$data['sid'],'name'=>$data['name'],'email'=>$data['email'],'status'=>$data['status']),'programme'=>$programm,'selbatch'=>$selBatch,'batch'=>array('id'=>$batches['id'],'name'=>$batches['name'],'id_org'=>$batches['batch_id'],'is_transfer'=>$isTransfer,'batch_code'=>$batches['batch_code']),'currentbatchid'=>$batches['id']));
 		}else{
 			echo json_encode(['result'=>array(),'batch'=>array(),'programme'=>array(),'selbatch'=>array(),'currentbatchid'=>'']);die;	
 		}

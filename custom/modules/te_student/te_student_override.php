@@ -119,7 +119,7 @@ class te_student_override extends te_student
     function getAllStudentBatch()
     {
 
-        $sql       = "select  te_ba_batch_id_c as id,name from te_student_batch where deleted=0 group by te_ba_batch_id_c,name order by name";
+        $sql       = "select  te_ba_batch_id_c as id,name,batch_code from te_student_batch where deleted=0 group by te_ba_batch_id_c,name order by name";
         $itemDetal = $this->dbinstance->query($sql);
         $rowData   = [];
         while ($row       = $this->dbinstance->fetchByAssoc($itemDetal))

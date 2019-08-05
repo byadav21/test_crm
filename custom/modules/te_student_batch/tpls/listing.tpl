@@ -318,7 +318,7 @@ function lvg_nav(m,id,act,offset,t){
 					<div class="col-sm-6">
 						<label>Status : </label> <% results.status %>
 						 <p>&nbsp;</p>
-						<label>Batch : </label> <% batch.code %>
+						<label>Batch : </label> <% batch.batch_code %>
 					</div>
 				</div>
 				<hr>
