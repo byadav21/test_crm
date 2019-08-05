@@ -244,24 +244,26 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     
                 if ($dispositionCode == 'Follow Up' && $finalDatTime != '')
                 {
+                    $bean->date_of_followup = gmdate('Y-m-d H:i:s', strtotime($finalDatTime));
+                    //$bean->date_of_followup = $finalDatTime;
+                    //if (array_key_exists($assignedUserId, $popUserArr))
+                    //{
+                        $res = $db->query($callbackSql);
+                        createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                    //}
 
-                    $bean->date_of_followup = $finalDatTime;
-                    if (array_key_exists($assignedUserId, $popUserArr)) {
-                    $res         = $db->query($callbackSql);
-                    createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
-                    }
-
-                    createLog('{Ameyo Follow Up response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
+                    createLog('{Ameyo Follow Up response}', 'callback_dispose_log_' . date('Y-m-d') . '.txt', 'follow Up=' . $finalDatTime, $_REQUEST);
                 }
                 if ($dispositionCode == 'Prospect' && $finalDatTime != '')
                 {
-                   $bean->date_of_prospect = $finalDatTime;
-                   if (array_key_exists($assignedUserId, $popUserArr)) {
-                   $res         = $db->query($callbackSql);
-                   createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
-                   }
-                   createLog('{Ameyo Prospect response}', 'callback_dispose_log_'.date('Y-m-d').'.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
-
+                    $bean->date_of_prospect = gmdate('Y-m-d H:i:s', strtotime($finalDatTime));
+                    //$bean->date_of_prospect = $finalDatTime;
+                    //if (array_key_exists($assignedUserId, $popUserArr))
+                    //{
+                        $res = $db->query($callbackSql);
+                        createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                    //}
+                    createLog('{Ameyo Prospect response}', 'callback_dispose_log_' . date('Y-m-d') . '.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
                 }
 
                 createLog('{Ameyo dispostion response}', 'new_dispose_log_'.date('Y-m-d').'.txt', $_REQUEST['lead_reference'], $_REQUEST);
