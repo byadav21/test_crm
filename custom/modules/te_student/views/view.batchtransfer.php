@@ -16,7 +16,7 @@ class te_studentViewBatchtransfer extends SugarView {
 			$currentBatch[]=$student['batch_id'];
 		}
 			
-		$batchSql="SELECT b.id,b.name FROM te_pr_programs_te_ba_batch_1_c bpr INNER JOIN te_ba_batch b ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id  WHERE b.deleted=0 AND bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$programId."' AND b.id NOT IN('".implode("','",$currentBatch)."')";
+		$batchSql="SELECT b.id,b.name,b.batch_code FROM te_pr_programs_te_ba_batch_1_c bpr INNER JOIN te_ba_batch b ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id  WHERE b.deleted=0 AND bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$programId."' AND b.id NOT IN('".implode("','",$currentBatch)."')";
 		$batchObj =$db->query($batchSql);
 		$batchOptions=array();
 		while($row =$db->fetchByAssoc($batchObj)){ 

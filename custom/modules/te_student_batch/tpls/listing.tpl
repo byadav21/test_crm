@@ -340,7 +340,7 @@ function lvg_nav(m,id,act,offset,t){
 					<div class="col-sm-6"  >
 						<label>Select Batch : </label>
 						 <select ng-model="req.newbatch" >
-								<option ng-repeat="selected in groupBatch" value='<%selected.id%>'><%selected.name%></option>
+								<option ng-repeat="selected in groupBatch" value='<%selected.id%>'><%selected.batch_code %>----<%selected.name%></option>
 						 </select>
 					</div>
 				</div>
