@@ -281,7 +281,7 @@ class remainderpopup
 
             }
         //fn60sec();
-            setInterval(fn60sec, 600 * 1000);
+            setInterval(fn60sec, 1200 * 1000);
         </script>
         <?php
         /* echo '<script type="text/javascript">
