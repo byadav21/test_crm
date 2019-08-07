@@ -133,8 +133,8 @@ class te_student_override extends te_student
     {
 
        $sql  = "select te_student_batch.te_pr_programs_id_c, te_student_batch.batch_code, te_student_batch.id,te_student_batch.te_ba_batch_id_c 
-							as batch_id,te_student_batch.name,te_student_batch.batch_start_date 
-							from  te_student_batch  where te_student_batch.deleted=0 and te_student_batch.id='". $id."'";
+							as batch_id,te_student_batch.name,te_student_batch.batch_start_date , te_in_institutes.name as institute_name
+							from  te_student_batch , te_in_institutes where te_student_batch.deleted=0 and te_student_batch.id='". $id."' and te_student_batch.te_in_institutes_id_c=te_in_institutes.id";
         $itemDetal = $this->dbinstance->query($sql);
         return $this->dbinstance->fetchByAssoc($itemDetal);
     }

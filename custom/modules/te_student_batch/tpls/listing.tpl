@@ -320,6 +320,10 @@ function lvg_nav(m,id,act,offset,t){
 						 <p>&nbsp;</p>
 						<label>Batch : </label> <% batch.batch_code %>
 					</div>
+					<div class="col-sm-6">
+						<label>Institute : </label> <% batch.institute_name %>
+						 <p>&nbsp;</p>
+					</div>
 				</div>
 				<hr>
 				<div class="col-sm-12" style="margin-bottom: 25px;display:none">
