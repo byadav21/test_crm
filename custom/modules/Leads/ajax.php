@@ -214,7 +214,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByDefaultSearch')
                 <th>Status</th>
                 <th>Sub Status</th>
                 <th>Counsellor</th>               
-                <th>Batch</th>               
+                <th>Batch Code</th>               
                  <th>Batch Name</th>      
                 </tr>';
         while ($row            = $db->fetchByAssoc($usObj))

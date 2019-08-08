@@ -134,8 +134,12 @@ function createLog($action, $filename, $field = '', $dataArray = array())
                                 <td><input type="text" name="followup_email" id="followup_email" class="inputy" /></td>
                                 <td><b>Mobile Number</b></td> 
                                 <td><input type="text" name="followup_mobile_number" id="followup_mobile_number" class="inputy" /></td> 
-                                <td><input type="Submit" name="Search_Converted_LeadX" value="Search Lead"></td> 
-                                </td></tr></br></br>
+                                
+                                <td><input type="Submit" name="Search_Converted_LeadX" value="Search Lead"> &nbsp;
+                                    <input  title="Clear" onclick="SUGAR.searchForm.clear_form(this.form); return false;"  type="button" name="clear" id="search_form_clear" value="Clear">
+                                </td> 
+                                
+                                
                         </table>       
                     </form>
 
@@ -162,6 +166,8 @@ function createLog($action, $filename, $field = '', $dataArray = array())
 <!--                                <td><b>Lead ID</b></td> 
                                 <td><input type="text" name="lead_id" id="lead_id" class="inputx"/></td> -->
                                 <td><input type="Submit" name="Search_default_value" value="Search Lead"></td> 
+                                <td> <input  title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
+                                    return false;"  type="button" name="clear" id="search_form_clear" value="Clear"></td>
 
                                 </td></tr></br></br>
                         </table>       
