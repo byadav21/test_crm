@@ -78,6 +78,7 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 			$( "#tags" ).autocomplete({
       				source: availableTags
     		});
+    		alert('open');
 			$('#studentModal').modal('show',{
 				backdrop: 'static',
 				keyboard: false,
