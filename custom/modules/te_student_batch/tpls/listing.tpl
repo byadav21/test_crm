@@ -337,7 +337,7 @@ function lvg_nav(m,id,act,offset,t){
 						<label>Select Programmes : </label>
 						<select ng-change="GetSelectedBatch()"  ng-model="req.newprogram"   >
 									<option value="">--Select Program--</option>
-									<option ng-repeat="selected in groupProgram" value='<%selected.id%>'><%selected.name%></option>
+									<option ng-repeat="selected in groupProgram" value='<%selected.id%>'><%selected.institute_name%>----<%selected.name%></option>
 						</select>
 
 					</div>
