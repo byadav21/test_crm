@@ -294,42 +294,6 @@ function lvg_nav(m,id,act,offset,t){
 </script>
 <script type="text/javascript" src="include/InlineEditing/inlineEditing.js"></script>
 {/if}
-<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#tags" ).autocomplete({
-      source: availableTags
-    });
-  } );
-  </script>-->
-
 
     <!-- Modal HTML -->
     <div id="studentModal" class="modal fade">
@@ -376,10 +340,6 @@ function lvg_nav(m,id,act,offset,t){
 									<option ng-repeat="selected in groupProgram" value='<%selected.id%>'><%selected.name%></option>
 						</select>
 
-					</div>
-					<div class="ui-widget">
-					  <label for="tags">Tags: </label>
-					  <input id="tags">
 					</div>
 					<div class="col-sm-6"  >
 						<label>Select Batch : </label>
