@@ -297,7 +297,7 @@ function lvg_nav(m,id,act,offset,t){
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   {literal}
-  
+
   $(document).ready(function(){
     var availableTags = [
       "ActionScript",
@@ -323,7 +323,7 @@ function lvg_nav(m,id,act,offset,t){
       "Scala",
       "Scheme"
     ];
-    $( "#tags" ).autocomplete({alert('tes');
+    $( "#tags" ).autocomplete({
       source: availableTags
     });
   } );
