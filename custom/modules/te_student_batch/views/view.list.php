@@ -14,8 +14,6 @@ class te_student_batchViewList extends ViewList
     public function preDisplay()
     {
         echo '<script type="text/javascript" src="custom/modules/te_student_batch/student_batch.js"></script>';
-        echo '<script src="https://code.jquery.com/jquery-1.12.4.js"></script>';
-        echo '<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>';
         parent::preDisplay();
     }
 

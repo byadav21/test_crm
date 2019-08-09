@@ -69,18 +69,7 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 			$scope.groupBatch=data.selbatch;
 			$scope.isprogramme=0;
 			$scope.req.cbid=data.currentbatchid;
-			var availableTags = [
-			      "ActionScript",
-			      "AppleScript",
-			      "Asp",
-			      "BASIC",
-			      "C",
-			      
-			    ];
-			$( "#tags" ).autocomplete({
-      				source: availableTags
-    		});
-    		alert('open');
+			
 			$('#studentModal').modal('show',{
 				backdrop: 'static',
 				keyboard: false,

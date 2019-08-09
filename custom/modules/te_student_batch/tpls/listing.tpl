@@ -43,6 +43,7 @@
 
 *}
 
+
 <script type='text/javascript' src='{sugar_getjspath file='include/javascript/popup_helper.js'}'></script>
 <script>
 {literal}
@@ -291,8 +292,6 @@ function lvg_nav(m,id,act,offset,t){
 
 
 </script>
-
-
 <script type="text/javascript" src="include/InlineEditing/inlineEditing.js"></script>
 {/if}
 
@@ -347,10 +346,6 @@ function lvg_nav(m,id,act,offset,t){
 						 <select ng-model="req.newbatch" >
 								<option ng-repeat="selected in groupBatch" value='<%selected.id%>'><%selected.batch_code %>----<%selected.name%></option>
 						 </select>
-					</div>
-					<div class="ui-widget">
-  						<label for="tags">Tags: </label>
-  						<input id="tags">
 					</div>
 				</div>
 
