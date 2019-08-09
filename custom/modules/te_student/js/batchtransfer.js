@@ -67,12 +67,22 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 			$scope.groupProgram=data.programme;
 			$scope.groupBatch=data.selbatch;
 			$scope.isprogramme=0;
-			
+			var availableTags = [
+			      "ActionScript",
+			      "AppleScript",
+			      "Asp",
+			      "BASIC",
+			      "C",
+			      
+			    ];
+			$( "#tags" ).autocomplete({
+      				source: availableTags
+    		});
 			$('#studentModal').modal('show',{
 				backdrop: 'static',
 				keyboard: false,
-			});
-						
+			});		
+    			
 		});
 		 
 		 	
