@@ -195,7 +195,7 @@ class te_student_override extends te_student
     {
 
         $programsList = array();
-        $programSql   = "SELECT id, name FROM te_pr_programs WHERE deleted=0 ";
+        $programSql   = "SELECT p.id,p.name,i.name as institute_name from te_pr_programs p,te_in_institutes i,te_in_institutes_te_pr_programs_1_c ip where ip.te_in_institutes_te_pr_programs_1te_pr_programs_idb= p.id and p.deleted=0 and ip.te_in_institutes_te_pr_programs_1te_in_institutes_ida=i.id ";
         $programObj   = $this->dbinstance->query($programSql);
         while ($row          = $this->dbinstance->fetchByAssoc($programObj))
         {
