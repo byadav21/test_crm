@@ -81,7 +81,8 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 			$('#studentModal').modal('show',{
 				backdrop: 'static',
 				keyboard: false,
-			});		
+			});
+			
     			
 		});
 		 
