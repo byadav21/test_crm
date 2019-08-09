@@ -301,7 +301,7 @@ function lvg_nav(m,id,act,offset,t){
   {literal}
 
   $(document).ready(function(){
-  	$.noConfilct();
+  	$.noConflict();
     var availableTags = [
       "ActionScript",
       "AppleScript",
