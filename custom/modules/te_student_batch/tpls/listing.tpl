@@ -347,6 +347,10 @@ function lvg_nav(m,id,act,offset,t){
 								<option ng-repeat="selected in groupBatch" value='<%selected.id%>'><%selected.batch_code %>----<%selected.name%></option>
 						 </select>
 					</div>
+					<div class="ui-widget">
+  						<label for="tags">Tags: </label>
+  						<input id="tags">
+					</div>
 				</div>
 
 
