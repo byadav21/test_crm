@@ -294,7 +294,7 @@ function lvg_nav(m,id,act,offset,t){
 </script>
 <script type="text/javascript" src="include/InlineEditing/inlineEditing.js"></script>
 {/if}
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -328,7 +328,7 @@ function lvg_nav(m,id,act,offset,t){
       source: availableTags
     });
   } );
-  </script>
+  </script>-->
 
 
     <!-- Modal HTML -->
