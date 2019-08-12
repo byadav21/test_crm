@@ -283,7 +283,7 @@ $utmOptions['status'] = "Transferred";
 
 # Mail sent for Approved/
 
-$studentSql     = "select * FROM `te_student` WHERE id ='" . $student_id . "' AND deleted=0";
+/*$studentSql     = "select * FROM `te_student` WHERE id ='" . $student_id . "' AND deleted=0";
 $studentObj     = $GLOBALS['db']->query($studentSql);
 $studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
 $studentemail   = $studentDetails['email'];
@@ -301,7 +301,7 @@ $template       = "<p>Dear " . $studentDetails['name'] . ",</p>
                         <p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 $mail           = new NetCoreEmail();
 $mail->sendEmail($studentemail, " Trasfer Batch Request Approved", $template);
-
+*/
 
 echo json_encode($utmOptions);
 return false;
