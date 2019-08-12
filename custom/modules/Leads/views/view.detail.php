@@ -604,7 +604,7 @@ if(!isset($_SESSION['referral'])){
 
 
 		}
-        echo "<pre>";print_r($this->bean);echo "</pre>";exit;
+
 		$overview=array();
 		$overview['name']=$this->bean->name;
 		$overview['email']=$this->bean->email1;
