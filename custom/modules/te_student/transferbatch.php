@@ -2,8 +2,8 @@
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'On');
 
 ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
@@ -63,7 +63,7 @@ if (isset($_REQUEST['request_status']) && $_REQUEST['request_status'] == "Reject
 
     # Mail sent for Rejected/
 
-    $studentSql     = "select * FROM `te_student` WHERE id ='" . $student_id . "' AND deleted=0";
+    /*$studentSql     = "select * FROM `te_student` WHERE id ='" . $student_id . "' AND deleted=0";
     $studentObj     = $GLOBALS['db']->query($studentSql);
     $studentDetails = $GLOBALS['db']->fetchByAssoc($studentObj);
     $studentemail   = $studentDetails['email'];
@@ -83,6 +83,7 @@ if (isset($_REQUEST['request_status']) && $_REQUEST['request_status'] == "Reject
 
     $mail = new NetCoreEmail();
     $mail->sendEmail($studentemail, " Trasfer Batch Request Rejected", $template);
+    */
 
     echo json_encode($utmOptions);
     return false;
