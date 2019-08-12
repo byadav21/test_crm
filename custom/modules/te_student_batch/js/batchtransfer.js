@@ -69,7 +69,7 @@ app.controller("studentlisting", function($rootScope,$scope, $http) {
 			$scope.groupBatch=data.selbatch;
 			$scope.isprogramme=0;
 			$scope.req.cbid=data.currentbatchid;
-			
+			alert(data.result.name);
 			$('#studentModal').modal('show',{
 				backdrop: 'static',
 				keyboard: false,
