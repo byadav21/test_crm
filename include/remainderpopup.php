@@ -117,10 +117,19 @@ class remainderpopup
     function load_js($event, $arguments)
     {
         global $db, $current_user;
-	if($current_user->is_admin == 1){
-            //echo 'You no need it!';
+        
+        //CCH i have commented this
+        $getRoleSlug = getUsersRole();
+       
+        $accRoleSlug = array('CCM','CCC','CCTL');
+        //echo '$current_user->id==='. $current_user->id;
+        $usersSlug   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : 'NA';
+        //echo '$usersSlug==='.$usersSlug; die;
+        if (!in_array($usersSlug, $accRoleSlug)){
             return;
-        };
+        }
+                
+       
         $datax         = $this->__get_userPopup();
         $data          = $this->__get_user_callback();
         $overdue_count = (isset($data['overdue'])) ? count($data['overdue']) : 0;
