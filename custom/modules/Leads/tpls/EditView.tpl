@@ -387,9 +387,9 @@
               }
               
               
-            $("#status").on('change', function () {
+            /*$("#status").on('change', function () {
                 alert('test');
-            });
+            });*/
         $("#status_description").on('change', function () {
 
           
