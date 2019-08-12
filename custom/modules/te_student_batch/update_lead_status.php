@@ -34,7 +34,7 @@
             /* new Status Change according to 27nov17 @Manish */
             if($bean->status=='Active'){
 				$dispo_status = 'Converted';
-				$discription=$bean->status_discription;
+				$discription= isset($bean->status_discription)? $bean->status_discription : '';
 			}
 			else{
 				$dispo_status = $bean->status;
@@ -44,7 +44,7 @@
 				  $user_id=$current_user->id;
 				  $current_date=date('Y-m-d H:i:s');
 				  $leadid = $bean->leads_id; 
-				  $discription=$bean->status_discription;
+				  $discription= isset($bean->status_discription)? $bean->status_discription : '';
 				  $notes=$bean->description;
 				 
 			      $dispo_id=$this->__create_guid();
@@ -62,7 +62,7 @@
 					$dispositionCall = new te_Disposition_student_batch();
 					$dispositionCall->status        = $bean->status;
 					$dispositionCall->dispostion_status = $discription;
-					$dispositionCall->date_time   = $bean->date_time;
+					$dispositionCall->date_time   = isset($bean->date_time)? $bean->date_time : '';
 					$dispositionCall->name        = $bean->status;
 					$dispositionCall->description        = $bean->description;
 					$dispositionCall->te_disposi5321t_batch_ida = $bean->id;

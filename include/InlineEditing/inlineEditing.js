@@ -35,7 +35,7 @@
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
-
+var action_sugar_grp1='';
 buildEditField();
 
 //Global Variables.
@@ -46,8 +46,8 @@ if($("#inline_edit_icon").length) {
 } else {
     var inlineEditIcon = "";
 }
-
-var view = action_sugar_grp1;
+var view = '';
+//var view = action_sugar_grp1;
 var currentModule = module_sugar_grp1;
 
 

@@ -12,6 +12,7 @@ class addStudentPaymentClass
         if (!isset($_REQUEST['import_module']) && (($_REQUEST['module'] == "Leads") || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == 'transferbatch') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == 'migrate_student') || (isset($_REQUEST['entryPoint']) && $_REQUEST['entryPoint'] == 'web_lead_payment')))
         {
             global $sugar_config;
+            $student_id='';
             $service_tax =  getTaxStatus($student_id,$bean->date_entered);
 
             /*Get Batch Discount*/

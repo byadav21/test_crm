@@ -10,7 +10,8 @@ function changeTransferStatus(request_id,value){
 				data: {request_id: request_id,request_status: value},
 				success: function (result)
 				{
-					var result = JSON.parse(result);
+                                    alert(result);
+					//var result = JSON.parse(result);
 					if(result.status=='Transferred'){
 						 //$("#"+span_id).html('');
 						 window.location.reload();
