@@ -11,7 +11,7 @@ function changeTransferStatus(request_id,value){
 				success: function (result)
 				{
                                     //alert(result);
-					//var result = JSON.parse(result);
+					var result = JSON.parse(result);
 					if(result.status=='Transferred'){
 						 //$("#"+span_id).html('');
 						 window.location.reload();
