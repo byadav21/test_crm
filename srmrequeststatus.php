@@ -6,5 +6,9 @@ if($_GET['student_batch']!=''){
 }else{
 	echo "Wrong URL";exit; 
 }
-echo "<pre>";print_r($_REQUEST);echo "</pre>";
+$query = "SELECT * from te_student_batch where id='".$student_batch."'";
+$result = $db->query($query);
+$row = $db->fetchByAssoc($result);
+
+echo "<pre>";print_r($row);echo "</pre>";
 ?>
