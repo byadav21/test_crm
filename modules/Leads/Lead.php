@@ -615,7 +615,7 @@ class Lead extends Person {
         return $return_array;
     }
 	
-	function create_export_query(&$order_by, &$where){
+	function create_export_query($order_by, $where, $relate_link_join = ''){
 		$where = str_replace('leads.batch in','leads_cstm.te_ba_batch_id_c in',$where);
 		$where =  str_replace('Counsellors', 'leads.assigned_user_id', $where);
 		global $current_user;

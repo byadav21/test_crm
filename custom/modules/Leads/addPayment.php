@@ -1046,10 +1046,10 @@ class addPaymentClass
                                         callback_date_time='" .$dateOfCall . "',
                                         assigned_user_id='" . $bean->assigned_user_id . "'"; 
                          
-                         if (array_key_exists($bean->assigned_user_id, $popUserArr)) {
+                          //if(array_key_exists($bean->assigned_user_id, $popUserArr)) {
                                 $res         = $db->query($callbackSql);
                                 $this->createLogPay('{If popupuser_check_loged}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $sql, $_REQUEST);
-                          }
+                          //}
                     
                      //die;
                     }
