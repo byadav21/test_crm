@@ -1,12 +1,13 @@
 <?php
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
+
 if($_GET['student_batch']!=''){
 	$student_batch	= $_GET['student_batch'];
 }else{
 	echo "Wrong URL";exit; 
 }
-$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
+$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
@@ -30,27 +31,27 @@ echo "<pre>";print_r($row);echo "</pre>";
 			<div class="profile-section">
 				
 				<div class="profile-details">
-					<div class="student-name">Dummy Payment SAP</div>
+					<div class="student-name"><?php echo $row['student_name'];?></div>
 					<ul>
-						<li><i>Email</i>a.sh.wani.kum.ar.iitd@gmail.com</li>
-						<li><i>Mobile</i>9899046730</li>
+						<li><i>Email</i><?php echo $row['email'];?></li>
+						<li><i>Mobile</i><?php echo $row['mobile'];?></li>
 					</ul>
 					<div class="profile-block">
-						<div class="status"><span>Pending</span></div>
+						<div class="status"><span><?php echo $row['status'];?></span></div>
 					</div>	
 					<div class="program-info">
 						<div class="block">		
 							<ol>
-								<li><i>Old Programe Name</i>Executive Program in Strategic Performance Management</li>
-								<li><i>Old Batch Name</i>PF-04-0817-01</li>
-								<li><i>Old Institute Name</i>PG Certificate Program in Business Management from IIFT</li>
+								<li><i>Old Programe Name</i><?php echo $row['old_program_name'];?></li>
+								<li><i>Old Batch Name</i><?php echo $row['old_batch_code'];?></li>
+								<li><i>Old Institute Name</i><?php echo $row['old_institute_name'];?></li>
 							</ol>
 						</div>
 						<div class="block">
 							<ol>
-								<li><i>New Programe Name</i>Executive Program in Strategic Performance Management</li>
-								<li><i>New Batch Name</i>PF-04-0817-01</li>
-								<li><i>New Institute Name</i>PG Certificate Program in Business Management from IIFT</li>
+								<li><i>New Programe Name</i><?php echo $row['new_program_name'];?></li>
+								<li><i>New Batch Name</i><?php echo $row['new_batch_code'];?></li>
+								<li><i>New Institute Name</i><?php echo $row['new_institute_name'];?></li>
 							</ol>
 						</div>
 					</div>
