@@ -72,8 +72,8 @@ echo "<pre>";print_r($_REQUEST);echo "</pre>";
 					</div>
 					<div class="block">
 						<label>Status</label>
-						<label><input type="radio" name="one" value="approve" /> Approve</label>
-						<label><input type="radio" name="one" value="reject"/> Reject</label>
+						<label><input type="radio" name="two" value="approve" /> Approve</label>
+						<label><input type="radio" name="two" value="reject"/> Reject</label>
 					</div>
 					<!-- <div class="block">
 						<label>Comment</label>
