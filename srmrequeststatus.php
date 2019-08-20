@@ -33,8 +33,8 @@ $row = $db->fetchByAssoc($result);
 				<div class="profile-details">
 					<div class="student-name"><?php echo $row['student_name'];?></div>
 					<ul>
-						<li><i>Email</i><?php echo $row['email'];?></li>
-						<li><i>Mobile</i><?php echo $row['mobile'];?></li>
+						<li><i style="font-weight: bold;">Email</i><?php echo $row['email'];?></li>
+						<li><i style="font-weight: bold;">Mobile</i><?php echo $row['mobile'];?></li>
 					</ul>
 					<div class="profile-block">
 						<div class="status"><span><?php echo $row['status'];?></span></div>
@@ -42,16 +42,16 @@ $row = $db->fetchByAssoc($result);
 					<div class="program-info">
 						<div class="block">		
 							<ol>
-								<li><i>Old Programe Name</i><?php echo $row['old_program_name'];?></li>
-								<li><i>Old Batch Name</i><?php echo $row['old_batch_code'];?></li>
-								<li><i>Old Institute Name</i><?php echo $row['old_institute_name'];?></li>
+								<li><i style="font-weight: bold;">Old Programe Name</i><?php echo $row['old_program_name'];?></li>
+								<li><i style="font-weight: bold;">Old Batch Name</i><?php echo $row['old_batch_code'];?></li>
+								<li><i style="font-weight: bold;">Old Institute Name</i><?php echo $row['old_institute_name'];?></li>
 							</ol>
 						</div>
 						<div class="block">
 							<ol>
-								<li><i>New Programe Name</i><?php echo $row['new_program_name'];?></li>
-								<li><i>New Batch Name</i><?php echo $row['new_batch_code'];?></li>
-								<li><i>New Institute Name</i><?php echo $row['new_institute_name'];?></li>
+								<li><i style="font-weight: bold;">New Programe Name</i><?php echo $row['new_program_name'];?></li>
+								<li><i style="font-weight: bold;">New Batch Name</i><?php echo $row['new_batch_code'];?></li>
+								<li><i style="font-weight: bold;">New Institute Name</i><?php echo $row['new_institute_name'];?></li>
 							</ol>
 						</div>
 					</div>
@@ -65,9 +65,9 @@ $row = $db->fetchByAssoc($result);
 					</div>
 					<div class="block">
 						<label>Topic</label>
-						<label><input type="radio" name="one"/> Free</label>
-						<label><input type="radio" name="one"/> Regular</label>
-						<label><input type="radio" name="one"/> Paid</label>
+						<label><input type="radio" name="one"/> Waiver</label>
+						<label><input type="radio" name="one"/> To be Deducted</label>
+						<label><input type="radio" name="one"/> To be Paid</label>
 					</div>
 					<div class="block">
 						<label>Status</label>
