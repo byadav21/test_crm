@@ -11,7 +11,7 @@ $query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-//echo "<pre>";print_r($row);echo "</pre>";
+echo "<pre>";print_r($_REQUEST);echo "</pre>";
 ?>
 
 <!doctype html>
@@ -25,6 +25,7 @@ $row = $db->fetchByAssoc($result);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+	<form method="post">
 	<div class="crm-detail-wrapper">
 		<div class="crm-detail-container">		
 
@@ -85,7 +86,7 @@ $row = $db->fetchByAssoc($result);
 			</section>	
 		</div>		
 	</div>
-
+</form>
 </body>
 </html>	
 <style type="text/css">
