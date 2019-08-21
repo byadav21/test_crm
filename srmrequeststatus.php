@@ -3,7 +3,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
 if($_POST['Submit']){
 
-	header('Location: '.$_SERVER['PHP_SELF']);
+	header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
 	die;
 }
 if($_GET['student_batch']!=''){
