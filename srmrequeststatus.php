@@ -8,9 +8,9 @@ if($_GET['student_batch']!=''){
 	echo "Wrong URL";exit; 
 }
 if($_POST['Submit']){
-	echo $updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."' where sb.id='".$student_batch."'";
+	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
-	echo $updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."' where tb.batch_id_rel='".$student_batch."'";
+	$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."' where batch_id_rel='".$student_batch."'";
 	$updatequerydata=$db->query($updatestatus);
 	//header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
 	//die;
