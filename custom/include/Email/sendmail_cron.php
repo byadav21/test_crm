@@ -102,6 +102,7 @@ class FalconideEmail
                 'pawan.kumar@talentedge.in',
                 'ajay.kumar@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in',
                 //B Head
+		'vishwanath.nair@talentedge.in',
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
                 'ritika.nayak@talentedge.in',
