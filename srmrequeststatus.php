@@ -1,7 +1,11 @@
 <?php
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
+if($_POST['Submit']){
 
+	header('Location: '.$_SERVER['PHP_SELF']);
+	die;
+}
 if($_GET['student_batch']!=''){
 	$student_batch	= $_GET['student_batch'];
 }else{
