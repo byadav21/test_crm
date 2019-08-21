@@ -70,19 +70,19 @@ echo "<pre>";print_r($_REQUEST);echo "</pre>";
 					</div>
 					<div class="block">
 						<label>Topic</label>
-						<label><input type="radio" name="one" value="waiver"/> Waiver</label>
-						<label><input type="radio" name="one" value="deduct"/> To be Deducted</label>
-						<label><input type="radio" name="one" value="paid"/> To be Paid</label>
+						<label><input type="radio" name="one" value="1"/> Waiver</label>
+						<label><input type="radio" name="one" value="2"/> To be Deducted</label>
+						<label><input type="radio" name="one" value="3"/> To be Paid</label>
 					</div>
 					<div class="block">
 						<label>Status</label>
 						<label><input type="radio" name="two" value="approve" /> Approve</label>
 						<label><input type="radio" name="two" value="reject"/> Reject</label>
 					</div>
-					<!-- <div class="block">
+					<div class="block">
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here"></textarea>
-					</div> -->
+					</div> 
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
