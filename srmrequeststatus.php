@@ -16,7 +16,7 @@ if($_POST['Submit']){
 	//die;
 }
 
-$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
+$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
@@ -75,18 +75,18 @@ echo "<pre>";print_r($_POST);echo "</pre>";
 					</div>
 					<div class="block">
 						<label>Topic</label>
-						<label><input type="radio" name="one" value="1"/> Waiver</label>
-						<label><input type="radio" name="one" value="2"/> To be Deducted</label>
-						<label><input type="radio" name="one" value="3"/> To be Paid</label>
+						<label><input type="radio" name="one" value="1" <?php echo ($row['bt_fee_waiver']== '1') ?  "checked" : "" ;  ?>/> Waiver</label>
+						<label><input type="radio" name="one" value="2" <?php echo ($row['bt_fee_waiver']== '2') ?  "checked" : "" ;  ?>/> To be Deducted</label>
+						<label><input type="radio" name="one" value="3"<?php echo ($row['bt_fee_waiver']== '3') ?  "checked" : "" ;  ?> /> To be Paid</label>
 					</div>
 					<div class="block">
 						<label>Status</label>
-						<label><input type="radio" name="two" value="approve" /> Approve</label>
-						<label><input type="radio" name="two" value="reject"/> Reject</label>
+						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve') ?  "checked" : "" ;  ?>/> Approve</label>
+						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 					</div>
 					<div class="block">
 						<label>Comment</label>
-						<textarea placeholder="Enter your Comments here" name="approve_comment"></textarea>
+						<textarea placeholder="Enter your Comments here" name="approve_comment" value="<?php echo $row['bt_approver_comments'];?>"></textarea>
 					</div> 
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
