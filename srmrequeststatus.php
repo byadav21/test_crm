@@ -81,7 +81,7 @@ echo "<pre>";print_r($_REQUEST);echo "</pre>";
 					</div>
 					<div class="block">
 						<label>Comment</label>
-						<textarea placeholder="Enter your Comments here"></textarea>
+						<textarea placeholder="Enter your Comments here" name="approve_comment"></textarea>
 					</div> 
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
