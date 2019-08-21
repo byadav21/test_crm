@@ -297,64 +297,7 @@ function lvg_nav(m,id,act,offset,t){
 
     <!-- Modal HTML -->
     <div id="studentModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					   <span aria-hidden="true">×</span>
-					   <span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel">
-					Transfer Batch
-				</h4>
-			</div>
-			<div class="modal-body">
-				<div class="col-sm-12">
-					<div class="col-sm-6">
-						<label>Name : </label> <% results.name %>
-						 <p>&nbsp;</p>
-						<label>Email : </label> <% results.email %>
-					</div>
-					<div class="col-sm-6">
-						<label>Status : </label> <% results.status %>
-						 <p>&nbsp;</p>
-						<label>Batch : </label> <% batch.name %>
-					</div>
-				</div>
-				<hr>
-				<div class="col-sm-12" style="margin-bottom: 25px;display:none">
-					<div class="col-sm-6">
-						<input type="checkbox" ng-init="isprogramme=0" ng-model="isprogramme" ng-true-value="'1'" ng-false-value="'0'" /> Transfer Batch<br>
-						<p style="color:red" ng-show="batch.is_transfer==0">Programme can't be transfered . Batch has been started </p>
-					</div>
-				</div>
-				<div class="col-sm-12" ng-if="batch.is_transfer==1">
-					<div class="col-sm-6">
-						<label>Select Programmes : </label>
-						<select ng-change="GetSelectedBatch()"  ng-model="req.newprogram"   >
-									<option value="">--Select Program--</option>
-									<option ng-repeat="selected in groupProgram" value='<%selected.id%>'><%selected.name%></option>
-						</select>
-
-					</div>
-					<div class="col-sm-6"  >
-						<label>Select Batch : </label>
-						 <select ng-model="req.newbatch" >
-								<option ng-repeat="selected in groupBatch" value='<%selected.id%>'><%selected.name%></option>
-						 </select>
-					</div>
-				</div>
-
-
-				<div class="col-sm-12 text-center" style="margin-top: 25px;">
-
-						<button type="button" class="button" ng-click="doTransfer()">TRANSFER</button>
-
-				</div>
-
-			</div>
-            </div>
-        </div>
+        <div id="getFormOptions"></div>
     </div>
 </div>
 </div>

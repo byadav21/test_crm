@@ -77,7 +77,7 @@ function getisSent($id){
 	global $current_user;	 
 	$obj=new  te_student_override();
 	$data=$obj->getApproval($id);
-	echo (!$data) ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\''. $id .'\')">Transfer Batch</a>' : 'Pending';
+	echo (!$data) ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\''. $id .'\')">Batch Transfer</a>' : 'Pending';
 	
 	
 }
