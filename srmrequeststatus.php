@@ -20,7 +20,7 @@ $query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-echo "<pre>";print_r($_SERVER);echo "</pre>";
+//echo "<pre>";print_r($_SERVER);echo "</pre>";
 ?>
 
 <!doctype html>
@@ -85,7 +85,7 @@ echo "<pre>";print_r($_SERVER);echo "</pre>";
 						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($row['bt_srm_attachment']!=''){?>
 						<div class="block-action">
-							<button><a href="<?php echo $_SERVER['SERVER_NAME']."/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>">Download Attached File</a></button>
+							<button><a href="<?php echo "/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>">Download Attached File</a></button>
 						</div>
 						<?php }?>
 					</div>
