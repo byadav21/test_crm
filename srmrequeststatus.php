@@ -85,7 +85,7 @@ echo "<pre>";print_r($_SERVER);echo "</pre>";
 						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($row['bt_srm_attachment']!=''){?>
 						<div class="block-action">
-							<button><a href="<?php echo $row['bt_srm_attachment'];?>">Download Attached File</a></button>
+							<button><a href="<?php echo $_SERVER['SERVER_NAME']."/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>">Download Attached File</a></button>
 						</div>
 						<?php }?>
 					</div>
