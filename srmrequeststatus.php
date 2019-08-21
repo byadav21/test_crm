@@ -1,6 +1,8 @@
 <?php
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
+require_once('custom/include/Email/sendmail.php'); 
+require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
 if($_GET['student_batch']!=''){
 	$student_batch	= $_GET['student_batch'];
@@ -12,6 +14,12 @@ if($_POST['Submit']){
 	$updatequerydata=$db->query($updatedata);
 	$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."' where batch_id_rel='".$student_batch."'";
 	$updatequerydata=$db->query($updatestatus);
+
+	$subject="Batch transfer Mail";
+	$body = "Hi,<br/>The batch transfer request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been '".$_POST['two']."'.";
+	$to='ashis.mohanty@talentedge.in';
+	$mail = new NetCoreEmail();
+	$mail -> sendEmail($to,$subject,$body);
 	//header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
 	//die;
 }
@@ -37,7 +45,8 @@ $row = $db->fetchByAssoc($result);
 	<form method="post">
 	<div class="crm-detail-wrapper">
 		<div class="crm-detail-container">		
-
+		<input type="hidden" name="emailid" id="emailid" value="<?php echo $row['email'];?>"/>
+		<input type="hidden" name="studentname" id="studentname" value="<?php echo $row['student_name'];?>"/>
 			<div class="profile-section">
 				
 				<div class="profile-details">
