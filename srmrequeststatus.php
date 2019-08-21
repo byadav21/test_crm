@@ -80,7 +80,7 @@ echo "<pre>";print_r($_REQUEST);echo "</pre>";
 						<textarea placeholder="Enter your Comments here"></textarea>
 					</div> -->
 					<div class="block-action">
-						<input type="submit" value="Submit">
+						<input type="submit" value="Submit" name="Submit">
 					</div>
 
 			</section>	
