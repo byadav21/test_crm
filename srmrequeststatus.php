@@ -85,7 +85,7 @@ $row = $db->fetchByAssoc($result);
 						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($row['bt_srm_attachment']!=''){?>
 						<div class="block-action">
-							<a href="<?php echo "/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>">Download Attached File</a>
+							<button><a href="<?php echo "/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>" target="_blank">Download Attached File</a></button>
 						</div>
 						<?php }?>
 					</div>
