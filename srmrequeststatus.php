@@ -21,7 +21,7 @@ if($_POST['Submit']){
 	$user     = 'talentedgeadmin';
     $password = 'Inkoniq@2016';
     //$url      = 'https://talentedge.in/order-api/';
-    $url      = $sugar_config['website_URL'] . '/batch_transfer.php';
+   echo $url      = $sugar_config['website_URL'] . '/batch_transfer.php';
     $headers  = array(
         'Authorization: Basic ' . base64_encode("$user:$password")
     );
