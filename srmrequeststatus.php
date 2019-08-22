@@ -15,8 +15,30 @@ if($_POST['Submit']){
 	$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."' where batch_id_rel='".$student_batch."'";
 	$updatequerydata=$db->query($updatestatus);
 
+	//API Call
+	global $sugar_config;
+	$data=array();
+	$user     = 'talentedgeadmin';
+    $password = 'Inkoniq@2016';
+    //$url      = 'https://talentedge.in/order-api/';
+    $url      = $sugar_config['website_URL'] . '/batch_transfer.php';
+    $headers  = array(
+        'Authorization: Basic ' . base64_encode("$user:$password")
+    );
+    $data['new_batch_code']=$_POST['newbatchcode'];
+	$data['old_batch_code']=$_POST['oldbatchcode'];
+	$data['email']	=	$_POST['emailid'];
+    $ch     = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $result = curl_exec($ch);
+    $res    = json_decode($result,TRUE);
+    echo "<pre>";print_r($res);echo "</pre>";exit;
 	$subject="Batch transfer Mail";
-	$body = "Hi,<br/>The batch transfer request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been '".$_POST['two']."'.";
+	$body = "Hi,<br/>The batch transfer request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been <b>'".$_POST['two']."'</b>.";
 	$to='ashis.mohanty@talentedge.in';
 	$mail = new NetCoreEmail();
 	$mail -> sendEmail($to,$subject,$body);
@@ -47,6 +69,8 @@ $row = $db->fetchByAssoc($result);
 		<div class="crm-detail-container">		
 		<input type="hidden" name="emailid" id="emailid" value="<?php echo $row['email'];?>"/>
 		<input type="hidden" name="studentname" id="studentname" value="<?php echo $row['student_name'];?>"/>
+		<input type="hidden" name="oldbatchcode" id="oldbatchcode" value="<?php echo $row['old_batch_code'];?>"/>
+		<input type="hidden" name="newbatchcode" id="newbatchcode" value="<?php echo $row['new_batch_code'];?>"/>
 			<div class="profile-section">
 				
 				<div class="profile-details">
