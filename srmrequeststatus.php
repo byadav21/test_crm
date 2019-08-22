@@ -36,7 +36,7 @@ if($_POST['Submit']){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $result = curl_exec($ch);
     $res    = json_decode($result,TRUE);
-    echo "<pre>";print_r($res);echo "</pre>";exit;
+    echo "=====<pre>";print_r($result);echo "</pre>";exit;
 	$subject="Batch transfer Mail";
 	$body = "Hi,<br/>The batch transfer request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been <b>'".$_POST['two']."'</b>.";
 	$to='ashis.mohanty@talentedge.in';
