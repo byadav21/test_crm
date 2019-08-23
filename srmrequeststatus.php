@@ -6,13 +6,14 @@ require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
 if($_GET['student_batch']!=''){
 	$student_batch	= $_GET['student_batch'];
+	$tbid=$_GET['tid'];
 }else{
 	echo "Wrong URL";exit; 
 }
 if($_POST['Submit']){
 	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
 	$newdata	=	array();
-	$newdata['request_id']	=	$student_batch;
+	$newdata['request_id']	=	$tid;
 	$newdata['request_status']	=	$_POST['two'];
 	
 	$ch     = curl_init();

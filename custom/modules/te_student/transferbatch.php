@@ -9,13 +9,13 @@ ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
 require_once('include/entryPoint.php');
 global $db;
-echo $transferSql     = "SELECT *
+$transferSql     = "SELECT *
                     FROM te_transfer_batch
                     WHERE id='" . $_REQUEST['request_id'] . "'
                       AND deleted=0";
 $transferObj     = $GLOBALS['db']->query($transferSql);
 $transferDetails = $GLOBALS['db']->fetchByAssoc($transferObj);
-echo "*****<pre>";print_r($transferDetails);exit;
+
 $old_batch_id         = $transferDetails['te_student_batch_id_c'];
 $new_batch_id         = $transferDetails['te_ba_batch_id_c'];
 $student_id           = $transferDetails['te_student_id_c'];
@@ -101,7 +101,7 @@ $srm_auto_Details       = $GLOBALS['db']->fetchByAssoc($srm_auto_assObj);
   $vendorObj= $GLOBALS['db']->query($vendorSql);
   $vendor = $GLOBALS['db']->fetchByAssoc($vendorObj); */
 #get Institute, Program and batch details
-echo $batchSql               = "SELECT   b.id AS batch_id,
+$batchSql               = "SELECT   b.id AS batch_id,
                                                     b.name AS batch_name,
                                                     b.batch_code,
                                                     b.fees_inr,
@@ -124,7 +124,6 @@ echo $batchSql               = "SELECT   b.id AS batch_id,
 
     $batchObj                               = $GLOBALS['db']->query($batchSql);
     $batchDetails                           = $GLOBALS['db']->fetchByAssoc($batchObj);
-    echo "@@@@@<pre>";print_r($batchDetails);exit;
     $studentBatchObj                        = new te_student_batch();
     $studentBatchObj->name                  = $batchDetails['batch_name'];
     $studentBatchObj->batch_code            = $batchDetails['batch_code'];
