@@ -10,10 +10,24 @@ if($_GET['student_batch']!=''){
 	echo "Wrong URL";exit; 
 }
 if($_POST['Submit']){
+	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
+	$newdata	=	array();
+	$newdata['request_id']	=	$student_batch;
+	$newdata['request_status']	=	$_POST['two'];
+	
+	$ch     = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $apiurl);
+    //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $result = curl_exec($ch);
+    $res    = json_decode($result,TRUE);
+    echo "=====<pre>";print_r($result);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
-	$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."' where batch_id_rel='".$student_batch."'";
-	$updatequerydata=$db->query($updatestatus);
+	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
+	//$updatequerydata=$db->query($updatestatus);
 	if($_POST['two']=='Approve'){
 			//API Call
 		global $sugar_config;

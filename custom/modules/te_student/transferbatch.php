@@ -412,3 +412,4 @@ function updateStudentPaymentPlan($batch_id, $student_id, $amount, $student_coun
         }
     }
 }
+echo "Approved updated";exit;
