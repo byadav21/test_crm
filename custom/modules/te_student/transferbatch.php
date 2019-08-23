@@ -9,7 +9,7 @@ ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
 require_once('include/entryPoint.php');
 global $db;
-$transferSql     = "SELECT *
+echo $transferSql     = "SELECT *
                     FROM te_transfer_batch
                     WHERE id='" . $_REQUEST['request_id'] . "'
                       AND deleted=0";
