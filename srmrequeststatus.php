@@ -1,21 +1,71 @@
 <?php
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('include/entryPoint.php');
-if($_POST['Submit']){
-
-	header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
-	die;
-}
+require_once('custom/include/Email/sendmail.php'); 
+require_once('modules/EmailTemplates/EmailTemplate.php');
+global $db;
 if($_GET['student_batch']!=''){
 	$student_batch	= $_GET['student_batch'];
 }else{
 	echo "Wrong URL";exit; 
 }
-$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
+if($_POST['Submit']){
+	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
+	$newdata	=	array();
+	$newdata['request_id']	=	$student_batch;
+	$newdata['request_status']	=	$_POST['two'];
+	
+	$ch     = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $apiurl);
+    //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $result = curl_exec($ch);
+    $res    = json_decode($result,TRUE);
+    //echo "=====<pre>";print_r($result);echo "</pre>";exit;
+	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."' where id='".$student_batch."'";
+	$updatequerydata=$db->query($updatedata);
+	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
+	//$updatequerydata=$db->query($updatestatus);
+	if($_POST['two']=='Approve'){
+			//API Call
+		global $sugar_config;
+		$data=array();
+		$user     = 'talentedgeadmin';
+	    $password = 'Inkoniq@2016';
+	    //$url      = 'https://talentedge.in/order-api/';
+	   	$url      = $sugar_config['website_URL'] . 'batch_transfer.php';
+	    $headers  = array(
+	        'Authorization: Basic ' . base64_encode("$user:$password")
+	    );
+	    $data['new_batch_code']=$_POST['newbatchcode'];
+		$data['old_batch_code']=$_POST['oldbatchcode'];
+		$data['email']	=	$_POST['emailid'];
+	    $ch     = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	    curl_setopt($ch, CURLOPT_POST, 1);
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+	    $result = curl_exec($ch);
+	    $res    = json_decode($result,TRUE);
+	}
+    //echo "=====<pre>";print_r($result);echo "</pre>";exit;
+	$subject="Batch transfer Mail";
+	$body = "Hi,<br/>The batch transfer request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been <b>'".$_POST['two']."'</b>.";
+	$to='ashis.mohanty@talentedge.in';
+	$mail = new NetCoreEmail();
+	$mail -> sendEmail($to,$subject,$body);
+	//header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+	//die;
+}
+
+$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-echo "<pre>";print_r($_REQUEST);echo "</pre>";
+echo "<pre>";print_r($_row);echo "</pre>";
 ?>
 
 <!doctype html>
@@ -32,7 +82,10 @@ echo "<pre>";print_r($_REQUEST);echo "</pre>";
 	<form method="post">
 	<div class="crm-detail-wrapper">
 		<div class="crm-detail-container">		
-
+		<input type="hidden" name="emailid" id="emailid" value="<?php echo $row['email'];?>"/>
+		<input type="hidden" name="studentname" id="studentname" value="<?php echo $row['student_name'];?>"/>
+		<input type="hidden" name="oldbatchcode" id="oldbatchcode" value="<?php echo $row['old_batch_code'];?>"/>
+		<input type="hidden" name="newbatchcode" id="newbatchcode" value="<?php echo $row['new_batch_code'];?>"/>
 			<div class="profile-section">
 				
 				<div class="profile-details">
@@ -65,28 +118,34 @@ echo "<pre>";print_r($_REQUEST);echo "</pre>";
 
 				<section>
 					<div class="block">
-						<label>Description</label>
-						<p>The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
+						<label>SRM Comment</label>
+						<p><?php echo $row['bt_srm_comments'];?></p>
 					</div>
 					<div class="block">
 						<label>Topic</label>
-						<label><input type="radio" name="one" value="waiver"/> Waiver</label>
-						<label><input type="radio" name="one" value="deduct"/> To be Deducted</label>
-						<label><input type="radio" name="one" value="paid"/> To be Paid</label>
+						<label><input type="radio" name="one" value="1" <?php echo ($row['bt_fee_waiver']== '1') ?  "checked" : "" ;  ?>/> Waiver</label>
+						<label><input type="radio" name="one" value="2" <?php echo ($row['bt_fee_waiver']== '2') ?  "checked" : "" ;  ?>/> To be Adjusted</label>
+						<label><input type="radio" name="one" value="3"<?php echo ($row['bt_fee_waiver']== '3') ?  "checked" : "" ;  ?> /> To be Paid</label>
 					</div>
 					<div class="block">
 						<label>Status</label>
-						<label><input type="radio" name="two" value="approve" /> Approve</label>
-						<label><input type="radio" name="two" value="reject"/> Reject</label>
+						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve') ?  "checked" : "" ;  ?>/> Approve</label>
+						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
+						<?php if($row['bt_srm_attachment']!=''){?>
+						<div class="block-action">
+							<button><a href="<?php echo "/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>" target="_blank">Download Attached File</a></button>
+						</div>
+						<?php }?>
 					</div>
-					<!-- <div class="block">
+					<div class="block">
 						<label>Comment</label>
-						<textarea placeholder="Enter your Comments here"></textarea>
-					</div> -->
+						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
+					</div> 
+					<?php if(strtolower($row['status'])=='pending'){?>
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
-
+					<?php }?>
 			</section>	
 		</div>		
 	</div>

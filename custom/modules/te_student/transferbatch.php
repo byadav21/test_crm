@@ -1,5 +1,5 @@
 <?php
-
+//echo "<pre>";print_r($_REQUEST);exit;
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 //error_reporting(E_ALL);
@@ -59,7 +59,7 @@ if (isset($_REQUEST['request_status']) && $_REQUEST['request_status'] == "Reject
                                          is_new_approved=1,
                                          te_student_batch_id_c='" . $student_batch_id . "'
                             WHERE id='" . $_REQUEST['request_id'] . "'");
-    $utmOptions['status'] = "Transferred";
+    $utmOptions['status'] = "Rejected Transferred";
 
     # Mail sent for Rejected/
 
@@ -279,7 +279,7 @@ SET is_new_approved=1,
     status='" . $_REQUEST['request_status'] . "',
                                          te_student_batch_id_c='" . $student_batch_id . "'
 WHERE id='" . $_REQUEST['request_id'] . "'");
-$utmOptions['status'] = "Transferred";
+$utmOptions['status'] = "Approved Transferred";
 
 # Mail sent for Approved/
 
@@ -412,3 +412,4 @@ function updateStudentPaymentPlan($batch_id, $student_id, $amount, $student_coun
         }
     }
 }
+echo "Approved updated";exit;
