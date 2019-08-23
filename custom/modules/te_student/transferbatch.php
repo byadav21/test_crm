@@ -124,7 +124,7 @@ $batchSql               = "SELECT   b.id AS batch_id,
 
     $batchObj                               = $GLOBALS['db']->query($batchSql);
     $batchDetails                           = $GLOBALS['db']->fetchByAssoc($batchObj);
-    echo "<pre>";print_r($batchDetails);exit;
+    echo "@@@@@<pre>";print_r($batchDetails);exit;
     $studentBatchObj                        = new te_student_batch();
     $studentBatchObj->name                  = $batchDetails['batch_name'];
     $studentBatchObj->batch_code            = $batchDetails['batch_code'];
