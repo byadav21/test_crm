@@ -4,7 +4,7 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php'); 
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
-if($_GET['student_batch']!=''){
+if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
 	$tbid=$_GET['tid'];
 }else{
