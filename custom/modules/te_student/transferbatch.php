@@ -59,7 +59,7 @@ if (isset($_REQUEST['request_status']) && $_REQUEST['request_status'] == "Reject
                                          is_new_approved=1,
                                          te_student_batch_id_c='" . $student_batch_id . "'
                             WHERE id='" . $_REQUEST['request_id'] . "'");
-    $utmOptions['status'] = "Transferred";
+    $utmOptions['status'] = "Rejected Transferred";
 
     # Mail sent for Rejected/
 
@@ -279,7 +279,7 @@ SET is_new_approved=1,
     status='" . $_REQUEST['request_status'] . "',
                                          te_student_batch_id_c='" . $student_batch_id . "'
 WHERE id='" . $_REQUEST['request_id'] . "'");
-$utmOptions['status'] = "Transferred";
+$utmOptions['status'] = "Approved Transferred";
 
 # Mail sent for Approved/
 
