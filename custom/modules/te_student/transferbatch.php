@@ -101,7 +101,7 @@ $srm_auto_Details       = $GLOBALS['db']->fetchByAssoc($srm_auto_assObj);
   $vendorObj= $GLOBALS['db']->query($vendorSql);
   $vendor = $GLOBALS['db']->fetchByAssoc($vendorObj); */
 #get Institute, Program and batch details
-$batchSql               = "SELECT   b.id AS batch_id,
+echo $batchSql               = "SELECT   b.id AS batch_id,
                                                     b.name AS batch_name,
                                                     b.batch_code,
                                                     b.fees_inr,
