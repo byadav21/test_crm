@@ -272,13 +272,17 @@ WHERE te_student_payment_plan.id = te_student_batch_te_student_payment_plan_1_c.
   AND te_student_batch_te_student_payment_plan_1_c.te_student_batch_te_student_payment_plan_1te_student_batch_ida='" . $student_batch_id . "'
   AND te_student_payment_plan.te_student_id_c='" . $student_id . "'");
 
-
-#update batch transfer request status
-$GLOBALS['db']->query("UPDATE te_transfer_batch
+echo "UPDATE te_transfer_batch
 SET is_new_approved=1,
     status='" . $_REQUEST['request_status'] . "',
                                          te_student_batch_id_c='" . $student_batch_id . "'
-WHERE id='" . $_REQUEST['request_id'] . "'");
+WHERE id='" . $_REQUEST['request_id'] . "'";
+#update batch transfer request status
+echo $value=$GLOBALS['db']->query("UPDATE te_transfer_batch
+SET is_new_approved=1,
+    status='" . $_REQUEST['request_status'] . "',
+                                         te_student_batch_id_c='" . $student_batch_id . "'
+WHERE id='" . $_REQUEST['request_id'] . "'");exit;
 $utmOptions['status'] = "Approved Transferred";
 
 # Mail sent for Approved/
