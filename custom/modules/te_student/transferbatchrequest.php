@@ -188,7 +188,7 @@ foreach ($btApprover as $val)
                             </tr>
                     </table>
                     Click the below link to approve the request:<br/>
-                    URL: http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$old_batch_id.'=appusr=' . md5($val) . '
+                    URL: http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&appusr=' . md5($val) . '
                     
                     <br>CRM: http://redge.talentedge.in <br><br>Regards,<br>SRM Team';
 
