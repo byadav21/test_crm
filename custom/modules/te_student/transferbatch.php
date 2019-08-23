@@ -123,6 +123,7 @@ $batchSql               = "SELECT   b.id AS batch_id,
                                                AND b.id='" . $new_batch_id . "'";
 
     $batchObj                               = $GLOBALS['db']->query($batchSql);
+    echo "<pre>";print_r($batchDetails);exit;
     $batchDetails                           = $GLOBALS['db']->fetchByAssoc($batchObj);
     $studentBatchObj                        = new te_student_batch();
     $studentBatchObj->name                  = $batchDetails['batch_name'];
