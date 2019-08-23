@@ -14,28 +14,29 @@ if($_POST['Submit']){
 	$updatequerydata=$db->query($updatedata);
 	$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."' where batch_id_rel='".$student_batch."'";
 	$updatequerydata=$db->query($updatestatus);
-
-	//API Call
-	global $sugar_config;
-	$data=array();
-	$user     = 'talentedgeadmin';
-    $password = 'Inkoniq@2016';
-    //$url      = 'https://talentedge.in/order-api/';
-   	$url      = $sugar_config['website_URL'] . 'batch_transfer.php';
-    $headers  = array(
-        'Authorization: Basic ' . base64_encode("$user:$password")
-    );
-    $data['new_batch_code']=$_POST['newbatchcode'];
-	$data['old_batch_code']=$_POST['oldbatchcode'];
-	$data['email']	=	$_POST['emailid'];
-    $ch     = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    $result = curl_exec($ch);
-    $res    = json_decode($result,TRUE);
+	if($_POST['two']=='Approve'){
+			//API Call
+		global $sugar_config;
+		$data=array();
+		$user     = 'talentedgeadmin';
+	    $password = 'Inkoniq@2016';
+	    //$url      = 'https://talentedge.in/order-api/';
+	   	$url      = $sugar_config['website_URL'] . 'batch_transfer.php';
+	    $headers  = array(
+	        'Authorization: Basic ' . base64_encode("$user:$password")
+	    );
+	    $data['new_batch_code']=$_POST['newbatchcode'];
+		$data['old_batch_code']=$_POST['oldbatchcode'];
+		$data['email']	=	$_POST['emailid'];
+	    $ch     = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	    curl_setopt($ch, CURLOPT_POST, 1);
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+	    $result = curl_exec($ch);
+	    $res    = json_decode($result,TRUE);
+	}
     //echo "=====<pre>";print_r($result);echo "</pre>";exit;
 	$subject="Batch transfer Mail";
 	$body = "Hi,<br/>The batch transfer request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been <b>'".$_POST['two']."'</b>.";
@@ -109,7 +110,7 @@ $row = $db->fetchByAssoc($result);
 					<div class="block">
 						<label>Topic</label>
 						<label><input type="radio" name="one" value="1" <?php echo ($row['bt_fee_waiver']== '1') ?  "checked" : "" ;  ?>/> Waiver</label>
-						<label><input type="radio" name="one" value="2" <?php echo ($row['bt_fee_waiver']== '2') ?  "checked" : "" ;  ?>/> To be Deducted</label>
+						<label><input type="radio" name="one" value="2" <?php echo ($row['bt_fee_waiver']== '2') ?  "checked" : "" ;  ?>/> To be Adjusted</label>
 						<label><input type="radio" name="one" value="3"<?php echo ($row['bt_fee_waiver']== '3') ?  "checked" : "" ;  ?> /> To be Paid</label>
 					</div>
 					<div class="block">
@@ -126,10 +127,11 @@ $row = $db->fetchByAssoc($result);
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
 					</div> 
+					<?php if(strtolower($row['status'])=='pending'){?>
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
-
+					<?php }?>
 			</section>	
 		</div>		
 	</div>
