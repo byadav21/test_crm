@@ -61,7 +61,7 @@ if($_POST['Submit']){
 	//die;
 }
 
-$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c limit";
+$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
