@@ -9,13 +9,13 @@ ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
 require_once('include/entryPoint.php');
 global $db;
-echo $transferSql     = "SELECT *
+$transferSql     = "SELECT *
                     FROM te_transfer_batch
                     WHERE id='" . $_REQUEST['request_id'] . "'
                       AND deleted=0";
 $transferObj     = $GLOBALS['db']->query($transferSql);
 $transferDetails = $GLOBALS['db']->fetchByAssoc($transferObj);
-echo "<pre>";print_r($transferDetails);exit;
+
 $old_batch_id         = $transferDetails['te_student_batch_id_c'];
 $new_batch_id         = $transferDetails['te_ba_batch_id_c'];
 $student_id           = $transferDetails['te_student_id_c'];
