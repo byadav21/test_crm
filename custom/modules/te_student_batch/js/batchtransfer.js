@@ -101,7 +101,7 @@ function showTransferPopup(student_id) {
         type: "POST",
         async: true,
         success: function (data) {
-            
+            //alert(data);
             $('#getFormOptions').html(data);
             $('#studentModal').modal('show', {
                 backdrop: 'static',
@@ -109,7 +109,7 @@ function showTransferPopup(student_id) {
             });
 
             SUGAR.ajaxUI.hideLoadingPanel();
-
+            return false;
         }
     });
 
@@ -117,3 +117,6 @@ function showTransferPopup(student_id) {
     return false;
 
 }
+
+
+            

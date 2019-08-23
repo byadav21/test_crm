@@ -413,6 +413,34 @@ input:checked + .slider:before {
                     updateStudentEligibility(student_batch_id,is_eligible);
                     
                 }
+                
+        $(document).ready(function () {
+
+             
+                
+                
+            });
+            
+            
+            function getAjax(target, id) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=srmajax",
+                    data: {action: target, ID: id},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        //alert(data)
+                        $('#' + target).html('');
+                        $('#' + target).html(data);
+
+                    }
+                });
+            }
 {/literal}
      </script>
 </body>
