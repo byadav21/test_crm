@@ -15,7 +15,7 @@ $transferSql     = "SELECT *
                       AND deleted=0";
 $transferObj     = $GLOBALS['db']->query($transferSql);
 $transferDetails = $GLOBALS['db']->fetchByAssoc($transferObj);
-
+echo "*****<pre>";print_r($transferDetails);exit;
 $old_batch_id         = $transferDetails['te_student_batch_id_c'];
 $new_batch_id         = $transferDetails['te_ba_batch_id_c'];
 $student_id           = $transferDetails['te_student_id_c'];
