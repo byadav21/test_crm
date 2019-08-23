@@ -127,7 +127,7 @@ $studentBatchObj->te_ba_batch_id_c      = $new_batch_id;
 $studentBatchObj->te_student_id_c       = $student_id;
 $studentBatchObj->status                = "Pending";
 $studentBatchObj->country               = $student_country;
-$studentBatchObj->save();
+$tid = $studentBatchObj->save();
 $utmOptions['status']                   = "queued";
 
 //$fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/srm_docs/" . $uploadedFile, "wb");
@@ -145,7 +145,9 @@ $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
 $mail            = new FalconideEmail();
 
 sugar_chmod($targetFilePath, 0777);
-$btApprover = array('pawan.kumar@talentedge.in', 'pawan.kumar@talentedge.in', 'pawan.kumar@talentedge.in');
+$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in','anup.kumar@talentedge.in');
+
+//$btApprover = array('pawan.kumar@talentedge.in','pawan.kumar@talentedge.in');
 
 //print_r($emailData);
 foreach ($btApprover as $val)
@@ -188,7 +190,7 @@ foreach ($btApprover as $val)
                             </tr>
                     </table>
                     Click the below link to approve the request:<br/>
-                    URL: http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&appusr=' . md5($val) . '
+                    URL: http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '
                     
                     <br>CRM: http://redge.talentedge.in <br><br>Regards,<br>SRM Team';
 
