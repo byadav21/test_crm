@@ -685,7 +685,7 @@ function getisSent($id)
                 <br>View <i class="fa fa-eye"></i>
                 </a>
                 </div>';
-    echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>'.$viewUrl : $data['status'].$viewUrl;
+    echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" " ng-click="openTransfer(\'' . $id . '\')">Transfer Batch</a>'.$viewUrl : 'Pendingggg'.$viewUrl;
 }
 
 function is_Eligibile($id)
