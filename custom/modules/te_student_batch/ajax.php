@@ -87,6 +87,32 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
     //RecordID: RecordID, RowID:RowID
     $getInstitutes = getInstitutes();
     $student_id    = $_POST['student_id'];
+    
+    function getInstProBatName($id)
+    {
+        global $db;
+
+        $sql = " SELECT i.`name` AS insname,
+                       i.id AS insid,
+                       i.web_institute_id,
+                       b.batch_code,
+                       b.name AS batchname,
+                       b.id AS batchid,
+                       p.name AS programname,
+                       p.id AS programid
+
+                FROM `te_in_institutes` AS i
+                INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id
+                INNER JOIN te_ba_batch AS b ON b.id=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb
+                INNER JOIN te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id
+                INNER JOIN te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                WHERE i.deleted=0
+                  AND ib.deleted=0
+                  AND pb.deleted=0 and b.id='$id'";
+
+        $itemDetal = $db->query($sql);
+        return $db->fetchByAssoc($itemDetal);
+    }
 
     function getStudentBatch($id)
     {
@@ -100,6 +126,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                         te_student.id AS sid,
                         te_student.name,
                         te_student.email,
+                        te_student.mobile,
                         te_student.status
                  FROM te_student_batch sb
                  INNER JOIN te_student_te_student_batch_1_c stb ON sb.id=stb.te_student_te_student_batch_1te_student_batch_idb
@@ -114,6 +141,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
     if ($student_id !== '')
     {
         $studentData = getStudentBatch($student_id);
+        $oldRecords  = getInstProBatName($studentData['batch_id']);
     }
     ?>
 <style>
@@ -140,7 +168,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                 </h4>
             </div>
             <div class="modal-body">
-                Student Current Details
+                <h5 class="modal-title">Student Details</h5> <br/>
                 <div class="col-sm-12">
                     
                     <div class="col-sm-6">
@@ -149,11 +177,27 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                         <label>Email : </label> <?= $studentData['email'] ?>
                     </div>
                     <div class="col-sm-6">
-                        <label>Status : </label> <?= $studentData['status'] ?>
+                        <label>Mobile : </label> <?= $studentData['mobile'] ?>
                         <p>&nbsp;</p>
-                        <label>Batch : </label> <?= $studentData['batch_name'] ?>
+                        <label>Status : </label> <?= $studentData['status'] ?>
                     </div>
                 </div>
+                 <hr>
+                 <h5 class="modal-title">Current Course Details</strong> <h5/><br/>
+                <div class="col-sm-12">
+                    
+                    <div class="col-sm-6">
+                        <label>Institute Name : </label> <?= $oldRecords['insname'] ?>
+                        <p>&nbsp;</p>
+                        <label>Programe Name : </label> <?= $oldRecords['programname'] ?>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Batch Name : </label> <?= $oldRecords['batchname'] ?>
+                        <p>&nbsp;</p>
+                        <label>Batch Code : </label> <?= $oldRecords['batch_code'] ?>
+                    </div>
+                </div>
+                
                 <hr>
 
                <div class = "block-wrapper">
