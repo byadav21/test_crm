@@ -140,7 +140,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                 </h4>
             </div>
             <div class="modal-body">
+                Student Current Details
                 <div class="col-sm-12">
+                    
                     <div class="col-sm-6">
                         <label>Name : </label> <?= $studentData['name'] ?>
                         <p>&nbsp;</p>
@@ -156,7 +158,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
 
                <div class = "block-wrapper">
                    <div class = "block">
-                        <label>Select Institute : </label>
+                        <label>Select New Institute : </label>
                         <select name="institute_dropdown" id="institute_dropdown"  class="" style="">
                             <option value="">-Select-</option>
                             <?php
@@ -171,14 +173,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
 
                     </div>
                     <div class = "block">
-                        <label>Select Program : </label>
+                        <label>Select New Program : </label>
                         <select name="program_dropdown" id="program_dropdown"  class=""  style="">
                             <option value="">-Select-</option>
 
                         </select>
                     </div>
                     <div class = "block">
-                        <label>Select Batch : </label>
+                        <label>Select New Batch : </label>
                         <select name="batch_dropdown" id="batch_dropdown"  class=""  style="">
                             <option value="">-Select-</option>
                         </select>
