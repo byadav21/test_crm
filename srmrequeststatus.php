@@ -15,6 +15,8 @@ if($_POST['Submit']){
 	$newdata	=	array();
 	$newdata['request_id']	=	$tbid;
 	$newdata['request_status']	=	$_POST['two'];
+	$newdata['bt_fee_waiver']	=	$_POST['one'];
+	$newdata['approve_comment']	=	$_POST['approve_comment'];
 	$ch     = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiurl);
     //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -145,11 +147,11 @@ $row = $db->fetchByAssoc($result);
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
 					</div> 
-					<?php if(strtolower($row['status'])=='pending'){?>
+					<?php //if(strtolower($row['status'])=='pending'){?>
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
-					<?php }?>
+					<?php //}?>
 			</section>	
 		</div>		
 	</div>

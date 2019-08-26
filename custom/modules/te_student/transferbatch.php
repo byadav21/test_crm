@@ -136,6 +136,8 @@ $batchSql               = "SELECT   b.id AS batch_id,
     $studentBatchObj->te_ba_batch_id_c      = $batchDetails['batch_id'];
     $studentBatchObj->te_pr_programs_id_c   = $batchDetails['program_id'];
     $studentBatchObj->te_in_institutes_id_c = $batchDetails['institute_id'];
+    $studentBatchObj->bt_approver_comments  = $_REQUEST['approve_comment'];
+    $studentBatchObj->bt_fee_waiver         = $_REQUEST['bt_fee_waiver'];
 //$studentBatchObj->te_vendor_id_c=$vendor['id'];
 $studentBatchObj->status                = "Active";
 if ($srm_auto_Details)
@@ -150,6 +152,8 @@ if ($oldBatchDetails)
     $studentBatchObj->study_kit_address_postalcode = $oldBatchDetails['study_kit_address_postalcode'];
     $studentBatchObj->study_kit_address_city       = $oldBatchDetails['study_kit_address_city'];
     $studentBatchObj->leads_id                     = $oldBatchDetails['leads_id'];
+    $studentBatchObj->bt_url                       = $oldBatchDetails['bt_url'];
+    $studentBatchObj->bt_srm_comments              = $oldBatchDetails['bt_srm_comments'];
 }
 $studentBatchObj->total_session_required                      = $batchDetails['total_sessions_planned'];
 $studentBatchObj->te_student_te_student_batch_1te_student_ida = $student_id;
