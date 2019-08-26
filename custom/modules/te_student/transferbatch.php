@@ -157,6 +157,7 @@ if ($oldBatchDetails)
 }
 $studentBatchObj->total_session_required                      = $batchDetails['total_sessions_planned'];
 $studentBatchObj->te_student_te_student_batch_1te_student_ida = $student_id;
+$studentBatchObj.set('bt_url','ahgsdjgjagj');
 //echo "<pre>";print_r($studentBatchObj);exit;
 $studentBatchObj->save();
 #get new student batch id
