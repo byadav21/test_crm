@@ -692,7 +692,7 @@ function getisSent($id)
     }
     else if(!empty($data) && $data['status'] == 'BTPark'){
         
-        echo 'BTPark'.$viewUrl;
+        echo 'BTPark<br><a href="javascript:void(0)" class=" "  onClick="showTransferPopup(\'' . $id . '\')">Transfer Batch</a> '.$viewUrl;
     }
     else{
         

@@ -115,7 +115,7 @@ if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']) &&
 //$student_country=$_REQUEST['student_country'];
 //echo '$old_batch_id='.$old_batch_id.'$new_batch_id='.$new_batch_id.'$student_id='.$student_id.'$cbid='.$cbid;die;
 $newRecords      = getInstProBatName($new_batch_id);
-$statux = 'pending';
+$statux = 'Pending';
 if($newRecords['batch_code']=='BTPark'){
     $statux = 'BTPark';
 }
@@ -162,6 +162,7 @@ $oldRecords      = getInstProBatName($old_batch_id);
 $str             = trim($_POST['bt_srm_comments']);
 $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
 
+//print_r($newRecords);
 if($newRecords['batch_code']=='BTPark'){
     $queryCC = "update te_student_batch  set status='BT_Parking' where id='$cbid'"; 
     $insert  = $db->query($queryCC);
@@ -173,9 +174,9 @@ if($newRecords['batch_code']=='BTPark'){
 $mail            = new FalconideEmail();
 
 sugar_chmod($targetFilePath, 0777);
-//$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in','anup.kumar@talentedge.in');
 
-$btApprover = array('pawan.kumar@talentedge.in');
+//$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in','anup.kumar@talentedge.in');
+$btApprover = array('pawan.kumar@talentedge.in','ashis.mohanty@talentedge.in');
 
 //print_r($emailData);
 foreach ($btApprover as $val)
@@ -186,7 +187,7 @@ foreach ($btApprover as $val)
    <table cellpadding="0" cellspacing="0" style="width: 600px; border:1px solid #999; padding: 10px;" align="center">
         
         <tr>
-            <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#333; text-align: center; font-weight: bold;">SRM Batch Transferred Details</td>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#333; text-align: center; font-weight: bold;">SRM Batch Transfer Request Details</td>
         </tr>
         <tr>
             <td><hr/></td>
@@ -295,13 +296,8 @@ foreach ($btApprover as $val)
         <tr>
             <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left;">SRM Team</td>
         </tr>
-     </table>
+     </table>';
 
-
-
-
-
-';
 
 
     $emailData = $mail->toBtApprover('SRM BT Request', $uploadedFile, date('Y-m-d'), $email_summary, array($val));
