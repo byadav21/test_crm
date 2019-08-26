@@ -163,7 +163,7 @@ $str             = trim($_POST['bt_srm_comments']);
 $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
 
 if($newRecords['batch_code']=='BTPark'){
-    $queryCC = "update te_student_batch  set status='BT Parking' where id='$cbid'"; 
+    $queryCC = "update te_student_batch  set status='BT_Parking' where id='$cbid'"; 
     $insert  = $db->query($queryCC);
     echo json_encode($utmOptions);
     return false;
