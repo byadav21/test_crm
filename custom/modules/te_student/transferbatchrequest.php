@@ -304,5 +304,5 @@ foreach ($btApprover as $val)
     $nnn       = $mail->btApprovalEmail($emailData);
 }
 
-//echo json_encode($utmOptions);
+echo json_encode($utmOptions);
 return false;
