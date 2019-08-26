@@ -15,7 +15,7 @@ $dictionary['te_student_batch']['fields']['bt_srm_attachment'] =array(
             );
 
 
-$dictionary['te_student_batch']['fields']['bt_fee_waiver'] =array(
+/*$dictionary['te_student_batch']['fields']['bt_fee_waiver'] =array(
                 'name' => 'bt_fee_waiver',
                 'vname' => 'bt_fee_waiver',
                  'type' => 'varchar',
@@ -29,7 +29,7 @@ $dictionary['te_student_batch']['fields']['bt_fee_waiver'] =array(
                 'audited' => false,
                 'importable' => 'true',
                 'duplicate_merge' => false,
-            );
+            );*/
 
 
 $dictionary['te_student_batch']['fields']['bt_srm_comments'] =array (
