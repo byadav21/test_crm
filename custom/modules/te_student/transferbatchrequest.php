@@ -276,7 +276,7 @@ foreach ($btApprover as $val)
 ';
 
 
-    $emailData = $mail->toBtApprover('Batch Trasfer Request', $uploadedFile, date('Y-m-d'), $email_summary, array($val));
+    $emailData = $mail->toBtApprover('SRM BT Request', $uploadedFile, date('Y-m-d'), $email_summary, array($val));
     $nnn       = $mail->btApprovalEmail($emailData);
 }
 
