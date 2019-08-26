@@ -17,6 +17,7 @@ $old_batch_id = $_REQUEST['old_batch_id'];
 $new_batch_id = $_REQUEST['batch_dropdown'];
 $student_id   = $_REQUEST['student_id'];
 $cbid         = $_REQUEST['te_student_batch_id'];
+$bt_fee_waiver         = $_REQUEST['bt_fee_waiver'];
 
 function getInstProBatName($id)
 {
@@ -45,12 +46,17 @@ function getInstProBatName($id)
 }
 
 // If form is submitted 
-if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']))
+$targetFilePath='';
+$uploadedFile='';
+$bt_urlx ='';
+if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']) && !empty($_FILES["bt_attached_file"]["name"]))
 {
-
+    
 
     $uploadedFile = '';
     $uploadStatus = '';
+    $response['status']=0;
+    $response['message']='';
     if (!empty($_FILES["bt_attached_file"]["name"]))
     {
 
@@ -61,7 +67,7 @@ if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']))
         $targetFilePath = 'upload/srm_docs/' . $fileName;
         $fileType       = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg');
+        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg','xlsx','xls');
         if (in_array($fileType, $allowTypes))
         {
 
@@ -85,13 +91,9 @@ if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']))
     }
 
     if ($uploadStatus == 1)
-    {
-
-
-        // Insert form data in the database 
-        $str             = trim($_POST['bt_srm_comments']);
-        $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
-        $insert          = $db->query("update te_student_batch set bt_srm_attachment='$fileName',bt_srm_comments='$bt_srm_comments' where id='$cbid'");
+    { 
+       
+        $insert          = $db->query("update te_student_batch  set bt_srm_attachment='$fileName' where id='$cbid'");
 
         if ($insert)
         {
@@ -99,14 +101,16 @@ if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']))
             $response['message'] = 'Form data submitted successfully!';
         }
     }
+    
+    // Return response 
+    if ($response['status'] != 1)
+    {
+        echo json_encode($response);
+        return;
+    }
 }
 
-// Return response 
-if ($response['status'] != 1)
-{
-    echo json_encode($response);
-    return;
-}
+
 
 //$student_country=$_REQUEST['student_country'];
 //echo '$old_batch_id='.$old_batch_id.'$new_batch_id='.$new_batch_id.'$student_id='.$student_id.'$cbid='.$cbid;die;
@@ -136,7 +140,19 @@ $utmOptions['status']                   = "queued";
 //
 //
 
-   $oldRecords      = getInstProBatName($old_batch_id);
+if($tid){
+    
+     $bt_urlx = "http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch=$cbid&tid=$tid";
+
+        // Insert form data in the database 
+        $str             = trim($_POST['bt_srm_comments']);
+        $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
+        $queryx = "update te_student_batch  set bt_srm_comments='$bt_srm_comments',bt_fee_waiver='$bt_fee_waiver',bt_url='$bt_urlx' where id='$cbid'"; 
+        $insert          = $db->query($queryx);
+        
+}
+
+$oldRecords      = getInstProBatName($old_batch_id);
 $newRecords      = getInstProBatName($new_batch_id);
 $str             = trim($_POST['bt_srm_comments']);
 $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
