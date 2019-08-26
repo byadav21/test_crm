@@ -127,14 +127,14 @@ $studentBatchObj->te_ba_batch_id_c      = $new_batch_id;
 $studentBatchObj->te_student_id_c       = $student_id;
 $studentBatchObj->status                = "Pending";
 $studentBatchObj->country               = $student_country;
-$tid = $studentBatchObj->save();
+$tid                                    = $studentBatchObj->save();
 $utmOptions['status']                   = "queued";
 
 //$fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/reports/srm_docs/" . $uploadedFile, "wb");
 //fwrite($fp, $AllLeadData);
 //fclose($fp);
 //
-    //
+//
 
    $oldRecords      = getInstProBatName($old_batch_id);
 $newRecords      = getInstProBatName($new_batch_id);
@@ -145,54 +145,135 @@ $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
 $mail            = new FalconideEmail();
 
 sugar_chmod($targetFilePath, 0777);
-$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in','anup.kumar@talentedge.in');
+//$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in','anup.kumar@talentedge.in');
 
-//$btApprover = array('pawan.kumar@talentedge.in','pawan.kumar@talentedge.in');
+$btApprover = array('pawan.kumar@talentedge.in');
 
 //print_r($emailData);
 foreach ($btApprover as $val)
 {
 
-    $email_summary = 'Hi, <br><br>
-                            
-                            Below is the information of Batch Transfer Request.<br>
-                            
-                            <table border="0" cellpadding="0" cellspacing="0" border="1" height="100%" width="100%" id="bodyTable">
-                        
-                            <tr>
-                                <td align="center" valign="top">
-                                    <table border="0" cellpadding="20" cellspacing="0" border="1" width="600" id="emailContainer">
-                                            <tr>
-                                                <td><strong>Name:</strong> <span>' . $studentname . '</span></td>
-                                                <td><strong>Email:</strong> <span>' . $studentemail . '</span></td>
-                                                <td><strong>Mobile:</strong> <span>' . $studentmobile . '</span></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Old Institute Name:</strong> <span>' . $oldRecords['insname'] . '</span></td>
-                                                <td><strong>Old Programe Name:</strong> <span>' . $oldRecords['programname'] . '</span></td>
-                                                <td><strong>Old Batch Name:</strong> <span>' . $oldRecords['batchname'] . '</span></td>
-                                                <td><strong>Code:</strong> <span>' . $oldRecords['batch_code'] . '</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>New Institute Name:</strong> <span>' . $newRecords['insname'] . '</span></td>
-                                                <td><strong>New Programe Name:</strong> <span>' . $newRecords['programname'] . '</span></td>
-                                                <td><strong>New Batch Name:</strong> <span>' . $newRecords['batchname'] . '</span></td>
-                                                <td><strong>Code:</strong> <span>' . $oldRecords['batch_code'] . '</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>SRM Comments:</strong></td>
-                                                <td>'.substr($bt_srm_comments, 0, 100).'.....l<br>(click the approval url for more details)</td>
-                                            </tr>
+    $email_summary = '
+        
+   <table cellpadding="0" cellspacing="0" style="width: 600px; border:1px solid #999; padding: 10px;" align="center">
+        
+        <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#333; text-align: center; font-weight: bold;">SRM Batch Transferred Details</td>
+        </tr>
+        <tr>
+            <td><hr/></td>
+        </tr>
+        <tr>
+            <td height="15"></td>
+        </tr>
+        <tr>
+        	<td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;">Hi,</td>
+        </tr>
+        
+        <tr>
+            <td height="15"></td>
+        </tr>
+        <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;">Below is the information of Batch Transfer Request</td>
+        </tr>
+        <tr>
+        	<td height="15"></td>
+        </tr>
+        <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;">
+               <table cellpadding="0" cellspacing="0" style="width: 600px; border:1px solid #999; padding: 10px; border-collapse: collapse;" align="center">
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; width: 28%;  padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Name :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; width: 72%;  padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'.$studentname.'</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Email :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;"><a href="#">'.$studentemail.'</a></td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Mobile :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'. $studentmobile.'</td>
+                </tr>
+                <tr>
+                <td></td> <td></td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Old Institute Name :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'.$oldRecords['insname'].'</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Old Programe Name : </strong></td>
+                    <td style="font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'. $oldRecords['programname'].'</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Old Batch Name :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $oldRecords['batchname'] . '</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Batch Code :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $oldRecords['batch_code'] . '</td>
+                </tr>
+                <tr>
+                <td></td> <td></td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">New Institute Name :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $newRecords['insname'] . '</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">New Programe Name : </strong></td>
+                    <td style="font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $newRecords['programname'] . '</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">New Batch Name :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $newRecords['batchname'] . '</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Batch Code :</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $oldRecords['batch_code'] . '</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: normal;"><strong style="margin-right: 10px;">SRM Comments : </strong></td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'.substr($bt_srm_comments, 0, 100).'...(<a href="http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '">Click the approval URl for more details</a>)</td>
+                </tr>
+               </table> 
+            </td>
+        </tr>
+        <tr>
+            <td height="15"></td>
+        </tr>
+        <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;">Click the Below links to approve the request</td>
+        </tr>
+        <tr>
+            <td height="15"></td>
+        </tr>
+        <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;"><strong>Approval URL:</strong>&nbsp;<a href="http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '" style="font-weight: normal;">the crmstage.talentedge.in</a></td>
+        </tr>
+        <tr>
+            <td height="15"></td>
+        </tr>
+       
+        <tr>
+            <td height="15"></td>
+        </tr>
+        <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;">Regards</td>
+        </tr>
+         <tr>
+            <td height="8"></td>
+        </tr>
+        <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left;">SRM Team</td>
+        </tr>
+     </table>
 
-                                    </table>
-                                </td>
-                            </tr>
-                    </table>
-                    Click the below link to approve the request:<br/>
-                    URL: http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '
-                    
-                    <br>CRM: http://redge.talentedge.in <br><br>Regards,<br>SRM Team';
+
+
+
+
+';
 
 
     $emailData = $mail->toBtApprover('Batch Trasfer Request', $uploadedFile, date('Y-m-d'), $email_summary, array($val));
