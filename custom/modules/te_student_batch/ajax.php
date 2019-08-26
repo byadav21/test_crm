@@ -123,6 +123,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
     .block-wrapper{display:flex; width:100%; padding:0 9px}
     .block{display:flex; flex-direction: column; margin-left: 15px; width:100%;}
     .block:first-child{margin-left:0px}
+    .block-wrapper label{margin:0 15px 0 0; display: flex; align-items: center;}
+    .block-wrapper input[type="radio"]{margin:0 5px 0 0;}
 </style>
 
     <div class="modal-dialog" style="overflow:visible">
@@ -186,11 +188,22 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                     <textarea name="bt_srm_comments" id="bt_srm_comments">
                                    
                 </textarea>
-                </div>    
+                    
+                    
+                </div>   
+                <div class="block-wrapper">
+                        <label>Status</label>
+                        <label><input type="radio" name="bt_fee_waiver" value="1" checked>Waiver</label>
+                        <label><input type="radio" name="bt_fee_waiver" value="2">To be Adjusted</label>
+                        <label><input type="radio" name="bt_fee_waiver" value="3">To be Paid</label>
+                </div>
+                <br/>
                 <div class = "block-wrapper">
                 <input type="file" name="bt_attached_file" id="bt_attached_file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                 <span>(Accepted format: xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf)</span>
                 </div>
+                
+                
 
                 <input type="hidden" name="te_student_batch_id" value="<?=$studentData['id'];?>">
                 <input type="hidden" name="student_id" value="<?=$studentData['sid'];?>">
@@ -255,9 +268,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                     else if(bt_srm_comments==''){
                         alert("Please input your comment."); return false;
                     } 
-                    else if(bt_attached_file==''){
-                        alert("Please select a file."); return false;
-                    } 
+                    //                    else if(bt_attached_file==''){
+                    //                        alert("Please select a file."); return false;
+                    //                    } 
                     
                     //var form = $("#formTrasferForm").get(0); 
                     var form = $('form').get(0); 
