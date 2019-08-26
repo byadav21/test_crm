@@ -8,12 +8,12 @@ if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
 	$tbid=$_GET['tid'];
 }else{
-	echo "Wrong URL";exit; 
+	echo "You have not the permission to access this page";exit; 
 }
 if($_POST['Submit']){
 	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
 	$newdata	=	array();
-	$newdata['request_id']	=	$tid;
+	$newdata['request_id']	=	$tbid;
 	$newdata['request_status']	=	$_POST['two'];
 	$ch     = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiurl);
@@ -61,18 +61,18 @@ if($_POST['Submit']){
 	//die;
 }
 
-$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c";
+$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment, SUM(sp.amount) AS total from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-echo "<pre>";print_r($_row);echo "</pre>";
+//echo "<pre>";print_r($row);echo "</pre>";exit;
 ?>
 
 <!doctype html>
 <html> 
 <head> 
 <meta charset="utf-8">
-<title>CRM</title>
+<title>SRM Module</title>
 <!-- <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0"> -->
 <meta name="viewport" content="user-scalable = 1">
 <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
@@ -122,13 +122,13 @@ echo "<pre>";print_r($_row);echo "</pre>";
 						<p><?php echo $row['bt_srm_comments'];?></p>
 					</div>
 					<div class="block">
-						<label>Topic</label>
+						<label>Status</label>
 						<label><input type="radio" name="one" value="1" <?php echo ($row['bt_fee_waiver']== '1') ?  "checked" : "" ;  ?>/> Waiver</label>
 						<label><input type="radio" name="one" value="2" <?php echo ($row['bt_fee_waiver']== '2') ?  "checked" : "" ;  ?>/> To be Adjusted</label>
 						<label><input type="radio" name="one" value="3"<?php echo ($row['bt_fee_waiver']== '3') ?  "checked" : "" ;  ?> /> To be Paid</label>
 					</div>
 					<div class="block">
-						<label>Status</label>
+						<label>Approval Status</label>
 						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve') ?  "checked" : "" ;  ?>/> Approve</label>
 						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($row['bt_srm_attachment']!=''){?>
@@ -136,6 +136,10 @@ echo "<pre>";print_r($_row);echo "</pre>";
 							<button><a href="<?php echo "/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>" target="_blank">Download Attached File</a></button>
 						</div>
 						<?php }?>
+					</div>
+					<div class="block">
+						<label>Total Paid</label>
+						<p><?php echo $row['total'];?> (including tax)</p>
 					</div>
 					<div class="block">
 						<label>Comment</label>
