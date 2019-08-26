@@ -32,7 +32,7 @@ else
 # Find program And istitute
 $sql_program    = "SELECT Ts.name AS institute,
                         Ps.name AS program,
-                        Sb.id, Sb.bt_url, Sb.bt_srm_comments
+                        Sb.id
                  FROM `te_student_batch` Sb
                  INNER JOIN te_pr_programs Ps ON Ps.id=Sb.te_pr_programs_id_c
                  INNER JOIN te_in_institutes Ts ON Ts.id=Sb.te_in_institutes_id_c
@@ -152,11 +152,12 @@ if ($oldBatchDetails)
     $studentBatchObj->study_kit_address_postalcode = $oldBatchDetails['study_kit_address_postalcode'];
     $studentBatchObj->study_kit_address_city       = $oldBatchDetails['study_kit_address_city'];
     $studentBatchObj->leads_id                     = $oldBatchDetails['leads_id'];
-    $studentBatchObj->bt_url                       = $progrm_result['bt_url'];
-    $studentBatchObj->bt_srm_comments              = $progrm_result['bt_srm_comments'];
+    $studentBatchObj->bt_url                       = $oldBatchDetails['bt_url'];
+    $studentBatchObj->bt_srm_comments              = $oldBatchDetails['bt_srm_comments'];
 }
 $studentBatchObj->total_session_required                      = $batchDetails['total_sessions_planned'];
 $studentBatchObj->te_student_te_student_batch_1te_student_ida = $student_id;
+echo "<pre>";print_r($studentBatchObj);exit;
 $studentBatchObj->save();
 #get new student batch id
 $student_batch_id                                             = $studentBatchObj->id;
