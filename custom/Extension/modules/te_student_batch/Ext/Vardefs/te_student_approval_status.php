@@ -4,14 +4,24 @@ $dictionary['te_student_batch']['fields']['bt_fee_waiver'] = array(
 	'name' => 'bt_fee_waiver',
 	'vname' => 'bt_fee_waiver',
 	'type' => 'enum',
-	'audited' => false,
-	'massupdate' => false,
-	'source' => 'non-db',
-	'studio' => 'visible',
-	'options' => 'approval_status',
-);
+	'massupdate' => 0,
+	  'no_default' => false,
+	  'comments' => '',
+	  'help' => '',
+	  'importable' => 'true',
+	  'duplicate_merge' => 'disabled',
+	  'duplicate_merge_dom_value' => '0',
+	  'audited' => false,
+	  'inline_edit' => true,
+	  'reportable' => true,
+	  'unified_search' => false,
+	  'merge_filter' => 'disabled',
+	  'options' => 'approval_status',
+	  'studio' => 'visible',
+	  'dependency' => false,
+	);
 
-$dictionary['te_student_batch']['fields']['bt_approver_comments'] = array(
+/*$dictionary['te_student_batch']['fields']['bt_approver_comments'] = array(
 	'required' => false,
 	'name' => 'bt_approver_comments',
 	'vname' => 'bt_approver_comments',
@@ -28,11 +38,4 @@ $dictionary['te_student_batch']['fields']['bt_url'] = array(
 	'audited' => false,
 	'massupdate' => false,	 
 	'studio' => 'visible',
-);
-
-
-
-
-
-
-
+);*/
