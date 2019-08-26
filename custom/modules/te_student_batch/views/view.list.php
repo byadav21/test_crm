@@ -685,7 +685,20 @@ function getisSent($id)
                 <br>View <i class="fa fa-eye"></i>
                 </a>
                 </div>';
-    echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" "  onClick="showTransferPopup(\'' . $id . '\')">Transfer Batch</a>'.$viewUrl : 'Pending'.$viewUrl;
+    
+    if(!empty($data) && $data['status'] == 'Pending'){
+        
+        echo 'Pending'.$viewUrl;
+    }
+    else if(!empty($data) && $data['status'] == 'BTPark'){
+        
+        echo 'BTPark'.$viewUrl;
+    }
+    else{
+        
+        echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" "  onClick="showTransferPopup(\'' . $id . '\')">Transfer Batch</a>'.$viewUrl : 'Pending'.$viewUrl;
+    }
+    
 }
 
 function is_Eligibile($id)

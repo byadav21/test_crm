@@ -171,6 +171,7 @@ $GLOBALS['app_list_strings']['student_batch_status_list']=array (
   'Inactive' => 'Inactive',
   'Dropout' => 'Dropout',
   'Inactive_transfer' => 'Inactive Transfer',
+  'BT_Parking' => 'BT Parking',
 );
 
 $GLOBALS['app_list_strings']['contract_type_list']=array (

@@ -114,6 +114,11 @@ if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']) &&
 
 //$student_country=$_REQUEST['student_country'];
 //echo '$old_batch_id='.$old_batch_id.'$new_batch_id='.$new_batch_id.'$student_id='.$student_id.'$cbid='.$cbid;die;
+$newRecords      = getInstProBatName($new_batch_id);
+$statux = 'pending';
+if($newRecords['batch_code']=='BTPark'){
+    $statux = 'BTPark';
+}
 
 $studentSql      = "SELECT * FROM te_student WHERE id='" . $student_id . "' AND deleted=0";
 $studentObj      = $GLOBALS['db']->query($studentSql);
@@ -129,7 +134,7 @@ $studentBatchObj->old_batch_records     = $old_batch_id;
 $studentBatchObj->batch_id_rel          = $cbid;
 $studentBatchObj->te_ba_batch_id_c      = $new_batch_id;
 $studentBatchObj->te_student_id_c       = $student_id;
-$studentBatchObj->status                = "Pending";
+$studentBatchObj->status                = $statux;
 $studentBatchObj->country               = $student_country;
 $tid                                    = $studentBatchObj->save();
 $utmOptions['status']                   = "queued";
@@ -153,9 +158,16 @@ if($tid){
 }
 
 $oldRecords      = getInstProBatName($old_batch_id);
-$newRecords      = getInstProBatName($new_batch_id);
+
 $str             = trim($_POST['bt_srm_comments']);
 $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
+
+if($newRecords['batch_code']=='BTPark'){
+    $queryCC = "update te_student_batch  set status='BT_Parking' where id='$cbid'"; 
+    $insert  = $db->query($queryCC);
+    echo json_encode($utmOptions);
+    return false;
+}
 //print_r($oldRecords);
 //print_r($newRecords); 
 $mail            = new FalconideEmail();
@@ -246,7 +258,7 @@ foreach ($btApprover as $val)
                 </tr>
                 <tr>
                     <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Batch Code :</td>
-                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $oldRecords['batch_code'] . '</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $newRecords['batch_code'] . '</td>
                 </tr>
                 <tr>
                     <td style="padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: normal;"><strong style="margin-right: 10px;">SRM Comments : </strong></td>
