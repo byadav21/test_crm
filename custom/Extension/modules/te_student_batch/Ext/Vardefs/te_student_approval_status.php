@@ -21,8 +21,7 @@ $dictionary['te_student_batch']['fields']['bt_fee_waiver'] = array(
 	  'options' => 'approval_status',
 	  'studio' => 'visible',
 	  'dependency' => false,
-	
-);
+	);
 
 $dictionary['te_student_batch']['fields']['bt_approver_comments'] = array(
 	'required' => false,
