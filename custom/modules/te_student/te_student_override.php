@@ -208,7 +208,7 @@ class te_student_override extends te_student
     {
 
         $programsList = array();
-        $programSql   = "SELECT status FROM te_transfer_batch WHERE batch_id_rel='$id' and status='Pending'  and deleted='0' ";
+        $programSql   = "SELECT status FROM te_transfer_batch WHERE batch_id_rel='$id' and (status='Pending' || status='BTPark')  and deleted='0' ";
         $programObj   = $this->dbinstance->query($programSql);
         return $this->dbinstance->fetchByAssoc($programObj);
     }

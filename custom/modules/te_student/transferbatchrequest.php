@@ -129,7 +129,7 @@ $studentBatchObj->old_batch_records     = $old_batch_id;
 $studentBatchObj->batch_id_rel          = $cbid;
 $studentBatchObj->te_ba_batch_id_c      = $new_batch_id;
 $studentBatchObj->te_student_id_c       = $student_id;
-$studentBatchObj->status                = "Pending";
+$studentBatchObj->status                = "BTPark";
 $studentBatchObj->country               = $student_country;
 $tid                                    = $studentBatchObj->save();
 $utmOptions['status']                   = "queued";
@@ -156,6 +156,11 @@ $oldRecords      = getInstProBatName($old_batch_id);
 $newRecords      = getInstProBatName($new_batch_id);
 $str             = trim($_POST['bt_srm_comments']);
 $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
+
+if($newRecords['batch_code']=='BTPark'){
+    echo json_encode($utmOptions);
+    return false;
+}
 //print_r($oldRecords);
 //print_r($newRecords); 
 $mail            = new FalconideEmail();
@@ -246,7 +251,7 @@ foreach ($btApprover as $val)
                 </tr>
                 <tr>
                     <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Batch Code :</td>
-                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $oldRecords['batch_code'] . '</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">' . $newRecords['batch_code'] . '</td>
                 </tr>
                 <tr>
                     <td style="padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: normal;"><strong style="margin-right: 10px;">SRM Comments : </strong></td>
