@@ -138,6 +138,10 @@ $row = $db->fetchByAssoc($result);
 						<?php }?>
 					</div>
 					<div class="block">
+						<label>Total Paid</label>
+						<p><?php echo $row['total'];?></p>
+					</div>
+					<div class="block">
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
 					</div> 
