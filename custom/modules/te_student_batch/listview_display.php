@@ -40,12 +40,11 @@ class listviewClass {
       else{
         $bean->feepaid="NA";
       }
-      	$bean->bt_fee_waiver='34567';
+
 
 			// $bean->feepaid=$row1;
 
 		}
-
  }
 
 
