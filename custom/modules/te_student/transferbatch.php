@@ -152,12 +152,12 @@ if ($oldBatchDetails)
     $studentBatchObj->study_kit_address_postalcode = $oldBatchDetails['study_kit_address_postalcode'];
     $studentBatchObj->study_kit_address_city       = $oldBatchDetails['study_kit_address_city'];
     $studentBatchObj->leads_id                     = $oldBatchDetails['leads_id'];
-    $studentBatchObj->bt_url                       = $oldBatchDetails['bt_url'];
+    $studentBatchObj->bt_url                       = 'ddsadf';
     $studentBatchObj->bt_srm_comments              = $oldBatchDetails['bt_srm_comments'];
 }
 $studentBatchObj->total_session_required                      = $batchDetails['total_sessions_planned'];
 $studentBatchObj->te_student_te_student_batch_1te_student_ida = $student_id;
-echo "<pre>";print_r($studentBatchObj);exit;
+//echo "<pre>";print_r($studentBatchObj);exit;
 $studentBatchObj->save();
 #get new student batch id
 $student_batch_id                                             = $studentBatchObj->id;
