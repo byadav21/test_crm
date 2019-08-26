@@ -37,6 +37,13 @@ $GLOBALS['app_list_strings']['lead_status_dom']=array (
   'Not_Enquired' => 'Not Enquired',
   'Converted' => 'Converted',
 );
+$GLOBALS['app_list_strings']['approval_status']=array (
+  
+  '1' => 'Waiver',
+  '2' => 'To be Adjusted',
+  '3' => 'Pending',
+  '4' => 'Paid',
+  );
 $app_strings['LBL_GROUPTAB6_1474959980'] = 'Digital Marketing';
 $app_strings['LBL_GROUPTAB7_1474959980'] = 'Contact Center';
 $app_strings['LBL_GROUPTAB1_1474960120'] = 'Digital Marketing';

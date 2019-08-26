@@ -3,11 +3,12 @@ $dictionary['te_student_batch']['fields']['bt_fee_waiver'] = array(
 	'required' => false,
 	'name' => 'bt_fee_waiver',
 	'vname' => 'bt_fee_waiver',
-	'type' => 'varchar',
+	'type' => 'ENUM',
 	'audited' => false,
 	'massupdate' => false,
 	'source' => 'non-db',
 	'studio' => 'visible',
+	'options' => 'approval_status',
 );
 
 $dictionary['te_student_batch']['fields']['bt_approver_comments'] = array(
