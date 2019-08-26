@@ -122,13 +122,13 @@ $row = $db->fetchByAssoc($result);
 						<p><?php echo $row['bt_srm_comments'];?></p>
 					</div>
 					<div class="block">
-						<label>Topic</label>
+						<label>Status</label>
 						<label><input type="radio" name="one" value="1" <?php echo ($row['bt_fee_waiver']== '1') ?  "checked" : "" ;  ?>/> Waiver</label>
 						<label><input type="radio" name="one" value="2" <?php echo ($row['bt_fee_waiver']== '2') ?  "checked" : "" ;  ?>/> To be Adjusted</label>
 						<label><input type="radio" name="one" value="3"<?php echo ($row['bt_fee_waiver']== '3') ?  "checked" : "" ;  ?> /> To be Paid</label>
 					</div>
 					<div class="block">
-						<label>Status</label>
+						<label>Approval Status</label>
 						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve') ?  "checked" : "" ;  ?>/> Approve</label>
 						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($row['bt_srm_attachment']!=''){?>
@@ -139,7 +139,7 @@ $row = $db->fetchByAssoc($result);
 					</div>
 					<div class="block">
 						<label>Total Paid</label>
-						<p><?php echo $row['total'];?></p>
+						<p><?php echo $row['total'];?> (including tax)</p>
 					</div>
 					<div class="block">
 						<label>Comment</label>
