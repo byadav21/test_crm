@@ -161,7 +161,7 @@ $studentBatchObj->te_student_te_student_batch_1te_student_ida = $student_id;
 $studentBatchObj->save();
 #get new student batch id
 $student_batch_id                                             = $studentBatchObj->id;
-$GLOBALS['db']->query("UPDATE te_student_batch set bt_url='".$oldBatchDetails['bt_url']."' where id='".$student_batch_id."'");
+$GLOBALS['db']->query("UPDATE te_student_batch set bt_url='".$oldBatchDetails['bt_url']."', approve_status='".$_REQUEST['request_status']."' where id='".$student_batch_id."'");
 #transfer payment from old batch to new batch
 $studentPaymentSql = "SELECT SUM(te_student_payment.amount) AS total
                             FROM te_student_payment,
