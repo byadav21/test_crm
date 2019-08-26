@@ -187,7 +187,7 @@ foreach ($btApprover as $val)
    <table cellpadding="0" cellspacing="0" style="width: 600px; border:1px solid #999; padding: 10px;" align="center">
         
         <tr>
-            <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#333; text-align: center; font-weight: bold;">SRM Batch Transferred Details</td>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#333; text-align: center; font-weight: bold;">SRM Batch Transfer Request Details</td>
         </tr>
         <tr>
             <td><hr/></td>
