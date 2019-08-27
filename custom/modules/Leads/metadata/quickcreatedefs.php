@@ -74,18 +74,6 @@ array (
         array (
           0 => 
           array (
-            'name' => 'min_attendance_c',
-            'label' => 'LBL_MIN_ATTENDANCE',
-          ),
-          1 => 
-          array (
-            'name' => 'status',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
             'name' => 'batch_c',
             'studio' => 'visible',
             'label' => 'LBL_BATCH',
@@ -95,33 +83,28 @@ array (
             'name' => 'assigned_user_name',
           ),
         ),
-        4 => 
+        3 => 
         array (
           0 => 
-          array (
-            'name' => 'lead_source',
-          ),
-          1 => 
           array (
             'name' => 'team_name',
           ),
-        ),
-        5 => 
-        array (
-          0 => 
+          1 => 
           array (
-            'name' => 'leads_leads_1_name',
-            'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
+            'name' => 'parent_name',
+            'studio' => 'visible',
+            'label' => 'LBL_FLEX_RELATE',
           ),
         ),
-        6 => 
+        4 => 
         array (
           0 => '',
           1 => '',
         ),
-        7 => 
+        5 => 
         array (
           0 => '',
+          1 => '',
         ),
       ),
     ),

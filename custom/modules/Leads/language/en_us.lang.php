@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-04 02:57:21
+// created: 2018-06-08 08:50:13
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Payment Details',
   'LBL_COMPANY' => 'Company',
@@ -25,9 +25,18 @@ $mod_strings = array (
   'LBL_ANY_EMAIL' => 'Email',
   'LBL_EMAIL_ADDRESS' => 'Email Address:',
   'NOTE' => 'Notes',
-  'LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE' => 'Disposition',
+  'LBL_TE_DISPOSITION_LEADS_FROM_TE_DISPOSITION_TITLE' => 'Status log',
   'LBL_BIRTHDATE' => 'Date of Birth',
   'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Groups',
   'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE' => 'Payment Details',
   'COMMENT' => 'Comment',
+  'LBL_LEAD_DATE' => 'Lead Date',
+  'LBL_ATTEMPTS' => 'No Answer Attempts',
+  'LBL_COUNTRY_LOG' => 'Country',
+  'LBL_PRIMARY_ADDRESS_STATE' => 'Primary Address State',
+  'LBL_MOBILE_PHONE' => 'Mobile:',
+  'Attempt Log' => 'Attempt Log',
+  'LBL_INDIVIDUAL_ID' => 'Individual Id',
+  'LBL_INDIVIDUAL_IDSTATUS' => 'Individual Id Status',
+  'LBL_INDIVIDUAL_IDBATCHSTATUS' => 'Individual Id Batch Status',
 );

@@ -147,7 +147,7 @@ Calendar.setup ({
 			var lead_id = document.getElementById('lead_id').value;
 			var disposition_id = document.getElementById('disposition_id').value;
 			//~ var url_open = "http://localhost/TalentEdge/index.php?module=Leads&action=EditView&record="+lead_id+"&disposition_id="+disposition_id+"&from_pusher=1";
-			var url_open = "http://te.engeniatech.in/index.php?module=Leads&action=EditView&record="+lead_id+"&disposition_id="+disposition_id+"&from_pusher=1";
+			var url_open = "http://35.154.138.186/crm/index.php?module=Leads&action=EditView&record="+lead_id+"&disposition_id="+disposition_id+"&from_pusher=1";
 			window.opener = self;
 			window.close();
 			
@@ -210,6 +210,9 @@ Calendar.setup ({
 							window.opener = self;
 						window.close();
 							//~ window.location.href='index.php?module=te_disposition&action=index';
+						}
+						else if(b.responseText.trim()=="2"){
+							alert('Please disconnect the call first and save the record')
 						}
 						else{
 							alert('Error!! Record not saved')

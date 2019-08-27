@@ -146,7 +146,7 @@ class Lead extends Person {
 	// This is used to retrieve related fields from form posts.
 	var $additional_column_fields = Array('assigned_user_name', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id');
 	var $relationship_fields = Array('email_id'=>'emails','call_id'=>'calls','meeting_id'=>'meetings','task_id'=>'tasks',);
-
+	public $leadreport_to_id=array();
 	public function __construct() {
 		parent::__construct();
 	}
@@ -614,6 +614,53 @@ class Lead extends Person {
 
         return $return_array;
     }
+	
+	function create_export_query($order_by, $where, $relate_link_join = ''){
+		$where = str_replace('leads.batch in','leads_cstm.te_ba_batch_id_c in',$where);
+		$where =  str_replace('Counsellors', 'leads.assigned_user_id', $where);
+		global $current_user;
+		$this->leadreport_to_id[]=$current_user->id;
+		$users_arr = $this->reportingUser($current_user->id);
+		$users = implode("','",$this->leadreport_to_id);
+		if(!empty($where) && preg_match('/^(?!leads\.id)\(\s*(.+)\s*\)/', $where,$matches)){
+			$where_clauses = explode(' ) AND ( ', $matches[1]) ;
+			foreach($where_clauses as $key => $clause)
+			{
+				if(!preg_match('/leads.id/', $clause))
+				{
+					if(!preg_match('/1/', $clause) && $users && $current_user->is_admin==0)
+					{
+						$where_clauses[count($where_clauses)] = "leads.assigned_user_id in ('".$users."')";
+					}
+					
+				}
+			}
+			if (count($where_clauses) > 0)
+			{
+				$where = '('. implode(' ) AND ( ', $where_clauses) . ')';
+			}
+			return parent::create_export_query($order_by, $where);
+		}
+		else{
+			if($users && $current_user->is_admin==0){
+				$where = '('."leads.assigned_user_id in ('".$users."')". ')';
+			}
+			return parent::create_export_query($order_by, $where);
+		}
+	}
+	function reportingUser($currentUserId){
+		$userObj = new User();
+		$userObj->disable_row_level_security = true;
+		$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+		if(!empty($userList)){
+			foreach($userList as $record){
+				if(!empty($record->reports_to_id) && !empty($record->id)){
+					$this->leadreport_to_id[] = $record->id;
+					$this->reportingUser($record->id);
+				}
+			}
+		}
+	}
 
 }
 

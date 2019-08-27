@@ -1,5 +1,5 @@
 <?php
-// created: 2016-11-24 20:20:23
+// created: 2017-04-21 16:49:48
 $searchFields['te_actual_campaign'] = array (
   'name' => 
   array (

@@ -75,9 +75,43 @@ function set_focus(){
 <input id='name' name='name' type='text' value='{$ROLE.name}'>
 </td><td>&nbsp;</td><td>&nbsp;</td>
 </tr>
+<TR>
+<td scope="row" align='right'>Slug:<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span></td><td >
+<input id='slug' name='slug' type='text' value='{$ROLE.slug}'>
+</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
 <tr>
 <td scope="row" align='right'>{$MOD.LBL_DESCRIPTION}:</td>
 <td ><textarea name='description' cols="80" rows="8">{$ROLE.description}</textarea></td>
+</tr>
+<tr>
+<td scope="row" align='right'>Parent Role:</td>
+<td >
+
+<select  id='parent_role' name='parent_role' >
+<option>-Select-</option>
+
+{foreach from=$allRoles item=val}
+<option {if $val.id==$otherRecords.parent_role} selected {/if} value="{$val.id}">  {$val.name} </option>
+{/foreach}
+</select>
+
+</td>
+</tr>
+<tr>
+<td scope="row" align='right'>Permission</td>
+<td >
+<input {if 1==$otherRecords.isvendor} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isvendor" value="1"> Is vendor module
+</td>
+</tr>
+<tr>
+<td scope="row" align='right'>Permission</td>
+<td >
+<input {if 1==$otherRecords.issubmit} checked {/if} style="    margin-top: -11px;" type="checkbox" name="issubmit" value="1"> Can Submit 
+<input {if 1==$otherRecords.isapprove} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isapprove" value="1"> Can Approve 
+<input {if 1==$otherRecords.sendtofin} checked {/if} style="     margin-top: -11px;"type="checkbox" name="sendtofin" value="1"> Can Send to Facility 
+<input {if 1==$otherRecords.isfacility} checked {/if} style="     margin-top: -11px;"type="checkbox" name="isfacility" value="1"> Is Facility Role
+</td>
 </tr>
 </table>
 

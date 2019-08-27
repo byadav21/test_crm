@@ -9,63 +9,79 @@ ini_set("display_errors",0);
 		{
 			var $report_to_id;
 			var $report_to_id1;
-			
-			
+			var $report_to_id_transfer;
+
+
 			function statusWiseCounts(){
-			
+
 				//~ require_once('custom/modules/Leads/customfunctionforcrm.php');
 				date_default_timezone_set("Asia/Kolkata");
 				global $current_user;
 				$currentUserId = $current_user->id;
+				$is_admin = $current_user->is_admin;
 				$reportingUserIds = array();
 				//~ $reportUserObj1 = new customfunctionforcrm();
 				$this->reportingUser($currentUserId);
 				$this->report_to_id[$currentUserId] = $current_user->name;
 				$reportingUserIds = $this->report_to_id;
-				
+
 				$user_ids = implode("', '", array_keys($reportingUserIds));
-				
-				$statusWiseCount = '<h2>Status Wise Count</h2><table style="width:100%"><tr><td>&nbsp;</td><td>&nbsp;</td></tr>';
-//New Leads		
-				$sqlCount = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'New Lead'  AND leads.assigned_user_id IN ('".$user_ids."')"; 
-				
+				$reporting_user_where = '';
+				$reporting_user_where_l = '';
+				if($is_admin!=1){
+					$reporting_user_where = " AND leads.assigned_user_id IN ('".$user_ids."') ";
+					$reporting_user_where_l = " AND l.assigned_user_id IN ('".$user_ids."') ";
+				}
+				$statusWiseCount = '';
+//New Leads
+				$sqlCount = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'New Lead' $reporting_user_where";
+
+				$statusWiseCount .= ' <style>.tile_count .tile_stats_count {width: 12%!important;}@media (max-width: 1024px) and (min-width: 979px) .col-sm-3.tile_stats_count { max-width: 242px !important; }</style>';
+
 				$resCount = $GLOBALS['db']->query($sqlCount);
-				$rowCount= $GLOBALS['db']->fetchByAssoc($resCount);						
+				$rowCount= $GLOBALS['db']->fetchByAssoc($resCount);
 				if($rowCount['count'] > 0){
-					$statusWiseCount .= '
-					<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowCount['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a  style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowCount['status_description'].'">'.$rowCount['status_description'].'</a></td></tr>
-					 </table>';
-					
+
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+						<div class="count">'.$rowCount['count'].'</div>
+						<span class="count_top">  <a   href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowCount['status_description'].'">'.$rowCount['status_description'].'</a></span>
+
+					</div>	';
+
 				}
 				else{
-					$statusWiseCount .= '
-					<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >New Lead</a></td></tr>
-					 </table>';
+
+
+					$statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+						<div class="count">0</div>
+						<span class="count_top"> New Leads</span>
+
+					</div>	';
+
 				}
 
-//Duplicate		
-				$sqlDup = "SELECT status_description,count(*) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Duplicate'  AND leads.assigned_user_id IN ('".$user_ids."')"; 
+//Re-Enquired
+				$sqlDup = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Re-Enquired'  $reporting_user_where";
 				$resDup = $GLOBALS['db']->query($sqlDup);
-				$rowDup= $GLOBALS['db']->fetchByAssoc($resDup);			
+				$rowDup= $GLOBALS['db']->fetchByAssoc($resDup);
 				if($rowDup['count'] > 0){
-					$statusWiseCount .= '
-					<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowDup['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowDup['status_description'].'">'.$rowDup['status_description'].'</a></td></tr>
-					 </table>';
-					
+
+
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					 <div class="count">'.$rowDup['count'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description='.$rowDup['status_description'].'">'.$rowDup['status_description'].'</a>s</span>
+
+					</div>	';
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '
-					<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Duplicate</a></td></tr>
-					 </table>';
+
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+						<div class="count">0</div>
+						<span class="count_top"> Re-Enquired</span>
+
+					</div>	';
 				}
 
 
@@ -73,24 +89,30 @@ ini_set("display_errors",0);
 
 // Prospect Today
 		//~ echo date('Y-m-d');
-            $sqlPros = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')"; 
-            
+            $sqlPros = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) = '".date('Y-m-d')."'  $reporting_user_where ";
+
             //~ echo $sqlPros;
             $resPros = $GLOBALS['db']->query($sqlPros);
             $rowPros= $GLOBALS['db']->fetchByAssoc($resPros);
 			if($rowPros['count'] > 0){
-				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowPros['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&pros_today=1&status_description_basic=Prospect">Prospect Today</a></td></tr>
-					 </table>';
-					
+				 ;
+
+					$statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					      <div class="count">'.$rowPros['count'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&pros_today=1&status_description_basic=Prospect">Prospect Today</a></span>
+
+					</div>	';
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Prospect Today</a></td></tr>
-					 </table>';
+
+
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					        <div class="count">0</div>
+						<span class="count_top"> Prospect Today</span>
+
+					</div>	';
 				}
 
 
@@ -98,181 +120,218 @@ ini_set("display_errors",0);
 
 // Followup Today
 
-            $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')"; 
+            $sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) = '".date('Y-m-d')."'  $reporting_user_where ";
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
-				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowFoll['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&follow_today=1&status_description_basic=Follow Up">Followup Today</a></td></tr>
-					 </table>';
-					
+
+
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+						<div class="count">'.$rowFoll['count'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&follow_today=1&status_description_basic=Follow Up">Followup Today</a></span>
+
+					</div>	';
+
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Followup Today</a></td></tr>
-					 </table>';
+
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					    <div class="count">0</div>
+						<span class="count_top"> Followup Today</span>
+
+					</div>	';
 				}
 
 //Over Due Prospect
 
-            $sqlPros = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')"; 
+            $sqlPros = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Prospect' AND DATE(date_of_prospect) < '".date('Y-m-d')."' $reporting_user_where ";
             //~ echo $sqlPros;
             $resPros = $GLOBALS['db']->query($sqlPros);
             $rowPros= $GLOBALS['db']->fetchByAssoc($resPros);
 			if($rowPros['count'] > 0){
-				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowPros['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&over_due_pros=pros&status_description_basic=Prospect">Over Due Prospect</a></td></tr>
-					 </table>';
-					
+
+
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+							<div class="count">'.$rowPros['count'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&over_due_pros=pros&status_description_basic=Prospect">Over Due Prospect</a></span>
+
+					</div>	';
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Over Due Prospect</a></td></tr>
-					 </table>';
+
+					 $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+					 <div class="count">0</div>
+						<span class="count_top"> Over Due Prospect</span>
+
+					</div>	';
 				}
 
 
 //Overdue followups
 
-            $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')"; 
+            $sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Follow Up' AND DATE(date_of_followup) < '".date('Y-m-d')."' $reporting_user_where ";
             //~ echo $sqlFoll;
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
-				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowFoll['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&due_followup=follow&status_description_basic=Follow Up">Overdue followups</a></td></tr>
-					 </table>';
-					
+
+					   $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+					   <div class="count">'.$rowFoll['count'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&due_followup=follow&status_description_basic=Follow Up">Overdue followups</a></span>
+
+					</div>	';
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Overdue followups</a></td></tr>
-					 </table>';
+
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+					  <div class="count">0</div>
+						<span class="count_top"> Overdue followups</span>
+
+					</div>	';
 				}
 
 
 //CallBack Today
-		   $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')"; 
+		   /*$sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) = '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
-				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowFoll['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_today=1&status_description_basic=Call Back">CallBack Today</a></td></tr>
-					 </table>';
-					
+
+
+					   $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					   <div class="count">'.$rowFoll['count'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_today=1&status_description_basic=Call Back">CallBack Today</a></span>
+
+					</div>	';
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >CallBack Today</a></td></tr>
-					 </table>';
-				}
+
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					  <div class="count">0</div>
+						<span class="count_top"> CallBack Today</span>
+
+					</div>	';
+				}*/
 
 
 // Overdue CallBack
 
 
-            $sqlFoll = "SELECT count(*) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')"; 
+            /*$sqlFoll = "SELECT count(id) as count FROM leads  WHERE deleted =0 AND status_description LIKE 'Call Back' AND DATE(date_of_callback) < '".date('Y-m-d')."' AND leads.assigned_user_id IN ('".$user_ids."')";
             //~ echo $sqlFoll;
             $resFoll = $GLOBALS['db']->query($sqlFoll);
             $rowFoll= $GLOBALS['db']->fetchByAssoc($resFoll);
 			if($rowFoll['count'] > 0){
-				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowFoll['count'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_back_due=due&status_description_basic=Call Back">Overdue CallBack</a></td></tr>
-					 </table>';
-					
+
+
+
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					  <div class="count">'.$rowFoll['count'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&call_back_due=due&status_description_basic=Call Back">Overdue CallBack</a></span>
+
+					</div>	';
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Overdue CallBack</a></td></tr>
-					 </table>';
-				}
+					  $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					  <div class="count">0</div>
+						<span class="count_top"> Overdue CallBack</span>
+
+					</div>	';
+				}*/
 
 
 // Payment Not Realized
 			//~ $payNR = "SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0";
-            $sqlPay = "SELECT count(id) as not_realized FROM leads  WHERE deleted =0 AND payment_realized_check = 0 AND leads.assigned_user_id  IN ('".$user_ids."') AND leads.id IN (SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0)";
+            $sqlPay = "SELECT count(id) as not_realized FROM leads  WHERE deleted =0 AND payment_realized_check = 0 $reporting_user_where AND leads.id IN (SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0)";
             $resPay = $GLOBALS['db']->query($sqlPay);
             $rowPay= $GLOBALS['db']->fetchByAssoc($resPay);
 			if($rowPay['not_realized'] > 0){
-				$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">'.$rowPay['not_realized'].'</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" href="index.php?module=Leads&searchFormTab=basic_search&query=true&payment_realized_check_basic=0">Payment Not Realized</a></td></tr>
-					 </table>';
-					
+		  $statusWiseCount .= '<div class="col-xs-4 col-sm-2 tile_stats_count">
+					  <div class="count">'.$rowPay['not_realized'].'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&searchFormTab=basic_search&query=true&payment_realized_check_basic=0">Payment Not Realized</a></span>
+
+					</div>	';
+
 				}
 				else{
 					$stat = 'Duplicate';
-					$statusWiseCount .= '<table width="50%" border="1" bordercolor="#fff" cellpadding="0" style="float:left;  cellpadding="5" cellspacing="5">
-				  <tr> <th align="center" style="padding:5px; color:#fff; font-size:18px;">0</th></tr>
-				 <tr> <td align="center"style="padding:5px;"><a style="color:#fff;" >Payment Not Realized</a></td></tr>
-					 </table>';
+
+
+					   $statusWiseCount .= '<div class="col-xs-6 col-sm-2 tile_stats_count">
+					   <div class="count">0</div>
+						<span class="count_top"> Payment Not Realized</span>
+
+					</div>	';
 				}
 
 
+# 1st Instalment Not Paid
+			 //  $sqlPay = "SELECT count(id) as not_realized FROM leads  WHERE deleted =0 AND payment_realized_check = 0 AND leads.assigned_user_id  IN ('".$user_ids."') AND leads.id IN (SELECT DISTINCT leads_te_payment_details_1leads_ida FROM leads_te_payment_details_1_c WHERE deleted = 0)";
+			$sqlPay="SELECT count(sb.id)total  FROM `te_student_batch` AS sb INNER JOIN leads AS l ON l.id=sb.leads_id INNER JOIN te_student_batch_te_student_payment_plan_1_c AS sppr ON sppr.te_student_batch_te_student_payment_plan_1te_student_batch_ida=sb.id INNER JOIN te_student_payment_plan AS spp ON spp.id=sppr.te_student9d1ant_plan_idb WHERE spp.name='1st Installment' AND sb.deleted=0 AND sb.status='Active' AND spp.deleted=0 $reporting_user_where_l AND spp.due_date<=CURRENT_DATE AND (spp.balance_inr!=0 AND spp.balance_usd!=0)";
+            $resPay = $GLOBALS['db']->query($sqlPay);
+            $rowPay= $GLOBALS['db']->fetchByAssoc($resPay);
+			if($rowPay['total'] > 0){
+			//$users_lead = "'".implode("','", $leadList)."'";
 
+				$statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+					   <div class="count">'. $rowPay['total'] .'</div>
+						<span class="count_top"> <a  href="index.php?module=Leads&action=index&&searchFormTab=basic_search&query=true&lead_id=id_instalment"> Installment Not Paid</a></span>
 
-				
-				$statusWiseCount .= '<tr><td>&nbsp;</td><td>&nbsp;</td></tr></table>';	
+					</div>';
+
+				}
+				else{
+					$stat = 'Duplicate';
+
+					$statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
+					   <div class="count">0</div>
+						<span class="count_top"> Installment Not Paid</span>
+
+					</div>';
+
+				}
+
 				return 	$statusWiseCount;
 			}
-			
-		
+
+
 		/*
 			recursively fetching all reporting user to the login user
 			@@param : $currentUserId <=> the user id of current login user
 		*/
 		function reportingUser($currentUserId){
-		
+
 			$userObj = new User();
 			$userObj->disable_row_level_security = true;
 			$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
-			
+
 			if(!empty($userList)){
-				
+
 				foreach($userList as $record){
 
 					if(!empty($record->reports_to_id)){
 
 						$this->report_to_id[$record->id] = $record->name."(".$record->id.")";
+						$this->report_to_id_transfer[$record->id] = $record->name;
 						$this->reportingUser($record->id);
 					}
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-	}//Class End 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+	}//Class End

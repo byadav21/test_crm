@@ -58,12 +58,25 @@ $sugar_smarty->assign('APP_LIST', $app_list_strings);
 $role = new ACLRole();
 $role->retrieve($_REQUEST['record']);
 $categories = ACLRole::getRoleActions($_REQUEST['record']);
+
 $names = ACLAction::setupCategoriesMatrix($categories);
 if(!empty($names))$tdwidth = 100 / sizeof($names);
 $sugar_smarty->assign('ROLE', $role->toArray());
 $sugar_smarty->assign('CATEGORIES', $categories);
 $sugar_smarty->assign('TDWIDTH', $tdwidth);
 $sugar_smarty->assign('ACTION_NAMES', $names);
+
+$otherRecords=[];
+if($role->id){
+  $otherRecords=$role->getOtherFeilds($role->id);
+  $otherRecords['issubmit']=($otherRecords['issubmit']==1)?'Y':'N';
+  $otherRecords['isapprove']=($otherRecords['isapprove']==1)?'Y':'N';
+  $otherRecords['sendtofin']=($otherRecords['sendtofin']==1)?'Y':'N';
+  $otherRecords['isfacility']=($otherRecords['isfacility']==1)?'Y':'N';
+  $otherRecords['isvendor']=($otherRecords['isvendor']==1)?'Y':'N';
+ // print_r( $otherRecords);die;
+}
+$sugar_smarty->assign('otherRecords', $otherRecords);
 
 $return= array('module'=>'ACLRoles', 'action'=>'DetailView', 'record'=>$role->id);
 $sugar_smarty->assign('RETURN', $return);
@@ -76,13 +89,13 @@ $hide_hide_supanels = true;
 
 echo $sugar_smarty->fetch('modules/ACLRoles/DetailView.tpl');
 //for subpanels the variable must be named focus;
-$focus =& $role;
+ $focus =& $role;
 $_REQUEST['module'] = 'ACLRoles';
 require_once('include/SubPanel/SubPanelTiles.php');
 
 $subpanel = new SubPanelTiles($role, 'ACLRoles');
 
-echo $subpanel->display();
+echo $subpanel->display(); 
 
 
 

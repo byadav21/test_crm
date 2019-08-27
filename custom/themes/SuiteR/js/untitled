@@ -1,0 +1,5 @@
+var social = angular
+.module('social', [], function($interpolateProvider) {
+	$interpolateProvider.startSymbol('<%');
+	$interpolateProvider.endSymbol('%>');
+}).

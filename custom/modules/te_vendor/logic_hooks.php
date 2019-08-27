@@ -6,5 +6,5 @@ $hook_array = Array();
 // position, file, function 
 $hook_array['before_save'] = array();
 $hook_array['before_save'][] = Array(4, 'duplicate name', 'custom/modules/te_vendor/vendor_dup.php','vendor_class', 'vendor_method'); 
-$hook_array['process_record'][] = Array(2, 'statusofprograms', 'custom/modules/te_vendor/vendor_contract.php','vc_class', 'vc_method');
+
 ?>

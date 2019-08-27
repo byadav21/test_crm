@@ -29,6 +29,14 @@ array (
         'default' => true,
         'width' => '10%',
       ),
+      'counsellors' => 
+      array (
+        'label' => 'Counsellors',
+        'type' => 'enum',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'Counsellors',
+      ),
       'phone_mobile' => 
       array (
         'type' => 'phone',
@@ -36,6 +44,14 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'phone_mobile',
+      ),
+      'lead_id' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'Lead ID',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'lead_id',
       ),
     ),
     'advanced_search' => 
@@ -56,24 +72,21 @@ array (
         'default' => true,
         'name' => 'phone_mobile',
       ),
-      'batch_c' => 
+      'counsellors' => 
       array (
-        'type' => 'relate',
-        'default' => true,
-        'studio' => 'visible',
-        'label' => 'LBL_BATCH',
-        'id' => 'TE_BA_BATCH_ID_C',
-        'link' => true,
+        'label' => 'Counsellors',
+        'type' => 'enum',
         'width' => '10%',
-        'name' => 'batch_c',
+        'default' => true,
+        'name' => 'Counsellors',
       ),
-      'date_entered' => 
+      'batch' => 
       array (
-        'type' => 'datetime',
-        'label' => 'LBL_DATE_ENTERED',
+        'label' => 'LBL_BATCH',
+        'type' => 'enum',
         'width' => '10%',
         'default' => true,
-        'name' => 'date_entered',
+        'name' => 'batch',
       ),
       'status_description' => 
       array (
@@ -89,21 +102,28 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'assigned_user_id' => 
+      'lead_source' => 
       array (
-        'name' => 'assigned_user_id',
-        'type' => 'enum',
-        'label' => 'LBL_ASSIGNED_TO',
-        'function' => 
-        array (
-          'name' => 'get_user_array',
-          'params' => 
-          array (
-            0 => false,
-          ),
-        ),
+        'name' => 'lead_source',
         'default' => true,
         'width' => '10%',
+      ),
+      'vendor_list' => 
+      array (
+        'label' => 'LBL_VENDOR',
+        'type' => 'enum',
+        'studio' => 'visible',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'vendor_list',
+      ),
+      'date_entered' => 
+      array (
+        'type' => 'datetime',
+        'label' => 'LBL_DATE_ENTERED',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'date_entered',
       ),
     ),
   ),

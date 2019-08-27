@@ -85,6 +85,51 @@ array (
         ),
         4 => 
         array (
+          0 => 
+          array (
+            'name' => 'invoice_order_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Order Number',
+          ),
+          1 => 
+          array (
+            'name' => 'receipt_url',
+            'studio' => 'visible',
+            'label' => 'Receipt Url',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'invoice_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Number',
+          ),
+          1 => 
+          array (
+            'name' => 'invoice_url',
+            'studio' => 'visible',
+            'label' => 'Invoice URL',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tax',
+            'studio' => 'visible',
+            'label' => 'Tax',
+          ),
+          1 => 
+          array (
+            'name' => 'tax_type',
+            'studio' => 'visible',
+            'label' => 'Tax Type',
+          ),
+        ),
+        7 => 
+        array (
           0 => '',
           1 => '',
         ),

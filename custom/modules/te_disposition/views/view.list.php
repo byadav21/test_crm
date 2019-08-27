@@ -90,7 +90,7 @@ class te_dispositionViewList extends ViewList
 		//~ alert(dispo_id)
 		//~ alert(mobile)
 			document.getElementById('disposition_id').value=dispo_id;
-			var url_open = "http://te.engeniatech.in/index.php?entryPoint=openDispositionPopup&disposition_id="+dispo_id+"&mobile="+mobile;
+			var url_open = "http://35.154.138.186/crm/index.php?entryPoint=openDispositionPopup&disposition_id="+dispo_id+"&mobile="+mobile;
 			window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
 		//~ $(this).popupModal('atomBox');
 	}

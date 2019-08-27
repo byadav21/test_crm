@@ -37,15 +37,23 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
-
-
-
-
+ 
+  
 $role = new ACLRole();
 if(isset($_REQUEST['record']))$role->id = $_POST['record'];
 if(!empty($_REQUEST['name'])){
 	$role->name = $_POST['name'];
 	$role->description = $_POST['description'];
+	$role->parent_role = $_POST['parent_role']; 
+        $role->slug        = $_POST['slug']; 
+	$role->sendtofin = (isset($_POST['sendtofin']))?$_POST['sendtofin']:0; 
+	$role->isfacility = (isset($_POST['isfacility']))?$_POST['isfacility']:0; 
+	$role->isvendor = (isset($_POST['isvendor']))?$_POST['isvendor']:0; 
+	
+	
+	$role->issubmit = (isset($_POST['issubmit']))?$_POST['issubmit']:0;
+	$role->isapprove = (isset($_POST['isapprove']))?$_POST['isapprove']:0;
+	
 	$role->save();
 	//if duplicate
 	if(isset($_REQUEST['isduplicate']) && !empty($_REQUEST['isduplicate'])){
@@ -73,6 +81,6 @@ if(!empty($_REQUEST['name'])){
     echo "result = {role_id:'$role->id', module:'$flc_module'}";
     sugar_cleanup(true);
 }
-
+ 
 header("Location: index.php?module=ACLRoles&action=DetailView&record=". $role->id);
 ?>

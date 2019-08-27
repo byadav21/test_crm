@@ -17,15 +17,6 @@ class listview_program_cetegory {
                 }
                 else
                 {
-					
-			echo "<style>
-		   #edit-".$bean->id." {
-			  display: none;
-		   }
-		   .checkbox[value='".$bean->id."'] {
-			   display: none;
-		   }
-		   </style>";		
 				$bean->programs="<a href='index.php?module=te_Program_category&action=view_cetegory&record=".$bean->id."'>".$result1['totalprog']."</a>";	
 				$bean->istitutes_list="<a href='index.php?module=te_Program_category&action=view_cetegory&record=".$bean->id."'>".$result1['totalprog']."</a>";
 				}

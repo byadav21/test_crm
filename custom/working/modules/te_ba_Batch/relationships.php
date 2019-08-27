@@ -40,7 +40,7 @@
 $relationships = array (
   'te_ba_batch_modified_user' => 
   array (
-    'id' => '3cea8063-cdc9-d2e3-4bd6-57d9fa3b76f8',
+    'id' => '951fd6f1-74e4-1883-d5d5-5b753b350430',
     'relationship_name' => 'te_ba_batch_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
@@ -66,7 +66,7 @@ $relationships = array (
   ),
   'te_ba_batch_created_by' => 
   array (
-    'id' => '3d118a7c-2136-c487-d867-57d9fa377a36',
+    'id' => '951fd3ec-0194-26e4-7cb4-5b753b8481af',
     'relationship_name' => 'te_ba_batch_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
@@ -92,7 +92,7 @@ $relationships = array (
   ),
   'te_ba_batch_assigned_user' => 
   array (
-    'id' => '3d353af4-584a-a2f2-544b-57d9fa62430a',
+    'id' => '955e5ead-23a3-7557-0a05-5b753b564d1a',
     'relationship_name' => 'te_ba_batch_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
@@ -118,7 +118,7 @@ $relationships = array (
   ),
   'securitygroups_te_ba_batch' => 
   array (
-    'id' => '3d58e569-0183-2661-4536-57d9fa3850a7',
+    'id' => '955e5c45-d73c-475e-59ce-5b753b762ce9',
     'relationship_name' => 'securitygroups_te_ba_batch',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
@@ -142,9 +142,35 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => true,
   ),
+  'te_ba_batch_te_installments_1' => 
+  array (
+    'id' => '73336e7e-7abb-f4d4-04bf-5b753b4d1a73',
+    'relationship_name' => 'te_ba_batch_te_installments_1',
+    'lhs_module' => 'te_ba_Batch',
+    'lhs_table' => 'te_ba_batch',
+    'lhs_key' => 'id',
+    'rhs_module' => 'te_installments',
+    'rhs_table' => 'te_installments',
+    'rhs_key' => 'id',
+    'join_table' => 'te_ba_batch_te_installments_1_c',
+    'join_key_lhs' => 'te_ba_batch_te_installments_1te_ba_batch_ida',
+    'join_key_rhs' => 'te_ba_batch_te_installments_1te_installments_idb',
+    'relationship_type' => 'one-to-many',
+    'relationship_role_column' => NULL,
+    'relationship_role_column_value' => NULL,
+    'reverse' => '0',
+    'deleted' => '0',
+    'readonly' => true,
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'from_studio' => true,
+    'is_custom' => true,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
   'te_in_institutes_te_ba_batch_1' => 
   array (
-    'id' => '5cf1b252-c974-096b-fa1a-57d9fa2f8e93',
+    'id' => '73eeec34-3d06-e866-4493-5b753b36b8c1',
     'relationship_name' => 'te_in_institutes_te_ba_batch_1',
     'lhs_module' => 'te_in_institutes',
     'lhs_table' => 'te_in_institutes',
@@ -170,7 +196,7 @@ $relationships = array (
   ),
   'te_pr_programs_te_ba_batch_1' => 
   array (
-    'id' => '5dc396d1-4cf5-1f67-205e-57d9facbef50',
+    'id' => '746bfdac-c5b1-a6ac-e86d-5b753b173a2d',
     'relationship_name' => 'te_pr_programs_te_ba_batch_1',
     'lhs_module' => 'te_pr_Programs',
     'lhs_table' => 'te_pr_programs',
@@ -194,13 +220,13 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
   ),
-  'te_ba_batch_te_installments_1' => 
+  'te_ba_batch_users_1' => 
   array (
-    'rhs_label' => 'Installments',
+    'rhs_label' => 'Users',
     'lhs_label' => 'Batch',
     'rhs_subpanel' => 'default',
     'lhs_module' => 'te_ba_Batch',
-    'rhs_module' => 'te_installments',
+    'rhs_module' => 'Users',
     'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
@@ -208,6 +234,6 @@ $relationships = array (
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'te_ba_batch_te_installments_1',
+    'relationship_name' => 'te_ba_batch_users_1',
   ),
 );

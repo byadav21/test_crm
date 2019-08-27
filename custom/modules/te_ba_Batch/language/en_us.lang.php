@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-28 01:29:34
+// created: 2018-11-28 18:20:38
 $mod_strings = array (
   'LBL_CLASS_SCHEDULE' => 'class schedule',
   'LBL_TE_BA_BATCH_TE_INSTALLMENTS_1_FROM_TE_INSTALLMENTS_TITLE' => 'Installments',
@@ -10,4 +10,5 @@ $mod_strings = array (
   'LBL_NAME' => 'Batch Name',
   'LBL_MINIMUM_BATCH_SIZE' => 'Minimum Batch Size',
   'LBL_DESCRIPTION' => 'Description',
+  'LBL_BATCH_COMPLETION_DATE_2' => 'Completion Date',
 );

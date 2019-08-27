@@ -2,14 +2,33 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/MVC/View/views/view.detail.php');
 require_once('include/utils.php');
+require_once('include/DetailView/DetailView2.php');
 class LeadsViewDetail extends ViewDetail {
-	
+
+
+
+	protected function _displaySubPanels()
+    {
+
+
+    }
+
+    public function preDisplay()
+    {
+ 	    $metadataFile = $this->getMetaDataFile();
+ 	    $this->dv = new DetailView2();
+ 	    $this->dv->ss =&  $this->ss;
+ 	    $this->dv->setup($this->module, $this->bean, $metadataFile, get_custom_file_if_exists('custom/modules/Leads/tpls/DetailView/DetailView.tpl'));
+    }
+
+
+
  	/**
      * Displays the header on section of the page; basically everything before the content
      */
     public function displayHeader($retModTabs=false)
     {
-		
+
 		 //~ parent::displayHeader();
         global $theme;
         global $max_tabs;
@@ -189,9 +208,9 @@ class LeadsViewDetail extends ViewDetail {
             $favorite_records = $favorites->getCurrentUserSidebarFavorites();
             $ss->assign("favoriteRecords",$favorite_records);
 
-            $tracker = new Tracker();
+            /*$tracker = new Tracker();
             $history = $tracker->get_recently_viewed($current_user->id);
-            $ss->assign("recentRecords",$this->processRecentRecords($history));
+            $ss->assign("recentRecords",$this->processRecentRecords($history));*/
         }
 
         $bakModStrings = $mod_strings;
@@ -337,28 +356,72 @@ class LeadsViewDetail extends ViewDetail {
                     $topTabList[$moduleKey] = $module;
                 }
 
-                $groupTabs[$tabIdx]['modules'] = $topTabs;
-                $groupTabs[$tabIdx]['extra'] = $extraTabs;
+                //$groupTabs[$tabIdx]['modules'] = $topTabs;
+                //$groupTabs[$tabIdx]['extra'] = $extraTabs;
             }
         }
 
         if ( isset($topTabList) && is_array($topTabList) ) {
             // Adding shortcuts array to menu array for displaying shortcuts associated with each module
             $shortcutTopMenu = array();
-            foreach($topTabList as $module_key => $label) {
-                global $mod_strings;
-                $mod_strings = return_module_language($current_language, $module_key);
-                foreach ( $this->getMenu($module_key) as $key => $menu_item ) {
-                    $shortcutTopMenu[$module_key][$key] = array(
-                        "URL"         => $menu_item[0],
-                        "LABEL"       => $menu_item[1],
-                        "MODULE_NAME" => $menu_item[2],
-                        "IMAGE"       => $themeObject
-                        ->getImage($menu_item[2],"border='0' align='absmiddle'",null,null,'.gif',$menu_item[1]),
-                        "ID"          => $menu_item[2]."_link",
-                        );
-                }
-            }
+						if(!isset($_SESSION['referral'])){
+							foreach($topTabList as $module_key => $label) {
+	                global $mod_strings;
+	                $mod_strings = return_module_language($current_language, $module_key);
+	                foreach ( $this->getMenu($module_key) as $key => $menu_item ) {
+	                    $shortcutTopMenu[$module_key][$key] = array(
+	                        "URL"         => $menu_item[0],
+	                        "LABEL"       => $menu_item[1],
+	                        "MODULE_NAME" => $menu_item[2],
+	                        "IMAGE"       => $themeObject
+	                        ->getImage($menu_item[2],"border='0' align='absmiddle'",null,null,'.gif',$menu_item[1]),
+	                        "ID"          => $menu_item[2]."_link",
+	                        );
+	                }
+	            }
+						}
+						else{
+	                    /*$shortcutTopMenu['Leads'][0] = array(
+	                        "URL"         => 'index.php?module=te_student_batch&action=revenue',
+	                        "LABEL"       => 'Summary',
+	                        "MODULE_NAME" => '',
+	                        "IMAGE"       => $themeObject
+	                        ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','View Student Batch'),
+	                        "ID"          => 'view'."_link",
+	                        );
+											$shortcutTopMenu['Leads'][1] = array(
+ 												 "URL"         => 'index.php?module=te_student_batch&action=dropoutrequest',
+ 												 "LABEL"       => 'Dropout Request',
+ 												 "MODULE_NAME" => '',
+ 												 "IMAGE"       => $themeObject
+ 												 ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','Dropout Request'),
+ 												 "ID"          => 'view'."_link",
+ 												 );
+										 $shortcutTopMenu['Leads'][2] = array(
+	                        "URL"         => 'index.php?module=te_student&action=batchtransfer',
+	                        "LABEL"       => 'Batch Transfer',
+	                        "MODULE_NAME" => '',
+	                        "IMAGE"       => $themeObject
+	                        ->getImage('',"border='0' align='absmiddle'",null,null,'.gif','Batch Transfer'),
+	                        "ID"          => 'view'."_link",
+	                        );
+										$shortcutTopMenu['Leads'][3] = array(
+												"URL"         => 'index.php?module=te_student_batch&action=viewmyrefferal&parent_id='.$current_user->id,
+												"LABEL"       => 'View My Referrals',
+												"MODULE_NAME" => '',
+												"IMAGE"       => $themeObject
+												->getImage('',"border='0' align='absmiddle'",null,null,'.gif','View My Referrals'),
+												"ID"          => 'view'."_link",
+												);
+										$shortcutTopMenu['Leads'][4] = array(
+												"URL"         => 'index.php?module=te_student_batch&action=search_leads',
+												"LABEL"       => 'CRM Leads Search',
+												"MODULE_NAME" => '',
+												"IMAGE"       => $themeObject
+												->getImage('',"border='0' align='absmiddle'",null,null,'.gif','CRM Leads Search'),
+												"ID"          => 'view'."_link",
+											);*/
+						}
             if(!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) $ss->assign('lock_homepage', true);
             $ss->assign("groupTabs",$groupTabs);
             $ss->assign("shortcutTopMenu",$shortcutTopMenu);
@@ -367,24 +430,31 @@ class LeadsViewDetail extends ViewDetail {
             // This is here for backwards compatibility, someday, somewhere, it will be able to be removed
             $ss->assign("moduleTopMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['modules']);
             $ss->assign("moduleExtraMenu",$groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);
-		
-		
+
+
 // Show the custom panel in the left panel
 
-			require_once('custom/modules/Leads/customfunctionforcrm.php');
-			global $current_user;
-			$currentUserId = $current_user->id;
-			$reportingUserIds = array();
-			$reportUserObj1 = new customfunctionforcrm();
-			$statusWiseCount = $reportUserObj1->statusWiseCounts();
-		
+if(!isset($_SESSION['referral'])){
+	require_once('custom/modules/Leads/customfunctionforcrm.php');
+	global $current_user;
+	$currentUserId = $current_user->id;
+	$reportingUserIds = array();
+	$reportUserObj1 = new customfunctionforcrm();
+	$statusWiseCount = $reportUserObj1->statusWiseCounts();
 
-			$ss->assign("statusWiseCount",$statusWiseCount);
-		
+
+	$ss->assign("statusWiseCount",$statusWiseCount);
+}
+			$ss->assign("csshack",'leadpage');
+
+
+
+
+
 
         }
 
-		
+
 		//~ echo $test;die;
         if ( isset($extraTabs) && is_array($extraTabs) ) {
             // Adding shortcuts array to extra menu array for displaying shortcuts associated with each module
@@ -437,12 +507,57 @@ class LeadsViewDetail extends ViewDetail {
         }
 
     }
-	  
-	public function display(){
-		global $current_user;
-		if(!is_admin($current_user)){
-	
+	public function getUserRolesForDetailView($user_id){
+		$query = "SELECT acl_roles.* ".
+		    "FROM acl_roles ".
+		    "INNER JOIN acl_roles_users ON acl_roles_users.user_id = '$user_id' ".
+		        "AND acl_roles_users.role_id = acl_roles.id AND acl_roles_users.deleted = 0 ".
+		    "WHERE acl_roles.deleted=0 ";
+
+		$result = $GLOBALS['db']->query($query);
+		$user_roles = array();
+
+		while($row = $GLOBALS['db']->fetchByAssoc($result) ){
+			$user_roles[$row['id']] = $row;
 		}
+		return $user_roles;
+	}
+	public function display(){		
+		
+		global $current_user;
+		$can_see_detail = 0;
+		$UserRolesForDetailView = $this->getUserRolesForDetailView($current_user->id);
+		$UserRolesForDetailViewSlug = [];
+		if($UserRolesForDetailView){
+			foreach($UserRolesForDetailView as $key=>$rdv){
+				$UserRolesForDetailViewSlug[$key] = $rdv['slug'];
+			}
+		}
+		if(is_admin($current_user)){$can_see_detail = 1;}
+		if(in_array('BA',$UserRolesForDetailViewSlug)){$can_see_detail = 1;}
+		if($can_see_detail === 0){
+			 
+			//check users
+			self::$reporters[]=$this->bean->assigned_user_id;
+			self::getUsers($this->bean->assigned_user_id);			 
+			if(!in_array($current_user->id,self::$reporters)){
+				echo 'You have not access to view this record'; exit();
+			}
+			
+
+		}
+
+
+		require_once ('include/SubPanel/SubPanelTiles.php');
+			$subpanel = new SubPanelTiles($this->bean, $this->module);
+			 // $ss->assign("customtabs", $subpanel->displayinPanel());
+			  //$ss->assign("mycustomtabs", 'Pankaj');
+		 $returnedTabs=$subpanel->displayinPanel();
+
+		 $this->dv->ss->assign('subpanel_tabs', $returnedTabs['tab']);
+		 $this->dv->ss->assign('subpanel_tabs_properties', $returnedTabs['properties']);
+
+
 		require_once('custom/modules/Leads/customfunctionforcrm.php');
 		$reportingUserIds = array();
 		$currentUserId = $current_user->id;
@@ -450,12 +565,11 @@ class LeadsViewDetail extends ViewDetail {
 		$reportUserObj->reportingUser($currentUserId);
 		$reportUserObj->report_to_id[$currentUserId] = $current_user->name;
 		$reportingUserIds = $reportUserObj->report_to_id;
-		
-		if (!array_key_exists($this->bean->assigned_user_id,$reportingUserIds)){
+
+		if (!array_key_exists($this->bean->assigned_user_id,$reportingUserIds)){//$('.actionsContainer').hide();
+				if(!is_admin($current_user) && $can_see_detail === 1){ ?><script>$(function(){$('.actionsContainer').hide();})</script><?php  }
 				echo "<span> You don't have access to view this record</span>";
 					//~ die;
-				
-		
 		}
 		if(!empty($this->bean->phone_mobile)){
 			$this->bean->phone_mobile .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
@@ -463,10 +577,10 @@ class LeadsViewDetail extends ViewDetail {
 		if(!empty($this->bean->phone_other)){
 			$this->bean->phone_other .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
 		}
-		
+
 		if(!empty($this->bean->te_ba_batch_id_c)){
 
-// Get Institute details based on the Batch			
+// Get Institute details based on the Batch
 			$sql_pro = "SELECT te_pr_programs_te_ba_batch_1te_pr_programs_ida,name FROM te_pr_programs p INNER JOIN te_pr_programs_te_ba_batch_1_c  pb ON p.id = pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida WHERE te_pr_programs_te_ba_batch_1te_ba_batch_idb = '".$this->bean->te_ba_batch_id_c."' AND pb.deleted = 0 AND p.deleted=0";
 			$res_pro = $GLOBALS['db']->query($sql_pro);
 			$pro = $GLOBALS['db']->fetchByAssoc($res_pro);
@@ -474,21 +588,46 @@ class LeadsViewDetail extends ViewDetail {
 			$this->bean->program = "<a href='index.php?action=DetailView&module=te_pr_Programs&record={$pid}'>".$pro['name']."</a>";
 
 // Get Institute details based on the Batch
-			
+
 			$sql_ins = "SELECT te_in_institutes_te_ba_batch_1te_in_institutes_ida,name FROM te_in_institutes i INNER JOIN  te_in_institutes_te_ba_batch_1_c ib ON i.id = ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida WHERE te_in_institutes_te_ba_batch_1te_ba_batch_idb = '".$this->bean->te_ba_batch_id_c."' AND ib.deleted = 0 AND i.deleted=0";
 			$res_ins = $GLOBALS['db']->query($sql_ins);
 			$ins = $GLOBALS['db']->fetchByAssoc($res_ins);
 			$iid = $ins['te_in_institutes_te_ba_batch_1te_in_institutes_ida'];
 			$this->bean->institute = "<a href='index.php?action=DetailView&module=te_in_institutes&record={$iid}'>".$ins['name']."</a>";
-			
-			
+
+			$sql_ins = "SELECT id,te_ba_batch.name FROM te_ba_batch  WHERE id = '".$this->bean->te_ba_batch_id_c . "'";
+			$res_ins = $GLOBALS['db']->query($sql_ins);
+			$ins = $GLOBALS['db']->fetchByAssoc($res_ins);
+			$iid = $ins['id'];
+			$this->bean->batches = "<a href='index.php?action=DetailView&module=te_ba_Batch&record={$iid}'>".$ins['name']."</a>";
+
+
+
 		}
-		
+
+		$overview=array();
+		$overview['name']=$this->bean->name;
+		$overview['email']=$this->bean->email1;
+		$overview['mobile']=$this->bean->phone_mobile;
+		$overview['batch']=$this->bean->batches;
+		$overview['note']=$this->bean->note;
+		$overview['institute'] = $this->bean->institute;
+		$overview['programe'] = $this->bean->program;
+		$overview['status'] = $this->bean->status;
+		$overview['statusDetail'] = $this->bean->status_description;
+		$dr = $this->bean->disposition_reason;
+		if(!empty($this->bean->disposition_reason)){
+			$dr  = $GLOBALS['app_list_strings']['leads_disposition_reason_list'][$this->bean->disposition_reason];
+		}
+		$overview['disposition_reason'] = $dr;
+		$overview['dated'] = $this->bean->date_entered;//DATE_ENTERED;
+		//print_r($overview);die;
+		$this->dv->ss->assign('overview',$overview);
 		?>
 
 <script>
-	
-	
+
+
     $(document).ready(function () {
 			var table 	 	= document.getElementById('detailpanel_1').getElementsByTagName('TBODY')[0].rows;
 			var rowCount 	= table.length;
@@ -502,15 +641,21 @@ class LeadsViewDetail extends ViewDetail {
 			}
 		    $("#status").change(function() {
 				alert(1)
-			});     
+			});
    });
-  
-  
+	 <?php if(isset($_SESSION['referral'])){//unset($_SESSION['referral']);?>
+	 	 $(function(){
+			$(".sugar_action_button").hide();
+			$("#create_link").hide();
+		 });
+
+	 <?php }?>
+
   function generateInvoice(lead_id){
 	  //~ alert(lead_id)
 	  //~ window.location.href='index.php?entryPoint=generateInvoice&LeadID='+lead_id;
 	  window.open('index.php?entryPoint=generateInvoice&LeadID='+lead_id, '_blank');
-	}          
+	}
   function clickToCall(phone,lead_id){
 
 		//~ alert(phone)
@@ -519,48 +664,117 @@ class LeadsViewDetail extends ViewDetail {
 			var callback = {
 				success:function(b){
 					SUGAR.ajaxUI.hideLoadingPanel();
-					var parsedJSON = JSON.parse(b.responseText);
-					//~ alert(parsedJSON[0]);
-					//~ alert(parsedJSON[1]);
-					
-					if(parsedJSON[0]=="200"){	
-						//~ alert('Call Success');
-						//~ $(this).popupModal('atomBox');
-						var url_open = "http://te.engeniatech.in/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
-						//~ window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
-						var width = 520;
-						var height = 570;
-						var windowFeatures = 'width=' + width + ',height=' + height + ',resizable=1,scrollbars=1';
-						SUGAR.util.openWindow(url_open, "Call Popup", windowFeatures);
-						//~ document.getElementById('call_id').value = parsedJSON[1];
-						//~ document.getElementById('mobile').value = phone;
-						//~ window.location.href='index.php?module=Leads&action=index';
-
-					}
-					else{
-						alert('Error!! Call not connected')
-						//~ var url_open = "http://localhost/TalentEdge/index.php?entryPoint=openCallPopup&mobile="+phone+"&lead_id="+lead_id+"&call_id="+parsedJSON[1];
-						//~ window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
-					}
+					if(b.responseText) swal(b.responseText);
 				}
-						
+
 			}
-			
-			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&number='+phone, callback);
+
+			var connectionObject = YAHOO.util.Connect.asyncRequest('GET', 'index.php?entryPoint=clickToCall&lead='+ lead_id +'&number='+phone, callback);
 		 }
 	}
-	
-	
-	
+
+	function updateleadseenunseen(lid){
+
+		var lead_id = $("#seenbtn").data('lid');
+		SUGAR.ajaxUI.showLoadingPanel();
+		$.ajax({url: "index.php?entryPoint=seen_unseen&lead_id="+lead_id, success: function(result){
+			SUGAR.ajaxUI.hideLoadingPanel();
+			if(result==1){
+				$("#seenbtn").text("Unseen");
+				return true;
+			}else{
+				alert("Unable to mark Seen!");
+				return false;
+			}
+
+		}});
+
+	}
+        
+         function getLogger(lead_id) {
+             alert(lead_id);
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=attemptlogger",
+                    data: {action: getLogger, param: lead_id},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                       
+                        $('#list_subpanel_te_dispositionlogger_leads').html(data);
+                    }
+                });
+            }
             
+	$(document).ready(function() {
+		//function to hide edit button on lead details page
+		if($("#seenbtn").attr('data-seen')=='1') {
+		  $(document).ajaxComplete(function() {
+ 		   //$("#delete_button").hide();
+		   //$("#edit_button_old").hide();
+		   //$("#edit_button").hide();
+		   $(".clickMenu").hide();
+		  });
+		}
+                
+                $("#Leads_detailview_tabs .yui-nav li").click(function() {
+                     var getTabName = $(this).find("a em").html();
+                     //alert(getTabName);
+                     if(getTabName=='Call log')
+                     {
+                       var lead_id ='<?=$_REQUEST['record'];?>';
+                       $.ajax({url: "index.php?entryPoint=attemptlogger&action=getLogger&lead_id="+lead_id, success: function(result){
+                               $('#list_subpanel_te_dispositionlogger_leads').html(result);
+                        }});
+                       
+                     }
+                });
+                
+                /*$('#tab4').click(function(){
+                    var lead_id ='<?//=$_REQUEST['record'];?>';
+                        $.ajax({url: "index.php?entryPoint=attemptlogger&action=getLogger&lead_id="+lead_id, success: function(result){
+                               $('#list_subpanel_te_dispositionlogger_leads').html(result);
+                        }});
+
+                });*/
+
+                
+              
+	});
+
+
+
+
      </script>
 
 
 <?php
-		
+
 		parent::display();
 		//~ require_once('custom/modules/Leads/include/ShowCallPopup.html');
 	}
 	
+	public static $reporters=array();
+	public static function getUsers($userID){
+	 global $db;
+	 
+		 $sql="select reports_to_id from users where id='" . $userID. "' and deleted=0";
+		 $res=$db->query($sql);	
+		 
+		 if($db->getRowCount($res) > 0){
+			 $records=$db->fetchByAssoc($res);
+			 if($records['reports_to_id']){	
+				 self::$reporters[]=$records['reports_to_id'];
+				 self::getUsers($records['reports_to_id']);
+			 }
+		 }	 
+		
+		
+	}
+
 }
 ?>

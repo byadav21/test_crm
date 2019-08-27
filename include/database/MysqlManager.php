@@ -176,10 +176,50 @@ class MysqlManager extends DBManager
 
 		parent::countQuery($sql);
 		$GLOBALS['log']->info('Query:' . $sql);
-		$this->checkConnection();
+		//$this->checkConnection();
 		$this->query_time = microtime(true);
 		$this->lastsql = $sql;
-		$result = $suppress?@mysql_query($sql, $this->database):mysql_query($sql, $this->database);
+               
+                if (isset($sql) && !empty($sql))
+                    {
+                        $queryType = strtolower(mb_substr(trim($sql), 0, 6));
+                        if ($queryType == 'select')
+                        {
+                            $report_action = '';
+                            $report_action = isset($GLOBALS['action'])? $GLOBALS['action'] : '';
+                            if (isset($sugar_config['report_lists'][$report_action]))
+                            {
+                            $con_list = DBManagerFactory::getInstance('cust_report_list');
+                            }
+                            else
+                            {
+                            $con_list = DBManagerFactory::getInstance('listviews');
+                            }
+                            //$con_list = DBManagerFactory::getInstance('listviews');
+                            $result = $suppress?@mysql_query($sql, $con_list->database):mysql_query($sql, $con_list->database);
+                            DBManagerFactory::getInstance('listviews');
+                        }
+                         else if ($queryType == 'update' || $queryType == 'insert')
+                        {
+                            $con_list = DBManagerFactory::getInstance('master_view');
+                           $result = $suppress?@mysql_query($sql, $con_list->database):mysql_query($sql, $con_list->database);
+                        }
+                        else
+                        {
+                            //$this->checkConnection();
+                            $con_list = DBManagerFactory::getInstance('master_view');
+                            $result = $suppress?@mysql_query($sql, $con_list->database):mysql_query($sql, $con_list->database);
+                        }
+                    }
+                    else
+                    {
+                        //$this->checkConnection();
+                        $con_list = DBManagerFactory::getInstance('master_view');
+                        $result = $suppress?@mysql_query($sql, $con_list->database):mysql_query($sql, $con_list->database);
+                    }
+               
+                
+		//$result = $suppress?@mysql_query($sql, $this->database):mysql_query($sql, $this->database);
 
 		$this->query_time = microtime(true) - $this->query_time;
 		$GLOBALS['log']->info('Query Execution Time:'.$this->query_time);

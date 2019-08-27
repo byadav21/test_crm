@@ -38,60 +38,65 @@ array (
         array (
           0 => 
           array (
-            'name' => 'payment_type',
+            'name' => 'currency_type',
             'studio' => 'visible',
-            'label' => 'LBL_PAYMENT_TYPE',
+            'label' => 'Currency Type',
           ),
           1 => 
           array (
-            'name' => 'date_of_payment',
-            'label' => 'LBL_DATE_OF_PAYMENT',
+            'name' => 'amount',
+            'label' => 'LBL_AMOUNT',
           ),
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'currency_type',
-            'studio' => 'visible',
-            'label' => 'Currency Type',
+            'name' => 'reference_number',
+            'label' => 'LBL_REFERENCE_NUMBER',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'payment_realized',
+            'label' => 'LBL_PAYMENT_REALIZED',
+          ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'amount',
-            'label' => 'LBL_AMOUNT',
+            'name' => 'payment_source',
+            'label' => 'LBL_PAYMENTTYPESOURCE',
           ),
           1 => 
           array (
-            'name' => 'reference_number',
-            'label' => 'LBL_REFERENCE_NUMBER',
+            'name' => 'transaction_id',
+            'label' => 'LBL_TRANSACTIONID',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'payment_realized',
-            'label' => 'LBL_PAYMENT_REALIZED',
-          ),
-          1 => 
-          array (
-            'name' => 'payment_source',
-            'label' => 'LBL_PAYMENTTYPESOURCE',
+            'name' => 'invoice_order_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Order Number',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'transaction_id',
-            'label' => 'LBL_TRANSACTIONID',
+            'name' => 'invoice_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Number',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'invoice_url',
+            'studio' => 'visible',
+            'label' => 'Invoice URL',
+          ),
         ),
       ),
     ),

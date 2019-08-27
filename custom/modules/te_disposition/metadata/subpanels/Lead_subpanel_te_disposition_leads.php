@@ -1,11 +1,13 @@
 <?php
-// created: 2016-11-17 02:50:05
+
+// created: 2018-07-20 17:58:03
 $subpanel_layout['list_fields'] = array (
-  'name' => 
+  'status' => 
   array (
+    'type' => 'enum',
+    'studio' => 'visible',
     'vname' => 'LBL_STATUS',
-    'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '15%',
+    'width' => '10%',
     'default' => true,
   ),
   'status_detail' => 
@@ -38,6 +40,18 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'orderBy' => 'date_entered',
     'default' => true,
+  ),
+  'modified_by_name' => 
+  array (
+    'type' => 'relate',
+    'link' => true,
+    'vname' => 'LBL_MODIFIED_NAME',
+    'id' => 'MODIFIED_USER_ID',
+    'width' => '10%',
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'Users',
+    'target_record_key' => 'modified_user_id',
   ),
   'created_by_name' => 
   array (

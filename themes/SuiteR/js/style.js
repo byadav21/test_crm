@@ -362,4 +362,38 @@ $(document).ready(function() {
     });
 });
 
+
+ 
+$( document ).ready(function() {
+	 if($( ".multiselbox").find("option").eq(0).val()==0) $( ".multiselbox").find("option").eq(0).remove();
+ 
+	 $('.multiselbox').multiselect({
+		 texts:{selectAll: 'Select All'}
+	}); 
+	
+	$('body').on('click','#desktop_notifications',function(){
+		 
+		if($(this).hasClass('open')){
+		  $(this).removeClass('open');	
+		}else{
+			 $(this).addClass('open');	
+		}
+	})
+	
+	$('body').on('click','.user-profile  ',function(){
+		 
+		if($(this).parent().hasClass('open')){
+		  $(this).parent().removeClass('open');	
+		  $('.dropdown-usermenu').hide();
+		}else{
+			 $(this).parent().addClass('open');	
+			  $('.dropdown-usermenu').show();
+		}
+	})
+	
+	
+});
+						
+
+
 // End of custom jQuery

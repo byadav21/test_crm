@@ -7,7 +7,7 @@ $dictionary['Lead']['fields']['status_description']['len']='100';
 $dictionary['Lead']['fields']['status_description']['options']='lead_status_details_custom_dom';
 $dictionary['Lead']['fields']['status_description']['audited']='true';
 $dictionary['Lead']['fields']['status_description']['default']='New Lead';
-
+$dictionary['Lead']['fields']['status_description']['required']=true;
 
 $dictionary['Lead']['fields']['status']['options']='lead_status_custom_dom';
 $dictionary['Lead']['fields']['status']['default']='Alive';

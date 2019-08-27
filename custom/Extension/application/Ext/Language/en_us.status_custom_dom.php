@@ -5,6 +5,7 @@ $app_list_strings['lead_status_custom_dom'] = array (
   'Converted' => 'Converted',
   'Dead' => 'Dead',
   'Duplicate' => 'Duplicate',
+  'Dropout' => 'Dropout',
   'Warm' => 'Warm',
   
 );

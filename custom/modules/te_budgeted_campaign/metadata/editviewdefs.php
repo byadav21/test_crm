@@ -68,31 +68,18 @@ array (
           ),
           1 => 
           array (
-            'name' => 'conversion_rate',
-            'label' => 'LBL_CONVERSION_RATE',
-          ),
-        ),
-		3 => 
-        array (
-          0 => 
-          array (
             'name' => 'leads',
             'label' => 'LBL_LEADS',
           ),
-          1 => 
-          array (
-            'name' => 'clp',
-            'label' => 'LBL_CLP',
-          ),
         ),
-		4 => 
+        3 => 
         array (
-          0 => 
-          array (
-            'name' => 'cpa',
-            'label' => 'LBL_CPA',
-          ),
+          0 => '',
           1 => '',
+        ),
+        4 => 
+        array (
+          0 => '',
         ),
       ),
     ),

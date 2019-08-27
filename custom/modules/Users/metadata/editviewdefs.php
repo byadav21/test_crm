@@ -24,6 +24,13 @@ array (
         'headerTpl' => 'custom/modules/Users/tpls/EditViewHeader.tpl',
         'footerTpl' => 'custom/modules/Users/tpls/EditViewFooter.tpl',
       ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/modules/Users/user.js',
+        ),
+      ),
       'useTabs' => false,
       'tabDefs' => 
       array (
@@ -44,7 +51,7 @@ array (
     array (
       'LBL_USER_INFORMATION' => 
       array (
-        0 => 
+        1 => 
         array (
           0 => 
           array (
@@ -56,14 +63,18 @@ array (
               'size' => 30,
             ),
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'te_department_expense_users_1_name',
+            'label' => 'LBL_TE_DEPARTMENT_EXPENSE_USERS_1_FROM_TE_DEPARTMENT_EXPENSE_TITLE',
+          ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 'first_name',
           1 => 'last_name',
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -80,7 +91,7 @@ array (
             'customCode' => '{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -93,16 +104,16 @@ array (
             'label' => 'LBL_NEOXPASS',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
             'name' => 'neox_extension',
             'label' => 'LBL_NEOXEXTENSION',
           ),
-          1 => '',
+          1 => 'phone_mobile',
         ),
-        5 => 
+        6 => 
         array (
           0 => 
           array (
@@ -117,6 +128,13 @@ array (
           array (
             'name' => 'user_access_type',
             'label' => 'LBL_USERTYPE',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'te_ba_batch_users_1_name',
           ),
         ),
       ),
@@ -142,7 +160,7 @@ array (
             'name' => 'reports_to_name',
             'customCode' => '{if $IS_ADMIN}@@FIELD@@{else}{$REPORTS_TO_READONLY}{/if}',
           ),
-          1 => '',
+          1 => 'designation',
         ),
       ),
     ),

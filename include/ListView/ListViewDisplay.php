@@ -299,8 +299,8 @@ class ListViewDisplay {
 		if ( $this->targetList && ACLController::checkAccess('ProspectLists','edit',true) )
 		    $menuItems[] = $this->buildTargetList($location);
 		// export
-		if ( ACLController::checkAccess($this->seed->module_dir,'export',true) && $this->export )
-			$menuItems[] = $this->buildExportLink($location);
+		//if ( ACLController::checkAccess($this->seed->module_dir,'export',true) && $this->export )
+		//	$menuItems[] = $this->buildExportLink($location);
 
 		foreach ( $this->actionsMenuExtraItems as $item )
 		    $menuItems[] = $item;

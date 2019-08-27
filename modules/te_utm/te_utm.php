@@ -42,7 +42,10 @@
  */
 require_once('modules/te_utm/te_utm_sugar.php');
 class te_utm extends te_utm_sugar {
+
 	
+        var $importable = true;
+
 	function __construct(){
 		parent::__construct();
 	}

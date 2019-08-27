@@ -53,7 +53,7 @@ class ACLRole extends SugarBean{
     var $created_by;
 
     public function __construct(){
-        parent::__construct();
+        parent::__construct(); 
     }
 
     /**
@@ -105,7 +105,7 @@ function getUserRoles($user_id, $getAsNameArray = true){
 
         //if we don't have it loaded then lets check against the db
         $additional_where = '';
-        $query = "SELECT acl_roles.* ".
+       echo  $query = "SELECT acl_roles.* ".
             "FROM acl_roles ".
             "INNER JOIN acl_roles_users ON acl_roles_users.user_id = '$user_id' ".
                 "AND acl_roles_users.role_id = acl_roles.id AND acl_roles_users.deleted = 0 ".
@@ -124,6 +124,16 @@ function getUserRoles($user_id, $getAsNameArray = true){
         }
 
         return $user_roles;
+}
+
+function getOtherFeilds($roleID){
+		$db = DBManagerFactory::getInstance();
+         $query = "SELECT a.parent_role,a.issubmit,a.isapprove,a.sendtofin,a.isvendor,b.name as parname,a.isfacility FROM acl_roles as a left join acl_roles as b on a.parent_role=b.id 
+                    WHERE a.deleted=0 and a.id='$roleID' ORDER BY a.name";
+
+        $result = $db->query($query);
+        return $db->fetchByAssoc($result);
+	
 }
 
 /**
@@ -301,6 +311,55 @@ function mark_relationships_deleted($id){
             $this->$name = $value;
         }
     }
+    
+    function getUserRole($user,$expense=2){
+        
+        $db = DBManagerFactory::getInstance();
+        $query =  "select acl_roles.id,acl_roles.name,issubmit,isapprove,isfacility,sendtofin,parent_role,isvendor from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='$user' where acl_roles_users.deleted=0";
+        if($expense==2)  $query .=" and isvendor=2 ";
+        if($expense==1)  $query .=" and isvendor=1 ";
+        $result=$db->query($query);
+        return $db->fetchByAssoc($result);
+    }
+    
+    function getUserRoleSlug($user_id){
+
+        
+
+        if($user_id!=''){
+            //if we don't have it loaded then lets check against the db
+            $additional_where = '';
+            $query = "SELECT acl_roles.slug ".
+                "FROM acl_roles ".
+                "INNER JOIN acl_roles_users ON acl_roles_users.user_id = '$user_id' ".
+                    "AND acl_roles_users.role_id = acl_roles.id AND acl_roles_users.deleted = 0 ".
+                "WHERE acl_roles.deleted=0 ";
+
+            $result = $GLOBALS['db']->query($query);
+            $user_roles ='';
+
+            while($row = $GLOBALS['db']->fetchByAssoc($result) ){
+                $user_roles = $row['slug'];
+            }
+
+            sugar_cache_put("RoleMembershipNames_".$user_id, $user_roles);
+        }
+
+        return $user_roles;
+}
+    
+	function getUserSlug ($user_id){
+		  global $db;	
+		  $sql="select slug from acl_roles inner join acl_roles_users on acl_roles_users.role_id=acl_roles.id and user_id='" . $user_id . "' and acl_roles.deleted=0 and acl_roles_users.deleted=0";
+		  $mis=$db->query($sql);
+		  $misData=$db->fetchByAssoc($mis);
+		  if($misData && count($misData)>0){
+			  return $misData;
+		  }else{
+			 return false;  
+		  }
+	}     
+    
 }
 
 ?>

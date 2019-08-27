@@ -143,6 +143,48 @@ $dictionary['ACLRole'] = array('table' => 'acl_roles', 'comment' => 'ACL Role de
                 'source' => 'non-db',
                 'vname' => 'LBL_SECURITYGROUPS',
             ),
+        'parent_role' =>
+            array(
+                'name' => 'parent_role',
+                'type' => 'id',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
+        'issubmit' =>
+            array(
+                'name' => 'issubmit',
+                'type' => 'int',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
+        'isapprove' =>
+            array(
+                'name' => 'isapprove',
+                'type' => 'int',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
+        'sendtofin' =>
+            array(
+                'name' => 'sendtofin',
+                'type' => 'int',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
+        'isfacility' =>
+            array(
+                'name' => 'isfacility',
+                'type' => 'int',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
+        'isvendor' =>
+            array(
+                'name' => 'isvendor',
+                'type' => 'int',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
+            'slug' =>
+            array(
+                'name' => 'slug',
+                'type' => 'varchar',               
+                'vname' => 'LBL_DEPARTMENT',
+            ),
     )
 , 'indices' => array(
         array('name' => 'aclrolespk', 'type' => 'primary', 'fields' => array('id')),

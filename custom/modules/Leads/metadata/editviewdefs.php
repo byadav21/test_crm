@@ -35,26 +35,25 @@ array (
           'field' => '30',
         ),
       ),
-       'includes' =>
-     array (
-    	0 =>
-    	array (
-    		'file' => 'custom/modules/Leads/include/js/popup.js',
-    		
-    	),
-     ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/modules/Leads/include/js/popup.js',
+        ),
+      ),
       'javascript' => '<script type="text/javascript" language="Javascript">function copyAddressRight(form)  {ldelim} form.alt_address_street.value = form.primary_address_street.value;form.alt_address_city.value = form.primary_address_city.value;form.alt_address_state.value = form.primary_address_state.value;form.alt_address_postalcode.value = form.primary_address_postalcode.value;form.alt_address_country.value = form.primary_address_country.value;return true; {rdelim} function copyAddressLeft(form)  {ldelim} form.primary_address_street.value =form.alt_address_street.value;form.primary_address_city.value = form.alt_address_city.value;form.primary_address_state.value = form.alt_address_state.value;form.primary_address_postalcode.value =form.alt_address_postalcode.value;form.primary_address_country.value = form.alt_address_country.value;return true; {rdelim} </script>',
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'LBL_CONTACT_INFORMATION' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
       ),
@@ -90,15 +89,10 @@ array (
         2 => 
         array (
           0 => 'email1',
-          1 => 'phone_mobile',
         ),
         3 => 
         array (
-          0 => 
-          array (
-            'name' => 'education_c',
-            'label' => 'LBL_EDUCATION',
-          ),
+          0 => 'phone_mobile',
           1 => 
           array (
             'name' => 'phone_other',
@@ -110,21 +104,50 @@ array (
         array (
           0 => 
           array (
-            'name' => 'work_experience_c',
-            'label' => 'LBL_WORK_EXPERIENCE',
+            'name' => 'education_c',
+            'label' => 'LBL_EDUCATION',
           ),
           1 => 
           array (
-            'name' => 'functional_area_c',
-            'label' => 'LBL_FUNCTIONAL_AREA',
+            'name' => 'work_experience_c',
+            'label' => 'LBL_WORK_EXPERIENCE',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
+            'name' => 'functional_area_c',
+            'label' => 'LBL_FUNCTIONAL_AREA',
+          ),
+          1 => 
+          array (
             'name' => 'company_c',
             'label' => 'LBL_COMPANY',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'country_log',
+            'comment' => 'Status of the country',
+            'label' => 'LBL_COUNTRY_LOG',
+          ),
+          1 => 
+          array (
+            'name' => 'primary_address_state',
+            'comment' => 'State for primary address',
+            'label' => 'LBL_STATE',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'primary_address_country',
+            'comment' => 'Country for primary address',
+            'label' => 'LBL_COUNTRY',
           ),
           1 => 
           array (
@@ -133,22 +156,7 @@ array (
             'label' => 'LBL_CITY',
           ),
         ),
-        6 => 
-        array (
-          0 => 
-          array (
-            'name' => 'primary_address_state',
-            'comment' => 'State for primary address',
-            'label' => 'LBL_STATE',
-          ),
-          1 => 
-          array (
-            'name' => 'primary_address_country',
-            'comment' => 'Country for primary address',
-            'label' => 'LBL_COUNTRY',
-          ),
-        ),
-        7 => 
+        8 => 
         array (
           0 => 
           array (
@@ -156,14 +164,18 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_BATCH',
           ),
-          1 => 
-          array (
-            'name' => 'utm_campaign',
-            'studio' => 'visible',
-            'label' => 'UTM Campaign',
-          ),
         ),
-        8 => 
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'discount',
+            'studio' => 'visible',
+            'label' => 'Discount',
+          ),
+          1 => '',
+        ),
+        10 => 
         array (
           0 => 
           array (
@@ -172,18 +184,26 @@ array (
             'studio' => 'visible',
             'label' => 'COMMENT',
           ),
-          1 => '',
         ),
-        9 => 
+        11 => 
         array (
-          0 => 'lead_source',
-          1 => 
+          0 => 
           array (
-            'name' => 'leads_leads_1_name',
-            'label' => 'Referral Lead',
+            'name' => 'lead_source_types',
+            'label' => 'Lead Source Type',
+          ),
+          1 => 'lead_source',
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'parent_name',
+            'studio' => 'visible',
+            'label' => 'LBL_FLEX_RELATE',
           ),
         ),
-        10 => 
+        13 => 
         array (
           0 => 'status',
           1 => 
@@ -191,7 +211,18 @@ array (
             'name' => 'status_description',
           ),
         ),
-        11 => 
+        14 => 
+        array (
+          0 => '',
+          1 => 
+          array (
+            'name' => 'disposition_reason',
+            'comment' => 'source_type',
+            'studio' => 'visible',
+            'label' => 'Disposition Reason',
+          ),
+        ),
+        15 => 
         array (
           0 => 
           array (
@@ -204,7 +235,7 @@ array (
             'label' => 'LBL_ASSIGNED_TO',
           ),
         ),
-        12 => 
+        16 => 
         array (
           0 => 
           array (
@@ -217,13 +248,14 @@ array (
             'label' => 'LBL_DATEOFCALLBACK',
           ),
         ),
-        13 => 
+        17 => 
         array (
           0 => 
           array (
             'name' => 'date_of_prospect',
             'label' => 'LBL_DATEOFPROSPECT',
           ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -274,7 +306,26 @@ array (
             'name' => 'transaction_id',
             'label' => 'LBL_TRANSACTIONID',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'invoice_order_number',
+            'studio' => 'visible',
+            'label' => 'Invoice Order Number',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'invoice_number',
+            'label' => 'LBL_INVOICE_NUMBER',
+          ),
+          1 => 
+          array (
+            'name' => 'invoice_url',
+            'studio' => 'visible',
+            'label' => 'Invoice URL',
+          ),
         ),
       ),
     ),

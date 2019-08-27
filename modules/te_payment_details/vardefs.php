@@ -154,6 +154,21 @@ $dictionary['te_payment_details'] = array(
     'len' => '255',
     'size' => '20',
   ),
+  'student_payment_id' => 
+	array (
+		'name' => 'student_payment_id',
+		'label' => 'Student Payment Id',
+		'type' => 'char',
+		'help' => '',
+		'comment' => '',
+		'default_value' => '',
+		'len' => '36',
+		'required' => false, 
+		'reportable' => true, 
+		'audited' => false, 
+		'importable' => 'true', 
+		'duplicate_merge' => false, 
+	),
 ),
 	'relationships'=>array (
 ),

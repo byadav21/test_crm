@@ -36,3 +36,36 @@ $dictionary["te_payment_details"]["fields"]["leads_te_payment_details_1leads_ida
   'side' => 'right',
   'vname' => 'LBL_LEADS_TE_PAYMENT_DETAILS_1_FROM_TE_PAYMENT_DETAILS_TITLE',
 );
+
+$dictionary["te_payment_details"]["fields"]["country"] = array (
+		'name' => 'country',
+		'vname' => 'Country',
+		'type' => 'varchar',
+		'required' => false,
+		'comments' => 'Student Country',
+		'help' => '',
+		'default'=> NULL,
+		'importable' => 'false',
+		'duplicate_merge' => 'disabled',
+		'duplicate_merge_dom_value' => '0',
+		'audited' => false,
+		'reportable' => false,
+		'len' => '100',
+		'size' => '100',
+	);
+$dictionary["te_payment_details"]["fields"]["state"] = array (
+		'name' => 'state',
+		'vname' => 'state',
+		'type' => 'varchar',
+		'required' => false,
+		'comments' => 'Student State',
+		'help' => '',
+		'default'=> NULL,
+		'importable' => 'false',
+		'duplicate_merge' => 'disabled',
+		'duplicate_merge_dom_value' => '0',
+		'audited' => false,
+		'reportable' => false,
+		'len' => '100',
+		'size' => '100',
+	);

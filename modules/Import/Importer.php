@@ -89,7 +89,7 @@ class Importer
 
         $this->importSource = $importSource;
 
-        //Vanilla copy of the bean object.
+        ////Vanilla copy of the bean object.
         $this->bean = $bean;
 
         // use our own error handler
@@ -140,7 +140,7 @@ class Importer
         $focus->unPopulateDefaultValues();
         $focus->save_from_post = false;
         $focus->team_id = null;
-        $this->ifs->createdBeans = array();
+        ImportFieldSanitize::$createdBeans = array();
         $this->importSource->resetRowErrorCounter();
         $do_save = true;
 
@@ -352,7 +352,7 @@ class Importer
             if ( $idc->isADuplicateRecord($enabled_dupes) )
             {
                 $this->importSource->markRowAsDuplicate($idc->_dupedFields);
-                $this->_undoCreatedBeans($this->ifs->createdBeans);
+                $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                 return;
             }
         }
@@ -365,8 +365,9 @@ class Importer
             if ( $idc->isADuplicateRecordByFields($enabled_dup_fields) )
             {
                 $this->importSource->markRowAsDuplicate($idc->_dupedFields);
-                $this->_undoCreatedBeans($this->ifs->createdBeans);
+                $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                 return;
+                
             }
         }
 
@@ -396,7 +397,7 @@ class Importer
                     if( ! $this->isUpdateOnly )
                     {
                         $this->importSource->writeError($mod_strings['LBL_ID_EXISTS_ALREADY'],'ID',$focus->id);
-                        $this->_undoCreatedBeans($this->ifs->createdBeans);
+                        $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                         return;
                     }
 
@@ -404,7 +405,7 @@ class Importer
                     if($clonedBean === FALSE)
                     {
                         $this->importSource->writeError($mod_strings['LBL_RECORD_CANNOT_BE_UPDATED'],'ID',$focus->id);
-                        $this->_undoCreatedBeans($this->ifs->createdBeans);
+                        $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
                         return;
                     }
                     else
@@ -427,7 +428,7 @@ class Importer
             $this->importSource->markRowAsImported($newRecord);
         }
         else
-            $this->_undoCreatedBeans($this->ifs->createdBeans);
+            $this->_undoCreatedBeans(ImportFieldSanitize::$createdBeans);
 
         unset($defaultRowValue);
 

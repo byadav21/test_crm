@@ -100,10 +100,12 @@
 						document.getElementById("hangup").disabled = true;
 						document.getElementById("hold").disabled = true;
 						document.getElementById("unhold").disabled = true;
+						document.getElementById("SAVE_FOOTER").style.display ='inline';
 
 					}
 					else{
 						alert('Error!! Not Disconnected')
+						
 					}
 				}
 						

@@ -100,9 +100,17 @@ class StagewiseDashlet extends Dashlet{
         $leadsData=array();
 		$user_id=$current_user->id;
 		
-		$leadQuery="select status, count(status) as statuscount from leads where assigned_user_id=1 group by status limit 0,".$this->StagewiseDashletOptions_dyna;
-
-	    $leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
+		$user_id=$current_user->id;
+		$this->report_to_id[]=$user_id;
+		$users = $this->reportingUser($user_id);
+		//print_r($users);
+		//print_r($this->report_to_id);
+		$uid=$this->report_to_id;
+		
+		$str = implode("','",$uid);
+		
+		$leadQuery="select status, count(status) as statuscount from leads where assigned_user_id IN('".$str."') group by status limit 0,".$this->StagewiseDashletOptions_dyna;
+		$leadObj=$resultDate=$GLOBALS['db']->query($leadQuery);			  
         while($row=$GLOBALS['db']->fetchByAssoc($leadObj)){	
 			$leadsData[]=$row;			 
 		}		
@@ -132,6 +140,26 @@ class StagewiseDashlet extends Dashlet{
         //$GLOBALS['log']->fatal($trackerData);
         return $output;
     }
+    function reportingUser($currentUserId){
+		
+			$userObj = new User();
+			$userObj->disable_row_level_security = true;
+			
+			$userList = $userObj->get_full_list("", "users.reports_to_id='".$currentUserId."'");
+             
+			if(!empty($userList)){
+				//echo "<pre>";print_r($userList);
+				//echo $userList[0]->id;exit();
+				foreach($userList as $record){
+                                    
+					if(!empty($record->reports_to_id) && !empty($record->id)){
+					
+						$this->report_to_id[] = $record->id;
+						$this->reportingUser($record->id);
+					}
+				}
+			}
+		}
     
 	
 }

@@ -4,7 +4,7 @@ $listViewDefs [$module_name] =
 array (
   'NAME' => 
   array (
-    'width' => '20%',
+    'width' => '32%',
     'label' => 'LBL_NAME',
     'default' => true,
     'link' => true,
@@ -22,27 +22,14 @@ array (
     'type' => 'relate',
     'link' => true,
     'label' => 'LBL_TE_VENDOR_TE_UTM_1_FROM_TE_VENDOR_TITLE',
+    'width' => '10%',
+    'default' => true,
     'id' => 'TE_VENDOR_TE_UTM_1TE_VENDOR_IDA',
-    'width' => '10%',
-    'default' => true,
   ),
-  'CONTRACT' => 
+  'CONTRACT_TYPE' => 
   array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_CONTRACT',
-    'id' => 'AOS_CONTRACTS_ID_C',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
-  'BATCH' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_BATCH',
-    'id' => 'TE_BA_BATCH_ID_C',
-    'link' => true,
+    'type' => 'enum',
+    'label' => 'UTM Medium',
     'width' => '10%',
     'default' => true,
   ),

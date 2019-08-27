@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-06 12:26:55
+// created: 2017-06-13 13:20:26
 $GLOBALS['tabStructure'] = array (
   'LBL_GROUPTAB5_1473074494' => 
   array (
@@ -10,6 +10,7 @@ $GLOBALS['tabStructure'] = array (
       1 => 'te_pr_Programs',
       2 => 'te_ba_Batch',
       3 => 'te_Program_category',
+      4 => 'AOW_WorkFlow',
     ),
   ),
   'LBL_GROUPTAB1_1474960120' => 
@@ -33,7 +34,6 @@ $GLOBALS['tabStructure'] = array (
     array (
       0 => 'Leads',
       1 => 'te_lead_assignment_rule',
-      2 => 'te_disposition',
     ),
   ),
   'LBL_GROUPTAB3_1480929977' => 
@@ -41,9 +41,29 @@ $GLOBALS['tabStructure'] = array (
     'label' => 'LBL_GROUPTAB3_1480929977',
     'modules' => 
     array (
-      0 => 'KReports',
-      1 => 'AOR_Reports',
-      2 => 'Home',
+      0 => 'AOR_Reports',
+      1 => 'Home',
+      2 => 'Emails',
+    ),
+  ),
+  'LBL_GROUPTAB4_1487154036' => 
+  array (
+    'label' => 'LBL_GROUPTAB4_1487154036',
+    'modules' => 
+    array (
+      0 => 'te_srm_auto_assignment',
+    ),
+  ),
+  'LBL_GROUPTAB5_1495719157' => 
+  array (
+    'label' => 'LBL_GROUPTAB5_1495719157',
+    'modules' => 
+    array (
+      0 => 'te_ExpensePO',
+      1 => 'te_ExpensePR',
+      2 => 'te_expense_vendor',
+      3 => 'te_Department_Expense',
+      4 => 'te_expense_product',
     ),
   ),
 );

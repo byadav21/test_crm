@@ -82,6 +82,7 @@ class SugarView
     var $type = null;
     var $responseTime;
     var $fileResources;
+    
 
     /**
      * Constructor which will peform the setup.
@@ -99,6 +100,7 @@ class SugarView
     public function SugarView($bean = null,
         $view_object_map = array()
         ){
+        global $sugar_config;
         $deprecatedMessage = 'PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code';
         if(isset($GLOBALS['log'])) {
             $GLOBALS['log']->deprecated($deprecatedMessage);
@@ -106,6 +108,17 @@ class SugarView
         else {
             trigger_error($deprecatedMessage, E_USER_DEPRECATED);
         }
+       
+         /*if(isset($sugar_config['report_lists'][$GLOBALS['action']])){
+             //echo 'action=='.$GLOBALS['action'];
+             $GLOBALS['db'] = DBManagerFactory::getInstance('cust_report_list');
+            
+             //echo '<pre>';
+             //print_r($dbx);  
+             echo 'db_name='. $GLOBALS['db']->connectOptions['db_name'];
+             
+                
+        }*/
         self::__construct($bean, $view_object_map);
     }
 
@@ -628,8 +641,8 @@ class SugarView
                     $topTabList[$moduleKey] = $module;
                 }
 
-                $groupTabs[$tabIdx]['modules'] = $topTabs;
-                $groupTabs[$tabIdx]['extra'] = $extraTabs;
+               // $groupTabs[$tabIdx]['modules'] = $topTabs;
+               // $groupTabs[$tabIdx]['extra'] = $extraTabs;
             }
         }
 

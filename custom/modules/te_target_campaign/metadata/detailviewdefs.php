@@ -39,6 +39,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -73,11 +74,20 @@ array (
         array (
           0 => 
           array (
+            'name' => 'Status',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
+          ),
+          1 => 
+          array (
             'name' => 'template',
             'label' => 'LBL_TEMPLATE',
             'comment' => '',
           ),
-          1 => 'description',
+        ),
+        3 => 
+        array (
+          0 => 'description',
         ),
       ),
     ),

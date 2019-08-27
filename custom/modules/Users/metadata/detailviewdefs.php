@@ -44,12 +44,16 @@ array (
     array (
       'LBL_USER_INFORMATION' => 
       array (
-        0 => 
+        1 => 
         array (
           0 => 'user_name',
-          1 => '',
+          1 => 
+          array (
+            'name' => 'te_department_expense_users_1_name',
+            'label' => 'LBL_TE_DEPARTMENT_EXPENSE_USERS_1_FROM_TE_DEPARTMENT_EXPENSE_TITLE',
+          ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -62,7 +66,7 @@ array (
             'label' => 'LBL_LAST_NAME',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 'status',
           1 => 
@@ -71,7 +75,7 @@ array (
             'customCode' => '{$USER_TYPE_READONLY}',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -84,22 +88,29 @@ array (
             'label' => 'LBL_NEOXPASS',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
             'name' => 'neox_extension',
             'label' => 'LBL_NEOXEXTENSION',
           ),
-          1 => '',
+          1 => 'phone_mobile',
         ),
-        5 => 
+        6 => 
         array (
           0 => 'full_name',
           1 => 
           array (
             'name' => 'user_access_type',
             'label' => 'LBL_USERTYPE',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'te_ba_batch_users_1_name',
           ),
         ),
       ),
@@ -113,7 +124,7 @@ array (
         1 => 
         array (
           0 => 'reports_to_name',
-          1 => '',
+          1 => 'designation',
         ),
       ),
     ),

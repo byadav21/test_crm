@@ -162,7 +162,7 @@
     current_user_id = '{$current_user}';
     jsChartsArray = new Array();
     var moduleName = '{$module}';
-    document.body.setAttribute("class", "yui-skin-sam");
+    document.body.setAttribute("class", "yui-skin-sam nav-md");
     {literal}
     var mySugarLoader = new YAHOO.util.YUILoader({
         require: ["my_sugar", "sugar_charts"],

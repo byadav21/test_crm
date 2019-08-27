@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-18 02:27:02
+// created: 2019-03-13 11:22:59
 $searchFields['te_ba_Batch'] = array (
   'name' => 
   array (
@@ -51,6 +51,24 @@ $searchFields['te_ba_Batch'] = array (
     'is_date_field' => true,
   ),
   'end_range_date_modified' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'range_batch_start_date1' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'start_range_batch_start_date1' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'end_range_batch_start_date1' => 
   array (
     'query_type' => 'default',
     'enable_range_search' => true,

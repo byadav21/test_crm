@@ -783,7 +783,7 @@ class EditView
         $lbl_securitygroups:
     </td>
     <td width="37.5%" valign="top">
-        <select title="" id="securitygroup_list" name="securitygroup_list[]" multiple="multiple" size="${group_count}">
+        <select title="" id="securitygroup_list" name="securitygroup_list[]" multiple="multiple"  class="multiselbox"  size="${group_count}">
         $group_options
         </select>
     </td>

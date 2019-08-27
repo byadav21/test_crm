@@ -7,14 +7,24 @@ class status_listview_program {
     global $db;
     
     
-    
-     // Total Batch 
+  // Total Batch update 3Aprl17 Manish gupta
        
         $row1 =$db->query("SELECT COUNT(te_pr_programs_te_ba_batch_1te_ba_batch_idb) AS Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'");                         
+       // $amt="SELECT COUNT(te_pr_programs_te_ba_batch_1te_ba_batch_idb) AS Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'";                         
 				$res1 =$db->fetchByAssoc($row1);
+				
+				if($res1['Totalbatch']==0)
+				{
 				$bean->total_p_c=$res1['Totalbatch'];
+				//$res1['Totalbatch'];
+				}
+				else
+				{
+				$bean->total_p_c="<a href='index.php?module=te_pr_Programs&action=statusview&total=".$bean->name."&&record=".$bean->id."'>".$res1['Totalbatch']."</a>";
+				//index.php?module=te_pr_Programs&action=statusview&Stw=total&record=
+					
+				}
 			  
-    
     
     // Query for Closed Batch
        $row2 =$db->query("SELECT tab1.te_pr_programs_te_ba_batch_1te_ba_batch_idb,COUNT(tab2.batch_status) AS Total_cl from te_pr_programs_te_ba_batch_1_c AS tab1 INNER JOIN te_ba_batch AS tab2 ON tab1.te_pr_programs_te_ba_batch_1te_ba_batch_idb = tab2.id WHERE tab2.deleted=0 AND tab2.batch_status= 'closed' AND tab1.te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'"); 
@@ -52,22 +62,7 @@ class status_listview_program {
 				$bean->classes_in_progress_c="<a href='index.php?module=te_pr_Programs&action=statusview&Stw=classes_in_progress&record=".$bean->id."'>".$res4['Total_cc']."</a>";
                 }
                
-               $row8 =$db->query("SELECT te_pr_programs_te_ba_batch_1te_ba_batch_idb Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'");                                                  
-               //echo $td="SELECT te_pr_programs_te_ba_batch_1te_ba_batch_idb Totalbatch from te_pr_programs_te_ba_batch_1_c where deleted=0 AND te_pr_programs_te_ba_batch_1te_pr_programs_ida='".$bean->id."'";                                                  
-			   //$res8 =$db->fetchByAssoc($row8);
-			   //echo $res1['Totalbatch'];
-										
-					   if($row8->num_rows>0){
-						echo "<style>
-						#edit-".$bean->id." {
-						display: none;
-						}
-						.checkbox[value='".$bean->id."'] {
-						 display: none;
-						}
-						</style>";
-		  
-							}
+               
          
     
     // @MANISH kUMAR 06-OCT update to 4 nov links 

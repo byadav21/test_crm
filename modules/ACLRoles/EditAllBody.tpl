@@ -78,6 +78,7 @@ Just get the accessOptions for the Accounts module and use for the header select
 Not ideal but it'll work since it's the only way to get that info without editing DetailView.php to pass this with ACTION_NAMES
 {foreach from=$ACTION_NAMES item="ACTION_LABEL" key="ACTION_NAME"}
 *}
+
 {foreach from=$CATEGORIES item="TYPES" key="CATEGORY_NAME"}
 {if $CATEGORY_NAME=='Accounts'}
 	

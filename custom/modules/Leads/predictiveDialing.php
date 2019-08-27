@@ -3,8 +3,10 @@
 		$event          = "neox_agent_logout";
 		$user           = $GLOBALS['current_user']->neox_user;
 		$password       = $GLOBALS['current_user']->neox_password;
-		$campaign       = $GLOBALS['sugar_config']['neox']['campaign_id_manual'];
-		$phone          = '2001';
+		$campaign       = $GLOBALS['sugar_config']['neox']['campaign_id_predictive'];
+		//~ $campaign       = $GLOBALS['sugar_config']['neox']['campaign_id_manual'];
+		
+		$phone          = $GLOBALS['current_user']->neox_extension;
 		$neoxKey   		= $GLOBALS['sugar_config']['neox']['secret_key'];
 
 		$URL = "http://$server_ip:9090/Neox_DialCenter_API/agent_login.php?secret_key=".$neoxKey;

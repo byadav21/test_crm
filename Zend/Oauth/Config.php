@@ -16,18 +16,13 @@
  * @package    Zend_Oauth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-
  */
-
 /** Zend_Oauth */
 require_once 'Zend/Oauth.php';
-
 /** Zend_Uri */
 require_once 'Zend/Uri.php';
-
 /** Zend_Oauth_Config_Interface */
 require_once 'Zend/Oauth/Config/ConfigInterface.php';
-
 /**
  * @category   Zend
  * @package    Zend_Oauth
@@ -42,7 +37,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var string
      */
     protected $_signatureMethod = 'HMAC-SHA1';
-
     /**
      * Three request schemes are defined by OAuth, of which passing
      * all OAuth parameters by Header is preferred. The other two are
@@ -51,7 +45,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var string
      */
     protected $_requestScheme = Zend_Oauth::REQUEST_SCHEME_HEADER;
-
     /**
      * Preferred request Method - one of GET or POST - which Zend_Oauth
      * will enforce as standard throughout the library. Generally a default
@@ -60,14 +53,12 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var string
      */
     protected $_requestMethod = Zend_Oauth::POST;
-
     /**
      * OAuth Version; This defaults to 1.0 - Must not be changed!
      *
      * @var string
      */
     protected $_version = '1.0';
-
     /**
      * This optional value is used to define where the user is redirected to
      * after authorizing a Request Token from an OAuth Providers website.
@@ -77,14 +68,12 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var string
      */
     protected $_callbackUrl = null;
-
     /**
      * The URL root to append default OAuth endpoint paths.
      *
      * @var string
      */
     protected $_siteUrl = null;
-
     /**
      * The URL to which requests for a Request Token should be directed.
      * When absent, assumed siteUrl+'/request_token'
@@ -92,7 +81,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var string
      */
     protected $_requestTokenUrl = null;
-
     /**
      * The URL to which requests for an Access Token should be directed.
      * When absent, assumed siteUrl+'/access_token'
@@ -100,7 +88,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var string
      */
     protected $_accessTokenUrl = null;
-
     /**
      * The URL to which users should be redirected to authorize a Request Token.
      * When absent, assumed siteUrl+'/authorize'
@@ -108,21 +95,18 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var string
      */
     protected $_authorizeUrl = null;
-
     /**
      * An OAuth application's Consumer Key.
      *
      * @var string
      */
     protected $_consumerKey = null;
-
     /**
      * Every Consumer Key has a Consumer Secret unless you're in RSA-land.
      *
      * @var string
      */
     protected $_consumerSecret = null;
-
     /**
      * If relevant, a PEM encoded RSA private key encapsulated as a
      * Zend_Crypt_Rsa Key
@@ -130,7 +114,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var Zend_Crypt_Rsa_Key_Private
      */
     protected $_rsaPrivateKey = null;
-
     /**
      * If relevant, a PEM encoded RSA public key encapsulated as a
      * Zend_Crypt_Rsa Key
@@ -138,7 +121,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var Zend_Crypt_Rsa_Key_Public
      */
     protected $_rsaPublicKey = null;
-
     /**
      * Generally this will nearly always be an Access Token represented as a
      * Zend_Oauth_Token_Access object.
@@ -146,7 +128,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      * @var Zend_Oauth_Token
      */
     protected $_token = null;
-
     /**
      * Constructor; create a new object with an optional array|Zend_Config
      * instance containing initialising options.
@@ -163,7 +144,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
             $this->setOptions($options);
         }
     }
-
     /**
      * Parse option array or Zend_Config instance and setup options using their
      * relevant mutators.
@@ -219,10 +199,8 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         if (isset($options['requestScheme'])) {
             $this->setRequestScheme($options['requestScheme']);
         }
-
         return $this;
     }
-
     /**
      * Set consumer key
      *
@@ -234,7 +212,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_consumerKey = $key;
         return $this;
     }
-
     /**
      * Get consumer key
      *
@@ -244,7 +221,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_consumerKey;
     }
-
     /**
      * Set consumer secret
      *
@@ -256,7 +232,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_consumerSecret = $secret;
         return $this;
     }
-
     /**
      * Get consumer secret
      *
@@ -272,7 +247,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         }
         return $this->_consumerSecret;
     }
-
     /**
      * Set signature method
      *
@@ -295,7 +269,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_signatureMethod = $method;;
         return $this;
     }
-
     /**
      * Get signature method
      *
@@ -305,7 +278,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_signatureMethod;
     }
-
     /**
      * Set request scheme
      *
@@ -338,7 +310,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_requestScheme = $scheme;
         return $this;
     }
-
     /**
      * Get request scheme
      *
@@ -348,7 +319,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_requestScheme;
     }
-
     /**
      * Set version
      *
@@ -360,7 +330,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_version = $version;
         return $this;
     }
-
     /**
      * Get version
      *
@@ -370,7 +339,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_version;
     }
-
     /**
      * Set callback URL
      *
@@ -389,7 +357,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_callbackUrl = $url;
         return $this;
     }
-
     /**
      * Get callback URL
      *
@@ -399,7 +366,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_callbackUrl;
     }
-
     /**
      * Set site URL
      *
@@ -418,7 +384,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_siteUrl = $url;
         return $this;
     }
-
     /**
      * Get site URL
      *
@@ -428,7 +393,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_siteUrl;
     }
-
     /**
      * Set request token URL
      *
@@ -447,7 +411,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_requestTokenUrl = rtrim($url, '/');
         return $this;
     }
-
     /**
      * Get request token URL
      *
@@ -463,7 +426,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         }
         return $this->_requestTokenUrl;
     }
-
     /**
      * Set access token URL
      *
@@ -482,7 +444,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_accessTokenUrl = rtrim($url, '/');
         return $this;
     }
-
     /**
      * Get access token URL
      *
@@ -498,7 +459,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         }
         return $this->_accessTokenUrl;
     }
-
     /**
      * Set user authorization URL
      *
@@ -510,7 +470,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->setAuthorizeUrl($url);
     }
-
     /**
      * Set authorization URL
      *
@@ -529,7 +488,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_authorizeUrl = rtrim($url, '/');
         return $this;
     }
-
     /**
      * Get user authorization URL
      *
@@ -539,7 +497,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->getAuthorizeUrl();
     }
-
     /**
      * Get authorization URL
      *
@@ -555,7 +512,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         }
         return $this->_authorizeUrl;
     }
-
     /**
      * Set request method
      *
@@ -579,7 +535,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_requestMethod = $method;
         return $this;
     }
-
     /**
      * Get request method
      *
@@ -589,7 +544,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_requestMethod;
     }
-
     /**
      * Set RSA public key
      *
@@ -601,7 +555,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_rsaPublicKey = $key;
         return $this;
     }
-
     /**
      * Get RSA public key
      *
@@ -611,7 +564,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_rsaPublicKey;
     }
-
     /**
      * Set RSA private key
      *
@@ -623,7 +575,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_rsaPrivateKey = $key;
         return $this;
     }
-
     /**
      * Get RSA private key
      *
@@ -633,7 +584,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     {
         return $this->_rsaPrivateKey;
     }
-
     /**
      * Set OAuth token
      *
@@ -645,7 +595,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         $this->_token = $token;
         return $this;
     }
-
     /**
      * Get OAuth token
      *

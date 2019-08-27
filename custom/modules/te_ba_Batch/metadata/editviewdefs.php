@@ -63,6 +63,20 @@ array (
         array (
           0 => 
           array (
+            'name' => 'short_name',
+            'label' => 'Short Name',
+          ),
+          1 => 
+          array (
+            'name' => 'batch_completion_date_2',
+            'label' => 'LBL_BATCH_COMPLETION_DATE_2',
+            'comment' => '',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
             'name' => 'batch_start_date',
             'label' => 'LBL_BATCH_START_DATE',
           ),
@@ -73,7 +87,7 @@ array (
             'label' => 'LBL_BATCH_STATUS',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -86,7 +100,7 @@ array (
             'label' => 'LBL_BATCH_SIZE',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -99,7 +113,7 @@ array (
             'label' => 'LBL_MINIMUM_ATTENDANCE_CRITERIA',
           ),
         ),
-        5 => 
+        6 => 
         array (
           0 => 
           array (
@@ -112,16 +126,20 @@ array (
             'label' => 'LBL_REGISTRATION_CLOSING_DATE',
           ),
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
             'name' => 'fees_in_usd',
             'label' => 'LBL_FEES_IN_USD',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'd_campaign_id',
+            'label' => 'Campagain ID',
+          ),
         ),
-        7 => 
+        8 => 
         array (
           0 => 
           array (
@@ -131,6 +149,36 @@ array (
               'cols' => 32,
               'rows' => 3,
             ),
+          ),
+          1 => 
+          array (
+            'name' => 'd_lead_id',
+            'label' => 'Lead ID',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'discount_in_inr',
+            'studio' => 'visible',
+            'label' => 'Discount In INR',
+          ),
+          1 => 
+          array (
+            'name' => 'discount_in_usd',
+            'studio' => 'visible',
+            'label' => 'Discount In USD',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'batch_cc_cue',
+            'label' => 'Cue Text',
+            'comment' => 'Cue info as batch attribute and view on CRM corresponding to every lead',
+            'studio' => 'visible',
           ),
           1 => '',
         ),

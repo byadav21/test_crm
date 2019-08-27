@@ -1,5 +1,5 @@
 <?php
-// created: 2016-11-18 11:18:18
+// created: 2017-09-18 11:24:00
 $subpanel_layout['list_fields'] = array (
   'payment_type' => 
   array (
@@ -35,6 +35,22 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'date',
     'vname' => 'LBL_DATE_OF_PAYMENT',
     'width' => '15%',
+    'default' => true,
+  ),
+  'invoice_number' => 
+  array (
+    'type' => 'int',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => 'Invoice Number',
+    'width' => '10%',
+  ),
+  'invoice_url' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'vname' => 'Invoice URL',
+    'width' => '10%',
     'default' => true,
   ),
   'edit_button' => 

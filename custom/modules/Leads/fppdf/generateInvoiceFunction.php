@@ -13,9 +13,11 @@ function generatePdf($params=array(),$saveFile='No'){
 	$gross = $params['gross'];
 	$program_name = $params['program_name'];
 	$payment_source = $params['payment_source'];
-
-	
-	
+	if(isset($params['payment_made'])&&$params['payment_made']!=""){
+		$payment_made = $params['payment_made'];	
+	}else{
+		$payment_made = "";	
+	}
 	
 	
 // Instanciation of inherited class
@@ -52,13 +54,14 @@ function generatePdf($params=array(),$saveFile='No'){
 	
 	
 	
-	
+	//~ $gross = '10';
 // Set Amount	
 	$title = "  ".number_format($gross,2);
 	$pdf->SetFont('Arial','B',20);
-	$w = $pdf->GetStringWidth($title)+90;
+	$w = $pdf->GetStringWidth($title)+100;
 	
-    $pdf->SetX((295-$w)/2);
+    //~ $pdf->SetX((295-$w)/2);
+    $pdf->SetX(-125);
     // Colors of frame, background and text
     //~ $pdf->SetDrawColor(0,80,180);
     $pdf->SetFillColor(0,0,0);
@@ -70,7 +73,7 @@ function generatePdf($params=array(),$saveFile='No'){
     $cont = "    Thank you for your purchase!";
     //~ $pdf->SetX((302-$w)/2);
     
-    $pdf->SetX(-($pdf->GetStringWidth(number_format(11500,2))+93));
+    $pdf->SetX(-124);
 	$pdf->Image('custom/modules/Leads/fppdf/download.png',$pdf->GetX(),80,4);
 	
     $pdf->SetY(85);
@@ -96,7 +99,7 @@ function generatePdf($params=array(),$saveFile='No'){
 	$pdf->Line(200,120,10,120);
 	
 // item Details
-	$pdf->Ln(10);
+	$pdf->Ln(15);
 	//~ $pdf->SetFont('Times','B',13);
 	$pdf->SetFont('Times','',12);		
 	$pdf->MultiCell(75,5,$program_name,0,1);
@@ -150,9 +153,15 @@ function generatePdf($params=array(),$saveFile='No'){
 	
 	
 	if($saveFile=='Yes'){
-		$path = "upload/";
-		$filename=$path.date('Y-m-d-H-i-s')."-Student-Invoice.pdf";
+		if($payment_made=="Yes"){	# If making payment for student
+			$path = "upload/student_payment/";
+			$filename=$path.date('Y-m-d')."_".rand()."_Payment-Invoice.pdf";
+		}else{
+			$path = "upload/";
+			$filename=$path.date('Y-m-d-H-i-s')."-Student-Invoice.pdf";
+		}
 		$pdf->Output($filename,'F');
+		return $filename;
 	}
 	else{	
 		$pdf->Output();

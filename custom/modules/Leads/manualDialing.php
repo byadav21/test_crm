@@ -5,8 +5,9 @@
 		//~ $user           = $GLOBALS['sugar_config']['neox']['user_id_predictive'];
 		$password       = $GLOBALS['current_user']->neox_password;
 		//~ $password       = $GLOBALS['sugar_config']['neox']['password_predictive'];
-		$campaign       = $GLOBALS['sugar_config']['neox']['campaign_id_predictive'];
-		$phone          = '2001';
+		//~ $campaign       = $GLOBALS['sugar_config']['neox']['campaign_id_predictive'];
+		$campaign       = $GLOBALS['sugar_config']['neox']['campaign_id_manual'];
+		$phone          = $GLOBALS['current_user']->neox_extension;
 		//~ $phone          = $GLOBALS['sugar_config']['neox']['number_predictive'];
 		$neoxKey   		= $GLOBALS['sugar_config']['neox']['secret_key'];
 

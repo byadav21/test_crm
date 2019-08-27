@@ -25,7 +25,7 @@
 <span id="{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}_monthly_options" style="display: none">
     {{$APP.LBL_CRON_ON_THE_MONTHDAY}}
     <select
-            multiple="multiple"
+            multiple="multiple" class="multiselbox"
             name='{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}_days'
             id='{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}_days'>
         {{$days}}
@@ -35,7 +35,8 @@
 <span id="{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}_weekly_options" style="display: none">
     {{$APP.LBL_CRON_ON_THE_WEEKDAY}}
     <select
-            multiple="multiple"
+            multiple="multiple" 
+            class="multiselbox"
             name='{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}_weekdays'
             id='{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$displayParams.idName}}{{/if}}_weekdays'>
         {{$weekdays}}

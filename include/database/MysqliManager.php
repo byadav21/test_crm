@@ -119,27 +119,29 @@ class MysqliManager extends MysqlManager
 	/**
 	 * @see MysqlManager::query()
 	 */
-	public function query($sql, $dieOnError = false, $msg = '', $suppress = false, $keepResult = false)
-	{
-		if(is_array($sql)) {
-			return $this->queryArray($sql, $dieOnError, $msg, $suppress);
-        }
-
-		static $queryMD5 = array();
-
-		parent::countQuery($sql);
-		$GLOBALS['log']->info('Query:' . $sql);
-		$this->checkConnection();
-		$this->query_time = microtime(true);
-		$this->lastsql = $sql;
-		$result = $suppress?@mysqli_query($this->database,$sql):mysqli_query($this->database,$sql);
-		$md5 = md5($sql);
-
-		if (empty($queryMD5[$md5]))
-			$queryMD5[$md5] = true;
-
-		$this->query_time = microtime(true) - $this->query_time;
-		$GLOBALS['log']->info('Query Execution Time:'.$this->query_time);
+	
+	
+	//public function query($sql, $dieOnError = false, $msg = '', $suppress = false, $keepResult = false)
+	//{
+	//	if(is_array($sql)) {
+	//		return $this->queryArray($sql, $dieOnError, $msg, $suppress);
+        //}
+	//
+	//	static $queryMD5 = array();
+	//
+	//	parent::countQuery($sql);
+	//	$GLOBALS['log']->info('Query:' . $sql);
+	//	$this->checkConnection();
+	//	$this->query_time = microtime(true);
+	//	$this->lastsql = $sql;
+	//	$result = $suppress?@mysqli_query($this->database,$sql):mysqli_query($this->database,$sql);
+	//	$md5 = md5($sql);
+	//
+	//	if (empty($queryMD5[$md5]))
+	//		$queryMD5[$md5] = true;
+	//
+	//	$this->query_time = microtime(true) - $this->query_time;
+	//	$GLOBALS['log']->info('Query Execution Time:'.$this->query_time);
 
 		// This is some heavy duty debugging, leave commented out unless you need this:
 		/*
@@ -154,12 +156,97 @@ class MysqliManager extends MysqlManager
 		*/
 
 
-		if($keepResult)
-			$this->lastResult = $result;
-		$this->checkError($msg.' Query Failed: ' . $sql, $dieOnError);
+	//	if($keepResult)
+	//		$this->lastResult = $result;
+	//	$this->checkError($msg.' Query Failed: ' . $sql, $dieOnError);
+	//
+	//	return $result;
+	//}
+ 
+     public function query($sql, $dieOnError = false, $msg = '', $suppress = false, $keepResult = false)
+     {
+        global $sugar_config;
+        if (is_array($sql))
+        {
+            return $this->queryArray($sql, $dieOnError, $msg, $suppress);
+        }
 
-		return $result;
-	}
+        static $queryMD5 = array();
+
+        parent::countQuery($sql);
+        $GLOBALS['log']->info('Query:' . $sql);
+        //$this->checkConnection();
+        $this->query_time = microtime(true);
+        $this->lastsql    = $sql;
+        if (isset($sql) && !empty($sql))
+        {
+            $queryType = strtolower(mb_substr(trim($sql), 0, 6));
+            if ($queryType == 'select')
+            {
+                //$con_list = mysqli_connect($sugar_config['db']['listviews']['db_host_name'], $sugar_config['db']['listviews']['db_user_name'], $sugar_config['db']['listviews']['db_password'], $sugar_config['db']['listviews']['db_name']);
+                $report_action = '';
+                $report_action = isset($GLOBALS['action'])? $GLOBALS['action'] : '';
+                if (isset($sugar_config['report_lists'][$report_action]))
+                  {
+                  $con_list = DBManagerFactory::getInstance('cust_report_list');
+                  }
+                  else
+                  {
+                  $con_list = DBManagerFactory::getInstance('listviews');
+                  }
+                // echo "<pre>";print_r($con_list);exit;
+                //$con_list = DBManagerFactory::getInstance('listviews');
+                $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
+                DBManagerFactory::getInstance('master_view');
+            }
+            else if ($queryType == 'update' || $queryType == 'insert')
+            {
+                $con_list = DBManagerFactory::getInstance('master_view');
+                $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
+            }
+            else
+            {
+                //$this->checkConnection();
+                $con_list = DBManagerFactory::getInstance('master_view');
+                $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
+            }
+        }
+        else
+        {
+            //$this->checkConnection();
+            $con_list = DBManagerFactory::getInstance('master_view');
+            $result   = $suppress ? @mysqli_query($con_list->database, $sql) : mysqli_query($con_list->database, $sql);
+        }
+
+        //$result = $suppress?@mysqli_query($this->database,$sql):mysqli_query($this->database,$sql);
+        //Code Added above
+        $md5 = md5($sql);
+
+        if (empty($queryMD5[$md5]))
+            $queryMD5[$md5] = true;
+
+        $this->query_time = microtime(true) - $this->query_time;
+        $GLOBALS['log']->info('Query Execution Time:' . $this->query_time);
+
+        // This is some heavy duty debugging, leave commented out unless you need this:
+        /*
+          $bt = debug_backtrace();
+          for ( $i = count($bt) ; $i-- ; $i > 0 ) {
+          if ( strpos('MysqliManager.php',$bt[$i]['file']) === false ) {
+          $line = $bt[$i];
+          }
+          }
+
+          $GLOBALS['log']->fatal("${line['file']}:${line['line']} ${line['function']} \nQuery: $sql\n");
+         */
+
+
+        if ($keepResult)
+            $this->lastResult = $result;
+        $this->checkError($msg . ' Query Failed: ' . $sql, $dieOnError);
+
+        return $result;
+    }
 
 	/**
 	 * Returns the number of rows affected by the last query

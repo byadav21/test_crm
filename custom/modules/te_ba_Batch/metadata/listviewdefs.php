@@ -16,6 +16,13 @@ array (
     'default' => true,
     'link' => true,
   ),
+  'BATCH_CODE' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_BATCH_CODE',
+    'width' => '10%',
+    'default' => true,
+  ),
   'TE_PR_PROGRAMS_TE_BA_BATCH_1_NAME' => 
   array (
     'type' => 'relate',
@@ -48,13 +55,6 @@ array (
     'default' => true,
     'label' => 'LBL_ENROLLED_STUDENTS',
     'width' => '10%',
-  ),
-  'BATCH_CODE' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_BATCH_CODE',
-    'width' => '10%',
-    'default' => false,
   ),
 );
 ?>

@@ -5,5 +5,6 @@
 $hook_array = Array(); 
 $hook_array['process_record'] = Array();
 $hook_array['process_record'][] = Array(1,'get name of ids','custom/modules/te_target_campaign/target_campaign_hook.php','TaggetCampaign','getName');
+//$hook_array['after_retrieve'][] = Array(3,'get name of ids','custom/modules/te_target_campaign/target_campaign_vendor.php','TaggetCampaignVendor','getNameVendor');
 
 ?>
