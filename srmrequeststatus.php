@@ -155,11 +155,11 @@ $row = $db->fetchByAssoc($result);
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
 					</div> 
-					<?php //if(strtolower($row['status'])=='pending'){?>
+					<?php if(strtolower($row['approve_status'])=='pending'){?>
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
-					<?php //}?>
+					<?php }?>
 			</section>	
 		</div>		
 	</div>
