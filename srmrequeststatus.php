@@ -136,10 +136,10 @@ $row = $db->fetchByAssoc($result);
 					</div>
 					<div class="block">
 						<label>Approval Status</label>
-						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve') ?  "checked" : "" ;  ?>/> Approve</label>
+						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve' || $row['status']=='' ) ?  "checked" : "" ;  ?>/> Approve</label>
 						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($error==1){
-							echo "Select one type";
+							//echo "Select one type";
 						}?>
 						<?php if($row['bt_srm_attachment']!=''){?>
 						<div class="block-action">
