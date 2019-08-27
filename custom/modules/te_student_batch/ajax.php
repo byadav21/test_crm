@@ -148,11 +148,16 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
     select{width:100%!important}
     textarea{width:100%!important; resize:none; height:90px;border-radius: 5px;}
     .marginTopBottom15{margin:15px 0;}
+     .marginTop15{margin:15px 0 0;}
     .block-wrapper{display:flex; width:100%; padding:0 9px}
     .block{display:flex; flex-direction: column; margin-left: 15px; width:100%;}
     .block:first-child{margin-left:0px}
-    .block-wrapper label{margin:0 15px 0 0; display: flex; align-items: center;}
+    .block-wrapper label{margin:0 15px 5px 0; display: flex; align-items: center;}
+    .block div{display:flex; margin-bottom: 10px;}
+    .block div label{display:flex; margin-right:10px;}
     .block-wrapper input[type="radio"]{margin:0 5px 0 0;}
+    .modal-title{margin-bottom:10px;}
+    .borderWidthPadding{border:1px solid #ddd; padding:5px;}
 </style>
 
     <div class="modal-dialog" style="overflow:visible">
@@ -168,39 +173,32 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                 </h4>
             </div>
             <div class="modal-body">
-                <h5 class="modal-title">Student Details</h5> <br/>
-                <div class="col-sm-12">
-                    
-                    <div class="col-sm-6">
-                        <label>Name : </label> <?= $studentData['name'] ?>
-                        <p>&nbsp;</p>
-                        <label>Email : </label> <?= $studentData['email'] ?>
+                    <h5 class="modal-title">Student Details</h5>
+                     <div class="block-wrapper borderWidthPadding">
+                        <div class="block">
+                            <div><label>Name : </label><?= $studentData['name'] ?></div>
+                            <div><label>Email : </label> <?= $studentData['email'] ?></div>
+                        </div>
+                        <div class="block">
+                            <div><label>Mobile : </label> <?= $studentData['mobile'] ?></div>
+                            <div><label>Status : </label> <?= $studentData['status'] ?></div>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label>Mobile : </label> <?= $studentData['mobile'] ?>
-                        <p>&nbsp;</p>
-                        <label>Status : </label> <?= $studentData['status'] ?>
-                    </div>
-                </div>
-                 <hr>
-                 <h5 class="modal-title">Current Course Details</strong> <h5/><br/>
-                <div class="col-sm-12">
-                    
-                    <div class="col-sm-6">
-                        <label>Institute Name : </label> <?= $oldRecords['insname'] ?>
-                        <p>&nbsp;</p>
-                        <label>Programe Name : </label> <?= $oldRecords['programname'] ?>
-                    </div>
-                    <div class="col-sm-6">
-                        <label>Batch Name : </label> <?= $oldRecords['batchname'] ?>
-                        <p>&nbsp;</p>
-                        <label>Batch Code : </label> <?= $oldRecords['batch_code'] ?>
-                    </div>
-                </div>
                 
-                <hr>
-
-               <div class = "block-wrapper">
+                 <h5 class="modal-title marginTop15">Current Course Details<h5/>
+                <div class="block-wrapper borderWidthPadding">
+                    
+                    <div class="block">
+                        <div><label>Institute Name : </label> <?= $oldRecords['insname'] ?></div>
+                         <div><label>Programe Name : </label> <?= $oldRecords['programname'] ?></div>
+                    </div>
+                    <div class="block">
+                         <div><label>Batch Name : </label> <?= $oldRecords['batchname'] ?></div>
+                         <div><label>Batch Code : </label> <?= $oldRecords['batch_code'] ?></div>
+                    </div>
+                </div>
+               
+               <div class = "block-wrapper marginTop15">
                    <div class = "block">
                         <label>Select New Institute : </label>
                         <select name="institute_dropdown" id="institute_dropdown"  class="" style="">
