@@ -339,7 +339,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                             //alert(data.status);
                             var result = JSON.parse(data);	
                         if(result.status=='queued')
-                            {
+                            {           
+                                    alert("The BT Request sent successuflly!");
                                     window.location.href="index.php?module=te_student_batch&action=index&parentTab=SRM";
                             }
                             else
