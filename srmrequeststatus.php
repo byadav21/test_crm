@@ -14,7 +14,7 @@ if($_GET['student_batch']!='' && $_GET['tid']!=''){
 if($_POST['two']==''){
 	$error=1;
 }
-echo "<pre>";print_r($_POST);exit;
+//echo "<pre>";print_r($_POST);exit;
 if($_POST['Submit'] && $error==0){
 	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
 	$newdata	=	array();
@@ -64,8 +64,8 @@ if($_POST['Submit'] && $error==0){
 	$to='ashis.mohanty@talentedge.in';
 	$mail = new NetCoreEmail();
 	$mail -> sendEmail($to,$subject,$body);
-	//header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
-	//die;
+	header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+	die;
 }
 
 $query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment, SUM(sp.amount) AS total from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
@@ -138,6 +138,9 @@ $row = $db->fetchByAssoc($result);
 						<label>Approval Status</label>
 						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve') ?  "checked" : "" ;  ?>/> Approve</label>
 						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
+						<?php if($error==1){
+							echo "Select one type";
+						}?>
 						<?php if($row['bt_srm_attachment']!=''){?>
 						<div class="block-action">
 							<button><a href="<?php echo "/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>" target="_blank">Download Attached File</a></button>
