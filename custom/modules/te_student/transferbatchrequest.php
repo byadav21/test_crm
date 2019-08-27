@@ -152,7 +152,7 @@ if($tid){
         // Insert form data in the database 
         $str             = trim($_POST['bt_srm_comments']);
         $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
-        $queryx = "update te_student_batch  set bt_srm_comments='$bt_srm_comments',bt_fee_waiver='$bt_fee_waiver',bt_url='$bt_urlx' where id='$cbid'"; 
+        $queryx = "update te_student_batch  set bt_srm_comments='$bt_srm_comments',bt_fee_waiver='$bt_fee_waiver',bt_url='$bt_urlx',approve_status='Pending' where id='$cbid'"; 
         $insert          = $db->query($queryx);
         
 }
