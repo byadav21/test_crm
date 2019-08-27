@@ -72,7 +72,7 @@ $query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-echo "<pre>";print_r($row);echo "</pre>";//exit;
+//echo "<pre>";print_r($row);echo "</pre>";//exit;
 ?>
 
 <!doctype html>
