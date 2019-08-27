@@ -35,7 +35,7 @@ if($_POST['Submit'] && $error==0){
 	$updatequerydata=$db->query($updatedata);
 	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
 	//$updatequerydata=$db->query($updatestatus);
-	if($_POST['two']=='Approve'){
+	if($_POST['two']=='Approved'){
 			//API Call
 		global $sugar_config;
 		$data=array();
@@ -72,7 +72,7 @@ $query = "SELECT sb.approve_status, sb.name as old_program_name,sb.batch_code as
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-echo "<pre>";print_r($row);echo "</pre>";//exit;
+//echo "<pre>";print_r($row);echo "</pre>";//exit;
 ?>
 
 <!doctype html>
@@ -102,7 +102,7 @@ echo "<pre>";print_r($row);echo "</pre>";//exit;
 						<li><i style="font-weight: bold;">Mobile</i><?php echo $row['mobile'];?></li>
 					</ul>
 					<div class="profile-block">
-						<div class="status"><span><?php echo $row['approve_status']==''?'Pending':$row['approve_status'];?></span></div>
+						<div class="status"><span><?php echo $row['status'];?></span></div>
 					</div>	
 					<div class="program-info">
 						<div class="block">		
@@ -136,10 +136,10 @@ echo "<pre>";print_r($row);echo "</pre>";//exit;
 					</div>
 					<div class="block">
 						<label>Approval Status</label>
-						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve') ?  "checked" : "" ;  ?>/> Approve</label>
-						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
+						<label><input type="radio" name="two" value="Approved" <?php echo ($row['status']== 'Approve' || $row['status']=='' ) ?  "checked" : "" ;  ?>/> Approve</label>
+						<label><input type="radio" name="two" value="Rejected" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($error==1){
-							echo "Select one type";
+							//echo "Select one type";
 						}?>
 						<?php if($row['bt_srm_attachment']!=''){?>
 						<div class="block-action">
