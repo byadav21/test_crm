@@ -176,7 +176,7 @@ $mail            = new FalconideEmail();
 sugar_chmod($targetFilePath, 0777);
 
 //$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in','anup.kumar@talentedge.in');
-$btApprover = array('pawan.kumar@talentedge.in','ashis.mohanty@talentedge.in','rohit.rana@talentedge.in');
+$btApprover = array('pawan.kumar@talentedge.in','ashis.mohanty@talentedge.in','kunal.soni@talentedge.in');
 
 //print_r($emailData);
 foreach ($btApprover as $val)
