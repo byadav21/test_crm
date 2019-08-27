@@ -39,3 +39,12 @@ $dictionary['te_student_batch']['fields']['bt_url'] = array(
 	'massupdate' => false,	 
 	'studio' => 'visible',
 );
+$dictionary['te_student_batch']['fields']['approve_status'] = array(
+	'required' => false,
+	'name' => 'approve_status',
+	'vname' => 'approve_status',
+	'type' => 'varchar',
+	'audited' => false,
+	'massupdate' => false,	 
+	'studio' => 'visible',
+);

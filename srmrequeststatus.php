@@ -4,13 +4,18 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php'); 
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
+$error=0;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
 	$tbid=$_GET['tid'];
 }else{
 	echo "You have not the permission to access this page";exit; 
 }
-if($_POST['Submit']){
+if($_POST['two']==''){
+	$error=1;
+}
+echo "<pre>";print_r($_POST);exit;
+if($_POST['Submit'] && $error==0){
 	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
 	$newdata	=	array();
 	$newdata['request_id']	=	$tbid;
@@ -26,7 +31,7 @@ if($_POST['Submit']){
     $result = curl_exec($ch);
     $res    = json_decode($result,TRUE);
     //echo "=====<pre>";print_r($result);echo "</pre>";exit;
-	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."' where id='".$student_batch."'";
+	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
 	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
 	//$updatequerydata=$db->query($updatestatus);
@@ -63,7 +68,7 @@ if($_POST['Submit']){
 	//die;
 }
 
-$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment, SUM(sp.amount) AS total from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
+$query = "SELECT sb.name as old_program_name,sb.batch_code as old_batch_code, ii.name as old_institute_name, bb.name as new_program_name, bb.batch_code as new_batch_code, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment, SUM(sp.amount) AS total, sb.approve_status from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
@@ -97,7 +102,7 @@ $row = $db->fetchByAssoc($result);
 						<li><i style="font-weight: bold;">Mobile</i><?php echo $row['mobile'];?></li>
 					</ul>
 					<div class="profile-block">
-						<div class="status"><span><?php echo $row['status'];?></span></div>
+						<div class="status"><span><?php echo $row['approve_status']==''?'Pending':$row['approve_status'];?></span></div>
 					</div>	
 					<div class="program-info">
 						<div class="block">		
@@ -147,11 +152,11 @@ $row = $db->fetchByAssoc($result);
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
 					</div> 
-					<?php //if(strtolower($row['status'])=='pending'){?>
+					<?php if(strtolower($row['approve_status'])=='pending'){?>
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
-					<?php //}?>
+					<?php }?>
 			</section>	
 		</div>		
 	</div>
