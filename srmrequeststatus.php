@@ -4,13 +4,18 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php'); 
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
+$error=0;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
 	$tbid=$_GET['tid'];
 }else{
 	echo "You have not the permission to access this page";exit; 
 }
-if($_POST['Submit']){
+if($_POST['two']==''){
+	$error=1;
+}
+echo "<pre>";print_r($_POST);exit;
+if($_POST['Submit'] && $error==0){
 	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
 	$newdata	=	array();
 	$newdata['request_id']	=	$tbid;
