@@ -116,7 +116,7 @@ $row = $db->fetchByAssoc($result);
 							<ol>
 								<li><i style="font-weight: bold;">New Programe Name</i><?php echo $row['new_program_name'];?></li>
 								<li><i style="font-weight: bold;">New Batch Name</i><?php echo $row['new_batch_code'];?></li>
-								<li><i style="font-weight: bold;">New Institute Name</i><?php echo $row['new_institute_name'];?></li>
+								<!--<li><i style="font-weight: bold;">New Institute Name</i><?php echo $row['new_institute_name'];?></li>-->
 							</ol>
 						</div>
 					</div>
