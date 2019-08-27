@@ -35,7 +35,7 @@ if($_POST['Submit'] && $error==0){
 	$updatequerydata=$db->query($updatedata);
 	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
 	//$updatequerydata=$db->query($updatestatus);
-	if($_POST['two']=='Approve'){
+	if($_POST['two']=='Approved'){
 			//API Call
 		global $sugar_config;
 		$data=array();
@@ -136,8 +136,8 @@ $row = $db->fetchByAssoc($result);
 					</div>
 					<div class="block">
 						<label>Approval Status</label>
-						<label><input type="radio" name="two" value="Approve" <?php echo ($row['status']== 'Approve' || $row['status']=='' ) ?  "checked" : "" ;  ?>/> Approve</label>
-						<label><input type="radio" name="two" value="Reject" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
+						<label><input type="radio" name="two" value="Approved" <?php echo ($row['status']== 'Approve' || $row['status']=='' ) ?  "checked" : "" ;  ?>/> Approve</label>
+						<label><input type="radio" name="two" value="Rejected" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($error==1){
 							//echo "Select one type";
 						}?>
