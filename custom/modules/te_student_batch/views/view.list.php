@@ -673,12 +673,15 @@ class te_student_batchViewList extends ViewList
 //tpl fun
 function getisSent($id)
 {
-    global $current_user;
+    global $current_user,$db;
     $obj = new te_student_override();
     //get Student ID
-    // $sid = $obj->getStudentID($id);
+    //$sid = $obj->getStudentID($id);
+    
 
-    $data = $obj->getApproval($id);
+     $data = $obj->getApproval($id);
+     $sb_data =  $db->fetchByAssoc($db->query("SELECT  sb.status   FROM te_student_batch sb    WHERE sb.deleted=0  AND sb.id='$id'"));
+     //print_r($sb_data);
     //$viewUrl = '</br></br><span><a href="index.php?module=te_student_batch&action=DetailView&record='.$id.'" target="_blank">View Lead</span>';
     $viewUrl = '<div class="action-icons">
                 <a class="action-icon" data-toggle="tooltip" title="View" href="index.php?module=te_student_batch&action=DetailView&record='.$id.'" target="_blank">
@@ -686,17 +689,23 @@ function getisSent($id)
                 </a>
                 </div>';
     
+    $trasferBtn = '<a href="javascript:void(0)" class=" "  onClick="showTransferPopup(\'' . $id . '\')">Transfer Batch</a>';
+    
+    if($sb_data['status']=='Inactive_transfer'){
+        $trasferBtn='';
+    }
+    
     if(!empty($data) && $data['status'] == 'Pending'){
         
         echo 'Pending'.$viewUrl;
     }
     else if(!empty($data) && $data['status'] == 'BTPark'){
         
-        echo 'BTPark<br><a href="javascript:void(0)" class=" "  onClick="showTransferPopup(\'' . $id . '\')">Transfer Batch</a> '.$viewUrl;
+        echo 'BTPark<br>'.$trasferBtn.' '.$viewUrl;
     }
     else{
         
-        echo (!$data || $data['status'] != 'Pending') ? '<a href="javascript:void(0)" class=" "  onClick="showTransferPopup(\'' . $id . '\')">Transfer Batch</a>'.$viewUrl : 'Pending'.$viewUrl;
+        echo (!$data || $data['status'] != 'Pending') ? $trasferBtn.''.$viewUrl : 'Pending'.$viewUrl;
     }
     
 }

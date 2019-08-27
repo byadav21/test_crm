@@ -145,6 +145,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
     }
     ?>
 <style>
+    .modal-dialog{width:700px;}
     select{width:100%!important}
     textarea{width:100%!important; resize:none; height:90px;border-radius: 5px;}
     .marginTopBottom15{margin:15px 0;}
@@ -153,7 +154,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
     .block{display:flex; flex-direction: column; margin-left: 15px; width:100%;}
     .block:first-child{margin-left:0px}
     .block-wrapper label{margin:0 15px 5px 0; display: flex; align-items: center;}
-    .block div{display:flex; margin-bottom: 10px;}
+    .block div{display:flex; margin-bottom: 10px; align-items: flex-start;}
     .block div label{display:flex; margin-right:10px;}
     .block-wrapper input[type="radio"]{margin:0 5px 0 0;}
     .modal-title{margin-bottom:10px;}
