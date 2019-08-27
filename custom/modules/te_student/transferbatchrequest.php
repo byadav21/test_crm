@@ -177,8 +177,9 @@ sugar_chmod($targetFilePath, 0777);
 
 
 
-$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in');
-//$btApprover = array('pawan.kumar@talentedge.in');
+//$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in');
+$btApprover = array('pawan.kumar@talentedge.in');
+
 
 //print_r($emailData);
 foreach ($btApprover as $val)
@@ -280,7 +281,7 @@ foreach ($btApprover as $val)
             <td height="15"></td>
         </tr>
         <tr>
-            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;"><strong>Approval URL:</strong>&nbsp;<a href="http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '" style="font-weight: normal;">the crmstage.talentedge.in</a></td>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;"><strong>Approval URL:</strong>&nbsp;<a href="http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '" style="font-weight: normal;">redge.talentedge.in</a></td>
         </tr>
         <tr>
             <td height="15"></td>

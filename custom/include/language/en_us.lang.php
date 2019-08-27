@@ -120,6 +120,7 @@ $GLOBALS['app_list_strings']['dropuout_status_list']=array (
   'Pending' => 'Pending',
   'Rejected' => 'Rejected',
   'Approved' => 'Approved',
+    'BTPark' => 'BT Parking',
 );
 $GLOBALS['app_list_strings']['designation_list']=array (
   '' => '',
