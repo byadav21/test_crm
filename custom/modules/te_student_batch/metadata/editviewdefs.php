@@ -239,7 +239,12 @@ array (
         ),
         13 => 
         array (
-          0 => '',
+          0 => 
+          array (
+            'name' => 'bt_fee_waiver',
+            'studio' => 'visible',
+            'label' => 'bt_fee_waiver',
+          ),
           1 => 
           array (
             'name' => 'study_kit_address_state',
