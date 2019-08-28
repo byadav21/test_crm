@@ -102,6 +102,7 @@ if ($misData['slug'] == 'DMM' || $misData['slug'] == 'BA')
             '36990877-a094-db61-6610-5b20f95a6e6e',// => 'Infoedge'
             'e7dafa0f-2d5e-9885-90d4-5c383bda6353',// =>'intellactads'
             'bbbea66c-1aee-a0bc-2654-5cb02b0123f0',// =>'OneyearMBA'
+            '80c3283f-97f4-06b3-c231-5d66510a463d',// =>'Proformics'
             );
          
         
