@@ -140,9 +140,9 @@ class FalconideEmail
     {
 
            $emailData = array('email' => array('pawan.kumar@talentedge.in',
-                                               'ashwani.sharma@talentedge.in',
-                                               'aastha.verma@talentedge.in',
-                                               'pritam.dutta@talentedge.in',
+                                               //'ashwani.sharma@talentedge.in',
+                                               //'aastha.verma@talentedge.in',
+                                               //'pritam.dutta@talentedge.in',
                                                //'ajay.kumar@talentedge.in', 
                                                //'pritam.dutta@talentedge.in',
                                                //'pramod.singh@talentedge.in'
