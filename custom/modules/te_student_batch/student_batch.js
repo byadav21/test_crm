@@ -38,7 +38,7 @@ $(document).ready(function () {
     //$("#bt_fee_waiver").closest('tr').hide();
     var total_payment = $("#total_payment").text();
     var pending_payment = $("#initial_payment_inr").text();
-    var feetype = $("#bt_fee_waiver").text();
+    var feetype = $("#bt_fee_waiver").html();
     var msg='';
     alert(feetype);
     if(feetype=='3' || feetype=='Pending'){
