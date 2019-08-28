@@ -35,7 +35,7 @@ $(document).ready(function () {
 
     $("#total_payment").closest('tr').hide();
     $("#initial_payment_inr").closest('tr').hide();
-    $("#bt_fee_waiver").closest('tr').hide();
+    //$("#bt_fee_waiver").closest('tr').hide();
     var total_payment = $("#total_payment").text();
     var pending_payment = $("#initial_payment_inr").text();
     var feetype = $("#bt_fee_waiver").text();
