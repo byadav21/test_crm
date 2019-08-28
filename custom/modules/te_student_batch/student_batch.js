@@ -40,7 +40,8 @@ $(document).ready(function () {
     var pending_payment = $("#initial_payment_inr").text();
     var feetype = $("#bt_fee_waiver").text();
     var msg='';
-    if(feetype=='3'){
+    alert(feetype);
+    if(feetype=='3' || feetype=='Pending'){
         msg='+ Batch transfer fee';
     }
     $("#list_subpanel_te_student_batch_te_student_payment_plan_1>table>tbody").last('tr').after("<tr><th colspan='8' style='border: 1px solid #ddd;font-weight: bold;font-size: 1.5em;text-align: right;'>Pending Amount: "+pending_payment+msg+" Total Payment: " + total_payment + "</th></tr>");
