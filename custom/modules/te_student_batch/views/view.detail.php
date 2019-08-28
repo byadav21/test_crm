@@ -9,8 +9,8 @@ class te_student_batchViewDetail extends ViewDetail {
 			$rownew =$db->query("SELECT fee_inr FROM `te_student_batch` WHERE `id`='".$this->bean->id."'  AND payment_realized=1 AND deleted=0");
 			$resnew =$db->fetchByAssoc($rownew);
 			$this->bean->total_payment=$res['amt_paid'];
-			$this->bean->initial_payment_inr=$resnew['fee_inr']-$res['amt_paid'];
-			//$this->bean->initial_payment_inr	= '1000';
+			//$this->bean->initial_payment_inr=$resnew['fee_inr']-$res['amt_paid'];
+			$this->bean->initial_payment_inr	= '1000';
 			parent::display();
 		}
 
