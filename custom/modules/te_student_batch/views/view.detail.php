@@ -6,7 +6,7 @@ class te_student_batchViewDetail extends ViewDetail {
 			global $current_user,$db;
 			$row =$db->query("SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$this->bean->id."'  AND payment_realized=1 AND deleted=0");
 			$res =$db->fetchByAssoc($row);
-			$rownew =$db->query("SELECT fee_inr FROM `te_student_batch` WHERE `id`='".$this->bean->id."'  AND payment_realized=1 AND deleted=0");
+			$rownew =$db->query("SELECT fee_inr FROM `te_student_batch` WHERE `id`='".$this->bean->id."' AND deleted=0");
 			$resnew =$db->fetchByAssoc($rownew);
 			$this->bean->total_payment=$res['amt_paid'];
 			$this->bean->initial_payment_inr=$resnew['fee_inr']-$res['amt_paid'];
