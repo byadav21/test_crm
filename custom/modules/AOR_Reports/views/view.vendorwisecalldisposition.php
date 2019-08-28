@@ -188,7 +188,8 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 
 
         $headers = array('l.id'                              => 'id',
-            'date(l.date_entered) date_entered' => 'date_entered',
+            //'date(l.date_entered) date_entered' => 'date_entered',
+            'CONVERT_TZ(l.date_entered,"+00:00","+05:30") date_entered' => 'date_entered',
             'l.vendor'                          => 'vendor',
             'te_ba_batch.batch_code'            => 'batch_code',
             'l.status'                          => 'status',
