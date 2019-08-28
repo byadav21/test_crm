@@ -43,7 +43,7 @@ $(document).ready(function () {
     if(feetype=='3'){
         msg='+ Batch transfer fee';
     }
-    $("#list_subpanel_te_student_batch_te_student_payment_plan_1>table>tbody").last('tr').after("<tr><th colspan='8' style='border: 1px solid #ddd;font-weight: bold;font-size: 1.5em;text-align: right;'>Pending Amount: "+pending_payment+msg+" Total Payment: " + total_payment + "</th></tr>");
+    $("#list_subpanel_te_student_batch_te_student_payment_plan_1>table>tbody").last('tr').after("<tr><th colspan='8' style='border: 1px solid #ddd;font-weight: bold;font-size: 1.5em;text-align: right;'>Pending Amount: "+pending_payment+" Total Payment: " + total_payment + "</th></tr>");
 });
 
 
