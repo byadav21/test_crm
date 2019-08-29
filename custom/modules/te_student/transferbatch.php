@@ -240,7 +240,7 @@ $insertRelSql = "INSERT INTO te_student_te_student_payment_1_c
 $GLOBALS['db']->Query($insertRelSql);
 
 
-#unlink old student batch from student
+#unlink old student batch from student 
 $GLOBALS['db']->query("UPDATE te_student_batch,
        te_student_te_student_batch_1_c
 SET te_student_batch.status = 'Inactive_transfer',
