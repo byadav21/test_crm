@@ -4,6 +4,8 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 ini_set('memory_limit', '1024M');
 require_once('include/entryPoint.php');
+
+createLog('{checkpaymentquery}', '$lead_data_' . date('Y-m-d') . '_log.txt', 'test',array());
 global $db;
 $data         = json_decode(file_get_contents('php://input'), true);
 $error_fields = [];
@@ -141,6 +143,7 @@ else
 
     //$lead_data = __get_lead_details($lead_id,$batch_id,$discount);
     $lead_data = __get_lead_details($email, $mobile, $batch_id, $discount);
+    createLog('{checkpaymentquery}', '$lead_data_' . date('Y-m-d') . '_log.txt', 'ddfdf',$lead_data);
     //echo "<pre>";print_r($lead_data);exit();
     if ($lead_data)
     {
