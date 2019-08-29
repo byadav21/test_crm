@@ -5,7 +5,20 @@ if (!defined('sugarEntry') || !sugarEntry)
 ini_set('memory_limit', '1024M');
 require_once('include/entryPoint.php');
 
-createLog('{checkpaymentquery}', '$lead_data_' . date('Y-m-d') . '_log.txt', 'test',array());
+/* Log create Function  */
+
+function createLog($action, $filename, $field = '', $dataArray = array())
+{
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+}
+
+createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'test',array());
+
 global $db;
 $data         = json_decode(file_get_contents('php://input'), true);
 $error_fields = [];
@@ -143,7 +156,7 @@ else
 
     //$lead_data = __get_lead_details($lead_id,$batch_id,$discount);
     $lead_data = __get_lead_details($email, $mobile, $batch_id, $discount);
-    createLog('{checkpaymentquery}', '$lead_data_' . date('Y-m-d') . '_log.txt', 'ddfdf',$lead_data);
+    createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'ddfdf',$lead_data);
     //echo "<pre>";print_r($lead_data);exit();
     if ($lead_data)
     {
@@ -263,17 +276,6 @@ function insert_payment($student_batch_detail = array(), $student_detail = array
     return $lead_payment_details_id;
 }
 
-/* Log create Function  */
-
-function createLog($action, $filename, $field = '', $dataArray = array())
-{
-    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
-    fwrite($file, date('Y-m-d H:i:s') . "\n");
-    fwrite($file, $action . "\n");
-    fwrite($file, $field . "\n");
-    fwrite($file, print_r($dataArray, TRUE) . "\n");
-    fclose($file);
-}
 
 function update_payment($student_batch_detail = array(), $student_detail = array(), $data = array(), $check_payment_row = array())
 {
