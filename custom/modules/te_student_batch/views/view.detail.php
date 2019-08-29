@@ -10,7 +10,7 @@ class te_student_batchViewDetail extends ViewDetail {
 			$resnew =$db->fetchByAssoc($rownew);
 			$this->bean->total_payment=$res['amt_paid'];
 			$amountpaid=($res['amt_paid']*100)/118;
-			$totalfee=$resnew['fee_inr']+($resnew['fee_inr']*18/100);
+			$totalfee=($res['fee_inr']*100)/118;
 			$this->bean->initial_payment_inr=$totalfee-$amountpaid;
 			$this->bean->bt_fee_waiver=$resnew['bt_fee_waiver'];
 			//$this->bean->initial_payment_inr	= '1000';
