@@ -244,8 +244,8 @@ $GLOBALS['db']->Query($insertRelSql);
 $GLOBALS['db']->query("UPDATE te_student_batch,
        te_student_te_student_batch_1_c
 SET te_student_batch.status = 'Inactive_transfer',
-    te_student_batch.deleted = 0,
-    te_student_te_student_batch_1_c.deleted=0
+    te_student_batch.deleted = 1,
+    te_student_te_student_batch_1_c.deleted=1
 WHERE te_student_batch.id = te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_batch_idb
   AND te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_ida='" . $student_id . "'
   AND te_student_te_student_batch_1_c.te_student_te_student_batch_1te_student_batch_idb='" . $student_batch_id_old . "'
