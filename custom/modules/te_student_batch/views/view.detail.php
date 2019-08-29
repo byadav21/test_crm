@@ -11,7 +11,7 @@ class te_student_batchViewDetail extends ViewDetail {
 			$this->bean->total_payment=$res['amt_paid'];
 			$amountpaid=$res['amt_paid']+($res['amt_paid']*18/100);
 			$totalfee=$resnew['fee_inr']+($resnew['fee_inr']*18/100);
-			$this->bean->initial_payment_inr=$amountpaid;
+			$this->bean->initial_payment_inr=$totalfee-$res['amt_paid'];
 			$this->bean->bt_fee_waiver=$resnew['bt_fee_waiver'];
 			//$this->bean->initial_payment_inr	= '1000';
 			parent::display();
