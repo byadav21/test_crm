@@ -41,7 +41,7 @@ $(document).ready(function () {
     var feetype = $("#bt_fee_waiver").val();
     var msg='';
     //alert(feetype);
-    if(feetype=='3'){
+    if(feetype=='3' || feetype=='2'){
         msg='+ 5900 (Batch transfer fee)';
     }
     $("#list_subpanel_te_student_batch_te_student_payment_plan_1>table>tbody").last('tr').after("<tr><th colspan='8' style='border: 1px solid #ddd;font-weight: bold;font-size: 1.5em;text-align: right;'>Pending Amount(Including Tax): "+pending_payment+msg+" Total Payment: " + total_payment + "</th></tr>");
