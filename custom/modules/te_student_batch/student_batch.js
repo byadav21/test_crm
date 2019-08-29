@@ -40,7 +40,7 @@ $(document).ready(function () {
     var pending_payment = $("#initial_payment_inr").text();
     var feetype = $("#bt_fee_waiver").text();
     var msg='';
-    //alert(feetype);
+    alert(feetype);
     if(feetype=='3' || feetype=='Pending'){
         msg='+ Batch transfer fee';
     }
