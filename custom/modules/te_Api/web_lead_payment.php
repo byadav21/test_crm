@@ -4,9 +4,9 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 ini_set('memory_limit', '1024M');
 require_once('include/entryPoint.php');
+global $db;
 
 /* Log create Function  */
-
 function createLog($action, $filename, $field = '', $dataArray = array())
 {
     $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
@@ -17,9 +17,9 @@ function createLog($action, $filename, $field = '', $dataArray = array())
     fclose($file);
 }
 
-createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'test',array());
+//createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'test',array());
 
-global $db;
+
 $data         = json_decode(file_get_contents('php://input'), true);
 $error_fields = [];
 $discount     = ' 0';
@@ -156,7 +156,7 @@ else
 
     //$lead_data = __get_lead_details($lead_id,$batch_id,$discount);
     $lead_data = __get_lead_details($email, $mobile, $batch_id, $discount);
-    createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'ddfdf',$lead_data);
+    //createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'ddfdf',$lead_data);
     //echo "<pre>";print_r($lead_data);exit();
     if ($lead_data)
     {
@@ -266,7 +266,7 @@ function insert_payment($student_batch_detail = array(), $student_detail = array
     $insertRelSql = "INSERT INTO te_student_te_student_payment_1_c SET id='" . create_guid() . "', 	date_modified='" . date('Y-m-d H:i:s') . "',deleted=0,te_student_te_student_payment_1te_student_ida='" . $student_id . "', te_student_te_student_payment_1te_student_payment_idb='" . $id . "'";
     $GLOBALS['db']->Query($insertRelSql);
 
-     createLog('{checkpaymentquery}', 'te_student_payment_query_' . date('Y-m-d') . '_log.txt', $insertSql.'<<>>'.$insertRelSql,$data);
+    //createLog('{checkpaymentquery}', 'te_student_payment_query_' . date('Y-m-d') . '_log.txt', $insertSql.'<<>>'.$insertRelSql,$data);
 
 
     if ($total_amt > 0)
@@ -391,7 +391,7 @@ function __get_student_batch_id($student_arr = array(),$data = array())
             'te_ba_batch_id_c' => $find_student_batch['te_ba_batch_id_c']
         );
         
-        createLog('{te_student_payment get batch id}', 'te_student_payment_query_' . date('Y-m-d') . '_log.txt', $find_student_batch_sql,$find_student_batch);
+        //createLog('{te_student_payment get batch id}', 'te_student_payment_query_' . date('Y-m-d') . '_log.txt', $find_student_batch_sql,$find_student_batch);
     }
     else
     {
