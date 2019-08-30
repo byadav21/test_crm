@@ -57,7 +57,7 @@ class sendVisitReport
             </tr>
         </table>';
         //emailData
-        $emailData = $mail->TestemailData('Linkedin Leads Report', $filename, $this->toDate, $email_summary);
+        $emailData = $mail->emailData('Linkedin Leads Report', $filename, $this->toDate, $email_summary);
         $mail->sendCertificateEmail($emailData);
     }
 
