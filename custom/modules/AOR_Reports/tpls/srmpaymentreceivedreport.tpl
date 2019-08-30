@@ -1,60 +1,47 @@
-<section class="moduleTitle"> <h2>Payment Received Report</h2><br/><br/>
+<section class="moduleTitle"> 
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=srmpaymentreceivedreport">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
+
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
-            <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                <tbody>
-                    <tr>
+            <h2>Payment Received Report:</h2><br><br><br>
+            <div class = "block-wrapper marginTop15">
+                <div class = "block">
+                    <label>Select Institute : </label>
+                    <select name="institute_dropdown" id="institute_dropdown"  class="" style="">
+                        <option value="">-Select-</option>
+                        {foreach from =$getInstituteDropData key=key item=program}
+                            <option value="{$program.id}" {if $program.id==$selected_institute_dropdown} selected="selected"{/if}>{$program.name}</option>
+                        {/foreach}
+                    </select>
 
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Status">Institute:</label>
-                        </td>
-                        
-                        <td nowrap="nowrap" >
-                            <select name="institute_dropdown" id="institute_dropdown"  class="" style="">
-                                <option value="">-Select-</option>
-                                {foreach from =$getInstituteDropData key=key item=program}
-                                    <option value="{$program.id}" {if $program.id==$selected_institute_dropdown} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
+                </div>
+                <div class = "block">
+                    <label>Select Program : </label>
+                    <select name="program_dropdown" id="program_dropdown"  class=""  style="">
+                        <option value="">-Select-</option>
 
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Code">Program:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="program_dropdown" id="program_dropdown"  class=""  style="">
-                                <option value="">-Select-</option>
+                    </select>
+                </div>
+                <div class = "block">
+                    <label>Select Batch : </label>
+                    <select name="batch_dropdown" id="batch_dropdown"  class=""  style="">
+                        <option value="">-Select-</option>
+                    </select>
+                </div>
+                
 
-                            </select>
-                        </td>
+            </div>
+                    <div class = "action-block">
+                        <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">
+               
+                
+                        <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
+                            return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
+                
+                
+                        <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
+                    </div>
 
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Code">Batch:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="batch_dropdown" id="batch_dropdown"  class=""  style="">
-                                <option value="">-Select-</option>
-                            </select>
-                        </td>
-
-
-                    </tr>
-
-
-
-                    <tr>
-                        <td class="sumbitButtons" colspan="3">
-                            <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
-                            <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
-                                    return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-                            <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
-                        </td>
-                    </tr>
-
-
-                </tbody>
-            </table>
         </div>
     </form>
 
@@ -355,6 +342,23 @@
         </table>
     </div>  
     {literal}
+        <style>
+            .modal-dialog{width:700px;}
+            select{width:100%!important}
+            textarea{width:100%!important; resize:none; height:90px;border-radius: 5px;}
+            .marginTopBottom15{margin:15px 0;}
+            .marginTop15{margin:15px 0 0;}
+            .block-wrapper{display:flex; width:100%; padding:0 9px}
+            .block{display:flex; flex-direction: column; margin-left: 15px; width:100%;}
+            .block:first-child{margin-left:0px}
+            .block-wrapper label{margin:0 15px 5px 0; display: flex; align-items: center;}
+            .block div{display:flex; margin-bottom: 10px; align-items: flex-start;}
+            .block div label{display:flex; margin-right:10px;}
+            .block-wrapper input[type="radio"]{margin:0 5px 0 0;}
+            .modal-title{margin-bottom:10px;}
+            .borderWidthPadding{border:1px solid #ddd; padding:5px;}
+            .action-block{display: flex; align-items: flex-end; justify-content: flex-end; margin:20px 0; padding: 0 9px;}
+        </style>
         <script>
             Calendar.setup({
                 inputField: "from_date",
