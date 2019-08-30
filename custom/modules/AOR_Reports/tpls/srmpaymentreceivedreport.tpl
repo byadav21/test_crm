@@ -9,11 +9,12 @@
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Batch Status">Institute:</label>
                         </td>
+                        
                         <td nowrap="nowrap" >
                             <select name="institute_dropdown" id="institute_dropdown"  class="" style="">
                                 <option value="">-Select-</option>
                                 {foreach from =$getInstituteDropData key=key item=program}
-                                    <option value="{$program.id}">{$program.name}</option>
+                                    <option value="{$program.id}" {if $program.id==$selected_institute_dropdown} selected="selected"{/if}>{$program.name}</option>
                                 {/foreach}
                             </select>
                         </td>

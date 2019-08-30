@@ -98,19 +98,10 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $getInstituteDropData  = $this->getInstitutesDdown();
         $usersdd               = "";
 
-        //echo "<pre>";print_r($getDueDateData);exit();
-//        if (!isset($_SESSION['cccon_from_date']))
-//        {
-//            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
-//        }
-//        if (!isset($_SESSION['cccon_to_date']))
-//        {
-//            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
-//        }
 
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-           // echo 'xxxxxxxx'.$_REQUEST['batch_dropdown'];
+           
             $_SESSION['cccon_batch_dropdown'] = $_REQUEST['batch_dropdown'];
             $_SESSION['cccon_program_dropdown'] = $_REQUEST['program_dropdown'];
             $_SESSION['cccon_institute_dropdown'] = $_REQUEST['institute_dropdown'];
@@ -136,8 +127,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $paymentList = array();
         $StatusList  = array();
 
-        echo '$selected_batch_code'.$selected_batch_code;
-        if (!empty($selected_batch_code))
+        //echo '$selected_batch_code'.$selected_batch_dropdown;
+        if (!empty($selected_batch_dropdown))
         {
 
             $wherecl .= " AND  sb.te_ba_batch_id_c = '$selected_batch_dropdown'";
@@ -185,14 +176,14 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
     $wherecl order by pd.`date_of_payment`,s.name";
 
 
-echo $leadSql;
+        //echo $leadSql;
 
 
 
         $checkOffline = array("Atom Gateway Payments", "paytm", "PayU");
         $Amountpaid   = 0;
         //$_SESSION['cccon_batch_code']=array();
-        if (!empty($_SESSION['cccon_batch_code']))
+        if (!empty($_SESSION['cccon_batch_dropdown']))
         {
 
             $leadObj = $db->query($leadSql);
@@ -274,7 +265,7 @@ echo $leadSql;
 
             $leadObj = $db->query($leadSql);
 
-            if (!empty($_SESSION['cccon_batch_code']))
+            if (!empty($_SESSION['cccon_batch_dropdown']))
             {
                 while ($row = $db->fetchByAssoc($leadObj))
                 {
