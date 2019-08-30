@@ -4,7 +4,6 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/include/Email/sendmail.php');
 
-
 class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 {
 
@@ -53,6 +52,19 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         return $batchOptions;
     }
 
+    function getInstitutesDdown()
+    {
+        global $db;
+        $batchSql     = "select id,name from te_in_institutes where deleted=0 order by name";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+            $batchOptions[] = $row;
+        }
+        return $batchOptions;
+    }
+
     function getInstitute()
     {
 
@@ -83,42 +95,43 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         $BatchListData         = $this->getBatch();
         $getDueDateData        = $this->getDueDate();
         $getInstituteData      = $this->getInstitute();
+        $getInstituteDropData  = $this->getInstitutesDdown();
         $usersdd               = "";
 
-        //echo "<pre>";print_r($getDueDateData);exit();
-//        if (!isset($_SESSION['cccon_from_date']))
-//        {
-//            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
-//        }
-//        if (!isset($_SESSION['cccon_to_date']))
-//        {
-//            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
-//        }
 
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-
-
-            $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
+           
+            $_SESSION['cccon_batch_dropdown'] = $_REQUEST['batch_dropdown'];
+            $_SESSION['cccon_program_dropdown'] = $_REQUEST['program_dropdown'];
+            $_SESSION['cccon_institute_dropdown'] = $_REQUEST['institute_dropdown'];
         }
 
 
         $findBatch = array();
 
-        if (!empty($_SESSION['cccon_batch_code']))
+        if ($_SESSION['cccon_batch_dropdown']!='')
         {
-            $selected_batch_code = $_SESSION['cccon_batch_code'];
+            $selected_batch_dropdown = $_SESSION['cccon_batch_dropdown'];
+        }
+        if ($_SESSION['cccon_program_dropdown']!='')
+        {
+            $selected_program_dropdown = $_SESSION['cccon_program_dropdown'];
+        }
+        if (!$_SESSION['cccon_institute_dropdown']!='')
+        {
+            $selected_institute_dropdown = $_SESSION['cccon_institute_dropdown'];
         }
 
 
         $paymentList = array();
         $StatusList  = array();
 
-
-        if (!empty($selected_batch_code))
+        //echo '$selected_batch_code'.$selected_batch_dropdown;
+        if (!empty($selected_batch_dropdown))
         {
 
-            $wherecl .= " AND  sb.te_ba_batch_id_c IN ('" . implode("','", $selected_batch_code) . "')";
+            $wherecl .= " AND  sb.te_ba_batch_id_c = '$selected_batch_dropdown'";
         }
 
         //echo '<pre>'.
@@ -163,14 +176,14 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
     $wherecl order by pd.`date_of_payment`,s.name";
 
 
-
+        //echo $leadSql;
 
 
 
         $checkOffline = array("Atom Gateway Payments", "paytm", "PayU");
         $Amountpaid   = 0;
         //$_SESSION['cccon_batch_code']=array();
-        if (!empty($_SESSION['cccon_batch_code']))
+        if (!empty($_SESSION['cccon_batch_dropdown']))
         {
 
             $leadObj = $db->query($leadSql);
@@ -182,7 +195,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
-                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['email_add']       = $row['email_add_c'];
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['email_add']        = $row['email_add_c'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
@@ -191,9 +204,9 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['lead_id']          = $row['lead_id'];
-                
-                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number']   = $row['invoice_number'];
-                
+
+                $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number'] = $row['invoice_number'];
+
 
 
                 $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
@@ -212,23 +225,21 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                     ($row['invoice_order_number']) ? $row['invoice_order_number'] : 'N/A',
                     ($row['amount']) ? $row['amount'] : 'N/A',
                     //(in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
-                    
                     ($row['payment_source']) ? $row['payment_source'] : 'N/A',
                     //($row['reference_number']) ? $row['reference_number'] : 'N/A',
                     ($row['date_of_payment']) ? date('F', strtotime($row['date_of_payment'])) : 'N/A',
                     ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
-                    
                 );
             }
             //echo "<pre>";
             $i = 1;
             foreach ($paymentList as $key => $val)
-            {   
-                $total_amount= $val['total_amount'];
-                $amt_tobe_pay= $val['amt_tobe_pay'];
+            {
+                $total_amount                      = $val['total_amount'];
+                $amt_tobe_pay                      = $val['amt_tobe_pay'];
                 $paymentList[$key]['srno']         = $i;
                 //$paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
-                $paymentList[$key]['amt_tobe_pay'] = ($total_amount!=0)?   ($total_amount-$amt_tobe_pay):0;
+                $paymentList[$key]['amt_tobe_pay'] = ($total_amount != 0) ? ($total_amount - $amt_tobe_pay) : 0;
 
                 foreach ($val['installment'] as $key2 => $val2)
                 {
@@ -254,7 +265,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
             $leadObj = $db->query($leadSql);
 
-            if (!empty($_SESSION['cccon_batch_code']))
+            if (!empty($_SESSION['cccon_batch_dropdown']))
             {
                 while ($row = $db->fetchByAssoc($leadObj))
                 {
@@ -263,7 +274,7 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_name']     = $row['student_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_id']       = $row['student_id'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['phone_mobile']     = $row['phone_mobile'];
-                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['email_add']       = $row['email_add_c'];
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['email_add']        = $row['email_add_c'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['student_email']    = $row['student_email'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['user_name']        = $row['user_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id'] = $row['assigned_user_id'];
@@ -272,8 +283,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_name']       = $row['batch_name'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['batch_code']       = $row['batch_code'];
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['lead_id']          = $row['lead_id'];
-                
-                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number']   = $row['invoice_number'];
+
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['invoice_number'] = $row['invoice_number'];
 
 
                     $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['program_name']   = $row['program_name'];
@@ -288,25 +299,24 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
 
 
 
-                    
-                   $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][] = array(
-                    ($row['invoice_order_number']) ? $row['invoice_order_number'] : 'N/A',
-                    ($row['amount']) ? $row['amount'] : 'N/A',
-                    //(in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
-                    
-                    ($row['payment_source']) ? $row['payment_source'] : 'N/A',
-                    //($row['reference_number']) ? $row['reference_number'] : 'N/A',
-                    ($row['date_of_payment']) ? date('F', strtotime($row['date_of_payment'])) : 'N/A',
-                    ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
+
+                    $paymentList[$row['student_id'] . '_BATCH_' . $row['batch_id']]['installment'][] = array(
+                        ($row['invoice_order_number']) ? $row['invoice_order_number'] : 'N/A',
+                        ($row['amount']) ? $row['amount'] : 'N/A',
+                        //(in_array($row['payment_type'], $checkOffline)) ? 'Online' : $row['payment_type'],
+                        ($row['payment_source']) ? $row['payment_source'] : 'N/A',
+                        //($row['reference_number']) ? $row['reference_number'] : 'N/A',
+                        ($row['date_of_payment']) ? date('F', strtotime($row['date_of_payment'])) : 'N/A',
+                        ($row['date_of_payment']) ? $row['date_of_payment'] : 'N/A',
                     );
                 }
 
                 foreach ($paymentList as $key => $val)
-                {   
-                     $total_amount= $val['total_amount'];
-                     $amt_tobe_pay= $val['amt_tobe_pay'];
+                {
+                    $total_amount                      = $val['total_amount'];
+                    $amt_tobe_pay                      = $val['amt_tobe_pay'];
                     //$paymentList[$key]['amt_tobe_pay'] = ($val['total_amount'] - $val['amt_tobe_pay']);
-                     $paymentList[$key]['amt_tobe_pay'] = ($total_amount!=0)?   ($total_amount-$amt_tobe_pay):0;
+                    $paymentList[$key]['amt_tobe_pay'] = ($total_amount != 0) ? ($total_amount - $amt_tobe_pay) : 0;
 
                     foreach ($val['installment'] as $key2 => $val2)
                     {
@@ -351,28 +361,28 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $data .= ",Month";
             $data .= ",Date of Payment";
             $data .= ",Due Date";
-            
+
             $data .= ",Order Number";
             $data .= ",Instalment 2/Payment 2";
             $data .= ",Payment Source";
             $data .= ",Month";
             $data .= ",Date of Payment";
             $data .= ",Due Date";
-            
+
             $data .= ",Order Number";
             $data .= ",Instalment 3/Payment 3";
             $data .= ",Payment Source";
             $data .= ",Month";
             $data .= ",Date of Payment";
             $data .= ",Due Date";
-            
+
             $data .= ",Order Number";
             $data .= ",Instalment 4/Payment 4";
             $data .= ",Payment Source";
             $data .= ",Month";
             $data .= ",Date of Payment";
             $data .= ",Due Date";
-            
+
             $data .= ",Order Number";
             $data .= ",Instalment 5/Payment 5";
             $data .= ",Payment Source";
@@ -402,14 +412,14 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                 $data .= "\",\"" . $datax['converted_date'];
 
                 $data .= "\",\"" . $datax['student_name'];
-                
+
                 $data .= "\",\"" . $datax['email_add'];
                 $data .= "\",\"" . $datax['phone_mobile'];
-                  
+
                 $data .= "\",\"" . $datax['lead_id'];
                 $data .= "\",\"" . $datax['counselor_name'];
                 $data .= "\",\"" . $datax['invoice_number'];
-                
+
 
                 $data .= "\",\"" . $datax['fee_inr'];
                 $data .= "\",\"" . $datax['gst'];
@@ -486,9 +496,14 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
         #pE
 
         $sugarSmarty = new Sugar_Smarty();
-        $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
+        $sugarSmarty->assign("selected_batch_dropdown", $selected_batch_dropdown);
+        $sugarSmarty->assign("selected_program_dropdown", $selected_program_dropdown);
+        $sugarSmarty->assign("selected_institute_dropdown", $selected_institute_dropdown);
+        
         $sugarSmarty->assign("selected_status", $selected_status);
         $sugarSmarty->assign("paymentList", $paymentList);
+        $sugarSmarty->assign("getInstituteDropData", $getInstituteDropData);
+
         $sugarSmarty->assign("PaymentsArray", $PaymentsArray);
         $sugarSmarty->assign("BatchListData", $BatchListData);
         $sugarSmarty->assign("CounselorList", $usersdd);
