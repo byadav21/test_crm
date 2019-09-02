@@ -49,6 +49,7 @@ if($_POST['Submit'] && $error==0){
 	    $data['new_batch_code']=$_POST['newbatchcode'];
 		$data['old_batch_code']=$_POST['oldbatchcode'];
 		$data['email']	=	$_POST['emailid'];
+		$data['batch_transfer_fee']	=	5900;
 	    $ch     = curl_init();
 	    curl_setopt($ch, CURLOPT_URL, $url);
 	    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
