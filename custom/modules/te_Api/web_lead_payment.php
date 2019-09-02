@@ -5,6 +5,21 @@ if (!defined('sugarEntry') || !sugarEntry)
 ini_set('memory_limit', '1024M');
 require_once('include/entryPoint.php');
 global $db;
+
+/* Log create Function  */
+function createLog($action, $filename, $field = '', $dataArray = array())
+{
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+}
+
+//createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'test',array());
+
+
 $data         = json_decode(file_get_contents('php://input'), true);
 $error_fields = [];
 $discount     = ' 0';
@@ -141,6 +156,7 @@ else
 
     //$lead_data = __get_lead_details($lead_id,$batch_id,$discount);
     $lead_data = __get_lead_details($email, $mobile, $batch_id, $discount);
+    //createLog('{checkpaymentquery}', 'lead_data_' . date('Y-m-d') . '_log.txt', 'ddfdf',$lead_data);
     //echo "<pre>";print_r($lead_data);exit();
     if ($lead_data)
     {
@@ -250,7 +266,7 @@ function insert_payment($student_batch_detail = array(), $student_detail = array
     $insertRelSql = "INSERT INTO te_student_te_student_payment_1_c SET id='" . create_guid() . "', 	date_modified='" . date('Y-m-d H:i:s') . "',deleted=0,te_student_te_student_payment_1te_student_ida='" . $student_id . "', te_student_te_student_payment_1te_student_payment_idb='" . $id . "'";
     $GLOBALS['db']->Query($insertRelSql);
 
-
+    //createLog('{checkpaymentquery}', 'te_student_payment_query_' . date('Y-m-d') . '_log.txt', $insertSql.'<<>>'.$insertRelSql,$data);
 
 
     if ($total_amt > 0)
@@ -260,17 +276,6 @@ function insert_payment($student_batch_detail = array(), $student_detail = array
     return $lead_payment_details_id;
 }
 
-/* Log create Function  */
-
-function createLog($action, $filename, $field = '', $dataArray = array())
-{
-    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
-    fwrite($file, date('Y-m-d H:i:s') . "\n");
-    fwrite($file, $action . "\n");
-    fwrite($file, $field . "\n");
-    fwrite($file, print_r($dataArray, TRUE) . "\n");
-    fclose($file);
-}
 
 function update_payment($student_batch_detail = array(), $student_detail = array(), $data = array(), $check_payment_row = array())
 {
@@ -366,7 +371,17 @@ function __get_student_id($student_arr = array())
 function __get_student_batch_id($student_arr = array(),$data = array())
 {   
     global $db;
-    $find_student_batch_sql = "SELECT s.id AS student_id,sb.id AS student_batch_id,sb.te_ba_batch_id_c FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS sbr ON sbr.te_student_te_student_batch_1te_student_ida=s.id INNER JOIN te_student_batch AS sb ON sb.id=sbr.te_student_te_student_batch_1te_student_batch_idb WHERE sb.leads_id='" . $student_arr['lead_id'] . "' AND s.deleted=0 AND sb.deleted=0 LIMIT 0,1";
+    $find_student_batch_sql = "SELECT s.id AS student_id,
+                                    sb.id AS student_batch_id,
+                                    sb.te_ba_batch_id_c
+                             FROM te_student AS s
+                             INNER JOIN te_student_te_student_batch_1_c AS sbr ON sbr.te_student_te_student_batch_1te_student_ida=s.id
+                             INNER JOIN te_student_batch AS sb ON sb.id=sbr.te_student_te_student_batch_1te_student_batch_idb
+                             WHERE sb.leads_id='" . $student_arr['lead_id'] . "'
+                               AND s.deleted=0
+                               AND sb.deleted=0
+                               AND sb.status='Active'
+                             LIMIT 0,1";
     $find_student_batch_Obj = $GLOBALS['db']->query($find_student_batch_sql);
     $find_student_batch     = $GLOBALS['db']->fetchByAssoc($find_student_batch_Obj);
     if ($find_student_batch)
@@ -375,6 +390,8 @@ function __get_student_batch_id($student_arr = array(),$data = array())
             'batch_id'         => $find_student_batch['student_batch_id'],
             'te_ba_batch_id_c' => $find_student_batch['te_ba_batch_id_c']
         );
+        
+        //createLog('{te_student_payment get batch id}', 'te_student_payment_query_' . date('Y-m-d') . '_log.txt', $find_student_batch_sql,$find_student_batch);
     }
     else
     {
