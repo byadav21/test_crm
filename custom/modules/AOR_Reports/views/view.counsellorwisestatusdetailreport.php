@@ -20,7 +20,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
   
   
-        function reportingUser($currentUserId)
+    function reportingUser($currentUserId)
     {
         $userObj                             = new User();
         $userObj->disable_row_level_security = true;

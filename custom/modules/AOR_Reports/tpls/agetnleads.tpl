@@ -20,6 +20,8 @@
             </table>
         </div>
     </form>
+                            
+          <div style="width:99%;overflow:hidden;">                         
     <table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view table footable-loaded footable default">
         <thead>
             {*Start Pagination*}
@@ -79,6 +81,11 @@
                 </td>
             </tr>
             {*End Pagination*}
+        </thead>
+    </table>
+          </div>
+        <div style="width:99%;overflow:auto;border:2px dashed #d0d0d0;" class="div-leads-list">                          
+        <table cellpadding="0" cellspacing="0" width="{$tablewidth}" border="0" class="list view table footable-loaded footable default">
 
             <tr height="20">
 
@@ -103,7 +110,8 @@
 
 
     </table>
-
+      
+    </div>
     {literal}
         <script>
             Calendar.setup({
