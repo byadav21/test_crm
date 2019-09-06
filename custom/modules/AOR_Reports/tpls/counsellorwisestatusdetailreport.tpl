@@ -75,7 +75,7 @@
                         </td>
 
                     </tr>
-
+                    {if $current_user_is_admin==1}
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Source">Source:</label>
@@ -102,6 +102,7 @@
                         </td>
 
                     </tr>
+                    {/if}
 
                     <tr>
                         <td class="sumbitButtons" colspan="3">

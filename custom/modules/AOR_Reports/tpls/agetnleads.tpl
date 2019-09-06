@@ -83,7 +83,7 @@
             <tr height="20">
                 {foreach from = $ExcelHeaders key=key item=column}
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$column}</strong></th>
-                        {/foreach}
+                 {/foreach}
             </tr>  
 
             {foreach from = $leadList key=key item=program}

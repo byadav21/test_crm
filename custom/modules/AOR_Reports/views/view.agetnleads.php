@@ -140,30 +140,24 @@ class AOR_ReportsViewagetnleads extends SugarView
             'leads.phone_mobile'                                          => 'Mobile',
             'CONCAT(leads.first_name," ",leads.last_name) Reporting_Name' => 'Customer Name',
             'te_ba_batch.batch_code'                                      => 'Batch Code',
-            //'leads_cstm.lead_source'              => 'Lead Source',
-            //'leads_cstm.vendor'                   => 'Vendor',
+            'leads.lead_source'                                           => 'Lead Source',
+            'leads.vendor'                                                => 'Vendor',
             'leads_cstm.attempts_c'                                       => 'No of Attempts'
         );
+        
+        if($current_user_is_admin!=1){
+            unset($headers['leads.lead_source']);
+            unset($headers['leads.vendor']);
+        }
+        //echo '<pre>';
+        //print_r($headers);
 
-
+        $headersss = implode(', ', array_keys($headers));
+        
+        
 
         $leadSql = "SELECT 
-                    	    leads.id,                            
-                            leads.date_entered,                 
-                            leads.date_modified,    
-                            leads.date_of_followup,             
-                            leads.date_of_prospect, 
-                            leads.status,                      
-                            leads.status_description,
-                            leads.disposition_reason,
-                            leads_cstm.email_add_c,
-                            leads.phone_mobile,
-                            #leads.lead_source,    
-                            CONCAT(leads.first_name,' ',leads.last_name) Reporting_Name,
-                            #leads.vendor,    
-                            te_ba_batch.batch_code,             
-                            leads_cstm.attempts_c  
-                                           
+                    	    $headersss     
                                        
                     FROM leads
                     INNER JOIN users ON leads.assigned_user_id =users.id
