@@ -24,6 +24,8 @@ class AOR_ReportsViewagetnleads extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
+        $current_user_id       = $current_user->id;
+        $current_user_is_admin = $current_user->is_admin;
 
         $wherecl = '';
         $left    = '';
@@ -126,59 +128,43 @@ class AOR_ReportsViewagetnleads extends SugarView
 
 
         $headers = array(
-            'leads.id'                            => 'ID',
-            'leads.date_entered'                  => 'Date Entered',
-            'leads.date_modified'                 => 'Date Modified',
-            'leads.converted_date'                => 'Converted Date',
-            'leads_cstm.temp_lead_date_c'         => 'Temp Lead Date',
-            'leads.date_of_followup'              => 'Date of Followup',
-            'leads.date_of_prospect'              => 'Date of Prospect',
-            'leads.status'                        => 'Status',
-            'leads.status_description'            => 'Status Description',
-            'leads.lead_source'                   => 'Lead Source',
-            #'leads.vendor'                        => 'Vendor',
-            'users.first_name as user_first_name' => 'Counsellor F.Name',
-            'users.last_name as user_last_name'   => 'Counsellor L.Name',
-            'leads.assigned_user_id'              => 'Assigned User',
-            'te_ba_batch.name'                    => 'Batch Name',
-            'te_ba_batch.batch_code'              => 'Batch Code',
-            'leads_cstm.attempts_c'               => 'No of Attempts',
-            'leads.autoassign'                    => 'Autoassign',
-            'leads.dristi_campagain_id'           => 'Campagain ID',
-            'leads.dristi_API_id'                 => 'API_id (LeadID)',
-            'leads.neoxstatus'                    => 'Ameyo Status',
-            'leads.deleted'                       => 'Deleted');
-
-
-
-
-
+            'leads.id'                                                    => 'ID',
+            'leads.date_entered'                                          => 'Date Entered',
+            'leads.date_modified'                                         => 'Date Modified',
+            'leads.date_of_followup'                                      => 'Date of Followup',
+            'leads.date_of_prospect'                                      => 'Date of Prospect',
+            'leads.status'                                                => 'Status',
+            'leads.status_description'                                    => 'Status Description',
+            'leads.disposition_reason'                                    => 'Disposition Reason',
+            'leads_cstm.email_add_c'                                      => 'Email Address',
+            'leads.phone_mobile'                                          => 'Mobile',
+            'CONCAT(leads.first_name," ",leads.last_name) Reporting_Name' => 'Customer Name',
+            'te_ba_batch.batch_code'                                      => 'Batch Code',
+            //'leads_cstm.lead_source'              => 'Lead Source',
+            //'leads_cstm.vendor'                   => 'Vendor',
+            'leads_cstm.attempts_c'                                       => 'No of Attempts'
+        );
 
 
 
         $leadSql = "SELECT 
                     	    leads.id,                            
                             leads.date_entered,                 
-                            leads.date_modified,                
-                            leads.converted_date,                
-                            leads_cstm.temp_lead_date_c,        
+                            leads.date_modified,    
                             leads.date_of_followup,             
-                            leads.date_of_prospect,             
+                            leads.date_of_prospect, 
                             leads.status,                      
-                            leads.status_description,           
-                            leads.lead_source,                   
-                            #leads.vendor,                       
-                            users.first_name as user_first_name,
-                            users.last_name as user_last_name,  
-                            leads.assigned_user_id,             
-                            te_ba_batch.name,                   
+                            leads.status_description,
+                            leads.disposition_reason,
+                            leads_cstm.email_add_c,
+                            leads.phone_mobile,
+                            #leads.lead_source,    
+                            CONCAT(leads.first_name,' ',leads.last_name) Reporting_Name,
+                            #leads.vendor,    
                             te_ba_batch.batch_code,             
-                            leads_cstm.attempts_c,              
-                            leads.autoassign,                  
-                            leads.dristi_campagain_id,          
-                            leads.dristi_API_id,                 
-                            leads.neoxstatus,                    
-                            leads.deleted             
+                            leads_cstm.attempts_c  
+                                           
+                                       
                     FROM leads
                     INNER JOIN users ON leads.assigned_user_id =users.id
                     INNER JOIN leads_cstm ON leads.id= leads_cstm.id_c
@@ -284,15 +270,14 @@ class AOR_ReportsViewagetnleads extends SugarView
         #pE
 
         $sugarSmarty = new Sugar_Smarty();
-        
+
         $sugarSmarty->assign("batch_id", $batch_id);
         $sugarSmarty->assign("statusBy", $statusBy);
         $sugarSmarty->assign("from_date", $from_date);
         $sugarSmarty->assign("to_date", $to_date);
         $sugarSmarty->assign("lcount", $lcount);
         $sugarSmarty->assign("assigned_user", $assigned_user);
-        
-        
+        $sugarSmarty->assign("current_user_is_admin", $current_user_is_admin);
         
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("ExcelHeaders", $headers);

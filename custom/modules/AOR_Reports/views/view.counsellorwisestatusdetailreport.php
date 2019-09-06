@@ -388,7 +388,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                     COALESCE(te_ba_batch.id,'NA') AS batch_id,
-                    COALESCE(te_ba_batch.name,'NA') AS batch_name,
+                    #COALESCE(te_ba_batch.name,'NA') AS batch_name,
                     COALESCE(te_ba_batch.batch_code,'NA')AS batch_code,
                     leads.status_description,
                     users.user_name,
@@ -409,7 +409,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         {
 
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                                                                = $row['batch_id'];
-            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']                                                              = $row['batch_name'];
+            //$programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']                                                              = $row['batch_name'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_code']                                                              = $row['batch_code'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                                                                = $row['batch_id'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']                                                           = $row['user_name'];
@@ -443,7 +443,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             # Create heading
             $data = "Counsellor Name";
             $data .= ",Reporting Manager";
-            $data .= ",Batch Name";
+            //$data .= ",Batch Name";
             $data .= ",Batch Code";
             $data .= ",Total";
             foreach ($StatusList as $statusVal)
@@ -459,7 +459,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             {
                 $data .= "\"" . $councelor['assigned_user'];
                 $data .= "\",\"" . $councelor['reporting_user'];
-                $data .= "\",\"" . $councelor['batch_name'];
+                //$data .= "\",\"" . $councelor['batch_name'];
                 $data .= "\",\"" . $councelor['batch_code'];
                 $data .= "\",\"" . $councelor['total'];
 
@@ -544,6 +544,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("selected_source", $selected_source);
         $sugarSmarty->assign("selected_managers", $selected_managers);
         $sugarSmarty->assign("selected_councellors", $selected_councellors);
+        $sugarSmarty->assign("current_user_is_admin", $current_user_is_admin);
         $sugarSmarty->assign("CouncellorsList", $CouncellorsList);
         $sugarSmarty->assign("managerSList", $managerSList);
 

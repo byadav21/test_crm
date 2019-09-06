@@ -103,21 +103,14 @@
 
                     </tr>
 
-
-
-
-
-
-
-
-
-
                     <tr>
                         <td class="sumbitButtons" colspan="3">
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
                                     return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-                            {* <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">*}
+                            {if $current_user_is_admin==1}
+                                <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
+                            {/if}
                         </td>
                     </tr>
 
@@ -227,9 +220,7 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Reporting Manager</strong>
                 </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Batch Name</strong>
-                </th>
+                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Code</strong>
                 </th>
@@ -247,7 +238,7 @@
 
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.assigned_user}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.reporting_user}</td>
-                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
+                    
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
                         {if !empty($program.total)} <a href="index.php?module=AOR_Reports&action=agetnleads&show=total&batch={$program.batch_id}&lcount={$program.total}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.aassigned_user_id}" target="_blank">{$program.total}</a> {else} 0 {/if}
