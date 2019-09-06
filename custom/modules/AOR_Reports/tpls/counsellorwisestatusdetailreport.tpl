@@ -242,7 +242,7 @@
                     
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
-                        {if !empty($program.total)} <a href="index.php?module=AOR_Reports&action=agetnleads&show=total&batch={$program.batch_id}&lcount={$program.total}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.aassigned_user_id}" target="_blank">{$program.total}</a> {else} 0 {/if}
+                        {if !empty($program.total)} <a href="index.php?module=AOR_Reports&action=agetnleads&show=total&batch={$program.batch_id}&lcount={$program.total}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.assigned_user_id}" target="_blank">{$program.total}</a> {else} 0 {/if}
                         <!--{if !empty($program.total)} {$program.total} {else} 0 {/if}-->
                     </td>
                     {foreach from = $StatusList key=statuskey item=vendor}
