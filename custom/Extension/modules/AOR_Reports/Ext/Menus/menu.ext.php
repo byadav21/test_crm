@@ -83,6 +83,8 @@ $displayCC  = false;
 $displayMis = false;
 $displaySRM = false;
 $displayDM  = false;
+$displayCCM  = false;
+
 if ($misData['slug'] == 'CCM' || $misData['slug'] == 'CCC' || $misData['slug'] == 'CCTL' || $misData['slug'] == 'CCH')
     $displayCC  = true;
 if ($misData['slug'] == 'mis')
@@ -91,6 +93,8 @@ if ($misData['slug'] == 'SRM' || $misData['slug'] == 'SRE')
     $displaySRM = true;
 if ($misData['slug'] == 'DMM' || $misData['slug'] == 'BA')
     $displayDM  = true;
+if ($misData['slug'] == 'CCM')
+    $displayCCM = true;
 
         
         $UsersVendrArr = array(
@@ -203,6 +207,11 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=summarised', "Summarised GSV", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwiseleadsource', "Vendor Wise Lead Source Report", 'AOR_Reports');
+}
+if ($displayCCM)
+{  
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
+    
 }
 
 
