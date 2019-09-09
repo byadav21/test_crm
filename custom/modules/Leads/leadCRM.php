@@ -23,7 +23,7 @@ try{
 		
 		if($mainMenu==1 &&  $callType=='inbound.call.dial'){
 			
-			$student= "select id,assigned_user_id,name as first_name,'' as last_name,'Active','Student' from  te_student where    mobile like '%$phone%' and deleted=0";
+			$student= "select id,assigned_user_id,name as first_name,'' as last_name,'Active','Student' from  te_student where   mobile = '$phone' and deleted=0";
 			$res=$db->query($student);
 			if($db->getRowCount($res) > 0){
 				
@@ -52,7 +52,7 @@ try{
 				$res=$db->query($lead);
 			}
 			if($db->getRowCount($res) == 0){	
-				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where ( phone_mobile like '%$phone%' or    phone_other like '%$phone%' ) and status!='Duplicate' and deleted=0 ";
+				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where ( phone_mobile = '$phone' or    phone_other ='$phone' ) and status!='Duplicate' and deleted=0 ";
 				 $res=$db->query($lead);
 			}	
 			
@@ -60,7 +60,7 @@ try{
 		}else if($callType=='inbound.call.dial'){
 			
 		 
-				$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and status!='Duplicate' and deleted=0  ";
+				$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where (phone_mobile = '$phone' or    phone_other ='$phone')  and status!='Duplicate' and deleted=0  ";
 				$res=$db->query($lead);			
 		
 			
@@ -72,7 +72,7 @@ try{
 			}	 
 			
 			if($db->getRowCount($res) == 0){	
-				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where (    phone_mobile like '%$phone%' or    phone_other like '%$phone%' )  and deleted=0 and status!='Duplicate'";
+				 $lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where (phone_mobile = '$phone' or    phone_other ='$phone' )  and deleted=0 and status!='Duplicate'";
 				 $res=$db->query($lead);
 			}	
 			
