@@ -178,13 +178,22 @@ array (
         ),
         9 => 
         array (
-          0 => 'description',
+          0 => 
+          array (
+            'name' => 'initial_payment_inr',
+            'label' => 'LBL_INITIAL_PAYMENT_INR',
+          ),
+          1 => '',
         ),
         10 => 
         array (
-          0 => 'total_payment',
+          0 => 'description',
         ),
         11 => 
+        array (
+          0 => 'total_payment',
+        ),
+        12 => 
         array (
           0 => 
           array (
@@ -199,7 +208,7 @@ array (
             'label' => 'bt_url',
           ),
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
@@ -213,10 +222,20 @@ array (
             'label' => 'approve_status',
           ),
         ),
+        14 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
       ),
       'lbl_editview_panel1' => 
       array (
         0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        1 => 
         array (
           0 => 
           array (
@@ -231,7 +250,7 @@ array (
             'label' => 'LBL_QUALIFY_FOR_REFUND',
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -244,7 +263,7 @@ array (
             'label' => 'LBL_REFUND_AMOUNT',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (

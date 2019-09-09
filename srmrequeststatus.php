@@ -16,7 +16,7 @@ if($_POST['two']==''){
 }
 //echo "<pre>";print_r($_POST);exit;
 if($_POST['Submit'] && $error==0){
-	$apiurl	=	'http://crmstage.talentedge.in/crm/index.php?entryPoint=transferbatch';
+	$apiurl         =	$GLOBALS['sugar_config']['site_url']."/index.php?entryPoint=transferbatch";
 	$newdata	=	array();
 	$newdata['request_id']	=	$tbid;
 	$newdata['request_status']	=	$_POST['two'];
@@ -49,6 +49,7 @@ if($_POST['Submit'] && $error==0){
 	    $data['new_batch_code']=$_POST['newbatchcode'];
 		$data['old_batch_code']=$_POST['oldbatchcode'];
 		$data['email']	=	$_POST['emailid'];
+		$data['batch_transfer_fee']	=	5900;
 	    $ch     = curl_init();
 	    curl_setopt($ch, CURLOPT_URL, $url);
 	    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);

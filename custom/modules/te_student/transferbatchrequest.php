@@ -8,7 +8,7 @@ ini_set('memory_limit', '1024M');
 
 require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail_cron.php');
-global $db;
+global $db,$sugar_config;
 
 
 //print_r($_FILES['bt_attached_file']);
@@ -147,7 +147,8 @@ $utmOptions['status']                   = "queued";
 
 if($tid){
     
-     $bt_urlx = "http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch=$cbid&tid=$tid";
+       //$bt_urlx = "http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch=$cbid&tid=$tid";
+        $bt_urlx = $GLOBALS['sugar_config']['site_url']."/srmrequeststatus.php?student_batch=$cbid&tid=$tid";
 
         // Insert form data in the database 
         $str             = trim($_POST['bt_srm_comments']);
@@ -177,14 +178,16 @@ sugar_chmod($targetFilePath, 0777);
 
 
 
-$btApprover = array('pawan.kumar@talentedge.in', 'kunal.soni@talentedge.in', 'ashis.mohanty@talentedge.in','rohit.rana@talentedge.in','jayeeta.b@talentedge.in','shilpi.sharma@talentedge.in');
-//$btApprover = array('pawan.kumar@talentedge.in');
+
+$btApprover = $sugar_config['bt_approver_test'];
+//$btApprover = array('vishwanath.nair@talentedge.in');
+//$sugar_config['bt_approver'];
 
 
 //print_r($emailData);
 foreach ($btApprover as $val)
 {
-
+    $urlx = $GLOBALS['sugar_config']['site_url'];
     $email_summary = '
         
    <table cellpadding="0" cellspacing="0" style="width: 600px; border:1px solid #999; padding: 10px;" align="center">
@@ -266,7 +269,7 @@ foreach ($btApprover as $val)
                 </tr>
                 <tr>
                     <td style="padding: 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: normal;"><strong style="margin-right: 10px;">SRM Comments : </strong></td>
-                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'.substr($bt_srm_comments, 0, 100).'...(<a href="http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '">Click the approval URl for more details</a>)</td>
+                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'.substr($bt_srm_comments, 0, 100).'...(<a href='.$urlx.'/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '">Click the approval URl for more details</a>)</td>
                 </tr>
                </table> 
             </td>
@@ -281,7 +284,7 @@ foreach ($btApprover as $val)
             <td height="15"></td>
         </tr>
         <tr>
-            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;"><strong>Approval URL:</strong>&nbsp;<a href="http://crmstage.talentedge.in/crm/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '" style="font-weight: normal;">redge.talentedge.in</a></td>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;"><strong>Approval URL:</strong>&nbsp;<a href="'.$urlx.'/srmrequeststatus.php?student_batch='.$cbid.'&tid='.$tid.'&appusr=' . md5($val) . '" style="font-weight: normal;">redge.talentedge.in</a></td>
         </tr>
         <tr>
             <td height="15"></td>
