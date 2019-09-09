@@ -37,6 +37,13 @@ $GLOBALS['app_list_strings']['lead_status_dom']=array (
   'Not_Enquired' => 'Not Enquired',
   'Converted' => 'Converted',
 );
+$GLOBALS['app_list_strings']['approval_status']=array (
+  
+  '1' => 'Waiver',
+  '2' => 'To be Adjusted',
+  '3' => 'Pending',
+  '4' => 'Paid',
+  );
 $app_strings['LBL_GROUPTAB6_1474959980'] = 'Digital Marketing';
 $app_strings['LBL_GROUPTAB7_1474959980'] = 'Contact Center';
 $app_strings['LBL_GROUPTAB1_1474960120'] = 'Digital Marketing';
@@ -113,6 +120,7 @@ $GLOBALS['app_list_strings']['dropuout_status_list']=array (
   'Pending' => 'Pending',
   'Rejected' => 'Rejected',
   'Approved' => 'Approved',
+    'BTPark' => 'BT Parking',
 );
 $GLOBALS['app_list_strings']['designation_list']=array (
   '' => '',
@@ -164,6 +172,7 @@ $GLOBALS['app_list_strings']['student_batch_status_list']=array (
   'Inactive' => 'Inactive',
   'Dropout' => 'Dropout',
   'Inactive_transfer' => 'Inactive Transfer',
+  'BT_Parking' => 'BT Parking',
 );
 
 $GLOBALS['app_list_strings']['contract_type_list']=array (

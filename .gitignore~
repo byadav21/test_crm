@@ -12,9 +12,19 @@ cache/*
 !/cache/index.html
 # Ignore some files and directories from the custom directory.
 /custom/modules/*/Ext/
+custom/history/*
+custom/modulebuilder/*
+custom/working/*
+custom/modules/*/Ext/
+custom/application/Ext/*
 # Custom configuration should also be ignored.
 /config.php
 /config_override.php
 # Logs files can safely be ignored.
 *.log
-/nbproject/private/
+nbproject/*
+upload/*
+reports/*
+upload_backup/*
+/excel/nbproject/private/
+/costum_import/nbproject/private/

@@ -6,6 +6,7 @@
 # the misuse of the repository as backup replacement.
 # For development the cache directory can be safely ignored and
 # therefore it is ignored.
+.gitignore
 /cache/
 cache/
 cache/*

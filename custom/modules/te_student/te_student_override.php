@@ -132,9 +132,9 @@ class te_student_override extends te_student
     function getStudentBatch($id)
     {
 
-       $sql  = "select te_student_batch.te_pr_programs_id_c, te_student_batch.id,te_student_batch.te_ba_batch_id_c 
-							as batch_id,te_student_batch.name,te_student_batch.batch_start_date 
-							from  te_student_batch  where te_student_batch.deleted=0 and te_student_batch.id='". $id."'";
+       $sql  = "select te_student_batch.te_pr_programs_id_c, te_student_batch.batch_code, te_student_batch.id,te_student_batch.te_ba_batch_id_c 
+							as batch_id,te_student_batch.name,te_student_batch.batch_start_date , te_in_institutes.name as institute_name
+							from  te_student_batch , te_in_institutes where te_student_batch.deleted=0 and te_student_batch.id='". $id."' and te_student_batch.te_in_institutes_id_c=te_in_institutes.id";
         $itemDetal = $this->dbinstance->query($sql);
         return $this->dbinstance->fetchByAssoc($itemDetal);
     }
@@ -181,7 +181,7 @@ class te_student_override extends te_student
             $currentBatch[] = $student['batch_id'];
         }
 
-        $batchSql     = "SELECT b.id,b.name FROM te_pr_programs_te_ba_batch_1_c bpr INNER JOIN te_ba_batch b ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id  WHERE b.deleted=0 AND bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida='" . $programId . "' AND b.id NOT IN('" . implode("','", $currentBatch) . "')";
+        $batchSql     = "SELECT b.id,b.name,b.batch_code FROM te_pr_programs_te_ba_batch_1_c bpr INNER JOIN te_ba_batch b ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id  WHERE b.deleted=0 AND bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida='" . $programId . "' AND b.id NOT IN('" . implode("','", $currentBatch) . "')";
         $batchObj     = $this->dbinstance->query($batchSql);
         $batchOptions = array();
         while ($row          = $this->dbinstance->fetchByAssoc($batchObj))
@@ -195,7 +195,7 @@ class te_student_override extends te_student
     {
 
         $programsList = array();
-        $programSql   = "SELECT id, name FROM te_pr_programs WHERE deleted=0 ";
+        $programSql   = "SELECT p.id,p.name,i.name as institute_name from te_pr_programs p,te_in_institutes i,te_in_institutes_te_pr_programs_1_c ip where ip.te_in_institutes_te_pr_programs_1te_pr_programs_idb= p.id and p.deleted=0 and ip.te_in_institutes_te_pr_programs_1te_in_institutes_ida=i.id ";
         $programObj   = $this->dbinstance->query($programSql);
         while ($row          = $this->dbinstance->fetchByAssoc($programObj))
         {
@@ -208,7 +208,7 @@ class te_student_override extends te_student
     {
 
         $programsList = array();
-        $programSql   = "SELECT status FROM te_transfer_batch WHERE batch_id_rel='$id' and status='Pending'  and deleted='0' ";
+        $programSql   = "SELECT status FROM te_transfer_batch WHERE batch_id_rel='$id' and (status='Pending' || status='BTPark')  and deleted='0' ";
         $programObj   = $this->dbinstance->query($programSql);
         return $this->dbinstance->fetchByAssoc($programObj);
     }

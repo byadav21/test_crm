@@ -43,6 +43,7 @@ $app_list_strings['student_batch_status_list']['Active'] = 'Active';
 $app_list_strings['student_batch_status_list']['Inactive'] = 'Inactive';
 $app_list_strings['student_batch_status_list']['Dropout'] = 'Dropout';
 $app_list_strings['student_batch_status_list']['Inactive_transfer'] = 'Inactive Transfer';
+$app_list_strings['student_batch_status_list']['BT_Parking'] = 'BT Parking';
 $app_list_strings['status_list_student_batch_discription'][''] = '';
 $app_list_strings['status_list_student_batch_discription']['Program enquiry'] = 'Program enquiry';
 $app_list_strings['status_list_student_batch_discription']['Payment enquiry'] = 'Payment enquiry';

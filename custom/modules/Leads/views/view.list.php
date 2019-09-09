@@ -618,7 +618,9 @@
 					window.open(url_open, '_blank', 'location=yes,height=570,width=520,status=yes');
 
 				});
+
 				*/
+
 
 
 
