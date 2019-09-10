@@ -137,7 +137,7 @@ $row = $db->fetchByAssoc($result);
 					</div>
 					<div class="block">
 						<label>Approval Status</label>
-						<label><input type="radio" name="two" value="Approved" <?php echo ($row['status']== 'Approved' || $row['status']=='' ) ?  "checked" : "" ;  ?>/> Approve</label>
+						<label><input type="radio" name="two" value="Approved" <?php echo ($row['status']== 'Approved' || $row['status']=='' || $row['status']=='Pending') ?  "checked" : "" ;  ?>/> Approve</label>
 						<label><input type="radio" name="two" value="Rejected" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 						<?php if($error==1){
 							//echo "Select one type";
