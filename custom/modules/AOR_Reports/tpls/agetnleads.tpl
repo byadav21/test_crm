@@ -1,5 +1,5 @@
 <section class="moduleTitle"> <h2>View Leads</h2><br/><br/>
-    {if $current_user_is_admin==1}
+    {if $current_user_is_admin==1 || $additionalUsrStatus==1}
         <form name="search_form" id="search_form" class="search_form" method="post" action="">
             <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
                 <table width="100%" cellspacing="0" cellpadding="0" border="0">
