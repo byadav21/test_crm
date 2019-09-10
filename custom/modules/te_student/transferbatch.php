@@ -199,6 +199,7 @@ $GLOBALS['db']->query("UPDATE leads,
 
 #update new student payment history
 $id                                           = create_guid();
+/*
 $payment                                      = new te_payment_details();
 $payment->payment_type                        = 'Batch Transfer';
 $payment->payment_source                      = 'Batch Transfer';
@@ -214,6 +215,21 @@ $payment_realized                             = 1;
 $payment->student_payment_id                  = $id;
 $payment->save();
 $lead_payment_details_id                      = $payment->id;
+*/
+
+$insertSql    = "INSERT INTO te_payment_details
+                    SET id='" . $id . "',
+                    payment_type='Batch Transfer',
+                    payment_source='Batch Transfer',
+                    transaction_id=''Transferred Payment',
+                    date_of_payment='" .date('Y-m-d') . "',
+                    reference_number='Transferred Payment',
+                    amount='" . $studentPayment['total'] . "',
+                    name='" . $studentPayment['total'] . "',
+                    payment_realized='1',
+                    leads_te_payment_details_1leads_ida='".$oldBatchDetails['leads_id']."',
+                    student_payment_id=$id";
+$GLOBALS['db']->Query($insertSql);
 
 $insertSql    = "INSERT INTO te_student_payment
                     SET id='" . $id . "',
