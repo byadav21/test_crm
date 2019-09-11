@@ -398,7 +398,8 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
                     COALESCE(te_ba_batch.batch_code,'NA')AS batch_code,
                     leads.status_description,
                     users.user_name,
-                    CONCAT(COALESCE(users.first_name),' ',COALESCE(users.last_name)) userName,
+                    users.first_name,
+                    users.last_name,
                     
                     leads.assigned_user_id
                 FROM leads 
@@ -420,7 +421,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             //$programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']                                                              = $row['batch_name'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_code']                                                              = $row['batch_code'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                                                                = $row['batch_id'];
-            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']                                                           = $row['userName'];
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']                                                           = $row['first_name'].' '.$row['last_name'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id']                                                        = $row['assigned_user_id'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['reporting_user']                                                          = isset($usersdd[$row['assigned_user_id']]['reporting_name']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
