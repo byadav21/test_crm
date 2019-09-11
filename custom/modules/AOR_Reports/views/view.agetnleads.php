@@ -24,9 +24,16 @@ class AOR_ReportsViewagetnleads extends SugarView
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
+        $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942');
+        $additionalUsrStatus   = 0;
         $current_user_id       = $current_user->id;
         $current_user_is_admin = $current_user->is_admin;
-
+        
+        if (in_array($current_user_id, $additionalUsr))
+        {
+             $additionalUsrStatus   = 1;
+        }
+        
         $wherecl = '';
         $left    = '';
 
@@ -273,6 +280,7 @@ class AOR_ReportsViewagetnleads extends SugarView
         $sugarSmarty->assign("lcount", $lcount);
         $sugarSmarty->assign("assigned_user", $assigned_user);
         $sugarSmarty->assign("current_user_is_admin", $current_user_is_admin);
+         $sugarSmarty->assign("additionalUsrStatus", $additionalUsrStatus);
         
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("ExcelHeaders", $headers);

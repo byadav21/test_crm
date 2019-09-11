@@ -75,7 +75,8 @@
                         </td>
 
                     </tr>
-                    {if $current_user_is_admin==1}
+                
+                    {if $current_user_is_admin==1 || $additionalUsrStatus==1}
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Source">Source:</label>
@@ -109,7 +110,7 @@
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
                                     return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-                            {if $current_user_is_admin==1}
+                            {if $current_user_is_admin==1 || $additionalUsrStatus==1}
                                 <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
                             {/if}
                         </td>

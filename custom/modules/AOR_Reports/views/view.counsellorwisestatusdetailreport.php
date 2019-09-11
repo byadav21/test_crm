@@ -185,13 +185,19 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
     public function display()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942', '581d9edd-a5e4-349a-fe28-5c59b9d2fe37');
+        $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942');
+        $additionalUsrStatus   = 0;
         $current_user_id       = $current_user->id;
         $current_user_is_admin = $current_user->is_admin;
         $where                 = "";
         $wherecl               = "";
         $usersdd               = "";
         $error                 = array();
+        
+        if (in_array($current_user_id, $additionalUsr))
+        {
+             $additionalUsrStatus   = 1;
+        }
 
         $managerSList    = $this->getManagers();
         $CouncellorsList = $this->getCouncelor($_SESSION['cccon_managers']);
@@ -392,6 +398,8 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
                     COALESCE(te_ba_batch.batch_code,'NA')AS batch_code,
                     leads.status_description,
                     users.user_name,
+                    CONCAT(users.first_name,' ',users.last_name) userName,
+                    
                     leads.assigned_user_id
                 FROM leads 
                 INNER JOIN users ON leads.assigned_user_id =users.id
@@ -412,7 +420,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             //$programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']                                                              = $row['batch_name'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_code']                                                              = $row['batch_code'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                                                                = $row['batch_id'];
-            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']                                                           = $row['user_name'];
+            $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user']                                                           = $row['userName'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['assigned_user_id']                                                        = $row['assigned_user_id'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['reporting_user']                                                          = isset($usersdd[$row['assigned_user_id']]['reporting_name']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
@@ -544,7 +552,8 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("selected_source", $selected_source);
         $sugarSmarty->assign("selected_managers", $selected_managers);
         $sugarSmarty->assign("selected_councellors", $selected_councellors);
-        $sugarSmarty->assign("current_user_is_admin", $current_user_is_admin);
+        $sugarSmarty->assign("current_user_is_admin", $current_user_is_admin); 
+        $sugarSmarty->assign("additionalUsrStatus", $additionalUsrStatus); 
         $sugarSmarty->assign("CouncellorsList", $CouncellorsList);
         $sugarSmarty->assign("managerSList", $managerSList);
 
