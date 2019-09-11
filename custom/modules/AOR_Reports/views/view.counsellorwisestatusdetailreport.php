@@ -398,7 +398,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
                     COALESCE(te_ba_batch.batch_code,'NA')AS batch_code,
                     leads.status_description,
                     users.user_name,
-                    CONCAT(users.first_name,' ',users.last_name) userName,
+                    CONCAT(COALESCE(users.first_name,' ',users.last_name)) userName,
                     
                     leads.assigned_user_id
                 FROM leads 
