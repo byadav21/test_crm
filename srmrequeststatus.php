@@ -22,7 +22,7 @@ if($_POST['Submit'] && $error==0){
 	$newdata['request_status']	=	$_POST['two'];
 	$newdata['bt_fee_waiver']	=	$_POST['one'];
 	$newdata['approve_comment']	=	$_POST['approve_comment'];
-	if($_POST['one']=='3'){
+	if($newdata['bt_fee_waiver']=='3'){
 		$btfee=5900;
 	}else{
 		$btfee=0;
@@ -35,7 +35,7 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $result = curl_exec($ch);
     $res    = json_decode($result,TRUE);
-    //echo "=====<pre>";print_r($result);echo "</pre>";exit;
+    echo "=====<pre>";print_r($result);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
 	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
@@ -162,11 +162,11 @@ $row = $db->fetchByAssoc($result);
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
 					</div> 
-					<?php if(strtolower($row['approve_status'])=='pending'){?>
+					<?php //if(strtolower($row['approve_status'])=='pending'){?>
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
-					<?php }?>
+					<?php //}?>
 			</section>	
 		</div>		
 	</div>
