@@ -54,7 +54,7 @@ if($_POST['Submit'] && $error==0){
 	    $data['new_batch_code']=$_POST['newbatchcode'];
 		$data['old_batch_code']=$_POST['oldbatchcode'];
 		$data['email']	=	$_POST['emailid'];
-		$data['batch_transfer_fee']	=	5900;
+		$data['batch_transfer_fee']	=	$btfee;
 		$data['crm_student_batch']	= $res['new_student_batch_id'];
 	    $ch     = curl_init();
 	    curl_setopt($ch, CURLOPT_URL, $url);
