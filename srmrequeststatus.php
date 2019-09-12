@@ -56,6 +56,7 @@ if($_POST['Submit'] && $error==0){
 		$data['email']	=	$_POST['emailid'];
 		$data['batch_transfer_fee']	=	$btfee;
 		$data['crm_student_batch']	= $res['new_student_batch_id'];
+		$data['batch_transfer_payment_status']	=	$_POST['one'];
 	    $ch     = curl_init();
 	    curl_setopt($ch, CURLOPT_URL, $url);
 	    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
