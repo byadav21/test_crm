@@ -5,9 +5,9 @@ require_once('custom/include/Email/sendmail.php');
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
 $error=0;
-if($_GET['student_batch']!='' && $_GET['tid']!=''){
+if($_GET['student_batch']!=''){
 	$student_batch	= $_GET['student_batch'];
-	$tbid=$_GET['tid'];
+	//$tbid=$_GET['tid'];
 }else{
 	echo "You have not the permission to access this page";exit; 
 }
@@ -18,9 +18,11 @@ if($_POST['two']==''){
 if($_POST['Submit'] && $error==0){
 	$apiurl         =	$GLOBALS['sugar_config']['site_url']."/index.php?entryPoint=dropoutapprove";
 	$newdata	=	array();
-	$newdata['request_id']	=	$tbid;
+	$newdata['refund_date']	=	$_POST['refunddate'];
+	$newdata['refund_amount']	=	$_POST['refundamount'];
+	$newdata['dropout_type']	=	$_POST['dropouttype'];
 	$newdata['request_status']	=	$_POST['two'];
-	$newdata['bt_fee_waiver']	=	$_POST['one'];
+	$newdata['lead_id']	=	$_POST['leadid'];
 	$newdata['approve_comment']	=	$_POST['approve_comment'];
 	if($newdata['bt_fee_waiver']=='3'){
 		$btfee=5900;
@@ -76,11 +78,11 @@ if($_POST['Submit'] && $error==0){
 	die;
 }
 
-$query = "SELECT sb.dropout_status, sb.name as program_name,sb.batch_code as batch_code,sb.refund_amount,sb.dropout_type, s.name as student_name, s.email, s.mobile, tb.status, sb.bt_srm_comments,sb.bt_approver_comments, sb.bt_fee_waiver,sb.bt_srm_attachment, SUM(sp.amount) AS total from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
+$query = "SELECT sb.dropout_status, sb.name as program_name,sb.batch_code, ii.name as institute_name,sb.refund_amount,sb.dropout_type,sb.refund_date,sb.leads_id, s.name as student_name, s.email, s.mobile, tb.status, sb.description,sb.bt_dropout_approver_comments, sb.qualify_for_refund from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-echo "======<pre>";print_r($row);echo "</pre>";exit;
+echo "======<pre>";print_r($row);echo "</pre>";//exit;
 ?>
 
 <!doctype html>
@@ -100,6 +102,10 @@ echo "======<pre>";print_r($row);echo "</pre>";exit;
 		<input type="hidden" name="emailid" id="emailid" value="<?php echo $row['email'];?>"/>
 		<input type="hidden" name="studentname" id="studentname" value="<?php echo $row['student_name'];?>"/>
 		<input type="hidden" name="batchcode" id="batchcode" value="<?php echo $row['batch_code'];?>"/>
+		<input type="hidden" name="refunddate" id="refunddate" value="<?php echo $row['refund_date'];?>"/>
+		<input type="hidden" name="refundamount" id="refundamount" value="<?php echo $row['refund_amount'];?>"/>
+		<input type="hidden" name="dropouttype" id="dropouttype" value="<?php echo $row['dropout_type'];?>"/>
+		<input type="hidden" name="leadid" id="leadid" value="<?php echo $row['leads_id'];?>"/>
 		<div class="profile-section">				
 			<div class="profile-details">
 				<div class="student-name"><?php echo $row['student_name'];?></div>
@@ -108,58 +114,46 @@ echo "======<pre>";print_r($row);echo "</pre>";exit;
 					<li><i style="font-weight: bold;">Mobile</i><?php echo $row['mobile'];?></li>
 				</ul>
 				<div class="profile-block">
-					<div class="status"><span><?php echo $row['status'];?></span></div>
+					<div class="status"><span><?php echo $row['dropout_status'];?></span></div>
 				</div>	
 				<div class="program-info">
 					<div class="block">		
 						<ol>
-							<li><i style="font-weight: bold;">Old Programe Name</i><?php echo $row['old_program_name'];?></li>
-							<li><i style="font-weight: bold;">Old Batch Name</i><?php echo $row['old_batch_code'];?></li>
-							<li><i style="font-weight: bold;">Old Institute Name</i><?php echo $row['old_institute_name'];?></li>
+							<li><i style="font-weight: bold;">Programe Name</i><?php echo $row['program_name'];?></li>
+							<li><i style="font-weight: bold;">Batch Name</i><?php echo $row['batch_code'];?></li>
+							<li><i style="font-weight: bold;">Institute Name</i><?php echo $row['institute_name'];?></li>
 						</ol>
 					</div>
-					<div class="block">
-						<ol>
-							<li><i style="font-weight: bold;">New Programe Name</i><?php echo $row['new_program_name'];?></li>
-							<li><i style="font-weight: bold;">New Batch Name</i><?php echo $row['new_batch_code'];?></li>
-							<!--<li><i style="font-weight: bold;">New Institute Name</i><?php echo $row['new_institute_name'];?></li>-->
-						</ol>
-					</div>
-				</div>
+					
 			</div>			
 		</div>
 
 		<section>
 			<div class="block">
 				<label>SRM Comment</label>
-				<p><?php echo $row['bt_srm_comments'];?></p>
+				<p><?php echo $row['description'];?></p>
 			</div>
-			<div class="block">
-				<label>Status</label>
-				<label><input type="radio" name="one" value="1" <?php echo ($row['bt_fee_waiver']== '1') ?  "checked" : "" ;  ?>/> Waiver</label>
-				<label><input type="radio" name="one" value="2" <?php echo ($row['bt_fee_waiver']== '2') ?  "checked" : "" ;  ?>/> To be Adjusted</label>
-				<label><input type="radio" name="one" value="3"<?php echo ($row['bt_fee_waiver']== '3') ?  "checked" : "" ;  ?> /> To be Paid</label>
-			</div>
+			
 			<div class="block">
 				<label>Approval Status</label>
-				<label><input type="radio" name="two" value="Approved" <?php echo ($row['status']== 'Approved' || $row['status']=='' || $row['status']=='Pending') ?  "checked" : "" ;  ?>/> Approve</label>
-				<label><input type="radio" name="two" value="Rejected" <?php echo ($row['status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
+				<label><input type="radio" name="two" value="Approved" <?php echo ($row['dropout_status']== 'Approved' || $row['dropout_status']=='' || $row['dropout_status']=='Pending') ?  "checked" : "" ;  ?>/> Approve</label>
+				<label><input type="radio" name="two" value="Rejected" <?php echo ($row['dropout_status']== 'Reject') ?  "checked" : "" ;  ?>/> Reject</label>
 				<?php if($error==1){
 					//echo "Select one type";
 				}?>
-				<?php if($row['bt_srm_attachment']!=''){?>
-				<div class="block-action">
-					<button><a href="<?php echo "/crm/upload/srm_docs/".$row['bt_srm_attachment'];?>" target="_blank">Download Attached File</a></button>
-				</div>
-				<?php }?>
+				
 			</div>
 			<div class="block">
-				<label>Total Paid</label>
-				<p><?php echo $row['total'];?> (including tax)</p>
+				<label>Refund Amount</label>
+				<p><?php echo $row['refund_amount'];?></p>
+			</div>
+			<div class="block">
+				<label>Dropout Type</label>
+				<p><?php echo str_replace("_", " ", $row['dropout_type']);?></p>
 			</div>
 			<div class="block">
 				<label>Comment</label>
-				<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
+				<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_dropout_approver_comments'];?></textarea>
 			</div> 
 			<?php if(strtolower($row['dropout_status'])=='pending'){?>
 			<div class="block-action">

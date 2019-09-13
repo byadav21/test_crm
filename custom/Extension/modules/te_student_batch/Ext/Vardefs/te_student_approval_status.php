@@ -57,3 +57,12 @@ $dictionary['te_student_batch']['fields']['batch_transfer_fee'] = array(
 	'massupdate' => false,	 
 	'studio' => 'visible',
 );
+$dictionary['te_student_batch']['fields']['bt_dropout_approver_comments'] = array(
+	'required' => false,
+	'name' => 'bt_dropout_approver_comments',
+	'vname' => 'bt_dropout_approver_comments',
+	'type' => 'text',
+	'audited' => false,
+	'massupdate' => false,	 
+	'studio' => 'visible',
+);
