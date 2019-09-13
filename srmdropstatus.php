@@ -14,7 +14,7 @@ if($_GET['student_batch']!=''){
 if($_POST['two']==''){
 	$error=1;
 }
-//echo "<pre>";print_r($_POST);exit;
+echo "<pre>";print_r($_POST);exit;
 if($_POST['Submit'] && $error==0){
 	$apiurl         =	$GLOBALS['sugar_config']['site_url']."/index.php?entryPoint=dropoutapprove";
 	$newdata	=	array();
@@ -82,7 +82,7 @@ $query = "SELECT sb.dropout_status, sb.name as program_name,sb.batch_code, ii.na
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-echo "======<pre>";print_r($row);echo "</pre>";//exit;
+//echo "======<pre>";print_r($row);echo "</pre>";//exit;
 ?>
 
 <!doctype html>
@@ -150,6 +150,10 @@ echo "======<pre>";print_r($row);echo "</pre>";//exit;
 			<div class="block">
 				<label>Dropout Type</label>
 				<p><?php echo str_replace("_", " ", $row['dropout_type']);?></p>
+			</div>
+			<div class="block">
+				<label>Refund Quality</label>
+				<p><?php echo $row['qualify_for_refund'];?></p>
 			</div>
 			<div class="block">
 				<label>Comment</label>
