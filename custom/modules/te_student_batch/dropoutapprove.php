@@ -71,7 +71,8 @@ if(isset($_REQUEST['request_status']) &&$_REQUEST['request_status']=="Rejected")
 			<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 
 			$mail = new NetCoreEmail();
-			$mail->sendEmail($studentemail,"Dropout Request Reject",$template);
+			//$mail->sendEmail($studentemail,"Dropout Request Reject",$template);
+			$mail->sendEmail('ashis.mohanty@talentedge.in',"Dropout Request Reject",$template);
 	
 		
 		}
@@ -112,7 +113,8 @@ if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Approved"
 
   		
 			$mail = new NetCoreEmail();
-			$mail->sendEmail($studentemail,"Dropout Request Approved",$template);
+			//$mail->sendEmail($studentemail,"Dropout Request Approved",$template);
+			$mail->sendEmail('ashis.mohanty@talentedge.in',"Dropout Request Approved",$template);
 		
 		}	
 
