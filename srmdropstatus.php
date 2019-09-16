@@ -35,7 +35,7 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $result = curl_exec($ch);
     $res    = json_decode($result,TRUE);
-    echo "=====<pre>";print_r($res);echo "</pre>";exit;
+    //echo "=====<pre>";print_r($res);echo "</pre>";exit;
 	
 	if($_POST['two']=='Approved'){
 			//API Call
@@ -44,16 +44,16 @@ if($_POST['Submit'] && $error==0){
 		$user     = 'talentedgeadmin';
 	    $password = 'Inkoniq@2016';
 	    //$url      = 'https://talentedge.in/order-api/';
-	   	$url      = $sugar_config['website_URL'] . '/batch_transfer.php';
+	   	$url      = $sugar_config['website_URL'] . '/dropoutcrm.php';
 	    $headers  = array(
 	        'Authorization: Basic ' . base64_encode("$user:$password")
 	    );
 	    $data['new_batch_code']=$_POST['batchcode'];
 		//$data['old_batch_code']=$_POST['oldbatchcode'];
 		$data['email']	=	$_POST['emailid'];
-		$data['batch_transfer_fee']	=	$btfee;
-		$data['crm_student_batch']	= $res['new_student_batch_id'];
-		$data['batch_transfer_payment_status']	=	$_POST['one'];
+		$data['refund_amount']	=	$_POST['refundamount'];
+		$data['refundtype']	= 'Refund';
+		
 	    $ch     = curl_init();
 	    curl_setopt($ch, CURLOPT_URL, $url);
 	    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -64,8 +64,8 @@ if($_POST['Submit'] && $error==0){
 	    $res    = json_decode($result,TRUE);
 	}
     //echo "=====<pre>";print_r($result);echo "</pre>";exit;
-	$subject="Batch transfer Mail";
-	$body = "Hi,<br/>The batch transfer request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been <b>'".$_POST['two']."'</b>.";
+	$subject="Amount Refund";
+	$body = "Hi,<br/>The refund request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been <b>'".$_POST['two']."'</b>.";
 	$to='ashis.mohanty@talentedge.in';
 	$mail = new NetCoreEmail();
 	$mail -> sendEmail($to,$subject,$body);
