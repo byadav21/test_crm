@@ -232,7 +232,12 @@ array (
       array (
         0 => 
         array (
-          0 => '',
+          0 => 
+          array (
+            'name' => 'batch_transfer_fee',
+            'studio' => 'visible',
+            'label' => 'batch_transfer_fee',
+          ),
           1 => '',
         ),
         1 => 
