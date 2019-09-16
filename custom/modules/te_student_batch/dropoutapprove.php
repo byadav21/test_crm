@@ -94,10 +94,10 @@ if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Approved"
     
 			$template="<p> Dear-".$student['name'].",</p>
 
-                        <p>Greetings! $sql_program </p>
+                        <p>Greetings!  </p>
 
                         <p>This is in response to your request for cancellation of enrolment, and refund for the programme ".$progrm_result['program']." ".$progrm_result['institute'].", you have registered for.</p>
-                        <p>As a special case, we are processing a Full Refund of the fee paid by you totalling ".$_REQUEST['refund_amount']."</p>
+                        <p>As a special case, we are processing a Full Refund of the fee paid by you totalling <b>".$_REQUEST['refund_amount']."</b></p>
                         <p>Request you to please share your Bank account details with us to process the NEFT transfer of refund amount into your bank account. The amount will be credited in your account within 30 working days post receipt of your Bank account details.</p>
                         <p>Details required from you:</p>
                         <p>Your Name as per bank records-</p>
