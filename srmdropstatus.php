@@ -73,11 +73,11 @@ if($_POST['Submit'] && $error==0){
 	die;
 }
 
-$query = "SELECT sb.dropout_status, sb.name as program_name,sb.batch_code, ii.name as institute_name,sb.refund_amount,sb.dropout_type,sb.refund_date,sb.leads_id, s.name as student_name, s.email, s.mobile, tb.status, sb.description,sb.bt_dropout_approver_comments, sb.qualify_for_refund from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
+echo $query = "SELECT sb.dropout_status, sb.name as program_name,sb.batch_code, ii.name as institute_name,sb.refund_amount,sb.dropout_type,sb.refund_date,sb.leads_id, s.name as student_name, s.email, s.mobile, tb.status, sb.description,sb.bt_dropout_approver_comments, sb.qualify_for_refund from te_student_batch sb, te_student s,te_transfer_batch tb,te_ba_batch bb, te_in_institutes ii, te_student_payment sp where sb.id='".$student_batch."' and sb.leads_id=s.lead_id_c and tb.batch_id_rel=sb.id and bb.id=tb.te_ba_batch_id_c and ii.id=sb.te_in_institutes_id_c and sp.te_student_batch_id_c='".$student_batch."'";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
-//echo "======<pre>";print_r($row);echo "</pre>";//exit;
+echo "======<pre>";print_r($row);echo "</pre>";//exit;
 ?>
 
 <!doctype html>
