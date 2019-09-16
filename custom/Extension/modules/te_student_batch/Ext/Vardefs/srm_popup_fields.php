@@ -65,3 +65,22 @@ $dictionary['te_student_batch']['fields']['bt_approver_comments'] =array (
 		'reportable' => true
 	
 	);
+
+
+$dictionary['te_student_batch']['fields']['bt_pre_dropped'] =array (
+		'name' => 'bt_pre_dropped',
+		'vname' => 'BT Pre Dropped',
+		'type' => 'int',
+		'required' => false,
+		'comments' => 'bt_pre_dropped',
+		'help' => '',
+		'default'=> 0,
+		'importable' => 'false',
+		'duplicate_merge' => 'disabled',
+		'duplicate_merge_dom_value' => '0',
+		'audited' => false,
+		'reportable' => false,
+		'len' => '10',
+		'size' => '10',
+	);
+

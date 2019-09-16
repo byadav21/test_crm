@@ -151,9 +151,15 @@ if($tid){
         $bt_urlx = $GLOBALS['sugar_config']['site_url']."/srmrequeststatus.php?student_batch=$cbid&tid=$tid";
 
         // Insert form data in the database 
+        $bt_pre_dropped=0;
+        if(isset($_POST['bt_pre_dropped']))
+            {
+                $bt_pre_dropped = $_POST['bt_pre_dropped'];
+            }
+        
         $str             = trim($_POST['bt_srm_comments']);
         $bt_srm_comments = htmlspecialchars($str, ENT_QUOTES);
-        $queryx = "update te_student_batch  set bt_srm_comments='$bt_srm_comments',bt_fee_waiver='$bt_fee_waiver',bt_url='$bt_urlx',approve_status='Pending' where id='$cbid'"; 
+        $queryx = "update te_student_batch  set bt_srm_comments='$bt_srm_comments',bt_fee_waiver='$bt_fee_waiver',bt_url='$bt_urlx',approve_status='Pending',bt_pre_dropped='$bt_pre_dropped' where id='$cbid'"; 
         $insert          = $db->query($queryx);
         
 }
