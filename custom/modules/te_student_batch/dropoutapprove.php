@@ -33,7 +33,7 @@ $dropoutStatue['status']="Approved";
 
 #mail Send for dropot reject Status
 
-if(isset($_REQUEST['request_status']) &&$_REQUEST['request_status']=="Rejected"){
+if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"){
 	global $db;
 			
 		    $studentSql="SELECT email,name FROM `te_student` WHERE lead_id_c = '".$lead_id."'";

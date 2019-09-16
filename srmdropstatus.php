@@ -14,7 +14,7 @@ if($_GET['student_batch']!=''){
 if($_POST['two']==''){
 	$error=1;
 }
-echo "<pre>";print_r($_POST);exit;
+//echo "<pre>";print_r($_POST);exit;
 if($_POST['Submit'] && $error==0){
 	$apiurl         =	$GLOBALS['sugar_config']['site_url']."/index.php?entryPoint=dropoutapprove";
 	$newdata	=	array();
@@ -23,12 +23,10 @@ if($_POST['Submit'] && $error==0){
 	$newdata['dropout_type']	=	$_POST['dropouttype'];
 	$newdata['request_status']	=	$_POST['two'];
 	$newdata['lead_id']	=	$_POST['leadid'];
+	$newdata['request_id']	= $student_batch;
 	$newdata['approve_comment']	=	$_POST['approve_comment'];
-	if($newdata['bt_fee_waiver']=='3'){
-		$btfee=5900;
-	}else{
-		$btfee=0;
-	}
+	$newdata['current_user_id']	=	'340f9002-697f-15f4-fe6f-5925b6149320';
+	
 	$ch     = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiurl);
     //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -37,11 +35,8 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $result = curl_exec($ch);
     $res    = json_decode($result,TRUE);
-    //echo "=====<pre>";print_r($res);echo "</pre>";exit;
-	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
-	$updatequerydata=$db->query($updatedata);
-	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
-	//$updatequerydata=$db->query($updatestatus);
+    echo "=====<pre>";print_r($res);echo "</pre>";exit;
+	
 	if($_POST['two']=='Approved'){
 			//API Call
 		global $sugar_config;
@@ -53,8 +48,8 @@ if($_POST['Submit'] && $error==0){
 	    $headers  = array(
 	        'Authorization: Basic ' . base64_encode("$user:$password")
 	    );
-	    $data['new_batch_code']=$_POST['newbatchcode'];
-		$data['old_batch_code']=$_POST['oldbatchcode'];
+	    $data['new_batch_code']=$_POST['batchcode'];
+		//$data['old_batch_code']=$_POST['oldbatchcode'];
 		$data['email']	=	$_POST['emailid'];
 		$data['batch_transfer_fee']	=	$btfee;
 		$data['crm_student_batch']	= $res['new_student_batch_id'];
