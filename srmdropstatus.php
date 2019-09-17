@@ -60,10 +60,10 @@ if($_POST['Submit'] && $error==0){
 	    curl_setopt($ch, CURLOPT_POST, 1);
 	    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-	    $resultnew = curl_exec($ch);
-	    $resnew    = json_decode($resultnew,TRUE);
+	    $result = curl_exec($ch);
+	    $res    = json_decode($result,TRUE);
 	}
-    echo "=====<pre>";print_r($resultnew);echo "</pre>";exit;
+    //echo "=====<pre>";print_r($result);echo "</pre>";exit;
 	$subject="Amount Refund";
 	$body = "Hi,<br/>The refund request of the candidate, name <b>'".$_POST['studentname']."'</b> which email id <b>'".$_POST['emailid']."'</b> has been <b>'".$_POST['two']."'</b>.";
 	$to='ashis.mohanty@talentedge.in';
@@ -154,11 +154,11 @@ $row = $db->fetchByAssoc($result);
 				<label>Comment</label>
 				<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_dropout_approver_comments'];?></textarea>
 			</div> 
-			<?php //if(strtolower($row['dropout_status'])=='pending'){?>
+			<?php if(strtolower($row['dropout_status'])=='pending'){?>
 			<div class="block-action">
 				<input type="submit" value="Submit" name="Submit">
 			</div>
-			<?php //}?>
+			<?php }?>
 	</section>	
 		</div>		
 	</div>
