@@ -7,7 +7,7 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php');
 global $db;
 
-$dropoutSql="UPDATE te_student_batch SET is_new_approved=1,dropout_status='".$_REQUEST['request_status']."',refund_date='".$GLOBALS['timedate']->to_db_date($_REQUEST['refund_date'],false)."',refund_amount='".$_REQUEST['refund_amount']."',dropout_type='".$_REQUEST['dropout_type']."', approved_by='".$_REQUEST['current_user_id']."' WHERE id='".$_REQUEST['request_id']."'";
+$dropoutSql="UPDATE te_student_batch SET is_new_approved=1,dropout_status='".$_REQUEST['request_status']."',refund_date='".$GLOBALS['timedate']->to_db_date($_REQUEST['refund_date'],false)."',refund_amount='".$_REQUEST['refund_amount']."',dropout_type='".$_REQUEST['dropout_type']."', bt_dropout_approver_comments='".$_REQUEST['approve_comment']."', approved_by='".$_REQUEST['current_user_id']."' WHERE id='".$_REQUEST['request_id']."'";
 $GLOBALS['db']->query($dropoutSql);
 
 $lead_id = $_REQUEST['lead_id'];
