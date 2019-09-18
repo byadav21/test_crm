@@ -40,7 +40,7 @@ ini_set('memory_limit', '1024M');
             $student_id       = $bean->te_student_te_student_batch_1te_student_ida;
            
             $xsx= array($sbid,$insname,$programname,$batchname,$batch_code,$bt_srm_comments,$student_id);
-            print_r($xsx);
+             //print_r($xsx);
               
                 $studentSql      = "SELECT * FROM te_student WHERE id='" . $student_id . "' AND deleted=0";
                 $studentObj      = $GLOBALS['db']->query($studentSql);
@@ -69,6 +69,8 @@ ini_set('memory_limit', '1024M');
               //echo '<pre>'; print_r($bean); die();
 
                 //print_r($btApprover); die;
+                if($qualifyforrefund=='Yes' &&  $refundamount!='')
+                {
                 foreach ($btApprover as $val)
                 {
                     $urlx = $GLOBALS['sugar_config']['site_url'];
@@ -178,7 +180,7 @@ ini_set('memory_limit', '1024M');
                     $emailData = $mail->toBtApprover('SRM Dropout Request', $uploadedFile, date('Y-m-d'), $email_summary, array($val));
                     $nnn       = $mail->btApprovalEmail($emailData);
                 }
-              
+                }
             }
             /* new Status Change according to 27nov17 @Manish */
             if($bean->status=='Active'){
