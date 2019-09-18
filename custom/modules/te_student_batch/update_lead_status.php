@@ -69,7 +69,7 @@ ini_set('memory_limit', '1024M');
               //echo '<pre>'; print_r($bean); die();
 
                 //print_r($btApprover); die;
-                if($qualifyforrefund=='Yes' &&  $refundamount!='')
+                if($qualifyforrefund!='No' &&  $refundamount!='')
                 {
                 foreach ($btApprover as $val)
                 {
@@ -155,7 +155,7 @@ ini_set('memory_limit', '1024M');
                             <td height="15"></td>
                         </tr>
                         <tr>
-                            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;"><strong>Approval URL:</strong>&nbsp;<a href="'.$urlx.'/srmrequeststatus.php?student_batch='.$sbid.'&&appusr=' . md5($val) . '" style="font-weight: normal;">redge.talentedge.in</a></td>
+                            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;"><strong>Approval URL:</strong>&nbsp;<a href="'.$urlx.'/srmdropstatus.php?student_batch='.$sbid.'&&appusr=' . md5($val) . '" style="font-weight: normal;">redge.talentedge.in</a></td>
                         </tr>
                         <tr>
                             <td height="15"></td>
