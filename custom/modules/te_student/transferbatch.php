@@ -9,6 +9,7 @@ ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
 require_once('include/entryPoint.php');
 global $db;
+$utmOptions=array();
 $transferSql     = "SELECT *
                     FROM te_transfer_batch
                     WHERE id='" . $_REQUEST['request_id'] . "'
@@ -305,6 +306,7 @@ SET is_new_approved=1,
     status='" . $_REQUEST['request_status'] . "',
                                          te_student_batch_id_c='" . $student_batch_id . "'
 WHERE id='" . $_REQUEST['request_id'] . "'");
+
 $utmOptions['status'] = "Approved Transferred";
 $utmOptions['new_student_batch_id'] = $student_batch_id;
 
