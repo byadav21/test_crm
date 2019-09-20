@@ -6,12 +6,12 @@ require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
 $error=0;
 error_reporting(0);
-$testarray=array();
+/*$testarray=array();
 $testarray['status']='Approved Transferred';
 $testarray['new_student_batch_id']='c9b8164d-3142-f937-1de1-5d848168d733';
 echo $val=json_encode($testarray);
 $value=json_decode($val);
-echo "<pre>";print_r($value);exit;
+echo "<pre>";print_r($value);exit;*/
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
 	$tbid=$_GET['tid'];
@@ -40,8 +40,8 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    $result = curl_exec($ch);
-    $res    = json_decode($result);
+   echo $result = curl_exec($ch);
+    $res    = json_decode(trim($result));
     var_dump($res);
     echo "=====<pre>";print_r($res);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
