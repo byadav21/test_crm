@@ -6,12 +6,12 @@ require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
 $error=0;
 error_reporting(0);
-/*$testarray=array();
-$testarray['status']='Approved Transferred';
-$testarray['new_student_batch_id']='c9b8164d-3142-f937-1de1-5d848168d733';
+$testarray=array();
+$testarray["status"]="Approved Transferred";
+$testarray["new_student_batch_id"]="c9b8164d-3142-f937-1de1-5d848168d733";
 echo $val=json_encode($testarray);
 $value=json_decode($val);
-echo "<pre>";print_r($value);exit;*/
+echo "<pre>";print_r($value);exit;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
 	$tbid=$_GET['tid'];
