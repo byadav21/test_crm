@@ -67,7 +67,7 @@ if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']) &&
         $targetFilePath = 'upload/srm_docs/' . $fileName;
         $fileType       = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg','xlsx','xls');
+        $allowTypes = array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg','xlsx','xls','ppt','pptx','PDF','DOC','DOCX','JPG','PNG','JPEG','XLSX'.'XLS','PPT','PPTX');
         if (in_array($fileType, $allowTypes))
         {
 
@@ -86,7 +86,7 @@ if (isset($_FILES['bt_attached_file']) && !empty($_FILES['bt_attached_file']) &&
         else
         {
             $uploadStatus        = 0;
-            $response['message'] = 'Sorry, only PDF, DOC, JPG, JPEG, & PNG files are allowed to upload.';
+            $response['message'] = 'Sorry, only PDF, DOC, JPG, JPEG, PPT, XLSX, XLS & PNG files are allowed to upload.';
         }
     }
 

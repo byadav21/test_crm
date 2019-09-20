@@ -345,10 +345,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                                     window.location.href="index.php?module=te_student_batch&action=index&parentTab=SRM";
                             }
                             else
-                            {
-                                    toastr["error"]("something gone wrong. Please try again!");
-                                    $('.modal-body').css('pointer-events','all');
-                                    $('.modal-body').css('opacity','1');
+                            {       console.log(result);
+                                    alert(result.message);
+                                    //toastr["error"]("something gone wrong. Please try again!");
+                                    //$('.modal-body').css('pointer-events','all');
+                                    //$('.modal-body').css('opacity','1');
+                                    SUGAR.ajaxUI.hideLoadingPanel();
+                                    return false;s
                             }
                         SUGAR.ajaxUI.hideLoadingPanel();
                         return false;
