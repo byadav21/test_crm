@@ -45,9 +45,11 @@ if($_POST['Submit'] && $error==0){
     'Content-Length: ' . strlen($newdata))
 );
    echo $resultarray = curl_exec($ch);
+   curl_close($ch);
+
    echo "-----".gettype($resultarray);
     $res    = json_decode(key($resultarray), true);
-    var_dump($res);
+    var_dump($_SESSION);
     echo $_SESSION['new_student_batch_id']."=====<pre>";print_r($res);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
