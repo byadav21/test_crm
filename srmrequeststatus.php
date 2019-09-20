@@ -41,13 +41,7 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
    echo $resultarray = curl_exec($ch);
-   $testarray=array();
-$testarray["status"]="Approved Transferred";
-$testarray["new_student_batch_id"]="c9b8164d-3142-f937-1de1-5d848168d733";
-echo $val=json_encode($testarray);
-$value=json_decode($val);
-echo "<pre>";print_r($value);echo "</pre>";
-    $res    = json_decode('{"status":"Approved Transferred","new_student_batch_id":"cd5c0f70-9cf1-d388-4956-5d849b4cde11"}');
+    $res    = json_decode("'".$resultarray."'");
     var_dump($res);
     echo "=====<pre>";print_r($res);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
