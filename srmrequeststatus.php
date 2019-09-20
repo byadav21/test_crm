@@ -6,6 +6,12 @@ require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
 $error=0;
 error_reporting(0);
+$testarray=array();
+$testarray['ab']='xyz xyz';
+$testarray['xy']='abc def';
+echo $val=json_encode($testarray);
+$value=json_decode($val);
+echo "<pre>";print_r($value);exit;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
 	$tbid=$_GET['tid'];
