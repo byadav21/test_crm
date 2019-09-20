@@ -21,7 +21,7 @@ class listviewClass {
 			$bean->mobile= $mobile.'  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$mobile.',\''.$LeadID.'\')" alt="Smiley face" height="20" width="20">';
       //echo "SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$bean->id."'";
       //exit();
-			$row =$db->query("SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$bean->id."'  AND payment_realized=1");
+			$row =$db->query("SELECT SUM(`amount`)amt_paid FROM `te_student_payment` WHERE `te_student_batch_id_c`='".$bean->id."'  AND payment_realized=1 AND deleted=0");
 			$res =$db->fetchByAssoc($row);
 
 		//$bean->feepaid=$res['fee_usd'];
