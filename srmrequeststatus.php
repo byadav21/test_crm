@@ -41,6 +41,12 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
    echo $resultarray = curl_exec($ch);
+   $testarray=array();
+$testarray["status"]="Approved Transferred";
+$testarray["new_student_batch_id"]="c9b8164d-3142-f937-1de1-5d848168d733";
+echo $val=json_encode($testarray);
+$value=json_decode($val);
+echo "<pre>";print_r($value);echo "</pre>";
     $res    = json_decode(preg_replace('/\s+/', '',$resultarray));
     var_dump($res);
     echo "=====<pre>";print_r($res);echo "</pre>";exit;
