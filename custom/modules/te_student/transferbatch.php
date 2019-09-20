@@ -309,6 +309,7 @@ WHERE id='" . $_REQUEST['request_id'] . "'");
 
 $utmOptions['status'] = "Approved Transferred";
 $utmOptions['new_student_batch_id'] = $student_batch_id;
+$_SESSION['new_student_batch_id']=$student_batch_id;
 
 # Mail sent for Approved/
 
