@@ -307,8 +307,8 @@ SET is_new_approved=1,
                                          te_student_batch_id_c='" . $student_batch_id . "'
 WHERE id='" . $_REQUEST['request_id'] . "'");
 
-$utmOptions['status'] = "Approved Transferred";
-//$utmOptions['batch'] = 'abcd';
+//$utmOptions['status'] = "Approved Transferred";
+$utmOptions['new_student_batch_id'] = 'abcd';
 
 # Mail sent for Approved/
 
