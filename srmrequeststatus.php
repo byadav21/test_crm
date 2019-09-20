@@ -4,19 +4,6 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php'); 
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
-
-
-function createLog($action, $filename, $field = '', $dataArray = array())
-{
-    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
-    fwrite($file, date('Y-m-d H:i:s') . "\n");
-    fwrite($file, $action . "\n");
-    fwrite($file, $field . "\n");
-    fwrite($file, print_r($dataArray, TRUE) . "\n");
-    fclose($file);
-}
-
-
 $error=0;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
@@ -71,8 +58,6 @@ if($_POST['Submit'] && $error==0){
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	    $result = curl_exec($ch);
 	    $res    = json_decode($result,TRUE);
-            
-            createLog('{check srm request status}', 'checking_srm_web_req_log_'.date('Y-m-d').'.txt','', $result);
 	}
     //echo "=====<pre>";print_r($result);echo "</pre>";exit;
 	$subject="Batch transfer Mail";
@@ -171,11 +156,11 @@ $row = $db->fetchByAssoc($result);
 						<label>Comment</label>
 						<textarea placeholder="Enter your Comments here" name="approve_comment" ><?php echo $row['bt_approver_comments'];?></textarea>
 					</div> 
-					<?php //if(strtolower($row['approve_status'])=='pending'){?>
+					<?php if(strtolower($row['approve_status'])=='pending'){?>
 					<div class="block-action">
 						<input type="submit" value="Submit" name="Submit">
 					</div>
-					<?php //}?>
+					<?php }?>
 			</section>	
 		</div>		
 	</div>
