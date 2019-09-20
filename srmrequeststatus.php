@@ -40,11 +40,7 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json',
-    'Content-Length: ' . strlen($newdata))
-);
-   echo $resultarray = curl_exec($ch);
+    echo $resultarray = curl_exec($ch);
    curl_close($ch);
 
    echo "-----".gettype($resultarray);
