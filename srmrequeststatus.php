@@ -35,7 +35,7 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $result = curl_exec($ch);
     $res    = json_decode($result,TRUE);
-    echo "=====<pre>";print_r($res);echo "</pre>";//exit;
+    echo "=====<pre>";print_r($res);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
 	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
