@@ -204,7 +204,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $BatchListData   = $this->getBatch();
         $lead_source     = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
         
-        if ($current_user_is_admin == 1)
+        if ($current_user_is_admin == 1 || in_array($current_user_id, $additionalUsr))
         {   //echo  '1';
             $usersdd = $this->getCouncelorForAdmin();
         }
