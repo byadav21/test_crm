@@ -138,6 +138,8 @@ $batchSql               = "SELECT   b.id AS batch_id,
     $studentBatchObj->te_in_institutes_id_c = $batchDetails['institute_id'];
     $studentBatchObj->bt_approver_comments  = $_REQUEST['approve_comment'];
     $studentBatchObj->bt_fee_waiver         = $_REQUEST['bt_fee_waiver'];
+    $studentBatchObj->certificate_sent      ='';
+    $studentBatchObj->kit_status            ='';
 //$studentBatchObj->te_vendor_id_c=$vendor['id'];
 $studentBatchObj->status                = "Active";
 if ($srm_auto_Details)
@@ -182,6 +184,8 @@ if (isset($studentPayment['total']) && $studentPayment['total'] > 0)
 {
     updateStudentPaymentPlan($new_batch_id, $student_id, $studentPayment['total'], $student_country);
 }
+
+echo "amit pandey45674567";
 
 #unlink old lead payment
 $GLOBALS['db']->query("UPDATE te_payment_details,
