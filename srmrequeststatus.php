@@ -33,6 +33,12 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                                            'Content-Type: application/json',
+                                            'Connection: Keep-Alive'
+                                            ));
+
+	curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
     echo $result = curl_exec($ch);
     $result = trim($result, "\0");
     $res    = json_decode("'".$result."'",TRUE);
