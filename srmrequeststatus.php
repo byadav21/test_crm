@@ -30,13 +30,14 @@ if($_POST['Submit'] && $error==0){
 	$ch     = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiurl);
     //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_HEADER, false)
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     //curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
     echo $resultdata = curl_exec($ch);
-    //$resultdata=utf8_encode($resultdata);
-    $resultdata=json_decode($resultdata);
+    $resultdata=utf8_encode($resultdata);
+    $resultdata=json_decode($resultdata,true);
     echo "99999<pre>";print_r($resultdata);echo "</pre>";
     echo json_last_error();     
 #  4 (JSON_ERROR_SYNTAX) 
