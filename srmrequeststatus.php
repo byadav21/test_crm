@@ -4,6 +4,7 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php'); 
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
+error_reporting(0);
 $error=0;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
@@ -38,7 +39,7 @@ if($_POST['Submit'] && $error==0){
     echo $resultdata = curl_exec($ch);
    // $resultdata=utf8_encode($resultdata);
     $resultdata=json_decode($resultdata,true);
-    echo "99999<pre>";print_r($resultdata);echo "</pre>";
+    echo "8777777<pre>";print_r($resultdata);echo "</pre>";
     echo json_last_error();     
 #  4 (JSON_ERROR_SYNTAX) 
 echo "------".json_last_error_msg(); exit;
