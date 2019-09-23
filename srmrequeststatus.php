@@ -30,7 +30,7 @@ if($_POST['Submit'] && $error==0){
 	$ch     = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiurl);
     //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_HEADER, false)
+    curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
