@@ -42,9 +42,12 @@ if($_POST['Submit'] && $error==0){
     echo $result = curl_exec($ch);
     $data = urldecode(utf8_decode(stripslashes($result))); 
 	$res    = json_decode($result,true);
-    $rest=json_decode('{"status":"Approved Transferred","new_student_batch_id":"81e11e44-1ea5-d7d2-512a-5d886ecb3a4e"}');
-    echo "898989<pre>";print_r($res);echo "</pre>";
-    echo "=====<pre>";print_r($rest);echo "</pre>";exit;
+    //$rest=json_decode('{"status":"Approved Transferred","new_student_batch_id":"81e11e44-1ea5-d7d2-512a-5d886ecb3a4e"}');
+    echo "000000<pre>";print_r($res);echo "</pre>";
+    echo json_last_error();     
+#  4 (JSON_ERROR_SYNTAX) 
+echo "------".json_last_error_msg(); exit;
+    //echo "=====<pre>";print_r($rest);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
 	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
