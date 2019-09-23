@@ -41,7 +41,7 @@ if($_POST['Submit'] && $error==0){
 	curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
     echo $result = curl_exec($ch);
     $result = stripslashes(html_entity_decode($result=));
-    $result=preg_replace( "/\p{Cc}*$/u", "", $result);
+    //$result=preg_replace( "/\p{Cc}*$/u", "", $result);
     $res    = json_decode($result,true);
     $rest=json_decode('{"status":"Approved Transferred","new_student_batch_id":"81e11e44-1ea5-d7d2-512a-5d886ecb3a4e"}');
     echo "0000000<pre>";print_r($res);echo "</pre>";
