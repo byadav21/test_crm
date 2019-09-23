@@ -4,8 +4,6 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php'); 
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
-error_reporting(0);
-ini_set('display_errors', 0);
 $error=0;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];
@@ -18,7 +16,6 @@ if($_POST['two']==''){
 }
 //echo "<pre>";print_r($_POST);exit;
 if($_POST['Submit'] && $error==0){
-	//die("345678345678");
 	$apiurl         =	$GLOBALS['sugar_config']['site_url']."/index.php?entryPoint=transferbatch";
 	$newdata	=	array();
 	$newdata['request_id']	=	$tbid;
@@ -33,19 +30,12 @@ if($_POST['Submit'] && $error==0){
 	$ch     = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiurl);
     //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
-    echo $resultdata = curl_exec($ch);
-   // $resultdata=utf8_encode($resultdata);
-    $resultdata=json_decode($resultdata,true);
-    echo "8777777<pre>";print_r($resultdata);echo "</pre>";
-    echo json_last_error();     
-#  4 (JSON_ERROR_SYNTAX) 
-echo "------".json_last_error_msg(); exit;
-    //echo "=====<pre>";print_r($rest);echo "</pre>";exit;
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $result = curl_exec($ch);
+    $res    = json_decode($result,TRUE);
+    //echo "=====<pre>";print_r($res);echo "</pre>";exit;
 	$updatedata="UPDATE te_student_batch set bt_fee_waiver='".$_POST['one']."', bt_approver_comments='".$_POST['approve_comment']."', approve_status='".$_POST['two']."',batch_transfer_fee='".$btfee."' where id='".$student_batch."'";
 	$updatequerydata=$db->query($updatedata);
 	//$updatestatus="UPDATE te_transfer_batch set status='".$_POST['two']."',is_new_approved=1, where batch_id_rel='".$student_batch."'";
