@@ -2,7 +2,7 @@
 //echo "<pre>";print_r($_REQUEST);exit;
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 //ini_set('display_errors', 'On');
 
 ini_set('memory_limit', '1024M');

@@ -35,7 +35,7 @@ if($_POST['Submit'] && $error==0){
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     //curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
-    $resultdata = curl_exec($ch);
+    echo $resultdata = curl_exec($ch);
    // $resultdata=utf8_encode($resultdata);
     $resultdata=json_decode($resultdata,true);
     echo "99999<pre>";print_r($resultdata);echo "</pre>";
