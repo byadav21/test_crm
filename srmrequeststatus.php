@@ -5,6 +5,7 @@ require_once('custom/include/Email/sendmail.php');
 require_once('modules/EmailTemplates/EmailTemplate.php');
 global $db;
 error_reporting(0);
+ini_set('display_errors', 0);
 $error=0;
 if($_GET['student_batch']!='' && $_GET['tid']!=''){
 	$student_batch	= $_GET['student_batch'];

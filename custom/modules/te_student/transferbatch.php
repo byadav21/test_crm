@@ -3,8 +3,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 error_reporting(0);
-//ini_set('display_errors', 'Off');
-
+ini_set('display_errors', 0);
 ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
 require_once('include/entryPoint.php');
@@ -332,7 +331,7 @@ $template       = "<p>Dear " . $studentDetails['name'] . ",</p>
 $mail           = new NetCoreEmail();
 $mail->sendEmail($studentemail, " Trasfer Batch Request Approved", $template);
 */
-error_reporting(0);
+//error_reporting(0);
 echo json_encode($utmOptions);
 return false;
 
