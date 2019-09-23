@@ -18,7 +18,7 @@ if($_POST['two']==''){
 }
 //echo "<pre>";print_r($_POST);exit;
 if($_POST['Submit'] && $error==0){
-	die("345678345678");
+	//die("345678345678");
 	$apiurl         =	$GLOBALS['sugar_config']['site_url']."/index.php?entryPoint=transferbatch";
 	$newdata	=	array();
 	$newdata['request_id']	=	$tbid;
