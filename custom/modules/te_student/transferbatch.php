@@ -185,7 +185,7 @@ if (isset($studentPayment['total']) && $studentPayment['total'] > 0)
     updateStudentPaymentPlan($new_batch_id, $student_id, $studentPayment['total'], $student_country);
 }
 
-echo "amit pandey45674567";
+
 
 #unlink old lead payment
 $GLOBALS['db']->query("UPDATE te_payment_details,
