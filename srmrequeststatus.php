@@ -32,20 +32,12 @@ if($_POST['Submit'] && $error==0){
     //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                            'Content-Type: application/json',
-                                            'Connection: Keep-Alive'
-                                            ));
-
-	curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+    //curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
     echo $resultdata = curl_exec($ch);
-    $response = str_replace("%", "", $resultdata); 
-    $response = str_replace("H\u0026A", "", $response); 
-    $response = str_replace("\u0026", "", $response); 
-    $response = stripslashes($response); 
-    $result = json_decode($response); print_r($result);
-    echo "121212<pre>";print_r($res);echo "</pre>";
+    $resultdata=utf8_encode($resultdata);
+    $resultdata=json_decode($resultdata);
+    echo "99999<pre>";print_r($resultdata);echo "</pre>";
     echo json_last_error();     
 #  4 (JSON_ERROR_SYNTAX) 
 echo "------".json_last_error_msg(); exit;
