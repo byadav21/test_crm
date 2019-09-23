@@ -309,7 +309,7 @@ WHERE id='" . $_REQUEST['request_id'] . "'");
 
 $utmOptions['status'] = "Approved Transferred";
 $utmOptions['new_student_batch_id'] = $student_batch_id;
-$_SESSION['new_student_batch_id']=$student_batch_id;
+//$_SESSION['new_student_batch_id']=$student_batch_id;
 
 # Mail sent for Approved/
 
@@ -332,7 +332,7 @@ $template       = "<p>Dear " . $studentDetails['name'] . ",</p>
 $mail           = new NetCoreEmail();
 $mail->sendEmail($studentemail, " Trasfer Batch Request Approved", $template);
 */
-
+error_reporting(0);
 echo json_encode($utmOptions);
 return false;
 
