@@ -40,8 +40,10 @@ if($_POST['Submit'] && $error==0){
 
 	curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
     echo $result = curl_exec($ch);
-    $data = urldecode(utf8_decode(stripslashes($result))); 
-	$res    = json_decode($result,true);
+    $json = mb_convert_encoding($result, "UTF-8");
+var_dump(json_decode($json, true));
+    //$data = urldecode(utf8_decode(stripslashes($result))); 
+	//$res    = json_decode($result,true);
     //$rest=json_decode('{"status":"Approved Transferred","new_student_batch_id":"81e11e44-1ea5-d7d2-512a-5d886ecb3a4e"}');
     echo "000000<pre>";print_r($res);echo "</pre>";
     echo json_last_error();     
