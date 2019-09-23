@@ -32,7 +32,7 @@ if($_POST['Submit'] && $error==0){
     //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($newdata));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     //curl_setopt($ch, CURLOPT_HTTPHEADER,array("Expect:  "));
     echo $resultdata = curl_exec($ch);
     //$resultdata=utf8_encode($resultdata);
