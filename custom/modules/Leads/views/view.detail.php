@@ -571,11 +571,15 @@ if(!isset($_SESSION['referral'])){
 				echo "<span> You don't have access to view this record</span>";
 					//~ die;
 		}
+                $ClickToCall='';
+                //echo 'dd=='.$this->bean->status_description; die;
+                if($this->bean->status_description!='Re-Enquired')
+                $ClickToCall ='<img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
 		if(!empty($this->bean->phone_mobile)){
-			$this->bean->phone_mobile .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
+			$this->bean->phone_mobile .=  $ClickToCall;
 		}
 		if(!empty($this->bean->phone_other)){
-			$this->bean->phone_other .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
+			$this->bean->phone_other .=  ' MXXX <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
 		}
 
 		if(!empty($this->bean->te_ba_batch_id_c)){

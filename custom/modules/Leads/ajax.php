@@ -21,13 +21,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'seachLeadByMobileFollowup')
     if (isset($Mobile) && $Mobile != '')
     {
 
-        $sqlConditions .= " AND leads.phone_mobile Like '%$Mobile%' ";
+        $sqlConditions .= " AND leads.phone_mobile ='$Mobile' ";
     }
 
     if (isset($Email) && $Email != '')
     {
 
-        $sqlConditions .= " AND lc.email_add_c  like '%$Email%' ";
+        $sqlConditions .= " AND lc.email_add_c  ='$Email' ";
     }
 
     if ($Email != '' || $Mobile != '')
