@@ -73,7 +73,8 @@ if($_POST['Submit'] && $error==0){
 	die;
 }
 
-$query = "SELECT sb.dropout_status,sb.NAME AS program_name, sb.batch_code, ii.NAME AS institute_name, sb.refund_amount, sb.dropout_type, sb.refund_date, sb.leads_id, s.NAME  AS student_name, s.email, s.mobile, sb.description, sb.bt_dropout_approver_comments, sb.qualify_for_refund FROM   te_student_batch sb, te_student s, te_in_institutes ii WHERE  sb.id = '".$student_batch."' AND sb.leads_id = s.lead_id_c AND ii.id = sb.te_in_institutes_id_c";
+$query = "SELECT sb.dropout_status,sb.NAME AS program_name, sb.batch_code, ii.NAME AS institute_name, sb.refund_amount, sb.dropout_type, sb.refund_date, sb.leads_id, s.NAME  AS student_name, s.email, s.mobile, sb.description, sb.bt_dropout_approver_comments, sb.qualify_for_refund FROM   te_student_batch sb, te_student s, te_in_institutes ii, te_student_te_student_batch_1_c tss WHERE  sb.id = '".$student_batch."' AND tss.te_student_te_student_batch_1te_student_batch_idb=sb.id
+and tss.te_student_te_student_batch_1te_student_ida=s.id AND ii.id = sb.te_in_institutes_id_c";
 $result = $db->query($query);
 $row = $db->fetchByAssoc($result);
 
