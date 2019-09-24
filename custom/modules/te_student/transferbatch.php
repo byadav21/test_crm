@@ -2,13 +2,13 @@
 //echo "<pre>";print_r($_REQUEST);exit;
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
-//error_reporting(E_ALL);
-//ini_set('display_errors', 'On');
-
+error_reporting(0);
+ini_set('display_errors', 0);
 ini_set('memory_limit', '1024M');
 require_once('custom/include/Email/sendmail.php');
 require_once('include/entryPoint.php');
 global $db;
+$utmOptions=array();
 $transferSql     = "SELECT *
                     FROM te_transfer_batch
                     WHERE id='" . $_REQUEST['request_id'] . "'
@@ -138,6 +138,8 @@ $batchSql               = "SELECT   b.id AS batch_id,
     $studentBatchObj->te_in_institutes_id_c = $batchDetails['institute_id'];
     $studentBatchObj->bt_approver_comments  = $_REQUEST['approve_comment'];
     $studentBatchObj->bt_fee_waiver         = $_REQUEST['bt_fee_waiver'];
+    $studentBatchObj->certificate_sent      ='';
+    $studentBatchObj->kit_status            ='';
 //$studentBatchObj->te_vendor_id_c=$vendor['id'];
 $studentBatchObj->status                = "Active";
 if ($srm_auto_Details)
@@ -161,7 +163,12 @@ $studentBatchObj->te_student_te_student_batch_1te_student_ida = $student_id;
 $studentBatchObj->save();
 #get new student batch id
 $student_batch_id                                             = $studentBatchObj->id;
-$GLOBALS['db']->query("UPDATE te_student_batch set bt_url='".$oldBatchDetails['bt_url']."', approve_status='".$_REQUEST['request_status']."' where id='".$student_batch_id."'");
+if($_REQUEST['bt_fee_waiver']=='3'){
+    $btfee=5900;
+  }else{
+    $btfee=0;
+  }
+$GLOBALS['db']->query("UPDATE te_student_batch set bt_url='".$oldBatchDetails['bt_url']."', approve_status='".$_REQUEST['request_status']."',batch_transfer_fee='".$btfee."' where id='".$student_batch_id."'");
 #transfer payment from old batch to new batch
 $studentPaymentSql = "SELECT SUM(te_student_payment.amount) AS total
                             FROM te_student_payment,
@@ -177,6 +184,8 @@ if (isset($studentPayment['total']) && $studentPayment['total'] > 0)
 {
     updateStudentPaymentPlan($new_batch_id, $student_id, $studentPayment['total'], $student_country);
 }
+
+
 
 #unlink old lead payment
 $GLOBALS['db']->query("UPDATE te_payment_details,
@@ -199,9 +208,9 @@ $GLOBALS['db']->query("UPDATE leads,
 
 #update new student payment history
 $id                                           = create_guid();
-/*
+
 $payment                                      = new te_payment_details();
-$payment->payment_type                        = 'Batch Transfer';
+/*$payment->payment_type                        = 'Batch Transfer';
 $payment->payment_source                      = 'Batch Transfer';
 $payment->transaction_id                      = 'Transferred Payment';
 $payment->date_of_payment                     = date('Y-m-d');
@@ -216,7 +225,7 @@ $payment->student_payment_id                  = $id;
 $payment->save();
 $lead_payment_details_id                      = $payment->id;
 */
-
+$lead_payment_details_id                      = $payment->id;
 $insertSql    = "INSERT INTO te_payment_details
                     SET id='" . $id . "',
                     payment_type='Batch Transfer',
@@ -300,7 +309,10 @@ SET is_new_approved=1,
     status='" . $_REQUEST['request_status'] . "',
                                          te_student_batch_id_c='" . $student_batch_id . "'
 WHERE id='" . $_REQUEST['request_id'] . "'");
+
 $utmOptions['status'] = "Approved Transferred";
+$utmOptions['new_student_batch_id'] = $student_batch_id;
+//$_SESSION['new_student_batch_id']=$student_batch_id;
 
 # Mail sent for Approved/
 
@@ -323,7 +335,7 @@ $template       = "<p>Dear " . $studentDetails['name'] . ",</p>
 $mail           = new NetCoreEmail();
 $mail->sendEmail($studentemail, " Trasfer Batch Request Approved", $template);
 */
-
+//error_reporting(0);
 echo json_encode($utmOptions);
 return false;
 

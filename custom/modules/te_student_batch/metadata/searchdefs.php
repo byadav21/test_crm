@@ -76,6 +76,14 @@ array (
         'default' => true,
         'name' => 'status',
       ),
+      'bt_pre_dropped' => 
+      array (
+        'type' => 'int',
+        'default' => true,
+        'label' => 'BT Pre Dropped',
+        'width' => '10%',
+        'name' => 'bt_pre_dropped',
+      ),
     ),
     'advanced_search' => 
     array (

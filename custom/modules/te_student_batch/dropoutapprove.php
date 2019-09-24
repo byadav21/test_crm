@@ -7,7 +7,7 @@ require_once('include/entryPoint.php');
 require_once('custom/include/Email/sendmail.php');
 global $db;
 
-$dropoutSql="UPDATE te_student_batch SET is_new_approved=1,dropout_status='".$_REQUEST['request_status']."',refund_date='".$GLOBALS['timedate']->to_db_date($_REQUEST['refund_date'],false)."',refund_amount='".$_REQUEST['refund_amount']."',dropout_type='".$_REQUEST['dropout_type']."', approved_by='".$_REQUEST['current_user_id']."' WHERE id='".$_REQUEST['request_id']."'";
+$dropoutSql="UPDATE te_student_batch SET is_new_approved=1,dropout_status='".$_REQUEST['request_status']."',refund_date='".$GLOBALS['timedate']->to_db_date($_REQUEST['refund_date'],false)."',refund_amount='".$_REQUEST['refund_amount']."',dropout_type='".$_REQUEST['dropout_type']."', bt_dropout_approver_comments='".$_REQUEST['approve_comment']."', approved_by='".$_REQUEST['current_user_id']."' WHERE id='".$_REQUEST['request_id']."'";
 $GLOBALS['db']->query($dropoutSql);
 
 $lead_id = $_REQUEST['lead_id'];
@@ -33,7 +33,7 @@ $dropoutStatue['status']="Approved";
 
 #mail Send for dropot reject Status
 
-if(isset($_REQUEST['request_status']) &&$_REQUEST['request_status']=="Rejected"){
+if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Rejected"){
 	global $db;
 			
 		    $studentSql="SELECT email,name FROM `te_student` WHERE lead_id_c = '".$lead_id."'";
@@ -71,7 +71,8 @@ if(isset($_REQUEST['request_status']) &&$_REQUEST['request_status']=="Rejected")
 			<p>Enquiries and Customer Support, Contact No: +91-8376000600</p>";
 
 			$mail = new NetCoreEmail();
-			$mail->sendEmail($studentemail,"Dropout Request Reject",$template);
+			//$mail->sendEmail($studentemail,"Dropout Request Reject",$template);
+			$mail->sendEmail('ashis.mohanty@talentedge.in',"Dropout Request Reject",$template);
 	
 		
 		}
@@ -93,10 +94,10 @@ if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Approved"
     
 			$template="<p> Dear-".$student['name'].",</p>
 
-                        <p>Greetings! $sql_program </p>
+                        <p>Greetings!  </p>
 
                         <p>This is in response to your request for cancellation of enrolment, and refund for the programme ".$progrm_result['program']." ".$progrm_result['institute'].", you have registered for.</p>
-                        <p>As a special case, we are processing a Full Refund of the fee paid by you totalling ".$_REQUEST['refund_amount']."</p>
+                        <p>As a special case, we are processing a Full Refund of the fee paid by you totalling <b>".$_REQUEST['refund_amount']."</b></p>
                         <p>Request you to please share your Bank account details with us to process the NEFT transfer of refund amount into your bank account. The amount will be credited in your account within 30 working days post receipt of your Bank account details.</p>
                         <p>Details required from you:</p>
                         <p>Your Name as per bank records-</p>
@@ -112,7 +113,8 @@ if(isset($_REQUEST['request_status']) && $_REQUEST['request_status']=="Approved"
 
   		
 			$mail = new NetCoreEmail();
-			$mail->sendEmail($studentemail,"Dropout Request Approved",$template);
+			//$mail->sendEmail($studentemail,"Dropout Request Approved",$template);
+			$mail->sendEmail('ashis.mohanty@talentedge.in',"Dropout Request Approved",$template);
 		
 		}	
 

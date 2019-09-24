@@ -231,16 +231,18 @@ if (isset($_POST['action']) && $_POST['action'] == 'showTransferPopup')
                 </div>
                 <div class="col-sm-12 marginTopBottom15">
                     <textarea name="bt_srm_comments" id="bt_srm_comments">
-                                   
-                </textarea>
-                    
-                    
+                    </textarea>
                 </div>   
                 <div class="block-wrapper">
                         <label>Status</label>
                         <label><input type="radio" name="bt_fee_waiver" value="1" checked>Waiver</label>
                         <label><input type="radio" name="bt_fee_waiver" value="2">To be Adjusted</label>
                         <label><input type="radio" name="bt_fee_waiver" value="3">To be Paid</label>
+                </div>
+                     </br>     
+                <div class="block-wrapper">
+                        <label>Pre Dropped</label>
+                        <input type="checkbox" name="bt_pre_dropped" value="1">
                 </div>
                 <br/>
                 <div class = "block-wrapper">
