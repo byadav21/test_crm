@@ -143,12 +143,16 @@ LEFT JOIN te_ba_batch b ON b.id=lc.te_ba_batch_id_c  where l.id='".$this->id."'"
 		$ins = $GLOBALS['db']->fetchByAssoc($res_ins);
 		$iid = $ins['te_in_institutes_te_ba_batch_1te_in_institutes_ida'];
 		$this->institute = "<a href='index.php?action=DetailView&module=te_in_institutes&record={$iid}'>".$ins['name']."</a>";
+                $ClickToCall='';
+                //echo 'dd=='.$this->status_description; die;
+                if($this->status_description!='Re-Enquired')
+                $ClickToCall ='<img src="custom/themes/default/images/phone.png" href="" onclick="alert(\'You are in Predictive mode\')" alt="Smiley face" height="20" width="20">';
 		if(!empty($this->phone_mobile)){
 			if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Predictive'){
-				$this->phone_mobile .= '  <img src="custom/themes/default/images/phone.png" href="" onclick="alert(\'You are in Predictive mode\')" alt="Smiley face" height="20" width="20">';
+				$this->phone_mobile .= $ClickToCall;
 			}
 			else{
-			$this->phone_mobile .= '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->phone_mobile.',\''.$this->id.'\')" alt="Smiley face" height="20" width="20">';
+			$this->phone_mobile .= $ClickToCall;
 			}
 			
 		}
