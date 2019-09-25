@@ -579,7 +579,7 @@ if(!isset($_SESSION['referral'])){
 			$this->bean->phone_mobile .=  $ClickToCall;
 		}
 		if(!empty($this->bean->phone_other)){
-			$this->bean->phone_other .=  ' MXXX <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
+			$this->bean->phone_other .=  '  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->bean->phone_mobile.',\''.$this->bean->id.'\')" alt="Smiley face" height="20" width="20">';
 		}
 
 		if(!empty($this->bean->te_ba_batch_id_c)){

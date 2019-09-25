@@ -146,10 +146,10 @@ LEFT JOIN te_ba_batch b ON b.id=lc.te_ba_batch_id_c  where l.id='".$this->id."'"
                 $ClickToCall='';
                 //echo 'dd=='.$this->status_description; die;
                 if($this->status_description!='Re-Enquired')
-                $ClickToCall ='<img src="custom/themes/default/images/phone.png" href="" onclick="alert(\'You are in Predictive mode\')" alt="Smiley face" height="20" width="20">';
+                $ClickToCall ='  <img src="custom/themes/default/images/phone.png" href="" onclick="clickToCall('.$this->phone_mobile.',\''.$this->id.'\')" alt="Smiley face" height="20" width="20">';
 		if(!empty($this->phone_mobile)){
 			if(isset($_SESSION['dial_type']) && $_SESSION['dial_type'] =='Predictive'){
-				$this->phone_mobile .= $ClickToCall;
+				$this->phone_mobile .= '  <img src="custom/themes/default/images/phone.png" href="" onclick="alert(\'You are in Predictive mode\')" alt="Smiley face" height="20" width="20">';
 			}
 			else{
 			$this->phone_mobile .= $ClickToCall;
