@@ -16,8 +16,8 @@ ini_set('memory_limit', '1024M');
             global $current_user,$db,$sugar_config;
             if($bean->status=='Dropout'){
 
-	     $mail            = new FalconideEmail();	 
-                
+	      $mail            = new FalconideEmail();	 
+              $dropOutArr      = array('pre_dropout'=>'Pre DO','post_dropout'=>'Post DO');
               $user_id=$current_user->id;
               $dispo_id=$this->__create_guid();
               $current_date=date('Y-m-d H:i:s');
@@ -26,6 +26,7 @@ ini_set('memory_limit', '1024M');
               
               
             $dropouttype       = $bean->dropout_type;
+            $dropSubStatus     = isset($dropOutArr[$dropouttype]) ? $dropOutArr[$dropouttype] : 'NA';
             $qualifyforrefund  = $bean->qualify_for_refund;
             $refundrequestdate = $bean->refund_request_date;
             $refundamount      = $bean->refund_amount;
@@ -54,10 +55,10 @@ ini_set('memory_limit', '1024M');
               $tebatchSql="UPDATE te_student_batch set is_new=0,is_new_dropout=1 WHERE id='". $bean->id."'";
               $tebatchSqlObj =$db->query($tebatchSql);
               
-              $leadSql="UPDATE leads set status='Dropout',status_description='Dropout' WHERE id='".$leadid."'";
+              $leadSql="UPDATE leads set status='Dropout',status_description='$dropSubStatus' WHERE id='".$leadid."'";
               $leadObj =$db->query($leadSql);
 
-              $leadDispoSql="INSERT INTO `te_disposition`(`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `assigned_user_id`, `status`, `status_detail`) VALUES ('".$dispo_id."','Dropout','".$current_date."','".$current_date."','".$user_id."','".$user_id."','".$user_id."','Dropout','Dropout')";
+              $leadDispoSql="INSERT INTO `te_disposition`(`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `assigned_user_id`, `status`, `status_detail`) VALUES ('".$dispo_id."','Dropout','".$current_date."','".$current_date."','".$user_id."','".$user_id."','".$user_id."','Dropout','$dropSubStatus')";
               $leadDispoObj =$db->query($leadDispoSql);
 
               $leadDispoRelSql="INSERT INTO `te_disposition_leads_c`(`id`, `date_modified`, `te_disposition_leadsleads_ida`, `te_disposition_leadste_disposition_idb`) VALUES ('".$te_disposition_leads_c."','".$current_date."','".$leadid."','".$dispo_id."')";
@@ -120,7 +121,7 @@ ini_set('memory_limit', '1024M');
                                 </tr>
                                 <tr>
                                     <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Dropout Type:</td>
-                                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'.$dropouttype .'</td>
+                                    <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: normal;">'.$dropSubStatus .'</td>
                                 </tr>
                                 <tr>
                                     <td style="border:1px solid #999; font-family:Arial, Helvetica, sans-serif; padding: 10px; font-size:12px; color:#333; text-align: left; font-weight: bold;">Qualify For Refund:</strong></td>
@@ -201,7 +202,7 @@ ini_set('memory_limit', '1024M');
 			      $dispo_id=$this->__create_guid();
                   $te_disposition_leads_c=$this->__create_guid();
 				 
-				  $leadSqlE="UPDATE leads set status_description='".$discription."' WHERE id='".$leadid."'";
+				  $leadSqlE="UPDATE leads set status_description='".$dropSubStatus."' WHERE id='".$leadid."'";
 				  $leadObj =$db->query($leadSqlE);
 				  
 					$leadDispoSql="INSERT INTO `te_disposition`(`id`, `name`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `assigned_user_id`, `status`, `status_detail`,`description`) VALUES ('".$dispo_id."','".$dispo_status."','".$current_date."','".$current_date."','".$user_id."','".$user_id."','".$user_id."','".$dispo_status."','".$discription."','".$notes."')";

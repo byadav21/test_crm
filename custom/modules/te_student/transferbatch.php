@@ -200,6 +200,8 @@ $GLOBALS['db']->query("UPDATE leads,
                             leads_cstm
                      SET leads.fee_usd='" . $batchDetails['fees_in_usd'] . "',
                                      leads.fee_inr='" . $batchDetails['fees_inr'] . "',
+                                     leads.status='Converted',
+                                     leads.status_description='Batch Transfer',
                                       leads.minimum_attendance='" . $batchDetails['minimum_attendance_criteria'] . "',
                                       leads_cstm.min_attendance_c='" . $batchDetails['minimum_attendance_criteria'] . "',
                                       leads_cstm.te_ba_batch_id_c = '" . $batchDetails['batch_id'] . "'

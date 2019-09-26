@@ -110,6 +110,8 @@
 								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$overview.status}</p>
                                                     {elseif $overview.status eq 'Recycle'}
                                                     <p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$overview.status}</p>
+                                                    {elseif $overview.status eq 'Dropout'}
+                                                    <p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$overview.status}</p>
 						   {/if}
                                                    
 					

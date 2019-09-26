@@ -507,7 +507,8 @@ class LeadsViewEdit extends ViewEdit
                     } else if (el.val() === "Dropout") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
-                        $("#status_description").append('<option>Dropout</option>');
+                        $("#status_description").append('<option>Pre DO</option>');
+                        $("#status_description").append('<option>Post DO</option>');
                     }
                 });
 
