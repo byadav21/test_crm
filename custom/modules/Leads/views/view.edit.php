@@ -164,7 +164,11 @@ class LeadsViewEdit extends ViewEdit
                      $("#status").attr('disabled','disabled');
                      //$("#status_description").attr('disabled','disabled');
                 }
-        
+                
+                 var DropoutStatus = ['Dropout', 'Pre DO', 'Post DO'];
+                 if ($.inArray(statusX, DropoutStatus)!='-1') {
+                     $("#status").attr('disabled','disabled');
+                }
                 
                 if (role_name == 'Contact Center Counselor') {
                     $("#tab1").hide();

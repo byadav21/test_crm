@@ -384,7 +384,20 @@
              $('#status option[value="Duplicate"]').remove(); 
             if(usersRole=='Contact Center Counselor' && $("#status_description").val() != 'Converted'){
                  $('#status option[value="Converted"]').remove();
+               
               }
+              
+              if(usersRole=='Contact Center Counselor' && $("#status").val() == 'Dropout'){ 
+                  $("#status").attr('disabled','disabled');
+                  $("#status_description").attr('disabled','disabled');
+               
+              }else if (usersRole=='Contact Center Counselor' && $("#status").val() != 'Dropout'){
+                  $('#status option[value="Dropout"]').remove();
+              }
+              
+              
+             
+       
               
               
             /*$("#status").on('change', function () {

@@ -10,14 +10,20 @@ global $db;
 $dropoutSql="UPDATE te_student_batch SET is_new_approved=1,dropout_status='".$_REQUEST['request_status']."',refund_date='".$GLOBALS['timedate']->to_db_date($_REQUEST['refund_date'],false)."',refund_amount='".$_REQUEST['refund_amount']."',dropout_type='".$_REQUEST['dropout_type']."', bt_dropout_approver_comments='".$_REQUEST['approve_comment']."', approved_by='".$_REQUEST['current_user_id']."' WHERE id='".$_REQUEST['request_id']."'";
 $GLOBALS['db']->query($dropoutSql);
 
+$dropouttype= $_REQUEST['dropout_type'];
+
 $lead_id = $_REQUEST['lead_id'];
+$lead_id = $_REQUEST['lead_id'];
+
+$dropOutArr      = array('pre_dropout'=>'Pre DO','post_dropout'=>'Post DO');
+$dropSubStatus     = isset($dropOutArr[$dropouttype]) ? $dropOutArr[$dropouttype] : 'NA';
 
 #update lead status as Dropout
 //$GLOBALS['db']->query("UPDATE leads SET status='".$_REQUEST['request_status']."' AND status_description='".$_REQUEST['request_status']."' WHERE id='".$lead_id."'");
 #Add new Disposition Record
 $disposition = new te_disposition();
 $disposition->status 	   = 'Dropout';
-$disposition->status_detail  = 'Dropout';
+$disposition->status_detail  = $dropSubStatus;
 
 $disposition->date_of_callback			 = date('Y-m-d');
 $disposition->date_of_followup			 = date('Y-m-d');
@@ -26,7 +32,7 @@ $disposition->name 		   	 = 'Dropout';
 $disposition->te_disposition_leadsleads_ida = $lead_id;
 $disposition->save();
 
-$sqlL = "UPDATE leads SET status='Dropout',status_description='Dropout' WHERE id ='".$lead_id."'";
+$sqlL = "UPDATE leads SET status='Dropout',status_description='$dropSubStatus' WHERE id ='".$lead_id."'";
 $GLOBALS['db']->query($sqlL);
 	
 $dropoutStatue['status']="Approved";
