@@ -94,6 +94,7 @@ function assigned_users_list(){
 		}
 		
 	}
+        $dropDown[$currentUserId]= $current_user->name;
 	return $dropDown;
 }
 function massReportingUsers(){
