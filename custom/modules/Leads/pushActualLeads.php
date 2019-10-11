@@ -85,6 +85,7 @@ class pushActualLeads
 
 $mainObj           = new pushActualLeads();
 $mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today']: date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
+//$mainObj->fromDate = '2019-10-10';
 
 $result = $mainObj->get_data();
 $utms_arr = [];
