@@ -6,6 +6,7 @@ require_once('custom/include/Email/sendmail.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
+ini_set('memory_limit', '-1');
 class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
 {
 

@@ -123,6 +123,7 @@ else
         }
     }
 }
+createLog('{checkpaymentquery}', 'web_lead_data_' . date('Y-m-d') . '_log.txt', 'ddfdf',$data);
 
 if ($error_fields)
 {
@@ -501,7 +502,8 @@ function __get_student_batch_id($student_arr = array(),$data = array())
                                     SET status='$c_status',
                                         status_description='$c_status_description',
                                         converted_date='$converted_datex',
-                                        lead_source='$lead_sourceX'
+                                        lead_source='$lead_sourceX',
+					date_modified='" . date('Y-m-d H:i:s') . "'
                                         
                                     WHERE id='" . $LBean->id . "'";
         
