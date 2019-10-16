@@ -19,7 +19,17 @@ class pushActualLeads
 	public function get_data(){
 		global $db;
 		$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
-		$sql="SELECT count(id)total,sum(case when status ='Converted' then 1 else 0 end) as converted,utm FROM `leads` WHERE date(date_entered)='".$this->fromDate."' AND vendor like '%tbs%' AND vendor NOT IN ($ignore_vendors) group by utm";
+		$sql="SELECT count(id)total,
+                        sum(CASE
+                                WHEN status ='Converted' THEN 1
+                                ELSE 0
+                            END) AS converted,
+                        utm
+                 FROM `leads`
+                 WHERE date(date_entered)='".$this->fromDate."'
+                   #AND vendor LIKE '%tbs%'
+                   AND vendor NOT IN ($ignore_vendors)
+                 GROUP BY utm";
 		$result = $db->query($sql);
 		$resultArr = [];
 		if($db->getRowCount($result)>0){
@@ -33,7 +43,18 @@ class pushActualLeads
 	public function get_total_data($utms){
 		global $db;
 		$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
-		$sql="SELECT count(id)total,sum(case when status ='Converted' then 1 else 0 end) as converted,utm FROM `leads` WHERE date(date_entered)<='".$this->fromDate."' AND vendor like '%tbs%' AND vendor NOT IN ($ignore_vendors) AND utm IN ($utms) group by utm";
+		$sql="SELECT count(id)total,
+                        sum(CASE
+                                WHEN status ='Converted' THEN 1
+                                ELSE 0
+                            END) AS converted,
+                        utm
+                 FROM `leads`
+                 WHERE date(date_entered)<='".$this->fromDate."'
+                   #AND vendor LIKE '%tbs%'
+                   AND vendor NOT IN ($ignore_vendors)
+                   AND utm IN ($utms)
+                 GROUP BY utm";
 		$result = $db->query($sql);
 		$resultArr = [];
 		if($db->getRowCount($result)>0){
@@ -84,8 +105,8 @@ class pushActualLeads
 }
 
 $mainObj           = new pushActualLeads();
-//$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today']: date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
-$mainObj->fromDate = '2019-09-27';
+$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today']: date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
+//$mainObj->fromDate = '2019-09-27';
 
 $result = $mainObj->get_data();
 $utms_arr = [];
