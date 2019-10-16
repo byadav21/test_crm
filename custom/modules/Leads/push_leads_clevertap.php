@@ -85,7 +85,7 @@ class pushLeadClevertap
         $result = curl_exec($ch);
         curl_close($ch);
         # Print response.
-        echo "profile: <pre>$result</pre>";
+        //echo "profile: <pre>$result</pre>";
 
 
         # 2. event
@@ -127,7 +127,7 @@ class pushLeadClevertap
         $result = curl_exec($ch);
         curl_close($ch);
         # Print response.
-        echo "Event: <pre>$result</pre>";
+        //echo "Event: <pre>$result</pre>";
 
 
 
