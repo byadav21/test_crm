@@ -41,11 +41,12 @@ class citehrSpends
     $mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today'] : date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
     //$mainObj->fromDate = '2019-09-27';
     
-    $citeData                = $mainObj->get_utm();
+    $citeData                = $mainObj->get_data();
     $insertable_arr     = '';
     $insertable_sub_arr = '';
 
     $citeHRAmt = 200000;
+    $vendorID= '14a4e733-b709-8c60-7731-590d5cb3b1f7';
     echo '$maxDays=' . $maxDays   = date('t');
     echo '$todayAmt=' . $todayAmt  = ($citeHRAmt / $maxDays);
 
@@ -59,7 +60,7 @@ class citehrSpends
     $ActualLead       = $citeData['total'];
     $ActualConversion = $citeData['converted'];
 
-    $insertable_arr[]     = " ('" . $id . "','" . $key . "','" . $mainObj->fromDate . "',$ActualLead,'" . $totalLeads . "','" . $ActualConversion . "','" . $totalConversion . "','" . $cpl_sum . "','" . $cpl . "','" . $cpa . "','','" . $utm[$key]['vendor_id'] . "','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "') ";
+    $insertable_arr[]     = " ('" . $id . "','citehr','" . $mainObj->fromDate . "',$ActualLead,'" . $totalLeads . "','" . $ActualConversion . "','" . $totalConversion . "','" . $cpl_sum . "','" . $cpl . "','" . $cpa . "','','" . $vendorID . "','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "') ";
     $insertable_sub_arr[] = " ('" . create_guid() . "','','" . $id . "','" . date('Y-m-d H:i:s') . "') ";
 
 
@@ -83,8 +84,8 @@ class citehrSpends
     echo "<pre>";
     print_r($insertable_arr);
     print_r($insertable_sub_arr);
-    print_r($result);
-    print_r($utm);
+    //print_r($result);
+    //print_r($utm);
     exit();
 
 
