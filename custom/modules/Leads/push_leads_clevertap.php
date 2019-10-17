@@ -15,8 +15,11 @@ class pushLeadClevertap
         
         //echo '<pre>';print_r($bean); die;
         
+        $first_name = isset($bean->first_name) ? $bean->first_name : '';
+        $last_name  = isset($bean->last_name) ? $bean->last_name : '';
+        
         $beanId             = $bean->id;
-        $cust_name          = $bean->first_name. ' '. $bean->last_name;
+        $cust_name          = $first_name. ' '. $last_name;
         $phone              = isset($bean->phone_mobile) ? $bean->phone_mobile : '';
         $email              = isset($bean->email_add_c) ? $bean->email_add_c : '';
         $batchid            = isset($bean->te_ba_batch_id_c) ? $bean->te_ba_batch_id_c : '';
@@ -102,11 +105,11 @@ class pushLeadClevertap
                         'Phone'              => $phoneNumber,
                         'Status_l'           => $status,
                         'status_description' => $status_description,
-                        'date_entered'       => $bean->date_entered,
-                        'date_of_followup'   => $bean->date_of_followup,
-                        'date_modified'      => $bean->date_modified,
-                        'converted_date'     => $bean->converted_date,
-                        'agent_id'         => $assigned_user_id,
+                        'date_entered'       => isset($bean->date_entered) ? $bean->date_entered : '',
+                        'date_of_followup'   => isset($bean->date_of_followup) ? $bean->date_of_followup : '',
+                        'date_modified'      => isset($bean->date_modified) ? $bean->date_modified : '',
+                        'converted_date'     => isset($bean->converted_date) ? $bean->converted_date : '',
+                        'agent_id'         =>   $assigned_user_id,
                         'vendor'             => $bean->vendor,
                         'batch_code'         => $batchCode
                     )
