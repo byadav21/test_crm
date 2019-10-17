@@ -5,7 +5,7 @@ set_time_limit(3600);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-class pushActualLeads
+class tbsSpends
 {
 
 	public $fromDate;
@@ -18,7 +18,7 @@ class pushActualLeads
 
 	public function get_data(){
 		global $db;
-		$ignore_vendors = "'tbs',citehr','facebook','google','te_focus','taboola'";
+		$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
 		$sql="SELECT count(id)total,
                         sum(CASE
                                 WHEN status ='Converted' THEN 1
@@ -26,9 +26,9 @@ class pushActualLeads
                             END) AS converted,
                         utm
                  FROM `leads`
-                 WHERE date(date_entered)='".$this->fromDate."'
-                   #AND vendor LIKE '%tbs%'
-                   AND vendor NOT IN ($ignore_vendors)
+                 WHERE converted_date='".$this->fromDate."'
+                   AND vendor LIKE '%tbs%'
+                   AND status = 'Converted'
                  GROUP BY utm";
 		$result = $db->query($sql);
 		$resultArr = [];
@@ -42,7 +42,7 @@ class pushActualLeads
 	
 	public function get_total_data($utms){
 		global $db;
-		$ignore_vendors = "'tbs',citehr','facebook','google','te_focus','taboola'";
+		$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
 		$sql="SELECT count(id)total,
                         sum(CASE
                                 WHEN status ='Converted' THEN 1
@@ -50,9 +50,9 @@ class pushActualLeads
                             END) AS converted,
                         utm
                  FROM `leads`
-                 WHERE date(date_entered)<='".$this->fromDate."'
-                   #AND vendor LIKE '%tbs%'
-                   AND vendor NOT IN ($ignore_vendors)
+                 WHERE converted_date<='".$this->fromDate."'
+                   AND vendor LIKE '%tbs%'
+                   AND status = 'Converted'
                    AND utm IN ($utms)
                  GROUP BY utm";
 		$result = $db->query($sql);
@@ -89,6 +89,7 @@ class pushActualLeads
 			AND v.deleted=0
 			AND tv.deleted=0
 			AND c.deleted=0
+                        AND tv.name like '%tbs%'
 			AND b.deleted=0";
 			//AND v.name NOTIN ($ignore_vendors)";
 		$result = $db->query($sql);
@@ -104,7 +105,7 @@ class pushActualLeads
 	
 }
 
-$mainObj           = new pushActualLeads();
+$mainObj           = new tbsSpends();
 $mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today']: date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
 //$mainObj->fromDate = '2019-09-27';
 

@@ -5,7 +5,7 @@ set_time_limit(3600);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-class pushActualLeads
+class citehrSpends
 {
 
 	public $fromDate;
@@ -18,7 +18,7 @@ class pushActualLeads
 
 	public function get_data(){
 		global $db;
-		$ignore_vendors = "'tbs',citehr','facebook','google','te_focus','taboola'";
+		//$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
 		$sql="SELECT count(id)total,
                         sum(CASE
                                 WHEN status ='Converted' THEN 1
@@ -27,8 +27,7 @@ class pushActualLeads
                         utm
                  FROM `leads`
                  WHERE date(date_entered)='".$this->fromDate."'
-                   #AND vendor LIKE '%tbs%'
-                   AND vendor NOT IN ($ignore_vendors)
+                   AND vendor LIKE '%citehr%'
                  GROUP BY utm";
 		$result = $db->query($sql);
 		$resultArr = [];
@@ -42,7 +41,7 @@ class pushActualLeads
 	
 	public function get_total_data($utms){
 		global $db;
-		$ignore_vendors = "'tbs',citehr','facebook','google','te_focus','taboola'";
+		//$ignore_vendors = "'citehr','facebook','google','te_focus','taboola'";
 		$sql="SELECT count(id)total,
                         sum(CASE
                                 WHEN status ='Converted' THEN 1
@@ -50,9 +49,8 @@ class pushActualLeads
                             END) AS converted,
                         utm
                  FROM `leads`
-                 WHERE date(date_entered)<='".$this->fromDate."'
-                   #AND vendor LIKE '%tbs%'
-                   AND vendor NOT IN ($ignore_vendors)
+                 WHERE date(date_entered)='".$this->fromDate."'
+                   AND vendor LIKE '%citehr%'
                    AND utm IN ($utms)
                  GROUP BY utm";
 		$result = $db->query($sql);
@@ -89,6 +87,7 @@ class pushActualLeads
 			AND v.deleted=0
 			AND tv.deleted=0
 			AND c.deleted=0
+                        AND tv.name like '%citehr%'
 			AND b.deleted=0";
 			//AND v.name NOTIN ($ignore_vendors)";
 		$result = $db->query($sql);
@@ -104,7 +103,7 @@ class pushActualLeads
 	
 }
 
-$mainObj           = new pushActualLeads();
+$mainObj           = new citehrSpends();
 $mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today']: date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
 //$mainObj->fromDate = '2019-09-27';
 
@@ -122,19 +121,20 @@ $utm = $mainObj->get_utm();
 $insertable_arr = '';
 $insertable_sub_arr = '';
 
+$citeHRAmt = 200000;
+echo '$maxDays='.$maxDays=date('t');
+echo '$todayAmt='.$todayAmt =  ($citeHRAmt /$maxDays);
+
 if($result && $utm){
 	foreach($result as $key => $val){
 		if(isset($utm[$key]['performance_metrics']) && $utm[$key]['performance_metrics']=='CPA'){
 
-			$target_c = (!empty($utm[$key]['target_c'])) ? str_replace('%','',$utm[$key]['target_c']): 0;
-			$target_per = $target_c/100;
-
-			$cpl_sum = ($target_c>0 && !empty($utm[$key]['fees_inr']) && $val['converted']>0 && $target_per>0) ? ($utm[$key]['fees_inr'] * $val['converted']) * $target_per : 0;
+			$cpl_sum = $todayAmt;
 			$cpa = ($cpl_sum>0 && $val['converted']) ? $cpl_sum/$val['converted'] : 0;
 			$cpl = ($cpl_sum>0 && $val['total']) ? $cpl_sum/$val['total'] : 0;
 		}else{
 			$cpl = (isset($utm[$key]['rate_c']) && !empty($utm[$key]['rate_c'])) ? $utm[$key]['rate_c']  : 0;
-			$cpl_sum = (isset($utm[$key]['rate_c']) && !empty($utm[$key]['rate_c'])) ? $utm[$key]['rate_c'] * $val['total'] : 0;
+			$cpl_sum = $todayAmt;
 		        $cpa = ($cpl_sum>0 && $val['converted']) ? $cpl_sum/$val['converted'] : 0;
 		}
 		
