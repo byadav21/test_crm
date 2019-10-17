@@ -17,18 +17,18 @@ class pushLeadClevertap
         
         $beanId             = $bean->id;
         $cust_name          = $bean->first_name. ' '. $bean->last_name;
-        $phone              = $bean->phone_mobile;
-        $email              = $bean->email_add_c;
-        $batchid            = $bean->te_ba_batch_id_c;
-        $modified_user_id   = $bean->modified_user_id; 
-        $assigned_user_id   = $bean->assigned_user_id; 
-        $created_by         = $bean->created_by;
-        $vendor             = $bean->vendor;
-        $status             = $bean->status;
-        $status_description = $bean->status_description;
-        $term               = $bean->utm_term_c;
-        $source             = $bean->utm_source_c;
-        $medium             = $bean->utm_contract_c;
+        $phone              = isset($bean->phone_mobile) ? $bean->phone_mobile : '';
+        $email              = isset($bean->email_add_c) ? $bean->email_add_c : '';
+        $batchid            = isset($bean->te_ba_batch_id_c) ? $bean->te_ba_batch_id_c : '';
+        $modified_user_id   = isset($bean->modified_user_id) ? $bean->modified_user_id : ''; 
+        $assigned_user_id   = isset($bean->assigned_user_id) ? $bean->assigned_user_id : ''; 
+        $created_by         = isset($bean->created_by) ? $bean->created_by : '';
+        $vendor             = isset($bean->vendor) ? $bean->vendor : '';
+        $status             = isset($bean->status) ? $bean->status : '';
+        $status_description = isset($bean->status_description) ? $bean->status_description : '';
+        $term               = isset($bean->utm_term_c) ? $bean->utm_term_c : '';
+        $source             = isset($bean->utm_source_c) ? $bean->utm_source_c : '';
+        $medium             = isset($bean->utm_contract_c) ? $bean->utm_contract_c : '';
 
         
         $url = 'https://api.clevertap.com/1/upload';
