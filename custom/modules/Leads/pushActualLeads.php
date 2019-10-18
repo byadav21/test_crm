@@ -18,7 +18,7 @@ class pushActualLeads
 
 	public function get_data(){
 		global $db;
-		$ignore_vendors = "'tbs',citehr','facebook','google','te_focus','taboola'";
+		$ignore_vendors = "'tbs','citehr','facebook','google','te_focus','taboola'";
 		$sql="SELECT count(id)total,
                         sum(CASE
                                 WHEN status ='Converted' THEN 1
@@ -42,7 +42,7 @@ class pushActualLeads
 	
 	public function get_total_data($utms){
 		global $db;
-		$ignore_vendors = "'tbs',citehr','facebook','google','te_focus','taboola'";
+		$ignore_vendors = "'tbs','citehr','facebook','google','te_focus','taboola'";
 		$sql="SELECT count(id)total,
                         sum(CASE
                                 WHEN status ='Converted' THEN 1
