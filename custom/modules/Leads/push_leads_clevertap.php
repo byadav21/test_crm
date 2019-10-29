@@ -97,7 +97,7 @@ class pushLeadClevertap
             array('0' =>
                 array('identity' => $Identity,
                     'type'     => 'event',
-                    'evtName'  => 'Product viewed',
+                    'evtName'  => 'CRM Update',
                     'evtData'  =>
                     array('Name'               => $cust_name,
                         'Email'              => $email,
