@@ -214,6 +214,20 @@ class FalconideEmail
             //'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/srm_docs/" . $filename);
         return $emailData;
     }
+    
+    public function inboundleadList($reponame, $filename, $date, $email_summary=NULL,$btApprover=array())
+    {
+
+           $emailData = array('email' => $btApprover,
+             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
+            'email_message' => ''
+			. $email_summary
+            //'pdfFileName'   => $filename,
+               //'certFilePath'  => "upload/srm_docs/" . $filename
+                   );
+            //'certFilePath'  => $_SERVER['DOCUMENT_ROOT'] . "/reports/srm_docs/" . $filename);
+        return $emailData;
+    }
 
 }
 
