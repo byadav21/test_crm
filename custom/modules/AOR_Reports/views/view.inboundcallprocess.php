@@ -56,8 +56,8 @@ class AOR_ReportsViewinboundcallprocess extends SugarView
                                             phone_mobile         = '$key',
                                             status_description   = '" . $newLeadArr['sub_status'] . "',
                                             status               = '" . $newLeadArr['status'] . "',
-                                            vendor               = 'Generic_Abdn',
-                                            lead_source          = 'CC_Generic_Abdn',
+                                            vendor               = 'InboundAbdn',
+                                            lead_source          = 'CC_InboundAbdn',
                                             utm_term_c           = '" . $newLeadArr['batch_code'] . "',
                                             date_entered         = '" . date('Y-m-d H:i:s') . "',
                                             date_modified        = '" . date('Y-m-d H:i:s') . "'";
@@ -396,8 +396,8 @@ class AOR_ReportsViewinboundcallprocess extends SugarView
         $current_user_id = $current_user->id;
 
         $people = array("d81fc9e1-91ae-eba3-19d9-5af02415c81c", //kiran
-            "c7e41406-1f7b-770e-6d0b-5ab0076957ce", //ritika
-            "9e6a7631-ca80-74f6-b734-599b04f9af60", //anup
+            "b33e1384-aac1-8db3-7234-5d80881459a9", //jatin
+            "c7d3fece-ef34-7b02-28b5-5928182dc8ea", //rachit
         );
 
         if (!in_array($current_user->id, $people) && ($current_user->is_admin != 1))
