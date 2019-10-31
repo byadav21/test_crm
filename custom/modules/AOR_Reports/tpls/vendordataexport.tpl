@@ -200,6 +200,9 @@
                     <strong>Status Description</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Disposition Reason</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Comment</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -224,6 +227,7 @@
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.user_name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.status}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.status_description}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.disposition_reason}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.comment}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.utm_campaign}</td>
                     

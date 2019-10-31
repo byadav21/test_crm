@@ -262,6 +262,7 @@ class AOR_ReportsViewVendordataexport extends SugarView
                     l.vendor,
                     te_vendor.id vendor_id,
                     l.status_description,
+                    l.disposition_reason,
                     l.utm_campaign
                 FROM leads l
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
@@ -309,6 +310,7 @@ class AOR_ReportsViewVendordataexport extends SugarView
             $data .= ",User Name";
             $data .= ",Status";
             $data .= ",Status Description";
+            $data .= ",Disposition Reason";
             $data .= ",Comment";
             $data .= ",UTM Campaign";
             $data .= "\n";
@@ -329,6 +331,7 @@ class AOR_ReportsViewVendordataexport extends SugarView
                 $data .= "\",\"" . $councelor['user_name'];
                 $data .= "\",\"" . $councelor['status'];
                 $data .= "\",\"" . $councelor['status_description'];
+                $data .= "\",\"" . $councelor['disposition_reason'];
                 $data .= "\",\"" . htmlspecialchars($councelor['comment']);
                 $data .= "\",\"" . $councelor['utm_campaign'];
                 $data .= "\"\n";
