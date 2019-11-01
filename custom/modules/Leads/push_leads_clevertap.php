@@ -38,8 +38,8 @@ class pushLeadClevertap
 
         $headers = array(
             "Content-Type: application/json",
-            "X-CleverTap-Account-Id: TEST-KZZ-RWR-655Z",
-            "X-CleverTap-Passcode: CVK-IKC-OPKL",
+            "X-CleverTap-Account-Id: 867-RZ5-R75Z",
+            "X-CleverTap-Passcode: SMQ-IOZ-MTKL",
         );
 
 
