@@ -53,7 +53,7 @@ class citehrSpends
         {
             while ($row = $db->fetchByAssoc($result))
             {
-                $resultArr[$row['utm_term_c']] = $row;
+                $resultArr[] = $row;
             }
         }
         return $resultArr;
@@ -62,10 +62,12 @@ class citehrSpends
 }
 
 $mainObj           = new citehrSpends();
-$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today'] : date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
-//$mainObj->fromDate = '2019-09-27';
+//$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today'] : date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
+$mainObj->fromDate = '2018-11-05';
 
 $citeData           = $mainObj->get_data();
+
+//print_r($citeData); die;
 $insertable_arr     = '';
 $insertable_sub_arr = '';
 
@@ -77,22 +79,22 @@ echo '$todayAmt=' . $todayAmt  = ($citeHRAmt / $maxDays);
 
 $totalData                = $mainObj->getTotalC();
 
-if ($result)
+if ($citeData)
 {
-    foreach ($result as $key => $val)
+    foreach ($citeData as $key => $val)
     {
-
-       
-        $perLeadPrice   = $todayAmt / $totalData['total'];
+	$perLeadPrice   = $todayAmt / $totalData['total'];
+        $cpl_sum        = ($perLeadPrice * $val['total']);
+        
         $cpa            = ($cpl_sum > 0 && $val['converted']) ? $perLeadPrice / $val['converted'] : 0;
         $cpl            = ($cpl_sum > 0 && $val['total']) ? $perLeadPrice * $val['total'] : 0;
-        $cpl_sum        = ($perLeadPrice * $val['total']);
+        
 
         $id               = create_guid();
         $totalLeads       = $val['total'];
         $totalConversion  = $val['converted'];
         $ActualLead       = $val['total'];
-        $ActualConversion = $vals['converted'];
+        $ActualConversion = $val['converted'];
 
         $insertable_arr[]     = " ('" . $id . "','citehr','" . $mainObj->fromDate . "',$ActualLead,'" . $totalLeads . "','" . $ActualConversion . "','" . $totalConversion . "','" . $cpl_sum . "','" . $cpl . "','" . $cpa . "','".$val['te_ba_batch_id_c']."','" . $vendorID . "','" . date('Y-m-d H:i:s') . "','" . date('Y-m-d H:i:s') . "') ";
         $insertable_sub_arr[] = " ('" . create_guid() . "','','" . $id . "','" . date('Y-m-d H:i:s') . "') ";
@@ -110,14 +112,14 @@ if ($insertable_arr)
 {
     $insert_str = "INSERT INTO `te_actual_campaign`(`id`, `name`, `plan_date`,`leads`,`total_leads`,`actual_conversion`,`total_conversion`, `total_cost`, `cpl`, `cpa`, `te_ba_batch_id_c`, `vendor_id`,`date_entered`,`date_modified`) VALUES ";
     $insert_str .= implode(',', $insertable_arr);
-    //$db->query($insert_str);
+    $db->query($insert_str);
     //echo $insert_str.'<br>';
 }
 if ($insertable_sub_arr)
 {
     $insertable_sub_str = "INSERT INTO `te_utm_te_actual_campaign_1_c`(`id`, `te_utm_te_actual_campaign_1te_utm_ida`, `te_utm_te_actual_campaign_1te_actual_campaign_idb`,`date_modified`) VALUES ";
     $insertable_sub_str .= implode(',', $insertable_sub_arr);
-    //$db->query($insertable_sub_str);
+    $db->query($insertable_sub_str);
     //echo $insertable_sub_str;exit();
 }
 echo "<pre>";
