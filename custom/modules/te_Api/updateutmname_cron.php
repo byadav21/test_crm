@@ -147,8 +147,8 @@ class updateUTM
 $mainObj = new updateUTM();
 if (strtotime($mainObj->fromDate) == strtotime($mainObj->toDate))
 {
-    //$fromDate = date('Y-m-d', (strtotime('-1 day', strtotime($mainObj->fromDate))));
-    $fromDate = '2018-09-28';
+    $fromDate = date('Y-m-d', (strtotime('-1 day', strtotime($mainObj->fromDate))));
+    //$fromDate = '2019-09-28';
 }
 
 $mainObj->toDate   = $fromDate;

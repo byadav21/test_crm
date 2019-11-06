@@ -253,12 +253,12 @@ class AOR_ReportsViewinboundcallprocess extends SugarView
 
             if ($exclude_newlead != 1)
             {
-                //$this->createNewLead($mobileNotFound,$csvArray);
+                $this->createNewLead($mobileNotFound,$csvArray);
             }
             if (!empty($inactiveBatchLeadsToNewLeadArr) && $exclude_newlead !== 1)
             {
 
-                //$this->createNewLead($inactiveBatchLeadsToNewLeadArr,$csvArray);
+                $this->createNewLead($inactiveBatchLeadsToNewLeadArr,$csvArray);
             }
             $mail = new NetCoreEmail();
             if ($exclude_email != 1)
@@ -275,7 +275,7 @@ class AOR_ReportsViewinboundcallprocess extends SugarView
    <table cellpadding="0" cellspacing="0" style="width: 600px; border:1px solid #999; padding: 10px;" align="center">
         
         <tr>
-            <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#333; text-align: center; font-weight: bold;">Inbound Lead Request Details</td>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#333; text-align: center; font-weight: bold;">Inbound Call By your Candidate</td>
         </tr>
         <tr>
             <td><hr/></td>
@@ -291,7 +291,7 @@ class AOR_ReportsViewinboundcallprocess extends SugarView
             <td height="15"></td>
         </tr>
         <tr>
-            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;">Below is the information of inbound request</td>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left; font-weight: bold;">Please refer below list of candidates who tried calling on Talentedge Helpline.</td>
         </tr>
         <tr>
         	<td height="15"></td>
@@ -341,18 +341,18 @@ class AOR_ReportsViewinboundcallprocess extends SugarView
             <td height="8"></td>
         </tr>
         <tr>
-            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left;">Pawan (IT)</td>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333; text-align: left;"></td>
         </tr>
      </table>';
                     //echo $key;
                     //echo $email_summary; die;
 
-                    if ($key == 'pawan.kumar@talentedge.in')
-                    {
+                    //if ($key == 'pawan.kumar@talentedge.in')
+                    //{
                         //echo $email_summary; die;
-                        $emailData = $mail->sendEmail($key, 'Inbound request list_' . date('Y-m-d'), $email_summary);
+                        $emailData = $mail->sendEmail($key, 'Inbound Call By your Candidates ' . date('Y-m-d'), $email_summary);
                         //echo '$emailData'.$emailData; die;
-                    }
+                    //}
                 }
             }
 

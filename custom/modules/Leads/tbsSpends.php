@@ -27,7 +27,7 @@ class tbsSpends
                         utm
                  FROM `leads`
                  WHERE converted_date='".$this->fromDate."'
-                   AND vendor LIKE '%tbs%'
+                   AND primary_vendor LIKE '%tbs%'
                    AND status = 'Converted'
                  GROUP BY utm";
 		$result = $db->query($sql);
