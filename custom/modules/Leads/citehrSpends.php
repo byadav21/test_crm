@@ -62,8 +62,8 @@ class citehrSpends
 }
 
 $mainObj           = new citehrSpends();
-//$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today'] : date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
-$mainObj->fromDate = '2018-11-05';
+$mainObj->fromDate = (isset($_GET['today']) && !empty($_GET['today'])) ? $_GET['today'] : date('Y-m-d', (strtotime('-1 day', strtotime(date('Y-m-d')))));
+//$mainObj->fromDate = '2018-11-05';
 
 $citeData           = $mainObj->get_data();
 
