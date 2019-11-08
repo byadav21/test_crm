@@ -395,6 +395,14 @@
                   $('#status option[value="Dropout"]').remove();
               }
               
+              if(usersRole=='Contact Center Counselor' && $("#status").val() == 'Recycle'){ 
+                  $("#status").attr('disabled','disabled');
+                  $("#status_description").attr('disabled','disabled');
+               
+              }else if (usersRole=='Contact Center Counselor' && $("#status").val() != 'Recycle'){
+                  $('#status option[value="Recycle"]').remove();
+              }
+              
               
              
        
