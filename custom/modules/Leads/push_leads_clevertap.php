@@ -14,6 +14,10 @@ class pushLeadClevertap
         global $db;
         
         //echo '<pre>';print_r($bean); die;
+        if (isset($_REQUEST['import_module']) && $_REQUEST['module'] == "Import"){
+             
+             return;
+         }
         
         $first_name = isset($bean->first_name) ? $bean->first_name : '';
         $last_name  = isset($bean->last_name) ? $bean->last_name : '';

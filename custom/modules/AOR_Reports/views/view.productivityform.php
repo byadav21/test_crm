@@ -44,8 +44,10 @@ class AOR_ReportsViewproductivityform extends SugarView
                          INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
                          INNER join acl_roles on aru.role_id=acl_roles.id
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
-                         WHERE aru.`role_id` IN ('$id')
-                           AND u.deleted=0
+                         WHERE 
+			   #aru.`role_id` IN ('$id')
+                            u.deleted=0
+			    AND  u.department='CC'
                            AND aru.deleted=0 and acl_roles.deleted=0 ";
         $userObj  = $db->query($userSql);
         $usersArr = [];
