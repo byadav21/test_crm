@@ -9,7 +9,7 @@ $data         = json_decode(file_get_contents('php://input'), true);
 $error_fields = [];
 $discount     = ' 0';
 
-$data= array('batch_crm_id'=>'8b6c11a8-64d5-4c94-0215-5bbb22d493af','email'=>'test@te.com','mobile'=>'9971502476','amount'=>'23');
+//$data= array('batch_crm_id'=>'8b6c11a8-64d5-4c94-0215-5bbb22d493af','email'=>'test@te.com','mobile'=>'9971502476','amount'=>'23');
 
 $lead_id     = '';
 $batch_id    = isset($data['batch_crm_id']) ? $data['batch_crm_id'] : '';
@@ -90,17 +90,18 @@ if ($error_fields)
     
     $sql .= " order by leads.date_entered limit 1";
 
-  die($sql);
+  //die($sql);
     
 $sqlobj = $db->query($sql);
 if ($db->getRowCount($sqlobj) > 0)
 {
     $records      = $db->fetchByAssoc($sqlobj);
     $leadID        = $records['id'];
-    $updateSql    = "update leads
+    $updateSql    = "update leads_cstm
                         SET
-                  lead_source         = '$lead_source',
-                  date_modified       = NOW()  where id='$leadID'";
+                  web_rm_status         = '1',
+                  web_rm_amt            = '$amount',
+                  date_modified         = NOW()  where id='$leadID'";
     $updateSqlres = $db->Query($updateSql);
     
     createLog('{Lead get update on success:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt',$sql, $data);
