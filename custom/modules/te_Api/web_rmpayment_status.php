@@ -9,7 +9,7 @@ $data         = json_decode(file_get_contents('php://input'), true);
 $error_fields = [];
 $discount     = ' 0';
 
-
+$data= array('batch_crm_id'=>'8b6c11a8-64d5-4c94-0215-5bbb22d493af','email'=>'test@te.com','mobile'=>'9971502476','amount'=>'23');
 
 $lead_id     = '';
 $batch_id    = isset($data['batch_crm_id']) ? $data['batch_crm_id'] : '';
@@ -58,29 +58,40 @@ if ($error_fields)
     exit();
 }
 
-die;
 
-$sql = "SELECT  leads.id AS id,
+
+    $sql = "SELECT  leads.id AS id,
                     leads.assigned_user_id,
-                    status,
-                    status_description
+                    leads.status,
+                    leads.status_description
              FROM leads
-             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c";
-if ($email != "")
-{
-    $sql .= " INNER JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id = leads.id
-                AND email_addr_bean_rel.bean_module ='Leads'";
+             INNER JOIN leads_cstm ON leads.id = leads_cstm.id_c ";
 
-    $sql .= " INNER JOIN email_addresses ON email_addresses.id =  email_addr_bean_rel.email_address_id ";
-}
+    $sql .= " WHERE leads.deleted = 0
+                  AND leads_cstm.te_ba_batch_id_c = '" . $batch_id . "'
+                  AND status_description!='Duplicate'
+                  AND status_description!='Re-Enquired'
+                  AND leads.deleted=0 "; 
+                // AND DATE(date_entered) = '".date('Y-m-d')."'";
+    if ($mobile && $email)
+    {
 
-$sql .= " WHERE leads.deleted = 0 AND leads_cstm.te_ba_batch_id_c = '" . $batch_id . "'";
+        $sql .= " AND ( leads.phone_mobile = '{$mobile}' or email_add_c = '{$email}')";
+    }
+    elseif (!$mobile && $email)
+    {
 
-if ($mobile != "" && $email != "")
-{
-    $sql .= " AND leads.phone_mobile = '$mobile' AND email_addresses.email_address='" .$email . "'";
-}
-$sql .="AND leads.status='Alive' AND leads.status_description='New Lead'";
+        $sql .= " AND email_add_c=  '{$email}'";
+    }
+    elseif ($mobile && !$email)
+    {
+        $sql .= " AND leads.phone_mobile = '{$mobile}'";
+    }
+    
+    $sql .= " order by leads.date_entered limit 1";
+
+  die($sql);
+    
 $sqlobj = $db->query($sql);
 if ($db->getRowCount($sqlobj) > 0)
 {
