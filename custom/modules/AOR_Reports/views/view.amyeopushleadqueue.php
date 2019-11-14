@@ -313,6 +313,8 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                    AND (l.assigned_user_id= 'NULL'
                         OR l.assigned_user_id =''
                         OR l.assigned_user_id IS NULL)
+		 AND CHAR_LENGTH(l.phone_mobile) >= 10 
+ 	      AND CHAR_LENGTH(l.phone_mobile) <= 10  
                  ORDER BY l.date_entered desc";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
