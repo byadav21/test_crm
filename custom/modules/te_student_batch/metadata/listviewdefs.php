@@ -62,6 +62,14 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'DROPOUT_TYPE' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_DROPOUT_TYPE',
+    'width' => '10%',
+    'default' => true,
+  ),
   'FEEPAID' => 
   array (
     'type' => 'varchar',

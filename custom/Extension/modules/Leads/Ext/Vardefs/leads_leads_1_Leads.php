@@ -176,3 +176,34 @@ $dictionary["Lead"]["fields"]["abnd_reenquired_status"] = array(
             'source'          => 'custom_fields',
 );
 
+$dictionary["Lead"]["fields"]["web_rm_status"] = array(
+            'name'            => 'web_rm_status',
+            'vname'           => 'WEB RM Status',
+            'type'            => 'varchar',
+            'len'             => '10',
+            'size'            => '10',
+            //'module' => 'Leads',
+            'default'         => '0',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);
+
+$dictionary["Lead"]["fields"]["web_rm_amt"] = array(
+            'name'            => 'web_rm_amt',
+            'vname'           => 'WEB RM Amt',
+            'type'            => 'varchar',
+            'len'             => '50',
+            'size'            => '20',
+            //'module' => 'Leads',
+            'default'         => 'NA',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);
