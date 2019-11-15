@@ -76,6 +76,15 @@ array (
         'default' => true,
         'name' => 'status',
       ),
+      'dropout_type' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_DROPOUT_TYPE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'dropout_type',
+      ),
       'bt_pre_dropped' => 
       array (
         'type' => 'int',
