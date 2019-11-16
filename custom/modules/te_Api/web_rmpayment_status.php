@@ -9,7 +9,7 @@ $data         = json_decode(file_get_contents('php://input'), true);
 $error_fields = [];
 $discount     = ' 0';
 
-//$data= array('batch_crm_id'=>'8b6c11a8-64d5-4c94-0215-5bbb22d493af','email'=>'test@te.com','mobile'=>'9971502476','amount'=>'23');
+ //$data= array('batch_crm_id'=>'8b6c11a8-64d5-4c94-0215-5bbb22d493af','email'=>'test@te.com','mobile'=>'9971502476','amount'=>'23');
 
 $lead_id     = '';
 $batch_id    = isset($data['batch_crm_id']) ? $data['batch_crm_id'] : '';
@@ -47,11 +47,11 @@ if (!isset($data['amount']) || empty($data['amount']))
 }
 
 
-createLog('{on initial action}', 'web_rmpayment_status' . date('Y-m-d') . '_log.txt', $lead_source, $data);
+createLog('{on initial action}', 'web_rmpayment_status_' . date('Y-m-d') . '_log.txt', $amount, $data);
 
 if ($error_fields)
 {
-    createLog('{while get an error}', 'web_rmpayment_status' . date('Y-m-d') . '_log.txt', $lead_source, $data);
+    createLog('{while get an error}', 'web_rmpayment_status_' . date('Y-m-d') . '_log.txt', $amount, $data);
 
     $response_result = array('status' => '400', 'result' => $error_fields);
     echo json_encode($response_result);
@@ -97,21 +97,22 @@ if ($db->getRowCount($sqlobj) > 0)
 {
     $records      = $db->fetchByAssoc($sqlobj);
     $leadID        = $records['id'];
-    $updateSql    = "update leads_cstm
+    echo $updateSql    = "update leads_cstm
                         SET
                   web_rm_status         = '1',
                   web_rm_amt            = '$amount',
-                  date_modified         = NOW()  where id='$leadID'";
+                  date_modified         = NOW()  where id_c='$leadID'";
     $updateSqlres = $db->Query($updateSql);
     
-    createLog('{Lead get update on success:}', 'web_lead_source_status' . date('Y-m-d') . '_log.txt',$sql, $data);
+    createLog('{Lead get update on success:}', 'web_rmpayment_status_' . date('Y-m-d') . '_log.txt',$sql, $data);
+    echo json_encode(array('status' => 'success', 'msg' => 'Lead updated!'));
     
 }
 else
 {
     echo json_encode(array('status' => 'failed', 'msg' => 'Lead ID not get fetched!'));
     
-    createLog('{Lead ID not get fetched:}', 'web_rmpayment_status' . date('Y-m-d') . '_log.txt', $sql, $data);
+    createLog('{Lead ID not get fetched:}', 'web_rmpayment_status_' . date('Y-m-d') . '_log.txt', $sql, $data);
 }
 
 
