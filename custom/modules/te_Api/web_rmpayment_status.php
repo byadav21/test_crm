@@ -100,8 +100,8 @@ if ($db->getRowCount($sqlobj) > 0)
     echo $updateSql    = "update leads_cstm
                         SET
                   web_rm_status         = '1',
-                  web_rm_amt            = '$amount',
-                  date_modified         = NOW()  where id_c='$leadID'";
+                  web_rm_amt            = '$amount'
+                  where id_c='$leadID'";
     $updateSqlres = $db->Query($updateSql);
     
     createLog('{Lead get update on success:}', 'web_rmpayment_status_' . date('Y-m-d') . '_log.txt',$sql, $data);
