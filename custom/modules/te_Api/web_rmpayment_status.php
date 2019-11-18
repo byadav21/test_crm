@@ -97,7 +97,7 @@ if ($db->getRowCount($sqlobj) > 0)
 {
     $records      = $db->fetchByAssoc($sqlobj);
     $leadID        = $records['id'];
-    echo $updateSql    = "update leads_cstm
+    $updateSql    = "update leads_cstm
                         SET
                   web_rm_status         = '1',
                   web_rm_amt            = '$amount'
