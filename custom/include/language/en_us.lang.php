@@ -486,7 +486,8 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_AR'=>'AR',
   'CO_te_skillgradeducational'=>'te_skillgradeducational',
   'CO_AY'=>'AY',
-     'CO_BS'=>'BS',
+  'CO_BS'=>'BS',
+  'CO_BM'=>'BM',
 
   'IS_INS'=>'INS',
   'IS_INS_Source_1'=>'INS_Source_1',
