@@ -44,7 +44,9 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
             'name'           => 'Vendor',
             'batch_code'     => 'Batch Code',
             'student_status' => 'Student Status',
-            'dropout_status' => 'Dropout Status'
+            'dropout_status' => 'Dropout Status',
+            'bt_pre_dropped' => 'BT Pre Dropped'
+        
         );
 
         return $headerArr;
@@ -88,11 +90,11 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
         $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
 
 
-        if (!in_array($current_user->id, isset($reportAccess[$report_action])? $reportAccess[$report_action]: array()) && ($current_user->is_admin != 1))
+        /*if (!in_array($current_user->id, isset($reportAccess[$report_action])? $reportAccess[$report_action]: array()) && ($current_user->is_admin != 1))
         {
             echo 'You are not authorized to access!';
             return;
-        }
+        }*/
 
 
 
@@ -211,7 +213,9 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
             'v.name'                                                                              => 'vendor_name',
             'b.batch_code'                                                                        => 'batch_code',
             'sb.status student_status'                                                            => 'student_status',
-            'sb.dropout_status'                                                                   => 'dropout_status'
+            'sb.dropout_status'                                                                   => 'dropout_status',
+            'sb.bt_pre_dropped'                                                                   => 'bt_pre_dropped'
+          
         );
 
 
