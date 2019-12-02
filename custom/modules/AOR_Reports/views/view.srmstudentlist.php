@@ -40,7 +40,7 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
             'batch_name'     => 'Batch Name',
             'batch_status'   => 'Batch Status',
             'dropout_type'   => 'Dropout Type',
-            'fee_inr'        => 'Fee',
+            //'fee_inr'        => 'Fee',
             'name'           => 'Vendor',
             'batch_code'     => 'Batch Code',
             'student_status' => 'Student Status',
@@ -209,7 +209,7 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
             'b.name batch_name'                                                                   => 'batch_name',
             'b.batch_status'                                                                      => 'batch_status',
             'sb.dropout_type'                                                                     => 'dropout_type',
-            'sb.fee_inr'                                                                          => 'fee_inr',
+            //'sb.fee_inr'                                                                          => 'fee_inr',
             'v.name'                                                                              => 'vendor_name',
             'b.batch_code'                                                                        => 'batch_code',
             'sb.status student_status'                                                            => 'student_status',
@@ -234,7 +234,7 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
                         left join leads_cstm on leads.id=leads_cstm.id_c
                         where sb.deleted=0
                         and inst.deleted=0
-                        and v.deleted=0
+                       
                         and b.deleted=0
                         $wherecl
                         and leads.deleted=0 ";
@@ -317,10 +317,6 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
 
 
             $leadCount = $rowCount; //count($leadList);
-
-
-
-
 
             header("Content-type: application/csv");
             header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
