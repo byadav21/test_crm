@@ -40,7 +40,7 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
             'batch_name'     => 'Batch Name',
             'batch_status'   => 'Batch Status',
             'dropout_type'   => 'Dropout Type',
-            'fee_inr'        => 'Fee',
+            //'fee_inr'        => 'Fee',
             'name'           => 'Vendor',
             'batch_code'     => 'Batch Code',
             'student_status' => 'Student Status',
@@ -215,7 +215,7 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
             'b.name batch_name'                                                                   => 'batch_name',
             'b.batch_status'                                                                      => 'batch_status',
             'sb.dropout_type'                                                                     => 'dropout_type',
-            'sum(CASE WHEN (sb.status)= "Active" THEN (sp.amount) ELSE 0 END) AS fee_inr'         => 'fee_inr',
+            //'sum(CASE WHEN (sb.status)= "Active" THEN (sp.amount) ELSE 0 END) AS fee_inr'         => 'fee_inr',
             'v.name'                                                                              => 'vendor_name',
             'b.batch_code'                                                                        => 'batch_code',
             'sb.status student_status'                                                            => 'student_status',
@@ -238,12 +238,14 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
                         left join te_pr_programs AS p ON p.id=sb.te_pr_programs_id_c
                         left join leads on sb.leads_id=leads.id 
                         left join leads_cstm on leads.id=leads_cstm.id_c
-                        left join te_student_payment as sp on sb.id= sp.te_student_batch_id_c
+                        
                         where sb.deleted=0
                         and inst.deleted=0
                         and b.deleted=0
                         $wherecl
-                        and leads.deleted=0 group by sb.id order by leads_cstm.email_add_c, sb.date_entered desc ";
+                        and leads.deleted=0 
+                        
+                        order by leads_cstm.email_add_c, sb.date_entered desc ";
 
         $countSql = "SELECT count(1) as count " . $sqlPart;
 
