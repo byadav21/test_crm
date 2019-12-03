@@ -54,6 +54,13 @@
                         <option value="post_dropout">Post Dropout</option>
                     </select>
                 </div>
+                <div class = "block">
+                    <label>BT Pre Dropped : </label>
+                    <select name="bt_pre_dropped" id="bt_pre_dropped"  class="" style="">
+                        <option value="">-Select-</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
             </div>
 
             <div class = "block-wrapper marginTop15">
