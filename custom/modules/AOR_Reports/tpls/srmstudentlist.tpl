@@ -72,16 +72,16 @@
             <div class = "block-wrapper marginTop15">
                 <div class = "block">
                     <label>Name : </label>
-                    <input type="text" value="{if $selected_student_name!=''} {$selected_student_name} {/if}" id="student_name" name="student_name" >
+                    <input type="text" value="{if $selected_student_name!=''}{$selected_student_name}{/if}" id="student_name" name="student_name" >
 
                 </div>
                 <div class = "block">
                     <label>Email: </label>
-                    <input type="text" value="{if $selected_student_email!=''} {$selected_student_email} {/if}" id="student_email" name="student_email" >
+                    <input type="text" value="{if $selected_student_email!=''}{$selected_student_email}{/if}" id="student_email" name="student_email" >
                 </div>
                 <div class = "block">
                     <label>Mobile : </label>
-                    <input type="text" value="{if $selected_student_mobile!=''} {$selected_student_mobile} {/if}" id="student_mobile" name="student_mobile" >
+                    <input type="text" value="{if $selected_student_mobile!=''}{$selected_student_mobile}{/if}" id="student_mobile" name="student_mobile" >
                 </div>
 
 

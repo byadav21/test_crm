@@ -214,20 +214,20 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
 
         if (!empty($selected_student_name))
         {
-
-            $wherecl .= " AND  (leads.first_name like '%$selected_student_name%' || leads.last_name like '%$selected_student_name%') ";
+            $trimed_name= trim($selected_student_name);
+            $wherecl .= " AND  (leads.first_name like '%$trimed_name%' || leads.last_name like '%$trimed_name%') ";
         }
 
         if (!empty($selected_student_email))
-        {
-
-            $wherecl .= " AND leads_cstm.email_add_c like '%$selected_student_email%' ";
+        {   
+            $trimed_email= trim($selected_student_email);
+            $wherecl .= " AND leads_cstm.email_add_c like '%$trimed_email%' ";
         }
 
         if (!empty($selected_student_mobile))
         {
-
-            $wherecl .= " AND  leads.phone_mobile like '%$selected_student_mobile%' ";
+            $trimed_mobile= trim($selected_student_mobile);
+            $wherecl .= " AND  leads.phone_mobile like '%$trimed_mobile%' ";
         }
          if (!empty($selected_bt_pre_dropped))
         {
