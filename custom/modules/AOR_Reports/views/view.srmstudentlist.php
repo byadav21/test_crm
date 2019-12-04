@@ -25,7 +25,7 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
         parent::SugarView();
         $this->objPagination = new pagination(60, 'page');
         $this->_objInputs    = new UserInput();
-        $this->_objInputs->syncSessions('vendorWiseCallDisposition');
+        $this->_objInputs->syncSessions('srmstudentlist');
     }
 
     function statusHeader()
@@ -74,6 +74,32 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
         }
         return $batchOptions;
     }
+    
+     function getProgramsDdown()
+        {
+            global $db;
+            $batchSql     = "select id,name from te_pr_programs where deleted=0 order by name";
+            $batchObj     = $db->query($batchSql);
+            $batchOptions = array();
+            while ($row          = $db->fetchByAssoc($batchObj))
+            {
+                $batchOptions[] = $row;
+            }
+            return $batchOptions;
+        }
+    
+     function getBatchsDdown()
+        {
+            global $db;
+            $batchSql     = "select id,name,batch_code from te_ba_batch where deleted=0 order by name";
+            $batchObj     = $db->query($batchSql);
+            $batchOptions = array();
+            while ($row          = $db->fetchByAssoc($batchObj))
+            {
+                $batchOptions[] = $row;
+            }
+            return $batchOptions;
+        }
 
     public function display()
     {
@@ -129,6 +155,8 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
         $selected_student_email           = $this->_objInputs->getVal('student_email', 'post', array());
         $selected_student_mobile          = $this->_objInputs->getVal('student_mobile', 'post', array());
         $selected_bt_pre_dropped          = $this->_objInputs->getVal('bt_pre_dropped', 'post', array());
+        
+
 
         $error = array();
         $Days  = $this->getBetweenDays($selected_from_date, $selected_to_date);
@@ -143,6 +171,10 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
 
         $statusHeader         = $this->statusHeader();
         $getInstituteDropData = $this->getInstitutesDdown();
+        
+        $getProgramsDown      = $this->getProgramsDdown();
+        $getBatchsDown        = $this->getBatchsDdown();
+        
 
 
 
@@ -205,7 +237,7 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
 
 
 
-
+        //echo '$selected_bt_pre_dropped=='.$selected_bt_pre_dropped;die;
 
         $headers = array(
             'concat(IFNULL(leads.first_name,"")," ",IFNULL(leads.last_name,"")) as Customer_name' => 'Customer_name',
@@ -379,6 +411,24 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendors);
         $sugarSmarty->assign("getInstituteDropData", $getInstituteDropData);
+        
+        
+        $sugarSmarty->assign("getProgramsDown", $getProgramsDown);
+        $sugarSmarty->assign("getBatchsDown",$getBatchsDown);
+        
+        
+        $sugarSmarty->assign("selected_institute", $selected_institute);
+        $sugarSmarty->assign("selected_program", $selected_program);
+        $sugarSmarty->assign("selected_batch", $selected_batch);
+        $sugarSmarty->assign("selected_student_status_dropdown", $selected_student_status_dropdown);
+        $sugarSmarty->assign("selected_dropout_type_dropdown", $selected_dropout_type_dropdown);
+        $sugarSmarty->assign("selected_student_name", $selected_student_name);
+        $sugarSmarty->assign("selected_student_email", $selected_student_email);
+        $sugarSmarty->assign("selected_student_mobile", $selected_student_mobile);
+        $sugarSmarty->assign("selected_bt_pre_dropped", $selected_bt_pre_dropped);
+
+
+        
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);

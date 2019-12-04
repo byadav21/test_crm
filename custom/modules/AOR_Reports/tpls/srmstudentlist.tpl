@@ -9,7 +9,7 @@
                     <select name="institute_dropdown" id="institute_dropdown"  class="" style="">
                         <option value="">-Select-</option>
                         {foreach from =$getInstituteDropData key=key item=program}
-                            <option value="{$program.id}" {if $program.id==$selected_institute_dropdown} selected="selected"{/if}>{$program.name}</option>
+                            <option value="{$program.id}" {if $program.id==$selected_institute} selected="selected"{/if}>{$program.name}</option>
                         {/foreach}
                     </select>
 
@@ -18,13 +18,19 @@
                     <label>Select Program : </label>
                     <select name="program_dropdown" id="program_dropdown"  class=""  style="">
                         <option value="">-Select-</option>
-
+                        {foreach from =$getProgramsDown key=key item=program}
+                            <option value="{$program.id}" {if $program.id==$selected_program} selected="selected"{/if}>{$program.name}</option>
+                        {/foreach}
+                            
                     </select>
                 </div>
                 <div class = "block">
                     <label>Select Batch : </label>
                     <select name="batch_dropdown" id="batch_dropdown"  class=""  style="">
                         <option value="">-Select-</option>
+                        {foreach from =$getBatchsDown   key=key item=program}
+                            <option value="{$program.id}" {if $program.id==$selected_batch} selected="selected"{/if}>{$program.name} ({$program.batch_code})</option>
+                        {/foreach}
                     </select>
                 </div>
 
@@ -37,11 +43,11 @@
                     <label>Student Status : </label>
                     <select name="student_status_dropdown" id="student_status_dropdown"  class="" style="">
                         <option value="">-Select-</option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                        <option value="Dropout">Dropout</option>
-                        <option value="Inactive_transfer">Inactive transfer</option>
-                        <option value="BT_Parking">BT Parking</option>
+                        <option value="Active" {if $selected_student_status_dropdown=='Active'} selected="selected"{/if}>Active</option>
+                        <option value="Inactive" {if $selected_student_status_dropdown=='Inactive'} selected="selected"{/if}>Inactive</option>
+                        <option value="Dropout" {if $selected_student_status_dropdown=='Dropout'} selected="selected"{/if}>Dropout</option>
+                        <option value="Inactive_transfer" {if $selected_student_status_dropdown=='Inactive_transfer'} selected="selected"{/if}>Inactive transfer</option>
+                        <option value="BT_Parking" {if $selected_student_status_dropdown=='BT_Parking'} selected="selected"{/if}>BT Parking</option>
                     </select>
 
                 </div>
@@ -50,15 +56,15 @@
                     <select name="dropout_type_dropdown" id="dropout_type_dropdown"  class="" style="">
                         <label>Dropout Type: </label>
                         <option value="">-Select-</option>
-                        <option value="pre_dropout">Pre Dropout</option>
-                        <option value="post_dropout">Post Dropout</option>
+                        <option value="pre_dropout" {if $selected_dropout_type_dropdown=='pre_dropout'} selected="selected"{/if}>Pre Dropout</option>
+                        <option value="post_dropout" {if $selected_dropout_type_dropdown=='post_dropout'} selected="selected"{/if}>Post Dropout</option>
                     </select>
                 </div>
                 <div class = "block">
                     <label>BT Pre Dropped : </label>
                     <select name="bt_pre_dropped" id="bt_pre_dropped"  class="" style="">
                         <option value="">-Select-</option>
-                        <option value="1">Yes</option>
+                        <option value="1" {if $selected_bt_pre_dropped=='1'} selected="selected"{/if}>Yes</option>
                     </select>
                 </div>
             </div>
@@ -66,16 +72,16 @@
             <div class = "block-wrapper marginTop15">
                 <div class = "block">
                     <label>Name : </label>
-                    <input type="text" value="" id="student_name" name="student_name" >
+                    <input type="text" value="{if $selected_student_name!=''} {$selected_student_name} {/if}" id="student_name" name="student_name" >
 
                 </div>
                 <div class = "block">
                     <label>Email: </label>
-                    <input type="text" value="" id="student_email" name="student_email" >
+                    <input type="text" value="{if $selected_student_email!=''} {$selected_student_email} {/if}" id="student_email" name="student_email" >
                 </div>
                 <div class = "block">
                     <label>Mobile : </label>
-                    <input type="text" value="" id="student_mobile" name="student_mobile" >
+                    <input type="text" value="{if $selected_student_mobile!=''} {$selected_student_mobile} {/if}" id="student_mobile" name="student_mobile" >
                 </div>
 
 
@@ -218,6 +224,7 @@
                 $("#institute_dropdown").change(function () {
                     var InstID = $('#institute_dropdown').val();
                     getAjax('program_dropdown', InstID);
+                     $("#batch_dropdown").html("");
                 });
 
                 $("#program_dropdown").change(function () {
