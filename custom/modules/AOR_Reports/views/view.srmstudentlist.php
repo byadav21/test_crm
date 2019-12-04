@@ -151,9 +151,9 @@ class AOR_ReportsViewsrmstudentlist extends SugarView
 
         $selected_student_status_dropdown = $this->_objInputs->getVal('student_status_dropdown', 'post', array());
         $selected_dropout_type_dropdown   = $this->_objInputs->getVal('dropout_type_dropdown', 'post', array());
-        $selected_student_name            = $this->_objInputs->getVal('student_name', 'post', array());
-        $selected_student_email           = $this->_objInputs->getVal('student_email', 'post', array());
-        $selected_student_mobile          = $this->_objInputs->getVal('student_mobile', 'post', array());
+        $selected_student_name            = $this->_objInputs->getVal('student_name', 'post');
+        $selected_student_email           = $this->_objInputs->getVal('student_email', 'post');
+        $selected_student_mobile          = $this->_objInputs->getVal('student_mobile', 'post');
         $selected_bt_pre_dropped          = $this->_objInputs->getVal('bt_pre_dropped', 'post', array());
         
 
