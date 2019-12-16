@@ -88,6 +88,8 @@ class pushLeadClevertap
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         # Return response instead of printing.
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         # Send request.
         $result = curl_exec($ch);
         curl_close($ch);
@@ -130,6 +132,8 @@ class pushLeadClevertap
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         # Return response instead of printing.
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         # Send request.
         $result = curl_exec($ch);
         curl_close($ch);

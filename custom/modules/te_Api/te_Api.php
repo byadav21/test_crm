@@ -79,7 +79,8 @@ class te_Api_override extends te_Api {
 			$ch = curl_init(); 
 			curl_setopt($ch, CURLOPT_URL, $server. urlencode(json_encode($data)));
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 30);						
 			$session= curl_exec($ch); 
 			 
 			//$session= file_get_contents(  $server. urlencode(json_encode($data)));
@@ -106,7 +107,8 @@ class te_Api_override extends te_Api {
 			$ch = curl_init(); 
 			curl_setopt($ch, CURLOPT_URL, $server. urlencode(json_encode($request)));
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 30);							
 			$data= curl_exec($ch);				
 			//$data= file_get_contents(  $server. urlencode(json_encode($request)));
 			$dataErr=json_decode($data);
@@ -195,7 +197,8 @@ class te_Api_override extends te_Api {
 				$ch = curl_init(); 
 				curl_setopt($ch, CURLOPT_URL, $url.$qrystr);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 100);						
+				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+                                curl_setopt($ch, CURLOPT_TIMEOUT, 30);						
 				$response = curl_exec($ch);
 				//$response= file_get_contents($url. ($qrystr)); 
                                 unset($_SESSION['temp_for_newUser']);
@@ -225,7 +228,8 @@ class te_Api_override extends te_Api {
 			$ch = curl_init(); 
 			curl_setopt($ch, CURLOPT_URL, $sugar_config['ameyo_URL'] . 'command?command=uploadContacts');
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 100);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 30);	
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
 			$response = curl_exec($ch);
