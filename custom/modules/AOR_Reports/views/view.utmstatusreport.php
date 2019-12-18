@@ -191,7 +191,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
         if (!empty($selected_vendor))
         {
 
-            $wheredr .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "')";
+            $wheredr .= " AND  te_vendor.id IN ('" . implode("','", $selected_vendor) . "') and leads_cstm.te_ba_batch_id_c!='b18b861f-ed8d-75b6-7462-593fe8c96812' ";
         }
 
         /* Check Date Range */
