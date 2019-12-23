@@ -130,7 +130,9 @@ class addStudentPaymentClass
                 unset($studentBatchObj);
                 $index++;
             }
-        }
+        } // end of IF
+        
+        /*
         elseif ($_REQUEST['module'] == "te_student_batch" && $bean->status == "Dropout" && $bean->dropout_status == "Pending")
         {
             global $db;
@@ -226,6 +228,7 @@ class addStudentPaymentClass
             $mail = new NetCoreEmail();
             $mail->sendEmail($studentemail, "Dropout Request", $template);
         }
+        */
     }
 
 }
