@@ -620,27 +620,68 @@ class LeadsViewEdit extends ViewEdit
                 })
                 $("#status_description").change(function () {
                     $("#disposition_reason option").hide();
-                    if ($(this).val() == 'Not Eligible') {
+                    if ($(this).val() == 'Call Back') {
+                        $("#disposition_reason option[value='Customer is Busy']").show();
+                        $("#disposition_reason option[value='RPC not available']").show();
+                        $("#disposition_reason option[value='Not Answering']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    }
+                    else if ($(this).val() == 'Follow Up') {
+                        $("#disposition_reason option[value='Interested Followup']").show();
+                        $("#disposition_reason option[value='Need approval from company']").show();
+                        $("#disposition_reason option[value='Not Reachable']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    else if ($(this).val() == 'Prospect') {
+                        $("#disposition_reason option[value='Prospect']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    
+                    
+                   else if ($(this).val() == 'Converted') {
+                        $("#disposition_reason option[value='Instalment Followup']").show();
+                        $("#disposition_reason option[value='Referral Followup']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    else if ($(this).val() == 'Wrong Number') {
+                        $("#disposition_reason option[value='Number belongs to someone else']").show();
+                        $("#disposition_reason option[value='Number out of service or invalid number']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    else if ($(this).val() == 'Not Enquired') {
+                        $("#disposition_reason option[value='Not Enquired']").show();
+                        $("#disposition_reason option[value='Enquired by Mistake']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    
+                    else if ($(this).val() == 'Not Eligible') {
                         $("#disposition_reason option[value='Language Barrier']").show();
-                        $("#disposition_reason option[value='Eligibility Criteria – Education']").show();
-                        $("#disposition_reason option[value='Eligibility Criteria – Experience']").show();
+                        $("#disposition_reason option[value='Education']").show();
+                        $("#disposition_reason option[value='Experience']").show();
                         $('#disposition_reason').closest('tr').show();
-                    } else if ($(this).val() == 'Not Interested') {
-                        $("#disposition_reason option[value='Fees High']").show();
-                        $("#disposition_reason option[value='Offline courses']").show();
-                        $("#disposition_reason option[value='Long duration']").show();
-                        $("#disposition_reason option[value='Syllabus']").show();
-
+                    } 
+                    else if ($(this).val() == 'DNC') {
+                        $("#disposition_reason option[value='Do not call']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    else if ($(this).val() == 'Not Answering') {
+                        $("#disposition_reason option[value='Not Answering']").show();
+                        $("#disposition_reason option[value='Not Interested']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    
+                    else if ($(this).val() == 'Fallout') {
+                        $("#disposition_reason option[value='Reason not shared']").show();
+                        $("#disposition_reason option[value='Next batch follow up']").show();
                         $("#disposition_reason option[value='Time Constraint']").show();
-                        $("#disposition_reason option[value='Enrolled Elsewhere']").show();
-                        $("#disposition_reason option[value='Customer Hang Up']").show();
+                        $("#disposition_reason option[value='Fees is high']").show();
+                        $("#disposition_reason option[value='Looking for Placement Assistance-Job']").show();
+                        $("#disposition_reason option[value='Enrolled with other institute']").show();
+                        $("#disposition_reason option[value='Existing student or Enrolled with TE']").show();
+                        $("#disposition_reason option[value='Looking for Degree Courses']").show();
                         $('#disposition_reason').closest('tr').show();
-                    } else if ($(this).val() == 'Fallout') {
-                        $("#disposition_reason option[value='Finance Issue']").show();
-                        $("#disposition_reason option[value='Time constraint']").show();
-                        $("#disposition_reason option[value='Enrolled somewhere else']").show();
-                        $('#disposition_reason').closest('tr').show();
-                    } else {
+                    } 
+                    else {
                         $('#disposition_reason').closest('tr').hide();
                     }
                     $("#disposition_reason option:selected").prop("selected", false);

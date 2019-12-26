@@ -42,15 +42,14 @@ $crmDispo = array('New Lead'               => 'Alive',
 $crmDispo = array(
     'Customer is Busy'                              => array('status' => 'Alive', 'sub_status' => 'Call Back'),
     'RPC not available'                             => array('status' => 'Alive', 'sub_status' => 'Call Back'),
-    'Not Answering'                                 => array('status' => 'Alive', 'sub_status' => 'Call Back'),
+    'Not Answering or Reachable'                    => array('status' => 'Alive', 'sub_status' => 'Call Back'),
     
     'Interested Followup'                           => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
     'Need approval from company'                    => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
-    'Not Reachable'                                 => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
+    'Not Answering or Not Reachable'                => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
     
     'Prospect'                                      => array('status' => 'Warm', 'sub_status' => 'Prospect'),
-    'Prospect'                                      => array('status' => 'Warm', 'sub_status' => 'Prospect'),
-    'Prospect'                                      => array('status' => 'Warm', 'sub_status' => 'Prospect'),
+   
     //'Re-Enquired'                                 => array('status' => 'Warm', 'sub_status' => 'Re-Enquired'), //System disposition
     
     //'Received Full Payment'                       => array('status' => 'Converted', 'sub_status' => 'Converted'),
@@ -61,7 +60,7 @@ $crmDispo = array(
     'Referral Followup'                             => array('status' => 'Converted', 'sub_status' => 'Converted'),
     
     'Number belongs to someone else'                => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
-    'Number out of service or invalid number'       => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
+    'Number out of service or invalid number'       => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),  
     
     'Not Enquired'                                  => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
     'Enquired by Mistake'                           => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
@@ -70,7 +69,7 @@ $crmDispo = array(
     'Education'                                     => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
     'Experience'                                    => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
     
-    'Do not call-Profanity'                         => array('status' => 'Dead', 'sub_status' => 'DNC'),
+    'Do not call'                                   => array('status' => 'Dead', 'sub_status' => 'DNC'),
     
     'Not Answering'                                 => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
     'Not Interested'                                => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
@@ -82,7 +81,7 @@ $crmDispo = array(
     'Fees is high'                                  => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Looking for Placement Assistance-Job'          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Enrolled with other institute'                 => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Existing student-Enrolled with TE'             => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Existing student or Enrolled with TE'             => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Looking for Degree Courses'                    => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     
     'Cross Sell'                                    => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),

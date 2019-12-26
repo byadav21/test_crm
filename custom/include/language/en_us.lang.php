@@ -9,24 +9,46 @@ $GLOBALS['app_list_strings']['batch_status_list']=array (
   'certification_in_progress' => 'Certification in progress',
   'closed' => 'Closed',
 );
-$GLOBALS['app_list_strings']['leads_disposition_reason_list']=array (
-  '' => 'Select Reason',
-  'Language Barrier' => 'Language Barrier',
-  'Eligibility Criteria – Education' => 'Eligibility Criteria – Education',
-  'Eligibility Criteria – Experience' => 'Eligibility Criteria – Experience',
+$GLOBALS['app_list_strings']['leads_disposition_reason_list'] = array(
+    ''                                          => 'Select Reason',
+    'Customer is Busy'                          => 'Customer is Busy',
+    'RPC not available'                         => 'RPC not available',
+    'Not Answering or Reachable'                => 'Not Answering or Reachable',
     
-  'Fees High' => 'Fees High',
-  'Offline courses' => 'Offline courses',
-  'Long duration' => 'Long duration',
-  'Syllabus' => 'Syllabus',
-  
-  'Time Constraint' => 'Time Constraint',
-  'Enrolled Elsewhere' => 'Enrolled Elsewhere',
-  'Customer Hang Up' => 'Customer Hang Up',
+    'Interested Followup'                       => 'Interested Followup',
+    'Need approval from company'                => 'Need approval from company',
+    'Not Answering or Not Reachable'            => 'Not Answering or Not Reachable',
     
-  'Finance Issue' => 'Finance Issue',
-  'Time constraint' => 'Time constraint',
-  'Enrolled somewhere else' => 'Enrolled somewhere else',
+    'Instalment Followup'                       => 'Instalment Followup',
+    'Referral Followup'                         => 'Referral Followup',
+    
+    
+    'Number belongs to someone else'            => 'Number belongs to someone else',
+    'Number out of service or invalid number'   => 'Number out of service or invalid number',
+    
+    
+    'Not Enquired'                              => 'Not Enquired',
+    'Enquired by Mistake'                       => 'Enquired by Mistake',
+    
+    
+    'Language Barrier'                          => 'Language Barrier',
+    'Education'                                 => 'Education',
+    'Experience'                                => 'Experience',
+    
+    'Do not call'                               => 'Do not call',
+    
+    'Not Answering'                             => 'Not Answering',
+    'Not Interested'                            => 'Not Interested',
+    
+    
+    'Reason not shared'                         => 'Reason not shared',
+    'Next batch follow up'                      => 'Next batch follow up',
+    'Time Constraint'                           => 'Time Constraint',
+    'Fees is high'                              => 'Fees is high',
+    'Looking for Placement Assistance-Job'      => 'Looking for Placement Assistance-Job',
+    'Enrolled with other institute'             => 'Enrolled with other institute',
+    'Existing student or Enrolled with TE'      => 'Existing student or Enrolled with TE',
+    'Looking for Degree Courses'                => 'Looking for Degree Courses',
 );
 $GLOBALS['app_list_strings']['lead_status_dom']=array (
   '' => '',
