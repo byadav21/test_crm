@@ -47,6 +47,9 @@ $callFollowupArr = array(
     'Followup_Need Company Approval' => 'Need Company Approval',
     'Followup_Not Answering'         => 'Not Answering');
 
+$convertedArr = array('Instalment Payment' => 'Instalment Followup',
+    'Referral'           => 'Referral Followup');
+
 $crmDispo = array(
     'Callback_Customer is Busy'             => array('status' => 'Alive', 'sub_status' => 'Call Back'),
     'Callback_RPC not available'            => array('status' => 'Alive', 'sub_status' => 'Call Back'),
@@ -134,10 +137,17 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     $dispositionCode        = isset($crmDispo[$dispositionReasonCode]['sub_status']) ? $crmDispo[$dispositionReasonCode]['sub_status'] : '';
     $status                 = isset($crmDispo[$dispositionReasonCode]['status']) ? $crmDispo[$dispositionReasonCode]['status'] : '';
     
-    if (in_array($dispositionCode, array('Follow Up','Call Back')))
+    if (in_array($dispositionCode, array('Follow Up', 'Call Back')))
     {
-            $dispositionReasonCode = $callFollowupArr[$dispositionReasonCode];
+        $dispositionReasonCode = $callFollowupArr[$dispositionReasonCode];
     }
+    if ($dispositionCode == 'Converted')
+    {
+        $dispositionReasonCode = $convertedArr[$dispositionReasonCode];
+    }
+
+
+
     $debugArr = array('lead_id'           => $records['id'],
         'status'            => $status,
         'subStatus'         => $dispositionCode,
