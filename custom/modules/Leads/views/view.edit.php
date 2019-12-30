@@ -467,9 +467,9 @@ class LeadsViewEdit extends ViewEdit
                     if (el.val() === "Alive") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
-                        //$("#status_description").append('<option>Call Back</option>');
                         $("#status_description").append('<option>Follow Up</option>');
-                        $("#status_description").append('<option>New Lead</option>');
+                        $("#status_description").append('<option>Call Back</option>');
+                        //$("#status_description").append('<option>New Lead</option>');
                     } else if (el.val() === "Dead") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
@@ -480,6 +480,7 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description").append('<option>Not Eligible</option>');
                         //$("#status_description").append('<option>Rejected</option>');
                         $("#status_description").append('<option>Cross Sell</option>');
+                        $("#status_description").append('<option>DNC</option>');
                         $("#status_description").append('<option>Not Interested</option>');
                         $("#status_description").append('<option>Next Batch</option>');
                         $("#status_description").append('<option>Fallout</option>');
@@ -493,8 +494,8 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
                         $("#status_description").append('<option>Converted</option>');
-                        $("#status_description").append('<option>Instalment Follow up</option>');
-                        $("#status_description").append('<option>Referral Follow up</option>');
+                        $("#status_description").append('<option>Instalment Followup</option>');
+                        $("#status_description").append('<option>Referral Followup</option>');
                     } 
                     
                     /*else if (el.val() === "Duplicate") {
@@ -628,8 +629,8 @@ class LeadsViewEdit extends ViewEdit
                     }
                     else if ($(this).val() == 'Follow Up') {
                         $("#disposition_reason option[value='Interested Followup']").show();
-                        $("#disposition_reason option[value='Need approval from company']").show();
-                        $("#disposition_reason option[value='Not Reachable']").show();
+                        $("#disposition_reason option[value='Need Company Approval']").show();
+                        $("#disposition_reason option[value='Not Answering']").show();
                         $('#disposition_reason').closest('tr').show();
                     } 
                     else if ($(this).val() == 'Prospect') {
@@ -645,7 +646,7 @@ class LeadsViewEdit extends ViewEdit
                     } 
                     else if ($(this).val() == 'Wrong Number') {
                         $("#disposition_reason option[value='Number belongs to someone else']").show();
-                        $("#disposition_reason option[value='Number out of service or invalid number']").show();
+                        $("#disposition_reason option[value='invalid number']").show();
                         $('#disposition_reason').closest('tr').show();
                     } 
                     else if ($(this).val() == 'Not Enquired') {
@@ -666,6 +667,9 @@ class LeadsViewEdit extends ViewEdit
                     } 
                     else if ($(this).val() == 'Not Answering') {
                         $("#disposition_reason option[value='Not Answering']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
+                    else if ($(this).val() == 'Not Interested') {
                         $("#disposition_reason option[value='Not Interested']").show();
                         $('#disposition_reason').closest('tr').show();
                     } 
@@ -675,12 +679,16 @@ class LeadsViewEdit extends ViewEdit
                         $("#disposition_reason option[value='Next batch follow up']").show();
                         $("#disposition_reason option[value='Time Constraint']").show();
                         $("#disposition_reason option[value='Fees is high']").show();
-                        $("#disposition_reason option[value='Looking for Placement Assistance-Job']").show();
+                        $("#disposition_reason option[value='Looking for Placement Assistance']").show();
                         $("#disposition_reason option[value='Enrolled with other institute']").show();
-                        $("#disposition_reason option[value='Existing student or Enrolled with TE']").show();
+                        $("#disposition_reason option[value='Enrolled with TE']").show();
                         $("#disposition_reason option[value='Looking for Degree Courses']").show();
                         $('#disposition_reason').closest('tr').show();
                     } 
+                    else if ($(this).val() == 'Cross Sell') {
+                        $("#disposition_reason option[value='Cross Sell']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    }
                     else {
                         $('#disposition_reason').closest('tr').hide();
                     }

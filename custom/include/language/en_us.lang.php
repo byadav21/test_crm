@@ -13,18 +13,20 @@ $GLOBALS['app_list_strings']['leads_disposition_reason_list'] = array(
     ''                                          => 'Select Reason',
     'Customer is Busy'                          => 'Customer is Busy',
     'RPC not available'                         => 'RPC not available',
-    'Not Answering or Reachable'                => 'Not Answering or Reachable',
+    'Not Answering'                             => 'Not Answering',
     
     'Interested Followup'                       => 'Interested Followup',
-    'Need approval from company'                => 'Need approval from company',
-    'Not Answering or Not Reachable'            => 'Not Answering or Not Reachable',
+    'Need Company Approval'                     => 'Need Company Approval',
+    'Not Answering'                             => 'Not Answering',
+    
+    'Prospect'                                  => 'Prospect',
     
     'Instalment Followup'                       => 'Instalment Followup',
     'Referral Followup'                         => 'Referral Followup',
     
     
     'Number belongs to someone else'            => 'Number belongs to someone else',
-    'Number out of service or invalid number'   => 'Number out of service or invalid number',
+    'invalid number'                            => 'invalid number',
     
     
     'Not Enquired'                              => 'Not Enquired',
@@ -42,13 +44,15 @@ $GLOBALS['app_list_strings']['leads_disposition_reason_list'] = array(
     
     
     'Reason not shared'                         => 'Reason not shared',
-    'Next batch follow up'                      => 'Next batch follow up',
+    'Next batch follow up'                      => 'Next batch',
     'Time Constraint'                           => 'Time Constraint',
     'Fees is high'                              => 'Fees is high',
-    'Looking for Placement Assistance-Job'      => 'Looking for Placement Assistance-Job',
+    'Looking for Placement Assistance'          => 'Looking for Placement Assistance',
     'Enrolled with other institute'             => 'Enrolled with other institute',
-    'Existing student or Enrolled with TE'      => 'Existing student or Enrolled with TE',
+    'Enrolled with TE'                          => 'Enrolled with TE',
     'Looking for Degree Courses'                => 'Looking for Degree Courses',
+    
+    'Cross Sell'                                => 'Cross Sell',
 );
 $GLOBALS['app_list_strings']['lead_status_dom']=array (
   '' => '',
@@ -619,7 +623,8 @@ $GLOBALS['app_list_strings']['lead_status_details_custom_dom']=array (
   'Post DO'=> 'Post DO',
   'Recycle'=> 'Recycle',
   'wrap.timeout'=> 'wrap.timeout',
-  'Enrolled with TE'=>'Enrolled with TE'
+  'Enrolled with TE'=>'Enrolled with TE',
+  'DNC'=>'DNC'
 );
 
 

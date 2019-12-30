@@ -107,6 +107,7 @@ $app_list_strings['lead_status_details_custom_dis_dom'] = array (
   'New Lead' => 'New Lead',
   'Re-Enquired' => 'Re-Enquired',
   'Prospect' => 'Prospect',
+  'DNC' => 'DNC',
   
 );
 

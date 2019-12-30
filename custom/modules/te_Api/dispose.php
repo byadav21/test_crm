@@ -47,8 +47,8 @@ $callFollowupArr = array(
     'Followup_Need Company Approval' => 'Need Company Approval',
     'Followup_Not Answering'         => 'Not Answering');
 
-$convertedArr = array('Instalment Payment' => 'Instalment Followup',
-    'Referral'           => 'Referral Followup');
+$convertedArr = array('Instalment Payment' => 'Instalment Follow Up',
+    'Referral'           => 'Referral Follow Up');
 
 $crmDispo = array(
     'Callback_Customer is Busy'             => array('status' => 'Alive', 'sub_status' => 'Call Back'),
@@ -69,14 +69,18 @@ $crmDispo = array(
     
     'Number belongs to someone else'        => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
     'invalid number'                        => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
+    
     'Not Enquired'                          => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
     'Enquired by Mistake'                   => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
     'Language Barrier'                      => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
     'Education'                             => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
     'Experience'                            => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
+    
     'Do not call'                           => array('status' => 'Dead', 'sub_status' => 'DNC'),
+    
     'Not Answering'                         => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
     'Not Interested'                        => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    
     'Reason not shared'                     => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Next batch follow up'                  => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Time Constraint'                       => array('status' => 'Dead', 'sub_status' => 'Fallout'),
@@ -85,6 +89,7 @@ $crmDispo = array(
     'Enrolled with other institute'         => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Enrolled with TE'                      => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Looking for Degree Courses'            => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    
     'Cross Sell'                            => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
     
     'wrap.timeout'                          => array('status' => 'wrap.timeout', 'sub_status' => 'wrap.timeout'),
