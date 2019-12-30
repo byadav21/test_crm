@@ -76,7 +76,7 @@ $crmDispo = array(
     'Education'                             => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
     'Experience'                            => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
     
-    'Do not call'                           => array('status' => 'Dead', 'sub_status' => 'DNC'),
+    'DNC'                                   => array('status' => 'Dead', 'sub_status' => 'DNC'),
     
     'Not Answering'                         => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
     'Not Interested'                        => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
@@ -333,6 +333,17 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 if ($dispositionCode == 'Prospect' && $finalDatTime != '')
                 {
                     $bean->date_of_prospect = gmdate('Y-m-d H:i:s', strtotime($finalDatTime));
+                    //$bean->date_of_prospect = $finalDatTime;
+                    //if (array_key_exists($assignedUserId, $popUserArr))
+                    //{
+                        $res = $db->query($callbackSql);
+                        createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                    //}
+                    createLog('{Ameyo Prospect response}', 'callback_dispose_log_' . date('Y-m-d') . '.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
+                }
+                if ($dispositionCode == 'Call Back' && $finalDatTime != '')
+                {
+                    $bean->date_of_callback = gmdate('Y-m-d H:i:s', strtotime($finalDatTime));
                     //$bean->date_of_prospect = $finalDatTime;
                     //if (array_key_exists($assignedUserId, $popUserArr))
                     //{

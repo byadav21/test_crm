@@ -37,7 +37,7 @@ $GLOBALS['app_list_strings']['leads_disposition_reason_list'] = array(
     'Education'                                 => 'Education',
     'Experience'                                => 'Experience',
     
-    'Do not call'                               => 'Do not call',
+    'DNC'                                       => 'DNC',
     
     'Not Answering'                             => 'Not Answering',
     'Not Interested'                            => 'Not Interested',

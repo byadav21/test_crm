@@ -331,75 +331,86 @@ class LeadsViewEdit extends ViewEdit
                     //~ alert(status_detail)
                     $("#status_description option").remove();
                     $("#status_description").append('<option></option>');
-                    if (status_detail == 'Dead Number') {
-                        $("#status_description").append('<option  selected="selected" >Dead Number</option>');
-                    } else {
-                        $("#status_description").append('<option>Dead Number</option>');
-                    }
+//                    if (status_detail == 'Dead Number') {
+//                        $("#status_description").append('<option  selected="selected" >Dead Number</option>');
+//                    } else {
+//                        $("#status_description").append('<option>Dead Number</option>');
+//                    }
+  //                    if (status_detail == 'Ringing Multiple Times') {
+                //                        $("#status_description").append('<option  selected="selected" >Ringing Multiple Times</option>');
+                //                    } else {
+                //                        $("#status_description").append('<option>Ringing Multiple Times</option>');
+                //                    }
                     if (status_detail == 'Wrong Number') {
-                        $("#status_description").append('<option  selected="selected" >Wrong Number</option>');
-                    } else {
-                        $("#status_description").append('<option >Wrong Number</option>');
-                    }
-        //                    if (status_detail == 'Ringing Multiple Times') {
-        //                        $("#status_description").append('<option  selected="selected" >Ringing Multiple Times</option>');
-        //                    } else {
-        //                        $("#status_description").append('<option>Ringing Multiple Times</option>');
-        //                    }
-                    if (status_detail == 'Not Enquired') {
-                        $("#status_description").append('<option  selected="selected" >Not Enquired</option>');
-                    } else {
-                        $("#status_description").append('<option>Not Enquired</option>');
-                    }
-                    if (status_detail == 'Not Eligible') {
-                        $("#status_description").append('<option  selected="selected" >Not Eligible</option>');
-                    } else {
-                        $("#status_description").append('<option>Not Eligible</option>');
-                    }
+                                $("#status_description").append('<option  selected="selected" >Wrong Number</option>');
+                            } else {
+                                $("#status_description").append('<option >Wrong Number</option>');
+                            }
+              
+                            if (status_detail == 'Not Enquired') {
+                                $("#status_description").append('<option  selected="selected" >Not Enquired</option>');
+                            } else {
+                                $("#status_description").append('<option>Not Enquired</option>');
+                            }
+                            if (status_detail == 'Not Eligible') {
+                                $("#status_description").append('<option  selected="selected" >Not Eligible</option>');
+                            } else {
+                                $("#status_description").append('<option>Not Eligible</option>');
+                            }
+                               if (status_detail == 'DNC') {
+                                $("#status_description").append('<option  selected="selected" >DNC</option>');
+                            } else {
+                                $("#status_description").append('<option >DNC</option>');
+                            }
+                               if (status_detail == 'Not Answering') {
+                                $("#status_description").append('<option  selected="selected" >Not Answering</option>');
+                            } else {
+                                $("#status_description").append('<option >Not Answering</option>');
+                            }
+                               if (status_detail == 'Not Interested') {
+                                $("#status_description").append('<option  selected="selected" >Not Interested</option>');
+                            } else {
+                                $("#status_description").append('<option >Not Interested</option>');
+                            }
+                             if (status_detail == 'Fallout') {
+                                $("#status_description").append('<option  selected="selected" >Fallout</option>');
+                            } else {
+                                $("#status_description").append('<option >Fallout</option>');
+                            }
+                              if (status_detail == 'Cross Sell') {
+                                $("#status_description").append('<option  selected="selected" >Cross Sell</option>');
+                            } else {
+                                $("#status_description").append('<option >Cross Sell</option>');
+                            }
+
+                     
                     /*if (status_detail == 'Rejected') {
                      $("#status_description").append('<option  selected="selected" >Rejected</option>');
                      } else {
                      $("#status_description").append('<option>Rejected</option>');
                      }*/
-                    if (status_detail == 'Fallout') {
-                        $("#status_description").append('<option  selected="selected" >Fallout</option>');
-                    } else {
-                        $("#status_description").append('<option >Fallout</option>');
-                    }
-                    if (status_detail == 'Cross Sell') {
-                        $("#status_description").append('<option  selected="selected" >Cross Sell</option>');
-                    } else {
-                        $("#status_description").append('<option >Cross Sell</option>');
-                    }
+                   
+                  
+                
 
-                    if (status_detail == 'Not Interested') {
-                        $("#status_description").append('<option  selected="selected" >Not Interested</option>');
-                    } else {
-                        $("#status_description").append('<option >Not Interested</option>');
-                    }
-
-                    if (status_detail == 'Next Batch') {
-                        $("#status_description").append('<option  selected="selected" >Next Batch</option>');
-                    } else {
-                        $("#status_description").append('<option >Next Batch</option>');
-                    }
-                    if (status_detail == 'Retired') {
-                        $("#status_description").append('<option  selected="selected" >Retired</option>');
-                    } else {
-                        $("#status_description").append('<option >Retired</option>');
-                    }
+//                    if (status_detail == 'Next Batch') {
+//                        $("#status_description").append('<option  selected="selected" >Next Batch</option>');
+//                    } else {
+//                        $("#status_description").append('<option >Next Batch</option>');
+//                    }
+                 
                     /*if (status_detail == 'Retired') {
                      $("#status_description").append('<option  selected="selected" >Retired</option>');
                      } else {
                      $("#status_description").append('<option>Retired</option>');
                      }*/
         
-                    if (status_detail == 'Enrolled with TE'){
-                                   $("#status_description").append('<option  selected="selected" >Enrolled with TE</option>');
-                           }
-                           else{
-                                   $("#status_description").append('<option>Enrolled with TE</option>');
-                           }
+//                    if (status_detail == 'Enrolled with TE'){
+//                                   $("#status_description").append('<option  selected="selected" >Enrolled with TE</option>');
+//                           }
+//                           else{
+//                                   $("#status_description").append('<option>Enrolled with TE</option>');
+//                           }
                 }
                 if (document.getElementById('status').value == "Converted") {
                     $("#status_description option").remove();
@@ -473,18 +484,22 @@ class LeadsViewEdit extends ViewEdit
                     } else if (el.val() === "Dead") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
-                        $("#status_description").append('<option>Dead Number</option>');
+                        //$("#status_description").append('<option>Dead Number</option>');
                         $("#status_description").append('<option>Wrong Number</option>');
                         //$("#status_description").append('<option>Ringing Multiple Times</option>');
                         $("#status_description").append('<option>Not Enquired</option>');
                         $("#status_description").append('<option>Not Eligible</option>');
-                        //$("#status_description").append('<option>Rejected</option>');
-                        $("#status_description").append('<option>Cross Sell</option>');
                         $("#status_description").append('<option>DNC</option>');
                         $("#status_description").append('<option>Not Interested</option>');
-                        $("#status_description").append('<option>Next Batch</option>');
+                        $("#status_description").append('<option>Not Answering</option>');
+                        //$("#status_description").append('<option>Rejected</option>');
                         $("#status_description").append('<option>Fallout</option>');
-                        $("#status_description").append('<option>Enrolled with TE</option>');
+                        $("#status_description").append('<option>Cross Sell</option>');
+                       
+                       
+                        //$("#status_description").append('<option>Next Batch</option>');
+                      
+                       
                         //$("#status_description").append('<option>Retired</option>');
                     } else if (el.val() === "Recycle") {
                         $("#status_description option").remove();
@@ -662,7 +677,7 @@ class LeadsViewEdit extends ViewEdit
                         $('#disposition_reason').closest('tr').show();
                     } 
                     else if ($(this).val() == 'DNC') {
-                        $("#disposition_reason option[value='Do not call']").show();
+                        $("#disposition_reason option[value='DNC']").show();
                         $('#disposition_reason').closest('tr').show();
                     } 
                     else if ($(this).val() == 'Not Answering') {
