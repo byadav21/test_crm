@@ -39,55 +39,57 @@ $crmDispo = array('New Lead'               => 'Alive',
 );
 */
 
+$callFollowupArr = array(
+    'Callback_Customer is Busy'      => 'Customer is Busy',
+    'Callback_RPC not available'     => 'RPC not available',
+    'Callback_Not Answering'         => 'Not Answering',
+    'Followup_Interested Followup'   => 'Interested Followup',
+    'Followup_Need Company Approval' => 'Need Company Approval',
+    'Followup_Not Answering'         => 'Not Answering');
+
 $crmDispo = array(
-    'Customer is Busy'                              => array('status' => 'Alive', 'sub_status' => 'Call Back'),
-    'RPC not available'                             => array('status' => 'Alive', 'sub_status' => 'Call Back'),
-    'Not Answering or Reachable'                    => array('status' => 'Alive', 'sub_status' => 'Call Back'),
+    'Callback_Customer is Busy'             => array('status' => 'Alive', 'sub_status' => 'Call Back'),
+    'Callback_RPC not available'            => array('status' => 'Alive', 'sub_status' => 'Call Back'),
+    'Callback_Not Answering'                => array('status' => 'Alive', 'sub_status' => 'Call Back'),
     
-    'Interested Followup'                           => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
-    'Need approval from company'                    => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
-    'Not Answering or Not Reachable'                => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
+    'Followup_Interested Followup'          => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
+    'Followup_Need Company Approval'        => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
+    'Followup_Not Answering'                => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
     
-    'Prospect'                                      => array('status' => 'Warm', 'sub_status' => 'Prospect'),
-   
-    //'Re-Enquired'                                 => array('status' => 'Warm', 'sub_status' => 'Re-Enquired'), //System disposition
+    'Prospect'                              => array('status' => 'Warm',  'sub_status' => 'Prospect'),
+    //'Re-Enquired'                         => array('status' => 'Warm', 'sub_status' => 'Re-Enquired'), //System disposition
+    //'Received Full Payment'               => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    //'Received Initial EMI'                => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    //'Received Partial EMI'                => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    'Instalment Payment'                    => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    'Referral'                              => array('status' => 'Converted', 'sub_status' => 'Converted'),
     
-    //'Received Full Payment'                       => array('status' => 'Converted', 'sub_status' => 'Converted'),
-    //'Received Initial EMI'                        => array('status' => 'Converted', 'sub_status' => 'Converted'),
-    //'Received Partial EMI'                        => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    'Number belongs to someone else'        => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
+    'invalid number'                        => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
+    'Not Enquired'                          => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
+    'Enquired by Mistake'                   => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
+    'Language Barrier'                      => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
+    'Education'                             => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
+    'Experience'                            => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
+    'Do not call'                           => array('status' => 'Dead', 'sub_status' => 'DNC'),
+    'Not Answering'                         => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
+    'Not Interested'                        => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'Reason not shared'                     => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Next batch follow up'                  => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Time Constraint'                       => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Fees is high'                          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Looking for Placement Assistance'      => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Enrolled with other institute'         => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Enrolled with TE'                      => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Looking for Degree Courses'            => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Cross Sell'                            => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
     
-    'Instalment Followup'                           => array('status' => 'Converted', 'sub_status' => 'Converted'),
-    'Referral Followup'                             => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    'wrap.timeout'                          => array('status' => 'wrap.timeout', 'sub_status' => 'wrap.timeout'),
+    'user.forced.logged.off'                => array('status' => 'user.forced.logged.off', 'sub_status' => 'user.forced.logged.off'),
     
-    'Number belongs to someone else'                => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
-    'Number out of service or invalid number'       => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),  
-    
-    'Not Enquired'                                  => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
-    'Enquired by Mistake'                           => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
-    
-    'Language Barrier'                              => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
-    'Education'                                     => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
-    'Experience'                                    => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
-    
-    'Do not call'                                   => array('status' => 'Dead', 'sub_status' => 'DNC'),
-    
-    'Not Answering'                                 => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
-    'Not Interested'                                => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
-    
-    
-    'Reason not shared'                             => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Next batch follow up'                          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Time Constraint'                               => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Fees is high'                                  => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Looking for Placement Assistance-Job'          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Enrolled with other institute'                 => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Existing student or Enrolled with TE'             => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Looking for Degree Courses'                    => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    
-    'Cross Sell'                                    => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
-    
-    //'Recycle'                                     => array('status' => 'Recycle', 'sub_status' => 'Recycle'),
-    //'Reassigned'                                  => array('status' => 'Reassigned', 'sub_status' => 'Reassigned'),
+    'Cross Sell'                            => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
+  //'Recycle'                               => array('status' => 'Recycle', 'sub_status' => 'Recycle'),
+  //'Reassigned'                            => array('status' => 'Reassigned', 'sub_status' => 'Reassigned'),
 );
 
 function createLog($action, $filename, $field = '', $dataArray = array())
@@ -130,7 +132,11 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     $dispositionReasonCode  = $_REQUEST['dispositionCode'];
     $dispositionCode        = isset($crmDispo[$dispositionReasonCode]['sub_status']) ? $crmDispo[$dispositionReasonCode]['sub_status'] : '';
     $status                 = isset($crmDispo[$dispositionReasonCode]['status']) ? $crmDispo[$dispositionReasonCode]['status'] : '';
-
+    
+    if (in_array($dispositionCode, array('Follow Up','Call Back')))
+    {
+            $dispositionReasonCode = $callFollowupArr[$dispositionReasonCode];
+    }
     $debugArr = array('lead_id'           => $records['id'],
         'status'            => $status,
         'subStatus'         => $dispositionCode,
