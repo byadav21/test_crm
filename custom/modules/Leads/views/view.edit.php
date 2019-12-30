@@ -494,8 +494,8 @@ class LeadsViewEdit extends ViewEdit
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
                         $("#status_description").append('<option>Converted</option>');
-                        $("#status_description").append('<option>Instalment Followup</option>');
-                        $("#status_description").append('<option>Referral Followup</option>');
+                        $("#status_description").append('<option>Instalment Follow Up</option>');
+                        $("#status_description").append('<option>Referral Follow Up</option>');
                     } 
                     
                     /*else if (el.val() === "Duplicate") {
