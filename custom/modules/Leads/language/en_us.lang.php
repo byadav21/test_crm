@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-08 08:50:13
+// created: 2019-12-30 17:54:47
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Payment Details',
   'LBL_COMPANY' => 'Company',
@@ -39,4 +39,5 @@ $mod_strings = array (
   'LBL_INDIVIDUAL_ID' => 'Individual Id',
   'LBL_INDIVIDUAL_IDSTATUS' => 'Individual Id Status',
   'LBL_INDIVIDUAL_IDBATCHSTATUS' => 'Individual Id Batch Status',
+  'Disposition log' => 'Disposition log',
 );

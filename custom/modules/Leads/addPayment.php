@@ -959,6 +959,7 @@ class addPaymentClass
 
                 $disposition->status        = $bean->status;
                 $disposition->status_detail = $bean->status_description;
+                $disposition->dispositionreason = $bean->disposition_reason;
                 if (isset($bean->note))
                 {
                     $disposition->description = $bean->note;

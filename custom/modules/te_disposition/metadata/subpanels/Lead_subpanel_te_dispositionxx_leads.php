@@ -1,5 +1,5 @@
 <?php
-// created: 2018-09-11 13:14:14
+// created: 2019-12-30 18:07:55
 $subpanel_layout['list_fields'] = array (
   'date_entered' => 
   array (
@@ -33,6 +33,13 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'enum',
     'studio' => 'visible',
     'vname' => 'LBL_STATUS_DETAIL',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'dispositionreason' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_Disposition_Reason',
     'width' => '10%',
     'default' => true,
   ),

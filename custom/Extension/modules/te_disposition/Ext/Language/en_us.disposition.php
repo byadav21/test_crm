@@ -14,5 +14,6 @@ $mod_strings['LBL_PROGRAM'] = 'Program';
 $mod_strings['LBL_BATCH'] = 'Batch';
 
 $mod_strings['LBL_Disposition_Name'] = 'Disposition Name';
+$mod_strings['LBL_Disposition_Reason'] = 'Disposition Reason';
 $mod_strings['LBL_Call_Type'] = 'Call Type';
 $mod_strings['LBL_Attempt_Count'] = 'Attempt Count';
