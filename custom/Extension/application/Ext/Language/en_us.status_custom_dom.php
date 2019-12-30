@@ -19,6 +19,7 @@ $app_list_strings['lead_status_details_custom_dom'] = array (
   'Not Enquired' => 'Not Enquired',
   'Not Eligible' => 'Not Eligible',
   'Rejected' => 'Rejected',
+  'DNC' => 'DNC',
   'Fallout' => 'Fallout',
   'Retired' => 'Retired',
   'Call Back' => 'Call Back',
