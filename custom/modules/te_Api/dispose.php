@@ -82,10 +82,10 @@ $crmDispo = array(
     'Not Interested'                        => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
     
     'Reason not shared'                     => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Next batch follow up'                  => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Next batch'                            => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Time Constraint'                       => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Fees is high'                          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
-    'Looking for Placement Assistance'      => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Looking for Job or Placement'          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Enrolled with other institute'         => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Enrolled with TE'                      => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Looking for Degree Courses'            => array('status' => 'Dead', 'sub_status' => 'Fallout'),

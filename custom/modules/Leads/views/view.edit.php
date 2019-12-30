@@ -691,10 +691,10 @@ class LeadsViewEdit extends ViewEdit
                     
                     else if ($(this).val() == 'Fallout') {
                         $("#disposition_reason option[value='Reason not shared']").show();
-                        $("#disposition_reason option[value='Next batch follow up']").show();
+                        $("#disposition_reason option[value='Next batch']").show();
                         $("#disposition_reason option[value='Time Constraint']").show();
                         $("#disposition_reason option[value='Fees is high']").show();
-                        $("#disposition_reason option[value='Looking for Placement Assistance']").show();
+                        $("#disposition_reason option[value='Looking for Job or Placement']").show();
                         $("#disposition_reason option[value='Enrolled with other institute']").show();
                         $("#disposition_reason option[value='Enrolled with TE']").show();
                         $("#disposition_reason option[value='Looking for Degree Courses']").show();
