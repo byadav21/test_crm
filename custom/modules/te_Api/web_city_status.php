@@ -17,8 +17,8 @@ $functional_area = isset($data['functional_area']) ? $data['functional_area'] : 
 $experience      = isset($data['experience']) ? $data['experience'] : 'NA';
 $qualification   = isset($data['qualification']) ? $data['qualification'] : 'NA';
 
-$country_name = isset($data['country_name']) ? $data['country_name'] : 'NA';
-$state        = isset($data['state']) ? $data['state'] : 'NA';
+//$country_name = isset($data['country_name']) ? $data['country_name'] : 'NA';
+//$state        = isset($data['state']) ? $data['state'] : 'NA';
 $city         = isset($data['city']) ? $data['city'] : 'NA';
 
 if (isset($country_name) && $country_name != '')
@@ -83,8 +83,8 @@ if ($site_lead_id != '')
         $qualification   = isset($data['qualification']) ? $data['qualification'] : 'NA';
 	$company         = isset($data['company']) ? $data['company'] : 'NA';
 
-        $country_name = isset($data['country_name']) ? $data['country_name'] : 'NA';
-        $state        = isset($data['state']) ? $data['state'] : 'NA';
+        //$country_name = isset($data['country_name']) ? $data['country_name'] : 'NA';
+        //$state        = isset($data['state']) ? $data['state'] : 'NA';
         $city         = isset($data['city']) ? $data['city'] : 'NA';
 
 
@@ -92,10 +92,10 @@ if ($site_lead_id != '')
         $LBean->functional_area_c       = $functional_area;
         $LBean->work_experience_c       = $experience;
         $LBean->education_c             = $qualification;
-        $LBean->primary_address_state   = $state;
-        $LBean->country_code            = $country_code;
-        $LBean->primary_address_country = $country_name;
-        $LBean->country_log             = $country_name;
+        //$LBean->primary_address_state   = $state;
+        //$LBean->country_code            = $country_code;
+        //$LBean->primary_address_country = $country_name;
+        //$LBean->country_log             = $country_name;
         $LBean->company_c               = $company;
 
         $checkSaveBean = $LBean->save();
