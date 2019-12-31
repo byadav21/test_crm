@@ -71,6 +71,24 @@
                         </td>
 
                     </tr>
+                    
+                    <tr>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Status">Target (Pitched):</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <input type="textbox" value="" id="target_pitched" name="target_pitched" >
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Code">Target (Prospects):</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <input type="textbox" value="" id="target_prospects" name="target_prospects" >
+                        </td>
+
+                    </tr>
 
 
 
@@ -168,7 +186,13 @@
                     <strong>Target (gsv)</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
-                    <strong>Unit (gsv)</strong>
+                    <strong>Unit (Converted)</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
+                    <strong>Unit (Pitched)</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
+                    <strong>Unit (Prospects)</strong>
                 </th>
                  <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="1">
                     <strong>Action</strong>
@@ -192,6 +216,10 @@
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_gsv}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_unit}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_pitched}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_prospects}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="javascript:void(0)" onclick='deleteItem("{$leads.id}","Myrow_{$key}")'>Delete</a></td>
 

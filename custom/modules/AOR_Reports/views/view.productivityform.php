@@ -234,6 +234,16 @@ class AOR_ReportsViewproductivityform extends SugarView
 
                 $target_unit = $_POST['target_unit'];
             }
+            if (isset($_POST['target_pitched']) && $_POST['target_pitched'] != '')
+            {
+
+                $target_pitched = $_POST['target_pitched'];
+            }
+            if (isset($_POST['target_prospects']) && $_POST['target_prospects'] != '')
+            {
+
+                $target_prospects = $_POST['target_prospects'];
+            }
 
 
 
@@ -261,6 +271,8 @@ class AOR_ReportsViewproductivityform extends SugarView
                                     . "month=$month,"
                                     . "target_gsv='$target_gsv',"
                                     . "target_unit='$target_unit' , "
+                                    . "target_pitched='$target_pitched' , "
+                                    . "target_prospects='$target_prospects' , "
                                     . "modified_date='" . date('Y-m-d H:i:s') . "' , "
                                     . "created_date='" . date('Y-m-d H:i:s') . "'";
                             $GLOBALS['db']->Query($insertSql);
@@ -279,6 +291,8 @@ class AOR_ReportsViewproductivityform extends SugarView
                                     . "month=$month,"
                                     . "target_gsv='$target_gsv',"
                                     . "target_unit='$target_unit' , "
+                                    . "target_pitched='$target_pitched' , "
+                                    . "target_prospects='$target_prospects' , "    
                                     . "modified_date='" . date('Y-m-d H:i:s') . "' , "
                                     . "created_date='" . date('Y-m-d H:i:s') . "'";
                             $GLOBALS['db']->Query($insertSql);
