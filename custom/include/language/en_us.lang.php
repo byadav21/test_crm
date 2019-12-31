@@ -9,24 +9,50 @@ $GLOBALS['app_list_strings']['batch_status_list']=array (
   'certification_in_progress' => 'Certification in progress',
   'closed' => 'Closed',
 );
-$GLOBALS['app_list_strings']['leads_disposition_reason_list']=array (
-  '' => 'Select Reason',
-  'Language Barrier' => 'Language Barrier',
-  'Eligibility Criteria – Education' => 'Eligibility Criteria – Education',
-  'Eligibility Criteria – Experience' => 'Eligibility Criteria – Experience',
+$GLOBALS['app_list_strings']['leads_disposition_reason_list'] = array(
+    ''                                          => 'Select Reason',
+    'Customer is Busy'                          => 'Customer is Busy',
+    'RPC not available'                         => 'RPC not available',
+    'Not Answering'                             => 'Not Answering',
     
-  'Fees High' => 'Fees High',
-  'Offline courses' => 'Offline courses',
-  'Long duration' => 'Long duration',
-  'Syllabus' => 'Syllabus',
-  
-  'Time Constraint' => 'Time Constraint',
-  'Enrolled Elsewhere' => 'Enrolled Elsewhere',
-  'Customer Hang Up' => 'Customer Hang Up',
+    'Interested Followup'                       => 'Interested Followup',
+    'Need Company Approval'                     => 'Need Company Approval',
+    'Not Answering'                             => 'Not Answering',
     
-  'Finance Issue' => 'Finance Issue',
-  'Time constraint' => 'Time constraint',
-  'Enrolled somewhere else' => 'Enrolled somewhere else',
+    'Prospect'                                  => 'Prospect',
+    
+    'Instalment Followup'                       => 'Instalment Followup',
+    'Referral Followup'                         => 'Referral Followup',
+    
+    
+    'Number belongs to someone else'            => 'Number belongs to someone else',
+    'invalid number'                            => 'invalid number',
+    
+    
+    'Not Enquired'                              => 'Not Enquired',
+    'Enquired by Mistake'                       => 'Enquired by Mistake',
+    
+    
+    'Language Barrier'                          => 'Language Barrier',
+    'Education'                                 => 'Education',
+    'Experience'                                => 'Experience',
+    
+    'DNC'                                       => 'DNC',
+    
+    'Not Answering'                             => 'Not Answering',
+    'Not Interested'                            => 'Not Interested',
+    
+    
+    'Reason not shared'                         => 'Reason not shared',
+    'Next batch'                                => 'Next batch',
+    'Time Constraint'                           => 'Time Constraint',
+    'Fees is high'                              => 'Fees is high',
+    'Looking for Job or Placement'              => 'Looking for Job or Placement',
+    'Enrolled with other institute'             => 'Enrolled with other institute',
+    'Enrolled with TE'                          => 'Enrolled with TE',
+    'Looking for Degree Courses'                => 'Looking for Degree Courses',
+    
+    'Cross Sell'                                => 'Cross Sell',
 );
 $GLOBALS['app_list_strings']['lead_status_dom']=array (
   '' => '',
@@ -597,7 +623,8 @@ $GLOBALS['app_list_strings']['lead_status_details_custom_dom']=array (
   'Post DO'=> 'Post DO',
   'Recycle'=> 'Recycle',
   'wrap.timeout'=> 'wrap.timeout',
-  'Enrolled with TE'=>'Enrolled with TE'
+  'Enrolled with TE'=>'Enrolled with TE',
+  'DNC'=>'DNC'
 );
 
 

@@ -71,6 +71,14 @@ $dictionary['te_disposition']['fields']['attempt_count']['audited']='false';
 $dictionary['te_disposition']['fields']['status']['required']=true;
 $dictionary['te_disposition']['fields']['status']['options']='lead_status_custom_dis_dom';
 $dictionary['te_disposition']['fields']['status_detail']['options']='lead_status_details_custom_dis_dom';
+
+
+$dictionary['te_disposition']['fields']['dispositionreason']['name']='dispositionreason';
+$dictionary['te_disposition']['fields']['dispositionreason']['vname']='LBL_Disposition_Reason';
+$dictionary['te_disposition']['fields']['dispositionreason']['type']='varchar';
+$dictionary['te_disposition']['fields']['dispositionreason']['dbType']='varchar';
+$dictionary['te_disposition']['fields']['dispositionreason']['len']='100';
+$dictionary['te_disposition']['fields']['dispositionreason']['audited']='false';
  ?>
  
  

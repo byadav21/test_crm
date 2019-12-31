@@ -8,7 +8,7 @@ require_once('modules/te_neox_call_details/te_neox_call_details.php');
 global $db, $current_user;
 
 
-
+/*
 $crmDispo = array('New Lead'               => 'Alive',
     'Follow Up'              => 'Alive',
     'Dead Number'            => 'Dead',
@@ -36,6 +36,69 @@ $crmDispo = array('New Lead'               => 'Alive',
     'Referral'               => 'Converted',
     'Technical' 	     => 'Converted',
     'Miscellaneous'          => 'Converted'
+);
+*/
+
+$callFollowupArr = array(
+    'Callback_Customer is Busy'      => 'Customer is Busy',
+    'Callback_RPC not available'     => 'RPC not available',
+    'Callback_Not Answering'         => 'Not Answering',
+    'Followup_Interested Followup'   => 'Interested Followup',
+    'Followup_Need Company Approval' => 'Need Company Approval',
+    'Followup_Not Answering'         => 'Not Answering');
+
+$convertedArr = array('Instalment Payment' => 'Instalment Follow Up',
+    'Referral'           => 'Referral Follow Up');
+
+$crmDispo = array(
+    'Callback_Customer is Busy'             => array('status' => 'Alive', 'sub_status' => 'Call Back'),
+    'Callback_RPC not available'            => array('status' => 'Alive', 'sub_status' => 'Call Back'),
+    'Callback_Not Answering'                => array('status' => 'Alive', 'sub_status' => 'Call Back'),
+    
+    'Followup_Interested Followup'          => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
+    'Followup_Need Company Approval'        => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
+    'Followup_Not Answering'                => array('status' => 'Alive', 'sub_status' => 'Follow Up'),
+    
+    'Prospect'                              => array('status' => 'Warm',  'sub_status' => 'Prospect'),
+    //'Re-Enquired'                         => array('status' => 'Warm', 'sub_status' => 'Re-Enquired'), //System disposition
+    //'Received Full Payment'               => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    //'Received Initial EMI'                => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    //'Received Partial EMI'                => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    'Instalment Payment'                    => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    'Referral'                              => array('status' => 'Converted', 'sub_status' => 'Converted'),
+    
+    'Number belongs to someone else'        => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
+    'invalid number'                        => array('status' => 'Dead', 'sub_status' => 'Wrong Number'),
+    
+    'Not Enquired'                          => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
+    'Enquired by Mistake'                   => array('status' => 'Dead', 'sub_status' => 'Not Enquired'),
+    'Language Barrier'                      => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
+    'Education'                             => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
+    'Experience'                            => array('status' => 'Dead', 'sub_status' => 'Not Eligible'),
+    
+    'DNC'                                   => array('status' => 'Dead', 'sub_status' => 'DNC'),
+    
+    'Not Answering'                         => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
+    'Not Interested'                        => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    
+    'Reason not shared'                     => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Next batch'                            => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Time Constraint'                       => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Fees is high'                          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Looking for Job or Placement'          => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Enrolled with other institute'         => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Enrolled with TE'                      => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Looking for Degree Courses'            => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    
+    'Cross Sell'                            => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
+    
+    'wrap.timeout'                          => array('status' => 'wrap.timeout', 'sub_status' => 'wrap.timeout'),
+    'user.forced.logged.off'                => array('status' => 'user.forced.logged.off', 'sub_status' => 'user.forced.logged.off'),
+    
+    
+    'Cross Sell'                            => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
+  //'Recycle'                               => array('status' => 'Recycle', 'sub_status' => 'Recycle'),
+  //'Reassigned'                            => array('status' => 'Reassigned', 'sub_status' => 'Reassigned'),
 );
 
 function createLog($action, $filename, $field = '', $dataArray = array())
@@ -75,8 +138,20 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
     $dispositionCode = '';
     $status          = '';
-    $dispositionCode = $_REQUEST['dispositionCode'];
-    $status          = isset($crmDispo[$dispositionCode]) ? $crmDispo[$dispositionCode] : '';
+    $dispositionReasonCode  = $_REQUEST['dispositionCode'];
+    $dispositionCode        = isset($crmDispo[$dispositionReasonCode]['sub_status']) ? $crmDispo[$dispositionReasonCode]['sub_status'] : '';
+    $status                 = isset($crmDispo[$dispositionReasonCode]['status']) ? $crmDispo[$dispositionReasonCode]['status'] : '';
+    
+    if (in_array($dispositionCode, array('Follow Up', 'Call Back')))
+    {
+        $dispositionReasonCode = $callFollowupArr[$dispositionReasonCode];
+    }
+    if ($dispositionCode == 'Converted')
+    {
+        $dispositionReasonCode = $convertedArr[$dispositionReasonCode];
+    }
+
+
 
     $debugArr = array('lead_id'           => $records['id'],
         'status'            => $status,
@@ -120,7 +195,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $auto_attempts  = intval($records['auto_attempts_c']);
             $assignedUserId = $records['assigned_user_id'];
            
-	    if ($_REQUEST['callType']!='manual.dial.customer' && $dispositionCode == 'null')
+	    if ($_REQUEST['callType']!='manual.dial.customer' && $dispositionReasonCode == 'null')
             {
                  $attempid++;
                  $auto_attempts++;
@@ -131,7 +206,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                 dispositionName='" . $_REQUEST['dispositionName'] . "',
                                                 systemDisposition='" . $_REQUEST['systemDisposition'] . "',
                                                 attempts_c='$attempid',
-                                                dispositionCode='$dispositionCode',
+                                                dispositionCode='$dispositionReasonCode',
                                                 callType='" . $_REQUEST['callType'] . "'";
                 $res        = $db->query($AtmpLogSql);
                 
@@ -174,7 +249,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             }
 
             //////////////////////////////
-            if ($dispositionCode != 'null')
+            if ($dispositionReasonCode != 'null')
             {
 
 
@@ -221,6 +296,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
                 $bean->status             = $status;
                 $bean->status_description = $dispositionCode;
+                $bean->disposition_reason = $dispositionReasonCode;
                 $bean->dispositionName    = $_REQUEST['dispositionName'];
                 $bean->callType           = $_REQUEST['callType'];
                 //$bean->modified_user_id   = $modifieduserIDX;
@@ -265,6 +341,17 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     //}
                     createLog('{Ameyo Prospect response}', 'callback_dispose_log_' . date('Y-m-d') . '.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
                 }
+                if ($dispositionCode == 'Call Back' && $finalDatTime != '')
+                {
+                    $bean->date_of_callback = gmdate('Y-m-d H:i:s', strtotime($finalDatTime));
+                    //$bean->date_of_prospect = $finalDatTime;
+                    //if (array_key_exists($assignedUserId, $popUserArr))
+                    //{
+                        $res = $db->query($callbackSql);
+                        createLog('{If popupuser_check_loged ameyo dispo}', 'popupuser_check_log_' . date('Y-m-d') . '_log.txt', $callbackSql, $_REQUEST);
+                    //}
+                    createLog('{Ameyo Prospect response}', 'callback_dispose_log_' . date('Y-m-d') . '.txt', 'Prospect=' . $finalDatTime, $_REQUEST);
+                }
 
                 createLog('{Ameyo dispostion response}', 'new_dispose_log_'.date('Y-m-d').'.txt', $_REQUEST['lead_reference'], $_REQUEST);
 
@@ -286,7 +373,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                         dispositionName='" . $_REQUEST['dispositionName'] . "',
                                                         systemDisposition='" . $_REQUEST['systemDisposition'] . "',
                                                         attempts_c='$attempid',
-                                                        dispositionCode='$dispositionCode',
+                                                        dispositionCode='$dispositionReasonCode',
                                                         callType='" . $_REQUEST['callType'] . "'";
                     $res        = $db->query($AtmpLogSql);
                 }
@@ -305,7 +392,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                         dispositionName='" . $_REQUEST['dispositionName'] . "',
                                                         systemDisposition='" . $_REQUEST['systemDisposition'] . "',
                                                         attempts_c='$attempid',
-                                                        dispositionCode='$dispositionCode',
+                                                        dispositionCode='$dispositionReasonCode',
                                                         callType='" . $_REQUEST['callType'] . "'";
                     $res        = $db->query($AtmpLogSql);
                     

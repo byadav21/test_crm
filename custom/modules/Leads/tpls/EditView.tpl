@@ -384,6 +384,7 @@
              $('#status option[value="Duplicate"]').remove(); 
             if(usersRole=='Contact Center Counselor' && $("#status_description").val() != 'Converted'){
                  $('#status option[value="Converted"]').remove();
+                 $("#lead_source_types").attr('disabled','disabled');
                
               }
               

@@ -59,3 +59,4 @@ $app_list_strings['lead_status_details_custom_dom']['New Lead'] = 'New Lead';
 $app_list_strings['lead_status_details_custom_dom']['Re-Enquired'] = 'Re-Enquired';
 $app_list_strings['lead_status_details_custom_dom']['Prospect'] = 'Prospect';
 $app_list_strings['lead_status_details_custom_dom']['Converted'] = 'Converted';
+$app_list_strings['lead_status_details_custom_dom']['DNC'] = 'DNC';
