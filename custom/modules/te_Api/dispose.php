@@ -89,6 +89,8 @@ $crmDispo = array(
     'Enrolled with other institute'         => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Enrolled with TE'                      => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Looking for Degree Courses'            => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Syllabus disinterest'                  => array('status' => 'Dead', 'sub_status' => 'Fallout'),
+    'Efforts Exhausted'                     => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     
     'Cross Sell'                            => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
     
