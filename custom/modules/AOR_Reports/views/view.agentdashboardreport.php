@@ -212,9 +212,26 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         return $batchOptions;
     }
     
-   function getMonthToDateActualCount()
+   function getMonthToDateActualCount($month='',$year='',$yesterday='',$today='')
     {
         global $db;
+        
+        $wherex='';
+        
+        if(empty($month)){
+             $where .=" AND month(leads.date_entered)>='$month' ";
+        }
+        if(empty($year)){
+             $wherex .=" AND year(leads.date_entered)='$year' ";
+        }
+        if(empty($yesterday)){
+             
+             $wherex .=" AND date(leads.date_entered)= '$yesterday' ";
+        }
+        if(empty($today)){
+             $wherex .=" AND date(leads.date_entered)= '$today' ";
+        }
+        
         $pinchedArr   = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect', 'Converted');
         $batchSql     = "SELECT 
                             users.user_name,
@@ -226,9 +243,13 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                      LEFT JOIN users ON leads.assigned_user_id =users.id
                      LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
                      WHERE leads.deleted=0
-                                     and leads.assigned_user_id!=''
+                       and leads.assigned_user_id!=''
+                       AND users.user_name='pawan.kumar@talentedge.in'
                        AND leads.status_description IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
-                     and month(leads.date_entered)>='1' and year(leads.date_entered)='2019'
+                      $wherex
+                     and month(leads.date_entered)>='1' 
+                     
+                     
                      GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_entered)
                      order by leads.assigned_user_id,leads.status_description,month(leads.date_entered);";
         $batchObj     = $db->query($batchSql);
@@ -383,31 +404,35 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
          $getMonthToDateActualCount = $this->getMonthToDateActualCount();
          $getMonthToDateTargetCount = $this->getMonthToDateTargetCount();
          
+         $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount();
+         $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount();
          
-            //echo '<pre>'; print_r($getMonthToDateActualCount); 
+         
+            echo '<pre>'; print_r($getMonthToDateActualCount); 
             $theFInalArray = array();
             foreach ($getMonthToDateActualCount as $key => $val)
-                {
-                    $theFInalArray[$key]['total_connected_calls'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+            {
+                $theFInalArray[$key]['total_connected_calls'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
 
-                    $theFInalArray[$key]['target_pitched'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                    $theFInalArray[$key]['actual_pitched'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['target_pitched'] = isset($getMonthToDateTargetCount[$key]['pitched']) ? $getMonthToDateTargetCount[$key]['pitched'] : 0;
+                $theFInalArray[$key]['actual_pitched'] = isset($getMonthToDateActualCount[$key]['pitched']) ? $getMonthToDateActualCount[$key]['pitched'] : 0;
 
-                    $theFInalArray[$key]['target_prospect'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                    $theFInalArray[$key]['actual_prospect'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['target_prospect'] = isset($getMonthToDateTargetCount[$key]['Prospects']) ? $getMonthToDateTargetCount[$key]['Prospects'] : 0;
+                $theFInalArray[$key]['actual_prospect'] = isset($getMonthToDateActualCount[$key]['Prospects']) ? $getMonthToDateActualCount[$key]['Prospects'] : 0;
 
-                    $theFInalArray[$key]['target_converts'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                    $theFInalArray[$key]['actual_converts'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['target_converts'] = isset($getMonthToDateTargetCount[$key]['Converts']) ? $getMonthToDateTargetCount[$key]['Converts'] : 0;
+                $theFInalArray[$key]['actual_converts'] = isset($getMonthToDateActualCount[$key]['Converts']) ? $getMonthToDateActualCount[$key]['Converts'] : 0;
 
-                    $theFInalArray[$key]['yesterday_pitched'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                    $theFInalArray[$key]['yesterday_pitched'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                    $theFInalArray[$key]['yesterday_pitched'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['yesterday_pitched']  = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['yesterday_prospect'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['yesterday_converts'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
 
-                    $theFInalArray[$key]['today_pitched']  = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                    $theFInalArray[$key]['today_prospect'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                    $theFInalArray[$key]['today_converts'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                }
-                 echo '<pre>'; print_r($theFInalArray); 
+                $theFInalArray[$key]['today_pitched']  = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['today_prospect'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['today_converts'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+            }
+        echo '<pre>';
+        print_r($theFInalArray);
 
         if ((!isset($_SESSION['cccon_managers']) && empty($_SESSION['cccon_managers'])) && (!isset($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_councellors'])))
         {
