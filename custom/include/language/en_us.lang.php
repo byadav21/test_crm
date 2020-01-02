@@ -51,6 +51,8 @@ $GLOBALS['app_list_strings']['leads_disposition_reason_list'] = array(
     'Enrolled with other institute'             => 'Enrolled with other institute',
     'Enrolled with TE'                          => 'Enrolled with TE',
     'Looking for Degree Courses'                => 'Looking for Degree Courses',
+    'Syllabus disinterest'                      => 'Syllabus disinterest',
+    'Efforts Exhausted'                         => 'Efforts Exhausted',
     
     'Cross Sell'                                => 'Cross Sell',
 );

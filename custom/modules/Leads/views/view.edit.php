@@ -698,6 +698,8 @@ class LeadsViewEdit extends ViewEdit
                         $("#disposition_reason option[value='Enrolled with other institute']").show();
                         $("#disposition_reason option[value='Enrolled with TE']").show();
                         $("#disposition_reason option[value='Looking for Degree Courses']").show();
+                        $("#disposition_reason option[value='Syllabus disinterest']").show();
+                        $("#disposition_reason option[value='Efforts Exhausted']").show();
                         $('#disposition_reason').closest('tr').show();
                     } 
                     else if ($(this).val() == 'Cross Sell') {
