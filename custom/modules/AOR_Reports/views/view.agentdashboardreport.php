@@ -80,7 +80,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
     function getCouncelor($selectedMangers = array())
     {
-        global $db,$current_user;
+        global $db, $current_user;
 
 
         //print_r($selectedMangers);
@@ -140,68 +140,29 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         return $batchOptions;
     }
 
-    function getConversion()
-    {
-        global $db;
-        $leadList = array();
-        $key      = '';
-        if (isset($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_managers']) && empty($_SESSION['cccon_councellors']))
-        {
-            //echo "ddd";
-            $key = 'batch_code,';
-        }
-        $leadSql = "SELECT COUNT(leads.id) AS Convertedcount,
-                                    leads.assigned_user_id user_id,
-                                    MONTH(leads.converted_date) AS Converted_month,
-                                    YEAR(leads.converted_date) AS Converted_Year,
-                                    IF(te_ba_batch.batch_code IS NULL,'NULL',te_ba_batch.batch_code) AS batch_code,
-                                    SUM(te_ba_batch.fees_inr) AS GSV,
-                                    te_ba_batch.fees_inr
-                             FROM leads
-                             LEFT JOIN leads_cstm ON leads.id = leads_cstm.id_c
-                             LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c = te_ba_batch.id
-                             WHERE leads.deleted=0
-                               AND leads.status='Converted'
-                               AND leads.deleted=0
-                               #AND YEAR(leads.converted_date)='2017'
-                             GROUP BY $key user_id,
-                                           Converted_month,
-                                           Converted_Year ";
-
-        $leadObj = $db->query($leadSql);
-
-
-
-        while ($row = $db->fetchByAssoc($leadObj))
-        {
-            if (isset($_SESSION['cccon_managers']) && !empty($_SESSION['cccon_managers']) && empty($_SESSION['cccon_councellors']))
-            {
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['Convertedcount'] = $row['Convertedcount'];
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['gsv']            = round($row['GSV'], 2);
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year'] . '_' . $row['batch_code']]['batch_code']     = $row['batch_code'];
-            }
-            else
-            {
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['Convertedcount'] = $row['Convertedcount'];
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['gsv']            = round($row['GSV'], 2);
-                $leadList[$row['user_id'] . '_' . $row['Converted_month'] . '_' . $row['Converted_Year']]['batch_code']     = $row['batch_code'];
-            }
-        }
-
-        return $leadList;
-    }
-    
-    
     ///////New task start
-    function getConnectedCalls()
+    function getConnectedCalls($month = '', $year = '')
     {
         global $db;
+
+        $wherex = '';
+
+        if (!empty($month))
+        {
+            $where .= " and month(reg_date)='$month' ";
+        }
+        if (!empty($year))
+        {
+            $wherex .= " and year(reg_date)='$year' ";
+        }
+
+        //#AND dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
+
         $batchSql     = "select user,
                             count(lead_id) leadCont
                             from attempt_log 
                             where dispositionName='CONNECTED' 
-                              #AND dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
-                            and year(reg_date)='2019' and month(reg_date)='12'
+                            $wherex
                            group by user,month(reg_date);";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
@@ -211,28 +172,39 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         }
         return $batchOptions;
     }
-    
-   function getMonthToDateActualCount($month='',$year='',$yesterday='',$today='')
+
+    function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array())
     {
         global $db;
+
+        $wherex = '';
+        //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday;
+        if (!empty($month))
+        {
+            $wherex .= " AND month(leads.date_entered)>= '$month' ";
+        }
+        if (!empty($year))
+        {
+            $wherex .= " AND year(leads.date_entered)='$year' ";
+        }
+        if (!empty($yesterday))
+        {
+
+            $wherex .= " AND date(leads.date_entered)= '$yesterday' ";
+        }
+        if (!empty($today))
+        {
+            $wherex .= " AND date(leads.date_entered)= '$today' ";
+        }
         
-        $wherex='';
-        
-        if(empty($month)){
-             $where .=" AND month(leads.date_entered)>='$month' ";
+        if (!empty($selected_councellors))
+        {
+            $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
-        if(empty($year)){
-             $wherex .=" AND year(leads.date_entered)='$year' ";
-        }
-        if(empty($yesterday)){
-             
-             $wherex .=" AND date(leads.date_entered)= '$yesterday' ";
-        }
-        if(empty($today)){
-             $wherex .=" AND date(leads.date_entered)= '$today' ";
-        }
-        
-        $pinchedArr   = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect', 'Converted');
+
+        $pinchedArr = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect', 'Converted');
+
+        //echo '<pre>'.
         $batchSql     = "SELECT 
                             users.user_name,
                             leads.status_description,
@@ -244,54 +216,69 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                      LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
                      WHERE leads.deleted=0
                        and leads.assigned_user_id!=''
-                       AND users.user_name='pawan.kumar@talentedge.in'
                        AND leads.status_description IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
                       $wherex
-                     and month(leads.date_entered)>='1' 
-                     
-                     
                      GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_entered)
                      order by leads.assigned_user_id,leads.status_description,month(leads.date_entered);";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
+        $pitchedCount = 0;
         while ($row          = $db->fetchByAssoc($batchObj))
         {
+
+
             if (in_array($row['status_description'], $pinchedArr))
             {
-                $batchOptions[$row['user_name']]['pitched'] = +$row['leadCont'];
+
+                $batchOptions[$row['user_name']]['pitched'] += $row['leadCont'];
             }
-            else if ($row['status_description'] == 'Prospect')
+            if ($row['status_description'] == 'Prospect')
             {
-                $batchOptions[$row['user_name']]['Prospects'] = +$row['leadCont'];
+                $batchOptions[$row['user_name']]['Prospects'] += $row['leadCont'];
             }
-            else if ($row['status_description'] == 'Converted')
+            if ($row['status_description'] == 'Converted')
             {
 
-                $batchOptions[$row['user_name']]['Converts'] = $row['leadCont'];
+                $batchOptions[$row['user_name']]['Converts'] += $row['leadCont'];
             }
         }
         return $batchOptions;
     }
-    
-    function getMonthToDateTargetCount()
+
+    function getMonthToDateTargetCount($year = '', $month = '', $yesterday = '', $today = '')
     {
         global $db;
 
-        $batchSql     = "SELECT target_pitched,target_prospects,target_unit
-                     FROM agent_productivity_report
-                     where status=1 and deleted=0 order by created_date desc;";
+        $wherex = '';
+
+        if (!empty($month))
+        {
+            $where .= " AND apr.month >= '$month' ";
+        }
+        if (!empty($year))
+        {
+            $wherex .= " AND apr.year = '$year' ";
+        }
+
+        $batchSql     = "SELECT users.user_name,apr.target_pitched,apr.target_prospects,apr.target_unit
+                     FROM agent_productivity_report apr
+                     INNER JOIN users ON apr.user_id =users.id
+                     where apr.status=1 and apr.deleted=0 
+                     $wherex
+                    order by apr.created_date desc;";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
         {
-            $batchOptions[$row['user_name']]['pitched']   = +$row['target_pitched'];
-            $batchOptions[$row['user_name']]['Prospects'] = +$row['target_prospects'];
-            $batchOptions[$row['user_name']]['Converts']  = +$row['target_unit'];
+            $batchOptions[$row['user_name']]['pitched']   += $row['target_pitched'];
+            $batchOptions[$row['user_name']]['Prospects'] += $row['target_prospects'];
+            $batchOptions[$row['user_name']]['Converts']  += $row['target_unit'];
         }
         return $batchOptions;
     }
+
     ///////New task end
-    
+
 
     public function display()
     {
@@ -304,44 +291,35 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $campaignID = array();
         $leadID     = array();
 
-        $BatchListData = $this->getBatch();
-        $is_manger = $this->checkManager();
-        $error = array();
-        
+        //$BatchListData = $this->getBatch();
+        $is_manger     = $this->checkManager();
+        $error         = array();
+
         $managerSList    = $this->getManagers();
         $CouncellorsList = $this->getCouncelor($_SESSION['cccon_managers']);
-  
-        
+
+
 
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            $_SESSION['cccon_from_date']   = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']     = $_REQUEST['to_date'];
-            $_SESSION['cccon_batch']       = $_REQUEST['batch'];
-            $_SESSION['cccon_batch_code']  = $_REQUEST['batch_code'];
+            //$_SESSION['cccon_from_date']   = $_REQUEST['from_date'];
+            //$_SESSION['cccon_to_date']     = $_REQUEST['to_date'];
+            //$_SESSION['cccon_batch']       = $_REQUEST['batch'];
+            //$_SESSION['cccon_batch_code']  = $_REQUEST['batch_code'];
             $_SESSION['cccon_managers']    = $_REQUEST['managers'];
             $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
-            $_SESSION['cccon_status']      = $_REQUEST['status'];
-            $_SESSION['cccon_status']      = $_REQUEST['status'];
-
+            //$_SESSION['cccon_status']      = $_REQUEST['status'];
+           
             $_SESSION['cccon_month'] = $_REQUEST['month'];
             $_SESSION['cccon_years'] = $_REQUEST['years'];
         }
 
-      
+
 
 
         $findBatch = array();
 
-        if (!empty($_SESSION['cccon_batch_code']))
-        {
-            $selected_batch_code = $_SESSION['cccon_batch_code'];
-        }
-
-        if (!empty($_SESSION['cccon_status']))
-        {
-            $selected_status = $_SESSION['cccon_status'];
-        }
+        
         if (!empty($_SESSION['cccon_councellors']))
         {
             $selected_councellors = $_SESSION['cccon_councellors'];
@@ -354,9 +332,17 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         {
             $selected_month = $_SESSION['cccon_month'];
         }
+        else
+        {
+            $selected_month = $current_year   = date('m');
+        }
         if (!empty($_SESSION['cccon_years']))
         {
             $selected_years = $_SESSION['cccon_years'];
+        }
+        else
+        {
+            $selected_years = $current_year   = date('Y');
         }
 
         if ($is_manger == 1)
@@ -364,85 +350,141 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
             $selected_managers = array($current_user->id);
         }
 
-        $leadList   = array();
-        $StatusList = array();
+        $theFInalArray = array();
+       
 
 
-        if (!empty($selected_batch_code))
-        {
-            $wherecl .= " AND  batch_id IN ('" . implode("','", $selected_batch_code) . "')";
-        }
+       
 
-
-
-        if (!empty($selected_councellors))
-        {
-            $wherecl .= " AND  user_id IN ('" . implode("','", $selected_councellors) . "')";
-        }
-        
-        if (!empty($selected_month))
-        {
-            $wherecl .= " AND  month IN ('" . implode("','", $selected_month) . "')";
-        }
-        if (!empty($selected_years))
-        {
-            $wherecl .= " AND  year IN ('" . implode("','", $selected_years) . "')";
-        }
-
+      
 
         $months = array(1  => 'January', 2  => 'February', 3  => 'March', 4  => 'April', 5  => 'May', 6  => 'June', 7  => 'July',
             8  => 'August', 9  => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
 
         $current_year = date('Y');
-        $range        = range($current_year, $current_year - 5);
+        $range        = range($current_year, $current_year - 1);
         $yearsList    = array_combine($range, $range);
 
-
-        //The new code will go here..
+        $todayDate  = date('Y-m-d');
+        $yesterDate = date('Y-m-d', strtotime("-1 days"));
         
-         $getConnectedCalls = $this->getConnectedCalls();
-         $getMonthToDateActualCount = $this->getMonthToDateActualCount();
-         $getMonthToDateTargetCount = $this->getMonthToDateTargetCount();
-         
-         $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount();
-         $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount();
-         
-         
-            echo '<pre>'; print_r($getMonthToDateActualCount); 
-            $theFInalArray = array();
-            foreach ($getMonthToDateActualCount as $key => $val)
-            {
-                $theFInalArray[$key]['total_connected_calls'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-
-                $theFInalArray[$key]['target_pitched'] = isset($getMonthToDateTargetCount[$key]['pitched']) ? $getMonthToDateTargetCount[$key]['pitched'] : 0;
-                $theFInalArray[$key]['actual_pitched'] = isset($getMonthToDateActualCount[$key]['pitched']) ? $getMonthToDateActualCount[$key]['pitched'] : 0;
-
-                $theFInalArray[$key]['target_prospect'] = isset($getMonthToDateTargetCount[$key]['Prospects']) ? $getMonthToDateTargetCount[$key]['Prospects'] : 0;
-                $theFInalArray[$key]['actual_prospect'] = isset($getMonthToDateActualCount[$key]['Prospects']) ? $getMonthToDateActualCount[$key]['Prospects'] : 0;
-
-                $theFInalArray[$key]['target_converts'] = isset($getMonthToDateTargetCount[$key]['Converts']) ? $getMonthToDateTargetCount[$key]['Converts'] : 0;
-                $theFInalArray[$key]['actual_converts'] = isset($getMonthToDateActualCount[$key]['Converts']) ? $getMonthToDateActualCount[$key]['Converts'] : 0;
-
-                $theFInalArray[$key]['yesterday_pitched']  = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                $theFInalArray[$key]['yesterday_prospect'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                $theFInalArray[$key]['yesterday_converts'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-
-                $theFInalArray[$key]['today_pitched']  = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                $theFInalArray[$key]['today_prospect'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-                $theFInalArray[$key]['today_converts'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-            }
-        echo '<pre>';
-        print_r($theFInalArray);
-
-        if ((!isset($_SESSION['cccon_managers']) && empty($_SESSION['cccon_managers'])) && (!isset($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_councellors'])))
+        if (empty($selected_month))
         {
-            $leadList = array();
+             $selected_month = date('m');
         }
+        if (empty($selected_years))
+        {
+             $selected_years = date('Y');
+        }
+        //The new code will go here..
+        //echo '$selected_month='.$selected_month.'$selected_years='.$selected_years;
+        //## All Connected
+        $getConnectedCalls = $this->getConnectedCalls($selected_month, $selected_years);
 
-        //echo '<pre>';
-        //print_r($leadList);
+        //## Actual Month wise leads
+        $getMonthToDateActualCount = $this->getMonthToDateActualCount($selected_years, $selected_month, '','',$selected_councellors);
+
+        //## Target month wise leads
+        $getMonthToDateTargetCount = $this->getMonthToDateTargetCount($selected_years, $selected_month, '','');
+
+        //### Yeastday real counts leads
+        $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount( '', '', date('Y-m-d', strtotime("-1 days")),'');
+        //#### Today Real counts of leads
+        $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount('','','', date('Y-m-d'));
+
+
+        //echo '<pre>'; print_r($getMonthToDateActualYesterdayCount);  die;
+        $theFInalArray = array();
+        foreach ($getMonthToDateActualCount as $key => $val)
+        {
+            $theFInalArray[$key]['total_connected_calls'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+
+            $theFInalArray[$key]['target_pitched'] = isset($getMonthToDateTargetCount[$key]['pitched']) ? $getMonthToDateTargetCount[$key]['pitched'] : 0;
+            $theFInalArray[$key]['actual_pitched'] = isset($getMonthToDateActualCount[$key]['pitched']) ? $getMonthToDateActualCount[$key]['pitched'] : 0;
+
+            $theFInalArray[$key]['target_prospect'] = isset($getMonthToDateTargetCount[$key]['Prospects']) ? $getMonthToDateTargetCount[$key]['Prospects'] : 0;
+            $theFInalArray[$key]['actual_prospect'] = isset($getMonthToDateActualCount[$key]['Prospects']) ? $getMonthToDateActualCount[$key]['Prospects'] : 0;
+
+            $theFInalArray[$key]['target_converts'] = isset($getMonthToDateTargetCount[$key]['Converts']) ? $getMonthToDateTargetCount[$key]['Converts'] : 0;
+            $theFInalArray[$key]['actual_converts'] = isset($getMonthToDateActualCount[$key]['Converts']) ? $getMonthToDateActualCount[$key]['Converts'] : 0;
+
+            $theFInalArray[$key]['yesterday_pitched']  = isset($getMonthToDateActualYesterdayCount[$key]['pitched']) ? $getMonthToDateActualYesterdayCount[$key]['pitched'] : 0;
+            $theFInalArray[$key]['yesterday_prospect'] = isset($getMonthToDateActualYesterdayCount[$key]['Prospects']) ? $getMonthToDateActualYesterdayCount[$key]['Prospects'] : 0;
+            $theFInalArray[$key]['yesterday_converts'] = isset($getMonthToDateActualYesterdayCount[$key]['Converts']) ? $getMonthToDateActualYesterdayCount[$key]['Converts'] : 0;
+
+            $theFInalArray[$key]['today_pitched']  = isset($getMonthToDateActualTodayCount[$key]['pitched']) ? $getMonthToDateActualTodayCount[$key]['pitched'] : 0;
+            $theFInalArray[$key]['today_prospect'] = isset($getMonthToDateActualTodayCount[$key]['Prospects']) ? $getMonthToDateActualTodayCount[$key]['Prospects'] : 0;
+            $theFInalArray[$key]['today_converts'] = isset($getMonthToDateActualTodayCount[$key]['Converts']) ? $getMonthToDateActualTodayCount[$key]['Converts'] : 0;
+        }
+     
+        //        if ((!isset($_SESSION['cccon_managers']) && empty($_SESSION['cccon_managers'])) && (!isset($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_councellors'])))
+        //        {
+        //            $theFInalArray = array();
+        //        }
+        //echo '<pre>'; print_r($theFInalArray);
+ 
+        
+        if (isset($_POST['export']))
+        {
+
+            $file     = "AgentDashboard_Report";
+            $where    = '';
+            $filename = $file . "_" . $selected_years . "_" . $selected_month;
+
+
+            $StatusList = $statusHeader;
+
+            $data .= "Counsellor Name";
+            $data .= ",Total connected";
+            $data .= ",Target Pitched";
+            $data .= ",Actual Pitched";
+            $data .= ",Target Prospects";
+            $data .= ",Actual Prospects";
+            $data .= ",Target Converts";
+            $data .= ",Actual Converts";
+
+            $data .= ",yesterday Pitched";
+            $data .= ",yesterday Prospects";
+            $data .= ",yesterday Converts";
+
+            $data .= ",Today Pitched";
+            $data .= ",Today Prospects";
+            $data .= ",Today Converts";
+
+            $data .= "\n";
+
+
+            foreach ($theFInalArray as $key => $values)
+            {
+                $data .= "\"" . $key;
+                $data .= "\",\"" . $values['total_connected_calls'];
+                $data .= "\",\"" . $values['target_pitched'];
+                $data .= "\",\"" . $values['actual_pitched'];
+                $data .= "\",\"" . $values['target_prospect'];
+                $data .= "\",\"" . $values['actual_prospect'];
+                $data .= "\",\"" . $values['target_converts'];
+                $data .= "\",\"" . $values['actual_converts'];
+
+                $data .= "\",\"" . $values['yesterday_pitched'];
+                $data .= "\",\"" . $values['yesterday_prospect'];
+                $data .= "\",\"" . $values['yesterday_converts'];
+
+                $data .= "\",\"" . $values['today_pitched'];
+                $data .= "\",\"" . $values['today_prospect'];
+                $data .= "\",\"" . $values['today_converts'];
+
+                $data .= "\"\n";
+            }
+
+            ob_end_clean();
+            header("Content-type: application/csv");
+            header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
+            echo $data;
+            exit;
+        } // End Of Export Func
         #PS @Pawan
-        $total     = count($leadList); #total records
+
+        $total     = count($theFInalArray); #total records
         $start     = 0;
         $per_page  = 60;
         $page      = 1;
@@ -478,28 +520,28 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
             $left = 1;
         }
 
-        $leadList = array_slice($leadList, $start, $per_page);
+        $theFInalArray = array_slice($theFInalArray, $start, $per_page);
         if ($total > $per_page)
         {
             $current = "(" . ($start + 1) . "-" . ($start + $per_page) . " of " . $total . ")";
         }
         else
         {
-            $current = "(" . ($start + 1) . "-" . count($leadList) . " of " . $total . ")";
+            $current = "(" . ($start + 1) . "-" . count($theFInalArray) . " of " . $total . ")";
         }
         #pE
 
         $sugarSmarty = new Sugar_Smarty();
 
         $sugarSmarty->assign("error", $error);
-        $sugarSmarty->assign("leadList", $leadList);
+        $sugarSmarty->assign("theFInalArray", $theFInalArray);
 
 
 
         $sugarSmarty->assign("BatchListData", $BatchListData);
 
         $sugarSmarty->assign("StatusList", $StatusList);
-        $sugarSmarty->assign("leadList", $leadList);
+
 
         $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
@@ -513,7 +555,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $sugarSmarty->assign("selected_source", $selected_source);
         $sugarSmarty->assign("selected_managers", $selected_managers);
         $sugarSmarty->assign("selected_councellors", $selected_councellors);
-
+        
         $sugarSmarty->assign("selected_month", $selected_month);
         $sugarSmarty->assign("selected_years", $selected_years);
 
