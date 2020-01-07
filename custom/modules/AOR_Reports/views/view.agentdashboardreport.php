@@ -108,8 +108,11 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                          INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
  			 INNER join acl_roles on aru.role_id=acl_roles.id
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
-                         WHERE aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
-                           AND u.deleted=0 $conditons
+                         WHERE 
+                            u.deleted=0
+                            #AND aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
+                           
+                           $conditons
                            AND aru.deleted=0 
                            AND acl_roles.deleted=0 
                            AND u.deleted=0 
