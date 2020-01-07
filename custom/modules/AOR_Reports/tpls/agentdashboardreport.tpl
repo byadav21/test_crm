@@ -244,7 +244,9 @@
   
 
     
-        
+                {if empty($theFInalArray)}
+                    <tr><td colspan="8">Data Not Found.</td></tr>
+                {/if}
             {foreach from = $theFInalArray key=key item=value}
                 
                 <tr>
