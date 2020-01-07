@@ -173,12 +173,18 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         return $batchOptions;
     }
 
-    function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array())
+    function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array())
     {
-        global $db;
+        global $db,$current_user;
 
         $wherex = '';
+        $userSlug = "";
+        
+        
         //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday;
+        
+        
+        //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
             $wherex .= " AND month(leads.date_entered)>= '$month' ";
@@ -197,10 +203,15 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
             $wherex .= " AND date(leads.date_entered)= '$today' ";
         }
         
-        if (!empty($selected_councellors))
+        if (!empty($selected_councellors) && $userSlug!='CCC')
         {
             $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
+             //echo 'xxx'.
+             $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
+        }
+       
 
         $pinchedArr = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect', 'Converted');
 
@@ -290,7 +301,14 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $wherecl    = "";
         $campaignID = array();
         $leadID     = array();
-
+        $current_userAccess = "";
+        $userSlug = "";
+        $getUsersRole = getUsersRole();
+        
+        $current_userAccess = isset($getUsersRole[$current_user->id]) ? $getUsersRole[$current_user->id] : array();
+        $userSlug = $current_userAccess['slug'];
+        
+       
         //$BatchListData = $this->getBatch();
         $is_manger     = $this->checkManager();
         $error         = array();
@@ -380,17 +398,17 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //echo '$selected_month='.$selected_month.'$selected_years='.$selected_years;
         //## All Connected
         $getConnectedCalls = $this->getConnectedCalls($selected_month, $selected_years);
-
-        //## Actual Month wise leads
-        $getMonthToDateActualCount = $this->getMonthToDateActualCount($selected_years, $selected_month, '','',$selected_councellors);
+        
+        //## Actual Month wise leads // ($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array())
+        $getMonthToDateActualCount = $this->getMonthToDateActualCount($selected_years, $selected_month, '','',$selected_councellors,$current_userAccess);
 
         //## Target month wise leads
         $getMonthToDateTargetCount = $this->getMonthToDateTargetCount($selected_years, $selected_month, '','');
 
         //### Yeastday real counts leads
-        $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount( '', '', date('Y-m-d', strtotime("-1 days")),'');
+        $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount( '', '', date('Y-m-d', strtotime("-1 days")),'','',$current_userAccess);
         //#### Today Real counts of leads
-        $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount('','','', date('Y-m-d'));
+        $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount('','','', date('Y-m-d'),'',$current_userAccess);
 
 
         //echo '<pre>'; print_r($getMonthToDateActualYesterdayCount);  die;
@@ -541,6 +559,9 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $sugarSmarty->assign("BatchListData", $BatchListData);
 
         $sugarSmarty->assign("StatusList", $StatusList);
+        $sugarSmarty->assign("userSlug", $userSlug);
+        
+        
 
 
         $sugarSmarty->assign("selected_batch_code", $selected_batch_code);

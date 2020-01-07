@@ -54,7 +54,8 @@
                         </td>
 
                     </tr>*}
-
+                    
+                    {if $userSlug!='CCC'}
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="status">Manager:</label>
@@ -81,7 +82,7 @@
                         </td>
 
                     </tr>
-
+                {/if}
 
 
 
