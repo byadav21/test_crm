@@ -217,7 +217,7 @@
 				<th class="column3">
 					<table cellpadding="0" cellspacing="0" border="0" class="table1">
 						<tr>
-							<th colspan="3">yesterday</th>
+							<th colspan="3">Yesterday</th>
 						</tr>
 						<tr>
 							<th>Pitched</th>
