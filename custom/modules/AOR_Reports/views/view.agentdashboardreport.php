@@ -176,7 +176,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         return $batchOptions;
     }
 
-    function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array())
+    function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
     {
         global $db,$current_user;
 
@@ -213,6 +213,16 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
              //echo 'xxx'.
              $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
+        }
+        //print_r($CouncellorsList);
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCM' && empty($selected_councellors)){
+             //echo 'xxx'.
+             $managersAgent = array();
+             foreach ($CouncellorsList as $key=>$val){
+                 $managersAgent[]= $key;
+             }
+              //print_r($managersAgent);
+              $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $managersAgent) . "')";
         }
        
 
@@ -317,7 +327,14 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $error         = array();
 
         $managerSList    = $this->getManagers();
-        $CouncellorsList = $this->getCouncelor($_SESSION['cccon_managers']);
+       
+        if($userSlug=='CCM'){
+          $CouncellorsList = $this->getCouncelor($current_user->id);  
+        }
+        else{
+            $CouncellorsList = $this->getCouncelor($_SESSION['cccon_managers']);  
+        }
+        
 
 
 
@@ -403,15 +420,15 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $getConnectedCalls = $this->getConnectedCalls($selected_month, $selected_years);
         
         //## Actual Month wise leads // ($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array())
-        $getMonthToDateActualCount = $this->getMonthToDateActualCount($selected_years, $selected_month, '','',$selected_councellors,$current_userAccess);
+        $getMonthToDateActualCount = $this->getMonthToDateActualCount($selected_years, $selected_month, '','',$selected_councellors,$current_userAccess,$CouncellorsList);
 
         //## Target month wise leads
         $getMonthToDateTargetCount = $this->getMonthToDateTargetCount($selected_years, $selected_month, '','');
 
         //### Yeastday real counts leads
-        $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount( '', '', date('Y-m-d', strtotime("-1 days")),'','',$current_userAccess);
+        $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount( '', '', date('Y-m-d', strtotime("-1 days")),'','',$current_userAccess,'');
         //#### Today Real counts of leads
-        $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount('','','', date('Y-m-d'),'',$current_userAccess);
+        $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount('','','', date('Y-m-d'),'',$current_userAccess,'');
 
 
         //echo '<pre>'; print_r($getMonthToDateActualYesterdayCount);  die;
