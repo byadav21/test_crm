@@ -190,20 +190,20 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
-            $wherex .= " AND month(leads.date_entered)>= '$month' ";
+            $wherex .= " AND month(leads.date_modified)>= '$month' ";
         }
         if (!empty($year))
         {
-            $wherex .= " AND year(leads.date_entered)='$year' ";
+            $wherex .= " AND year(leads.date_modified)='$year' ";
         }
         if (!empty($yesterday))
         {
 
-            $wherex .= " AND date(leads.date_entered)= '$yesterday' ";
+            $wherex .= " AND date(leads.date_modified)= '$yesterday' ";
         }
         if (!empty($today))
         {
-            $wherex .= " AND date(leads.date_entered)= '$today' ";
+            $wherex .= " AND date(leads.date_modified)= '$today' ";
         }
         
         if (!empty($selected_councellors) && $userSlug!='CCC')
@@ -222,8 +222,8 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $batchSql     = "SELECT 
                             users.user_name,
                             leads.status_description,
-                                month(leads.date_entered) monthwise,
-                                year(leads.date_entered) yearwise,
+                                month(leads.date_modified) monthwise,
+                                year(leads.date_modified) yearwise,
                             count(leads.id) leadCont
                      FROM leads
                      LEFT JOIN users ON leads.assigned_user_id =users.id
@@ -232,8 +232,8 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                        and leads.assigned_user_id!=''
                        AND leads.status_description IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
                       $wherex
-                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_entered)
-                     order by leads.assigned_user_id,leads.status_description,month(leads.date_entered);";
+                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_modified)
+                     order by leads.assigned_user_id,leads.status_description,month(leads.date_modified);";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         $pitchedCount = 0;
