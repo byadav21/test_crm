@@ -179,7 +179,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     {
         $dispositionReasonCode = $notInterestedArr[$dispositionReasonCode];
     }
-    if ($dispositionCode == 'Next batch')
+    if ($dispositionCode == 'Next Batch')
     {
         $dispositionReasonCode = $nextBatchArr[$dispositionReasonCode];
     }
