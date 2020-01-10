@@ -495,6 +495,7 @@ class LeadsViewEdit extends ViewEdit
                         //$("#status_description").append('<option>Rejected</option>');
                         $("#status_description").append('<option>Fallout</option>');
                         $("#status_description").append('<option>Cross Sell</option>');
+                         $("#status_description").append('<option>Next Batch</option>');
                        
                        
                         //$("#status_description").append('<option>Next Batch</option>');
@@ -684,8 +685,23 @@ class LeadsViewEdit extends ViewEdit
                         $("#disposition_reason option[value='Not Answering']").show();
                         $('#disposition_reason').closest('tr').show();
                     } 
+                    else if ($(this).val() == 'Next Batch') {
+                        $("#disposition_reason option[value='Next Batch']").show();
+                        $('#disposition_reason').closest('tr').show();
+                    } 
                     else if ($(this).val() == 'Not Interested') {
                         $("#disposition_reason option[value='Not Interested']").show();
+                        $("#disposition_reason option[value='Reason not shared']").show();
+                        $("#disposition_reason option[value='Time Constraint']").show();
+                        $("#disposition_reason option[value='Fees is high']").show();
+                        $("#disposition_reason option[value='Looking for Job or Placement']").show();
+                        $("#disposition_reason option[value='Enrolled with other institutes']").show();
+                        $("#disposition_reason option[value='Enrolled with TE']").show();
+                        $("#disposition_reason option[value='Looking for Degree Courses']").show();
+                        $("#disposition_reason option[value='Syllabus disinterest']").show();
+                        $("#disposition_reason option[value='Efforts Exhausted']").show();
+                        
+                        
                         $('#disposition_reason').closest('tr').show();
                     } 
                     

@@ -50,6 +50,19 @@ $callFollowupArr = array(
 $convertedArr = array('Instalment Payment' => 'Instalment Follow Up',
     'Referral'           => 'Referral Follow Up');
 
+$notInterestedArr = array(
+    'NI_Reason not shared'              => 'Reason not shared',
+    'NI_Time Constraint'                => 'Time Constraint',
+    'NI_Fees is high'                   => 'Fees is high',
+    'NI_Looking for Job or Placement'   => 'Looking for Job or Placement',
+    'NI_Enrolled with other institute'  => 'Enrolled with other institute',
+    'NI_Enrolled with TE'               => 'Enrolled with TE',
+    'NI_Looking for Degree Courses'     => 'Looking for Degree Courses',
+    'NI_Syllabus disinterest'           => 'Syllabus disinterest',
+    'NI_Efforts Exhausted'              => 'Efforts Exhausted');
+
+$nextBatchArr    =  array('Next_batch' => 'Next batch');
+
 $crmDispo = array(
     'Callback_Customer is Busy'             => array('status' => 'Alive', 'sub_status' => 'Call Back'),
     'Callback_RPC not available'            => array('status' => 'Alive', 'sub_status' => 'Call Back'),
@@ -81,6 +94,18 @@ $crmDispo = array(
     'Not Answering'                         => array('status' => 'Dead', 'sub_status' => 'Not Answering'),
     'Not Interested'                        => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
     
+    'NI_Reason not shared'                  => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Time Constraint'                    => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Fees is high'                       => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Looking for Job or Placement'       => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Enrolled with other institutes'     => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Enrolled with TE'                   => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Looking for Degree Courses'         => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Syllabus disinterest'               => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    'NI_Efforts Exhausted'                  => array('status' => 'Dead', 'sub_status' => 'Not Interested'),
+    
+    'Next_batch'                            => array('status' => 'Dead', 'sub_status' => 'Next Batch'),
+    
     'Reason not shared'                     => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Next batch'                            => array('status' => 'Dead', 'sub_status' => 'Fallout'),
     'Time Constraint'                       => array('status' => 'Dead', 'sub_status' => 'Fallout'),
@@ -97,8 +122,6 @@ $crmDispo = array(
     'wrap.timeout'                          => array('status' => 'wrap.timeout', 'sub_status' => 'wrap.timeout'),
     'user.forced.logged.off'                => array('status' => 'user.forced.logged.off', 'sub_status' => 'user.forced.logged.off'),
     
-    
-    'Cross Sell'                            => array('status' => 'Dead', 'sub_status' => 'Cross Sell'),
   //'Recycle'                               => array('status' => 'Recycle', 'sub_status' => 'Recycle'),
   //'Reassigned'                            => array('status' => 'Reassigned', 'sub_status' => 'Reassigned'),
 );
@@ -152,6 +175,16 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
     {
         $dispositionReasonCode = $convertedArr[$dispositionReasonCode];
     }
+    if ($dispositionCode == 'Not Interested')
+    {
+        $dispositionReasonCode = $notInterestedArr[$dispositionReasonCode];
+    }
+    if ($dispositionCode == 'Next batch')
+    {
+        $dispositionReasonCode = $nextBatchArr[$dispositionReasonCode];
+    }
+    
+    
 
 
 

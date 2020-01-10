@@ -44,7 +44,8 @@ $GLOBALS['app_list_strings']['leads_disposition_reason_list'] = array(
     
     
     'Reason not shared'                         => 'Reason not shared',
-    'Next batch'                                => 'Next batch',
+    'Next batch'                                => 'Next batch', 
+    'Next Batch'                                => 'Next Batch', 
     'Time Constraint'                           => 'Time Constraint',
     'Fees is high'                              => 'Fees is high',
     'Looking for Job or Placement'              => 'Looking for Job or Placement',
