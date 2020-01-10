@@ -315,17 +315,24 @@ class LeadsViewEdit extends ViewEdit
                      } else {
                      $("#status_description").append('<option value="Call Back" >Call Back</option>');
                      }*/
-                    if (status_detail == 'Follow Up') {
-                        $("#status_description").append('<option value="Follow Up" selected="selected">Follow Up</option>');
-                    } else {
-                        $("#status_description").append('<option value="Follow Up" >Follow Up</option>');
-                    }
+                    if (status_detail == 'Follow Up') 
+                            {
+                                $("#status_description").append('<option value="Follow Up" selected="selected">Follow Up</option>');
+                            } else {
+                                $("#status_description").append('<option value="Follow Up" >Follow Up</option>');
+                            }
+                    if (status_detail == 'Call Back') 
+                            {
+                                $("#status_description").append('<option value="Call Back" selected="selected">Call Back</option>');
+                            } else {
+                                $("#status_description").append('<option value="Call Back" >Call Back</option>');
+                            }
 
-                    if (status_detail == 'New Lead') {
-                        $("#status_description").append('<option  value="New Lead" selected="selected" >New Lead</option>');
-                    } else {
-                        $("#status_description").append('<option  value="New Lead" >New Lead</option>');
-                    }
+//                    if (status_detail == 'New Lead') {
+//                        $("#status_description").append('<option  value="New Lead" selected="selected" >New Lead</option>');
+//                    } else {
+//                        $("#status_description").append('<option  value="New Lead" >New Lead</option>');
+//                    }
                 }
                 if (document.getElementById('status').value == "Dead") {
                     //~ alert(status_detail)
@@ -351,6 +358,11 @@ class LeadsViewEdit extends ViewEdit
                                 $("#status_description").append('<option  selected="selected" >Not Enquired</option>');
                             } else {
                                 $("#status_description").append('<option>Not Enquired</option>');
+                            }
+                            if (status_detail == 'Next Batch') {
+                                $("#status_description").append('<option  selected="selected" >Next Batch</option>');
+                            } else {
+                                $("#status_description").append('<option>Next Batch</option>');
                             }
                             if (status_detail == 'Not Eligible') {
                                 $("#status_description").append('<option  selected="selected" >Not Eligible</option>');
