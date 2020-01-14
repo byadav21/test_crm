@@ -62,7 +62,7 @@ ini_set("display_errors",0);
 
 //Re-Enquired
 				$sqlDup = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'Re-Enquired' "
-                                        . " AND (disposition_reason ='' || disposition_reason  is NULL || disposition_reason  is null || disposition_reason ='NA')  $reporting_user_where";
+                                        . " AND (disposition_reason ='' || disposition_reason  is NULL || disposition_reason  is null || disposition_reason ='')  $reporting_user_where";
 				$resDup = $GLOBALS['db']->query($sqlDup);
 				$rowDup= $GLOBALS['db']->fetchByAssoc($resDup);
 				if($rowDup['count'] > 0){
