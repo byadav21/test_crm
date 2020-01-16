@@ -240,6 +240,9 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                      LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
                      WHERE leads.deleted=0
                        and leads.assigned_user_id!=''
+                       AND users.deleted=0
+                       AND users.status='Active'
+		       AND users.department='CC'
                        AND leads.status_description IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
                       $wherex
                      GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_modified)
