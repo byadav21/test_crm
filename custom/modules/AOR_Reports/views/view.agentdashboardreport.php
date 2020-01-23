@@ -236,14 +236,15 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                                 year(leads.date_modified) yearwise,
                             count(leads.id) leadCont
                      FROM leads
-                     LEFT JOIN users ON leads.assigned_user_id =users.id
-                     LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
+                     INNER JOIN attempt_log on leads.id=attempt_log.lead_id
+                     INNER JOIN users ON leads.assigned_user_id =users.id
+                     INNER JOIN leads_cstm ON leads.id= leads_cstm.id_c
                      WHERE leads.deleted=0
                        and leads.assigned_user_id!=''
                        AND users.deleted=0
                        AND users.status='Active'
 		       AND users.department='CC'
-                       AND leads.status_description IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
+                       AND leads.status_description IN ('Fallout','Follow Up','Cross Sell','Prospect')
                       $wherex
                      GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_modified)
                      order by leads.assigned_user_id,leads.status_description,month(leads.date_modified);";
@@ -263,10 +264,98 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
             {
                 $batchOptions[$row['user_name']]['Prospects'] += $row['leadCont'];
             }
+            if ($row['status_description'] == 'Follow Up')
+            {
+
+            $batchOptions[$row['user_name']]['follow_up'] += $row['leadCont'];
+            }
+        }
+        return $batchOptions;
+    }
+    
+    function getMonthToDateActualConverts($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
+    {
+        global $db,$current_user;
+
+        $wherex = '';
+        $userSlug = "";
+        
+        
+        //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday;
+        
+        
+        //echo 'dd=='.$current_userAccess['slug'];
+        if (!empty($month))
+        {
+            $wherex .= " AND month(leads.converted_date)>= '$month' ";
+        }
+        if (!empty($year))
+        {
+            $wherex .= " AND year(leads.converted_date)='$year' ";
+        }
+        if (!empty($yesterday))
+        {
+
+            $wherex .= " AND leads.converted_date= '$yesterday' ";
+        }
+        if (!empty($today))
+        {
+            $wherex .= " AND leads.converted_date= '$today' ";
+        }
+        
+        if (!empty($selected_councellors) && $userSlug!='CCC')
+        {
+            $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
+             //echo 'xxx'.
+             $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
+        }
+        //print_r($CouncellorsList);
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCM' && empty($selected_councellors)){
+             //echo 'xxx'.
+             $managersAgent = array();
+             foreach ($CouncellorsList as $key=>$val){
+                 $managersAgent[]= $key;
+             }
+              //print_r($managersAgent);
+              $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $managersAgent) . "')";
+        }
+       
+
+        $pinchedArr = array('Converted');
+
+        //echo '<pre>'.
+        $batchSql     = "SELECT 
+                            users.user_name,
+                            leads.status_description,
+                                month(leads.date_modified) monthwise,
+                                year(leads.date_modified) yearwise,
+                            count(leads.id) leadCont
+                     FROM leads
+                     INNER JOIN users ON leads.assigned_user_id =users.id
+                     INNER JOIN leads_cstm ON leads.id= leads_cstm.id_c
+                     WHERE leads.deleted=0
+                       and leads.assigned_user_id!=''
+                       AND users.deleted=0
+                       AND users.status='Active'
+		       AND users.department='CC'
+                       AND leads.status_description IN ('Converted')
+                      $wherex
+                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_modified)
+                     order by leads.assigned_user_id,leads.status_description,month(leads.date_modified);";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        $pitchedCount = 0;
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+
+
+            
             if ($row['status_description'] == 'Converted')
             {
 
-                $batchOptions[$row['user_name']]['Converts'] += $row['leadCont'];
+            $batchOptions[$row['user_name']]['Converted'] += $row['leadCont'];
             }
         }
         return $batchOptions;
@@ -424,6 +513,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         
         //## Actual Month wise leads // ($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array())
         $getMonthToDateActualCount = $this->getMonthToDateActualCount($selected_years, $selected_month, '','',$selected_councellors,$current_userAccess,$CouncellorsList);
+        $getMonthToDateActualConverts = $this->getMonthToDateActualConverts($selected_years, $selected_month, '','',$selected_councellors,$current_userAccess,$CouncellorsList);
 
         //## Target month wise leads
         $getMonthToDateTargetCount = $this->getMonthToDateTargetCount($selected_years, $selected_month, '','');
@@ -448,14 +538,19 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
             $theFInalArray[$key]['target_converts'] = isset($getMonthToDateTargetCount[$key]['Converts']) ? $getMonthToDateTargetCount[$key]['Converts'] : 0;
             $theFInalArray[$key]['actual_converts'] = isset($getMonthToDateActualCount[$key]['Converts']) ? $getMonthToDateActualCount[$key]['Converts'] : 0;
-
+            
+            $theFInalArray[$key]['target_follow_up'] = isset($getMonthToDateTargetCount[$key]['follow_up']) ? $getMonthToDateTargetCount[$key]['follow_up'] : 0;
+            $theFInalArray[$key]['actual_follow_up'] = isset($getMonthToDateActualCount[$key]['follow_up']) ? $getMonthToDateActualCount[$key]['follow_up'] : 0;
+            
             $theFInalArray[$key]['yesterday_pitched']  = isset($getMonthToDateActualYesterdayCount[$key]['pitched']) ? $getMonthToDateActualYesterdayCount[$key]['pitched'] : 0;
             $theFInalArray[$key]['yesterday_prospect'] = isset($getMonthToDateActualYesterdayCount[$key]['Prospects']) ? $getMonthToDateActualYesterdayCount[$key]['Prospects'] : 0;
-            $theFInalArray[$key]['yesterday_converts'] = isset($getMonthToDateActualYesterdayCount[$key]['Converts']) ? $getMonthToDateActualYesterdayCount[$key]['Converts'] : 0;
+            $theFInalArray[$key]['yesterday_converts'] = isset($getMonthToDateActualConverts[$key]['Converts']) ? $getMonthToDateActualConverts[$key]['Converts'] : 0;
+            $theFInalArray[$key]['yesterday_follow_up'] = isset($getMonthToDateActualYesterdayCount[$key]['follow_up']) ? $getMonthToDateActualYesterdayCount[$key]['follow_up'] : 0;
 
             $theFInalArray[$key]['today_pitched']  = isset($getMonthToDateActualTodayCount[$key]['pitched']) ? $getMonthToDateActualTodayCount[$key]['pitched'] : 0;
             $theFInalArray[$key]['today_prospect'] = isset($getMonthToDateActualTodayCount[$key]['Prospects']) ? $getMonthToDateActualTodayCount[$key]['Prospects'] : 0;
-            $theFInalArray[$key]['today_converts'] = isset($getMonthToDateActualTodayCount[$key]['Converts']) ? $getMonthToDateActualTodayCount[$key]['Converts'] : 0;
+            $theFInalArray[$key]['today_converts'] = isset($getMonthToDateActualConverts[$key]['Converts']) ? $getMonthToDateActualConverts[$key]['Converts'] : 0;
+            $theFInalArray[$key]['today_follow_up'] = isset($getMonthToDateActualTodayCount[$key]['follow_up']) ? $getMonthToDateActualTodayCount[$key]['follow_up'] : 0;
         }
      
         //        if ((!isset($_SESSION['cccon_managers']) && empty($_SESSION['cccon_managers'])) && (!isset($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_councellors'])))
@@ -483,14 +578,18 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
             $data .= ",Actual Prospects";
             $data .= ",Target Converts";
             $data .= ",Actual Converts";
+            $data .= ",Target Follow Up";
+            $data .= ",Actual Follow Up";
 
             $data .= ",yesterday Pitched";
             $data .= ",yesterday Prospects";
             $data .= ",yesterday Converts";
+            $data .= ",yesterday Follow Up";
 
             $data .= ",Today Pitched";
             $data .= ",Today Prospects";
             $data .= ",Today Converts";
+            $data .= ",Today Follow Up";
 
             $data .= "\n";
 
@@ -505,14 +604,18 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                 $data .= "\",\"" . $values['actual_prospect'];
                 $data .= "\",\"" . $values['target_converts'];
                 $data .= "\",\"" . $values['actual_converts'];
+                $data .= "\",\"" . $values['target_follow_up'];
+                $data .= "\",\"" . $values['actual_follow_up'];
 
                 $data .= "\",\"" . $values['yesterday_pitched'];
                 $data .= "\",\"" . $values['yesterday_prospect'];
                 $data .= "\",\"" . $values['yesterday_converts'];
+                $data .= "\",\"" . $values['yesterday_follow_up'];
 
                 $data .= "\",\"" . $values['today_pitched'];
                 $data .= "\",\"" . $values['today_prospect'];
                 $data .= "\",\"" . $values['today_converts'];
+                $data .= "\",\"" . $values['today_follow_up'];
 
                 $data .= "\"\n";
             }
