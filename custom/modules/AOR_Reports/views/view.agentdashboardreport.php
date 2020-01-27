@@ -574,7 +574,8 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
             $StatusList = $statusHeader;
 
-            $data .= "Counsellor Name";
+            $data .= "Counsellor Email";
+            $data .= ",Counsellor Name";
             $data .= ",Total connected";
             $data .= ",Target Pitched";
             $data .= ",Actual Pitched";
@@ -601,6 +602,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
             foreach ($theFInalArray as $key => $values)
             {
                 $data .= "\"" . $key;
+                $data .= "\",\"" .  $values['Agent_Name'];
                 $data .= "\",\"" . $values['total_connected_calls'];
                 $data .= "\",\"" . $values['target_pitched'];
                 $data .= "\",\"" . $values['actual_pitched'];
