@@ -231,6 +231,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //echo '<pre>'.
         $batchSql     = "SELECT 
                             users.user_name,
+                            concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name,
                             leads.status_description,
                                 month(leads.date_modified) monthwise,
                                 year(leads.date_modified) yearwise,
@@ -529,6 +530,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         foreach ($getMonthToDateActualCount as $key => $val)
         {
             $theFInalArray[$key]['total_connected_calls'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
+                $theFInalArray[$key]['Agent_Name'] = isset($val['Agent_Name']) ? $val['Agent_Name'] : 'NA';
 
             $theFInalArray[$key]['target_pitched'] = isset($getMonthToDateTargetCount[$key]['pitched']) ? $getMonthToDateTargetCount[$key]['pitched'] : 0;
             $theFInalArray[$key]['actual_pitched'] = isset($getMonthToDateActualCount[$key]['pitched']) ? $getMonthToDateActualCount[$key]['pitched'] : 0;
@@ -557,7 +559,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //        {
         //            $theFInalArray = array();
         //        }
-        //echo '<pre>'; print_r($theFInalArray);
+        echo '<pre>'; print_r($theFInalArray);
  
         
         if (isset($_POST['export']))

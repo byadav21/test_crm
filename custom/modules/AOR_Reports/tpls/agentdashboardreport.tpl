@@ -170,7 +170,8 @@
                 
                 
                 <tr>
-				<th class="column1" valign="middle">Counsellor Name</th>
+				<th class="column1" valign="middle">Counsellor Email</th>
+                                <th class="column1" valign="middle">Counsellor Name</th>
 				<th class="column2">
 					<table cellpadding="0" cellspacing="0" border="0" class="table1">
 						<tr>
@@ -264,6 +265,7 @@
                 
                 <tr>
 				<td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
+                                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
 				<td class="column2">
 					<table cellpadding="0" cellspacing="0" border="0" class="table1">
 						<tr>
