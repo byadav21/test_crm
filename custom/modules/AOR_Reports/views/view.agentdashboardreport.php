@@ -149,34 +149,42 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         global $db;
 
         $wherex = '';
-
+        //echo '$month=='.$month;
         if (!empty($month))
         {
-            $where .= " and month(reg_date)='$month' ";
+            $wherex .= " and month(al.reg_date)='$month' ";
         }
         if (!empty($year))
         {
-            $wherex .= " and year(reg_date)='$year' ";
+            $wherex .= " and year(al.reg_date)='$year' ";
         }
 
         //#AND dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
 
-        $batchSql     = "select user,
-                            count(lead_id) leadCont
-                            from attempt_log 
-                            where dispositionName='CONNECTED' 
+       echo  $batchSql     = "select 
+                            al.user,
+                            concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name,
+                            count(al.lead_id) leadCont
+                            from attempt_log al
+                            LEFT JOIN users ON al.user =users.user_name
+                            where users.deleted=0
+                            AND users.status='Active'
+                            AND users.department='CC'
+                            AND al.dispositionName='CONNECTED' 
                             $wherex
-                           group by user,month(reg_date);";
+                           group by al.user,month(al.reg_date);";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         while ($row          = $db->fetchByAssoc($batchObj))
         {
-            $batchOptions[$row['user']] = $row['leadCont'];
+            $batchOptions[$row['user']]['leadCont'] = $row['leadCont'];
+            $batchOptions[$row['user']]['Agent_Name'] = $row['Agent_Name'];
         }
         return $batchOptions;
     }
 
-    function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
+    
+    function getMonthToDateActualCountXX($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
     {
         global $db,$current_user;
 
@@ -276,6 +284,107 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         return $batchOptions;
     }
     
+     function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
+    {
+        global $db,$current_user;
+
+        $wherex = '';
+        $userSlug = "";
+        
+        
+        //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday;
+        
+        
+        //echo 'dd=='.$current_userAccess['slug'];
+        if (!empty($month))
+        {
+            $wherex .= " AND month(al.reg_date)>= '$month' ";
+        }
+        if (!empty($year))
+        {
+            $wherex .= " AND year(al.reg_date)='$year' ";
+        }
+        if (!empty($yesterday))
+        {
+
+            $wherex .= " AND date(al.reg_date)= '$yesterday' ";
+        }
+        if (!empty($today))
+        {
+            $wherex .= " AND date(al.reg_date)= '$today' ";
+        }
+        
+        if (!empty($selected_councellors) && $userSlug!='CCC')
+        {
+            $wherex .= " AND  users.id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
+             //echo 'xxx'.
+             $wherex .= " AND  users.id ='$current_user->id'";
+        }
+        //print_r($CouncellorsList);
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCM' && empty($selected_councellors)){
+             //echo 'xxx'.
+             $managersAgent = array();
+             foreach ($CouncellorsList as $key=>$val){
+                 $managersAgent[]= $key;
+             }
+              //print_r($managersAgent);
+              $wherex .= " AND  users.id IN ('" . implode("','", $managersAgent) . "')";
+        }
+       
+
+        $pinchedArr = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect', 'Converted');
+
+        echo '<pre>'.
+        $batchSql     = "SELECT 
+                        users.user_name,
+                        concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name,
+                           al.subDisposeCode status_description,
+                            month(al.reg_date) monthwise,
+                            year(al.reg_date) yearwise,
+                        count(al.lead_id) leadCont
+                    FROM attempt_log al
+
+                    LEFT JOIN users ON al.user =users.user_name
+                    WHERE 
+                     users.deleted=0
+                    AND users.status='Active'
+                    AND users.department='CC'
+                    AND al.dispositionName='CONNECTED' 
+                    AND al.dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect')
+                    $wherex
+                    GROUP BY al.user,al.dispositionCode,month(al.reg_date)
+                    order by al.user,al.dispositionCode,month(al.reg_date);"; 
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        $pitchedCount = 0;
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+
+
+            if (in_array($row['status_description'], $pinchedArr))
+            {
+
+                $batchOptions[$row['user_name']]['pitched'] += $row['leadCont'];
+            }
+            if ($row['status_description'] == 'Prospect')
+            {
+                $batchOptions[$row['user_name']]['Prospects'] += $row['leadCont'];
+            }
+            if ($row['status_description'] == 'Follow Up')
+            {
+
+            $batchOptions[$row['user_name']]['follow_up'] += $row['leadCont'];
+            }
+            
+            $batchOptions[$row['user_name']]['Agent_Name'] = $row['Agent_Name'];
+        }
+        return $batchOptions;
+    }
+    
+    
+    
     function getMonthToDateActualConverts($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
     {
         global $db,$current_user;
@@ -372,7 +481,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
         if (!empty($month))
         {
-            $where .= " AND apr.month >= '$month' ";
+            $wherex .= " AND apr.month >= '$month' ";
         }
         if (!empty($year))
         {
@@ -463,11 +572,11 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         }
         if (!empty($_SESSION['cccon_month']))
         {
-            $selected_month = $_SESSION['cccon_month'];
+               $selected_month = $_SESSION['cccon_month'];
         }
         else
         {
-            $selected_month = $current_year   = date('m');
+               $selected_month  = date('m');
         }
         if (!empty($_SESSION['cccon_years']))
         {
@@ -475,7 +584,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         }
         else
         {
-            $selected_years = $current_year   = date('Y');
+            $selected_years   = date('Y');
         }
 
         if ($is_manger == 1)
@@ -509,6 +618,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         {
              $selected_years = date('Y');
         }
+        //echo $selected_month.'mm';
         //The new code will go here..
         //echo '$selected_month='.$selected_month.'$selected_years='.$selected_years;
         //## All Connected
@@ -527,12 +637,12 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount('','','', date('Y-m-d'),'',$current_userAccess,'');
 
 
-        //echo '<pre>'; print_r($getMonthToDateActualYesterdayCount);  die;
+        //echo '<pre>'; print_r($getMonthToDateActualCount);  die;
         $theFInalArray = array();
-        foreach ($getMonthToDateActualCount as $key => $val)
+        foreach ($getConnectedCalls as $key => $val)
         {
-            $theFInalArray[$key]['total_connected_calls'] = isset($getConnectedCalls[$key]) ? $getConnectedCalls[$key] : 0;
-            $theFInalArray[$key]['Agent_Name'] = isset($getMonthToDateActualCount[$key]['Agent_Name']) ? $getMonthToDateActualCount[$key]['Agent_Name'] : 'NA';
+            $theFInalArray[$key]['total_connected_calls'] = isset($val['leadCont']) ? $val['leadCont'] : 0;
+            $theFInalArray[$key]['Agent_Name'] = isset($val['Agent_Name']) ? $val['Agent_Name'] : 0;
 
             $theFInalArray[$key]['target_pitched'] = isset($getMonthToDateTargetCount[$key]['pitched']) ? $getMonthToDateTargetCount[$key]['pitched'] : 0;
             $theFInalArray[$key]['actual_pitched'] = isset($getMonthToDateActualCount[$key]['pitched']) ? $getMonthToDateActualCount[$key]['pitched'] : 0;

@@ -242,6 +242,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                 systemDisposition='" . $_REQUEST['systemDisposition'] . "',
                                                 attempts_c='$attempid',
                                                 dispositionCode='$dispositionReasonCode',
+                                                subDisposeCode='$dispositionCode',
                                                 callType='" . $_REQUEST['callType'] . "'";
                 $res        = $db->query($AtmpLogSql);
                 
@@ -409,6 +410,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                         systemDisposition='" . $_REQUEST['systemDisposition'] . "',
                                                         attempts_c='$attempid',
                                                         dispositionCode='$dispositionReasonCode',
+                                                        subDisposeCode='$dispositionCode',
                                                         callType='" . $_REQUEST['callType'] . "'";
                     $res        = $db->query($AtmpLogSql);
                 }
@@ -428,6 +430,7 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                                                         systemDisposition='" . $_REQUEST['systemDisposition'] . "',
                                                         attempts_c='$attempid',
                                                         dispositionCode='$dispositionReasonCode',
+                                                        subDisposeCode='$dispositionCode',
                                                         callType='" . $_REQUEST['callType'] . "'";
                     $res        = $db->query($AtmpLogSql);
                     
