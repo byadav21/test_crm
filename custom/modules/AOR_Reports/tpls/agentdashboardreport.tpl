@@ -170,11 +170,12 @@
                 
                 
                 <tr>
-				<th class="column1" valign="middle">Counsellor Name</th>
+				<th class="column1" valign="middle">Counsellor Email</th>
+                                <th class="column1" valign="middle">Counsellor Name</th>
 				<th class="column2">
 					<table cellpadding="0" cellspacing="0" border="0" class="table1">
 						<tr>
-							<th colspan="4">Month to date</th>
+							<th colspan="5">Month to date</th>
 						</tr>
 						<tr>
 							<th class="total-value">Total connected</th>
@@ -211,30 +212,43 @@
 									</tr>
 								</table>	
 							</th>
+                                                        <th>
+								<table cellpadding="0" cellspacing="0" border="0" class="table2">	
+									<tr>
+										<th colspan="2">Follow Up</th>
+									</tr>
+									<tr>
+										<th>Target</th>
+										<th>Actual</th>
+									</tr>
+								</table>	
+							</th>
 						</tr>
 					</table>
 				</th>
 				<th class="column3">
 					<table cellpadding="0" cellspacing="0" border="0" class="table1">
 						<tr>
-							<th colspan="3">Yesterday</th>
+							<th colspan="4">Yesterday</th>
 						</tr>
 						<tr>
 							<th>Pitched</th>
 							<th>Prospects</th>
 							<th>Converts</th>
+                                                        <th>Follow Up</th>
 						</tr>
 					</table>
 				</th>
 				<th class="column4">
 					<table cellpadding="0" cellspacing="0" border="0" class="table1">
 						<tr>
-							<th colspan="3">Today</th>
+							<th colspan="4">Today</th>
 						</tr>
 						<tr>
 							<th>Pitched</th>
 							<th>Prospects</th>
 							<th>Converts</th>
+                                                        <th>Follow Up</th>
 						</tr>
 					</table>
 				</th>
@@ -251,6 +265,7 @@
                 
                 <tr>
 				<td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
+                                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
 				<td class="column2">
 					<table cellpadding="0" cellspacing="0" border="0" class="table1">
 						<tr>
@@ -279,24 +294,34 @@
 									</tr>
 								</table>	
 							</td>
+                                                        <td>
+								<table cellpadding="0" cellspacing="0" border="0" class="table2">	
+									<tr>
+										<td style="width:54px;">{$value.target_follow_up}</td>
+										<td style="width:56px;">{$value.actual_follow_up}</td>
+									</tr>
+								</table>	
+							</td>
 						</tr>
 					</table>
 				</td>
 				<td class="column3">
 					<table cellpadding="0" cellspacing="0" border="0" border="0" class="table1">
 						<tr>
-							<td style="width:57px">{$value.yesterday_pitched}</td>
-							<td style="width:77px">{$value.yesterday_prospect}</td>
-							<td style="width:70px">{$value.yesterday_converts}</td>
+							<td style="width:54px">{$value.yesterday_pitched}</td>
+							<td style="width:72px">{$value.yesterday_prospect}</td>
+							<td style="width:67px">{$value.yesterday_converts}</td>
+                                                        <td style="width:67px">{$value.yesterday_follow_up}</td>
 						</tr>
 					</table>
 				</td>
 				<td class="column4">
 					<table cellpadding="0" cellspacing="0" border="0" border="0" class="table1">
 						<tr>
-							<td style="width:57px">{$value.today_pitched}</td>
-							<td style="width:77px">{$value.today_prospect}</td>
-							<td style="width:71px">{$value.today_converts}</td>
+							<td style="width:54px">{$value.today_pitched}</td>
+							<td style="width:72px">{$value.today_prospect}</td>
+							<td style="width:67px">{$value.today_converts}</td>
+                                                        <td style="width:67px">{$value.today_follow_up}</td>
 						</tr>
 					</table>
 				</td>
@@ -408,6 +433,7 @@
         </script>
 
         <style>
+       .paginationTable{min-width:1400px;}     
             .lead-report-table{display: flex; flex-direction: column; width: 100%; overflow-x: auto;}
 .lead-report-table table{width: 100%;  border-style: hidden; height: 100%; border:0px solid #000;  border-collapse: collapse; border-spacing: 0;}
 .lead-report-table .table1 tr:first-child th{height:30px;}
