@@ -185,6 +185,22 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
     public function display()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
+         //~~~~~~~
+            $report_action = '';
+            $reportAccess  = reportAccessLog();
+
+            $current_user_id = $current_user->id;
+            $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
+
+
+                if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+                {
+                    echo 'You are not authorized to access!';
+                    return;
+                }
+            //~~~~~~~
+
+                
         $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942','581d9edd-a5e4-349a-fe28-5c59b9d2fe37');
         $additionalUsrStatus   = 0;
         $current_user_id       = $current_user->id;
