@@ -171,6 +171,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                             AND users.status='Active'
                             AND users.department='CC'
                             AND al.dispositionName='CONNECTED' 
+                            #and al.user='abhishek.singh@talentedge.in'
                             $wherex
                            group by al.user,month(al.reg_date);";
         $batchObj     = $db->query($batchSql);
@@ -284,7 +285,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         return $batchOptions;
     }
     
-     function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
+    function getMonthToDateActualCount($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
     {
         global $db,$current_user;
 
@@ -292,13 +293,13 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $userSlug = "";
         
         
-        //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday;
+        //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday.'<br>';
         
         
         //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
-            $wherex .= " AND month(al.reg_date)>= '$month' ";
+            $wherex .= " AND month(al.reg_date)= '$month' ";
         }
         if (!empty($year))
         {
@@ -334,13 +335,13 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         }
        
 
-        $pinchedArr = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect', 'Converted');
+        $pinchedArr = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect');
 
         //echo '<pre>'.
         $batchSql     = "SELECT 
                         users.user_name,
                         concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name,
-                           al.subDisposeCode status_description,
+                           al.dispositionCode status_description,
                             month(al.reg_date) monthwise,
                             year(al.reg_date) yearwise,
                         count(al.lead_id) leadCont
@@ -352,6 +353,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                     AND users.status='Active'
                     AND users.department='CC'
                     AND al.dispositionName='CONNECTED' 
+                    #and al.user='abhishek.singh@talentedge.in'
                     AND al.dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect')
                     $wherex
                     GROUP BY al.user,al.dispositionCode,month(al.reg_date)
