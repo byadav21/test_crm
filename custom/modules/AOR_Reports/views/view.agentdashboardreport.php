@@ -161,7 +161,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
         //#AND dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
 
-       echo  $batchSql     = "select 
+        $batchSql     = "select 
                             al.user,
                             concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name,
                             count(al.lead_id) leadCont
@@ -336,7 +336,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
         $pinchedArr = array('Fallout', 'Follow Up', 'Cross Sell', 'Prospect', 'Converted');
 
-        echo '<pre>'.
+        //echo '<pre>'.
         $batchSql     = "SELECT 
                         users.user_name,
                         concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name,
