@@ -111,12 +111,12 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                          WHERE 
                             u.deleted=0
                             #AND aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
-                           
                            $conditons
                            AND aru.deleted=0 
                            AND acl_roles.deleted=0 
                            AND u.deleted=0 
-                           AND u.employee_status='Active'";
+                            AND u.department='CC'
+                           AND u.employee_status='Active' ";
         $userObj  = $db->query($userSql);
         $usersArr = [];
         while ($user     = $db->fetchByAssoc($userObj))
@@ -144,20 +144,51 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
     }
 
     ///////New task start
-    function getConnectedCalls($month = '', $year = '')
+    function getConnectedCalls($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array(),$CouncellorsList=array())
     {
-        global $db;
+        global $db,$current_user;
 
         $wherex = '';
-        //echo '$month=='.$month;
+        $userSlug = "";
+
+        //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
-            $wherex .= " and month(al.reg_date)='$month' ";
+            $wherex .= " AND month(al.reg_date)= '$month' ";
         }
         if (!empty($year))
         {
-            $wherex .= " and year(al.reg_date)='$year' ";
+            $wherex .= " AND year(al.reg_date)='$year' ";
         }
+        if (!empty($yesterday))
+        {
+
+            $wherex .= " AND date(al.reg_date)= '$yesterday' ";
+        }
+        if (!empty($today))
+        {
+            $wherex .= " AND date(al.reg_date)= '$today' ";
+        }
+        
+        if (!empty($selected_councellors) && $userSlug!='CCC')
+        {
+            $wherex .= " AND  users.id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
+             //echo 'xxx'.
+             $wherex .= " AND  users.id ='$current_user->id'";
+        }
+        //print_r($CouncellorsList);
+        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCM' && empty($selected_councellors)){
+             //echo 'xxx'.
+             $managersAgent = array();
+             foreach ($CouncellorsList as $key=>$val){
+                 $managersAgent[]= $key;
+             }
+              //print_r($managersAgent);
+              $wherex .= " AND  users.id IN ('" . implode("','", $managersAgent) . "')";
+        }
+       
 
         //#AND dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
 
@@ -626,7 +657,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //The new code will go here..
         //echo '$selected_month='.$selected_month.'$selected_years='.$selected_years;
         //## All Connected
-        $getConnectedCalls = $this->getConnectedCalls($selected_month, $selected_years);
+        $getConnectedCalls = $this->getConnectedCalls($selected_years, $selected_month, '','',$selected_councellors,$current_userAccess,$CouncellorsList);
         
         //## Actual Month wise leads // ($year = '', $month = '', $yesterday = '', $today = '',$selected_councellors=array(),$current_userAccess=array())
         $getMonthToDateActualCount = $this->getMonthToDateActualCount($selected_years, $selected_month, '','',$selected_councellors,$current_userAccess,$CouncellorsList);
