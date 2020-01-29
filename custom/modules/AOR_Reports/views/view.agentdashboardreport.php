@@ -199,7 +199,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
-            $wherex .= " AND month(leads.date_modified)>= '$month' ";
+            $wherex .= " AND month(leads.date_modified) = '$month' ";
         }
         if (!empty($year))
         {
@@ -401,7 +401,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
-            $wherex .= " AND month(leads.converted_date)>= '$month' ";
+            $wherex .= " AND month(leads.converted_date) = '$month' ";
         }
         if (!empty($year))
         {
@@ -483,7 +483,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
         if (!empty($month))
         {
-            $wherex .= " AND apr.month >= '$month' ";
+            $wherex .= " AND apr.month = '$month' ";
         }
         if (!empty($year))
         {
