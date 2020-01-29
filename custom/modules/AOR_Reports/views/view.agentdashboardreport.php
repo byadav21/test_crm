@@ -199,7 +199,9 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
-            $wherex .= " AND month(leads.date_modified = '$month' ";
+
+            $wherex .= " AND month(leads.date_modified) = '$month' ";
+
         }
         if (!empty($year))
         {
@@ -341,7 +343,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $batchSql     = "SELECT 
                         users.user_name,
                         concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name,
-                           al.dispositionCode status_description,
+                           al.subDisposeCode status_description,
                             month(al.reg_date) monthwise,
                             year(al.reg_date) yearwise,
                         count(al.lead_id) leadCont
@@ -354,10 +356,10 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
                     AND users.department='CC'
                     AND al.dispositionName='CONNECTED' 
                     #and al.user='abhishek.singh@talentedge.in'
-                    AND al.dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect')
+                    AND al.subDisposeCode IN ('Fallout','Follow Up','Cross Sell','Prospect')
                     $wherex
-                    GROUP BY al.user,al.dispositionCode,month(al.reg_date)
-                    order by al.user,al.dispositionCode,month(al.reg_date);"; 
+                    GROUP BY al.user,al.subDisposeCode,month(al.reg_date)
+                    order by al.user,al.subDisposeCode,month(al.reg_date);"; 
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         $pitchedCount = 0;
@@ -515,7 +517,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-	die('Report is under maintenance!');
+	//die('Report is under maintenance!');
         $where      = "";
         $wherecl    = "";
         $campaignID = array();
