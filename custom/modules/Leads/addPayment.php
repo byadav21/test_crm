@@ -1129,7 +1129,7 @@ class addPaymentClass
             }
             /*             * ************************ Mail 1Trigers Code 14Sep18 by MKG  Mail=> Not Interested ***************** */
             $useremail = $bean->email1;
-            if (($bean->lead_source_types != "OO" && $bean->lead_source_types != "CO") && $bean->status_description == "Not Interested")
+            if (($bean->lead_source_types != "OO" && $bean->lead_source_types != "CO") && $bean->status_description == "Not Interested" && $bean->disposition_reason!='Enrolled with TE')
             {
                 $template = "<p>Hi " . $bean->first_name . " " . $bean->last_name . ",</p>
                 <p>We regret not having been able to help you with your query regarding " . $bean->batch_c . ".</p>
@@ -1146,8 +1146,8 @@ class addPaymentClass
             }
 
             /** Mail2 => Fallout: ** */
-            if (($bean->lead_source_types != "OO" && $bean->lead_source_types != "CO") && $bean->status_description == "Fallout")
-            {
+            if (($bean->lead_source_types != "OO" && $bean->lead_source_types != "CO") && $bean->status_description == "Fallout" && $bean->disposition_reason!='Enrolled with TE')
+            {   
                 $template = "<p>Hi " . $bean->first_name . " " . $bean->last_name . ",</p>
                 <p>We are sorry to see you go from " . $bean->batch_c . " .</p>  
                 <p>However, you can be sure that we will continue to bring to you the most industry relevant courses and do our best to help you fast-track your career.</p>
