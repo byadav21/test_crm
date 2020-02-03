@@ -132,7 +132,7 @@
 
 
 
-                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    {*<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                         <strong>Student Name</strong>
                     </th>
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
@@ -141,7 +141,7 @@
 
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                         <strong>Phone Number</strong>
-                    </th> 
+                    </th> *}
 
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                         <strong>Lead ID</strong>
@@ -310,11 +310,12 @@
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.Vendor}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.institute}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.converted_date}</td>
+                        {*
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.student_name}</td>
 
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.email_add}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.phone_mobile}</td>
-
+                        *}
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.lead_id}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.counselor_name}</td>
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.invoice_number}</td>

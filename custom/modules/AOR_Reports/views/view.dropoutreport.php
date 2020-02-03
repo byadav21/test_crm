@@ -69,7 +69,25 @@ class AOR_ReportsViewDropoutreport extends SugarView {
 			}
 
 		# Query Fill $$ Manish Kumar
-		$leadSql="SELECT b.name AS batch,s.name AS student,s.email AS email,s.mobile AS mobile,leads.primary_address_city,leads.primary_address_state,leads_cstm.education_c,leads_cstm.work_experience_c FROM te_student AS s INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb INNER JOIN te_ba_batch as b ON b.id=sb.te_ba_batch_id_c LEFT JOIN leads ON leads.id=sb.leads_id LEFT JOIN leads_cstm ON leads_cstm.id_c=leads.id WHERE s.deleted=0 AND sb.deleted=0 AND sb.status='Dropout' ".$where."";
+		$leadSql="SELECT 
+                                sb.id AS sd_id,
+                                b.name AS batch,
+                                s.name AS student,
+                                #s.email AS email,
+                                #s.mobile AS mobile,
+                                leads.primary_address_city,
+                                leads.primary_address_state,
+                                leads_cstm.education_c,
+                                leads_cstm.work_experience_c
+                         FROM te_student AS s
+                         INNER JOIN te_student_te_student_batch_1_c AS ssb ON s.id=ssb.te_student_te_student_batch_1te_student_ida
+                         INNER JOIN te_student_batch AS sb ON sb.id=ssb.te_student_te_student_batch_1te_student_batch_idb
+                         INNER JOIN te_ba_batch AS b ON b.id=sb.te_ba_batch_id_c
+                         LEFT JOIN leads ON leads.id=sb.leads_id
+                         LEFT JOIN leads_cstm ON leads_cstm.id_c=leads.id
+                         WHERE s.deleted=0
+                           AND sb.deleted=0
+                           AND sb.status='Dropout' ".$where."";
 
 		$leadObj =$db->query($leadSql);
 		$councelorList=array();
@@ -79,11 +97,11 @@ class AOR_ReportsViewDropoutreport extends SugarView {
 		}
 
 		if(isset($_POST['export']) && $_POST['export']=="Export"){
-			$data="Student,Batch,Email,Phone,Experience,Education,City,State\n";
+			$data="StudentID,Batch,Experience,Education,City,State\n";
 			$file = "dropout_report";
 			$filename = $file . "_" . date ( "Y-m-d");
 			foreach($councelorList as $key=>$councelor){
-				$data.= "\"" . $councelor['student'] . "\",\"" . $councelor['batch'] . "\",\"". $councelor['email']. "\",\"". $councelor['mobile']. "\",\"". $councelor['work_experience_c']. "\",\"". $councelor['education_c']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['primary_address_state']. "\"\n";
+				$data.= "\"" . $councelor['sd_id'] . "\",\"" . $councelor['batch'] . "\",\"". $councelor['work_experience_c']. "\",\"". $councelor['education_c']. "\",\"". $councelor['primary_address_city']. "\",\"". $councelor['primary_address_state']. "\"\n";
 			}
 			ob_end_clean();
 			header("Content-type: application/csv");

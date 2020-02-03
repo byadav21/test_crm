@@ -96,17 +96,17 @@
 	<tr height="20">
 
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-			<strong>Student</strong>
+			<strong>Student ID</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Batch</strong>
 		</th>
-		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+		{*<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Email</strong>
 		</th>
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Phone</strong>
-		</th>
+		</th>*}
 		<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
 			<strong>Experience</strong>
 		</th>
@@ -123,10 +123,11 @@
 	</tr>
 	{foreach from = $councelorList key=key item=councelor}
 		<tr height="20" class="oddListRowS1">
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.student}</td>
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.sd_id}</td>
+			{*<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.student}</td>*}
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.batch}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.email}</td>
-			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.mobile}</td>
+{*			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.email}</td>
+			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.mobile}</td>*}
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.work_experience_c}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.education_c}</td>
 			<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.primary_address_city}</td>
