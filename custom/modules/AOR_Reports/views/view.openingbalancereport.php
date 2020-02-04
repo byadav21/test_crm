@@ -75,6 +75,21 @@ class AOR_ReportsViewopeningbalancereport extends SugarView
     public function display()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
+        //~~~~~~~
+        $report_action = '';
+        $reportAccess  = reportAccessLog();
+
+        $current_user_id = $current_user->id;
+        $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
+
+
+            if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+            {
+                echo 'You are not authorized to access!';
+                return;
+            }
+        //~~~~~~~
+                
         $current_user_id       = $current_user->id;
         $current_user_is_admin = $current_user->is_admin;
         $where                 = "";
