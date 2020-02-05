@@ -26,6 +26,7 @@ class AOR_ReportsViewaddreportaccess extends SugarView
 
         $userSql  = "SELECT     u.first_name,
                                 u.last_name,
+                                u.user_name,
                                 u.id
                          FROM users AS u
                          WHERE 
@@ -37,6 +38,7 @@ class AOR_ReportsViewaddreportaccess extends SugarView
         {
             $usersArr[$user['id']]['id']   = $user['id'];
             $usersArr[$user['id']]['name'] = $user['first_name'] . ' ' . $user['last_name'];
+            $usersArr[$user['id']]['email'] = $user['user_name'];
         }
         return $usersArr;
     }
@@ -144,7 +146,7 @@ class AOR_ReportsViewaddreportaccess extends SugarView
 
                 foreach ($userArr as $key => $userID)
                 {
-
+                    //echo '<pre>';print_r($CouncellorsList); die;
                     $insertSql = "INSERT INTO report_access_log  SET "
                             . " assigned_user_id='" . $userID . "', "
                             . "	assigned_user_email='" . $CouncellorsList[$userID]['email'] . "',"
