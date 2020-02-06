@@ -665,6 +665,12 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
         $getMonthToDateActualYesterdayCount = $this->getMonthToDateActualCount( '', '', date('Y-m-d', strtotime("-1 days")),'','',$current_userAccess,'');
         //#### Today Real counts of leads
         $getMonthToDateActualTodayCount     = $this->getMonthToDateActualCount('','','', date('Y-m-d'),'',$current_userAccess,'');
+        
+        
+         //### Yeastday real counts leads
+         $getMonthToDateActualConvertsYesterdayCount = $this->getMonthToDateActualConverts( '', '', date('Y-m-d', strtotime("-1 days")),'','',$current_userAccess,'');
+        //#### Today Real counts of leads
+         $getMonthToDateActualConvertsTodayCount     = $this->getMonthToDateActualConverts('','','', date('Y-m-d'),'',$current_userAccess,'');
 
 
         //echo '<pre>'; print_r($getMonthToDateActualConverts);  die;
@@ -688,12 +694,12 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
             
             $theFInalArray[$key]['yesterday_pitched']  = isset($getMonthToDateActualYesterdayCount[$key]['pitched']) ? $getMonthToDateActualYesterdayCount[$key]['pitched'] : 0;
             $theFInalArray[$key]['yesterday_prospect'] = isset($getMonthToDateActualYesterdayCount[$key]['Prospects']) ? $getMonthToDateActualYesterdayCount[$key]['Prospects'] : 0;
-            $theFInalArray[$key]['yesterday_converts'] = isset($getMonthToDateActualConverts[$key]['Converts']) ? $getMonthToDateActualConverts[$key]['Converts'] : 0;
+            $theFInalArray[$key]['yesterday_converts'] = isset($getMonthToDateActualConvertsYesterdayCount[$key]['Converts']) ? $getMonthToDateActualConvertsYesterdayCount[$key]['Converts'] : 0;
             $theFInalArray[$key]['yesterday_follow_up'] = isset($getMonthToDateActualYesterdayCount[$key]['follow_up']) ? $getMonthToDateActualYesterdayCount[$key]['follow_up'] : 0;
 
             $theFInalArray[$key]['today_pitched']  = isset($getMonthToDateActualTodayCount[$key]['pitched']) ? $getMonthToDateActualTodayCount[$key]['pitched'] : 0;
             $theFInalArray[$key]['today_prospect'] = isset($getMonthToDateActualTodayCount[$key]['Prospects']) ? $getMonthToDateActualTodayCount[$key]['Prospects'] : 0;
-            $theFInalArray[$key]['today_converts'] = isset($getMonthToDateActualConverts[$key]['Converts']) ? $getMonthToDateActualConverts[$key]['Converts'] : 0;
+            $theFInalArray[$key]['today_converts'] = isset($getMonthToDateActualConvertsTodayCount[$key]['Converts']) ? $getMonthToDateActualConvertsTodayCount[$key]['Converts'] : 0;
             $theFInalArray[$key]['today_follow_up'] = isset($getMonthToDateActualTodayCount[$key]['follow_up']) ? $getMonthToDateActualTodayCount[$key]['follow_up'] : 0;
         }
      
