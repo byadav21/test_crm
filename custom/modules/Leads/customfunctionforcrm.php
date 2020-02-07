@@ -34,7 +34,7 @@ ini_set("display_errors",0);
 				}
 				$statusWiseCount = '';
 //New Leads
-				$sqlCount = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description LIKE 'New Lead' $reporting_user_where";
+				$sqlCount = "SELECT status_description,count(id) as count FROM leads WHERE deleted =0 AND status_description='Call Back' $reporting_user_where";
 
 				$statusWiseCount .= ' <style>.tile_count .tile_stats_count {width: 12%!important;}@media (max-width: 1024px) and (min-width: 979px) .col-sm-3.tile_stats_count { max-width: 242px !important; }</style>';
 
@@ -44,7 +44,7 @@ ini_set("display_errors",0);
 
 					 $statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 						<div class="count">'.$rowCount['count'].'</div>
-						<span class="count_top">  <a   href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowCount['status_description'].'">'.$rowCount['status_description'].'</a></span>
+						<span class="count_top">  <a   href="index.php?module=Leads&searchFormTab=basic_search&query=true&status_description_basic='.$rowCount['status_description'].'">Callback</a></span>
 
 					</div>	';
 
@@ -54,7 +54,7 @@ ini_set("display_errors",0);
 
 					$statusWiseCount .= '<div class="col-xs-6 col-sm-3 tile_stats_count">
 						<div class="count">0</div>
-						<span class="count_top"> New Leads</span>
+						<span class="count_top"> Call Back</span>
 
 					</div>	';
 
