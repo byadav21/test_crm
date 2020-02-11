@@ -277,7 +277,10 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
             'Re-Enquired'            => 'Re-Enquired',
             'Prospect'               => 'Prospect',
             'Recycle'                => 'Recycle',
-            'wrap.timeout'           => 'wrap.timeout');
+            'wrap.timeout'           => 'wrap.timeout',
+            'Call Back'              => 'Call Back',
+            'Re-Assigned'            =>  'Re-Assigned',
+            'user.forced.logged.off' => 'user.forced.logged.off');
 
         if(!empty($selected_headers)){
         $headersss = implode(",", $selected_headers);

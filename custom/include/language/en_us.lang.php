@@ -630,6 +630,7 @@ $GLOBALS['app_list_strings']['lead_status_details_custom_dom']=array (
   'Enrolled with TE'=>'Enrolled with TE',
   'DNC'=>'DNC',
   'Re-Assigned'=>'Re-Assigned'
+  
 );
 
 
@@ -1209,6 +1210,7 @@ $GLOBALS['app_list_strings']['lead_status_custom_dom']=array (
   'Warm' => 'Warm',
   'Recycle' => 'Recycle',
   'Re-Assigned' => 'Re-Assigned',
+  
 );
 $GLOBALS['app_list_strings']['status_list_student_batch_discription']=array (
   '' => '',
