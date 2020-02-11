@@ -432,6 +432,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_Crosssell_Churned'=>'Crosssell Churned',
   'CC_Concentrix'=>'Concentrix',
   'CC_Majorel'=>'Majorel',
+  'CC_TataAIA'=>'TataAIA',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
