@@ -392,6 +392,9 @@
                                                   {elseif $rowData.STATUS eq 'Dropout'}
 								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}
                                                                 </p>
+                                                  {elseif $rowData.STATUS eq 'Re-Assigned'}
+								<p style="color:#187816;font-weight:bold;display:inline"><i class="fa fa-bookmark" aria-hidden="true"></i> {$rowData.STATUS_DESCRIPTION}
+                                                                </p>
 						   {/if}
 					<p>
                                              {if $rowData.STATUS_DESCRIPTION=='Call Back'}

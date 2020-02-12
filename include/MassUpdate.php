@@ -927,6 +927,10 @@ $('#mass_status_description').parent().css('display','none');
 
 		 $("#mass_status_description").append('<option>Recycle</option>');
 	}
+        else if(el.val() === "Re-Assigned" ) {
+            $("#mass_status_description option").remove();
+            $("#mass_status_description").append('<option>Re-Assigned</option>');
+	}
   });
 </script>
 EOJS;
