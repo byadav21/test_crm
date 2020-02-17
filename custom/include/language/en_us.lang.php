@@ -433,6 +433,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CC_Concentrix'=>'Concentrix',
   'CC_Majorel'=>'Majorel',
   'CC_TataAIA'=>'TataAIA',
+  'CC_Infosys'=>'Infosys',
   'OO_KOL'=>'TBA KOLKATA',
   'OO_NOI'=>'TBA NOIDA',
   'OO_HYD'=>'TBA HYDERABAD',
