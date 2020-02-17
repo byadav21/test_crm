@@ -94,7 +94,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
     public function updateLeads()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
-        $headers  = array('id', 'dristi_campagain_id', 'dristi_API_id');
+        $headers  = array('id', 'dristi_campagain_id', 'dristi_API_id','assigned_user_id','status','status_description');
         //$headers2 = array();
         $filename = $_FILES["file"]["tmp_name"];
 
@@ -123,8 +123,22 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                 $LeadID              = $emapData[0];
                 $dristi_campagain_id = $emapData[1];
                 $dristi_API_id       = $emapData[2];
+                $assigned_user_id    = $emapData[3];
+                $status              = $emapData[4];
+                $status_description  = $emapData[5];
 
+                $neoxstatus  = '0';
+                $statusX     = 'Alive';
+                $statusDescX = 'New Lead';
+                $autoassignX = 'Yes';
 
+                if (!empty($assigned_user_id))
+                {
+                    $neoxstatus  = '1';
+                    $statusX     = $status;
+                    $statusDescX = $status_description;
+                    $autoassignX = 'No';
+                }
                 $bean = BeanFactory::getBean('Leads', $LeadID);
                 //die($bean);
 
@@ -133,7 +147,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
 
 
-                        $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
+                    $AtmpLogSql = "INSERT INTO amyeo_lead_push_tracker
                                         SET lead_id='$bean->id',
                                             last_status='$bean->status',
                                             last_sub_status='$bean->status_description',
@@ -149,60 +163,73 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                                             lead_pushed_by='$current_user->id',
                                         date_entered='" . date('Y-m-d H:i:s') . "'";
 
-                        $res = $db->query($AtmpLogSql);
-                    
-                    
+                    $res = $db->query($AtmpLogSql);
 
-                        $updateSql = "update leads 
+
+                    $msQuery='';
+                    
+                    if (!empty($assigned_user_id))
+                    {
+                        $msQuery .= "assigned_user_id    = '$assigned_user_id',";
+                    }
+                    if (!empty($statusX))
+                    {
+                        $msQuery .= "status    = '$statusX',";
+                    }
+                    if (!empty($statusDescX))
+                    {
+                        $msQuery .= "status_description    = '$statusDescX',";
+                    }
+
+
+                
+                    
+                    $updateSql    = "update leads 
                                                 SET
-                                            autoassign          = 'Yes',
-                                            neoxstatus          = '0',
-                                            assigned_user_id    = '',
-                                            status_description   = 'New Lead',
-                                            status              = 'Alive',
-                                            dristi_campagain_id = $dristi_campagain_id,
-                                            dristi_API_id       = $dristi_API_id,
-                                            date_modified       = NOW(),
-                                            dristi_customer_id  = '' where id='$bean->id'"; 
-                        $updateSqlres = $db->Query($updateSql);
+                                    autoassign          = '$autoassignX',
+                                    neoxstatus          = '$neoxstatus',
+                                    $msQuery
+                                    dristi_campagain_id = $dristi_campagain_id,
+                                    dristi_API_id       = $dristi_API_id,
+                                    date_modified       = NOW(),
+                                    dristi_customer_id  = '' where id='$bean->id'"; 
+                                            
+                    $updateSqlres = $db->Query($updateSql);
 
-                        if ($updateSqlres)
-                        {
-                            $guidid = create_guid();
-                            $insertSql         = "INSERT INTO te_disposition
+                    if ($updateSqlres)
+                    {
+                        $guidid            = create_guid();
+                        $insertSql         = "INSERT INTO te_disposition
                                                 SET id          =   '$guidid',
-                                            status              =   'Alive',
-                                            status_detail       =   'New Lead',
+                                            status              =   '$status',
+                                            status_detail       =   '$statusDescX',
                                             date_modified       =   NOW(),
                                             date_entered        =   NOW()";
-                            $te_disposition_id = $db->Query($insertSql);
-                            
-                            
-                            $guidid2        = create_guid();
-                            $insertDis_cSql = "INSERT INTO te_disposition_leads_c
+                        $te_disposition_id = $db->Query($insertSql);
+
+
+                        $guidid2        = create_guid();
+                        $insertDis_cSql = "INSERT INTO te_disposition_leads_c
                                                 SET id          =   '$guidid2',
                           te_disposition_leadste_disposition_idb=   '$guidid',
                           te_disposition_leadsleads_ida         =   '$bean->id',
                                             date_modified=NOW()";
-                            $db->Query($insertDis_cSql);
-                        }
-                   
+                        $db->Query($insertDis_cSql);
+                    }
 
 
-                        /*$bean->autoassign          = 'Yes';
-                          $bean->neoxstatus          = 0;
-                          $bean->assigned_user_id    = '';
-                          $bean->status_description  = 'New Lead';
-                          $bean->status              = 'Alive';
-                          $bean->dristi_campagain_id = $dristi_campagain_id;
-                          $bean->dristi_API_id       = $dristi_API_id;
-                          $bean->date_modified       = date('Y-m-d H:i:s');
-                          $bean->dristi_customer_id  = '';
-                          $checkSaveBean             = $bean->save();
-                         */
 
-
-                    
+                    /* $bean->autoassign          = 'Yes';
+                      $bean->neoxstatus          = 0;
+                      $bean->assigned_user_id    = '';
+                      $bean->status_description  = 'New Lead';
+                      $bean->status              = 'Alive';
+                      $bean->dristi_campagain_id = $dristi_campagain_id;
+                      $bean->dristi_API_id       = $dristi_API_id;
+                      $bean->date_modified       = date('Y-m-d H:i:s');
+                      $bean->dristi_customer_id  = '';
+                      $checkSaveBean             = $bean->save();
+                     */
                 }
             }
 
@@ -232,15 +259,16 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
         $current_user_id = $current_user->id;
-        
+
         $people = array("d81fc9e1-91ae-eba3-19d9-5af02415c81c", //kiran
-                        "c7e41406-1f7b-770e-6d0b-5ab0076957ce", //ritika
-                        "9e6a7631-ca80-74f6-b734-599b04f9af60", //anup
-                        ); 
-        
-        if(!in_array($current_user->id, $people) && ($current_user->is_admin != 1)){
-           echo 'You are not authorized to access!';
-           return;
+            "c7e41406-1f7b-770e-6d0b-5ab0076957ce", //ritika
+            "9e6a7631-ca80-74f6-b734-599b04f9af60", //anup
+        );
+
+        if (!in_array($current_user->id, $people) && ($current_user->is_admin != 1))
+        {
+            echo 'You are not authorized to access!';
+            return;
         }
         $_export         = isset($this->_objInputs->post['export_queue_list']) && $this->_objInputs->post['export_queue_list'] == "export_queue_list";
         $_export_junk    = isset($this->_objInputs->post['export_junk_leads']) && $this->_objInputs->post['export_junk_leads'] == "export_junk_leads";
