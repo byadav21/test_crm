@@ -358,8 +358,8 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
             $data .= ",Registration Date";
 
 
-            //$data .= ",Student Name";
-            //$data .= ",Email ID";
+            $data .= ",Student Name";
+            $data .= ",Email ID";
             //$data .= ",Phone Number";
             $data .= ",Lead ID";
             $data .= ",Counselor Name";
@@ -428,9 +428,9 @@ class AOR_ReportsViewsrmpaymentreceivedreport extends SugarView
                 $data .= "\",\"" . $datax['institute'];
                 $data .= "\",\"" . $datax['converted_date'];
 
-                //$data .= "\",\"" . $datax['student_name'];
+                $data .= "\",\"" . $datax['student_name'];
 
-                //$data .= "\",\"" . $datax['email_add'];
+                $data .= "\",\"" . $datax['email_add'];
                 //$data .= "\",\"" . $datax['phone_mobile'];
 
                 $data .= "\",\"" . $datax['lead_id'];
