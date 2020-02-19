@@ -45,10 +45,11 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             'comment'                 => 'Comments',
             'primary_address_state'   => 'state',
             'primary_address_country' => 'country',
-            'landing_url'             => 'Landing Url'
+            'landing_url'             => 'Landing Url',
+            'utm_campaign'            => 'UTM Campaign'
                 #'id'                   =>'User Name',
         );
-
+        
         return $headerArr;
     }
 
@@ -200,7 +201,8 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             'l.comment'                         => 'comment',
             'l.primary_address_state'           => 'primary_address_state',
             'l.primary_address_country'         => 'primary_address_country',
-            'lc.landing_url'                    => 'landing_url');
+            'lc.landing_url'                    => 'landing_url',
+            'l.utm_campaign'                    => 'utm_campaign');
 
 
         $headersss = implode(', ', array_keys($headers));
@@ -282,6 +284,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
                 $programList[$row['id']]['primary_address_state']   = addslashes(isset($row['primary_address_state']) ? $row['primary_address_state'] : 'N/A');
                 $programList[$row['id']]['primary_address_country'] = addslashes(isset($row['primary_address_country']) ? $row['primary_address_country'] : 'N/A');
                 $programList[$row['id']]['landing_url']             = addslashes(isset($row['landing_url']) ? $row['landing_url'] : 'N/A');
+                $programList[$row['id']]['utm_campaign']            = addslashes(isset($row['utm_campaign']) ? $row['utm_campaign'] : 'N/A');
             }
 
             $StatusList = $statusHeader;
@@ -312,6 +315,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $data .= ",State";
             $data .= ",Country";
             $data .= ",Landing Url";
+            $data .= ",UTM Campaign";
             $data .= "\n";
 
 
