@@ -94,6 +94,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
     public function updateLeads()
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
+        $current_user_id = $current_user->id;
         $headers  = array('id', 'dristi_campagain_id', 'dristi_API_id','assigned_user_id','status','status_description');
         //$headers2 = array();
         $filename = $_FILES["file"]["tmp_name"];
@@ -172,6 +173,10 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                     {
                         $msQuery .= "assigned_user_id    = '$assigned_user_id',";
                     }
+                    else
+                    {
+                        $msQuery .= "assigned_user_id    = '',";
+                    }
                     if (!empty($statusX))
                     {
                         $msQuery .= "status    = '$statusX',";
@@ -183,7 +188,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
 
                 
-                    
+                    //echo '<pre>'.
                     $updateSql    = "update leads 
                                                 SET
                                     autoassign          = '$autoassignX',
@@ -201,8 +206,11 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                         $guidid            = create_guid();
                         $insertSql         = "INSERT INTO te_disposition
                                                 SET id          =   '$guidid',
-                                            status              =   '$status',
+                                            status              =   '$statusX',
                                             status_detail       =   '$statusDescX',
+                                            modified_user_id    =   '$current_user_id',
+                                            created_by          =   '$current_user_id',
+                                            assigned_user_id    =   '$assigned_user_id',
                                             date_modified       =   NOW(),
                                             date_entered        =   NOW()";
                         $te_disposition_id = $db->Query($insertSql);
@@ -236,6 +244,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
             fclose($file);
             clearstatcache();
+            //die();
             //throws a message if data successfully imported to mysql database from excel file
             echo "<script type=\"text/javascript\">
                         alert(\"CSV File has been successfully Imported.\");
