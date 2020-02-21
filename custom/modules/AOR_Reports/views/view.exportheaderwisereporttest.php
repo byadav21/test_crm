@@ -228,6 +228,7 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
             'te_ba_batch.name'                    => 'Batch Name',
             'te_ba_batch.batch_code'              => 'Batch Code',
             'leads_cstm.attempts_c'               => 'No of Attempts',
+            'leads_cstm.auto_attempts_c'          => 'No of Auto Attempts',
             'leads.first_name'                    => 'First Name',
             'leads.last_name'                     => 'Last Name',
             'leads_cstm.email_add_c'              => 'Email Address',

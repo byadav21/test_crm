@@ -102,7 +102,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $fileRows = file($filename);
 
 
-        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 111))
+        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 311))
         {
             //echo count($fileRows); die;
             $file      = fopen($filename, "r");
@@ -403,7 +403,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         }
 
         if ($_export_junk)
-        {
+        {  
 
 
             $data = $this->getAll($snagLeadSql);
