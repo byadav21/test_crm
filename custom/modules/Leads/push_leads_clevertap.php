@@ -13,7 +13,8 @@ class pushLeadClevertap
     {
         global $db;
         
-        //echo '<pre>';print_r($bean); die;
+        //$agentArr= getUsersName();
+        //echo '<pre>';print_r($bean->assigned_user_name); die;
         if (isset($_REQUEST['import_module']) && $_REQUEST['module'] == "Import"){
              
              return;
@@ -36,6 +37,13 @@ class pushLeadClevertap
         $term               = isset($bean->utm_term_c) ? $bean->utm_term_c : '';
         $source             = isset($bean->utm_source_c) ? $bean->utm_source_c : '';
         $medium             = isset($bean->utm_contract_c) ? $bean->utm_contract_c : '';
+        $date_of_prospect   = isset($bean->date_of_prospect) ? $bean->date_of_prospect : '';
+        $agent_name	    = isset($bean->assigned_user_name) ? $bean->assigned_user_name : '';
+        
+        $date_entered       = isset($bean->fetched_row['date_entered']) ? $bean->fetched_row['date_entered'] : '';
+        $date_of_followup   = isset($bean->date_of_followup) ? $bean->date_of_followup : '';
+        $date_modified      = isset($bean->date_modified) ? $bean->date_modified : '';
+        $converted_date     = isset($bean->converted_date) ? $bean->converted_date : '';
 
         
         $url = 'https://api.clevertap.com/1/upload';
@@ -105,23 +113,25 @@ class pushLeadClevertap
                     'type'     => 'event',
                     'evtName'  => 'CRM Update',
                     'evtData'  =>
-                    array('Name'               => $cust_name,
+                    array('Name'             => $cust_name,
                         'Email'              => $email,
                         'Phone_l'            => $phoneNumber,
                         'Phone'              => $phoneNumber,
                         'Status_l'           => $status,
                         'status_description' => $status_description,
-                        'date_entered'       => isset($bean->date_entered) ? $bean->date_entered : '',
-                        'date_of_followup'   => isset($bean->date_of_followup) ? $bean->date_of_followup : '',
-                        'date_modified'      => isset($bean->date_modified) ? $bean->date_modified : '',
-                        'converted_date'     => isset($bean->converted_date) ? $bean->converted_date : '',
-                        'agent_id'         =>   $assigned_user_id,
-                        'vendor'             => $bean->vendor,
-                        'batch_code'         => $batchCode
+                        'date_entered'       => strtotime($date_entered),
+                        'date_of_followup'   => strtotime($date_of_followup),
+                        'date_modified'      => strtotime($date_modified),
+                        'converted_date'     => strtotime($converted_date),
+                        'agent_id'           => $assigned_user_id,
+                        'vendor'             => $vendor,
+                        'batch_code'         => $batchCode,
+                        'counsellor_name'    => $agent_name,
+                        'date_of_prospect'   => strtotime($date_of_prospect)
                     )
         )));
 
-
+        //echo '<pre>';print_r($data);die;
         $payload = json_encode($data);
 
 
