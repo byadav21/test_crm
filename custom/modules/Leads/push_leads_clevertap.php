@@ -119,15 +119,15 @@ class pushLeadClevertap
                         'Phone'              => $phoneNumber,
                         'Status_l'           => $status,
                         'status_description' => $status_description,
-                        'date_entered'       => strtotime($date_entered),
-                        'date_of_followup'   => strtotime($date_of_followup),
-                        'date_modified'      => strtotime($date_modified),
-                        'converted_date'     => strtotime($converted_date),
+                        'date_entered'       => '$_'.strtotime($date_entered),
+                        'date_of_followup'   => '$_'.strtotime($date_of_followup),
+                        'date_modified'      => '$_'.strtotime($date_modified),
+                        'converted_date'     => '$_'.strtotime($converted_date),
                         'agent_id'           => $assigned_user_id,
                         'vendor'             => $vendor,
                         'batch_code'         => $batchCode,
                         'counsellor_name'    => $agent_name,
-                        'date_of_prospect'   => strtotime($date_of_prospect)
+                        'date_of_prospect'   => '$_'.strtotime($date_of_prospect)
                     )
         )));
 
