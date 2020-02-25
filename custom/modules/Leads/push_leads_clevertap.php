@@ -140,19 +140,24 @@ class pushLeadClevertap
                         'Phone'              => $phoneNumber,
                         'Status_l'           => $status,
                         'status_description' => $status_description,
-                        'date_entered'       => $date_entered_doller.''.strtotime($date_entered),
-                        'date_of_followup'   => $date_of_followup_doller.''.strtotime($date_of_followup),
-                        'date_modified'      => $date_modified_doller.''.strtotime($date_modified),
-                        'converted_date'     => $converted_date_doller.''.strtotime($converted_date),
+                        'date_entered'       => $date_entered,
+                        'date_entered_I'     => $date_entered_doller.''.strtotime($date_entered),
+                        'date_of_followup'   => $date_of_followup,
+                        'date_of_followup_I' => $date_of_followup_doller.''.strtotime($date_of_followup),
+                        'date_modified'      => $date_modified,
+                        'date_modified_I'    => $date_modified_doller.''.strtotime($date_modified),
+                        'converted_date'     => $$converted_date,
+                        'converted_date_I'   => $converted_date_doller.''.strtotime($converted_date),
                         'agent_id'           => $assigned_user_id,
                         'vendor'             => $vendor,
                         'batch_code'         => $batchCode,
                         'counsellor_name'    => $agent_name,
-                        'date_of_prospect'   => $date_of_prospect_doller.''.strtotime($date_of_prospect)
+                        'date_of_prospect'   => $date_of_prospect,
+                        'date_of_prospect_I' => $date_of_prospect_doller.''.strtotime($date_of_prospect)
                     )
         )));
 
-        //echo '<pre>';print_r($data);die;
+        echo '<pre>';print_r($data);die;
         $payload = json_encode($data);
 
 
