@@ -103,8 +103,29 @@ class pushLeadClevertap
         curl_close($ch);
         # Print response.
         //echo "profile: <pre>$result</pre>";
-
-
+        
+        $date_entered_doller='';
+        $date_of_followup_doller='';
+        $date_modified_doller='';
+        $converted_date_doller='';
+        $date_of_prospect_doller='';
+        
+        
+        if($date_entered!=''){
+            $date_entered_doller = '$_';
+        }
+        if($date_of_followup!=''){
+            $date_of_followup_doller = '$_';
+        }
+        if($date_modified!=''){
+            $date_modified_doller = '$_';
+        }
+        if($converted_date!=''){
+            $converted_date_doller = '$_';
+        }
+        if($date_of_prospect!=''){
+            $date_of_prospect_doller = '$_';
+        }
         # 2. event
 
         $data = array('d' =>
@@ -119,15 +140,15 @@ class pushLeadClevertap
                         'Phone'              => $phoneNumber,
                         'Status_l'           => $status,
                         'status_description' => $status_description,
-                        'date_entered'       => '$_'.strtotime($date_entered),
-                        'date_of_followup'   => '$_'.strtotime($date_of_followup),
-                        'date_modified'      => '$_'.strtotime($date_modified),
-                        'converted_date'     => '$_'.strtotime($converted_date),
+                        'date_entered'       => $date_entered_doller.''.strtotime($date_entered),
+                        'date_of_followup'   => $date_of_followup_doller.''.strtotime($date_of_followup),
+                        'date_modified'      => $date_modified_doller.''.strtotime($date_modified),
+                        'converted_date'     => $converted_date_doller.''.strtotime($converted_date),
                         'agent_id'           => $assigned_user_id,
                         'vendor'             => $vendor,
                         'batch_code'         => $batchCode,
                         'counsellor_name'    => $agent_name,
-                        'date_of_prospect'   => '$_'.strtotime($date_of_prospect)
+                        'date_of_prospect'   => $date_of_prospect_doller.''.strtotime($date_of_prospect)
                     )
         )));
 
@@ -148,7 +169,7 @@ class pushLeadClevertap
         $result = curl_exec($ch);
         curl_close($ch);
         # Print response.
-        //echo "Event: <pre>$result</pre>";
+        //echo "Event: <pre>$result</pre>";die;
 
 
 
