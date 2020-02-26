@@ -112,20 +112,21 @@ class pushLeadClevertap
         
         
         if($date_entered!=''){
-            $date_entered_doller = '$D_';
+            $date_entered_doller = '$D_'.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_entered)));
         }
         if($date_of_followup!=''){
-            $date_of_followup_doller = '$D_';
+            $date_of_followup_doller = '$D_'.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_of_followup)));
         }
         if($date_modified!=''){
-            $date_modified_doller = '$D_';
+            $date_modified_doller = '$D_'.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_modified)));
         }
         if($converted_date!=''){
-            $converted_date_doller = '$D_';
+            $converted_date_doller = '$D_'.strtotime($converted_date);
         }
         if($date_of_prospect!=''){
-            $date_of_prospect_doller = '$D_';
+            $date_of_prospect_doller = '$D_'.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_of_prospect)));
         }
+        
         # 2. event
 
         $data = array('d' =>
@@ -141,19 +142,19 @@ class pushLeadClevertap
                         'Status_l'           => $status,
                         'status_description' => $status_description,
                         'date_entered'       => $date_entered,
-                        'date_entered_I'     => $date_entered_doller.''.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_entered))),
+                        'date_entered_I'     => $date_entered_doller,
                         'date_of_followup'   => $date_of_followup,
-                        'date_of_followup_I' => $date_of_followup_doller.''.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_of_followup))),
+                        'date_of_followup_I' => $date_of_followup_doller,
                         'date_modified'      => $date_modified,
-                        'date_modified_I'    => $date_modified_doller.''.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_modified))),
+                        'date_modified_I'    => $date_modified_doller,
                         'converted_date'     => $converted_date,
-                        'converted_date_I'   => $converted_date_doller.''.strtotime($converted_date),
+                        'converted_date_I'   => $converted_date_doller,
                         'agent_id'           => $assigned_user_id,
                         'vendor'             => $vendor,
                         'batch_code'         => $batchCode,
                         'counsellor_name'    => $agent_name,
                         'date_of_prospect'   => $date_of_prospect,
-                        'date_of_prospect_I' => $date_of_prospect_doller.''.strtotime(gmdate('Y-m-d H:i:s', strtotime($date_of_prospect)))
+                        'date_of_prospect_I' => $date_of_prospect_doller
                     )
         )));
 
