@@ -4,23 +4,57 @@
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
-                    
-                     <tr>
+                  
+                  
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="From Date">From Date:</label>
+                            <div class="block">
+                                <label class="switch"><input type="checkbox" id="modifiedDateOptionsX"  onclick="modifiedDateOptionsY()" >
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>By Modified Date</span>
+                            </div>
+                        </td>
+                        
+                  
+                    
+                     <tr id="date_entered_divX">
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="From Date">Created From Date:</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
                             <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
                         </td>
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="To Date">To Date:</label>
+                            <label for="To Date">Created To Date:</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
                             <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
                     </tr>
+                   
+                
+                    
+                     <tr id="date_modified_divX">
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="From Date">Modified From Date:</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+                            <input name="modified_from_date" type="text"  value="{$selected_modified_to_date}" id='modified_from_date'/>
+                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="modified_from_date_trigger">
+                        </td>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="To Date">Modified To Date:</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+                            <input name="modified_to_date" type="text"  value="{$selected_modified_from_date}" id='modified_to_date'/>
+                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="modified_to_date_trigger">
+                        </td>
+                    </tr>
+                    
+                            
+                            
                      <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch Name:</label>
@@ -375,7 +409,50 @@
                 step: 1,
                 weekNumbers: false,
             });
+            
+            Calendar.setup({
+                inputField: "modified_from_date",
+                daFormat: "%Y-%m-%d %I:%M%P",
+                button: "modified_from_date_trigger",
+                singleClick: true,
+                dateStr: "",
+                step: 1,
+                weekNumbers: false,
+            });
+            Calendar.setup({
+                inputField: "modified_to_date",
+                daFormat: "%Y-%m-%d %I:%M%P",
+                button: "modified_to_date_trigger",
+                singleClick: true,
+                dateStr: "",
+                step: 1,
+                weekNumbers: false,
+            });
+            
+            
+            function modifiedDateOptionsY() {
+                
+                if ($("#modifiedDateOptionsX").is(':checked') == true) {
+                    //date_modified_divX //date_entered_divX
+                    $("#from_date").val("");
+                    $("#to_date").val("");
+                    $("#date_entered_divX").hide();
+                    $("#date_modified_divX").show();
+
+                } else if ($("#modifiedDateOptionsX").is(':checked') == false) {
+                    $("#modified_from_date").val("");
+                    $("#modified_to_date").val("");
+                    $("#date_entered_divX").show();
+                    $("#date_modified_divX").hide();
+                }
+           }
+           
+           
             $(document).ready(function () {
+                
+                $("#date_modified_divX").hide();
+                
+                
                 $(".multiselbox").each(function () {
                     if ($(this).find("option").eq(0).val() == '') {
                         $(this).find("option").eq(0).remove();
@@ -400,7 +477,7 @@
                      
                       var from_date    = $('#from_date').val();
                       var to_date      = $('#to_date').val();
-                      
+                      if ($("#modifiedDateOptionsX").is(':checked') == false) {
                       if(from_date=='' || from_date ==null){
                           $("#from_date").focus();
                            alert('Please select From-Date!'); return false;
@@ -410,15 +487,85 @@
                           $("#to_date").focus();
                            alert('Please select To-Date!'); return false;
                       }
+                     }
                      
                     
                  }));
                 
             });
+            
+            
+
         </script>
 
 
+        <style>
+            
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 48px;
+                height: 20px;
+                margin-bottom:0;
+                margin-right: 10px;
+            }
 
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 4px;
+                bottom: 3px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+            .block{display:flex; align-items: center; margin:20px 0}
+            .block label + span{font-size: 14px; color:#4d4d4d; font-weight: bold;}
+        </style>
 
     {/literal}
 

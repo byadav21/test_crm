@@ -155,6 +155,10 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
 //        {
             $selected_from_date          = $this->_objInputs->getVal('from_date', 'post', date('Y-m-d', strtotime('-1 days')));
             $selected_to_date            = $this->_objInputs->getVal('to_date', 'post', date('Y-m-d', strtotime('-1 days')));
+            
+            $selected_modified_from_date = $this->_objInputs->getVal('modified_from_date', 'post', date('Y-m-d', strtotime('-1 days')));
+            $selected_modified_to_date   = $this->_objInputs->getVal('modified_to_date', 'post', date('Y-m-d', strtotime('-1 days')));
+            
             $selected_batch              = $this->_objInputs->getVal('batch', 'post', array());
             $selected_batch_code         = $this->_objInputs->getVal('batch_code', 'post', array());
             $selected_vendor             = $this->_objInputs->getVal('vendors', 'post', array());
@@ -174,6 +178,17 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
             $to_date = date('Y-m-d', strtotime(str_replace('/', '-', $selected_to_date)));
             $wherecl .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
         }
+        
+        if ($selected_modified_from_date != "" ){
+            $modified_from_date  = date('Y-m-d', strtotime(str_replace('/', '-', $selected_modified_from_date)));
+            $wherecl    .= " AND DATE(leads.date_modified) >= '" . $modified_from_date . "'";
+        }
+
+        if ($selected_modified_to_date != ""){
+            $modified_to_date = date('Y-m-d', strtotime(str_replace('/', '-', $selected_modified_to_date)));
+            $wherecl .= " AND DATE(leads.date_modified) <= '" . $modified_to_date . "' ";
+        }
+        
 
         if (!empty($selected_batch)){
 
@@ -280,7 +295,8 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
             'Recycle'                => 'Recycle',
             'wrap.timeout'           => 'wrap.timeout',
             'Call Back'              => 'Call Back',
-            'Re-Assigned'            =>  'Re-Assigned',
+            'Re-Assigned'            => 'Re-Assigned',
+            'Not Answering'          => 'Not Answering',
             'user.forced.logged.off' => 'user.forced.logged.off');
 
         if(!empty($selected_headers)){
@@ -446,6 +462,11 @@ class AOR_ReportsViewexportheaderwisereporttest extends SugarView
         $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
+        
+        $sugarSmarty->assign("selected_modified_to_date", $selected_modified_to_date);
+        $sugarSmarty->assign("selected_modified_from_date", $selected_modified_from_date);
+        
+        
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
         $sugarSmarty->assign("selected_program", $selected_program);
         $sugarSmarty->assign("selected_headers", $selected_headers);
