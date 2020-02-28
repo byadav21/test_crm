@@ -114,7 +114,7 @@ class FalconideEmail
                 //'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
                 //'ritika.nayak@talentedge.in','kiran.mathew@talentedge.in',
-	        'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in',
+	        'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in',
                 //Marketing Team :
                 'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 'parvez.ali@talentedge.in',
@@ -141,7 +141,7 @@ class FalconideEmail
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
                 //'ritika.nayak@talentedge.in','kiran.mathew@talentedge.in',
-		'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in',
+		'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in',
                 //'eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
                 //'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
                 
