@@ -156,6 +156,8 @@ if ($oldBatchDetails)
     $studentBatchObj->leads_id                     = $oldBatchDetails['leads_id'];
     $studentBatchObj->bt_url                       = $oldBatchDetails['bt_url'];
     $studentBatchObj->bt_srm_comments              = $oldBatchDetails['bt_srm_comments'];
+    $studentBatchObj->lead_id                      = $oldBatchDetails['lead_id'];
+    
 }
 $studentBatchObj->total_session_required                      = $batchDetails['total_sessions_planned'];
 $studentBatchObj->te_student_te_student_batch_1te_student_ida = $student_id;
@@ -209,7 +211,7 @@ $GLOBALS['db']->query("UPDATE leads,
                        AND leads_cstm.id_c='" . $oldBatchDetails['leads_id'] . "'");
 
 #update new student payment history
-$id                                           = create_guid();
+
 
 //$payment                                      = new te_payment_details();
 /*$payment->payment_type                        = 'Batch Transfer';
@@ -228,8 +230,14 @@ $payment->save();
 $lead_payment_details_id                      = $payment->id;
 */
 
+$studentpaymentid                             = create_guid();
+$paymentdetailsid                             = create_guid();
+$paymentdetailsRelid                          = create_guid();
+
 $insertSql    = "INSERT INTO te_payment_details
-                    SET id='" . $id . "',
+                    SET id='" . $paymentdetailsid . "',
+                    date_entered='" . date('Y-m-d H:i:s') . "',
+                    date_modified='" . date('Y-m-d H:i:s') . "',
                     payment_type='Batch Transfer',
                     payment_source='Batch Transfer',
                     transaction_id='Transferred Payment',
@@ -238,14 +246,23 @@ $insertSql    = "INSERT INTO te_payment_details
                     amount='" . $studentPayment['total'] . "',
                     name='" . $studentPayment['total'] . "',
                     payment_realized='1',
-                    student_payment_id='$id'";
-$idx = $GLOBALS['db']->Query($insertSql);
+                    student_payment_id='$studentpaymentid'";
+$GLOBALS['db']->Query($insertSql);
+
+$insertrelSql    = "INSERT INTO leads_te_payment_details_1_c
+                    SET id='" . $paymentdetailsRelid . "',
+                     date_modified='" . date('Y-m-d H:i:s') . "',
+                    deleted='0',
+                    leads_te_payment_details_1leads_ida='".$oldBatchDetails['leads_id']."',
+                    leads_te_payment_details_1te_payment_details_idb='$paymentdetailsid'";
+$GLOBALS['db']->Query($insertrelSql);
+
 
 
 
 $insertSql    = "INSERT INTO te_student_payment
-                    SET id='" . $id . "',
-                    lead_payment_details_id='" . $lead_payment_details_id . "',
+                    SET id='" . $studentpaymentid . "',
+                    lead_payment_details_id='" . $paymentdetailsid . "',
                     name='Transferred Payment',
                     date_entered='" . date('Y-m-d H:i:s') . "',
                     date_modified='" . date('Y-m-d H:i:s') . "',
@@ -264,7 +281,7 @@ $insertRelSql = "INSERT INTO te_student_te_student_payment_1_c
                 date_modified='" . date('Y-m-d H:i:s') . "',
                 deleted=0,
                 te_student_te_student_payment_1te_student_ida='" . $student_id . "',
-                te_student_te_student_payment_1te_student_payment_idb='" . $id . "'";
+                te_student_te_student_payment_1te_student_payment_idb='" . $studentpaymentid . "'";
 $GLOBALS['db']->Query($insertRelSql);
 
 
