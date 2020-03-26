@@ -11,6 +11,8 @@ $source       = $_REQUEST['utm_source'];
 $medium       = $_REQUEST['utm_medium'];
 $term         = $_REQUEST['utm_term']; //batchcode
 $campaign     = $_REQUEST['utm_campaign'];
+$clvrtp_whatsapp     = $_REQUEST['whatsapp'];
+
 $leadObj      = new leads_override();
 $batchid      = '';
 $status       = 'Alive';
@@ -257,6 +259,9 @@ if ($campagain_d)
     $leadObj->dristi_campagain_id = $campagain_d;
 if ($lead_d)
     $leadObj->dristi_API_id       = $lead_d;
+if ($clvrtp_whatsapp)
+    $leadObj->msg_whatsapp_clvrtp       = $clvrtp_whatsapp;
+
 $leadObj->assigned_user_id    = $assigned_user_id;
 $leadObj->autoassign          = $autoassign;
 

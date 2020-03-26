@@ -207,3 +207,20 @@ $dictionary["Lead"]["fields"]["web_rm_amt"] = array(
             'duplicate_merge' => false,
             'source'          => 'custom_fields',
 );
+
+$dictionary["Lead"]["fields"]["msg_whatsapp_clvrtp"] = array(
+            'name'            => 'msg_whatsapp_clvrtp',
+            'vname'           => 'MSG Whatsapp',
+            'type'            => 'varchar',
+            'len'             => '50',
+            'size'            => '20',
+            //'module' => 'Leads',
+            'default'         => 'NA',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);
+

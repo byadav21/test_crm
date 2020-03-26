@@ -44,6 +44,7 @@ class pushLeadClevertap
         $date_of_followup   = isset($bean->date_of_followup) ? $bean->date_of_followup : '';
         $date_modified      = isset($bean->date_modified) ? $bean->date_modified : '';
         $converted_date     = isset($bean->converted_date) ? $bean->converted_date : '';
+        $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) ? $bean->msg_whatsapp_clvrtp : '';
 
         
         $url = 'https://api.clevertap.com/1/upload';
@@ -154,7 +155,8 @@ class pushLeadClevertap
                         'batch_code'         => $batchCode,
                         'counsellor_name'    => $agent_name,
                         'date_of_prospect'   => $date_of_prospect_doller,
-                        'date_of_prospect_I' => $date_of_prospect_doller
+                        'date_of_prospect_I' => $date_of_prospect_doller,
+                        'MSG-whatsapp'       => $whatsapp_clvrtp
                     )
         )));
 
