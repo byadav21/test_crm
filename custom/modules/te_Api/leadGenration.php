@@ -260,7 +260,7 @@ if ($campagain_d)
 if ($lead_d)
     $leadObj->dristi_API_id       = $lead_d;
 if ($clvrtp_whatsapp)
-    $leadObj->msg_whatsapp_clvrtp       = $clvrtp_whatsapp;
+    $leadObj->msg_whatsapp_clvrtp       = strtolower($clvrtp_whatsapp);
 
 $leadObj->assigned_user_id    = $assigned_user_id;
 $leadObj->autoassign          = $autoassign;
