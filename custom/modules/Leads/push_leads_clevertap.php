@@ -87,7 +87,8 @@ class pushLeadClevertap
                         'Phone_l'            => $phoneNumber,
                         'Phone'              => $phoneNumber,
                         'Status_l'           => $status,
-                        'status_description' => $status_description
+                        'status_description' => $status_description,
+                        'MSG-whatsapp'       => $whatsapp_clvrtp
                     )
         )));
         $payload  = json_encode($data);
