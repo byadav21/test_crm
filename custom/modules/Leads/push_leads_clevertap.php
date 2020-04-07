@@ -44,7 +44,8 @@ class pushLeadClevertap
         $date_of_followup   = isset($bean->date_of_followup) ? $bean->date_of_followup : '';
         $date_modified      = isset($bean->date_modified) ? $bean->date_modified : '';
         $converted_date     = isset($bean->converted_date) ? $bean->converted_date : '';
-        $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) ? $bean->msg_whatsapp_clvrtp : '';
+       // $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) ? $bean->msg_whatsapp_clvrtp : '';
+       $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) && ($bean->msg_whatsapp_clvrtp=='TRUE') ? TRUE : FALSE;
 
         
         $url = 'https://api.clevertap.com/1/upload';
