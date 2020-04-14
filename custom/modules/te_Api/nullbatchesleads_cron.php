@@ -30,17 +30,15 @@ class sendVisitReport
         $filename      = $file . "_" . $this->toDate;
         $StatusList    = array();
         $email_summary = '';
-
+        $lastSevenDays = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
+        
         $headers       = array('leads.id'                       => 'LeadID',
             'leads.date_entered'             => 'Date Entered',
             'leads.date_modified'            => 'Date Modified',
-            'users.user_name'                => 'User Name',
-            'leads.modified_user_id'         => 'Modified User Id',
-            'leads.assigned_user_id'         => 'Assigned User Id',
             'leads.first_name'               => 'First Name',
             'leads.last_name'                => 'Last Name',
-            'leads_cstm.email_add_c'         => 'Email',
-            'leads.phone_mobile'             => 'Mobile',
+            //'leads_cstm.email_add_c'         => 'Email',
+            //'leads.phone_mobile'             => 'Mobile',
             'leads.status'                   => 'Status',
             'leads.status_description'       => 'Status Description',
             'leads.disposition_reason'       => 'Disposition Reason',
@@ -63,10 +61,11 @@ class sendVisitReport
                         LEFT JOIN leads_cstm ON leads.id= leads_cstm.id_c
                         LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
                         where leads.deleted=0 
-                        and (leads.vendor like '%Concentrix%' ||  leads_cstm.email_add_c like '%Concentrix%')
-                        and leads.status='Converted' order by leads.date_entered";
+                        and (te_ba_batch.batch_code IS NULL || te_ba_batch.batch_code='')
+                        //and DATE(leads.date_entered) >=  '$this->fromDate'
+                        order by leads.date_entered";
 
-        //echo $leadSql;exit();
+                        //echo $leadSql;exit();
 
 
                         $leadObj = $db->query($leadSql);
@@ -98,11 +97,7 @@ class sendVisitReport
         chmod($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", 0777);
 
 
-        $to        = array('pawan.kumar@talentedge.in',
-                           'ankit.singh@talentedge.in',
-                           'kunal.soni@talentedge.in',
-                           'duke.banerjee@talentedge.in',
-                           'nitin.manchanda@talentedge.in');
+        $to        = array('pawan.kumar@talentedge.in');
         $emailData = $mail->cron_email_Data('Leads With NULL Batch Report', $filename, $this->toDate, $to, $email_summary);
         $mail->sendCertificateEmail($emailData);
     }
@@ -113,11 +108,12 @@ $mainObj = new sendVisitReport();
 //$mainObj->toDate   = '2017-11-04';
 //$mainObj->fromDate = '2017-11-04';
 if (strtotime($mainObj->fromDate) == strtotime($mainObj->toDate))
-{
-    $fromDate = date('Y-m-d', (strtotime('-1 day', strtotime($mainObj->fromDate))));
+{   
+    $toDate   = date('Y-m-d');
+    $fromDate = date('Y-m-d', (strtotime('-7 day', strtotime($mainObj->fromDate))));
 }
 
-$mainObj->toDate   = $fromDate;
+$mainObj->toDate   = $toDate;
 $mainObj->fromDate = $fromDate;
 
 $mainObj->main();
