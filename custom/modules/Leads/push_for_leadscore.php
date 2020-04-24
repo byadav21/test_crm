@@ -28,28 +28,43 @@ class pushforLeadscore
         $phone        = isset($bean->phone_mobile) ? $bean->phone_mobile : '';
         $email        = isset($bean->email_add_c) ? $bean->email_add_c : '';
         $status       = isset($bean->status) ? $bean->status : '';
+        $status_description = isset($bean->status_description) ? $bean->status_description : '';
         $term         = isset($bean->utm_term_c) ? $bean->utm_term_c : '';
         $date_entered = isset($bean->fetched_row['date_entered']) ? $bean->fetched_row['date_entered'] : '';
         $country      = isset($bean->primary_address_country) ? $bean->primary_address_country : '';
+        $city         = isset($bean->primary_address_city) ? $bean->primary_address_city : '';
+        $course_category='';
         //primary_address_country
-
+        
+        if ($status_description == "Re-Enquired")
+        {
+            return;
+        }
 
         $batchdata = array();
-        $batchObj  = $db->query("SELECT batch_code,name FROM te_ba_batch WHERE id='" . $bean->te_ba_batch_id_c . "' AND deleted=0");
+        $batchObj  = $db->query("SELECT p.name pro_name,
+                                    b.batch_code
+                             FROM te_ba_batch b
+                             INNER JOIN te_pr_programs_te_ba_batch_1_c AS pb ON pb.te_pr_programs_te_ba_batch_1te_ba_batch_idb=b.id
+                             INNER JOIN te_pr_programs AS p ON p.id=pb.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                             WHERE b.deleted=0
+                               AND pb.deleted=0
+                               AND p.deleted=0
+                               AND b. id='" . $bean->te_ba_batch_id_c . "'");
         $batchdata = $db->fetchByAssoc($batchObj);
 
 
         $batchCode = isset($batchdata['batch_code']) ? $batchdata['batch_code'] : $term;
-        $batchname = isset($batchdata['name']) ? $batchdata['name'] : '';
+        $proname = isset($batchdata['pro_name']) ? $batchdata['pro_name'] : '';
         $dob       = '';
         
         $url       = 'http://3.6.184.43:5000/storeCRMtoDatabase';
         $fields    = array(
             'lead_id'         => $beanId,
             'email'           => $email,
-            'course_name'     => $batchname,
-            'course_category' => $batchCode,
-            'disposition'     => $status,
+            'course_name'     => $proname,
+            'course_category' => $course_category,
+            'disposition'     => $status_description,
             'phone_number'    => $phone,
             'fname'           => $first_name,
             'lname'           => $last_name,
