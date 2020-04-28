@@ -224,3 +224,21 @@ $dictionary["Lead"]["fields"]["msg_whatsapp_clvrtp"] = array(
             'source'          => 'custom_fields',
 );
 
+$dictionary["Lead"]["fields"]["lead_score"] = array(
+            'name'            => 'lead_score',
+            'vname'           => 'Lead Score',
+            'type'            => 'varchar',
+            'len'             => '100',
+            'size'            => '20',
+            //'module' => 'Leads',
+            'default'         => '',
+            'required'        => false,
+            'reportable'      => true,
+            'audited'         => false,
+            'importable'      => 'true',
+            'duplicate_merge' => false,
+            'source'          => 'custom_fields',
+);
+
+
+
