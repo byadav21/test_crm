@@ -37,14 +37,14 @@ class sendVisitReport
             'leads.date_modified'            => 'Date Modified',
             'leads.first_name'               => 'First Name',
             'leads.last_name'                => 'Last Name',
-            //'leads_cstm.email_add_c'         => 'Email',
-            //'leads.phone_mobile'             => 'Mobile',
+            'leads_cstm.email_add_c'         => 'Email',
+            'leads.phone_mobile'             => 'Mobile',
             'leads.status'                   => 'Status',
             'leads.status_description'       => 'Status Description',
             'leads.disposition_reason'       => 'Disposition Reason',
             'leads.lead_source'              => 'Lead Source',
             'leads.vendor'                   => 'Vendor',
-            'te_ba_batch.name AS batch_name' => 'Batch Name',
+            //'te_ba_batch.name AS batch_name' => 'Batch Name',
             'te_ba_batch.batch_code'         => 'Batch Code',
             'leads.lead_source_types'        => 'Lead Source Types',
             'leads.utm_term_c'               => 'UTM Term',
@@ -62,7 +62,7 @@ class sendVisitReport
                         LEFT JOIN te_ba_batch ON leads_cstm.te_ba_batch_id_c= te_ba_batch.id
                         where leads.deleted=0 
                         and (te_ba_batch.batch_code IS NULL || te_ba_batch.batch_code='')
-                        //and DATE(leads.date_entered) >=  '$this->fromDate'
+                        and DATE(leads.date_entered) >=  '$this->fromDate'
                         order by leads.date_entered";
 
                         //echo $leadSql;exit();
@@ -97,7 +97,7 @@ class sendVisitReport
         chmod($_SERVER['DOCUMENT_ROOT'] . "/reports/" . $filename . ".csv", 0777);
 
 
-        $to        = array('pawan.kumar@talentedge.in');
+        $to        = array('pawan.kumar@talentedge.in','sandeep.sharma@talentedge.in');
         $emailData = $mail->cron_email_Data('Leads With NULL Batch Report', $filename, $this->toDate, $to, $email_summary);
         $mail->sendCertificateEmail($emailData);
     }
