@@ -520,6 +520,10 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_AY'=>'AY',
   'CO_BS'=>'BS',
   'CO_BM'=>'BM',
+  'CO_Metlife'=>'Metlife',
+  'CO_Hitachi'=>'Hitachi',
+  'CO_CanonIndia'=>'CanonIndia',
+  'CO_magicbricks'=>'magicbricks',
 
   'IS_INS'=>'INS',
   'IS_INS_Source_1'=>'INS_Source_1',

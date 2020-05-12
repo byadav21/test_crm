@@ -13,7 +13,7 @@ $error_fields = [];
 
 
 $lead_id    = isset($_REQUEST['lead_id']) ? $_REQUEST['lead_id'] : '';
-$leadscore  = isset($_REQUEST['lead_scroe']) ? $_REQUEST['lead_scroe'] : '';
+$leadscore  = isset($_REQUEST['lead_score']) ? $_REQUEST['lead_score'] : '';
 
 //print_r($_POST);
 
@@ -36,7 +36,7 @@ if (empty($lead_id))
 
 if (empty($leadscore))
 {
-    $error_fields['lead_scroe'] = ['lead_scroe field is required.'];
+    $error_fields['lead_score'] = ['lead_score field is required.'];
 }
 
 
