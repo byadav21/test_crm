@@ -367,7 +367,7 @@ class AOR_ReportsViewLeadscore extends SugarView
         if ($_export && empty($error))
         {
 
-            $file     = "VendorwiseCallDispositionReport_report";
+            $file     = "lead_score_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
