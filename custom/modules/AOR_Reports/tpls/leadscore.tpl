@@ -29,9 +29,9 @@
 			
                         <td nowrap="nowrap" >
                             <select name="budget" id="budget" >
-                                <option value="0-25" {if '0-25'==$selected_budge} selected="selected"{/if}>0-25</option>
-                                <option value="26-50" {if '26-50'==$selected_budge} selected="selected"{/if}>26-50</option>
-                                <option value="51-100" {if '51-100'==$selected_budge} selected="selected"{/if}>51-100</option>
+                                <option value="0-25" {if '0-25'==$selected_budget} selected="selected"{/if}>0-25</option>
+                                <option value="26-50" {if '26-50'==$selected_budget} selected="selected"{/if}>26-50</option>
+                                <option value="51-100" {if '51-100'==$selected_budget} selected="selected"{/if}>51-100</option>
                             </select>
                         </td>
 

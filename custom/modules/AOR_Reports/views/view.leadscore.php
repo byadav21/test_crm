@@ -447,7 +447,7 @@ class AOR_ReportsViewLeadscore extends SugarView
         $sugarSmarty->assign("subStatusList", $suBstatusArr);
         $sugarSmarty->assign("subStatusReasonList", $subChildstatusArr);
 
-
+        //echo '$selected_budget'.$selected_budget;
         $sugarSmarty->assign("selected_budget", $selected_budget);
         $sugarSmarty->assign("selected_status", $selected_status);
         $sugarSmarty->assign("selected_subStatus", $selected_subStatus);
