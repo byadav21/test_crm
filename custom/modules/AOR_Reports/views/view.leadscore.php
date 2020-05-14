@@ -378,9 +378,9 @@ class AOR_ReportsViewLeadscore extends SugarView
             $data .= ",Date";
             $data .= ",Name";
             $data .= ",Phone Number";
-            $data .= ",Batch Code";
             $data .= ",Score";
             $data .= ",Attempts";
+            $data .= ",Batch Code";
             $data .= ",Status";
             $data .= ",Sub Status";
             $data .= ",Disposition Reason";
