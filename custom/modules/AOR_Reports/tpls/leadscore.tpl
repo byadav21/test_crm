@@ -1,51 +1,82 @@
-<section class="moduleTitle"> <h2>Vendor wise Call Disposition Report</h2><br/><br/>
-    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=vendorwisecalldisposition">
+<section class="moduleTitle"> <h2>Lead Score Report</h2><br/><br/>
+    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadscore">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
+
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Batch Code</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="batch_code[]" id="batch_code"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$BatchListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch_code)} selected="selected"{/if}>{$program.batch_code}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Vendor</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$VendorListData key=key item=program}
-
-                                    <option value="{$program.name}"{if in_array($program.name, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">From Date</label>
+                            <label for="From Date">From Date:</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
                             <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
                         </td>
                         <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">To Date</label>
+                            <label for="To Date">To Date:</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
                             <input name="to_date" type="text"  value="{$selected_to_date}" id='to_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
                     </tr>
+                    <tr>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Status">Budget:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="budget" id="budget" >
+                                <option value="0-25" {if ('0-25'==$selected_budge)} selected="selected"{/if}>0-25</option>
+                                <option value="26-50" {if ('26-50'==$selected_budge)} selected="selected"{/if}>26-50</option>
+                                <option value="51-100" {if ('51-100'==$selected_budge)} selected="selected"{/if}>51-100</option>
+                            </select>
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Code">Status:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="status" id="status">
+                                <option value="">-Select-</option>
+                                {foreach from =$statusList key=key item=value}
+                                    <option value="{$value}"{if $value == $selected_status } selected="selected"{/if}>{$value}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Sub Status">Sub Status:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="subStatus" id="subStatus" >
+                                <option value="">-Select-</option>
+                                {foreach from =$subStatusList key=key item=value}
+                                    <option value="{$key}"{if $key == $selected_subStatus } selected="selected"{/if}>{$key}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Status Reason">Status Reason:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="statusReason" id="statusReason">
+                                <option value="">-Select-</option>
+                                {foreach from =$subStatusReasonList key=key item=value}
+                                    <option value="{$key}"{if $key==$selected_statusReason } selected="selected"{/if}>{$key}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                    </tr>
+
+
+
 
 
 
@@ -80,11 +111,11 @@
                                     <td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
 
                                         {if $left eq 1}
-                                            <a href="index.php?module=AOR_Reports&action=vendorwisecalldisposition"  name="listViewStartButton" title="Start" class="button" >
+                                            <a href="index.php?module=AOR_Reports&action=leadscore"  name="listViewStartButton" title="Start" class="button" >
                                                 <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
                                             </a>
 
-                                            <a href="index.php?module=AOR_Reports&action=vendorwisecalldisposition&page={$page}"  class="button" title="Previous">
+                                            <a href="index.php?module=AOR_Reports&action=leadscore&page={$page}"  class="button" title="Previous">
                                                 <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
                                             </a>
                                         {else}
@@ -103,10 +134,10 @@
                                     </td>
                                     <td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
                                         {if $right eq 1}
-                                            <a href="index.php?module=AOR_Reports&action=vendorwisecalldisposition&page={$pagenext}"  class="button" title="Next" disabled="disabled">
+                                            <a href="index.php?module=AOR_Reports&action=leadscore&page={$pagenext}"  class="button" title="Next" disabled="disabled">
                                                 <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
                                             </a>
-                                            <a href="index.php?module=AOR_Reports&action=vendorwisecalldisposition&page={$last_page}"  class="button" title="End" disabled="disabled">
+                                            <a href="index.php?module=AOR_Reports&action=leadscore&page={$last_page}"  class="button" title="End" disabled="disabled">
                                                 <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
                                             </a>
                                         {else}
@@ -139,6 +170,7 @@
 
             </tr>
             {if empty($programList)}<tr class="oddListRowS1"><td align="left"  colspan="30">No Data Found.</td></tr>{/if}
+            
             {foreach from = $programList key=key item=program}
                 <tr height="20" class="oddListRowS1">
                     {foreach from = $StatusList key=statuskey item=vendor}
@@ -170,7 +202,39 @@
                 step: 1,
                 weekNumbers: false,
             });
+            function getAjax(target, arr) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'leadScore', target: target, param: arr},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        $('#' + target).html('');
+                        $('#' + target).html(data);
+                        //$('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
+
             $(document).ready(function () {
+
+                $("#status").change(function () {
+                    var arg = $('#status').val();
+                    getAjax('subStatus', arg);
+                     $('#statusReason').html('<option value="">-Select-</option>');
+                });
+                $("#subStatus").change(function () {
+                    var arg = $('#subStatus').val();
+                    getAjax('statusReason', arg);
+                });
+
+
                 $("#search_form").on('submit', (function (e) {
 
                     var from_date = $('#from_date').val();
