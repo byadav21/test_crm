@@ -232,15 +232,15 @@ class AOR_ReportsViewLeadscore extends SugarView
         {   
             if ($selected_budget == '0-25')
             {
-                $wherecl .= " AND  lc.lead_score >= '0'  AND  lc.lead_score <= '25'";
+                $wherecl .= " AND  lc.lead_score >= 1  AND  lc.lead_score <= 25 ";
             }
             elseif ($selected_budget == '26-50')
             {
-                $wherecl .= " AND  lc.lead_score >= '26'  AND  lc.lead_score <= '50'";
+                $wherecl .= " AND  lc.lead_score >= 26  AND  lc.lead_score <= 50";
             }
-            else
+            elseif ($selected_budget == '51-100')
             {
-                $wherecl .= " AND  lc.lead_score >= '51'  AND  lc.lead_score <= '100'";
+                $wherecl .= " AND  lc.lead_score >= 51  AND  lc.lead_score <= 100";
             }
             
         }
