@@ -39,9 +39,10 @@ class AOR_ReportsViewLeadscore extends SugarView
             'date_entered'            => 'Date',
             'date_modified'           => 'Date Modified',
             'user_name'               => 'Name',
+            'agent_name'              => 'Agent Name',
             'phone_mobile'            => 'Mobile',
             'lead_score'              => 'Score',
-            'Attempts'                => 'Attempts',
+            'attempts_c'              => 'Attempts',
             'batch_code'              => 'Batch Code',
             'status'                  => 'Status',
             'status_description'      => 'Sub Status',
@@ -289,6 +290,7 @@ class AOR_ReportsViewLeadscore extends SugarView
             'CONVERT_TZ(l.date_entered,"+00:00","+05:30") date_entered'                     => 'date_entered',
             'CONVERT_TZ(l.date_modified,"+00:00","+05:30") date_modified'                   => 'date_modified',
             'concat(IFNULL(l.first_name,"")," ",IFNULL(l.last_name,""))  user_name'         => 'user_name',
+            'users.user_name agent_name'                                                    => 'agent_name',
             'l.phone_mobile'                                                                => 'phone_mobile',
             'lc.lead_score'                                                                 => 'lead_score',
             'lc.attempts_c'                                                                 => 'attempts_c',
@@ -305,6 +307,7 @@ class AOR_ReportsViewLeadscore extends SugarView
 ///wwww
         $sqlPart = "
                 FROM leads l
+                LEFT JOIN users ON l.assigned_user_id =users.id
                 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                  WHERE l.deleted=0
@@ -367,12 +370,13 @@ class AOR_ReportsViewLeadscore extends SugarView
 
                 $programList[$row['id']]['id']                      = $row['id'];
                 $programList[$row['id']]['date_entered']            = $row['date_entered'];
-                $programList[$row['id']]['date_modified']            = $row['date_modified'];
+                $programList[$row['id']]['date_modified']           = $row['date_modified'];
                 $programList[$row['id']]['user_name']               = $row['user_name'];
+                $programList[$row['id']]['agent_name']              = isset($row['agent_name']) ? $row['agent_name'] : 'N/A';
                 $programList[$row['id']]['phone_mobile']            = isset($row['phone_mobile']) ? $row['phone_mobile'] : 'N/A';
                 $programList[$row['id']]['batch_code']              = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
-                $programList[$row['id']]['lead_score']              = addslashes(isset($row['lead_score']) ? $row['lead_score'] : 'N/A');
-                $programList[$row['id']]['attempts_c']              = addslashes(isset($row['attempts_c']) ? $row['attempts_c'] : 'N/A');
+                $programList[$row['id']]['lead_score']              = isset($row['lead_score']) ? $row['lead_score'] : 'N/A';
+                $programList[$row['id']]['attempts_c']              = isset($row['attempts_c']) ? $row['attempts_c'] : '0';
                 $programList[$row['id']]['status']                  = isset($row['status']) ? $row['status'] : 'N/A';
                 $programList[$row['id']]['status_description']      = isset($row['status_description']) ? $row['status_description'] : 'N/A';
                 $programList[$row['id']]['disposition_reason']      = isset($row['disposition_reason']) ? $row['disposition_reason'] : 'N/A';
@@ -400,6 +404,7 @@ class AOR_ReportsViewLeadscore extends SugarView
             $data .= ",Date";
             $data .= ",Date Modified";
             $data .= ",Name";
+            $data .= ",Agent Name";
             $data .= ",Phone Number";
             $data .= ",Score";
             $data .= ",Attempts";
