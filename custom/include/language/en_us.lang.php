@@ -525,7 +525,7 @@ $GLOBALS['app_list_strings']['lead_source_custom_dom']=array (
   'CO_CanonIndia'=>'CanonIndia',
   'CO_magicbricks'=>'magicbricks',
   'CO_SHRM_2020'=>'SHRM_2020',
-
+  'CO_Corporate_2020'=>'Corporate_2020',
   'IS_INS'=>'INS',
   'IS_INS_Source_1'=>'INS_Source_1',
   'IS_INS_Source_2'=>'INS_Source_2',
