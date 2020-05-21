@@ -250,6 +250,7 @@
 
                     var from_date = $('#from_date').val();
                     var to_date = $('#to_date').val();
+                    var budget = $('#budget').val();
 
                     if (from_date == '' || from_date == null) {
                         $("#from_date").focus();
@@ -260,6 +261,12 @@
                     if (to_date == '' || to_date == null) {
                         $("#to_date").focus();
                         alert('Please select To-Date!');
+                        return false;
+                    }
+                    
+                    if (budget == '' || budget == null) {
+                        $("#budget").focus();
+                        alert('Please select Budget!');
                         return false;
                     }
 
