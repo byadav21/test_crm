@@ -28,10 +28,10 @@
                         </td>
 			
                         <td nowrap="nowrap" >
-                            <select name="budget" id="budget" >
-                                <option value="0-25" {if '0-25'==$selected_budget} selected="selected"{/if}>0-25</option>
-                                <option value="26-50" {if '26-50'==$selected_budget} selected="selected"{/if}>26-50</option>
-                                <option value="51-100" {if '51-100'==$selected_budget} selected="selected"{/if}>51-100</option>
+                            <select name="budget[]" id="budget" class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                 {foreach from =$budgetArr key=key item=value}
+                                    <option value="{$key}" {if in_array($key, $selected_budget)}  selected="selected"{/if}>{$value}</option>
+                                {/foreach}
                             </select>
                         </td>
 
@@ -39,10 +39,10 @@
                             <label for="Batch Code">Status:</label>
                         </td>
                         <td nowrap="nowrap" >
-                            <select name="status" id="status">
+                            <select name="status[]" id="status" class="multiselbox" multiple style="width:180px !important; height: 70px !important;"> 
                                 <option value="">-Select-</option>
                                 {foreach from =$statusList key=key item=value}
-                                    <option value="{$value}"{if $value == $selected_status } selected="selected"{/if}>{$value}</option>
+                                    <option value="{$value}" {if in_array($value, $selected_status)}  selected="selected"{/if}>{$value}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -54,10 +54,10 @@
                             <label for="Sub Status">Sub Status:</label>
                         </td>
                         <td nowrap="nowrap" >
-                            <select name="subStatus" id="subStatus" >
+                            <select name="subStatus[]" id="subStatus" class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 <option value="">-Select-</option>
                                 {foreach from =$subStatusList key=key item=value}
-                                    <option value="{$key}"{if $key == $selected_subStatus } selected="selected"{/if}>{$key}</option>
+                                    <option value="{$key}" {if in_array($key, $selected_subStatus)} selected="selected"{/if}>{$key}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -66,10 +66,10 @@
                             <label for="Status Reason">Status Reason:</label>
                         </td>
                         <td nowrap="nowrap" >
-                            <select name="statusReason" id="statusReason">
+                            <select name="statusReason[]" id="statusReason" class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 <option value="">-Select-</option>
                                 {foreach from =$subStatusReasonList key=key item=value}
-                                    <option value="{$key}"{if $key==$selected_statusReason } selected="selected"{/if}>{$key}</option>
+                                    <option value="{$key}" {if in_array($key, $selected_statusReason)} selected="selected"{/if}>{$key}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -217,13 +217,23 @@
                     success: function (data) {
                         $('#' + target).html('');
                         $('#' + target).html(data);
-                        //$('select[multiple]').multiselect('reload');
+                        $('select[multiple]').multiselect('reload');
 
                     }
                 });
             }
 
             $(document).ready(function () {
+                
+                 $(".multiselbox").each(function () {
+                    if ($(this).find("option").eq(0).val() == '') {
+                        $(this).find("option").eq(0).remove();
+                    }
+                })
+                $(".multiselbox").multiselect({
+                    includeSelectAllOption: true
+                });
+                
 
                 $("#status").change(function () {
                     var arg = $('#status').val();

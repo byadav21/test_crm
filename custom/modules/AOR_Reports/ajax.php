@@ -271,6 +271,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'leadScore')
     global $db;
     $option = '';
     //RecordID: RecordID, RowID:RowID
+    $param = array();
 
     $target = $_POST['target'];
     $param  = $_POST['param'];
@@ -328,7 +329,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'leadScore')
     );
 
 
-
+    //print_r($param);
     //echo '$target'.$target;
     //echo '$param'.$param;
     $subStatusArr    = array();
@@ -337,8 +338,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'leadScore')
     foreach ($crmDispo as $key => $value)
     {
         if ($target == 'subStatus')
-        {
-            if ($param == $value['status'])
+        {   
+            if (in_array($value['status'], $param))
+            //if ($param == $value['status'])
             {
 
                 $subStatusArr[$value['sub_status']] = $value['sub_status'];
@@ -346,8 +348,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'leadScore')
         }
         if ($target == 'statusReason')
         {
-
-            if ($param == $value['sub_status'])
+            if (in_array($value['sub_status'], $param))
+            //if ($param == $value['sub_status'])
             {
                 $statusReasonArr[$key] = $key;
                 echo '<option value="' . $key . '">' . $key . '</option>';

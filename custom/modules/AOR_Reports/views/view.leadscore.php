@@ -37,6 +37,7 @@ class AOR_ReportsViewLeadscore extends SugarView
         $headerArr = array(
             'id'                      => 'Lead ID',
             'date_entered'            => 'Date',
+            'date_modified'           => 'Date Modified',
             'user_name'               => 'Name',
             'phone_mobile'            => 'Mobile',
             'lead_score'              => 'Score',
@@ -100,7 +101,8 @@ class AOR_ReportsViewLeadscore extends SugarView
         $current_user_id = $current_user->id;
         $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
 
-
+        $budgetArr = array(a=>'0-25',b=>'26-50',c=>'51-100'); 
+        //print_r($budgetArr);
         $crmDispo = array(
             'Callback_Customer is Busy'         => array('status' => 'Alive', 'sub_status' => 'Call Back'),
             'Callback_RPC not available'        => array('status' => 'Alive', 'sub_status' => 'Call Back'),
@@ -193,10 +195,10 @@ class AOR_ReportsViewLeadscore extends SugarView
 
 
 
-        $selected_budget       = $this->_objInputs->getVal('budget', 'post', '');
-        $selected_status       = $this->_objInputs->getVal('status', 'post', '');
-        $selected_subStatus    = $this->_objInputs->getVal('subStatus', 'post', '');
-        $selected_statusReason = $this->_objInputs->getVal('statusReason', 'post', '');
+        $selected_budget       = $this->_objInputs->getVal('budget', 'post', array());
+        $selected_status       = $this->_objInputs->getVal('status', 'post', array());
+        $selected_subStatus    = $this->_objInputs->getVal('subStatus', 'post', array());
+        $selected_statusReason = $this->_objInputs->getVal('statusReason', 'post', array());
 
         $error = array();
         $Days  = $this->getBetweenDays($selected_from_date, $selected_to_date);
@@ -229,36 +231,54 @@ class AOR_ReportsViewLeadscore extends SugarView
 
 
         if (!empty($selected_budget))
-        {   
-            if ($selected_budget == '0-25')
+        {
+            if (in_array('a', $selected_budget) && !in_array('b', $selected_budget) && !in_array('c', $selected_budget))
             {
                 $wherecl .= " AND  lc.lead_score >= 1  AND  lc.lead_score <= 25 ";
             }
-            elseif ($selected_budget == '26-50')
+            elseif (!in_array('a', $selected_budget) && in_array('b', $selected_budget) && !in_array('c', $selected_budget))
             {
-                $wherecl .= " AND  lc.lead_score >= 26  AND  lc.lead_score <= 50";
+                $wherecl .= " AND  lc.lead_score >= 26  AND  lc.lead_score <= 50 ";
             }
-            elseif ($selected_budget == '51-100')
+            elseif (!in_array('a', $selected_budget) && !in_array('b', $selected_budget) && in_array('c', $selected_budget))
             {
-                $wherecl .= " AND  lc.lead_score >= 51  AND  lc.lead_score <= 100";
+                $wherecl .= " AND  lc.lead_score >= 51  AND  lc.lead_score <= 100 ";
             }
             
+            elseif (in_array('a', $selected_budget) && in_array('b', $selected_budget) && !in_array('c', $selected_budget))
+            {
+                $wherecl .= " AND  lc.lead_score >= 1  AND  lc.lead_score <= 50";
+            }
+            elseif (in_array('a', $selected_budget) && in_array('b', $selected_budget) && in_array('c', $selected_budget))
+            {
+                $wherecl .= " AND  lc.lead_score >= 1  AND  lc.lead_score <= 100";
+            }
+            elseif (!in_array('a', $selected_budget) && in_array('b', $selected_budget) && in_array('c', $selected_budget))
+            {
+                $wherecl .= " AND  lc.lead_score >= 26  AND  lc.lead_score <= 100";
+            }
+            elseif (in_array('a', $selected_budget) && !in_array('b', $selected_budget) && in_array('c', $selected_budget))
+            {
+                $wherecl .= " AND  lc.lead_score >= 1  AND  lc.lead_score <= 100";
+            }
         }
+
         if (!empty($selected_status))
         {
 
-            $wherecl .= " AND  l.status='".$selected_status."'";
+            $wherecl .= " AND  l.status IN ('" . implode("','", $selected_status) . "')"; 
+            
         }
 
         if (!empty($selected_subStatus))
         {
 
-            $wherecl .= " AND  l.status_description='".$selected_subStatus."'";
+            $wherecl .= " AND  l.status_description IN ('" . implode("','", $selected_subStatus) . "')"; 
         }
         if (!empty($selected_statusReason))
         {
 
-            $wherecl .= " AND  l.disposition_reason='".$selected_statusReason."'";
+            $wherecl .= " AND  l.disposition_reason IN ('" . implode("','", $selected_statusReason) . "')";  
         }
 
 
@@ -267,6 +287,7 @@ class AOR_ReportsViewLeadscore extends SugarView
 
         $headers = array('l.id'                                                             => 'id',
             'CONVERT_TZ(l.date_entered,"+00:00","+05:30") date_entered'                     => 'date_entered',
+            'CONVERT_TZ(l.date_modified,"+00:00","+05:30") date_modified'                   => 'date_modified',
             'concat(IFNULL(l.first_name,"")," ",IFNULL(l.last_name,""))  user_name'         => 'user_name',
             'l.phone_mobile'                                                                => 'phone_mobile',
             'lc.lead_score'                                                                 => 'lead_score',
@@ -345,7 +366,8 @@ class AOR_ReportsViewLeadscore extends SugarView
             {
 
                 $programList[$row['id']]['id']                      = $row['id'];
-                $programList[$row['id']]['date_entered']          = $row['date_entered'];
+                $programList[$row['id']]['date_entered']            = $row['date_entered'];
+                $programList[$row['id']]['date_modified']            = $row['date_modified'];
                 $programList[$row['id']]['user_name']               = $row['user_name'];
                 $programList[$row['id']]['phone_mobile']            = isset($row['phone_mobile']) ? $row['phone_mobile'] : 'N/A';
                 $programList[$row['id']]['batch_code']              = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
@@ -376,6 +398,7 @@ class AOR_ReportsViewLeadscore extends SugarView
 
             $data .= "Lead ID";
             $data .= ",Date";
+            $data .= ",Date Modified";
             $data .= ",Name";
             $data .= ",Phone Number";
             $data .= ",Score";
@@ -442,7 +465,8 @@ class AOR_ReportsViewLeadscore extends SugarView
 
         $sugarSmarty->assign("headers", $headers);
         $sugarSmarty->assign("tablewidth", count($headers) * 130);
-
+        
+        $sugarSmarty->assign("budgetArr", $budgetArr);
         $sugarSmarty->assign("statusList", $statusArr);
         $sugarSmarty->assign("subStatusList", $suBstatusArr);
         $sugarSmarty->assign("subStatusReasonList", $subChildstatusArr);
