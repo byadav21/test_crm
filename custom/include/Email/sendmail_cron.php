@@ -134,8 +134,7 @@ class FalconideEmail
     public function emailData($reponame, $filename, $date, $email_summary=NULL)
     {
 		$emailData = array('email' => array(
-                'pawan.kumar@talentedge.in',
-                'ajay.kumar@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in',
+                'pawan.kumar@talentedge.in','kunal.soni@talentedge.in',
                 //B Head
 		'vishwanath.nair@talentedge.in',
                 'sreedevi.sreekumar@talentedge.in',
