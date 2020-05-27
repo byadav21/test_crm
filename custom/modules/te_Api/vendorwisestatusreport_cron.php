@@ -115,20 +115,14 @@ class sendVisitReport
 
         //var/www/htmlVendorWiseReport_report_2018-01-22.csv
          $to = array(
-                'pawan.kumar@talentedge.in'
-                ,'pritam.dutta@talentedge.in',
-                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in',
+                'pawan.kumar@talentedge.in',
+                'kunal.soni@talentedge.in',
                 //B Head
-                #'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                #'ritika.nayak@talentedge.in','eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
-                #'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
-                
-                //Marketing Team :
-                'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 //BA Team :
-                'duke.banerjee@talentedge.in');
+                //Marketing Team :
+                'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in'
+                );
         $emailData = $mail->cron_email_Data('Vendor Wise Status Report', $filename, $this->toDate,$to,$email_summary);
         //$emailData = $mail->emailData('Vendor Wise Status Report', $filename, $this->toDate);
         $mail->sendCertificateEmail($emailData);

@@ -75,18 +75,16 @@ class FalconideEmail
     {
 
         $emailData = array('email' => array(
-                'pawan.kumar@talentedge.in'
-                ,'pritam.dutta@talentedge.in',
-                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in',
+                'pawan.kumar@talentedge.in',
                 //B Head
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                'deepak.sharma@talentedge.in', 'eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
-                'amit.arora@talentedge.in', 'pramod.singh@talentedge.in', 'ishant.khanna@talentedge.in',
+                'deepak.yadav@talentedge.in'
+                
                 //Marketing Team :
-                'karan.bhatia@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in', 'vivek.bathla@talentedge.in',
+                
                 //BA Team :
-                'duke.banerjee@talentedge.in', 'harsh.malik@talentedge.in'
+                
                 ),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
@@ -99,12 +97,7 @@ class FalconideEmail
     public function TestemailData($reponame, $filename, $date)
     {
 
-           $emailData = array('email' => array('pawan.kumar@talentedge.in',
-                                               'ashwani.sharma@talentedge.in',
-                                               'ajay.kumar@talentedge.in', 
-                                               'pritam.dutta@talentedge.in',
-                                               'pramod.singh@talentedge.in'
-                                                ),
+           $emailData = array('email' => array('pawan.kumar@talentedge.in'),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
             . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>',

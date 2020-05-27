@@ -58,23 +58,18 @@ class sendDailyJunkLead
                 </td>
             </tr>
         </table>';
-		//'pawan.kumar@talentedge.in','pritam.dutta@talentedge.in','ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','pramod.singh@talentedge.in'
-//		$to = array('pawan.kumar@talentedge.in','pritam.dutta@talentedge.in','ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','pramod.singh@talentedge.in','deepak.sharma@talentedge.in','vivek.bathla@talentedge.in','sreedevi.sreekumar@talentedge.in');
+		
+//		$to = array('pawan.kumar@talentedge.in','sreedevi.sreekumar@talentedge.in');
                 $to = array(
-                'pawan.kumar@talentedge.in','pritam.dutta@talentedge.in',
-                'ajay.kumar@talentedge.in', 'ashwani.sharma@talentedge.in','aastha.verma@talentedge.in','kunal.soni@talentedge.in',
+                'pawan.kumar@talentedge.in','kunal.soni@talentedge.in',
                 //B Head
-                'sreedevi.sreekumar@talentedge.in',
+                //'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                'ritika.nayak@talentedge.in','kiran.mathew@talentedge.in',
-                #'eleazer.rohit@talentedge.in', 
-                #'amit.arora@talentedge.in', 'deepak.yadav@talentedge.in','abha.saxena@talentedge.in',
-                
-                //Marketing Team :
-                'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
-                'vivek.bathla@talentedge.in','sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 //BA Team :
-                'duke.banerjee@talentedge.in');
+                //Marketing Team :
+                'ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in'
+                
+                  );
         $emailData = $mail->cron_email_Data('Daily Junk Lead Data', $filename, $this->toDate,$to,$email_summary);
         //$emailData = $mail->emailData('Daily Junk Lead Data', $filename, $this->toDate,$email_summary);
         $mail->sendCertificateEmail($emailData);

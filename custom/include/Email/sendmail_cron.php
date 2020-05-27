@@ -111,15 +111,13 @@ class FalconideEmail
                 'pawan.kumar@talentedge.in',
                 'kunal.soni@talentedge.in',
                 //B Head
-                //'sreedevi.sreekumar@talentedge.in',
+              
                 //CC Team:
-                //'ritika.nayak@talentedge.in','kiran.mathew@talentedge.in',
+                
 	        'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in',
                 //Marketing Team :
                 'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
-                'parvez.ali@talentedge.in',
-                //BA Team :
-                'duke.banerjee@talentedge.in'
+                'parvez.ali@talentedge.in'
                 ),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
@@ -139,17 +137,11 @@ class FalconideEmail
 		'vishwanath.nair@talentedge.in',
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-                //'ritika.nayak@talentedge.in','kiran.mathew@talentedge.in',
 		'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in',
-                //'eleazer.rohit@talentedge.in', 'deepak.yadav@talentedge.in',
-                //'amit.arora@talentedge.in', 'pramod.singh@talentedge.in','abha.saxena@talentedge.in',
-                
+                 //BA Team :
                 //Marketing Team :
-                //'varun.vashistha@talentedge.in', 'amit.sati@talentedge.in', 'sachin.jain@talentedge.in',
                 'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
-                'parvez.ali@talentedge.in',
-                //BA Team :
-                'duke.banerjee@talentedge.in'
+                'parvez.ali@talentedge.in'
                 ),
             'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
@@ -174,14 +166,7 @@ class FalconideEmail
     public function TestemailData($reponame, $filename, $date, $email_summary=NULL)
     {
 
-           $emailData = array('email' => array('pawan.kumar@talentedge.in',
-                                               //'ashwani.sharma@talentedge.in',
-                                               //'aastha.verma@talentedge.in',
-                                               //'pritam.dutta@talentedge.in',
-                                               //'ajay.kumar@talentedge.in', 
-                                               //'pritam.dutta@talentedge.in',
-                                               //'pramod.singh@talentedge.in'
-                                                ),
+           $emailData = array('email' => array('pawan.kumar@talentedge.in'),
              'subject'       => $reponame . ' - ' . date("F d, Y", strtotime($date)),
             'email_message' => '<p>Hi,</p> '
             . '<p>Please find in here attached, ' . $reponame . ' for "' . date("F d, Y", strtotime($date)) . '"</p>'
