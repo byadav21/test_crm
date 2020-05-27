@@ -59,11 +59,11 @@ if ($error_fields)
       
       
          
-            $updateleadSql  = "UPDATE leads_cstm ls
-                            LEFT JOIN leads l ON l.id = ls.id_c
-                            SET ls.lead_score = '$leadscore',
-                                l.date_modified=NOW()
-                            WHERE l.id = '$lead_id'";
+            $updateleadSql  = "UPDATE leads_cstm
+                            
+                            SET lead_score = '$leadscore'
+                            
+                            WHERE id_c = '$lead_id'";
             
             $checkSaveBean     = $db->Query($updateleadSql);
             
