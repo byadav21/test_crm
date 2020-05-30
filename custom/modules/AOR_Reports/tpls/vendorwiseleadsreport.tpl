@@ -16,19 +16,19 @@
                                 {/foreach}
                             </select>
                         </td>
-						<td scope="row" nowrap="nowrap" width="1%">
+                        <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Status</label>
                         </td>
                         <td nowrap="nowrap" width="10%">
                             <select name="status" id="status" style="width:300px !important;">
                                 <option value='All' {if $selected_status=='All'} selected="selected"{/if}>All</option>
-								<option value='re-enquired' {if $selected_status=='re-enquired'} selected="selected"{/if}>Re-Enquired</option>
-								<option value='duplicate' {if $selected_status=='duplicate'} selected="selected"{/if}>Duplicate</option>
-								<option value='fresh' {if $selected_status=='fresh'} selected="selected"{/if}>Fresh</option>
+                                <option value='re-enquired' {if $selected_status=='re-enquired'} selected="selected"{/if}>Re-Enquired</option>
+                                <option value='duplicate' {if $selected_status=='duplicate'} selected="selected"{/if}>Duplicate</option>
+                                <option value='fresh' {if $selected_status=='fresh'} selected="selected"{/if}>Fresh</option>
                             </select>
                         </td>
-					</tr>
-					<tr>
+                    </tr>
+                    <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">From Date</label>
                         </td>
@@ -44,6 +44,24 @@
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
                     <tr>
+                        
+                    <tr>
+                       
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Export with</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+                            
+                             <select name="exportwith" id="exportwith" >
+                                {foreach from =$exportwithArr key=key item=val}
+
+                                    <option value="{$key}"{if ($key==$selected_exportwith) } selected="selected"{/if}>{$val}</option>
+                                {/foreach}
+                            </select>
+                            
+                           
+                        </td>
+                    </tr>
 
 
 
@@ -152,7 +170,7 @@
     </table>
     {literal}
         <script>
-           Calendar.setup({
+            Calendar.setup({
                 inputField: "from_date",
                 daFormat: "%Y-%m-%d %I:%M%P",
                 button: "from_date_trigger",

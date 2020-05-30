@@ -4,18 +4,8 @@
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
-		<tr>
-                        {*<td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Program</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="program[]" id="program"  class="batch_advanced" multiple style="width:600px !important; height: 70px !important;">
-                                {foreach from =$ProgramListData key=key item=program}
+                    <tr>
 
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_program)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>*}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch</label>
                         </td>
@@ -27,14 +17,6 @@
                                 {/foreach}
                             </select>
                         </td>
-
-                        
-                    </tr>
-                    <tr>
-					
-                    <tr>
-                        
-
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch Code</label>
                         </td>
@@ -46,20 +28,10 @@
                                 {/foreach}
                             </select>
                         </td>
-                        
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Vendor</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$VendorListData key=key item=program}
 
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        
                     </tr>
+                    <tr>
+
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">From Date</label>
@@ -76,6 +48,42 @@
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
                     </tr>
+
+
+                    <tr>
+
+
+
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Vendor</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$VendorListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Export with</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+
+                            <select name="exportwith" id="exportwith" >
+                                {foreach from =$exportwithArr key=key item=val}
+
+                                    <option value="{$key}"{if ($key==$selected_exportwith) } selected="selected"{/if}>{$val}</option>
+                                {/foreach}
+                            </select>
+
+
+                        </td>
+
+                    </tr>
+
 
 
 
@@ -152,17 +160,17 @@
                 </td>
             </tr>
             {*End Pagination*}
-			<tr height="20">
+            <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
                 {*<th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Alive</strong></th>
@@ -176,8 +184,8 @@
 
             </tr>
             <tr height="20">
-		{*<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    <strong>Program Name</strong>
+                {*<th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <strong>Program Name</strong>
                 </th>*}
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Batch Name</strong>
@@ -189,16 +197,16 @@
                     <strong>Vendor</strong>
                 </th>
                 {foreach from = $StatusList key=key item=status}
-				<th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$status}</strong></th>
-				{/foreach}
+                    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$status}</strong></th>
+                        {/foreach}
 
             </tr>
-			{foreach from = $programList key=key item=program}
+            {foreach from = $programList key=key item=program}
                 <tr height="20" class="oddListRowS1">
-                   {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>*}
-					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
+                    {* <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.program_name}</td>*}
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
-					<td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.vendor}</td>
                     {foreach from = $StatusList key=statuskey item=vendor}
 
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> {if !empty($program.$statuskey)} {$program.$statuskey} {else} 0 {/if} </td>
@@ -206,7 +214,7 @@
 
                 </tr>
             {/foreach}
-            
+
 
     </table>
     {literal}

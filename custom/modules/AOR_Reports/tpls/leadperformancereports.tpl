@@ -2,8 +2,8 @@
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=leadperformancereports">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
-         <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                 <tbody>
+            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
 
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
@@ -75,7 +75,7 @@
 
                     </tr>
 
-
+                    
 
 
 
@@ -84,7 +84,7 @@
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
                                     return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-                           {*<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">*}
+                            {*<input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">*}
                         </td>
                     </tr>
 
@@ -159,17 +159,14 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
-               
+
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Contactable</strong></th>
-                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     &nbsp;
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Non-Contactable</strong></th>
 
-                {*    <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Dropout</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Duplicate</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>NA</strong></th>*}
+            
 
             </tr>
             <tr height="20">
@@ -179,31 +176,31 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>No Answer</strong>
                 </th>
-                
-                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Ringing Multiple Times</strong>
                 </th>
-                
+
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Busy</strong>
                 </th>
-                
-                
-                
-                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+
+
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Wrong Number</strong>
                 </th>
-                
-                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Not Eligible</strong>
                 </th>
-                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Not Enquired</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Converted</strong>
                 </th>
-               
+
 
             </tr>
 
@@ -211,13 +208,13 @@
                 <tr height="20" class="oddListRowS1">
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$councelor.name}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                         {if ($councelor.NO_ANSWER!=0)} 
+                        {if ($councelor.NO_ANSWER!=0)} 
                             <a href="index.php?module=AOR_Reports&action=viewleadsperformance&dispositionName=NO_ANSWER&batch={$councelor.name}&lcount={$councelor.NO_ANSWER}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
                                 {$councelor.NO_ANSWER}
                             </a>
                         {else} 0 {/if}
-                       
-                    
+
+
                     </td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
                         {if ($councelor.Ringing_Multiple_Times!=0)} 
@@ -227,23 +224,23 @@
                         {else} 0 {/if}
                     </td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                         {if ($councelor.BUSY!=0)} 
+                        {if ($councelor.BUSY!=0)} 
                             <a href="index.php?module=AOR_Reports&action=viewleadsperformance&dispositionName=BUSY&batch={$councelor.name}&lcount={$councelor.BUSY}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
                                 {$councelor.BUSY}
                             </a>
                         {else} 0 {/if}
-                        
+
                     </td>
 
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                         {if ($councelor.Wrong_Number!=0)} 
+                        {if ($councelor.Wrong_Number!=0)} 
                             <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Wrong_Number&batch={$councelor.name}&lcount={$councelor.Wrong_Number}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
                                 {$councelor.Wrong_Number}
                             </a>
                         {else} 0 {/if}
                     </td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                         {if ($councelor.Not_Eligible!=0)} 
+                        {if ($councelor.Not_Eligible!=0)} 
                             <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Not_Eligible&batch={$councelor.name}&lcount={$councelor.Not_Eligible}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
                                 {$councelor.Not_Eligible}
                             </a>
@@ -257,7 +254,7 @@
                         {else} 0 {/if}
                     </td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">
-                         {if ($councelor.Converted!=0)} 
+                        {if ($councelor.Converted!=0)} 
                             <a href="index.php?module=AOR_Reports&action=viewleadsperformance&desc=Converted&batch={$councelor.name}&lcount={$councelor.Converted}&to_date={$selected_to_date}&from_date={$selected_from_date}" target="_blank">
                                 {$councelor.Converted}
                             </a>
@@ -265,9 +262,9 @@
                     </td>
                 </tr>
             {/foreach}
-            
-            
-          
+
+
+
     </table>
     <script>
         {literal}
@@ -293,8 +290,8 @@
                 step: 1,
                 weekNumbers: false,
             });
-            
-             function getAjax(target, arr) {
+
+            function getAjax(target, arr) {
                 $.ajax({
                     beforeSend: function (request)
                     {
@@ -313,7 +310,7 @@
                     }
                 });
             }
-            
+
             $(document).ready(function () {
                 $(".multiselbox").each(function () {
                     if ($(this).find("option").eq(0).val() == '') {
@@ -323,8 +320,8 @@
                 $(".multiselbox").multiselect({
                     includeSelectAllOption: true
                 });
-                
-                
+
+
                 $("#status").change(function () {
                     var arg = $('#status').val();
                     getAjax('batch_code', arg);
@@ -333,58 +330,50 @@
                     var arg = $('#managers').val();
                     getAjax('councellors', arg);
                 });
-                
-                
-                 $("#search_form").on('submit', (function(e) {
-                     
-                      var from_date    = $('#from_date').val();
-                      var to_date      = $('#to_date').val();
-                      var batch_code   = $('#batch_code').val();
-                      var status       = $('#status').val();
-                      var month        = $('#month').val();
-                      var year         = $('#year').val();
-                      var users        = $('#users').val();
-                      var managers     = $('#managers').val();
-                      var councellors  = $('#councellors').val();
-                      
-                      
-                      if(from_date=='' || from_date ==null){
-                          $("#from_date").focus();
-                           alert('Please select From-Date!'); return false;
-                      }
-                      
-                      if(to_date=='' || to_date ==null){
-                          $("#to_date").focus();
-                           alert('Please select To-Date!'); return false;
-                      }
-                     
-                     if(status=='' || status ==null){
-                          $("#status").focus();
-                           alert('Please select a Status!'); return false;
-                      }
-                     
-                      if(batch_code=='' || batch_code ==null){
-                          $("#batch_code").focus();
-                           alert('Please select a Batch Code!'); return false;
-                      }
-                      
-                      /*if(managers=='' || managers ==null){
-                          $("#manager").focus();
-                          alert('Please select a Manager!'); return false;
-                      }
-                      
-                       if(councellors=='' || councellors ==null){
-                          $("#councellors").focus();
-                          alert('Please select a Councellor!'); return false;
-                      }*/
-                      
-                      
-                     
-                    
-                 }));
-                
+
+
+                $("#search_form").on('submit', (function (e) {
+
+                    var from_date = $('#from_date').val();
+                    var to_date = $('#to_date').val();
+                    var batch_code = $('#batch_code').val();
+                    var status = $('#status').val();
+                    var month = $('#month').val();
+                    var year = $('#year').val();
+                    var users = $('#users').val();
+                    var managers = $('#managers').val();
+                    var councellors = $('#councellors').val();
+
+
+                    if (from_date == '' || from_date == null) {
+                        $("#from_date").focus();
+                        alert('Please select From-Date!');
+                        return false;
+                    }
+
+                    if (to_date == '' || to_date == null) {
+                        $("#to_date").focus();
+                        alert('Please select To-Date!');
+                        return false;
+                    }
+
+                    if (status == '' || status == null) {
+                        $("#status").focus();
+                        alert('Please select a Status!');
+                        return false;
+                    }
+
+                    if (batch_code == '' || batch_code == null) {
+                        $("#batch_code").focus();
+                        alert('Please select a Batch Code!');
+                        return false;
+                    }
+
+                  
+
+                }));
+
             });
         </script>
     {/literal}
-    
- 
+

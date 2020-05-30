@@ -28,28 +28,53 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         $this->_objInputs->syncSessions('vendorWiseCallDisposition');
     }
 
-    function statusHeader()
+    function statusHeader($instField = '')
     {
         $headerArr = array();
+        if ($instField != '')
+        {
 
-        $headerArr = array(
-            'id'                      => 'Lead ID',
-            'date_entered'            => 'Date',
-            'vendor'                  => 'Vendor',
-            'batch_code'              => 'Batch Code',
-            'status'                  => 'Status',
-            'status_description'      => 'Sub Status',
-            'disposition_reason'      => 'Disposition Reason',
-            'primary_address_city'    => 'City',
-            'note'                    => 'Note',
-            'comment'                 => 'Comments',
-            'primary_address_state'   => 'state',
-            'primary_address_country' => 'country',
-            'landing_url'             => 'Landing Url',
-            'utm_campaign'            => 'UTM Campaign'
-                #'id'                   =>'User Name',
-        );
-        
+            $headerArr = array(
+                'id'                      => 'Lead ID',
+                'date_entered'            => 'Date',
+                'vendor'                  => 'Vendor',
+                'batch_code'              => 'Batch Code',
+                'institute'               => 'Institute',
+                'status'                  => 'Status',
+                'status_description'      => 'Sub Status',
+                'disposition_reason'      => 'Disposition Reason',
+                'primary_address_city'    => 'City',
+                'note'                    => 'Note',
+                'comment'                 => 'Comments',
+                'primary_address_state'   => 'state',
+                'primary_address_country' => 'country',
+                'landing_url'             => 'Landing Url',
+                'utm_campaign'            => 'UTM Campaign'
+                    #'id'                   =>'User Name',
+            );
+        }
+        else
+        {
+            $headerArr = array(
+                'id'                      => 'Lead ID',
+                'date_entered'            => 'Date',
+                'vendor'                  => 'Vendor',
+                'batch_code'              => 'Batch Code',
+                'status'                  => 'Status',
+                'status_description'      => 'Sub Status',
+                'disposition_reason'      => 'Disposition Reason',
+                'primary_address_city'    => 'City',
+                'note'                    => 'Note',
+                'comment'                 => 'Comments',
+                'primary_address_state'   => 'state',
+                'primary_address_country' => 'country',
+                'landing_url'             => 'Landing Url',
+                'utm_campaign'            => 'UTM Campaign'
+                    #'id'                   =>'User Name',
+            );
+        }
+
+
         return $headerArr;
     }
 
@@ -102,7 +127,8 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 
         $current_user_id = $current_user->id;
         $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
-
+        $exportwithArr   = array();
+        $exportwithArr   = array(a => 'Basic', b => 'All With Cornell Column', c => 'Only Cornell Without Column');
 
         if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
         {
@@ -136,6 +162,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         $selected_vendors    = $this->_objInputs->getVal('vendors', 'post', array());
         $selected_program    = $this->_objInputs->getVal('program', 'post', array());
         $selected_batch      = $this->_objInputs->getVal('batch', 'post', array());
+        $selected_exportwith = $this->_objInputs->getVal('exportwith', 'post', '');
 
         $error = array();
         $Days  = $this->getBetweenDays($selected_from_date, $selected_to_date);
@@ -148,9 +175,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         //echo '$Days=='.$Days; 
 
 
-        $statusHeader   = $this->statusHeader();
-        $BatchListData  = $this->getBatch();
-        $VendorListData = $this->getVendors();
+
 
 
 
@@ -180,31 +205,59 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 
         if (!empty($selected_vendors))
         {
-            
+
             $wherecl .= " AND  l.vendor IN ('" . implode("','", $selected_vendors) . "')";
+        }
+        $instField        = '';
+        $tobeaddInstitute = '';
+
+        if (!empty($selected_exportwith) && ($selected_exportwith != 'a'))
+        {
+            $instField        = "i.name institute,";
+            $tobeaddInstitute .= " INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON  lc.te_ba_batch_id_c=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb AND ib.deleted=0
+                                   INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0 ";
+
+            if ($selected_exportwith == 'c')
+            {
+                $instField        = '';
+                $tobeaddInstitute .= " AND i.name ='Cornell'";
+            }
+        }
+
+        $statusHeader   = $this->statusHeader($instField);
+        $BatchListData  = $this->getBatch();
+        $VendorListData = $this->getVendors();
+
+
+
+
+        $headers = array('l.id'                                                      => 'id',
+            //'date(l.date_entered) date_entered' => 'date_entered',
+            'CONVERT_TZ(l.date_entered,"+00:00","+05:30") date_entered' => 'date_entered',
+            'l.vendor'                                                  => 'vendor',
+            'te_ba_batch.batch_code'                                    => 'batch_code',
+            'l.status'                                                  => 'status',
+            'l.status_description'                                      => 'status_description',
+            'l.disposition_reason'                                      => 'disposition_reason',
+            'l.primary_address_city'                                    => 'primary_address_city',
+            'l.note'                                                    => 'note',
+            'l.comment'                                                 => 'comment',
+            'l.primary_address_state'                                   => 'primary_address_state',
+            'l.primary_address_country'                                 => 'primary_address_country',
+            'lc.landing_url'                                            => 'landing_url',
+            'l.utm_campaign'                                            => 'utm_campaign');
+
+        if ($instField != '')
+        {
+
+            $instaArr = array('i.name institute' => 'institute');
+
+            $headers = array_merge($headers, $instaArr);
         }
 
 
 
-
-
-        $headers = array('l.id'                              => 'id',
-            //'date(l.date_entered) date_entered' => 'date_entered',
-            'CONVERT_TZ(l.date_entered,"+00:00","+05:30") date_entered' => 'date_entered',
-            'l.vendor'                          => 'vendor',
-            'te_ba_batch.batch_code'            => 'batch_code',
-            'l.status'                          => 'status',
-            'l.status_description'              => 'status_description',
-            'l.disposition_reason'              => 'disposition_reason',
-            'l.primary_address_city'            => 'primary_address_city',
-            'l.note'                            => 'note',
-            'l.comment'                         => 'comment',
-            'l.primary_address_state'           => 'primary_address_state',
-            'l.primary_address_country'         => 'primary_address_country',
-            'lc.landing_url'                    => 'landing_url',
-            'l.utm_campaign'                    => 'utm_campaign');
-
-
+        //echo '<pre>';print_r($headers); die;
         $headersss = implode(', ', array_keys($headers));
 
 
@@ -213,6 +266,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
                 FROM leads l
                 LEFT JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+                $tobeaddInstitute
                  WHERE l.deleted=0
                    $wherecl
                order by  l.date_entered,te_ba_batch.batch_code,l.vendor  ";
@@ -222,7 +276,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
 
         $leadSql = "SELECT  $headersss " . $sqlPart;
 
-        //echo '<pre>'.$leadSql;
+        //echo '<pre>'.$leadSql;die;
         //die($leadSql);
         if (!$_export)
         {
@@ -267,14 +321,21 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
                 }
             }
             //print_r($leadObj);
-            
+
             while ($row = $db->fetchByAssoc($leadObj))
             {
-                
-                $programList[$row['id']]['id']                      = $row['id'];
-                $programList[$row['id']]['date_entered']            = $row['date_entered'];
-                $programList[$row['id']]['vendor']                  = isset($row['vendor']) ? $row['vendor'] : 'N/A';
-                $programList[$row['id']]['batch_code']              = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
+
+                $programList[$row['id']]['id']           = $row['id'];
+                $programList[$row['id']]['date_entered'] = $row['date_entered'];
+                $programList[$row['id']]['vendor']       = isset($row['vendor']) ? $row['vendor'] : 'N/A';
+                $programList[$row['id']]['batch_code']   = isset($row['batch_code']) ? $row['batch_code'] : 'N/A';
+                if ($instField != '')
+                {
+
+                    //echo 'xxx'; die;
+                    $programList[$row['id']]['institute'] = isset($row['institute']) ? $row['institute'] : 'N/A';
+                }
+
                 $programList[$row['id']]['status']                  = isset($row['status']) ? $row['status'] : 'N/A';
                 $programList[$row['id']]['status_description']      = isset($row['status_description']) ? $row['status_description'] : 'N/A';
                 $programList[$row['id']]['disposition_reason']      = isset($row['disposition_reason']) ? $row['disposition_reason'] : 'N/A';
@@ -306,6 +367,11 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $data .= ",Date";
             $data .= ",Vendor";
             $data .= ",Batch Code";
+            if ($instField != '')
+            {
+                $data .= ",Institute";
+            }
+
             $data .= ",Status";
             $data .= ",Sub Status";
             $data .= ",Disposition Reason";
@@ -318,7 +384,7 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
             $data .= ",UTM Campaign";
             $data .= "\n";
 
-
+            //echo '<pre>';print_r($programList); die;
             foreach ($programList as $key => $councelor)
             {
                 $i = 0;
@@ -386,6 +452,8 @@ class AOR_ReportsViewVendorwisecalldisposition extends SugarView
         $sugarSmarty->assign("selected_from_date", $selected_from_date);
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendors);
+        $sugarSmarty->assign("selected_exportwith", $selected_exportwith);
+        $sugarSmarty->assign("exportwithArr", $exportwithArr);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);

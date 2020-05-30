@@ -6,6 +6,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
 ini_set('memory_limit', '30M');
+
 class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
 {
 
@@ -80,6 +81,9 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
         $current_user_id = $current_user->id;
         $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
 
+        
+        $exportwithArr = array();
+        $exportwithArr = array(a=>'Basic',b=>'All With Cornell Column',c=>'Only Cornell Without Column');
 
         if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
         {
@@ -120,6 +124,7 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
             $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
             $_SESSION['cccon_program']    = $_REQUEST['program'];
+            $_SESSION['cccon_exportwith']   = $_REQUEST['exportwith'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -159,6 +164,14 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
         {
             $selected_program = $_SESSION['cccon_program'];
         }
+        
+        if (!empty($_SESSION['cccon_exportwith']))
+        {
+            $selected_exportwith = $_SESSION['cccon_exportwith'];
+           
+        }
+        
+        
 
         $programList = array();
         $StatusList  = array();
@@ -186,6 +199,21 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
             $wherecl .= " AND  p.id IN ('" . implode("','", $selected_program) . "')";
         }
 
+        $instField='';
+        $tobeaddInstitute='';
+
+        if (!empty($selected_exportwith) && ($selected_exportwith != 'a'))
+        {   
+             $instField="i.name institute,";
+             $tobeaddInstitute .=" INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON  lc.te_ba_batch_id_c=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb AND ib.deleted=0
+                                   INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0 ";
+
+            if($selected_exportwith=='c'){
+                $instField='';
+                $tobeaddInstitute .=" AND i.name ='Cornell'";
+            }
+
+        }
 
 
 
@@ -202,6 +230,7 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
                     te_ba_batch.name AS batch_name,
                     te_ba_batch.batch_code,
                     l.status,
+                    $instField
                     l.vendor,
                     te_vendor.id vendor_id,
                     l.status_description
@@ -209,6 +238,7 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
+                $tobeaddInstitute
                  WHERE l.deleted=0
                    #AND DATE(l.date_entered)>='2018-11-11'
                    #AND DATE(l.date_entered)<='2018-11-11'
@@ -232,6 +262,13 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
             $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['batch_name']                                                              = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
             $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['batch_code']                                                              = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
             $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['vendor']                                                                  = isset($row['vendor']) ? $row['vendor'] : 'NULL';
+            
+            if($instField!=''){
+            
+            $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['institute']                                                               = isset($row['institute']) ? $row['institute'] : 'NULL';
+            }
+
+
             $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['date_entered']                                                            = isset($row['date_entered']) ? $row['date_entered'] : 'NULL';
             $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['lead_count']                                                              = $row['lead_count'];
             $programList[strtolower($row['vendor_id']) . '_BATCH_' . $row['batch_id'] . '_' . $row['date_entered'] . '_' . strtolower(str_replace(array(' ', '-'), '_', $row['status_description'])) . '_' . $row['status']]['status_description']                                                      = $row['status_description'];
@@ -261,7 +298,12 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
             $data .= "Batch Name";
             $data .= ",Batch Code";
             $data .= ",Vendor";
+            if($instField!=''){
+            $data .= ",Institute";
+            }
+
             $data .= ",Created Date";
+            
             foreach ($StatusList as $key => $statusVal)
             {
                 $data .= "," . $key;
@@ -276,6 +318,10 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
                 $data .= "\"" . $councelor['batch_name'];
                 $data .= "\",\"" . $councelor['batch_code'];
                 $data .= "\",\"" . $councelor['vendor'];
+                if($instField!=''){
+                $data .= "\",\"" . $councelor['institute'];
+                }
+
                 $data .= "\",\"" . $councelor['date_entered'];
                 $toal = 0;
                 foreach ($StatusList as $key1 => $value)
@@ -367,6 +413,9 @@ class AOR_ReportsViewVendorstatusdatewisereport extends SugarView
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
         $sugarSmarty->assign("selected_program", $selected_program);
+        
+        $sugarSmarty->assign("selected_exportwith", $selected_exportwith);
+        $sugarSmarty->assign("exportwithArr", $exportwithArr);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);

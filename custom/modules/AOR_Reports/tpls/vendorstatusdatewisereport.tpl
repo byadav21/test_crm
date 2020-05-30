@@ -5,7 +5,6 @@
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
                     <tr>
-
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch</label>
                         </td>
@@ -17,13 +16,6 @@
                                 {/foreach}
                             </select>
                         </td>
-
-
-                    </tr>
-                    <tr>
-
-                    <tr>
-
 
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch Code</label>
@@ -37,19 +29,12 @@
                             </select>
                         </td>
 
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="batch_basic">Vendor</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$VendorListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
                     </tr>
+
+
+
+
+
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">From Date</label>
@@ -68,12 +53,44 @@
                     </tr>
 
 
+                    <tr>
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Vendor</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="vendors[]" id="vendor"  class="multiselbox_batch" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$VendorListData key=key item=program}
+
+                                    <option value="{$program.id}"{if in_array($program.id, $selected_vendor)} selected="selected"{/if}>{$program.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Export with</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+
+                            <select name="exportwith" id="exportwith" >
+                                {foreach from =$exportwithArr key=key item=val}
+
+                                    <option value="{$key}"{if ($key==$selected_exportwith) } selected="selected"{/if}>{$val}</option>
+                                {/foreach}
+                            </select>
+
+
+                        </td>
+
+                    </tr>
+
+
+
 
                     <tr>
                         <td class="sumbitButtons" colspan="3">
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
-                                    return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
+                                return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
                             <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
                         </td>
                     </tr>
@@ -171,10 +188,10 @@
                 <th scope="col" data-hide="date" class="footable-visible footable-first-column">
                     <strong>Created Date</strong>
                 </th>
-                
-            {foreach from = $StatusList key=key item=status}
+
+                {foreach from = $StatusList key=key item=status}
                     <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>{$status}</strong></th>
-            {/foreach}
+                        {/foreach}
 
             </tr>
             {foreach from = $programList key=key item=program}
@@ -214,25 +231,27 @@
                 step: 1,
                 weekNumbers: false,
             });
-	    $(document).ready(function () {
-                 $("#search_form").on('submit', (function(e) {
-                     
-                      var from_date    = $('#from_date').val();
-                      var to_date      = $('#to_date').val();
-                      
-                      if(from_date=='' || from_date ==null){
-                          $("#from_date").focus();
-                           alert('Please select From-Date!'); return false;
-                      }
-                      
-                      if(to_date=='' || to_date ==null){
-                          $("#to_date").focus();
-                           alert('Please select To-Date!'); return false;
-                      }
-                     
-                    
-                 }));
-                
+            $(document).ready(function () {
+                $("#search_form").on('submit', (function (e) {
+
+                    var from_date = $('#from_date').val();
+                    var to_date = $('#to_date').val();
+
+                    if (from_date == '' || from_date == null) {
+                        $("#from_date").focus();
+                        alert('Please select From-Date!');
+                        return false;
+                    }
+
+                    if (to_date == '' || to_date == null) {
+                        $("#to_date").focus();
+                        alert('Please select To-Date!');
+                        return false;
+                    }
+
+
+                }));
+
             });
         </script>
     {/literal}

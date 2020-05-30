@@ -20,13 +20,18 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-        $where                       = "";
-        $wherecl                     = "";
+        $where   = "";
+        $wherecl = "";
         
-        if(!isset($_SESSION['cccon_from_date'])){
+        $exportwithArr = array();
+        $exportwithArr = array(a=>'Basic',b=>'All With Cornell Column',c=>'Only Cornell Without Column');
+
+        if (!isset($_SESSION['cccon_from_date']))
+        {
             $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
         }
-        if(!isset($_SESSION['cccon_to_date'])){
+        if (!isset($_SESSION['cccon_to_date']))
+        {
             $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
         }
         if (isset($_POST['button']) || isset($_POST['export']))
@@ -39,6 +44,7 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
             $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
             $_SESSION['cccon_medium_val'] = $_REQUEST['medium_val'];
             $_SESSION['cccon_status']     = $_REQUEST['status'];
+            $_SESSION['cccon_exportwith']   = $_REQUEST['exportwith'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -46,7 +52,7 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
             $selected_to_date   = $_SESSION['cccon_to_date'];
             $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
             $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-           $wherecl            .= " AND DATE(l.converted_date)>='" . $from_date . "' AND DATE(l.converted_date)<='" . $to_date . "'";
+            $wherecl            .= " AND DATE(l.converted_date)>='" . $from_date . "' AND DATE(l.converted_date)<='" . $to_date . "'";
         }
         elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
         {
@@ -75,7 +81,13 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
             $selected_batch_code = $_SESSION['cccon_batch_code'];
             //$batches        = $this->getBatch($_SESSION['cccon_batch']);
         }
+        if (!empty($_SESSION['cccon_exportwith']))
+        {
+            $selected_exportwith = $_SESSION['cccon_exportwith'];
+           
+        }
         
+
         $programList = array();
         $VendorList  = array();
 
@@ -89,8 +101,82 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
 
             $wherecl .= " AND  te_ba_batch.id IN ('" . implode("','", $selected_batch_code) . "')";
         }
+        
+        
+        $instField='';
+        $tobeaddInstitute='';
 
-        if (isset($_POST['export']) && $_POST['export'] == "Export")
+        if (!empty($selected_exportwith) && ($selected_exportwith != 'a'))
+        {   
+             $instField="i.name institute,";
+             $tobeaddInstitute .=" INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON  lc.te_ba_batch_id_c=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb AND ib.deleted=0
+                                   INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0 ";
+
+            if($selected_exportwith=='c'){
+                $instField='';
+                $tobeaddInstitute .=" AND i.name ='Cornell'";
+            }
+
+        }
+
+
+
+
+       
+
+
+
+
+
+
+
+
+        $leadSql = "SELECT COUNT(l.id) AS lead_count,
+                    l.date_entered,
+                    te_ba_batch.id AS batch_id,
+                    te_ba_batch.name AS batch_name,
+                    te_ba_batch.batch_code,
+                    l.vendor,
+                    $instField
+                    te_vendor.id vendor_id
+             FROM leads l
+            INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
+            LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+            LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name) 
+            $tobeaddInstitute
+             WHERE l.deleted=0
+               AND l.status='Converted'
+               AND l.status IN('Alive','Warm','Dead','Converted')
+              $wherecl
+             GROUP BY te_vendor.id,lc.te_ba_batch_id_c";
+        
+        //if (isset($_POST['export']) && $_POST['export'] == "Export"){  echo '<pre>'.$leadSql;exit();  }
+
+
+        $leadObj = $db->query($leadSql);
+
+
+        while ($row = $db->fetchByAssoc($leadObj))
+        {
+
+
+            $programList[$row['batch_id']]['id']         = $row['batch_id'];
+            $programList[$row['batch_id']]['name']       = $row['batch_name'];
+            $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
+            
+            if($instField!=''){
+            $programList[$row['batch_id']]['institute'] = $row['institute'];   
+            }
+
+            $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
+            $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
+        }
+
+
+        
+        
+        
+         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
 
@@ -99,46 +185,14 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
-            $leadSql = "SELECT COUNT(l.id) AS lead_count,
-                    l.date_entered,
-                    te_ba_batch.id AS batch_id,
-                    te_ba_batch.name AS batch_name,
-                    te_ba_batch.batch_code,
-                    l.vendor,
-                    te_vendor.id vendor_id
-                FROM leads l
-                INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
-                LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
-                LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name) 
-                 WHERE l.deleted=0
-                   AND l.status='Converted'
-                   AND l.status IN('Alive','Warm','Dead','Converted')
-                   $wherecl
-              GROUP BY te_vendor.id,lc.te_ba_batch_id_c";
-            //echo $leadSql;exit();
-
-
-            $leadObj = $db->query($leadSql);
-
-
-            while ($row = $db->fetchByAssoc($leadObj))
-            {
-
-
-                $programList[$row['batch_id']]['id']         = $row['batch_id'];
-                $programList[$row['batch_id']]['name']       = $row['batch_name'];
-                $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-
-
-                $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
-                $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
-            }
-
-
-
+          
             # Create heading
             $data = "Programme Name";
             $data .= ",Batch Code";
+            if($instField!=''){
+            $data .= ",Institute";
+            }
+
             foreach ($VendorList as $key => $vendorVal)
             {
                 $data .= "," . $vendorVal['name'];
@@ -153,7 +207,10 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
             {
                 $data .= "\"" . $councelor['name'];
                 $data .= "\",\"" . $councelor['batch_code'];
-                $toal=0;
+                if($instField!=''){
+                $data .= "\",\"" . $councelor['institute'];
+                }
+                $toal = 0;
                 foreach ($VendorList as $key1 => $value)
                 {
                     $converted = $programList[$key][$key1]['lead_count'];
@@ -170,51 +227,7 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
             echo $data;
             exit;
         } // End Of Export Func
-
-
-
-
-
-
-
-
-        $leadSql = "SELECT COUNT(l.id) AS lead_count,
-                    l.date_entered,
-                    te_ba_batch.id AS batch_id,
-                    te_ba_batch.name AS batch_name,
-                    te_ba_batch.batch_code,
-                    l.vendor,
-                    te_vendor.id vendor_id
-             FROM leads l
-            INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
-            LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
-            LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name) 
-             WHERE l.deleted=0
-               AND l.status='Converted'
-               AND l.status IN('Alive','Warm','Dead','Converted')
-              $wherecl
-             GROUP BY te_vendor.id,lc.te_ba_batch_id_c";
-        //echo $leadSql;exit();
-
-
-        $leadObj = $db->query($leadSql);
-
-
-        while ($row = $db->fetchByAssoc($leadObj))
-        {
-
-
-            $programList[$row['batch_id']]['id']         = $row['batch_id'];
-            $programList[$row['batch_id']]['name']       = $row['batch_name'];
-            $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
-
-
-            $VendorList[$row['vendor_id']]['name']                          = $row['vendor'];
-            $programList[$row['batch_id']][$row['vendor_id']]['lead_count'] = $row['lead_count'];
-        }
-
-
-
+        
 
 
         //echo '<pre>';
@@ -279,6 +292,9 @@ class AOR_ReportsViewVendorwiseconversionreport extends SugarView
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
         $sugarSmarty->assign("selected_medium_val", $selected_medium_val);
         $sugarSmarty->assign("selected_counsellor", $selected_counsellor);
+        
+        $sugarSmarty->assign("selected_exportwith", $selected_exportwith);
+        $sugarSmarty->assign("exportwithArr", $exportwithArr);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);

@@ -16,7 +16,7 @@
                                 {/foreach}
                             </select>
                         </td>
-                        
+
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="batch_basic">Batch Code</label>
                         </td>
@@ -44,6 +44,26 @@
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="to_date_trigger">
                         </td>
                     <tr>
+                        
+                          
+                    <tr>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="batch_basic">Export with</label>
+                        </td>
+                        <td nowrap="nowrap" width="10%">
+
+                             <select name="exportwith" id="exportwith" >
+                                {foreach from =$exportwithArr key=key item=val}
+
+                                    <option value="{$key}"{if ($key==$selected_exportwith) } selected="selected"{/if}>{$val}</option>
+                                {/foreach}
+                            </select>
+
+
+                        </td>
+                    </tr>
+
 
 
 

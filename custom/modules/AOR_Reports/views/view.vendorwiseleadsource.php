@@ -61,9 +61,9 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-        $where           = "";
-        $wherecl         = "";
-        
+        $where   = "";
+        $wherecl = "";
+
         //~~~~~~~
         $report_action = '';
         $reportAccess  = reportAccessLog();
@@ -71,12 +71,14 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
         $current_user_id = $current_user->id;
         $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
 
+        $exportwithArr = array();
+        $exportwithArr = array(a=>'Basic',b=>'All With Cornell Column',c=>'Only Cornell Without Column');
 
-            if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
-            {
-                echo 'You are not authorized to access!';
-                return;
-            }
+        if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+        {
+            echo 'You are not authorized to access!';
+            return;
+        }
         //~~~~~~~
 
         $ProgramListData = $this->getProgram();
@@ -99,6 +101,7 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
             $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
             $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
             $_SESSION['cccon_program']    = $_REQUEST['program'];
+            $_SESSION['cccon_exportwith']   = $_REQUEST['exportwith'];
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
         {
@@ -138,6 +141,11 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
         {
             $selected_program = $_SESSION['cccon_program'];
         }
+         if (!empty($_SESSION['cccon_exportwith']))
+        {
+            $selected_exportwith = $_SESSION['cccon_exportwith'];
+           
+        }
 
         $programList = array();
         $StatusList  = array();
@@ -165,6 +173,23 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
 
             $wherecl .= " AND  p.id IN ('" . implode("','", $selected_program) . "')";
         }
+        
+        $instField='';
+        $tobeaddInstitute='';
+
+        if (!empty($selected_exportwith) && ($selected_exportwith != 'a'))
+        {   
+             $instField="i.name institute,";
+             $tobeaddInstitute .=" INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON  lc.te_ba_batch_id_c=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb AND ib.deleted=0
+                                   INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0 ";
+
+            if($selected_exportwith=='c'){
+                $instField='';
+                $tobeaddInstitute .=" AND i.name ='Cornell'";
+            }
+
+        }
+
 
 
 
@@ -183,6 +208,7 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
                     te_ba_batch.batch_code,
                     l.status,
                     l.vendor,
+                    $instField
                     te_vendor.id vendor_id,
                     l.status_description,
                     (CASE
@@ -195,8 +221,7 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
                 INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                 LEFT JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
                 LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-                #LEFT JOIN te_pr_programs_te_ba_batch_1_c AS bpr ON bpr.te_pr_programs_te_ba_batch_1te_ba_batch_idb=te_ba_batch.id
-                #LEFT JOIN te_pr_programs as p ON p.id=bpr.te_pr_programs_te_ba_batch_1te_pr_programs_ida
+                $tobeaddInstitute
                  WHERE l.deleted=0
                    $wherecl
               GROUP BY l.lead_source,te_vendor.id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
@@ -218,6 +243,11 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
             //$programList[strtolower($row['vendor']) .'_BATCH_'.$row['batch_id']]['program_name'] = $row['program_name'];
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']  = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']  = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
+                
+            if($instField!=''){
+            $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['institute']  = isset($row['institute']) ? $row['institute'] : 'NULL';
+            }
+
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']      = isset($row['vendor']) ? $row['vendor'] : 'NULL';
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['lead_count']  = $row['lead_count'];
             $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['lead_source'] = $row['lead_source'];
@@ -232,36 +262,11 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
-
-
             $file     = "VendorWiseLeadSource_report";
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
-            $leadObj = $db->query($leadSql);
-
-
-            $vendor = 'NULL';
-
-            while ($row = $db->fetchByAssoc($leadObj))
-            {
-                if ($row['vendor'] == '')
-                {
-                    $row['vendor'] = $vendor;
-                }
-
-
-
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_id']    = $row['batch_id'];
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_name']  = isset($row['batch_name']) ? $row['batch_name'] : 'NULL';
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['batch_code']  = isset($row['batch_code']) ? $row['batch_code'] : 'NULL';
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['vendor']      = isset($row['vendor']) ? $row['vendor'] : 'NULL';
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['lead_count']  = $row['lead_count'];
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']]['lead_source'] = $row['lead_source'];
-                $programList[strtolower($row['vendor']) . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['lead_source']))] = $row['lead_count'];
-                $StatusList[strtolower(str_replace(array(' ', '-'), '_', $row['lead_source']))] = $row['lead_source'];
-            }
-
+           
             //echo "<pre>";
             //print_r($StatusList); die;
             # Create heading
@@ -269,6 +274,10 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
             $data .= "Batch Name";
             $data .= ",Batch Code";
             $data .= ",Vendor";
+            if($instField!=''){
+            $data .= ",Institute";
+            }
+
             foreach ($StatusList as $key => $statusVal)
             {
                 $data .= "," . $key;
@@ -285,6 +294,10 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
                 $data .= "\"" . $councelor['batch_name'];
                 $data .= "\",\"" . $councelor['batch_code'];
                 $data .= "\",\"" . $councelor['vendor'];
+                if($instField!=''){
+                $data .= "\",\"" . $councelor['institute'];
+                }
+
                 $toal = 0;
                 foreach ($StatusList as $key1 => $value)
                 {
@@ -301,9 +314,9 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
             header('Content-disposition: attachment;filename=" ' . $filename . '.csv";');
             echo $data;
             exit;
-        } 
-       
-       
+        }
+
+
         #PS @Pawan
         $total     = count($programList); #total records
         $start     = 0;
@@ -366,7 +379,8 @@ class AOR_ReportsViewVendorwiseleadsource extends SugarView
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
         $sugarSmarty->assign("selected_program", $selected_program);
-
+        $sugarSmarty->assign("selected_exportwith", $selected_exportwith);
+        $sugarSmarty->assign("exportwithArr", $exportwithArr);
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);
         $sugarSmarty->assign("pagenext", $pagenext);

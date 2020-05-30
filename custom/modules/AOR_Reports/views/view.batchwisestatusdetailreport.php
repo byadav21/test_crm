@@ -17,8 +17,8 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
     {
         parent::SugarView();
     }
-    
-       function checkManager()
+
+    function checkManager()
     {
         global $db, $current_user;
         $userSql = "SELECT u.id
@@ -78,7 +78,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
     function getCouncelor($selectedMangers = array())
     {
-        global $db,$current_user;
+        global $db, $current_user;
 
 
         //print_r($selectedMangers);
@@ -96,7 +96,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             $conditons = "AND ru.id in ('" . implode("','", $selectedMangers) . "')";
         }
 
-         $userSql  = "SELECT u.first_name,
+        $userSql  = "SELECT u.first_name,
                                 u.last_name,
                                 u.id,
                                 ru.first_name AS reporting_firstname,
@@ -124,7 +124,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         }
         return $usersArr;
     }
-    
+
     function getBatch()
     {
         global $db;
@@ -157,7 +157,7 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
         return preg_replace('/[^A-Za-z0-9-]/', '', $string); // Removes special chars.
     }
-    
+
     function getNotconnected($wherecl)
     {
         global $db;
@@ -184,40 +184,47 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
         return $leadList;
     }
-   
+
     public function display()
     {
 
         global $sugar_config, $app_list_strings, $current_user, $db;
+
+        //~~~~~~~
+        $report_action = '';
+        $reportAccess  = reportAccessLog();
+
+        $current_user_id = $current_user->id;
+        $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
+
+
+        if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+        {
+            echo 'You are not authorized to access!';
+            return;
+        }
+        //~~~~~~~
         
-         //~~~~~~~
-            $report_action = '';
-            $reportAccess  = reportAccessLog();
+        $exportwithArr = array();
+        $exportwithArr = array(a=>'Basic',b=>'All With Cornell Column',c=>'Only Cornell Without Column');
 
-            $current_user_id = $current_user->id;
-            $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
-
-
-                if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
-                {
-                    echo 'You are not authorized to access!';
-                    return;
-                }
-            //~~~~~~~
-
-                
         $where             = "";
         $wherecl           = "";
         $BatchListData     = $this->getBatch();
         $ProgrammeListData = $this->getProgram();
-        $is_manger = $this->checkManager();
-        $managerSList    = $this->getManagers();
+        $is_manger         = $this->checkManager();
+        $managerSList      = $this->getManagers();
         $CouncellorsList   = $this->getCouncelor($_SESSION['cccon_managers']);
-        
-        $selected_batch='';
-        $selected_status='';
-        $selected_vendor='';
-        $selected_medium_val='';$selected_source='';$selected_batch_code='';$selected_program='';$selected_councellors='';$left='';
+
+        $selected_batch       = '';
+        $selected_status      = '';
+        $selected_vendor      = '';
+        $selected_medium_val  = '';
+        $selected_source      = '';
+        $selected_batch_code  = '';
+        $selected_program     = '';
+        $selected_councellors = '';
+        $left                 = '';
         if (!isset($_SESSION['cccon_from_date']))
         {
             $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
@@ -228,17 +235,18 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         }
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            $_SESSION['cccon_from_date']  = $_REQUEST['from_date'];
-            $_SESSION['cccon_to_date']    = $_REQUEST['to_date'];
-             $_SESSION['cccon_batch']      = (isset($_REQUEST['batch']))? $_REQUEST['batch']:'';
-            $_SESSION['cccon_program']    = $_REQUEST['program'];
-            $_SESSION['cccon_batch_code'] = $_REQUEST['batch_code'];
-            $_SESSION['cccon_vendors']    = $_REQUEST['vendors'];
-            $_SESSION['cccon_medium_val'] = $_REQUEST['medium_val'];
-            $_SESSION['cccon_status']     = $_REQUEST['status'];
-            $_SESSION['cccon_managers']   = $_REQUEST['managers'];
+            $_SESSION['cccon_from_date']   = $_REQUEST['from_date'];
+            $_SESSION['cccon_to_date']     = $_REQUEST['to_date'];
+            $_SESSION['cccon_batch']       = (isset($_REQUEST['batch'])) ? $_REQUEST['batch'] : '';
+            $_SESSION['cccon_program']     = $_REQUEST['program'];
+            $_SESSION['cccon_batch_code']  = $_REQUEST['batch_code'];
+            $_SESSION['cccon_vendors']     = $_REQUEST['vendors'];
+            $_SESSION['cccon_medium_val']  = $_REQUEST['medium_val'];
+            $_SESSION['cccon_status']      = $_REQUEST['status'];
+            $_SESSION['cccon_managers']    = $_REQUEST['managers'];
             $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
-            
+            $_SESSION['cccon_exportwith']   = $_REQUEST['exportwith'];
+
             //print_r($_REQUEST['councellors']); die;
         }
         if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
@@ -283,15 +291,18 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         if (!empty($_SESSION['cccon_councellors']))
         {
             $selected_councellors = $_SESSION['cccon_councellors'];
-            
-           
         }
         if (!empty($_SESSION['cccon_managers']))
         {
             $selected_managers = $_SESSION['cccon_managers'];
         }
-        
-         if ($is_manger == 1)
+         if (!empty($_SESSION['cccon_exportwith']))
+        {
+            $selected_exportwith = $_SESSION['cccon_exportwith'];
+           
+        }
+
+        if ($is_manger == 1)
         {
             $selected_managers = array($current_user->id);
         }
@@ -318,47 +329,84 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         {
             $wherecl .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
+        $instField='';
+        $tobeaddInstitute='';
 
-        $StatusList['new_lead']               = 'New Lead';
-        $StatusList['follow_up']              = 'Follow-Up';
-        $StatusList['prospect']               = 'Prospect';
-        
+        if (!empty($selected_exportwith) && ($selected_exportwith != 'a'))
+        {   
+             $instField="i.name institute,";
+             $tobeaddInstitute .=" INNER JOIN te_in_institutes_te_ba_batch_1_c AS ib ON  lc.te_ba_batch_id_c=ib.te_in_institutes_te_ba_batch_1te_ba_batch_idb AND ib.deleted=0
+                                   INNER JOIN te_in_institutes as i on ib.te_in_institutes_te_ba_batch_1te_in_institutes_ida=i.id AND i.deleted=0 ";
+
+            if($selected_exportwith=='c'){
+                $instField='';
+                $tobeaddInstitute .=" AND i.name ='Cornell'";
+            }
+
+        }
+
+        $StatusList['new_lead']  = 'New Lead';
+        $StatusList['follow_up'] = 'Follow-Up';
+        $StatusList['prospect']  = 'Prospect';
+
         $StatusList['dead_number']            = 'Dead Number';
         $StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
-        $StatusList['dispositions']            = 'Non-connect';
-        
-        $StatusList['fallout']                = 'Fallout';       
-        $StatusList['not_eligible']           = 'Not Eligible';
-        $StatusList['not_enquired']           = 'Not Enquired';
-        $StatusList['wrong_number']           = 'Wrong Number';
-        
-        $StatusList['converted']              = 'Converted';
-        //$StatusList['na']                     = 'NA';
+        $StatusList['dispositions']           = 'Non-connect';
 
-//        $StatusList['call_back']              = 'Call-back';
-//        $StatusList['retired']                = 'Retired';
-//        $StatusList['re_enquired']            = 'Re-Enquired';
-//        $StatusList['recycle']                = 'Recycle';
-//        $StatusList['dropout']                = 'Dropout';
-//        $StatusList['duplicate']              = 'Duplicate';
-//        $StatusList['na']                     = 'NA';
-           $getNotConnected = $this->getNotconnected($wherecl);
-           //echo '<pre>'.print_r($getNotConnected); die;
-           $leadSql = "SELECT COUNT(l.id) AS lead_count,
+        $StatusList['fallout']      = 'Fallout';
+        $StatusList['not_eligible'] = 'Not Eligible';
+        $StatusList['not_enquired'] = 'Not Enquired';
+        $StatusList['wrong_number'] = 'Wrong Number';
+
+        $StatusList['converted'] = 'Converted';
+
+        $getNotConnected = $this->getNotconnected($wherecl);
+        //echo '<pre>'.print_r($getNotConnected); die;
+        $leadSql         = "SELECT COUNT(l.id) AS lead_count,
                                 l.date_entered,
                                 IF(te_ba_batch.id IS NULL,'NA',te_ba_batch.id) AS batch_id,
                                 IF(te_ba_batch.name IS NULL,'NA',te_ba_batch.name) AS batch_name,
                                 IF(te_ba_batch.batch_code IS NULL,'NA',te_ba_batch.batch_code) AS batch_code,
+                                $instField
                                 IF(l.status_description IS NULL
                                    OR l.status_description ='', 'NA', l.status_description) AS status_description
                          FROM leads l
                          INNER JOIN leads_cstm AS lc ON l.id=lc.id_c
                          INNER JOIN te_ba_batch ON lc.te_ba_batch_id_c = te_ba_batch.id
+                         $tobeaddInstitute
                          WHERE l.deleted=0 $wherecl 
-                             #and te_ba_batch.batch_code='GSCM-01-0318-01'
+                            
                          GROUP BY l.status_description,
                                   te_ba_batch.id";
-          
+
+        
+
+        //echo '<pre>';print_r($leadSql); die;
+
+        $leadObj = $db->query($leadSql);
+        
+        $i   = 1;
+        while ($row = $db->fetchByAssoc($leadObj))
+        {
+
+
+            $programList[$row['batch_id']]['id']         = $row['batch_id'];
+            $programList[$row['batch_id']]['name']       = $row['batch_name'];
+            $programList[$row['batch_id']]['batch_code'] = $row['batch_code'];
+            if($instField!=''){
+            $programList[$row['batch_id']]['institute'] = $row['institute'];   
+            }
+            #$programList[$row['batch_id']]['program_name'] = $row['program_name'];
+            //if($row['dispositionName']!='CONNECTED'){
+            //$programList[$row['batch_id']]['check_despo'][] = $row['dispositionName'];
+            $programList[$row['batch_id']]['dispositions']                                                            = (isset($getNotConnected[$row['batch_id']])) ? $getNotConnected[$row['batch_id']] : 0;
+            //}
+            $programList[$row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
+        }
+        
+        //echo '<pre>';
+        //print_r($programList); die;
+        
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
 
@@ -366,34 +414,13 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             $where    = '';
             $filename = $file . "_" . $from_date . "_" . $to_date;
 
-          
-            //echo $leadSql;exit();
 
-
-            $leadObj = $db->query($leadSql);
-
-            $i=1;
-            while ($row = $db->fetchByAssoc($leadObj))
-            {
-
-
-                $programList[$row['batch_id']]['id']           = $row['batch_id'];
-                $programList[$row['batch_id']]['name']         = $this->clean($row['batch_name']);
-                $programList[$row['batch_id']]['batch_code']   = $row['batch_code'];
-                #$programList[$row['batch_id']]['program_name'] = $this->clean($row['program_name']);
-                
-               $programList[$row['batch_id']]['dispositions'] = (isset($getNotConnected[$row['batch_id']]))?$getNotConnected[$row['batch_id']]:0;
-
-
-                $programList[$row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
-            }
-
-
-
-            # Create heading
-            #$data = "Programme Name";
+           
             $data = "Batch Name";
             $data .= ",Batch Code";
+            if($instField!=''){
+            $data .= ",Institute";
+            }
             foreach ($StatusList as $key => $statusVal)
             {
                 $data .= "," . $statusVal;
@@ -406,9 +433,13 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
 
             foreach ($programList as $key => $councelor)
             {
-                $data .= "\"" .  $this->clean($councelor['name']);
+                $data .= "\"" . $this->clean($councelor['name']);
                 #$data .= "\",\"" . $councelor['name'];
                 $data .= "\",\"" . $councelor['batch_code'];
+                if($instField!=''){
+                $data .= "\",\"" . $councelor['institute'];
+                }
+
                 $toal = 0;
                 foreach ($StatusList as $key1 => $value)
                 {
@@ -426,30 +457,6 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
             echo $data;
             exit;
         } // End Of Export Func
-
-
-
-        $leadObj = $db->query($leadSql);
-
-        $i=1;
-        while ($row = $db->fetchByAssoc($leadObj))
-        {
-
-
-            $programList[$row['batch_id']]['id']           = $row['batch_id'];
-            $programList[$row['batch_id']]['name']         = $row['batch_name'];
-            $programList[$row['batch_id']]['batch_code']   = $row['batch_code'];
-            #$programList[$row['batch_id']]['program_name'] = $row['program_name'];
-
-            //if($row['dispositionName']!='CONNECTED'){
-            //$programList[$row['batch_id']]['check_despo'][] = $row['dispositionName'];
-            $programList[$row['batch_id']]['dispositions'] = (isset($getNotConnected[$row['batch_id']]))?$getNotConnected[$row['batch_id']]:0;
-            //}
-            $programList[$row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
-        }
-
-        //echo '<pre>';
-        //print_r($programList); die;
 
         $total     = count($programList); #total records
         $start     = 0;
@@ -512,8 +519,11 @@ class AOR_ReportsViewBatchwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("selected_to_date", $selected_to_date);
         $sugarSmarty->assign("selected_vendor", $selected_vendor);
         $sugarSmarty->assign("selected_medium_val", $selected_medium_val);
-        $sugarSmarty->assign("councelorList",$councelorList);
+        $sugarSmarty->assign("councelorList", $councelorList);
         $sugarSmarty->assign("selected_source", $selected_source);
+        $sugarSmarty->assign("selected_exportwith", $selected_exportwith);
+        $sugarSmarty->assign("exportwithArr", $exportwithArr);
+
 
         $sugarSmarty->assign("selected_batch_code", $selected_batch_code);
 
