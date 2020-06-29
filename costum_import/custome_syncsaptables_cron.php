@@ -89,7 +89,7 @@ class syncsaptables
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE   `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0 AND pd.deleted=0 AND lp.deleted=0 
-                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
+                        AND `pd`.`date_entered` > '2019-02-26 16:28:43' AND `pd`.`date_entered` <= '2019-06-29 22:16:43' 
                         AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
