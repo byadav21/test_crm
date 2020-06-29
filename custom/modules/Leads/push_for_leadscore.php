@@ -40,6 +40,15 @@ class pushforLeadscore
         {
             return;
         }
+        
+        if ($status_description == "Prospect")
+        {   
+            $upadeSQL = "update leads_cstm set prospect_status='true' where id_c='$beanId'"; 
+            $queryx = $db->query($upadeSQL);
+            //prospect_status // PROSPECT_STATUS
+        }
+        
+        
 
         $batchdata = array();
         $batchObj  = $db->query("SELECT p.name pro_name,

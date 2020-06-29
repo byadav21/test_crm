@@ -125,6 +125,15 @@ array (
         'default' => true,
         'name' => 'date_entered',
       ),
+      'prospect_status' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_PROSPECT_TYPE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'prospect_status',
+      ),
     ),
   ),
   'templateMeta' => 
