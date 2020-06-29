@@ -9,7 +9,7 @@ $result_set =  mysqli_query($conn,$SQLSELECT);
 $i=0; 
 while($row = mysqli_fetch_array($result_set)){
  echo $i++.'.';   
- $sqlu="update leads_cstm set email_add_c='". $row['email_address'] ."' where id_c='". $row['id_c'] ."'";
+ //$sqlu="update leads_cstm set email_add_c='". $row['email_address'] ."' where id_c='". $row['id_c'] ."'";
          mysqli_query($conn,$sqlu);
 
 /*
