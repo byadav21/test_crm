@@ -41,61 +41,24 @@ class syncsaptables
         return $row['reg_date'];
     }
 
-    function WEB_RCT1()
+    function WEB_OPRJ()
     {
 
         global $conn;
-        $leadsCstmData = array();
-
-
-        $query   = "SELECT 
-                        replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
-                        `pd`.`date_of_payment` AS `DueDate`,
-                        round((`pd`.`amount` * 0.01),2) AS `CheckSum`,
-                        `pd`.`Pay_Status` AS `Pay_Status`
-                 FROM (((((`te_student` `s`
-                       JOIN `te_student_te_student_batch_1_c` `stsb` on((`s`.`id` = `stsb`.`te_student_te_student_batch_1te_student_ida`)))
-                       JOIN `te_student_batch` `sb` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`)))
-                       JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
-                       JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
-                       JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
-                       JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-                 WHERE  pd.deleted=0 AND lp.deleted=0  AND `pd`.`date_of_payment` > '2019-02-26'";
-        $leadObj = mysqli_query($conn, $query);
-        if ($leadObj)
-        {
-
-            while ($row = mysqli_fetch_assoc($leadObj))
-            {
-                $leadsCstmData[] = $row;
-            }
-        }
-
-        return $leadsCstmData;
-    }
-
-    function WEB_RCT2()
-    {
-
-        global $conn;
-        $leadsCstmData = array();
-
-
-        $query   = "SELECT replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
-                            `pd`.`SAP_DocEntry` AS `DocEntry`,
-                             0 AS `InvoiceId`,
-                            `pd`.`amount` AS `SumApplied`,
-                            `pd`.`Pay_Status` AS `Pay_Status`,
-                             `s`.`SAP_CardCode` AS `CardCode`,
-                            `pd`.`invoice_number` AS `U_OrigNum`
-                     FROM (((((`te_student` `s`
-                               JOIN `te_student_te_student_batch_1_c` `stsb` on((`s`.`id` = `stsb`.`te_student_te_student_batch_1te_student_ida`)))
-                              JOIN `te_student_batch` `sb` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`)))
-                             JOIN `te_student_payment` `sp` on((`stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sp`.`te_student_batch_id_c`)))
-                            JOIN `te_payment_details` `pd` on((`sp`.`id` = `pd`.`student_payment_id`)))
-                            JOIN leads_te_payment_details_1_c AS lp ON lp.leads_te_payment_details_1te_payment_details_idb=pd.id
-                           JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
-                     WHERE pd.deleted=0 AND lp.deleted=0 AND `pd`.`date_of_payment` > '2019-02-26'";
+        $leadsCstmData    = array();
+        $SyncSapTimestamp = $this->SyncSapTimestamp();
+        $currentTime      = date('Y-m-d H:i:s');
+        
+        
+        $query   = "SELECT replace(`bb`.`id`, '-', '') AS `U_OrigCode`,
+                            replace(`bb`.`batch_code`, '-', '_') AS `PrjCode`,
+                            replace(`bb`.`batch_code`, '-', '_') AS `PrjName`,
+                            'N' AS `Locked`,
+                            'Y' AS `Active`,
+                            `bb`.`SAP_Status` AS `SAP_Status`
+                     FROM `te_ba_batch` `bb`
+                     WHERE `bb`.`deleted` = 0 AND `bb`.`date_entered` > '2019-02-26' "
+                . "AND `bb`.`date_entered` <= '$currentTime'";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -114,19 +77,26 @@ class syncsaptables
 
         global $sap_conn;
 
-        $WEB_RCT1Arr = array();
-        $WEB_RCT2Arr = array();
+       
+        #11. /////////// WEB_OPRJ Table Syncing //////////////////
+        
+        
+        $WEB_OPRJArr = $this->WEB_OPRJ();
+        echo '<hr>WEB_OPRJ Table Syncing ';
 
-        #9. /////////// WEB_RCT1 Table Syncing //////////////////
-        $WEB_RCT1Arr = $this->WEB_RCT1();
-
-        echo '<hr>WEB_RCT1 Table Syncing ';
-
-        $custSQL = "INSERT INTO `WEB_RCT1` (`U_OrigEntry`, `DueDate`,`CheckSum`,`Pay_Status`) VALUES ";
+        $custSQL = "INSERT INTO `WEB_OPRJ` (`U_OrigCode`, `PrjCode`,`PrjName`,`Locked`,`Active`) VALUES ";
         $i       = 1;
-        foreach ($WEB_RCT1Arr as $key => $data)
+        foreach ($WEB_OPRJArr as $key => $data)
         {
-            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DueDate'] . "','" . $data['CheckSum'] . "','" . $data['Pay_Status'] . "'),";
+            $PrjCode = mysqli_real_escape_string($sap_conn, $data['PrjCode']);
+            $PrjName = mysqli_real_escape_string($sap_conn, $data['PrjName']);
+
+            $custSQL .= "('" . $data['U_OrigCode'] . "',
+                        '" . $PrjCode . "',
+                        '" . $PrjName . "',
+                        '" . $data['Locked'] . "',
+                        '" . $data['Active'] . "'),";
+
 
             $i++;
         }
@@ -135,30 +105,9 @@ class syncsaptables
         {
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
         }
-        unset($WEB_RCT1Arr);
+        unset($WEB_OPRJArr);
 
-
-
-
-        #10. /////////// WEB_RCT2 Table Syncing //////////////////
-
-        $WEB_RCT2Arr = $this->WEB_RCT2();
-
-        echo '<hr>WEB_RCT2 Table Syncing ';
-
-        $custSQL = "INSERT INTO `WEB_RCT2` (`U_OrigEntry`, `DocEntry`,`SumApplied`,`Pay_Status`,`CardCode`,`U_OrigNum`) VALUES ";
-        $i       = 1;
-        foreach ($WEB_RCT2Arr as $key => $data)
-        {
-            $custSQL .= "('" . $data['U_OrigEntry'] . "','" . $data['DocEntry'] . "','" . $data['SumApplied'] . "','" . $data['Pay_Status'] . "','" . $data['CardCode'] . "','" . $data['U_OrigNum'] . "'),";
-            $i++;
-        }
-        $exeSql = rtrim($custSQL, ',');
-        if ($i > 1)
-        {
-            mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
-        }
-        unset($WEB_RCT2Arr);
+       
     }
 
 // END of Main
