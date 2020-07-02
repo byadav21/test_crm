@@ -248,8 +248,16 @@
 							<td>
 								<table cellpadding="0" cellspacing="0" border="0" class="table2">	
 									<tr>
-										<td style="width:54px;">{$value.target_converts}</td>
-										<td style="width:56px;">{$value.today_converts}</td>
+										<td style="width:54px;">
+                                                                                    <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red"></i>
+                                                                                    {$value.target_converts} | {$value.monthly_icon}
+                                                                                    <span class="CellComment">Here is a comment</span>
+                                                                                </td>
+										<td style="width:56px;">
+                                                                                    <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green"></i>
+                                                                                    {$value.actual_converts}
+                                                                                    <span class="CellComment">dfd dfdfd</span>
+                                                                                </td>
 									</tr>
 								</table>	
 							</td>
