@@ -6,7 +6,7 @@
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
 
-                    <tr>
+                    {*<tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="From Date">Month:</label>
                         </td>
@@ -27,33 +27,19 @@
                                 {/foreach}
                             </select>
                         </td>
-                    </tr>
-                  {*  <tr>
-
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Status">Batch Status:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="status[]" id="status"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                <option value="All" {if in_array('All', $selected_status)} selected="selected"{/if}>All</option>
-                                <option value="Active" {if in_array('Active', $selected_status)} selected="selected"{/if}>Active</option>
-                                <option value="Inactive" {if in_array('Inactive', $selected_status)} selected="selected"{/if}>Inactive</option>
-                            </select>
-                        </td>
-
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Batch Code">Batch Code:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="batch_code[]" id="batch_code"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$BatchListData key=key item=program}
-
-                                    <option value="{$program.id}"{if in_array($program.id, $selected_batch_code)} selected="selected"{/if}>{$program.batch_code}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
                     </tr>*}
+                    
+                     <tr>
+                       
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="To Date">Date:</label>
+                        </td>
+                         <td nowrap="nowrap">
+                            <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
+                            <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
+                        </td>
+                    </tr>
+                 
                     
                     {if $userSlug!='CCC'}
                     <tr>
@@ -181,12 +167,11 @@
 
                                                 <th>
                                                         <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+                                                                
                                                                 <tr>
-                                                                        <th colspan="2">Converts</th>
-                                                                </tr>
-                                                                <tr>
-                                                                        <th>Target</th>
-                                                                        <th>Actual</th>
+                                                                        <th>Revenue</th>
+                                                                        <th>Number of<br> 
+                                                                            admissions</th>
                                                                 </tr>
                                                         </table>	
                                                 </th>
@@ -198,18 +183,16 @@
 				<th class="column2">
                                 <table cellpadding="0" cellspacing="0" border="0" class="table1">
                                         <tr>
-                                                <th colspan="2">Month to date</th>
+                                                <th colspan="2">{$selected_from_date}</th>
                                         </tr>
                                         <tr>
 
                                                 <th>
                                                         <table cellpadding="0" cellspacing="0" border="0" class="table2">	
                                                                 <tr>
-                                                                        <th colspan="2">Converts</th>
-                                                                </tr>
-                                                                <tr>
-                                                                        <th>Target</th>
-                                                                        <th>Actual</th>
+                                                                        <th>Revenue</th>
+                                                                        <th>Number of<br> 
+                                                                            admissions</th>
                                                                 </tr>
                                                         </table>	
                                                 </th>
@@ -241,7 +224,7 @@
 									<tr>
 										<td style="width:54px;">
                                                                                     <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red"></i>
-                                                                                    {$value.target_converts}
+                                                                                    {$value.target_converts} | {$value.monthly_icon}
                                                                                     <span class="CellComment">Here is a comment</span>
                                                                                 </td>
 										<td style="width:56px;">
@@ -354,7 +337,7 @@
 
 
 
-                    if (month == '' || month == null) {
+                    /*if (month == '' || month == null) {
                         $("#month").focus();
                         alert('Please select a month!');
                         return false;
@@ -368,7 +351,7 @@
 
 
 
-                    /*if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
+                    if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
                      $("#users").focus();
                      alert('Please select a user!'); return false;
                      }*/
