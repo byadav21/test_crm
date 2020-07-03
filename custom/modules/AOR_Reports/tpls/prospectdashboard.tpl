@@ -6,28 +6,7 @@
             <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
 
-                    {*<tr>
-                    <td scope="row" nowrap="nowrap" width="1%">
-                    <label for="From Date">Month:</label>
-                    </td>
-                    <td nowrap="nowrap" >
-                    <select name="month" id="month"  >
-                    {foreach from =$month key=key item=value}
-                    <option value="{$key}" {if ($key==$selected_month)} selected="selected"{/if}>{$value}</option>
-                    {/foreach}
-                    </select>
-                    </td>
-                    <td scope="row" nowrap="nowrap" width="1%">
-                    <label for="To Date">Year:</label>
-                    </td>
-                    <td nowrap="nowrap" >
-                    <select name="years" id="year"  >
-                    {foreach from =$years key=key item=value}
-                    <option value="{$key}" {if ($key==$selected_years)} selected="selected"{/if}>{$value}</option>
-                    {/foreach}
-                    </select>
-                    </td>
-                    </tr>*}
+       
 
                     <tr>
 
@@ -77,9 +56,8 @@
                     <tr>
                         <td class="sumbitButtons" colspan="3">
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
-                            <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
-                                    return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
-                            <input tabindex="2" title="Export" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="export" value="Export" id="export_form_submit">
+                            <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);  return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
+                            
                         </td>
                     </tr>
 

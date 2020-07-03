@@ -548,7 +548,7 @@ class AOR_ReportsViewprospectdashboard extends SugarView
          $getDayWsieRevenue             = $this->getMonthToDateActualRevenue('','','', $selected_date,'',$current_userAccess,'');
          
 
-        //echo '<pre>'; print_r($selected_date);  die;
+        //echo '<pre>'; print_r($getDayWsieConvertsCount);  die;
         $theFInalArray = array();
         foreach ($getConnectedCalls as $key => $val)
         {
@@ -566,8 +566,8 @@ class AOR_ReportsViewprospectdashboard extends SugarView
             
             
             $daywise_target_converts = isset($getMonthToDateTargetCount[$key]['Converts']) ? ($getMonthToDateTargetCount[$key]['Converts'] / 30) : 0;
-            $daywise_actual_converts = isset($getDayWsieRevenue[$key]['Converts']) ? $getDayWsieRevenue[$key]['Converts'] : 0;
-            $daywise_gsv             = isset($getMonthToDateActualRevenue[$key]['revenue']) ? ($getMonthToDateActualRevenue[$key]['revenue']/30) : 0;
+            $daywise_actual_converts = isset($getDayWsieConvertsCount[$key]['Converts']) ? $getDayWsieConvertsCount[$key]['Converts'] : 0;
+            $daywise_gsv             = isset($getDayWsieRevenue[$key]['revenue']) ? $getDayWsieRevenue[$key]['revenue'] : 0;
             $daywise_target_gsv      = isset($getMonthToDateTargetCount[$key]['target_gsv']) ? ($getMonthToDateTargetCount[$key]['target_gsv']/30) : 0;
             
             //revenue  // revenue tooltip
@@ -612,18 +612,18 @@ class AOR_ReportsViewprospectdashboard extends SugarView
             {
                
                  $theFInalArray[$key]['daywise_revenue'] = 'false';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_gsv,2).", Actual:".number_format($daywise_target_gsv,2);
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_target_gsv,2).", Actual:".number_format($daywise_gsv,2);
                  
             }
             elseif (($daywise_gsv >= $daywise_target_gsv) && ($daywise_gsv!=0 || $daywise_target_gsv!=0))
             {
                  $theFInalArray[$key]['daywise_revenue'] = 'true';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_gsv,2).", Actual:".number_format($daywise_target_gsv,2);
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_target_gsv,2).", Actual:".number_format($daywise_gsv,2);
             }
             else
             {
                  $theFInalArray[$key]['daywise_revenue'] = 'false';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_gsv,2).", Actual:".number_format($daywise_target_gsv,2);
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_target_gsv,2).", Actual:".number_format($daywise_gsv,2);
             }
 
             //admission //admission tooltip
