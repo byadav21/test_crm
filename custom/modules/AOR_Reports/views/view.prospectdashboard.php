@@ -177,6 +177,7 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         //#AND dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
 
         $batchSql     = "select 
+                            users.id user_id,
                             users.user_name user,
                             concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name
                            
@@ -192,6 +193,7 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         {
             
             $batchOptions[$row['user']]['Agent_Name'] = $row['Agent_Name'];
+            $batchOptions[$row['user']]['user_id']   = $row['user_id'];
         }
         return $batchOptions;
     }
@@ -552,6 +554,7 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         {
             
             $theFInalArray[$key]['Agent_Name'] = isset($val['Agent_Name']) ? $val['Agent_Name'] : 0;
+            $theFInalArray[$key]['Agent_ID'] = isset($val['user_id']) ? $val['user_id'] : 0;
             
             
             
@@ -568,57 +571,79 @@ class AOR_ReportsViewprospectdashboard extends SugarView
             $daywise_target_gsv      = isset($getMonthToDateTargetCount[$key]['target_gsv']) ? ($getMonthToDateTargetCount[$key]['target_gsv']/30) : 0;
             
             //revenue  // revenue tooltip
-            if ($monthly_gsv < $monthly_target_gsv)
+            if (($monthly_gsv < $monthly_target_gsv) && ($monthly_gsv!=0 || $monthly_target_gsv!=0))
             {
                
                  $theFInalArray[$key]['monthly_revenue'] = 'false';
                  $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";
                  
             }
-            elseif ($monthly_gsv >= $monthly_target_gsv)
+            elseif (($monthly_gsv >= $monthly_target_gsv) && ($monthly_gsv!=0 || $monthly_target_gsv!=0) )
             {
                  $theFInalArray[$key]['monthly_revenue'] = 'true';
                  $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";
             }
+            else
+            {
+                 $theFInalArray[$key]['monthly_revenue'] = 'false';
+                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";   
+            }
 
             //admission //admission tooltip
-            if ($monthly_actual_converts < $monthly_target_converts)
+            if (($monthly_actual_converts < $monthly_target_converts) && ($monthly_actual_converts!=0 || $monthly_target_converts!=0))
             {
                  $theFInalArray[$key]['monthly_admission'] = 'false';
                  $theFInalArray[$key]['monthly_admission_tooltip'] = "Taget:$monthly_target_converts, Actual:$monthly_actual_converts ";
             }
-            elseif ($monthly_actual_converts >= $monthly_target_converts)
+            elseif (($monthly_actual_converts >= $monthly_target_converts) && ($monthly_actual_converts!=0 || $monthly_target_converts!=0))
             {
                  $theFInalArray[$key]['monthly_admission'] = 'true';
                  $theFInalArray[$key]['monthly_admission_tooltip'] = "Taget:$monthly_target_converts, Actual:$monthly_actual_converts ";
                 
             }
+            else
+            {
+                 $theFInalArray[$key]['monthly_revenue'] = 'false';
+                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";   
+            }
             
             
-            if ($daywise_gsv < $daywise_target_gsv)
+            if (($daywise_gsv < $daywise_target_gsv) && ($daywise_gsv!=0 || $daywise_target_gsv!=0))
             {
                
                  $theFInalArray[$key]['daywise_revenue'] = 'false';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:$daywise_gsv, Actual:$daywise_target_gsv ";
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_gsv,2).", Actual:".number_format($daywise_target_gsv,2);
                  
             }
-            elseif ($daywise_gsv >= $daywise_target_gsv)
+            elseif (($daywise_gsv >= $daywise_target_gsv) && ($daywise_gsv!=0 || $daywise_target_gsv!=0))
             {
                  $theFInalArray[$key]['daywise_revenue'] = 'true';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:$daywise_gsv, Actual:$daywise_target_gsv ";
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_gsv,2).", Actual:".number_format($daywise_target_gsv,2);
+            }
+            else
+            {
+                 $theFInalArray[$key]['daywise_revenue'] = 'false';
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_gsv,2).", Actual:".number_format($daywise_target_gsv,2);
             }
 
             //admission //admission tooltip
-            if ($daywise_actual_converts < $daywise_target_converts)
+            if (($daywise_actual_converts < $daywise_target_converts) && ($daywise_actual_converts!=0 || $daywise_target_converts!=0))
             {
                  $theFInalArray[$key]['daywise_admission'] = 'false';
-                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:$daywise_target_converts, Actual:$daywise_actual_converts ";
+                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:".number_format($daywise_target_converts,2).", Actual:".number_format($daywise_actual_converts,2);
             }
-            elseif ($daywise_actual_converts >= $daywise_target_converts)
+            elseif (($daywise_actual_converts >= $daywise_target_converts) && ($daywise_actual_converts!=0 || $daywise_target_converts!=0))
             {
                  $theFInalArray[$key]['daywise_admission'] = 'true';
-                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:".number_format($daywise_target_converts).", Actual:$daywise_actual_converts ";
+                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:".number_format($daywise_target_converts,2).", Actual:".number_format($daywise_actual_converts,2);
                 
+            }
+            else
+            {
+                
+                 $theFInalArray[$key]['daywise_admission'] = 'false';
+                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:".number_format($daywise_target_converts,2).", Actual:".number_format($daywise_actual_converts,2);
+            
             }
            
 

@@ -7,74 +7,74 @@
                 <tbody>
 
                     {*<tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="From Date">Month:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="month" id="month"  >
-                                {foreach from =$month key=key item=value}
-                                    <option value="{$key}" {if ($key==$selected_month)} selected="selected"{/if}>{$value}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="To Date">Year:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="years" id="year"  >
-                                {foreach from =$years key=key item=value}
-                                    <option value="{$key}" {if ($key==$selected_years)} selected="selected"{/if}>{$value}</option>
-                                {/foreach}
-                            </select>
-                        </td>
+                    <td scope="row" nowrap="nowrap" width="1%">
+                    <label for="From Date">Month:</label>
+                    </td>
+                    <td nowrap="nowrap" >
+                    <select name="month" id="month"  >
+                    {foreach from =$month key=key item=value}
+                    <option value="{$key}" {if ($key==$selected_month)} selected="selected"{/if}>{$value}</option>
+                    {/foreach}
+                    </select>
+                    </td>
+                    <td scope="row" nowrap="nowrap" width="1%">
+                    <label for="To Date">Year:</label>
+                    </td>
+                    <td nowrap="nowrap" >
+                    <select name="years" id="year"  >
+                    {foreach from =$years key=key item=value}
+                    <option value="{$key}" {if ($key==$selected_years)} selected="selected"{/if}>{$value}</option>
+                    {/foreach}
+                    </select>
+                    </td>
                     </tr>*}
-                    
-                     <tr>
-                       
+
+                    <tr>
+
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="To Date">Date:</label>
                         </td>
-                         <td nowrap="nowrap">
+                        <td nowrap="nowrap">
                             <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
                             <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
                         </td>
                     </tr>
-                 
-                    
+
+
                     {if $userSlug!='CCC'}
+                        <tr>
+                            <td scope="row" nowrap="nowrap" width="1%">
+                                <label for="status">Manager:</label>
+                            </td>
+                            <td nowrap="nowrap" >
+                                <select name="managers[]" id="managers"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                    {foreach from =$managerSList key=key item=managers}
+
+                                        <option value="{$key}"{if in_array($key, $selected_managers)} selected="selected"{/if}>{$managers.name}</option>
+                                    {/foreach}
+                                </select>
+                            </td>
+
+                            <td scope="row" nowrap="nowrap" width="1%">
+                                <label for="Status Description">Agent:</label>
+                            </td>
+                            <td nowrap="nowrap" >
+                                <select name="councellors[]" id="councellors"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                    {foreach from =$CouncellorsList key=key item=councellor}
+
+                                        <option value="{$key}"{if in_array($key, $selected_councellors)} selected="selected"{/if}>{$councellor.name}</option>
+                                    {/foreach}
+                                </select>
+                            </td>
+
+                        </tr>
+                    {/if}
+
+
+
+
+
                     <tr>
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="status">Manager:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="managers[]" id="managers"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$managerSList key=key item=managers}
-
-                                    <option value="{$key}"{if in_array($key, $selected_managers)} selected="selected"{/if}>{$managers.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
-                        <td scope="row" nowrap="nowrap" width="1%">
-                            <label for="Status Description">Agent:</label>
-                        </td>
-                        <td nowrap="nowrap" >
-                            <select name="councellors[]" id="councellors"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
-                                {foreach from =$CouncellorsList key=key item=councellor}
-
-                                    <option value="{$key}"{if in_array($key, $selected_councellors)} selected="selected"{/if}>{$councellor.name}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-
-                    </tr>
-                {/if}
-
-
-
-
-
-                      <tr>
                         <td class="sumbitButtons" colspan="3">
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
@@ -88,11 +88,11 @@
             </table>
         </div>
     </form>
-       
-                        
-                        
-      <div class="lead-report-table">             
-                      
+
+
+
+    <div class="lead-report-table">             
+
         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="paginationTable">  
             <thead>
                 {*Start Pagination*}
@@ -153,121 +153,147 @@
                     </td>
                 </tr>
                 {*End Pagination*}
-                
-                
+
+
                 <tr>
-				<th class="column1" valign="middle">Counsellor Email</th>
-                                <th class="column1" valign="middle">Counsellor Name</th>
-				<th class="column2">
-                                <table cellpadding="0" cellspacing="0" border="0" class="table1">
-                                        <tr>
-                                                <th colspan="2">Month to date</th>
-                                        </tr>
-                                        <tr>
+                    <th class="column1" valign="middle">Counsellor Email</th>
+                    <th class="column1" valign="middle">Counsellor Name</th>
+                    <th class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+                                <th colspan="2">Month to date</th>
+                            </tr>
+                            <tr>
 
-                                                <th>
-                                                        <table cellpadding="0" cellspacing="0" border="0" class="table2">	
-                                                                
-                                                                <tr>
-                                                                        <th>Revenue</th>
-                                                                        <th>Number of<br> 
-                                                                            admissions</th>
-                                                                </tr>
-                                                        </table>	
-                                                </th>
+                                <th>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
 
-                                        </tr>
-                                </table>
-				</th>
-				
-				<th class="column2">
-                                <table cellpadding="0" cellspacing="0" border="0" class="table1">
                                         <tr>
-                                                <th colspan="2">{$selected_from_date}</th>
+                                            <th>Revenue</th>
+                                            <th>Number of<br> 
+                                                admissions</th>
                                         </tr>
+                                    </table>	
+                                </th>
+
+                            </tr>
+                        </table>
+                    </th>
+
+                    <th class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+                                <th colspan="2">{$selected_from_date}</th>
+                            </tr>
+                            <tr>
+
+                                <th>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
                                         <tr>
-
-                                                <th>
-                                                        <table cellpadding="0" cellspacing="0" border="0" class="table2">	
-                                                                <tr>
-                                                                        <th>Revenue</th>
-                                                                        <th>Number of<br> 
-                                                                            admissions</th>
-                                                                </tr>
-                                                        </table>	
-                                                </th>
-
+                                            <th>Revenue</th>
+                                            <th>Number of<br> 
+                                                admissions</th>
                                         </tr>
-                                </table>
-				</th>
-			</tr>  
+                                    </table>	
+                                </th>
+
+                            </tr>
+                        </table>
+                    </th>
+                </tr>  
             </thead>
-       
-  
 
-    
-                {if empty($theFInalArray)}
-                    <tr><td colspan="8">Data Not Found.</td></tr>
-                {/if}
+
+
+
+            {if empty($theFInalArray)}
+                <tr><td colspan="8">Data Not Found.</td></tr>
+            {/if}
             {foreach from = $theFInalArray key=key item=value}
-                
+
                 <tr>
-				<td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
-                                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
-				<td class="column2">
-					<table cellpadding="0" cellspacing="0" border="0" class="table1">
-						<tr>
-							
-							
-							<td>
-								<table cellpadding="0" cellspacing="0" border="0" class="table2">	
-									<tr>
-										<td style="width:54px;">
-                                                                                    <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red"></i>
-                                                                                    {$value.target_converts} | {$value.monthly_icon}
-                                                                                    <span class="CellComment">Here is a comment</span>
-                                                                                </td>
-										<td style="width:56px;">
-                                                                                    <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green"></i>
-                                                                                    {$value.actual_converts}
-                                                                                    <span class="CellComment">dfd dfdfd</span>
-                                                                                </td>
-									</tr>
-								</table>	
-							</td>
-                                                      
-						</tr>
-					</table>
-				</td>
-				
-				<td class="column2">
-					<table cellpadding="0" cellspacing="0" border="0" class="table1">
-						<tr>
-							
-							
-							<td>
-								<table cellpadding="0" cellspacing="0" border="0" class="table2">	
-									<tr>
-										<td style="width:54px;">
-                                                                                    <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red"></i>
-                                                                                    {$value.target_converts} | {$value.monthly_icon}
-                                                                                    <span class="CellComment">Here is a comment</span>
-                                                                                </td>
-										<td style="width:56px;">
-                                                                                    <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green"></i>
-                                                                                    {$value.actual_converts}
-                                                                                    <span class="CellComment">dfd dfdfd</span>
-                                                                                </td>
-									</tr>
-								</table>	
-							</td>
-                                                      
-						</tr>
-					</table>
-				</td>
-			</tr>
-                        
-               
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
+                    <td class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+
+
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+                                        <tr>
+                                            <td style="width:54px;">
+
+
+
+                                                {if $value.monthly_revenue == 'true'}
+                                                    <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}','{$value.monthly_revenue_tooltip}')"></i>
+                                                {else}
+                                                    <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}','{$value.monthly_revenue_tooltip}')"></i>
+                                                {/if}
+                                              
+                                            </td>
+                                            <td style="width:56px;">
+
+                                                {if $value.monthly_admission == 'true'}
+                                                    <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_admission_{$value.Agent_ID}','{$value.monthly_admission_tooltip}')"></i>
+                                                {else}
+                                                    <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_admission_{$value.Agent_ID}','{$value.monthly_admission_tooltip}')"></i>
+                                                {/if}
+
+                                            </td>
+                                        </tr>
+                                    </table>	
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+
+
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+                                        <tr>
+
+
+
+                                            <td style="width:54px;">
+
+
+
+                                                {if $value.daywise_revenue == 'true'}
+                                                    <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('daywise_revenue_{$value.Agent_ID}','{$value.daywise_revenue_tooltip}')"></i>
+                                                {else}
+                                                    <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('daywise_revenue_{$value.Agent_ID}','{$value.daywise_revenue_tooltip}')"></i>
+                                                {/if}
+
+                                                
+                                            </td>
+                                            <td style="width:56px;">
+
+                                                {if $value.daywise_admission == 'true'}
+                                                    <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('daywise_admission_{$value.Agent_ID}','{$value.daywise_admission_tooltip}')"></i>
+                                                {else}
+                                                    <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('daywise_admission_{$value.Agent_ID}','{$value.daywise_admission_tooltip}')"></i>
+                                                {/if}
+
+
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>	
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                
 
             {/foreach}
 
@@ -276,9 +302,30 @@
 
 
 
- </table>
-   
-      </div>
+        </table>
+            
+    <!-- Modal HTML -->
+    <div id="tooltipModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					   <span aria-hidden="true">×</span>
+					   <span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					Status
+				</h4>
+			</div>
+			<div class="modal-body">
+                            <span id="messagex"></span>
+				
+			</div>                
+            </div>
+        </div>
+    </div>
+    
+    </div>
 
     {literal}
         <script>
@@ -319,7 +366,21 @@
                     }
                 });
             }
+            
+            function getTooltip(id,desc){
+                //alert(id);
+                $("#messagex").html(desc);
+                $('#tooltipModal').modal('show', {
+                backdrop: 'static',
+                keyboard: false,
+                });
+               
+            }
+                
             $(document).ready(function () {
+               
+                
+                
 
                 $("#status").change(function () {
                     var arg = $('#status').val();
@@ -346,20 +407,20 @@
 
 
                     /*if (month == '' || month == null) {
-                        $("#month").focus();
-                        alert('Please select a month!');
-                        return false;
-                    }
-
-                    if (year == '' || year == null) {
-                        $("#year").focus();
-                        alert('Please select a year!');
-                        return false;
-                    }
-
-
-
-                    if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
+                     $("#month").focus();
+                     alert('Please select a month!');
+                     return false;
+                     }
+                     
+                     if (year == '' || year == null) {
+                     $("#year").focus();
+                     alert('Please select a year!');
+                     return false;
+                     }
+                     
+                     
+                     
+                     if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
                      $("#users").focus();
                      alert('Please select a user!'); return false;
                      }*/
@@ -373,56 +434,94 @@
         </script>
 
         <style>
-       .paginationTable{min-width:1400px;}     
+            .paginationTable{min-width:1400px;}     
             .lead-report-table{display: flex; flex-direction: column; width: 100%; overflow-x: auto;}
-.lead-report-table table{width: 100%;  border-style: hidden; height: 100%; border:0px solid #000;  border-collapse: collapse; border-spacing: 0;}
-.lead-report-table .table1 tr:first-child th{height:30px;}
-.lead-report-table .table2 tr:last-child th{height:30px;}
-.lead-report-table .table1 tr:first-child td{height:30px;}
-.lead-report-table .table2 tr:last-child td{height:30px;}
-.lead-report-table .total-value{width:100px;}
-.lead-report-table table {border:0px solid #000; font-weight: normal;}
-.lead-report-table th{color:#000; border: 1px solid #000; font-weight: normal;}
-.lead-report-table td{color:#808080; border: 1px solid #000; font-weight: normal; text-align: center;}
+            .lead-report-table table{width: 100%;  border-style: hidden; height: 100%; border:0px solid #000;  border-collapse: collapse; border-spacing: 0;}
+            .lead-report-table .table1 tr:first-child th{height:30px;}
+            .lead-report-table .table2 tr:last-child th{height:30px;}
+            .lead-report-table .table1 tr:first-child td{height:30px;}
+            .lead-report-table .table2 tr:last-child td{height:30px;}
+            .lead-report-table .total-value{width:100px;}
+            .lead-report-table table {border:0px solid #000; font-weight: normal;}
+            .lead-report-table th{color:#000; border: 1px solid #000; font-weight: normal;}
+            .lead-report-table td{color:#808080; border: 1px solid #000; font-weight: normal; text-align: center;}
 
-.lead-report-table .table2{border:0px none;}
-.lead-report-table .table1 th{border-left:0px none; border-top:0px none;}
-.lead-report-table .table1 th:last-child{border-right: 0px solid transparent;}
-.lead-report-table .table1 tr:last-child th{border-bottom:0px none;}
-.lead-report-table .table1 tr:last-child th .table2 tr:first-child th:first-child{border-bottom:1px solid #000;}
-.lead-report-table .table2 tr:last-child th:first-child{border-right:1px solid #000;}
-.lead-report-table .table2 th{border-left:0px none; border-right:0px none; border-top:0px none;}
-.lead-report-table .table2  tr:last-child th{border-left:0px none; border-bottom:0px none; border-right:0px none; border-top:0px none;}
+            .lead-report-table .table2{border:0px none;}
+            .lead-report-table .table1 th{border-left:0px none; border-top:0px none;}
+            .lead-report-table .table1 th:last-child{border-right: 0px solid transparent;}
+            .lead-report-table .table1 tr:last-child th{border-bottom:0px none;}
+            .lead-report-table .table1 tr:last-child th .table2 tr:first-child th:first-child{border-bottom:1px solid #000;}
+            .lead-report-table .table2 tr:last-child th:first-child{border-right:1px solid #000;}
+            .lead-report-table .table2 th{border-left:0px none; border-right:0px none; border-top:0px none;}
+            .lead-report-table .table2  tr:last-child th{border-left:0px none; border-bottom:0px none; border-right:0px none; border-top:0px none;}
 
-.lead-report-table .table1 td{border-left:0px none; border-bottom:0px none; text-align: center; border-top:0px none;}
-.lead-report-table .table1 td:last-child{border-right: 0px;}
-.lead-report-table .table2 td{border-left:0px none; border-right:0px none; border-top:0px none;}
-.lead-report-table .table2 tr:last-child td{border-left:0px none; border-bottom:0px none; border-right:0px none; border-top:0px none;}
-.lead-report-table .table2 tr:last-child td:last-child{border-left:1px solid #000;}	
-
-.CellWithComment{
-  position:relative;
+            .lead-report-table .table1 td{border-left:0px none; border-bottom:0px none; text-align: center; border-top:0px none;}
+            .lead-report-table .table1 td:last-child{border-right: 0px;}
+            .lead-report-table .table2 td{border-left:0px none; border-right:0px none; border-top:0px none;}
+            .lead-report-table .table2 tr:last-child td{border-left:0px none; border-bottom:0px none; border-right:0px none; border-top:0px none;}
+            .lead-report-table .table2 tr:last-child td:last-child{border-left:1px solid #000;}	
+            .lead-report-table td.paginationChangeButtons,
+.lead-report-table td.paginationActionButtons {
+    background: #3c8dbc;
+    width: 33%;
+}
+.lead-report-table th {
+    background: #2a3f54;
+    color: #fff !important;
+    font-weight: 600 !important;
+    border-color: #f7f7f7 !important;
+}
+.lead-report-table .table1 tr:last-child th .table2 tr:first-child th:first-child{
+    border-bottom: 1px solid #fff;
+    width: 50%;
+}
+.lead-report-table .table2 tr:last-child td{
+    width: 50% !important;
+}
+#pagination .button {
+    padding: 4px 8px;
+    background: #2a3f54;
+}
+.lead-report-table td {
+    color: #2a3f54;
+    border: 1px solid #2a3f54;
+    font-weight: normal;
+    text-align: center;
+}
+.lead-report-table #pagination .pageNumbers{
+    color: #fff;
 }
 
-.CellComment{
-  display:none;
-  position:absolute; 
-  z-index:100;
-  border:1px;
-  background-color:white;
-  border-style:solid;
-  border-width:1px;
-  border-color:red;
-  padding:3px;
-  color:red; 
-  top:20px; 
-  left:20px;
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
 }
 
-.CellWithComment:hover span.CellComment{
-  display:block;
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
 }
 
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+            
+
+           
         </style>
 
 
