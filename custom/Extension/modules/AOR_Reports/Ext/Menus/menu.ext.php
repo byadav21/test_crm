@@ -108,6 +108,7 @@ if ($misData['slug'] == 'CCM')
             'bbbea66c-1aee-a0bc-2654-5cb02b0123f0',// =>'OneyearMBA'
             '80c3283f-97f4-06b3-c231-5d66510a463d',// =>'Proformics'
 	    '98beaef1-89c8-b51e-68f0-5df21e3b40d9', // => 'pointific'
+            '67fe4fa4-3b45-9a7c-35c4-5efeed862529',  //=> Connective9
             );
          
         

@@ -94,7 +94,8 @@ class AOR_ReportsViewVendordataexport extends SugarView
             'e7dafa0f-2d5e-9885-90d4-5c383bda6353' => 'intellactads',
             'bbbea66c-1aee-a0bc-2654-5cb02b0123f0' => 'OneyearMBA',
             '80c3283f-97f4-06b3-c231-5d66510a463d' => 'Proformics',
-            '98beaef1-89c8-b51e-68f0-5df21e3b40d9' => 'pointific');
+            '98beaef1-89c8-b51e-68f0-5df21e3b40d9' => 'pointific',
+            '67fe4fa4-3b45-9a7c-35c4-5efeed862529' => 'Connective9');
 
 
 
@@ -118,8 +119,9 @@ class AOR_ReportsViewVendordataexport extends SugarView
             'Infoedge'     => '92f19224-b7b2-68e2-a112-590d64d59115',
             'intellactads' => '7eb40efc-b353-0885-1f7f-5c3733292e86',
             'OneyearMBA'   => '189101d3-837e-ca93-43ee-5c4003d0586f',
-             'Proformics'   => 'b7045019-6b1b-e69b-2a18-590d67814ab3',
-            'pointific'   =>   '681ba8eb-34fd-0a41-dbea-5de7905fa337');
+            'Proformics'   => 'b7045019-6b1b-e69b-2a18-590d67814ab3',
+            'pointific'    => '681ba8eb-34fd-0a41-dbea-5de7905fa337',
+            'Connective9'  => '8c6a35d9-8cfd-ae0d-5338-5efe9c41d5dc');
         
         $where           = "";
         $wherecl         = "";
@@ -248,6 +250,11 @@ class AOR_ReportsViewVendordataexport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['pointific']);
             $VendorListData  = array(array('id' => $vendorsIdArr['pointific'], 'name' => 'pointific'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Connective9')
+        {
+            $selected_vendor = array($vendorsIdArr['Connective9']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Connective9'], 'name' => 'Connective9'));
         }
 
         if (!empty($selected_vendor))
