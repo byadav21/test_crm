@@ -1,4 +1,4 @@
-<section class="moduleTitle"> <h2>Agent dashboard Report</h2><br/><br/><br/><br/><br/>
+<section class="moduleTitle"> <h2>Prospect dashboard</h2><br/><br/><br/><br/><br/>
 
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=prospectdashboard">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
