@@ -22,7 +22,7 @@
                     </select>
                 </div>
                 <div class = "block">
-                    <label>Select Batch : </label>
+                    <label>Agent : </label>
                     <select name="councellors[]" id="councellors"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                         {foreach from =$CouncellorsList key=key item=councellor}
 
@@ -494,7 +494,26 @@
             .borderWidthPadding{border:1px solid #ddd; padding:5px;}
             .action-block{display: flex; align-items: flex-end; justify-content: flex-end; margin:20px 0; padding: 0 9px;}
 
+.block{
+    position: relative;
+}
+input#from_date {
+    width: 100% !important;
+}
+img#from_date_trigger {
+    position: absolute;
+    top: 28px;
+    right: 15px;
+    width: 20px;
+}
 
+.ms-options-wrap {
+    width: auto;
+}
+.ms-options-wrap > .ms-options{
+    flex-direction: column;
+        width: 90%;
+}
 
         </style>
 
