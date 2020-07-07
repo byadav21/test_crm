@@ -506,9 +506,10 @@ img#from_date_trigger {
     right: 15px;
     width: 20px;
 }
-
 .ms-options-wrap {
     width: auto;
+    max-width: 300px;
+
 }
 .ms-options-wrap > .ms-options{
     flex-direction: column;
