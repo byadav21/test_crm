@@ -575,36 +575,36 @@ class AOR_ReportsViewprospectdashboard extends SugarView
             {
                
                  $theFInalArray[$key]['monthly_revenue'] = 'false';
-                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";
+                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Target: $monthly_target_gsv <br> Actual: $monthly_gsv ";
                  
             }
             elseif (($monthly_gsv >= $monthly_target_gsv) && ($monthly_gsv!=0 || $monthly_target_gsv!=0) )
             {
                  $theFInalArray[$key]['monthly_revenue'] = 'true';
-                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";
+                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Target: $monthly_target_gsv <br> Actual: $monthly_gsv ";
             }
             else
             {
                  $theFInalArray[$key]['monthly_revenue'] = 'false';
-                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";   
+                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Target: $monthly_target_gsv <br> Actual: $monthly_gsv ";   
             }
 
             //admission //admission tooltip
             if (($monthly_actual_converts < $monthly_target_converts) && ($monthly_actual_converts!=0 || $monthly_target_converts!=0))
             {
                  $theFInalArray[$key]['monthly_admission'] = 'false';
-                 $theFInalArray[$key]['monthly_admission_tooltip'] = "Taget:$monthly_target_converts, Actual:$monthly_actual_converts ";
+                 $theFInalArray[$key]['monthly_admission_tooltip'] = "Target: $monthly_target_converts <br> Actual: $monthly_actual_converts ";
             }
             elseif (($monthly_actual_converts >= $monthly_target_converts) && ($monthly_actual_converts!=0 || $monthly_target_converts!=0))
             {
                  $theFInalArray[$key]['monthly_admission'] = 'true';
-                 $theFInalArray[$key]['monthly_admission_tooltip'] = "Taget:$monthly_target_converts, Actual:$monthly_actual_converts ";
+                 $theFInalArray[$key]['monthly_admission_tooltip'] = "Target: $monthly_target_converts <br> Actual: $monthly_actual_converts ";
                 
             }
             else
             {
-                 $theFInalArray[$key]['monthly_revenue'] = 'false';
-                 $theFInalArray[$key]['monthly_revenue_tooltip'] = "Taget:$monthly_target_gsv, Actual:$monthly_gsv ";   
+                 $theFInalArray[$key]['monthly_admission'] = 'false';
+                 $theFInalArray[$key]['monthly_admission_tooltip'] = "Target: $monthly_target_gsv <br> Actual: $monthly_gsv ";   
             }
             
             
@@ -612,37 +612,37 @@ class AOR_ReportsViewprospectdashboard extends SugarView
             {
                
                  $theFInalArray[$key]['daywise_revenue'] = 'false';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_target_gsv,2).", Actual:".number_format($daywise_gsv,2);
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Target: ".number_format($daywise_target_gsv,2)." <br> Actual: ".number_format($daywise_gsv,2);
                  
             }
             elseif (($daywise_gsv >= $daywise_target_gsv) && ($daywise_gsv!=0 || $daywise_target_gsv!=0))
             {
                  $theFInalArray[$key]['daywise_revenue'] = 'true';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_target_gsv,2).", Actual:".number_format($daywise_gsv,2);
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Target: ".number_format($daywise_target_gsv,2)." <br> Actual: ".number_format($daywise_gsv,2);
             }
             else
             {
                  $theFInalArray[$key]['daywise_revenue'] = 'false';
-                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Taget:".number_format($daywise_target_gsv,2).", Actual:".number_format($daywise_gsv,2);
+                 $theFInalArray[$key]['daywise_revenue_tooltip'] = "Target: ".number_format($daywise_target_gsv,2)." <br> Actual: ".number_format($daywise_gsv,2);
             }
 
             //admission //admission tooltip
             if (($daywise_actual_converts < $daywise_target_converts) && ($daywise_actual_converts!=0 || $daywise_target_converts!=0))
             {
                  $theFInalArray[$key]['daywise_admission'] = 'false';
-                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:".number_format($daywise_target_converts,2).", Actual:".number_format($daywise_actual_converts,2);
+                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Target: ".number_format($daywise_target_converts,2)." <br> Actual: ".number_format($daywise_actual_converts,2);
             }
             elseif (($daywise_actual_converts >= $daywise_target_converts) && ($daywise_actual_converts!=0 || $daywise_target_converts!=0))
             {
                  $theFInalArray[$key]['daywise_admission'] = 'true';
-                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:".number_format($daywise_target_converts,2).", Actual:".number_format($daywise_actual_converts,2);
+                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Target: ".number_format($daywise_target_converts,2)." <br> Actual: ".number_format($daywise_actual_converts,2);
                 
             }
             else
             {
                 
                  $theFInalArray[$key]['daywise_admission'] = 'false';
-                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Taget:".number_format($daywise_target_converts,2).", Actual:".number_format($daywise_actual_converts,2);
+                 $theFInalArray[$key]['daywise_admission_tooltip'] = "Target: ".number_format($daywise_target_converts,2)." <br> Actual: ".number_format($daywise_actual_converts,2);
             
             }
            
