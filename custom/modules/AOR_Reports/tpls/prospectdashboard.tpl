@@ -9,7 +9,7 @@
                 <div class = "block">
                     <label>Date: </label>
                     <input name="from_date" type="text"  value="{$selected_from_date}" id='from_date'/>
-                    <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="position:relative; top:-1px" border="0" id="from_date_trigger">
+                    <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="" border="0" id="from_date_trigger">
 
                 </div>
                 <div class = "block">
@@ -394,7 +394,7 @@
         </script>
 
         <style>
-            .paginationTable{min-width:1400px;}     
+            
             .lead-report-table{display: flex; flex-direction: column; width: 100%; overflow-x: auto;}
             .lead-report-table table{width: 100%;  border-style: hidden; height: 100%; border:0px solid #000;  border-collapse: collapse; border-spacing: 0;}
             .lead-report-table .table1 tr:first-child th{height:30px;}
@@ -423,7 +423,6 @@
             .lead-report-table td.paginationChangeButtons,
             .lead-report-table td.paginationActionButtons {
                 background: #3c8dbc;
-                width: 33%;
             }
             .lead-report-table th {
                 background: #2a3f54;
