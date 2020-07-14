@@ -125,6 +125,12 @@
 						  {if !empty($overview.note)} 
 								<small>Note: {$overview.note}</small>
 						  {/if}
+                                                  
+                                                  {if $overview.prospect_status eq 'True' or $overview.prospect_status eq 'true'}
+                                           
+                                                      <br/><p style="color:187816;font-weight:bold;display:inline;"><strong>Prospect Status: </strong> <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;"></i></p>
+                                           
+					{/if} 
 	</div>
 
 </div>

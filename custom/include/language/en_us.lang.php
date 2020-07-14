@@ -1229,3 +1229,8 @@ $GLOBALS['app_list_strings']['status_list_student_batch_discription']=array (
   'Miscellaneous' => 'Miscellaneous',
     
   );
+
+$GLOBALS['app_list_strings']['prospect_status_list']=array (
+  '' => '',
+  'true' => 'True'
+);

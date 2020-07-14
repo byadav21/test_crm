@@ -289,5 +289,11 @@ array (
     'label' => 'LBL_MODIFIED',
     'default' => false,
   ),
+  'PROSPECT_STATUS' => 
+  array (
+    'width' => '10%',
+    'label' => 'LBL_PROSPECT_TYPE',
+    'default' => false,
+  ),
 );
 ?>

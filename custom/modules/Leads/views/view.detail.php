@@ -619,6 +619,7 @@ if(!isset($_SESSION['referral'])){
 		$overview['programe'] = $this->bean->program;
 		$overview['status'] = $this->bean->status;
 		$overview['statusDetail'] = $this->bean->status_description;
+                $overview['prospect_status'] = $this->bean->prospect_status;
 		$dr = $this->bean->disposition_reason;
 		if(!empty($this->bean->disposition_reason)){
 			$dr  = $GLOBALS['app_list_strings']['leads_disposition_reason_list'][$this->bean->disposition_reason];

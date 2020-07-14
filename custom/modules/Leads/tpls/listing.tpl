@@ -411,6 +411,12 @@
 					{if $rowData.DISPOSITION_REASON!='Select Reason'} 
 						<p style="display:inline"><strong>Disposition Reason:</strong> {$rowData.DISPOSITION_REASON}</p>
 					{/if} 
+                                       
+                                       {if $rowData.PROSPECT_STATUS eq 'True' or $rowData.PROSPECT_STATUS eq 'true'}
+                                           
+                                           <br><p style="color:187816;font-weight:bold;display:inline;"><strong>Prospect Status: </strong>  <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;"></i></p>
+                                           
+					{/if} 
 				  </div>
 			</div>
 		   {/foreach} 
