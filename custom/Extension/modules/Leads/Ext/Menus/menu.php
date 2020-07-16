@@ -8,4 +8,5 @@ $module_menu[]=Array("index.php?module=Leads&action=search_leads", "CRM Leads Se
 $module_menu[]=Array("index.php?module=Leads&action=utmleadassignmentrule", "Campaign Allocation", "");
 $module_menu[] = array('index.php?module=AOR_Reports&action=agentdashboardreport', "Agent dashboard Report", 'AOR_Reports');
 $module_menu[] = array('index.php?module=AOR_Reports&action=prospectdashboard', "Prospect dashboard", 'AOR_Reports');
+$module_menu[] = array('index.php?module=AOR_Reports&action=prospectdashboard2', "Prospect dashboard 2", 'AOR_Reports');
 ?>

@@ -89,6 +89,42 @@
                         </td>
 
                     </tr>
+                    
+                    <tr>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Status">Conversion Rate(%):</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <input type="textbox" value="" id="conversion_rate" name="conversion_rate" >
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Code">No. of connected Calls :</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <input type="textbox" value="" id="target_prospects" name="connected_calls" >
+                        </td>
+
+                    </tr>
+                    
+                       <tr>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Status">Talk Time:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <input type="textbox" value="" id="talk_time" name="talk_time" >
+                        </td>
+
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Batch Code">Call Quality Score:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <input type="textbox" value="" id="quality_score" name="quality_score" >
+                        </td>
+
+                    </tr>
 
 
 
@@ -194,6 +230,21 @@
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
                     <strong>Unit (Prospects)</strong>
                 </th>
+                
+                
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
+                    <strong>Conversion Rate</strong>
+                </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
+                    <strong>No. of connected Calls</strong>
+                </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
+                    <strong>Talk Time</strong>
+                </th>
+                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2">
+                    <strong>Call Quality Score</strong>
+                </th>
+                
                  <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="1">
                     <strong>Action</strong>
                 </th>
@@ -220,6 +271,15 @@
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_pitched}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.target_prospects}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.conversion_rate}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.connected_calls}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.talk_time}</td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
+                    <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$leads.quality_score}</td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"></td>
                     <td  align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"><a href="javascript:void(0)" onclick='deleteItem("{$leads.id}","Myrow_{$key}")'>Delete</a></td>
 
