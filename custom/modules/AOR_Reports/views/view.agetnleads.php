@@ -156,6 +156,8 @@ class AOR_ReportsViewagetnleads extends SugarView
         if($current_user_is_admin!=1){
             unset($headers['leads.lead_source']);
             unset($headers['leads.vendor']);
+	    unset($headers['leads.phone_mobile']);
+	    unset($headers['leads_cstm.email_add_c']);
         }
         //echo '<pre>';
         //print_r($headers);
