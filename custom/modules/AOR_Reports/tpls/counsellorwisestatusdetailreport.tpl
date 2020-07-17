@@ -57,7 +57,7 @@
                             <select name="managers[]" id="managers"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$managerSList key=key item=managers}
 
-                                    <option value="{$key}"{if in_array($key, $selected_managers)} selected="selected"{/if}>{$managers.name}</option>
+                                    <option value="{$key}">{$managers.name}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -107,6 +107,7 @@
 
                     <tr>
                         <td class="sumbitButtons" colspan="3">
+                            <input type="hidden" value="{$current_user_is_admin}" id="is_adminx"/>
                             <input tabindex="2" title="Search" onclick="SUGAR.savedViews.setChooser();" class="button" type="submit" name="button" value="Search" id="search_form_submit">&nbsp;
                             <input tabindex="2" title="Clear" onclick="SUGAR.searchForm.clear_form(this.form);
                                     return false;" class="button" type="button" name="clear" id="search_form_clear" value="Clear">
@@ -283,6 +284,9 @@
                 step: 1,
                 weekNumbers: false,
             });
+            
+                                
+            
 
             function getAjax(target, arr) {
                 $.ajax({
@@ -317,6 +321,7 @@
 
                 $("#search_form").on('submit', (function (e) {
 
+
                     var from_date = $('#from_date').val();
                     var to_date = $('#to_date').val();
                     var batch_code = $('#batch_code').val();
@@ -327,7 +332,9 @@
                     var managers = $('#managers').val();
                     var councellors = $('#councellors').val();
 
-
+                    var is_admin = $('#is_adminx').val();
+                       
+            
                     if (from_date == '' || from_date == null) {
                         $("#from_date").focus();
                         alert('Please select From-Date!');
@@ -351,15 +358,15 @@
                         return false;
                     }
 
-                    /*if(managers=='' || managers ==null){
+                    if(is_admin!=1 && (managers=='' || managers ==null)){
                      $("#manager").focus();
                      alert('Please select a Manager!'); return false;
                      }
                      
-                     if(councellors=='' || councellors ==null){
+                     if(is_admin!=1 && (councellors=='' || councellors ==null)){
                      $("#councellors").focus();
                      alert('Please select a Councellor!'); return false;
-                     }*/
+                     }
 
 
 
