@@ -334,6 +334,10 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         }
         return $batchOptions;
     }
+    
+    function clean($string){
+      return preg_replace('/[^A-Za-z0-9\-]/', ' ', $string); // Removes special chars.
+    }
 
     //getamyeoCallHistoryCount
     function getamyeoCallHistoryCount($year = '', $month = '', $yesterday = '', $today = '')
@@ -655,7 +659,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $theFInalArray[$key]['Agent_ID']      = isset($val['user_id']) ? $val['user_id'] : 0;
             $quality_score  = isset($getTargetCount[$key]['quality_score']) ? $getTargetCount[$key]['quality_score'] : 0;
             
-            $theFInalArray[$key]['usercomments']  = isset($getProspectComments[$key]['comments']) ? $getProspectComments[$key]['comments'] : '';
+            $theFInalArray[$key]['usercomments']  = isset($getProspectComments[$key]['comments']) ? $this->clean($getProspectComments[$key]['comments']) : '';
 
 
 
