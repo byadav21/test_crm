@@ -1,10 +1,10 @@
 <section class="moduleTitle"> 
 
-    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=prospectdashboard">
+    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=prospectdashboard2">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
 
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
-            <h2>Prospect dashboard:</h2><br><br><br>
+            <h2>Prospect dashboard:</h2> &nbsp;&nbsp;<a href="index.php?module=AOR_Reports&action=prospectdashboard" class="button">BLOCK 1</a><br><br><br>
             <div class = "block-wrapper marginTop15">
                 <div class = "block">
                     <label>Date: </label>
@@ -116,10 +116,87 @@
                 <tr>
                     <th class="column1" valign="middle">Counsellor Email</th>
                     <th class="column1" valign="middle">Counsellor Name  </th>
-                    <th class="column1" valign="middle">Intersted Prospects</th>
-                    <th class="column1" valign="middle">Number of connected Calls</th>
-                    <th class="column1" valign="middle">Talk Time</th>
-                    <th class="column1" valign="middle">Conversion Rate</th>
+                    <th class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+                                <th colspan="2">Intersted Prospects</th>
+                            </tr>
+                            <tr>
+
+                                <th>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </table>	
+                                </th>
+
+                            </tr>
+                        </table>
+                    </th>
+                    <th class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+                                <th colspan="2">Number of connected Calls</th>
+                            </tr>
+                            <tr>
+
+                                <th>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </table>	
+                                </th>
+
+                            </tr>
+                        </table>
+                    </th>
+
+                    <th class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+                                <th colspan="2">Talk Time</th>
+                            </tr>
+                            <tr>
+
+                                <th>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </table>	
+                                </th>
+
+                            </tr>
+                        </table>
+                    </th>
+                    <th class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+                                <th colspan="2">Conversion</th>
+                            </tr>
+                            <tr>
+
+                                <th>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </table>	
+                                </th>
+
+                            </tr>
+                        </table>
+                    </th>
                     <th class="column1" valign="middle">Call Quality Score</th>
                     <th class="column1" valign="middle">Action Item</th>
                 </tr>  
@@ -134,53 +211,72 @@
             {foreach from = $theFInalArray key=key item=value}
 
                 <tr>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
-                    
-                    {if $value.monthly_revenue == 'true'}
-                        <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {else}
-                        <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {/if}
-                </td>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
-                    {if $value.monthly_revenue == 'true'}
-                        <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {else}
-                        <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {/if}
-                </td>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
-                     {if $value.monthly_revenue == 'true'}
-                        <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {else}
-                        <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {/if}
-                </td>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
-                     {if $value.monthly_revenue == 'true'}
-                        <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {else}
-                        <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {/if}
-                </td>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
-                     {if $value.monthly_revenue == 'true'}
-                        <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {else}
-                        <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {/if}
-                </td>
-                <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
-                     {if $value.monthly_revenue == 'true'}
-                        <i class="fa fa-check" aria-hidden="true" style="font-size:28px;color:green;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {else}
-                        <i class="fa fa-times" aria-hidden="true" style="font-size:28px;color:red;cursor: pointer;" onclick="getTooltip('monthly_revenue_{$value.Agent_ID}', '{$value.monthly_revenue_tooltip}')"></i>
-                    {/if}
-                </td>
-                         
-                   
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                        {if $value.monthly_prospect == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('monthly_prospect_{$value.Agent_ID}', '{$value.monthly_prospect_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('monthly_prospect_{$value.Agent_ID}', '{$value.monthly_prospect_tooltip}')"></i>
+                        {/if}
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        {if $value.daywise_prospect == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('daywise_prospect_{$value.Agent_ID}', '{$value.daywise_prospect_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('daywise_prospect_{$value.Agent_ID}', '{$value.daywise_prospect_tooltip}')"></i>
+                        {/if}
+                    </td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                        {if $value.monthly_totalcalls == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('monthly_totalcalls_{$value.Agent_ID}', '{$value.monthly_totalcalls_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('monthly_totalcalls_{$value.Agent_ID}', '{$value.monthly_totalcalls_tooltip}')"></i>
+                        {/if}
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        {if $value.daywise_totalcalls == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('daywise_totalcalls_{$value.Agent_ID}', '{$value.daywise_totalcalls_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('daywise_totalcalls_{$value.Agent_ID}', '{$value.daywise_totalcalls_tooltip}')"></i>
+                        {/if}
+                    </td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                        {if $value.monthly_talktime == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('monthly_talktime_{$value.Agent_ID}', '{$value.monthly_talktime_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('monthly_talktime_{$value.Agent_ID}', '{$value.monthly_talktime_tooltip}')"></i>
+                        {/if}
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        {if $value.daywise_talktime == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('daywise_talktime_{$value.Agent_ID}', '{$value.daywise_talktime_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('daywise_talktime_{$value.Agent_ID}', '{$value.daywise_talktime_tooltip}')"></i>
+                        {/if}
+                    </td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                        {if $value.monthly_conversion == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('monthly_conversion_{$value.Agent_ID}', '{$value.monthly_conversion_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('monthly_conversion_{$value.Agent_ID}', '{$value.monthly_conversion_tooltip}')"></i>
+                        {/if}
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        {if $value.daywise_talktime == 'true'}
+                            <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('daywise_conversion_{$value.Agent_ID}', '{$value.daywise_conversion_tooltip}')"></i>
+                        {else}
+                            <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('daywise_conversion_{$value.Agent_ID}', '{$value.daywise_conversion_tooltip}')"></i>
+                        {/if}
+                    </td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                        <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('daywise_quality_score_{$value.Agent_ID}', '{$value.quality_score_tooltip}')"></i>
+                    </td>
+                    <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+
+                        
+
+                        <i class="fa fa-edit" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getCommentBox('{$value.Agent_ID}','{$key}', '{$current_user_id}','{$value.usercomments}')"></i>
+
+                    </td>
+
+
                 </tr>
 
 
@@ -214,7 +310,42 @@
                 </div>
             </div>
         </div>
-
+        
+        
+            <!-- Modal HTML -->
+            <div id="commentBox" class="modal fade">
+            <div class="modal-dialog" style="overflow:visible">
+                <form method="post"  id="proCommentBox"  enctype="multipart/form-data">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Add Comments
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-sm-12 marginTopBottom15">
+                                <textarea name="bt_srm_comments" id="bt_srm_comments">
+                                </textarea>
+                            </div>
+                            <input type="hidden" id="hidden_com_by" value=""/>
+                            <input type="hidden" id="hidden_user_id" value=""/>
+                            <input type="hidden" id="hidden_user_email" value=""/>
+                            </br> 
+                            <br/>
+                            <div class = "block-wrapper">
+                                <div class="col-sm-12 text-center" style="margin-top: 25px;">
+                                    <button type="submit" name="submit" class="button">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </div>
     </div>
 
     {literal}
@@ -256,7 +387,19 @@
                     }
                 });
             }
-
+            
+            
+            function getCommentBox(user_id,user_email, commented_by,comments){
+               
+               $("#hidden_com_by").val(commented_by);
+               $("#hidden_user_id").val(user_id);
+               $("#hidden_user_email").val(user_email);
+               $("#bt_srm_comments").val(comments);
+               $('#commentBox').modal('show', {
+                    backdrop: 'static',
+                    keyboard: false,
+                });  
+            }
             function getTooltip(id, desc) {
                 //alert(id);
                 $("#messagex").html(desc);
@@ -266,6 +409,9 @@
                 });
 
             }
+            
+            
+            
 
             $(document).ready(function () {
 
@@ -280,14 +426,59 @@
                     var arg = $('#managers').val();
                     getAjax('councellors', arg);
                 });
+                
+                
+                $("#proCommentBox").on('submit', function(e){
+                 
+                
+                    var pro_comments = $('#bt_srm_comments').val();
+                    var selecteddate = $('#from_date').val();
+                    var hidden_com_by = $('#hidden_com_by').val();
+                    var hidden_user_id = $('#hidden_user_id').val();
+                    var hidden_user_email = $('#hidden_user_email').val();
+                    
+                    if(bt_srm_comments==''){
+                        alert("Please input your comment."); return false;
+                    } 
 
+                        $.ajax({
+                            beforeSend: function (request)
+                            {
+
+                                SUGAR.ajaxUI.showLoadingPanel();
+                            },
+                            url: "index.php?entryPoint=reportsajax",
+                            data: {action: 'proComentBox',msg:pro_comments,selecteddate:selecteddate,hidden_com_by:hidden_com_by,hidden_user_id:hidden_user_id,hidden_user_email:hidden_user_email},
+                            dataType: 'json',
+                            type: "POST",
+                            async: true,
+                            success: function (data) {
+                                if (data.status == 'success') {
+                                    
+                                    SUGAR.ajaxUI.hideLoadingPanel();
+                                    $(".close").click();
+                                    location.reload();
+                                } else if (data.status == 'error')
+                                {   
+                                    alert("Something went wrong!");
+                                    $(".close").click();
+                                    location.reload();
+                                    
+                                }
+
+                            }
+                        });
+                    return false;
+
+                    
+              });
 
                 $("#search_form").on('submit', (function (e) {
 
 
                     var batch_code = $('#batch_code').val();
                     var status = $('#status').val();
-                    var month = $('#month').val();
+                    var from_date = $('#from_date').val();
                     var year = $('#year').val();
                     var users = $('#users').val();
                     var managers = $('#managers').val();
@@ -296,11 +487,7 @@
 
 
 
-                    /*if (month == '' || month == null) {
-                     $("#month").focus();
-                     alert('Please select a month!');
-                     return false;
-                     }
+                    /*
                      
                      if (year == '' || year == null) {
                      $("#year").focus();
@@ -310,11 +497,20 @@
                      
                      
                      
-                     if((managers=='' || managers ==null) && (councellors=='' || councellors ==null)){
+                     */
+                    if (from_date == '' || from_date == null) {
+                     $("#from_date").focus();
+                     alert('Please select a Date!');
+                     return false;
+                     }
+                    if(managers=='' || managers ==null){
                      $("#users").focus();
-                     alert('Please select a user!'); return false;
-                     }*/
-
+                     alert('Please select a Manager!'); return false;
+                     }
+                     if(councellors=='' || councellors ==null){
+                     $("#users").focus();
+                     alert('Please select a councellor!'); return false;
+                     }
 
 
                 }));
@@ -324,7 +520,7 @@
         </script>
 
         <style>
-            
+
             .lead-report-table{display: flex; flex-direction: column; width: 100%; overflow-x: auto;}
             .lead-report-table table{width: 100%;  border-style: hidden; height: 100%; border:0px solid #000;  border-collapse: collapse; border-spacing: 0;}
             .lead-report-table .table1 tr:first-child th{height:30px;}
@@ -380,8 +576,8 @@
             .lead-report-table #pagination .pageNumbers{
                 color: #fff;
             }
-            
-             .modal-dialog{width:700px;}
+
+            .modal-dialog{width:700px;}
             select{width:100%!important}
             textarea{width:100%!important; resize:none; height:90px;border-radius: 5px;}
             .marginTopBottom15{margin:15px 0;}
@@ -416,7 +612,7 @@
             }
             .ms-options-wrap > .ms-options{
                 flex-direction: column;
-                    width: 90%;
+                width: 90%;
             }
 
 

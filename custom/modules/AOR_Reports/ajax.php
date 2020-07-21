@@ -369,4 +369,59 @@ if (isset($_POST['action']) && $_POST['action'] == 'leadScore')
 
     die;
 }
+
+
+if (isset($_POST['action']) && $_POST['action'] == 'proComentBox')
+{
+    global $db;
+    $option = '';
+    //RecordID: RecordID, RowID:RowID
+    $param = array();
+
+    $msg            = trim($_POST['msg']);
+    $selecteddate   = $_POST['selecteddate'];
+    $com_by         = $_POST['hidden_com_by'];
+    $user_id        = $_POST['hidden_user_id'];
+    $user_email        = $_POST['hidden_user_email'];
+    
+    $selected_years = date('Y', strtotime($selecteddate));
+
+    $selected_month = date('m', strtotime($selecteddate));
+
+    
+    // te_prospect_repo_comments
+     $lead = "SELECT user_id
+                FROM te_prospect_repo_comments
+                WHERE user_id='$user_id'
+                  AND MONTH='$selected_month'
+                  AND YEAR='$selected_years'";
+    $res = $db->query($lead);
+    
+    if ($db->getRowCount($res) > 0)
+    {   
+        $updateSql = "update te_prospect_repo_comments SET comments='".$msg."' where "
+                . "user_id='".$user_id."' "
+                . "and month='".$selected_month."' and year='".$selected_years."'";
+        $usObj     = $GLOBALS['db']->Query($updateSql);
+
+    }
+    else
+    {
+         $updateSql = "insert into te_prospect_repo_comments SET "
+                . "date='" . date('Y-m-d H:i:s') . "',"
+                . "user_id='".$user_id."',"
+                . "user_email='".$user_email."',"
+                . "comments='".$msg."',"
+                . "commented_by='".$com_by."',"
+                . "month='".$selected_month."',"
+                . "year='".$selected_years."',"
+                . "comment_date='".date('Y-m-d') ."'";
+        $usObj     = $GLOBALS['db']->Query($updateSql);
+    }
+
+    
+    echo json_encode(array('status' => 'success', 'msg' => 'success!'));
+    
+   
+}
 ?>

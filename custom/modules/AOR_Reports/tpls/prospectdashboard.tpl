@@ -4,7 +4,7 @@
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
 
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
-            <h2>Prospect dashboard:</h2><br><br><br>
+            <h2>Prospect dashboard:</h2> &nbsp;&nbsp;<a href="index.php?module=AOR_Reports&action=prospectdashboard2" class="button">BLOCK 2</a><br><br><br>
             <div class = "block-wrapper marginTop15">
                 <div class = "block">
                     <label>Date: </label>
