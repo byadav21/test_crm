@@ -259,6 +259,28 @@ class AOR_ReportsViewproductivityform extends SugarView
 
                 $target_prospects = $_POST['target_prospects'];
             }
+            
+            
+            if (isset($_POST['conversion_rate']) && $_POST['conversion_rate'] != '')
+            {
+
+                $conversion_rate = $_POST['conversion_rate'];
+            }
+            if (isset($_POST['connected_calls']) && $_POST['connected_calls'] != '')
+            {
+
+                $connected_calls = $_POST['connected_calls'];
+            }
+            if (isset($_POST['talk_time']) && $_POST['talk_time'] != '')
+            {
+
+                $talk_time = $_POST['talk_time'];
+            }
+            if (isset($_POST['quality_score']) && $_POST['quality_score'] != '')
+            {
+
+                $quality_score = $_POST['quality_score'];
+            }
 
 
 
@@ -286,8 +308,12 @@ class AOR_ReportsViewproductivityform extends SugarView
                                     . "month=$month,"
                                     . "target_gsv='$target_gsv',"
                                     . "target_unit='$target_unit' , "
-                                    . "target_pitched='$target_pitched' , "
-                                    . "target_prospects='$target_prospects' , "
+                                    . "target_pitched='$target_pitched',"
+                                    . "target_prospects='$target_prospects',"
+                                    . "conversion_rate='$conversion_rate' , "
+                                    . "connected_calls='$connected_calls' , "
+                                    . "talk_time='$talk_time' , "
+                                    . "quality_score='$quality_score' , "    
                                     . "modified_date='" . date('Y-m-d H:i:s') . "' , "
                                     . "created_date='" . date('Y-m-d H:i:s') . "'";
                             $GLOBALS['db']->Query($insertSql);
@@ -307,7 +333,11 @@ class AOR_ReportsViewproductivityform extends SugarView
                                     . "target_gsv='$target_gsv',"
                                     . "target_unit='$target_unit' , "
                                     . "target_pitched='$target_pitched' , "
-                                    . "target_prospects='$target_prospects' , "    
+                                    . "target_prospects='$target_prospects' , "
+                                    . "conversion_rate='$conversion_rate' , "
+                                    . "connected_calls='$connected_calls' , "
+                                    . "talk_time='$talk_time' , "
+                                    . "quality_score='$quality_score' , "    
                                     . "modified_date='" . date('Y-m-d H:i:s') . "' , "
                                     . "created_date='" . date('Y-m-d H:i:s') . "'";
                             $GLOBALS['db']->Query($insertSql);

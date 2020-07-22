@@ -240,5 +240,30 @@ $dictionary["Lead"]["fields"]["lead_score"] = array(
             'source'          => 'custom_fields',
 );
 
+$dictionary["Lead"]["fields"]["prospect_status"] = array(
+            'required' => false,
+            'name' => 'prospect_status',
+            'vname' => 'LBL_PROSPECT_TYPE',
+            'type' => 'enum',
+            'source'          => 'custom_fields',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'inline_edit' => true,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'len' => 50,
+            'size' => '20',
+            'options' => 'prospect_status_list',
+            'studio' => 'visible',
+            'dependency' => false,
+);
+
 
 
