@@ -364,7 +364,19 @@
                     var councellors = $('#councellors').val();
 
 
-
+                    if (from_date == '' || from_date == null) {
+                     $("#from_date").focus();
+                     alert('Please select a Date!');
+                     return false;
+                     }
+                    if(managers=='' || managers ==null){
+                     $("#users").focus();
+                     alert('Please select a Manager!'); return false;
+                     }
+                     if(councellors=='' || councellors ==null){
+                     $("#users").focus();
+                     alert('Please select a councellor!'); return false;
+                     }
 
                     /*if (month == '' || month == null) {
                      $("#month").focus();

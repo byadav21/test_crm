@@ -565,10 +565,10 @@ class AOR_ReportsViewprospectdashboard extends SugarView
             $monthly_target_gsv      = isset($getMonthToDateTargetCount[$key]['target_gsv']) ? $getMonthToDateTargetCount[$key]['target_gsv'] : 0;
             
             
-            $daywise_target_converts = isset($getMonthToDateTargetCount[$key]['Converts']) ? ($getMonthToDateTargetCount[$key]['Converts'] / 30) : 0;
+            $daywise_target_converts = isset($getMonthToDateTargetCount[$key]['Converts']) ? ($getMonthToDateTargetCount[$key]['Converts'] / 25) : 0;
             $daywise_actual_converts = isset($getDayWsieConvertsCount[$key]['Converts']) ? $getDayWsieConvertsCount[$key]['Converts'] : 0;
             $daywise_gsv             = isset($getDayWsieRevenue[$key]['revenue']) ? $getDayWsieRevenue[$key]['revenue'] : 0;
-            $daywise_target_gsv      = isset($getMonthToDateTargetCount[$key]['target_gsv']) ? ($getMonthToDateTargetCount[$key]['target_gsv']/30) : 0;
+            $daywise_target_gsv      = isset($getMonthToDateTargetCount[$key]['target_gsv']) ? ($getMonthToDateTargetCount[$key]['target_gsv']/25) : 0;
             
             //revenue  // revenue tooltip
             if (($monthly_gsv < $monthly_target_gsv) && ($monthly_gsv!=0 || $monthly_target_gsv!=0))
@@ -655,7 +655,10 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         //            $theFInalArray = array();
         //        }
         //echo '<pre>'; print_r($theFInalArray);
- 
+        
+        if(empty($selected_councellors)){
+            $theFInalArray = array();
+        }
 
         #PS @Pawan
 
