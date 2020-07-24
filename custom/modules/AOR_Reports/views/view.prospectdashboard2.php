@@ -395,7 +395,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         while ($row          = $db->fetchByAssoc($batchObj))
         {
 
-            $batchOptions[$row['counsellor']]['total_calls_dialed'] += $row['total_calls_dialed'];
+            $batchOptions[$row['counsellor']]['total_connected_calls'] += $row['total_connected_calls'];
             $batchOptions[$row['counsellor']]['inbound_time']       += $this->minutes($row['inbound_time']);
             $batchOptions[$row['counsellor']]['outbound_time']      += $this->minutes($row['outbound_time']);
             $batchOptions[$row['counsellor']]['autodial_time']      += $this->minutes($row['autodial_time']);
@@ -673,8 +673,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
             $monthly_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? $getTargetCount[$key]['connected_calls'] : 0;
             $daywise_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? ($getTargetCount[$key]['connected_calls'] / 25) : 0;
-            $monthly_actual_calls   = isset($amyeoMonthwise[$key]['total_calls_dialed']) ? $amyeoMonthwise[$key]['total_calls_dialed'] : 0;
-            $daywise_actual_calls   = isset($amyeoDaywise[$key]['total_calls_dialed']) ? $amyeoDaywise[$key]['total_calls_dialed'] : 0;
+            $monthly_actual_calls   = isset($amyeoMonthwise[$key]['total_connected_calls']) ? $amyeoMonthwise[$key]['total_connected_calls'] : 0;
+            $daywise_actual_calls   = isset($amyeoDaywise[$key]['total_connected_calls']) ? $amyeoDaywise[$key]['total_connected_calls'] : 0;
 
 
             $monthly_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? $getTargetCount[$key]['talk_time'] : 0;
