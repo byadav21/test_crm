@@ -93,7 +93,8 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             'bbbea66c-1aee-a0bc-2654-5cb02b0123f0' => 'OneyearMBA',
             '80c3283f-97f4-06b3-c231-5d66510a463d' => 'Proformics',
             '98beaef1-89c8-b51e-68f0-5df21e3b40d9' => 'pointific',
-            '67fe4fa4-3b45-9a7c-35c4-5efeed862529' => 'Connective9');
+            '67fe4fa4-3b45-9a7c-35c4-5efeed862529' => 'Connective9',
+            '9ecbddae-7078-89f6-4cbb-5f1a854587fe' => 'Collegedunia');
 
 
 
@@ -109,7 +110,8 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             'OneyearMBA'   => '189101d3-837e-ca93-43ee-5c4003d0586f',
             'Proformics'   => 'b7045019-6b1b-e69b-2a18-590d67814ab3',
             'pointific'    => '681ba8eb-34fd-0a41-dbea-5de7905fa337',
-            'Connective9'  => '8c6a35d9-8cfd-ae0d-5338-5efe9c41d5dc');
+            'Connective9'  => '8c6a35d9-8cfd-ae0d-5338-5efe9c41d5dc',
+            'Collegedunia' => 'b2ef6323-ea47-2605-59c9-590d5cae3850');
 
 
         $batchList  = $this->getBatch();
@@ -207,6 +209,11 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['Connective9']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Connective9'], 'name' => 'Connective9'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Collegedunia')
+        {
+            $selected_vendor = array($vendorsIdArr['Collegedunia']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Collegedunia'], 'name' => 'Collegedunia'));
         }
 
         if (!empty($selected_vendor))
