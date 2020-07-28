@@ -208,6 +208,88 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         }
         return $batchOptions;
     }
+    
+    function getTotalProspect($year = '', $month = '', $yesterday = '', $today = '', $selected_councellors = array(), $current_userAccess = array(), $CouncellorsList = array())
+    {
+        global $db, $current_user;
+
+        $wherex   = '';
+        $userSlug = "";
+
+
+        //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday;
+        //echo 'dd=='.$current_userAccess['slug'];
+        if (!empty($month))
+        {
+            $wherex .= " AND month(leads.date_entered) = '$month' ";
+        }
+        if (!empty($year))
+        {
+            $wherex .= " AND year(leads.date_entered)='$year' ";
+        }
+        if (!empty($yesterday))
+        {
+
+            $wherex .= " AND date(leads.date_entered)= '$yesterday' ";
+        }
+        if (!empty($today))
+        {
+            $wherex .= " AND date(leads.date_entered)= '$today' ";
+        }
+
+        if (!empty($selected_councellors) && $userSlug != 'CCC')
+        {
+            $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCC')
+        {
+            //echo 'xxx'.
+            $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
+        }
+        //print_r($CouncellorsList);
+        if (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCM' && empty($selected_councellors))
+        {
+            //echo 'xxx'.
+            $managersAgent = array();
+            foreach ($CouncellorsList as $key => $val)
+            {
+                $managersAgent[] = $key;
+            }
+            //print_r($managersAgent);
+            $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $managersAgent) . "')";
+        }
+
+
+        //$pinchedArr = array('Converted');
+        //echo '<pre>'.
+        $batchSql     = "SELECT 
+                            users.user_name,
+                            leads.status_description,
+                                month(leads.date_entered) monthwise,
+                                year(leads.date_entered) yearwise,
+                            count(leads.id) leadCont
+                     FROM leads
+                     INNER JOIN users ON leads.assigned_user_id =users.id
+                     INNER JOIN leads_cstm ON leads.id= leads_cstm.id_c
+                     WHERE leads.deleted=0
+                       and leads.assigned_user_id!=''
+                       AND users.deleted=0
+                       
+		       AND users.department='CC'
+                       AND leads.status_description ='Prospect'
+                      $wherex
+                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_entered)
+                     order by leads.assigned_user_id,leads.status_description,month(leads.date_entered);";
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        $pitchedCount = 0;
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+
+            $batchOptions[$row['user_name']]['prospect'] += $row['leadCont'];
+        }
+        return $batchOptions;
+    }
 
     function getMonthToDateProspect($year = '', $month = '', $yesterday = '', $today = '', $selected_councellors = array(), $current_userAccess = array(), $CouncellorsList = array())
     {
@@ -644,7 +726,10 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $getMonthwiseProspect = $this->getMonthToDateProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayWiseProspect   = $this->getMonthToDateProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
-
+        
+        $getMonthTotalProspect = $this->getTotalProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
+        $getDayTotalProspect   = $this->getTotalProspect('', '', '', $selected_date, '', $current_userAccess, '');
+        
         $getMonthwiseConverts = $this->getActualConverts($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayWiseConverts   = $this->getActualConverts('', '', '', $selected_date, '', $current_userAccess, '');
 
@@ -661,7 +746,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             
             $theFInalArray[$key]['usercomments']  = isset($getProspectComments[$key]['comments']) ? $this->clean($getProspectComments[$key]['comments']) : '';
 
-
+            $theFInalArray[$key]['total_month_prospect']  = isset($getMonthTotalProspect[$key]['prospect']) ? $getMonthTotalProspect[$key]['prospect'] : 0;
+            $theFInalArray[$key]['total_day_prospect']    = isset($getDayTotalProspect[$key]['prospect']) ? $getDayTotalProspect[$key]['prospect'] : 0;
 
 
             $monthly_prospect_target = isset($getTargetCount[$key]['Prospects']) ? $getTargetCount[$key]['Prospects'] : 0;
@@ -835,7 +921,12 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             
             if($quality_score){
             $theFInalArray[$key]['quality_score_tooltip'] = "Score: $quality_score ";
+            }            else
+            {
+            $theFInalArray[$key]['quality_score_tooltip'] = "Score: NA ";    
             }
+            
+          
         }
 
         //        if ((!isset($_SESSION['cccon_managers']) && empty($_SESSION['cccon_managers'])) && (!isset($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_councellors'])))

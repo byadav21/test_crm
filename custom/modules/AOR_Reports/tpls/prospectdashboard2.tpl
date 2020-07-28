@@ -119,7 +119,27 @@
                     <th class="column2">
                         <table cellpadding="0" cellspacing="0" border="0" class="table1">
                             <tr>
-                                <th colspan="2">Intersted Prospects</th>
+                                <th colspan="2">PTP</th>
+                            </tr>
+                            <tr>
+
+                                <th>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+
+                                        <tr>
+                                            <th>Month</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </table>	
+                                </th>
+
+                            </tr>
+                        </table>
+                    </th>
+                    <th class="column2">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table1">
+                            <tr>
+                                <th colspan="2">Prospects</th>
                             </tr>
                             <tr>
 
@@ -206,7 +226,7 @@
 
 
             {if empty($theFInalArray)}
-                <tr><td colspan="8">Data Not Found.</td></tr>
+                <tr><td colspan="9">Data Not Found.</td></tr>
             {/if}
             {foreach from = $theFInalArray key=key item=value}
 
@@ -225,6 +245,12 @@
                         {else}
                             <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('daywise_prospect_{$value.Agent_ID}', '{$value.daywise_prospect_tooltip}')"></i>
                         {/if}
+                    </td>
+                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                         
+                         {$value.total_month_prospect}
+                            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                         {$value.total_day_prospect}
                     </td>
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
                         {if $value.monthly_totalcalls == 'true'}
@@ -266,7 +292,7 @@
                         {/if}
                     </td>
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
-                        <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('daywise_quality_score_{$value.Agent_ID}', '{$value.quality_score_tooltip}')"></i>
+                        <i class="fa fa-eye" aria-hidden="true" style="font-size:12px;color:green;cursor: pointer;" onclick="getTooltip('daywise_quality_score_{$value.Agent_ID}', '{$value.quality_score_tooltip}')"></i>
                     </td>
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
 
