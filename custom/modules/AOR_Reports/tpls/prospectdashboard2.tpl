@@ -119,14 +119,15 @@
                     <th class="column2">
                         <table cellpadding="0" cellspacing="0" border="0" class="table1">
                             <tr>
-                                <th colspan="2">PTP</th>
+                                <th colspan="3">Prospects</th>
                             </tr>
                             <tr>
 
                                 <th>
-                                    <table cellpadding="0" cellspacing="0" border="0" class="table2">	
+                                    <table cellpadding="2" cellspacing="0" border="0" class="">	
 
                                         <tr>
+                                            <th>PTP</th>
                                             <th>Month</th>
                                             <th>Date</th>
                                         </tr>
@@ -136,7 +137,7 @@
                             </tr>
                         </table>
                     </th>
-                    <th class="column2">
+                   {* <th class="column2">
                         <table cellpadding="0" cellspacing="0" border="0" class="table1">
                             <tr>
                                 <th colspan="2">Prospects</th>
@@ -155,7 +156,7 @@
 
                             </tr>
                         </table>
-                    </th>
+                    </th>*}
                     <th class="column2">
                         <table cellpadding="0" cellspacing="0" border="0" class="table1">
                             <tr>
@@ -234,6 +235,8 @@
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                        {$value.total_day_prospect}
+                         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         {if $value.monthly_prospect == 'true'}
                             <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('monthly_prospect_{$value.Agent_ID}', '{$value.monthly_prospect_tooltip}')"></i>
                         {else}
@@ -246,12 +249,12 @@
                             <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('daywise_prospect_{$value.Agent_ID}', '{$value.daywise_prospect_tooltip}')"></i>
                         {/if}
                     </td>
-                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                    {* <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
                          
                          {$value.total_month_prospect}
                             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                          {$value.total_day_prospect}
-                    </td>
+                    </td>*}
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
                         {if $value.monthly_totalcalls == 'true'}
                             <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('monthly_totalcalls_{$value.Agent_ID}', '{$value.monthly_totalcalls_tooltip}')"></i>
