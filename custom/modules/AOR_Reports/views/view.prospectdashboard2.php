@@ -746,8 +746,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             
             $theFInalArray[$key]['usercomments']  = isset($getProspectComments[$key]['comments']) ? $this->clean($getProspectComments[$key]['comments']) : '';
 
-            $theFInalArray[$key]['total_month_prospect']  = isset($getMonthTotalProspect[$key]['Prospects']) ? $getMonthTotalProspect[$key]['Prospects'] : 0;
-            $theFInalArray[$key]['total_day_prospect']    = isset($getDayTotalProspect[$key]['Prospects']) ? $getDayTotalProspect[$key]['Prospects'] : 0;
+            $theFInalArray[$key]['total_month_prospect']  = isset($getMonthTotalProspect[$key]['prospect']) ? $getMonthTotalProspect[$key]['prospect'] : 0;
+            $theFInalArray[$key]['total_day_prospect']    = isset($getDayTotalProspect[$key]['prospect']) ? $getDayTotalProspect[$key]['prospect'] : 0;
 
 
             $monthly_prospect_target = isset($getTargetCount[$key]['Prospects']) ? $getTargetCount[$key]['Prospects'] : 0;
