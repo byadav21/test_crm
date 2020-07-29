@@ -210,7 +210,7 @@
 
                                         <tr>
                                             <th>Month</th>
-                                            <th>Date</th>
+                                            <th>Week</th>
                                         </tr>
                                     </table>	
                                 </th>

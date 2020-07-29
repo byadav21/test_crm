@@ -770,7 +770,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
 
             $monthly_targeted_conversion = isset($getTargetCount[$key]['target_unit']) ? $getTargetCount[$key]['target_unit'] : 0;
-            $daywise_targeted_conversion = isset($getTargetCount[$key]['target_unit']) ? ($getTargetCount[$key]['target_unit'] / 25) : 0;
+            $daywise_targeted_conversion = isset($getTargetCount[$key]['target_unit']) ? ($getTargetCount[$key]['target_unit'] / 4) : 0;
             $monthly_actual_conversion   = isset($getMonthwiseConverts[$key]['Converts']) ? $getMonthwiseConverts[$key]['Converts'] : 0;
             $daywise_actual_conversion   = isset($getDayWiseConverts[$key]['Converts']) ? $getDayWiseConverts[$key]['Converts'] : 0;
             
