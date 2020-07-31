@@ -751,20 +751,20 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
 
             $monthly_prospect_target = isset($getTargetCount[$key]['Prospects']) ? $getTargetCount[$key]['Prospects'] : 0;
-            $daywise_prospect_target = isset($getTargetCount[$key]['Prospects']) ? ($getTargetCount[$key]['Prospects'] / 25) : 0;
+            $daywise_prospect_target = isset($getTargetCount[$key]['Prospects']) ? ($getTargetCount[$key]['Prospects'] / 24) : 0;
             $monthly_actual_prospect = isset($getMonthwiseProspect[$key]['prospect']) ? $getMonthwiseProspect[$key]['prospect'] : 0;
             $daywise_actual_prospect = isset($getDayWiseProspect[$key]['prospect']) ? $getDayWiseProspect[$key]['prospect'] : 0;
 
 
 
             $monthly_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? $getTargetCount[$key]['connected_calls'] : 0;
-            $daywise_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? ($getTargetCount[$key]['connected_calls'] / 25) : 0;
+            $daywise_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? ($getTargetCount[$key]['connected_calls'] / 24) : 0;
             $monthly_actual_calls   = isset($amyeoMonthwise[$key]['total_calls_dialed']) ? $amyeoMonthwise[$key]['total_calls_dialed'] : 0;
             $daywise_actual_calls   = isset($amyeoDaywise[$key]['total_calls_dialed']) ? $amyeoDaywise[$key]['total_calls_dialed'] : 0;
 
 
             $monthly_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? $getTargetCount[$key]['talk_time'] : 0;
-            $daywise_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time'] / 25) : 0;
+            $daywise_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time'] / 24) : 0;
             $monthly_actual_talktime   = isset($amyeoMonthwise[$key]['total_call_time']) ? $amyeoMonthwise[$key]['total_call_time'] : 0;
             $daywise_actual_talktime   = isset($amyeoDaywise[$key]['total_call_time']) ? $amyeoDaywise[$key]['total_call_time'] : 0;
 
@@ -774,7 +774,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $monthly_actual_conversion   = isset($getMonthwiseConverts[$key]['Converts']) ? $getMonthwiseConverts[$key]['Converts'] : 0;
             $daywise_actual_conversion   = isset($getDayWiseConverts[$key]['Converts']) ? $getDayWiseConverts[$key]['Converts'] : 0;
             
-
+            //$daywise_targeted_conversion = round($daywise_targeted_conversion);
 
             // Start of Prospect section ///////////////////////////////////////////////////////////////////////////////////////////////
             if (($monthly_actual_prospect < $monthly_prospect_target) && ($monthly_actual_prospect != 0 || $monthly_prospect_target != 0))
@@ -906,7 +906,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                 $theFInalArray[$key]['daywise_conversion']         = 'false';
                 $theFInalArray[$key]['daywise_conversion_tooltip'] = "Target: $daywise_targeted_conversion <br> Actual: $daywise_actual_conversion ";
             }
-            elseif (($daywise_actual_talktime >= $daywise_targeted_talktime) && ($daywise_actual_talktime != 0 || $daywise_targeted_talktime != 0))
+            elseif (($daywise_actual_conversion >= $daywise_targeted_conversion) && ($daywise_actual_conversion != 0 || $daywise_targeted_conversion != 0))
             {
                 $theFInalArray[$key]['daywise_conversion']         = 'true';
                 $theFInalArray[$key]['daywise_conversion_tooltip'] = "Target: $daywise_targeted_conversion <br> Actual: $daywise_actual_conversion ";
