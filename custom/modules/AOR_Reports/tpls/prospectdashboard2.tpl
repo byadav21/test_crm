@@ -288,7 +288,7 @@
                             <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('monthly_conversion_{$value.Agent_ID}', '{$value.monthly_conversion_tooltip}')"></i>
                         {/if}
                         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                        {if $value.daywise_talktime == 'true'}
+                        {if $value.daywise_conversion == 'true'}
                             <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('daywise_conversion_{$value.Agent_ID}', '{$value.daywise_conversion_tooltip}')"></i>
                         {else}
                             <i class="fa fa-times" aria-hidden="true" style="font-size:15px;color:red;cursor: pointer;" onclick="getTooltip('daywise_conversion_{$value.Agent_ID}', '{$value.daywise_conversion_tooltip}')"></i>

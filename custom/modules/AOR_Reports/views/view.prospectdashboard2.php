@@ -774,7 +774,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $monthly_actual_conversion   = isset($getMonthwiseConverts[$key]['Converts']) ? $getMonthwiseConverts[$key]['Converts'] : 0;
             $daywise_actual_conversion   = isset($getDayWiseConverts[$key]['Converts']) ? $getDayWiseConverts[$key]['Converts'] : 0;
             
-            //$daywise_targeted_conversion = round($daywise_targeted_conversion);
+            $daywise_targeted_conversion = round($daywise_targeted_conversion);
+	    //$daywise_actual_conversion   = round($daywise_actual_conversion);
 
             // Start of Prospect section ///////////////////////////////////////////////////////////////////////////////////////////////
             if (($monthly_actual_prospect < $monthly_prospect_target) && ($monthly_actual_prospect != 0 || $monthly_prospect_target != 0))
