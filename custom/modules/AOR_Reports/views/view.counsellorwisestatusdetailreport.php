@@ -378,6 +378,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $StatusList['referral_follow_up']     = 'Referral Follow Up';
         $StatusList['null']                   = 'Null';
         $StatusList['prospect']               = 'Prospect';
+        $StatusList['re-enquired']            = 'Re-Enquired';
         $StatusList['cross_sell']             = 'Cross Sell';
         $StatusList['dnc']                    = 'DNC';
         $StatusList['fallout']                = 'Fallout';

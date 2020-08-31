@@ -1,3 +1,5 @@
+<link href="custom/modules/AOR_Reports/include/css/common_style_aor_reports.css" rel="stylesheet" type="text/css"/>
+
 <section class="moduleTitle"> <h2>Counselor Wise Status Detail Report</h2><br/><br/>
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
@@ -187,30 +189,18 @@
     </div>
 
     <div style="width:99%;overflow:auto;border:2px dashed #d0d0d0;" class="div-leads-list">                          
-        <table cellpadding="0" cellspacing="0" width="{$tablewidth}" border="0" class="list view table footable-loaded footable default">
+        <table cellpadding="0" cellspacing="0" width="{$tablewidth}" border="0" class="list view table footable-loaded footable default bordered-table">
 
 
             <tr height="20">
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
-                    &nbsp;
-                </th>
-                
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="3"><strong>Alive</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="4"><strong>Converted</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Warm</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="11"><strong>Dead</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Re-Assigned</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column" colspan="2"><strong>System Disposition</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column"><strong>Recycle </strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="4"><strong>Details</strong></th>                
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="3" ><strong>Alive</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="4"><strong>Converted</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="2"><strong>Warm</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="11"><strong>Dead</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading"><strong>Re-Assigned</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="2"><strong>System Disposition</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading"><strong>Recycle </strong></th>
                 
             </tr>
             <tr height="20">
@@ -246,7 +236,7 @@
                     </td>
                     {foreach from = $StatusList key=statuskey item=vendor}
 
-                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
+                        <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column" style="text-align:center !important;"> 
                             {if !empty($program.$statuskey)} <a href="index.php?module=AOR_Reports&action=agetnleads&show={$statuskey}&batch={$program.batch_id}&lcount={$program.$statuskey}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.assigned_user_id}" target="_blank">{$program.$statuskey}</a> {else} 0 {/if} 
                             <!--{if !empty($program.$statuskey)} {$program.$statuskey} {else} 0 {/if}-->
                         </td>

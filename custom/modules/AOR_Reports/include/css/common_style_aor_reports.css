@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+
+.bordered-table > thead > tr > th,
+.bordered-table > tbody > tr > th,
+.bordered-table > tfoot > tr > th,
+.bordered-table > thead > tr > td,
+.bordered-table > tbody > tr > td,
+.bordered-table > tfoot > tr > td{
+	border: 1px solid #000 !important;
+}
+.bordered-table > tbody > tr > .table-heading {
+    text-align: center !important;
+}
