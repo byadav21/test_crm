@@ -16,8 +16,8 @@ error_reporting(E_ALL);
 		
 		$user = 'talentedgeadmin';
 		$password = 'Inkoniq@2016';
-		//$url = $sugar_config['website_URL']."/crmordersync.php?startdate='".$startDate."'&enddate='".$endDate."'";
-		$url = "http://site.talentedge.in/crmordersync.php?startdate='".$startDate."'&enddate='".$endDate."'";
+		$url = $sugar_config['website_URL']."/crmordersync.php?startdate='".$startDate."'&enddate='".$endDate."'";
+		//$url = "http://site.talentedge.in/crmordersync.php?startdate='".$startDate."'&enddate='".$endDate."'";
 		
 		//echo $url;
 		$headers = array(
@@ -43,17 +43,15 @@ error_reporting(E_ALL);
 		$i=0;
 		
 		foreach ($res as $value){
-			
-			if( !empty($value['taxtype']) && !empty($value['state']) ){
+			if( !empty($value['taxtype']) && !empty($value['state'] && !empty($value['payment_id'])) ){
 				
 				$query = "UPDATE te_payment_details SET tax_type='".$value['taxtype']."', state='".$value['state']."' where invoice_order_number='".$value['payment_id']."' ";
 				$qry1= $db->query($query);
 				echo "Numbers of Rows:- ".$i;
 				echo "</br>";
-			}
-		$i++;
-		}
-		
 			
+				$i++;
+			}
+		}	
 	}
 ?>
