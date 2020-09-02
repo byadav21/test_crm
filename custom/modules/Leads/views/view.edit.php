@@ -20,6 +20,8 @@ class LeadsViewEdit extends ViewEdit
         $getRoleSlug = getUsersRole();
         $usersRole   = ''; //Contact Center Counselor 
         $usersRole   = !empty($getRoleSlug[$current_user->id]['role_name']) ? $getRoleSlug[$current_user->id]['role_name'] : 'NA';
+        $usertype   ='';
+		$usertype   =   is_admin($current_user);
 
         $cue_txt = 'N/A';
         $sql     = "select batch_cc_cue from te_ba_batch where id='" . $this->bean->te_ba_batch_id_c . "' and deleted=0";
@@ -113,6 +115,7 @@ class LeadsViewEdit extends ViewEdit
         echo "<input type='hidden' id='CheckEditView' value='" . $_REQUEST['record'] . "'>";
         echo "<input type='hidden' id='cute_txt_id' value='" . $cue_txt . "'>";
         echo "<input type='hidden' id='role_name_id' value='" . $usersRole . "'>";
+        echo "<input type='hidden' id='usertype' value='" . $usertype . "'>";
 
         //print_r($GLOBALS['app_list_strings']['indian_states']); die;
 
@@ -152,7 +155,7 @@ class LeadsViewEdit extends ViewEdit
             var xxx = '<i class="fa fa-exclamation-circle" style="font-size:20px;color:limegreen;cursor: pointer;" title="' + jjj + '" data-placement="bottom"></i>';
             var dispo_reason = '<?php echo $dispo_reason; ?>';
             var role_name = '<?php echo $usersRole; ?>';
-
+			var usertype = '<?php echo $usertype; ?>';
             $(document).ready(function () {
                 
                 //alert(role_name);
@@ -522,7 +525,9 @@ class LeadsViewEdit extends ViewEdit
                     } else if (el.val() === "Converted") {
                         $("#status_description option").remove();
                         $("#status_description").append('<option></option>');
-                        $("#status_description").append('<option>Converted</option>');
+                        if(usertype==1){
+							$("#status_description").append('<option>Converted</option>');
+                        }
                         $("#status_description").append('<option>Instalment Follow Up</option>');
                         $("#status_description").append('<option>Referral Follow Up</option>');
                     } 
