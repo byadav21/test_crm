@@ -53,6 +53,9 @@ class AOR_ReportsViewtargetupload extends SugarView
                     if($contRow['id']==''){//user not exists
                         continue;
                     }
+                    $batchselect = "SELECT * FROM te_ba_batch WHERE `batch_code`='".$emapData[3]."' ";
+                    $result_set_batch =  $db->query($batchselect);
+                    $contRowbatch= $db->fetchByAssoc($result_set_batch);
                     $SQLSELECT = "SELECT * FROM agent_productivity_report WHERE `user_id`='".$contRow['id']."' and month='".$emapData[1]."' and year='".$emapData[2]."'";
                         $result_set =  $db->query($SQLSELECT);
                         $contRow = $db->fetchByAssoc($result_set);
@@ -61,6 +64,7 @@ class AOR_ReportsViewtargetupload extends SugarView
                         `month`="'.$emapData[1].'",
                         `year`="'.$emapData[2].'",
                         `batch_code`="'.$emapData[3].'",
+                        `batch_id`="'.$contRowbatch['id'].'"
                         `target_gsv`="'.$emapData[4].'",
                         `target_unit`="'.$emapData[5].'",
                         `target_pitched`="'.$emapData[6].'",
