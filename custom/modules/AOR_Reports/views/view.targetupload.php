@@ -79,7 +79,7 @@ class AOR_ReportsViewtargetupload extends SugarView
                         $result = $db->query($agentupdate);
                     }else{                       
                         $username=$contRowuser['first_name']." ".$contRowuser['last_name'];
-                        $sql = 'insert into agent_productivity_report (user_name,user_id,reporting_to,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days,created_date) values ( "'.$username.'","'.$contRowuser['id'].'","'.$contRowuser['reports_to_id'].'" ,"'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'","'.date("Y-m-d H:i:s").'")';
+                        $sql = 'insert into agent_productivity_report (user_name,user_id,reporting_to,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days,created_date,status) values ( "'.$username.'","'.$contRowuser['id'].'","'.$contRowuser['reports_to_id'].'" ,"'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'","'.date("Y-m-d H:i:s").'","1")';
 
                         $result = $db->query($sql);
                         if (!$result){
