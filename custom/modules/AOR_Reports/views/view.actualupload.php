@@ -74,7 +74,6 @@ class AOR_ReportsViewactualupload extends SugarView
                     if($contRow>0) {
                         $agentupdate    ='update  te_amyeo_calls_history set 
                                             `calling_date`      = "'.$cdate.'",
-                                            `id`                = "'.mt_rand().'",
                                             `manager`           = "'.$emapData[0].'",
                                             `tl_am`             = "'.$emapData[1].'",
                                             `modified_user_id`  = "'.$current_user->id.'",
@@ -100,7 +99,7 @@ class AOR_ReportsViewactualupload extends SugarView
                     }else {
                         
                         $sql = 'insert into te_amyeo_calls_history (calling_date,id,manager,tl_am,modified_user_id,created_by,counsellor_id,counsellor,total_calls_dialed,inbound_time,outbound_time,autodial_time,total_call_time,average_talk_time,name, date_entered) values ("'.$cdate.'","'.create_guid().'",
-                    "'.$emapData['0'].'", "'.$emapData['1'].'", "'.$current_user->id.'", "'.$current_user->id.'", "'.$contRow['id'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['49'].'", "'.$emapData['50'].'", "'.$emapData['51'].'", "'.$emapData['52'].'","'.$emapData['36'].'","'.$emapData[7].'", "'.date("Y-m-d H:i:s").'")';
+                    "'.$emapData['0'].'", "'.$emapData['1'].'", "'.$current_user->id.'", "'.$current_user->id.'", "'.$contRowUser['id'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['49'].'", "'.$emapData['50'].'", "'.$emapData['51'].'", "'.$emapData['52'].'","'.$emapData['36'].'","'.$emapData[7].'", "'.date("Y-m-d H:i:s").'")';
                                     
                         $result = $db->query($sql);
                         if(!$result)
