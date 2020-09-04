@@ -77,7 +77,8 @@ class AOR_ReportsViewtargetupload extends SugarView
                         `working_days`="'.$emapData[12].'" where `user_id` ="'.$contRow['id'].'" and month="'.$emapData[1].'" and year="'.$emapData[2].'"';
                         $result = $db->query($agentupdate);
                     }else{                       
-                        $sql = 'insert into agent_productivity_report (user_id,reporting_to,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days) values ( "'.$contRowuser['id'].'","'.$contRowuser['reports_to_id'].'" ,"'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'")';
+                        $username=$contRowuser['first_name']." ".$contRowuser['last_name'];
+                        $sql = 'insert into agent_productivity_report (user_name,user_id,reporting_to,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days) values ( "'.$username.'","'.$contRowuser['id'].'","'.$contRowuser['reports_to_id'].'" ,"'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'")';
 
                         $result = $db->query($sql);
                         if (!$result){
