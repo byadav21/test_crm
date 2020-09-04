@@ -11,7 +11,7 @@ class AOR_ReportsViewactualupload extends SugarView
 
     public function display()
     {
-        global $db;
+        global $db, $current_user;
         if (isset($_POST["Import"]))
         {
             $mimeType='';
@@ -32,7 +32,6 @@ class AOR_ReportsViewactualupload extends SugarView
             {
                 echo "<script type=\"text/javascript\">
                             alert(\"Invalid File:Please Upload CSV File.\");
-                            window.location = \"index.php?module=AOR_Reports&action=actualupload\"
                     </script>";
             }
 
@@ -44,7 +43,7 @@ class AOR_ReportsViewactualupload extends SugarView
                 while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
                 {   
 
-                    if ($count== 0 && $emapData[2] =='') {
+                    if ($count== 0 && $emapData[2] !='') {
                         $cdate=$emapData[2];
                         $count++;
                         continue;
@@ -54,7 +53,7 @@ class AOR_ReportsViewactualupload extends SugarView
                         $count++;
                         continue;
                     }
-                    //print_r($emapData) die();
+                    
                     //Check Validation Date & Email 
                     if($emapData[2]=='' || $emapData[7]=='') 
                     continue;
@@ -78,6 +77,8 @@ class AOR_ReportsViewactualupload extends SugarView
                                             `id`                = "'.mt_rand().'",
                                             `manager`           = "'.$emapData[0].'",
                                             `tl_am`             = "'.$emapData[1].'",
+                                            `modified_user_id`  = "'.$current_user->id.'",
+                                            `counsellor_id`     = "'.$emapData[7].'",
                                             `counsellor`        = "'.$emapData[7].'",
                                             `total_calls_dialed`= "'.$emapData[8].'",
                                             `inbound_time`      = "'.$emapData[49].'",
@@ -85,28 +86,27 @@ class AOR_ReportsViewactualupload extends SugarView
                                             `autodial_time`     = "'.$emapData[51].'",
                                             `total_call_time`   = "'.$emapData[52].'",
                                             `average_talk_time` = "'.$emapData[36].'",
-                                            `name`              = "'.$contRow['name'].'",
-                                            where `name` ="'.$contRow['name'].'" and calling_date="'.$cdate.'" ';
+                                            `name`              = "'.$emapData[7].'",
+                                            where `name` ="'.$emapData[7].'" and calling_date="'.$cdate.'" ';
                         
                         $result = $db->query($agentupdate);
                         if(!$result)
                         {
                             echo "<script type=\"text/javascript\">
                                     alert(\"Error:Please check the Update query.\");
-                                    window.location = \"index.php?module=AOR_Reports&action=actualupload\"
                                 </script>";
                         }
 
                     }else {
-                        $sql = 'insert into te_amyeo_calls_history (calling_date,id,manager,tl_am,counsellor,total_calls_dialed,inbound_time,outbound_time,autodial_time,total_call_time,average_talk_time,name) values ("'.$cdate.'","'.mt_rand().'",
-                    "'.$emapData['0'].'", "'.$emapData['1'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['49'].'", "'.$emapData['50'].'", "'.$emapData['51'].'", "'.$emapData['52'].'","'.$emapData['36'].'","'.$contRow['user_name'].'")';
+                        
+                        $sql = 'insert into te_amyeo_calls_history (calling_date,id,manager,tl_am,modified_user_id,created_by,counsellor_id,counsellor,total_calls_dialed,inbound_time,outbound_time,autodial_time,total_call_time,average_talk_time,name, date_entered) values ("'.$cdate.'","'.mt_rand().'",
+                    "'.$emapData['0'].'", "'.$emapData['1'].'", "'.$current_user->id.'", "'.$current_user->id.'", "'.$emapData[7].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['49'].'", "'.$emapData['50'].'", "'.$emapData['51'].'", "'.$emapData['52'].'","'.$emapData['36'].'","'.$emapData[7].'", "'.date("Y-m-d H:i:s").'")';
                                     
                         $result = $db->query($sql);
                         if(!$result)
                         {
                             echo "<script type=\"text/javascript\">
                                     alert(\"Error:Please check the Insert query.\");
-                                    window.location = \"index.php?module=AOR_Reports&action=actualupload\"
                                 </script>";
                         }
                     }
@@ -116,7 +116,6 @@ class AOR_ReportsViewactualupload extends SugarView
                     {
                         echo "<script type=\"text/javascript\">
                                 alert(\"CSV File has been successfully Imported.\");
-                                window.location = \"../index.php?module=AOR_Reports&action=actualupload\"
                             </script>";
                     }
                   
