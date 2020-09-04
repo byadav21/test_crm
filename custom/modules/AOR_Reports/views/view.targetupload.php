@@ -15,95 +15,83 @@ class AOR_ReportsViewtargetupload extends SugarView
 
     public function display()
     {
-global $db;
-        if (isset($_POST["Import"]))
-        {
-
-
-             $mimeType='';
+        global $db;
+        if (isset($_POST["Import"])){
+            $mimeType='';
             $extentionType='';
             $filename = $_FILES["file"]["tmp_name"];
             $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type text/plain 
             $mimeType= finfo_file($finfo, $filename) . "\n"; 
-           
-           $filenameEx = $_FILES["file"]["name"];
+            $filenameEx = $_FILES["file"]["name"];
             $allowed =  array('csv');
-         $ext = pathinfo($filenameEx, PATHINFO_EXTENSION);
-           
+            $ext = pathinfo($filenameEx, PATHINFO_EXTENSION);
             if(!in_array($ext,$allowed) ) {
                 $extentionType= 'error';
             }
-            
-            if ($extentionType=='error' && $mimeType!='text/plain')
-   {
-     
-           
+            if ($extentionType=='error' && $mimeType!='text/plain'){             
                echo "<script type=\"text/javascript\">
                                                          alert(\"Invalid File:Please Upload CSV File.\");
                                                          window.location = \"index.php?module=AOR_Reports&action=targetupload\"
                                                  </script>";
             }
-
-
-            if ($_FILES["file"]["size"] > 0)
-            {
+            if ($_FILES["file"]["size"] > 0){
                 $count = 0;
-
                 $file     = fopen($filename, "r");
-                while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
-                {   
+                while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE){   
                     if ($count == 0) {
                         $count++;
                         continue;
                     }    
-//print_r($emapData) die();
-                   // if($emapData[0]=='' || $emapData[1]==''|| $emapData[2]==''||$emapData[12]=='') continue;
-                       
-                   $sql = 'insert into agent_productivity_report (user_id,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days) values ( "'.$emapData['0'].'", "'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'")';
-                 
-                    $result = $db->query($sql);
-                    //print_r($db); die();
-                    if (!$result)
-                    {
-                         echo "<script type=\"text/javascript\">
-                                    alert(\"Error:Please check the Insert query.\");
-                                //  window.location = \"index.php?module=AOR_Reports&action=targetupload\"
-                                </script>";
+                    //print_r($emapData) die();
+                    if($emapData[0]=='' || $emapData[1]==''|| $emapData[2]==''||$emapData[12]==''){
+                        continue;
                     }
-                    $count++;
-            
-
-                    if($emapData[0]=='') continue;
-                    $SQLSELECT = "SELECT * FROM agent_productivity_report WHERE `user_id`='".$emapData[0]."' ";
+                    //For Update
+                    $userselect = "SELECT * FROM users WHERE `user_name`='".$emapData[0]."' ";
+                    $result_set =  $db->query($userselect);
+                    $contRow = $db->fetchByAssoc($result_set);
+                    if($contRow['id']==''){//user not exists
+                        continue;
+                    }
+                    $SQLSELECT = "SELECT * FROM agent_productivity_report WHERE `user_id`='".$contRow['id']."' and month='".$emapData[1]."' and year='".$emapData[2]."'";
                         $result_set =  $db->query($SQLSELECT);
                         $contRow = $db->fetchByAssoc($result_set);
-                   if($contRow>0) {                   
-                            $agentupdate    ='update  agent_productivity_report set `user_id`="'.$emapData[0].'",
-                            `month`="'.$emapData[1].'",
-                            `year`="'.$emapData[2].'",
-                            `batch_code`="'.$emapData[3].'",
-                            `target_gsv`="'.$emapData[4].'",
-                            `target_unit`="'.$emapData[5].'",
-                            `target_pitched`="'.$emapData[6].'",
-                            `target_prospects`="'.$emapData[7].'",
-                            `conversion_rate`="'.$emapData[8].'",
-                            `connected_calls`="'.$emapData[9].'",
-                            `talk_time`="'.$emapData[10].'",
-                            `quality_score`="'.$emapData[11].'",
-                            `working_days`="'.$emapData[12].'" where `user_id` ="'.$emapData[0].'"';
+                    if($contRow>0) {                   
+                        $agentupdate    ='update  agent_productivity_report set `user_id`="'.$contRow['id'].'",
+                        `month`="'.$emapData[1].'",
+                        `year`="'.$emapData[2].'",
+                        `batch_code`="'.$emapData[3].'",
+                        `target_gsv`="'.$emapData[4].'",
+                        `target_unit`="'.$emapData[5].'",
+                        `target_pitched`="'.$emapData[6].'",
+                        `target_prospects`="'.$emapData[7].'",
+                        `conversion_rate`="'.$emapData[8].'",
+                        `connected_calls`="'.$emapData[9].'",
+                        `talk_time`="'.$emapData[10].'",
+                        `quality_score`="'.$emapData[11].'",
+                        `working_days`="'.$emapData[12].'" where `user_id` ="'.$contRow['id'].'" and month="'.$emapData[1].'" and year="'.$emapData[2].'"';
+                        $result = $db->query($agentupdate);
+                    }else{                       
+                        $sql = 'insert into agent_productivity_report (user_id,reporting_to,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days) values ( "'.$contRow['id'].'","'.$contRow['reports_to_id'].'" ,"'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'")';
 
-
-                            $result = $db->query($agentupdate);
-                   }
-                   if (!$result)
+                        $result = $db->query($sql);
+                        if (!$result){
+                            echo "<script type=\"text/javascript\">
+                            alert(\"Error:Please check the Insert query.\");
+                            //  window.location = \"index.php?module=AOR_Reports&action=targetupload\"
+                            </script>";
+                        }                        
+                    }
+                    $count++;
+                   /*if (!$result)
                     {
                      echo "<script type=\"text/javascript\">
                                    alert(\"Error:Please check the update query.\");
                                    window.location = \"index.php?module=AOR_Reports&action=targetupload\"
                          </script>";
-                    }
-                }
-            }
+                    }*/
+                }//while end
+            }//file size check
 
 
 
