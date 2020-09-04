@@ -74,7 +74,7 @@ class AOR_ReportsViewtargetupload extends SugarView
                         `connected_calls`="'.$emapData[9].'",
                         `talk_time`="'.$emapData[10].'",
                         `quality_score`="'.$emapData[11].'",
-                        `modified_date`="'.time().'",
+                        `modified_date`="'.date("Y-m-d H:i:s").'",
                         `working_days`="'.$emapData[12].'" where `user_id` ="'.$contRowuser['id'].'" and month="'.$emapData[1].'" and year="'.$emapData[2].'"';
                         $result = $db->query($agentupdate);
                     }else{                       
