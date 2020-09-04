@@ -65,7 +65,7 @@ class AOR_ReportsViewtargetupload extends SugarView
                         `month`="'.$emapData[1].'",
                         `year`="'.$emapData[2].'",
                         `batch_code`="'.$emapData[3].'",
-                        `batch_id`="'.$contRowbatch['id'].'"
+                        `batch_id`="'.$contRowbatch['id'].'",
                         `target_gsv`="'.$emapData[4].'",
                         `target_unit`="'.$emapData[5].'",
                         `target_pitched`="'.$emapData[6].'",
