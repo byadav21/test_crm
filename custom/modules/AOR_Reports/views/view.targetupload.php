@@ -49,18 +49,19 @@ class AOR_ReportsViewtargetupload extends SugarView
                     //For Update
                     $userselect = "SELECT * FROM users WHERE `user_name`='".$emapData[0]."' ";
                     $result_set =  $db->query($userselect);
-                    $contRow = $db->fetchByAssoc($result_set);
-                    if($contRow['id']==''){//user not exists
+                    $contRowuser = $db->fetchByAssoc($result_set);
+                    if($contRowuser['id']==''){//user not exists
                         continue;
                     }
                     $batchselect = "SELECT * FROM te_ba_batch WHERE `batch_code`='".$emapData[3]."' ";
                     $result_set_batch =  $db->query($batchselect);
                     $contRowbatch= $db->fetchByAssoc($result_set_batch);
-                    $SQLSELECT = "SELECT * FROM agent_productivity_report WHERE `user_id`='".$contRow['id']."' and month='".$emapData[1]."' and year='".$emapData[2]."'";
+                    $SQLSELECT = "SELECT * FROM agent_productivity_report WHERE `user_id`='".$contRowuser['id']."' and month='".$emapData[1]."' and year='".$emapData[2]."'";
                         $result_set =  $db->query($SQLSELECT);
                         $contRow = $db->fetchByAssoc($result_set);
                     if($contRow>0) {                   
-                        $agentupdate    ='update  agent_productivity_report set `user_id`="'.$contRow['id'].'",
+                        $agentupdate    ='update  agent_productivity_report set `user_id`="'.$contRowuser['id'].'",
+                        `reporting_to`="'.$contRowuser['reports_to_id'].'",
                         `month`="'.$emapData[1].'",
                         `year`="'.$emapData[2].'",
                         `batch_code`="'.$emapData[3].'",
@@ -76,7 +77,7 @@ class AOR_ReportsViewtargetupload extends SugarView
                         `working_days`="'.$emapData[12].'" where `user_id` ="'.$contRow['id'].'" and month="'.$emapData[1].'" and year="'.$emapData[2].'"';
                         $result = $db->query($agentupdate);
                     }else{                       
-                        $sql = 'insert into agent_productivity_report (user_id,reporting_to,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days) values ( "'.$contRow['id'].'","'.$contRow['reports_to_id'].'" ,"'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'")';
+                        $sql = 'insert into agent_productivity_report (user_id,reporting_to,month,year,batch_code,target_gsv,target_unit,target_pitched,target_prospects,conversion_rate,connected_calls,talk_time,quality_score,working_days) values ( "'.$contRowuser['id'].'","'.$contRowuser['reports_to_id'].'" ,"'.$emapData['1'].'", "'.$emapData['2'].'", "'.$emapData['3'].'", "'.$emapData['4'].'", "'.$emapData['5'].'", "'.$emapData['6'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['9'].'", "'.$emapData['10'].'", "'.$emapData['11'].'", "'.$emapData['12'].'")';
 
                         $result = $db->query($sql);
                         if (!$result){
