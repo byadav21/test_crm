@@ -38,7 +38,7 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['te_ba_Batch'] = 'Batch';
+$app_list_strings['moduleList']['te_ba_Batch'] = NULL;
 $app_list_strings['batch_status_list']['planned'] = 'Planned';
 $app_list_strings['batch_status_list']['enrollment_in_progress'] = 'Enrollment In-Progress';
 $app_list_strings['batch_status_list']['enrollment_closed'] = 'Enrollment Closed';
