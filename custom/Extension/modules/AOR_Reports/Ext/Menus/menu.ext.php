@@ -211,7 +211,11 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwiseleadsource', "Vendor Wise Lead Source Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=srmstudentlist', "Student List Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=targetupload', "Target Upload", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=actualupload', "Actual Upload", 'AOR_Reports');
 }
+
+
 if ($displayCCM)
 {  
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');

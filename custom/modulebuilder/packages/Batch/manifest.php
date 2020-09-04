@@ -63,9 +63,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'Batch',
-  'published_date' => '2016-09-05 12:01:22',
+  'published_date' => '2020-09-01 13:10:31',
   'type' => 'module',
-  'version' => 1473076882,
+  'version' => 1598965831,
   'remove_tables' => 'prompt',
 );
 
