@@ -221,20 +221,20 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         //echo 'dd=='.$current_userAccess['slug'];
         if (!empty($month))
         {
-            $wherex .= " AND month(leads.date_entered) = '$month' ";
+            $wherex .= " AND month(leads.date_of_prospect) = '$month' ";
         }
         if (!empty($year))
         {
-            $wherex .= " AND year(leads.date_entered)='$year' ";
+            $wherex .= " AND year(leads.date_of_prospect)='$year' ";
         }
         if (!empty($yesterday))
         {
 
-            $wherex .= " AND date(leads.date_entered)= '$yesterday' ";
+            $wherex .= " AND date(leads.date_of_prospect)= '$yesterday' ";
         }
         if (!empty($today))
         {
-            $wherex .= " AND date(leads.date_entered)= '$today' ";
+            $wherex .= " AND date(leads.date_of_prospect)= '$today' ";
         }
 
         if (!empty($selected_councellors) && $userSlug != 'CCC')
