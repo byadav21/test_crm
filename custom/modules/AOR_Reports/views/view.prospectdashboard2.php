@@ -69,9 +69,9 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
                          WHERE aru.`role_id` IN ('7e225ca3-69fa-a75d-f3f2-581d88cafd9a')
                            AND u.deleted=0 $conditons
-                           AND aru.deleted=0 
-                           AND acl_roles.deleted=0 
-                           AND u.deleted=0  
+                           AND aru.deleted=0
+                           AND acl_roles.deleted=0
+                           AND u.deleted=0
                            AND u.employee_status='Active'";
         $userObj  = $db->query($userSql);
         $usersArr = [];
@@ -116,13 +116,13 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                          INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
  			 INNER join acl_roles on aru.role_id=acl_roles.id
                          INNER JOIN users AS ru ON ru.id=u.reports_to_id
-                         WHERE 
+                         WHERE
                             u.deleted=0
                             #AND aru.`role_id` IN ('270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')
                            $conditons
-                           AND aru.deleted=0 
-                           AND acl_roles.deleted=0 
-                           AND u.deleted=0 
+                           AND aru.deleted=0
+                           AND acl_roles.deleted=0
+                           AND u.deleted=0
                             AND u.department='CC'
                            AND u.employee_status='Active' ";
         $userObj  = $db->query($userSql);
@@ -187,16 +187,16 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         //#AND dispositionCode IN ('Fallout','Follow Up','Cross Sell','Prospect','Converted')
 
-        $batchSql     = "select 
+        $batchSql     = "select
                             users.id user_id,
                             users.user_name user,
                             concat(IFNULL(users.first_name,''),' ',IFNULL(users.last_name,'')) as Agent_Name
-                           
-                            from users 
+
+                            from users
                             where users.deleted=0
                             AND users.status='Active'
                             AND users.department='CC'
-                          
+
                             $wherex ;";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
@@ -208,7 +208,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         }
         return $batchOptions;
     }
-    
+
     function getTotalProspect($year = '', $month = '', $yesterday = '', $today = '', $selected_councellors = array(), $current_userAccess = array(), $CouncellorsList = array())
     {
         global $db, $current_user;
@@ -262,7 +262,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         //$pinchedArr = array('Converted');
         //echo '<pre>'.
-        $batchSql     = "SELECT 
+        $batchSql     = "SELECT
                             users.user_name,
                             leads.status_description,
                                 month(leads.date_entered) monthwise,
@@ -274,7 +274,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                      WHERE leads.deleted=0
                        and leads.assigned_user_id!=''
                        AND users.deleted=0
-                       
+
 		       AND users.department='CC'
                        AND leads.status_description ='Prospect'
                       $wherex
@@ -344,7 +344,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         //$pinchedArr = array('Converted');
         //echo '<pre>'.
-        $batchSql     = "SELECT 
+        $batchSql     = "SELECT
                             users.user_name,
                             leads.status_description,
                                 month(leads.date_of_prospect) monthwise,
@@ -388,7 +388,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $wherex .= " AND apr.year = '$year' ";
         }
 
-        $batchSql     = "SELECT 
+        $batchSql     = "SELECT
                             users.user_name,
                             apr.target_pitched,
                             apr.target_prospects,
@@ -397,7 +397,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                             apr.conversion_rate,
                             apr.connected_calls,
                             apr.talk_time,
-                            apr.quality_score
+                            apr.quality_score,
+                            apr.working_days
                      FROM agent_productivity_report apr
                      INNER JOIN users ON apr.user_id =users.id
                      WHERE apr.status=1
@@ -411,12 +412,14 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $batchOptions[$row['user_name']]['Prospects']       += $row['target_prospects'];
             $batchOptions[$row['user_name']]['conversion_rate'] += $row['conversion_rate'];
             $batchOptions[$row['user_name']]['connected_calls'] += $row['connected_calls'];
-            $batchOptions[$row['user_name']]['talk_time']       += ($row['talk_time'] * 3600);
+            //$batchOptions[$row['user_name']]['talk_time']       += ($row['talk_time'] * 3600);
+            $batchOptions[$row['user_name']]['talk_time']       += $row['talk_time'];
             $batchOptions[$row['user_name']]['quality_score']   += $row['quality_score'];
+            $batchOptions[$row['user_name']]['working_days']       += $row['working_days'];
         }
         return $batchOptions;
     }
-    
+
     function clean($string){
       return preg_replace('/[^A-Za-z0-9\-]/', ' ', $string); // Removes special chars.
     }
@@ -466,7 +469,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         }
 
 
-        $batchSql     = "SELECT 
+        $batchSql     = "SELECT
                             *
                      FROM te_amyeo_calls_history ach
                      LEFT JOIN users ON ach.counsellor_id =users.id
@@ -540,7 +543,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         //$pinchedArr = array('Converted');
         //echo '<pre>'.
-        $batchSql     = "SELECT 
+        $batchSql     = "SELECT
                             users.user_name,
                             leads.status_description,
                                 month(leads.converted_date) monthwise,
@@ -567,8 +570,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         }
         return $batchOptions;
     }
-    
-    
+
+
     function  getProspectComments($month = '',$year = '')
     {
         global $db;
@@ -595,7 +598,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         {
 
             $batchOptions[$row['user_email']]['comments']  = $row['comments'];
-            
+
         }
         return $batchOptions;
     }
@@ -616,7 +619,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $current_userAccess = "";
         $userSlug           = "";
         $getUsersRole       = getUsersRole();
-        
+
 
         $current_userAccess = isset($getUsersRole[$current_user->id]) ? $getUsersRole[$current_user->id] : array();
         $userSlug           = $current_userAccess['slug'];
@@ -713,7 +716,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         //## All USER List
         $getAgentsUser = $this->getAgentsUser($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
 
-        # Month wise Report to be poplated 
+        # Month wise Report to be poplated
 
 
 
@@ -726,10 +729,10 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $getMonthwiseProspect = $this->getMonthToDateProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayWiseProspect   = $this->getMonthToDateProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
-        
+
         $getMonthTotalProspect = $this->getTotalProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayTotalProspect   = $this->getTotalProspect('', '', '', $selected_date, '', $current_userAccess, '');
-        
+
         $getMonthwiseConverts = $this->getActualConverts($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayWiseConverts   = $this->getActualConverts('', '', '', $selected_date, '', $current_userAccess, '');
 
@@ -743,7 +746,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $theFInalArray[$key]['Agent_Name']    = isset($val['Agent_Name']) ? $val['Agent_Name'] : 0;
             $theFInalArray[$key]['Agent_ID']      = isset($val['user_id']) ? $val['user_id'] : 0;
             $quality_score  = isset($getTargetCount[$key]['quality_score']) ? $getTargetCount[$key]['quality_score'] : 0;
-            
+
             $theFInalArray[$key]['usercomments']  = isset($getProspectComments[$key]['comments']) ? $this->clean($getProspectComments[$key]['comments']) : '';
 
             $theFInalArray[$key]['total_month_prospect']  = isset($getMonthTotalProspect[$key]['prospect']) ? $getMonthTotalProspect[$key]['prospect'] : 0;
@@ -773,7 +776,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $daywise_targeted_conversion = isset($getTargetCount[$key]['target_unit']) ? ($getTargetCount[$key]['target_unit'] / 4) : 0;
             $monthly_actual_conversion   = isset($getMonthwiseConverts[$key]['Converts']) ? $getMonthwiseConverts[$key]['Converts'] : 0;
             $daywise_actual_conversion   = isset($getDayWiseConverts[$key]['Converts']) ? $getDayWiseConverts[$key]['Converts'] : 0;
-            
+
             $daywise_targeted_conversion = round($daywise_targeted_conversion);
 	    //$daywise_actual_conversion   = round($daywise_actual_conversion);
 
@@ -850,35 +853,47 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             // Number of Talk Time section ///////////////////////////////////////////////////////////////////////////////////////////
             if (($monthly_actual_talktime < $monthly_targeted_talktime) && ($monthly_actual_talktime != 0 || $monthly_targeted_talktime != 0))
             {
+                $monthly_targeted_talktime=round($monthly_targeted_talktime);
+                $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
                 $theFInalArray[$key]['monthly_talktime']         = 'false';
-                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . gmdate("H:i:s", $monthly_targeted_talktime) . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
+                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . $monthly_targeted_talktime . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
             }
             elseif (($monthly_actual_talktime >= $monthly_targeted_talktime) && ($monthly_actual_talktime != 0 || $monthly_targeted_talktime != 0))
             {
+                $monthly_targeted_talktime=round($monthly_targeted_talktime);
+                $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
                 $theFInalArray[$key]['monthly_talktime']         = 'true';
-                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . gmdate("H:i:s", $monthly_targeted_talktime) . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
+                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . $monthly_targeted_talktime . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
             }
             else
             {
+                $monthly_targeted_talktime=round($monthly_targeted_talktime);
+                $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
                 $theFInalArray[$key]['monthly_talktime']         = 'false';
-                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . gmdate("H:i:s", $monthly_targeted_talktime) . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
+                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . $monthly_targeted_talktime . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
             }
 
             /* Day wise */
             if (($daywise_actual_talktime < $daywise_targeted_talktime) && ($daywise_actual_talktime != 0 || $daywise_targeted_talktime != 0))
             {
+                $daywise_targeted_talktime=round($daywise_targeted_talktime);
+                $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
                 $theFInalArray[$key]['daywise_talktime']         = 'false';
-                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . gmdate("H:i:s", $daywise_targeted_talktime) . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
+                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . $daywise_targeted_talktime . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
             }
             elseif (($daywise_actual_talktime >= $daywise_targeted_talktime) && ($daywise_actual_talktime != 0 || $daywise_targeted_talktime != 0))
             {
+                $daywise_targeted_talktime=round($daywise_targeted_talktime);
+                $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
                 $theFInalArray[$key]['daywise_talktime']         = 'true';
-                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . gmdate("H:i:s", $daywise_targeted_talktime) . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
+                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . $daywise_targeted_talktime . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
             }
             else
             {
+                $daywise_targeted_talktime=round($daywise_targeted_talktime);
+                $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
                 $theFInalArray[$key]['daywise_talktime']         = 'false';
-                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . gmdate("H:i:s", $daywise_targeted_talktime) . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
+                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . $daywise_targeted_talktime . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
             }
 
 
@@ -919,15 +934,15 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             }
 
             // Call Quality Score ///////////////////////////////////////////////////////////////////////////////////////////
-            
+
             if($quality_score){
             $theFInalArray[$key]['quality_score_tooltip'] = "Score: $quality_score ";
             }            else
             {
-            $theFInalArray[$key]['quality_score_tooltip'] = "Score: NA ";    
+            $theFInalArray[$key]['quality_score_tooltip'] = "Score: NA ";
             }
-            
-          
+
+
         }
 
         //        if ((!isset($_SESSION['cccon_managers']) && empty($_SESSION['cccon_managers'])) && (!isset($_SESSION['cccon_councellors']) && empty($_SESSION['cccon_councellors'])))
@@ -936,7 +951,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         //        }
         //echo '<pre>'; print_r($theFInalArray);
         #PS @Pawan
-        
+
         if(empty($selected_councellors)){
             $theFInalArray = array();
         }
@@ -1018,7 +1033,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         $sugarSmarty->assign("selected_month", $selected_month);
         $sugarSmarty->assign("selected_years", $selected_years);
-        
+
          $sugarSmarty->assign("current_user_id", $current_user->id);
 
         $sugarSmarty->assign("CouncellorsList", $CouncellorsList);
@@ -1037,4 +1052,3 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
 }
 ?>
-
