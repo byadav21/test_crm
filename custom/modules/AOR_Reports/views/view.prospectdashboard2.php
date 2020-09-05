@@ -208,6 +208,89 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         }
         return $batchOptions;
     }
+    function getTotalActualProspect($year = '', $month = '', $yesterday = '', $today = '', $selected_councellors = array(), $current_userAccess = array(), $CouncellorsList = array())
+    {
+        global $db, $current_user;
+
+        $wherex   = '';
+        $userSlug = "";
+
+
+        //echo '$year='.$year.'$month='.$month.'$yesterday='.$yesterday.'$yesterday='.$yesterday;
+        //echo 'dd=='.$current_userAccess['slug'];
+        if (!empty($month))
+        {
+            $wherex .= " AND month(leads_audit.date_created) = '$month' ";
+        }
+        if (!empty($year))
+        {
+            $wherex .= " AND year(leads_audit.date_created)='$year' ";
+        }
+        if (!empty($yesterday))
+        {
+
+            $wherex .= " AND date(leads_audit.date_created)= '$yesterday' ";
+        }
+        if (!empty($today))
+        {
+            $wherex .= " AND date(leads_audit.date_created)= '$today' ";
+        }
+
+        if (!empty($selected_councellors) && $userSlug != 'CCC')
+        {
+            $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
+        }
+        if (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCC')
+        {
+            //echo 'xxx'.
+            $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
+        }
+        //print_r($CouncellorsList);
+        if (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCM' && empty($selected_councellors))
+        {
+            //echo 'xxx'.
+            $managersAgent = array();
+            foreach ($CouncellorsList as $key => $val)
+            {
+                $managersAgent[] = $key;
+            }
+            //print_r($managersAgent);
+            $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $managersAgent) . "')";
+        }
+
+
+        //$pinchedArr = array('Converted');
+        //echo '<pre>'.
+        echo $batchSql     = "SELECT
+                            users.user_name,
+                            leads.status_description,
+                            leads_audit.after_value_string,
+                                month(leads_audit.date_created) monthwise,
+                                year(leads_audit.date_created) yearwise,
+                            count(leads_audit.id) leadCont
+                     FROM leads
+                     INNER JOIN users ON leads.assigned_user_id =users.id
+                     INNER JOIN leads_audit ON leads.id= leads_audit.parent_id
+                     WHERE leads.deleted=0
+                       and leads.assigned_user_id!=''
+                       AND users.deleted=0
+                       AND leads_audit.field_name='status_description'
+
+               AND users.department='CC'
+                       AND leads.status_description ='Prospect'
+                      $wherex
+                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads_audit.date_created)
+                     order by leads.assigned_user_id,leads.status_description,month(leads_audit.date_created);";exit;
+        $batchObj     = $db->query($batchSql);
+        $batchOptions = array();
+        $pitchedCount = 0;
+        while ($row          = $db->fetchByAssoc($batchObj))
+        {
+
+            $batchOptions[$row['user_name']]['prospect'] += $row['leadCont'];
+        }
+        return $batchOptions;
+    }
 
     function getTotalProspect($year = '', $month = '', $yesterday = '', $today = '', $selected_councellors = array(), $current_userAccess = array(), $CouncellorsList = array())
     {
@@ -265,8 +348,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $batchSql     = "SELECT
                             users.user_name,
                             leads.status_description,
-                                month(leads.date_entered) monthwise,
-                                year(leads.date_entered) yearwise,
+                                month(leads.date_of_prospect) monthwise,
+                                year(leads.date_of_prospect) yearwise,
                             count(leads.id) leadCont
                      FROM leads
                      INNER JOIN users ON leads.assigned_user_id =users.id
@@ -278,8 +361,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 		       AND users.department='CC'
                        AND leads.status_description ='Prospect'
                       $wherex
-                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_entered)
-                     order by leads.assigned_user_id,leads.status_description,month(leads.date_entered);";
+                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads.date_of_prospect)
+                     order by leads.assigned_user_id,leads.status_description,month(leads.date_of_prospect);";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         $pitchedCount = 0;
@@ -729,7 +812,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $getMonthwiseProspect = $this->getMonthToDateProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayWiseProspect   = $this->getMonthToDateProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
-
+        $getMonthTotalProspect = $this->getTotalActualProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getMonthTotalProspect = $this->getTotalProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayTotalProspect   = $this->getTotalProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
