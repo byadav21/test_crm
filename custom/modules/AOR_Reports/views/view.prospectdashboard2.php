@@ -275,6 +275,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                        and leads.assigned_user_id!=''
                        AND users.deleted=0
                        AND leads_audit.field_name='status_description'
+                       AND leads_audit.after_value_string='Prospect'
 
                AND users.department='CC'
                        AND leads.status_description ='Prospect'
@@ -812,7 +813,9 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $getMonthwiseProspect = $this->getMonthToDateProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayWiseProspect   = $this->getMonthToDateProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
-        $getMonthTotalProspect = $this->getTotalActualProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
+        //$getMonthTotalProspect = $this->getTotalActualProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
+        $getDayWiseProspect = $this->getTotalActualProspect('', '', '', $selected_date, '', $current_userAccess, '');
+
         $getMonthTotalProspect = $this->getTotalProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayTotalProspect   = $this->getTotalProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
