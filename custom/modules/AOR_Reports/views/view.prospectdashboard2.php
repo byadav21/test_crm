@@ -681,11 +681,9 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
 
             $monthly_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time']*$getTargetCount[$key]['working_days']) : 0;
-            $monthly_targeted_talktime=round($monthly_targeted_talktime);
-            $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
+            
             $daywise_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time'] ) : 0;
-            $daywise_targeted_talktime=round($daywise_targeted_talktime);
-            $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
+            
             $monthly_actual_talktime   = isset($amyeoMonthwise[$key]['total_call_time']) ? $amyeoMonthwise[$key]['total_call_time'] : 0;
             $daywise_actual_talktime   = isset($amyeoDaywise[$key]['total_call_time']) ? $amyeoDaywise[$key]['total_call_time'] : 0;
 
@@ -770,35 +768,47 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             // Number of Talk Time section ///////////////////////////////////////////////////////////////////////////////////////////
             if (($monthly_actual_talktime < $monthly_targeted_talktime) && ($monthly_actual_talktime != 0 || $monthly_targeted_talktime != 0))
             {
+                $monthly_targeted_talktime=round($monthly_targeted_talktime);
+                $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
                 $theFInalArray[$key]['monthly_talktime']         = 'false';
-                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . gmdate("H:i:s", $monthly_targeted_talktime) . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
+                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . $monthly_targeted_talktime . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
             }
             elseif (($monthly_actual_talktime >= $monthly_targeted_talktime) && ($monthly_actual_talktime != 0 || $monthly_targeted_talktime != 0))
             {
+                $monthly_targeted_talktime=round($monthly_targeted_talktime);
+                $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
                 $theFInalArray[$key]['monthly_talktime']         = 'true';
-                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . gmdate("H:i:s", $monthly_targeted_talktime) . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
+                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . $monthly_targeted_talktime . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
             }
             else
             {
+                $monthly_targeted_talktime=round($monthly_targeted_talktime);
+                $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
                 $theFInalArray[$key]['monthly_talktime']         = 'false';
-                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . gmdate("H:i:s", $monthly_targeted_talktime) . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
+                $theFInalArray[$key]['monthly_talktime_tooltip'] = "Target: " . $monthly_targeted_talktime . " <br> Actual: " . gmdate("H:i:s", $monthly_actual_talktime);
             }
 
             /* Day wise */
             if (($daywise_actual_talktime < $daywise_targeted_talktime) && ($daywise_actual_talktime != 0 || $daywise_targeted_talktime != 0))
             {
+                $daywise_targeted_talktime=round($daywise_targeted_talktime);
+                $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
                 $theFInalArray[$key]['daywise_talktime']         = 'false';
-                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . gmdate("H:i:s", $daywise_targeted_talktime) . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
+                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . $daywise_targeted_talktime . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
             }
             elseif (($daywise_actual_talktime >= $daywise_targeted_talktime) && ($daywise_actual_talktime != 0 || $daywise_targeted_talktime != 0))
             {
+                $daywise_targeted_talktime=round($daywise_targeted_talktime);
+                $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
                 $theFInalArray[$key]['daywise_talktime']         = 'true';
-                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . gmdate("H:i:s", $daywise_targeted_talktime) . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
+                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . $daywise_targeted_talktime . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
             }
             else
             {
+                $daywise_targeted_talktime=round($daywise_targeted_talktime);
+                $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
                 $theFInalArray[$key]['daywise_talktime']         = 'false';
-                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . gmdate("H:i:s", $daywise_targeted_talktime) . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
+                $theFInalArray[$key]['daywise_talktime_tooltip'] = "Target:  " . $daywise_targeted_talktime . " <br> Actual:  " . gmdate("H:i:s", $daywise_actual_talktime);
             }
 
 
