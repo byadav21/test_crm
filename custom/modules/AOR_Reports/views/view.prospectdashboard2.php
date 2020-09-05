@@ -766,8 +766,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $daywise_actual_calls   = isset($amyeoDaywise[$key]['total_calls_dialed']) ? $amyeoDaywise[$key]['total_calls_dialed'] : 0;
 
 
-            $monthly_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? $getTargetCount[$key]['talk_time'] : 0;
-            $daywise_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time'] / 24) : 0;
+            $monthly_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time']*$getTargetCount[$key]['working_days']) : 0;
+            $daywise_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time'] ) : 0;
             $monthly_actual_talktime   = isset($amyeoMonthwise[$key]['total_call_time']) ? $amyeoMonthwise[$key]['total_call_time'] : 0;
             $daywise_actual_talktime   = isset($amyeoDaywise[$key]['total_call_time']) ? $amyeoDaywise[$key]['total_call_time'] : 0;
 
