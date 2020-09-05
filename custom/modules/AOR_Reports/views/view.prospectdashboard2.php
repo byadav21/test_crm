@@ -754,14 +754,14 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
 
             $monthly_prospect_target = isset($getTargetCount[$key]['Prospects']) ? $getTargetCount[$key]['Prospects'] : 0;
-            $daywise_prospect_target = isset($getTargetCount[$key]['Prospects']) ? ($getTargetCount[$key]['Prospects'] / 24) : 0;
+            $daywise_prospect_target = isset($getTargetCount[$key]['Prospects']) ? ($getTargetCount[$key]['Prospects'] / $getTargetCount[$key]['working_days']) : 0;
             $monthly_actual_prospect = isset($getMonthwiseProspect[$key]['prospect']) ? $getMonthwiseProspect[$key]['prospect'] : 0;
             $daywise_actual_prospect = isset($getDayWiseProspect[$key]['prospect']) ? $getDayWiseProspect[$key]['prospect'] : 0;
 
 
 
             $monthly_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? $getTargetCount[$key]['connected_calls'] : 0;
-            $daywise_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? ($getTargetCount[$key]['connected_calls'] / 24) : 0;
+            $daywise_targeted_calls = isset($getTargetCount[$key]['connected_calls']) ? ($getTargetCount[$key]['connected_calls'] / $getTargetCount[$key]['working_days']) : 0;
             $monthly_actual_calls   = isset($amyeoMonthwise[$key]['total_calls_dialed']) ? $amyeoMonthwise[$key]['total_calls_dialed'] : 0;
             $daywise_actual_calls   = isset($amyeoDaywise[$key]['total_calls_dialed']) ? $amyeoDaywise[$key]['total_calls_dialed'] : 0;
 
