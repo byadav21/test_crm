@@ -261,7 +261,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         //$pinchedArr = array('Converted');
         //echo '<pre>'.
-        echo $batchSql     = "SELECT
+        $batchSql     = "SELECT
                             users.user_name,
                             leads.status_description,
                             leads_audit.after_value_string,
@@ -281,7 +281,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                        AND leads.status_description ='Prospect'
                       $wherex
                      GROUP BY leads.assigned_user_id,leads.status_description,month(leads_audit.date_created)
-                     order by leads.assigned_user_id,leads.status_description,month(leads_audit.date_created);";exit;
+                     order by leads.assigned_user_id,leads.status_description,month(leads_audit.date_created);";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         $pitchedCount = 0;
