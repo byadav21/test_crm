@@ -178,7 +178,7 @@ class AOR_ReportsViewagetnleads extends SugarView
                     
                     $wherecl
                     order by leads.id";
-        //echo $leadSql;exit;
+        //echo $leadSql;
         $leadObj = $db->query($leadSql);
 
 
