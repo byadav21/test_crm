@@ -810,13 +810,15 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $amyeoMonthwise = $this->getamyeoCallHistoryCount($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $amyeoDaywise   = $this->getamyeoCallHistoryCount('', '', '', $selected_date, '', $current_userAccess, '');
 
-        $getMonthwiseProspect = $this->getMonthToDateProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
-        $getDayWiseProspect   = $this->getMonthToDateProspect('', '', '', $selected_date, '', $current_userAccess, '');
+        //$getMonthwiseProspect = $this->getMonthToDateProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
+        //$getDayWiseProspect   = $this->getMonthToDateProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
-        //$getMonthTotalProspect = $this->getTotalActualProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
+        $getMonthwiseProspect = $this->getTotalActualProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
         $getDayWiseProspect = $this->getTotalActualProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
+        
         $getMonthTotalProspect = $this->getTotalProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
+
         $getDayTotalProspect   = $this->getTotalProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
         $getMonthwiseConverts = $this->getActualConverts($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
