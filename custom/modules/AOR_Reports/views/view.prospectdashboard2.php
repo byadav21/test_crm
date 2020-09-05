@@ -315,7 +315,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                             apr.conversion_rate,
                             apr.connected_calls,
                             apr.talk_time,
-                            apr.quality_score
+                            apr.quality_score,
+                            apr.working_days
                      FROM agent_productivity_report apr
                      INNER JOIN users ON apr.user_id =users.id
                      WHERE apr.status=1
@@ -329,8 +330,10 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $batchOptions[$row['user_name']]['Prospects']       += $row['target_prospects'];
             $batchOptions[$row['user_name']]['conversion_rate'] += $row['conversion_rate'];
             $batchOptions[$row['user_name']]['connected_calls'] += $row['connected_calls'];
-            $batchOptions[$row['user_name']]['talk_time']       += ($row['talk_time'] * 3600);
+            //$batchOptions[$row['user_name']]['talk_time']       += ($row['talk_time'] * 3600);
+            $batchOptions[$row['user_name']]['talk_time']       += $row['talk_time'];
             $batchOptions[$row['user_name']]['quality_score']   += $row['quality_score'];
+            $batchOptions[$row['user_name']]['working_days']       += $row['working_days'];
         }
         return $batchOptions;
     }
@@ -677,8 +680,12 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $daywise_actual_calls   = isset($amyeoDaywise[$key]['total_calls_dialed']) ? $amyeoDaywise[$key]['total_calls_dialed'] : 0;
 
 
-            $monthly_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? $getTargetCount[$key]['talk_time'] : 0;
-            $daywise_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time'] / 30) : 0;
+            $monthly_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time']*$getTargetCount[$key]['working_days']) : 0;
+            $monthly_targeted_talktime=round($monthly_targeted_talktime);
+            $monthly_targeted_talktime = sprintf('%02d:%02d:%02d', ($monthly_targeted_talktime/3600),($monthly_targeted_talktime/60%60), $monthly_targeted_talktime%60);
+            $daywise_targeted_talktime = isset($getTargetCount[$key]['talk_time']) ? ($getTargetCount[$key]['talk_time'] ) : 0;
+            $daywise_targeted_talktime=round($daywise_targeted_talktime);
+            $daywise_targeted_talktime = sprintf('%02d:%02d:%02d', ($daywise_targeted_talktime/3600),($daywise_targeted_talktime/60%60), $daywise_targeted_talktime%60);
             $monthly_actual_talktime   = isset($amyeoMonthwise[$key]['total_call_time']) ? $amyeoMonthwise[$key]['total_call_time'] : 0;
             $daywise_actual_talktime   = isset($amyeoDaywise[$key]['total_call_time']) ? $amyeoDaywise[$key]['total_call_time'] : 0;
 
