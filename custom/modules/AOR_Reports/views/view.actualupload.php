@@ -79,13 +79,13 @@ class AOR_ReportsViewactualupload extends SugarView
                                             `modified_user_id`  = "'.$current_user->id.'",
                                             `counsellor_id`     = "'.$emapData[7].'",
                                             `counsellor`        = "'.$emapData[7].'",
-                                            `total_calls_dialed`= "'.$emapData[8].'",
+                                            `total_calls_dialed`= "'.$emapData[9].'",
                                             `inbound_time`      = "'.$emapData[49].'",
                                             `outbound_time`     = "'.$emapData[50].'",
                                             `autodial_time`     = "'.$emapData[51].'",
                                             `total_call_time`   = "'.$emapData[52].'",
                                             `average_talk_time` = "'.$emapData[36].'",
-                                            `name`              = "'.$emapData[7].'",
+                                            `name`              = "'.$emapData[7].'"
                                             where `name` ="'.$emapData[7].'" and calling_date="'.$cdate.'" ';
                         
                         $result = $db->query($agentupdate);
@@ -99,7 +99,7 @@ class AOR_ReportsViewactualupload extends SugarView
                     }else {
                         
                         $sql = 'insert into te_amyeo_calls_history (calling_date,id,manager,tl_am,modified_user_id,created_by,counsellor_id,counsellor,total_calls_dialed,inbound_time,outbound_time,autodial_time,total_call_time,average_talk_time,name, date_entered) values ("'.$cdate.'","'.create_guid().'",
-                    "'.$emapData['0'].'", "'.$emapData['1'].'", "'.$current_user->id.'", "'.$current_user->id.'", "'.$contRowUser['id'].'", "'.$emapData['7'].'", "'.$emapData['8'].'", "'.$emapData['49'].'", "'.$emapData['50'].'", "'.$emapData['51'].'", "'.$emapData['52'].'","'.$emapData['36'].'","'.$emapData[7].'", "'.date("Y-m-d H:i:s").'")';
+                    "'.$emapData['0'].'", "'.$emapData['1'].'", "'.$current_user->id.'", "'.$current_user->id.'", "'.$contRowUser['id'].'", "'.$emapData['7'].'", "'.$emapData['9'].'", "'.$emapData['49'].'", "'.$emapData['50'].'", "'.$emapData['51'].'", "'.$emapData['52'].'","'.$emapData['36'].'","'.$emapData[7].'", "'.date("Y-m-d H:i:s").'")';
                                     
                         $result = $db->query($sql);
                         if(!$result)
