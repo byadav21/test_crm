@@ -111,12 +111,12 @@ class AOR_ReportsViewactualupload extends SugarView
                     }
                     $count++;
                     
-                    if($result)
+                   /* if($result)
                     {
                         echo "<script type=\"text/javascript\">
                                 alert(\"CSV File has been successfully Imported.\");
                             </script>";
-                    }
+                    }*/
                   
                 }
 
