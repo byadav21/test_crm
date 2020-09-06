@@ -278,7 +278,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                        AND leads_audit.after_value_string='Prospect'
 
                AND users.department='CC'
-                       AND leads.status_description ='Prospect'
+                    #   AND leads.status_description ='Prospect'
                       $wherex
                      GROUP BY leads.assigned_user_id,leads.status_description,month(leads_audit.date_created)
                      order by leads.assigned_user_id,leads.status_description,month(leads_audit.date_created);";
