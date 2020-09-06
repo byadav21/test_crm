@@ -263,7 +263,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         //echo '<pre>'.
         $batchSql     = "SELECT
                             users.user_name,
-                            leads.status_description,
+                            leads_audit.field_name,
                             leads_audit.after_value_string,
                                 month(leads_audit.date_created) monthwise,
                                 year(leads_audit.date_created) yearwise,
@@ -271,6 +271,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                      FROM leads
                      INNER JOIN users ON leads.assigned_user_id =users.id
                      INNER JOIN leads_audit ON leads.id= leads_audit.parent_id
+                     INNER JOIN leads_cstm ON leads_cstm.id_c=leads.id
                      WHERE leads.deleted=0
                        and leads.assigned_user_id!=''
                        AND users.deleted=0
@@ -278,10 +279,11 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                        AND leads_audit.after_value_string='Prospect'
 
                AND users.department='CC'
-                       AND leads.status_description ='Prospect'
+               AND leads_cstm.prospect_status ='true'
+                      # AND leads.status_description ='Prospect'
                       $wherex
-                     GROUP BY leads.assigned_user_id,leads.status_description,month(leads_audit.date_created)
-                     order by leads.assigned_user_id,leads.status_description,month(leads_audit.date_created);";
+                     GROUP BY leads.assigned_user_id,month(leads_audit.date_created)
+                     order by leads.assigned_user_id,month(leads_audit.date_created);";
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         $pitchedCount = 0;
