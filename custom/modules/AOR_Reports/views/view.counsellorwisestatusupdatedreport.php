@@ -7,7 +7,7 @@ require_once('custom/include/Email/sendmail.php');
 //error_reporting(E_ALL);
 //ini_set('display_errors', 'On');
 
-class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
+class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
 {
 
     var $report_to_id;
@@ -140,7 +140,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             return $db->getRowCount($userObj);
         }
         
-            function getManagers($role = '')
+        function getManagers($role = '')
         {
             global $db, $current_user;
 
@@ -284,19 +284,19 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
             //$from_date          = "2017-10-01";
             //$to_date            = "2017-10-05";
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' AND DATE(leads.date_entered) <= '" . $to_date . "'";
+            $wherecl            .= " AND DATE(leads.date_modified) >= '" . $from_date . "' AND DATE(leads.date_modified) <= '" . $to_date . "'";
         }
         elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
         {
             $selected_from_date = $_SESSION['cccon_from_date'];
             $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
-            $wherecl            .= " AND DATE(leads.date_entered) >= '" . $from_date . "' ";
+            $wherecl            .= " AND DATE(leads.date_modified) >= '" . $from_date . "' ";
         }
         elseif ($_SESSION['cccon_from_date'] == "" && $_SESSION['cccon_to_date'] != "")
         {
             $selected_to_date = $_SESSION['cccon_to_date'];
             $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
-            $wherecl          .= " AND DATE(leads.date_entered) <= '" . $to_date . "' ";
+            $wherecl          .= " AND DATE(leads.date_modified) <= '" . $to_date . "' ";
         }
 
 
@@ -541,8 +541,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
         $sugarSmarty->assign("programList", $programList);
 
-
-        $sugarSmarty->assign("date_entered", "date_entered");
+        $sugarSmarty->assign("date_modified", "date_modified");
         $sugarSmarty->assign("BatchListData", $BatchListData);
         $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->assign("leadList", $leadList);
@@ -571,7 +570,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("last_page", $last_page);
         $sugarSmarty->assign("statusArr", $statusArr);
         $sugarSmarty->assign("StatusList", $StatusList);
-        $sugarSmarty->display('custom/modules/AOR_Reports/tpls/counsellorwisestatusdetailreport.tpl');
+        $sugarSmarty->display('custom/modules/AOR_Reports/tpls/counsellorwisestatusupdatedreport.tpl');
     }
 
 }

@@ -1,7 +1,7 @@
 <link href="custom/modules/AOR_Reports/include/css/common_style_aor_reports.css" rel="stylesheet" type="text/css"/>
 
-<section class="moduleTitle"> <h2>Counselor Wise Status Detail Report</h2><br/><br/>
-    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport">
+<section class="moduleTitle"> <h2>Counselor Wise Status Updated Detail Report</h2><br/><br/>
+    <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
 
@@ -231,13 +231,13 @@
                     
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_code}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column"> 
-                        {if !empty($program.total)} <a href="index.php?module=AOR_Reports&action=agetnleads&show=total&batch={$program.batch_id}&lcount={$program.total}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.assigned_user_id}&status_date={$date_entered}" target="_blank">{$program.total}</a> {else} 0 {/if}
+                        {if !empty($program.total)} <a href="index.php?module=AOR_Reports&action=agetnleads&show=total&batch={$program.batch_id}&lcount={$program.total}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.assigned_user_id}&status_date={$date_modified}" target="_blank">{$program.total}</a> {else} 0 {/if}
                         <!--{if !empty($program.total)} {$program.total} {else} 0 {/if}-->
                     </td>
                     {foreach from = $StatusList key=statuskey item=vendor}
 
                         <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column" style="text-align:center !important;"> 
-                            {if !empty($program.$statuskey)} <a href="index.php?module=AOR_Reports&action=agetnleads&show={$statuskey}&batch={$program.batch_id}&lcount={$program.$statuskey}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.assigned_user_id}&status_date={$date_entered}" target="_blank">{$program.$statuskey}</a> {else} 0 {/if} 
+                            {if !empty($program.$statuskey)} <a href="index.php?module=AOR_Reports&action=agetnleads&show={$statuskey}&batch={$program.batch_id}&lcount={$program.$statuskey}&to_date={$selected_to_date}&from_date={$selected_from_date}&assigned_user={$program.assigned_user_id}&status_date={$date_modified}" target="_blank">{$program.$statuskey}</a> {else} 0 {/if} 
                             <!--{if !empty($program.$statuskey)} {$program.$statuskey} {else} 0 {/if}-->
                         </td>
                     {/foreach}

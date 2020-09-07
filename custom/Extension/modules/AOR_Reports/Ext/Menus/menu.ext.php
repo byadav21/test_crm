@@ -209,6 +209,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=Leads&action=junkleadlog ', "Leads Snag List", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=summarised', "Summarised GSV", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwiseleadsource', "Vendor Wise Lead Source Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=srmstudentlist', "Student List Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=targetupload', "Target Upload", 'AOR_Reports');

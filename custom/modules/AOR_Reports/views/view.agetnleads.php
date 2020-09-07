@@ -70,6 +70,10 @@ class AOR_ReportsViewagetnleads extends SugarView
         {
             $assigned_user = $_GET['assigned_user'];
         }
+        if (isset($_GET['status_date']) && $_GET['status_date'] != '')
+        {
+            $status_date = $_GET['status_date'];
+        }
 
         $StatusList['new_lead']               = 'New Lead';
         $StatusList['follow_up']              = 'Follow Up';
@@ -79,6 +83,7 @@ class AOR_ReportsViewagetnleads extends SugarView
         $StatusList['not_eligible']           = 'Not Eligible';
         $StatusList['not_enquired']           = 'Not Enquired';
         $StatusList['retired']                = 'Retired';
+        $StatusList['auto_retired']           = 'Auto Retired';
         $StatusList['ringing_multiple_times'] = 'Ringing Multiple Times';
         $StatusList['wrong_number']           = 'Wrong Number';
         $StatusList['converted']              = 'Converted';
@@ -87,6 +92,8 @@ class AOR_ReportsViewagetnleads extends SugarView
         $StatusList['recycle']                = 'Recycle';
         $StatusList['dropout']                = 'Dropout';
         $StatusList['duplicate']              = 'Duplicate';
+        $StatusList['dnc']                    = 'DNC';
+        $StatusList['not_answering']          = 'Not Answering';
 
         ///New added
         $StatusList['rejected']             = 'Rejected';
@@ -97,23 +104,25 @@ class AOR_ReportsViewagetnleads extends SugarView
         $StatusList['cross_sell']           = 'Cross Sell';
         $StatusList['next_batch']           = 'Next Batch';
         $StatusList['program_enquiry']      = 'Program Enquiry';
-        $StatusList['wrap.timeout']         = 'Wrap Timeout';
+        $StatusList['re-assigned']          = 'Re-Assigned';
+        $StatusList['user_forced_logged_off'] = 'user.forced.logged.off'; 
+        $StatusList['wrap_timeout']         = 'wrap.timeout';
         ///
         $StatusList['na']                   = 'NA';
 
 
 
 
-
+        $status_date = ($status_date == 'date_modified') ? 'date_modified': 'date_entered';
         if ($from_date != "" && $to_date != "")
         {
 
-            $wherecl .= " AND DATE(leads.date_entered) >= '" . $from_date . "' AND DATE(leads.date_entered) <= '" . $to_date . "'";
+            $wherecl .= " AND DATE(leads.".$status_date.") >= '" . $from_date . "' AND DATE(leads.".$status_date.") <= '" . $to_date . "'";
         }
         else
         {
-
-            $wherecl .= " AND DATE(leads.date_entered) = '" . date('Y-m-d') . "'";
+            
+            $wherecl .= " AND DATE(leads.".$status_date.") = '" . date('Y-m-d') . "'";
         }
 
         if ($assigned_user != '')
@@ -178,7 +187,7 @@ class AOR_ReportsViewagetnleads extends SugarView
                     
                     $wherecl
                     order by leads.id";
-        //echo $leadSql;
+        // echo $leadSql;
         $leadObj = $db->query($leadSql);
 
 
