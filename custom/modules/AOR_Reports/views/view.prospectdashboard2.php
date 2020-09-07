@@ -816,7 +816,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         //$getDayWiseProspect   = $this->getMonthToDateProspect('', '', '', $selected_date, '', $current_userAccess, '');
 
         $getMonthwiseProspect = $this->getTotalActualProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
-        $getDayWiseProspect = $this->getTotalActualProspect('', '', '', $selected_date, '', $current_userAccess, '');
+        $getDayWiseProspect = $this->getTotalActualProspect('', '', '', $selected_date, '', $current_userAccess, $CouncellorsList);
 
         
         $getMonthTotalProspect = $this->getTotalProspect($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
