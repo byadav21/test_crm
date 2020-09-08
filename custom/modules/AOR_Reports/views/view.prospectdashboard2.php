@@ -601,7 +601,43 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         }
         if (!empty($today))
         {
-            $wherex .= " AND leads.converted_date= '$today' ";
+            // $today = "2020-09-30";
+            // echo $today.".<br/>";
+            $check_day      = date("d", strtotime($today));
+            $check_month    = date("m", strtotime($today));
+            $check_year     = date("Y", strtotime($today));
+            //Start Date Divided weak Wise
+            $daystartWeek1 = '01';
+            $daystartWeek2 = '08';
+            $daystartWeek3 = '15';
+            $daystartWeek4 = '23';
+
+            //End Date Divided weak Wise
+            $dayendWeek1 = '07';
+            $dayendWeek2 = '14';
+            $dayendWeek3 = '22';
+            $dayendWeek4 = '31';
+            
+            if($check_day >= $daystartWeek1  && $check_day <= $dayendWeek1){
+                $startDate = $check_year."-".$check_month."-".$daystartWeek1;
+                $endDate   = $check_year."-".$check_month."-".$dayendWeek1;
+
+            }else if($check_day <= $daystartWeek2 || $check_day <= $dayendWeek2) {
+                $startDate  = $check_year."-".$check_month."-".$daystartWeek2;
+                $endDate    = $check_year."-".$check_month."-".$dayendWeek2;
+
+            }else if($check_day <= $daystartWeek3 || $check_day <= $dayendWeek3) {
+                $startDate  = $check_year."-".$check_month."-".$daystartWeek3;
+                $endDate    = $check_year."-".$check_month."-".$dayendWeek3;
+
+            } else if($check_day <= $daystartWeek4 || $check_day <= $dayendWeek4) {
+                $startDate  = $check_year."-".$check_month."-".$daystartWeek4;
+                $endDate    = $check_year."-".$check_month."-".$dayendWeek4;
+
+            }
+            // echo $startDate ."===". $endDate;
+            // die('hello');
+            $wherex .= " AND leads.converted_date BETWEEN '$startDate' AND '$endDate' ";
         }
 
         if (!empty($selected_councellors) && $userSlug != 'CCC')
@@ -646,6 +682,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                       $wherex
                      GROUP BY leads.assigned_user_id,leads.status_description,month(leads.converted_date)
                      order by leads.assigned_user_id,leads.status_description,month(leads.converted_date);";
+        // echo $batchSql;
         $batchObj     = $db->query($batchSql);
         $batchOptions = array();
         $pitchedCount = 0;
