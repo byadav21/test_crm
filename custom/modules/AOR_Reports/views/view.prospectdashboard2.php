@@ -637,7 +637,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             }
             // echo $startDate ."===". $endDate;
             // die('hello');
-            $wherex .= " AND leads.converted_date BETWEEN $startDate AND $endDate ";
+            $wherex .= " AND leads.converted_date BETWEEN '$startDate' AND '$endDate' ";
         }
 
         if (!empty($selected_councellors) && $userSlug != 'CCC')
