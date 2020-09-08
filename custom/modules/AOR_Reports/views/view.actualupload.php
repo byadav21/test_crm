@@ -85,7 +85,8 @@ class AOR_ReportsViewactualupload extends SugarView
                                             `autodial_time`     = "'.$emapData[51].'",
                                             `total_call_time`   = "'.$emapData[52].'",
                                             `average_talk_time` = "'.$emapData[36].'",
-                                            `name`              = "'.$emapData[7].'"
+                                            `name`              = "'.$emapData[7].'",
+                                            `date_modified`     = "'.date("Y-m-d H:i:s").'" 
                                             where `name` ="'.$emapData[7].'" and calling_date="'.$cdate.'" ';
                         
                         $result = $db->query($agentupdate);
