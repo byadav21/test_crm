@@ -77,7 +77,7 @@ class AOR_ReportsViewactualupload extends SugarView
                                             `manager`           = "'.$emapData[0].'",
                                             `tl_am`             = "'.$emapData[1].'",
                                             `modified_user_id`  = "'.$current_user->id.'",
-                                            `counsellor_id`     = "'.$emapData[7].'",
+                                            `counsellor_id`     = "'.$contRowUser['id'].'",
                                             `counsellor`        = "'.$emapData[7].'",
                                             `total_calls_dialed`= "'.$emapData[9].'",
                                             `inbound_time`      = "'.$emapData[49].'",
