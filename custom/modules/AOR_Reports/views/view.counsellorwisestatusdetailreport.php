@@ -428,7 +428,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['reporting_user']                                                          = isset($usersdd[$row['assigned_user_id']]['reporting_name']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
         }
-echo "<pre>"; print_r($programList);
+// echo "<pre>"; print_r($programList);
         foreach ($programList as $key => $val)
         {
             $total = 0;
@@ -443,13 +443,18 @@ echo "<pre>"; print_r($programList);
                     echo  $unset_data = $val['assigned_user_id'] . '_BATCH_' . $val['batch_id'];
                 
                     $val['user_forced_logged_off'] = $valuecheck['user.forced.logged.off'];
+                    $val_wrap_force['user_forced_logged_off'] = $val['user_forced_logged_off'];
+                    
                     $val['wrap_timeout'] = $valuecheck['wrap.timeout'];
+                    $val_wrap_force['wrap_timeout'] = $val['wrap_timeout'];
                     
                     unset($val['user.forced.logged.off']);
                     unset($val['wrap.timeout']);
                     // unset($unset_data);
-                    array_push($programList[$key], $val);
+                    array_push($programList[$key], $val_wrap_force);
+
                     echo "<pre>"; print_r($programList);
+                    // unset($programList[$key]);
                     // die('imhere');
                 }
                 
