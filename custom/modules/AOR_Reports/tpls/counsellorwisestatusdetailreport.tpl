@@ -195,7 +195,7 @@
             <tr height="20">
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="4"><strong>Details</strong></th>                
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="3" ><strong>Alive</strong></th>
-                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="3"><strong>Converted</strong></th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="4"><strong>Converted</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="2"><strong>Warm</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading" colspan="11"><strong>Dead</strong></th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column table-heading"><strong>Re-Assigned</strong></th>

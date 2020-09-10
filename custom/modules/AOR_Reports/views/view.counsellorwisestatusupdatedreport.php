@@ -376,7 +376,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $StatusList['converted']              = 'Converted';
         $StatusList['instalment_follow_up']   = 'Instalment Follow Up';
         $StatusList['referral_follow_up']     = 'Referral Follow Up';
-        // $StatusList['null']                   = 'Null';
+        $StatusList['null']                   = 'Null';
         $StatusList['prospect']               = 'Prospect';
         $StatusList['re_enquired']            = 'Re-Enquired';
         $StatusList['cross_sell']             = 'Cross Sell';
@@ -442,7 +442,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
                     $programList[$key]['user_forced_logged_off']      = $forced_logged['user_forced_logged_off'];
                     unset($programList[$key]['user.forced.logged.off']);
                 }
-                
+
                 //Disposition change wrap.timeout to wrap_timeout
                 if($keycheck == "wrap.timeout")
                 {
