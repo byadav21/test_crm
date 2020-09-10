@@ -370,7 +370,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
         $statusArr                            = ['alive', 'dead', 'converted', 'warm', 'recycle', 'dropout'];
         
-        $StatusList['call_back']              = 'Call back';
+        $StatusList['call_back']              = 'Call Back';
         $StatusList['follow_up']              = 'Follow Up';
         $StatusList['new_lead']               = 'New Lead'; 
         $StatusList['converted']              = 'Converted';
@@ -391,13 +391,12 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $StatusList['auto_retired']           = 'Auto Retired';
         $StatusList['retired']                = 'Retired';
         $StatusList['re-assigned']            = 'Re-Assigned';
-        $StatusList['user_forced_logged_off'] = 'user.forced.logged.off'; 
-        $StatusList['wrap_timeout']           = 'wrap.timeout';
+        $StatusList['user_forced_logged_off'] = 'user_forced_logged_off'; 
+        $StatusList['wrap_timeout']           = 'wrap_timeout';
         $StatusList['recycle']                = 'Recycle';
       
         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                     COALESCE(te_ba_batch.id,'NA') AS batch_id,
-                    #COALESCE(te_ba_batch.name,'NA') AS batch_name,
                     COALESCE(te_ba_batch.batch_code,'NA')AS batch_code,
                     leads.status_description,
                     users.user_name,
@@ -419,7 +418,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $leadObj = $db->query($leadSql);
         while ($row     = $db->fetchByAssoc($leadObj))
         {
-
+            // echo "<pre>"; print_r($row);
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_id']                                                                = $row['batch_id'];
             //$programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_name']                                                              = $row['batch_name'];
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['batch_code']                                                              = $row['batch_code'];
@@ -429,20 +428,44 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']]['reporting_user']                                                          = isset($usersdd[$row['assigned_user_id']]['reporting_name']) ? $usersdd[$row['assigned_user_id']]['reporting_name'] : 'NA';
             $programList[$row['assigned_user_id'] . '_BATCH_' . $row['batch_id']][strtolower(str_replace(array(' ', '-'), '_', $row['status_description']))] = $row['lead_count'];
         }
-
+echo "<pre>"; print_r($programList);
         foreach ($programList as $key => $val)
         {
             $total = 0;
-            foreach ($StatusList as $key1 => $value)
+            
+            foreach($val as $keycheck => $valuecheck)
             {
-                $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
-                $total       += $countedLead;
+
+                if($keycheck == "user.forced.logged.off" || $keycheck == "wrap.timeout")
+                {
+                   // $key = $keycheck;
+                    //str_replace('.', ' ', $key);
+                    echo  $unset_data = $val['assigned_user_id'] . '_BATCH_' . $val['batch_id'];
+                
+                    $val['user_forced_logged_off'] = $valuecheck['user.forced.logged.off'];
+                    $val['wrap_timeout'] = $valuecheck['wrap.timeout'];
+                    
+                    unset($val['user.forced.logged.off']);
+                    unset($val['wrap.timeout']);
+                    // unset($unset_data);
+                    array_push($programList[$key], $val);
+                    echo "<pre>"; print_r($programList);
+                    // die('imhere');
+                }
+                
+                // echo "<pre>";print_r($keycheck);
+                foreach ($StatusList as $key1 => $value)
+                {
+                    $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                    $total       += $countedLead;
+                }
+                
             }
             $programList[$key]['total'] = $total;
         }
-        //echo '<pre>';
-        //print_r($programList);
-
+        echo '<pre>';
+    //    print_r($programList);
+// die('imhere');
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
