@@ -376,7 +376,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $StatusList['converted']              = 'Converted';
         $StatusList['instalment_follow_up']   = 'Instalment Follow Up';
         $StatusList['referral_follow_up']     = 'Referral Follow Up';
-        $StatusList['null']                   = 'Null';
+        // $StatusList['null']                   = 'Null';
         $StatusList['prospect']               = 'Prospect';
         $StatusList['re_enquired']            = 'Re-Enquired';
         $StatusList['cross_sell']             = 'Cross Sell';
@@ -434,18 +434,22 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             foreach($val as $keycheck => $valuecheck)
             {
                 $total = 0;
-                
-                if($keycheck == "user.forced.logged.off" || $keycheck == "wrap.timeout")
+                //Disposition change user.forced.logged.off to user_forced_logged_off
+                if($keycheck == "user.forced.logged.off")
                 {
                     $forced_logged['user_forced_logged_off'] = $valuecheck['user.forced.logged.off'];
-                    $wrap_timeout['wrap_timeout']            = $valuecheck['wrap.timeout'];
-                    
                     $programList[$key]['user_forced_logged_off']      = $forced_logged['user_forced_logged_off'];
-                    $programList[$key]['wrap_timeout']                = $wrap_timeout['wrap_timeout'];
-                    
                     unset($programList[$key]['user.forced.logged.off']);
+                }
+
+                //Disposition change wrap.timeout to wrap_timeout
+                if($keycheck == "wrap.timeout")
+                {
+                    $wrap_timeout['wrap_timeout']        = $valuecheck['wrap.timeout'];
+                    $programList[$key]['wrap_timeout']   = $wrap_timeout['wrap_timeout'];
                     unset($programList[$key]['wrap.timeout']);
                 }
+
                 foreach ($StatusList as $key1 => $value)
                 {
                     $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
