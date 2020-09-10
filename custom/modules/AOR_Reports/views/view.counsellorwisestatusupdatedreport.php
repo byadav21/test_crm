@@ -438,16 +438,14 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
                 //Disposition change user.forced.logged.off to user_forced_logged_off
                 if($keycheck == "user.forced.logged.off")
                 {
-                    $forced_logged['user_forced_logged_off'] = $valuecheck['user.forced.logged.off'];
-                    $programList[$key]['user_forced_logged_off']      = $forced_logged['user_forced_logged_off'];
+                    $programList[$key]['user_forced_logged_off']      = $valuecheck['user.forced.logged.off'];
                     unset($programList[$key]['user.forced.logged.off']);
                 }
 
                 //Disposition change wrap.timeout to wrap_timeout
                 if($keycheck == "wrap.timeout")
                 {
-                    $wrap_timeout['wrap_timeout']        = $valuecheck['wrap.timeout'];
-                    $programList[$key]['wrap_timeout']   = $wrap_timeout['wrap_timeout'];
+                    $programList[$key]['wrap_timeout']   = $valuecheck['wrap.timeout'];
                     unset($programList[$key]['wrap.timeout']);
                 }
 
