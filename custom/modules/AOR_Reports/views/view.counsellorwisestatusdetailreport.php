@@ -431,46 +431,30 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 // echo "<pre>"; print_r($programList);
         foreach ($programList as $key => $val)
         {
-            $total = 0;
-            
             foreach($val as $keycheck => $valuecheck)
             {
-
+                $total = 0;
+                
                 if($keycheck == "user.forced.logged.off" || $keycheck == "wrap.timeout")
                 {
-                   // $key = $keycheck;
-                    //str_replace('.', ' ', $key);
-                    echo  $unset_data = $val['assigned_user_id'] . '_BATCH_' . $val['batch_id'];
-                
-                    $val['user_forced_logged_off'] = $valuecheck['user.forced.logged.off'];
-                    $val_wrap_force['user_forced_logged_off'] = $val['user_forced_logged_off'];
+                    $forced_logged['user_forced_logged_off'] = $valuecheck['user.forced.logged.off'];
+                    $wrap_timeout['wrap_timeout']            = $valuecheck['wrap.timeout'];
                     
-                    $val['wrap_timeout'] = $valuecheck['wrap.timeout'];
-                    $val_wrap_force['wrap_timeout'] = $val['wrap_timeout'];
+                    $programList[$key]['user_forced_logged_off']      = $forced_logged['user_forced_logged_off'];
+                    $programList[$key]['wrap_timeout']                = $wrap_timeout['wrap_timeout'];
                     
-                    unset($val['user.forced.logged.off']);
-                    unset($val['wrap.timeout']);
-                    // unset($unset_data);
-                    array_push($programList[$key], $val_wrap_force);
-
-                    echo "<pre>"; print_r($programList);
-                    // unset($programList[$key]);
-                    // die('imhere');
+                    unset($programList[$key]['user.forced.logged.off']);
+                    unset($programList[$key]['wrap.timeout']);
                 }
-                
-                // echo "<pre>";print_r($keycheck);
                 foreach ($StatusList as $key1 => $value)
                 {
                     $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
                     $total       += $countedLead;
                 }
-                
+                $programList[$key]['total'] = $total;
             }
-            $programList[$key]['total'] = $total;
+            
         }
-        echo '<pre>';
-    //    print_r($programList);
-// die('imhere');
 
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {

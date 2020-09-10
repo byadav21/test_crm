@@ -391,8 +391,8 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $StatusList['auto_retired']           = 'Auto Retired';
         $StatusList['retired']                = 'Retired';
         $StatusList['re-assigned']            = 'Re-Assigned';
-        $StatusList['user_forced_logged_off'] = 'user.forced.logged.off'; 
-        $StatusList['wrap_timeout']           = 'wrap.timeout';
+        $StatusList['user_forced_logged_off'] = 'user_forced_logged_off'; 
+        $StatusList['wrap_timeout']           = 'wrap_timeout';
         $StatusList['recycle']                = 'Recycle';
       
         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
@@ -432,13 +432,30 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
 
         foreach ($programList as $key => $val)
         {
-            $total = 0;
-            foreach ($StatusList as $key1 => $value)
+            // $total = 0;
+            foreach($val as $keycheck => $valuecheck)
             {
-                $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
-                $total       += $countedLead;
+                $total = 0;
+                
+                if($keycheck == "user.forced.logged.off" || $keycheck == "wrap.timeout")
+                {
+                    $forced_logged['user_forced_logged_off'] = $valuecheck['user.forced.logged.off'];
+                    $wrap_timeout['wrap_timeout']            = $valuecheck['wrap.timeout'];
+                    
+                    $programList[$key]['user_forced_logged_off']      = $forced_logged['user_forced_logged_off'];
+                    $programList[$key]['wrap_timeout']                = $wrap_timeout['wrap_timeout'];
+                    
+                    unset($programList[$key]['user.forced.logged.off']);
+                    unset($programList[$key]['wrap.timeout']);
+                }
+                
+                foreach ($StatusList as $key1 => $value)
+                {
+                    $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
+                    $total       += $countedLead;
+                }
+                $programList[$key]['total'] = $total;
             }
-            $programList[$key]['total'] = $total;
         }
         //echo '<pre>';
         //print_r($programList);
@@ -466,7 +483,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
 
 
 
-            //echo "<pre>";print_r($programList);exit();
+            // echo "<pre>";print_r($programList);exit();
             foreach ($programList as $key => $councelor)
             {
                 $data .= "\"" . $councelor['assigned_user'];
