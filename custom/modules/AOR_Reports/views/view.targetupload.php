@@ -56,7 +56,7 @@ class AOR_ReportsViewtargetupload extends SugarView
                     $batchselect = "SELECT * FROM te_ba_batch WHERE `batch_code`='".$emapData[3]."' ";
                     $result_set_batch =  $db->query($batchselect);
                     $contRowbatch= $db->fetchByAssoc($result_set_batch);
-                    $SQLSELECT = "SELECT * FROM agent_productivity_report WHERE `user_id`='".$contRowuser['id']."' and month='".$emapData[1]."' and year='".$emapData[2]."'";
+                    $SQLSELECT = "SELECT * FROM agent_productivity_report WHERE `user_id`='".$contRowuser['id']."' and month='".$emapData[1]."' and year='".$emapData[2]."' and deleted='0'";
                         $result_set =  $db->query($SQLSELECT);
                         $contRow = $db->fetchByAssoc($result_set);
                     if($contRow>0) {                   
@@ -75,7 +75,7 @@ class AOR_ReportsViewtargetupload extends SugarView
                         `talk_time`="'.$emapData[10].'",
                         `quality_score`="'.$emapData[11].'",
                         `modified_date`="'.date("Y-m-d H:i:s").'",
-                        `working_days`="'.$emapData[12].'" where `user_id` ="'.$contRowuser['id'].'" and month="'.$emapData[1].'" and year="'.$emapData[2].'"';
+                        `working_days`="'.$emapData[12].'" where `user_id` ="'.$contRowuser['id'].'" and month="'.$emapData[1].'" and year="'.$emapData[2].'" and deleted="0"';
                         $result = $db->query($agentupdate);
                     }else{                       
                         $username=$contRowuser['first_name']." ".$contRowuser['last_name'];

@@ -67,7 +67,7 @@ class AOR_ReportsViewactualupload extends SugarView
                         continue;
                     }
 
-                    $SQLSELECT = "SELECT * FROM te_amyeo_calls_history WHERE `name`='".$emapData[7]."' AND `calling_date`= '".$cdate."' ";
+                    $SQLSELECT = "SELECT * FROM te_amyeo_calls_history WHERE `name`='".$emapData[7]."' AND `calling_date`= '".$cdate."' and deleted='0'";
                     $result_set =   $db->query($SQLSELECT);
                     $contRow    =   $db->fetchByAssoc($result_set);
                     
@@ -87,7 +87,7 @@ class AOR_ReportsViewactualupload extends SugarView
                                             `average_talk_time` = "'.$emapData[36].'",
                                             `name`              = "'.$emapData[7].'",
                                             `date_modified`     = "'.date("Y-m-d H:i:s").'" 
-                                            where `name` ="'.$emapData[7].'" and calling_date="'.$cdate.'" ';
+                                            where `name` ="'.$emapData[7].'" and calling_date="'.$cdate.'" and deleted="0"';
                         
                         $result = $db->query($agentupdate);
                         if(!$result)
