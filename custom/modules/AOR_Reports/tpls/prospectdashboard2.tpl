@@ -235,7 +235,12 @@
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$key}</td>
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">{$value.Agent_Name}</td>
                     <td class="column1" valign="middle" style="width:170px; word-break: break-word;">
+                    {if $value.total_day_prospect == 0}
+                        
                         {$value.total_day_prospect}
+                        {else}
+                        <a href="index.php?module=AOR_Reports&action=agetnleads&date_of_prospect={$selected_from_date}&assigned_user={$value.Agent_ID}&status_description=Prospect" target="_blank"> {$value.total_day_prospect}</a>
+                        {/if}
                          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         {if $value.monthly_prospect == 'true'}
                             <i class="fa fa-check" aria-hidden="true" style="font-size:15px;color:green;cursor: pointer;" onclick="getTooltip('monthly_prospect_{$value.Agent_ID}', '{$value.monthly_prospect_tooltip}')"></i>
