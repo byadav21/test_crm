@@ -169,7 +169,7 @@ class AOR_ReportsViewagetnleads extends SugarView
             'leads.status'                                                => 'Status',
             'leads.status_description'                                    => 'Status Description',
             'leads.disposition_reason'                                    => 'Disposition Reason',
-            'CONCAT(leads.first_name," ",leads.last_name) Reporting_Name' => 'Customer Name',
+            "CONCAT(COALESCE(leads.first_name,''),' ',COALESCE(leads.last_name,'')) AS Reporting_Name"  => 'Customer Name',
             'leads_cstm.email_add_c'                                      => 'Email Address',
             'leads.phone_mobile'                                          => 'Mobile',
             'users.user_name'                                             => 'Agent Name',
@@ -309,7 +309,7 @@ class AOR_ReportsViewagetnleads extends SugarView
         $sugarSmarty->assign("assigned_user", $assigned_user);
         $sugarSmarty->assign("current_user_is_admin", $current_user_is_admin);
          $sugarSmarty->assign("additionalUsrStatus", $additionalUsrStatus);
-        
+
         $sugarSmarty->assign("leadList", $leadList);
         $sugarSmarty->assign("ExcelHeaders", $headers);
         $sugarSmarty->assign("current_records", $current);
