@@ -154,7 +154,7 @@ class AOR_ReportsViewagetnleads extends SugarView
 
         if ($date_of_prospect != '')
         {
-            $wherecl .= " AND  leads.date_of_prospect='" . $date_of_prospect . "'";
+            $wherecl .= " AND  leads.date_of_prospect like '" . $date_of_prospect . "%'";
             $wherecl .= " AND  leads.status_description='" . $status_description . "'";
         }
 
