@@ -45,6 +45,8 @@ class AOR_ReportsViewagetnleads extends SugarView
         $assigned_user = '';
 
 
+
+
         if (isset($_GET['batch']) && $_GET['batch'] != '')
         {
             $batch_id = $_GET['batch'];
@@ -75,6 +77,15 @@ class AOR_ReportsViewagetnleads extends SugarView
             $status_date = $_GET['status_date'];
         }
 
+        if (isset($_GET['date_of_prospect']) && $_GET['date_of_prospect'] != '')
+        {
+            $date_of_prospect = $_GET['date_of_prospect'];
+        }
+
+        if (isset($_GET['status_description']) && $_GET['status_description'] != '')
+        {
+            $status_description = $_GET['status_description'];
+        }
         $StatusList['new_lead']               = 'New Lead';
         $StatusList['follow_up']              = 'Follow Up';
         $StatusList['call_back']              = 'Call back';
@@ -112,7 +123,7 @@ class AOR_ReportsViewagetnleads extends SugarView
 
 
 
-
+        if(empty($date_of_prospect)){
         $status_date = ($status_date == 'date_modified') ? 'date_modified': 'date_entered';
         if ($from_date != "" && $to_date != "")
         {
@@ -124,6 +135,7 @@ class AOR_ReportsViewagetnleads extends SugarView
             
             $wherecl .= " AND DATE(leads.".$status_date.") = '" . date('Y-m-d') . "'";
         }
+    }
 
         if ($assigned_user != '')
         {
@@ -140,6 +152,11 @@ class AOR_ReportsViewagetnleads extends SugarView
             $wherecl .= " AND  te_ba_batch.id='" . $batch_id . "'";
         }
 
+        if ($date_of_prospect != '')
+        {
+            $wherecl .= " AND  leads.date_of_prospect='" . $date_of_prospect . "'";
+            $wherecl .= " AND  leads.status_description='" . $status_description . "'";
+        }
 
 
 
