@@ -220,7 +220,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
 if ($displayCCM)
 {  
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
-    
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
 }
 
 
