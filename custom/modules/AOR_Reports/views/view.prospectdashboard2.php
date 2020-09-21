@@ -52,7 +52,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         $is_manger = $this->checkManager();
         $conditons = '';
-        if ($is_manger == 1)
+        if ($is_manger == 1 && ($current_user->id != "1a5ea8c8-0d37-9447-eed7-5ed50f9cfd3f") && ($current_user->id != "ee49a56d-ad54-5c35-a295-5f5b4ebf2b6f") )// Used Hard code current_user id rohit lall & Prashant Shrivastava
         {
             $conditons = 'AND u.id="' . $current_user->id . '"';
         }
