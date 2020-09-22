@@ -41,7 +41,7 @@ try{
 		
 		
 		$userid=$db->fetchByAssoc($getUserID);
-		if($callType=='outbound.auto.dial'){	
+		if($callType=='outbound.auto.dial' || $callType == 'outbound.auto.preview.dial'){	
 			$lead="select id,assigned_user_id,first_name,last_name,status,status_description,dristi_campagain_id from  leads where  id='". $customers->lead_reference ."' and deleted=0 and status!='Duplicate' ";
 			$res=$db->query($lead); 
 			
@@ -84,7 +84,7 @@ try{
 		if($db->getRowCount($res) > 0){	
 			$records=$db->fetchByAssoc($res);	
 			//print_r($records);die;
-			if($callType=='outbound.auto.dial' || $callType=='outbound.callback.dial'){		
+			if($callType=='outbound.auto.dial' || $callType=='outbound.callback.dial' || $callType == 'outbound.auto.preview.dial'){		
 
 				if(empty($records['assigned_user_id']) ||  $records['assigned_user_id']==NULL ||  $records['assigned_user_id']=='NULL'){
 					$db->query("update leads set call_object_id='". $callObjId  ."' , dristi_request='".  json_encode($_REQUEST) ."',assigned_user_id='". $userid['id'] ."',assigned_date='". date('Y-m-d H:i:s') ."'  where id='". $records['id'] ."'");	
