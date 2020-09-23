@@ -58,8 +58,6 @@ if ($vendorID != '' && $vendorName != '')
     $is_Vendor = 1;
 }
 
-
-
 $userSql = "SELECT u.id
                 FROM users AS u
             INNER JOIN acl_roles_users AS aru ON aru.user_id=u.id
@@ -74,16 +72,15 @@ $userSql = "SELECT u.id
 $userObj   = $db->query($userSql);
 $is_manger = $db->getRowCount($userObj);
 
-
-
-
-
 $misData    = $acl_obj->getUserSlug($current_user->id);
 $displayCC  = false;
 $displayMis = false;
 $displaySRM = false;
 $displayDM  = false;
-$displayCCM  = false;
+$displayCCM = false;
+$displayCP  = false; // Channel Partner
+$displayCPMGR = false;// Channel Partner Manger
+$displayCPTL = false;// Channel Partner TL
 
 if ($misData['slug'] == 'CCM' || $misData['slug'] == 'CCC' || $misData['slug'] == 'CCTL' || $misData['slug'] == 'CCH')
     $displayCC  = true;
@@ -95,8 +92,13 @@ if ($misData['slug'] == 'DMM' || $misData['slug'] == 'BA')
     $displayDM  = true;
 if ($misData['slug'] == 'CCM')
     $displayCCM = true;
+if ($misData['slug'] == 'CP')
+    $displayCP = true;
+if ($misData['slug'] == 'CPMGR')    
+    $displayCPMGR = true;
+if ($misData['slug'] == 'CPTL')    
+    $displayCPTL = true;
 
-        
         $UsersVendrArr = array(
             'e7c007d2-5ca7-57e5-64ba-5b23a435c4b7',// => 'ileap',
             'b28d0f4a-b486-731e-2781-5b23a41da9cf',// => 'TBS',
@@ -123,7 +125,7 @@ if ($misData['slug'] == 'CCM')
             '87d1f4da-c6c9-81fe-944a-5b1fb537fc1c', // => 'Infoedge'
             );
         */
-        
+//   print_r($misData['slug']);      
 if ($current_user->is_admin == 1 || $displayMis || $displayCC)
 {
 
@@ -150,7 +152,7 @@ if(in_array($current_user->id, $UsersVendrArr))
 
 
 # DIgital Marketing #
-if ($current_user->is_admin == 1 || $displayMis || $displayDM)
+if ($current_user->is_admin == 1 || $displayMis || $displayDM || $displayCHP)
 {
 
     //$module_menu[] = array('index.php?module=AOR_Reports&action=studentgsv', "Student GSV", 'AOR_Reports');
@@ -216,9 +218,9 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=actualupload', "Actual Upload", 'AOR_Reports');
 }
 
-
-if ($displayCCM)
-{  
+//Channel Partner(CP) , Channel Partner Manager(CPMGR) & Channel Partner TL(CPTL) for show reports menu
+if ($displayCCM || $displayCP || $displayCPMGR || $displayCPTL )
+{
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
 }
