@@ -152,7 +152,7 @@ if(in_array($current_user->id, $UsersVendrArr))
 
 
 # DIgital Marketing #
-if ($current_user->is_admin == 1 || $displayMis || $displayDM || $displayCHP)
+if ($current_user->is_admin == 1 || $displayMis || $displayDM)
 {
 
     //$module_menu[] = array('index.php?module=AOR_Reports&action=studentgsv', "Student GSV", 'AOR_Reports');
