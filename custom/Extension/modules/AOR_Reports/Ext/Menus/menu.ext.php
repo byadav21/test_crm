@@ -219,7 +219,9 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
 }
 
 //Channel Partner(CP) , Channel Partner Manager(CPMGR) & Channel Partner TL(CPTL) for show reports menu
-if ($displayCCM || $displayCP || $displayCPMGR || $displayCPTL )
+    $checkAccess = array('CH','CHMGR','CHTL', 'CP','CPMGR','CPTL', 'QA','QAMGR','QATL', 'TR','TRMGR','TRTL');
+
+if ($displayCCM)
 {
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
