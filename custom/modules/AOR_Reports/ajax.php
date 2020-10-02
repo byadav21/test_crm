@@ -125,6 +125,72 @@ if (isset($_POST['action']) && $_POST['action'] == 'councellors')
     die;
 }
 
+if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
+    $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : "";
+    $param = $channelHeadRole;
+    $mgUserIds = getCouncelorForUsers($param);
+    $mgOption = '';
+    $tlOption = '';
+    $agentOption = '';
+    foreach ($mgUserIds as  $value)
+    {
+        $getRoleSlug = getUsersRoleData();
+        $currentRoleName   = !empty($getRoleSlug[$value['id']]['slug']) ? $getRoleSlug[$value['id']]['slug'] : '';
+        if($currentRoleName == "MG"){
+         $mgOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+        }elseif($currentRoleName == "TL"){
+        $tlOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+        }elseif($currentRoleName == "AGENT"){
+        $agentOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+        }
+    }
+    $option = array("mgOption" => $mgOption , "tlOption" => $tlOption,"agentOption" => $agentOption);
+    echo json_encode($option);
+    die();
+}elseif (isset($_POST['action']) && $_POST['action'] == 'teamLeadRole'){
+    $param = array();
+    $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : "";
+    $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : "";
+    $param = array_merge($channelHeadRole,$managerRole);
+    $tlOption = '';
+    $agentOption = '';
+    $option = array();
+    $mgUserIds = getCouncelorForUsers($param);
+    foreach ($mgUserIds as  $value)
+    {
+        $getRoleSlug = getUsersRoleData();
+        $currentRoleName   = !empty($getRoleSlug[$value['id']]['slug']) ? $getRoleSlug[$value['id']]['slug'] : '';
+        if($currentRoleName == "TL"){
+        $tlOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+        }elseif($currentRoleName == "AGENT"){
+        $agentOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+        }
+    }     
+    $option = array("tlOption" => $tlOption,"agentOption" => $agentOption);
+    echo json_encode($option);
+    die();
+}else if (isset($_POST['action']) && $_POST['action'] == 'agentRole'){
+    $param = array();
+    $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : "";
+    $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : "";
+    $tlRole = isset($_REQUEST['arg2']) ? $_REQUEST['arg2'] : "";
+    $param = array_merge($channelHeadRole,$managerRole,$tlRole);
+    $option = array();
+    $mgUserIds = getCouncelorForUsers($param);
+    $agentOption = '';
+    foreach ($mgUserIds as  $value)
+    {
+        $getRoleSlug = getUsersRoleData();
+        $currentRoleName   = !empty($getRoleSlug[$value['id']]['slug']) ? $getRoleSlug[$value['id']]['slug'] : '';
+        if($currentRoleName == "AGENT"){
+        $agentOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+        }
+    }
+    $option = array("agentOption" => $agentOption);
+    echo json_encode($option);
+    die();
+}
+
 if (isset($_POST['action']) && $_POST['action'] == 'DeleteTargetRepo')
 {
     global $db;
@@ -424,4 +490,53 @@ if (isset($_POST['action']) && $_POST['action'] == 'proComentBox')
     
    
 }
+
+function getCouncelorForUsers($user_ids = array())
+    {
+        global $db;
+        $userSql  = "SELECT u.first_name,
+                            u.last_name,
+                            u.id,
+                            ru.first_name AS reporting_firstname,
+                            ru.last_name AS reporting_lastname,
+                            ru.id AS reporting_id
+                     FROM users AS u
+                     LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+                     WHERE ru.id IN ('" . implode("',
+                                    '", $user_ids) . "')
+                       AND u.deleted=0";
+        $userObj  = $db->query($userSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+            $usersArr[$user['id']] = array(
+                'id'             => $user['id'],
+                'name'           => $user['first_name'] . ' ' . $user['last_name'],
+                'reporting_id'   => $user['reporting_id'],
+                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
+            );
+        }
+        return $usersArr;
+    }
+    
+    function getUsersRoleData()
+    {
+        global $db;
+        $proSql      = "SELECT slug, 
+                        user_id, 
+                        name role_name
+                                                 FROM acl_roles
+                                INNER JOIN acl_roles_users ON acl_roles_users.role_id = acl_roles.id
+                                AND acl_roles.deleted =0
+                                AND acl_roles_users.deleted =0";
+        $pro_Obj     = $db->query($proSql);
+        $pro_Options = array();
+        while ($row         = $db->fetchByAssoc($pro_Obj))
+        {
+            $pro_Options[$row['user_id']]['user_id']   = $row['user_id'];
+            $pro_Options[$row['user_id']]['slug']      = $row['slug'];
+            $pro_Options[$row['user_id']]['role_name'] = $row['role_name'];
+        }
+        return $pro_Options;
+    }
 ?>
