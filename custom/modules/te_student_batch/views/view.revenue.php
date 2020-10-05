@@ -17,6 +17,18 @@ class te_student_batchViewRevenue extends SugarView
     public function display()
     {
         global $current_user;
+            //~~~~~~~
+            $report_action = '';
+            $reportAccess  = reportAccessLog();
+
+            $current_user_id = $current_user->id;
+            if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+            {
+                echo 'You are not authorized to access!';
+                return;
+            }
+            //~~~~~~~
+
         $sugarSmarty = new Sugar_Smarty();
         $sugarSmarty->display('custom/modules/te_student_batch/tpls/revenue.tpl');
     }
