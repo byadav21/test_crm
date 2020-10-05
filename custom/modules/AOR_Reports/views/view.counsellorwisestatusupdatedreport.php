@@ -220,7 +220,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         }
         return $usersArr;
     }
-      
+    
     function checkManager()
         {
             global $db, $current_user;
@@ -319,38 +319,35 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $BatchListData   = $this->getBatch();
         $lead_source     = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
         
-        $isAdmin = $current_user->is_admin;
+        //Business Head(BH), Channel Head(CH), Sales Cluster Head(SCH), Digital Marketing Head(DMH), SRM Head(SRMH), Quality Head(QA), Training Head(TH), Vendor Head(VH), Manager(MGR), TL (TL), Agent(AGENT)
+
         $getRoleSlug = getUsersRole();
         $chUserIds = $chUserIdsDataSRM;
-        $businessHeadArray = array("BH");
-        $channelHeadArray = array("CH","CP","DIM","SRM","QA","TR","VR");
-        $managerArray = array("CHMGR","CPMGR","DIMMGR","SRMMGR","QAMGR","TRMGR","VRMGR");
-        $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
-        $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+        $businessHeadArray = array("BH","SM");
+        $channelHeadArray = array("CH","SCH","DMH","SRMH","QA","TR","VR");
+        $managerArray = array("CHMGR","SCHMGR","DMHMGR","SRMHMGR","QAMGR","TRMGR","VRMGR");
+        $teamLeadArray = array("CHTL","SCHTL","DMHTL","SRMHTL","QATL","TRTL","VRTL");
+        $agentArray = array("CHAGENT","SCHAGENT","DMHAGENT","SRMHAGENT","QAAGENT","TRAGENT","VRAGENT");
         //echo "<pre>";print_r($getRoleSlug);die();
         $usersRole   = '';
-        $currentRoleName   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : '';
+        $currentRoleName   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : '7e225ca3-69fa-a75d-f3f2-581d88cafd9a';
         $chUserIds = array();
         $mgUserIds = array();
         $tlUserIds = array();
         $agentUserIds = array();
-        if($isAdmin == 1 || in_array ($currentRoleName, $businessHeadArray)){
+        if(in_array ($currentRoleName, $businessHeadArray)){
             $chUserIds = array();
             foreach ($getRoleSlug as $userIds){
                if(in_array($userIds['slug'] , $channelHeadArray)){
                   $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
                   $chUserIds = $this->getCouncelorForUsersNew($chUserIdsData,$current_user->id);
                }
-               if($isAdmin == 1){
+               if($userIds['slug'] == "SRMH"){
                    $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
                    $chUserIdsDataSRM = $this->getCouncelorForUsersSRM($chUserIdsData,$current_user->id);
-                   $chUserIds = $chUserIdsDataSRM;
                }
             }
         }
-        
-       // echo "<pre>";print_r($chUserIds);die("Okkk");
-        
        if(in_array($currentRoleName, $channelHeadArray)){
             foreach ($getRoleSlug as $userIds){
                 if(in_array($userIds['slug'], $managerArray)){
@@ -775,7 +772,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $sugarSmarty->assign("CouncellorsList", $CouncellorsList);
         $sugarSmarty->assign("managerSList", $managerSList);
         
-       
+        
         $sugarSmarty->assign("chUserIds", $chUserIds);
         $sugarSmarty->assign("mgUserIds", $mgUserIds);
         $sugarSmarty->assign("tlUserIds", $tlUserIds);
@@ -786,7 +783,6 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $sugarSmarty->assign("managerArray", $managerArray);
         $sugarSmarty->assign("teamLeadArray", $teamLeadArray);
         $sugarSmarty->assign("agentArray", $agentArray);
-        $sugarSmarty->assign("isAdmin", $isAdmin);
         
 
 
