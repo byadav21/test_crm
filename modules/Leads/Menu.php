@@ -61,15 +61,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
     //All ClusterHead(CH), Channel Partner(CP) & ALL Quality Analisic(QA),ALL Training(TR) Channel Partner Manager(CPMGR) & Channel Partner TL(CPTL) for not show menu
 
-    //$checkAccess = array('CH','CHMGR','CHTL', 'CP','CPMGR','CPTL', 'QA','QAMGR','QATL', 'TR','TRMGR','TRTL');
-
     if($current_user->is_admin == 1){
         
         if(ACLController::checkAccess('Leads', 'import', true))
-        // if ( ($misData['slug'] != "CH" && $misData['slug'] != "CHMGR" && $misData['slug'] != "CHTL") || ($misData['slug'] != "CP" && $misData['slug'] != "CPMGR" && $misData['slug'] != "CPTL") || ($misData['slug'] != "QA" && $misData['slug'] != "QAMGR" && $misData['slug'] != "QATL") || ($misData['slug'] != "TR" && $misData['slug'] != "TRMGR" && $misData['slug'] != "TRTL") ){
-        // die('imhere');
             $module_menu[]=Array("index.php?module=Import&action=Step1&import_module=Leads&return_module=Leads&return_action=index", $mod_strings['LNK_IMPORT_LEADS'],"Import", 'Leads');
-
     }
     
 ?>

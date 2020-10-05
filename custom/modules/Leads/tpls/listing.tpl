@@ -317,7 +317,6 @@
 				  
 							 <p>{$rowData.PROGRAM} - {$rowData.INSTITUTE}</p>
 							 
-
 							<P><label>Institute</label> : 
 							 {if !empty($rowData.INSTITUTE)} 
 								{$rowData.INSTITUTE}

@@ -150,9 +150,19 @@ if(in_array($current_user->id, $UsersVendrArr))
  $module_menu[] = array('index.php?module=AOR_Reports&action=vendordataexport', "Vendor Data Export Report", 'AOR_Reports');
 }
 
+    $salesClusterHeadArray  = array("SCH","SCHMGR","SCHTL","SCHAGENT");
+    $qualityArray           = array("QA","QAMGR","QATL","QAAGENT");
+    $trainingArray          = array("TR","TRMGR","TRTL","TRAGENT");
+
+# DIgital Marketing Training Quality #
+if( in_array($misData['slug'], $salesClusterHeadArray) ||  in_array($misData['slug'], $qualityArray) ||  in_array($misData['slug'], $trainingArray) ){
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
+
+}
 
 # DIgital Marketing #
-if ($current_user->is_admin == 1 || $displayMis || $displayDM)
+if ($current_user->is_admin == 1 || $displayMis || $displayDM )
 {
 
     //$module_menu[] = array('index.php?module=AOR_Reports&action=studentgsv', "Student GSV", 'AOR_Reports');
