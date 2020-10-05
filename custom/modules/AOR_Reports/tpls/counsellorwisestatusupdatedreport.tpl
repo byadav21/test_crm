@@ -79,7 +79,7 @@
                     </tr>*}
                     
                     <tr>
-                        {if $currentRoleName == "BH" || $currentRoleName == "SRM"}
+                        {if in_array($currentRoleName, $businessHeadArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="status">CH List:</label>
                         </td>
@@ -92,15 +92,14 @@
                             </select>
                         </td>
                         {/if}
-                        {if $currentRoleName == "BH" || $currentRoleName == "CH" || $currentRoleName == "SRM"}
+                        {if in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Status Description">MG List:</label>
                         </td>
                         <td nowrap="nowrap" >
                             <select name="managerRole[]" id="managerRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$mgUserIds key=key item=managerRole}
-{*                                    <option value="{$key}"{if in_array($key, $selected_councellors)} selected="selected"{/if}>{$managerRole.name}</option>*}
-                             <option value="{$key}"{if in_array($key, $selected_managerRole)} selected="selected"{/if}>{$managerRole.name}</option>
+                                <option value="{$key}"{if in_array($key, $selected_managerRole)} selected="selected"{/if}>{$managerRole.name}</option>
                                  {/foreach}
                             </select>
                         </td>
@@ -108,27 +107,25 @@
                     </tr>
                     
                     <tr>
-                        {if $currentRoleName == "BH" || $currentRoleName == "CH" || $currentRoleName == "MG" || $currentRoleName == "SRM"}
+                    {if in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="status">TL List:</label>
                         </td>
                         <td nowrap="nowrap" >
                             <select name="teamLeadRole[]" id="teamLeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$tlUserIds key=key item=teamLeadRole}
-{*                                    <option value="{$teamLeadRole.reporting_id}">{$teamLeadRole.name}</option>*}
                                     <option value="{$key}"{if in_array($key, $selected_teamLeadRole)} selected="selected"{/if}>{$teamLeadRole.name}</option>
                                 {/foreach}
                             </select>
                         </td>
                         {/if}
-                        {if $currentRoleName == "BH" || $currentRoleName == "CH" || $currentRoleName == "MG" || $currentRoleName == "TL" || $currentRoleName == "SRM"}
+                        {if in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray) || in_array($currentRoleName, $agentArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Status Description">Agent List:</label>
                         </td>
                         <td>
                             <select name="agentRole[]" id="agentRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$agentUserIds key=key item=agentRole}
-{*                                    <option value="{$key}">{$agentRole.name}</option>*}
                                     <option value="{$key}"{if in_array($key, $selected_agentRole)} selected="selected"{/if}>{$agentRole.name}</option>
                                 {/foreach}
                             </select>
@@ -391,7 +388,7 @@
                     type: "POST",
                     async: true,
                     success: function (data) {
-                        //console.log("Testjs" + data);
+                        console.log("Testjs" + data);
                         var argData = JSON.parse(data);
                         $('#' + 'teamLeadRole').html('');
                         $('#' + 'agentRole').html('');

@@ -126,6 +126,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'councellors')
 }
 
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
+    $channelHeadArray = array("CH","CP","DIM","SRM","QA","TR","VR");
+    $managerArray = array("CHMGR","CPMGR","DIMMGR","SRMMGR","QAMGR","TRMGR","VRMGR");
+    $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
+    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+      
     $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : "";
     $param = $channelHeadRole;
     $mgUserIds = getCouncelorForUsers($param);
@@ -136,11 +141,11 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
     {
         $getRoleSlug = getUsersRoleData();
         $currentRoleName   = !empty($getRoleSlug[$value['id']]['slug']) ? $getRoleSlug[$value['id']]['slug'] : '';
-        if($currentRoleName == "MG"){
+        if(in_array($currentRoleName ,$managerArray)){
          $mgOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-        }elseif($currentRoleName == "TL"){
+        }elseif(in_array($currentRoleName,$teamLeadArray)){
         $tlOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-        }elseif($currentRoleName == "AGENT"){
+        }elseif(in_array($currentRoleName,$agentArray)){
         $agentOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
         }
     }
@@ -148,9 +153,11 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
     echo json_encode($option);
     die();
 }elseif (isset($_POST['action']) && $_POST['action'] == 'teamLeadRole'){
+    $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
+    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
     $param = array();
-    $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : "";
-    $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : "";
+    $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : array();
+    $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : array();
     $param = array_merge($channelHeadRole,$managerRole);
     $tlOption = '';
     $agentOption = '';
@@ -160,9 +167,10 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
     {
         $getRoleSlug = getUsersRoleData();
         $currentRoleName   = !empty($getRoleSlug[$value['id']]['slug']) ? $getRoleSlug[$value['id']]['slug'] : '';
-        if($currentRoleName == "TL"){
+        if(in_array($currentRoleName,$teamLeadArray)){
+            
         $tlOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-        }elseif($currentRoleName == "AGENT"){
+        }elseif(in_array($currentRoleName,$agentArray)){
         $agentOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
         }
     }     
@@ -170,10 +178,12 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
     echo json_encode($option);
     die();
 }else if (isset($_POST['action']) && $_POST['action'] == 'agentRole'){
+    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+    
     $param = array();
-    $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : "";
-    $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : "";
-    $tlRole = isset($_REQUEST['arg2']) ? $_REQUEST['arg2'] : "";
+    $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : array();
+    $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : array();
+    $tlRole = isset($_REQUEST['arg2']) ? $_REQUEST['arg2'] : array();
     $param = array_merge($channelHeadRole,$managerRole,$tlRole);
     $option = array();
     $mgUserIds = getCouncelorForUsers($param);
@@ -182,7 +192,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
     {
         $getRoleSlug = getUsersRoleData();
         $currentRoleName   = !empty($getRoleSlug[$value['id']]['slug']) ? $getRoleSlug[$value['id']]['slug'] : '';
-        if($currentRoleName == "AGENT"){
+        if(in_array($currentRoleName,$agentArray)){
         $agentOption .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
         }
     }
