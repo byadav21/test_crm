@@ -319,14 +319,15 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $BatchListData   = $this->getBatch();
         $lead_source     = $GLOBALS['app_list_strings']['lead_source_custom_dom'];
         
-        
+        //Business Head(BH), Channel Head(CH), Sales Cluster Head(SCH), Digital Marketing Head(DMH), SRM Head(SRMH), Quality Head(QA), Training Head(TH), Vendor Head(VH), Manager(MGR), TL (TL), Agent(AGENT)
+
         $getRoleSlug = getUsersRole();
         $chUserIds = $chUserIdsDataSRM;
         $businessHeadArray = array("BH","SM");
-        $channelHeadArray = array("CH","CP","DIM","SRM","QA","TR","VR");
-        $managerArray = array("CHMGR","CPMGR","DIMMGR","SRMMGR","QAMGR","TRMGR","VRMGR");
-        $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
-        $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+        $channelHeadArray = array("CH","SCH","DMH","SRMH","QA","TR","VR");
+        $managerArray = array("CHMGR","SCHMGR","DMHMGR","SRMHMGR","QAMGR","TRMGR","VRMGR");
+        $teamLeadArray = array("CHTL","SCHTL","DMHTL","SRMHTL","QATL","TRTL","VRTL");
+        $agentArray = array("CHAGENT","SCHAGENT","DMHAGENT","SRMHAGENT","QAAGENT","TRAGENT","VRAGENT");
         //echo "<pre>";print_r($getRoleSlug);die();
         $usersRole   = '';
         $currentRoleName   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : '7e225ca3-69fa-a75d-f3f2-581d88cafd9a';
@@ -341,7 +342,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
                   $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
                   $chUserIds = $this->getCouncelorForUsersNew($chUserIdsData,$current_user->id);
                }
-               if($userIds['slug'] == "SRM"){
+               if($userIds['slug'] == "SRMH"){
                    $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
                    $chUserIdsDataSRM = $this->getCouncelorForUsersSRM($chUserIdsData,$current_user->id);
                }
