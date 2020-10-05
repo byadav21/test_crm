@@ -77,9 +77,8 @@
                         </td>
 
                     </tr>*}
-                    
                     <tr>
-                        {if in_array($currentRoleName, $businessHeadArray)}
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="status">CH List:</label>
                         </td>
@@ -92,7 +91,7 @@
                             </select>
                         </td>
                         {/if}
-                        {if in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray)}
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Status Description">MG List:</label>
                         </td>
@@ -107,7 +106,7 @@
                     </tr>
                     
                     <tr>
-                    {if in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray)}
+                    {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="status">TL List:</label>
                         </td>
@@ -119,7 +118,7 @@
                             </select>
                         </td>
                         {/if}
-                        {if in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray) || in_array($currentRoleName, $agentArray)}
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray) || in_array($currentRoleName, $agentArray)}
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Status Description">Agent List:</label>
                         </td>
@@ -350,7 +349,7 @@
                     }
                 });
             }
-            
+
             function getAjaxChannelHeadRole(managerRole,arg) {
                 $.ajax({
                     beforeSend: function (request)
