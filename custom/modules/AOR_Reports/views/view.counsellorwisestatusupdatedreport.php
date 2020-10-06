@@ -245,7 +245,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
 
             $is_manger = $this->checkManager();
             $conditons = '';
-            if ($is_manger == 1 && ($current_user->id != "1a5ea8c8-0d37-9447-eed7-5ed50f9cfd3f") && ($current_user->id != "ee49a56d-ad54-5c35-a295-5f5b4ebf2b6f") )// Used Hard code current_user id rohit lall & Prashant Shrivastava
+            if ($is_manger == 1)
             {
                 $conditons = 'AND u.id="' . $current_user->id . '"';
             }
@@ -321,6 +321,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         
         //Business Head(BH), Channel Head(CH), Sales Cluster Head(SCH), Digital Marketing Head(DMH), SRM Head(SRMH), Quality Head(QA), Training Head(TH), Vendor Head(VH), Manager(MGR), TL (TL), Agent(AGENT)
 
+        $isAdmin = $current_user->is_admin;
         $getRoleSlug = getUsersRole();
         $chUserIds = $chUserIdsDataSRM;
         $businessHeadArray = array("BH","SM");
@@ -335,16 +336,17 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $mgUserIds = array();
         $tlUserIds = array();
         $agentUserIds = array();
-        if(in_array ($currentRoleName, $businessHeadArray)){
+        if($isAdmin == 1 || in_array ($currentRoleName, $businessHeadArray)){
             $chUserIds = array();
             foreach ($getRoleSlug as $userIds){
                if(in_array($userIds['slug'] , $channelHeadArray)){
                   $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
                   $chUserIds = $this->getCouncelorForUsersNew($chUserIdsData,$current_user->id);
                }
-               if($userIds['slug'] == "SRMH"){
+               if($isAdmin == 1){
                    $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
                    $chUserIdsDataSRM = $this->getCouncelorForUsersSRM($chUserIdsData,$current_user->id);
+                   $chUserIds = $chUserIdsDataSRM;
                }
             }
         }
@@ -577,8 +579,8 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $StatusList['auto_retired']           = 'Auto Retired';
         $StatusList['retired']                = 'Retired';
         $StatusList['re-assigned']            = 'Re-Assigned';
-        $StatusList['user_forced_logged_off'] = 'user_forced_logged_off'; 
-        $StatusList['wrap_timeout']           = 'wrap_timeout';
+        $StatusList['user_forced_logged_off'] = 'user.forced.logged.off'; 
+        $StatusList['wrap_timeout']           = 'wrap.timeout';
         $StatusList['recycle']                = 'Recycle';
       
         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
@@ -634,23 +636,17 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
                     $programList[$key]['wrap_timeout']   = $valuecheck['wrap.timeout'];
                     unset($programList[$key]['wrap.timeout']);
                 }
-                $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
-                $total       += $countedLead;
-            }
-            $programList[$key]['total'] = $total;
-        }
-        //echo '<pre>';
-        //print_r($programList);
-        
-
                 foreach ($StatusList as $key1 => $value)
                 {
                     $countedLead = (isset($programList[$key][$key1]) && !empty($programList[$key][$key1]) ? $programList[$key][$key1] : 0);
                     $total       += $countedLead;
                 }
-                $programList[$key]['total'] = $total;
+                
             }
+            $programList[$key]['total'] = $total;
         }
+        //echo '<pre>';
+        //print_r($programList);
         
         if (isset($_POST['export']) && $_POST['export'] == "Export")
         {
@@ -783,6 +779,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $sugarSmarty->assign("managerArray", $managerArray);
         $sugarSmarty->assign("teamLeadArray", $teamLeadArray);
         $sugarSmarty->assign("agentArray", $agentArray);
+        $sugarSmarty->assign("isAdmin", $isAdmin);
         
 
 
@@ -801,3 +798,4 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
 }
 
 ?>
+
