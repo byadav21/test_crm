@@ -180,42 +180,74 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         return $usersArr;
     }
     
-    function getCouncelorForUsersSRM($user_ids = array(),$current_user_id)
+//    function getCouncelorForUsersSRM($user_ids = array(),$current_user_id)
+//    {
+//        global $db;
+//        $chUserIdDataId = array();
+//        $query = "SELECT id FROM `acl_roles` where slug='CH'";
+//        $userObjj  = $db->query($query);
+//        $acl_roles_id = $db->fetchByAssoc($userObjj);
+//        if($acl_roles_id){
+//        $query1 = "SELECT user_id  FROM `acl_roles_users` where role_id = '".$acl_roles_id['id']."'";
+//        $userObj1  = $db->query($query1);
+//        
+//         while ($product = $db->fetchByAssoc($userObj1)) {
+//            $chUserIdDataId[] = $product['user_id'];
+//        }
+//        }
+//        $user_ids = $chUserIdDataId;
+//        $userSql  = "SELECT u.first_name,
+//                            u.last_name,
+//                            u.id,
+//                            ru.first_name AS reporting_firstname,
+//                            ru.last_name AS reporting_lastname,
+//                            ru.id AS reporting_id
+//                     FROM users AS u
+//                     LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+//                     WHERE u.id IN ('" . implode("',
+//                                    '", $user_ids) . "') 
+//                       AND u.deleted=0";
+//        $userObj  = $db->query($userSql);
+//        $usersArr = [];
+//        while ($user     = $db->fetchByAssoc($userObj))
+//        {
+//            $usersArr[$user['id']] = array(
+//                'id'             => $user['id'],
+//                'name'           => $user['first_name'] . ' ' . $user['last_name'],
+//                'reporting_id'   => $user['reporting_id'],
+//                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
+//            );
+//        }
+//        return $usersArr;
+//    }
+    
+    function getCouncelorForUsersSRM()
     {
         global $db;
-        $chUserIdDataId = array();
-        $query = "SELECT id FROM `acl_roles` where slug='CH'";
-        $userObjj  = $db->query($query);
-        $acl_roles_id = $db->fetchByAssoc($userObjj);
-        if($acl_roles_id){
-        $query1 = "SELECT user_id  FROM `acl_roles_users` where role_id = '".$acl_roles_id['id']."'";
-        $userObj1  = $db->query($query1);
-        
-         while ($product = $db->fetchByAssoc($userObj1)) {
-            $chUserIdDataId[] = $product['user_id'];
-        }
-        }
-        $user_ids = $chUserIdDataId;
-        $userSql  = "SELECT u.first_name,
-                            u.last_name,
-                            u.id,
-                            ru.first_name AS reporting_firstname,
-                            ru.last_name AS reporting_lastname,
-                            ru.id AS reporting_id
-                     FROM users AS u
-                     LEFT JOIN users AS ru ON ru.id=u.reports_to_id
-                     WHERE u.id IN ('" . implode("',
-                                    '", $user_ids) . "') 
-                       AND u.deleted=0";
-        $userObj  = $db->query($userSql);
+        $proSql      = "SELECT
+            u.first_name,
+            u.last_name,
+            u.id,
+            slug,
+            user_id,
+            NAME role_name
+            FROM
+            acl_roles
+            INNER JOIN
+            acl_roles_users
+            ON
+            acl_roles_users.role_id = acl_roles.id
+            INNER JOIN
+            users u
+            ON
+            u.id = acl_roles_users.user_id AND acl_roles.deleted = 0 AND acl_roles_users.deleted = 0 where slug IN ('CH','QA')";
+        $userObj  = $db->query($proSql);
         $usersArr = [];
         while ($user     = $db->fetchByAssoc($userObj))
         {
             $usersArr[$user['id']] = array(
                 'id'             => $user['id'],
                 'name'           => $user['first_name'] . ' ' . $user['last_name'],
-                'reporting_id'   => $user['reporting_id'],
-                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
             );
         }
         return $usersArr;
@@ -337,7 +369,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         if($isAdmin == 1 || in_array ($currentRoleName, $businessHeadArray)){
             $chUserIds = array();
             foreach ($getRoleSlug as $userIds){
-               if(in_array($userIds['slug'] , $channelHeadArray)){
+               if(in_array($userIds['slug'] , $channelHeadArray) && $isAdmin != 1){
                   $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
                   $chUserIds = $this->getCouncelorForUsersNew($chUserIdsData,$current_user->id);
                }
