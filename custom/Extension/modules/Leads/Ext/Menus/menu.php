@@ -13,7 +13,9 @@ if(ACLController::checkAccess('Leads', 'import', true))
     $module_menu[]=array("index.php?module=Leads&action=search_leads", "CRM Leads Search", "");
     
     //Menu not show ALL Channel Head (CH) 
-    if($misData['slug'] != "CH" || $misData['slug'] != "CHMGR" || $misData['slug'] != "CHTL" || $misData['slug'] != "CHAGENT" ){
+    $allchannelHeadArray = array("CH","CHMGR","CHTL","CHAGENT");
+        
+    if(! in_array($misData['slug'], $allchannelHeadArray) ){
         $module_menu[] = array('index.php?module=AOR_Reports&action=agentdashboardreport', "Agent dashboard Report", 'AOR_Reports');
         $module_menu[] = array('index.php?module=AOR_Reports&action=prospectdashboard2', "Prospect dashboard 2", 'AOR_Reports');
     }

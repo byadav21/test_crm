@@ -156,8 +156,8 @@ if(in_array($current_user->id, $UsersVendrArr))
 
 # DIgital Marketing Training Quality #
 if( in_array($misData['slug'], $salesClusterHeadArray) ||  in_array($misData['slug'], $qualityArray) ||  in_array($misData['slug'], $trainingArray) ){
-    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report_Create Date", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Status Detail Report_Modified Date", 'AOR_Reports');
 
 }
 
@@ -220,21 +220,18 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=openingbalancereport', "GSV/Opening Balance Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=Leads&action=junkleadlog ', "Leads Snag List", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=summarised', "Summarised GSV", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report_Create Date", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Status Detail Report_Modified Date", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwiseleadsource', "Vendor Wise Lead Source Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=srmstudentlist', "Student List Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=targetupload', "Target Upload", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=actualupload', "Actual Upload", 'AOR_Reports');
 }
 
-//Channel Partner(CP) , Channel Partner Manager(CPMGR) & Channel Partner TL(CPTL) for show reports menu
-    $checkAccess = array('CH','CHMGR','CHTL', 'CP','CPMGR','CPTL', 'QA','QAMGR','QATL', 'TR','TRMGR','TRTL');
-
 if ($displayCCM)
 {
-    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Updated Status Detail Report", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report_Create Date", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Status Detail Report_Modified Date", 'AOR_Reports');
 }
 
 
