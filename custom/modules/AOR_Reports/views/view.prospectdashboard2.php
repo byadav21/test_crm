@@ -890,7 +890,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             //$_SESSION['cccon_batch']       = $_REQUEST['batch'];
             //$_SESSION['cccon_batch_code']  = $_REQUEST['batch_code'];
             $_SESSION['cccon_managers']    = $_REQUEST['managers'];
-            $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
+            //$_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
+            $_SESSION['cccon_councellors'] = $_REQUEST['agentRole'];
             //$_SESSION['cccon_status']      = $_REQUEST['status'];
 
             $_SESSION['cccon_month'] = $_REQUEST['month'];

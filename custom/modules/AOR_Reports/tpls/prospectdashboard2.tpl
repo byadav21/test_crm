@@ -603,7 +603,7 @@
                     var year = $('#year').val();
                     var users = $('#users').val();
                     var managers = $('#managers').val();
-                    var councellors = $('#councellors').val();
+                    var councellors = $('#agentRole').val();
 
 
 
@@ -624,10 +624,10 @@
                      alert('Please select a Date!');
                      return false;
                      }
-                    if(managers=='' || managers ==null){
+                    /*if(managers=='' || managers ==null){
                      $("#users").focus();
                      alert('Please select a Manager!'); return false;
-                     }
+                     }*/
                      if(councellors=='' || councellors ==null){
                      $("#users").focus();
                      alert('Please select a councellor!'); return false;
