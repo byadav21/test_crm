@@ -1,6 +1,6 @@
 <link href="custom/modules/AOR_Reports/include/css/common_style_aor_reports.css" rel="stylesheet" type="text/css"/>
 
-<section class="moduleTitle"> <h2>Counselor Wise Status Updated Detail Report</h2><br/><br/>
+<section class="moduleTitle"> <h2>Counsellor Wise Status Detail Report_Modified Date</h2><br/><br/>
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
