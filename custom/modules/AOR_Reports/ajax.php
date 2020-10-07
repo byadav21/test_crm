@@ -126,10 +126,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'councellors')
 }
 
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
-    $channelHeadArray = array("CH","CP","DIM","SRM","QA","TR","VR");
-    $managerArray = array("CHMGR","CPMGR","DIMMGR","SRMMGR","QAMGR","TRMGR","VRMGR");
-    $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
-    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+//    $channelHeadArray = array("CH","CP","DIM","SRM","QA","TR","VR");
+//    $managerArray = array("CHMGR","CPMGR","DIMMGR","SRMMGR","QAMGR","TRMGR","VRMGR");
+//    $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
+//    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+    
+    $channelHeadArray = array("CH","SCH","DMH","SRMH","QA","TR","VR");
+    $managerArray = array("CHMGR","SCHMGR","DMHMGR","SRMHMGR","QAMGR","TRMGR","VRMGR");
+    $teamLeadArray = array("CHTL","SCHTL","DMHTL","SRMHTL","QATL","TRTL","VRTL");
+    $agentArray = array("CHAGENT","SCHAGENT","DMHAGENT","SRMHAGENT","QAAGENT","TRAGENT","VRAGENT");
       
     $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : "";
     $param = $channelHeadRole;
