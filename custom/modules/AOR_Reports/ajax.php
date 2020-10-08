@@ -158,8 +158,10 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
     echo json_encode($option);
     die();
 }elseif (isset($_POST['action']) && $_POST['action'] == 'teamLeadRole'){
-    $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
-    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+//    $teamLeadArray = array("CHTL","CPTL","DIMTL","SRMTL","QATL","TRTL","VRTL");
+//    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+    $teamLeadArray = array("CHTL","SCHTL","DMHTL","SRMHTL","QATL","TRTL","VRTL");
+    $agentArray = array("CHAGENT","SCHAGENT","DMHAGENT","SRMHAGENT","QAAGENT","TRAGENT","VRAGENT");
     $param = array();
     $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : array();
     $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : array();
@@ -183,8 +185,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'managerRole'){
     echo json_encode($option);
     die();
 }else if (isset($_POST['action']) && $_POST['action'] == 'agentRole'){
-    $agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
-    
+    //$agentArray = array("CHAGENT","CPAGENT","DIMAGENT","SRMAGENT","QAAGENT","TRAGENT","VRAGENT");
+    $agentArray = array("CHAGENT","SCHAGENT","DMHAGENT","SRMHAGENT","QAAGENT","TRAGENT","VRAGENT");
     $param = array();
     $channelHeadRole = isset($_REQUEST['arg']) ? $_REQUEST['arg'] : array();
     $managerRole = isset($_REQUEST['arg1']) ? $_REQUEST['arg1'] : array();
