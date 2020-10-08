@@ -42,7 +42,7 @@
                             <select name="channelHeadRole[]" id="channelHeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$chUserIds key=key item=channelHeadRole}
                                     {*<option value="{$key}">{$channelHeadRole.name}</option>*}
-                                    <option value="{$key}"{if in_array($key, $selected_channelHeadRole)} selected="selected"{/if}>{$channelHeadRole.name}</option>
+                                    <option value="{$key}">{$channelHeadRole.name}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -56,7 +56,7 @@
                         <td nowrap="nowrap" >
                             <select name="managerRole[]" id="managerRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$mgUserIds key=key item=managerRole}
-                                <option value="{$key}"{if in_array($key, $selected_managerRole)} selected="selected"{/if}>{$managerRole.name}</option>
+                                <option value="{$key}">{$managerRole.name}</option>
                                  {/foreach}
                             </select>
                         </td>
@@ -73,7 +73,7 @@
                         <td nowrap="nowrap" >
                             <select name="teamLeadRole[]" id="teamLeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$tlUserIds key=key item=teamLeadRole}
-                                    <option value="{$key}"{if in_array($key, $selected_teamLeadRole)} selected="selected"{/if}>{$teamLeadRole.name}</option>
+                                    <option value="{$key}">{$teamLeadRole.name}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -88,7 +88,7 @@
                         <td>
                             <select name="agentRole[]" id="agentRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$agentUserIds key=key item=agentRole}
-                                    <option value="{$key}"{if in_array($key, $selected_agentRole)} selected="selected"{/if}>{$agentRole.name}</option>
+                                    <option value="{$key}">{$agentRole.name}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -628,10 +628,10 @@
                      $("#users").focus();
                      alert('Please select a Manager!'); return false;
                      }*/
-                     if(councellors=='' || councellors ==null){
+                     /*if(councellors=='' || councellors ==null){
                      $("#users").focus();
                      alert('Please select a councellor!'); return false;
-                     }
+                     }*/
 
 
                 }));
