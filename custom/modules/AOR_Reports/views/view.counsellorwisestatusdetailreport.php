@@ -824,7 +824,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $sugarSmarty->assign("statusArr", $statusArr);
         $sugarSmarty->assign("StatusList", $StatusList);
         $sugarSmarty->assign("currentRoleName", $currentRoleName);
-        $sugarSmarty->display('custom/modules/AOR_Reports/tpls/counsellorwisestatusupdatedreport.tpl');
+        $sugarSmarty->display('custom/modules/AOR_Reports/tpls/counsellorwisestatusdetailreport.tpl');
     }
 
 }
