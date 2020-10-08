@@ -216,10 +216,10 @@
                                     </td>
                                     <td nowrap="nowrap" align="right" class="paginationActionButtons" width="1%">
                                         {if $right eq 1}
-                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport&page={$pagenext}"  class="button" title="Next" disabled="disabled">
+                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport&page={$pagenext}"  class="button" title="Next" disabled="disabled">
                                                 <img src="themes/SuiteR/images/next_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Next">
                                             </a>
-                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport&page={$last_page}"  class="button" title="End" disabled="disabled">
+                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport&page={$last_page}"  class="button" title="End" disabled="disabled">
                                                 <img src="themes/SuiteR/images/end_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" alt="End">
                                             </a>
                                         {else}
