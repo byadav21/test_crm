@@ -193,11 +193,11 @@
                                     <td nowrap="nowrap" align="right" class="paginationChangeButtons" width="1%">
 
                                         {if $left eq 1}
-                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport"  name="listViewStartButton" title="Start" class="button" >
+                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport"  name="listViewStartButton" title="Start" class="button" >
                                                 <img src="themes/SuiteR/images/start_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Start">
                                             </a>
 
-                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport&page={$page}"  class="button" title="Previous">
+                                            <a href="index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport&page={$page}"  class="button" title="Previous">
                                                 <img src="themes/SuiteR/images/previous_off.gif?v=S2eFayn4JyvAICLoJ82pZw" align="absmiddle" border="0" alt="Previous">
                                             </a>
                                         {else}
