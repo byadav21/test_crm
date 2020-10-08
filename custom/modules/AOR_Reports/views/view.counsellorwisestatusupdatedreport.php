@@ -223,6 +223,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
     
     function getCouncelorForUsersSRM()
     {
+        $channelHeadArray = array("CH","SCH","DMH","SRMH","QA","TR","VR");
         global $db;
         $proSql      = "SELECT
             u.first_name,
@@ -240,7 +241,8 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
             INNER JOIN
             users u
             ON
-            u.id = acl_roles_users.user_id AND acl_roles.deleted = 0 AND acl_roles_users.deleted = 0 where slug IN ('CH','QA')";
+            u.id = acl_roles_users.user_id AND acl_roles.deleted = 0 AND acl_roles_users.deleted = 0 where slug IN ('" . implode("',
+                                    '", $channelHeadArray) . "')";
         $userObj  = $db->query($proSql);
         $usersArr = [];
         while ($user     = $db->fetchByAssoc($userObj))
