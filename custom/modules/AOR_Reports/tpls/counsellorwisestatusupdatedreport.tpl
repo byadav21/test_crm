@@ -86,7 +86,7 @@
                             <select name="channelHeadRole[]" id="channelHeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$chUserIds key=key item=channelHeadRole}
                                     {*<option value="{$key}">{$channelHeadRole.name}</option>*}
-                                    <option value="{$key}"{if in_array($key, $selected_channelHeadRole)} selected="selected"{/if}>{$channelHeadRole.name}</option>
+                                    <option value="{$key}">{$channelHeadRole.name}</option>
                                 {/foreach}
                             </select>
                         </td>
