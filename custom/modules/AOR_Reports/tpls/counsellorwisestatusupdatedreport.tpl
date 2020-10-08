@@ -491,7 +491,7 @@
                         return false;
                     }
 
-                    if(is_admin!=1 && (managers=='' || managers ==null)){
+                    /*if(is_admin!=1 && (managers=='' || managers ==null)){
                      $("#manager").focus();
                      alert('Please select a Manager!'); return false;
                      }
@@ -499,7 +499,7 @@
                      if(is_admin!=1 && (councellors=='' || councellors ==null)){
                      $("#councellors").focus();
                      alert('Please select a Councellor!'); return false;
-                     }
+                     }*/
 
 
 
