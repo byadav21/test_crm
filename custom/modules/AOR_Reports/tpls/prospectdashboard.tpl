@@ -79,7 +79,7 @@
                         </div>
                         {/if}
                         
-                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray) || in_array($currentRoleName, $agentArray)}
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray) || in_array($currentRoleName, $teamLeadArray)}
                         <div class = "block">
                             <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Status Description">Agent List:</label>
