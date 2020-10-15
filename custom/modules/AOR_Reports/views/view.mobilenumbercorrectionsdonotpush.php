@@ -47,7 +47,7 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                     // echo "<pre>"; print_r($emapData);
                     
                     //Check Validation All 
-                    if($emapData[0] !='' && $emapData[1] !='' && $emapData[2] !='') 
+                    if($emapData[0] !='' && $emapData[1] !='') 
                     {
                         //update leads set phone_mobile, dristi_campagain_id, dristi_API_id
 
