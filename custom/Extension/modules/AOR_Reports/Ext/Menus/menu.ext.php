@@ -228,6 +228,8 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=targetupload', "Target Upload", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=actualupload', "Actual Upload", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=numbercorrectionspushtodialer', "Number Corrections Push to Dialer", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=uploadmarkwrongnumber', "Mark Wrong Number", 'AOR_Reports');
+    $module_menu[] = array('index.php?module=AOR_Reports&action=mobilenumbercorrectionsdonotpush', "Mobile Number Corrections | DO NOT PUSH", 'AOR_Reports');
 }
 
 if ($displayCCM)
