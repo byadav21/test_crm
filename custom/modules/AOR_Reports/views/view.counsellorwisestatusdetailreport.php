@@ -179,48 +179,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         }
         return $usersArr;
     }
-    
-//    function getCouncelorForUsersSRM($user_ids = array(),$current_user_id)
-//    {
-//        global $db;
-//        $chUserIdDataId = array();
-//        $query = "SELECT id FROM `acl_roles` where slug='CH'";
-//        $userObjj  = $db->query($query);
-//        $acl_roles_id = $db->fetchByAssoc($userObjj);
-//        if($acl_roles_id){
-//        $query1 = "SELECT user_id  FROM `acl_roles_users` where role_id = '".$acl_roles_id['id']."'";
-//        $userObj1  = $db->query($query1);
-//        
-//         while ($product = $db->fetchByAssoc($userObj1)) {
-//            $chUserIdDataId[] = $product['user_id'];
-//        }
-//        }
-//        $user_ids = $chUserIdDataId;
-//        $userSql  = "SELECT u.first_name,
-//                            u.last_name,
-//                            u.id,
-//                            ru.first_name AS reporting_firstname,
-//                            ru.last_name AS reporting_lastname,
-//                            ru.id AS reporting_id
-//                     FROM users AS u
-//                     LEFT JOIN users AS ru ON ru.id=u.reports_to_id
-//                     WHERE u.id IN ('" . implode("',
-//                                    '", $user_ids) . "') 
-//                       AND u.deleted=0";
-//        $userObj  = $db->query($userSql);
-//        $usersArr = [];
-//        while ($user     = $db->fetchByAssoc($userObj))
-//        {
-//            $usersArr[$user['id']] = array(
-//                'id'             => $user['id'],
-//                'name'           => $user['first_name'] . ' ' . $user['last_name'],
-//                'reporting_id'   => $user['reporting_id'],
-//                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
-//            );
-//        }
-//        return $usersArr;
-//    }
-    
+        
     function getCouncelorForUsersSRM()
     {
         $channelHeadArray = array("CH","SCH","DMH","SRMH","QA","TR","VR");
@@ -585,6 +544,14 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
             $wherecl .= " AND  leads.lead_source_types IN ('" . implode("','", $selected_lead_source_types) . "')";
         }
 
+        $usersIdData = array();
+        foreach($usersdd as $key => $value){
+            $usersIdData[] = $key;
+        }
+        
+        if(!empty($usersIdData)){
+            $wherecl .= " AND users.id IN ('" . implode("','", $usersIdData) . "')";
+        }
 
         $lead_source_typesArr = array('NULL' => 'NULL', 'CC' => 'CC', 'OO' => 'OO', 'CO' => 'CO');
 
@@ -614,7 +581,17 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $StatusList['user_forced_logged_off'] = 'user.forced.logged.off'; 
         $StatusList['wrap_timeout']           = 'wrap.timeout';
         $StatusList['recycle']                = 'Recycle';
-      
+        
+        //If search & Export button is not click then after $leadsql query is not running, deafult running data no data found.
+
+            //Only for check Pagenation Start
+            $link = $_SERVER['REQUEST_URI'];
+            $link_array = end(explode('&',$link));
+            $checkPagenation = substr_count($link_array,"page");
+            //Only for check Pagenation END
+
+        if( (isset($_POST['button']) && $_POST['button'] == 'Search') || (isset($_POST['export']) && $_POST['export'] == 'Export') || ($checkPagenation == 1) ){
+            
         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                     COALESCE(te_ba_batch.id,'NA') AS batch_id,
                     COALESCE(te_ba_batch.batch_code,'NA')AS batch_code,
@@ -631,7 +608,9 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
                  WHERE leads.deleted=0
                    $wherecl
               GROUP BY leads.status_description,leads.assigned_user_id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
-        //echo $leadSql;
+        }
+
+        // echo $leadSql;
         //exit();
 
 
