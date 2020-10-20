@@ -39,7 +39,7 @@
                             <label for="status">CH List:</label>
                         </td>
                         <td nowrap="nowrap">
-                            <select name="channelHeadRole[]" id="channelHeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                            <select name="channelHeadRole[]" id="channelHeadRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$chUserIds key=key item=channelHeadRole}
                                     {*<option value="{$key}">{$channelHeadRole.name}</option>*}
                                     <option value="{$key}">{$channelHeadRole.name}</option>
@@ -54,7 +54,7 @@
                             <label for="Status Description">MG List:</label>
                         </td>
                         <td nowrap="nowrap" >
-                            <select name="managerRole[]" id="managerRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                            <select name="managerRole[]" id="managerRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$mgUserIds key=key item=managerRole}
                                 <option value="{$key}">{$managerRole.name}</option>
                                  {/foreach}
@@ -71,7 +71,7 @@
                             <label for="status">TL List:</label>
                         </td>
                         <td nowrap="nowrap" >
-                            <select name="teamLeadRole[]" id="teamLeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                            <select name="teamLeadRole[]" id="teamLeadRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$tlUserIds key=key item=teamLeadRole}
                                     <option value="{$key}">{$teamLeadRole.name}</option>
                                 {/foreach}
@@ -86,7 +86,7 @@
                             <label for="Status Description">Agent List:</label>
                         </td>
                         <td>
-                            <select name="agentRole[]" id="agentRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                            <select name="agentRole[]" id="agentRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$agentUserIds key=key item=agentRole}
                                     <option value="{$key}">{$agentRole.name}</option>
                                 {/foreach}
@@ -602,10 +602,10 @@
                     var from_date = $('#from_date').val();
                     var year = $('#year').val();
                     var users = $('#users').val();
-                    var managers = $('#managers').val();
+                    var managerRole = $('#managerRole').val();
                     var councellors = $('#agentRole').val();
-
-
+                    var channelHeadRole = $('#channelHeadRole').val();
+                    var teamLeadRole = $('#teamLeadRole').val();
 
 
                     /*
@@ -619,19 +619,36 @@
                      
                      
                      */
-                    if (from_date == '' || from_date == null) {
+                    if (from_date == '' || from_date == null ) {
                      $("#from_date").focus();
                      alert('Please select a Date!');
                      return false;
                      }
-                    /*if(managers=='' || managers ==null){
-                     $("#users").focus();
-                     alert('Please select a Manager!'); return false;
-                     }*/
-                     /*if(councellors=='' || councellors ==null){
-                     $("#users").focus();
-                     alert('Please select a councellor!'); return false;
-                     }*/
+                     /*
+                     if (channelHeadRole == '' || channelHeadRole == null ) {
+                     $("#channelHeadRole").focus();
+                        alert('Please select a channel Head!');
+                        return false;
+                     }
+
+                    if(managerRole=='' || managerRole ==null){
+                        $("#users").focus();
+                        alert('Please select a Manager!'); 
+                        return false;
+                     }
+
+                     if(teamLeadRole=='' || teamLeadRole ==null){
+                        $("#users").focus();
+                        alert('Please select a TL!'); 
+                        return false;
+                     }
+                     
+                     if(councellors=='' || councellors ==null){
+                        $("#users").focus();
+                        alert('Please select a councellor!'); 
+                        return false;
+                     }
+                     */
 
 
                 }));

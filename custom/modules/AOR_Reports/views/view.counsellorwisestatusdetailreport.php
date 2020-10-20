@@ -584,14 +584,6 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         
         //If search & Export button is not click then after $leadsql query is not running, deafult running data no data found.
 
-            //Only for check Pagenation Start
-            $link = $_SERVER['REQUEST_URI'];
-            $link_array = end(explode('&',$link));
-            $checkPagenation = substr_count($link_array,"page");
-            //Only for check Pagenation END
-
-        if( (isset($_POST['button']) && $_POST['button'] == 'Search') || (isset($_POST['export']) && $_POST['export'] == 'Export') || ($checkPagenation == 1) ){
-            
         $leadSql = "SELECT COUNT(leads.id) AS lead_count,
                     COALESCE(te_ba_batch.id,'NA') AS batch_id,
                     COALESCE(te_ba_batch.batch_code,'NA')AS batch_code,
@@ -608,8 +600,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
                  WHERE leads.deleted=0
                    $wherecl
               GROUP BY leads.status_description,leads.assigned_user_id,te_ba_batch.batch_code order by  te_ba_batch.batch_code ";
-        }
-
+       
         // echo $leadSql;
         //exit();
 

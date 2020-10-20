@@ -90,7 +90,7 @@
                         <label for="status">CH List:</label>
                     </td>
                     <td nowrap="nowrap">
-                        <select name="channelHeadRole[]" id="channelHeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                        <select name="channelHeadRole[]" id="channelHeadRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                             {foreach from =$chUserIds key=key item=channelHeadRole}
                                 {*<option value="{$key}">{$channelHeadRole.name}</option>*}
                                 <option value="{$key}">{$channelHeadRole.name}</option>
@@ -103,7 +103,7 @@
                         <label for="Status Description">MG List:</label>
                     </td>
                     <td nowrap="nowrap" >
-                        <select name="managerRole[]" id="managerRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                        <select name="managerRole[]" id="managerRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                             {foreach from =$mgUserIds key=key item=managerRole}
                             <option value="{$key}">{$managerRole.name}</option>
                              {/foreach}
@@ -118,7 +118,7 @@
                         <label for="status">TL List:</label>
                     </td>
                     <td nowrap="nowrap" >
-                        <select name="teamLeadRole[]" id="teamLeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                        <select name="teamLeadRole[]" id="teamLeadRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                             {foreach from =$tlUserIds key=key item=teamLeadRole}
                                 <option value="{$key}">{$teamLeadRole.name}</option>
                             {/foreach}
@@ -130,7 +130,7 @@
                         <label for="Status Description">Agent List:</label>
                     </td>
                     <td>
-                        <select name="agentRole[]" id="agentRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                        <select name="agentRole[]" id="agentRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                             {foreach from =$agentUserIds key=key item=agentRole}
                                 <option value="{$key}">{$agentRole.name}</option>
                             {/foreach}
