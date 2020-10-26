@@ -173,7 +173,12 @@ array (
             'studio' => 'visible',
             'label' => 'Discount',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'expectationsprogram',
+            'studio' => 'visible',
+            'label' => 'Expectationsprogram',
+          ),
         ),
         10 => 
         array (

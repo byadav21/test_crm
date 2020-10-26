@@ -54,4 +54,24 @@ $dictionary["Lead"]["fields"]["callType"] =
                 'duplicate_merge' => false,
             );
 
+          
+$dictionary['Lead']['fields']['expectationsprogram'] = array (
+    'name' => 'expectationsprogram',
+    'vname' => 'LBL_EXPECTATIONSPROGRAM',
+    'label' => 'Expectations Program',
+    'type' => 'text',
+    'comment' => 'Expectations From The Program',
+    'rows' => 6,
+    'cols' => '103',
+    'inline_edit' => true,
+    'comments' => 'Expectations From The Program',
+    'merge_filter' => 'disabled',
+    'required' => false,
+    'studio' => 'visible',
+    'source'          => 'custom_fields',
+    );
+            
+
+
+
 
