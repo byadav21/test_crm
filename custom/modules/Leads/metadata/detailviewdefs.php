@@ -273,28 +273,15 @@ array (
           ),
           1 => 
           array (
-            'name' => 'lead_facebook_c',
-            'label' => 'Facebook',            
-            'studio' => 'visible',
-
-          ),
-        ),
-        14 => 
-        array (
-          0 => 
-          array (
             'name' => 'twitter_c',
             'label' => 'Twitter',
             'studio' => 'visible',
           ),
-          1 => 
-          array (
-            'name' => 'linkedin_c',
-            'label' => 'Linkedin',
-            'studio' => 'visible',
-          ),
+          
         ),
-        15 => 
+        //14 => 
+        
+        14 => 
         array (
           0 => 
           array (
@@ -310,6 +297,25 @@ array (
             'studio' => 'visible',
           ),
         ),
+        15 => 
+        array (
+          0 => 
+          array (
+            'name' => 'lead_fb_c',
+            'comment' => 'Facebook',
+            'label' => 'Facebook',
+            'studio' => 'visible',
+          ),
+          1 => 
+          array (
+            'name' => 'linkedin_c',
+            'comment' => 'linkedin_c',
+            'label' => 'Linkedin',
+            'studio' => 'visible',
+            
+          ),
+        ),
+
         
       ),
     ),

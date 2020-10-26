@@ -285,7 +285,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'lead_facebook_c',
+            'name' => 'lead_fb_c',
             'label' => 'Facebook',
             'studio' => 'visible',
           ),

@@ -71,9 +71,9 @@ $dictionary["Lead"]["fields"]["callType"] =
         'source'          => 'custom_fields',
         );
 
-    $dictionary['Lead']['fields']['lead_facebook_c'] = array (
-        'name' => 'lead_facebook_c',
-        'vname' => 'LBL_LEAD_FACEBOOK',
+    $dictionary['Lead']['fields']['lead_fb_c'] = array (
+        'name' => 'lead_fb_c',
+        'vname' => 'LBL_LEAD_FB',
         'label' => 'Facebook',
         'type' => 'varchar',
         'comment' => 'Facebook',
