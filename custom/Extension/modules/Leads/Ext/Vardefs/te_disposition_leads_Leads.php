@@ -71,9 +71,9 @@ $dictionary["Lead"]["fields"]["callType"] =
         'source'          => 'custom_fields',
         );
 
-    $dictionary['Lead']['fields']['facebook_c'] = array (
-        'name' => 'facebook_c',
-        'vname' => 'LBL_FACEBOOK',
+    $dictionary['Lead']['fields']['lead_facebook_c'] = array (
+        'name' => 'lead_facebook_c',
+        'vname' => 'LBL_LEAD_FACEBOOK',
         'label' => 'Facebook',
         'type' => 'varchar',
         'comment' => 'Facebook',
@@ -125,11 +125,11 @@ $dictionary["Lead"]["fields"]["callType"] =
         'vname' => 'LBL_TWITTER',
         'label' => 'Twitter',
         'type' => 'varchar',
-        'comment' => 'twitter',
+        'comment' => 'Twitter',
         'len' => '255',
 		'size' => '20',
         'inline_edit' => true,
-        'comments' => 'twitter',
+        'comments' => 'Twitter',
         'merge_filter' => 'disabled',
         'required' => false,
         'studio' => 'visible',

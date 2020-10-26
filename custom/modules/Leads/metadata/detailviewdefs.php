@@ -273,7 +273,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'facebook_c',
+            'name' => 'lead_facebook_c',
             'label' => 'Facebook',            
             'studio' => 'visible',
 
