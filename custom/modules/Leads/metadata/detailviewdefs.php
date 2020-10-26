@@ -263,6 +263,15 @@ array (
             'label' => 'Disposition Reason',
           ),
         ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'expectationsprogram',
+            'studio' => 'visible',
+            'label' => 'Expectationsprogram',
+          ),
+        ),
       ),
     ),
   ),
