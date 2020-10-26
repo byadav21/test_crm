@@ -267,10 +267,42 @@ array (
         array (
           0 => 
           array (
-            'name' => 'expectationsprogram',
+            'name' => 'instagram_c',
+            'label' => 'LBL_INSTAGRAM',
             'studio' => 'visible',
-            'label' => 'Expectationsprogram',
           ),
+          1 => 
+          array (
+            'name' => 'facebook_c',
+            'label' => 'LBL_FACEBOOK',
+            'studio' => 'visible',
+          ),
+        ),
+        14 => 
+        array (
+          0 => 
+          array (
+            'name' => 'linkedin_c',
+            'label' => 'LBL_LINKEDIN',
+            'studio' => 'visible',
+          ),
+          1 => 
+          array (
+            'name' => 'twitter_c',
+            'label' => 'LBL_TWITTER',
+            'studio' => 'visible',
+          ),
+        ),
+        15 => 
+        array (
+          0 => 
+          array (
+            'name' => 'expectationsprogram',
+            'label' => 'LBL_EXPECTATIONSPROGRAM',
+            'comment' => 'Expectations From The Program',
+            'studio' => 'visible',
+          ),
+          1 => '',
         ),
       ),
     ),

@@ -159,6 +159,15 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'EXPECTATIONSPROGRAM' => 
+  array (
+    'label' => 'LBL_EXPECTATIONSPROGRAM',
+    'type' => 'text',
+    'studio' => 'visible',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => true,
+  ),
   'TITLE' => 
   array (
     'width' => '10%',

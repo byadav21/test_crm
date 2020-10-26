@@ -55,23 +55,105 @@ $dictionary["Lead"]["fields"]["callType"] =
             );
 
           
-$dictionary['Lead']['fields']['expectationsprogram'] = array (
-    'name' => 'expectationsprogram',
-    'vname' => 'LBL_EXPECTATIONSPROGRAM',
-    'label' => 'Expectations Program',
-    'type' => 'text',
-    'comment' => 'Expectations From The Program',
-    'rows' => 6,
-    'cols' => '103',
-    'inline_edit' => true,
-    'comments' => 'Expectations From The Program',
-    'merge_filter' => 'disabled',
-    'required' => false,
-    'studio' => 'visible',
-    'source'          => 'custom_fields',
-    );
-            
+    $dictionary['Lead']['fields']['expectationsprogram'] = array (
+        'name' => 'expectationsprogram',
+        'vname' => 'LBL_EXPECTATIONSPROGRAM',
+        'label' => 'Expectations Program',
+        'type' => 'text',
+        'comment' => 'Expectations From The Program',
+        'rows' => 6,
+        'cols' => '103',
+        'inline_edit' => true,
+        'comments' => 'Expectations From The Program',
+        'merge_filter' => 'disabled',
+        'required' => false,
+        'studio' => 'visible',
+        'source'          => 'custom_fields',
+        );
 
+    $dictionary['Lead']['fields']['facebook_c'] = array (
+        'name' => 'facebook_c',
+        'vname' => 'LBL_FACEBOOK',
+        'label' => 'Facebook',
+        'type' => 'text',
+        'comment' => 'Facebook',
+        'len' => '255',
+		'size' => '20',
+        'inline_edit' => true,
+        'comments' => 'Facebook',
+        'merge_filter' => 'disabled',
+        'required' => false,
+        'studio' => 'visible',
+        'source' => 'custom_fields',
+    );
+
+    $dictionary['Lead']['fields']['instagram_c'] = array (
+        'name' => 'instagram_c',
+        'vname' => 'LBL_INSTAGRAM',
+        'label' => 'Instagram',
+        'type' => 'text',
+        'comment' => 'Instagram',
+        'len' => '255',
+		'size' => '20',
+        'inline_edit' => true,
+        'comments' => 'Instagram',
+        'merge_filter' => 'disabled',
+        'required' => false,
+        'studio' => 'visible',
+        'source' => 'custom_fields',
+    );
+
+    $dictionary['Lead']['fields']['linkedin_c'] = array (
+        'name' => 'linkedin_c',
+        'vname' => 'LBL_LINKEDIN',
+        'label' => 'Linkedin',
+        'type' => 'text',
+        'comment' => 'Linkedin',
+        'len' => '255',
+		'size' => '20',
+        'inline_edit' => true,
+        'comments' => 'Linkedin',
+        'merge_filter' => 'disabled',
+        'required' => false,
+        'studio' => 'visible',
+        'source' => 'custom_fields',
+    );
+
+
+    $dictionary['Lead']['fields']['twitter_c'] = array (
+        'name' => 'twitter_c',
+        'vname' => 'LBL_TWITTER',
+        'label' => 'Twitter',
+        'type' => 'text',
+        'comment' => 'twitter',
+        'len' => '255',
+		'size' => '20',
+        'inline_edit' => true,
+        'comments' => 'twitter',
+        'merge_filter' => 'disabled',
+        'required' => false,
+        'studio' => 'visible',
+        'source' => 'custom_fields',
+        );
+
+    $dictionary['Lead']['fields']['job_title'] = array (
+        'name' => 'job_title',
+        'vname' => 'LBL_JOB_TITLE',
+        'label' => 'Job Title',
+        'type' => 'text',
+        'comment' => 'Job Title',
+        'len' => '255',
+		'size' => '20',
+        'inline_edit' => true,
+        'comments' => 'Job Title',
+        'merge_filter' => 'disabled',
+        'required' => false,
+        'studio' => 'visible',
+        'source' => 'custom_fields',
+        );
+
+
+    
 
 
 

@@ -173,14 +173,18 @@ array (
             'studio' => 'visible',
             'label' => 'Discount',
           ),
-          1 => 
+          1 => '',
+        ),
+        10 => 
+        array (
+          0 => 
           array (
             'name' => 'expectationsprogram',
             'studio' => 'visible',
-            'label' => 'Expectationsprogram',
+            'label' => 'LBL_EXPECTATIONSPROGRAM',
           ),
         ),
-        10 => 
+        11 => 
         array (
           0 => 
           array (
@@ -190,7 +194,7 @@ array (
             'label' => 'COMMENT',
           ),
         ),
-        11 => 
+        12 => 
         array (
           0 => 
           array (
@@ -199,7 +203,7 @@ array (
           ),
           1 => 'lead_source',
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
@@ -208,7 +212,7 @@ array (
             'label' => 'LBL_FLEX_RELATE',
           ),
         ),
-        13 => 
+        14 => 
         array (
           0 => 'status',
           1 => 
@@ -216,7 +220,7 @@ array (
             'name' => 'status_description',
           ),
         ),
-        14 => 
+        15 => 
         array (
           0 => '',
           1 => 
@@ -227,7 +231,7 @@ array (
             'label' => 'Disposition Reason',
           ),
         ),
-        15 => 
+        16 => 
         array (
           0 => 
           array (
@@ -240,7 +244,7 @@ array (
             'label' => 'LBL_ASSIGNED_TO',
           ),
         ),
-        16 => 
+        17 => 
         array (
           0 => 
           array (
@@ -253,7 +257,7 @@ array (
             'label' => 'LBL_DATEOFCALLBACK',
           ),
         ),
-        17 => 
+        18 => 
         array (
           0 => 
           array (
@@ -262,6 +266,38 @@ array (
           ),
           1 => '',
         ),
+        19 => 
+        array (
+          0 => 
+          array (
+            'name' => 'instagram_c',
+            'label' => 'LBL_INSTAGRAM',
+            'studio' => 'visible',
+          ),
+          1 => 
+          array (
+            'name' => 'linkedin_c',
+            'label' => 'LBL_LINKEDIN',
+            'studio' => 'visible',
+          ),
+        ),
+        20 => 
+        array (
+          0 => 
+          array (
+            'name' => 'facebook_c',
+            'label' => 'LBL_FACEBOOK',
+            'studio' => 'visible',
+          ),
+          1 => 
+          array (
+            'name' => 'twitter_c',
+            'label' => 'LBL_TWITTER',
+            'studio' => 'visible',
+          ),
+        ),
+        
+        
       ),
       'lbl_editview_panel1' => 
       array (

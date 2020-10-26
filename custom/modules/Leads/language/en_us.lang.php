@@ -2,10 +2,10 @@
 // created: 2019-12-30 17:54:47
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Payment Details',
-  'LBL_COMPANY' => 'Company',
+  'LBL_COMPANY' => 'Current Organisation',
   'LBL_FUNCTIONAL_AREA' => 'Functional Area',
   'LBL_WORK_EXPERIENCE' => 'Work Experience',
-  'LBL_EDUCATION' => 'Education',
+  'LBL_EDUCATION' => 'Highest Education',
   'LBL_PREVIOUS_COURSES_FROM_TE' => 'Previous Courses From TE',
   'LBL_CITY' => 'City',
   'LBL_AGE' => 'Age',
