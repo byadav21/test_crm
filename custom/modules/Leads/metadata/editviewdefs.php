@@ -181,7 +181,7 @@ array (
           array (
             'name' => 'expectationsprogram',
             'studio' => 'visible',
-            'label' => 'LBL_EXPECTATIONSPROGRAM',
+            'label' => 'Expectations From The Program',
           ),
         ),
         11 => 
@@ -271,13 +271,13 @@ array (
           0 => 
           array (
             'name' => 'instagram_c',
-            'label' => 'LBL_INSTAGRAM',
+            'label' => 'Instagram',
             'studio' => 'visible',
           ),
           1 => 
           array (
             'name' => 'linkedin_c',
-            'label' => 'LBL_LINKEDIN',
+            'label' => 'Linkedin',
             'studio' => 'visible',
           ),
         ),
@@ -286,15 +286,26 @@ array (
           0 => 
           array (
             'name' => 'facebook_c',
-            'label' => 'LBL_FACEBOOK',
+            'label' => 'Facebook',
             'studio' => 'visible',
           ),
           1 => 
           array (
             'name' => 'twitter_c',
-            'label' => 'LBL_TWITTER',
+            'label' => 'Twitter',
             'studio' => 'visible',
           ),
+        ),
+        21 => 
+        array (
+          0 => 
+          array (
+            'name' => 'job_title',
+            'label' => 'Job Title',
+            'studio' => 'visible',
+          ),
+          1 => '', 
+          
         ),
         
         
