@@ -268,12 +268,15 @@ array (
           0 => 
           array (
             'name' => 'instagram_c',
-            'label' => 'Instagram',
+            'label' => 'Instagram',            
+            'studio' => 'visible',
           ),
           1 => 
           array (
             'name' => 'facebook_c',
-            'label' => 'Facebook',
+            'label' => 'Facebook',            
+            'studio' => 'visible',
+
           ),
         ),
         14 => 
