@@ -12,7 +12,6 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
     public function display()
     {
         global $db, $current_user;
-        $sugarSmarty = new Sugar_Smarty();
         if (isset($_POST["Import"]))
         {
             $mimeType='';
@@ -34,9 +33,9 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
                 echo "<script type=\"text/javascript\">
                             alert(\"Invalid File:Please Upload CSV File.\");
                     </script>";
-                $sugarSmarty->display('custom/modules/AOR_Reports/tpls/numbercorrectionspushtodialer.tpl');
-                return true;
-            } else if ($_FILES["file"]["size"] > 0)
+            }
+
+            if ($_FILES["file"]["size"] > 0)
             {
                 $count = 0;
                 $count_blank = 0;
@@ -44,17 +43,7 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
                 $file     = fopen($filename, "r");
                 while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
                 {
-                    if($flag) { 
-                        if($emapData[0] != "ID" && $emapData[1] != "Campagain ID" && $emapData[2] != "API_id LeadID" && $emapData[3] != "Correct Number"){
-                            echo "<script type=\"text/javascript\">
-                                alert(\"Invalid Column:Please Upload CSV File.\");
-                                </script>";
-                            // print_r($emapData);
-                            $sugarSmarty->display('custom/modules/AOR_Reports/tpls/numbercorrectionspushtodialer.tpl');
-                            return true; 
-                        }
-                        $flag = false; continue; 
-                    }
+                    if($flag) { $flag = false; continue; }
 
                     // echo "<pre>"; print_r($emapData);
                     
