@@ -12,6 +12,8 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
     public function display()
     {
         global $db, $current_user;
+        $sugarSmarty = new Sugar_Smarty();
+
         if (isset($_POST["Import"]))
         {
             $mimeType='';
@@ -33,7 +35,8 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                 echo "<script type=\"text/javascript\">
                             alert(\"Invalid File:Please Upload CSV File.\");
                             </script>";
-
+                $sugarSmarty->display('custom/modules/AOR_Reports/tpls/mobilenumbercorrectionsdonotpush.tpl');
+                return true;
             } else if ($_FILES["file"]["size"] > 0)
             {
                 $count = 0;
@@ -42,7 +45,18 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                 $file     = fopen($filename, "r");
                 while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
                 {
-                    if($flag) { $flag = false; continue; } //Skip 1st row 
+                    if($flag) { 
+                        if($emapData[0] != "ID" && $emapData[1] != "CorrectNumber"){
+                            echo "<script type=\"text/javascript\">
+                                alert(\"Invalid Column:Please Upload CSV File.\");
+                                </script>";
+                            // print_r($emapData);
+                            $sugarSmarty->display('custom/modules/AOR_Reports/tpls/mobilenumbercorrectionsdonotpush.tpl');
+                            return true; 
+                        }
+
+                        $flag = false; continue; 
+                    } //Skip 1st row 
 
                     // echo "<pre>"; print_r($emapData);
                     
@@ -78,7 +92,7 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
             fclose($file);
         }
         
-        $sugarSmarty = new Sugar_Smarty();
+        
         $sugarSmarty->assign("examList",$examList);
         $sugarSmarty->assign("docsnum",$docsnum);
         $sugarSmarty->assign("documentifo",$documentifo);
