@@ -212,9 +212,14 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
     //$module_menu[] = array('index.php?module=AOR_Reports&action=leadprofilingreport', "Lead Profiling Report", 'AOR_Reports');
 
-    if ($current_user->id == '5240d085-ec81-a57b-8619-590da1bba899' || $current_user->id == 'ede84399-71df-5962-1e68-590dd0a64b0e' || $current_user->id == 1 || $current_user->id == 'd81fc9e1-91ae-eba3-19d9-5af02415c81c')
+    if ($current_user->id == 1)
     {
         $module_menu[] = array('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
+        $module_menu[] = array('index.php?module=AOR_Reports&action=targetupload', "Target Upload", 'AOR_Reports');
+        $module_menu[] = array('index.php?module=AOR_Reports&action=actualupload', "Actual Upload", 'AOR_Reports');
+        $module_menu[] = array('index.php?module=AOR_Reports&action=numbercorrectionspushtodialer', "Number Corrections Push to Dialer", 'AOR_Reports');
+        $module_menu[] = array('index.php?module=AOR_Reports&action=uploadmarkwrongnumber', "Mark Wrong Number", 'AOR_Reports');
+        $module_menu[] = array('index.php?module=AOR_Reports&action=mobilenumbercorrectionsdonotpush', "Number Corrections | DO NOT Push", 'AOR_Reports');
     }
     $module_menu[] = array('index.php?module=AOR_Reports&action=srmpaymentreceivedreport', "Payment Received Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=debtorreport', "Debtor Report", 'AOR_Reports');
@@ -225,11 +230,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Status Detail Report_Modified Date", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=vendorwiseleadsource', "Vendor Wise Lead Source Report", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=srmstudentlist', "Student List Report", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=targetupload', "Target Upload", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=actualupload', "Actual Upload", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=numbercorrectionspushtodialer', "Number Corrections Push to Dialer", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=uploadmarkwrongnumber', "Mark Wrong Number", 'AOR_Reports');
-    $module_menu[] = array('index.php?module=AOR_Reports&action=mobilenumbercorrectionsdonotpush', "Mobile Number Corrections | DO NOT PUSH", 'AOR_Reports');
+    
 }
 
 if ($displayCCM)
