@@ -212,7 +212,7 @@ if ($current_user->is_admin == 1 || $displayMis || $displaySRM || $displayDM)
     $module_menu[] = array('index.php?module=AOR_Reports&action=dropoutreport', "Dropout Report", 'AOR_Reports');
     //$module_menu[] = array('index.php?module=AOR_Reports&action=leadprofilingreport', "Lead Profiling Report", 'AOR_Reports');
 
-    if ($current_user->id == 1)
+    if ($current_user->is_admin == 1)
     {
         $module_menu[] = array('index.php?module=AOR_Reports&action=importlead', "Import Leads Data", 'AOR_Reports');
         $module_menu[] = array('index.php?module=AOR_Reports&action=targetupload', "Target Upload", 'AOR_Reports');
