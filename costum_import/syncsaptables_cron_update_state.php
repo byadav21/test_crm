@@ -61,7 +61,7 @@ class sync_update_tables
 			if($get_data){
 				$row_count 	= mysqli_fetch_assoc($get_data);
 				
-				if(empty($row_count['State']) || ($row_count['State'] == NULL) ){
+				//if(empty($row_count['State']) || ($row_count['State'] == NULL) ){
 					echo "Number of Count:- ".$j." && NumAtCard ID:- ".$set_data['NumAtCard']." && State:- ".$set_data['State']."<br/>";
 					$check_state = $set_data['State'];
 
@@ -94,7 +94,7 @@ class sync_update_tables
 					$update_query = "UPDATE `Stud_OINV` SET `State` = '".$state."' where NumAtCard = '".$set_data['NumAtCard']."'  ";
 					$update_state = mysqli_query($sap_conn, $update_query) or die(mysqli_error($sap_conn));
 					$j++;
-				}
+				//}
 			}
 			
 		}
