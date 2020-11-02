@@ -34,6 +34,8 @@ class AOR_ReportsViewuploadmarkwrongnumber extends SugarView
                 echo "<script type=\"text/javascript\">
                             alert(\"Invalid File:Please Upload CSV File.\");
                             </script>";
+                $sugarSmarty->display('custom/modules/AOR_Reports/tpls/uploadmarkwrongnumber.tpl');
+                return false;
 
             }
             
