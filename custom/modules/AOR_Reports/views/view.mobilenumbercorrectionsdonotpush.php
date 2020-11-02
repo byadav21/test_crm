@@ -52,8 +52,11 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                 $sugarSmarty->display('custom/modules/AOR_Reports/tpls/mobilenumbercorrectionsdonotpush.tpl');
                 return false;
             }
+
+            $numcols = count(file($filename));
+            $maxLimitRows = 300;
             
-            if ($_FILES["file"]["size"] > 0)
+            if ($_FILES["file"]["size"] > 0 && $numcols <= $maxLimitRows)
             {
                 $count = 0;
                 $count_blank = 0;
@@ -61,6 +64,7 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                 $file     = fopen($filename, "r");
                 while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
                 {
+
                     if($flag) { $flag = false; continue; } //Skip 1st row 
 
                     // echo "<pre>"; print_r($emapData);
@@ -101,6 +105,10 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                             alert(\"Total Number of count Rows Data:-". $count." Total Number of Blank count Rows Data:-". $count_blank."\");
                         </script>";
                 }
+            } else {
+                echo "<script type=\"text/javascript\">
+                            alert(\"Please check Number of Rows Data, Max Limit is:- ".$maxLimitRows.".\");
+                        </script>";
             }
 
             fclose($file);
