@@ -304,25 +304,19 @@
 								 
 							{/if}
 						<p>Counsellor : {$rowData.ASSIGNED_USER_NAME}</p>
-						  {if !empty($rowData.INDIVIDUAL_ID_C)} 
-                          <p>Individual Id:<a href="index.php?module=Leads&action=indivisuallog&ivd={$rowData.INDIVIDUAL_ID_C}">{$rowData.INDIVIDUAL_ID_C}</a></p>
-                          {else}
-                          <p>Individual Id: <span style="color:red">-NA-<span></p>
-                          {/if}
-						<p>Individual Id Status: {$rowData.INDIVIDUAL_IDSTATUS_C}  </p>
-						<p>Individual Id Batch Status:{$rowData.INDIVIDUAL_IDBATCHSTATUS_C}</p>
-				  </div>
-				  <div class="col-sm-4">
-				  
-							 <p>{$rowData.PROGRAM} - {$rowData.INSTITUTE}</p>
-							 <P><label>BATCH</label> : 
+						  
+						<P><label>BATCH</label> : 
 							 {if !empty($rowData.BATCH)} 
 								{$rowData.BATCH}
 							 {else}
 								 <span style="color:red"> -NA- <span>
 							 {/if}
 							 </P>
-
+				  </div>
+				  <div class="col-sm-4">
+				  
+							 <p>{$rowData.PROGRAM} - {$rowData.INSTITUTE}</p>
+							 
 							<P><label>Institute</label> : 
 							 {if !empty($rowData.INSTITUTE)} 
 								{$rowData.INSTITUTE}

@@ -1,6 +1,6 @@
 <link href="custom/modules/AOR_Reports/include/css/common_style_aor_reports.css" rel="stylesheet" type="text/css"/>
 
-<section class="moduleTitle"> <h2>Counselor Wise Status Detail Report</h2><br/><br/>
+<section class="moduleTitle"> <h2>Counsellor Wise Status Detail Report_Create Date</h2><br/><br/>
     <form name="search_form" id="search_form" class="search_form" method="post" action="index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport">
         <input type="hidden" name="batch_created_date" id="batch_created_date" value="{$batch_created_date}">
         <div id="te_budgeted_campaignbasic_searchSearchForm" style="" class="edit view search basic">
@@ -51,7 +51,7 @@
 
                     </tr>
 
-                    <tr>
+                    {*<tr>
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="status">Manager:</label>
                         </td>
@@ -76,8 +76,63 @@
                             </select>
                         </td>
 
+                    </tr>*}
+                    <tr>
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray)}
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="status">CH List:</label>
+                        </td>
+                        <td nowrap="nowrap">
+                            <select name="channelHeadRole[]" id="channelHeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$chUserIds key=key item=channelHeadRole}
+                                    {*<option value="{$key}">{$channelHeadRole.name}</option>*}
+                                    <option value="{$key}">{$channelHeadRole.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        {/if}
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray)}
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Status Description">MG List:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="managerRole[]" id="managerRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$mgUserIds key=key item=managerRole}
+                                <option value="{$key}">{$managerRole.name}</option>
+                                 {/foreach}
+                            </select>
+                        </td>
+                        {/if}
                     </tr>
-                
+                    
+                    <tr>
+                    {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray)}
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="status">TL List:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="teamLeadRole[]" id="teamLeadRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$tlUserIds key=key item=teamLeadRole}
+                                    <option value="{$key}">{$teamLeadRole.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        {/if}
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray) || in_array($currentRoleName, $teamLeadArray)}
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Status Description">Agent List:</label>
+                        </td>
+                        <td>
+                            <select name="agentRole[]" id="agentRole"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$agentUserIds key=key item=agentRole}
+                                    <option value="{$key}">{$agentRole.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        {/if}
+                    </tr>
+                    
+                    
                     {if $current_user_is_admin==1 || $additionalUsrStatus==1}
                     <tr>
                         <td scope="row" nowrap="nowrap" width="1%">
@@ -88,7 +143,7 @@
 
                                 {foreach from =$lead_source_type key=key item=type}
 
-                                    <option value="{$key}" {if in_array($key, $selected_source)} selected="selected"{/if}>{$type}</option>
+                                    <option value="{$key}">{$type}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -96,10 +151,10 @@
                         <td scope="row" nowrap="nowrap" width="1%">
                             <label for="Lead Source Type">Lead Source Type:</label>
                         </td>
-                        <td nowrap="nowrap" >
+                        <td nowrap="nowrap">
                             <select name="lead_source_types[]" id="lead_source_types"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                                 {foreach from =$lead_source_types key=key item=type} 
-                                    <option value="{$key}" {if in_array($key, $selected_lead_source_types)} selected="selected"{/if}>{$type}</option>
+                                    <option value="{$key}">{$type}</option>
                                 {/foreach}
                             </select>
                         </td>
@@ -294,6 +349,78 @@
                     }
                 });
             }
+
+            function getAjaxChannelHeadRole(managerRole,arg) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'managerRole',arg : arg},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        var argData = JSON.parse(data);
+                        $('#' + 'managerRole').html('');
+                        $('#' + 'teamLeadRole').html('');
+                        $('#' + 'agentRole').html('');
+                        $('#' + 'managerRole').html(argData.mgOption);
+                        $('#' + 'teamLeadRole').html(argData.tlOption);
+                        $('#' + 'agentRole').html(argData.agentOption);
+                        $('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
+            
+            function getAjaxManagerRole(teamLeadRole,arg,arg1) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'teamLeadRole',arg : arg,arg1 : arg1},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        console.log("Testjs" + data);
+                        var argData = JSON.parse(data);
+                        $('#' + 'teamLeadRole').html('');
+                        $('#' + 'agentRole').html('');
+                        $('#' + 'teamLeadRole').html(argData.tlOption);
+                        $('#' + 'agentRole').html(argData.agentOption);
+                        $('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
+            
+            function getAjaxTeamLeadRole(agentRole,arg,arg1,arg2) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'agentRole',arg : arg,arg1 : arg1,arg2 : arg2},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        console.log("Testjs" + data);
+                        var argData = JSON.parse(data);
+                        $('#' + 'agentRole').html('');
+                        $('#' + 'agentRole').html(argData.agentOption);
+                        $('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
+            
             $(document).ready(function () {
 
                 $("#status").change(function () {
@@ -303,6 +430,25 @@
                 $("#managers").change(function () {
                     var arg = $('#managers').val();
                     getAjax('councellors', arg);
+                });
+                
+                // This is the main js function
+                $("#channelHeadRole").change(function () {
+                    var arg = $('#channelHeadRole').val();
+                    getAjaxChannelHeadRole('managerRole', arg);
+                });
+                
+                $("#managerRole").change(function () {
+                    var arg = $('#channelHeadRole').val();
+                    var arg1 = $('#managerRole').val();
+                    getAjaxManagerRole('teamLeadRole',arg,arg1);
+                });
+                
+                $("#teamLeadRole").change(function () {
+                    var arg = $('#channelHeadRole').val();
+                    var arg1 = $('#managerRole').val();
+                    var arg2 = $('#teamLeadRole').val();
+                    getAjaxTeamLeadRole('agentRole', arg,arg1,arg2);
                 });
                 //getStateByZone();
 
@@ -345,7 +491,7 @@
                         return false;
                     }
 
-                    if(is_admin!=1 && (managers=='' || managers ==null)){
+                    /*if(is_admin!=1 && (managers=='' || managers ==null)){
                      $("#manager").focus();
                      alert('Please select a Manager!'); return false;
                      }
@@ -353,12 +499,13 @@
                      if(is_admin!=1 && (councellors=='' || councellors ==null)){
                      $("#councellors").focus();
                      alert('Please select a Councellor!'); return false;
-                     }
+                     }*/
 
 
 
 
                 }));
             });
+     
         </script>
     {/literal}

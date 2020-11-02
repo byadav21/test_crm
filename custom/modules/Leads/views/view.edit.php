@@ -52,14 +52,16 @@ class LeadsViewEdit extends ViewEdit
             require_once('modules/ACLRoles/ACLRole.php');
             $acl_obj      = new ACLRole();
             $misData      = $acl_obj->getUserSlug($current_user->id);
-            if ($misData['slug'] == 'CCC' || $misData['slug'] == 'CCTL')
-                $disableBatch = true;
+            // if ($misData['slug'] == 'CCC' || $misData['slug'] == 'CCTL' || $misData['slug'] == 'CP')
+            if($usertype != 1)   
+            $disableBatch = true;
             if ($disableBatch)
             {
                 ?>        
                 <style>
                     #btn_batch_c,#btn_clr_batch_c{display:none;pointer-events: none;}
                     #batch_c{pointer-events: none;}
+                    #phone_mobile, #Leads0emailAddress0 {pointer-events: none;}
                 </style>
                 <script>
                     $('#btn_batch_c,#btn_clr_batch_c').remove();
@@ -100,7 +102,7 @@ class LeadsViewEdit extends ViewEdit
                 $countries_list .= ' selected ';
             $countries_list .= ' >' . $val . '</option>';
         }
-        //echo $this->bean->primary_address_state;
+        // echo "<pre>";print_r($this->bean);//->primary_address_state;
         $state_list = '';
         foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
         {

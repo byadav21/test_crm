@@ -12,7 +12,7 @@
                     <img src="themes/SuiteP/images/jscalendar.gif?v=yt-yazfsU-Y9uR7ixqf7Lg" alt="Enter Date" style="" border="0" id="from_date_trigger">
 
                 </div>
-                <div class = "block">
+                {*<div class = "block">
                     <label>Manager : </label>
                     <select name="managers[]" id="managers"  class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
                         {foreach from =$managerSList key=key item=managers}
@@ -29,8 +29,70 @@
                             <option value="{$key}"{if in_array($key, $selected_councellors)} selected="selected"{/if}>{$councellor.name}</option>
                         {/foreach}
                     </select>
-                </div>
-
+                </div>*}
+                
+                
+                {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray)}
+                            <div class = "block">
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="status">CH List:</label>
+                        </td>
+                        <td nowrap="nowrap">
+                            <select name="channelHeadRole[]" id="channelHeadRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$chUserIds key=key item=channelHeadRole}
+                                    {*<option value="{$key}">{$channelHeadRole.name}</option>*}
+                                    <option value="{$key}">{$channelHeadRole.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        </div>
+                        {/if}
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray)}
+                        <div class = "block">
+                            <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Status Description">MG List:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="managerRole[]" id="managerRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$mgUserIds key=key item=managerRole}
+                                <option value="{$key}">{$managerRole.name}</option>
+                                 {/foreach}
+                            </select>
+                        </td>
+                        </div>
+                        {/if}
+                    
+                    
+                    
+                    {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray)}
+                        <div class = "block">
+                        <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="status">TL List:</label>
+                        </td>
+                        <td nowrap="nowrap" >
+                            <select name="teamLeadRole[]" id="teamLeadRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$tlUserIds key=key item=teamLeadRole}
+                                    <option value="{$key}">{$teamLeadRole.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        </div>
+                        {/if}
+                        
+                        {if $isAdmin == 1 || in_array($currentRoleName, $businessHeadArray) || in_array($currentRoleName, $channelHeadArray) || in_array($currentRoleName, $managerArray) || in_array($currentRoleName, $teamLeadArray)}
+                        <div class = "block">
+                            <td scope="row" nowrap="nowrap" width="1%">
+                            <label for="Status Description">Agent List:</label>
+                        </td>
+                        <td>
+                            <select name="agentRole[]" id="agentRole" required class="multiselbox" multiple style="width:180px !important; height: 70px !important;">
+                                {foreach from =$agentUserIds key=key item=agentRole}
+                                    <option value="{$key}">{$agentRole.name}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        {/if}
+                   </div>
 
             </div>
             <div class = "action-block">
@@ -350,6 +412,26 @@
                     var arg = $('#managers').val();
                     getAjax('councellors', arg);
                 });
+                
+                
+                
+                $("#channelHeadRole").change(function () {
+                    var arg = $('#channelHeadRole').val();
+                    getAjaxChannelHeadRole('managerRole', arg);
+                });
+                
+                $("#managerRole").change(function () {
+                    var arg = $('#channelHeadRole').val();
+                    var arg1 = $('#managerRole').val();
+                    getAjaxManagerRole('teamLeadRole',arg,arg1);
+                });
+                
+                $("#teamLeadRole").change(function () {
+                    var arg = $('#channelHeadRole').val();
+                    var arg1 = $('#managerRole').val();
+                    var arg2 = $('#teamLeadRole').val();
+                    getAjaxTeamLeadRole('agentRole', arg,arg1,arg2);
+                });
 
 
                 $("#search_form").on('submit', (function (e) {
@@ -361,7 +443,7 @@
                     var year = $('#year').val();
                     var users = $('#users').val();
                     var managers = $('#managers').val();
-                    var councellors = $('#councellors').val();
+                    var councellors = $('#agentRole').val();
 
 
                     if (from_date == '' || from_date == null) {
@@ -369,14 +451,14 @@
                      alert('Please select a Date!');
                      return false;
                      }
-                    if(managers=='' || managers ==null){
+                    /*if(managers=='' || managers ==null){
                      $("#users").focus();
                      alert('Please select a Manager!'); return false;
-                     }
-                     if(councellors=='' || councellors ==null){
+                     }*/
+                     /*if(councellors=='' || councellors ==null){
                      $("#users").focus();
                      alert('Please select a councellor!'); return false;
-                     }
+                     }*/
 
                     /*if (month == '' || month == null) {
                      $("#month").focus();
@@ -401,6 +483,78 @@
 
                 }));
             });
+            
+            function getAjaxChannelHeadRole(managerRole,arg) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'managerRole',arg : arg},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        console.log("Okkk"+ data)
+                        var argData = JSON.parse(data);
+                        $('#' + 'managerRole').html('');
+                        $('#' + 'teamLeadRole').html('');
+                        $('#' + 'agentRole').html('');
+                        $('#' + 'managerRole').html(argData.mgOption);
+                        $('#' + 'teamLeadRole').html(argData.tlOption);
+                        $('#' + 'agentRole').html(argData.agentOption);
+                        $('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
+            
+            function getAjaxManagerRole(teamLeadRole,arg,arg1) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'teamLeadRole',arg : arg,arg1 : arg1},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        console.log("Testjs" + data);
+                        var argData = JSON.parse(data);
+                        $('#' + 'teamLeadRole').html('');
+                        $('#' + 'agentRole').html('');
+                        $('#' + 'teamLeadRole').html(argData.tlOption);
+                        $('#' + 'agentRole').html(argData.agentOption);
+                        $('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
+            
+            function getAjaxTeamLeadRole(agentRole,arg,arg1,arg2) {
+                $.ajax({
+                    beforeSend: function (request)
+                    {
+                        //request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    },
+                    url: "index.php?entryPoint=reportsajax",
+                    data: {action: 'agentRole',arg : arg,arg1 : arg1,arg2 : arg2},
+                    dataType: "html",
+                    type: "POST",
+                    async: true,
+                    success: function (data) {
+                        console.log("Testjs" + data);
+                        var argData = JSON.parse(data);
+                        $('#' + 'agentRole').html('');
+                        $('#' + 'agentRole').html(argData.agentOption);
+                        $('select[multiple]').multiselect('reload');
+
+                    }
+                });
+            }
 
 
         </script>

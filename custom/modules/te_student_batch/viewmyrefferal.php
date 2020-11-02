@@ -6,6 +6,23 @@ ini_set('memory_limit','1024M');
 require_once('include/entryPoint.php');
 	require_once('custom/modules/Leads/customfunctionforcrm.php');
 global $db,$current_user,$app_list_strings;
+	
+	//~~~~~~~
+	$report_action = '';
+	$reportAccess  = reportAccessLog();
+
+	$current_user_id = $current_user->id;
+	$report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
+
+
+	if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+	{
+		echo 'You are not authorized to access!';
+		return;
+	}
+	//~~~~~~~
+
+
 $currentUserId = $current_user->id;
 $srExecutiveRole = '30957fe0-3494-e372-656d-58a9a6296516';
 //~ echo "<pre>";
