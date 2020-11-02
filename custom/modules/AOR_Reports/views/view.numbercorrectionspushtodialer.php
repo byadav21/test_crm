@@ -52,7 +52,10 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
                 return false;
             }
 
-            if ($_FILES["file"]["size"] > 0)
+            $numcols = count(file($filename));
+            $maxLimitRows = 300;
+            
+            if ($_FILES["file"]["size"] > 0 && $numcols <= $maxLimitRows)
             {
                 $count = 0;
                 $count_blank = 0;
@@ -105,6 +108,10 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
                             alert(\"Total Number of count Rows Data:-". $count." Total Number of Blank count Rows Data:-". $count_blank."\");
                         </script>";
                 }
+            } else {
+                echo "<script type=\"text/javascript\">
+                            alert(\"Please check Number of Rows Data, Max Limit is:- ".$maxLimitRows.".\");
+                        </script>";
             }
 
             fclose($file);

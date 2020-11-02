@@ -649,6 +649,10 @@ class syncsaptables
         #5. /////////// Stud_OINV Table Syncing //////////////////
         
         $Stud_OINVArr = $this->Stud_OINV();
+
+        echo "============== Testing Imhere Start ====================";
+        echo "<pre>"; print_r($Stud_OINVArr); echo "</pre>";
+        
         echo '<hr>Stud_OINV Table Syncing ';
 
         $custSQL = "INSERT INTO `Stud_OINV` (`U_OrigEntry`, `U_OrigNum`,`U_ARInvNo`,`SlpCode`,`DocDate`,`TaxDate`,`DocDueDate`,`U_BPId`,`CardCode`,`Address`,`State`,`NumAtCard`,`U_Batch`) VALUES ";
@@ -676,11 +680,13 @@ class syncsaptables
             $i++;
         }
         $exeSql = rtrim($custSQL, ','); 
+        
         if ($i > 1)
         {
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
         }
-        unset($Stud_OINVArr);
+        echo "============== Testing Imhere END ==================== ".$exeSql." ///////////////////////";
+                unset($Stud_OINVArr);
 
 
 
