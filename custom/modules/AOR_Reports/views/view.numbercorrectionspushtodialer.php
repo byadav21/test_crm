@@ -12,6 +12,7 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
     public function display()
     {
         global $db, $current_user;
+        $sugarSmarty = new Sugar_Smarty();
         if (isset($_POST["Import"]))
         {
             $mimeType='';
@@ -35,6 +36,20 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
                     </script>";
             }
 
+            //Check headers Validation we expect
+            $requiredHeaders = array('ID', 'Campagain ID', 'API_id LeadID','Correct Numbers','Status','Status Description'); 
+            $f = fopen($filename, 'r');
+            $firstLine = fgets($f); //get first line of csv file
+            $foundHeaders = str_getcsv(trim($firstLine), ',', '"'); //parse to array
+            fclose($f); // close file
+            if ($foundHeaders !== $requiredHeaders) {
+                echo "<script type=\"text/javascript\">
+                alert(\"Headers do not match:-". implode(', ', $foundHeaders)."\");
+                    </script>";
+                $sugarSmarty->display('custom/modules/AOR_Reports/tpls/numbercorrectionspushtodialer.tpl');
+                return false;
+            }
+
             if ($_FILES["file"]["size"] > 0)
             {
                 $count = 0;
@@ -51,14 +66,26 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
                     if($emapData[0] !='' && $emapData[1] !='' && $emapData[2] !='' && $emapData[3] !='') 
                     {
                         //update leads set phone_mobile, dristi_campagain_id, dristi_API_id
-
-                        $agentupdate    ='update  leads set 
-                                            `dristi_campagain_id`   = "'.$emapData[1].'",
-                                            `dristi_API_id`         = "'.$emapData[2].'",
-                                            `phone_mobile`          = "'.$emapData[3].'",
-                                            `date_modified`         = "'.date("Y-m-d H:i:s").'" 
-                                            where `id`              = "'.$emapData[0].'" ';
+                        $updateArray = array(
+                                            'dristi_campagain_id' => $emapData[1], 
+                                            'dristi_API_id'       => $emapData[2],
+                                            'phone_mobile'        => $emapData[3],
+                                            'date_modified'       => date("Y-m-d H:i:s"));
                         
+                        if(!empty($emapData[4])){
+                            $updateArray['status'] = $emapData[4];
+                        }
+                        if(!empty($emapData[5])){
+                            $updateArray['status_description'] = $emapData[5];
+                        }
+                        // echo "<pre>"; print_r($updateArray);
+                        $valueSets = array();
+                        foreach($updateArray as $key => $value) {
+                            $valueSets[] = "`".$key . "` = '" . $value . "' ";
+                        }
+                        
+                        $agentupdate ='update leads set '. join(",",$valueSets).' where `id`= "'.$emapData[0].'" ';
+
                         $result = $db->query($agentupdate);
                         $count++;
                     } else {
@@ -72,7 +99,7 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
                 if($result)
                 {
                     echo "<script type=\"text/javascript\">
-                            alert(\"CSV File has been successfully Imported.\");
+                            alert(\"CSV File has been successfully Updated.\");
                             alert(\"Total Number of count Rows Data:-". $count." Total Number of Blank count Rows Data:-". $count_blank."\");
                         </script>";
                 }
@@ -81,7 +108,6 @@ class AOR_ReportsViewnumbercorrectionspushtodialer extends SugarView
             fclose($file);
         }
         
-        $sugarSmarty = new Sugar_Smarty();
         $sugarSmarty->assign("examList",$examList);
         $sugarSmarty->assign("docsnum",$docsnum);
         $sugarSmarty->assign("documentifo",$documentifo);

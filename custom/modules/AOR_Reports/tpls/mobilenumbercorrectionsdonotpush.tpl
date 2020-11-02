@@ -14,7 +14,7 @@
                 </td>
                 <td nowrap="nowrap" width="10%">
                     Sample CSV
-                    <a href="custom\modules\AOR_Reports/mobilenumbercorrectionsdonotpush.csv">Download Template</a>
+                    <a href="custom\modules\AOR_Reports/mobile_number_corrections_do_not_push.csv">Download Template</a>
                 </td>
             </tr>
             <tr>

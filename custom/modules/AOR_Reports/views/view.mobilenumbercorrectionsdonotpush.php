@@ -12,6 +12,7 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
     public function display()
     {
         global $db, $current_user;
+        $sugarSmarty = new Sugar_Smarty();
         if (isset($_POST["Import"]))
         {
             $mimeType='';
@@ -34,7 +35,23 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                             alert(\"Invalid File:Please Upload CSV File.\");
                             </script>";
 
-            } else if ($_FILES["file"]["size"] > 0)
+            }
+            
+            //Check headers Validation we expect
+            $requiredHeaders = array('ID', 'CorrectNumber','Status','Status Description'); 
+            $f = fopen($filename, 'r');
+            $firstLine = fgets($f); //get first line of csv file
+            $foundHeaders = str_getcsv(trim($firstLine), ',', '"'); //parse to array
+            fclose($f); // close file
+            if ($foundHeaders !== $requiredHeaders) {
+                echo "<script type=\"text/javascript\">
+                alert(\"Headers do not match:-". implode(', ', $foundHeaders)."\");
+                    </script>";
+                $sugarSmarty->display('custom/modules/AOR_Reports/tpls/mobilenumbercorrectionsdonotpush.tpl');
+                return false;
+            }
+            
+            if ($_FILES["file"]["size"] > 0)
             {
                 $count = 0;
                 $count_blank = 0;
@@ -47,15 +64,24 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
                     // echo "<pre>"; print_r($emapData);
                     
                     //Check Validation All 
-                    if($emapData[0] !='' && $emapData[1] !='') 
+                    if($emapData[0] !='' && $emapData[1] !='')
                     {
                         //update leads set phone_mobile, dristi_campagain_id, dristi_API_id
-
-                        $agentupdate    ='update  leads set 
-                                            `phone_mobile`         = "'.$emapData[1].'",
-                                            `date_modified`        = "'.date("Y-m-d H:i:s").'" 
-                                            where `id`             = "'.$emapData[0].'" ';
+                        $updateArray = array('phone_mobile' =>$emapData[1], 'date_modified' => date("Y-m-d H:i:s"));
                         
+                        if(!empty($emapData[2])){
+                            $updateArray['status'] = $emapData[2];
+                        }
+                        if(!empty($emapData[3])){
+                            $updateArray['status_description'] = $emapData[3];
+                        }
+
+                        $valueSets = array();
+                        foreach($updateArray as $key => $value) {
+                            $valueSets[] = "`".$key . "` = '" . $value . "'";
+                        }
+                        
+                        $agentupdate ='update leads set '. join(",",$valueSets).' where `id`= "'.$emapData[0].'" ';
                         $result = $db->query($agentupdate);
                         $count++;
                     } else {
@@ -78,7 +104,6 @@ class AOR_ReportsViewmobilenumbercorrectionsdonotpush extends SugarView
             fclose($file);
         }
         
-        $sugarSmarty = new Sugar_Smarty();
         $sugarSmarty->assign("examList",$examList);
         $sugarSmarty->assign("docsnum",$docsnum);
         $sugarSmarty->assign("documentifo",$documentifo);
