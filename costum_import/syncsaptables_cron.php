@@ -37,6 +37,7 @@ class syncsaptables
         $query   = "SELECT reg_date FROM   `SYNC_SAP_TIMESTAMP` order by reg_date desc limit 1";
         $leadObj = mysqli_query($sap_conn, $query);
         $row     = mysqli_fetch_assoc($leadObj);
+        $row['reg_date'] = date("Y-m-d H:i:s",strtotime($row['reg_date']." -330 minutes"));
 
         return $row['reg_date'];
     }
