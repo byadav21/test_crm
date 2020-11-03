@@ -392,7 +392,7 @@
                 $('#lead_source_types option[value="IS"]').remove();
             }
             //Hide for all lead source types accept in Channel
-            var roleCheckAccessCH = array('CH', 'CHMGR', 'CHTL', 'CHAGENT');
+            var roleCheckAccessCH = ['CH', 'CHMGR', 'CHTL', 'CHAGENT'];
             var roleAccessCH =  roleCheckAccessCH.includes(usersRoleSlug);
             if(roleAccessCH){
                 $('#lead_source_types option[value="CC"]').remove();
@@ -418,7 +418,7 @@
                   $("#status").attr('disabled','disabled');
                   $("#status_description").attr('disabled','disabled');
                
-              }else if ((usersRole=='Contact Center Counselor' && $("#status").val() != 'Recycle') || (roleAccessSCH && && $("#status").val() != 'Recycle') ){
+              }else if ((usersRole=='Contact Center Counselor' && $("#status").val() != 'Recycle') || (roleAccessSCH && $("#status").val() != 'Recycle') ){
                   $('#status option[value="Recycle"]').remove();
               }
               

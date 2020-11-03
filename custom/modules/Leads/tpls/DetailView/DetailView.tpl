@@ -401,9 +401,20 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
     </script>
 {/if}
 <script>
+    
     var ModuleSubPanels = '{$module_sub_panels}';
     {literal}
 
+    $( document ).ready(function() {
+
+        // Hide for all view level Refree Leads tab
+        $("#Leads_detailview_tabs .yui-nav li a em").each(function(){
+            var refreeLeads = $(this).text();
+            if(refreeLeads == 'Refree Leads'){
+                $(this).closest("li").hide();
+            }
+        });
+    });
     var updateSubpanelGroup = function() {
         // Filter subpanels to show the current tab
         if (typeof SUGAR.subpanelUtils.currentSubpanelGroup !== "undefined") {
