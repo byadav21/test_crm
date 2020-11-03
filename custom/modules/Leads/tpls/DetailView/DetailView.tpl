@@ -408,12 +408,18 @@ var {{$module}}_detailview_tabs = new YAHOO.widget.TabView("{{$module}}_detailvi
     $( document ).ready(function() {
 
         // Hide for all view level Refree Leads tab
-        $("#Leads_detailview_tabs .yui-nav li a em").each(function(){
-            var refreeLeads = $(this).text();
-            if(refreeLeads == 'Refree Leads'){
-                $(this).closest("li").hide();
-            }
-        });
+        var usersAdminID = $("#role_name_id_access").val();
+        // alert(usersAdminID);
+        //Admin ID value is :- 1
+        if(usersAdminID != '1'){
+            $("#Leads_detailview_tabs .yui-nav li a em").each(function(){
+                var refreeLeads = $(this).text();
+                if(refreeLeads == 'Refree Leads'){
+                    $(this).closest("li").hide();
+                }
+            });
+        }
+        
     });
     var updateSubpanelGroup = function() {
         // Filter subpanels to show the current tab

@@ -52,6 +52,8 @@ class LeadsViewDetail extends ViewDetail {
         $ss->assign("MODULE_NAME", $this->module);
         $ss->assign("langHeader", get_language_header());
 
+        echo "<input type='hidden' id='role_name_id_access' value='" . $current_user->id . "'>";
+
         // set ab testing if exists
         $testing = (isset($_REQUEST["testing"]) ? $_REQUEST['testing'] : "a");
         $ss->assign("ABTESTING", $testing);
