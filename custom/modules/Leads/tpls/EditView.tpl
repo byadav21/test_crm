@@ -380,27 +380,45 @@
         })
         
             var usersRole = $("#role_name_id").val();
-              //alert(usersRole);
-             $('#status option[value="Duplicate"]').remove(); 
-            if(usersRole=='Contact Center Counselor' && $("#status_description").val() != 'Converted'){
+            var usersRoleSlug = $("#role_name_id_access").val();
+            $('#status option[value="Duplicate"]').remove();
+            
+            //Hide for all lead source types accept in Call Center
+            var roleCheckAccessSCH = ['SCH', 'SCHMGR', 'SCHTL', 'SCHAGENT'];
+            var roleAccessSCH = roleCheckAccessSCH.includes(usersRoleSlug);
+            if(roleAccessSCH){
+                $('#lead_source_types option[value="OO"]').remove();
+                $('#lead_source_types option[value="CO"]').remove();
+                $('#lead_source_types option[value="IS"]').remove();
+            }
+            //Hide for all lead source types accept in Channel
+            var roleCheckAccessCH = array('CH', 'CHMGR', 'CHTL', 'CHAGENT');
+            var roleAccessCH =  roleCheckAccessCH.includes(usersRoleSlug);
+            if(roleAccessCH){
+                $('#lead_source_types option[value="CC"]').remove();
+                $('#lead_source_types option[value="CO"]').remove();
+                $('#lead_source_types option[value="IS"]').remove();
+            }
+
+             if( (usersRole=='Contact Center Counselor' && $("#status_description").val() != 'Converted') || (roleAccessSCH && $("#status_description").val() != 'Converted') ){
                  $('#status option[value="Converted"]').remove();
                  $("#lead_source_types").attr('disabled','disabled');
                
               }
               
-              if(usersRole=='Contact Center Counselor' && $("#status").val() == 'Dropout'){ 
+              if( (usersRole=='Contact Center Counselor' && $("#status").val() == 'Dropout') || (roleAccessSCH && $("#status").val() == 'Dropout') ){ 
                   $("#status").attr('disabled','disabled');
                   $("#status_description").attr('disabled','disabled');
                
-              }else if (usersRole=='Contact Center Counselor' && $("#status").val() != 'Dropout'){
+              }else if ( (usersRole=='Contact Center Counselor' && $("#status").val() != 'Dropout') || (roleAccessSCH && $("#status").val() != 'Dropout') ){
                   $('#status option[value="Dropout"]').remove();
               }
               
-              if(usersRole=='Contact Center Counselor' && $("#status").val() == 'Recycle'){ 
+              if( (usersRole=='Contact Center Counselor' && $("#status").val() == 'Recycle') || (roleAccessSCH && $("#status").val() == 'Recycle') ){ 
                   $("#status").attr('disabled','disabled');
                   $("#status_description").attr('disabled','disabled');
                
-              }else if (usersRole=='Contact Center Counselor' && $("#status").val() != 'Recycle'){
+              }else if ((usersRole=='Contact Center Counselor' && $("#status").val() != 'Recycle') || (roleAccessSCH && && $("#status").val() != 'Recycle') ){
                   $('#status option[value="Recycle"]').remove();
               }
               
@@ -427,7 +445,7 @@
                     return false;
                 } else
                 {
-                    if(usersRole=='Contact Center Counselor'){
+                    if(usersRole=='Contact Center Counselor' || roleAccessSCH){
                         return false;
                     }
                     $("ul.yui-nav li:eq(0)").removeClass("selected");

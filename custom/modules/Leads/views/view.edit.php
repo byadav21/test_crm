@@ -20,6 +20,7 @@ class LeadsViewEdit extends ViewEdit
         $getRoleSlug = getUsersRole();
         $usersRole   = ''; //Contact Center Counselor 
         $usersRole   = !empty($getRoleSlug[$current_user->id]['role_name']) ? $getRoleSlug[$current_user->id]['role_name'] : 'NA';
+        $usersRoleSlug   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : 'NA';
         $usertype   ='';
 		$usertype   =   is_admin($current_user);
 
@@ -52,14 +53,16 @@ class LeadsViewEdit extends ViewEdit
             require_once('modules/ACLRoles/ACLRole.php');
             $acl_obj      = new ACLRole();
             $misData      = $acl_obj->getUserSlug($current_user->id);
-            if ($misData['slug'] == 'CCC' || $misData['slug'] == 'CCTL')
-                $disableBatch = true;
+            // if ($misData['slug'] == 'CCC' || $misData['slug'] == 'CCTL' || $misData['slug'] == 'CP')
+            if($usertype != 1)   
+            $disableBatch = true;
             if ($disableBatch)
             {
                 ?>        
                 <style>
                     #btn_batch_c,#btn_clr_batch_c{display:none;pointer-events: none;}
                     #batch_c{pointer-events: none;}
+                    #phone_mobile, #Leads0emailAddress0 {pointer-events: none;}
                 </style>
                 <script>
                     $('#btn_batch_c,#btn_clr_batch_c').remove();
@@ -100,7 +103,7 @@ class LeadsViewEdit extends ViewEdit
                 $countries_list .= ' selected ';
             $countries_list .= ' >' . $val . '</option>';
         }
-        //echo $this->bean->primary_address_state;
+        // echo "<pre>";print_r($this->bean);//->primary_address_state;
         $state_list = '';
         foreach ($GLOBALS['app_list_strings']['indian_states'] as $key => $val)
         {
@@ -115,6 +118,7 @@ class LeadsViewEdit extends ViewEdit
         echo "<input type='hidden' id='CheckEditView' value='" . $_REQUEST['record'] . "'>";
         echo "<input type='hidden' id='cute_txt_id' value='" . $cue_txt . "'>";
         echo "<input type='hidden' id='role_name_id' value='" . $usersRole . "'>";
+        echo "<input type='hidden' id='role_name_id_access' value='" . $usersRoleSlug . "'>";
         echo "<input type='hidden' id='usertype' value='" . $usertype . "'>";
 
         //print_r($GLOBALS['app_list_strings']['indian_states']); die;
