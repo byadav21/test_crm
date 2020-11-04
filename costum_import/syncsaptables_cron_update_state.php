@@ -91,7 +91,7 @@ class sync_update_tables
 						default:
 							$state = $check_state;
 					}
-					$update_query = "UPDATE `Stud_OINV` SET `State` = '".$state."',`invoice_number`='".$set_data['invoice_number']."' where NumAtCard = '".$set_data['NumAtCard']."'  ";
+					$update_query = "UPDATE `Stud_OINV` SET `State` = '".$state."',`U_OrigNum`='".$set_data['invoice_number']."',`U_ARInvNo`='".$set_data['invoice_number']."' where NumAtCard = '".$set_data['NumAtCard']."'  ";
 					$update_state = mysqli_query($sap_conn, $update_query) or die(mysqli_error($sap_conn));
 					$j++;
 				//}
