@@ -401,7 +401,67 @@ class AOR_ReportsViewprospectdashboard extends SugarView
     }
 
     ///////New task end
-
+     function getCouncelorForUsersNew($user_ids = array(),$current_user_id)
+            {
+        global $db;
+        $userSql  = "SELECT u.first_name,
+                            u.last_name,
+                            u.id,
+                            ru.first_name AS reporting_firstname,
+                            ru.last_name AS reporting_lastname,
+                            ru.id AS reporting_id
+                     FROM users AS u
+                     LEFT JOIN users AS ru ON ru.id=u.reports_to_id
+                     WHERE u.id IN ('" . implode("',
+                                    '", $user_ids) . "') and ru.id = '$current_user_id'
+                       AND u.deleted=0";
+        $userObj  = $db->query($userSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+            $usersArr[$user['id']] = array(
+                'id'             => $user['id'],
+                'name'           => $user['first_name'] . ' ' . $user['last_name'],
+                'reporting_id'   => $user['reporting_id'],
+                'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
+            );
+        }
+        return $usersArr;
+    }
+    
+    function getCouncelorForUsersSRM()
+    {
+        $channelHeadArray = array("CH","SCH","DMH","SRMH","QA","TR","VR");
+        global $db;
+        $proSql      = "SELECT
+            u.first_name,
+            u.last_name,
+            u.id,
+            slug,
+            user_id,
+            NAME role_name
+            FROM
+            acl_roles
+            INNER JOIN
+            acl_roles_users
+            ON
+            acl_roles_users.role_id = acl_roles.id
+            INNER JOIN
+            users u
+            ON
+            u.id = acl_roles_users.user_id AND acl_roles.deleted = 0 AND acl_roles_users.deleted = 0 where slug IN ('" . implode("',
+                                    '", $channelHeadArray) . "')";
+        $userObj  = $db->query($proSql);
+        $usersArr = [];
+        while ($user     = $db->fetchByAssoc($userObj))
+        {
+            $usersArr[$user['id']] = array(
+                'id'             => $user['id'],
+                'name'           => $user['first_name'] . ' ' . $user['last_name'],
+            );
+        }
+        return $usersArr;
+    }
 
     public function display()
     {
@@ -435,6 +495,60 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         }
         
 
+        $isAdmin = $current_user->is_admin;
+        $getRoleSlug = getUsersRole();
+        //$chUserIds = $chUserIdsDataSRM;
+        $businessHeadArray = array("BH","SM");
+        $channelHeadArray = array("CH","SCH","DMH","SRMH","QA","TR","VR");
+        $managerArray = array("CHMGR","SCHMGR","DMHMGR","SRMHMGR","QAMGR","TRMGR","VRMGR");
+        $teamLeadArray = array("CHTL","SCHTL","DMHTL","SRMHTL","QATL","TRTL","VRTL");
+        $agentArray = array("CHAGENT","SCHAGENT","DMHAGENT","SRMHAGENT","QAAGENT","TRAGENT","VRAGENT");
+        $usersRole   = '';
+        $currentRoleName   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : '7e225ca3-69fa-a75d-f3f2-581d88cafd9a';
+        $chUserIds = array();
+        $mgUserIds = array();
+        $tlUserIds = array();
+        $agentUserIds = array();
+        if($isAdmin == 1 || in_array ($currentRoleName, $businessHeadArray)){
+            $chUserIds = array();
+            foreach ($getRoleSlug as $userIds){
+               if(in_array($userIds['slug'] , $channelHeadArray) && $isAdmin != 1){
+                  $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
+                  $chUserIdsss = $this->getCouncelorForUsersNew($chUserIdsData,$current_user->id);
+               }
+               else if ($isAdmin == 1){
+                   $chUserIdsData[$userIds['user_id']] = $userIds['user_id'];
+                   $chUserIdsDataSRM = $this->getCouncelorForUsersSRM($chUserIdsData,$current_user->id);
+                   $chUserIds = $chUserIdsDataSRM;
+               }
+            }
+        }
+        
+       if(in_array($currentRoleName, $channelHeadArray)){
+            foreach ($getRoleSlug as $userIds){
+                if(in_array($userIds['slug'], $managerArray)){
+                  $mgUserIdsData[$userIds['user_id']] = $userIds['user_id'];
+                  $mgUserIds = $this->getCouncelorForUsersNew($mgUserIdsData,$current_user->id);
+               }
+            }
+        }
+        if(in_array($currentRoleName, $managerArray)){
+            foreach ($getRoleSlug as $userIds){
+               if(in_array($userIds['slug'], $teamLeadArray)){
+                  $tlUserIdsData[$userIds['user_id']] = $userIds['user_id'];
+                  $tlUserIds = $this->getCouncelorForUsersNew($tlUserIdsData,$current_user->id);
+               }
+            }
+        }
+        
+         if(in_array($currentRoleName, $teamLeadArray)){
+            foreach ($getRoleSlug as $userIds){
+               if(in_array($userIds['slug'],$agentArray)){
+                  $agentUserIdsData[$userIds['user_id']] = $userIds['user_id'];
+                  $agentUserIds = $this->getCouncelorForUsersNew($agentUserIdsData,$current_user->id);
+               }
+            }
+        }
 
 
         if (isset($_POST['button']) || isset($_POST['export']))
@@ -444,7 +558,8 @@ class AOR_ReportsViewprospectdashboard extends SugarView
             //$_SESSION['cccon_batch']       = $_REQUEST['batch'];
             //$_SESSION['cccon_batch_code']  = $_REQUEST['batch_code'];
             $_SESSION['cccon_managers']    = $_REQUEST['managers'];
-            $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
+            $_SESSION['cccon_councellors'] = $_REQUEST['agentRole'];
+//            $_SESSION['cccon_councellors'] = $_REQUEST['councellors'];
             //$_SESSION['cccon_status']      = $_REQUEST['status'];
            
             $_SESSION['cccon_month'] = $_REQUEST['month'];
@@ -490,7 +605,7 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         $theFInalArray = array();
        
 
-
+        
        
 
       
@@ -744,6 +859,19 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         $sugarSmarty->assign("managerSList", $managerSList);
         $sugarSmarty->assign("month", $months);
         $sugarSmarty->assign("years", $yearsList);
+        
+        $sugarSmarty->assign("chUserIds", $chUserIds);
+        $sugarSmarty->assign("mgUserIds", $mgUserIds);
+        $sugarSmarty->assign("tlUserIds", $tlUserIds);
+        $sugarSmarty->assign("agentUserIds", $agentUserIds);
+        
+        $sugarSmarty->assign("businessHeadArray", $businessHeadArray);
+        $sugarSmarty->assign("channelHeadArray", $channelHeadArray);
+        $sugarSmarty->assign("managerArray", $managerArray);
+        $sugarSmarty->assign("teamLeadArray", $teamLeadArray);
+        $sugarSmarty->assign("agentArray", $agentArray);
+        $sugarSmarty->assign("isAdmin", $isAdmin);
+        $sugarSmarty->assign("currentRoleName", $currentRoleName);
 
         $sugarSmarty->assign("current_records", $current);
         $sugarSmarty->assign("page", $page);

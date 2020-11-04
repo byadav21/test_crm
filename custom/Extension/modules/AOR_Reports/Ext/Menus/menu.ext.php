@@ -156,7 +156,7 @@ if(in_array($current_user->id, $UsersVendrArr))
     $channelArray           = array("CH","CHMGR","CHTL","CHAGENT");
 
 # DIgital Marketing Training Quality #
-if( in_array($misData['slug'], $salesClusterHeadArray) ||  in_array($misData['slug'], $qualityArray) ||  in_array($misData['slug'], $trainingArray) || in_array($misData['slug'], $channelArray) ){
+if( in_array($misData['slug'], $salesClusterHeadArray) ||  in_array($misData['slug'], $qualityArray) ||  in_array($misData['slug'], $trainingArray) || in_array($misData['slug'], $channelArray) || in_array($misData['slug'], $businessHeadArray) ){
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusdetailreport', "Counsellor Wise Status Detail Report_Create Date", 'AOR_Reports');
     $module_menu[] = array('index.php?module=AOR_Reports&action=counsellorwisestatusupdatedreport', "Counsellor Wise Status Detail Report_Modified Date", 'AOR_Reports');
 
