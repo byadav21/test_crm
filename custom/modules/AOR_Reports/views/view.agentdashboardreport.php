@@ -17,7 +17,7 @@ class AOR_ReportsViewagentdashboardreport extends SugarView
 
     public function __construct()
     {
-        $accRoles = array("SCH", "SCHMGR", "SCHTL", "SCHAGENT");
+        $accRoles = array("SCH", "SCHMGR", "SCHTL", "SCHAGENT", "CH", "CHMGR", "CHTL", "CHAGENT");
         parent::SugarView();
         
     }

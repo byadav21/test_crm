@@ -17,6 +17,7 @@ class AOR_ReportsViewprospectdashboard extends SugarView
 
     public function __construct()
     {
+        $accRoles = array("SCH", "SCHMGR", "SCHTL", "SCHAGENT", "CH", "CHMGR", "CHTL", "CHAGENT");
         parent::SugarView();
     }
 
@@ -154,16 +155,15 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         //echo 'dd=='.$current_userAccess['slug'];
    
         
-        if (!empty($selected_councellors) && $userSlug!='CCC')
+        if (!empty($selected_councellors) && $userSlug!='CCC' || (!empty($selected_councellors) && ! in_array($userSlug, $accRoles)))
         {
             $wherex .= " AND  users.id IN ('" . implode("','", $selected_councellors) . "')";
         }
-        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
-             //echo 'xxx'.
-             $wherex .= " AND  users.id ='$current_user->id'";
+        if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCC') || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) ) ){
+            $wherex .= " AND  users.id ='$current_user->id'";
         }
         //print_r($CouncellorsList);
-        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCM' && empty($selected_councellors)){
+        if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCM' && empty($selected_councellors)) || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) && empty($selected_councellors))){ 
              //echo 'xxx'.
              $managersAgent = array();
              foreach ($CouncellorsList as $key=>$val){
@@ -233,12 +233,14 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         {
             $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
-        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
+        if ((!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCC') || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) ) )
+        {
              //echo 'xxx'.
              $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
         }
         //print_r($CouncellorsList);
-        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCM' && empty($selected_councellors)){
+        if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCM' && empty($selected_councellors)) || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) && empty($selected_councellors)) )
+        {
              //echo 'xxx'.
              $managersAgent = array();
              foreach ($CouncellorsList as $key=>$val){
@@ -350,12 +352,16 @@ class AOR_ReportsViewprospectdashboard extends SugarView
         {
             $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
-        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCC'){
+        
+        if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCC') || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles)) )
+        {
              //echo 'xxx'.
              $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
         }
         //print_r($CouncellorsList);
-        if(!empty($current_userAccess['slug']) && $current_userAccess['slug']=='CCM' && empty($selected_councellors)){
+        
+        if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCM' && empty($selected_councellors)) || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) && empty($selected_councellors)) )
+        {
              //echo 'xxx'.
              $managersAgent = array();
              foreach ($CouncellorsList as $key=>$val){
