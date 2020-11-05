@@ -664,6 +664,35 @@ class syncsaptables
 
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
             $Address = ($Address=='0')? '': $Address;
+
+            $check_state = $data['State'];
+
+					switch ($check_state) {
+						case "BR":
+							$state = "BH";
+							break;
+						case "CT":
+							$state = "CG";
+							break;
+						case "DN":
+							$state = "DH";
+							break;
+						case "KA":
+							$state = "KT";
+							break;
+						case "ML":
+							$state = "ME";
+							break;
+						case "TG":
+							$state = "TS";
+							break;
+						case "UK":
+							$state = "UT";
+							break;
+						
+						default:
+							$state = $check_state;
+					}
             
             $custSQL .= "('" . $data['U_OrigEntry'] . "',
                 '" . $data['U_OrigNum'] . "',
@@ -675,7 +704,7 @@ class syncsaptables
                 '" . $data['U_BPId'] . "',
 		'" . $data['CardCode'] . "',
 		'" . $Address. "',
-		'" . $data['State'] . "',
+		'" . $state . "',
 		'" . $data['NumAtCard'] . "','" . $data['U_Batch'] . "'),";
 
             $i++;

@@ -238,8 +238,19 @@ function insert_payment($student_batch_detail = array(), $student_detail = array
     $payment->payment_realized                    = $payment_realized;
     $payment->leads_te_payment_details_1leads_ida = $student_detail['lead_id'];
     $payment->student_payment_id                  = $id;
+    $payment->state                               = $data['state'];
+    
     // added pawan on 22nd Nov 2017
-    $payment->invoice_number                      = $data['invoice_number'];
+    $get_invoice_number_payment_sql = "SELECT invoice_number FROM `te_payment_details` WHERE `invoice_number`='".$data['invoice_number']."' ";
+    $get_invoice_number_payment_Obj = $GLOBALS['db']->query($get_invoice_number_payment_sql);
+    $row_get_invoice_number_payment = $GLOBALS['db']->rowCount($get_invoice_number_payment_Obj);
+
+    if($row_get_invoice_number_payment == 0){
+        $payment->invoice_number                      = $data['invoice_number'];
+    } else {
+        $payment->invoice_number                      = '';
+    }
+    
     $payment->invoice_url                         = $data['invoice_url'];
     $payment->invoice_order_number                = $data['payment_id'];
     $payment->tax_type                            = $data['taxtype'];
@@ -288,7 +299,7 @@ function update_payment($student_batch_detail = array(), $student_detail = array
     {
         $payment_realized = 0;
     }
-    $GLOBALS['db']->query("UPDATE te_payment_details SET amount='" . $data['amount'] . "',payment_realized='" . $payment_realized . "',invoice_number='" . $data['invoice_number'] . "',invoice_url='" . $data['invoice_url'] . "',invoice_order_number='" . $data['payment_id'] . "',receipt_url='" . $data['receipt_url'] . "' WHERE id='" . $data['crm_payment_id'] . "'");
+    $GLOBALS['db']->query("UPDATE te_payment_details SET amount='" . $data['amount'] . "',payment_realized='" . $payment_realized . "', invoice_number='" . $data['invoice_number'] . "',invoice_url='" . $data['invoice_url'] . "',invoice_order_number='" . $data['payment_id'] . "',receipt_url='" . $data['receipt_url'] . "',`state`='".$data['state']."' WHERE id='" . $data['crm_payment_id'] . "'");
     $GLOBALS['db']->query("UPDATE te_student_payment SET amount='" . $data['amount'] . "',payment_realized='" . $payment_realized . "',invoice_number='" . $data['invoice_number'] . "',invoice_url='" . $data['invoice_url'] . "',invoice_order_number='" . $data['payment_id'] . "' WHERE id='" . $check_payment_row['student_payment_id'] . "'");
 
     $get_student_payment_sql = "SELECT SUM(amount)amount FROM `te_student_payment` WHERE `te_student_batch_id_c`='" . $student_batch_detail['batch_id'] . "' AND deleted=0 AND payment_realized= 1";
