@@ -242,10 +242,10 @@ function insert_payment($student_batch_detail = array(), $student_detail = array
     
     // added pawan on 22nd Nov 2017
     
-    $get_invoice_number_payment_Obj = $GLOBALS['db']->query(" SELECT count(invoice_number) FROM `te_payment_details` WHERE `invoice_number`='".$data['invoice_number']."' ");
+    $get_invoice_number_payment_Obj = $GLOBALS['db']->query(" SELECT count(invoice_number) AS invoice_count FROM `te_payment_details` WHERE `invoice_number`='".$data['invoice_number']."' ");
     $row_get_invoice_number_payment = $GLOBALS['db']->fetchByAssoc($get_invoice_number_payment_Obj);
 
-    if($row_get_invoice_number_payment == 0){
+    if($row_get_invoice_number_payment['invoice_count'] == 0){
         $payment->invoice_number                      = $data['invoice_number'];
     } else {
         $payment->invoice_number                      = '';
