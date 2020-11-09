@@ -37,7 +37,7 @@ class syncsaptables
         $query   = "SELECT reg_date FROM   `SYNC_SAP_TIMESTAMP` order by reg_date desc limit 1";
         $leadObj = mysqli_query($sap_conn, $query);
         $row     = mysqli_fetch_assoc($leadObj);
-        $row['reg_date'] = date("Y-m-d H:i:s",strtotime($row['reg_date']." -330 minutes"));
+        //$row['reg_date'] = date("Y-m-d H:i:s",strtotime($row['reg_date']." -330 minutes"));
 
         return $row['reg_date'];
     }
@@ -285,7 +285,7 @@ class syncsaptables
                                     #AND `l`.`lead_source_types` <> '' 
                                     AND  pd.deleted=0
                                     AND lp.deleted=0 
-                                    AND sp.date_entered > '$SyncSapTimestamp' AND sp.date_entered <= '$currentTime'
+                                    AND pd.date_entered > '$SyncSapTimestamp' AND pd.date_entered <= '$currentTime'
                              GROUP BY `sp`.`id`";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -909,7 +909,12 @@ class syncsaptables
 $mainObj = new syncsaptables();
 $mainObj->main();
 
-$sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . date("Y-m-d H:i:s") . "'";
+$query   = "SELECT date_entered FROM `te_payment_details` ORDER BY `te_payment_details`.`date_entered` DESC limit 1";
+$leadObj = mysqli_query($conn, $query);
+$row     = mysqli_fetch_assoc($leadObj);
+$sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . $row['date_entered'] . "'";
+
+//$sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . date("Y-m-d H:i:s") . "'";
 mysqli_query($sap_conn, $sql);
 
 mysqli_close($conn);
