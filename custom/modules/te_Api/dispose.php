@@ -337,6 +337,9 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                     $bean->status_description = "New Lead";
                     $bean->assigned_user_id   = '';
                     
+                }else {
+                    $bean->status             = $status;
+                    $bean->status_description = $dispositionCode;
                 }
                     $bean->disposition_reason = $dispositionReasonCode;
                     $bean->dispositionName    = $_REQUEST['dispositionName'];
