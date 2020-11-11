@@ -188,11 +188,12 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
          //~~~~~~~
             $report_action = '';
             $reportAccess  = reportAccessLog();
-echo "<pre>"; print_r($current_user);
+
             $current_user_id = $current_user->id;
             $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
-
-
+            $getRoleSlug = getUsersRole();
+            $currentSlugRoleName   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : '';
+            
                 if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
                 {
                     echo 'You are not authorized to access!';
@@ -212,7 +213,7 @@ echo "<pre>"; print_r($current_user);
         $usersdd               = "";
         $error                 = array();
         
-        if (in_array($current_user_id, $additionalUsr) || in_array($current_user_id, $additionalUsr) )
+        if (in_array($current_user_id, $additionalUsr) || in_array($currentSlugRoleName, $additionalUsrSlug) )
         {
              $additionalUsrStatus   = 1;
         }
