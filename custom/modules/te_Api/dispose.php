@@ -330,12 +330,18 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
                 }
 
                 $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
-                $bean->status             = $status;
-                $bean->status_description = $dispositionCode;
-                $bean->disposition_reason = $dispositionReasonCode;
-                $bean->dispositionName    = $_REQUEST['dispositionName'];
-                $bean->callType           = $_REQUEST['callType'];
-                //$bean->modified_user_id   = $modifieduserIDX;
+
+                if($_REQUEST['callType'] == 'outbound.auto.preview.dial' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['entryPoint'] == 'dispose')
+                {
+                    $bean->status             = "Alive";
+                    $bean->status_description = "New Lead";
+                    $bean->assigned_user_id   = '';
+                    
+                }
+                    $bean->disposition_reason = $dispositionReasonCode;
+                    $bean->dispositionName    = $_REQUEST['dispositionName'];
+                    $bean->callType           = $_REQUEST['callType'];
+                    //$bean->modified_user_id   = $modifieduserIDX;
                 
                $popUserArr = array();
                $popUserArr = array('b2e5e387-de9c-62ea-e5da-590d9fadcc80'=>'rohit.mittal@talentedge.in',
