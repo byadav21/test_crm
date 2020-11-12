@@ -203,7 +203,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
 
                 
         $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942','581d9edd-a5e4-349a-fe28-5c59b9d2fe37');
-        $additionalUsrSlug     = array('CCM','BA');
+        $additionalUsrSlug     = array('CCM','BA','QA');
 
         $additionalUsrStatus   = 0;
         $current_user_id       = $current_user->id;
