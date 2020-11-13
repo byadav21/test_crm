@@ -288,10 +288,16 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         //      echo 'You are not authorized to access!';
         //      return;
         //  }
+            
+            $getRoleSlug = getUsersRole();
+            $currentSlugRoleName   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : '';
+
             //~~~~~~~
 
                 
         $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942','581d9edd-a5e4-349a-fe28-5c59b9d2fe37');
+        $additionalUsrSlug     = array('CCM','BA','QA');
+
         $additionalUsrStatus   = 0;
         $current_user_id       = $current_user->id;
         $current_user_is_admin = $current_user->is_admin;
@@ -300,7 +306,7 @@ class AOR_ReportsViewCounsellorwisestatusupdatedreport extends SugarView
         $usersdd               = "";
         $error                 = array();
         
-        if (in_array($current_user_id, $additionalUsr))
+        if (in_array($current_user_id, $additionalUsr) || in_array($currentSlugRoleName, $additionalUsrSlug) )
         {
              $additionalUsrStatus   = 1;
         }

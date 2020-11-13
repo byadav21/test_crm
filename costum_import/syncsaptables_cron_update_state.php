@@ -19,7 +19,7 @@ class sync_update_tables
 			echo "StartDate:- ".$startDate." && EndDate:- ".$endDate."<br/>";
 		}
         //die('imhere');
-       $query   = "SELECT `pd`.`state` AS `State`, `pd`.`invoice_order_number` AS `NumAtCard`
+       $query   = "SELECT `pd`.`state` AS `State`, `pd`.`invoice_order_number` AS `NumAtCard`,`pd`.`invoice_number`
                       FROM `te_payment_details` `pd` 
                       WHERE `pd`.`deleted` = 0
                         AND `pd`.`date_entered` > '$startDate' AND `pd`.`date_entered` <= '$endDate' 
@@ -91,7 +91,7 @@ class sync_update_tables
 						default:
 							$state = $check_state;
 					}
-					$update_query = "UPDATE `Stud_OINV` SET `State` = '".$state."' where NumAtCard = '".$set_data['NumAtCard']."'  ";
+					$update_query = "UPDATE `Stud_OINV` SET `State` = '".$state."',`U_OrigNum`='".$set_data['invoice_number']."',`U_ARInvNo`='".$set_data['invoice_number']."' where NumAtCard = '".$set_data['NumAtCard']."'  ";
 					$update_state = mysqli_query($sap_conn, $update_query) or die(mysqli_error($sap_conn));
 					$j++;
 				//}

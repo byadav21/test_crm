@@ -278,20 +278,25 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
     {
         global $sugar_config, $app_list_strings, $current_user, $db;
          //~~~~~~~
-        //  $report_action   = '';
-        //  $reportAccess    = reportAccessLog();
-        //  $current_user_id = $current_user->id;
-        //  $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
- 
-        //  if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
-        //  {
-        //      echo 'You are not authorized to access!';
-        //      return;
-        //  }
+            // $report_action = '';
+            // $reportAccess  = reportAccessLog();
+
+            // $current_user_id = $current_user->id;
+            // $report_action   = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
+            $getRoleSlug = getUsersRole();
+            $currentSlugRoleName   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : '';
+            
+                // if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+                // {
+                //     echo 'You are not authorized to access!';
+                //     return;
+                // }
             //~~~~~~~
 
                 
         $additionalUsr         = array('4fa58025-3c9d-aa2a-d355-59a062393942','581d9edd-a5e4-349a-fe28-5c59b9d2fe37');
+        $additionalUsrSlug     = array('CCM','BA','QA');
+
         $additionalUsrStatus   = 0;
         $current_user_id       = $current_user->id;
         $current_user_is_admin = $current_user->is_admin;
@@ -300,7 +305,7 @@ class AOR_ReportsViewCounsellorwisestatusdetailreport extends SugarView
         $usersdd               = "";
         $error                 = array();
         
-        if (in_array($current_user_id, $additionalUsr))
+        if (in_array($current_user_id, $additionalUsr) || in_array($currentSlugRoleName, $additionalUsrSlug) )
         {
              $additionalUsrStatus   = 1;
         }
