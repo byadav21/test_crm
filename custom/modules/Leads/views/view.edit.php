@@ -62,7 +62,8 @@ class LeadsViewEdit extends ViewEdit
                 <style>
                     #btn_batch_c,#btn_clr_batch_c{display:none;pointer-events: none;}
                     #batch_c{pointer-events: none;}
-                   
+                    #Leads0emailAddress0 {pointer-events: none;}
+                    
                 </style>
                 <script>
                     $('#btn_batch_c,#btn_clr_batch_c').remove();
@@ -162,7 +163,7 @@ class LeadsViewEdit extends ViewEdit
 			var usertype = '<?php echo $usertype; ?>';
             $(document).ready(function () {
                 
-                //alert(role_name);
+                // alert(role_name);
                 var ConvertedStatus = ['Converted', 'Instalment Follow up', 'Referral Follow up'];
                 var status_descriptionX = $('#status_description').val();
 		 var statusX = $('#status').val();
