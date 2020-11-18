@@ -122,7 +122,7 @@ class remainderpopup
         //CCH i have commented this
         $getRoleSlug = getUsersRole();
        
-        $accRoleSlug = array('CCM','CCC','CCTL');
+        $accRoleSlug = array("CCM","CCC","CCTL","SCH", "SCHMGR", "SCHTL", "SCHAGENT", "CH", "CHMGR", "CHTL", "CHAGENT");
         //echo '$current_user->id==='. $current_user->id;
         $usersSlug   = !empty($getRoleSlug[$current_user->id]['slug']) ? $getRoleSlug[$current_user->id]['slug'] : 'NA';
         //echo '$usersSlug==='.$usersSlug; die;
