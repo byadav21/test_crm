@@ -17,7 +17,6 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
     public function __construct()
     {
-        $accRoles = array("SCH", "SCHMGR", "SCHTL", "SCHAGENT", "CH", "CHMGR", "CHTL", "CHAGENT");
         parent::SugarView();
     }
 
@@ -136,7 +135,6 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $usersArr[$user['id']]['reporting_id']   = $user['reporting_id'];
             $usersArr[$user['id']]['reporting_name'] = $user['reporting_firstname'] . ' ' . $user['reporting_lastname'];
         }
-        // echo "<pre>"; print_r($usersArr);
         return $usersArr;
     }
 
@@ -158,32 +156,33 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
     {
         global $db, $current_user;
         $accRoles = array("SCH", "SCHMGR", "SCHTL", "SCHAGENT", "CH", "CHMGR", "CHTL", "CHAGENT");
+
         $wherex   = '';
         $userSlug = "";
 
-        // echo 'dd=='.$current_userAccess['slug'];
+        //echo 'dd=='.$current_userAccess['slug'];
 
 
-        if (!empty($selected_councellors) && $userSlug != 'CCC' || !empty($selected_councellors) && ! in_array($userSlug, $accRoles))
+        if (!empty($selected_councellors) && $userSlug != 'CCC')
         {
             $wherex .= " AND  users.id IN ('" . implode("','", $selected_councellors) . "')";
         }
-        
+
         if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCC') || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) ) )
         {
-            // echo 'xxx'.
+            //echo 'xxx'.
             $wherex .= " AND  users.id ='$current_user->id'";
         }
-        // echo "<pre>";print_r($CouncellorsList);
+        //print_r($CouncellorsList);
         if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCM' && empty($selected_councellors)) || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) && empty($selected_councellors))) 
         {
-            // echo 'xxx';
+            //echo 'xxx'.
             $managersAgent = array();
             foreach ($CouncellorsList as $key => $val)
             {
                 $managersAgent[] = $key;
             }
-            // print_r($managersAgent);
+            //print_r($managersAgent);
             $wherex .= " AND  users.id IN ('" . implode("','", $managersAgent) . "')";
         }
 
@@ -215,6 +214,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
     {
         global $db, $current_user;
         $accRoles = array("SCH", "SCHMGR", "SCHTL", "SCHAGENT", "CH", "CHMGR", "CHTL", "CHAGENT");
+
         $wherex   = '';
         $userSlug = "";
 
@@ -248,16 +248,16 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             //echo 'xxx'.
             $wherex .= " AND  leads.assigned_user_id ='$current_user->id'";
         }
-        // echo "<pre>";print_r($CouncellorsList); 
+        //print_r($CouncellorsList); 
         if ( (!empty($current_userAccess['slug']) && $current_userAccess['slug'] == 'CCM' && empty($selected_councellors)) || (!empty($current_userAccess['slug']) && in_array($current_userAccess['slug'], $accRoles) && empty($selected_councellors)) )
         {
-            // echo 'xxx';
+            //echo 'xxx'.
             $managersAgent = array();
             foreach ($CouncellorsList as $key => $val)
             {
                 $managersAgent[] = $key;
             }
-            // print_r($managersAgent);
+            //print_r($managersAgent);
             $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $managersAgent) . "')";
         }
 
@@ -410,7 +410,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $wherex .= " AND date(leads.date_of_prospect)= '$today' ";
         }
 
-        if (!empty($selected_councellors) && $userSlug != 'CCC' || !empty($selected_councellors) && ! in_array($userSlug, $accRoles))
+        if (!empty($selected_councellors) && $userSlug != 'CCC')
         {
             $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
@@ -538,7 +538,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $wherex .= " AND ach.calling_date= '$today' ";
         }
 
-        if (!empty($selected_councellors) && $userSlug != 'CCC' || !empty($selected_councellors) && ! in_array($userSlug, $accRoles))
+        if (!empty($selected_councellors) && $userSlug != 'CCC')
         {
             $wherex .= " AND  ach.counsellor_id IN ('" . implode("','", $selected_councellors) . "')";
         }
@@ -647,7 +647,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $wherex .= " AND leads.converted_date BETWEEN '$startDate' AND '$endDate' ";
         }
 
-        if (!empty($selected_councellors) && $userSlug != 'CCC' || !empty($selected_councellors) && ! in_array($userSlug, $accRoles))
+        if (!empty($selected_councellors) && $userSlug != 'CCC')
         {
             $wherex .= " AND  leads.assigned_user_id IN ('" . implode("','", $selected_councellors) . "')";
         }
@@ -761,7 +761,6 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                 'reporting_name' => $user['reporting_firstname'] . ' ' . $user['reporting_lastname']
             );
         }
-        // print_r($usersArr);
         return $usersArr;
     }
     
@@ -805,7 +804,6 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
 
         global $sugar_config, $app_list_strings, $current_user, $db;
 
-        // print_r($current_user->id);
         //die('Report is under maintenance!');
         $where              = "";
         $wherecl            = "";
@@ -825,9 +823,8 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         $error     = array();
 
         $managerSList = $this->getManagers();
-        $accRoles = array("SCH", "SCHMGR", "SCHTL", "SCHAGENT", "CH", "CHMGR", "CHTL", "CHAGENT");
 
-        if ($userSlug == 'CCM' || in_array($accRoles, $userSlug) )
+        if ($userSlug == 'CCM')
         {
             $CouncellorsList = $this->getCouncelor($current_user->id);
         }
@@ -884,7 +881,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
                }
             }
         }
-        // echo "<pre>"; print_r($currentRoleName);
+        
          if(in_array($currentRoleName, $teamLeadArray)){
             foreach ($getRoleSlug as $userIds){
                if(in_array($userIds['slug'],$agentArray)){
@@ -894,10 +891,9 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             }
         }
         
-        // print_r($_REQUEST);//die('imhere');
+        
         if (isset($_POST['button']) || isset($_POST['export']))
         {
-            
             $_SESSION['cccon_from_date']   = $_REQUEST['from_date'];
             //$_SESSION['cccon_to_date']     = $_REQUEST['to_date'];
             //$_SESSION['cccon_batch']       = $_REQUEST['batch'];
@@ -968,12 +964,19 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
         //The new code will go here..
         //echo '$selected_month='.$selected_month.'$selected_years='.$selected_years;
         //## All USER List
-        // echo "<pre> selected_councellors:-";print_r($selected_councellors);
+
+        $agentRoleName = array("CHAGENT","SCHAGENT","DMHAGENT","SRMHAGENT","QAAGENT","TRAGENT","VRAGENT");
+        // if(in_array($currentRoleName, $agentRoleName)){
+        //     $selected_councellors = $current_user->id;
+        // } else {
+        //     $selected_councellors = $selected_councellors;
+        // }
+
         $getAgentsUser = $this->getAgentsUser($selected_years, $selected_month, '', '', $selected_councellors, $current_userAccess, $CouncellorsList);
 
         # Month wise Report to be poplated
 
-        // echo "<pre>"; print_r($getAgentsUser);
+
 
         $getTargetCount = $this->getMonthToDateTargetCount($selected_years, $selected_month, '', '');
 
@@ -1261,7 +1264,7 @@ class AOR_ReportsViewprospectdashboard2 extends SugarView
             $current = "(" . ($start + 1) . "-" . count($theFInalArray) . " of " . $total . ")";
         }
         #pE
-    // echo "<pre>"; print_r($theFInalArray);
+
         $sugarSmarty = new Sugar_Smarty();
 
         $sugarSmarty->assign("error", $error);

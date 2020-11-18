@@ -483,6 +483,12 @@
         }
 
         $(document).ready(function () {
+            $('#phone_mobile').prop('readonly', true);
+            // console.log('imhere');
+            // $("input#Leads0emailAddress0").on('change', function (){
+            //     $("input#Leads0emailAddress0 ").prop('readonly', true);
+            // });
+            
             $("#note").focusout(function () {
                 var note = $("#note").val();
 
