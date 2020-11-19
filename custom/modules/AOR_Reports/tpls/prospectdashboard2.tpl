@@ -667,7 +667,7 @@
                     type: "POST",
                     async: true,
                     success: function (data) {
-                        console.log("Okkk"+ data)
+                        // console.log("Okkk"+ data)
                         var argData = JSON.parse(data);
                         $('#' + 'managerRole').html('');
                         $('#' + 'teamLeadRole').html('');
@@ -693,7 +693,7 @@
                     type: "POST",
                     async: true,
                     success: function (data) {
-                        console.log("Testjs" + data);
+                        // console.log("Testjs" + data);
                         var argData = JSON.parse(data);
                         $('#' + 'teamLeadRole').html('');
                         $('#' + 'agentRole').html('');
@@ -717,7 +717,7 @@
                     type: "POST",
                     async: true,
                     success: function (data) {
-                        console.log("Testjs" + data);
+                        // console.log("Testjs" + data);
                         var argData = JSON.parse(data);
                         $('#' + 'agentRole').html('');
                         $('#' + 'agentRole').html(argData.agentOption);
