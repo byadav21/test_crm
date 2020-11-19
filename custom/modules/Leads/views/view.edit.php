@@ -67,6 +67,7 @@ class LeadsViewEdit extends ViewEdit
                 </style>
                 <script>
                     $('#btn_batch_c,#btn_clr_batch_c').remove();
+                    $('#phone_mobile').prop('readonly', true);
                 </script> <?php
             }
         }

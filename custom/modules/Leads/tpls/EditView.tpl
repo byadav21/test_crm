@@ -483,7 +483,7 @@
         }
 
         $(document).ready(function () {
-            $('#phone_mobile').prop('readonly', true);
+            
             
             $("#note").focusout(function () {
                 var note = $("#note").val();
