@@ -215,7 +215,8 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
         $sql = "SELECT  lc.attempts_c,
                         lc.auto_attempts_c,
                         lc.id_c,
-                        l.assigned_user_id
+                        l.assigned_user_id,
+                        l.status_description
                  FROM leads l
                  INNER JOIN leads_cstm lc ON lc.id_c=l.id
                  WHERE l.id='" . $_REQUEST['lead_reference'] . "'";
@@ -229,13 +230,14 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
             $attempid       = intval($records['attempts_c']);
             $auto_attempts  = intval($records['auto_attempts_c']);
             $assignedUserId = $records['assigned_user_id'];
+            $leadUserIdStatusDescription = $records['status_description'];
            
-	    if ($_REQUEST['callType']!='manual.dial.customer' && $dispositionReasonCode == 'null')
+	        if ($_REQUEST['callType']!='manual.dial.customer' && $dispositionReasonCode == 'null')
             {
                  $attempid++;
                  $auto_attempts++;
                 
-		 $AtmpLogSql = "INSERT INTO attempt_log
+		        $AtmpLogSql = "INSERT INTO attempt_log
                                             SET lead_id='$id',
                                                 user='$disPosedUser',
                                                 dispositionName='" . $_REQUEST['dispositionName'] . "',
@@ -331,16 +333,19 @@ if (isset($_REQUEST['customerCRTId']) && $_REQUEST['customerCRTId'])
 
                 $bean                     = BeanFactory::getBean('Leads', $_REQUEST['lead_reference']);
 
-                if($_REQUEST['callType'] == 'outbound.auto.preview.dial' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['entryPoint'] == 'dispose')
+                if($_REQUEST['callType'] == 'outbound.auto.preview.dial' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['entryPoint'] == 'dispose' && $leadUserIdStatusDescription != 'New Lead' && $assignedUserId !=''){
+                    $bean->status             = $status;
+                    $bean->status_description = $dispositionCode;
+                }else if($_REQUEST['callType'] == 'outbound.auto.preview.dial' && $_REQUEST['dispositionName'] != 'CONNECTED' && $_REQUEST['entryPoint'] == 'dispose')
                 {
                     $bean->status             = "Alive";
                     $bean->status_description = "New Lead";
                     $bean->assigned_user_id   = '';
-                    
                 }else {
                     $bean->status             = $status;
                     $bean->status_description = $dispositionCode;
                 }
+
                     $bean->disposition_reason = $dispositionReasonCode;
                     $bean->dispositionName    = $_REQUEST['dispositionName'];
                     $bean->callType           = $_REQUEST['callType'];
