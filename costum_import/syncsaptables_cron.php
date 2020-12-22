@@ -391,7 +391,7 @@ class syncsaptables
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE   `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0 AND pd.deleted=0 AND lp.deleted=0 
-                        AND `pd`.`date_entered` > '2020-12-20 00:00:00' AND `pd`.`date_entered` <= '$currentTime' 
+                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
                         AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -535,7 +535,7 @@ class syncsaptables
 
         #1. /////////// Customers Table Syncing //////////////////
 
-       /* $CustomersArr = $this->Customers();
+        $CustomersArr = $this->Customers();
         echo '<hr>Customers Table Syncing ';
 
         $custSQL = "INSERT INTO `Customers` (`U_BPID`, `CardName`, `CardFName`) VALUES ";
@@ -782,7 +782,7 @@ class syncsaptables
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
         }
         unset($Stud_INV12Arr);
-        */
+        
         
         
         
@@ -810,10 +810,12 @@ class syncsaptables
                     $data['CashSum']    =$data['CheckSum']*0.18;
                     $data['TrsfrSum']   =$data['amount']-($data['CheckSum']+$data['CashSum']);
                 }else if($data['U_PaymentGateway']=='paytm'){
-                    if($pres->mode=='UPI'){
+                    if($pres->PAYMENTMODE=='UPI'){
                         $data['CheckSum']   =0;                        
                     }else if($pres->PAYMENTMODE=='PPI'){
                         $data['CheckSum']   =$data['amount']*(1.60/100);                        
+                    }else if($pres->PAYMENTMODE=='NB'){
+                        $data['CheckSum']   =17;                        
                     }else if($pres->PAYMENTMODE=='CC' && $pres->GATEWAYNAME=='AMEX'){
                         $data['CheckSum']   =$data['amount']*(2.70/100);                        
                     }else if($pres->PAYMENTMODE=='CC' && $pres->GATEWAYNAME!='AMEX'){
@@ -832,7 +834,7 @@ class syncsaptables
                 }
 
             }
-            echo "<pre>";print_r($data);exit;
+            //echo "<pre>";print_r($data);exit;
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
             $Address = ($Address=='0')? '': $Address;
             
@@ -948,13 +950,13 @@ class syncsaptables
 $mainObj = new syncsaptables();
 $mainObj->main();
 
-/*$query   = "SELECT date_entered FROM `te_payment_details` ORDER BY `te_payment_details`.`date_entered` DESC limit 1";
+$query   = "SELECT date_entered FROM `te_payment_details` ORDER BY `te_payment_details`.`date_entered` DESC limit 1";
 $leadObj = mysqli_query($conn, $query);
 $row     = mysqli_fetch_assoc($leadObj);
 $sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . $row['date_entered'] . "'";
 
 //$sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . date("Y-m-d H:i:s") . "'";
-mysqli_query($sap_conn, $sql);*/
+mysqli_query($sap_conn, $sql);
 
 mysqli_close($conn);
 ?>		 
