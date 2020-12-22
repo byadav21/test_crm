@@ -798,8 +798,8 @@ class syncsaptables
             if($data['payment_response']){
                 $pres=json_decode($data['payment_response']);
                 if($data['U_PaymentGateway']=='PayU' && $pres->bank_name=='UPI'){
-                    $data['CheckSum']   =20;
-                    $data['CashSum']    =$$data['CheckSum']*0.18;
+                    $data['CheckSum']   =20.00;
+                    $data['CashSum']    =$data['CheckSum']*0.18;
                     $data['TrsfrSum']   =$data['TrsfrSum']-($data['CheckSum']+$data['CashSum']);
                 }
 
