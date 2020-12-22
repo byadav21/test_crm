@@ -797,10 +797,38 @@ class syncsaptables
         {
             if($data['payment_response']){
                 $pres=json_decode($data['payment_response']);
-                if($data['U_PaymentGateway']=='PayU' && $pres->bank_name=='UPI'){
-                    $data['CheckSum']   =20;
+                if($data['U_PaymentGateway']=='PayU'){
+                    if($pres->mode=='UPI'){
+                        $data['CheckSum']   =20;                        
+                    }else if($pres->mode=='DC'){
+                        $data['CheckSum']   =$data['amount']*(1.05/100);                        
+                    }else if($pres->mode=='CC' || $pres->mode=='NB'){
+                        $data['CheckSum']   =$data['amount']*(1.27/100);                        
+                    }else if($pres->mode=='EMI'){
+                        $data['CheckSum']   =$data['amount']*(2.25/100);   
+                    }
                     $data['CashSum']    =$data['CheckSum']*0.18;
                     $data['TrsfrSum']   =$data['amount']-($data['CheckSum']+$data['CashSum']);
+                }else if($data['U_PaymentGateway']=='paytm'){
+                    if($pres->mode=='UPI'){
+                        $data['CheckSum']   =0;                        
+                    }else if($pres->PAYMENTMODE=='PPI'){
+                        $data['CheckSum']   =$data['amount']*(1.60/100);                        
+                    }else if($pres->PAYMENTMODE=='CC' && $pres->GATEWAYNAME=='AMEX'){
+                        $data['CheckSum']   =$data['amount']*(2.70/100);                        
+                    }else if($pres->PAYMENTMODE=='CC' && $pres->GATEWAYNAME!='AMEX'){
+                        $data['CheckSum']   =$data['amount']*(1.20/100);   
+                    }else if($pres->PAYMENTMODE=='DC' && $data['amount']>2000){
+                        $data['CheckSum']   =$data['amount']*(0.01);   
+                    }else if($pres->PAYMENTMODE=='DC' && $data['amount']<2000){
+                        $data['CheckSum']   =$data['amount']*(0.0075);   
+                    }
+                    $data['CashSum']    =$data['CheckSum']*0.18;
+                    $data['TrsfrSum']   =$data['amount']-($data['CheckSum']+$data['CashSum']);
+                }else{
+                    $data['CheckSum']=0;
+                    $data['CashSum'] =0;
+                    $data['TrsfrSum']= $data['amount'];
                 }
 
             }
