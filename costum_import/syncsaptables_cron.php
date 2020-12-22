@@ -358,6 +358,8 @@ class syncsaptables
                         concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
                         `pd`.`Pay_Status` AS `Pay_Status`,
                         `pd`.`transaction_id` AS `U_PaymnetID`,
+                        `pd`.`payment_response`,
+                        `pd`.`amount`,
                         `pd`.`invoice_number` AS `U_OrigNum`,
                         (CASE
                              WHEN (`pd`.`payment_source` IN ('PayU',
@@ -389,7 +391,7 @@ class syncsaptables
                        JOIN `leads` on((`sb`.`leads_id` = `leads`.`id`)))
                  WHERE   `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0 AND pd.deleted=0 AND lp.deleted=0 
-                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
+                        AND `pd`.`date_entered` > '2020-12-20 00:00:00' AND `pd`.`date_entered` <= '$currentTime' 
                         AND `pd`.`amount` <> 0";
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
@@ -533,7 +535,7 @@ class syncsaptables
 
         #1. /////////// Customers Table Syncing //////////////////
 
-        $CustomersArr = $this->Customers();
+       /* $CustomersArr = $this->Customers();
         echo '<hr>Customers Table Syncing ';
 
         $custSQL = "INSERT INTO `Customers` (`U_BPID`, `CardName`, `CardFName`) VALUES ";
@@ -780,7 +782,7 @@ class syncsaptables
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
         }
         unset($Stud_INV12Arr);
-
+        */
         
         
         
@@ -793,7 +795,16 @@ class syncsaptables
         $i       = 1;
         foreach ($WEB_ORCTArr as $key => $data)
         {
+            if($data['payment_response']){
+                $pres=json_decode($data['payment_response']);
+                if($data['payment_source']=='PayU' && $pres->bank_name=='UPI'){
+                    $data['CheckSum']   =20;
+                    $data['CashSum']    =$$data['CheckSum']*0.18;
+                    $data['TrsfrSum']   =$data['TrsfrSum']-($data['CheckSum']+$data['CashSum']);
+                }
 
+            }
+            echo "<pre>";print_r($date);exit;
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
             $Address = ($Address=='0')? '': $Address;
             
