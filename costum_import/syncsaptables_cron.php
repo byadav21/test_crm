@@ -920,13 +920,13 @@ class syncsaptables
 $mainObj = new syncsaptables();
 $mainObj->main();
 
-$query   = "SELECT date_entered FROM `te_payment_details` ORDER BY `te_payment_details`.`date_entered` DESC limit 1";
+/*$query   = "SELECT date_entered FROM `te_payment_details` ORDER BY `te_payment_details`.`date_entered` DESC limit 1";
 $leadObj = mysqli_query($conn, $query);
 $row     = mysqli_fetch_assoc($leadObj);
 $sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . $row['date_entered'] . "'";
 
 //$sql = "INSERT INTO SYNC_SAP_TIMESTAMP  SET reg_date='" . date("Y-m-d H:i:s") . "'";
-mysqli_query($sap_conn, $sql);
+mysqli_query($sap_conn, $sql);*/
 
 mysqli_close($conn);
 ?>		 
