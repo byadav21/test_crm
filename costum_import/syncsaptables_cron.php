@@ -358,6 +358,8 @@ class syncsaptables
                         concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
                         `pd`.`Pay_Status` AS `Pay_Status`,
                         `pd`.`transaction_id` AS `U_PaymnetID`,
+                        `pd`.`payment_response`,
+                        `pd`.`amount`,
                         `pd`.`invoice_number` AS `U_OrigNum`,
                         (CASE
                              WHEN (`pd`.`payment_source` IN ('PayU',
@@ -780,7 +782,7 @@ class syncsaptables
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
         }
         unset($Stud_INV12Arr);
-
+        
         
         
         
@@ -793,7 +795,46 @@ class syncsaptables
         $i       = 1;
         foreach ($WEB_ORCTArr as $key => $data)
         {
+            if($data['payment_response']){
+                $pres=json_decode($data['payment_response']);
+                if($data['U_PaymentGateway']=='PayU'){
+                    if($pres->mode=='UPI'){
+                        $data['CheckSum']   =20;                        
+                    }else if($pres->mode=='DC'){
+                        $data['CheckSum']   =$data['amount']*(1.05/100);                        
+                    }else if($pres->mode=='CC' || $pres->mode=='NB'){
+                        $data['CheckSum']   =$data['amount']*(1.27/100);                        
+                    }else if($pres->mode=='EMI'){
+                        $data['CheckSum']   =$data['amount']*(2.25/100);   
+                    }
+                    $data['CashSum']    =$data['CheckSum']*0.18;
+                    $data['TrsfrSum']   =$data['amount']-($data['CheckSum']+$data['CashSum']);
+                }else if($data['U_PaymentGateway']=='paytm'){
+                    if($pres->PAYMENTMODE=='UPI'){
+                        $data['CheckSum']   =0;                        
+                    }else if($pres->PAYMENTMODE=='PPI'){
+                        $data['CheckSum']   =$data['amount']*(1.60/100);                        
+                    }else if($pres->PAYMENTMODE=='NB'){
+                        $data['CheckSum']   =17;                        
+                    }else if($pres->PAYMENTMODE=='CC' && $pres->GATEWAYNAME=='AMEX'){
+                        $data['CheckSum']   =$data['amount']*(2.70/100);                        
+                    }else if($pres->PAYMENTMODE=='CC' && $pres->GATEWAYNAME!='AMEX'){
+                        $data['CheckSum']   =$data['amount']*(1.20/100);   
+                    }else if($pres->PAYMENTMODE=='DC' && $data['amount']>2000){
+                        $data['CheckSum']   =$data['amount']*(0.01);   
+                    }else if($pres->PAYMENTMODE=='DC' && $data['amount']<2000){
+                        $data['CheckSum']   =$data['amount']*(0.0075);   
+                    }
+                    $data['CashSum']    =$data['CheckSum']*0.18;
+                    $data['TrsfrSum']   =$data['amount']-($data['CheckSum']+$data['CashSum']);
+                }else{
+                    $data['CheckSum']=0;
+                    $data['CashSum'] =0;
+                    $data['TrsfrSum']= $data['amount'];
+                }
 
+            }
+            //echo "<pre>";print_r($data);exit;
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
             $Address = ($Address=='0')? '': $Address;
             
