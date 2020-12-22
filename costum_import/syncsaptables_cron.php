@@ -797,14 +797,14 @@ class syncsaptables
         {
             if($data['payment_response']){
                 $pres=json_decode($data['payment_response']);
-                if($data['payment_source']=='PayU' && $pres->bank_name=='UPI'){
+                if($data['U_PaymentGateway']=='PayU' && $pres->bank_name=='UPI'){
                     $data['CheckSum']   =20;
                     $data['CashSum']    =$$data['CheckSum']*0.18;
                     $data['TrsfrSum']   =$data['TrsfrSum']-($data['CheckSum']+$data['CashSum']);
                 }
 
             }
-            echo "<pre>";print_r($date);exit;
+            echo "<pre>";print_r($data);exit;
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
             $Address = ($Address=='0')? '': $Address;
             
