@@ -45,7 +45,7 @@ error_reporting(E_ALL);
 		foreach ($res as $value){
 			if( !empty($value['taxtype']) && !empty($value['state'] && !empty($value['payment_id'])) ){
 				
-				$query = "UPDATE te_payment_details SET tax_type='".$value['taxtype']."', state='".$value['state']."', invoice_number='".$value['invoice_number']."' where invoice_order_number='".$value['payment_id']."' ";
+				$query = "UPDATE te_payment_details SET tax_type='".$value['taxtype']."', state='".$value['state']."', invoice_number='".$value['invoice_number']."', payment_response='".$value['payment_response']."' where invoice_order_number='".$value['payment_id']."' ";
 				$qry1= $db->query($query);
 				echo "Numbers of Rows:- ".$i;
 				echo "</br>";
