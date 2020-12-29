@@ -15,15 +15,15 @@ error_reporting(E_ALL);
         // echo "StartDate:- ".$startDate." && EndDate:- ".$endDate."<br/>";
     }
     
-    $query ="SELECT DISTINCT(lc.email_add_c) FROM leads_cstm AS lc INNER JOIN leads AS l ON l.id = lc.id_c where lc.temp_lead_date_c > '$startDate' AND lc.temp_lead_date_c <= '$endDate' AND l.STATUS = 'Converted' ";
+    $query ="SELECT DISTINCT(lc.email_add_c), l.id FROM leads_cstm AS lc INNER JOIN leads AS l ON l.id = lc.id_c where lc.temp_lead_date_c > '$startDate' AND lc.temp_lead_date_c <= '$endDate' AND l.status = 'Converted' ";
 
     $result = $db->query($query);
     // print_r($result);
     while (($row = $db->fetchByAssoc($result)) != null) {
         // echo "<pre>";print_r($row);echo "</pre>";
-        $selectQuery = "SELECT l.id, md5(l.phone_mobile) AS Mobile_Encripted, md5(lc.email_add_c) AS Email_Encripted, lc.te_ba_batch_id_c, l.status, l.date_entered FROM leads AS l
+        $selectQuery = "SELECT l.id, (l.phone_mobile) AS Mobile_Encripted, (lc.email_add_c) AS Email_Encripted, lc.te_ba_batch_id_c, l.status, l.date_entered FROM leads AS l
         INNER JOIN leads_cstm AS lc ON l.id = lc.id_c
-        WHERE l.STATUS = 'Converted' AND lc.email_add_c = '".$row['email_add_c']."'  AND l.date_entered > '".$startDate."' AND  l.date_entered <= '".$endDate."'
+        WHERE lc.email_add_c = '".$row['email_add_c']."'  AND l.date_entered > '".$startDate."' AND  l.date_entered <= '".$endDate."'
         order by l.date_entered DESC ";
 
         $resultselect = $db->query($selectQuery);
