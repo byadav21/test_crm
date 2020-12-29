@@ -21,7 +21,7 @@ error_reporting(E_ALL);
     // print_r($result);
     while (($row = $db->fetchByAssoc($result)) != null) {
         // echo "<pre>";print_r($row);echo "</pre>";
-        $selectQuery = "SELECT l.id, (l.phone_mobile) AS Mobile_Encripted, (lc.email_add_c) AS Email_Encripted, lc.te_ba_batch_id_c, l.status, l.date_entered FROM leads AS l
+        $selectQuery = "SELECT l.id, md5(l.phone_mobile) AS Mobile_Encripted, md5(lc.email_add_c) AS Email_Encripted, lc.te_ba_batch_id_c, l.status, l.date_entered FROM leads AS l
         INNER JOIN leads_cstm AS lc ON l.id = lc.id_c
         WHERE lc.email_add_c = '".$row['email_add_c']."'  AND l.date_entered > '".$startDate."' AND  l.date_entered <= '".$endDate."'
         order by l.date_entered DESC ";
