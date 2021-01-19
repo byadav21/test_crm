@@ -21,7 +21,7 @@ error_reporting(E_ALL);
     // print_r($result);
     while (($row = $db->fetchByAssoc($result)) != null) {
         // echo "<pre>";print_r($row);echo "</pre>";
-        $selectQuery = "SELECT l.id, md5(l.phone_mobile) AS Mobile_Encripted, md5(lc.email_add_c) AS Email_Encripted, lc.te_ba_batch_id_c, l.vendor, l.status, l.date_entered FROM leads AS l
+        $selectQuery = "SELECT l.id, md5(l.phone_mobile) AS Mobile_Encripted, md5(lc.email_add_c) AS Email_Encripted, lc.te_ba_batch_id_c, l.vendor, l.converted_date, l.status, l.status_description, l.date_entered FROM leads AS l
         INNER JOIN leads_cstm AS lc ON l.id = lc.id_c
         WHERE lc.email_add_c = '".$row['email_add_c']."'
         order by l.date_entered DESC ";
@@ -36,7 +36,9 @@ error_reporting(E_ALL);
             $programList[$row['email_add_c']][$getAllData['id']]['email_add_c']         = $getAllData['Email_Encripted'];
             $programList[$row['email_add_c']][$getAllData['id']]['te_ba_batch_id_c']    = $getAllData['te_ba_batch_id_c'];
             $programList[$row['email_add_c']][$getAllData['id']]['vendor']              = $getAllData['vendor'];
+            $programList[$row['email_add_c']][$getAllData['id']]['converted_date']      = $getAllData['converted_date'];
             $programList[$row['email_add_c']][$getAllData['id']]['status']              = $getAllData['status'];
+            $programList[$row['email_add_c']][$getAllData['id']]['status_description']  = $getAllData['status_description'];
             $programList[$row['email_add_c']][$getAllData['id']]['date_entered']        = $getAllData['date_entered']; 
         }
         
@@ -54,7 +56,9 @@ error_reporting(E_ALL);
     $data .= ",Email Encripted";
     $data .= ",Batch Code";
     $data .= ",Vendor";
+    $data .= ",Converted Date";
     $data .= ",Status";
+    $data .= ",Status Description";
     $data .= ",Date";
 
     $data .= "\n";
