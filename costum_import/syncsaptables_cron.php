@@ -1,6 +1,5 @@
 <?php
-
-error_reporting(-1);
+error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 #For Institutes :  Customers 
@@ -14,7 +13,7 @@ ini_set('display_errors', 'On');
 #Payment Details like Check Amount / Due Date : WEB_RCT1 
 #Payment Against Invoice : WEB_RCT2 
 #Projects : WEB_OPRJ
-
+include('../custom/include/Email/sendmail.php');
 include 'db.php';
 include 'sap_db.php';
 
@@ -194,8 +193,9 @@ class syncsaptables
         $currentTime      = date('Y-m-d H:i:s');
        
 
-       $query   = "SELECT          
+        $query   = "SELECT          
                              replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
+                             `pd`.`id` AS `Check_Id`,
                              `pd`.`invoice_number` AS `U_OrigNum`,
                              `pd`.`invoice_number` AS `U_ARInvNo`,
                              `te_vendor`.`SlpCode` AS `SlpCode`,
@@ -208,7 +208,8 @@ class syncsaptables
                              `pd`.`state` AS `State`,
                              `pd`.`invoice_order_number` AS `NumAtCard`,
                              `sb`.`batch_code` AS `U_Batch`,
-                             `pd`.`SAP_Status` AS `SAP_Status`
+                             `pd`.`SAP_Status` AS `SAP_Status`,
+                             `pd`.`currency_type` AS `currency_type`
                       FROM `te_student` `s`
                       JOIN `te_student_te_student_batch_1_c` `stsb` ON `s`.`id` = `stsb`.`te_student_te_student_batch_1te_student_ida`
                       JOIN `te_student_batch` `sb` ON `stsb`.`te_student_te_student_batch_1te_student_batch_idb` = `sb`.`id`
@@ -220,10 +221,12 @@ class syncsaptables
                       WHERE `sb`.`deleted` = 0
                         AND `pd`.`deleted` = 0
                         AND lp.deleted=0 
-                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
+                        AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'
                       GROUP BY `sb`.`leads_id`
                       ORDER BY `pd`.`date_entered`";
         $leadObj = mysqli_query($conn, $query);
+        //AND `pd`.`date_entered` > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime' 
+        // AND `pd`.`date_entered` > '2019-07-25' AND `pd`.`date_entered` <= '2019-07-26' 
         if ($leadObj)
         {
 
@@ -232,7 +235,7 @@ class syncsaptables
                 $leadsCstmData[] = $row;
             }
         }
-
+        // echo "<pre>"; print_r($leadsCstmData);
         return $leadsCstmData;
     }
 
@@ -244,9 +247,8 @@ class syncsaptables
         $SyncSapTimestamp = $this->SyncSapTimestamp();
         $currentTime      = date('Y-m-d H:i:s');
         
-        
-
         $query   = "SELECT replace(`pd`.`id`, '-', '') AS `U_OrigEntry`,
+                                    `pd`.`id` AS `Check_Id`,
                                     '1' AS `U_OrigLine`,
                                     `p`.`SAP_ItemCode` AS `ItemCode`,
                                     1 AS `Quantity`,
@@ -285,8 +287,10 @@ class syncsaptables
                                     #AND `l`.`lead_source_types` <> '' 
                                     AND  pd.deleted=0
                                     AND lp.deleted=0 
-                                    AND pd.date_entered > '$SyncSapTimestamp' AND pd.date_entered <= '$currentTime'
+                                    AND pd.date_entered > '$SyncSapTimestamp' AND `pd`.`date_entered` <= '$currentTime'
                              GROUP BY `sp`.`id`";
+                            //  AND pd.date_entered > '$SyncSapTimestamp' AND pd.date_entered <= '$currentTime'
+                            // AND `pd`.`date_entered` > '2019-07-25' AND `pd`.`date_entered` <= '2019-08-30' 
         $leadObj = mysqli_query($conn, $query);
         if ($leadObj)
         {
@@ -360,6 +364,7 @@ class syncsaptables
                         `pd`.`transaction_id` AS `U_PaymnetID`,
                         `pd`.`payment_response`,
                         `pd`.`amount`,
+                        `pd`.`transaction_id` AS `U_TransactionID`,
                         `pd`.`invoice_number` AS `U_OrigNum`,
                         (CASE
                              WHEN (`pd`.`payment_source` IN ('PayU',
@@ -508,14 +513,57 @@ class syncsaptables
         return $leadsCstmData;
     }
 
+    // Update API SET State, Tax, Invoice payment_response 
+    function update_state_tax_invoice_payment()
+    {
+        global $db, $sugar_config;
+        $currentDate 	= date("Y-m-d");
+        
+        $startDate = date_create($currentDate);
+        $endDate = date_create($currentDate);
+        
+        date_sub($endDate,date_interval_create_from_date_string("2 days"));
+        
+        $endDate   = date_format($endDate, "Y-m-d");
+        $startDate   = date_format($startDate, "Y-m-d");
+        
+        $user = 'talentedgeadmin';
+        $password = 'Inkoniq@2016';
+        $url = $sugar_config['website_URL']."/crmordersync.php?startdate='".$startDate."'&enddate='".$endDate."'";
+        $headers = array(
+                'Authorization: Basic '. base64_encode("$user:$password")
+        );
+        $post = [
+                'startdate' => $startDate,
+                'enddate' 	=> $endDate
+        ];
+            
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+
+        //curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $result = curl_exec($ch);
+        $result = stripslashes(html_entity_decode($result));
+        $res = json_decode(trim($result),TRUE);
+        if (is_array($res) || is_object($res))
+        {
+            foreach ($res as $value){
+                if( !empty($value['taxtype']) && !empty($value['state']) && !empty($value['payment_id']) ){
+                    $query = "UPDATE te_payment_details SET `currency_type` ='".$value['currency']."', `tax_type` ='".$value['taxtype']."', `state` ='".$value['state']."', `invoice_number` ='".$value['invoice_number']."', `payment_response_new` ='".$value['payment_response']."', `transaction_id` = '".$value['payment_referencenum']."' where `invoice_order_number`='".$value['payment_id']."' ";
+                    $qry1= $db->query($query);
+                }
+            }
+        }	
+    }
+    
+
  function main()
     {
 
-        global $sap_conn;
-
-
-
-
+        global $sap_conn, $conn;
 
         $CustomersArr     = array();
         $StudCustomersArr = array();
@@ -528,11 +576,15 @@ class syncsaptables
         $WEB_RCT1Arr      = array();
         $WEB_RCT2Arr      = array();
         $WEB_OPRJArr      = array();
-
+        $update_state_tax_invoice_paymentArr = array();
 
         $SyncSapTimestamp = $this->SyncSapTimestamp();
-
-
+        
+        #0. /////////// $updat_state_payment_responseArr //////////
+        echo '<hr>Update State Tax Invoide te_payment_details Table Syncing ';
+        $update_state_tax_invoice_paymentArr = $this->update_state_tax_invoice_payment();
+        unset($update_state_tax_invoice_paymentArr);
+        
         #1. /////////// Customers Table Syncing //////////////////
 
         $CustomersArr = $this->Customers();
@@ -653,13 +705,14 @@ class syncsaptables
         
         $Stud_OINVArr = $this->Stud_OINV();
 
-        echo "============== Testing Imhere Start ====================";
-        echo "<pre>"; print_r($Stud_OINVArr); echo "</pre>";
+        //echo "<br /><hr>============== Testing Imhere Start ====================";
+        // echo "<pre>"; print_r($Stud_OINVArr); echo "</pre>";
         
         echo '<hr>Stud_OINV Table Syncing ';
-
-        $custSQL = "INSERT INTO `Stud_OINV` (`U_OrigEntry`, `U_OrigNum`,`U_ARInvNo`,`SlpCode`,`DocDate`,`TaxDate`,`DocDueDate`,`U_BPId`,`CardCode`,`Address`,`State`,`NumAtCard`,`U_Batch`) VALUES ";
-
+        $checkID = array();
+        // echo "<pre>"; print_r($Stud_OINVArr);
+        $custSQL = "INSERT INTO `Stud_OINV` (`U_OrigEntry`, `U_OrigNum`,`U_ARInvNo`,`SlpCode`,`DocDate`,`TaxDate`,`DocDueDate`,`U_BPId`,`CardCode`,`Address`,`State`,`NumAtCard`,`U_Batch`,`currency_type`) VALUES ";
+        $numAtCard_Check_Id = array();
         $i = 1;
         foreach ($Stud_OINVArr as $key => $data)
         {
@@ -696,29 +749,60 @@ class syncsaptables
 							$state = $check_state;
 					}
             
-            $custSQL .= "('" . $data['U_OrigEntry'] . "',
-                '" . $data['U_OrigNum'] . "',
-	        '" . $data['U_ARInvNo'] . "',
-		'" . $data['SlpCode'] . "',
-		'" . $data['DocDate'] . "',
-		'" . $data['TaxDate'] . "',
-		'" . $data['DocDueDate'] . "',
-                '" . $data['U_BPId'] . "',
-		'" . $data['CardCode'] . "',
-		'" . $Address. "',
-		'" . $state . "',
-		'" . $data['NumAtCard'] . "','" . $data['U_Batch'] . "'),";
+            if(empty($data['NumAtCard']) || $data['NumAtCard'] == NULL || $data['NumAtCard'] == 'NULL'){
+                
+                //Send Mail IF NumAtCard data is Blank
+                $numAtCard_Check_Id[]     = $data['Check_Id'];
+               // echo "numAtCard_Check_Id:- " .$data['Check_Id']." </br>";
+            }else {
+                $custSQL .= "('" . $data['U_OrigEntry'] . "',
+                        '" . $data['U_OrigNum'] . "',
+                        '" . $data['U_ARInvNo'] . "',
+                        '" . $data['SlpCode'] . "',
+                        '" . $data['DocDate'] . "',
+                        '" . $data['TaxDate'] . "',
+                        '" . $data['DocDueDate'] . "',
+                        '" . $data['U_BPId'] . "',
+                        '" . $data['CardCode'] . "',
+                        '" . $Address. "',
+                        '" . $state . "',
+                        '" . $data['NumAtCard'] . "',
+                        '" . $data['U_Batch'] . "',
+                        '" . $data['currency_type'] . "'),";
+            }
 
             $i++;
         }
-        $exeSql = rtrim($custSQL, ','); 
         
+        $exeSql = rtrim($custSQL, ','); 
+        // echo "<pre>"; print_r(str_replace("-",'', $checkID));
         if ($i > 1)
         {
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
+            
         }
-        echo "============== Testing Imhere END ==================== ".$exeSql." ///////////////////////";
-                unset($Stud_OINVArr);
+
+        //echo "============== Testing Imhere END ==================== ".$exeSql." /////////////////////// </br />";
+        // echo "imhere"; 
+        // die('brijesh');
+        if(!empty($numAtCard_Check_Id)){
+            $body   = '<table>';
+            foreach ($numAtCard_Check_Id AS $value){
+                $body .='
+                <tr height="20">
+                    <td align="left" valign="top">te_payment_details ID:- ' . $value . '</td></br/>
+                </tr>';
+            }
+            
+            $body .='</table>';
+                
+            $subject    = "Sap Not Insert for this tables te_payment_details Leads";
+            $mail       = new NetCoreEmail();
+            $email      = 'brijesh.kumar@talentedge.com';
+            $mail->sendEmail($email, $subject, $body);
+
+        }
+            unset($Stud_OINVArr);
 
 
 
@@ -726,41 +810,183 @@ class syncsaptables
         #6. /////////// Stud_INV1 Table Syncing //////////////////
         
         $Stud_INV1Arr = $this->Stud_INV1();
-        echo '<hr>Stud_INV1 Table Syncing ';
-
+        echo '<br /><hr> Stud_INV1 Table Syncing ';
+        // echo "<pre>"; print_r(str_replace("-",'', $checkID));
+        //echo "<pre>"; print_r($Stud_INV1Arr);
+        $get_checkID = array();
         $custSQL = "INSERT INTO `Stud_INV1` (`U_OrigEntry`, `U_OrigLine`,`ItemCode`,`Quantity`,`PriceBefDi`,`TaxCode`,`OcrCode`,`OcrCode2`,`OcrCode3`,`OcrCode4`,`OcrCode5`,`Project`,`U_CourseID`) VALUES ";
 
         $i = 1;
         foreach ($Stud_INV1Arr as $key => $data)
         {
+          // echo "<pre> "; print_r($data);
 
             $Project = mysqli_real_escape_string($sap_conn, $data['Project']);
 
 
             $custSQL .= "('" . $data['U_OrigEntry'] . "',
                 '" . $data['U_OrigLine'] . "',
-	        '" . $data['ItemCode'] . "',
-		'" . $data['Quantity'] . "',
-		'" . $data['PriceBefDi'] . "',
-		'" . $data['TaxCode'] . "',
-		'" . $data['OcrCode'] . "',
-		'" . $data['OcrCode2'] . "',
+                '" . $data['ItemCode'] . "',
+                '" . $data['Quantity'] . "',
+                '" . $data['PriceBefDi'] . "',
+                '" . $data['TaxCode'] . "',
+                '" . $data['OcrCode'] . "',
+                '" . $data['OcrCode2'] . "',
                 '" . $data['OcrCode3'] . "',
                 '" . $data['OcrCode4'] . "',
                 '" . $data['OcrCode5'] . "',
-		'" . $Project . "','" . $data['U_CourseID'] . "'),";
+                '" . $Project . "',
+                '" . $data['U_CourseID'] . "'),";
 
+            $get_checkID[]    = $data['Check_Id'];
+        
             $i++;
         }
 
         $exeSql = rtrim($custSQL, ',');
+       // echo "<pre>"; print_r($get_checkID);
+        $sap_status_not_updated_Stud_OINV = array();
+        $sap_status_not_updated_Stud_INV1 = array();
         if ($i > 1)
         {
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
+            foreach($get_checkID AS $value)
+            {
+                // echo "<pre>"; print_r($value);
+                //Remove UnderScore in checkID
+                $valueRemoveID = str_replace("-",'', $value);
+
+                // echo "<pre>"; print_r($valueRemoveID);
+                // die('imhere');
+
+                // Check & Update for Stud_INV1
+                $query_Stud_OINV = "select U_OrigEntry from `Stud_OINV` where `U_OrigEntry` = '".$valueRemoveID."' ";
+                $queryStud_OINV = mysqli_query($sap_conn, $query_Stud_OINV) or die(mysqli_error($sap_conn));
+                $query_count_Stud_OINV = mysqli_num_rows($queryStud_OINV);
+                //Count Number of rows data & remove all data accepted 1 rows
+                $delete_count_Stud_OINV = $query_count_Stud_OINV - 1 ;
+                // print_r(" delete_count_Stud_OINV:- ".$delete_count_Stud_OINV);
+                      
+                // if($query_count_Stud_OINV >= 1){
+                //     $delete_query_Stud_OINV = "DELETE from `Stud_OINV` where `U_OrigEntry` = '".$valueRemoveID."' LIMIT $delete_count_Stud_OINV ";
+                //     mysqli_query($sap_conn, $delete_query_Stud_OINV) or die(mysqli_error($sap_conn));
+                // }
+                
+                if ($queryStud_OINV)
+                {
+                    while($row = mysqli_fetch_assoc($queryStud_OINV)){
+                        if($row['U_OrigEntry'] == $valueRemoveID){
+                            $SAP_Status_CRM = 1;
+                        }else {
+                            $SAP_Status_CRM = 2;
+                            $sap_status_not_updated_Stud_OINV[] = $value." Stud_OINV SAP_Status_CRM:- ".$SAP_Status_CRM;
+                        }
+                    }
+                }else {
+                    $SAP_Status_CRM = 0;
+                    $sap_status_not_updated_Stud_OINV[] = $value." Stud_OINV SAP_Status_CRM:- ".$SAP_Status_CRM;
+                }
+                //echo " sap_status_not_updated_Stud_OINV :- ".$SAP_Status_CRM. " =====<br/>";
+
+                //Send Mail which data not updated
+                // if($SAP_Status_CRM = 2 || $SAP_Status_CRM = 0){
+                //     $body   = '<table>
+                //                         <tr height="20">
+                //                             <td align="left" valign="top">' . $value . '</td>
+                //                         </tr>
+                //                     </table>';
+                        
+                //     $subject    = "Sap Not Update for this tables:-Stud_OINV:-'". $SAP_Status_CRM . "'  Lead ID:- ".$value;
+                //     $mail       = new NetCoreEmail();
+                //     $email      = 'brijesh.kumar@talentedge.com';
+                    
+                //     $mail->sendEmail($email, $subject, $body);
+                // }
+                // echo " SAP_Status_CRM OINV :- ".$SAP_Status_CRM;
+                $updateCRM = "UPDATE te_payment_details SET SAP_Status = '".$SAP_Status_CRM."' WHERE id =  '".$value."' ";
+                $query = mysqli_query($conn, $updateCRM) or die(mysqli_error($conn));
+                // print_r($row);
+
+                // Check & Update for Stud_INV1
+                $query_Stud_INV1 = "select U_OrigEntry from `Stud_INV1` where `U_OrigEntry` = '".$valueRemoveID."' ";
+                $queryStud_INV1 = mysqli_query($sap_conn, $query_Stud_INV1) or die(mysqli_error($sap_conn));
+                $query_count_Stud_INV1 = mysqli_num_rows($queryStud_INV1);
+                //Count Number of rows data & remove all data accepted 1 rows
+                $delete_count_Stud_INV1 = $query_count_Stud_INV1 - 1 ;
+                // print_r(" delete_count_Stud_INV1:- ".$delete_count_Stud_INV1);
+
+                // $querySAP = "select U_OrigEntry,NumAtCard from `Stud_OINV` where `U_OrigEntry` = 'cfa01028a4fef9e576bd5d395d034c69' ";
+
+                // if($query_count_Stud_INV1 >= 1){
+                //     $delete_query_Stud_INV1 = "DELETE from `Stud_INV1` where `U_OrigEntry` = '".$valueRemoveID."' LIMIT $delete_count_Stud_INV1 ";
+                //     mysqli_query($sap_conn, $delete_query_Stud_INV1) or die(mysqli_error($sap_conn));
+                // }
+                
+                if ($queryStud_INV1)
+                {
+                    while($row = mysqli_fetch_assoc($queryStud_INV1)){
+                        if($row['U_OrigEntry'] == $valueRemoveID){
+                            $SAP_Status_CRM = 1;
+                        }else {
+                            $SAP_Status_CRM = 3;
+                            $sap_status_not_updated_Stud_INV1[] = $value." Stud_INV1 SAP_Status_CRM:- ".$SAP_Status_CRM;
+                        }
+                    }
+                }else {
+                    $SAP_Status_CRM = 0;
+                    $sap_status_not_updated_Stud_INV1[] = $value." Stud_INV1 SAP_Status_CRM:- ".$SAP_Status_CRM;
+                }
+                //echo " sap_status_not_updated_Stud_INV1 :- ".$SAP_Status_CRM. " =====<br/>";
+                $updateCRM = "UPDATE te_payment_details SET SAP_Status = '".$SAP_Status_CRM."' WHERE id =  '".$value."' ";
+                $query = mysqli_query($conn, $updateCRM) or die(mysqli_error($conn));
+                // print_r($row);
+
+                
+            }
         }
+
+        //Send Mail which data not updated
+        if(!empty($sap_status_not_updated_Stud_OINV)){
+
+            $body   = '<table>';
+            foreach ($sap_status_not_updated_Stud_OINV AS $value){
+                $body .='
+                <tr height="20">
+                    <td align="left" valign="top">Stud_OINV ID:- ' . $value . '</td></br/>
+                </tr>';
+            }
+            
+            $body .='</table>';
+                
+            $subject    = "Sap Not Update for this tables:-Stud_OINV, Leads ID";
+            $mail       = new NetCoreEmail();
+            $email      = 'brijesh.kumar@talentedge.com';
+            
+            $mail->sendEmail($email, $subject, $body);
+        }
+
+        if(!empty($sap_status_not_updated_Stud_INV1)){
+
+            $body   = '<table>';
+            foreach ($sap_status_not_updated_Stud_INV1 AS $data_id){
+                $body .='
+                <tr height="20">
+                    <td align="left" valign="top">Stud_INV1 ID:- ' . $data_id . '</td></br/>
+                </tr>';
+            }
+            
+            $body .='</table>';
+                
+            $subject    = "Sap Not Update for this tables:-Stud_INV1, Leads ID";
+            $mail       = new NetCoreEmail();
+            $email      = 'brijesh.kumar@talentedge.com';
+            
+            $mail->sendEmail($email, $subject, $body);
+        }
+
+        // echo "imhere"; die('brijesh');
+
         unset($Stud_INV1Arr);
-
-
         
         #7. /////////// Stud_INV12 Table Syncing //////////////////
         
@@ -942,6 +1168,7 @@ class syncsaptables
             mysqli_query($sap_conn, $exeSql) or die(mysqli_error($sap_conn));
         }
         unset($WEB_OPRJArr);
+        
     }
 
 // END of Main
