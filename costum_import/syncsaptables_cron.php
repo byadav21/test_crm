@@ -529,13 +529,13 @@ class syncsaptables
         
         $user = 'talentedgeadmin';
         $password = 'Inkoniq@2016';
-        $url = $sugar_config['website_URL']."/crmordersync.php?startdate='".$startDate."'&enddate='".$endDate."'";
+        $url = "https://talentedge.com/crmordersync.php?startdate='".$endDate."'&enddate='".$startDate."'";
         $headers = array(
                 'Authorization: Basic '. base64_encode("$user:$password")
         );
         $post = [
-                'startdate' => $startDate,
-                'enddate' 	=> $endDate
+                'startdate' => $endDate,
+                'enddate' 	=> $startDate
         ];
             
         $ch = curl_init();
