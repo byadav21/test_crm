@@ -516,7 +516,7 @@ class syncsaptables
     // Update API SET State, Tax, Invoice payment_response 
     function update_state_tax_invoice_payment()
     {
-        global $db, $sugar_config;
+        global $conn, $db, $sugar_config;
         $currentDate 	= date("Y-m-d");
         
         $startDate = date_create($currentDate);
@@ -553,7 +553,7 @@ class syncsaptables
             foreach ($res as $value){
                 if( !empty($value['taxtype']) && !empty($value['state']) && !empty($value['payment_id']) ){
                     $query = "UPDATE te_payment_details SET `currency_type` ='".$value['currency']."', `tax_type` ='".$value['taxtype']."', `state` ='".$value['state']."', `invoice_number` ='".$value['invoice_number']."', `payment_response_new` ='".$value['payment_response']."', `transaction_id` = '".$value['payment_referencenum']."' where `invoice_order_number`='".$value['payment_id']."' ";
-                    $qry1= $db->query($query);
+                    $qry1 = mysqli_query($conn, $query);
                 }
             }
         }	
@@ -1017,7 +1017,7 @@ class syncsaptables
         $WEB_ORCTArr = $this->WEB_ORCT();
         echo '<hr>WEB_ORCT Table Syncing ';
 
-        $custSQL = "INSERT INTO `WEB_ORCT` (`U_OrigEntry`, `DocDate`,`DocDueDate`,`TaxDate`,`CardCode`,`Address`,`Pay_Status`,`U_PaymnetID`,`U_PaymentGateway`,`CheckAcct`,`CashAcct`,`TrsfrSum`,`TrsfrAcct`,`CheckSum`,`CashSum`,`U_OrigNum`) VALUES ";
+        $custSQL = "INSERT INTO `WEB_ORCT` (`U_OrigEntry`, `DocDate`,`DocDueDate`,`TaxDate`,`CardCode`,`Address`,`Pay_Status`,`U_PaymnetID`,`U_PaymentGateway`,`CheckAcct`,`CashAcct`,`TrsfrSum`,`TrsfrAcct`,`CheckSum`,`CashSum`,`U_OrigNum`,`U_TransactionID`) VALUES ";
         $i       = 1;
         foreach ($WEB_ORCTArr as $key => $data)
         {
@@ -1078,7 +1078,10 @@ class syncsaptables
                 '" . $data['TrsfrSum'] . "',
                 '" . $data['TrsfrAcct'] . "',
                 '" . $data['CheckSum'] . "',
-                '" . $data['CashSum'] . "','" . $data['U_OrigNum'] . "'),";
+                '" . $data['CashSum'] . "',
+                '" . $data['U_OrigNum'] . "',
+                '" . $data['U_TransactionID'] . "'
+            ),";
 
 
             $i++;
