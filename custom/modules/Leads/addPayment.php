@@ -65,6 +65,7 @@ class addPaymentClass
             $payment->leads_te_payment_details_1leads_ida = $bean->id;
             $payment->country                             = $student_country;
             $payment->state                               = $bean->primary_address_state;
+            $payment->payment_response_new                = ($bean->payment_type == 'Offline')? $bean->payment_source : '';
             $payment->save();
             $lead_payment_details_id                      = $payment->id;
             $paidAmount                                   = $bean->amount;
