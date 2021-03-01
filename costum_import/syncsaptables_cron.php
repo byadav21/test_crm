@@ -362,9 +362,10 @@ class syncsaptables
                         concat_ws(' ',`leads`.`primary_address_street`, `leads`.`primary_address_city`,`leads`.`primary_address_state`,`leads`.`primary_address_postalcode`) AS `Address`,
                         `pd`.`Pay_Status` AS `Pay_Status`,
                         `pd`.`transaction_id` AS `U_PaymnetID`,
-                        `pd`.`payment_response`,
+                        `pd`.`payment_response_new`,
                         `pd`.`amount`,
                         `pd`.`transaction_id` AS `U_TransactionID`,
+                        `pd`.`invoice_order_number` AS `invoice_order_number`,
                         `pd`.`invoice_number` AS `U_OrigNum`,
                         (CASE
                              WHEN (`pd`.`payment_source` IN ('PayU',
@@ -513,7 +514,7 @@ class syncsaptables
         return $leadsCstmData;
     }
 
-    // Update API SET State, Tax, Invoice payment_response 
+    // Update API SET State, Tax, Invoice payment_response_new
     function update_state_tax_invoice_payment()
     {
         global $conn, $db, $sugar_config;
@@ -552,7 +553,8 @@ class syncsaptables
         {
             foreach ($res as $value){
                 if( !empty($value['taxtype']) && !empty($value['state']) && !empty($value['payment_id']) ){
-                    $query = "UPDATE te_payment_details SET `currency_type` ='".$value['currency']."', `tax_type` ='".$value['taxtype']."', `state` ='".$value['state']."', `invoice_number` ='".$value['invoice_number']."', `payment_response_new` ='".$value['payment_response']."', `transaction_id` = '".$value['payment_referencenum']."' where `invoice_order_number`='".$value['payment_id']."' ";
+                    $payment_response_new = (!empty($value['payment_response'])) ? $value['payment_response'] : 'NEFT';
+                    $query = "UPDATE te_payment_details SET `currency_type` ='".$value['currency']."', `tax_type` ='".$value['taxtype']."', `state` ='".$value['state']."', `invoice_number` ='".$value['invoice_number']."', `payment_response_new` = '".$payment_response_new."', `transaction_id` = '".$value['payment_referencenum']."' where `invoice_order_number`='".$value['payment_id']."' ";
                     $qry1 = mysqli_query($conn, $query);
                 }
             }
@@ -888,21 +890,6 @@ class syncsaptables
                 }
                 //echo " sap_status_not_updated_Stud_OINV :- ".$SAP_Status_CRM. " =====<br/>";
 
-                //Send Mail which data not updated
-                // if($SAP_Status_CRM = 2 || $SAP_Status_CRM = 0){
-                //     $body   = '<table>
-                //                         <tr height="20">
-                //                             <td align="left" valign="top">' . $value . '</td>
-                //                         </tr>
-                //                     </table>';
-                        
-                //     $subject    = "Sap Not Update for this tables:-Stud_OINV:-'". $SAP_Status_CRM . "'  Lead ID:- ".$value;
-                //     $mail       = new NetCoreEmail();
-                //     $email      = 'brijesh.kumar@talentedge.com';
-                    
-                //     $mail->sendEmail($email, $subject, $body);
-                // }
-                // echo " SAP_Status_CRM OINV :- ".$SAP_Status_CRM;
                 $updateCRM = "UPDATE te_payment_details SET SAP_Status = '".$SAP_Status_CRM."' WHERE id =  '".$value."' ";
                 $query = mysqli_query($conn, $updateCRM) or die(mysqli_error($conn));
                 // print_r($row);
@@ -914,8 +901,6 @@ class syncsaptables
                 //Count Number of rows data & remove all data accepted 1 rows
                 $delete_count_Stud_INV1 = $query_count_Stud_INV1 - 1 ;
                 // print_r(" delete_count_Stud_INV1:- ".$delete_count_Stud_INV1);
-
-                // $querySAP = "select U_OrigEntry,NumAtCard from `Stud_OINV` where `U_OrigEntry` = 'cfa01028a4fef9e576bd5d395d034c69' ";
 
                 // if($query_count_Stud_INV1 >= 1){
                 //     $delete_query_Stud_INV1 = "DELETE from `Stud_INV1` where `U_OrigEntry` = '".$valueRemoveID."' LIMIT $delete_count_Stud_INV1 ";
@@ -1021,8 +1006,8 @@ class syncsaptables
         $i       = 1;
         foreach ($WEB_ORCTArr as $key => $data)
         {
-            if($data['payment_response']){
-                $pres=$data['payment_response'];
+            if($data['payment_response_new']){
+                $pres=$data['payment_response_new'];
                 if($data['U_PaymentGateway']=='PayU'){
                     if($pres=='UPI'){
                         $data['CheckSum']   =20;                        
@@ -1063,26 +1048,26 @@ class syncsaptables
             //echo "<pre>";print_r($data);exit;
             $Address = mysqli_real_escape_string($sap_conn, $data['Address']);
             $Address = ($Address=='0')? '': $Address;
-            
-            $custSQL .= "('" . $data['U_OrigEntry'] . "',
-                '" . $data['DocDate'] . "',
-	        '" . $data['DocDueDate'] . "',
-		'" . $data['TaxDate'] . "',
-		'" . $data['CardCode'] . "',
-		'" . $Address. "',
-		'" . $data['Pay_Status'] . "',
-                '" . $data['U_PaymnetID'] . "',
-                '" . $data['U_PaymentGateway'] . "',
-                '" . $data['CheckAcct'] . "',
-                '" . $data['CashAcct'] . "',
-                '" . $data['TrsfrSum'] . "',
-                '" . $data['TrsfrAcct'] . "',
-                '" . $data['CheckSum'] . "',
-                '" . $data['CashSum'] . "',
-                '" . $data['U_OrigNum'] . "',
-                '" . $data['U_TransactionID'] . "'
-            ),";
-
+            if(!empty($data['invoice_order_number']) ){
+                $custSQL .= "('" . $data['U_OrigEntry'] . "',
+                    '" . $data['DocDate'] . "',
+                    '" . $data['DocDueDate'] . "',
+                    '" . $data['TaxDate'] . "',
+                    '" . $data['CardCode'] . "',
+                    '" . $Address. "',
+                    '" . $data['Pay_Status'] . "',
+                    '" . $data['U_PaymnetID'] . "',
+                    '" . $data['U_PaymentGateway'] . "',
+                    '" . $data['CheckAcct'] . "',
+                    '" . $data['CashAcct'] . "',
+                    '" . $data['TrsfrSum'] . "',
+                    '" . $data['TrsfrAcct'] . "',
+                    '" . $data['CheckSum'] . "',
+                    '" . $data['CashSum'] . "',
+                    '" . $data['U_OrigNum'] . "',
+                    '" . $data['U_TransactionID'] . "'
+                ),";
+            }
 
             $i++;
         }
