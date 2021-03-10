@@ -242,6 +242,34 @@ class te_Api_override extends te_Api {
 			
 		}	
 	}
+
+	//Delete API {"campaignId":"1","sessionId":"abc-133123-xyz","customerIds":[123456,123456,123456]}
+	function removeContactsFromCampaign($campaignId='',$sessionId,$customerIds=''){
+		try{	
+			global $sugar_config;
+			$this->importError='';
+			// $request=$data;
+			$request['campaignId']	= ($campaignId)? $campaignId :$sugar_config['ameyo_campaigainID'];
+			$request['sessionId'] 	= $sessionId;
+			$request['customerIds']	= ($customerIds)? $customerIds : $sugar_config['ameyo_customerIds'];	
+			 
+			$ch = curl_init(); 
+			curl_setopt($ch, CURLOPT_URL, $sugar_config['ameyo_URL'] . 'command?command=removeContactsFromCampaign');
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 30);	
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
+			$response = curl_exec($ch);
+			$this->createLog(print_r($data,true),$response,$data);	
+		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
+			 $responses=json_decode($response);				
+			return $responses;
+			
+		}catch(Exception $e){
+			
+		}	
+	}
 	
 	/*function createLog($req,$res,$request=array()){
 		 
