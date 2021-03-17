@@ -124,7 +124,8 @@ class AOR_ReportsViewVendordataexport extends SugarView
             'Proformics'   => 'b7045019-6b1b-e69b-2a18-590d67814ab3',
             'pointific'    => '681ba8eb-34fd-0a41-dbea-5de7905fa337',
             'Connective9'  => '8c6a35d9-8cfd-ae0d-5338-5efe9c41d5dc',
-            'Collegedunia' => 'b2ef6323-ea47-2605-59c9-590d5cae3850');
+            'Collegedunia' => 'b2ef6323-ea47-2605-59c9-590d5cae3850',
+            'Shiksha'      => '47c6f465-82a1-39d0-c96f-590d6f34c0ca');
         
         $where           = "";
         $wherecl         = "";
