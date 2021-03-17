@@ -94,7 +94,8 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             '80c3283f-97f4-06b3-c231-5d66510a463d' => 'Proformics',
             '98beaef1-89c8-b51e-68f0-5df21e3b40d9' => 'pointific',
             '67fe4fa4-3b45-9a7c-35c4-5efeed862529' => 'Connective9',
-            '9ecbddae-7078-89f6-4cbb-5f1a854587fe' => 'Collegedunia');
+            '9ecbddae-7078-89f6-4cbb-5f1a854587fe' => 'Collegedunia',
+            '2abde316-781b-2dce-4ba4-6051cd2c902c' => 'Shiksha');
 
 
 
@@ -185,7 +186,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             $selected_vendor = array($vendorsIdArr['ileap']);
             $VendorListData  = array(array('id' => $vendorsIdArr['ileap'], 'name' => 'ileap'));
         }
-	if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'intellactads')
+	    if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'intellactads')
         {
             $selected_vendor = array($vendorsIdArr['intellactads']);
             $VendorListData  = array(array('id' => $vendorsIdArr['intellactads'], 'name' => 'intellactads'));
@@ -214,6 +215,11 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['Collegedunia']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Collegedunia'], 'name' => 'Collegedunia'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Shiksha')
+        {
+            $selected_vendor = array($vendorsIdArr['Shiksha']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Shiksha'], 'name' => 'Shiksha'));
         }
 
         if (!empty($selected_vendor))
