@@ -244,10 +244,11 @@ class te_Api_override extends te_Api {
 	}
 
 	//Delete API {"campaignId":"1","sessionId":"abc-133123-xyz","customerIds":[123456,123456,123456]}
-	function removeContactsFromCampaign($campaignId='',$sessionId,$customerIds=''){
+	function removeContactsFromCampaign($campaignId='',$customerIds=''){
 		try{	
 			global $sugar_config;
 			$this->importError='';
+			$sessionId = doLogin();
 			// $request=$data;
 			$request['campaignId']	= ($campaignId)? $campaignId :$sugar_config['ameyo_campaigainID'];
 			$request['sessionId'] 	= $sessionId;
