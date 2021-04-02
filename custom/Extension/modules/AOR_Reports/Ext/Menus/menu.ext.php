@@ -112,7 +112,8 @@ if ($misData['slug'] == 'CPTL')
 	        '98beaef1-89c8-b51e-68f0-5df21e3b40d9',// =>'pointific'
             '67fe4fa4-3b45-9a7c-35c4-5efeed862529',//=> Connective9
             '9ecbddae-7078-89f6-4cbb-5f1a854587fe', //=> Collegedunia
-            '2abde316-781b-2dce-4ba4-6051cd2c902c' //=> Shiksha
+            '2abde316-781b-2dce-4ba4-6051cd2c902c', //=> Shiksha
+            '5d31a08d-d23e-a7e5-e661-6034cbfba0f3' //=> wheebox
             );
          
         

@@ -95,7 +95,8 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             '98beaef1-89c8-b51e-68f0-5df21e3b40d9' => 'pointific',
             '67fe4fa4-3b45-9a7c-35c4-5efeed862529' => 'Connective9',
             '9ecbddae-7078-89f6-4cbb-5f1a854587fe' => 'Collegedunia',
-            '2abde316-781b-2dce-4ba4-6051cd2c902c' => 'Shiksha');
+            '2abde316-781b-2dce-4ba4-6051cd2c902c' => 'Shiksha',
+            '5d31a08d-d23e-a7e5-e661-6034cbfba0f3' => 'Wheebox');
 
 
 
@@ -113,7 +114,8 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             'pointific'    => '681ba8eb-34fd-0a41-dbea-5de7905fa337',
             'Connective9'  => '8c6a35d9-8cfd-ae0d-5338-5efe9c41d5dc',
             'Collegedunia' => 'b2ef6323-ea47-2605-59c9-590d5cae3850',
-            'Shiksha'      => '47c6f465-82a1-39d0-c96f-590d6f34c0ca');
+            'Shiksha'      => '47c6f465-82a1-39d0-c96f-590d6f34c0ca',
+            'Wheebox'      => '71d437b6-cff2-8145-eac7-590d71acd731');
 
 
         $batchList  = $this->getBatch();
