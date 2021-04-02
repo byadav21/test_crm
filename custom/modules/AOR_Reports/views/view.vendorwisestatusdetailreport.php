@@ -284,6 +284,11 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $selected_vendor = array($vendorsIdArr['Shiksha']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Shiksha'], 'name' => 'Shiksha'));
         }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Wheebox')
+        {
+            $selected_vendor = array($vendorsIdArr['Wheebox']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Wheebox'], 'name' => 'Wheebox'));
+        }
 
 
         if (!empty($selected_vendor))
