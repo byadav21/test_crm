@@ -69,6 +69,7 @@ class te_Api_override extends te_Api {
 	
 	function doLogin($user='',$pass=''){
 		try{
+			
 			global $sugar_config;
 			$server = $this->url.'force-login&data=';
 			
@@ -86,7 +87,7 @@ class te_Api_override extends te_Api {
 			//$session= file_get_contents(  $server. urlencode(json_encode($data)));
 			$this->createLog($server. urlencode(json_encode($data)),$session); 	
 			$jsonEncodedData = json_decode($session);
-			 
+			
 			if(isset($jsonEncodedData->sessionId) && !empty($jsonEncodedData->sessionId)){
 				
 						
@@ -244,27 +245,27 @@ class te_Api_override extends te_Api {
 	}
 
 	//Delete API {"campaignId":"1","sessionId":"abc-133123-xyz","customerIds":[123456,123456,123456]}
-	function removeContactsFromCampaign($campaignId='',$customerIds=''){
+	function removeContactsFromCampaign($sessionId,$campaignId='',$customerIds=''){
 		try{	
 			global $sugar_config;
 			$this->importError='';
-			$sessionId = doLogin();
-			// $request=$data;
+			$request=[];
 			$request['campaignId']	= ($campaignId)? $campaignId :$sugar_config['ameyo_campaigainID'];
 			$request['sessionId'] 	= $sessionId;
 			$request['customerIds']	= ($customerIds)? $customerIds : $sugar_config['ameyo_customerIds'];	
-			 
-			$ch = curl_init(); 
-			curl_setopt($ch, CURLOPT_URL, $sugar_config['ameyo_URL'] . 'command?command=removeContactsFromCampaign');
+			
+			$data_url = $sugar_config['ameyo_URL'] . 'command?command=removeContactsFromCampaign&data=';
+            $url = $data_url. (json_encode($request));
+            
+            $ch = curl_init(); 
+            curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 30);	
 			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
 			$response = curl_exec($ch);
-			$this->createLog(print_r($data,true),$response,$data);	
-		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
-			 $responses=json_decode($response);				
+				
+			$responses = json_decode($response);				
 			return $responses;
 			
 		}catch(Exception $e){

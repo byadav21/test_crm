@@ -5,7 +5,7 @@ if (!defined('sugarEntry') || !sugarEntry)die('Not A Valid Entry Point');
 	
 //echo"Gya pani me";
 require_once('custom/modules/te_Api/te_Api.php');
-$api = new te_Api_override();
+
 
 class AOR_ReportsViewamyeodeletepushlead extends SugarView
 {
@@ -32,81 +32,57 @@ class AOR_ReportsViewamyeodeletepushlead extends SugarView
             }
             if ($extentionType=='error' && $mimeType!='text/plain'){             
                echo "<script type=\"text/javascript\">
-                                                         alert(\"Invalid File:Please Upload CSV File.\");
-                                                         window.location = \"index.php?module=AOR_Reports&action=amyeodeletepushlead\"
-                                                 </script>";
+                            alert(\"Invalid File:Please Upload CSV File.\");
+                            window.location = \"index.php?module=AOR_Reports&action=amyeodeletepushlead\"
+                    </script>";
             }
             if ($_FILES["file"]["size"] > 0){
+                $empData = array();
                 $count = 0;
                 $file     = fopen($filename, "r");
-                while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE){   
+                while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE){
                     if ($count == 0) {
                         $count++;
                         continue;
-                    }    
-                    //print_r($emapData) die();
+                    }   
+                    
                     if($emapData[0]=='' || $emapData[1]==''){
                         continue;
                     }
-                    //For Update
                     
-
-                    $result = $api->removeContactsFromCampaign($campaignId, $customerIds);
+                    $empData[$emapData[0]][] = $emapData[1];
                     
-                    if (!$result){
-                        echo "<script type=\"text/javascript\">
-                        alert(\"Error:Please check the Insert query.\");
-                        //  window.location = \"index.php?module=AOR_Reports&action=targetupload\"
-                        </script>";
-                    }
-                       
                     $count++;
-                   /*if (!$result)
-                    {
-                     echo "<script type=\"text/javascript\">
-                                   alert(\"Error:Please check the update query.\");
-                                   window.location = \"index.php?module=AOR_Reports&action=targetupload\"
-                         </script>";
-                    }*/
+                   
                 }//while end
+
+                $api = new te_Api_override();
+                $sessionId = $api->doLogin();
+                foreach ($empData as $key => $value) {
+                    $campaignId = $key;
+                    $customerIds = $value;
+                    $response = $api->removeContactsFromCampaign($sessionId,$campaignId, $customerIds);
+                }
+                echo ($response->result);
+                if (!$response->result){
+                    echo "<script type=\"text/javascript\">
+                    alert(\"Error:Please Try again!.\");
+                    //  window.location = \"index.php?module=AOR_Reports&action=targetupload\"
+                    </script>";
+                }
+
             }//file size check
-
-
-
+            
             fclose($file);
-             
-           /*
-            echo "<script type=\"text/javascript\">
-                                alert(\"CSV File has been successfully Imported.\");
-                                window.location = \"../index.php?module=AOR_Reports&action=productivityform\"
-                            </script>";
-            */
-           
+          
+            // echo "Imhere";
             }
+            
         
-         $sugarSmarty = new Sugar_Smarty();
-        $sugarSmarty->assign("examList",$examList);
-        $sugarSmarty->assign("docsnum",$docsnum);
-        $sugarSmarty->assign("documentifo",$documentifo);
-  
-  
-        // $sugarSmarty->assign("error", $error);
-        // $sugarSmarty->assign("leadList", $leadList);
-        // $sugarSmarty->assign("headers", $headers);
-        // $sugarSmarty->assign("tablewidth", count($headers) * 130);
-        // $sugarSmarty->assign("QueueCount", $QueueCount);
-        // $sugarSmarty->assign("junkCount", $junkCount);
-
-        // $sugarSmarty->assign("campaignIDs", $campaignID);
-        // $sugarSmarty->assign("leadIDs", $leadID);
-        // $sugarSmarty->assign("ExcelHeaders", $ExcelHeaders);
-        // $sugarSmarty->assign("current_records", $current);
-        // $sugarSmarty->assign("page", $page);
-        // $sugarSmarty->assign("pagenext", $pagenext);
-        // $sugarSmarty->assign("pageprevious", $pageprevious);
-        // $sugarSmarty->assign("right", $right);
-        // $sugarSmarty->assign("left", $left);
-        // $sugarSmarty->assign("last_page", $last_page);
+        $sugarSmarty = new Sugar_Smarty();
+       
+        $sugarSmarty->assign("error", $error);
+        $sugarSmarty->assign("response", $response);
         $sugarSmarty->display('custom/modules/AOR_Reports/tpls/amyeodeletepushlead.tpl');
     }
 
