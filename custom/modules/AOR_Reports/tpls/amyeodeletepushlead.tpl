@@ -11,12 +11,11 @@
                 <td nowrap="nowrap" width="10%">
                 <td width="30%">
                     <input type="file" value="" name="file" required accept=".csv"><br>
-            <!-- <input type="hidden" value="{$doclist.name}" name="docname[]"> -->
                 </td>
                 </td>
                 <td nowrap="nowrap" width="10%">
                     Sample CSV
-                    <a href="custom\modules\AOR_Reports/Importdataleadscsv.csv">Download Template</a>
+                    <a href="custom\modules\AOR_Reports/amyeodeletelead.csv">Download Template</a>
                 </td>
             </tr>
             <tr>

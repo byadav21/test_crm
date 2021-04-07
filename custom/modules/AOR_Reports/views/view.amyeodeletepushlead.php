@@ -37,13 +37,22 @@ class AOR_ReportsViewamyeodeletepushlead extends SugarView
                     </script>";
             }
             $numcols = count(file($filename));
-            $maxLimitRows = 1000;
+            $maxLimitRows = 680;
+            if ($numcols >= $maxLimitRows){             
+                echo "<script type=\"text/javascript\">
+                alert(\"Invalid File:Max Limit allowed is $maxLimitRows . Current Count is:- \" + $numcols);
+                            //  window.location = \"index.php?module=AOR_Reports&action=amyeodeletepushlead\"
+                     </script>";
+             }
+            //  print_r($numcols);die('imherews');
+            
             if ($_FILES["file"]["size"] > 0 && $numcols <= $maxLimitRows){
                 $empData = array();
                 $count = 0;
                 $file     = fopen($filename, "r");
                 while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE){
                     if ($count == 0) {
+                        $count++;
                         continue;
                     }   
                     
@@ -59,17 +68,20 @@ class AOR_ReportsViewamyeodeletepushlead extends SugarView
 
                 $api = new te_Api_override();
                 $sessionId = $api->doLogin();
+                // echo "<pre>"; print_r($empData);die('imhere');
                 foreach ($empData as $key => $value) {
                     $campaignId = $key;
                     $customerIds = $value;
                     $response = $api->removeContactsFromCampaign($sessionId,$campaignId, $customerIds);
                 }
-                echo ($response->result);
+                
                 if (!$response->result){
                     echo "<script type=\"text/javascript\">
                     alert(\"Error:Please Try again!.\");
                     //  window.location = \"index.php?module=AOR_Reports&action=targetupload\"
                     </script>";
+                }else {
+                    echo '<h1 class="response" style="text-align:center; color:green; font-size: 20px;">'.$response->result."</h1>";
                 }
 
             }//file size check
