@@ -36,13 +36,14 @@ class AOR_ReportsViewamyeodeletepushlead extends SugarView
                             window.location = \"index.php?module=AOR_Reports&action=amyeodeletepushlead\"
                     </script>";
             }
-            if ($_FILES["file"]["size"] > 0){
+            $numcols = count(file($filename));
+            $maxLimitRows = 1000;
+            if ($_FILES["file"]["size"] > 0 && $numcols <= $maxLimitRows){
                 $empData = array();
                 $count = 0;
                 $file     = fopen($filename, "r");
                 while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE){
                     if ($count == 0) {
-                        $count++;
                         continue;
                     }   
                     
