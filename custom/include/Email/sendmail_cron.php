@@ -108,13 +108,13 @@ class FalconideEmail
     public function emailData3pm($reponame, $filename, $date, $email_summary=NULL)
     {
 		 $emailData = array('email' => array(
-                'pawan.kumar@talentedge.in',
+                'brijesh.kumar@talentedge.in',
                 'kunal.soni@talentedge.in',
                 //B Head
               
                 //CC Team:
                 
-	        'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in',
+	        'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in','prabhjot.tiwana@talentedge.com','abhinav.upadhyay@talentedge.com','chirag.talwar@talentedge.com',
                 //Marketing Team :
                 'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 'parvez.ali@talentedge.in'
@@ -132,12 +132,12 @@ class FalconideEmail
     public function emailData($reponame, $filename, $date, $email_summary=NULL)
     {
 		$emailData = array('email' => array(
-                'pawan.kumar@talentedge.in','kunal.soni@talentedge.in',
+                'brijesh.kumar@talentedge.in','kunal.soni@talentedge.in',
                 //B Head
 		'vishwanath.nair@talentedge.in',
                 'sreedevi.sreekumar@talentedge.in',
                 //CC Team:
-		'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in',
+		'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in','prabhjot.tiwana@talentedge.com','abhinav.upadhyay@talentedge.com','chirag.talwar@talentedge.com',
                  //BA Team :
                 //Marketing Team :
                 'sandeep.sharma@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',

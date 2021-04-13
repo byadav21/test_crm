@@ -96,7 +96,8 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             '67fe4fa4-3b45-9a7c-35c4-5efeed862529' => 'Connective9',
             '9ecbddae-7078-89f6-4cbb-5f1a854587fe' => 'Collegedunia',
             '2abde316-781b-2dce-4ba4-6051cd2c902c' => 'Shiksha',
-            '5d31a08d-d23e-a7e5-e661-6034cbfba0f3' => 'Wheebox');
+            '5d31a08d-d23e-a7e5-e661-6034cbfba0f3' => 'Wheebox',
+            'af9384f4-266e-4de2-b036-6074239ec46d' => 'Freshersworld');
 
 
 
@@ -115,7 +116,8 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
             'Connective9'  => '8c6a35d9-8cfd-ae0d-5338-5efe9c41d5dc',
             'Collegedunia' => 'b2ef6323-ea47-2605-59c9-590d5cae3850',
             'Shiksha'      => '47c6f465-82a1-39d0-c96f-590d6f34c0ca',
-            'Wheebox'      => '71d437b6-cff2-8145-eac7-590d71acd731');
+            'Wheebox'      => '71d437b6-cff2-8145-eac7-590d71acd731',
+            'Freshersworld'=> 'd1627f68-b398-e603-92a4-607424a45ab9');
 
 
         $batchList  = $this->getBatch();
@@ -228,6 +230,11 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['Wheebox']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Wheebox'], 'name' => 'Wheebox'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Freshersworld')
+        {
+            $selected_vendor = array($vendorsIdArr['Freshersworld']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Freshersworld'], 'name' => 'Freshersworld'));
         }
 
         if (!empty($selected_vendor))

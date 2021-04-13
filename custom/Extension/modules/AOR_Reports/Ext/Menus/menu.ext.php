@@ -113,7 +113,8 @@ if ($misData['slug'] == 'CPTL')
             '67fe4fa4-3b45-9a7c-35c4-5efeed862529',//=> Connective9
             '9ecbddae-7078-89f6-4cbb-5f1a854587fe', //=> Collegedunia
             '2abde316-781b-2dce-4ba4-6051cd2c902c', //=> Shiksha
-            '5d31a08d-d23e-a7e5-e661-6034cbfba0f3' //=> wheebox
+            '5d31a08d-d23e-a7e5-e661-6034cbfba0f3', //=> wheebox
+            'af9384f4-266e-4de2-b036-6074239ec46d' // => 'Freshersworld'
             );
          
         
