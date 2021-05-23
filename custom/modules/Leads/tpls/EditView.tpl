@@ -346,6 +346,13 @@
             var record = $("#CheckEditView").val();
 
             var status_description = $("#status_description").val();
+            var disposition_reason = $("#disposition_reason").val();
+            if (disposition_reason == "") {
+                alert("Please select a Disposition Reason.");
+                $("#disposition_reason").focus();
+                return false;
+            }
+
             var status_describe = "";
             if(status_description == "Follow Up"){
                 // alert("Please select date of followup.");
@@ -367,7 +374,7 @@
             
             // alert(date_of_date+"=="+date_of_hours+"=="+date_of_minutes+"=="+date_of_meridiem);
 
-            if(date_of_date == "" || date_of_hours == "" || date_of_minutes == "" || date_of_meridiem == ""){
+            if(date_of_date == "" && date_of_hours == "" && date_of_minutes == "" && date_of_meridiem == ""){
                 alert("Please Select "+ status_description +" Date & Time.");
                 $("#date_of_"+status_describe+"_date").focus();
                 return false;
