@@ -350,8 +350,7 @@
                 $("#lead_source").focus();
                 return false;
             }
-
-
+            
             var callbackdispose = {
                 success: function (b) {
 
@@ -426,15 +425,19 @@
              
        
               
-              
-            /*$("#status").on('change', function () {
-                alert('test');
-            });*/
+            // ON Change Status in #status_description is remove all option current value
+            $("#status").on('change', function () {
+                var status = $("#status").val();
+                if(status == ''){
+                    $('#status_description').find('option').remove().end().append('<option></option>').val('');
+                }
+            });
+
         $("#status_description").on('change', function () {
 
           
             if ($("#status_description").val() == 'Converted') {
-
+                
                 var status_description = $("#status_description").val();
                 var state = $("#primary_address_state").val();
                 if (status_description == 'Converted' && state == 0)
