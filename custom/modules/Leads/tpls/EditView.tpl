@@ -345,6 +345,41 @@
             var lead_source = $("#lead_source").val();
             var record = $("#CheckEditView").val();
 
+	    var status_description = $("#status_description").val();
+            var disposition_reason = $("#disposition_reason").val();
+            if (disposition_reason == "") {
+                alert("Please select a Disposition Reason.");
+                $("#disposition_reason").focus();
+                return false;
+            }
+
+            var status_describe = "";
+            if(status_description == "Follow Up"){
+                // alert("Please select date of followup.");
+                var status_describe = "followup";
+
+            } else if(status_description == "Call Back"){
+                // alert("Please select date of callback.");
+                var status_describe = "callback";
+
+            } else if(status_description == "Prospect") {
+                // alert("Please select date of prospsect.");
+                var status_describe = "prospect";
+
+            }
+            var date_of_date       = $('#date_of_'+status_describe+'_date').val();
+            var date_of_hours      = $('#date_of_'+status_describe+'_hours').val();
+            var date_of_minutes    = $('#date_of_'+status_describe+'_minutes').val();
+            var date_of_meridiem   = $('#date_of_'+status_describe+'_meridiem').val();
+            
+            // alert(date_of_date+"=="+date_of_hours+"=="+date_of_minutes+"=="+date_of_meridiem);
+
+            if(date_of_date == "" && date_of_hours == "" && date_of_minutes == "" && date_of_meridiem == ""){
+                alert("Please Select "+ status_description +" Date & Time.");
+                $("#date_of_"+status_describe+"_date").focus();
+                return false;
+            }
+
             if (lead_source == "" && record == "") {
                 alert("Please select a lead source.");
                 $("#lead_source").focus();
