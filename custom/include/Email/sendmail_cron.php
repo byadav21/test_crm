@@ -114,7 +114,7 @@ class FalconideEmail
               
                 //CC Team:
                 
-	        'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in','prabhjot.tiwana@talentedge.com','abhinav.upadhyay@talentedge.com','chirag.talwar@talentedge.com',
+	            'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in','prabhjot.tiwana@talentedge.com','abhinav.upadhyay@talentedge.com','chirag.talwar@talentedge.com',
                 //Marketing Team :
                 'prashant.shrivastav@talentedge.in','rohit.lall@talentedge.in','ravi.sharma@talentedge.com','gaurav.kukreja@talentedge.com','rishi.anand@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 'parvez.ali@talentedge.in','ankur.rajput@talentedge.com'
@@ -140,6 +140,7 @@ class FalconideEmail
 		'rachit.vohra@talentedge.in','deepak.yadav@talentedge.in','rohan.munshi@talentedge.in','prabhjot.tiwana@talentedge.com','abhinav.upadhyay@talentedge.com','chirag.talwar@talentedge.com',
                  //BA Team :
                 //Marketing Team :
+
                 'prashant.shrivastav@talentedge.in','rohit.lall@talentedge.in','ravi.sharma@talentedge.com','gaurav.kukreja@talentedge.com','rishi.anand@talentedge.in','ashish.somvanshi@talentedge.in','ravinder.saini@talentedge.in',
                 'parvez.ali@talentedge.in','ankur.rajput@talentedge.com'
                 ),
