@@ -457,6 +457,13 @@
               }
               
               
+            // ON Change Status in #status_description is remove all option current value
+            $("#status").on('change', function () {
+                var status = $("#status").val();
+                if(status == ''){
+                    $('#status_description').find('option').remove().end().append('<option></option>').val('');
+                }
+            });
 
         $("#status_description").on('change', function () {
 
