@@ -345,11 +345,8 @@
             var lead_source = $("#lead_source").val();
             var record = $("#CheckEditView").val();
 
-<<<<<<< HEAD
-	    var status_description = $("#status_description").val();
-=======
             var status_description = $("#status_description").val();
->>>>>>> add_email_marketing
+
             var disposition_reason = $("#disposition_reason").val();
             if (disposition_reason == "") {
                 alert("Please select a Disposition Reason.");
