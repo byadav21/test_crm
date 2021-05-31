@@ -99,9 +99,16 @@ class AOR_ReportsViewVendordataexport extends SugarView
             '9ecbddae-7078-89f6-4cbb-5f1a854587fe' => 'Collegedunia',
             '2abde316-781b-2dce-4ba4-6051cd2c902c' => 'Shiksha',
             '5d31a08d-d23e-a7e5-e661-6034cbfba0f3' => 'Wheebox',
-            'af9384f4-266e-4de2-b036-6074239ec46d' => 'Freshersworld');
-
-
+            'af9384f4-266e-4de2-b036-6074239ec46d' => 'Freshersworld',
+            '341b68ce-1143-3f8f-a8ea-60b48709398a' => 'Lucini',
+            'f21fa038-cda9-4bb3-88c3-60b488b51675' => 'MC',
+            '3db45eb8-5576-5484-43ed-60b48936fd05' => 'BQ',
+            'd5ee4f91-38e1-ce31-870f-60b48a409931' => 'W2S',
+            '428c236a-688c-264b-b503-60b48af4cb72' => 'BTS',
+            '1d5548d6-eb8a-40c6-e1fb-60b491fcddb6' => 'Google',
+            'abee435e-0fda-03ab-4013-60b492e08e72' => 'Facebook',
+            '6ba222f6-c005-3be1-6bbe-60b4929e1ee9' => 'Te_Focus',
+            '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' => 'Linkedin');
 
         /*
           $UsersVendrArr = array(
@@ -129,7 +136,17 @@ class AOR_ReportsViewVendordataexport extends SugarView
             'Collegedunia' => 'b2ef6323-ea47-2605-59c9-590d5cae3850',
             'Shiksha'      => '47c6f465-82a1-39d0-c96f-590d6f34c0ca',
             'Wheebox'      => '71d437b6-cff2-8145-eac7-590d71acd731',
-            'Freshersworld'=> 'd1627f68-b398-e603-92a4-607424a45ab9');
+            'Freshersworld'=> 'd1627f68-b398-e603-92a4-607424a45ab9',
+            'Lucini'       => '2269098a-d030-9091-d995-60a3b764df42',
+            'MC'           => '2f24b4d0-8efd-ab41-a8e1-60a3b6dae734',
+            'BQ'           => '42713a80-5d94-6ea2-0c96-60a3b6412703',
+            'W2S'          => 'ce78c409-86b6-9ed2-678c-60a3b7e5c0e0',
+            'BTS'          => 'c69f1a11-a5bc-40ef-a6fb-60a3b77a06e6',
+            'Google'       => '855c9d13-28e9-352a-2bad-590d7126ae38',
+            'Facebook'     => 'becdd890-2eb2-203a-3a95-590d7161a65b',
+            'Te_Focus'     => '219cf5f3-4c81-8d2c-9e30-590d708ef0fe',
+            'Linkedin'     => '81e8c7cd-9501-65f2-7ac7-590d719aed14'
+            );
         
         $where           = "";
         $wherecl         = "";
@@ -283,6 +300,51 @@ class AOR_ReportsViewVendordataexport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['Freshersworld']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Freshersworld'], 'name' => 'Freshersworld'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Lucini')
+        {
+            $selected_vendor = array($vendorsIdArr['Lucini']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Lucini'], 'name' => 'Lucini'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'MC')
+        {
+            $selected_vendor = array($vendorsIdArr['MC']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['MC'], 'name' => 'MC'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'BQ')
+        {
+            $selected_vendor = array($vendorsIdArr['BQ']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['BQ'], 'name' => 'BQ'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'W2S')
+        {
+            $selected_vendor = array($vendorsIdArr['W2S']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['W2S'], 'name' => 'W2S'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'BTS')
+        {
+            $selected_vendor = array($vendorsIdArr['BTS']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['BTS'], 'name' => 'BTS'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Google')
+        {
+            $selected_vendor = array($vendorsIdArr['Google']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Google'], 'name' => 'Google'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Facebook')
+        {
+            $selected_vendor = array($vendorsIdArr['Facebook']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Facebook'], 'name' => 'Facebook'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'TE_Focus')
+        {
+            $selected_vendor = array($vendorsIdArr['TE_Focus']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['TE_Focus'], 'name' => 'TE_Focus'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Linkedin')
+        {
+            $selected_vendor = array($vendorsIdArr['Linkedin']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Linkedin'], 'name' => 'Linkedin'));
         }
 
 

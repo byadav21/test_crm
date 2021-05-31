@@ -114,9 +114,18 @@ if ($misData['slug'] == 'CPTL')
             '9ecbddae-7078-89f6-4cbb-5f1a854587fe', //=> Collegedunia
             '2abde316-781b-2dce-4ba4-6051cd2c902c', //=> Shiksha
             '5d31a08d-d23e-a7e5-e661-6034cbfba0f3', //=> wheebox
-            'af9384f4-266e-4de2-b036-6074239ec46d' // => 'Freshersworld'
+            'af9384f4-266e-4de2-b036-6074239ec46d', // => 'Freshersworld' 
+            '341b68ce-1143-3f8f-a8ea-60b48709398a', // => 'lucini'
+            'f21fa038-cda9-4bb3-88c3-60b488b51675', // => 'Money Control'
+            '3db45eb8-5576-5484-43ed-60b48936fd05', // => 'BloombergQuint'
+            'd5ee4f91-38e1-ce31-870f-60b48a409931', // => 'Way2SMS'
+            '428c236a-688c-264b-b503-60b48af4cb72', // => 'Tradebrief'
+            '1d5548d6-eb8a-40c6-e1fb-60b491fcddb6', // => 'Google Icubeswire'
+            'abee435e-0fda-03ab-4013-60b492e08e72', // => 'Facebook Icubeswire'
+            '6ba222f6-c005-3be1-6bbe-60b4929e1ee9', // => 'Te_Focus Icubeswire'
+            '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' // => 'Linkedin Icubeswire'
             );
-         
+            
         
         /*
         $UsersVendrArr = array(
