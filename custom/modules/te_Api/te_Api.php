@@ -244,6 +244,37 @@ class te_Api_override extends te_Api {
 		}	
 	}
 
+	// uploadContacts for fresh leads API one campaigainID to move another campaigainID
+	function uploadContactsCampaigainID($data,$campID='',$api=''){
+		try{	
+			global $sugar_config;
+			$this->importError='';
+			//$server = $this->url.'uploadContacts&data=';
+			$request=$data;
+			// echo "<pre>"; print_r($data);
+			// die('imhere upload');
+			$request['campaignId']=($campID)? $campID :$sugar_config['ameyo_campaigainID'];
+			// $request['status']='NOT_TRIED';
+			$request['leadId']=($api)? $api : $sugar_config['ameyo_leadID'];	
+			 
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $sugar_config['ameyo_URL'] . 'command?command=uploadContacts');
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 30);	
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
+			$response = curl_exec($ch);
+			$this->createLog(print_r($data,true),$response,$data);	
+		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
+			 $responses=json_decode($response);				
+			return $responses;
+			
+		}catch(Exception $e){
+			
+		}	
+	}
+
 	//Delete API {"campaignId":"1","sessionId":"abc-133123-xyz","customerIds":[123456,123456,123456]}
 	function removeContactsFromCampaign($sessionId,$campaignId='',$customerIds=''){
 		try{	

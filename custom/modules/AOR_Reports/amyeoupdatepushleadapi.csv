@@ -1,0 +1,12 @@
+id,dristi_campagain_id,dristi_API_id,Ameyo Status,status,status_description
+3a5fe9fb-8b3d-de87-bbf2-60a80dfc2b04,30,611,ATTEMPT_FAILED,Alive,New Lead
+5087ff9a-f2dc-b2ce-c2f5-60afcf5a7ea5,14,619,BUSY,Alive,New Lead
+5ac377aa-cdf6-371c-8a99-60afcefcf642,64,623,CALL_DROP,Alive,New Lead
+7a6c34a3-71f5-b8a7-6375-60ad4991a2b1,18,625,CALL_HANGUP,Alive,New Lead
+7a7304d4-c996-c62f-6d9e-60b3acc44769,64,654,CALL_NOT_PICKED,Alive,New Lead
+37921534-7a9e-3915-90d8-60b10067bab4,30,661,NO_ANSWER,Alive,New Lead
+4f2d4690-3f86-4e80-54bb-60af3f1011fc,14,669,NOT_TRIED,Alive,New Lead
+52339989-13d2-e388-4961-60b290f435c9,14,671,NUMBER_FAILURE,Alive,New Lead
+6b0074bb-12e8-fae7-f8d8-60a8bc8ce260,35,701,NUMBER_TEMP_FAILURE,Alive,New Lead
+51816626-e5ae-992e-a604-60a2871e0dc9,35,710,PROVIDER_FAILURE,Alive,New Lead
+bc0fa68e-492f-76c9-785e-6096cec1258c,23,712,PROVIDER_TEMP_FAILURE,Alive,New Lead
