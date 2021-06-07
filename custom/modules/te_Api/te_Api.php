@@ -256,18 +256,19 @@ class te_Api_override extends te_Api {
 			$request['campaignId']=($campID)? $campID :$sugar_config['ameyo_campaigainID'];
 			// $request['status']='NOT_TRIED';
 			$request['leadId']=($api)? $api : $sugar_config['ameyo_leadID'];	
-			 
+			
+			$data_url = $sugar_config['ameyo_URL'] . 'command?command=uploadContacts&data=';
+            $url = $data_url. (json_encode($request));
+
 			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $sugar_config['ameyo_URL'] . 'command?command=uploadContacts');
+			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 30);	
 			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".urlencode(json_encode($request)));					
 			$response = curl_exec($ch);
-			$this->createLog(print_r($data,true),$response,$data);	
-		   // $response= file_get_contents($server. urlencode(json_encode($request)));			
-			 $responses=json_decode($response);				
+			// $this->createLog(print_r($data,true),$response,$data);	
+			$responses=json_decode($response);		
 			return $responses;
 			
 		}catch(Exception $e){

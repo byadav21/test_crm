@@ -126,12 +126,9 @@ class AOR_ReportsViewamyeoupdatepushleadapi extends SugarView
                         $db->query("update leads set  status='". $valueData['status']  ."' , status_description='". $valueData['status_description'] ."',assigned_user_id='', assigned_date='". date('Y-m-d H:i:s') ."'   where id='". $valueData['leadid'] ."'");	
                     }
                 }
-                echo "<pre>"; print_r($responses);
+                // echo "<pre>"; print_r($responses);
                 // die('imhere123');
-                
-
                 // echo "<pre>"; print_r($empData);die('imhere');
-                
                 
                 if (!$response){
                     echo "<script type=\"text/javascript\">
