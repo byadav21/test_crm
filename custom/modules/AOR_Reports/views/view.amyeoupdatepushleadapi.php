@@ -81,9 +81,9 @@ class AOR_ReportsViewamyeoupdatepushleadapi extends SugarView
                     // $getData = ;
                     $result_set =  $db->query("SELECT phone_mobile FROM leads WHERE `id`='".$emapData[0]."' ");
                     $getMobile    = $db->fetchByAssoc($result_set);
-            // echo "<pre>";print_r($getMobile['phone_mobile']);
 
-                    // $mobileNumber = getPhoneNumber($emapData[0]);
+
+
                     
                     $empData[$emapData[0]]['leadid']                = $emapData[0];
                     $empData[$emapData[0]]['dristi_campagain_id']   = $emapData[1];
@@ -93,44 +93,39 @@ class AOR_ReportsViewamyeoupdatepushleadapi extends SugarView
                     $empData[$emapData[0]]['status']                = $emapData[4];
                     $empData[$emapData[0]]['status_description']    = $emapData[5];
                     $count++;
-                    // echo "<pre>"; print_r($empData);
+
                 }//while end
-                // echo "<pre>"; print_r($empData);
+  //               echo "<pre>"; print_r($empData);
                 // die('imheewdc');
                 $api = new te_Api_override();
                 $data               =   [];
                 $session            =   $api->doLogin();								
-                $data['sessionId']  = $session;
-                $data['properties'] = array('update.customer'=>'true','migrate.customer'=>'true');
-
-                foreach ($empData as $keyData => $valueData) {
-                    // $campaignId[] = $keyData;
-                    $customerIds[$keyData] = $valueData;
-                    // echo "<pre>"; print_r($valueData);die('imherewq');
+               
+		 foreach ($empData as $keyData => $valueData) {
+                     
+                    $data['campaignId']                = $valueData['dristi_campagain_id'];
+                    $data['leadId']                    = $valueData['dristi_API_id'];
+                    $data['sessionId']                 = $session;
+                    $data['properties']                = array('update.customer'=>true,migrate.customer=>true);
                     $data['status']                    = $valueData['ameyo_status'];
                     $data['customerRecords']           = [];
                     $customerRecords['phone1']         = $valueData['phone_mobile'];
                     $customerRecords['lead_reference'] = $valueData['leadid'];
                     $data['customerRecords'][]         = $customerRecords;
-                    $campID                            = $valueData['dristi_campagain_id'];
-                    $apiID                             = $valueData['dristi_API_id'];
+//                    echo "<pre>";print_r($data);
                     
-                    $responses = $api->uploadContactsCampaigainID($data,$campID,$apiID);
-
-                    // $server = 'http://111.93.50.157:8888/ameyowebaccess/command/?command=force-login&data='; //Staging server
-			
-// https://arrina.ameyo.net:8443/ameyowebaccess/command/?command=uploadContacts
+                    $responses = $api->uploadContactsCampaigainID($data);//,$campID,$apiID  
 
 // {"campaignId":"49","leadId":516,"sessionId":"d379-60536742-ses-noc@talentedge.in-sDmnGOJS-25809","properties":{"update.customer":true,"migrate.customer":true},"status":"NOT_TRIED","customerRecords":[{"phone1":"9818222840","lead_reference":"1022a9cb-5bef-6c5c-d787-601accc832d8"},{"phone1":"8929822325","lead_reference":"104aa438-8e4c-2703-6017-603354583a2a"}]}
                     if($responses){
-                        $db->query("update leads set  status='". $valueData['status']  ."' , status_description='". $valueData['status_description'] ."',assigned_user_id='', assigned_date='". date('Y-m-d H:i:s') ."'   where id='". $valueData['leadid'] ."'");	
+                        $db->query("update leads set  status='". $valueData['status']  ."' , status_description='". $valueData['status_description'] ."',assigned_user_id='', assigned_date='". date('Y-m-d H:i:s') ."' where id='". $valueData['leadid'] ."'");	
                     }
                 }
-                // echo "<pre>"; print_r($responses);
-                // die('imhere123');
-                // echo "<pre>"; print_r($empData);die('imhere');
+
+
+
                 
-                if (!$response){
+                if (!$responses){
                     echo "<script type=\"text/javascript\">
                     alert(\"Error:Please Try again!.\");
                     //  window.location = \"index.php?module=AOR_Reports&action=amyeoupdatepushleadapi\"
@@ -149,8 +144,8 @@ class AOR_ReportsViewamyeoupdatepushleadapi extends SugarView
         
         $sugarSmarty = new Sugar_Smarty();
        
-        $sugarSmarty->assign("error", $error);
-        $sugarSmarty->assign("response", $response);
+	$sugarSmarty->assign("error", $error);
+	$sugarSmarty->assign("response", $response);
         $sugarSmarty->display('custom/modules/AOR_Reports/tpls/amyeoupdatepushleadapi.tpl');
     }
 

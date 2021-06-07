@@ -245,20 +245,20 @@ class te_Api_override extends te_Api {
 	}
 
 	// uploadContacts for fresh leads API one campaigainID to move another campaigainID
-	function uploadContactsCampaigainID($data,$campID='',$api=''){
+	function uploadContactsCampaigainID($data){
 		try{	
 			global $sugar_config;
 			$this->importError='';
-			//$server = $this->url.'uploadContacts&data=';
+
 			$request=$data;
-			// echo "<pre>"; print_r($data);
-			// die('imhere upload');
-			$request['campaignId']=($campID)? $campID :$sugar_config['ameyo_campaigainID'];
-			// $request['status']='NOT_TRIED';
-			$request['leadId']=($api)? $api : $sugar_config['ameyo_leadID'];	
-			
+
+
+			//$request['campaignId']=($campID)? $campID :$sugar_config['ameyo_campaigainID'];
+
+			//$request['leadId']=($api)? $api : $sugar_config['ameyo_leadID'];	
+		//	echo (json_encode($request));
 			$data_url = $sugar_config['ameyo_URL'] . 'command?command=uploadContacts&data=';
-            $url = $data_url. (json_encode($request));
+            		$url = $data_url. (json_encode($request));
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $url);
@@ -267,7 +267,7 @@ class te_Api_override extends te_Api {
 			curl_setopt($ch, CURLOPT_TIMEOUT, 30);	
 			curl_setopt($ch, CURLOPT_POST, true);
 			$response = curl_exec($ch);
-			// $this->createLog(print_r($data,true),$response,$data);	
+			//$this->createLog(print_r($data,true),$response,$data);	
 			$responses=json_decode($response);		
 			return $responses;
 			
