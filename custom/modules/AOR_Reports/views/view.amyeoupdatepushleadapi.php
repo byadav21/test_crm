@@ -106,7 +106,7 @@ class AOR_ReportsViewamyeoupdatepushleadapi extends SugarView
                     $data['campaignId']                = $valueData['dristi_campagain_id'];
                     $data['leadId']                    = $valueData['dristi_API_id'];
                     $data['sessionId']                 = $session;
-                    $data['properties']                = array('update.customer'=>true,migrate.customer=>true);
+                    $data['properties']                = array('update.customer'=>true,'migrate.customer'=>true);
                     //$data['status']                    = $valueData['ameyo_status'];
                     $data['customerRecords']           = [];
                     $customerRecords['phone1']         = $valueData['phone_mobile'];
