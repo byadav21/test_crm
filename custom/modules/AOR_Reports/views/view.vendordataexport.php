@@ -108,7 +108,9 @@ class AOR_ReportsViewVendordataexport extends SugarView
             '1d5548d6-eb8a-40c6-e1fb-60b491fcddb6' => 'Google',
             'abee435e-0fda-03ab-4013-60b492e08e72' => 'Facebook',
             '6ba222f6-c005-3be1-6bbe-60b4929e1ee9' => 'Te_Focus',
-            '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' => 'Linkedin');
+            '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' => 'Linkedin',
+            '2b98175d-6a90-d4ef-c751-60c093e77ee8' => 'htmedia',
+            '21a9d904-4306-3814-bc3d-60c095d4daa3' => 'icubeswire');
 
         /*
           $UsersVendrArr = array(
@@ -145,7 +147,9 @@ class AOR_ReportsViewVendordataexport extends SugarView
             'Google'       => '855c9d13-28e9-352a-2bad-590d7126ae38',
             'Facebook'     => 'becdd890-2eb2-203a-3a95-590d7161a65b',
             'Te_Focus'     => '219cf5f3-4c81-8d2c-9e30-590d708ef0fe',
-            'Linkedin'     => '81e8c7cd-9501-65f2-7ac7-590d719aed14'
+            'Linkedin'     => '81e8c7cd-9501-65f2-7ac7-590d719aed14',
+            'htmedia'      => '6b41a911-6080-4dc8-7306-60c093bd01e3',
+            'iCubeswire'   => 'be0e2ac7-8433-f864-c47d-60b5b0cfaaa4'
             );
         
         $where           = "";
@@ -345,6 +349,16 @@ class AOR_ReportsViewVendordataexport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['Linkedin']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Linkedin'], 'name' => 'Linkedin'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'htmedia')
+        {
+            $selected_vendor = array($vendorsIdArr['htmedia']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['htmedia'], 'name' => 'htmedia'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'iCubeswire')
+        {
+            $selected_vendor = array($vendorsIdArr['iCubeswire']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['iCubeswire'], 'name' => 'iCubeswire'));
         }
 
 

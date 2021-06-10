@@ -123,7 +123,9 @@ if ($misData['slug'] == 'CPTL')
             '1d5548d6-eb8a-40c6-e1fb-60b491fcddb6', // => 'Google Icubeswire'
             'abee435e-0fda-03ab-4013-60b492e08e72', // => 'Facebook Icubeswire'
             '6ba222f6-c005-3be1-6bbe-60b4929e1ee9', // => 'Te_Focus Icubeswire'
-            '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' // => 'Linkedin Icubeswire'
+            '5feeb2dc-365b-7353-7e9a-60b492ea0f2f', // => 'Linkedin Icubeswire'
+            '2b98175d-6a90-d4ef-c751-60c093e77ee8', // => 'htmedia',
+            '21a9d904-4306-3814-bc3d-60c095d4daa3', // => 'icubeswire'
             );
             
         
