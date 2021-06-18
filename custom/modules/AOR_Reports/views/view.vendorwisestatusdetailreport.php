@@ -114,7 +114,8 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             '6ba222f6-c005-3be1-6bbe-60b4929e1ee9' => 'Te_Focus',
             '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' => 'Linkedin',
             '2b98175d-6a90-d4ef-c751-60c093e77ee8' => 'htmedia',
-            '21a9d904-4306-3814-bc3d-60c095d4daa3' => 'icubeswire');
+            '21a9d904-4306-3814-bc3d-60c095d4daa3' => 'icubeswire',
+            'f0163da1-502c-f65a-b2a0-60cc2b9a7421' => 'eweb');
 
 
 
@@ -155,7 +156,8 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             'Te_Focus'     => '219cf5f3-4c81-8d2c-9e30-590d708ef0fe',
             'Linkedin'     => '81e8c7cd-9501-65f2-7ac7-590d719aed14',
             'htmedia'      => '6b41a911-6080-4dc8-7306-60c093bd01e3',
-            'iCubeswire'   => 'be0e2ac7-8433-f864-c47d-60b5b0cfaaa4'
+            'icubeswire'   => 'be0e2ac7-8433-f864-c47d-60b5b0cfaaa4',
+            'eweb'         => 'a812e51e-fa33-9945-dfd9-60c1cb93ac1a'
             );
 
 
@@ -369,10 +371,15 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             $selected_vendor = array($vendorsIdArr['htmedia']);
             $VendorListData  = array(array('id' => $vendorsIdArr['htmedia'], 'name' => 'htmedia'));
         }
-        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'iCubeswire')
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'icubeswire')
         {
-            $selected_vendor = array($vendorsIdArr['iCubeswire']);
-            $VendorListData  = array(array('id' => $vendorsIdArr['iCubeswire'], 'name' => 'iCubeswire'));
+            $selected_vendor = array($vendorsIdArr['icubeswire']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['icubeswire'], 'name' => 'icubeswire'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'eweb')
+        {
+            $selected_vendor = array($vendorsIdArr['eweb']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['eweb'], 'name' => 'eweb'));
         }
 
         if (!empty($selected_vendor))
