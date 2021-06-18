@@ -317,7 +317,7 @@ class AOR_ReportsViewUtmstatusreport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['eweb']);
             $VendorListData  = array(array('id' => $vendorsIdArr['eweb'], 'name' => 'eweb'));
-        });
+        }
 
         if (!empty($selected_vendor))
         {
