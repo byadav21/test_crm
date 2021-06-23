@@ -8,7 +8,7 @@ class FalconideEmail
         $sentTo                = (!is_array($sentTo)) ? array($sentTo) : $sentTo;
         // $sentTo = "virendra.bhardwaj@talentedge.in;
         $data                  = array();
-        $data['api_key']       = 'fbb5606b326850fce2fa335cdce8dc16';
+        $data['api_key']       = "089c8f52c1027af75be2e11ea308c85d";//'fbb5606b326850fce2fa335cdce8dc16'; old key
         $data['email_details'] = array(
             'fromname' => rawurlencode("CRM Report - Talentedge"),
             'subject'  => rawurlencode($emailSubject),

@@ -3,7 +3,7 @@ class NetCoreEmail{
 	public function sendEmail($to,$subject,$body){
 		$from = "falconadmin@talentedge.in";
 		$fromname = "TalentEdge";
-		$api_key = "fbb5606b326850fce2fa335cdce8dc16";
+		$api_key = "089c8f52c1027af75be2e11ea308c85d";//"fbb5606b326850fce2fa335cdce8dc16"; old Key
 		$content = $body;
 		$data=array();
 		$data['subject']= $subject;
@@ -18,7 +18,7 @@ class NetCoreEmail{
 	public function sendEmail2($to,$subject,$body){
 		$from = "admissions@talentedge.in";
 		$fromname = "TalentEdge";
-		$api_key = "fbb5606b326850fce2fa335cdce8dc16";
+		$api_key = "089c8f52c1027af75be2e11ea308c85d";//"fbb5606b326850fce2fa335cdce8dc16"; old key
 		$content = $body;
 		$data=array();
 		$data['subject']= $subject;
