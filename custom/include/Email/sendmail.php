@@ -1,6 +1,7 @@
 <?php
 class NetCoreEmail{
 	public function sendEmail($to,$subject,$body){
+		global $sugar_config;
 		$from = "falconadmin@talentedge.in";
 		$fromname = "TalentEdge";
 		$api_key = $sugar_config['falconide_apikey'];
@@ -16,6 +17,7 @@ class NetCoreEmail{
 		return trim($apiresult);
 	}
 	public function sendEmail2($to,$subject,$body){
+		global $sugar_config;
 		$from = "admissions@talentedge.in";
 		$fromname = "TalentEdge";
 		$api_key = $sugar_config['falconide_apikey'];

@@ -5,6 +5,7 @@ class FalconideEmail
 
     public function sendEmail($sentTo, $emailSubject, $emailMessage, $emailFromName = NULL, $emailFrom = NULL, $attachData = array())
     {
+        global $sugar_config;
         $sentTo                = (!is_array($sentTo)) ? array($sentTo) : $sentTo;
         // $sentTo = "virendra.bhardwaj@talentedge.in;
         $data                  = array();
