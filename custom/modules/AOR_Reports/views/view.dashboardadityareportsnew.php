@@ -1,0 +1,265 @@
+<?php
+
+if (!defined('sugarEntry') || !sugarEntry)
+    die('Not A Valid Entry Point');
+require_once('custom/include/Email/sendmail.php');
+
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
+ini_set('memory_limit', '-1');
+
+class AOR_ReportsViewdashboardadityareportsnew extends SugarView
+{
+
+    var $report_to_id;
+    var $counsellors_arr;
+
+    public function __construct()
+    {
+        parent::SugarView();
+    }
+
+    public function getVendorBatchLeads($from_date, $to_date)
+    {
+        global $db;
+        $proSql = 'SELECT COUNT(l.id) AS total_lead_count, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor, b.fees_inr
+        FROM leads AS l
+        LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c
+        LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id
+        LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
+        WHERE l.date_entered >= "'.$from_date.'" AND l.date_entered <= "'.$to_date.'" 
+        AND l.vendor NOT IN ("Crosssell_churned","TAcademy")
+        GROUP BY CONCAT(l.vendor,b.batch_code)
+        ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
+
+        $pro_Obj     = $db->query($proSql);
+        while ($emapData   = $db->fetchByAssoc($pro_Obj))
+        {
+            $SQLSELECT = "SELECT COUNT(*) as countData FROM dashboard_expenses_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' AND date_entered = '".$emapData['date_entered']."' ";
+            $result_set =   $db->query($SQLSELECT);
+            $contRow    =   $db->fetchByAssoc($result_set);
+
+            if($contRow['countData'] > 0) {
+                
+                $updatesql = 'UPDATE dashboard_expenses_report SET batch_code = "'.$emapData['batch_code'].'", vendor = "'.$emapData['vendor'].'", date_modified = "'.date("Y-m-d H:i:s").'", total_leads = "'.$emapData['total_lead_count'].'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" AND total_leads = "'.$emapData['total_lead_count'].'" ';
+                $result = $db->query($updatesql);
+                                 
+            } else {
+                $sql = 'INSERT INTO dashboard_expenses_report (batch_code, batch_fees, vendor, date_entered, date_modified, total_leads, fresh_leads, conversion, spends, revenue, budgeted_leads, budgeted_conversion, budgeted_spends, budgeted_revenue, batch_start_date, total_days_of_campaign, active ) values 
+                ("'.$emapData['batch_code'].'", "'.$emapData['fees_inr'].'", "'.$emapData['vendor'].'", "'.$emapData['date_entered'].'", "'.date("Y-m-d").'", "'.$emapData['total_lead_count'].'" , "0", "0", "0", "0", "0", "0", "0", "0", "'.date("Y-m-d").'", "0","yes")';
+                $result = $db->query($sql);
+            }
+
+
+            $getData = "SELECT * FROM dashboard_budgeted_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' ";
+            $getresult_set =   $db->query($getData);
+            $getcontRow    =   $db->fetchByAssoc($getresult_set);
+// echo "<pre>";print_r($getcontRow['id']);
+            if($getcontRow['id'] > 0 ) {
+                
+                $sql = 'UPDATE dashboard_expenses_report SET budgeted_leads = "'.$getcontRow['budgeted_leads'].'", budgeted_conversion = "'.$getcontRow['budgeted_conversion'] .'", budgeted_spends = "'.$getcontRow['budgeted_spends'] .'", budgeted_revenue = "'.$getcontRow['budgeted_revenue'] .'", batch_start_date = "'.$getcontRow['batch_start_date'] .'", total_days_of_campaign = "'.$getcontRow['total_days_of_campaign'] .'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+                $result = $db->query($sql);
+            }
+        }
+
+// die('imhere 1234567');
+    }
+
+    public function getFressLeads($from_date, $to_date)
+    {
+        global $db;
+        $proSql = 'SELECT COUNT(l.id) AS total_fress_lead, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor
+        FROM leads AS l
+        LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c
+        LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id
+        LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
+        WHERE l.date_entered >= "'.$from_date.'" AND l.date_entered <= "'.$to_date.'" 
+        AND l.vendor NOT IN ("Crosssell_churned","TAcademy") AND l.status_description NOT IN ("Duplicate","Re-Enquired")
+        GROUP BY CONCAT(l.vendor,b.batch_code)
+        ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
+
+        $pro_Obj     = $db->query($proSql);
+        while ($emapData   = $db->fetchByAssoc($pro_Obj))
+        {
+            $SQLSELECT = "SELECT COUNT(*) AS count FROM dashboard_expenses_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' AND date_entered = '".$emapData['date_entered']."' ";
+            $result_set =   $db->query($SQLSELECT);
+            $contRow    =   $db->fetchByAssoc($result_set);
+            
+            if($contRow['count'] > 0) {
+                $sql = 'UPDATE dashboard_expenses_report SET fresh_leads = "'.$emapData['total_fress_lead'].'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+                $result = $db->query($sql);
+                                 
+            }else {
+                // echo (' ========================= imhere else part');
+            }
+        }
+    }
+
+    public function getConvertedLeads($from_date, $to_date)
+    {
+        global $db;
+        $proSql = 'SELECT COUNT(l.id) AS total_lead_converted, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor, b.fees_inr
+        FROM leads AS l
+        LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c
+        LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id
+        LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
+        WHERE l.date_entered >= "'.$from_date.'" AND l.date_entered <= "'.$to_date.'" 
+        AND l.vendor NOT IN ("Crosssell_churned","TAcademy") AND l.status_description IN ("Converted")
+        GROUP BY CONCAT(l.vendor,b.batch_code)
+        ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
+
+        $pro_Obj     = $db->query($proSql);
+        while ($emapData   = $db->fetchByAssoc($pro_Obj))
+        {
+            $SQLSELECT = "SELECT COUNT(*) as count FROM dashboard_expenses_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' AND date_entered = '".$emapData['date_entered']."' ";
+            $result_set =   $db->query($SQLSELECT);
+            $contRow    =   $db->fetchByAssoc($result_set);
+
+            if($contRow['count'] > 0) {
+                $revenue = $emapData['fees_inr'] * $emapData['total_lead_converted'];
+                $sql = 'UPDATE dashboard_expenses_report SET conversion = "'.$emapData['total_lead_converted'].'", revenue = "'.$revenue .'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+                $result = $db->query($sql);
+                                 
+            }
+            // $getData = "SELECT * FROM dashboard_budgeted_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' ";
+            // $getresult_set =   $db->query($getData);
+            // $getcontRow    =   $db->fetchByAssoc($getresult_set);
+
+            // if($getcontRow > 0) {
+                
+            //     $sql = 'UPDATE dashboard_expenses_report SET budgeted_leads = "'.$getcontRow['budgeted_leads'].'", budgeted_conversion = "'.$getcontRow['budgeted_conversion'] .'", budgeted_spends = "'.$getcontRow['budgeted_spends'] .'", budgeted_revenue = "'.$getcontRow['budgeted_revenue'] .'", batch_start_date = "'.$getcontRow['batch_start_date'] .'", total_days_of_campaign = "'.$getcontRow['total_days_of_campaign'] .'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+            //     $result = $db->query($sql);
+            // }
+
+
+        }
+    }
+
+    public function display()
+    {
+
+        global $sugar_config, $app_list_strings, $current_user, $db;
+        //~~~~~~~
+
+        // $startDate = "2019-01-01";
+        // $endDate   = "2019-12-31";
+
+        if (!isset($_SESSION['cccon_from_date']))
+        {
+            $_SESSION['cccon_from_date'] = date('Y-m-d', strtotime('-1 days'));
+        }
+        if (!isset($_SESSION['cccon_to_date']))
+        {
+            $_SESSION['cccon_to_date'] = date('Y-m-d', strtotime('-1 days'));
+        }
+        if (isset($_POST['button']) || isset($_POST['export']))
+        {
+            $_SESSION['cccon_from_date']    = $_REQUEST['from_date'];
+            $_SESSION['cccon_to_date']      = $_REQUEST['to_date'];
+            $_SESSION['cccon_exportwith']   = $_REQUEST['exportwith'];
+        }
+        if ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] != "")
+        {
+            $selected_from_date = $_SESSION['cccon_from_date'];
+            $selected_to_date   = $_SESSION['cccon_to_date'];
+            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
+            $to_date            = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
+            
+        }
+        elseif ($_SESSION['cccon_from_date'] != "" && $_SESSION['cccon_to_date'] == "")
+        {
+            $selected_from_date = $_SESSION['cccon_from_date'];
+            $from_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_from_date'])));
+            
+        }
+        elseif ($_SESSION['cccon_from_date'] == "" && $_SESSION['cccon_to_date'] != "")
+        {
+            $selected_to_date = $_SESSION['cccon_to_date'];
+            $to_date          = date('Y-m-d', strtotime(str_replace('/', '-', $_SESSION['cccon_to_date'])));
+            
+        }
+        
+        $getVendorBatchLeads = $this->getVendorBatchLeads($from_date, $to_date);
+        $getFressLeads       = $this->getFressLeads($from_date, $to_date);
+        $getConvertedLeads   = $this->getConvertedLeads($from_date, $to_date);
+        
+        // $getAllData = "SELECT * FROM dashboard_expenses_report";
+        $getAllData =   $db->query("SELECT * FROM dashboard_expenses_report where date_entered BETWEEN '".$from_date."' AND '".$to_date."' ");
+        $allResultSetsData = array();
+        // $programList = array();
+
+        while ($row = $db->fetchByAssoc($getAllData))
+        {
+            $allResultSetsData[] = $row;
+        }
+        $programList = $allResultSetsData;
+
+        $total     = count($programList); #total records
+        $start     = 0;
+        $per_page  = 100;//$total;
+        $page      = 1;
+        $pagenext  = 1;
+        $last_page = ceil($total / $per_page);
+
+        if (isset($_REQUEST['page']) && $_REQUEST['page'] > 0)
+        {
+            $start    = $per_page * ($_REQUEST['page'] - 1);
+            $page     = ($_REQUEST['page'] - 1);
+            $pagenext = ($_REQUEST['page'] + 1);
+        }
+        else
+        {
+
+            $pagenext++;
+        }
+        if (($start + $per_page) < $total)
+        {
+            $right = 1;
+        }
+        else
+        {
+            $right = 0;
+        }
+        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 1)
+        {
+            $left = 0;
+        }
+        elseif (isset($_REQUEST['page']))
+        {
+
+            $left = 1;
+        }
+
+        $programList = array_slice($programList, $start, $per_page);
+        if ($total > $per_page)
+        {
+            $current = "(" . ($start + 1) . "-" . ($start + $per_page) . " of " . $total . ")";
+        }
+        else
+        {
+            $current = "(" . ($start + 1) . "-" . count($programList) . " of " . $total . ")";
+        }
+        #pE
+        $sugarSmarty = new Sugar_Smarty();
+
+        $sugarSmarty->assign("programList", $programList);
+
+        $sugarSmarty->assign("getVendorBatchLeads", $getVendorBatchLeads);
+        $sugarSmarty->assign("getFressLeads", $getFressLeads);
+        $sugarSmarty->assign("getConvertedLeads", $getConvertedLeads);
+        $sugarSmarty->assign("allResultSetsData", $allResultSetsData);
+
+        $sugarSmarty->assign("selected_from_date", $selected_from_date);
+        $sugarSmarty->assign("selected_to_date", $selected_to_date);
+        $sugarSmarty->assign("current_records", $current);
+        $sugarSmarty->assign("page", $page);
+        $sugarSmarty->assign("pagenext", $pagenext);
+        $sugarSmarty->assign("right", $right);
+        $sugarSmarty->assign("left", $left);
+        $sugarSmarty->assign("last_page", $last_page);
+        $sugarSmarty->display('custom/modules/AOR_Reports/tpls/dashboardadityareportsnew.tpl');
+    }
+
+}
+
+?>
