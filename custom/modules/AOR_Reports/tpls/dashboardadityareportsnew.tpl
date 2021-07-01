@@ -152,6 +152,9 @@
                     <strong>Total Days of Campaign</strong>
                 </th>
                 <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
+                    <strong>Campaign Start Date</strong>
+                </th>
+                <th scope="col" data-hide="phone" class="footable-visible footable-first-column">
                     <strong>Active</strong>
                 </th>
                 {foreach from = $StatusList key=key item=status}
@@ -175,6 +178,7 @@
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.budgeted_revenue}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.batch_start_date}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.total_days_of_campaign}</td>
+                    <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.campaign_start_date}</td>
                     <td align="left" valign="top" type="relate" field="batch" class="inlineEdit footable-visible footable-last-column">{$program.active}</td>
                     {foreach from = $StatusList key=statuskey item=vendor}
 

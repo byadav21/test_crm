@@ -41,13 +41,16 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
 
             if($contRow['countData'] > 0) {
                 
-                $updatesql = 'UPDATE dashboard_expenses_report SET batch_code = "'.$emapData['batch_code'].'", vendor = "'.$emapData['vendor'].'", date_modified = "'.date("Y-m-d H:i:s").'", total_leads = "'.$emapData['total_lead_count'].'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" AND total_leads = "'.$emapData['total_lead_count'].'" ';
+                $updatesql = 'UPDATE dashboard_expenses_report SET batch_code = "'.$emapData['batch_code'].'", vendor = "'.$emapData['vendor'].'", date_modified = "'.date("Y-m-d").'", total_leads = "'.$emapData['total_lead_count'].'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" AND total_leads = "'.$emapData['total_lead_count'].'" ';
                 $result = $db->query($updatesql);
                                  
             } else {
-                $sql = 'INSERT INTO dashboard_expenses_report (batch_code, batch_fees, vendor, date_entered, date_modified, total_leads, fresh_leads, conversion, spends, revenue, budgeted_leads, budgeted_conversion, budgeted_spends, budgeted_revenue, batch_start_date, total_days_of_campaign, active ) values 
-                ("'.$emapData['batch_code'].'", "'.$emapData['fees_inr'].'", "'.$emapData['vendor'].'", "'.$emapData['date_entered'].'", "'.date("Y-m-d").'", "'.$emapData['total_lead_count'].'" , "0", "0", "0", "0", "0", "0", "0", "0", "'.date("Y-m-d").'", "0","yes")';
-                $result = $db->query($sql);
+                if($emapData['fees_inr'] != 0){
+                    $sql = 'INSERT INTO dashboard_expenses_report (batch_code, batch_fees, vendor, date_entered, date_modified, total_leads, fresh_leads, conversion, spends, revenue, budgeted_leads, budgeted_conversion, budgeted_spends, budgeted_revenue, batch_start_date, total_days_of_campaign, campaign_start_date, active ) values 
+                    ("'.$emapData['batch_code'].'", "'.$emapData['fees_inr'].'", "'.$emapData['vendor'].'", "'.$emapData['date_entered'].'", "'.date("Y-m-d").'", "'.$emapData['total_lead_count'].'" , "0", "0", "0", "0", "0", "0", "0", "0", NULL, "0",NULL,"yes")';
+                    $result = $db->query($sql);
+                }
+                
             }
 
 
@@ -56,8 +59,8 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
             $getcontRow    =   $db->fetchByAssoc($getresult_set);
 // echo "<pre>";print_r($getcontRow['id']);
             if($getcontRow['id'] > 0 ) {
-                
-                $sql = 'UPDATE dashboard_expenses_report SET budgeted_leads = "'.$getcontRow['budgeted_leads'].'", budgeted_conversion = "'.$getcontRow['budgeted_conversion'] .'", budgeted_spends = "'.$getcontRow['budgeted_spends'] .'", budgeted_revenue = "'.$getcontRow['budgeted_revenue'] .'", batch_start_date = "'.$getcontRow['batch_start_date'] .'", total_days_of_campaign = "'.$getcontRow['total_days_of_campaign'] .'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+                $getActive = ($getcontRow['budgeted_spends'] == 0) ? 'NO':'Yes';
+                $sql = 'UPDATE dashboard_expenses_report SET budgeted_leads = "'.$getcontRow['budgeted_leads'].'", type = "'.$getcontRow['type'].'", budgeted_conversion = "'.$getcontRow['budgeted_conversion'] .'", budgeted_spends = "'.$getcontRow['budgeted_spends'] .'", budgeted_revenue = "'.$getcontRow['budgeted_revenue'] .'", batch_start_date = "'.$getcontRow['batch_start_date'] .'", total_days_of_campaign = "'.$getcontRow['total_days_of_campaign'] .'", campaign_start_date = "'.$getcontRow['campaign_start_date'] .'", active = "'.$getActive.'", date_modified = "'.date("Y-m-d").'"  WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
                 $result = $db->query($sql);
             }
         }
@@ -86,7 +89,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
             $contRow    =   $db->fetchByAssoc($result_set);
             
             if($contRow['count'] > 0) {
-                $sql = 'UPDATE dashboard_expenses_report SET fresh_leads = "'.$emapData['total_fress_lead'].'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+                $sql = 'UPDATE dashboard_expenses_report SET fresh_leads = "'.$emapData['total_fress_lead'].'", date_modified = "'.date("Y-m-d").'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
                 $result = $db->query($sql);
                                  
             }else {
@@ -117,7 +120,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
 
             if($contRow['count'] > 0) {
                 $revenue = $emapData['fees_inr'] * $emapData['total_lead_converted'];
-                $sql = 'UPDATE dashboard_expenses_report SET conversion = "'.$emapData['total_lead_converted'].'", revenue = "'.$revenue .'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+                $sql = 'UPDATE dashboard_expenses_report SET conversion = "'.$emapData['total_lead_converted'].'", revenue = "'.$revenue .'", date_modified = "'.date("Y-m-d").'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
                 $result = $db->query($sql);
                                  
             }
