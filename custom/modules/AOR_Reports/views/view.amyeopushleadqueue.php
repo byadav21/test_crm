@@ -114,7 +114,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
             {
                 //echo 'good'; die;
                 //echo 'No';
-                //echo '<pre>'; print_r($emapData);print_r($headers);die;
+                echo '<pre>'; print_r($emapData);print_r($headers);die;
                 echo "<script type=\"text/javascript\">
                                     alert(\"Please check the csv headers.\");
                                     window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
@@ -142,11 +142,18 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
 
             $api = new te_Api_override();
             $sessionId = $api->doLogin();
-            echo "<pre>"; print_r($empData);die('imhere');
+            echo "<pre>"; print_r($empData);//die('imhere');
             foreach ($empData as $key => $value) {
                 $campaignId = $key;
                 $customerIds = $value;
                 $response = $api->removeContactsFromCampaign($sessionId,$campaignId, $customerIds);
+                if($response){
+                    echo "<pre>";
+                    print_r($response);
+                    $updateQuery = $db->query("update leads SET date_modified = NOW(), dristi_customer_id  = '' where  id='".$bean->id."' ");
+                    print_r($updateQuery);
+                }
+                echo "<br /><hr>";
             }
             //End Using for Delete API Call.
 
