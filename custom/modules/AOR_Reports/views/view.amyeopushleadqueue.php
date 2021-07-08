@@ -97,7 +97,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         global $sugar_config, $app_list_strings, $current_user, $db;
         $current_user_id = $current_user->id;
         $headers  = array('id', 'dristi_campagain_id', 'dristi_API_id','assigned_user_id','status','status_description');
-        $new_headers  = array('id', 'dristi_campagain_id', 'dristi_API_id','assigned_user_id','status','status_description','Delete_CampaignId','Delete_CustomerID');
+      //  $new_headers  = array('id', 'dristi_campagain_id', 'dristi_API_id','assigned_user_id','status','status_description','Delete_CampaignId','Delete_CustomerID');
         
         //$headers2 = array();
         $filename = $_FILES["file"]["tmp_name"];
@@ -105,16 +105,16 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         $fileRows = file($filename);
 
 
-        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 680))
+        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 999))
         {
             //echo count($fileRows); die;
             $file      = fopen($filename, "r");
             $headerRow = fgetcsv($file, 10000, ",");
-            if (($headerRow == $new_headers) === FALSE)
+            if (($headerRow == $headers) === FALSE)
             {
                 //echo 'good'; die;
                 //echo 'No';
-                echo '<pre>'; print_r($emapData);print_r($headers);die;
+               // echo '<pre>'; print_r($emapData);print_r($headers);die;
                 echo "<script type=\"text/javascript\">
                                     alert(\"Please check the csv headers.\");
                                     window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
@@ -124,7 +124,8 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
             //fgetcsv($file);
             $countDelete = 0;
             //Start Using for Delete API Call.
-            while (($empDeleteData = fgetcsv($file, 10000, ",")) !== FALSE){
+/*  
+          while (($empDeleteData = fgetcsv($file, 10000, ",")) !== FALSE){
                 if ($countDelete == 0) {
                     $countDelete++;
                     continue;
@@ -135,13 +136,13 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                 }
                 
                 $empData[$empDeleteData[6]][] = $empDeleteData[7];
-                
+               
                 $countDelete++;
                
             }//while end
-
+*/
             $api = new te_Api_override();
-            $sessionId = $api->doLogin();
+           /* $sessionId = $api->doLogin();
             echo "<pre>"; print_r($empData);//die('imhere');
             foreach ($empData as $key => $value) {
                 $campaignId = $key;
@@ -156,7 +157,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                 echo "<br /><hr>";
             }
             //End Using for Delete API Call.
-
+	*/
 
             while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
             {
