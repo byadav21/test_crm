@@ -7,6 +7,7 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 require_once('custom/modules/AOR_Reports/pagination.php');
 require_once('custom/modules/AOR_Reports/UserInput.php');
+require_once('custom/modules/te_Api/te_Api.php');
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
@@ -96,22 +97,24 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
         global $sugar_config, $app_list_strings, $current_user, $db;
         $current_user_id = $current_user->id;
         $headers  = array('id', 'dristi_campagain_id', 'dristi_API_id','assigned_user_id','status','status_description');
+        $new_headers  = array('id', 'dristi_campagain_id', 'dristi_API_id','assigned_user_id','status','status_description','Delete_CampaignId','Delete_CustomerID');
+        
         //$headers2 = array();
         $filename = $_FILES["file"]["tmp_name"];
 
         $fileRows = file($filename);
 
 
-        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 999))
+        if (($_FILES["file"]["size"] > 1) && (count($fileRows) <= 680))
         {
             //echo count($fileRows); die;
             $file      = fopen($filename, "r");
             $headerRow = fgetcsv($file, 10000, ",");
-            if (($headerRow == $headers) === FALSE)
+            if (($headerRow == $new_headers) === FALSE)
             {
                 //echo 'good'; die;
                 //echo 'No';
-                //echo '<pre>'; print_r($emapData);print_r($headers);die;
+                echo '<pre>'; print_r($emapData);print_r($headers);die;
                 echo "<script type=\"text/javascript\">
                                     alert(\"Please check the csv headers.\");
                                     window.location = \"index.php?module=AOR_Reports&action=amyeopushleadqueue\"
@@ -119,6 +122,42 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                 die;
             }
             //fgetcsv($file);
+            $countDelete = 0;
+            //Start Using for Delete API Call.
+            while (($empDeleteData = fgetcsv($file, 10000, ",")) !== FALSE){
+                if ($countDelete == 0) {
+                    $countDelete++;
+                    continue;
+                }   
+                
+                if($empDeleteData[6]=='' || $empDeleteData[7]==''){
+                    continue;
+                }
+                
+                $empData[$empDeleteData[6]][] = $empDeleteData[7];
+                
+                $countDelete++;
+               
+            }//while end
+
+            $api = new te_Api_override();
+            $sessionId = $api->doLogin();
+            echo "<pre>"; print_r($empData);//die('imhere');
+            foreach ($empData as $key => $value) {
+                $campaignId = $key;
+                $customerIds = $value;
+                $response = $api->removeContactsFromCampaign($sessionId,$campaignId, $customerIds);
+                if($response){
+                    echo "<pre>";
+                    print_r($response);
+                    $updateQuery = $db->query("update leads SET date_modified = NOW(), dristi_customer_id  = '' where  id='".$bean->id."' ");
+                    print_r($updateQuery);
+                }
+                echo "<br /><hr>";
+            }
+            //End Using for Delete API Call.
+
+
             while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
             {
                 $LeadID              = $emapData[0];
@@ -141,7 +180,7 @@ class AOR_ReportsViewamyeopushleadqueue extends SugarView
                     $autoassignX = 'No';
                 }
                 $bean = BeanFactory::getBean('Leads', $LeadID);
-                //die($bean);
+                //die($bean);headers
 
                 if ($bean)
                 {

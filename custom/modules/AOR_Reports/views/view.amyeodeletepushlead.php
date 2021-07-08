@@ -38,7 +38,7 @@ class AOR_ReportsViewamyeodeletepushlead extends SugarView
             }
             $numcols = count(file($filename));
             $maxLimitRows = 680;
-            if ($numcols >= $maxLimitRows){             
+            if ($numcols > $maxLimitRows){             
                 echo "<script type=\"text/javascript\">
                 alert(\"Invalid File:Max Limit allowed is $maxLimitRows . Current Count is:- \" + $numcols);
                             //  window.location = \"index.php?module=AOR_Reports&action=amyeodeletepushlead\"
@@ -89,7 +89,7 @@ class AOR_ReportsViewamyeodeletepushlead extends SugarView
             fclose($file);
           
             // echo "Imhere";
-            }
+        }
             
         
         $sugarSmarty = new Sugar_Smarty();
