@@ -22,7 +22,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
     public function getVendorBatchLeads($from_date, $to_date)
     {
         global $db;
-        $proSql = 'SELECT COUNT(l.id) AS total_lead_count, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor, b.fees_inr
+    $proSql_old = 'SELECT COUNT(l.id) AS total_lead_count, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor, b.fees_inr
         FROM leads AS l
         LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c
         LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id
@@ -31,7 +31,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
         AND l.vendor NOT IN ("Crosssell_churned","TAcademy")
         GROUP BY CONCAT(l.vendor,b.batch_code)
         ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
-
+echo " ======getVendorBatchLeads count:-============= ". $proSql = 'SELECT COUNT(l.id) AS total_lead_count, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as Createdate, b.batch_code, l.vendor, b.fees_inr FROM leads AS l LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name) LEFT JOIN users ON l.assigned_user_id = users.id WHERE DATE_FORMAT(l.date_entered, "%Y-%m-%d") >= "'.$from_date.'" AND DATE_FORMAT(l.date_entered, "%Y-%m-%d") <= "'.$to_date.'" AND l.vendor NOT IN ("Crosssell_churned","TAcademy","Channel")  AND l.id NOT IN (SELECT leads.id FROM `leads` INNER JOIN users ON leads.assigned_user_id = users.id WHERE users.user_name LIKE "te.%") GROUP BY Createdate, l.vendor,b.batch_code ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
         $pro_Obj     = $db->query($proSql);
         while ($emapData   = $db->fetchByAssoc($pro_Obj))
         {
@@ -45,10 +45,10 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
                 $result = $db->query($updatesql);
                                  
             } else {
-                if($emapData['fees_inr'] != 0){
-                    $sql = 'INSERT INTO dashboard_expenses_report (batch_code, batch_fees, vendor, date_entered, date_modified, total_leads, fresh_leads, conversion, spends, revenue, budgeted_leads, budgeted_conversion, budgeted_spends, budgeted_revenue, batch_start_date, total_days_of_campaign, campaign_start_date, active ) values 
+                if($emapData['fees_inr'] != 0 ){
+                 $sql = 'INSERT INTO dashboard_expenses_report (batch_code, batch_fees, vendor, date_entered, date_modified, total_leads, fresh_leads, conversion, spends, revenue, budgeted_leads, budgeted_conversion, budgeted_spends, budgeted_revenue, batch_start_date, total_days_of_campaign, campaign_start_date, active ) values 
                     ("'.$emapData['batch_code'].'", "'.$emapData['fees_inr'].'", "'.$emapData['vendor'].'", "'.$emapData['date_entered'].'", "'.date("Y-m-d").'", "'.$emapData['total_lead_count'].'" , "0", "0", "0", "0", "0", "0", "0", "0", NULL, "0",NULL,"yes")';
-                    $result = $db->query($sql);
+          $result = $db->query($sql);
                 }
                 
             }
@@ -58,7 +58,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
             $getresult_set =   $db->query($getData);
             $getcontRow    =   $db->fetchByAssoc($getresult_set);
 // echo "<pre>";print_r($getcontRow['id']);
-            if($getcontRow['id'] > 0 ) {
+            if($getcontRow['id'] > 0  ) {
                 $getActive = ($getcontRow['budgeted_spends'] == 0) ? 'NO':'Yes';
                 $sql = 'UPDATE dashboard_expenses_report SET budgeted_leads = "'.$getcontRow['budgeted_leads'].'", type = "'.$getcontRow['type'].'", budgeted_conversion = "'.$getcontRow['budgeted_conversion'] .'", budgeted_spends = "'.$getcontRow['budgeted_spends'] .'", budgeted_revenue = "'.$getcontRow['budgeted_revenue'] .'", batch_start_date = "'.$getcontRow['batch_start_date'] .'", total_days_of_campaign = "'.$getcontRow['total_days_of_campaign'] .'", campaign_start_date = "'.$getcontRow['campaign_start_date'] .'", active = "'.$getActive.'", date_modified = "'.date("Y-m-d").'"  WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
                 $result = $db->query($sql);
@@ -71,7 +71,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
     public function getFressLeads($from_date, $to_date)
     {
         global $db;
-        $proSql = 'SELECT COUNT(l.id) AS total_fress_lead, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor
+ $proSql1 = 'SELECT COUNT(l.id) AS total_fress_lead, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor
         FROM leads AS l
         LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c
         LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id
@@ -81,7 +81,8 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
         GROUP BY CONCAT(l.vendor,b.batch_code)
         ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
 
-        $pro_Obj     = $db->query($proSql);
+echo " ====fressleads query:- ========". $proSql = 'SELECT COUNT(l.id) AS total_fress_lead, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as Createdate, b.batch_code, l.vendor, b.fees_inr FROM leads AS l LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name) LEFT JOIN users ON l.assigned_user_id = users.id WHERE DATE_FORMAT(l.date_entered, "%Y-%m-%d") >= "'.$from_date.'" AND DATE_FORMAT(l.date_entered, "%Y-%m-%d") <= "'.$to_date.'" AND l.vendor NOT IN ("Crosssell_churned","TAcademy","Channel") AND l.status_description NOT IN ("Duplicate","Re-Enquired") AND l.id NOT IN (SELECT leads.id FROM `leads` INNER JOIN users ON leads.assigned_user_id = users.id WHERE users.user_name LIKE "te.%") GROUP BY Createdate, l.vendor,b.batch_code ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
+$pro_Obj     = $db->query($proSql);
         while ($emapData   = $db->fetchByAssoc($pro_Obj))
         {
             $SQLSELECT = "SELECT COUNT(*) AS count FROM dashboard_expenses_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' AND date_entered = '".$emapData['date_entered']."' ";
@@ -89,7 +90,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
             $contRow    =   $db->fetchByAssoc($result_set);
             
             if($contRow['count'] > 0) {
-                $sql = 'UPDATE dashboard_expenses_report SET fresh_leads = "'.$emapData['total_fress_lead'].'", date_modified = "'.date("Y-m-d").'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+                $sql = 'UPDATE dashboard_expenses_report SET fresh_leads = "0", date_modified = "'.date("Y-m-d").'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
                 $result = $db->query($sql);
                                  
             }else {
@@ -101,17 +102,10 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
     public function getConvertedLeads($from_date, $to_date)
     {
         global $db;
-        $proSql = 'SELECT COUNT(l.id) AS total_lead_converted, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as date_entered, b.batch_code, l.vendor, b.fees_inr
-        FROM leads AS l
-        LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c
-        LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id
-        LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)
-        WHERE l.date_entered >= "'.$from_date.'" AND l.date_entered <= "'.$to_date.'" 
-        AND l.vendor NOT IN ("Crosssell_churned","TAcademy") AND l.status_description IN ("Converted")
-        GROUP BY CONCAT(l.vendor,b.batch_code)
-        ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
+   $proSql1 = 'SELECT COUNT(l.id) AS total_lead_converted, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as Createdate, b.batch_code, l.vendor, b.fees_inr        FROM leads AS l LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c  LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id   LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name)   WHERE l.date_entered >= "'.$from_date.'" AND l.date_entered <= "'.$to_date.'"        AND l.vendor NOT IN ("Crosssell_churned","TAcademy") AND l.status_description IN ("Converted")    GROUP BY CONCAT(l.vendor,b.batch_code)       ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
 
-        $pro_Obj     = $db->query($proSql);
+       echo " ===============getConvertedLeads count:-==================== ".$proSql = 'SELECT COUNT(l.id) AS total_lead_converted, DATE_FORMAT(l.date_entered, "%Y-%m-%d") as Createdate, b.batch_code, l.vendor, b.fees_inr FROM leads AS l LEFT JOIN leads_cstm AS lc ON l.id = lc.id_c LEFT JOIN te_ba_batch AS b ON lc.te_ba_batch_id_c = b.id LEFT JOIN te_vendor on lower(l.vendor)=lower(te_vendor.name) LEFT JOIN users ON l.assigned_user_id = users.id WHERE DATE_FORMAT(l.date_entered, "%Y-%m-%d") >= "'.$from_date.'" AND DATE_FORMAT(l.date_entered, "%Y-%m-%d") <= "'.$to_date.'" AND l.vendor NOT IN ("Crosssell_churned","TAcademy","Channel") AND l.status IN ("Converted") AND l.id NOT IN (SELECT leads.id FROM `leads` INNER JOIN users ON leads.assigned_user_id = users.id WHERE users.user_name LIKE "te.%") GROUP BY Createdate, l.vendor,b.batch_code ORDER BY DATE_FORMAT(l.date_entered, "%Y-%m-%d") DESC';
+$pro_Obj     = $db->query($proSql);
         while ($emapData   = $db->fetchByAssoc($pro_Obj))
         {
             $SQLSELECT = "SELECT COUNT(*) as count FROM dashboard_expenses_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' AND date_entered = '".$emapData['date_entered']."' ";
@@ -120,7 +114,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
 
             if($contRow['count'] > 0) {
                 $revenue = $emapData['fees_inr'] * $emapData['total_lead_converted'];
-                $sql = 'UPDATE dashboard_expenses_report SET conversion = "'.$emapData['total_lead_converted'].'", revenue = "'.$revenue .'", date_modified = "'.date("Y-m-d").'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
+         $sql = 'UPDATE dashboard_expenses_report SET conversion = "00", revenue = "'.$revenue .'", date_modified = "'.date("Y-m-d").'" WHERE batch_code = "'.$emapData['batch_code'].'" AND vendor = "'.$emapData['vendor'].'" AND  date_entered = "'.$emapData['date_entered'].'" ';
                 $result = $db->query($sql);
                                  
             }
@@ -187,7 +181,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
         $getConvertedLeads   = $this->getConvertedLeads($from_date, $to_date);
         
         // $getAllData = "SELECT * FROM dashboard_expenses_report";
-        $getAllData =   $db->query("SELECT * FROM dashboard_expenses_report where date_entered BETWEEN '".$from_date."' AND '".$to_date."' ");
+        echo $getAllData =   $db->query("SELECT * FROM dashboard_expenses_report where date_entered BETWEEN '".$from_date."' AND '".$to_date."' ");
         $allResultSetsData = array();
         // $programList = array();
 
@@ -199,7 +193,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
 
         $total     = count($programList); #total records
         $start     = 0;
-        $per_page  = 100;//$total;
+        $per_page  = 1000;//$total;
         $page      = 1;
         $pagenext  = 1;
         $last_page = ceil($total / $per_page);
