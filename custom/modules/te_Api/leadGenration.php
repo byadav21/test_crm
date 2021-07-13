@@ -15,7 +15,9 @@ if(strlen($number) > 10){
 // Remove the + sign.
 $number = str_replace('+', '', $number);
 // Remove 1st digit 0.
-$number = ltrim($number, "0");//12345
+$number = str_replace('-', '', $number);
+
+$number = ltrim($number, '0');//12345
 
 $name         = $_REQUEST['name'];
 $phone        = $number;//ltrim($_REQUEST['phone'], '0');
