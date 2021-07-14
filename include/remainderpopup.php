@@ -118,7 +118,7 @@ class remainderpopup
     {
         global $db, $current_user;
         
-	// return; // just commented till the debug;
+	 return; // just commented till the debug;
         //CCH i have commented this
         $getRoleSlug = getUsersRole();
        
