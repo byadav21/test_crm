@@ -72,11 +72,11 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
         $exportwithArr = array();
         $exportwithArr = array(a=>'Basic',b=>'All With Cornell Column',c=>'Only Cornell Without Column');
 
-        if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
-        {
-            echo 'You are not authorized to access!';
-            return;
-        }
+        // if (!in_array($current_user->id, $reportAccess[$report_action]) && ($current_user->is_admin != 1))
+        // {
+        //     echo 'You are not authorized to access!';
+        //     return;
+        // }
         //~~~~~~~
         //echo '<pre>';print_r($current_user); die;
         $vendorID   = $current_user->te_vendor_users_1te_vendor_ida;
@@ -115,9 +115,10 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' => 'Linkedin',
             '2b98175d-6a90-d4ef-c751-60c093e77ee8' => 'htmedia',
             '21a9d904-4306-3814-bc3d-60c095d4daa3' => 'icubeswire',
-            'f0163da1-502c-f65a-b2a0-60cc2b9a7421' => 'eweb');
-
-
+            'f0163da1-502c-f65a-b2a0-60cc2b9a7421' => 'eweb',
+            '9eaed8c7-3939-5288-186c-60eed60b9375' => 'vcommission',
+            'efef10c9-e91f-77e8-0282-60eed8ad695a' => 'adcanopus'
+        );
 
         /*
           $UsersVendrArr = array(
@@ -157,7 +158,9 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             'Linkedin'     => '81e8c7cd-9501-65f2-7ac7-590d719aed14',
             'htmedia'      => '6b41a911-6080-4dc8-7306-60c093bd01e3',
             'icubeswire'   => 'be0e2ac7-8433-f864-c47d-60b5b0cfaaa4',
-            'eweb'         => 'a812e51e-fa33-9945-dfd9-60c1cb93ac1a'
+            'eweb'         => 'a812e51e-fa33-9945-dfd9-60c1cb93ac1a',
+            'adcanopus'    => 'c2452785-98e6-7c88-e443-60e69a3e8ddd',
+            'vcommission'  => 'aca54f16-1b11-0eae-94cd-60dc41f177b1',
             );
 
 
@@ -380,6 +383,16 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['eweb']);
             $VendorListData  = array(array('id' => $vendorsIdArr['eweb'], 'name' => 'eweb'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'vcommission')
+        {
+            $selected_vendor = array($vendorsIdArr['vcommission']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['vcommission'], 'name' => 'vcommission'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'adcanopus')
+        {
+            $selected_vendor = array($vendorsIdArr['adcanopus']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['adcanopus'], 'name' => 'adcanopus'));
         }
 
         if (!empty($selected_vendor))

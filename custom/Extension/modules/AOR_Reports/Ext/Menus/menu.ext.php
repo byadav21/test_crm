@@ -126,8 +126,10 @@ if ($misData['slug'] == 'CPTL')
             '5feeb2dc-365b-7353-7e9a-60b492ea0f2f', // => 'Linkedin Icubeswire'
             '2b98175d-6a90-d4ef-c751-60c093e77ee8', // => 'htmedia',
             '21a9d904-4306-3814-bc3d-60c095d4daa3', // => 'icubeswire'
-            'f0163da1-502c-f65a-b2a0-60cc2b9a7421', //=> 'eweb'
-            );
+            'f0163da1-502c-f65a-b2a0-60cc2b9a7421', //=> 'eweb',
+            '9eaed8c7-3939-5288-186c-60eed60b9375', // => 'vcommission',
+            'efef10c9-e91f-77e8-0282-60eed8ad695a', // => 'adcanopus'
+        );
             
         
         /*
