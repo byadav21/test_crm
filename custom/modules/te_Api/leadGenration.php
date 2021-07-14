@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(1);
 require_once('custom/modules/te_Api/leads_override.php');
 global $db;
-
+/*
 $number = $_REQUEST['phone'];
 // Remove the spaces.
 $number = str_replace(' ', '', $number);
@@ -18,9 +18,9 @@ $number = str_replace('+', '', $number);
 $number = str_replace('-', '', $number);
 
 $number = ltrim($number, '0');//12345
-
+*/
 $name         = $_REQUEST['name'];
-$phone        = $number;//ltrim($_REQUEST['phone'], '0');
+$phone        = ltrim($_REQUEST['phone'], '0');
 $email        = $_REQUEST['email'];
 $source       = $_REQUEST['utm_source'];
 $medium       = $_REQUEST['utm_medium'];
