@@ -27,7 +27,7 @@ class AOR_ReportsViewdashboardadityareportsnew extends SugarView
         // echo "<pre>"; print_r($pro_Obj);die('imh');
         while ($emapData   = $db->fetchByAssoc($pro_Obj))
         {
-            $SQLSELECT = "SELECT COUNT(*) as countData FROM dashboard_expenses_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' AND DATE_FORMAT(date_entered = '".$emapData['Createdate']."', '%Y-%m-%d') ";
+            $SQLSELECT = "SELECT COUNT(*) as countData FROM dashboard_expenses_report where batch_code= '".$emapData['batch_code']."' AND vendor = '".$emapData['vendor']."' AND date_entered = '".$emapData['Createdate']."' ";
             $result_set =   $db->query($SQLSELECT);
             $contRow    =   $db->fetchByAssoc($result_set);
             // echo "<pre>"; print_r($result_set);die('imhere');
