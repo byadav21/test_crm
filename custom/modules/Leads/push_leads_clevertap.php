@@ -66,7 +66,7 @@ class pushLeadClevertap
             
         $batchCode = isset($batchdata['batch_code']) ?  $batchdata['batch_code'] : $term;
         //echo 'xxx'.$batchCode; die;
-echo "cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$batchCode.'<br/>';
+//echo "cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$batchCode.'<br/>';
 // $phone = "+919911198392";
         if (strpos($phone, '+') !== false)
         {
@@ -125,7 +125,7 @@ echo "cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchC
 
         if(!empty($phoneNumber)){
 //echo "<pre>"; print_r($resultData);
-            echo  $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
+             $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
 
             $ch     = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url_opt_in_gupshup);
@@ -136,17 +136,19 @@ echo "cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchC
             # Send request.
             $result = curl_exec($ch);
             curl_close($ch);
-            echo "<pre>";print_r($result)."<br />";
+           // echo "<pre>";print_r($result)."<br />";
 
             if($result){
-//echo urlencode($resultData['course_name']);
-                echo "<br/>".$url_media_gupshup = $url_gupshup.'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config['whatsapp_gupshup_userid'].'&auth_scheme=plain&password='.$sugar_config['whatsapp_gupshup_pass'].'&method=SendmediaMessage&v=1.1&media_url='.$resultData['brochure_url'].'&caption=Your%20registration%20for%20*'.urlencode($resultData['institute_name']).'%20'.urlencode($resultData['course_name']).'*%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*'.$resultData['number'].'*%20or%20reply%20*Hi*%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&isHSM=True&footer=TALENTEDGE&filename='.urlencode($resultData['course_name']).'&format=json';
+	 $caption_Core_Data ="Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
+
+For the course details, download the attached brochure.
+
+You can call us on *".$resultData['number']."* or reply Hi to this message to chat with our counsellor on WhatsApp.";
+	$captionData = urlencode($caption_Core_Data);
+
+echo "<br/>".$url_media_gupshup = $url_gupshup.'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config["whatsapp_gupshup_userid"].'&auth_scheme=plain&password='.$sugar_config["whatsapp_gupshup_pass"].'&method=SendmediaMessage&v=1.1&media_url='.$resultData["brochure_url"].'&caption='.$captionData.'&isHSM=True&footer=TALENTEDGE&filename='.urlencode($resultData['course_name']).'&format=json';
+
                 //https://media.smsgupshup.com/GatewayAPI/rest?send_to=9930079420&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&method=SendmediaMessage&v=1.1&media_url=http://www.africau.edu/images/default/sample.pdf&caption=Your%20registration%20for%20test%20test%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20test%20or%20reply%20Hi%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&isHSM=True&footer=TALENTEDGE&filename=TEST123&format=json
-
-                //https://media.smsgupshup.com/GatewayAPI/rest?send_to=6392472704&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&method=SendmediaMessage&v=1.1&media_url=http://d37c7ubwjknfep.cloudfront.net/wp-content/uploads/2021/05/IIML-SCM.pdf&caption=Your%20registration%20for%20*Business%20Analytics%20IIM%20Kozhikode*%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*9582086600*%20or%20reply%20Hi%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&isHSM=True&footer=TALENTEDGE&filename=Business%20Analytics%20IIM%20Kozhikode&format=json
-
-
-                //https://media.smsgupshup.com/GatewayAPI/rest?send_to=9911198392&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&v=1.1&format=text&caption=Your%20registration%20for%20*IIM%20Lucknow%20Supply%20Chain%20Management*%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*9911198392*%20or%20reply%20*Hi*%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&method=SendmediaMessage&filename=Test12345&media_url=http://www.africau.edu/images/default/sample.pdf&footer=TALENTEDGE&isHSM=false
 
 //echo $url_media_gupshup = 'https://media.smsgupshup.com/GatewayAPI/rest?send_to=9911198392&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&v=1.1&format=json&caption=Your%20registration%20for%20*Talentedge %20 Modern%20Business%20Masters%20-%20Jumpstart *%20 is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*9911198392*%20or%20reply%20*Hi*%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&method=SendmediaMessage&filename=Modern%20Business%20Masters%20-%20Jumpstart&media_url=https://d37c7ubwjknfep.cloudfront.net/wp-content/uploads/2021/06/brochure_jumpstart.pdf&footer=TALENTEDGE&isHSM=false';
                 // $curl = curl_init();
