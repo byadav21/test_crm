@@ -849,7 +849,7 @@ class LeadsViewEdit extends ViewEdit
 
         parent::display();
         global $db;
-        $checkRoleSql = "SELECT * FROM `acl_roles_users` WHERE user_id='" . $GLOBALS['current_user']->id . "' AND (`role_id`='30957fe0-3494-e372-656d-58a9a6296516' OR `role_id`='270ce9dd-7f7d-a7bf-f758-582aeb4f2a45')";
+        $checkRoleSql = "SELECT * FROM `acl_roles_users` WHERE user_id='" . $GLOBALS['current_user']->id . "' AND (`role_id`='30957fe0-3494-e372-656d-58a9a6296516' OR `role_id`='270ce9dd-7f7d-a7bf-f758-582aeb4f2a45' OR `role_id`= '7e39c851-514a-94c3-fe18-5f896746513b' )";
         $checkRoleObj = $db->query($checkRoleSql);
         $row          = $db->fetchByAssoc($checkRoleObj);
         if ($row)
