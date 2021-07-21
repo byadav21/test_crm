@@ -19,8 +19,17 @@ $number = str_replace('-', '', $number);
 
 $number = ltrim($number, '0');//12345
 */
+ $number = $_REQUEST['phone'];
+ // Remove the spaces.
+ $number = preg_replace('/(?<=\d)\s+(?=\d)/', '', $number);
+ // Remove the + sign.
+ $number = str_replace('+', '', $number);
+ // Remove 1st digit 0.
+ $number = str_replace('-', '', $number);
+
+
 $name         = $_REQUEST['name'];
-$phone        = ltrim($_REQUEST['phone'], '0');
+$phone        = $number;//ltrim($_REQUEST['phone'], '0');
 $email        = $_REQUEST['email'];
 $source       = $_REQUEST['utm_source'];
 $medium       = $_REQUEST['utm_medium'];

@@ -3,7 +3,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
-//error_reporting(-1);
+error_reporting(E_ALL);
 //ini_set('display_errors', 'On');
 
 class pushLeadClevertap
@@ -20,6 +20,7 @@ class pushLeadClevertap
              return;
          }
         
+//echo "<pre>";print_r($bean);
         $first_name = isset($bean->first_name) ? $bean->first_name : '';
         $last_name  = isset($bean->last_name) ? $bean->last_name : '';
         
@@ -65,13 +66,15 @@ class pushLeadClevertap
             
         $batchCode = isset($batchdata['batch_code']) ?  $batchdata['batch_code'] : $term;
         //echo 'xxx'.$batchCode; die;
+echo "cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$batchCode.'<br/>';
+// $phone = "+919911198392";
         if (strpos($phone, '+') !== false)
         {
-            $phoneNumber = trim(preg_replace('/\s+/', '', $phone));
+           $phoneNumber = trim(preg_replace('/\s+/', '', $phone));
         }
         else
         {
-            $phoneNumber = trim(preg_replace('/\s+/', '', '+91' . $phone));
+           $phoneNumber = trim(preg_replace('/\s+/', '', '+91' . $phone));
         }
         
         $emaibatch = $email.'_'.$batchCode;
@@ -105,24 +108,24 @@ class pushLeadClevertap
         $result = curl_exec($ch);
         curl_close($ch);
         # Print response.
-        //echo "profile: <pre>$result</pre>";
+       // echo "profile: <pre>";print_r($data);
 
-        // $getQuery = "SELECT * from ";
-        $itemDetal=$db->query("select * from gupshup_api_details where batch_code='".$batch_code."' ");
+            $getQuery = "select * from gupshup_api_details where batch_code='".$batchCode."' ";
+            $itemDetal=$db->query($getQuery);
 	    $resultData = $db->fetchByAssoc($itemDetal);
 
 
-
+//echo "<pre>"; print_r($resultData);
         //Start Using for WhatsApp Gupshup APi
-        $url_gupshup  = "https://media.smsgupshup.com/GatewayAPI/rest?";
+        $url_gupshup  = 'https://media.smsgupshup.com/GatewayAPI/rest?';
         // $url_gupshup .= "userid=".$sugar_config['whatsapp_gupshup_userid'];
         // $url_gupshup .= "&password=".$sugar_config['whatsapp_gupshup_pass'];
         // $url_gupshup .= "phone_number=". $phoneNumber . "&v=1.1&auth_scheme=plain&channel=WHATSAPP";
         //https://media.smsgupshup.com/GatewayAPI/rest?userid=2000199169&method=OPT_IN&format=json&password=xHeVYaDP&phone_number=9011198392&v=1.1&auth_scheme=plain&channel=WHATSAPP
 
         if(!empty($phoneNumber)){
-
-            echo $url_opt_in_gupshup = '"'.$url_gupshup.'"?method=OPT_IN&format=json&userid="'.$sugar_config['whatsapp_gupshup_userid'].'"&password="'.$sugar_config['whatsapp_gupshup_pass'].'"&phone_number="'.$phoneNumber.'"&v=1.1&auth_scheme=plain&channel=WHATSAPP';
+//echo "<pre>"; print_r($resultData);
+            echo  $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
 
             $ch     = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url_opt_in_gupshup);
@@ -133,16 +136,17 @@ class pushLeadClevertap
             # Send request.
             $result = curl_exec($ch);
             curl_close($ch);
-            echo "<pre>";print_r($result);
+            echo "<pre>";print_r($result)."<br />";
 
             if($result){
-
-                echo $url_media_gupshup = '"'.$url_gupshup.'"?send_to="'.$phoneNumber.'"&msg_type=DOCUMENT&userid="'.$sugar_config['whatsapp_gupshup_userid'].'"&auth_scheme=plain&password="'.$sugar_config['whatsapp_gupshup_pass'].'"&v=1.1&format=json&caption=Your%20registration%20for%20*"'.$resultData['institute_name'].'" %20 "'.$resultData['course_name'].'" *%20 is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*"'.$resultData['number'].'"*%20or%20reply%20*Hi*%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&method=SendmediaMessage&filename="'.$resultData['course_name'].'"&media_url="'.$resultData['brochure_url'].'"&footer=TALENTEDGE&isHSM=True';
+//echo urlencode($resultData['course_name']);
+                echo "<br/>".$url_media_gupshup = $url_gupshup.'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config['whatsapp_gupshup_userid'].'&auth_scheme=plain&password='.$sugar_config['whatsapp_gupshup_pass'].'&v=1.1&format=json&caption=Your%20registration%20for%20*'.urlencode($resultData['institute_name']).'%20'.urlencode($resultData['course_name']).'*%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*'.$resultData['number'].'*%20or%20reply%20*Hi*%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&method=SendmediaMessage&filename='.urlencode($resultData['course_name']).'&media_url='.$resultData['brochure_url'].'&footer=TALENTEDGE&isHSM=false';
                 //https://media.smsgupshup.com/GatewayAPI/rest?send_to=6392472704&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&method=SendmediaMessage&v=1.1&media_url=http://d37c7ubwjknfep.cloudfront.net/wp-content/uploads/2021/05/IIML-SCM.pdf&caption=Your%20registration%20for%20*Business%20Analytics%20IIM%20Kozhikode*%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*9582086600*%20or%20reply%20Hi%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&isHSM=True&footer=TALENTEDGE&filename=Business%20Analytics%20IIM%20Kozhikode&format=json
 
 
                 //https://media.smsgupshup.com/GatewayAPI/rest?send_to=9911198392&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&v=1.1&format=text&caption=Your%20registration%20for%20*IIM%20Lucknow%20Supply%20Chain%20Management*%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*9911198392*%20or%20reply%20*Hi*%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&method=SendmediaMessage&filename=Test12345&media_url=http://www.africau.edu/images/default/sample.pdf&footer=TALENTEDGE&isHSM=false
 
+//echo $url_media_gupshup = 'https://media.smsgupshup.com/GatewayAPI/rest?send_to=9911198392&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&v=1.1&format=json&caption=Your%20registration%20for%20*Talentedge %20 Modern%20Business%20Masters%20-%20Jumpstart *%20 is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20*9911198392*%20or%20reply%20*Hi*%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&method=SendmediaMessage&filename=Modern%20Business%20Masters%20-%20Jumpstart&media_url=https://d37c7ubwjknfep.cloudfront.net/wp-content/uploads/2021/06/brochure_jumpstart.pdf&footer=TALENTEDGE&isHSM=false';
                 // $curl = curl_init();
 
                 // curl_setopt_array($curl, array(
@@ -165,7 +169,7 @@ class pushLeadClevertap
                 // curl_close($curl);
 
                 $ch     = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $$url_media_gupshup);
+                curl_setopt($ch, CURLOPT_URL, $url_media_gupshup);
                 # Return response instead of printing.
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
