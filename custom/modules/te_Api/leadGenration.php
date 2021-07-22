@@ -72,9 +72,9 @@ createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') .
 
 if ($phone || $email)
 {
-
-            $updateData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES('".$phone."','".$term."','2021-07-22 13:30:20') ";
-            $itemDetal=$db->query($updateData);
+    $dataget = ("cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$batchCode);
+    $updateData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES('".$dataget."','".$term."','2021-07-22 13:30:20') ";
+    $itemDetal=$db->query($updateData);
     if ($source)
     {
         $vendorUsers = $leadObj->fetchVendorWithUsers($source);
@@ -199,7 +199,8 @@ if ($phone || $email)
             echo "<pre>";print_r($result);
             $updateData = "UPDATE gupshup_api_details SET response = '".$result."' WHERE batch_code='".$batchCode."' ";
             $itemDetal=$db->query($updateData);
-            $insertData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES('".$resultData."', '".$term."', now()");
+            $datenow = now();
+            $insertData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES ('".$resultData."', '".$term."', '".$datenow."' )";
             $itemDetal=$db->query($insertData);
 
             
@@ -414,7 +415,7 @@ else
     exit();
 }
 //echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); exit();
-
+/*
     if(!empty($phone)){
 
         $batchObj = $db->query("SELECT batch_code FROM te_ba_batch WHERE id='" . $batchid . "' AND deleted=0");
@@ -477,13 +478,14 @@ else
             # Send request.
             $result = curl_exec($ch);
             curl_close($ch);
-//            echo "<pre>";print_r($result);
+            //echo "<pre>";print_r($result);
 		$date = now();
          //   $updateData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES('".$result."','".$batchCode."','".$date."') ";
-$updateData = "UPDATE gupshup_api_details SET response = '".$result."' WHERE batch_code='".$batchCode."' ";
-$itemDetal=$db->query($updateData);
+        $updateData = "UPDATE gupshup_api_details SET response = '".$result."' WHERE batch_code='".$batchCode."' ";
+        $itemDetal=$db->query($updateData);
 		
         }
     }
     //End Using for WhatsApp Gupshup APi
+    */
 
