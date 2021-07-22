@@ -72,7 +72,7 @@ createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') .
 
 if ($phone || $email)
 {
-    $dataget = ("cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$batchCode);
+    $dataget = ("cust_name:- ". $name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$term);
     $updateData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES('".$dataget."','".$term."','2021-07-22 13:30:20') ";
     $itemDetal=$db->query($updateData);
     if ($source)
@@ -141,7 +141,7 @@ if ($phone || $email)
             
         $batchCode = isset($batchdata['batch_code']) ?  $batchdata['batch_code'] : $term;
         //echo 'xxx'.$batchCode; die;
-//        echo "cust_name:- ". $cust_name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$batchCode.'<br/>';
+        // echo "cust_name:- ". $name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$term.'<br/>';
         // $phone = "+919911198392";
   /*      if (strpos($phone, '+') !== false)
         {
@@ -176,12 +176,13 @@ if ($phone || $email)
         // echo "<pre>";print_r($result)."<br />";
         //End Using for OPT_IN Gupshup APi
         if($result){
-            $caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
-
-            For the course details, download the attached brochure.
-
-            You can call us on *".$resultData['number']."* or reply Hi to this message to chat with our counsellor on WhatsApp.";
             
+$caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
+
+For the course details, download the attached brochure.
+
+You can call us on *".$resultData['number']."* or reply Hi to this message to chat with our counsellor on WhatsApp.";
+
             $captionData = urlencode($caption_Core_Data);
             $url_media_gupshup = $url_gupshup.'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config["whatsapp_gupshup_userid"].'&auth_scheme=plain&password='.$sugar_config["whatsapp_gupshup_pass"].'&method=SendmediaMessage&v=1.1&media_url='.$resultData["brochure_url"].'&caption='.$captionData.'&isHSM=True&footer=TALENTEDGE&filename='.urlencode($resultData['course_name']).'&format=json';
 
@@ -196,14 +197,12 @@ if ($phone || $email)
             # Send request.
             $result = curl_exec($ch);
             curl_close($ch);
-            echo "<pre>";print_r($result);
+            // echo "<pre>";print_r($result);
             $updateData = "UPDATE gupshup_api_details SET response = '".$result."' WHERE batch_code='".$batchCode."' ";
             $itemDetal=$db->query($updateData);
-            $datenow = now();
-            $insertData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES ('".$resultData."', '".$term."', '".$datenow."' )";
+            // $datenow = date();
+            $insertData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES ('".$caption_Core_Data."', '".$term."', '2021-07-22 14:43:00' )";
             $itemDetal=$db->query($insertData);
-
-            
         }
     
     //End Using for WhatsApp Gupshup APi
