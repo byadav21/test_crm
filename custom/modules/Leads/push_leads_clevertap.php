@@ -11,7 +11,7 @@ class pushLeadClevertap
 
     function pushLead(&$bean, $event, $argument)
     {
-        global $db,$sugar_config;
+        global $db;
         
         //$agentArr= getUsersName();
         //echo '<pre>';print_r($bean->assigned_user_name); die;
@@ -47,7 +47,6 @@ class pushLeadClevertap
         $converted_date     = isset($bean->converted_date) ? $bean->converted_date : '';
        // $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) ? $bean->msg_whatsapp_clvrtp : '';
        $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) && ($bean->msg_whatsapp_clvrtp=='TRUE') ? TRUE : FALSE;
-        $whatsapp_gupshup    = isset($bean->msg_whatsapp_gupshup) && ($bean->msg_whatsapp_gupshup=='TRUE') ? TRUE : FALSE;
         
         $url = 'https://api.clevertap.com/1/upload';
 
@@ -107,7 +106,6 @@ class pushLeadClevertap
         $result = curl_exec($ch);
         curl_close($ch);
         # Print response.
-       // echo "profile: <pre>";print_r($data);
 
         $date_entered_doller='';
         $date_of_followup_doller='';
