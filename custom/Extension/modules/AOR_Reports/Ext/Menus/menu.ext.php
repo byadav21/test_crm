@@ -126,19 +126,11 @@ if ($misData['slug'] == 'CPTL')
             '5feeb2dc-365b-7353-7e9a-60b492ea0f2f', // => 'Linkedin Icubeswire'
             '2b98175d-6a90-d4ef-c751-60c093e77ee8', // => 'htmedia',
             '21a9d904-4306-3814-bc3d-60c095d4daa3', // => 'icubeswire'
+            '460b2aba-ecc9-6ad4-788e-60fe50a49c90', // => 'Plabs'
             );
             
         
-        /*
-        $UsersVendrArr = array(
-            '29a6c441-8c9c-a49a-a28e-5b234fa1ecf9', // => 'ileap', 
-            '1cbd38c1-2a63-3ab8-a85c-5b234febc8a4', // => 'TBS',
-            '93e39ed4-487b-e35c-62bc-5b234f7cd078', // => 'iimjobs',
-            'e86be88c-3f72-3211-a058-5b2350c211cd', // => 'CiteHR',
-            'b27c5fd1-f781-bcab-a7e5-5b2350b22896', // => 'Career360',
-            '87d1f4da-c6c9-81fe-944a-5b1fb537fc1c', // => 'Infoedge'
-            );
-        */
+       
 //   print_r($misData['slug']);      
 if ($current_user->is_admin == 1 || $displayMis || $displayCC)
 {
