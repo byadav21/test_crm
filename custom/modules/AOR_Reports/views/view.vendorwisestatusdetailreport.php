@@ -117,19 +117,9 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             '21a9d904-4306-3814-bc3d-60c095d4daa3' => 'icubeswire',
             'f0163da1-502c-f65a-b2a0-60cc2b9a7421' => 'eweb',
             '9eaed8c7-3939-5288-186c-60eed60b9375' => 'vcommission',
-            'efef10c9-e91f-77e8-0282-60eed8ad695a' => 'adcanopus'
-        );
-
-        /*
-          $UsersVendrArr = array(
-          '29a6c441-8c9c-a49a-a28e-5b234fa1ecf9' => 'ileap',
-          '1cbd38c1-2a63-3ab8-a85c-5b234febc8a4' => 'TBS',
-          '93e39ed4-487b-e35c-62bc-5b234f7cd078' => 'iimjobs',
-          'e86be88c-3f72-3211-a058-5b2350c211cd' => 'CiteHR',
-          'b27c5fd1-f781-bcab-a7e5-5b2350b22896' => 'Career360',
-          '87d1f4da-c6c9-81fe-944a-5b1fb537fc1c' => 'Infoedge');
-
-         */
+            'efef10c9-e91f-77e8-0282-60eed8ad695a' => 'adcanopus',
+            '460b2aba-ecc9-6ad4-788e-60fe50a49c90' => 'Plabs');
+        
 
         $vendorsIdArr = array(
             'ileap'        => '4a9e16bf-0396-fffc-b848-5b084550f2a8',
@@ -161,6 +151,7 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
             'eweb'         => 'a812e51e-fa33-9945-dfd9-60c1cb93ac1a',
             'adcanopus'    => 'c2452785-98e6-7c88-e443-60e69a3e8ddd',
             'vcommission'  => 'aca54f16-1b11-0eae-94cd-60dc41f177b1',
+            'Plabs'        => '9e18d26a-244a-4fc9-6cc1-60fa91b3cdec'
             );
 
 
@@ -393,6 +384,11 @@ class AOR_ReportsViewVendorwisestatusdetailreport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['adcanopus']);
             $VendorListData  = array(array('id' => $vendorsIdArr['adcanopus'], 'name' => 'adcanopus'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'Plabs')
+        {
+            $selected_vendor = array($vendorsIdArr['Plabs']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['Plabs'], 'name' => 'Plabs'));
         }
 
         if (!empty($selected_vendor))
