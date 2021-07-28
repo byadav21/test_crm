@@ -67,7 +67,7 @@
             <a id="powered_by" >&copy; {$MOD.LBL_SUITE_POWERED_BY}</a>
             
             -->
-            Powered By <a href="http://www.engeniatech.com" target="_blank">Engenia Technologies Pvt Ltd.</a>
+            Powered By <a href="https://talentedge.com/" target="_blank">Arrina Education Services Pvt Ltd.</a>
             </div>
         </div>
     </footer>
