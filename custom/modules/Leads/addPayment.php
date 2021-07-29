@@ -69,7 +69,7 @@ class addPaymentClass
             $payment->save();
             $lead_payment_details_id                      = $payment->id;
             $paidAmount                                   = $bean->amount;
-            $GLOBALS['db']->query("UPDATE leads SET invoice_number='',invoice_order_number='',invoice_url='',payment_type='',transaction_id='',payment_source='',date_of_payment='',reference_number='',amount='',payment_realized=''");
+            $GLOBALS['db']->query("UPDATE leads SET invoice_number='',invoice_order_number='',invoice_url='',payment_type='',transaction_id='',payment_source='',date_of_payment='',reference_number='',amount='',payment_realized=''  WHERE id='" . $bean->id . "' ");
 
             $sqlRel = "SELECT p.id FROM te_payment_details p INNER JOIN leads_te_payment_details_1_c lp ON p.id=lp.leads_te_payment_details_1te_payment_details_idb WHERE lp.leads_te_payment_details_1leads_ida='" . $bean->id . "' AND p.payment_realized= 0 ";
             $rel    = $GLOBALS['db']->query($sqlRel);
