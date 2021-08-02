@@ -163,11 +163,11 @@ if ($phone || $email)
             $getPhoneDetal = $db->query($checkPhoneNum);
             $getPhoneNum   = $db->fetchByAssoc($getPhoneDetal);
             
-            // echo "<pre>"; print_r($getPhoneDetal);
+            echo "<pre>"; print_r($getPhoneDetal);
             //Start Using for WhatsApp Gupshup APi
             $url_gupshup  = 'https://media.smsgupshup.com/GatewayAPI/rest?';
             
-            //echo "<pre>"; print_r($resultData);
+            echo "<pre>"; print_r($resultData);
             if($db->getRowCount($getPhoneDetal) <= 0 ){
                 $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
 
@@ -184,7 +184,7 @@ if ($phone || $email)
             }
                 //End Using for OPT_IN Gupshup APi
             if($getPhoneNum['phone_mobile'] == $phone){
-            //    echo $whatsapp_number = '<a href="tel:+91'.$resultData['number'].">+91". $resultData['number'].'</a>';
+               echo $whatsapp_number = '<a href="tel:+91'.$resultData['number'].">+91". $resultData['number'].'</a>';
             //*<a href='tel:+91".$resultData['number']."'>+91". $resultData['number']."</a>*
 $caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
 
@@ -206,7 +206,9 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 # Send request.
                 $result = curl_exec($ch);
                 curl_close($ch);
-                // echo "<pre>";print_r($result);
+                echo "<pre>";print_r($result);
+                $updateData = "UPDATE gupshup_api_details SET response = '".$result."' WHERE batch_code='".$batchCode."' ";
+                $itemDetal=$db->query($updateData);
                 $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$caption_Core_Data."' where phone_mobile='".$phone."' ";
                 $itemDetal=$db->query($updateData);
                 // $datenow = date();
