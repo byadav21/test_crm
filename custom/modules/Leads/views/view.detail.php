@@ -525,7 +525,7 @@ if(!isset($_SESSION['referral'])){
 		return $user_roles;
 	}
 	public function display(){		
-		
+		echo '<script type="text/javascript" src="jssource/src_files/include/SubPanel/SubPanelTiles.js"></script>';		
 		global $current_user;
 		$can_see_detail = 0;
 		$UserRolesForDetailView = $this->getUserRolesForDetailView($current_user->id);
