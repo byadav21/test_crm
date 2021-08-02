@@ -3,7 +3,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
-//error_reporting(-1);
+error_reporting(0);
 //ini_set('display_errors', 'On');
 
 class pushLeadClevertap
@@ -20,6 +20,7 @@ class pushLeadClevertap
              return;
          }
         
+//echo "<pre>";print_r($bean);
         $first_name = isset($bean->first_name) ? $bean->first_name : '';
         $last_name  = isset($bean->last_name) ? $bean->last_name : '';
         
@@ -46,7 +47,6 @@ class pushLeadClevertap
         $converted_date     = isset($bean->converted_date) ? $bean->converted_date : '';
        // $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) ? $bean->msg_whatsapp_clvrtp : '';
        $whatsapp_clvrtp    = isset($bean->msg_whatsapp_clvrtp) && ($bean->msg_whatsapp_clvrtp=='TRUE') ? TRUE : FALSE;
-
         
         $url = 'https://api.clevertap.com/1/upload';
 
@@ -65,13 +65,14 @@ class pushLeadClevertap
             
         $batchCode = isset($batchdata['batch_code']) ?  $batchdata['batch_code'] : $term;
         //echo 'xxx'.$batchCode; die;
+
         if (strpos($phone, '+') !== false)
         {
-            $phoneNumber = trim(preg_replace('/\s+/', '', $phone));
+           $phoneNumber = trim(preg_replace('/\s+/', '', $phone));
         }
         else
         {
-            $phoneNumber = trim(preg_replace('/\s+/', '', '+91' . $phone));
+           $phoneNumber = trim(preg_replace('/\s+/', '', '+91' . $phone));
         }
         
         $emaibatch = $email.'_'.$batchCode;
@@ -105,8 +106,7 @@ class pushLeadClevertap
         $result = curl_exec($ch);
         curl_close($ch);
         # Print response.
-        //echo "profile: <pre>$result</pre>";
-        
+
         $date_entered_doller='';
         $date_of_followup_doller='';
         $date_modified_doller='';

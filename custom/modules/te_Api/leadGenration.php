@@ -1,32 +1,29 @@
 <?php
 
 ini_set('display_errors', 1);
-error_reporting(1);
+error_reporting(0);
 require_once('custom/modules/te_Api/leads_override.php');
-global $db;
-/*
-$number = $_REQUEST['phone'];
-// Remove the spaces.
-$number = str_replace(' ', '', $number);
-// Remove the +91 sign.
-if(strlen($number) > 10){
-    $number = str_replace('+91', '', $number);
-}
-// Remove the + sign.
-$number = str_replace('+', '', $number);
-// Remove 1st digit 0.
-$number = str_replace('-', '', $number);
 
-$number = ltrim($number, '0');//12345
-*/
+global $db, $sugar_config;
+
+$number = $_REQUEST['phone'];
+ // Remove the spaces & special char. show only numbers
+ $number = preg_replace('/[^0-9\-]/', '', $number );
+ $number = ltrim($number, '0');//12345
+// Remove the 91 sign.
+// if(strlen($number) > 10){
+//     $number = str_replace('91', '', $number);
+// }
+
 $name         = $_REQUEST['name'];
-$phone        = ltrim($_REQUEST['phone'], '0');
+$phone        = $number;//ltrim($_REQUEST['phone'], '0');
 $email        = $_REQUEST['email'];
 $source       = $_REQUEST['utm_source'];
 $medium       = $_REQUEST['utm_medium'];
 $term         = $_REQUEST['utm_term']; //batchcode
 $campaign     = $_REQUEST['utm_campaign'];
 $clvrtp_whatsapp     = $_REQUEST['whatsapp'];
+$gupshup_whatsapp    = $_REQUEST['whatsapp'];
 
 $leadObj      = new leads_override();
 $batchid      = '';
@@ -59,6 +56,7 @@ createLog('{on initial action}', 'leadGenration_source_status' . date('Y-m-d') .
 
 if ($phone || $email)
 {
+
     if ($source)
     {
         $vendorUsers = $leadObj->fetchVendorWithUsers($source);
@@ -117,6 +115,88 @@ if ($phone || $email)
             }
         }
     }
+
+
+
+        $batchObj = $db->query("SELECT batch_code FROM te_ba_batch WHERE batch_code = '" . $term . "' AND deleted=0");
+        $batchdata= $db->fetchByAssoc($batchObj);
+
+        //Start Using for OPT_IN Gupshup APi
+        
+        if(!empty($batchdata['batch_code'])){
+
+            $batchCode = isset($batchdata['batch_code']) ?  $batchdata['batch_code'] : $term;
+            //echo 'xxx'.$batchCode; die;
+            // echo "cust_name:- ". $name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$term.'<br/>';
+            // $phone = "+919911198392";
+    
+            $getQuery = "select * from gupshup_api_details where batch_code='".$batchCode."' ";
+            $itemDetal=$db->query($getQuery);
+            $resultData = $db->fetchByAssoc($itemDetal);
+
+            $checkPhoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
+            $getPhoneDetal = $db->query($checkPhoneNum);
+            $getPhoneNum   = $db->fetchByAssoc($getPhoneDetal);
+            
+            //Start Using for WhatsApp Gupshup APi
+            $url_gupshup  = 'https://media.smsgupshup.com/GatewayAPI/rest?';
+            
+            if($db->getRowCount($getPhoneDetal) <= 0 ){
+              $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
+
+                $ch     = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url_opt_in_gupshup);
+                # Return response instead of printing.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+                # Send request.
+                $result = curl_exec($ch);
+                curl_close($ch);
+                if($result){
+                    $insertPhoneNum = "INSERT INTO gupshup_leads_details (`date_entered`,`date_modified`,`phone_mobile`,`send_whatsapp`,`opt_in`) VALUES ('".date('Y-m-d h:i:s')."','".date('Y-m-d h:i:s')."','".$phone."','".$result."','1')";
+                    $insertPhoneNumData = $db->query($insertPhoneNum);
+                }
+            }
+            //End Using for OPT_IN Gupshup APi
+            $phoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
+            $getPhoneDetail = $db->query($phoneNum);
+            $getPhoneNum = $db->fetchByAssoc($getPhoneDetail);
+            // echo "<pre>"; print_r($getPhoneNum);
+            if($getPhoneNum['phone_mobile'] == $phone){
+                $whatsapp_number = '<a href="tel:+91'.$resultData['number'].">+91". $resultData['number'].'</a>';
+            //*<a href='tel:+91".$resultData['number']."'>+91". $resultData['number']."</a>*
+$caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
+
+For the course details, download the attached brochure.
+
+You can call us on ".$resultData['number']." or reply Hi to this message to chat with our counsellor on WhatsApp.";
+
+                $captionData = urlencode($caption_Core_Data);
+                $url_media_gupshup = $url_gupshup.'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config["whatsapp_gupshup_userid"].'&auth_scheme=plain&password='.$sugar_config["whatsapp_gupshup_pass"].'&method=SendmediaMessage&v=1.1&media_url='.$resultData["brochure_url"].'&caption='.$captionData.'&isHSM=True&footer=TALENTEDGE&filename='.urlencode($resultData['course_name']).'&format=json';
+
+                //https://media.smsgupshup.com/GatewayAPI/rest?send_to=9930079420&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&method=SendmediaMessage&v=1.1&media_url=http://www.africau.edu/images/default/sample.pdf&caption=Your%20registration%20for%20test%20test%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20test%20or%20reply%20Hi%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&isHSM=True&footer=TALENTEDGE&filename=TEST123&format=json
+
+                $ch     = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url_media_gupshup);
+                # Return response instead of printing.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+                # Send request.
+                $result = curl_exec($ch);
+                curl_close($ch);
+                
+                $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$caption_Core_Data."', date_modified = '".date('Y-m-d h:i:s')."' where phone_mobile='".$phone."' ";
+                $itemDetal=$db->query($updateData);
+                
+            }
+        }
+
+    
+    //End Using for WhatsApp Gupshup APi
+
+
 }
 else
 {
@@ -124,6 +204,9 @@ else
     echo json_encode(array('status' => 'error', 'msg' => 'Mobile or Email is required field'));
     exit();
 }
+
+//$updateData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES('".$phone."','term',now()) ";
+  //          $itemDetal=$db->query($updateData);
 
             /*
             $sql = "SELECT  leads.id AS id,
@@ -199,6 +282,9 @@ if ($GLOBALS['db']->getRowCount($re) > 0)
     $autoassign      = 'No';
     $duplicate_check = 1;
 }
+
+$updateData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES('".$sql."','".$term."',now()) ";
+            $itemDetal=$db->query($updateData);
 
 
 if ($vendor_id && $vendor_user_id)
@@ -276,7 +362,9 @@ if ($lead_d)
     $leadObj->dristi_API_id       = $lead_d;
 if ($clvrtp_whatsapp)
     $leadObj->msg_whatsapp_clvrtp  = $clvrtp_whatsapp;
-
+if ($gupshup_whatsapp)
+    $leadObj->msg_whatsapp_gupshup = $gupshup_whatsapp;
+    
 $leadObj->assigned_user_id    = $assigned_user_id;
 $leadObj->autoassign          = $autoassign;
 
@@ -315,3 +403,4 @@ else
     exit();
 }
 //echo json_encode(array('status'=>'success','msg'=>'Lead saved successfully!')); exit();
+
