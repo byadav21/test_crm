@@ -207,9 +207,7 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 # Send request.
                 $result = curl_exec($ch);
                 curl_close($ch);
-                // echo "<pre>";print_r($result);
-                $updateData = "UPDATE gupshup_api_details SET response = '".$result."' WHERE batch_code='".$batchCode."' ";
-                $itemDetal=$db->query($updateData);
+                
                 $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$caption_Core_Data."', date_modified = '".date('Y-m-d h:i:s')."' where phone_mobile='".$phone."' ";
                 $itemDetal=$db->query($updateData);
                 
