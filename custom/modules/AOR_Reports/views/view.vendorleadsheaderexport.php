@@ -108,7 +108,8 @@ class AOR_ReportsViewVendorleadsheaderexport extends SugarView
             'f0163da1-502c-f65a-b2a0-60cc2b9a7421' => 'eweb',
             '9eaed8c7-3939-5288-186c-60eed60b9375' => 'vcommission',
             'efef10c9-e91f-77e8-0282-60eed8ad695a' => 'adcanopus',
-            '460b2aba-ecc9-6ad4-788e-60fe50a49c90' => 'Plabs'
+            '460b2aba-ecc9-6ad4-788e-60fe50a49c90' => 'Plabs',
+            '9b3c7d01-3d31-043b-beb9-6107a98950e4' => 'OMG'
         );
             
 
@@ -386,6 +387,11 @@ class AOR_ReportsViewVendorleadsheaderexport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['Plabs']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Plabs'], 'name' => 'Plabs'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'OMG')
+        {
+            $selected_vendor = array($vendorsIdArr['OMG']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['OMG'], 'name' => 'OMG'));
         }
 
         if (!empty($selected_vendor))

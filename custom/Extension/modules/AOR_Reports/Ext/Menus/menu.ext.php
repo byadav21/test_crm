@@ -130,6 +130,7 @@ if ($misData['slug'] == 'CPTL')
             '9eaed8c7-3939-5288-186c-60eed60b9375', // => 'vcommission',
             'efef10c9-e91f-77e8-0282-60eed8ad695a', // => 'adcanopus'
             '460b2aba-ecc9-6ad4-788e-60fe50a49c90', // => 'Plabs'
+            '9b3c7d01-3d31-043b-beb9-6107a98950e4', // => 'OMG'
             );
             
         
