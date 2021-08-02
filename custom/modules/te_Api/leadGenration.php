@@ -6,35 +6,14 @@ require_once('custom/modules/te_Api/leads_override.php');
 
 global $db, $sugar_config;
 
-/*
 $number = $_REQUEST['phone'];
-// Remove the spaces.
-$number = str_replace(' ', '', $number);
-// Remove the +91 sign.
-if(strlen($number) > 10){
-    $number = str_replace('+91', '', $number);
-}
-// Remove the + sign.
-$number = str_replace('+', '', $number);
-// Remove 1st digit 0.
-$number = str_replace('-', '', $number);
-
-$number = ltrim($number, '0');//12345
-*/
- $number = $_REQUEST['phone'];
- // Remove the spaces.
+ // Remove the spaces & special char. show only numbers
  $number = preg_replace('/[^0-9\-]/', '', $number );
- 
-// Remove the +91 sign.
+ $number = ltrim($number, '0');//12345
+// Remove the 91 sign.
 // if(strlen($number) > 10){
 //     $number = str_replace('91', '', $number);
 // }
-
- // Remove the + sign.
- //$number = str_replace('+', '', $number);
- // Remove 1st digit 0.
- //$number = str_replace('-', '', $number);
-
 
 $name         = $_REQUEST['name'];
 $phone        = $number;//ltrim($_REQUEST['phone'], '0');
