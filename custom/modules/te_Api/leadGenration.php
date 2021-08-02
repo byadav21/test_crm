@@ -26,9 +26,9 @@ $number = ltrim($number, '0');//12345
  $number = preg_replace('/[^0-9\-]/', '', $number );
  
 // Remove the +91 sign.
-if(strlen($number) > 10){
-    $number = str_replace('91', '', $number);
-}
+// if(strlen($number) > 10){
+//     $number = str_replace('91', '', $number);
+// }
 
  // Remove the + sign.
  //$number = str_replace('+', '', $number);
@@ -158,26 +158,32 @@ if ($phone || $email)
             $getQuery = "select * from gupshup_api_details where batch_code='".$batchCode."' ";
             $itemDetal=$db->query($getQuery);
             $resultData = $db->fetchByAssoc($itemDetal);
+
+            $checkPhoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
+            $getPhoneDetal = $db->query($checkPhoneNum);
+            $getPhoneNum   = $db->fetchByAssoc($getPhoneDetal);
             
-            // echo "<pre>"; print_r($resultData);
+            // echo "<pre>"; print_r($getPhoneDetal);
             //Start Using for WhatsApp Gupshup APi
             $url_gupshup  = 'https://media.smsgupshup.com/GatewayAPI/rest?';
             
             //echo "<pre>"; print_r($resultData);
-            $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
+            if($db->getRowCount($getPhoneDetal) <= 0 ){
+                $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
 
-            $ch     = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url_opt_in_gupshup);
-            # Return response instead of printing.
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-            # Send request.
-            $result = curl_exec($ch);
-            curl_close($ch);
-            // echo "<pre>";print_r($result)."<br />";
-            //End Using for OPT_IN Gupshup APi
-            if($result){
+                $ch     = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url_opt_in_gupshup);
+                # Return response instead of printing.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+                # Send request.
+                $result = curl_exec($ch);
+                curl_close($ch);
+                // echo "<pre>";print_r($result)."<br />";
+            }
+                //End Using for OPT_IN Gupshup APi
+            if($getPhoneNum['phone_mobile'] == $phone){
             //    echo $whatsapp_number = '<a href="tel:+91'.$resultData['number'].">+91". $resultData['number'].'</a>';
             //*<a href='tel:+91".$resultData['number']."'>+91". $resultData['number']."</a>*
 $caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
@@ -204,7 +210,7 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 $updateData = "UPDATE gupshup_api_details SET response = '".$result."' WHERE batch_code='".$batchCode."' ";
                 $itemDetal=$db->query($updateData);
                 // $datenow = date();
-                $insertData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES ('".$caption_Core_Data."', '".$term."', '2021-07-22 14:43:00' )";
+                $insertData = "Insert into test_check_data (datacheck,batch_code, date_entered) VALUES ('".$caption_Core_Data."', '".$term."', '".date('Y-m-d H:i:s')."' )";
                 $itemDetal=$db->query($insertData);
             }
         }
