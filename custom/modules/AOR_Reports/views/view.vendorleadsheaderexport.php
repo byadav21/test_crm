@@ -105,7 +105,8 @@ class AOR_ReportsViewVendorleadsheaderexport extends SugarView
             '5feeb2dc-365b-7353-7e9a-60b492ea0f2f' => 'Linkedin',
             '2b98175d-6a90-d4ef-c751-60c093e77ee8' => 'htmedia',
             '21a9d904-4306-3814-bc3d-60c095d4daa3' => 'icubeswire',
-            '460b2aba-ecc9-6ad4-788e-60fe50a49c90' => 'Plabs'
+            '460b2aba-ecc9-6ad4-788e-60fe50a49c90' => 'Plabs',
+            '9b3c7d01-3d31-043b-beb9-6107a98950e4' => 'OMG'
         );
             
 
@@ -136,7 +137,8 @@ class AOR_ReportsViewVendorleadsheaderexport extends SugarView
             'Linkedin'     => '81e8c7cd-9501-65f2-7ac7-590d719aed14',
             'htmedia'      => '6b41a911-6080-4dc8-7306-60c093bd01e3',
             'iCubeswire'   => 'be0e2ac7-8433-f864-c47d-60b5b0cfaaa4',
-            'Plabs'        => '9e18d26a-244a-4fc9-6cc1-60fa91b3cdec'
+            'Plabs'        => '9e18d26a-244a-4fc9-6cc1-60fa91b3cdec',
+            'OMG'          => 'cc80e5c8-4c0e-3c47-8b30-6103f1cf0c3a'
             );
 
         $report_action = '';
@@ -365,6 +367,11 @@ class AOR_ReportsViewVendorleadsheaderexport extends SugarView
         {
             $selected_vendor = array($vendorsIdArr['Plabs']);
             $VendorListData  = array(array('id' => $vendorsIdArr['Plabs'], 'name' => 'Plabs'));
+        }
+        if (isset($UsersVendrArr[$current_user->id]) && $UsersVendrArr[$current_user->id] == 'OMG')
+        {
+            $selected_vendor = array($vendorsIdArr['OMG']);
+            $VendorListData  = array(array('id' => $vendorsIdArr['OMG'], 'name' => 'OMG'));
         }
 
         if (!empty($selected_vendor))

@@ -127,6 +127,7 @@ if ($misData['slug'] == 'CPTL')
             '2b98175d-6a90-d4ef-c751-60c093e77ee8', // => 'htmedia',
             '21a9d904-4306-3814-bc3d-60c095d4daa3', // => 'icubeswire'
             '460b2aba-ecc9-6ad4-788e-60fe50a49c90', // => 'Plabs'
+            '9b3c7d01-3d31-043b-beb9-6107a98950e4', // => 'OMG'
             );
             
         
