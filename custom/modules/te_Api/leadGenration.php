@@ -175,6 +175,7 @@ if ($phone || $email)
                 } else {
                     createLog('{In Add Case}', 'z_not_send_gupshup_number_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
                 }
+createLog('{In check gupshup test}', 'zzsend_gupshup_'.date('Y-m-d').'_log.txt', $_REQUEST, $result);
             }
             //End Using for OPT_IN Gupshup APi
             $phoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
@@ -225,7 +226,6 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
             } else {
                 createLog('{In Add Case}', 'send_gupshup_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
             }
-
         }
 
     
