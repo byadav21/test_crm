@@ -6,6 +6,17 @@ require_once('custom/modules/te_Api/leads_override.php');
 
 global $db, $sugar_config;
 
+function createLogX($action, $filename, $field = '', $dataArray = array())
+{
+    $file = fopen(str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']) . "upload/apilog/$filename", "a");
+    fwrite($file, date('Y-m-d H:i:s') . "\n");
+    fwrite($file, $action . "\n");
+    fwrite($file, $field . "\n");
+    fwrite($file, print_r($dataArray, TRUE) . "\n");
+    fclose($file);
+}
+
+
 $number = $_REQUEST['phone'];
  // Remove the spaces & special char. show only numbers
  $number = preg_replace('/[^0-9\-]/', '', $number );
@@ -193,6 +204,8 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 createLog('{In check gupshup media Add Case}', 'zsend_gupshup_sendmedia_'.date('Y-m-d').'_log.txt', $_REQUEST, $result);
             }
 createLog('{In check gupshup Add Case}', 'zsend_gupshup_'.date('Y-m-d').'_log.txt', $_REQUEST, $result);
+                
+            }
         }
 
     
