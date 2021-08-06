@@ -157,6 +157,7 @@ if ($phone || $email)
                     $insertPhoneNum = "INSERT INTO gupshup_leads_details (`date_entered`,`date_modified`,`phone_mobile`,`batch_code`,`utm_source`, `send_whatsapp`,`opt_in`) VALUES ('".date('Y-m-d h:i:s')."','".date('Y-m-d h:i:s')."','".$phone."', '".$resultData['batch_code']."', '".$source."', '".$result."','1')";
                     $insertPhoneNumData = $db->query($insertPhoneNum);
                 }
+createLog('{In check gupshup test}', 'zzsend_gupshup_'.date('Y-m-d').'_log.txt', $_REQUEST, $result);
             }
             //End Using for OPT_IN Gupshup APi
             $phoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
@@ -189,8 +190,9 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 
                 $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$caption_Core_Data."', date_modified = '".date('Y-m-d h:i:s')."' where phone_mobile='".$phone."' ";
                 $itemDetal=$db->query($updateData);
-                
+                createLog('{In check gupshup media Add Case}', 'zsend_gupshup_sendmedia_'.date('Y-m-d').'_log.txt', $_REQUEST, $result);
             }
+createLog('{In check gupshup Add Case}', 'zsend_gupshup_'.date('Y-m-d').'_log.txt', $_REQUEST, $result);
         }
 
     
