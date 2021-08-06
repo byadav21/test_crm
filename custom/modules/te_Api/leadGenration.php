@@ -141,7 +141,7 @@ if ($phone || $email)
             //Start Using for WhatsApp Gupshup APi
             $url_gupshup  = 'https://media.smsgupshup.com/GatewayAPI/rest?';
             
-            if($db->getRowCount($getPhoneDetal) <= 0 ){
+            if($db->getRowCount($getPhoneDetal) <= 0 && $resultData['batch_code'] == $batchCode ){
               $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
 
                 $ch     = curl_init();
@@ -154,7 +154,7 @@ if ($phone || $email)
                 $result = curl_exec($ch);
                 curl_close($ch);
                 if($result){
-                    $insertPhoneNum = "INSERT INTO gupshup_leads_details (`date_entered`,`date_modified`,`phone_mobile`,`send_whatsapp`,`opt_in`) VALUES ('".date('Y-m-d h:i:s')."','".date('Y-m-d h:i:s')."','".$phone."','".$result."','1')";
+                    $insertPhoneNum = "INSERT INTO gupshup_leads_details (`date_entered`,`date_modified`,`phone_mobile`,`batch_code`,`utm_source`, `send_whatsapp`,`opt_in`) VALUES ('".date('Y-m-d h:i:s')."','".date('Y-m-d h:i:s')."','".$phone."', '".$resultData['batch_code']."', '".$source."', '".$result."','1')";
                     $insertPhoneNumData = $db->query($insertPhoneNum);
                 }
             }
@@ -163,8 +163,8 @@ if ($phone || $email)
             $getPhoneDetail = $db->query($phoneNum);
             $getPhoneNum = $db->fetchByAssoc($getPhoneDetail);
             // echo "<pre>"; print_r($getPhoneNum);
-            if($getPhoneNum['phone_mobile'] == $phone){
-                $whatsapp_number = '<a href="tel:+91'.$resultData['number'].">+91". $resultData['number'].'</a>';
+            if($getPhoneNum['phone_mobile'] == $phone && $resultData['batch_code'] == $batchCode ){
+                // $whatsapp_number = '<a href="tel:+91'.$resultData['number'].">+91". $resultData['number'].'</a>';
             //*<a href='tel:+91".$resultData['number']."'>+91". $resultData['number']."</a>*
 $caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
 
