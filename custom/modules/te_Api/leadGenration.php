@@ -161,9 +161,9 @@ if ($phone || $email)
             //End Using for OPT_IN Gupshup APi
             $phoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
             $getPhoneDetail = $db->query($phoneNum);
-            $getPhoneNum = $db->fetchByAssoc($getPhoneDetail);
+            $getPhoneNum1 = $db->fetchByAssoc($getPhoneDetail);
             // echo "<pre>"; print_r($getPhoneNum);
-            if($getPhoneNum['phone_mobile'] == $phone && $resultData['batch_code'] == $batchCode ){
+            if($getPhoneNum1['phone_mobile'] == $phone && $resultData['batch_code'] == $batchCode ){
                 // $whatsapp_number = '<a href="tel:+91'.$resultData['number'].">+91". $resultData['number'].'</a>';
             //*<a href='tel:+91".$resultData['number']."'>+91". $resultData['number']."</a>*
 $caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
