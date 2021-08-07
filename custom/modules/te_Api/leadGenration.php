@@ -222,6 +222,8 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 } else {
                     createLog('{In Add Case}', 'zsend_gupshup_sendmedia_error_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
                 }
+
+createLog('{Check Default Case}', 'zsend_gupshup_sendmedia_default_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
                 
             } else {
                 createLog('{In Add Case}', 'zsend_gupshup_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
