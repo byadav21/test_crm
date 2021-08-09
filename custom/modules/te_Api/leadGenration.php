@@ -132,15 +132,12 @@ if ($phone || $email)
         $batchObj = $db->query("SELECT batch_code FROM te_ba_batch WHERE batch_code = '" . $term . "' AND deleted=0");
         $batchdata= $db->fetchByAssoc($batchObj);
 
-        //Start Using for OPT_IN Gupshup APi
+        
         
         if(!empty($batchdata['batch_code'])){
 
             $batchCode = isset($batchdata['batch_code']) ?  $batchdata['batch_code'] : $term;
-            //echo 'xxx'.$batchCode; die;
-            // echo "cust_name:- ". $name ." phone:- ". $phone." email:- ".$email." batchCode:- ".$term.'<br/>';
-            // $phone = "+919911198392";
-    
+            
             $getQuery = "select * from gupshup_api_details where batch_code='".$batchCode."' AND deleted = 0 ";
             $itemDetal=$db->query($getQuery);
             $resultData = $db->fetchByAssoc($itemDetal);
@@ -148,44 +145,12 @@ if ($phone || $email)
             $checkPhoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
             $getPhoneDetal = $db->query($checkPhoneNum);
             $getPhoneNum   = $db->fetchByAssoc($getPhoneDetal);
+            $getCountPhone = $db->getRowCount($getPhoneDetal);
             
-            //Start Using for WhatsApp Gupshup APi
-            $url_gupshup  = 'https://media.smsgupshup.com/GatewayAPI/rest?';
+            //Start Using for SendmediaMessage Gupshup APi
+            if( ($getPhoneNum['phone_mobile'] != '') && ($resultData['batch_code'] == $batchCode) ){
+                // die('imhere media');
             
-            if($db->getRowCount($getPhoneDetal) <= 0 && $resultData['batch_code'] == $batchCode ){
-              $url_opt_in_gupshup = $url_gupshup.'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
-              $ch     = curl_init();
-              curl_setopt($ch, CURLOPT_URL, $url_opt_in_gupshup);
-              # Return response instead of printing.
-              curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-              curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-              curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-              # Send request.
-              $result = curl_exec($ch);
-                curl_close($ch);
-              $jsonresultData = json_decode($result);
-                // echo "<pre>";
-                //   print_r($resultData);
-                //   print_r($jsonresultData->response->status);
-                //   die('imhere');
-                  
-                if($jsonresultData->response->status == 'success'){
-                    $insertPhoneNum = "INSERT INTO gupshup_leads_details (`date_entered`,`date_modified`,`phone_mobile`,`batch_code`,`utm_source`, `send_whatsapp`,`opt_in`) VALUES ('".date('Y-m-d h:i:s')."','".date('Y-m-d h:i:s')."','".$phone."', '".$resultData['batch_code']."', '".$source."', '".$result."','1')";
-                    $insertPhoneNumData = $db->query($insertPhoneNum);
-                } else {
-                    createLog('{In Add Case}', 'zsend_gupshup_not_optin_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
-                }
-//createLog('{In check gupshup test}', 'zzsend_gupshup_'.date('Y-m-d').'_log.txt', $_REQUEST, $result);
-            }
-            //End Using for OPT_IN Gupshup APi
-            $phoneNum = "select phone_mobile from gupshup_leads_details where phone_mobile='".$phone."' ";
-            $getPhoneDetail = $db->query($phoneNum);
-            $getPhoneNum1 = $db->fetchByAssoc($getPhoneDetail);
-            // echo "<pre>"; print_r($getPhoneNum);print_r($resultData);print_r($batchCode);print_r($getPhoneNum1);print_r($phone);
-
-            // die; 
-            if($getPhoneNum1['phone_mobile'] == $phone && $resultData['batch_code'] == $batchCode ){
-            //*<a href='tel:+91".$resultData['number']."'>+91". $resultData['number']."</a>*
 $caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
 
 For the course details, download the attached brochure.
@@ -195,7 +160,7 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 // $captionData = urlencode($caption_Core_Data);
                 $captionData = rawurlencode($caption_Core_Data);
                 
-               $url_media_gupshup = $url_gupshup.'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config["whatsapp_gupshup_userid"].'&auth_scheme=plain&password='.$sugar_config["whatsapp_gupshup_pass"].'&method=SendmediaMessage&v=1.1&media_url='.$resultData["brochure_url"].'&caption='.$captionData.'&isHSM=True&footer=TALENTEDGE&filename='.rawurlencode($resultData['course_name']).'&format=json';
+               $url_media_gupshup = $sugar_config["url_gupshup"].'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config["whatsapp_gupshup_userid"].'&auth_scheme=plain&password='.$sugar_config["whatsapp_gupshup_pass"].'&method=SendmediaMessage&v=1.1&media_url='.$resultData["brochure_url"].'&caption='.$captionData.'&isHSM=True&footer=TALENTEDGE&filename='.rawurlencode($resultData['course_name']).'&format=json';
                 //print_r($url_media_gupshup);die;
                 //https://media.smsgupshup.com/GatewayAPI/rest?send_to=9930079420&msg_type=DOCUMENT&userid=2000199169&auth_scheme=plain&password=xHeVYaDP&method=SendmediaMessage&v=1.1&media_url=http://www.africau.edu/images/default/sample.pdf&caption=Your%20registration%20for%20test%20test%20is%20successfully%20completed.%0A%0AFor%20the%20course%20details%2C%20download%20the%20attached%20brochure.%0A%0AYou%20can%20call%20us%20on%20test%20or%20reply%20Hi%20to%20this%20message%20to%20chat%20with%20our%20counsellor%20on%20WhatsApp.&isHSM=True&footer=TALENTEDGE&filename=TEST123&format=json
 
@@ -211,22 +176,105 @@ You can call us on ".$resultData['number']." or reply Hi to this message to chat
                 $jsonresultData = json_decode($result);
                 curl_close($ch);
                 // echo "<pre>";
+                //   print_r($jsonresultData->response->status);
+                //   die('imhere');
+                $statusData = $jsonresultData->response->status;
+                if($statusData == 'success'){
+
+                    $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$result."', date_modified = '".date('Y-m-d h:i:s')."' where phone_mobile='".$phone."' ";
+                    $itemDetal=$db->query($updateData);
+                    createLog('{In Add Case}', 'zsend_gupshup_sendmedia_success_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+
+                }else {
+                    createLog('{In Add Case}', 'zsend_gupshup_sendmedia_error_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                }
+                //End Using for SendmediaMessage Gupshup APi
+            } else if( ($getCountPhone == 0) && ($resultData['batch_code'] == $batchCode) ){
+                //Start Using for Opt_IN & SendmediaMessage Gupshup APi
+                $url_opt_in_gupshup = $sugar_config["url_gupshup"].'method=OPT_IN&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
+                $ch     = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url_opt_in_gupshup);
+                # Return response instead of printing.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+                # Send request.
+                $result = curl_exec($ch);
+                    curl_close($ch);
+                $jsonresultData = json_decode($result);
+                    // echo "<pre>";
+                    //   print_r($resultData);
+                    //   print_r($jsonresultData->response->status);
+                    //   die('imhere');
+                  
+                if($jsonresultData->response->status == 'success'){
+
+                    $insertPhoneNum = "INSERT INTO gupshup_leads_details (`date_entered`,`date_modified`,`phone_mobile`,`batch_code`,`utm_source`, `send_whatsapp`,`opt_in`) VALUES ('".date('Y-m-d h:i:s')."',NULL,'".$phone."', '".$resultData['batch_code']."', '".$source."', '".$result."','1')";
+                    $insertPhoneNumData = $db->query($insertPhoneNum);
+
+$caption_Core_Data = "Your registration for *".$resultData['institute_name']." ".$resultData['course_name']."* is successfully completed.
+
+For the course details, download the attached brochure.
+
+You can call us on ".$resultData['number']." or reply Hi to this message to chat with our counsellor on WhatsApp.";
+
+                // $captionData = urlencode($caption_Core_Data);
+                $captionData = rawurlencode($caption_Core_Data);
+                
+               $url_media_gupshup = $sugar_config["url_gupshup"].'send_to='.$phone.'&msg_type=DOCUMENT&userid='.$sugar_config["whatsapp_gupshup_userid"].'&auth_scheme=plain&password='.$sugar_config["whatsapp_gupshup_pass"].'&method=SendmediaMessage&v=1.1&media_url='.$resultData["brochure_url"].'&caption='.$captionData.'&isHSM=True&footer=TALENTEDGE&filename='.rawurlencode($resultData['course_name']).'&format=json';
+                $ch     = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url_media_gupshup);
+                # Return response instead of printing.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+                # Send request.
+                $result = curl_exec($ch);
+                
+                curl_close($ch);
+                // echo "<pre>";
                 //   print_r($resultData);
                 //   print_r($jsonresultData->response->status);
                 //   die('imhere');
-                  
-                if($jsonresultData->response->status == 'success'){
-                    $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$caption_Core_Data."', date_modified = '".date('Y-m-d h:i:s')."' where phone_mobile='".$phone."' ";
-                    $itemDetal=$db->query($updateData);
-                    createLog('{In Add Case}', 'zsend_gupshup_sendmedia_success_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                
+                    $statusData = $jsonresultData->response->status;
+                    if($statusData == 'success'){
+                        $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$result."', date_modified = '".date('Y-m-d h:i:s')."' where phone_mobile='".$phone."' ";
+                        $itemDetal=$db->query($updateData);
+                        createLog('{In Add Case}', 'zsend_gupshup_optin_sendmedia_success_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                    }else {
+                        createLog('{In Add Case}', 'zsend_gupshup_optin_sendmedia_error_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                    }
+
                 } else {
-                    createLog('{In Add Case}', 'zsend_gupshup_sendmedia_error_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                   createLog('{In Add Case}', 'zsend_gupshup_optin_error_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
                 }
 
-createLog('{Check Default Case}', 'zsend_gupshup_sendmedia_default_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
-                
+                //End Using for OPT_IN & SendmediaMessage Gupshup APi
             } else {
+                //Start Using for OPT_OUT Gupshup APi
+                $url_opt_out_gupshup = $sugar_config["url_gupshup"].'method=OPT_OUT&format=json&userid='.$sugar_config['whatsapp_gupshup_userid'].'&password='.$sugar_config['whatsapp_gupshup_pass'].'&phone_number='.$phone.'&v=1.1&auth_scheme=plain&channel=WHATSAPP';
+                $ch     = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url_opt_out_gupshup);
+                # Return response instead of printing.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+                # Send request.
+                $result = curl_exec($ch);
+                    curl_close($ch);
+                $jsonresultData = json_decode($result);
+                $statusData = $jsonresultData->response->status;
+                if($statusData == 'success'){
+                    $updateData = "UPDATE gupshup_leads_details SET send_whatsapp = '".$result."', date_modified = '".date('Y-m-d h:i:s')."' where phone_mobile='".$phone."' ";
+                    $itemDetal=$db->query($updateData);
+                    createLog('{In Add Case}', 'zsend_gupshup_optout_success_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                } else {
+                    createLog('{In Add Case}', 'zsend_gupshup_optout_error_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                }
+                
                 createLog('{In Add Case}', 'zsend_gupshup_log_'.date('Y-m-d').'.txt', $_REQUEST, $result);
+                //End Using for OPT_OUT Gupshup APi
             }
         }
 
