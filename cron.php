@@ -1,4 +1,4 @@
-<?php
+<?php 
  if(!defined('sugarEntry'))define('sugarEntry', true);
  /*$myfile = fopen("newfile.txt", "a") or die("Unable to open file!");
 $txt = date('Y-m-d H:i:s');
